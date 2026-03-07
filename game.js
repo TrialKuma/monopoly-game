@@ -2225,18 +2225,22 @@ function buildTooltipContent(idx) {
     tile = state.board[tile.largePrimaryIndex];
 
   if (tile.isStart) {
+    const preview = `<div class="tt-preview tt-preview-special">${createStartSvg()}</div>`;
     return `<button class="tt-close" aria-label="关闭">✕</button>
       <div class="tt-name">起点 · 市政府</div>
       <span class="tt-badge" style="background:#fde68a;">奖励地块</span>
+      ${preview}
       <div class="tt-row">经过自动领取 ¥${CONFIG.startBonus}</div>
       <div class="tt-row">停留可强制收购对手一处地产</div>`;
   }
 
   if (tile.isSpecial) {
     const s = tile.special;
+    const preview = `<div class="tt-preview tt-preview-special">${createSpecialSvg(s.type)}</div>`;
     return `<button class="tt-close" aria-label="关闭">✕</button>
       <div class="tt-name">${tile.name}</div>
       <span class="tt-badge" style="background:${s.color};">${s.label}</span>
+      ${preview}
       <div class="tt-row">${s.description}</div>`;
   }
 
@@ -2249,6 +2253,16 @@ function buildTooltipContent(idx) {
   const dots = [1, 2, 3].map(l =>
     `<span class="tt-dot${l <= lot.level ? " filled" : ""}"></span>`).join("");
   const largeMark = lot.isLarge ? `<span class="tt-large-tag">大型</span>` : "";
+
+  // 建筑预览：已建则显示对应等级建筑图，未建则显示地基
+  const spriteHtml = lot.level > 0
+    ? createBuildingSvg(lot.theme.key, lot.level, owner?.color ?? "#64748b", lot.isLarge)
+    : createLotBaseSprite(!!lot.ownerId);
+  // 背景色用主题色淡化，与格子保持一致感
+  const previewBg = lot.level > 0
+    ? `background:linear-gradient(160deg,${lot.theme.color}33,${lot.theme.color}11)`
+    : `background:rgba(255,255,255,0.04)`;
+  const preview = `<div class="tt-preview" style="${previewBg}">${spriteHtml}</div>`;
 
   let tollBlock = "";
   if (owner) {
@@ -2268,6 +2282,7 @@ function buildTooltipContent(idx) {
       <span style="color:${ownerColor};font-weight:700;">${ownerText}</span>
       <div class="tt-level-dots">${dots}</div>
     </div>
+    ${preview}
     <div class="tt-divider"></div>
     ${tollBlock}
     ${upgradeHint}

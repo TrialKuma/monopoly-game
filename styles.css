@@ -700,6 +700,32 @@ img.building-sprite {
 .tt-upgrade {
   font-size: 11px; color: #34d399; margin-top: 3px;
 }
+/* 建筑 / 图标 预览区 */
+.tt-preview {
+  position: relative;
+  width: 100%; height: 110px;
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+  margin: 8px 0 4px;
+}
+.tt-preview-special {
+  background: rgba(255,255,255,0.04);
+}
+/* 覆盖 img.building-sprite 的绝对定位，让它在预览容器内正常居中显示 */
+.tt-preview img.building-sprite {
+  position: static !important;
+  width: auto !important; height: 90px !important;
+  inset: auto !important;
+  object-fit: contain;
+  -webkit-mask-image: none !important;
+  mask-image: none !important;
+  filter: drop-shadow(0 6px 16px rgba(0,0,0,0.35));
+}
+/* SVG building-sprite 在预览区放大 */
+.tt-preview svg.building-sprite {
+  width: 120px !important; height: 90px !important;
+}
 
 /* ===== 手机迷你记分条 ===== */
 .mini-scoreboard {
