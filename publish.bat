@@ -62,7 +62,7 @@ if errorlevel 1 (
 echo [3/3] Pushing to origin/%BRANCH% ...
 git push origin "%BRANCH%"
 if errorlevel 1 (
-  echo [ERROR] git push failed (network/auth issue possible).
+  echo [ERROR] git push failed. Network or auth issue possible.
   set "EXIT_CODE=1"
   goto :end
 )
