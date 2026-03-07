@@ -37,10 +37,16 @@ if not defined HAS_CHANGES (
 )
 
 for /f %%B in ('git rev-parse --abbrev-ref HEAD') do set "BRANCH=%%B"
+for /f %%T in ('powershell -NoProfile -Command "Get-Date -Format yyyy-MM-dd_HH-mm-ss"') do set "STAMP=%%T"
+set "AUTO_TAG=[%BRANCH% %STAMP%]"
 
 set "MSG="
 set /p MSG=Commit message ^(press Enter for default^): 
-if "%MSG%"=="" set "MSG=Update: routine changes"
+if "%MSG%"=="" (
+  set "MSG=Update: routine changes %AUTO_TAG%"
+) else (
+  set "MSG=%MSG% %AUTO_TAG%"
+)
 
 echo.
 echo [1/3] Staging files...
