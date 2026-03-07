@@ -623,6 +623,122 @@ img.building-sprite {
   .center-dice { width: 50px; height: 50px; font-size: 20px; border-radius: 14px; }
 }
 
+/* ===== 地块详情 Tooltip ===== */
+.tile-tooltip {
+  position: fixed; z-index: 1800;
+  width: 210px; padding: 14px 16px;
+  background: #1e293b;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 18px;
+  box-shadow: 0 16px 48px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,255,255,0.06);
+  color: #f1f5f9; font-size: 13px;
+  pointer-events: none;
+  animation: tooltipIn 0.15s ease;
+}
+.tile-tooltip.hidden { display: none !important; }
+@keyframes tooltipIn {
+  from { opacity: 0; transform: scale(0.94) translateY(6px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+/* 手机端: 居中遮罩, 可点击关闭 */
+@media (hover: none) {
+  .tile-tooltip {
+    pointer-events: auto;
+    width: min(290px, 86vw);
+  }
+}
+.tt-close {
+  position: absolute; top: 10px; right: 10px;
+  width: 26px; height: 26px; border-radius: 50%;
+  background: rgba(255,255,255,0.1); border: none;
+  color: #94a3b8; font-size: 13px; cursor: pointer;
+  display: none; align-items: center; justify-content: center;
+  line-height: 1;
+}
+@media (hover: none) { .tt-close { display: flex; } }
+.tt-name {
+  font-size: 17px; font-weight: 800; color: #f8fafc;
+  margin: 0 0 6px; line-height: 1.2;
+  padding-right: 24px; /* 留给关闭按钮 */
+}
+.tt-large-tag {
+  display: inline-block; font-size: 10px; font-weight: 700;
+  background: rgba(251,191,36,0.18); color: #fbbf24;
+  padding: 1px 5px; border-radius: 5px; vertical-align: middle;
+  margin-left: 4px;
+}
+.tt-badge {
+  display: inline-block; font-size: 11px; font-weight: 700;
+  padding: 2px 9px; border-radius: 999px;
+  color: #1e293b; margin-bottom: 10px;
+}
+.tt-row {
+  font-size: 12px; color: #94a3b8; margin-bottom: 3px; line-height: 1.4;
+}
+.tt-divider { height: 1px; background: rgba(255,255,255,0.08); margin: 9px 0; }
+.tt-owner-row {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 13px; font-weight: 600; color: #e2e8f0; margin-bottom: 4px;
+}
+.tt-level-dots { display: flex; gap: 4px; margin-left: auto; }
+.tt-dot { width: 9px; height: 9px; border-radius: 50%; background: rgba(255,255,255,0.15); }
+.tt-dot.filled { background: #fbbf24; box-shadow: 0 0 6px rgba(251,191,36,0.6); }
+.tt-price-row {
+  display: flex; justify-content: space-between;
+  font-size: 12px; color: #64748b; margin-bottom: 4px;
+}
+.tt-toll {
+  font-size: 14px; font-weight: 800; color: #ef4444;
+  margin-bottom: 2px;
+}
+.tt-toll-label { font-size: 11px; color: #94a3b8; margin-bottom: 6px; }
+.tt-district {
+  font-size: 11px; color: #475569;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding-top: 7px; margin-top: 4px;
+}
+.tt-upgrade {
+  font-size: 11px; color: #34d399; margin-top: 3px;
+}
+
+/* ===== 手机迷你记分条 ===== */
+.mini-scoreboard {
+  display: none; /* 桌面隐藏 */
+}
+@media (max-width: 1300px) {
+  .mini-scoreboard {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 8px; padding: 7px 12px;
+    background: rgba(15,23,42,0.04);
+    border: 1px solid rgba(148,163,184,0.14);
+    border-radius: 12px; margin-bottom: 8px;
+  }
+}
+.mini-player {
+  display: flex; align-items: center; gap: 7px;
+  flex: 1; min-width: 0;
+}
+.mini-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+.mini-name { font-size: 12px; font-weight: 700; color: #475569; white-space: nowrap; }
+.mini-cash {
+  font-size: 14px; font-weight: 800; color: #1e293b;
+  font-variant-numeric: tabular-nums;
+  transition: color 0.3s;
+}
+.mini-player.active .mini-name { color: var(--primary); }
+.mini-player.active .mini-cash { color: var(--primary); }
+.mini-delta {
+  font-size: 11px; font-weight: 700; padding: 1px 5px;
+  border-radius: 5px; margin-left: 2px;
+  animation: logSlideIn 0.25s ease;
+}
+.mini-delta.pos { color: #16a34a; background: rgba(34,197,94,0.1); }
+.mini-delta.neg { color: #dc2626; background: rgba(239,68,68,0.1); }
+.mini-vs {
+  font-size: 11px; color: #94a3b8; padding: 0 4px; flex-shrink: 0;
+}
+.mini-player-right { flex-direction: row-reverse; text-align: right; }
+
 @keyframes diceIdle {
   0%, 100% { transform: rotate(0deg) scale(1); }
   25% { transform: rotate(3deg) scale(1.02); }
@@ -711,7 +827,7 @@ img.building-sprite {
   font-size: 42px; font-weight: 800; letter-spacing: -0.02em;
   color: #fff; margin: 0;
   background: linear-gradient(135deg, #fbbf24, #f59e0b, #fb923c);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
 }
 .start-subtitle {
   font-size: 15px; color: #94a3b8; margin: 0; letter-spacing: 0.08em;

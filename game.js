@@ -99,6 +99,7 @@ const eventMessageEl = document.getElementById("event-message");
 const eventActionsEl = document.getElementById("event-actions");
 const eventIconWrapEl = document.getElementById("event-icon-wrap");
 const roundProgressBarEl = document.getElementById("round-progress-bar");
+const tileTooltipEl = document.getElementById("tile-tooltip");
 
 const EVENT_ICON_MAP = {
   "购买提示": { emoji: "🏠", cls: "event-buy" },
@@ -798,7 +799,7 @@ function clearHighlights() {
 }
 
 function render() {
-  renderBoard(); renderScoreboard(); renderLogs(); renderStatus(); updateControls(); renderModal();
+  renderBoard(); renderScoreboard(); renderMiniScoreboard(); renderLogs(); renderStatus(); updateControls(); renderModal();
 }
 
 function renderBoard() {
@@ -839,6 +840,7 @@ function renderBoard() {
     if (tile.lot?.ownerId) el.style.setProperty("--owner-accent", getPlayerById(tile.lot.ownerId).color);
     else el.style.removeProperty("--owner-accent");
 
+    el.dataset.tileIndex = tile.index;
     if (tile.isStart) el.innerHTML = renderStartTile(tile);
     else if (tile.isSpecial) el.innerHTML = renderSpecialTile(tile);
     else if (isLargePrimary) el.innerHTML = renderLargeLotMerged(tile, secTile);
@@ -985,6 +987,25 @@ function renderScoreboard() {
       </div>`;
     scoreboardEl.appendChild(card);
   });
+}
+
+function renderMiniScoreboard() {
+  const el = document.getElementById("mini-scoreboard");
+  if (!el) return;
+  const [p0, p1] = state.players;
+  const activeId = state.gameOver ? null : currentPlayer().id;
+  const mkPlayer = (p, alignRight) => {
+    const dc = Math.round(p.displayedCash ?? p.cash);
+    const dt = p.cashDelta > 0 ? `+${p.cashDelta}` : `${p.cashDelta}`;
+    const deltaHtml = p.cashDeltaVisible
+      ? `<span class="mini-delta ${p.cashDelta > 0 ? "pos" : "neg"}">${dt}</span>` : "";
+    return `<div class="mini-player${p.id === activeId ? " active" : ""}${alignRight ? " mini-player-right" : ""}">
+      <span class="mini-dot" style="background:${p.color};"></span>
+      <span class="mini-name">${p.isAi ? "AI" : "玩家"}</span>
+      <span class="mini-cash">¥${dc}</span>${deltaHtml}
+    </div>`;
+  };
+  el.innerHTML = mkPlayer(p0, false) + `<span class="mini-vs">vs</span>` + mkPlayer(p1, true);
 }
 
 function getLogPlayerColor(text) {
@@ -2192,6 +2213,122 @@ function createBuildingSvg(type, level, color, isLarge = false) {
 }
 
 
+
+// ─── 地块 Tooltip ────────────────────────────────────────────────────────────
+let tooltipLongPressTimer = null;
+
+function buildTooltipContent(idx) {
+  // 若是大地块副格，映射到主格
+  let tile = state.board[idx];
+  if (!tile) return "";
+  if (tile.isLargeSecondary && tile.largePrimaryIndex != null)
+    tile = state.board[tile.largePrimaryIndex];
+
+  if (tile.isStart) {
+    return `<button class="tt-close" aria-label="关闭">✕</button>
+      <div class="tt-name">起点 · 市政府</div>
+      <span class="tt-badge" style="background:#fde68a;">奖励地块</span>
+      <div class="tt-row">经过自动领取 ¥${CONFIG.startBonus}</div>
+      <div class="tt-row">停留可强制收购对手一处地产</div>`;
+  }
+
+  if (tile.isSpecial) {
+    const s = tile.special;
+    return `<button class="tt-close" aria-label="关闭">✕</button>
+      <div class="tt-name">${tile.name}</div>
+      <span class="tt-badge" style="background:${s.color};">${s.label}</span>
+      <div class="tt-row">${s.description}</div>`;
+  }
+
+  const lot = tile.lot;
+  if (!lot) return `<div class="tt-name">${tile.name}</div>`;
+
+  const owner = lot.ownerId ? getPlayerById(lot.ownerId) : null;
+  const ownerColor = owner ? owner.color : "#64748b";
+  const ownerText = owner ? owner.name : "待售";
+  const dots = [1, 2, 3].map(l =>
+    `<span class="tt-dot${l <= lot.level ? " filled" : ""}"></span>`).join("");
+  const largeMark = lot.isLarge ? `<span class="tt-large-tag">大型</span>` : "";
+
+  let tollBlock = "";
+  if (owner) {
+    tollBlock = `<div class="tt-toll">收费 ¥${lot.tolls[lot.level]}</div>
+      <div class="tt-toll-label">Lv.0 ¥${lot.tolls[0]}　Lv.1 ¥${lot.tolls[1]}　Lv.2 ¥${lot.tolls[2]}　Lv.3 ¥${lot.tolls[3]}</div>`;
+  } else {
+    tollBlock = `<div class="tt-price-row"><span>售价 ¥${lot.price}</span><span>基础收费 ¥${lot.tolls[0]}</span></div>`;
+  }
+
+  const upgradeHint = (owner && lot.level < 3)
+    ? `<div class="tt-upgrade">↑ 升至 Lv.${lot.level + 1} 需 ¥${lot.buildCosts[lot.level + 1]}</div>` : "";
+
+  return `<button class="tt-close" aria-label="关闭">✕</button>
+    <div class="tt-name">${tile.name}${largeMark}</div>
+    <span class="tt-badge" style="background:${lot.theme.color};">${lot.theme.label}</span>
+    <div class="tt-owner-row">
+      <span style="color:${ownerColor};font-weight:700;">${ownerText}</span>
+      <div class="tt-level-dots">${dots}</div>
+    </div>
+    <div class="tt-divider"></div>
+    ${tollBlock}
+    ${upgradeHint}
+    <div class="tt-district">📍 ${lot.district || "—"}</div>`;
+}
+
+function positionTooltip(anchorEl) {
+  if (!tileTooltipEl) return;
+  // 手机 (无 hover 能力): 固定居中
+  if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+    tileTooltipEl.style.cssText =
+      "left:50%;top:50%;transform:translate(-50%,-50%);";
+    return;
+  }
+  // 桌面: 贴近格子，避免超出视口
+  const r = anchorEl.getBoundingClientRect();
+  const w = 218, h = tileTooltipEl.offsetHeight || 260;
+  let left = r.right + 10;
+  let top = r.top;
+  if (left + w > window.innerWidth - 8) left = r.left - w - 10;
+  if (top + h > window.innerHeight - 8) top = window.innerHeight - h - 8;
+  if (top < 8) top = 8;
+  tileTooltipEl.style.cssText = `left:${left}px;top:${top}px;transform:none;`;
+}
+
+function showTileTooltip(idx, anchorEl) {
+  if (!tileTooltipEl || !state.board) return;
+  tileTooltipEl.innerHTML = buildTooltipContent(idx);
+  tileTooltipEl.classList.remove("hidden");
+  positionTooltip(anchorEl);
+  // 关闭按钮 (手机)
+  tileTooltipEl.querySelector(".tt-close")?.addEventListener("click", hideTileTooltip);
+}
+
+function hideTileTooltip() {
+  tileTooltipEl?.classList.add("hidden");
+}
+
+// 桌面: 鼠标悬浮
+boardEl.addEventListener("mouseover", (e) => {
+  const tile = e.target.closest(".tile[data-tile-index]");
+  if (!tile) { hideTileTooltip(); return; }
+  showTileTooltip(Number(tile.dataset.tileIndex), tile);
+});
+boardEl.addEventListener("mouseleave", hideTileTooltip);
+
+// 手机: 长按 500ms
+boardEl.addEventListener("touchstart", (e) => {
+  const tile = e.target.closest(".tile[data-tile-index]");
+  if (!tile) return;
+  clearTimeout(tooltipLongPressTimer);
+  tooltipLongPressTimer = setTimeout(() => {
+    showTileTooltip(Number(tile.dataset.tileIndex), tile);
+  }, 500);
+}, { passive: true });
+boardEl.addEventListener("touchend",   () => clearTimeout(tooltipLongPressTimer), { passive: true });
+boardEl.addEventListener("touchmove",  () => clearTimeout(tooltipLongPressTimer), { passive: true });
+// 点击棋盘空白处关闭
+boardEl.addEventListener("click", (e) => {
+  if (!e.target.closest(".tile")) hideTileTooltip();
+});
 
 eventActionsEl.addEventListener("click", (e) => {
   const btn = e.target.closest("button[data-action]");
