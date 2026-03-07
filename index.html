@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>环城大富翁</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ========== 开始界面 ========== -->
+  <div id="start-screen" class="start-screen">
+    <div class="start-panel">
+      <div class="start-title-block">
+        <div class="start-logo">🏙️</div>
+        <h1 class="start-game-title">环城大富翁</h1>
+        <p class="start-subtitle">策略 · 运气 · 地产争霸</p>
+      </div>
+      <div class="start-actions">
+        <button id="start-play-btn" class="start-btn start-btn-primary" type="button">🎮 开始游戏</button>
+        <button id="start-history-btn" class="start-btn start-btn-secondary" type="button">📋 历史记录</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== 历史记录弹窗 ========== -->
+  <div id="history-overlay" class="history-overlay hidden">
+    <div class="history-panel">
+      <div class="history-panel-header">
+        <h2>历史对局记录</h2>
+        <button id="history-close-btn" class="ghost-btn" type="button">✕ 关闭</button>
+      </div>
+      <div id="history-list" class="history-list"></div>
+    </div>
+  </div>
+
+  <div class="app-shell">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow" id="mode-eyebrow">环形地图休闲对战</p>
+        <h1>环城大富翁</h1>
+      </div>
+      <div class="topbar-actions">
+        <button id="sound-toggle-btn" class="ghost-btn sound-toggle-btn" type="button" aria-pressed="true">音效：开</button>
+        <button id="music-toggle-btn" class="ghost-btn sound-toggle-btn" type="button" aria-pressed="true">音乐：开</button>
+        <button id="restart-btn" class="ghost-btn restart-btn" type="button">重新开始</button>
+      </div>
+    </header>
+
+    <main class="layout">
+      <section class="board-section card">
+        <div class="board-header">
+          <div>
+            <p class="panel-label">地图状态</p>
+            <h2>环形线路 · 22 格</h2>
+          </div>
+          <div class="round-chip" id="round-chip">第 1 / 30 回合</div>
+        </div>
+        <div class="board-stage">
+          <div id="board" class="board" aria-label="游戏地图"></div>
+          <section id="center-console" class="board-center" aria-label="中央控制台">
+            <p class="panel-label">中央控制台</p>
+            <div class="console-dice-row">
+              <div id="center-dice" class="center-dice">
+                <span id="center-dice-value">-</span>
+              </div>
+              <div class="console-copy">
+                <h3 id="center-title">准备开始</h3>
+                <p id="center-description">点击掷骰子按钮，开始你的第一回合。</p>
+              </div>
+            </div>
+            <div class="round-progress" id="round-progress">
+              <div class="round-progress-bar" id="round-progress-bar" style="width:0%"></div>
+            </div>
+            <div class="center-badges">
+              <span id="center-player-badge" class="center-badge">当前：玩家</span>
+              <span id="center-phase-badge" class="center-badge">等待掷骰</span>
+            </div>
+            <div class="center-actions">
+              <button id="roll-btn" class="primary-btn center-roll-btn">掷骰子</button>
+            </div>
+          </section>
+          <div id="event-overlay" class="event-overlay" aria-live="polite">
+            <div id="event-card" class="event-card">
+              <div id="event-icon-wrap"></div>
+              <p id="event-label" class="panel-label">行动提示</p>
+              <h3 id="event-title">提示</h3>
+              <p id="event-message" class="event-message"></p>
+              <div id="event-actions" class="event-actions"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <aside class="sidebar">
+        <section class="card status-card">
+          <div class="panel-title-row">
+            <p class="panel-label">当前局势</p>
+            <div class="dice-box" id="dice-box">-</div>
+          </div>
+          <h2 id="turn-title">准备开始</h2>
+          <p id="turn-description" class="muted">点击"掷骰子"开始第一回合。</p>
+
+          <div class="scoreboard" id="scoreboard"></div>
+
+          <div class="rules">
+            <p>规则速览</p>
+            <ul>
+              <li>落到空地可购买，再次落到可升级（最高 3 级）；持有即收过路费。经过市政府自动建造空地。</li>
+              <li>同街区连锁收费：该街区内所有你的地产一起算，2 块×1.2，3 块×1.5。</li>
+              <li>掷出 6 点可获得额外一个完整回合（每次最多触发一次）。</li>
+              <li>金融中心（大地块）：有建筑时所有者停留额外获得收益。</li>
+              <li>温泉庄园（大地块）：有建筑时对手停留将被绊住（无法移动但结算地块）。</li>
+              <li>每局开始抛硬币决定先手，正面玩家先，反面 AI 先。</li>
+              <li>翻牌格：随机抽 3 张卡牌选 1 张发动，许多卡牌可选择对自己或对手使用。</li>
+              <li>城建局：选择免费升级自己或拆除对手一层建筑！</li>
+              <li>银行金库：强制掷骰存钱，存满后下个人全部提走！</li>
+              <li>机会格：触发随机事件，含空地购买机会，好坏难料！</li>
+              <li>停留市政府可发动征用令，解除对手一块地产的归属（建筑保留）！</li>
+              <li>绊脚术：目标下回合无法移动，但仍需结算当前所在地块。</li>
+              <li>逆行术：可改变自己或对手的前进方向！</li>
+              <li>大地块占据两格，价值高收费猛！</li>
+              <li><b>30 回合制</b>：满 30 回合后，剩余现金最高者获胜。</li>
+              <li><b>破产淘汰制</b>：某方无力偿还过路费即告破产，对手获胜。</li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="card log-card">
+          <div class="panel-title-row">
+            <div>
+              <p class="panel-label">事件日志</p>
+              <h2>回合记录</h2>
+            </div>
+          </div>
+          <div id="log-list" class="log-list"></div>
+        </section>
+      </aside>
+    </main>
+  </div>
+
+  <script src="assets/vendor/webaudiofont/WebAudioFontPlayer.js"></script>
+  <script src="assets/music-fonts/0000_JCLive_sf2_file.js"></script>
+  <script src="assets/music-fonts/0100_JCLive_sf2_file.js"></script>
+  <script src="assets/music-fonts/0110_JCLive_sf2_file.js"></script>
+  <script src="assets/music-fonts/0320_JCLive_sf2_file.js"></script>
+  <script src="assets/music-fonts/0480_JCLive_sf2_file.js"></script>
+  <script src="assets/music-fonts/12836_6_JCLive_sf2_file.js"></script>
+  <script src="assets/music-fonts/12838_6_JCLive_sf2_file.js"></script>
+  <script src="assets/music-fonts/12842_6_JCLive_sf2_file.js"></script>
+  <script src="assets/music-fonts/12846_6_JCLive_sf2_file.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>
