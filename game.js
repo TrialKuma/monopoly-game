@@ -122,33 +122,32 @@ const COMPACT_LOT_CONFIGS = {
 };
 
 const EXPANSION_ROUTE_POSITIONS = [
-  { x: 1, y: 1 }, { x: 2, y: 1 }, { x: 3, y: 1 }, { x: 4, y: 1 }, { x: 5, y: 1 }, { x: 5, y: 2 }, { x: 5, y: 3 },
-  { x: 4, y: 3 }, { x: 3, y: 3 }, { x: 2, y: 3 }, { x: 1, y: 3 }, { x: 1, y: 4 }, { x: 1, y: 5 }, { x: 2, y: 5 },
-  { x: 3, y: 5 }, { x: 4, y: 5 }, { x: 4, y: 4 }, { x: 1, y: 2 },
-  { x: 6, y: 3 }, { x: 7, y: 3 }, { x: 8, y: 3 }, { x: 9, y: 3 }, { x: 9, y: 2 }, { x: 9, y: 1 },
-  { x: 8, y: 1 }, { x: 7, y: 1 }, { x: 6, y: 1 }, { x: 6, y: 2 },
+  { x: 1, y: 1 }, { x: 2, y: 1 }, { x: 3, y: 1 }, { x: 4, y: 1 }, { x: 4, y: 2 }, { x: 4, y: 3 },
+  { x: 4, y: 4 }, { x: 3, y: 4 }, { x: 2, y: 4 }, { x: 1, y: 4 }, { x: 1, y: 3 }, { x: 1, y: 2 },
+  { x: 5, y: 3 },
+  { x: 6, y: 3 }, { x: 6, y: 2 }, { x: 6, y: 1 }, { x: 7, y: 1 }, { x: 8, y: 1 }, { x: 9, y: 1 }, { x: 10, y: 1 },
+  { x: 10, y: 2 }, { x: 10, y: 3 }, { x: 10, y: 4 }, { x: 9, y: 4 }, { x: 8, y: 4 }, { x: 7, y: 4 }, { x: 6, y: 4 }, { x: 5, y: 4 },
 ];
 
 const EXPANSION_TILE_NAMES = [
-  "市政府", "晶藤街", "花园里", "清贝里", "银行金库", "开发局", "时空枢纽",
-  "金藤街", "新月公园", "左环花园", "左环艺区", "翻牌驿站", "城建局", "左环湾岸",
-  "左环星港", "左环塔院", "左环中庭", "左环门廊",
-  "日落湾", "机运广场", "机运广场", "传送港", "暮岚街", "百味町",
-  "命运转盘", "潮畔街", "摩天大楼", "摩天大楼",
+  "市政府", "晶藤街", "花园里", "清贝里", "银行金库", "开发局",
+  "左环中庭", "新月公园", "左环花园", "左环艺区", "翻牌驿站", "左环门廊",
+  "时空枢纽",
+  "日落湾", "机运广场", "机运广场", "传送港", "暮岚街", "百味町", "命运转盘",
+  "潮畔街", "云栖区", "右环湾岸", "右环星港", "右环塔院", "右环中庭", "摩天大楼", "摩天大楼",
 ];
 
-const EXPANSION_LARGE_LOT_LINKS = { 27: 26, 15: 14, 9: 8 };
+const EXPANSION_LARGE_LOT_LINKS = { 8: 7, 27: 26 };
 const EXPANSION_DISTRICT_CONFIG = {
   1: "晶藤街区", 2: "晶藤街区", 3: "晶藤街区",
-  8: "左环街区", 9: "左环街区", 10: "左环街区",
-  13: "左环海湾", 14: "左环海湾", 15: "左环海湾", 16: "左环海湾",
-  18: "机运街区", 22: "机运街区", 23: "机运街区",
-  24: "右环街区", 25: "右环街区", 26: "天际街区", 27: "天际街区",
+  6: "左环街区", 7: "左环街区", 8: "左环街区", 9: "左环街区", 11: "左环街区",
+  13: "机运街区", 17: "机运街区", 18: "机运街区", 20: "机运街区",
+  22: "右环街区", 23: "右环街区", 24: "右环街区", 25: "右环街区",
+  26: "天际街区", 27: "天际街区",
 };
 const EXPANSION_DISTRICT_COLORS = {
   "晶藤街区": "#86efac",
   "左环街区": "#f9a8d4",
-  "左环海湾": "#c4b5fd",
   "机运街区": "#fde68a",
   "右环街区": "#93c5fd",
   "天际街区": "#67e8f9",
@@ -156,32 +155,60 @@ const EXPANSION_DISTRICT_COLORS = {
 const EXPANSION_SPECIAL_TILES = {
   4:  { type: "bank", label: "金库", color: "#bfdbfe", description: "存钱或提款！" },
   5:  { type: "construction", label: "开发局", color: "#fef08a", description: "强化建设节奏。" },
-  6:  { type: "junction", label: "时空枢纽", color: "#bae6fd", description: "停留后可选择下一圈路线。" },
-  11: { type: "card_draw", label: "翻牌格", color: "#e9d5ff", description: "翻牌选卡发动！" },
-  12: { type: "construction", label: "城建局", color: "#fef08a", description: "建造或拆除！" },
-  19: { type: "chance", label: "机会格", color: "#fbcfe8", description: "触发随机事件。" },
-  20: { type: "chance", label: "机会格", color: "#fbcfe8", description: "触发随机事件。" },
-  21: { type: "teleport", label: "传送港", color: "#a7f3d0", description: "随机传送到一块地产。" },
-  24: { type: "card_draw", label: "命运转盘", color: "#e9d5ff", description: "翻牌选卡发动！" },
+  10: { type: "card_draw", label: "翻牌格", color: "#e9d5ff", description: "翻牌选卡发动！" },
+  12: { type: "junction", label: "时空枢纽", color: "#bae6fd", description: "停留后可选择下一圈路线。" },
+  14: { type: "chance", label: "机会格", color: "#fbcfe8", description: "触发随机事件。" },
+  16: { type: "teleport", label: "传送港", color: "#a7f3d0", description: "随机传送到一块地产。" },
+  19: { type: "card_draw", label: "命运转盘", color: "#e9d5ff", description: "翻牌选卡发动！" },
+  22: { type: "chance", label: "机会格", color: "#fbcfe8", description: "触发随机事件。" },
 };
 const EXPANSION_LOT_CONFIGS = {
   1:  { price: 80,  buildCosts: [0, 38, 66, 100], tolls: [18, 52, 112, 188], themeIdx: 0 },
   2:  { price: 90,  buildCosts: [0, 40, 70, 106], tolls: [20, 58, 122, 202], themeIdx: 0 },
   3:  { price: 105, buildCosts: [0, 46, 78, 118], tolls: [24, 66, 138, 228], themeIdx: 0 },
-  7:  { price: 130, buildCosts: [0, 52, 88, 136], tolls: [30, 82, 174, 286], themeIdx: 1 },
-  8:  { price: 210, buildCosts: [0, 74, 122, 176], tolls: [46, 124, 256, 424], themeIdx: 2 },
-  9:  { price: 220, buildCosts: [0, 78, 128, 182], tolls: [48, 130, 266, 436], themeIdx: 2, effectId: "tower_bonus" },
-  10: { price: 110, buildCosts: [0, 48, 82, 124], tolls: [26, 72, 148, 242], themeIdx: 0 },
+  6:  { price: 110, buildCosts: [0, 48, 82, 124], tolls: [26, 72, 148, 242], themeIdx: 0 },
+  7:  { price: 210, buildCosts: [0, 74, 122, 176], tolls: [46, 124, 256, 424], themeIdx: 2, effectId: "finance_bonus" },
+  9:  { price: 125, buildCosts: [0, 50, 84, 128], tolls: [28, 76, 156, 256], themeIdx: 1 },
+  11: { price: 95,  buildCosts: [0, 42, 74, 112], tolls: [22, 60, 130, 216], themeIdx: 0 },
   13: { price: 120, buildCosts: [0, 50, 86, 130], tolls: [28, 76, 158, 258], themeIdx: 1 },
-  14: { price: 250, buildCosts: [0, 82, 132, 188], tolls: [54, 142, 292, 472], themeIdx: 3, effectId: "finance_bonus" },
-  15: { price: 260, buildCosts: [0, 86, 136, 194], tolls: [56, 148, 304, 488], themeIdx: 3 },
-  16: { price: 145, buildCosts: [0, 56, 92, 142], tolls: [34, 88, 182, 298], themeIdx: 1 },
-  17: { price: 95,  buildCosts: [0, 42, 74, 112], tolls: [22, 60, 130, 216], themeIdx: 0 },
-  18: { price: 140, buildCosts: [0, 54, 90, 138], tolls: [32, 86, 176, 290], themeIdx: 1 },
-  22: { price: 125, buildCosts: [0, 50, 84, 128], tolls: [28, 76, 156, 256], themeIdx: 1 },
-  23: { price: 135, buildCosts: [0, 54, 90, 136], tolls: [30, 82, 168, 276], themeIdx: 1 },
-  25: { price: 115, buildCosts: [0, 48, 82, 124], tolls: [26, 72, 150, 246], themeIdx: 0 },
-  26: { price: 280, buildCosts: [0, 90, 144, 206], tolls: [62, 158, 318, 516], themeIdx: 3, effectId: "hot_spring_rest" },
+  15: { price: 115, buildCosts: [0, 48, 82, 124], tolls: [26, 72, 150, 246], themeIdx: 0 },
+  17: { price: 135, buildCosts: [0, 54, 90, 136], tolls: [30, 82, 168, 276], themeIdx: 1 },
+  18: { price: 145, buildCosts: [0, 56, 92, 142], tolls: [34, 88, 182, 298], themeIdx: 1 },
+  20: { price: 110, buildCosts: [0, 48, 82, 124], tolls: [26, 72, 148, 242], themeIdx: 0 },
+  21: { price: 120, buildCosts: [0, 50, 84, 130], tolls: [28, 76, 158, 258], themeIdx: 1 },
+  23: { price: 130, buildCosts: [0, 52, 88, 136], tolls: [30, 82, 174, 286], themeIdx: 1 },
+  24: { price: 140, buildCosts: [0, 54, 90, 138], tolls: [32, 86, 176, 290], themeIdx: 1 },
+  25: { price: 150, buildCosts: [0, 58, 96, 146], tolls: [36, 94, 188, 306], themeIdx: 1 },
+  26: { price: 280, buildCosts: [0, 90, 144, 206], tolls: [62, 158, 318, 516], themeIdx: 3, effectId: "tower_bonus" },
+};
+
+const EXPANSION_TILE_VISUALS = {
+  7:  { left: "14%",  top: "1%",   width: "13%",  height: "12%" },
+  2:  { left: "10%",  top: "15%",  width: "7.2%", height: "11%" },
+  4:  { left: "24%",  top: "15%",  width: "7.2%", height: "11%" },
+  1:  { left: "4%",   top: "29%",  width: "7.2%", height: "11%" },
+  5:  { left: "30%",  top: "29%",  width: "7.2%", height: "11%" },
+  0:  { left: "0%",   top: "42%",  width: "7.5%", height: "13%" },
+  11: { left: "4%",   top: "56%",  width: "7.2%", height: "11%" },
+  10: { left: "30%",  top: "56%",  width: "7.2%", height: "11%" },
+  9:  { left: "10%",  top: "70%",  width: "7.2%", height: "11%" },
+  6:  { left: "24%",  top: "70%",  width: "7.2%", height: "11%" },
+  3:  { left: "15%",  top: "84%",  width: "10%",  height: "11%" },
+  12: { left: "40%",  top: "42%",  width: "8%",   height: "13%" },
+  26: { left: "68%",  top: "1%",   width: "13%",  height: "12%" },
+  14: { left: "63%",  top: "15%",  width: "7.2%", height: "11%" },
+  16: { left: "78%",  top: "15%",  width: "7.2%", height: "11%" },
+  13: { left: "56%",  top: "29%",  width: "7.2%", height: "11%" },
+  17: { left: "85%",  top: "29%",  width: "7.2%", height: "11%" },
+  25: { left: "51%",  top: "42%",  width: "7.2%", height: "11%" },
+  18: { left: "79%",  top: "42%",  width: "7.2%", height: "11%" },
+  19: { left: "92%",  top: "42%",  width: "7.5%", height: "13%" },
+  24: { left: "56%",  top: "56%",  width: "7.2%", height: "11%" },
+  20: { left: "85%",  top: "56%",  width: "7.2%", height: "11%" },
+  23: { left: "60%",  top: "70%",  width: "7.2%", height: "11%" },
+  22: { left: "71%",  top: "70%",  width: "7.2%", height: "11%" },
+  21: { left: "81%",  top: "70%",  width: "7.2%", height: "11%" },
+  15: { left: "69%",  top: "84%",  width: "10%",  height: "11%" },
 };
 
 function makeLoopNavigation(length) {
@@ -233,7 +260,8 @@ const MAP_PRESETS = {
     boardTitle: "都市扩张图 · 28 格",
     startDescription: "更长的路线和 8 字交叉枢纽，停在枢纽时可选择下一圈方向。",
     modeLabel: "8 字交叉经营图",
-    grid: { columns: 9, rows: 5, cellMin: 72, cellMinTablet: 50, cellMinMobile: 40, height: "min(88vh, 980px)", heightTablet: "min(80vh, 660px)", heightMobile: "min(74vh, 520px)", centerWidth: "min(260px, calc(100% - 220px))", centerWidthTablet: "min(220px, calc(100% - 120px))", centerWidthMobile: "min(180px, calc(100% - 60px))" },
+    layoutMode: "free",
+    grid: { columns: 10, rows: 7, cellMin: 78, cellMinTablet: 50, cellMinMobile: 38, height: "min(72vh, 660px)", heightTablet: "min(64vh, 540px)", heightMobile: "min(58vh, 420px)", centerWidth: "min(150px, 11%)", centerWidthTablet: "min(140px, 14%)", centerWidthMobile: "min(120px, 18%)", centerTop: "45%", centerLeft: "70%" },
     routePositions: EXPANSION_ROUTE_POSITIONS,
     tileNames: EXPANSION_TILE_NAMES,
     largeLotLinks: EXPANSION_LARGE_LOT_LINKS,
@@ -241,23 +269,24 @@ const MAP_PRESETS = {
     districtColors: EXPANSION_DISTRICT_COLORS,
     specialTiles: EXPANSION_SPECIAL_TILES,
     lotConfigs: EXPANSION_LOT_CONFIGS,
+    tileVisuals: EXPANSION_TILE_VISUALS,
     navigation: {
       next: {
-        0: 1, 1: 2, 2: 3, 3: 4, 4: 5, 5: 6,
-        7: 8, 8: 9, 9: 10, 10: 11, 11: 12, 12: 13, 13: 14, 14: 15, 15: 16, 16: 17, 17: 0,
-        18: 19, 19: 20, 20: 21, 21: 22, 22: 23, 23: 24, 24: 25, 25: 26, 26: 27, 27: 0,
+        0: 1, 1: 2, 2: 3, 3: 4, 4: 12,
+        5: 6, 6: 7, 7: 8, 8: 9, 9: 10, 10: 11, 11: 0,
+        13: 14, 14: 15, 15: 16, 16: 17, 17: 18, 18: 19, 19: 20, 20: 21, 21: 22, 22: 23, 23: 24, 24: 25, 25: 26, 26: 27, 27: 12,
       },
       prev: {
-        0: 17, 1: 0, 2: 1, 3: 2, 4: 3, 5: 4, 6: 5,
-        7: 6, 8: 7, 9: 8, 10: 9, 11: 10, 12: 11, 13: 12, 14: 13, 15: 14, 16: 15, 17: 16,
-        18: 6, 19: 18, 20: 19, 21: 20, 22: 21, 23: 22, 24: 23, 25: 24, 26: 25, 27: 26,
+        0: 11, 1: 0, 2: 1, 3: 2, 4: 3, 5: 12, 6: 5, 7: 6, 8: 7, 9: 8, 10: 9, 11: 10,
+        12: 27,
+        13: 12, 14: 13, 15: 14, 16: 15, 17: 16, 18: 17, 19: 18, 20: 19, 21: 20, 22: 21, 23: 22, 24: 23, 25: 24, 26: 25, 27: 26,
       },
       junctions: {
-        6: {
-          defaultNext: 7,
+        12: {
+          defaultNext: 5,
           options: [
-            { id: "left", label: "左环经营线", next: 7 },
-            { id: "right", label: "右环机遇线", next: 18 },
+            { id: "left", label: "左环经营线", next: 5 },
+            { id: "right", label: "右环机遇线", next: 13 },
           ],
         },
       },
@@ -719,6 +748,8 @@ function applyMapLayout(mapCfg = getMapConfig()) {
   centerConsoleEl?.style.setProperty("--board-center-width", mapCfg.grid.centerWidth);
   centerConsoleEl?.style.setProperty("--board-center-width-tablet", mapCfg.grid.centerWidthTablet);
   centerConsoleEl?.style.setProperty("--board-center-width-mobile", mapCfg.grid.centerWidthMobile);
+  centerConsoleEl?.style.setProperty("--board-center-top", mapCfg.grid.centerTop || "50%");
+  centerConsoleEl?.style.setProperty("--board-center-left", mapCfg.grid.centerLeft || "50%");
   if (boardMapTitleEl) boardMapTitleEl.textContent = mapCfg.boardTitle;
 }
 
@@ -1103,7 +1134,9 @@ function render() {
 }
 
 function renderBoard() {
-  boardEl.className = `board${state.animation.boardBurst ? " burst" : ""}`;
+  const mapCfg = getMapConfig(state.currentMapId);
+  const isFreeLayout = mapCfg.layoutMode === "free";
+  boardEl.className = `board${state.animation.boardBurst ? " burst" : ""}${isFreeLayout ? " free-layout" : ""}`;
   boardEl.innerHTML = "";
   state.board.forEach((tile) => {
     if (tile.isLargeSecondary) return;
@@ -1125,7 +1158,24 @@ function renderBoard() {
       el.style.setProperty("--player-here-b", hexToRgba(here[here.length - 1].color, 0.25));
     }
     el.className = cls.join(" ");
-    if (isLargePrimary && secTile) {
+    if (isFreeLayout) {
+      const visual = mapCfg.tileVisuals?.[tile.index];
+      if (visual) {
+        el.style.left = visual.left;
+        el.style.top = visual.top;
+        el.style.width = visual.width || (tile.isStart || tile.isSpecial ? "10.5%" : "9%");
+        el.style.height = visual.height || "15%";
+        el.style.transform = visual.rotate ? `rotate(${visual.rotate})` : "";
+      } else {
+        el.style.left = `${tile.x * 8}%`;
+        el.style.top = `${tile.y * 12}%`;
+        el.style.width = isLargePrimary ? "18%" : "9%";
+        el.style.height = isLargePrimary ? "16%" : "15%";
+        el.style.transform = "";
+      }
+      el.style.gridColumn = "";
+      el.style.gridRow = "";
+    } else if (isLargePrimary && secTile) {
       if (tile.x === secTile.x) {
         el.style.gridColumn = String(tile.x);
         el.style.gridRow = `${Math.min(tile.y, secTile.y)} / span 2`;
@@ -1133,9 +1183,19 @@ function renderBoard() {
         el.style.gridColumn = `${Math.min(tile.x, secTile.x)} / span 2`;
         el.style.gridRow = String(tile.y);
       }
+      el.style.left = "";
+      el.style.top = "";
+      el.style.width = "";
+      el.style.height = "";
+      el.style.transform = "";
     } else {
       el.style.gridColumn = String(tile.x);
       el.style.gridRow = String(tile.y);
+      el.style.left = "";
+      el.style.top = "";
+      el.style.width = "";
+      el.style.height = "";
+      el.style.transform = "";
     }
     if (tile.lot?.ownerId) el.style.setProperty("--owner-accent", getPlayerById(tile.lot.ownerId).color);
     else el.style.removeProperty("--owner-accent");
