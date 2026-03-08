@@ -3,10 +3,11 @@ const CONFIG = {
   startCash: 1600,
   startBonus: 300,
   startStopBonus: 160,
-  boardLength: 22,
 };
 
-const ROUTE_POSITIONS = [
+const DEFAULT_MAP_ID = "classic";
+
+const CLASSIC_ROUTE_POSITIONS = [
   { x: 1, y: 1 }, { x: 2, y: 1 }, { x: 3, y: 1 }, { x: 4, y: 1 }, { x: 5, y: 1 },
   { x: 6, y: 1 }, { x: 7, y: 1 }, { x: 7, y: 2 }, { x: 7, y: 3 },
   { x: 7, y: 4 }, { x: 7, y: 5 }, { x: 7, y: 6 }, { x: 6, y: 6 },
@@ -14,7 +15,7 @@ const ROUTE_POSITIONS = [
   { x: 1, y: 5 }, { x: 1, y: 4 }, { x: 1, y: 3 }, { x: 1, y: 2 },
 ];
 
-const TILE_NAMES = [
+const CLASSIC_TILE_NAMES = [
   "市政府", "晨曦街", "花园里", "曦园", "银行金库",
   "金融中心", "金融中心", "摩天楼", "摩天楼",
   "命运转盘", "百味町", "湖畔街", "瀚海阁", "机会广场",
@@ -22,7 +23,7 @@ const TILE_NAMES = [
   "中央区", "艺文里", "翻牌驿站", "日落湾",
 ];
 
-const LARGE_LOT_LINKS = { 6: 5, 8: 7, 15: 14 };
+const CLASSIC_LARGE_LOT_LINKS = { 6: 5, 8: 7, 15: 14 };
 
 const LOT_THEMES = [
   { key: "villa", label: "住宅区", color: "#86efac" },
@@ -36,7 +37,7 @@ const PLAYER_DEFS = [
   { id: "ai", name: "AI 对手", color: "#ef4444", isAi: true },
 ];
 
-const DISTRICT_CONFIG = {
+const CLASSIC_DISTRICT_CONFIG = {
   1: "晨曦街区", 2: "晨曦街区", 3: "晨曦街区",
   5: "金融街区", 6: "金融街区", 7: "金融街区", 8: "金融街区",
   10: "湖畔街区", 11: "湖畔街区", 12: "湖畔街区",
@@ -44,7 +45,7 @@ const DISTRICT_CONFIG = {
   18: "中央街区", 19: "中央街区", 21: "中央街区",
 };
 
-const DISTRICT_COLORS = {
+const CLASSIC_DISTRICT_COLORS = {
   "晨曦街区": "#86efac",
   "金融街区": "#93c5fd",
   "湖畔街区": "#fde68a",
@@ -52,13 +53,219 @@ const DISTRICT_COLORS = {
   "中央街区": "#c4b5fd",
 };
 
-const SPECIAL_TILES = {
+const CLASSIC_SPECIAL_TILES = {
   4:  { type: "bank", label: "金库", color: "#bfdbfe", description: "存钱或提款！" },
   9:  { type: "card_draw", label: "翻牌格", color: "#e9d5ff", description: "翻牌选卡发动！" },
   13: { type: "chance", label: "机会格", color: "#fbcfe8", description: "触发随机事件。" },
   17: { type: "construction", label: "城建局", color: "#fef08a", description: "建造或拆除！" },
   20: { type: "card_draw", label: "翻牌格", color: "#e9d5ff", description: "翻牌选卡发动！" },
 };
+
+const CLASSIC_LOT_CONFIGS = {
+  1:  { price: 80,  buildCosts: [0, 40, 70, 110],  tolls: [20, 60, 130, 220],  themeIdx: 0 },
+  2:  { price: 90,  buildCosts: [0, 42, 75, 115],  tolls: [22, 65, 140, 235],  themeIdx: 0 },
+  3:  { price: 95,  buildCosts: [0, 44, 78, 120],  tolls: [24, 68, 148, 246],  themeIdx: 0 },
+  5:  { price: 240, buildCosts: [0, 80, 130, 185], tolls: [55, 140, 280, 460], themeIdx: 3, effectId: "finance_bonus" },
+  7:  { price: 210, buildCosts: [0, 72, 118, 172], tolls: [48, 125, 250, 415], themeIdx: 3, effectId: "tower_bonus" },
+  10: { price: 140, buildCosts: [0, 55, 95, 140],  tolls: [34, 90, 180, 300],  themeIdx: 1 },
+  11: { price: 150, buildCosts: [0, 58, 100, 145], tolls: [36, 95, 190, 315],  themeIdx: 1 },
+  12: { price: 170, buildCosts: [0, 62, 105, 155], tolls: [40, 105, 210, 345], themeIdx: 1 },
+  14: { price: 280, buildCosts: [0, 90, 145, 210], tolls: [65, 160, 320, 530], themeIdx: 2, effectId: "hot_spring_rest" },
+  16: { price: 180, buildCosts: [0, 65, 110, 160], tolls: [42, 110, 220, 360], themeIdx: 2 },
+  18: { price: 70,  buildCosts: [0, 35, 65, 100],  tolls: [18, 55, 120, 200],  themeIdx: 0 },
+  19: { price: 80,  buildCosts: [0, 40, 70, 110],  tolls: [20, 60, 130, 220],  themeIdx: 0 },
+  21: { price: 90,  buildCosts: [0, 42, 75, 115],  tolls: [22, 65, 140, 235],  themeIdx: 0 },
+};
+
+const COMPACT_ROUTE_POSITIONS = [
+  { x: 1, y: 1 }, { x: 2, y: 1 }, { x: 3, y: 1 }, { x: 4, y: 1 }, { x: 5, y: 1 }, { x: 6, y: 1 },
+  { x: 6, y: 2 }, { x: 6, y: 3 }, { x: 6, y: 4 }, { x: 6, y: 5 }, { x: 5, y: 5 }, { x: 4, y: 5 },
+  { x: 3, y: 5 }, { x: 2, y: 5 }, { x: 1, y: 5 }, { x: 1, y: 4 }, { x: 1, y: 3 }, { x: 1, y: 2 },
+];
+
+const COMPACT_TILE_NAMES = [
+  "市政府", "河畔小筑", "林间庄园", "林间庄园", "晨曦街", "城建局",
+  "翻牌驿站", "机会广场", "冲刺站", "中央金库", "港风小筑", "潮畔别墅",
+  "潮畔别墅", "传送港", "艺文里", "命运转盘", "艺文里南", "艺文里北",
+];
+
+const COMPACT_LARGE_LOT_LINKS = { 3: 2, 12: 11 };
+const COMPACT_DISTRICT_CONFIG = {
+  1: "河畔街区", 2: "林间街区", 3: "林间街区", 4: "河畔街区",
+  10: "海湾街区", 11: "海湾街区", 12: "海湾街区",
+  14: "艺文街区", 16: "艺文街区", 17: "艺文街区",
+};
+const COMPACT_DISTRICT_COLORS = {
+  "河畔街区": "#86efac",
+  "林间街区": "#a7f3d0",
+  "海湾街区": "#93c5fd",
+  "艺文街区": "#c4b5fd",
+};
+const COMPACT_SPECIAL_TILES = {
+  5:  { type: "construction", label: "城建局", color: "#fef08a", description: "建造或拆除！" },
+  6:  { type: "card_draw", label: "翻牌格", color: "#e9d5ff", description: "翻牌选卡发动！" },
+  7:  { type: "chance", label: "机会格", color: "#fbcfe8", description: "触发随机事件。" },
+  8:  { type: "rush", label: "冲刺站", color: "#fdba74", description: "立即向前冲刺 2 格。" },
+  9:  { type: "bank", label: "金库", color: "#bfdbfe", description: "存钱或提款！" },
+  13: { type: "teleport", label: "传送港", color: "#a7f3d0", description: "随机传送到一块地产。" },
+  15: { type: "card_draw", label: "命运轮盘", color: "#e9d5ff", description: "翻牌选卡发动！" },
+};
+const COMPACT_LOT_CONFIGS = {
+  1:  { price: 100, buildCosts: [0, 44, 76, 118], tolls: [24, 68, 146, 238], themeIdx: 0 },
+  2:  { price: 220, buildCosts: [0, 78, 128, 180], tolls: [48, 128, 266, 430], themeIdx: 2, effectId: "finance_bonus" },
+  4:  { price: 110, buildCosts: [0, 48, 80, 125], tolls: [26, 72, 154, 250], themeIdx: 0 },
+  10: { price: 130, buildCosts: [0, 52, 88, 136], tolls: [30, 82, 172, 280], themeIdx: 1 },
+  11: { price: 240, buildCosts: [0, 82, 132, 188], tolls: [52, 138, 284, 458], themeIdx: 2, effectId: "hot_spring_rest" },
+  14: { price: 90,  buildCosts: [0, 40, 70, 108], tolls: [22, 62, 132, 220], themeIdx: 0 },
+  16: { price: 95,  buildCosts: [0, 42, 74, 112], tolls: [23, 64, 136, 226], themeIdx: 0 },
+  17: { price: 105, buildCosts: [0, 46, 78, 120], tolls: [25, 68, 144, 236], themeIdx: 0 },
+};
+
+const EXPANSION_ROUTE_POSITIONS = [
+  { x: 1, y: 1 }, { x: 2, y: 1 }, { x: 3, y: 1 }, { x: 4, y: 1 }, { x: 5, y: 1 }, { x: 5, y: 2 }, { x: 5, y: 3 },
+  { x: 4, y: 3 }, { x: 3, y: 3 }, { x: 2, y: 3 }, { x: 1, y: 3 }, { x: 1, y: 4 }, { x: 1, y: 5 }, { x: 2, y: 5 },
+  { x: 3, y: 5 }, { x: 4, y: 5 }, { x: 4, y: 4 }, { x: 1, y: 2 },
+  { x: 6, y: 3 }, { x: 7, y: 3 }, { x: 8, y: 3 }, { x: 9, y: 3 }, { x: 9, y: 2 }, { x: 9, y: 1 },
+  { x: 8, y: 1 }, { x: 7, y: 1 }, { x: 6, y: 1 }, { x: 6, y: 2 },
+];
+
+const EXPANSION_TILE_NAMES = [
+  "市政府", "晶藤街", "花园里", "清贝里", "银行金库", "开发局", "时空枢纽",
+  "金藤街", "新月公园", "左环花园", "左环艺区", "翻牌驿站", "城建局", "左环湾岸",
+  "左环星港", "左环塔院", "左环中庭", "左环门廊",
+  "日落湾", "机运广场", "机运广场", "传送港", "暮岚街", "百味町",
+  "命运转盘", "潮畔街", "摩天大楼", "摩天大楼",
+];
+
+const EXPANSION_LARGE_LOT_LINKS = { 27: 26, 15: 14, 9: 8 };
+const EXPANSION_DISTRICT_CONFIG = {
+  1: "晶藤街区", 2: "晶藤街区", 3: "晶藤街区",
+  8: "左环街区", 9: "左环街区", 10: "左环街区",
+  13: "左环海湾", 14: "左环海湾", 15: "左环海湾", 16: "左环海湾",
+  18: "机运街区", 22: "机运街区", 23: "机运街区",
+  24: "右环街区", 25: "右环街区", 26: "天际街区", 27: "天际街区",
+};
+const EXPANSION_DISTRICT_COLORS = {
+  "晶藤街区": "#86efac",
+  "左环街区": "#f9a8d4",
+  "左环海湾": "#c4b5fd",
+  "机运街区": "#fde68a",
+  "右环街区": "#93c5fd",
+  "天际街区": "#67e8f9",
+};
+const EXPANSION_SPECIAL_TILES = {
+  4:  { type: "bank", label: "金库", color: "#bfdbfe", description: "存钱或提款！" },
+  5:  { type: "construction", label: "开发局", color: "#fef08a", description: "强化建设节奏。" },
+  6:  { type: "junction", label: "时空枢纽", color: "#bae6fd", description: "停留后可选择下一圈路线。" },
+  11: { type: "card_draw", label: "翻牌格", color: "#e9d5ff", description: "翻牌选卡发动！" },
+  12: { type: "construction", label: "城建局", color: "#fef08a", description: "建造或拆除！" },
+  19: { type: "chance", label: "机会格", color: "#fbcfe8", description: "触发随机事件。" },
+  20: { type: "chance", label: "机会格", color: "#fbcfe8", description: "触发随机事件。" },
+  21: { type: "teleport", label: "传送港", color: "#a7f3d0", description: "随机传送到一块地产。" },
+  24: { type: "card_draw", label: "命运转盘", color: "#e9d5ff", description: "翻牌选卡发动！" },
+};
+const EXPANSION_LOT_CONFIGS = {
+  1:  { price: 80,  buildCosts: [0, 38, 66, 100], tolls: [18, 52, 112, 188], themeIdx: 0 },
+  2:  { price: 90,  buildCosts: [0, 40, 70, 106], tolls: [20, 58, 122, 202], themeIdx: 0 },
+  3:  { price: 105, buildCosts: [0, 46, 78, 118], tolls: [24, 66, 138, 228], themeIdx: 0 },
+  7:  { price: 130, buildCosts: [0, 52, 88, 136], tolls: [30, 82, 174, 286], themeIdx: 1 },
+  8:  { price: 210, buildCosts: [0, 74, 122, 176], tolls: [46, 124, 256, 424], themeIdx: 2 },
+  9:  { price: 220, buildCosts: [0, 78, 128, 182], tolls: [48, 130, 266, 436], themeIdx: 2, effectId: "tower_bonus" },
+  10: { price: 110, buildCosts: [0, 48, 82, 124], tolls: [26, 72, 148, 242], themeIdx: 0 },
+  13: { price: 120, buildCosts: [0, 50, 86, 130], tolls: [28, 76, 158, 258], themeIdx: 1 },
+  14: { price: 250, buildCosts: [0, 82, 132, 188], tolls: [54, 142, 292, 472], themeIdx: 3, effectId: "finance_bonus" },
+  15: { price: 260, buildCosts: [0, 86, 136, 194], tolls: [56, 148, 304, 488], themeIdx: 3 },
+  16: { price: 145, buildCosts: [0, 56, 92, 142], tolls: [34, 88, 182, 298], themeIdx: 1 },
+  17: { price: 95,  buildCosts: [0, 42, 74, 112], tolls: [22, 60, 130, 216], themeIdx: 0 },
+  18: { price: 140, buildCosts: [0, 54, 90, 138], tolls: [32, 86, 176, 290], themeIdx: 1 },
+  22: { price: 125, buildCosts: [0, 50, 84, 128], tolls: [28, 76, 156, 256], themeIdx: 1 },
+  23: { price: 135, buildCosts: [0, 54, 90, 136], tolls: [30, 82, 168, 276], themeIdx: 1 },
+  25: { price: 115, buildCosts: [0, 48, 82, 124], tolls: [26, 72, 150, 246], themeIdx: 0 },
+  26: { price: 280, buildCosts: [0, 90, 144, 206], tolls: [62, 158, 318, 516], themeIdx: 3, effectId: "hot_spring_rest" },
+};
+
+function makeLoopNavigation(length) {
+  const next = {};
+  const prev = {};
+  for (let i = 0; i < length; i++) {
+    next[i] = (i + 1) % length;
+    prev[i] = (i - 1 + length) % length;
+  }
+  return { next, prev, junctions: {} };
+}
+
+const MAP_PRESETS = {
+  classic: {
+    id: "classic",
+    name: "经典环线",
+    boardTitle: "环形线路 · 22 格",
+    startDescription: "经典 22 格环形线路，节奏均衡，适合标准对局。",
+    modeLabel: "环形地图休闲对战",
+    grid: { columns: 7, rows: 6, cellMin: 90, cellMinTablet: 56, cellMinMobile: 44, height: "min(90vh, 1080px)", heightTablet: "min(85vh, 660px)", heightMobile: "min(80vh, 520px)", centerWidth: "min(340px, calc(100% - 160px))", centerWidthTablet: "min(280px, calc(100% - 60px))", centerWidthMobile: "min(240px, calc(100% - 40px))" },
+    routePositions: CLASSIC_ROUTE_POSITIONS,
+    tileNames: CLASSIC_TILE_NAMES,
+    largeLotLinks: CLASSIC_LARGE_LOT_LINKS,
+    districtConfig: CLASSIC_DISTRICT_CONFIG,
+    districtColors: CLASSIC_DISTRICT_COLORS,
+    specialTiles: CLASSIC_SPECIAL_TILES,
+    lotConfigs: CLASSIC_LOT_CONFIGS,
+    navigation: makeLoopNavigation(CLASSIC_ROUTE_POSITIONS.length),
+  },
+  compact: {
+    id: "compact",
+    name: "紧凑冲突图",
+    boardTitle: "紧凑冲突图 · 18 格",
+    startDescription: "更短的单环路线，功能格更密，买地和交锋都来得更快。",
+    modeLabel: "高冲突短局",
+    grid: { columns: 6, rows: 5, cellMin: 104, cellMinTablet: 64, cellMinMobile: 48, height: "min(82vh, 900px)", heightTablet: "min(76vh, 620px)", heightMobile: "min(72vh, 480px)", centerWidth: "min(300px, calc(100% - 120px))", centerWidthTablet: "min(260px, calc(100% - 56px))", centerWidthMobile: "min(220px, calc(100% - 32px))" },
+    routePositions: COMPACT_ROUTE_POSITIONS,
+    tileNames: COMPACT_TILE_NAMES,
+    largeLotLinks: COMPACT_LARGE_LOT_LINKS,
+    districtConfig: COMPACT_DISTRICT_CONFIG,
+    districtColors: COMPACT_DISTRICT_COLORS,
+    specialTiles: COMPACT_SPECIAL_TILES,
+    lotConfigs: COMPACT_LOT_CONFIGS,
+    navigation: makeLoopNavigation(COMPACT_ROUTE_POSITIONS.length),
+  },
+  expansion: {
+    id: "expansion",
+    name: "都市扩张图",
+    boardTitle: "都市扩张图 · 28 格",
+    startDescription: "更长的路线和 8 字交叉枢纽，停在枢纽时可选择下一圈方向。",
+    modeLabel: "8 字交叉经营图",
+    grid: { columns: 9, rows: 5, cellMin: 72, cellMinTablet: 50, cellMinMobile: 40, height: "min(88vh, 980px)", heightTablet: "min(80vh, 660px)", heightMobile: "min(74vh, 520px)", centerWidth: "min(260px, calc(100% - 220px))", centerWidthTablet: "min(220px, calc(100% - 120px))", centerWidthMobile: "min(180px, calc(100% - 60px))" },
+    routePositions: EXPANSION_ROUTE_POSITIONS,
+    tileNames: EXPANSION_TILE_NAMES,
+    largeLotLinks: EXPANSION_LARGE_LOT_LINKS,
+    districtConfig: EXPANSION_DISTRICT_CONFIG,
+    districtColors: EXPANSION_DISTRICT_COLORS,
+    specialTiles: EXPANSION_SPECIAL_TILES,
+    lotConfigs: EXPANSION_LOT_CONFIGS,
+    navigation: {
+      next: {
+        0: 1, 1: 2, 2: 3, 3: 4, 4: 5, 5: 6,
+        7: 8, 8: 9, 9: 10, 10: 11, 11: 12, 12: 13, 13: 14, 14: 15, 15: 16, 16: 17, 17: 0,
+        18: 19, 19: 20, 20: 21, 21: 22, 22: 23, 23: 24, 24: 25, 25: 26, 26: 27, 27: 0,
+      },
+      prev: {
+        0: 17, 1: 0, 2: 1, 3: 2, 4: 3, 5: 4, 6: 5,
+        7: 6, 8: 7, 9: 8, 10: 9, 11: 10, 12: 11, 13: 12, 14: 13, 15: 14, 16: 15, 17: 16,
+        18: 6, 19: 18, 20: 19, 21: 20, 22: 21, 23: 22, 24: 23, 25: 24, 26: 25, 27: 26,
+      },
+      junctions: {
+        6: {
+          defaultNext: 7,
+          options: [
+            { id: "left", label: "左环经营线", next: 7 },
+            { id: "right", label: "右环机遇线", next: 18 },
+          ],
+        },
+      },
+    },
+  },
+};
+
+let selectedMapId = DEFAULT_MAP_ID;
 
 const CARD_POOL = [
   { id: "teleport", name: "传送术", icon: "🌀", description: "传送自己或对手到随机地产格" },
@@ -81,6 +288,7 @@ const logListEl = document.getElementById("log-list");
 const turnTitleEl = document.getElementById("turn-title");
 const turnDescriptionEl = document.getElementById("turn-description");
 const roundChipEl = document.getElementById("round-chip");
+const boardMapTitleEl = document.getElementById("board-map-title");
 const diceBoxEl = document.getElementById("dice-box");
 const rollBtn = document.getElementById("roll-btn");
 const restartBtn = document.getElementById("restart-btn");
@@ -92,6 +300,7 @@ const centerTitleEl = document.getElementById("center-title");
 const centerDescriptionEl = document.getElementById("center-description");
 const centerPlayerBadgeEl = document.getElementById("center-player-badge");
 const centerPhaseBadgeEl = document.getElementById("center-phase-badge");
+const centerConsoleEl = document.getElementById("center-console");
 const eventOverlayEl = document.getElementById("event-overlay");
 const eventLabelEl = document.getElementById("event-label");
 const eventTitleEl = document.getElementById("event-title");
@@ -115,7 +324,10 @@ const EVENT_ICON_MAP = {
   "骰6再动": { emoji: "🎲", cls: "event-special" },
   "绊脚效果": { emoji: "🪤", cls: "event-info" },
   "卡牌效果": { emoji: "🃏", cls: "event-card" },
+  "路线选择": { emoji: "🧭", cls: "event-special" },
+  "冲刺站": { emoji: "🚀", cls: "event-special" },
   "金融中心": { emoji: "📈", cls: "event-special" },
+  "摩天楼": { emoji: "🏙️", cls: "event-special" },
   "温泉休息": { emoji: "♨️", cls: "event-info" },
   "温泉庄园": { emoji: "♨️", cls: "event-info" },
   "破产救助": { emoji: "🆘", cls: "event-toll" },
@@ -482,14 +694,61 @@ function defaultEffects() {
   return { speedBoost: false, speedSlow: false, shield: false, doubleRent: false, frozen: false, extraTurn: false, reversed: false, hotSpringRest: false, bankruptcyRelief: false };
 }
 
-function initializeGame() {
+function getMapConfig(mapId = state?.currentMapId ?? selectedMapId) {
+  return MAP_PRESETS[mapId] || MAP_PRESETS[DEFAULT_MAP_ID];
+}
+
+function getBoardLength() {
+  return state.board?.length || getMapConfig().routePositions.length;
+}
+
+function getDistrictColors() {
+  return getMapConfig().districtColors || {};
+}
+
+function applyMapLayout(mapCfg = getMapConfig()) {
+  if (!boardEl) return;
+  boardEl.style.setProperty("--board-cols", String(mapCfg.grid.columns));
+  boardEl.style.setProperty("--board-rows", String(mapCfg.grid.rows));
+  boardEl.style.setProperty("--board-cell-min", `${mapCfg.grid.cellMin}px`);
+  boardEl.style.setProperty("--board-cell-min-tablet", `${mapCfg.grid.cellMinTablet}px`);
+  boardEl.style.setProperty("--board-cell-min-mobile", `${mapCfg.grid.cellMinMobile}px`);
+  boardEl.style.setProperty("--board-height", mapCfg.grid.height);
+  boardEl.style.setProperty("--board-height-tablet", mapCfg.grid.heightTablet);
+  boardEl.style.setProperty("--board-height-mobile", mapCfg.grid.heightMobile);
+  centerConsoleEl?.style.setProperty("--board-center-width", mapCfg.grid.centerWidth);
+  centerConsoleEl?.style.setProperty("--board-center-width-tablet", mapCfg.grid.centerWidthTablet);
+  centerConsoleEl?.style.setProperty("--board-center-width-mobile", mapCfg.grid.centerWidthMobile);
+  if (boardMapTitleEl) boardMapTitleEl.textContent = mapCfg.boardTitle;
+}
+
+function renderStartMapOptions() {
+  if (!startMapOptionsEl) return;
+  const mapCfg = getMapConfig(selectedMapId);
+  startMapOptionsEl.querySelectorAll("[data-map-id]").forEach((btn) => {
+    const active = btn.dataset.mapId === selectedMapId;
+    btn.classList.toggle("active", active);
+    btn.setAttribute("aria-pressed", active ? "true" : "false");
+  });
+  if (startMapDescriptionEl) startMapDescriptionEl.textContent = mapCfg.startDescription;
+}
+
+function setSelectedMap(mapId) {
+  selectedMapId = MAP_PRESETS[mapId] ? mapId : DEFAULT_MAP_ID;
+  renderStartMapOptions();
+}
+
+function initializeGame(mapId = selectedMapId) {
   if (modalResolver) { modalResolver("cancel"); modalResolver = null; }
+  const mapCfg = getMapConfig(mapId);
+  selectedMapId = mapCfg.id;
   state = {
     sessionId: ++sessionCounter,
     round: 1,
     currentPlayerIndex: 0,
     phase: "await_roll",
-    board: createBoard(),
+    currentMapId: mapCfg.id,
+    board: createBoard(mapCfg),
     players: PLAYER_DEFS.map((p) => ({
       ...p,
       cash: CONFIG.startCash,
@@ -497,6 +756,7 @@ function initializeGame() {
       cashDelta: 0, cashDeltaVisible: false, cashPulse: false,
       cashAnimFrame: null, cashChangeToken: 0, pendingCashDelta: 0,
       position: 0,
+      nextJunctionChoice: null,
       effects: defaultEffects(),
     })),
     lastDice: null, logs: [], gameOver: false, busy: false,
@@ -510,6 +770,9 @@ function initializeGame() {
   setHumanTurnStatus();
   updateSoundToggleButton();
   updateMusicToggleButton();
+  applyMapLayout(mapCfg);
+  updateModeEyebrow();
+  renderStartMapOptions();
   render();
 }
 
@@ -525,8 +788,11 @@ const startPlayBtn = document.getElementById("start-play-btn");
 const startHistoryBtn = document.getElementById("start-history-btn");
 const historyCloseBtn = document.getElementById("history-close-btn");
 const modeEyebrowEl = document.getElementById("mode-eyebrow");
+const startMapOptionsEl = document.getElementById("start-map-options");
+const startMapDescriptionEl = document.getElementById("start-map-description");
 
 function showStartScreen() {
+  renderStartMapOptions();
   startScreenEl?.classList.remove("hidden");
 }
 function hideStartScreen() {
@@ -543,6 +809,11 @@ function hideHistoryOverlay() {
 startPlayBtn?.addEventListener("click", () => void startNewGame());
 startHistoryBtn?.addEventListener("click", showHistoryOverlay);
 historyCloseBtn?.addEventListener("click", hideHistoryOverlay);
+startMapOptionsEl?.addEventListener("click", (e) => {
+  const btn = e.target.closest("[data-map-id]");
+  if (!btn) return;
+  setSelectedMap(btn.dataset.mapId);
+});
 historyOverlayEl?.addEventListener("click", (e) => {
   if (e.target === historyOverlayEl) hideHistoryOverlay();
 });
@@ -553,11 +824,14 @@ function loadHistory() {
   catch { return []; }
 }
 function saveGameResult(reason, winnerId) {
+  const mapCfg = getMapConfig(state.currentMapId);
   const now = new Date();
   const pad = (n) => String(n).padStart(2, "0");
   const record = {
     date: `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}`,
     time: `${pad(now.getHours())}:${pad(now.getMinutes())}`,
+    mapId: mapCfg.id,
+    mapName: mapCfg.name,
     mode: state.gameMode,
     rounds: state.round - 1,
     winner: winnerId,
@@ -577,6 +851,7 @@ function renderHistoryList() {
   }
   historyListEl.innerHTML = history.map((rec) => {
     const modeLabel = rec.mode === "bankruptcy" ? "破产淘汰制" : `30 回合制（${rec.rounds} 回合）`;
+    const mapLabel = rec.mapName || MAP_PRESETS[rec.mapId]?.name || MAP_PRESETS[DEFAULT_MAP_ID].name;
     const winnerName = rec.winner === "draw"
       ? "平局"
       : (rec.players?.find((p) => p.id === rec.winner)?.name ?? rec.winner);
@@ -591,7 +866,7 @@ function renderHistoryList() {
       <div class="history-record-date">${rec.date}<br>${rec.time}</div>
       <div class="history-record-result ${resultCls}">${resultText}</div>
       <div class="history-record-cash">${cashRow}</div>
-      <div class="history-record-mode">${modeLabel}</div>
+      <div class="history-record-mode">${mapLabel} · ${modeLabel}</div>
     </div>`;
   }).join("");
 }
@@ -634,7 +909,7 @@ async function coinFlipForFirstPlayer(sid) {
 
 async function startNewGame() {
   hideStartScreen();
-  initializeGame();
+  initializeGame(selectedMapId);
   const sid = state.sessionId;
 
   // 模式选择
@@ -659,47 +934,34 @@ async function startNewGame() {
 
 function updateModeEyebrow() {
   if (!modeEyebrowEl) return;
+  const mapCfg = getMapConfig(state.currentMapId);
   modeEyebrowEl.textContent = state.gameMode === "bankruptcy"
-    ? "破产淘汰制 · 环形地图休闲对战"
-    : "30 回合制 · 环形地图休闲对战";
+    ? `破产淘汰制 · ${mapCfg.modeLabel}`
+    : `30 回合制 · ${mapCfg.modeLabel}`;
 }
 
-function createBoard() {
-  const lotConfigs = {
-    1:  { price: 80,  buildCosts: [0, 40, 70, 110],  tolls: [20, 60, 130, 220],  themeIdx: 0 },
-    2:  { price: 90,  buildCosts: [0, 42, 75, 115],  tolls: [22, 65, 140, 235],  themeIdx: 0 },
-    3:  { price: 95,  buildCosts: [0, 44, 78, 120],  tolls: [24, 68, 148, 246],  themeIdx: 0 },
-    5:  { price: 240, buildCosts: [0, 80, 130, 185], tolls: [55, 140, 280, 460], themeIdx: 3 },
-    7:  { price: 210, buildCosts: [0, 72, 118, 172], tolls: [48, 125, 250, 415], themeIdx: 3 },
-    10: { price: 140, buildCosts: [0, 55, 95, 140],  tolls: [34, 90, 180, 300],  themeIdx: 1 },
-    11: { price: 150, buildCosts: [0, 58, 100, 145], tolls: [36, 95, 190, 315],  themeIdx: 1 },
-    12: { price: 170, buildCosts: [0, 62, 105, 155], tolls: [40, 105, 210, 345], themeIdx: 1 },
-    14: { price: 280, buildCosts: [0, 90, 145, 210], tolls: [65, 160, 320, 530], themeIdx: 2 },
-    16: { price: 180, buildCosts: [0, 65, 110, 160], tolls: [42, 110, 220, 360], themeIdx: 2 },
-    18: { price: 70,  buildCosts: [0, 35, 65, 100],  tolls: [18, 55, 120, 200],  themeIdx: 0 },
-    19: { price: 80,  buildCosts: [0, 40, 70, 110],  tolls: [20, 60, 130, 220],  themeIdx: 0 },
-    21: { price: 90,  buildCosts: [0, 42, 75, 115],  tolls: [22, 65, 140, 235],  themeIdx: 0 },
-  };
-
-  const board = ROUTE_POSITIONS.map((pos, index) => {
+function createBoard(mapCfg = getMapConfig()) {
+  const largePrimarySet = new Set(Object.values(mapCfg.largeLotLinks));
+  const board = mapCfg.routePositions.map((pos, index) => {
     const tile = {
-      index, name: TILE_NAMES[index], x: pos.x, y: pos.y,
+      index, name: mapCfg.tileNames[index], x: pos.x, y: pos.y,
       isStart: index === 0,
-      isSpecial: !!SPECIAL_TILES[index],
-      special: SPECIAL_TILES[index] || null,
-        lot: null,
-      isLargeSecondary: !!LARGE_LOT_LINKS[index],
-      largePrimaryIndex: LARGE_LOT_LINKS[index] ?? null,
+      isSpecial: !!mapCfg.specialTiles[index],
+      special: mapCfg.specialTiles[index] || null,
+      lot: null,
+      isLargeSecondary: !!mapCfg.largeLotLinks[index],
+      largePrimaryIndex: mapCfg.largeLotLinks[index] ?? null,
     };
     if (tile.isStart || tile.isSpecial || tile.isLargeSecondary) return tile;
-    const cfg = lotConfigs[index];
+    const cfg = mapCfg.lotConfigs[index];
     if (!cfg) return tile;
-    const isLarge = Object.values(LARGE_LOT_LINKS).includes(index);
+    const isLarge = largePrimarySet.has(index);
     tile.lot = {
       ownerId: null, level: 0,
       price: cfg.price, buildCosts: cfg.buildCosts, tolls: cfg.tolls,
       theme: LOT_THEMES[cfg.themeIdx],
-        district: DISTRICT_CONFIG[index],
+      district: mapCfg.districtConfig[index],
+      effectId: cfg.effectId || null,
       isLarge,
     };
     return tile;
@@ -711,6 +973,44 @@ function createBoard() {
     }
   });
   return board;
+}
+
+function getMapNavigation() {
+  return getMapConfig(state.currentMapId).navigation || makeLoopNavigation(getBoardLength());
+}
+
+function getJunctionConfig(index) {
+  return getMapNavigation().junctions?.[index] || null;
+}
+
+function getNextTileIndex(player, currentIndex, dir = (player.effects?.reversed ? -1 : 1), consumeChoice = true) {
+  const nav = getMapNavigation();
+  if (dir < 0) return nav.prev[currentIndex] ?? ((currentIndex - 1 + getBoardLength()) % getBoardLength());
+  const junction = getJunctionConfig(currentIndex);
+  if (junction) {
+    const selected = junction.options.find((opt) => opt.id === player.nextJunctionChoice);
+    if (selected) {
+      if (consumeChoice) player.nextJunctionChoice = null;
+      return selected.next;
+    }
+    return junction.defaultNext ?? nav.next[currentIndex] ?? ((currentIndex + 1) % getBoardLength());
+  }
+  return nav.next[currentIndex] ?? ((currentIndex + 1) % getBoardLength());
+}
+
+function previewMovement(player, steps, options = {}) {
+  const temp = {
+    effects: { reversed: options.direction === -1 },
+    nextJunctionChoice: options.branchChoice ?? player.nextJunctionChoice ?? null,
+  };
+  let idx = options.startingIndex ?? player.position;
+  const dir = options.direction ?? (player.effects.reversed ? -1 : 1);
+  const path = [];
+  for (let i = 0; i < steps; i++) {
+    idx = getNextTileIndex(temp, idx, dir, true);
+    path.push(idx);
+  }
+  return { path, index: idx, branchChoice: temp.nextJunctionChoice };
 }
 
 function currentPlayer() { return state.players[state.currentPlayerIndex]; }
@@ -866,7 +1166,7 @@ function renderLotTile(tile) {
   const sprite = lot.level > 0
     ? createBuildingSvg(lot.theme.key, lot.level, owner?.color ?? lot.theme.color)
     : createLotBaseSprite(!!lot.ownerId);
-  const distColor = DISTRICT_COLORS[lot.district] || "#e2e8f0";
+  const distColor = getDistrictColors()[lot.district] || "#e2e8f0";
   const forSaleBadge = !owner ? `<span class="for-sale-badge">待售 <b>¥${lot.price}</b></span>` : "";
   const tollRow = owner ? `<div class="lot-price-toll">收费 ${formatMoney(lot.tolls[lot.level])}</div>` : "";
   return `<div class="tile-header"><span class="tile-name">${tile.name}</span>${forSaleBadge}</div>
@@ -886,7 +1186,7 @@ function renderLargeLotMerged(tile, secTile) {
   const sprite = lot.level > 0
     ? createBuildingSvg(lot.theme.key, lot.level, owner?.color ?? lot.theme.color, true)
     : createLotBaseSprite(!!lot.ownerId);
-  const distColor = DISTRICT_COLORS[lot.district] || "#e2e8f0";
+  const distColor = getDistrictColors()[lot.district] || "#e2e8f0";
   const isVertical = secTile && tile.x === secTile.x;
   let cellA, cellB;
   if (isVertical) {
@@ -1224,7 +1524,7 @@ async function animateMovement(player, steps, sid) {
   const dir = player.effects.reversed ? -1 : 1;
   for (let step = 1; step <= steps; step++) {
     const prev = player.position;
-    const next = (player.position + dir + CONFIG.boardLength) % CONFIG.boardLength;
+    const next = getNextTileIndex(player, player.position, dir, true);
     player.position = next;
     playSound("step", {
       rate: 0.95 + Math.random() * 0.14,
@@ -1234,7 +1534,7 @@ async function animateMovement(player, steps, sid) {
     state.animation.landedTile = step === steps ? next : null;
     state.statusTitle = `${player.name} 前进中`;
     state.statusDescription = `第 ${step} / ${steps} 步，抵达 ${state.board[next].name}。`;
-    const crossedStart = (dir === 1 && next === 0) || (dir === -1 && prev === 0);
+    const crossedStart = next === 0 && prev !== 0;
     let startUpgradeMsg = "";
     if (crossedStart) {
       state.passedStartThisTurn = true;
@@ -1331,32 +1631,45 @@ async function resolveStartTakeover(player, sid) {
 
 async function resolveLargeLotEffect(player, tile, sid) {
   if (!isSessionActive(sid)) return;
-  const primaryIdx = tile.isLargeSecondary ? tile.largePrimaryIndex : tile.index;
   const lot = tile.lot;
-  if (!lot || lot.level === 0) return;
+  const lotName = tile.isLargeSecondary && tile.largePrimaryIndex != null
+    ? state.board[tile.largePrimaryIndex]?.name || tile.name
+    : tile.name;
+  if (!lot || lot.level === 0 || !lot.effectId) return;
 
-  if (primaryIdx === 5 && lot.ownerId === player.id) {
+  if (lot.effectId === "finance_bonus" && lot.ownerId === player.id) {
     const bonusTable = [0, 60, 120, 200];
     const bonus = bonusTable[lot.level];
     updatePlayerCash(player, bonus, false);
-    pushLog(`${player.name} 的金融中心（Lv.${lot.level}）带来额外收益 ${formatMoney(bonus)}！`);
+    pushLog(`${player.name} 的 ${lotName}（Lv.${lot.level}）带来额外收益 ${formatMoney(bonus)}！`);
     render();
     await showContinueModal({
       label: "金融中心",
-      title: "📈 金融中心运转！",
+      title: `📈 ${lotName} 运转！`,
       message: `Lv.${lot.level} 建筑额外收益 ${formatMoney(bonus)} 入账！`,
     });
-  } else if (primaryIdx === 14 && lot.ownerId && lot.ownerId !== player.id) {
+  } else if (lot.effectId === "tower_bonus" && lot.ownerId === player.id) {
+    const bonusTable = [0, 50, 100, 170];
+    const bonus = bonusTable[lot.level];
+    updatePlayerCash(player, bonus, false);
+    pushLog(`${player.name} 的 ${lotName}（Lv.${lot.level}）带来商务收益 ${formatMoney(bonus)}！`);
+    render();
+    await showContinueModal({
+      label: "摩天楼",
+      title: `🏙️ ${lotName} 商务收益！`,
+      message: `Lv.${lot.level} 商务运营收益 ${formatMoney(bonus)} 入账！`,
+    });
+  } else if (lot.effectId === "hot_spring_rest" && lot.ownerId && lot.ownerId !== player.id) {
     if (player.effects.hotSpringRest) {
-      pushLog(`${player.name} 已经在温泉休息中，不会重复入住。`);
+      pushLog(`${player.name} 已经在特殊休息状态中，不会重复触发。`);
     } else {
       player.effects.hotSpringRest = true;
-      pushLog(`${player.name} 沉醉于温泉庄园的魔力，下回合被迫休息！`);
+      pushLog(`${player.name} 被 ${lotName} 的效果困住，下回合被迫休息！`);
       render();
       await showContinueModal({
         label: "温泉庄园",
-        title: "♨️ 温泉魔力！",
-        message: `${player.name} 沉浸在温泉庄园中，下回合将被迫休息一回合！`,
+        title: `♨️ ${lotName} 生效！`,
+        message: `${player.name} 被迫在 ${lotName} 停留，下回合将休息一回合！`,
       });
     }
   }
@@ -1476,6 +1789,93 @@ async function resolveLanding(player, tile, sid) {
   await resolveLargeLotEffect(player, tile, sid);
 }
 
+function scoreAiTargetTile(player, tile) {
+  const opp = getOpponent(player);
+  let score = 0;
+  if (tile.lot && !tile.lot.ownerId) score += 6;
+  else if (tile.lot?.ownerId === player.id && tile.lot.level < 3) score += 4;
+  else if (tile.lot?.ownerId === opp.id) score -= tile.lot.tolls[tile.lot.level] / 42;
+  if (tile.isSpecial) {
+    if (tile.special.type === "construction" || tile.special.type === "card_draw") score += 3;
+    if (tile.special.type === "chance" || tile.special.type === "teleport") score += 2;
+    if (tile.special.type === "bank") score += state.bankPool >= 200 ? 5 : 1;
+  }
+  return score;
+}
+
+function chooseAiJunctionOption(player, tile) {
+  const junction = getJunctionConfig(tile.index);
+  if (!junction) return null;
+  let best = junction.options[0];
+  let bestScore = -Infinity;
+  for (const option of junction.options) {
+    const immediate = state.board[option.next];
+    const preview = previewMovement(player, 3, { startingIndex: tile.index, branchChoice: option.id });
+    const future = state.board[preview.index];
+    const score = scoreAiTargetTile(player, immediate) * 1.4 + scoreAiTargetTile(player, future);
+    if (score > bestScore) {
+      best = option;
+      bestScore = score;
+    }
+  }
+  return best;
+}
+
+async function resolveJunctionTile(player, tile, sid) {
+  const junction = getJunctionConfig(tile.index);
+  if (!junction) return;
+  if (player.isAi) {
+    const selected = chooseAiJunctionOption(player, tile) || junction.options[0];
+    player.nextJunctionChoice = selected.id;
+    pushLog(`${player.name} 在 ${tile.name} 选择了 ${selected.label}。`);
+    await showContinueModal({
+      label: "路线选择",
+      title: `${player.name} 锁定路线`,
+      message: `AI 选择了 ${selected.label}，下次从 ${tile.name} 出发时将进入该路线。`,
+    });
+    return;
+  }
+  const buttons = junction.options.map((opt) => ({
+    id: opt.id,
+    label: `${opt.label}（下一站 ${state.board[opt.next].name}）`,
+    variant: "primary",
+  }));
+  const selected = await showModal({
+    label: "路线选择",
+    title: `选择 ${tile.name} 的前进方向`,
+    message: "你停在交叉枢纽，可以为下一次从这里出发时锁定路线。",
+    buttons,
+  });
+  if (!isSessionActive(sid)) return;
+  const option = junction.options.find((opt) => opt.id === selected) || junction.options[0];
+  player.nextJunctionChoice = option.id;
+  pushLog(`${player.name} 在 ${tile.name} 选择了 ${option.label}。`);
+  await showContinueModal({
+    label: "路线选择",
+    title: "路线已锁定",
+    message: `下次从 ${tile.name} 出发时，你将进入 ${option.label}。`,
+  });
+}
+
+async function resolveRushTile(player, sid) {
+  playSound("special", { rate: 1.1 });
+  pushLog(`${player.name} 启动冲刺站，立刻再前进 2 格！`);
+  await showContinueModal({
+    label: "冲刺站",
+    title: "冲刺站启动！",
+    message: `${player.name} 立刻向前冲刺 2 格。`,
+  });
+  if (!isSessionActive(sid)) return;
+  await animateMovement(player, 2, sid);
+  if (!isSessionActive(sid) || state.gameOver) return;
+  state.animation.currentTile = null;
+  state.animation.landedTile = player.position;
+  render();
+  await sleep(220);
+  if (!isSessionActive(sid)) return;
+  await resolveLanding(player, state.board[player.position], sid);
+}
+
 async function resolveSpecialTile(player, tile, sid) {
   if (tile.special.type === "bank") {
     playSound("special", { rate: 0.9 });
@@ -1527,6 +1927,15 @@ async function resolveSpecialTile(player, tile, sid) {
   if (tile.special.type === "card_draw") {
     await resolveCardDraw(player, sid);
     return;
+  }
+
+  if (tile.special.type === "rush") {
+    await resolveRushTile(player, sid);
+    return;
+  }
+
+  if (tile.special.type === "junction") {
+    await resolveJunctionTile(player, tile, sid);
   }
 }
 
@@ -1731,7 +2140,7 @@ async function chooseCardTarget(player, card, sid) {
       case "teleport": return "opponent";
       case "boost": {
         for (let s = 1; s <= 3; s++) {
-          const idx = (opp.position + s * 2) % CONFIG.boardLength;
+          const idx = previewMovement(opp, s * 2).index;
           const t = state.board[idx];
           if (t.lot?.ownerId === player.id && t.lot.level >= 2) return "opponent";
         }
@@ -1739,8 +2148,7 @@ async function chooseCardTarget(player, card, sid) {
       }
       case "slow": {
         for (let s = 1; s <= 3; s++) {
-          const dir = player.effects.reversed ? -1 : 1;
-          const idx = (player.position + s * dir + CONFIG.boardLength) % CONFIG.boardLength;
+          const idx = previewMovement(player, s).index;
           const t = state.board[idx];
           if ((t.lot && !t.lot.ownerId) || (t.lot?.ownerId === player.id && t.lot.level < 3)) return "self";
         }
@@ -1792,8 +2200,7 @@ async function executeCardEffect(player, card, sid) {
       if (player.isAi) {
         let bestStep = 1, bestScore = -9999;
         for (let s = 1; s <= 6; s++) {
-          const dir = player.effects.reversed ? -1 : 1;
-          const idx = (player.position + s * dir + CONFIG.boardLength) % CONFIG.boardLength;
+          const idx = previewMovement(player, s).index;
           const t = state.board[idx];
           let score = 0;
           if (t.lot && !t.lot.ownerId) score += 5;
@@ -1806,8 +2213,7 @@ async function executeCardEffect(player, card, sid) {
       } else {
         const btns = [];
         for (let s = 1; s <= 6; s++) {
-          const dir = player.effects.reversed ? -1 : 1;
-          const idx = (player.position + s * dir + CONFIG.boardLength) % CONFIG.boardLength;
+          const idx = previewMovement(player, s).index;
           btns.push({ id: String(s), label: `${s} 步 → ${state.board[idx].name}`, variant: "primary" });
         }
         const choice = await showModal({
@@ -1838,7 +2244,7 @@ async function executeCardEffect(player, card, sid) {
       await showContinueModal({ label: "卡牌效果", title: "时光回溯！", message: `${target_player.name} 被迫后退 3 步！` });
       if (!isSessionActive(sid)) return;
       for (let i = 0; i < 3; i++) {
-        target_player.position = (target_player.position - 1 + CONFIG.boardLength) % CONFIG.boardLength;
+        target_player.position = getNextTileIndex(target_player, target_player.position, -1, false);
         state.animation.currentTile = target_player.position;
         render(); await sleep(180);
         if (!isSessionActive(sid)) return;
@@ -2187,6 +2593,17 @@ function createSpecialSvg(type) {
     <rect x="35" y="14" width="20" height="30" rx="4" fill="#a78bfa"/>
     <rect x="42" y="12" width="20" height="30" rx="4" fill="#8b5cf6" transform="rotate(8 52 27)"/>
     <text x="52" y="31" font-size="14" fill="#fff" text-anchor="middle" font-weight="bold">?</text>
+  </svg>`;
+  if (type === "rush") return `<svg class="building-sprite" viewBox="0 0 90 70" aria-hidden="true">
+    <ellipse cx="45" cy="58" rx="28" ry="8" fill="#fed7aa"/>
+    <rect x="22" y="28" width="44" height="18" rx="9" fill="#f97316"/>
+    <path d="M30 37 H56" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
+    <path d="M48 29 L60 37 L48 45" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>`;
+  if (type === "junction") return `<svg class="building-sprite" viewBox="0 0 90 70" aria-hidden="true">
+    <ellipse cx="45" cy="58" rx="28" ry="8" fill="#dbeafe"/>
+    <circle cx="45" cy="34" r="18" fill="#e0f2fe" stroke="#38bdf8" stroke-width="3"/>
+    <path d="M45 18 V49 M29 24 L45 34 L61 24 M29 44 L45 34 L61 44" stroke="#0f172a" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
   </svg>`;
   return `<svg class="building-sprite" viewBox="0 0 90 70" aria-hidden="true">
     <ellipse cx="45" cy="58" rx="28" ry="8" fill="#e2e8f0"/>

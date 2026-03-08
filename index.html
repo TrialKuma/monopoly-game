@@ -16,6 +16,24 @@
         <h1 class="start-game-title">环城大富翁</h1>
         <p class="start-subtitle">策略 · 运气 · 地产争霸</p>
       </div>
+      <div class="map-picker">
+        <p class="map-picker-label">选择地图</p>
+        <div id="start-map-options" class="map-options" role="radiogroup" aria-label="地图选择">
+          <button class="map-option active" type="button" data-map-id="classic" aria-pressed="true">
+            <span class="map-option-title">经典环线</span>
+            <span class="map-option-meta">22 格 · 休闲对战</span>
+          </button>
+          <button class="map-option" type="button" data-map-id="compact" aria-pressed="false">
+            <span class="map-option-title">紧凑冲突图</span>
+            <span class="map-option-meta">18 格 · 高频碰撞</span>
+          </button>
+          <button class="map-option" type="button" data-map-id="expansion" aria-pressed="false">
+            <span class="map-option-title">都市扩张图</span>
+            <span class="map-option-meta">28 格 · 8 字交叉</span>
+          </button>
+        </div>
+        <p id="start-map-description" class="start-map-description">经典 22 格环形线路，节奏均衡，适合标准对局。</p>
+      </div>
       <div class="start-actions">
         <button id="start-play-btn" class="start-btn start-btn-primary" type="button">🎮 开始游戏</button>
         <button id="start-history-btn" class="start-btn start-btn-secondary" type="button">📋 历史记录</button>
@@ -55,7 +73,7 @@
         <div class="board-header">
           <div>
             <p class="panel-label">地图状态</p>
-            <h2>环形线路 · 22 格</h2>
+            <h2 id="board-map-title">环形线路 · 22 格</h2>
           </div>
           <div class="round-chip" id="round-chip">第 1 / 30 回合</div>
         </div>
@@ -114,13 +132,13 @@
               <li>落到空地可购买，再次落到可升级（最高 3 级）；持有即收过路费。经过市政府自动建造空地。</li>
               <li>同街区连锁收费：该街区内所有你的地产一起算，2 块×1.2，3 块×1.5。</li>
               <li>掷出 6 点可获得额外一个完整回合（每次最多触发一次）。</li>
-              <li>金融中心（大地块）：有建筑时所有者停留额外获得收益。</li>
-              <li>温泉庄园（大地块）：有建筑时对手停留将被绊住（无法移动但结算地块）。</li>
+              <li>部分大型地产拥有专属效果，例如额外收益或让对手下回合休息。</li>
               <li>每局开始抛硬币决定先手，正面玩家先，反面 AI 先。</li>
               <li>翻牌格：随机抽 3 张卡牌选 1 张发动，许多卡牌可选择对自己或对手使用。</li>
               <li>城建局：选择免费升级自己或拆除对手一层建筑！</li>
               <li>银行金库：强制掷骰存钱，存满后下个人全部提走！</li>
               <li>机会格：触发随机事件，含空地购买机会，好坏难料！</li>
+              <li>不同地图会带来不同路线机制，例如冲刺站或交叉枢纽选路。</li>
               <li>停留市政府可发动征用令，解除对手一块地产的归属（建筑保留）！</li>
               <li>绊脚术：目标下回合无法移动，但仍需结算当前所在地块。</li>
               <li>逆行术：可改变自己或对手的前进方向！</li>
