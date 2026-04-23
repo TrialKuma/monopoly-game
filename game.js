@@ -381,7 +381,7 @@ const SOUND_LIBRARY = {
   win: { src: "assets/sfx/win.wav", volume: 0.55, voices: 1 },
 };
 const BGM_CONFIG = {
-  fallbackSrc: "assets/bgm/city-loop-deluxe.wav",
+  fallbackSrc: "assets/bgm/The_Plaza_Suite.mp3",
   volume: 0.42,
   bpm: 108,
   beatsPerBar: 4,
@@ -668,25 +668,8 @@ function setMusicEnabled(enabled) {
 }
 
 function startBgmPlayback() {
-  const engine = ensureBgmEngine();
-  if (engine) {
-    if (engine.audioContext.state === "suspended") {
-      engine.audioContext.resume().catch(() => {});
-    }
-    if (engine.schedulerId) return;
-    engine.nextLoopTime = Math.max(engine.audioContext.currentTime + 0.12, engine.nextLoopTime || 0);
-    const schedule = () => {
-      while (engine.nextLoopTime < engine.audioContext.currentTime + BGM_CONFIG.scheduleAheadTime) {
-        scheduleBgmLoop(engine.nextLoopTime);
-        engine.nextLoopTime += barTime(BGM_CONFIG.loopBars);
-      }
-    };
-    schedule();
-    engine.schedulerId = window.setInterval(schedule, BGM_CONFIG.schedulerIntervalMs);
-    return;
-  }
   const audio = ensureFallbackBgmAudio();
-  audio.volume = BGM_CONFIG.volume * 0.45;
+  audio.volume = BGM_CONFIG.volume;
   playManagedAudio(audio);
 }
 
