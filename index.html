@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>环城大富翁</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=game-ui-v9">
 </head>
 <body>
 
@@ -12,7 +12,7 @@
   <div id="start-screen" class="start-screen">
     <div class="start-panel">
       <div class="start-title-block">
-        <div class="start-logo">🏙️</div>
+        <div class="start-logo" aria-hidden="true"></div>
         <h1 class="start-game-title">环城大富翁</h1>
         <p class="start-subtitle">策略 · 运气 · 地产争霸</p>
       </div>
@@ -29,7 +29,7 @@
           </button>
           <button class="map-option" type="button" data-map-id="expansion" aria-pressed="false">
             <span class="map-option-title">都市扩张图</span>
-            <span class="map-option-meta">28 格 · 8 字交叉</span>
+            <span class="map-option-meta">31 格 · 双环转向</span>
           </button>
         </div>
         <p id="start-map-description" class="start-map-description">经典 22 格环形线路，节奏均衡，适合标准对局。</p>
@@ -157,6 +157,18 @@
             </div>
           </div>
           <div id="log-list" class="log-list"></div>
+          <div class="build-shelf" aria-label="可建造资产">
+            <div class="build-shelf-title">
+              <p class="panel-label">可建造</p>
+              <span>城市资产</span>
+            </div>
+            <div class="build-options">
+              <div class="build-option"><img class="build-asset" src="assets/ui/city-hall.png" alt="" draggable="false"><b>小屋</b><small>¥100</small></div>
+              <div class="build-option"><img class="build-asset" src="assets/ui/construction-hat.png" alt="" draggable="false"><b>公寓</b><small>¥300</small></div>
+              <div class="build-option"><img class="build-asset" src="assets/ui/bank-vault.png" alt="" draggable="false"><b>大楼</b><small>¥700</small></div>
+              <div class="build-option"><img class="build-asset" src="assets/ui/coin-stack.png" alt="" draggable="false"><b>酒店</b><small>¥1200</small></div>
+            </div>
+          </div>
         </section>
       </aside>
     </main>
@@ -172,6 +184,6 @@
   <script src="assets/music-fonts/12838_6_JCLive_sf2_file.js"></script>
   <script src="assets/music-fonts/12842_6_JCLive_sf2_file.js"></script>
   <script src="assets/music-fonts/12846_6_JCLive_sf2_file.js"></script>
-  <script src="game.js"></script>
+  <script src="game.js?v=game-ui-v9"></script>
 </body>
 </html>
