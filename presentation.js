@@ -79,6 +79,7 @@
     const inMenu=!document.getElementById('start-screen').classList.contains('hidden');
     document.body.classList.toggle('mode-start',inMenu);
     document.body.classList.toggle('mode-showcase',preview&&!inMenu);
+    document.body.classList.toggle('ai-turn',!inMenu&&!state.gameOver&&document.body.dataset.turn==='ai');
     showcaseControls.classList.toggle('hidden',!preview||inMenu);
     document.getElementById('showcase-open-btn').classList.toggle('hidden',!preview);
     if(lastCameraSession!==state.sessionId){lastCameraSession=state.sessionId;inspectorKey='';}

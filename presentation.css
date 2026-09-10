@@ -18,3 +18,35 @@
 .board-section,.sidebar{overflow-anchor:none}
 .board-center{flex-direction:row}
 .inspect-building-btn{display:flex;align-items:center;justify-content:space-between;gap:18px;width:100%;min-height:44px;margin:16px 0 0;padding:10px 14px;border:1px solid #c3d4c5;border-radius:10px;background:#e7eee0;color:#386653;font-size:12px;font-weight:700;cursor:pointer}.inspect-building-btn:hover:not(:disabled){background:#dae8cf}.inspect-building-btn:disabled{opacity:.45;cursor:default}.event-card .inspect-building-btn{justify-content:center;margin-top:10px;background:transparent}
+
+/* Follow the existing current-player marker throughout the whole AI turn. */
+body.ai-turn {
+  background-color:#f0e4df;
+  background-image:radial-gradient(ellipse at 14% 0%,#fff0df 0,transparent 55%),linear-gradient(140deg,#f5e6e0,#ead8d5);
+}
+.brand-mark,.board-section,.board-center,.status-card,.round-chip,.mini-scoreboard {
+  transition:background-color .3s ease,border-color .3s ease,box-shadow .3s ease,color .3s ease;
+}
+.ai-turn .brand-mark { background:#853a35;box-shadow:0 4px 0 #d7b8ae; }
+.ai-turn .board-section { background:#f5e7e1;border-color:#e7c4ba; }
+.ai-turn .board-header h2,.ai-turn .console-copy h3 { color:#7c3833; }
+.ai-turn .board-header .panel-label { color:#a26c61; }
+.ai-turn .round-chip { color:#9e443c;border-color:#dfb2a6;background:#fff4ed; }
+.ai-turn .board-center { background:#fff0e8;border-top-color:#e4b3a5; }
+.ai-turn .center-dice { background:linear-gradient(140deg,#db7468,#a13732);box-shadow:0 5px 0 #752a28,0 9px 18px #75322e22; }
+.ai-turn .console-copy .center-badge { color:#af463d; }
+.ai-turn .console-copy p,.ai-turn .center-actions>.center-badge { color:#a3756b; }
+.ai-turn .center-roll-btn:disabled { color:#a36d66;background:#efd8d0; }
+.ai-turn .round-progress { background:#ead0c7; }
+.ai-turn .round-progress-bar { background:linear-gradient(90deg,#b8453d,#e6a276); }
+.ai-turn .scene-caption { color:#9a5d52; }
+.ai-turn .scene-caption .live-dot { background:#c85d51;box-shadow:0 0 0 4px #c85d5118; }
+.ai-turn .status-card { background:#5e302e;box-shadow:0 12px 30px #632d2b21; }
+.ai-turn .status-card>.panel-title-row>.panel-label,.ai-turn .victory-rule { color:#d0aba0; }
+.ai-turn .player-card.active { border-color:#f0ac9b;background:#ef8d721a; }
+.ai-turn .player-name { color:#f4ded6; }
+.ai-turn .player-cash-label { color:#d3aaa0; }
+.ai-turn .player-title .meta-chip,.ai-turn .player-meta .meta-chip { color:#dcbdb2; }
+.ai-turn .mini-scoreboard { background:#f0d9d0; }
+.ai-turn .mini-player.active .mini-name,.ai-turn .mini-player.active .mini-cash { color:#a33c34; }
+.ai-turn .event-card .modal-btn.primary { background:#b64b40;box-shadow:0 3px 0 #84352f; }
