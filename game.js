@@ -234,6 +234,7 @@ const MAP_PRESETS = {
     id: "expansion",
     maxRounds: 40,
     openingBuildings: true,
+    reliefShield: true,
     name: "都市大环线",
     boardTitle: "都市大环线 · 28 格",
     startDescription: "28 格大环线：六个街区各有一处随机 Lv.1 地产开业，城市快线与传送让整座城都能碰面。",
@@ -1300,7 +1301,7 @@ function renderScoreboard() {
     if (p.effects.doubleRent) efx.push("💎翻倍");
     if (p.effects.frozen) efx.push("🪤绊脚");
     if (p.effects.hotSpringRest) efx.push("♨️休息中");
-    if (p.effects.bankruptcyRelief) efx.push("🆘等待救援");
+    if (p.effects.bankruptcyRelief) efx.push("🆘休整中");
     if (p.effects.extraTurn) efx.push("🥁连击");
     if (p.effects.reversed) efx.push("🔃逆行");
     const efxHtml = efx.length > 0 ? `<div class="player-effects">${efx.map((e) => `<span class="effect-chip">${e}</span>`).join("")}</div>` : "";
@@ -1439,11 +1440,11 @@ async function processTurn(player, isExtraTurn = false) {
     player.effects.bankruptcyRelief = false;
     player.effects.frozen = false;
     player.effects.hotSpringRest = false;
-    pushLog(`${player.name} 正在等待救援资金，本回合无法行动。`);
-    state.statusTitle = `${player.name} 等待救援`;
-    state.statusDescription = "资金告急，等待救援资金到账，本回合跳过。";
+    pushLog(`${player.name} 本回合休整，救助金已在上回合到账，下回合恢复行动。`);
+    state.statusTitle = `${player.name} 本回合休整`;
+    state.statusDescription = "救助金已在上回合到账，本回合休整，下回合恢复行动。";
     render();
-    await showContinueModal({ label: "等待救援", title: `${player.name} 等待救援资金`, message: "破产救助期间无法行动，救援资金已到账，下回合恢复行动！" });
+    await showContinueModal({ label: "等待救援", title: `${player.name} 本回合休整`, message: "本回合休整，救助金已在上回合到账，下回合恢复行动。", drama: { type: "notice", amount: 0 } });
     if (!isSessionActive(sid)) return;
     endTurn(); return;
   }
@@ -1535,12 +1536,12 @@ async function processTurn(player, isExtraTurn = false) {
   endTurn();
 }
 
-async function animateDiceRoll(sid) {
+async function animateDiceRoll(sid, purpose = "turn") {
   const final = rollDice();
   playSound("dice", { rate: 0.92 + Math.random() * 0.06 });
   state.animation.diceRolling = true;
-  state.statusTitle = `${currentPlayer().name} 正在掷骰`;
-  state.statusDescription = "骰子正在滚动...";
+  state.statusTitle = `${currentPlayer().name} 正在掷${purpose === "bank" ? "存款骰" : "骰"}`;
+  state.statusDescription = purpose === "bank" ? "按点数 × 30 计算存款，不影响本回合步数。" : "骰子正在滚动...";
   render();
   for (let i = 0; i < 10; i++) {
     state.lastDice = rollDice(); render();
@@ -1553,8 +1554,10 @@ async function animateDiceRoll(sid) {
   state.animation.diceResult = true;
   state.animation.boardBurst = true;
   playSound("land", { volumeMultiplier: 0.55, rate: 1.18 + (final / 6) * 0.08 });
-  state.statusTitle = `${currentPlayer().name} 掷出了 ${final} 点`;
-  state.statusDescription = final === 6 ? "骰出6点！本次行动后将获得额外一个完整回合！" : "开始前进。";
+  state.statusTitle = purpose === "bank" ? `存款骰：${final} 点` : `${currentPlayer().name} 掷出了 ${final} 点`;
+  state.statusDescription = purpose === "bank"
+    ? `本次应存入 ${formatMoney(final * 30)}，最多扣除现有现金。`
+    : final === 6 ? "骰出6点！本次行动后将获得额外一个完整回合！" : "开始前进。";
   render();
   await sleep(500);
   if (!isSessionActive(sid)) return null;
@@ -1692,7 +1695,7 @@ async function resolveLargeLotEffect(player, tile, sid) {
     await showContinueModal({
       label: "金融中心",
       title: `📈 ${lotName} 运转！`,
-      message: `Lv.${lot.level} 建筑额外收益 ${formatMoney(bonus)} 入账！`,
+      message: `Lv.${lot.level} 建筑额外收益 ${formatMoney(bonus)} 入账！${lot.level === 3 ? "\n建筑已满级，无需再升级。" : ""}`,
     });
   } else if (lot.effectId === "tower_bonus" && lot.ownerId === player.id) {
     const bonusTable = [0, 50, 100, 170];
@@ -1703,7 +1706,7 @@ async function resolveLargeLotEffect(player, tile, sid) {
     await showContinueModal({
       label: "摩天楼",
       title: `🏙️ ${lotName} 商务收益！`,
-      message: `Lv.${lot.level} 商务运营收益 ${formatMoney(bonus)} 入账！`,
+      message: `Lv.${lot.level} 商务运营收益 ${formatMoney(bonus)} 入账！${lot.level === 3 ? "\n建筑已满级，无需再升级。" : ""}`,
     });
   } else if (lot.effectId === "hot_spring_rest" && lot.ownerId && lot.ownerId !== player.id) {
     if (player.effects.hotSpringRest) {
@@ -1740,8 +1743,8 @@ async function resolveLanding(player, tile, sid) {
       return;
     }
     if (player.isAi) {
-      if (shouldAiBuy(player, lot)) {
-        buyLot(player, tile, false); render();
+      if (shouldAiBuy(player, lot) && buyLot(player, tile, false)) {
+        render();
         await showContinueModal({ label: "AI 行动", title: `AI 买下了 ${tile.name}`, message: `花费 ${formatMoney(lot.price)}。${purchaseBuildingNote(lot)}` });
       } else {
         pushLog(`AI 对手放弃购买 ${tile.name}。`);
@@ -1758,7 +1761,7 @@ async function resolveLanding(player, tile, sid) {
       ],
     });
     if (!isSessionActive(sid)) return;
-    if (dec === "buy") { buyLot(player, tile); render(); await showContinueModal({ label: "购买完成", title: `${tile.name}，归你了！`, message: `花费 ${formatMoney(lot.price)}，这座小城又多了一块你的地盘。${purchaseBuildingNote(lot)}`, drama: { type: "buy", amount: lot.price, to: player, tiles: [tile.index], tileName: tile.name } }); }
+    if (dec === "buy" && buyLot(player, tile)) { render(); await showContinueModal({ label: "购买完成", title: `${tile.name}，归你了！`, message: `花费 ${formatMoney(lot.price)}，这座小城又多了一块你的地盘。${purchaseBuildingNote(lot)}`, drama: { type: "buy", amount: lot.price, to: player, tiles: [tile.index], tileName: tile.name } }); }
     return;
   }
 
@@ -1767,7 +1770,9 @@ async function resolveLanding(player, tile, sid) {
     if (!isSessionActive(sid) || state.gameOver) return;
 
     if (lot.level >= 3) {
-      await showContinueModal({ label: "升级提示", title: `${tile.name} 已满级`, message: `Lv.3 最高等级，收费 ${formatMoney(lot.tolls[3])}。` });
+      if (lot.effectId !== "finance_bonus" && lot.effectId !== "tower_bonus") {
+        await showContinueModal({ label: "升级提示", title: `${tile.name} 已满级`, message: `Lv.3 最高等级，收费 ${formatMoney(lot.tolls[3])}。` });
+      }
       return;
     }
     const cost = lot.buildCosts[lot.level + 1];
@@ -1830,13 +1835,16 @@ async function resolveLanding(player, tile, sid) {
     player.effects.bankruptcyRelief = true;
     player.effects.frozen = false;
     player.effects.hotSpringRest = false;
+    const reliefShield = getMapConfig().reliefShield === true;
+    if (reliefShield) player.effects.shield = true;
     updatePlayerCash(player, relief, false);
-    pushLog(`${player.name} 现金耗尽，进入破产救助：等待救援资金，发放 ${formatMoney(relief)} 救助金。`);
+    const reliefMessage = `${formatMoney(relief)} 救助金立即到账，下回合休整。${reliefShield ? "另获一次过路护盾，免交下一笔租金。" : ""}`;
+    pushLog(`${player.name} 现金耗尽，进入破产救助：${reliefMessage}`);
     await showContinueModal({
       label: "破产救助",
       title: "还没结束，再来！",
       drama: { type: "relief", amount: relief, to: player, tiles: [tile.index], tileName: tile.name },
-      message: `${player.name} 仅支付了 ${formatMoney(toll.actualPayment)}，差 ${formatMoney(toll.toll - toll.actualPayment)} 无力偿还。\n进入等待救援资金状态：下回合跳过行动，同时领取 ${formatMoney(relief)} 救助金重新出发。`,
+      message: `${player.name} 仅支付了 ${formatMoney(toll.actualPayment)}，差 ${formatMoney(toll.toll - toll.actualPayment)} 无力偿还。\n${reliefMessage}`,
     });
   } else if (!window.GamePresentation) {
     await showContinueModal({ label: "过路费提示", title: `支付 ${formatMoney(toll.actualPayment)} 过路费`, message: toll.message });
@@ -1950,11 +1958,11 @@ async function resolveSpecialTile(player, tile, sid) {
       render();
       await showContinueModal({
         label: "功能地块", title: "金库大丰收！",
-        drama: { type: "bank", amount: payout, from: { id: "bank", name: "城市金库" }, to: player, tiles: [tile.index], tileName: tile.name },
+        drama: { type: "bank", amount: payout, from: { id: "bank", name: "银行金库" }, to: player, tiles: [tile.index], tileName: tile.name },
         message: `金库已满，${player.name} 提走了全部 ${formatMoney(payout)}！金库清零重新开始。`,
       });
     } else {
-      const bankDice = await animateDiceRoll(sid);
+      const bankDice = await animateDiceRoll(sid, "bank");
       if (!isSessionActive(sid) || bankDice === null) return;
       const deposit = bankDice * 30;
       const actual = Math.min(deposit, player.cash);
@@ -1966,7 +1974,7 @@ async function resolveSpecialTile(player, tile, sid) {
       render();
       await showContinueModal({
         label: "功能地块", title: `强制存款！掷出 ${bankDice} 点`,
-        drama: { type: "bank", amount: actual, from: player, to: { id: "bank", name: "城市金库" }, tiles: [tile.index], tileName: tile.name },
+        drama: { type: "bank", amount: actual, from: player, to: { id: "bank", name: "银行金库" }, tiles: [tile.index], tileName: tile.name },
         message: `${player.name} 被迫向金库存入 ${formatMoney(actual)}。\n金库累计：${formatMoney(state.bankPool)} / ${formatMoney(threshold)}`,
       });
     }
@@ -2044,8 +2052,8 @@ async function resolveChance(player, tile, sid) {
       handled = true;
       pushLog(`${player.name} 在 ${tile.name} 触发空地购买机会：${selected.name}！`);
       if (player.isAi) {
-        if (shouldAiBuy(player, selected.lot)) {
-          buyLot(player, selected, false); render();
+        if (shouldAiBuy(player, selected.lot) && buyLot(player, selected, false)) {
+          render();
           await showContinueModal({ label: "功能地块", title: selected.lot.level > 0 ? "开业地产购买机会！" : "空地购买机会！", message: `AI 趁机买下了 ${selected.name}（${formatMoney(selected.lot.price)}）！${purchaseBuildingNote(selected.lot)}` });
         } else {
           await showContinueModal({ label: "功能地块", title: "空地购买机会", message: `AI 放弃购买 ${selected.name}。` });
@@ -2063,7 +2071,7 @@ async function resolveChance(player, tile, sid) {
             ],
           });
           if (!isSessionActive(sid)) return;
-          if (dec === "buy") { buyLot(player, selected); render(); await sleep(420); }
+          if (dec === "buy" && buyLot(player, selected)) { render(); await sleep(420); }
         }
       }
     }
@@ -2363,7 +2371,7 @@ async function executeCardEffect(player, card, sid) {
     }
     case "freeze":
       if (opp.effects.bankruptcyRelief) {
-        pushLog(`绊脚术对 ${opp.name} 无效！对方正在等待救援资金，免疫控制效果。`);
+        pushLog(`绊脚术对 ${opp.name} 无效！对方正在救助休整中，免疫控制效果。`);
         await showContinueModal({ label: "卡牌效果", title: "🪤 绊脚术 — 无效！", message: `${opp.name} 正处于破产救助状态，免疫绊脚术！` });
       } else {
         opp.effects.frozen = true;
@@ -2462,10 +2470,15 @@ function purchaseBuildingNote(lot) {
 
 function buyLot(player, tile, animate = true) {
   const lot = tile.lot;
+  if (player.cash < lot.price) {
+    pushLog(`${player.name} 资金不足，无法购买 ${tile.name}。`);
+    return false;
+  }
   updatePlayerCash(player, -lot.price, animate);
   lot.ownerId = player.id;
   playSound("buy", { rate: lot.isLarge ? 0.92 : 1 });
   pushLog(`${player.name} 花 ${formatMoney(lot.price)} 买下了 ${tile.name}。`);
+  return true;
 }
 
 function buildLot(player, tile, animate = true) {
@@ -2486,7 +2499,7 @@ function collectToll(visitor, owner, tile) {
   if (owner.effects.doubleRent) { mult *= 2; owner.effects.doubleRent = false; doubleActive = true; }
   const base = distTiles.reduce((s, t) => s + t.lot.tolls[t.lot.level], 0);
   const toll = Math.round(base * mult);
-  const actual = Math.min(visitor.cash, toll);
+  const actual = Math.max(0, Math.min(visitor.cash, toll));
   updatePlayerCash(visitor, -actual, false);
   updatePlayerCash(owner, actual, false);
   playSound("toll", { rate: doubleActive ? 0.9 : 1 });
@@ -2522,6 +2535,7 @@ function findUpgradeableOwnedLot(pid) {
 }
 
 function shouldAiBuy(player, lot) {
+  if (player.cash < lot.price) return false;
   const reserve = 180;
   const distOwned = getDistrictOwnerLots(lot.district, player.id);
   const distTotal = new Set(state.board.filter((t) => t.lot && t.lot.district === lot.district).map((t) => t.lot)).size;

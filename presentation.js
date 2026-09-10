@@ -16,7 +16,7 @@
   const mapGuide = document.getElementById('map-guide');
   const mapGuides = {
     compact: {title:'短环追逐 · 冲刺也可能冲进账单',copy:'沿 18 格短环线前进，三个街区更容易连锁收租。冲刺站随机再走 2–4 格；传送港落地后立即结算，护盾同样能挡租。'},
-    expansion: {title:'大城开业 · 每圈经过全部六个街区',copy:'沿 28 格大环线依次前进。开局每街区随机一处无主地产预建 Lv.1，买下即用。城市快线随机再走 3–5 格，传送港落地后立即结算。'},
+    expansion: {title:'大城开业 · 每圈经过全部六个街区',copy:'沿 28 格大环线依次前进。开局每街区随机一处无主地产预建 Lv.1，买下即用。城市快线随机再走 3–5 格，传送港落地后立即结算。回合制救助附带一次过路护盾，帮助脱困再起。'},
   };
   const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const money = n => `¥${Math.round(n).toLocaleString('zh-CN')}`;
