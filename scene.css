@@ -10,11 +10,16 @@ body.scene-ready #board { visibility:hidden; pointer-events:none; }
 .scene-tile:hover,.scene-tile:focus-visible,.scene-tile.is-selected { z-index:8; padding:5px 7px; background:#fffdf5; box-shadow:0 0 0 1px #d2b579,0 6px 20px #425b5030; outline:none; }
 .scene-tile:hover .scene-tile-meta,.scene-tile:focus-visible .scene-tile-meta,.scene-tile.is-selected .scene-tile-meta { display:block; margin-top:4px; }
 .scene-tile.is-event { z-index:9; background:#fff4d9; box-shadow:0 0 0 2px #edc97f,0 0 24px #f8cc75a0; }
+.scene-tile.is-built-for-sale .scene-tile-name::after { content:' · Lv.' attr(data-level); color:#a4803d; font-size:8px; }
 .scene-secondary-step { position:absolute; inset:0 auto auto 0; width:16px; height:16px; padding:0; border:1px solid #c0b298; border-radius:50%; background:#ede1c9d0; color:#877b63; font-family:inherit; font-size:7px; font-weight:700; line-height:1; display:grid; place-items:center; pointer-events:auto; cursor:pointer; }
 .scene-secondary-step:focus-visible { outline:2px solid #3a8c82; outline-offset:2px; }
 .scene-pawn-anchor { position:absolute; inset:0 auto auto 0; display:block; padding:3px 6px; border-radius:5px; background:#2f827c; color:#fff9e7; box-shadow:0 2px 5px #314a422c; border:1px solid #f5edcd; font-size:9px; font-weight:750; line-height:1; white-space:nowrap; }
 .scene-pawn-anchor.pawn-ai { background:#bb6c4b; }
 .scene-pawn-anchor.is-current::after { content:''; position:absolute; left:50%; bottom:-5px; transform:translateX(-50%); border:3px solid transparent; border-top-color:#fff8e5; }
+.scene-travel-arrow { position:absolute; inset:0 auto auto 0; width:25px; height:19px; display:block; color:#287d77; filter:drop-shadow(0 1px 2px #fff6db); pointer-events:none; z-index:2; }
+.scene-travel-arrow[hidden] { display:none; }
+.scene-travel-arrow[data-player="ai"] { color:#c86044; }
+.scene-travel-arrow svg { display:block; width:100%; height:100%; overflow:visible; fill:none; stroke:currentColor; stroke-width:4; stroke-linecap:round; stroke-linejoin:round; paint-order:stroke; }
 .scene-labels-tiny .scene-tile { padding:2px 3px; }
 .scene-labels-tiny .scene-tile:hover,.scene-labels-tiny .scene-tile:focus-visible,.scene-labels-tiny .scene-tile.is-selected { padding:5px; }
 .scene-labels-tiny .scene-pawn-anchor { padding:2px 4px; font-size:8px; }

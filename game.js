@@ -84,20 +84,19 @@ const COMPACT_ROUTE_POSITIONS = [
 ];
 
 const COMPACT_TILE_NAMES = [
-  "市政府", "河畔小筑", "林间庄园", "林间庄园", "晨曦街", "城建局",
-  "翻牌驿站", "机会广场", "冲刺站", "中央金库", "港风小筑", "潮畔别墅",
-  "潮畔别墅", "传送港", "艺文里", "命运转盘", "艺文里南", "艺文里北",
+  "市政府", "河畔小筑", "林间公馆", "林间公馆", "晨曦街", "城建局",
+  "翻牌驿站", "机会广场", "冲刺站", "中央金库", "港风小筑", "潮畔温泉",
+  "潮畔温泉", "传送港", "艺文里", "命运转盘", "艺文里南", "艺文里北",
 ];
 
 const COMPACT_LARGE_LOT_LINKS = { 3: 2, 12: 11 };
 const COMPACT_DISTRICT_CONFIG = {
-  1: "河畔街区", 2: "林间街区", 3: "林间街区", 4: "河畔街区",
+  1: "河畔街区", 2: "河畔街区", 3: "河畔街区", 4: "河畔街区",
   10: "海湾街区", 11: "海湾街区", 12: "海湾街区",
   14: "艺文街区", 16: "艺文街区", 17: "艺文街区",
 };
 const COMPACT_DISTRICT_COLORS = {
   "河畔街区": "#86efac",
-  "林间街区": "#a7f3d0",
   "海湾街区": "#93c5fd",
   "艺文街区": "#c4b5fd",
 };
@@ -105,60 +104,63 @@ const COMPACT_SPECIAL_TILES = {
   5:  { type: "construction", label: "城建局", color: "#fef08a", description: "建造或拆除！" },
   6:  { type: "card_draw", label: "翻牌格", color: "#e9d5ff", description: "翻牌选卡发动！" },
   7:  { type: "chance", label: "机会格", color: "#fbcfe8", description: "触发随机事件。" },
-  8:  { type: "rush", label: "冲刺站", color: "#fdba74", description: "立即向前冲刺 2 格。" },
+  8:  { type: "rush", label: "冲刺站", color: "#fdba74", rushMin: 2, rushMax: 4, description: "随机冲刺 2–4 格，到达后立即结算。" },
   9:  { type: "bank", label: "金库", color: "#bfdbfe", description: "存钱或提款！" },
-  13: { type: "teleport", label: "传送港", color: "#a7f3d0", description: "随机传送到一块地产。" },
+  13: { type: "teleport", label: "传送港", color: "#a7f3d0", settleArrival: true, description: "随机传送到一块地产，到达后立即结算。" },
   15: { type: "card_draw", label: "命运轮盘", color: "#e9d5ff", description: "翻牌选卡发动！" },
 };
 const COMPACT_LOT_CONFIGS = {
   1:  { price: 100, buildCosts: [0, 44, 76, 118], tolls: [24, 68, 146, 238], themeIdx: 0 },
-  2:  { price: 220, buildCosts: [0, 78, 128, 180], tolls: [48, 128, 266, 430], themeIdx: 2, effectId: "finance_bonus" },
+  2:  { price: 220, buildCosts: [0, 78, 128, 180], tolls: [48, 128, 266, 430], themeIdx: 2, effectId: "finance_bonus", landmarkKey: "finance" },
   4:  { price: 110, buildCosts: [0, 48, 80, 125], tolls: [26, 72, 154, 250], themeIdx: 0 },
   10: { price: 130, buildCosts: [0, 52, 88, 136], tolls: [30, 82, 172, 280], themeIdx: 1 },
-  11: { price: 240, buildCosts: [0, 82, 132, 188], tolls: [52, 138, 284, 458], themeIdx: 2, effectId: "hot_spring_rest" },
+  11: { price: 240, buildCosts: [0, 82, 132, 188], tolls: [52, 138, 284, 458], themeIdx: 2, effectId: "hot_spring_rest", landmarkKey: "onsen" },
   14: { price: 90,  buildCosts: [0, 40, 70, 108], tolls: [22, 62, 132, 220], themeIdx: 0 },
   16: { price: 95,  buildCosts: [0, 42, 74, 112], tolls: [23, 64, 136, 226], themeIdx: 0 },
   17: { price: 105, buildCosts: [0, 46, 78, 120], tolls: [25, 68, 144, 236], themeIdx: 0 },
 };
 
 const EXPANSION_ROUTE_POSITIONS = [
-  { x: 1, y: 1 }, { x: 2, y: 1 }, { x: 3, y: 1 }, { x: 4, y: 1 }, { x: 4, y: 2 }, { x: 4, y: 3 },
-  { x: 4, y: 4 }, { x: 3, y: 4 }, { x: 2, y: 4 }, { x: 1, y: 4 }, { x: 1, y: 3 }, { x: 1, y: 2 },
-  { x: 5, y: 3 },
-  { x: 6, y: 3 }, { x: 6, y: 2 }, { x: 6, y: 1 }, { x: 7, y: 1 }, { x: 8, y: 1 }, { x: 9, y: 1 }, { x: 10, y: 1 },
-  { x: 10, y: 2 }, { x: 10, y: 3 }, { x: 10, y: 4 }, { x: 9, y: 4 }, { x: 8, y: 4 }, { x: 7, y: 4 }, { x: 6, y: 4 }, { x: 5, y: 4 },
+  { x: 1, y: 1 }, { x: 2, y: 1 }, { x: 3, y: 1 }, { x: 4, y: 1 }, { x: 5, y: 1 },
+  { x: 6, y: 1 }, { x: 7, y: 1 }, { x: 8, y: 1 }, { x: 9, y: 1 }, { x: 10, y: 1 },
+  { x: 10, y: 2 }, { x: 10, y: 3 }, { x: 10, y: 4 }, { x: 10, y: 5 }, { x: 10, y: 6 },
+  { x: 9, y: 6 }, { x: 8, y: 6 }, { x: 7, y: 6 }, { x: 6, y: 6 }, { x: 5, y: 6 },
+  { x: 4, y: 6 }, { x: 3, y: 6 }, { x: 2, y: 6 }, { x: 1, y: 6 },
+  { x: 1, y: 5 }, { x: 1, y: 4 }, { x: 1, y: 3 }, { x: 1, y: 2 },
 ];
 
 const EXPANSION_TILE_NAMES = [
   "市政府", "晶藤街", "花园里", "清贝里", "银行金库", "开发局",
-  "左环中庭", "新月公园", "左环花园", "左环艺区", "翻牌驿站", "左环门廊",
-  "时空枢纽",
-  "日落湾", "机运广场", "机运广场", "传送港", "暮岚街", "百味町", "命运转盘",
-  "潮畔街", "云栖区", "右环湾岸", "右环星港", "右环塔院", "右环中庭", "摩天大楼", "摩天大楼",
+  "新月里", "摩天大楼", "摩天大楼", "望月庭", "翻牌驿站", "百味町",
+  "城市快线",
+  "烟火巷", "机运广场", "食光里", "传送港", "暮岚街", "港湾路", "命运转盘",
+  "潮畔街", "云栖区", "星湾广场", "星港里", "星河庭", "天际里", "新月温泉", "新月温泉",
 ];
 
 const EXPANSION_LARGE_LOT_LINKS = { 8: 7, 27: 26 };
 const EXPANSION_DISTRICT_CONFIG = {
   1: "晶藤街区", 2: "晶藤街区", 3: "晶藤街区",
-  6: "左环街区", 7: "左环街区", 8: "左环街区", 9: "左环街区", 11: "左环街区",
-  13: "机运街区", 17: "机运街区", 18: "机运街区", 20: "机运街区",
-  22: "右环街区", 23: "右环街区", 24: "右环街区", 25: "右环街区",
-  26: "天际街区", 27: "天际街区",
+  6: "新月街区", 7: "新月街区", 8: "新月街区", 9: "新月街区",
+  11: "百味街区", 13: "百味街区", 15: "百味街区",
+  17: "海港街区", 18: "海港街区", 20: "海港街区",
+  21: "星湾街区", 23: "星湾街区", 24: "星湾街区",
+  25: "天际街区", 26: "天际街区", 27: "天际街区",
 };
 const EXPANSION_DISTRICT_COLORS = {
   "晶藤街区": "#86efac",
-  "左环街区": "#f9a8d4",
-  "机运街区": "#fde68a",
-  "右环街区": "#93c5fd",
+  "新月街区": "#f9a8d4",
+  "百味街区": "#fde68a",
+  "海港街区": "#93c5fd",
+  "星湾街区": "#c4b5fd",
   "天际街区": "#67e8f9",
 };
 const EXPANSION_SPECIAL_TILES = {
   4:  { type: "bank", label: "金库", color: "#bfdbfe", description: "存钱或提款！" },
   5:  { type: "construction", label: "开发局", color: "#fef08a", description: "强化建设节奏。" },
   10: { type: "card_draw", label: "翻牌格", color: "#e9d5ff", description: "翻牌选卡发动！" },
-  12: { type: "junction", label: "时空枢纽", color: "#bae6fd", description: "停留后可选择下一圈路线。" },
+  12: { type: "rush", label: "城市快线", color: "#fdba74", rushMin: 3, rushMax: 5, description: "随机冲刺 3–5 格，到达后立即结算。" },
   14: { type: "chance", label: "机会格", color: "#fbcfe8", description: "触发随机事件。" },
-  16: { type: "teleport", label: "传送港", color: "#a7f3d0", description: "随机传送到一块地产。" },
+  16: { type: "teleport", label: "传送港", color: "#a7f3d0", settleArrival: true, description: "随机传送到一块地产，到达后立即结算。" },
   19: { type: "card_draw", label: "命运转盘", color: "#e9d5ff", description: "翻牌选卡发动！" },
   22: { type: "chance", label: "机会格", color: "#fbcfe8", description: "触发随机事件。" },
 };
@@ -167,7 +169,7 @@ const EXPANSION_LOT_CONFIGS = {
   2:  { price: 90,  buildCosts: [0, 40, 70, 106], tolls: [20, 58, 122, 202], themeIdx: 0 },
   3:  { price: 105, buildCosts: [0, 46, 78, 118], tolls: [24, 66, 138, 228], themeIdx: 0 },
   6:  { price: 110, buildCosts: [0, 48, 82, 124], tolls: [26, 72, 148, 242], themeIdx: 0 },
-  7:  { price: 210, buildCosts: [0, 74, 122, 176], tolls: [46, 124, 256, 424], themeIdx: 2, effectId: "finance_bonus" },
+  7:  { price: 280, buildCosts: [0, 90, 144, 206], tolls: [62, 158, 318, 516], themeIdx: 3, effectId: "tower_bonus", landmarkKey: "skyscraper" },
   9:  { price: 125, buildCosts: [0, 50, 84, 128], tolls: [28, 76, 156, 256], themeIdx: 1 },
   11: { price: 95,  buildCosts: [0, 42, 74, 112], tolls: [22, 60, 130, 216], themeIdx: 0 },
   13: { price: 120, buildCosts: [0, 50, 86, 130], tolls: [28, 76, 158, 258], themeIdx: 1 },
@@ -179,37 +181,9 @@ const EXPANSION_LOT_CONFIGS = {
   23: { price: 130, buildCosts: [0, 52, 88, 136], tolls: [30, 82, 174, 286], themeIdx: 1 },
   24: { price: 140, buildCosts: [0, 54, 90, 138], tolls: [32, 86, 176, 290], themeIdx: 1 },
   25: { price: 150, buildCosts: [0, 58, 96, 146], tolls: [36, 94, 188, 306], themeIdx: 1 },
-  26: { price: 280, buildCosts: [0, 90, 144, 206], tolls: [62, 158, 318, 516], themeIdx: 3, effectId: "tower_bonus" },
+  26: { price: 210, buildCosts: [0, 74, 122, 176], tolls: [46, 124, 256, 424], themeIdx: 2, effectId: "hot_spring_rest", landmarkKey: "onsen" },
 };
 
-const EXPANSION_TILE_VISUALS = {
-  7:  { left: "13.6%", top: "1%",  width: "13.8%", height: "13.1%" },
-  2:  { left: "9.7%",  top: "15%", width: "7.8%",  height: "11.8%" },
-  4:  { left: "23.7%", top: "15%", width: "7.8%",  height: "11.8%" },
-  1:  { left: "3.7%",  top: "29%", width: "7.8%",  height: "11.8%" },
-  5:  { left: "29.6%", top: "29%", width: "8.2%",  height: "12%" },
-  0:  { left: "0%",    top: "42%", width: "8.4%",  height: "13.8%" },
-  11: { left: "3.7%",  top: "56%", width: "7.8%",  height: "11.8%" },
-  10: { left: "29.7%", top: "56%", width: "7.8%",  height: "11.8%" },
-  9:  { left: "9.7%",  top: "70%", width: "7.8%",  height: "11.8%" },
-  6:  { left: "23.7%", top: "70%", width: "7.8%",  height: "11.8%" },
-  3:  { left: "14.6%", top: "84%", width: "10.8%", height: "11.8%" },
-  12: { left: "39.7%", top: "42%", width: "8.6%",  height: "13.8%" },
-  26: { left: "67.6%", top: "1%",  width: "13.8%", height: "13.1%" },
-  14: { left: "62.7%", top: "15%", width: "7.8%",  height: "11.8%" },
-  16: { left: "77.7%", top: "15%", width: "7.8%",  height: "11.8%" },
-  13: { left: "55.7%", top: "29%", width: "7.8%",  height: "11.8%" },
-  17: { left: "84.7%", top: "29%", width: "7.8%",  height: "11.8%" },
-  25: { left: "50.6%", top: "42%", width: "8.2%",  height: "12%" },
-  18: { left: "78.7%", top: "42%", width: "7.8%",  height: "11.8%" },
-  19: { left: "91.6%", top: "42%", width: "8.4%",  height: "13.8%" },
-  24: { left: "55.7%", top: "56%", width: "7.8%",  height: "11.8%" },
-  20: { left: "84.7%", top: "56%", width: "7.8%",  height: "11.8%" },
-  23: { left: "59.7%", top: "70%", width: "7.8%",  height: "11.8%" },
-  22: { left: "70.7%", top: "70%", width: "7.8%",  height: "11.8%" },
-  21: { left: "80.7%", top: "70%", width: "7.8%",  height: "11.8%" },
-  15: { left: "68.6%", top: "84%", width: "10.8%", height: "11.8%" },
-};
 
 function makeLoopNavigation(length) {
   const next = {};
@@ -224,6 +198,7 @@ function makeLoopNavigation(length) {
 const MAP_PRESETS = {
   classic: {
     id: "classic",
+    maxRounds: 30,
     name: "经典环线",
     boardTitle: "环形线路 · 22 格",
     startDescription: "经典 22 格环形线路，节奏均衡，适合标准对局。",
@@ -240,9 +215,10 @@ const MAP_PRESETS = {
   },
   compact: {
     id: "compact",
-    name: "紧凑冲突图",
-    boardTitle: "紧凑冲突图 · 18 格",
-    startDescription: "更短的单环路线，功能格更密，买地和交锋都来得更快。",
+    maxRounds: 26,
+    name: "紧凑冲突",
+    boardTitle: "紧凑冲突 · 18 格",
+    startDescription: "18 格短环线：随机冲刺 2–4 格，传送后立即结算，三个街区更快连锁收租。",
     modeLabel: "高冲突短局",
     grid: { columns: 6, rows: 5, cellMin: 104, cellMinTablet: 64, cellMinMobile: 48, height: "min(82vh, 900px)", heightTablet: "min(76vh, 620px)", heightMobile: "min(72vh, 480px)", centerWidth: "min(300px, calc(100% - 120px))", centerWidthTablet: "min(260px, calc(100% - 56px))", centerWidthMobile: "min(220px, calc(100% - 32px))" },
     routePositions: COMPACT_ROUTE_POSITIONS,
@@ -256,12 +232,13 @@ const MAP_PRESETS = {
   },
   expansion: {
     id: "expansion",
-    name: "都市扩张图",
-    boardTitle: "都市扩张图 · 28 格",
-    startDescription: "更长的路线和 8 字交叉枢纽，停在枢纽时可选择下一圈方向。",
-    modeLabel: "8 字交叉经营图",
-    layoutMode: "free",
-    grid: { columns: 10, rows: 7, cellMin: 78, cellMinTablet: 50, cellMinMobile: 38, height: "min(78vh, 760px)", heightTablet: "min(68vh, 600px)", heightMobile: "min(60vh, 470px)", centerWidth: "min(150px, 11%)", centerWidthTablet: "min(140px, 14%)", centerWidthMobile: "min(120px, 18%)", centerTop: "45%", centerLeft: "70%" },
+    maxRounds: 40,
+    openingBuildings: true,
+    name: "都市大环线",
+    boardTitle: "都市大环线 · 28 格",
+    startDescription: "28 格大环线：六个街区各有一处随机 Lv.1 地产开业，城市快线与传送让整座城都能碰面。",
+    modeLabel: "六街区都市大环线",
+    grid: { columns: 10, rows: 6, cellMin: 78, cellMinTablet: 50, cellMinMobile: 38, height: "min(84vh, 820px)", heightTablet: "min(76vh, 650px)", heightMobile: "min(68vh, 500px)", centerWidth: "min(420px, calc(100% - 160px))", centerWidthTablet: "min(330px, calc(100% - 80px))", centerWidthMobile: "min(250px, calc(100% - 45px))" },
     routePositions: EXPANSION_ROUTE_POSITIONS,
     tileNames: EXPANSION_TILE_NAMES,
     largeLotLinks: EXPANSION_LARGE_LOT_LINKS,
@@ -269,28 +246,7 @@ const MAP_PRESETS = {
     districtColors: EXPANSION_DISTRICT_COLORS,
     specialTiles: EXPANSION_SPECIAL_TILES,
     lotConfigs: EXPANSION_LOT_CONFIGS,
-    tileVisuals: EXPANSION_TILE_VISUALS,
-    navigation: {
-      next: {
-        0: 1, 1: 2, 2: 3, 3: 4, 4: 12,
-        5: 6, 6: 7, 7: 8, 8: 9, 9: 10, 10: 11, 11: 0,
-        13: 14, 14: 15, 15: 16, 16: 17, 17: 18, 18: 19, 19: 20, 20: 21, 21: 22, 22: 23, 23: 24, 24: 25, 25: 26, 26: 27, 27: 12,
-      },
-      prev: {
-        0: 11, 1: 0, 2: 1, 3: 2, 4: 3, 5: 12, 6: 5, 7: 6, 8: 7, 9: 8, 10: 9, 11: 10,
-        12: 27,
-        13: 12, 14: 13, 15: 14, 16: 15, 17: 16, 18: 17, 19: 18, 20: 19, 21: 20, 22: 21, 23: 22, 24: 23, 25: 24, 26: 25, 27: 26,
-      },
-      junctions: {
-        12: {
-          defaultNext: 5,
-          options: [
-            { id: "left", label: "左环经营线", next: 5 },
-            { id: "right", label: "右环机遇线", next: 13 },
-          ],
-        },
-      },
-    },
+    navigation: makeLoopNavigation(EXPANSION_ROUTE_POSITIONS.length),
   },
 };
 
@@ -711,6 +667,10 @@ function getMapConfig(mapId = state?.currentMapId ?? selectedMapId) {
   return MAP_PRESETS[mapId] || MAP_PRESETS[DEFAULT_MAP_ID];
 }
 
+function getMaxRounds(mapId = state?.currentMapId ?? selectedMapId) {
+  return getMapConfig(mapId).maxRounds || CONFIG.maxRounds;
+}
+
 function getBoardLength() {
   return state.board?.length || getMapConfig().routePositions.length;
 }
@@ -766,6 +726,7 @@ function initializeGame(mapId = selectedMapId) {
     phase: "await_roll",
     currentMapId: mapCfg.id,
     board: createBoard(mapCfg),
+    openingLots: [],
     players: PLAYER_DEFS.map((p) => ({
       ...p,
       cash: CONFIG.startCash,
@@ -783,7 +744,12 @@ function initializeGame(mapId = selectedMapId) {
     animation: { currentTile: null, landedTile: null, diceRolling: false, diceResult: false, boardBurst: false },
     modal: defaultModal(),
   };
+  state.openingLots = prepareOpeningLots(state.board, mapCfg);
   pushLog(`游戏开始，双方初始资金均为 ${formatMoney(CONFIG.startCash)}。`);
+  if (state.openingLots.length) {
+    const names = state.openingLots.map((index) => state.board[index].name).join("、");
+    pushLog(`新城开业：${names} 已建成 Lv.1，均为无主地产，仍按原地价购买。`);
+  }
   setHumanTurnStatus();
   updateSoundToggleButton();
   updateMusicToggleButton();
@@ -850,6 +816,7 @@ function saveGameResult(reason, winnerId) {
     mapId: mapCfg.id,
     mapName: mapCfg.name,
     mode: state.gameMode,
+    roundLimit: getMaxRounds(),
     rounds: state.round - 1,
     winner: winnerId,
     players: state.players.map((p) => ({ id: p.id, name: p.name, cash: p.cash })),
@@ -867,7 +834,9 @@ function renderHistoryList() {
     return;
   }
   historyListEl.innerHTML = history.map((rec) => {
-    const modeLabel = rec.mode === "bankruptcy" ? "破产淘汰制" : `30 回合制（${rec.rounds} 回合）`;
+    // Records created before map-specific limits all used the original 30 rounds.
+    const roundLimit = Number.isInteger(rec.roundLimit) && rec.roundLimit > 0 ? rec.roundLimit : CONFIG.maxRounds;
+    const modeLabel = rec.mode === "bankruptcy" ? "破产淘汰制" : `${roundLimit} 回合制（${rec.rounds} 回合）`;
     const mapLabel = rec.mapName || MAP_PRESETS[rec.mapId]?.name || MAP_PRESETS[DEFAULT_MAP_ID].name;
     const winnerName = rec.winner === "draw"
       ? "平局"
@@ -890,12 +859,13 @@ function renderHistoryList() {
 
 // ─── 模式选择 ──────────────────────────────────────────────
 async function selectGameMode(sid) {
+  const maxRounds = getMaxRounds();
   const choice = await showModal({
     label: "模式选择",
     title: "选择游戏模式",
-    message: "30 回合制：满30回合后现金最多者胜。\n破产淘汰制：无力偿还过路费即告破产，对手获胜。",
+    message: `${maxRounds} 回合制：满 ${maxRounds} 回合后现金最多者胜。\n破产淘汰制：无力偿还过路费即告破产，对手获胜。`,
     buttons: [
-      { id: "rounds", label: "🕐 30 回合制", variant: "primary" },
+      { id: "rounds", label: `🕐 ${maxRounds} 回合制`, variant: "primary" },
       { id: "bankruptcy", label: "💸 破产淘汰制", variant: "ghost" },
     ],
   });
@@ -956,7 +926,7 @@ function updateModeEyebrow() {
   const mapCfg = getMapConfig(state.currentMapId);
   modeEyebrowEl.textContent = state.gameMode === "bankruptcy"
     ? `破产淘汰制 · ${mapCfg.modeLabel}`
-    : `30 回合制 · ${mapCfg.modeLabel}`;
+    : `${getMaxRounds()} 回合制 · ${mapCfg.modeLabel}`;
 }
 
 function createBoard(mapCfg = getMapConfig()) {
@@ -981,6 +951,7 @@ function createBoard(mapCfg = getMapConfig()) {
       theme: LOT_THEMES[cfg.themeIdx],
       district: mapCfg.districtConfig[index],
       effectId: cfg.effectId || null,
+      ...(cfg.landmarkKey ? { landmarkKey: cfg.landmarkKey } : {}),
       isLarge,
     };
     return tile;
@@ -992,6 +963,21 @@ function createBoard(mapCfg = getMapConfig()) {
     }
   });
   return board;
+}
+
+function prepareOpeningLots(board, mapCfg) {
+  if (!mapCfg.openingBuildings) return [];
+  const districts = new Map();
+  board.forEach((tile) => {
+    if (!tile.lot || tile.isLargeSecondary || !tile.lot.district) return;
+    if (!districts.has(tile.lot.district)) districts.set(tile.lot.district, []);
+    districts.get(tile.lot.district).push(tile);
+  });
+  return [...districts.values()].map((lots) => {
+    const selected = lots[Math.floor(Math.random() * lots.length)];
+    selected.lot.level = 1;
+    return selected.index;
+  });
 }
 
 function getMapNavigation() {
@@ -1041,7 +1027,7 @@ function sleep(ms) { return new Promise((r) => setTimeout(r, ms)); }
 function isSessionActive(sid) { return state.sessionId === sid; }
 
 function pushLog(msg) {
-  state.logs.push(`第 ${state.gameMode === "bankruptcy" ? state.round : Math.min(state.round, CONFIG.maxRounds)} 回合 · ${msg}`);
+  state.logs.push(`第 ${state.gameMode === "bankruptcy" ? state.round : Math.min(state.round, getMaxRounds())} 回合 · ${msg}`);
   if (state.logs.length > 24) state.logs.shift();
 }
 
@@ -1095,7 +1081,7 @@ function flushQueuedCashAnimations() {
 function getRoundLabel() {
   return state.gameMode === "bankruptcy"
     ? `第 ${state.round} 回合`
-    : `第 ${state.round} / ${CONFIG.maxRounds} 回合`;
+    : `第 ${state.round} / ${getMaxRounds()} 回合`;
 }
 
 function setHumanTurnStatus() {
@@ -1382,8 +1368,8 @@ function renderStatus() {
     roundChipEl.textContent = `第 ${state.round} 回合 · 破产淘汰制`;
     roundProgressBarEl.style.width = "0%";
   } else {
-    roundChipEl.textContent = `第 ${Math.min(state.round, CONFIG.maxRounds)} / ${CONFIG.maxRounds} 回合`;
-    roundProgressBarEl.style.width = `${Math.min((state.round - 1) / CONFIG.maxRounds * 100, 100)}%`;
+    roundChipEl.textContent = `第 ${Math.min(state.round, getMaxRounds())} / ${getMaxRounds()} 回合`;
+    roundProgressBarEl.style.width = `${Math.min((state.round - 1) / getMaxRounds() * 100, 100)}%`;
   }
   diceBoxEl.textContent = state.lastDice ?? "-";
   if (state.lastDice) centerDiceValueEl.innerHTML = renderDiceFaceSvg(state.lastDice);
@@ -1736,6 +1722,7 @@ async function resolveLargeLotEffect(player, tile, sid) {
 }
 
 async function resolveLanding(player, tile, sid) {
+  if (!isSessionActive(sid) || state.gameOver) return;
   if (tile.isStart) {
     await resolveStartTakeover(player, sid);
     return;
@@ -1755,7 +1742,7 @@ async function resolveLanding(player, tile, sid) {
     if (player.isAi) {
       if (shouldAiBuy(player, lot)) {
         buyLot(player, tile, false); render();
-        await showContinueModal({ label: "AI 行动", title: `AI 买下了 ${tile.name}`, message: `花费 ${formatMoney(lot.price)}。` });
+        await showContinueModal({ label: "AI 行动", title: `AI 买下了 ${tile.name}`, message: `花费 ${formatMoney(lot.price)}。${purchaseBuildingNote(lot)}` });
       } else {
         pushLog(`AI 对手放弃购买 ${tile.name}。`);
         await showContinueModal({ label: "AI 行动", title: `AI 放弃购买 ${tile.name}`, message: "AI 选择保留现金。" });
@@ -1764,14 +1751,14 @@ async function resolveLanding(player, tile, sid) {
     }
     const dec = await showModal({
       label: "购买提示", title: `购买 ${tile.name}？`,
-      message: `${lot.theme.label}${lot.isLarge ? "（大型地产·命中率翻倍）" : ""} 售价 ${formatMoney(lot.price)}，当前现金 ${formatMoney(player.cash)}。`,
+      message: `${lot.theme.label}${lot.isLarge ? "（大型地产·命中率翻倍）" : ""} 售价 ${formatMoney(lot.price)}，当前现金 ${formatMoney(player.cash)}。${purchaseBuildingNote(lot)}`,
       buttons: [
         { id: "buy", label: `购买 ${formatMoney(lot.price)}`, variant: "primary" },
         { id: "skip", label: "暂不购买", variant: "ghost" },
       ],
     });
     if (!isSessionActive(sid)) return;
-    if (dec === "buy") { buyLot(player, tile); render(); await showContinueModal({ label: "购买完成", title: `${tile.name}，归你了！`, message: `花费 ${formatMoney(lot.price)}，这座小城又多了一块你的地盘。`, drama: { type: "buy", amount: lot.price, to: player, tiles: [tile.index], tileName: tile.name } }); }
+    if (dec === "buy") { buyLot(player, tile); render(); await showContinueModal({ label: "购买完成", title: `${tile.name}，归你了！`, message: `花费 ${formatMoney(lot.price)}，这座小城又多了一块你的地盘。${purchaseBuildingNote(lot)}`, drama: { type: "buy", amount: lot.price, to: player, tiles: [tile.index], tileName: tile.name } }); }
     return;
   }
 
@@ -1926,16 +1913,22 @@ async function resolveJunctionTile(player, tile, sid) {
   });
 }
 
-async function resolveRushTile(player, sid) {
+async function resolveRushTile(player, sid, tile = state.board[player.position]) {
+  if (!isSessionActive(sid) || state.gameOver) return;
+  const minSteps = tile.special?.rushMin ?? 2;
+  const maxSteps = tile.special?.rushMax ?? minSteps;
+  const steps = minSteps === maxSteps ? minSteps : minSteps + Math.floor(Math.random() * (maxSteps - minSteps + 1));
+  const name = tile.name || "冲刺站";
   playSound("special", { rate: 1.1 });
-  pushLog(`${player.name} 启动冲刺站，立刻再前进 2 格！`);
+  pushLog(`${player.name} 启动${name}，随机冲刺 ${steps} 格！`);
   await showContinueModal({
-    label: "冲刺站",
-    title: "冲刺站启动！",
-    message: `${player.name} 立刻向前冲刺 2 格。`,
+    label: name,
+    title: `${name}，冲刺 ${steps} 格！`,
+    message: `${player.name} 沿当前${player.effects.reversed ? "逆时针" : "顺时针"}方向再前进 ${steps} 格，到达后立即结算。`,
+    drama: { type: "card", to: player, tiles: [tile.index], tileName: name },
   });
-  if (!isSessionActive(sid)) return;
-  await animateMovement(player, 2, sid);
+  if (!isSessionActive(sid) || state.gameOver) return;
+  await animateMovement(player, steps, sid);
   if (!isSessionActive(sid) || state.gameOver) return;
   state.animation.currentTile = null;
   state.animation.landedTile = player.position;
@@ -1986,7 +1979,7 @@ async function resolveSpecialTile(player, tile, sid) {
   }
 
   if (tile.special.type === "teleport") {
-    await resolveTeleportTile(player, sid);
+    await resolveTeleportTile(player, sid, tile);
     return;
   }
 
@@ -2001,7 +1994,7 @@ async function resolveSpecialTile(player, tile, sid) {
   }
 
   if (tile.special.type === "rush") {
-    await resolveRushTile(player, sid);
+    await resolveRushTile(player, sid, tile);
     return;
   }
 
@@ -2053,7 +2046,7 @@ async function resolveChance(player, tile, sid) {
       if (player.isAi) {
         if (shouldAiBuy(player, selected.lot)) {
           buyLot(player, selected, false); render();
-          await showContinueModal({ label: "功能地块", title: "空地购买机会！", message: `AI 趁机买下了 ${selected.name}（${formatMoney(selected.lot.price)}）！` });
+          await showContinueModal({ label: "功能地块", title: selected.lot.level > 0 ? "开业地产购买机会！" : "空地购买机会！", message: `AI 趁机买下了 ${selected.name}（${formatMoney(selected.lot.price)}）！${purchaseBuildingNote(selected.lot)}` });
         } else {
           await showContinueModal({ label: "功能地块", title: "空地购买机会", message: `AI 放弃购买 ${selected.name}。` });
         }
@@ -2062,8 +2055,8 @@ async function resolveChance(player, tile, sid) {
           await showContinueModal({ label: "功能地块", title: "空地购买机会", message: `发现空地 ${selected.name}（${formatMoney(selected.lot.price)}），但你只有 ${formatMoney(player.cash)}，无法购买。` });
         } else {
           const dec = await showModal({
-            label: "功能地块", title: `🏗️ 空地购买机会！`,
-            message: `政府公示：${selected.name}（${selected.lot.theme.label}）以底价 ${formatMoney(selected.lot.price)} 出售！\n当前现金：${formatMoney(player.cash)}`,
+            label: "功能地块", title: selected.lot.level > 0 ? "🏗️ 开业地产购买机会！" : "🏗️ 空地购买机会！",
+            message: `政府公示：${selected.name}（${selected.lot.theme.label}）以底价 ${formatMoney(selected.lot.price)} 出售！\n当前现金：${formatMoney(player.cash)}${purchaseBuildingNote(selected.lot)}`,
             buttons: [
               { id: "buy", label: `购买 ${formatMoney(selected.lot.price)}`, variant: "primary" },
               { id: "skip", label: "放弃", variant: "ghost" },
@@ -2086,19 +2079,27 @@ async function resolveChance(player, tile, sid) {
   }
 }
 
-async function resolveTeleportTile(player, sid) {
+async function resolveTeleportTile(player, sid, tile = state.board[player.position]) {
+  if (!isSessionActive(sid) || state.gameOver) return;
+  const settleArrival = tile.special?.settleArrival === true;
   playSound("special", { rate: 1.08 });
   const lots = state.board.filter((t) => t.lot !== null);
   if (lots.length === 0) return;
   const target = lots[Math.floor(Math.random() * lots.length)];
+  // A jump has no traversed route: do not call animateMovement or pay a start bonus.
   player.position = target.index;
   pushLog(`${player.name} 踏入传送门，被传送到了 ${target.name}！`);
+  state.animation.currentTile = null;
   state.animation.landedTile = target.index;
-    render();
+  render();
   await showContinueModal({
     label: "传送门", title: "传送门启动！",
-    message: `${player.name} 被传送到了 ${target.name}！下回合将从此处出发。`,
+    message: `${player.name} 被传送到了 ${target.name}！${settleArrival ? "现在立即结算这块地产。" : "下回合将从此处出发。"}`,
+    drama: { type: "card", to: player, tiles: [target.index], tileName: target.name },
   });
+  if (!isSessionActive(sid) || state.gameOver) return;
+  // The outer landing resolves only this station; settle its destination once here.
+  if (settleArrival) await resolveLanding(player, target, sid);
 }
 
 async function resolveConstruction(player, sid) {
@@ -2453,6 +2454,12 @@ async function executeCardEffect(player, card, sid) {
   }
 }
 
+function purchaseBuildingNote(lot) {
+  return lot.level > 0
+    ? `\n已建 Lv.${lot.level}，当前基础租金 ${formatMoney(lot.tolls[lot.level])}。按原地价买入，现有建筑一并保留。`
+    : "";
+}
+
 function buyLot(player, tile, animate = true) {
   const lot = tile.lot;
   updatePlayerCash(player, -lot.price, animate);
@@ -2517,9 +2524,9 @@ function findUpgradeableOwnedLot(pid) {
 function shouldAiBuy(player, lot) {
   const reserve = 180;
   const distOwned = getDistrictOwnerLots(lot.district, player.id);
-  const distTotal = new Set(state.board.filter((t) => t.lot?.district === lot.district).map((t) => t.lot)).size;
+  const distTotal = new Set(state.board.filter((t) => t.lot && t.lot.district === lot.district).map((t) => t.lot)).size;
   if (distOwned.length + 1 >= distTotal && player.cash - lot.price >= 60) return true;
-  const oppOwns = state.board.filter((t) => t.lot?.district === lot.district && t.lot.ownerId && t.lot.ownerId !== player.id).length;
+  const oppOwns = state.board.filter((t) => t.lot && t.lot.district === lot.district && t.lot.ownerId && t.lot.ownerId !== player.id).length;
   if (oppOwns >= 2 && player.cash - lot.price >= reserve) return true;
   return player.cash - lot.price >= reserve || lot.price <= 120;
 }
@@ -2553,7 +2560,7 @@ function endTurn() {
   if (state.currentPlayerIndex === state.players.length - 1) {
     state.round += 1; state.currentPlayerIndex = 0;
   } else { state.currentPlayerIndex += 1; }
-  if (state.gameMode === "rounds" && state.round > CONFIG.maxRounds) { finishGame("rounds"); return; }
+  if (state.gameMode === "rounds" && state.round > getMaxRounds()) { finishGame("rounds"); return; }
   if (currentPlayer().isAi) { setAiTurnStatus(); render(); void startAiTurnWithDelay(state.sessionId); }
   else { setHumanTurnStatus(); render(); }
 }

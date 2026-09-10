@@ -6,9 +6,9 @@
   <meta name="theme-color" content="#173d3a">
   <title>环城大富翁 · 好戏开场</title>
   <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="presentation.css?v=20260911-12">
-  <link rel="stylesheet" href="scene.css?v=20260911-11">
-  <link rel="stylesheet" href="drama.css?v=20260911-11">
+  <link rel="stylesheet" href="presentation.css?v=20260911-14">
+  <link rel="stylesheet" href="scene.css?v=20260911-14">
+  <link rel="stylesheet" href="drama.css?v=20260911-14">
 </head>
 <body class="mode-start">
   <div id="start-screen" class="start-screen">
@@ -21,9 +21,9 @@
       <div class="map-picker">
         <p class="map-picker-label">今天，在哪座城开场？</p>
         <div id="start-map-options" class="map-options" role="group" aria-label="地图选择">
-          <button class="map-option active" type="button" data-map-id="classic" aria-pressed="true"><span class="map-option-mark">▱</span><span class="map-option-title">经典环线</span><span class="map-option-meta">22 格 · 休闲对战</span></button>
-          <button class="map-option" type="button" data-map-id="compact" aria-pressed="false"><span class="map-option-mark">◇</span><span class="map-option-title">紧凑冲突</span><span class="map-option-meta">18 格 · 高频碰撞</span></button>
-          <button class="map-option" type="button" data-map-id="expansion" aria-pressed="false"><span class="map-option-mark">∞</span><span class="map-option-title">都市扩张</span><span class="map-option-meta">28 格 · 交叉选路</span></button>
+          <button class="map-option active" type="button" data-map-id="classic" aria-pressed="true"><span class="map-option-mark">▱</span><span class="map-option-title">经典环线</span><span class="map-option-meta">22 格 · 30 回合</span></button>
+          <button class="map-option" type="button" data-map-id="compact" aria-pressed="false"><span class="map-option-mark">↗</span><span class="map-option-title">紧凑冲突</span><span class="map-option-meta">18 格 · 26 回合</span></button>
+          <button class="map-option" type="button" data-map-id="expansion" aria-pressed="false"><span class="map-option-mark">▱</span><span class="map-option-title">都市大环线</span><span class="map-option-meta">28 格 · 40 回合</span></button>
         </div>
         <p id="start-map-description" class="start-map-description"></p>
       </div>
@@ -52,6 +52,7 @@
     <main class="layout">
       <section class="board-section card">
         <div class="board-header"><div><p class="panel-label">CITY BOARD</p><h2 id="board-map-title">经典环线</h2></div><div class="round-chip" id="round-chip">第 1 / 30 回合</div></div>
+        <details id="map-guide" class="map-guide" hidden><summary><span id="map-guide-title"></span><span class="map-guide-toggle">本图玩法 ＋</span></summary><p id="map-guide-copy"></p><p id="map-opening-copy" hidden></p></details>
         <div id="mini-scoreboard" class="mini-scoreboard"></div>
         <div id="board-stage" class="board-stage">
           <div id="city-canvas-wrap" aria-hidden="true"></div>
@@ -65,7 +66,7 @@
           <div class="center-actions"><span id="center-phase-badge" class="center-badge">等待掷骰</span><button id="roll-btn" class="primary-btn center-roll-btn">掷骰子 <span>↗</span></button></div>
           <div class="round-progress" id="round-progress"><div class="round-progress-bar" id="round-progress-bar"></div></div>
         </section>
-        <div id="showcase-controls" class="showcase-controls hidden"><div><b>演出预览</b><span>示例局面 · 不计入历史战绩</span></div><div class="showcase-buttons"><button data-showcase="rent">连锁收租</button><button data-showcase="seize">地标征用</button><button data-showcase="shield">护盾救场</button><button data-showcase="relief">绝境救助</button><button data-showcase="build">建筑升级</button><button id="showcase-exit-btn">开始正式对局 ↗</button></div></div>
+        <div id="showcase-controls" class="showcase-controls hidden"><div><b>演出预览</b><span>示例局面 · 不计入历史战绩</span></div><div class="showcase-buttons"><button data-showcase="rent">连锁收租</button><button data-showcase="seize">地标征用</button><button data-showcase="shield">护盾救场</button><button data-showcase="relief">绝境救助</button><button data-showcase="build">建筑升级</button><button data-showcase="route" id="showcase-route-btn" hidden>快线追租</button><button id="showcase-exit-btn">开始正式对局 ↗</button></div></div>
       </section>
       <aside class="sidebar">
         <section class="card status-card"><div class="panel-title-row"><p class="panel-label">这局，谁占上风</p><div class="dice-box" id="dice-box">—</div></div><h2 id="turn-title">准备开场</h2><p id="turn-description" class="muted"></p><div class="scoreboard" id="scoreboard"></div><p class="victory-rule" id="victory-rule">30 回合后，现金最多者获胜</p></section>
@@ -83,12 +84,13 @@
               <li>城建局：选择免费升级自己或拆除对手一层建筑！</li>
               <li>银行金库：强制掷骰存钱，存满后下个人全部提走！</li>
               <li>机会格：触发随机事件，含空地购买机会，好坏难料！</li>
-              <li>不同地图会带来不同路线机制，例如冲刺站或交叉枢纽选路。</li>
+              <li>紧凑冲突的冲刺站随机前进 2–4 格；都市大环线的快线随机前进 3–5 格。抵达地产后照常买地、升级或交租。</li>
+              <li>传送港随机送到地产并立即结算。都市大环线开局每个街区随机一处无主地产预建一级，买下即可经营。</li>
               <li>停留市政府可发动征用令，解除对手一块地产的归属（建筑保留）！</li>
               <li>绊脚术：目标下回合无法移动，但仍需结算当前所在地块。</li>
               <li>逆行术：可改变自己或对手的前进方向！</li>
               <li>大地块占据两格，价值高收费猛！</li>
-              <li><b>30 回合制</b>：满 30 回合后，剩余现金最高者获胜。</li>
+              <li><b>回合制</b>：经典环线 30 回合、紧凑冲突 26 回合、都市大环线 40 回合；结束时剩余现金最高者获胜。</li>
               <li><b>破产淘汰制</b>：某方无力偿还过路费即告破产，对手获胜。</li>
             </ul>
           </details>
@@ -96,9 +98,9 @@
     </main>
   </div>
 
-  <script src="drama.js?v=20260911-11"></script>
-  <script src="game.js?v=20260911-11"></script>
-  <script src="presentation.js?v=20260911-12"></script>
-  <script type="module" src="scene.js?v=20260911-11"></script>
+  <script src="drama.js?v=20260911-14"></script>
+  <script src="game.js?v=20260911-14"></script>
+  <script src="presentation.js?v=20260911-14"></script>
+  <script type="module" src="scene.js?v=20260911-14"></script>
 </body>
 </html>

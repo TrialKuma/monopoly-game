@@ -26,7 +26,8 @@ let modelsLoading = false;
 let renderDirty = false;
 let inspection = null;
 let studioEnvironment = null;
-const LANDMARKS = { classic: { 5:'finance', 7:'skyscraper', 14:'onsen' }, expansion: { 26:'skyscraper' } };
+let travelArrow = null;
+const LANDMARKS = { classic: { 5:'finance', 7:'skyscraper', 14:'onsen' }, compact: { 2:'finance', 11:'onsen' }, expansion: { 7:'skyscraper', 26:'onsen' } };
 const SPECIAL_MODELS = { bank:'vault_bank',construction:'builders_guild',card_draw:'card_pavilion',chance:'chance_wheel',teleport:'teleport_gate',rush:'rush_station',junction:'junction_hub' };
 const ASSET_BUNDLES = [
   {file:'city-kit.glb',authored:false,pattern:/^(villa_[123]|shop_[123]|hotel_[123]|tower_[123]|plot_0|city_hall|bank|construction|card_station|tree|streetlamp|fountain)$/},
@@ -164,6 +165,7 @@ function selectSceneTile(index){
 }
 function clearMap() {
   world?.clear(); labels?.replaceChildren(); lotViews.clear(); pawnViews.clear(); stepViews.clear();
+  travelArrow = null;
   resources.forEach((resource) => resource.dispose?.()); resources.clear(); materials.clear(); pulses.length = 0;
 }
 function reset() {
@@ -176,12 +178,29 @@ function tilePosition(tile) {
 }
 function inward(position) {
   const x = position.x, z = position.z;
-  // On the two-loop map the nearest courtyard gives each route its own inward edge.
-  const centerX = snapshot?.mapId === 'expansion' ? (x < -1 ? -4.95 : x > 1 ? 3.3 : 0) : 0;
-  const vector = new THREE.Vector3(centerX - x, 0, -z);
-  if (Math.abs(x - centerX) > Math.abs(z) * 1.18) vector.z = 0; else vector.x = 0;
+  if(snapshot?.mapId!=='classic'){
+    const edges=boundaryEdges(position),distance=Math.min(...edges.map((edge)=>edge.distance));
+    // Corners join the two inner pavements with one short diagonal. Every other
+    // step follows its actual boundary, including long, shallow rectangles.
+    const vector=new THREE.Vector3();
+    edges.filter((edge)=>edge.distance<distance+.001).forEach((edge)=>vector.add(edge.normal));
+    return vector.normalize();
+  }
+  const vector = new THREE.Vector3(-x, 0, -z);
+  if (Math.abs(x) > Math.abs(z) * 1.18) vector.z = 0; else vector.x = 0;
   return vector.normalize();
 }
+function boundaryEdges(position){
+  const left=(boardBounds.minX-boardBounds.cx)*STEP,right=(boardBounds.maxX-boardBounds.cx)*STEP;
+  const back=(boardBounds.minY-boardBounds.cy)*STEP,front=(boardBounds.maxY-boardBounds.cy)*STEP;
+  return [
+    {side:'north',distance:Math.abs(position.z-back),normal:new THREE.Vector3(0,0,1),rotation:0},
+    {side:'south',distance:Math.abs(position.z-front),normal:new THREE.Vector3(0,0,-1),rotation:Math.PI},
+    {side:'west',distance:Math.abs(position.x-left),normal:new THREE.Vector3(1,0,0),rotation:Math.PI/2},
+    {side:'east',distance:Math.abs(position.x-right),normal:new THREE.Vector3(-1,0,0),rotation:-Math.PI/2},
+  ];
+}
+function boundaryFor(position){return boundaryEdges(position).sort((a,b)=>a.distance-b.distance)[0];}
 function buildMap(data) {
   clearMap();
   const xs = data.board.map((tile) => tile.x), ys = data.board.map((tile) => tile.y);
@@ -200,10 +219,15 @@ function buildMap(data) {
   makeRoads(data);
   data.board.filter((tile) => !tile.isLargeSecondary).forEach((tile) => makeLot(tile, data));
   data.players.forEach((player) => makePawn(player));
+  if(data.mapId!=='classic'){
+    travelArrow=document.createElement('span');travelArrow.className='scene-travel-arrow';travelArrow.setAttribute('role','img');
+    travelArrow.innerHTML='<svg viewBox="0 0 28 20" aria-hidden="true"><path d="M3 10H23M17 4L23 10L17 16"/></svg>';
+    labels.appendChild(travelArrow);
+  }
   resize();
 }
 function makePark(mapId) {
-  const parks = mapId === 'expansion' ? [{ x: -4.95, z: -.1, w: 2.8, d: 1.55 }, { x: 3.3, z: -.1, w: 4.4, d: 1.55 }] : [{ x: 0, z: 0, w: boardBounds.w - 4.7, d: boardBounds.d - 4.65 }];
+  const parks = [{ x: 0, z: 0, w: boardBounds.w - 4.7, d: boardBounds.d - 4.65 }];
   parks.forEach((p) => {
     if (p.w < 1 || p.d < 1) return;
     const g = new THREE.Group(); g.position.set(p.x, .1, p.z); world.add(g);
@@ -241,10 +265,11 @@ function numberTexture(number) {
   const texture = own(new THREE.CanvasTexture(canvas)); texture.colorSpace = THREE.SRGBColorSpace; return texture;
 }
 function makeStep(tile) {
-  const center = tilePosition(tile), walk = center.clone().add(inward(center).multiplyScalar(.63)); walk.y = .205;
+  const modern=snapshot?.mapId!=='classic';
+  const center = tilePosition(tile), walk = center.clone().add(inward(center).multiplyScalar(modern?.84:.63)); walk.y = .205;
   const disc = mesh(new THREE.PlaneGeometry(.30,.30), own(new THREE.MeshBasicMaterial({ map:numberTexture(tile.index), transparent:true, depthWrite:false })), world, walk.x, walk.y, walk.z);
   disc.rotation.x = -Math.PI/2; disc.castShadow = false;
-  const ring = mesh(new THREE.RingGeometry(.15,.195,28), own(new THREE.MeshBasicMaterial({ color:'#efba68', transparent:true, opacity:0, side:THREE.DoubleSide, depthWrite:false })), world, walk.x, .218, walk.z);
+  const ring = mesh(new THREE.RingGeometry(modern?.24:.15,modern?.33:.195,36), own(new THREE.MeshBasicMaterial({ color:'#efba68', transparent:true, opacity:0, side:THREE.DoubleSide, depthWrite:false })), world, walk.x, .218, walk.z);
   ring.rotation.x = -Math.PI/2;
   stepViews.set(tile.index, { center, walk, ring });
 }
@@ -253,12 +278,16 @@ function makeRoads(data) {
   const addEdge = (a,b) => { if (!stepViews.has(a)||!stepViews.has(b)) return; const key=[a,b].sort((x,y)=>x-y).join(':'); if(edges.has(key))return; edges.add(key); connections.push([a,b]); };
   if (data.navigation?.next) Object.entries(data.navigation.next).forEach(([a,b]) => addEdge(Number(a),Number(b)));
   else data.board.forEach((tile,i)=>addEdge(tile.index,data.board[(i+1)%data.board.length].index));
-  if (data.mapId === 'expansion') [[4,12],[12,5],[12,13],[27,12]].forEach(([a,b])=>addEdge(a,b));
   connections.forEach(([a,b]) => {
     const start = stepViews.get(a).walk, end = stepViews.get(b).walk;
     const length = start.distanceTo(end); const midpoint = start.clone().add(end).multiplyScalar(.5);
-    const road = box(world,.16,.014,length, '#d3c7af',midpoint.x,.197,midpoint.z);
+    const road = box(world,data.mapId==='classic'?.16:.34,.014,length, data.mapId==='classic'?'#d3c7af':'#e7dac0',midpoint.x,.197,midpoint.z);
     road.rotation.y = Math.atan2(end.x-start.x,end.z-start.z); road.castShadow=false;
+    if(data.mapId!=='classic'){
+      const shape=new THREE.Shape();shape.moveTo(-.085,-.07);shape.lineTo(0,.08);shape.lineTo(.085,-.07);shape.lineTo(0,-.025);shape.closePath();
+      const arrow=mesh(new THREE.ShapeGeometry(shape),own(new THREE.MeshBasicMaterial({color:'#a99161',side:THREE.DoubleSide})),world,midpoint.x,.216,midpoint.z);
+      arrow.rotation.set(-Math.PI/2,0,-Math.atan2(end.x-start.x,-(end.z-start.z)));arrow.castShadow=false;
+    }
   });
 }
 function makeLot(tile, data) {
@@ -268,14 +297,17 @@ function makeLot(tile, data) {
   const w = 1.43 + (secondary && secondary.x !== tile.x ? STEP : 0);
   const d = 1.43 + (secondary && secondary.y !== tile.y ? STEP : 0);
   const group = new THREE.Group(); group.position.copy(position); group.userData.tileIndex=tile.index; world.add(group);
+  const boundary=boundaryFor(position),modern=data.mapId!=='classic';
   rounded(group,w,.08,d,.13,PALETTE.cream,0,-.07);
   rounded(group,w-.12,.03,d-.12,.09,tile.lot ? '#c5cfad' : '#ded3bc',0,.011);
   const ownerMaterial = own(new THREE.MeshStandardMaterial({ color:'#d9cbb3', roughness:.72, emissive:'#000000' }));
-  const ownerStripe = rounded(group,w-.12,.027,.075,.025,ownerMaterial,0,.054,d/2-.10);
+  const ownerStripe = rounded(group,modern&&Math.abs(boundary.normal.x)>.5?d-.12:w-.12,.027,.075,.025,ownerMaterial,0,.054,d/2-.10);
+  if(modern){const depth=Math.abs(boundary.normal.x)>.5?w:d;ownerStripe.position.copy(boundary.normal.clone().multiplyScalar(depth/2-.10));ownerStripe.position.y=.054;ownerStripe.rotation.y=boundary.rotation;}
   const pulseMaterial = own(new THREE.MeshBasicMaterial({ color:PALETTE.gold, transparent:true, opacity:0, depthWrite:false }));
   const outline = rounded(group,w+.16,.025,d+.16,.16,pulseMaterial,0,-.011); outline.castShadow=false;
   const building = new THREE.Group(); building.position.y=.048; group.add(building);
   const flag = new THREE.Group(); flag.position.set(-w/2+.19,.045,d/2-.26); group.add(flag);
+  if(modern){const front=Math.abs(boundary.normal.x)>.5?w:d,span=Math.abs(boundary.normal.x)>.5?d:w;flag.position.copy(boundary.normal.clone().multiplyScalar(front/2-.23)).add(new THREE.Vector3(boundary.normal.z,0,-boundary.normal.x).multiplyScalar(-span/2+.19));flag.position.y=.045;flag.rotation.y=boundary.rotation;}
   cylinder(flag,.017,.38,PALETTE.dark,0,.19,0,8);
   const flagCloth = box(flag,.21,.12,.012,ownerMaterial,.09,.32,0);
   const outward = inward(position).multiplyScalar(-1);
@@ -284,10 +316,11 @@ function makeLot(tile, data) {
   if(outward.z<-.2)outward.z*=-1;
   const anchor = position.clone().add(outward.multiplyScalar(.91)); anchor.y=.07;
   const button = document.createElement('button'); button.type='button'; button.className='scene-tile'; button.dataset.sceneTileIndex=String(tile.index);
+  button.dataset.side=boundary.side;
   button.innerHTML='<span class="scene-tile-name"></span><span class="scene-tile-meta"></span>';
   button.querySelector('.scene-tile-name').textContent=tile.name;
   labels.appendChild(button);
-  const view={tile, group, building, ownerMaterial, ownerStripe, flag, flagCloth, outline, label:button, anchor, w, d, signature:'', modelName:'', born:0};
+  const view={tile, mapId:data.mapId, boundary, group, building, ownerMaterial, ownerStripe, flag, flagCloth, outline, label:button, anchor, w, d, signature:'', modelName:'', born:0};
   lotViews.set(tile.index,view); updateLot(view,tile,data,true);
   if (secondary) {
     // Both physical step positions remain separately selectable even when they share a deed.
@@ -314,13 +347,13 @@ function cloneAuthoredModel(source){
   return object;
 }
 function resolveAsset(tile,data,level=tile.lot?.level||0){
-  const family=LANDMARKS[data.mapId]?.[tile.isLargeSecondary?tile.largePrimaryIndex:tile.index];
+  const family=tile.lot?.landmarkKey||LANDMARKS[data.mapId]?.[tile.isLargeSecondary?tile.largePrimaryIndex:tile.index];
   const fallback=tile.isStart?'city_hall':tile.lot?(level===0?'plot_0':`${tile.lot.theme?.key||'villa'}_${level}`):({bank:'bank',construction:'construction',card_draw:'card_station'}[tile.special?.type]||'card_station');
   const desired=tile.isStart?'civic_hall':tile.lot?(level===0?'plot_0':family?`${family}_${level}`:fallback):(SPECIAL_MODELS[tile.special?.type]||fallback);
   const key=modelLibrary.has(desired)?desired:fallback;
   return {family,desired,key,source:modelLibrary.get(key),authored:authoredModels.has(key),level};
 }
-function lotModelRotation(view){return view.d>view.w?Math.PI/2:0;}
+function lotModelRotation(view){return view.mapId==='classic'?(view.d>view.w?Math.PI/2:0):(view.readableRotation??view.boundary.rotation);}
 function createLotModel(tile,data,level,view=null){
   const asset=resolveAsset(tile,data,level);let model;
   if(asset.source){
@@ -332,6 +365,7 @@ function createLotModel(tile,data,level,view=null){
     else proceduralSpecial(model,tile.isStart?'city_hall':tile.special?.type||'card_station');
   }
   if(view){
+    model.userData.cityBaseRotationY=model.rotation.y;
     model.rotation.y+=lotModelRotation(view);
     const setback=inward(view.group.position).multiplyScalar(-.10);
     model.position.x+=setback.x;model.position.z+=setback.z;
@@ -445,10 +479,12 @@ function updateLot(view,tile,data,initial=false) {
   const meta=view.label.querySelector('.scene-tile-meta');
   if(tile.lot){
     const rent=data.rents?.[tile.index]??tile.lot.tolls?.[level]??0;
-    meta.textContent=owner?`${owner.id==='human'?'你':'对手'} · ${level}级 · ¥${rent}`:`待售 ¥${tile.lot.price}`;
+    meta.textContent=owner?`${owner.id==='human'?'你':'对手'} · Lv.${level} · ¥${rent}`:level>0?`Lv.${level}待售 · 买下即用 · ¥${tile.lot.price}`:`空地待售 ¥${tile.lot.price}`;
     view.label.style.setProperty('--owner-color',owner?color:'#b8ab90');
     view.label.dataset.owner=owner?.id||'none';
     view.label.dataset.rent=String(rent);
+    view.label.dataset.level=String(level);view.label.classList.toggle('is-built-for-sale',!owner&&level>0);
+    view.label.querySelector('.scene-tile-name').dataset.level=String(level);
   }else {meta.textContent=tile.isStart?'起点 · 征用':tile.special?.label||'城市事件';view.label.style.setProperty('--owner-color','#ab9569');}
   view.label.title=`第 ${tile.index+1} 格 · ${tile.name}${tile.lot?.isLarge?' · 双格地产':''} · ${meta.textContent}`;
   view.label.setAttribute('aria-label',view.label.title);
@@ -473,7 +509,13 @@ function makePawn(player) {
 }
 function pawnPosition(player){
   const step=stepViews.get(player.position)||stepViews.values().next().value;
-  const pos=step.walk.clone();pos.y=.235;pos.x+=player.id==='human'?-.15:.15;pos.z+=player.id==='human'?.04:-.04;return pos;
+  const pos=step.walk.clone();pos.y=.235;
+  if(snapshot?.mapId==='classic'){pos.x+=player.id==='human'?-.15:.15;pos.z+=player.id==='human'?.04:-.04;}
+  else{
+    const normal=inward(step.center),tangent=new THREE.Vector3(normal.z,0,-normal.x);
+    pos.add(tangent.multiplyScalar(player.id==='human'?-.20:.20)).add(normal.multiplyScalar(.045));
+  }
+  return pos;
 }
 function update(data){
   if(inspection&&inspection.sessionId!==data?.sessionId)closeInspection();
@@ -493,8 +535,16 @@ function update(data){
     }
     view.shield.visible=Boolean(player.effects?.shield||player.effects?.shieldCharges||player.effects?.rentShield);
     view.anchor.classList.toggle('is-current',data.currentPlayerId===player.id);
+    if(data.mapId!=='classic')view.anchor.textContent=`${player.id==='human'?'你':'对手'} · ${String(player.position+1).padStart(2,'0')}`;
+    view.anchor.title=`${player.name}当前位于第 ${player.position+1} 格 · ${data.board[player.position]?.name||''}`;
   });
-  stepViews.forEach((step,index)=>{step.ring.material.opacity=index===data.animation?.currentTile||index===data.animation?.landedTile ? .75:0;});
+  const current=data.players.find((player)=>player.id===data.currentPlayerId);
+  stepViews.forEach((step,index)=>{
+    const landed=index===data.animation?.landedTile,moving=index===data.animation?.currentTile;
+    const standing=data.mapId!=='classic'&&index===current?.position;
+    step.ring.material.opacity=(landed||moving) ? .85 : standing ? .70 : 0;
+    step.ring.material.color.set(landed||moving?'#e6b253':current?.id==='ai'?'#d77b59':'#348d87');
+  });
   renderer.render(scene,camera);document.body.classList.add('scene-ready');api.ready=true;
   arrangeLabels();positionLabels();loadModelKit();
 }
@@ -550,6 +600,18 @@ function positionLabels(){
   lotViews.forEach((view)=>{const p=view.screenPoint||project(view.anchor);view.label.style.transform=`translate(${p.x.toFixed(1)}px,${p.y.toFixed(1)}px) translate(-50%,-50%)`;});
   stepViews.forEach((step)=>{if(step.label){const p=project(step.walk);step.label.style.transform=`translate(${p.x.toFixed(1)}px,${p.y.toFixed(1)}px) translate(-50%,-50%)`;}});
   pawnViews.forEach((view)=>{const p=project(view.group.position.clone().add(new THREE.Vector3(0,.76,0)));view.anchor.style.transform=`translate(${p.x.toFixed(1)}px,${p.y.toFixed(1)}px) translate(-50%,-50%)`;});
+  if(travelArrow){
+    const current=snapshot.players.find((player)=>player.id===snapshot.currentPlayerId);
+    const route=current?.effects?.reversed?snapshot.navigation?.prev:snapshot.navigation?.next;
+    const next=route?.[current?.position],from=stepViews.get(current?.position),to=stepViews.get(next);
+    travelArrow.hidden=!from||!to||Boolean(snapshot.gameOver);
+    if(from&&to){
+      const a=project(from.walk),b=project(to.walk),x=a.x+(b.x-a.x)*.60,y=a.y+(b.y-a.y)*.60;
+      travelArrow.style.transform=`translate(${x.toFixed(1)}px,${y.toFixed(1)}px) translate(-50%,-50%) rotate(${Math.atan2(b.y-a.y,b.x-a.x)}rad)`;
+      travelArrow.dataset.player=current.id;travelArrow.dataset.from=String(current.position);travelArrow.dataset.next=String(next);
+      travelArrow.setAttribute('aria-label',`${current.id==='human'?'你':'对手'}${current.effects?.reversed?'逆行':''}下一步：第 ${next+1} 格 ${snapshot.board[next]?.name||''}`);
+    }
+  }
 }
 function framingForLot(view){
   const asset=resolveAsset(view.tile,snapshot,view.tile.lot?3:0);
@@ -577,9 +639,27 @@ function resize(){
     // familiar high three-quarter miniature view. The route itself never moves.
     const aspect=width/height;
     const wide=THREE.MathUtils.clamp((aspect-1.05)/.85,0,1);
-    const yaw=THREE.MathUtils.lerp(.65,.10,wide);
-    const elevation=THREE.MathUtils.lerp(.91,.62,wide);
+    let yaw=THREE.MathUtils.lerp(.65,.10,wide);
+    let elevation=THREE.MathUtils.lerp(.91,.62,wide);
+    if(snapshot?.mapId==='expansion'){
+      // Turn toward the long side on a phone: the 28-step rectangle then uses
+      // the available height instead of squeezing ten buildings across 390px.
+      const portrait=THREE.MathUtils.clamp((1.40-aspect)/.65,0,1);
+      yaw=THREE.MathUtils.lerp(.10,-1.47,portrait);elevation=THREE.MathUtils.lerp(.62,.93,portrait);
+    }
     camera.position.set(Math.sin(yaw)*22,Math.tan(elevation)*22,Math.cos(yaw)*22);camera.lookAt(0,0,0);camera.updateMatrixWorld(true);
+    if(snapshot?.mapId!=='classic')lotViews.forEach((view)=>{
+      // Signs need their illustrated front to stay visible. Square civic plots
+      // may turn by quarter-turns without changing their footprint or route.
+      if(['chance','card_draw','bank','rush','teleport'].includes(view.tile.special?.type)){
+        view.readableRotation=Math.round(yaw/(Math.PI/2))*(Math.PI/2);
+        view.building?.children.forEach((model)=>{model.rotation.y=(model.userData.cityBaseRotationY||0)+view.readableRotation;});
+      }
+      const normal=view.boundary.normal.clone();
+      if(normal.x*Math.sin(yaw)+normal.z*Math.cos(yaw)<0)normal.negate();
+      const depth=Math.abs(normal.x)>.5?view.w:view.d;
+      view.anchor.copy(view.group.position).add(normal.multiplyScalar(depth/2+.26));view.anchor.y=.07;
+    });
     camera.left=-1;camera.right=1;camera.top=1;camera.bottom=-1;camera.updateProjectionMatrix();
     const xs=[],ys=[];
     const include=(point)=>{const p=point.clone().project(camera);xs.push(p.x);ys.push(p.y);};
