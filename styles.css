@@ -116,20 +116,25 @@ h1 { margin-top: 4px; font-size: 30px; }
   position: absolute;
   margin: 0;
   z-index: 1;
-  padding: 4px;
-  gap: 2px;
+  padding: 6px 6px 7px;
+  gap: 3px;
+  border-radius: 12px;
   box-sizing: border-box;
   overflow: hidden;
 }
-.board.free-layout .tile-name { font-size: 10px; line-height: 1.15; }
-.board.free-layout .lot-badge { font-size: 9px; padding: 1px 4px; }
-.board.free-layout .lot-body { font-size: 10px; min-height: 16px; }
-.board.free-layout .for-sale-badge { font-size: 9px; }
-.board.free-layout .sprite-wrap { min-height: 16px; }
-.board.free-layout .district-bar { font-size: 8px; padding: 1px 4px; }
-.board.free-layout .token { width: 16px; height: 16px; font-size: 7px; border-width: 1.5px; }
+.board.free-layout .tile-name { font-size: 11px; line-height: 1.18; }
+.board.free-layout .lot-badge { font-size: 9px; padding: 1px 5px; }
+.board.free-layout .lot-body { font-size: 10px; min-height: 18px; gap: 1px; }
+.board.free-layout .for-sale-badge { font-size: 9px; padding: 1px 5px; }
+.board.free-layout .sprite-wrap { min-height: 24px; }
+.board.free-layout .tile.start .sprite-wrap,
+.board.free-layout .tile.special .sprite-wrap { min-height: 28px; }
+.board.free-layout .district-bar { font-size: 8px; padding: 1px 5px; margin-top: 0; }
+.board.free-layout .token-row { min-height: 20px; gap: 3px; }
+.board.free-layout .token { width: 18px; height: 18px; font-size: 8px; border-width: 1.5px; }
 .board.free-layout .building-tag { font-size: 8px; padding: 1px 4px; }
 .board.free-layout .bank-pool { font-size: 9px; padding: 2px 5px; }
+.board.free-layout img.building-sprite { inset: 4% 4% 8%; }
 .board.free-layout .tile.large-lot-merged {
   z-index: 2;
 }
@@ -664,6 +669,17 @@ img.building-sprite {
   .lot-body { font-size: 10px; min-height: 20px; }
   .sprite-wrap { min-height: 24px; }
   .token { width: 20px; height: 20px; font-size: 9px; }
+  .board.free-layout .tile { padding: 4px; gap: 2px; border-radius: 10px; }
+  .board.free-layout .tile-name { font-size: 10px; }
+  .board.free-layout .lot-badge { font-size: 8px; padding: 1px 4px; }
+  .board.free-layout .lot-body { font-size: 9px; min-height: 16px; }
+  .board.free-layout .for-sale-badge { font-size: 8px; padding: 1px 4px; }
+  .board.free-layout .sprite-wrap,
+  .board.free-layout .tile.start .sprite-wrap,
+  .board.free-layout .tile.special .sprite-wrap { min-height: 18px; }
+  .board.free-layout .district-bar { font-size: 7px; padding: 1px 4px; }
+  .board.free-layout .token-row { min-height: 16px; gap: 2px; }
+  .board.free-layout .token { width: 15px; height: 15px; font-size: 7px; border-width: 1px; }
 }
 
 @media (max-width: 600px) {
@@ -683,6 +699,13 @@ img.building-sprite {
   .console-copy h3 { font-size: 14px; }
   .console-copy p { font-size: 11px; }
   .center-dice { width: 50px; height: 50px; font-size: 20px; border-radius: 14px; }
+  .board.free-layout .tile { padding: 3px; gap: 2px; border-radius: 8px; }
+  .board.free-layout .sprite-wrap,
+  .board.free-layout .tile.start .sprite-wrap,
+  .board.free-layout .tile.special .sprite-wrap { min-height: 16px; }
+  .board.free-layout .district-bar { font-size: 7px; padding: 1px 3px; }
+  .board.free-layout .token-row { min-height: 14px; gap: 2px; }
+  .board.free-layout .token { width: 14px; height: 14px; font-size: 6px; border-width: 1px; }
 }
 
 /* ===== 地块详情 Tooltip ===== */

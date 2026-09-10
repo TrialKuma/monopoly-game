@@ -33,8 +33,8 @@ const LOT_THEMES = [
 ];
 
 const PLAYER_DEFS = [
-  { id: "human", name: "玩家", color: "#2563eb", isAi: false },
-  { id: "ai", name: "AI 对手", color: "#ef4444", isAi: true },
+  { id: "human", name: "玩家", color: "#318d88", isAi: false },
+  { id: "ai", name: "AI 对手", color: "#d67c59", isAi: true },
 ];
 
 const CLASSIC_DISTRICT_CONFIG = {
@@ -183,32 +183,32 @@ const EXPANSION_LOT_CONFIGS = {
 };
 
 const EXPANSION_TILE_VISUALS = {
-  7:  { left: "14%",  top: "1%",   width: "13%",  height: "12%" },
-  2:  { left: "10%",  top: "15%",  width: "7.2%", height: "11%" },
-  4:  { left: "24%",  top: "15%",  width: "7.2%", height: "11%" },
-  1:  { left: "4%",   top: "29%",  width: "7.2%", height: "11%" },
-  5:  { left: "30%",  top: "29%",  width: "7.2%", height: "11%" },
-  0:  { left: "0%",   top: "42%",  width: "7.5%", height: "13%" },
-  11: { left: "4%",   top: "56%",  width: "7.2%", height: "11%" },
-  10: { left: "30%",  top: "56%",  width: "7.2%", height: "11%" },
-  9:  { left: "10%",  top: "70%",  width: "7.2%", height: "11%" },
-  6:  { left: "24%",  top: "70%",  width: "7.2%", height: "11%" },
-  3:  { left: "15%",  top: "84%",  width: "10%",  height: "11%" },
-  12: { left: "40%",  top: "42%",  width: "8%",   height: "13%" },
-  26: { left: "68%",  top: "1%",   width: "13%",  height: "12%" },
-  14: { left: "63%",  top: "15%",  width: "7.2%", height: "11%" },
-  16: { left: "78%",  top: "15%",  width: "7.2%", height: "11%" },
-  13: { left: "56%",  top: "29%",  width: "7.2%", height: "11%" },
-  17: { left: "85%",  top: "29%",  width: "7.2%", height: "11%" },
-  25: { left: "51%",  top: "42%",  width: "7.2%", height: "11%" },
-  18: { left: "79%",  top: "42%",  width: "7.2%", height: "11%" },
-  19: { left: "92%",  top: "42%",  width: "7.5%", height: "13%" },
-  24: { left: "56%",  top: "56%",  width: "7.2%", height: "11%" },
-  20: { left: "85%",  top: "56%",  width: "7.2%", height: "11%" },
-  23: { left: "60%",  top: "70%",  width: "7.2%", height: "11%" },
-  22: { left: "71%",  top: "70%",  width: "7.2%", height: "11%" },
-  21: { left: "81%",  top: "70%",  width: "7.2%", height: "11%" },
-  15: { left: "69%",  top: "84%",  width: "10%",  height: "11%" },
+  7:  { left: "13.6%", top: "1%",  width: "13.8%", height: "13.1%" },
+  2:  { left: "9.7%",  top: "15%", width: "7.8%",  height: "11.8%" },
+  4:  { left: "23.7%", top: "15%", width: "7.8%",  height: "11.8%" },
+  1:  { left: "3.7%",  top: "29%", width: "7.8%",  height: "11.8%" },
+  5:  { left: "29.6%", top: "29%", width: "8.2%",  height: "12%" },
+  0:  { left: "0%",    top: "42%", width: "8.4%",  height: "13.8%" },
+  11: { left: "3.7%",  top: "56%", width: "7.8%",  height: "11.8%" },
+  10: { left: "29.7%", top: "56%", width: "7.8%",  height: "11.8%" },
+  9:  { left: "9.7%",  top: "70%", width: "7.8%",  height: "11.8%" },
+  6:  { left: "23.7%", top: "70%", width: "7.8%",  height: "11.8%" },
+  3:  { left: "14.6%", top: "84%", width: "10.8%", height: "11.8%" },
+  12: { left: "39.7%", top: "42%", width: "8.6%",  height: "13.8%" },
+  26: { left: "67.6%", top: "1%",  width: "13.8%", height: "13.1%" },
+  14: { left: "62.7%", top: "15%", width: "7.8%",  height: "11.8%" },
+  16: { left: "77.7%", top: "15%", width: "7.8%",  height: "11.8%" },
+  13: { left: "55.7%", top: "29%", width: "7.8%",  height: "11.8%" },
+  17: { left: "84.7%", top: "29%", width: "7.8%",  height: "11.8%" },
+  25: { left: "50.6%", top: "42%", width: "8.2%",  height: "12%" },
+  18: { left: "78.7%", top: "42%", width: "7.8%",  height: "11.8%" },
+  19: { left: "91.6%", top: "42%", width: "8.4%",  height: "13.8%" },
+  24: { left: "55.7%", top: "56%", width: "7.8%",  height: "11.8%" },
+  20: { left: "84.7%", top: "56%", width: "7.8%",  height: "11.8%" },
+  23: { left: "59.7%", top: "70%", width: "7.8%",  height: "11.8%" },
+  22: { left: "70.7%", top: "70%", width: "7.8%",  height: "11.8%" },
+  21: { left: "80.7%", top: "70%", width: "7.8%",  height: "11.8%" },
+  15: { left: "68.6%", top: "84%", width: "10.8%", height: "11.8%" },
 };
 
 function makeLoopNavigation(length) {
@@ -261,7 +261,7 @@ const MAP_PRESETS = {
     startDescription: "更长的路线和 8 字交叉枢纽，停在枢纽时可选择下一圈方向。",
     modeLabel: "8 字交叉经营图",
     layoutMode: "free",
-    grid: { columns: 10, rows: 7, cellMin: 78, cellMinTablet: 50, cellMinMobile: 38, height: "min(72vh, 660px)", heightTablet: "min(64vh, 540px)", heightMobile: "min(58vh, 420px)", centerWidth: "min(150px, 11%)", centerWidthTablet: "min(140px, 14%)", centerWidthMobile: "min(120px, 18%)", centerTop: "45%", centerLeft: "70%" },
+    grid: { columns: 10, rows: 7, cellMin: 78, cellMinTablet: 50, cellMinMobile: 38, height: "min(78vh, 760px)", heightTablet: "min(68vh, 600px)", heightMobile: "min(60vh, 470px)", centerWidth: "min(150px, 11%)", centerWidthTablet: "min(140px, 14%)", centerWidthMobile: "min(120px, 18%)", centerTop: "45%", centerLeft: "70%" },
     routePositions: EXPANSION_ROUTE_POSITIONS,
     tileNames: EXPANSION_TILE_NAMES,
     largeLotLinks: EXPANSION_LARGE_LOT_LINKS,
@@ -628,6 +628,7 @@ function scheduleBgmLoop(startTime) {
 
 function setSoundEnabled(enabled) {
   soundState.enabled = enabled;
+  window.GameDrama?.setMuted(!enabled);
   if (!enabled) stopAllSounds();
   try {
     localStorage.setItem(SOUND_PREF_KEY, enabled ? "on" : "off");
@@ -753,6 +754,8 @@ function setSelectedMap(mapId) {
 }
 
 function initializeGame(mapId = selectedMapId) {
+  window.GameDrama?.reset();
+  window.GamePresentation?.onReset();
   if (modalResolver) { modalResolver("cancel"); modalResolver = null; }
   const mapCfg = getMapConfig(mapId);
   selectedMapId = mapCfg.id;
@@ -928,13 +931,15 @@ async function startNewGame() {
 
   // 模式选择
   const mode = await selectGameMode(sid);
-  if (!isSessionActive(sid) || mode === undefined) { showStartScreen(); return; }
+  if (!isSessionActive(sid)) return;
+  if (mode === undefined) { showStartScreen(); return; }
   state.gameMode = mode;
   updateModeEyebrow();
 
   // 硬币决定先手
   const humanFirst = await coinFlipForFirstPlayer(sid);
-  if (!isSessionActive(sid) || humanFirst === undefined) { showStartScreen(); return; }
+  if (!isSessionActive(sid)) return;
+  if (humanFirst === undefined) { showStartScreen(); return; }
   if (!humanFirst) {
     state.currentPlayerIndex = 1;
     setAiTurnStatus();
@@ -1068,14 +1073,14 @@ function startCashAnimation(player, prev, next, delta) {
     if (state.sessionId !== sid || player.cashChangeToken !== token) return;
     const t = Math.min((now - start) / dur, 1);
     player.displayedCash = Math.round(prev + (next - prev) * t);
-    render();
+    window.GamePresentation ? window.GamePresentation.updateCash() : render();
     if (t < 1) player.cashAnimFrame = requestAnimationFrame(step);
-    else { player.displayedCash = next; player.cashAnimFrame = null; render(); }
+    else { player.displayedCash = next; player.cashAnimFrame = null; window.GamePresentation ? window.GamePresentation.updateCash() : render(); }
   };
   player.cashAnimFrame = requestAnimationFrame(step);
   setTimeout(() => {
     if (state.sessionId !== sid || player.cashChangeToken !== token) return;
-    player.cashDeltaVisible = false; player.cashPulse = false; render();
+    player.cashDeltaVisible = false; player.cashPulse = false; window.GamePresentation ? window.GamePresentation.updateCash() : render();
   }, 1300);
 }
 
@@ -1114,9 +1119,11 @@ function clearHighlights() {
 
 function render() {
   renderBoard(); renderScoreboard(); renderMiniScoreboard(); renderLogs(); renderStatus(); updateControls(); renderModal();
+  window.GamePresentation?.update();
 }
 
 function renderBoard() {
+  if (window.CityScene?.ready) return;
   const mapCfg = getMapConfig(state.currentMapId);
   const isFreeLayout = mapCfg.layoutMode === "free";
   boardEl.className = `board${state.animation.boardBurst ? " burst" : ""}${isFreeLayout ? " free-layout" : ""}`;
@@ -1297,6 +1304,7 @@ function renderScoreboard() {
     const totalLv = lots.reduce((s, t) => s + t.lot.level, 0);
     const card = document.createElement("div");
     card.className = `player-card${p.id === currentPlayer().id && !state.gameOver ? " active" : ""}${p.cashPulse ? " cash-changing" : ""}`;
+    card.dataset.playerAnchor = p.id;
     const dc = Math.round(p.displayedCash ?? p.cash);
     const dt = p.cashDelta > 0 ? `+${formatMoney(p.cashDelta)}` : `-${formatMoney(Math.abs(p.cashDelta))}`;
     const efx = [];
@@ -1342,7 +1350,7 @@ function renderMiniScoreboard() {
     const dt = p.cashDelta > 0 ? `+${p.cashDelta}` : `${p.cashDelta}`;
     const deltaHtml = p.cashDeltaVisible
       ? `<span class="mini-delta ${p.cashDelta > 0 ? "pos" : "neg"}">${dt}</span>` : "";
-    return `<div class="mini-player${p.id === activeId ? " active" : ""}${alignRight ? " mini-player-right" : ""}">
+    return `<div data-player-anchor="${p.id}" class="mini-player${p.id === activeId ? " active" : ""}${alignRight ? " mini-player-right" : ""}">
       <span class="mini-dot" style="background:${p.color};"></span>
       <span class="mini-name">${p.isAi ? "AI" : "玩家"}</span>
       <span class="mini-cash">¥${dc}</span>${deltaHtml}
@@ -1357,6 +1365,9 @@ function getLogPlayerColor(text) {
 }
 
 function renderLogs() {
+  const nextKey = state.logs.join("\n");
+  if (logListEl.dataset.logKey === nextKey) return;
+  logListEl.dataset.logKey = nextKey;
   logListEl.innerHTML = state.logs.slice().reverse().map((item) => {
     const c = getLogPlayerColor(item);
     return `<div class="log-item"><span class="log-dot" style="background:${c};"></span><span class="log-text">${item}</span></div>`;
@@ -1389,6 +1400,9 @@ function renderStatus() {
 
 function renderModal() {
   const m = state.modal;
+  const nextKey = JSON.stringify(m);
+  if (eventOverlayEl.dataset.modalKey === nextKey) return;
+  eventOverlayEl.dataset.modalKey = nextKey;
   eventOverlayEl.classList.toggle("visible", m.visible);
   eventLabelEl.textContent = m.label || "行动提示";
   eventTitleEl.textContent = m.title || "";
@@ -1412,9 +1426,10 @@ function updateControls() {
 
 function getPhaseLabel() {
   if (state.gameOver) return "已结束";
+  if (state.phase === "presenting") return "好戏进行中";
   if (state.animation.diceRolling) return "骰子滚动中";
+  if (state.modal.visible) return "轮到你选择";
   if (state.animation.currentTile !== null) return "棋子移动中";
-  if (state.modal.visible) return "等待确认";
   if (currentPlayer().isAi && state.busy) return "AI 思考中";
   return state.phase === "await_roll" ? "等待掷骰" : "结算中";
 }
@@ -1632,7 +1647,8 @@ async function resolveStartTakeover(player, sid) {
     pushLog(`市政府征用令！${opp.name} 的 ${target.name}（Lv.${target.lot.level}）被强制拍卖，退还买地成本 ${formatMoney(refund)}！`);
     render();
     await showContinueModal({
-      label: "市政府征用", title: "📜 AI 发动征用令！",
+      label: "市政府征用", title: "地标易主！",
+      drama: { type: "seize", from: opp, to: { id: "city", name: "无主地产" }, tiles: [target.index], tileName: target.name },
       message: `${opp.name} 的 ${target.name}（Lv.${target.lot.level}）被强制拍卖！地产变为无主状态，建筑保留。\n买地成本 ${formatMoney(refund)} 已退还给 ${opp.name}。`,
     });
     return;
@@ -1668,6 +1684,7 @@ async function resolveStartTakeover(player, sid) {
   render();
   await showContinueModal({
     label: "市政府征用", title: "征用成功！",
+    drama: { type: "seize", from: opp, to: { id: "city", name: "无主地产" }, tiles: [target.index], tileName: target.name },
     message: `${target.name}（Lv.${target.lot.level}）被强制拍卖！地产变为无主状态，建筑保留。\n买地成本 ${formatMoney(refund)} 已退还给 ${opp.name}。`,
   });
 }
@@ -1754,7 +1771,7 @@ async function resolveLanding(player, tile, sid) {
       ],
     });
     if (!isSessionActive(sid)) return;
-    if (dec === "buy") { buyLot(player, tile); render(); await sleep(420); }
+    if (dec === "buy") { buyLot(player, tile); render(); await showContinueModal({ label: "购买完成", title: `${tile.name}，归你了！`, message: `花费 ${formatMoney(lot.price)}，这座小城又多了一块你的地盘。`, drama: { type: "buy", amount: lot.price, to: player, tiles: [tile.index], tileName: tile.name } }); }
     return;
   }
 
@@ -1790,7 +1807,7 @@ async function resolveLanding(player, tile, sid) {
       ],
     });
     if (!isSessionActive(sid)) return;
-    if (dec === "build") { buildLot(player, tile); render(); await sleep(420); }
+    if (dec === "build") { buildLot(player, tile); render(); await showContinueModal({ label: "建筑升级", title: `${tile.name} 升至 Lv.${lot.level}`, message: `下一次经过，这里会是另一番风景。`, drama: { type: "build", amount: cost, to: player, tiles: [tile.index], tileName: tile.name } }); }
     return;
   }
 
@@ -1798,12 +1815,18 @@ async function resolveLanding(player, tile, sid) {
   if (player.effects.shield) {
     player.effects.shield = false;
     pushLog(`${player.name} 的护盾术生效，免交 ${tile.name} 的过路费！`);
-    await showContinueModal({ label: "过路费提示", title: "护盾术生效！", message: `${player.name} 免交过路费！` });
+    await showContinueModal({ label: "过路费提示", title: "这笔账，护盾挡了！", message: `${player.name} 免交 ${tile.name} 的过路费。`, drama: { type: "shield", expectedAmount: window.GamePresentation?.rentFor(tile).total ?? lot.tolls[lot.level], to: player, tiles: [tile.index], tileName: tile.name } });
+    if (!isSessionActive(sid)) return;
     await resolveLargeLotEffect(player, tile, sid);
     return;
   }
   const toll = collectToll(player, owner, tile);
   render();
+  if (window.GamePresentation) {
+    const leadChanged = owner.cash > player.cash && owner.cash - toll.actualPayment <= player.cash + toll.actualPayment;
+    await showContinueModal({ label: "过路费提示", title: toll.actualPayment >= 300 ? "整条街，向你收租！" : "租金到账", message: toll.message, drama: { type: "rent", amount: toll.actualPayment, expectedAmount: toll.toll, leadChanged, from: player, to: owner, tiles: getDistrictOwnerLots(lot.district, owner.id).map(t => t.index), tileName: tile.name } });
+    if (!isSessionActive(sid)) return;
+  }
   if (toll.actualPayment < toll.toll) {
     if (state.gameMode === "bankruptcy") {
       pushLog(`${player.name} 无力偿还 ${formatMoney(toll.toll)} 过路费，宣告破产！游戏结束。`);
@@ -1812,6 +1835,7 @@ async function resolveLanding(player, tile, sid) {
         title: "💸 破产！游戏结束",
         message: `${player.name} 仅剩 ${formatMoney(toll.actualPayment)}，差 ${formatMoney(toll.toll - toll.actualPayment)} 无力偿还。\n${owner.name} 获胜！`,
       });
+      if (!isSessionActive(sid)) return;
       finishGame("bankruptcy");
       return;
     }
@@ -1823,12 +1847,14 @@ async function resolveLanding(player, tile, sid) {
     pushLog(`${player.name} 现金耗尽，进入破产救助：等待救援资金，发放 ${formatMoney(relief)} 救助金。`);
     await showContinueModal({
       label: "破产救助",
-      title: "资金告急！",
+      title: "还没结束，再来！",
+      drama: { type: "relief", amount: relief, to: player, tiles: [tile.index], tileName: tile.name },
       message: `${player.name} 仅支付了 ${formatMoney(toll.actualPayment)}，差 ${formatMoney(toll.toll - toll.actualPayment)} 无力偿还。\n进入等待救援资金状态：下回合跳过行动，同时领取 ${formatMoney(relief)} 救助金重新出发。`,
     });
-  } else {
+  } else if (!window.GamePresentation) {
     await showContinueModal({ label: "过路费提示", title: `支付 ${formatMoney(toll.actualPayment)} 过路费`, message: toll.message });
   }
+  if (!isSessionActive(sid)) return;
   await resolveLargeLotEffect(player, tile, sid);
 }
 
@@ -1931,6 +1957,7 @@ async function resolveSpecialTile(player, tile, sid) {
       render();
       await showContinueModal({
         label: "功能地块", title: "金库大丰收！",
+        drama: { type: "bank", amount: payout, from: { id: "bank", name: "城市金库" }, to: player, tiles: [tile.index], tileName: tile.name },
         message: `金库已满，${player.name} 提走了全部 ${formatMoney(payout)}！金库清零重新开始。`,
       });
     } else {
@@ -1946,6 +1973,7 @@ async function resolveSpecialTile(player, tile, sid) {
       render();
       await showContinueModal({
         label: "功能地块", title: `强制存款！掷出 ${bankDice} 点`,
+        drama: { type: "bank", amount: actual, from: player, to: { id: "bank", name: "城市金库" }, tiles: [tile.index], tileName: tile.name },
         message: `${player.name} 被迫向金库存入 ${formatMoney(actual)}。\n金库累计：${formatMoney(state.bankPool)} / ${formatMoney(threshold)}`,
       });
     }
@@ -2169,6 +2197,8 @@ async function resolveCardDraw(player, sid) {
 }
 
 function setTargetHighlight(enabled) {
+  state.targetSelection = enabled;
+  document.body.classList.toggle("selecting-target", enabled);
   document.querySelectorAll(".token").forEach((el) => {
     el.classList.toggle("token-target-highlight", enabled);
   });
@@ -2552,6 +2582,7 @@ function finishGame(reason = "rounds") {
   saveGameResult(reason, tied.length > 1 ? "draw" : top.id);
   playSound("win");
   render();
+  window.GamePresentation?.celebrate(top, tied.length > 1);
 }
 
 function getWinnerText() {
@@ -2564,11 +2595,13 @@ function getWinnerText() {
 function showModal({ label = "行动提示", title, message, buttons, cardDraw = false }) {
   if (modalResolver) { modalResolver("cancel"); modalResolver = null; }
   state.modal = { visible: true, label, title, message, buttons, cardDraw };
+  window.GamePresentation?.selectCurrentTile();
   state.phase = "await_modal"; state.busy = false; render();
   return new Promise((r) => { modalResolver = r; });
 }
 
 async function showContinueModal(cfg) {
+  if (window.GamePresentation) return window.GamePresentation.present(cfg);
   await showModal({ ...cfg, buttons: [{ id: "continue", label: "确定", variant: "primary" }] });
   flushQueuedCashAnimations();
 }

@@ -3,130 +3,75 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>环城大富翁</title>
+  <meta name="theme-color" content="#173d3a">
+  <title>环城大富翁 · 好戏开场</title>
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="presentation.css?v=20260911-11">
+  <link rel="stylesheet" href="scene.css?v=20260911-11">
+  <link rel="stylesheet" href="drama.css?v=20260911-11">
 </head>
-<body>
-
-  <!-- ========== 开始界面 ========== -->
+<body class="mode-start">
   <div id="start-screen" class="start-screen">
     <div class="start-panel">
       <div class="start-title-block">
-        <div class="start-logo">🏙️</div>
-        <h1 class="start-game-title">环城大富翁</h1>
-        <p class="start-subtitle">策略 · 运气 · 地产争霸</p>
+        <p class="start-kicker"><span></span> 一座小城 · 一场大戏</p>
+        <h1 class="start-game-title">环城<br><em>大富翁</em></h1>
+        <p class="start-subtitle">盖起你的地标，等一个好骰子。<br>下一笔租金，谁会笑到最后？</p>
       </div>
       <div class="map-picker">
-        <p class="map-picker-label">选择地图</p>
-        <div id="start-map-options" class="map-options" role="radiogroup" aria-label="地图选择">
-          <button class="map-option active" type="button" data-map-id="classic" aria-pressed="true">
-            <span class="map-option-title">经典环线</span>
-            <span class="map-option-meta">22 格 · 休闲对战</span>
-          </button>
-          <button class="map-option" type="button" data-map-id="compact" aria-pressed="false">
-            <span class="map-option-title">紧凑冲突图</span>
-            <span class="map-option-meta">18 格 · 高频碰撞</span>
-          </button>
-          <button class="map-option" type="button" data-map-id="expansion" aria-pressed="false">
-            <span class="map-option-title">都市扩张图</span>
-            <span class="map-option-meta">28 格 · 8 字交叉</span>
-          </button>
+        <p class="map-picker-label">今天，在哪座城开场？</p>
+        <div id="start-map-options" class="map-options" role="group" aria-label="地图选择">
+          <button class="map-option active" type="button" data-map-id="classic" aria-pressed="true"><span class="map-option-mark">▱</span><span class="map-option-title">经典环线</span><span class="map-option-meta">22 格 · 休闲对战</span></button>
+          <button class="map-option" type="button" data-map-id="compact" aria-pressed="false"><span class="map-option-mark">◇</span><span class="map-option-title">紧凑冲突</span><span class="map-option-meta">18 格 · 高频碰撞</span></button>
+          <button class="map-option" type="button" data-map-id="expansion" aria-pressed="false"><span class="map-option-mark">∞</span><span class="map-option-title">都市扩张</span><span class="map-option-meta">28 格 · 交叉选路</span></button>
         </div>
-        <p id="start-map-description" class="start-map-description">经典 22 格环形线路，节奏均衡，适合标准对局。</p>
+        <p id="start-map-description" class="start-map-description"></p>
       </div>
       <div class="start-actions">
-        <button id="start-play-btn" class="start-btn start-btn-primary" type="button">🎮 开始游戏</button>
-        <button id="start-history-btn" class="start-btn start-btn-secondary" type="button">📋 历史记录</button>
+        <button id="start-play-btn" class="start-btn start-btn-primary" type="button">好戏开场 <span>↗</span></button>
+        <button id="start-showcase-btn" class="start-btn start-btn-secondary" type="button">先看一场好戏</button>
+        <button id="start-history-btn" class="start-history-link" type="button">历史对局 ↗</button>
       </div>
+      <p class="start-note">人机对局 · 三张选一 · 地产易主 · 连锁收租</p>
     </div>
   </div>
-
-  <!-- ========== 历史记录弹窗 ========== -->
   <div id="history-overlay" class="history-overlay hidden">
-    <div class="history-panel">
-      <div class="history-panel-header">
-        <h2>历史对局记录</h2>
-        <button id="history-close-btn" class="ghost-btn" type="button">✕ 关闭</button>
-      </div>
-      <div id="history-list" class="history-list"></div>
-    </div>
+    <div class="history-panel"><div class="history-panel-header"><h2>那些好戏</h2><button id="history-close-btn" class="ghost-btn" type="button">关闭</button></div><div id="history-list"></div></div>
   </div>
-
-  <!-- 地块悬浮提示框 -->
   <div id="tile-tooltip" class="tile-tooltip hidden" role="tooltip"></div>
-
   <div class="app-shell">
     <header class="topbar">
-      <div>
-        <p class="eyebrow" id="mode-eyebrow">环形地图休闲对战</p>
-        <h1>环城大富翁</h1>
-      </div>
+      <div class="brand-lockup"><span class="brand-mark" aria-hidden="true">城</span><div><h1>环城大富翁</h1><p class="eyebrow" id="mode-eyebrow">一座小城，一场大戏</p></div></div>
       <div class="topbar-actions">
-        <button id="sound-toggle-btn" class="ghost-btn sound-toggle-btn" type="button" aria-pressed="true">音效：开</button>
-        <button id="music-toggle-btn" class="ghost-btn sound-toggle-btn" type="button" aria-pressed="true">音乐：开</button>
-        <button id="restart-btn" class="ghost-btn restart-btn" type="button">重新开始</button>
+        <button id="sound-toggle-btn" class="ghost-btn" type="button" aria-pressed="true">音效：开</button>
+        <button id="music-toggle-btn" class="ghost-btn" type="button" aria-pressed="true">音乐：开</button>
+        <button id="showcase-open-btn" class="ghost-btn" type="button">演出预览</button>
+        <button id="restart-btn" class="ghost-btn" type="button">返回首页</button>
       </div>
     </header>
-
     <main class="layout">
       <section class="board-section card">
-        <div class="board-header">
-          <div>
-            <p class="panel-label">地图状态</p>
-            <h2 id="board-map-title">环形线路 · 22 格</h2>
-          </div>
-          <div class="round-chip" id="round-chip">第 1 / 30 回合</div>
-        </div>
-        <!-- 手机专用迷你记分条 -->
+        <div class="board-header"><div><p class="panel-label">CITY BOARD</p><h2 id="board-map-title">经典环线</h2></div><div class="round-chip" id="round-chip">第 1 / 30 回合</div></div>
         <div id="mini-scoreboard" class="mini-scoreboard"></div>
-        <div class="board-stage">
+        <div id="board-stage" class="board-stage">
+          <div id="city-canvas-wrap" aria-hidden="true"></div>
+          <div id="city-labels" aria-label="城市地块"></div>
           <div id="board" class="board" aria-label="游戏地图"></div>
-          <section id="center-console" class="board-center" aria-label="中央控制台">
-            <p class="panel-label">中央控制台</p>
-            <div class="console-dice-row">
-              <div id="center-dice" class="center-dice">
-                <span id="center-dice-value">-</span>
-              </div>
-              <div class="console-copy">
-                <h3 id="center-title">准备开始</h3>
-                <p id="center-description">点击掷骰子按钮，开始你的第一回合。</p>
-              </div>
-            </div>
-            <div class="round-progress" id="round-progress">
-              <div class="round-progress-bar" id="round-progress-bar" style="width:0%"></div>
-            </div>
-            <div class="center-badges">
-              <span id="center-player-badge" class="center-badge">当前：玩家</span>
-              <span id="center-phase-badge" class="center-badge">等待掷骰</span>
-            </div>
-            <div class="center-actions">
-              <button id="roll-btn" class="primary-btn center-roll-btn">掷骰子</button>
-            </div>
-          </section>
-          <div id="event-overlay" class="event-overlay" aria-live="polite">
-            <div id="event-card" class="event-card">
-              <div id="event-icon-wrap"></div>
-              <p id="event-label" class="panel-label">行动提示</p>
-              <h3 id="event-title">提示</h3>
-              <p id="event-message" class="event-message"></p>
-              <div id="event-actions" class="event-actions"></div>
-            </div>
-          </div>
+          <div class="scene-caption"><span class="live-dot"></span><span id="scene-caption-text">轻点地块，看看这是谁的地盘</span></div>
+          <div id="event-overlay" class="event-overlay" aria-live="polite"><div id="event-card" class="event-card"><div id="event-icon-wrap"></div><p id="event-label" class="panel-label">轮到你了</p><h3 id="event-title"></h3><p id="event-message" class="event-message"></p><div id="event-property-preview"></div><div id="event-actions" class="event-actions"></div></div></div>
         </div>
+        <section id="center-console" class="board-center" aria-label="回合操作">
+          <div class="console-dice-row"><div id="center-dice" class="center-dice"><span id="center-dice-value">—</span></div><div class="console-copy"><p id="center-player-badge" class="center-badge">当前：玩家</p><h3 id="center-title">准备开场</h3><p id="center-description">掷出骰子，好戏开场。</p></div></div>
+          <div class="center-actions"><span id="center-phase-badge" class="center-badge">等待掷骰</span><button id="roll-btn" class="primary-btn center-roll-btn">掷骰子 <span>↗</span></button></div>
+          <div class="round-progress" id="round-progress"><div class="round-progress-bar" id="round-progress-bar"></div></div>
+        </section>
+        <div id="showcase-controls" class="showcase-controls hidden"><div><b>演出预览</b><span>示例局面 · 不计入历史战绩</span></div><div class="showcase-buttons"><button data-showcase="rent">连锁收租</button><button data-showcase="seize">地标征用</button><button data-showcase="shield">护盾救场</button><button data-showcase="relief">绝境救助</button><button data-showcase="build">建筑升级</button><button id="showcase-exit-btn">开始正式对局 ↗</button></div></div>
       </section>
-
       <aside class="sidebar">
-        <section class="card status-card">
-          <div class="panel-title-row">
-            <p class="panel-label">当前局势</p>
-            <div class="dice-box" id="dice-box">-</div>
-          </div>
-          <h2 id="turn-title">准备开始</h2>
-          <p id="turn-description" class="muted">点击"掷骰子"开始第一回合。</p>
-
-          <div class="scoreboard" id="scoreboard"></div>
-
-          <div class="rules">
+        <section class="card status-card"><div class="panel-title-row"><p class="panel-label">这局，谁占上风</p><div class="dice-box" id="dice-box">—</div></div><h2 id="turn-title">准备开场</h2><p id="turn-description" class="muted"></p><div class="scoreboard" id="scoreboard"></div><p class="victory-rule" id="victory-rule">30 回合后，现金最多者获胜</p></section>
+        <section id="property-inspector" class="card property-inspector"><p class="panel-label">街区手册</p><h2>好戏，发生在地盘上</h2><p>轻点一栋建筑，查看归属、等级和整条街的租金。</p><div class="inspector-legend"><span><i class="human-dot"></i>你的地产</span><span><i class="ai-dot"></i>对手地产</span></div></section>
+        <section class="card log-card"><div class="panel-title-row"><div><p class="panel-label">刚刚发生</p><h2>小城快报</h2></div><span class="live-dot"></span></div><div id="log-list"></div></section>
+        <details class="rules card"><summary>游戏规则 <span>＋</span></summary>
             <p>规则速览</p>
             <ul>
               <li>落到空地可购买，再次落到可升级（最高 3 级）；持有即收过路费。经过市政府自动建造空地。</li>
@@ -146,32 +91,14 @@
               <li><b>30 回合制</b>：满 30 回合后，剩余现金最高者获胜。</li>
               <li><b>破产淘汰制</b>：某方无力偿还过路费即告破产，对手获胜。</li>
             </ul>
-          </div>
-        </section>
-
-        <section class="card log-card">
-          <div class="panel-title-row">
-            <div>
-              <p class="panel-label">事件日志</p>
-              <h2>回合记录</h2>
-            </div>
-          </div>
-          <div id="log-list" class="log-list"></div>
-        </section>
+          </details>
       </aside>
     </main>
   </div>
 
-  <script src="assets/vendor/webaudiofont/WebAudioFontPlayer.js"></script>
-  <script src="assets/music-fonts/0000_JCLive_sf2_file.js"></script>
-  <script src="assets/music-fonts/0100_JCLive_sf2_file.js"></script>
-  <script src="assets/music-fonts/0110_JCLive_sf2_file.js"></script>
-  <script src="assets/music-fonts/0320_JCLive_sf2_file.js"></script>
-  <script src="assets/music-fonts/0480_JCLive_sf2_file.js"></script>
-  <script src="assets/music-fonts/12836_6_JCLive_sf2_file.js"></script>
-  <script src="assets/music-fonts/12838_6_JCLive_sf2_file.js"></script>
-  <script src="assets/music-fonts/12842_6_JCLive_sf2_file.js"></script>
-  <script src="assets/music-fonts/12846_6_JCLive_sf2_file.js"></script>
-  <script src="game.js"></script>
+  <script src="drama.js?v=20260911-11"></script>
+  <script src="game.js?v=20260911-11"></script>
+  <script src="presentation.js?v=20260911-11"></script>
+  <script type="module" src="scene.js?v=20260911-11"></script>
 </body>
 </html>
