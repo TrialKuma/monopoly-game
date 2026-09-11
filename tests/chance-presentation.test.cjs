@@ -1,6 +1,7 @@
 // Pure Node DOM/clock tests. No browser, application state injection, or real audio.
 const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict');
 const source=fs.readFileSync(require('node:path').join(__dirname,'../drama.js'),'utf8');
+const presentationSource=fs.readFileSync(require('node:path').join(__dirname,'../presentation.js'),'utf8');
 class Clock {
  constructor(){this.now=0;this.serial=0;this.timers=new Map();this.micro=[];}
  set(fn,delay=0){const id=++this.serial;this.timers.set(id,{at:this.now+Number(delay),fn});return id;}
@@ -20,7 +21,7 @@ function harness({reduced=false,cardTop=110}={}){
   addEventListener(type,fn){(this.listeners[type]??=[]).push(fn);}click(){(this.listeners.click||[]).forEach(fn=>fn({target:this}));}
   matches(s){if(s.startsWith('#'))return this.id===s.slice(1);if(s.startsWith('.'))return this.classList.contains(s.slice(1));const a=s.match(/^\[([^=\]]+)(?:=['"]?([^'"\]]+)['"]?)?\]$/);if(a)return a[2]===undefined?this.getAttribute(a[1])!=null:this.getAttribute(a[1])===a[2];return this.tagName===s.toUpperCase();}
   querySelectorAll(s){const out=[];for(const c of this.children){if(s.split(',').some(x=>c.matches(x.trim())))out.push(c);out.push(...c.querySelectorAll(s));}return out;}querySelector(s){return this.querySelectorAll(s)[0]||null;}closest(s){return this.matches(s)?this:this.parent?.closest(s)||null;}
-  getBoundingClientRect(){const card=this.classList.contains('drama-card');const r=card?{left:190,top:cardTop,width:510,height:410}:this.id==='board-stage'||this.id==='drama-layer'?{left:0,top:0,width:900,height:600}:{left:950,top:200,width:170,height:90};return{...r,right:r.left+r.width,bottom:r.top+r.height,x:r.left,y:r.top};}
+  getBoundingClientRect(){const card=this.classList.contains('drama-card');const r=card?{left:190,top:cardTop,width:510,height:410}:this.id==='board-stage'||this.id==='drama-layer'?{left:0,top:0,width:900,height:600}:{left:this.getAttribute('data-player-anchor')==='ai'?1150:950,top:200,width:170,height:90};return{...r,right:r.left+r.width,bottom:r.top+r.height,x:r.left,y:r.top};}
   scrollIntoView(options){scrollCalls++;this.scrollOptions=options;}
   animate(frames,options){let resolve,reject;const animation={finished:new Promise((a,b)=>{resolve=a;reject=b;}),cancel:()=>{clock.clear(timer);reject(new Error('cancel'));}};const timer=clock.set(resolve,(options.duration||0)+(options.delay||0));return animation;}
  }
@@ -117,6 +118,52 @@ const kinds={renovation:'build',district:'build',shield:'card',express:'card',sw
  {
   const h=harness();let done=false;const p=h.api.play({type:'rent',amount:60,payerCashAfter:900,from:actor,to:rival,message:'支付 ¥60。'}).then(()=>done=true);
   await h.clock.advance(2999);assert(!done);await h.clock.advance(1);await p;assert.equal(h.clock.timers.size,0);count++;
+ }
+ {
+  for(const reduced of [false,true]) {
+   const h=harness({reduced}),event={type:'seize',acquisition:true,amount:875,purchasePrice:875,refund:700,premium:175,from:rival,to:actor,tiles:[7],tileName:'温泉庄园',sessionId:10};
+   h.api.play(event);
+   assert.equal(h.q('.drama-currency').textContent,'−¥');
+   assert.equal(h.q('.drama-amount-unit').textContent,'接手总支出');
+   assert.equal(h.q('.drama-stamp').textContent,'接手成功');
+   assert.deepEqual(h.q('.drama-takeover-ledger').children.map(n=>n.textContent),['玩家 −¥875','AI 对手 获补偿 +¥700','公共金库 +¥175']);
+   const transfer=h.all('.drama-detail').find(n=>n!==h.q('.drama-takeover-ledger'));
+   assert.equal(transfer.textContent,'产权AI 对手→玩家温泉庄园');
+   await h.clock.advance(600);
+   assert.equal(h.q('.drama-amount').textContent,'875');
+   assert.deepEqual(h.all('.drama-cash-float').map(n=>[n.textContent,n.style.left]),[['-¥875','1035px'],['+¥700','1235px']]);
+   if(!reduced)assert(h.all('.drama-coin').every(n=>n.style.left==='1035px'),'refund coins originate at the buyer');
+   else assert.equal(h.all('.drama-coin').length,0);
+   await h.skip();
+   h.api.play({...event,amount:250,purchasePrice:250,refund:200,premium:50});
+   assert.equal(h.all('.drama-speech').length,0,'repeat takeover preserves the shared dialogue cooldown');
+   assert(h.q('.drama-takeover-ledger'),'silent takeover still has its ledger');
+   await h.reset();assert.equal(h.clock.timers.size,0);assert.equal(h.randomCalls(),0);
+  }
+  count++;
+ }
+ {
+  for(const refund of [undefined,700]) {
+   const h=harness();h.api.play({type:'seize',amount:0,refund,from:rival,to:{id:'city',name:'无主地产'},tileName:'温泉庄园'});
+   assert.equal(h.q('.drama-stamp').textContent,'征用令');assert.equal(h.q('.drama-amount'),null);
+   assert.equal(h.q('.drama-detail').textContent,refund?'AI 对手 获补偿 +¥700':'产权AI 对手→无主地产温泉庄园');
+   await h.clock.advance(600);
+   assert.deepEqual(h.all('.drama-cash-float').map(n=>n.textContent),refund?['+¥700']:[]);
+   assert.equal(h.all('.drama-coin').length,0,'requisition never sends money from the former owner to the city');
+   await h.reset();
+  }
+  count++;
+ }
+ {
+  const human={...actor,cash:1725,position:0},ai={...rival,cash:1680},tile={index:7,name:'温泉庄园',lot:{ownerId:'human'}};
+  const inferSource=presentationSource.slice(presentationSource.indexOf('function inferEvent('),presentationSource.indexOf('async function present('));
+  const ctx={state:{board:[{index:0,name:'市政府'},tile]},currentPlayer:()=>human,person:p=>p&&({id:p.id,name:p.name,color:p.color}),getPlayerById:id=>[human,ai].find(p=>p.id===id)};
+  ctx.cfg={label:'市政府征用',title:'接手成功',message:'原主获补偿 ¥700。',drama:{type:'seize',acquisition:true,amount:875,purchasePrice:875,refund:700,premium:175,from:ai,to:human,tiles:[7],tileName:tile.name}};
+  const acquired=vm.runInNewContext(inferSource+'\ninferEvent(cfg)',ctx);
+  assert.equal(acquired.amount,875);assert.equal(acquired.payerCashAfter,1725,'buyer is the payer, regardless of ownership arrow');assert.equal(acquired.cashAfter,1725);assert.equal(acquired.sellerCashAfter,1680);
+  ctx.cfg={label:'市政府征用',title:'征用成功',message:'温泉庄园退还原主 ¥700。',drama:{type:'seize',refund:700,from:ai,to:{id:'city',name:'无主地产'}}};
+  const legacy=vm.runInNewContext(inferSource+'\ninferEvent(cfg)',ctx);
+  assert.equal(legacy.amount,0,'a compensation mentioned in legacy copy is not a purchase amount');assert.equal(legacy.refund,700);count++;
  }
  console.log('PASS',count,'chance presentation / ledger / actor / timing / cleanup checks');
 })().catch(e=>{console.error(e);process.exitCode=1});

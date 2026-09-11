@@ -3,7 +3,7 @@
  * play({ type, title, message, amount, expectedAmount, from, to,
  *        tiles, tileName, leadChanged?, duration?, sessionId?, payerCashAfter?,
  *        cashAfter?, districtCount?, isLarge?, buildingLevel?, isOpeningBuilding?, rival?,
- *        chanceKind?, outcomeLabel?, actor?, beneficiaries? }): Promise<void>
+ *        chanceKind?, outcomeLabel?, actor?, beneficiaries?, acquisition?, purchasePrice?, refund?, premium? }): Promise<void>
  * from/to: { id: 'human'|'ai', name, color }. Amounts are positive magnitudes.
  * reset() cancels every animation, pending event and sound; all promises resolve.
  * setMuted(boolean) follows the game's sound preference.
@@ -524,6 +524,9 @@
     const beneficiaries = event.chanceKind === 'bonus' && Array.isArray(event.beneficiaries)
       ? event.beneficiaries.filter((p,i,all) => p?.id && all.findIndex(q => q?.id === p.id) === i) : [];
     const amount = finiteAmount(event.amount);
+    const acquisition = type === 'seize' && event.acquisition === true;
+    const refund = type === 'seize' ? finiteAmount(event.refund) : 0;
+    const premium = acquisition ? finiteAmount(event.premium) : 0;
     const leadChanged = type === 'rent' && !!event.leadChanged;
     const facts = purchaseFacts(event);
     const importantPurchase = type === 'buy' && (facts.chain || facts.large || facts.built);
@@ -565,7 +568,7 @@
     const heading = element('h3', 'drama-title', title);
     copy.appendChild(heading);
     if (chance && event.outcomeLabel) copy.appendChild(element('span', 'drama-chance-outcome', event.outcomeLabel));
-    if (type === 'seize') copy.appendChild(element('span', 'drama-stamp', '征用令'));
+    if (type === 'seize') copy.appendChild(element('span', 'drama-stamp', acquisition ? '接手成功' : '征用令'));
     const showAmount = amount > 0 || type === 'shield';
     if (showAmount) {
       const numberLine = element('div', 'drama-amount-line');
@@ -574,7 +577,7 @@
         if (expected) numberLine.appendChild(element('del', 'drama-expected-amount', '¥' + fmt(expected)));
         numberLine.append(element('span', 'drama-currency', '¥'), element('strong', 'drama-amount', '0'), element('span', 'drama-amount-unit', '本次免付'));
       } else {
-        const prefix = ['relief', 'income'].includes(type) || event.chanceKind === 'bank' ? '+¥' : '¥';
+        const prefix = acquisition ? '−¥' : ['relief', 'income'].includes(type) || event.chanceKind === 'bank' ? '+¥' : '¥';
         numberLine.append(element('span', 'drama-currency', prefix));
         const counter = element('strong', 'drama-amount', !reduced() && amount >= 100 ? '0' : fmt(amount));
         numberLine.appendChild(counter);
@@ -589,10 +592,18 @@
           };
         }
         if (type === 'buy') numberLine.appendChild(element('span', 'drama-amount-unit', '买入花费'));
+        if (acquisition) numberLine.appendChild(element('span', 'drama-amount-unit', '接手总支出'));
         if (beneficiaries.length) numberLine.appendChild(element('span', 'drama-amount-unit', '每人到账'));
         if (event.chanceKind === 'bank') numberLine.appendChild(element('span', 'drama-amount-unit', '金库增加'));
       }
       copy.appendChild(numberLine);
+    }
+    if (acquisition || refund > 0) {
+      const ledger = element('div', 'drama-detail drama-takeover-ledger');
+      if (acquisition) ledger.appendChild(element('span', 'drama-person', `${event.to?.name || '买家'} −¥${fmt(amount)}`));
+      ledger.appendChild(element('span', 'drama-person', `${event.from?.name || '原主'} 获补偿 +¥${fmt(refund)}`));
+      if (acquisition) ledger.appendChild(element('span', 'drama-person', `公共金库 +¥${fmt(premium)}`));
+      copy.appendChild(ledger);
     }
     if (type === 'buy') {
       const ribbon = element('div', 'drama-purchase-ribbon');
@@ -607,6 +618,7 @@
     if (beneficiaries.length) {
       beneficiaries.forEach(p => detail.appendChild(element('span', 'drama-person drama-to', p.name)));
     } else if (event.from?.name || event.to?.name) {
+      if (type === 'seize') detail.appendChild(element('span', 'drama-place', '产权'));
       if (event.from?.name) detail.appendChild(element('span', 'drama-person drama-from', event.from.name));
       if (event.from?.name && event.to?.name) detail.appendChild(element('span', 'drama-transfer-arrow', '→'));
       if (event.to?.name) detail.appendChild(element('span', 'drama-person drama-to', event.to.name));
@@ -659,6 +671,13 @@
         coins(job, {...event,to:p});
         delay(job, () => signedCounter(job,p,amount,'+'),460+i*120);
       });
+    } else if (type === 'seize') {
+      if (acquisition) {
+        // Ownership goes seller → buyer; money goes in the opposite direction.
+        coins(job, {...event, from:event.to, to:event.from, amount:refund});
+        delay(job, () => signedCounter(job, event.to, amount, '-'), 280);
+      }
+      if (refund) delay(job, () => signedCounter(job, event.from, refund, '+'), 460);
     } else if (event.chanceKind !== 'bank' && ['rent', 'bank', 'income', 'relief'].includes(type)) {
       coins(job, event);
       if (type === 'rent' || type === 'bank') delay(job, () => signedCounter(job, event.from, amount, '-'), 280);

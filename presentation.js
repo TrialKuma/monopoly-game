@@ -16,7 +16,7 @@
   const mapGuide = document.getElementById('map-guide');
   const mapGuides = {
     classic: {title:'经典环线 · 街坊间的财富拉锯',copy:'沿 22 格环线前进，同街区地产连锁收租。机会广场可能改造街区、互换位置或送上免单券，下一步随时变天。'},
-    compact: {title:'短环追逐 · 冲刺也可能冲进账单',copy:'沿 18 格短环线前进，三个街区更容易连锁收租。冲刺站随机再走 2–4 格；传送港落地后立即结算，护盾同样能挡租。'},
+    compact: {title:'短环追逐 · 冲刺也可能冲进账单',copy:'沿 18 格短环线前进，三个街区更容易连锁收租。冲刺站随机再走 2–8 格；传送港落地后立即结算，护盾同样能挡租。回合制救助获得 ¥200 和一次免租，不再额外罚停。'},
     expansion: {title:'大城开业 · 每圈经过全部六个街区',copy:'沿 28 格大环线依次前进。开局每街区随机一处无主地产预建 Lv.1，买下即用。城市快线随机再走 3–5 格，传送港落地后立即结算。回合制救助附带一次过路护盾，帮助脱困再起。'},
   };
   const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -77,7 +77,7 @@
     if(lot){
       inspector.innerHTML=`<p class="panel-label">${esc(lot.district||'地产手册')}</p><h2>${esc(tile.name)}</h2><div class="property-meta"><span>${esc(owner?.name||'等待新主人')}</span><span>${lot.level===0?'空地':`Lv.${lot.level}`}</span>${lot.isLarge?'<span>占据 2 格</span>':''}</div><div class="property-price">${money(owner?rent.total:lot.price)} <small>${owner?'整条街 · 本次租金':'买下这片地'}</small></div>${owner?`<div class="property-breakdown">${rent.lots.map(t=>`${esc(t.name)} ${money(t.lot.tolls[t.lot.level])}`).join(' ＋ ')}<br>街区合计 ${money(rent.base)} × ${rent.multiplier}</div>`:''}<p class="property-note">${!owner&&lot.level>0?`开业地产：买下即得 Lv.${lot.level} 建筑。`:lot.level<3?`升级到 Lv.${lot.level+1}：${money(lot.buildCosts[lot.level+1])}`:'地标已建成，等对手的好骰子。'}${lot.effectId?'<br>'+({finance_bonus:'自己停留时获得金融收益。',tower_bonus:'自己停留时获得商务收益。',hot_spring_rest:'让来访的对手下回合休息。'}[lot.effectId]||''):''}</p>`;
     } else {
-      inspector.innerHTML=`<p class="panel-label">城市特别地标</p><h2>${esc(tile.name)}</h2><div class="inspector-special">${tile.isStart?'⚑':({bank:'◈',card_draw:'▣',chance:'✦',construction:'⚒',teleport:'◎',rush:'↗',junction:'∞'}[tile.special?.type]||'✦')}</div><p class="property-note">${tile.isStart?`经过领取 ${money(economy.startBonus)}，并自动建造一处空地。停留时可征用对手地产。`:esc(tile.special?.description)}</p>${tile.special?.type==='bank'?`<div class="property-price">${money(state.bankPool)}<small>${state.bankPool>=economy.bankThreshold?'金库已满 · 下位来客全部提走':`金库积累中 · ${money(economy.bankThreshold)} 起可提`}</small></div>`:''}`;
+      inspector.innerHTML=`<p class="panel-label">城市特别地标</p><h2>${esc(tile.name)}</h2><div class="inspector-special">${tile.isStart?'⚑':({bank:'◈',card_draw:'▣',chance:'✦',construction:'⚒',teleport:'◎',rush:'↗',junction:'∞'}[tile.special?.type]||'✦')}</div><p class="property-note">${tile.isStart?`经过领取 ${money(economy.startBonus)}，并自动建造一处空地。停留时可按原地价的 125% 带楼接手对手的一处地产，也可只征用，让它变为无主。原主获原地价补偿，接手溢价进入公共金库。`:esc(tile.special?.description)}</p>${tile.special?.type==='bank'?`<div class="property-price">${money(state.bankPool)}<small>${state.bankPool>=economy.bankThreshold?'金库已满 · 下位来客全部提走':`金库积累中 · ${money(economy.bankThreshold)} 起可提`}</small></div>`:''}`;
     }
     inspector.insertAdjacentHTML('beforeend',`<button class="inspect-building-btn" type="button" data-inspect-building="${tile.index}">近看建筑 <span aria-hidden="true">↗</span></button>`);
     inspector.querySelector('[data-inspect-building]').disabled=!window.CityScene?.inspectTile||(state.busy&&!preview);
@@ -142,10 +142,18 @@
       if(ownerId&&ownerId!==event.to?.id)event.rival=person(getPlayerById(ownerId));
     }
     // Read the settled ledger, never infer a player's balance from the animation.
-    const payer=event.from?.id?getPlayerById(event.from.id):null;
+    const payerId=event.type==='seize'&&event.acquisition?event.to?.id:event.from?.id;
+    const payer=payerId?getPlayerById(payerId):null;
     const recipient=event.to?.id?getPlayerById(event.to.id):null;
     if(payer)event.payerCashAfter=payer.cash;
     if(recipient)event.cashAfter=recipient.cash;
+    // In a takeover from/to names describe ownership, not a cash transfer.
+    // A legacy requisition has no purchase price even if its copy mentions a refund.
+    if(event.type==='seize') {
+      if(!event.acquisition)event.amount=0;
+      const previousOwner=event.from?.id?getPlayerById(event.from.id):null;
+      if(previousOwner)event.sellerCashAfter=previousOwner.cash;
+    }
     if(event.type==='buy') {
       if(recipient)event.rival=person(getOpponent(recipient));
       const purchased=state.board[event.tiles?.[0]];
@@ -203,13 +211,14 @@
   async function runShowcase(type) {
     if(previewBusy)return;
     setupShowcase();previewBusy=true;render();const sid=state.sessionId;
-    const human=state.players[0],ai=state.players[1];
+    const human=state.players[0];
     if(type==='shield')human.effects.shield=true;
     if(type==='relief'){human.cash=150;human.displayedCash=150;}
     try {
       if(type==='seize'){
-        showcaseTargets.district.forEach(i=>{state.board[i].lot.ownerId='human';});ai.position=0;state.currentPlayerIndex=1;render();
-        await resolveStartTakeover(ai,sid);
+        human.position=0;state.currentPlayerIndex=0;selected=0;
+        state.statusTitle='这次，挑一栋对手的楼';state.statusDescription='在市政府选择地产，再决定带楼接手或只征用。';render();
+        await resolveStartTakeover(human,sid);
       } else if(type==='buy'){
         const tile=state.board[showcaseTargets.build];
         tile.lot.ownerId=null;tile.lot.level=state.openingLots?.includes(tile.index)?1:0;

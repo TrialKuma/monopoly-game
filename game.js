@@ -104,7 +104,7 @@ const COMPACT_SPECIAL_TILES = {
   5:  { type: "construction", label: "城建局", color: "#fef08a", description: "建造或拆除！" },
   6:  { type: "card_draw", label: "翻牌格", color: "#e9d5ff", description: "翻牌选卡发动！" },
   7:  { type: "chance", label: "机会格", color: "#fbcfe8", description: "街区翻新、换位、专车等城市奇遇。" },
-  8:  { type: "rush", label: "冲刺站", color: "#fdba74", rushMin: 2, rushMax: 4, description: "随机冲刺 2–4 格，到达后立即结算。" },
+  8:  { type: "rush", label: "冲刺站", color: "#fdba74", rushMin: 2, rushMax: 8, description: "随机冲刺 2–8 格，到达后立即结算。" },
   9:  { type: "bank", label: "金库", color: "#bfdbfe", description: "存钱或提款！" },
   13: { type: "teleport", label: "传送港", color: "#a7f3d0", settleArrival: true, description: "随机传送到一块地产，到达后立即结算。" },
   15: { type: "card_draw", label: "命运轮盘", color: "#e9d5ff", description: "翻牌选卡发动！" },
@@ -218,6 +218,8 @@ const MAP_PRESETS = {
     id: "compact",
     maxRounds: 26,
     economy: { secondPlayerBonus: 500 },
+    reliefShield: true,
+    reliefRest: false,
     name: "紧凑冲突",
     boardTitle: "紧凑冲突 · 18 格",
     startDescription: "18 格短环线，冲刺与传送加快连锁收租。起始 ¥1600，后手额外补给 ¥500。",
@@ -1335,7 +1337,7 @@ function renderScoreboard() {
     if (p.effects.doubleRent) efx.push("💎翻倍");
     if (p.effects.frozen) efx.push("🪤绊脚");
     if (p.effects.hotSpringRest) efx.push("♨️休息中");
-    if (p.effects.bankruptcyRelief) efx.push("🆘休整中");
+    if (p.effects.bankruptcyRelief) efx.push(getMapConfig().reliefRest === false ? "🆘已获救助" : "🆘休整中");
     if (p.effects.extraTurn) efx.push("🥁连击");
     if (p.effects.reversed) efx.push("🔃逆行");
     const efxHtml = efx.length > 0 ? `<div class="player-effects">${efx.map((e) => `<span class="effect-chip">${e}</span>`).join("")}</div>` : "";
@@ -1474,13 +1476,19 @@ async function processTurn(player, isExtraTurn = false) {
     player.effects.bankruptcyRelief = false;
     player.effects.frozen = false;
     player.effects.hotSpringRest = false;
-    pushLog(`${player.name} 本回合休整，救助金已在上回合到账，下回合恢复行动。`);
-    state.statusTitle = `${player.name} 本回合休整`;
-    state.statusDescription = "救助金已在上回合到账，本回合休整，下回合恢复行动。";
-    render();
-    await showContinueModal({ label: "等待救援", title: `${player.name} 本回合休整`, message: "本回合休整，救助金已在上回合到账，下回合恢复行动。", drama: { type: "notice", amount: 0 } });
-    if (!isSessionActive(sid)) return;
-    endTurn(); return;
+    if (getMapConfig().reliefRest === false) {
+      // Compact rescue protects the next departure without taking an action
+      // away. The one-use shield still follows the regular landing rules.
+      pushLog(`${player.name} 救助后恢复行动，正常掷骰。`);
+    } else {
+      pushLog(`${player.name} 本回合休整，救助金已在上回合到账，下回合恢复行动。`);
+      state.statusTitle = `${player.name} 本回合休整`;
+      state.statusDescription = "救助金已在上回合到账，本回合休整，下回合恢复行动。";
+      render();
+      await showContinueModal({ label: "等待救援", title: `${player.name} 本回合休整`, message: "本回合休整，救助金已在上回合到账，下回合恢复行动。", drama: { type: "notice", amount: 0 } });
+      if (!isSessionActive(sid)) return;
+      endTurn(); return;
+    }
   }
 
   if (player.effects.hotSpringRest) {
@@ -1639,7 +1647,14 @@ async function animateMovement(player, steps, sid) {
   }
 }
 
+function getCityTakeoverQuote(lot) {
+  const refund = lot.price;
+  const purchasePrice = Math.ceil(refund * 1.25);
+  return { refund, purchasePrice, premium: purchasePrice - refund };
+}
+
 async function resolveStartTakeover(player, sid) {
+  if (!isSessionActive(sid) || getPlayerById(player.id) !== player) return;
   const opp = getOpponent(player);
   const oppTiles = state.board.filter((t) => t.lot?.ownerId === opp.id && !t.isLargeSecondary);
 
@@ -1651,50 +1666,76 @@ async function resolveStartTakeover(player, sid) {
     return;
   }
 
+  let target, action;
   if (player.isAi) {
-    const sorted = [...oppTiles].sort((a, b) => {
-      const valA = a.lot.tolls[a.lot.level] + a.lot.level * 80;
-      const valB = b.lot.tolls[b.lot.level] + b.lot.level * 80;
-      return valB - valA;
+    const value = (tile) => tile.lot.tolls[tile.lot.level] + tile.lot.level * 80
+      + getDistrictOwnerLots(tile.lot.district, player.id).length * 90
+      + getDistrictOwnerLots(tile.lot.district, opp.id).length * 50;
+    const sorted = [...oppTiles].sort((a, b) => value(b) - value(a));
+    // Consider every affordable property before falling back to a free seizure.
+    target = sorted.find((tile) => player.cash - getCityTakeoverQuote(tile.lot).purchasePrice >= 80);
+    action = target ? "acquire" : "release";
+    target ||= sorted[0];
+  } else {
+    const buttons = oppTiles.map((tile) => ({
+      id: `seize_${tile.index}`,
+      label: `${tile.name}（Lv.${tile.lot.level}）接手 ${formatMoney(getCityTakeoverQuote(tile.lot).purchasePrice)}`,
+      variant: "secondary",
+    }));
+    buttons.push({ id: "skip", label: "跳过（不征用）", variant: "secondary" });
+    const selection = await showModal({
+      label: "市政府征用", title: "📜 市政府征用令 — 选择目标",
+      message: "选对手一处地产：可按原地价加价 25% 连楼接手，或免费征用使其变为无主。建筑等级都会保留。",
+      buttons,
     });
-    const target = sorted[0];
-    const refund = target.lot.price;
-    target.lot.ownerId = null;
+    if (!isSessionActive(sid)) return;
+    if (selection === "skip" || selection === "cancel") {
+      pushLog(`${player.name} 停留市政府，放弃了征用机会。`);
+      return;
+    }
+    if (typeof selection !== "string" || !/^seize_\d+$/.test(selection)) return;
+    target = state.board[Number(selection.slice(6))];
+    if (!oppTiles.includes(target) || target.lot.ownerId !== opp.id) return;
+
+    const quote = getCityTakeoverQuote(target.lot);
+    const canAcquire = player.cash >= quote.purchasePrice;
+    const choices = [];
+    if (canAcquire) choices.push({ id: "acquire", label: `接手房产 · 支付 ${formatMoney(quote.purchasePrice)}`, variant: "primary" });
+    choices.push({ id: "release", label: "只征用 · 不花钱，地产变无主", variant: "danger" });
+    choices.push({ id: "skip", label: "放弃这次征用", variant: "secondary" });
+    action = await showModal({
+      label: "市政府征用", title: `${target.name}（Lv.${target.lot.level}）— 怎么处理？`,
+      message: `接手总价 ${formatMoney(quote.purchasePrice)}（原地价 × 125%）：${opp.name} 获得 ${formatMoney(quote.refund)} 补偿，另有 ${formatMoney(quote.premium)} 进入公共金库。产权立即归你，建筑保留。\n只征用则由市政府退还原地价，房产变为无主。\n${canAcquire ? `你现有 ${formatMoney(player.cash)}，接手后剩余 ${formatMoney(player.cash - quote.purchasePrice)}。` : `你现有 ${formatMoney(player.cash)}，还差 ${formatMoney(quote.purchasePrice - player.cash)} 才能接手；仍可免费征用。`}`,
+      buttons: choices,
+    });
+  }
+
+  // Both menus can remain open while a game is restarted; validate immediately
+  // before the synchronous transfer, including ownership and available cash.
+  if (!isSessionActive(sid) || getPlayerById(player.id) !== player || getPlayerById(opp.id) !== opp) return;
+  if (action !== "acquire" && action !== "release") return;
+  if (state.board[target?.index] !== target || !target?.lot || target.isLargeSecondary || target.lot.ownerId !== opp.id) return;
+  const { refund, purchasePrice, premium } = getCityTakeoverQuote(target.lot);
+  if (action === "acquire") {
+    if (player.cash < purchasePrice) {
+      await showContinueModal({ label: "市政府征用", title: "现金不足，未接手", message: `接手 ${target.name} 需要 ${formatMoney(purchasePrice)}，你目前只有 ${formatMoney(player.cash)}。产权与金库均未改变。` });
+      return;
+    }
+    updatePlayerCash(player, -purchasePrice, false);
     updatePlayerCash(opp, refund, false);
-    playSound("special", { rate: 0.88 });
-    pushLog(`市政府征用令！${opp.name} 的 ${target.name}（Lv.${target.lot.level}）被强制拍卖，退还买地成本 ${formatMoney(refund)}！`);
+    state.bankPool += premium;
+    target.lot.ownerId = player.id;
+    playSound("special", { rate: 1.05 });
+    pushLog(`市政府接管令！${player.name} 花 ${formatMoney(purchasePrice)} 接手 ${target.name}（Lv.${target.lot.level}），${opp.name} 获补偿 ${formatMoney(refund)}，溢价 ${formatMoney(premium)} 进入公共金库。`);
     render();
     await showContinueModal({
-      label: "市政府征用", title: "地标易主！",
-      drama: { type: "seize", from: opp, to: { id: "city", name: "无主地产" }, tiles: [target.index], tileName: target.name },
-      message: `${opp.name} 的 ${target.name}（Lv.${target.lot.level}）被强制拍卖！地产变为无主状态，建筑保留。\n买地成本 ${formatMoney(refund)} 已退还给 ${opp.name}。`,
+      label: "市政府征用", title: "连地带楼，接手了！",
+      drama: { type: "seize", from: opp, to: player, amount: purchasePrice, acquisition: true, purchasePrice, refund, premium, tiles: [target.index], tileName: target.name },
+      message: `${player.name} 接手了 ${target.name}，Lv.${target.lot.level} 建筑原样保留，之后租金归新业主。\n支付 ${formatMoney(purchasePrice)}：${opp.name} 收到 ${formatMoney(refund)} 补偿，${formatMoney(premium)} 进入公共金库（现有 ${formatMoney(state.bankPool)}）。`,
     });
     return;
   }
 
-  const btns = oppTiles.map((t) => ({
-    id: `seize_${t.index}`,
-    label: `${t.name}（Lv.${t.lot.level}）退还 ${formatMoney(t.lot.price)}`,
-    variant: "danger",
-  }));
-  btns.push({ id: "skip", label: "跳过（不征用）", variant: "secondary" });
-  const dec = await showModal({
-    label: "市政府征用", title: "📜 市政府征用令 — 选择目标",
-    message: `停留市政府！你可以选择对手的一处地产强制拍卖。地产变为无主状态，建筑保留，买地成本退还给对手。`,
-    buttons: btns,
-  });
-  if (!isSessionActive(sid)) return;
-
-  if (dec === "skip" || dec === "cancel") {
-    pushLog(`${player.name} 停留市政府，放弃了征用机会。`);
-    await showContinueModal({ label: "市政府征用", title: "放弃征用", message: "你选择了跳过市政府征用令。" });
-    return;
-  }
-
-  const idx = parseInt(dec.replace("seize_", ""), 10);
-  const target = state.board[idx];
-  if (!target?.lot) return;
-  const refund = target.lot.price;
   target.lot.ownerId = null;
   updatePlayerCash(opp, refund, false);
   playSound("special", { rate: 0.88 });
@@ -1702,7 +1743,7 @@ async function resolveStartTakeover(player, sid) {
   render();
   await showContinueModal({
     label: "市政府征用", title: "征用成功！",
-    drama: { type: "seize", from: opp, to: { id: "city", name: "无主地产" }, tiles: [target.index], tileName: target.name },
+    drama: { type: "seize", from: opp, to: { id: "city", name: "无主地产" }, amount: 0, refund, tiles: [target.index], tileName: target.name },
     message: `${target.name}（Lv.${target.lot.level}）被强制拍卖！地产变为无主状态，建筑保留。\n买地成本 ${formatMoney(refund)} 已退还给 ${opp.name}。`,
   });
 }
@@ -1869,7 +1910,7 @@ async function resolveLanding(player, tile, sid) {
     const reliefShield = getMapConfig().reliefShield === true;
     if (reliefShield) player.effects.shield = true;
     updatePlayerCash(player, relief, false);
-    const reliefMessage = `${formatMoney(relief)} 救助金立即到账，下回合休整。${reliefShield ? "另获一次过路护盾，免交下一笔租金。" : ""}`;
+    const reliefMessage = `${formatMoney(relief)} 救助金立即到账，${getMapConfig().reliefRest === false ? "下次行动正常掷骰，不额外休整" : "下回合休整"}。${reliefShield ? "另获一次过路护盾，免交下一笔租金。" : ""}`;
     pushLog(`${player.name} 现金耗尽，进入破产救助：${reliefMessage}`);
     await showContinueModal({
       label: "破产救助",
