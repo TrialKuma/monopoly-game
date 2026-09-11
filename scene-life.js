@@ -1,5 +1,7 @@
 // Cosmetic city life. No game state writes, global RNG, timers, or animation loop.
 // Articulated Blender parts are kept by scene.js before its static mesh batching.
+import { createCityLighting } from './scene-lighting.js?v=20260912-23';
+import { createCityWeather } from './scene-weather.js?v=20260912-23';
 export function shouldPreserveLifeNode(node) {
   return !!node?.userData?.lifePart || /^life_(wheel_rotor|crane_pendulum)$/.test(node?.name || '');
 }
@@ -13,17 +15,14 @@ export function createSceneLife({ THREE, scene, world, light, snapshot, lotViews
   const media = typeof window !== 'undefined' ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
   let reduced = !!media?.matches, hidden = typeof document !== 'undefined' && document.hidden;
   let disposed = false, paused = false, mode = 'auto', elapsed = 0, accumulator = 0, forced = true;
-  let night = 0, warmth = 0, lastTime = null, currentSnapshot = snapshot;
+  let night = 0, lastTime = null, currentSnapshot = snapshot;
   let observedBuildings = '';
   const sparkEvents = [], sparkLimit = 20;
   const w = Math.max(1, (boardBounds?.w || 11.55) - 4.7);
   const d = Math.max(1, (boardBounds?.d || 9.9) - 4.65);
   const parkY = .16;
-  const lightDefaults = [];
-  scene.traverse(node => {
-    if (node.isLight) lightDefaults.push({ node, intensity: node.intensity, color: node.color.clone(), ground: node.groundColor?.clone() });
-  });
-  const environmentIntensity = scene.environmentIntensity;
+  const lighting = createCityLighting({ THREE, scene, world, renderer, light, boardBounds, requestRender });
+  const weather = createCityWeather({ THREE, world, renderer, boardBounds, requestRender });
   const own = resource => { owned.add(resource); return resource; };
   const standard = (color, extra = {}) => own(new THREE.MeshStandardMaterial({ color, roughness: .65, ...extra }));
   const basic = (color, extra = {}) => own(new THREE.MeshBasicMaterial({ color, ...extra }));
@@ -81,8 +80,16 @@ export function createSceneLife({ THREE, scene, world, light, snapshot, lotViews
   }
 
   // Four modest lanterns; emissive windows and ground glows need no shadow lights.
-  const poolMat = basic('#ffc87b', { transparent: true, opacity: 0, depthWrite: false });
-  const poolGeo = own(new THREE.CircleGeometry(.33, 28));
+  const glowPixels = new Uint8Array(32 * 32 * 4);
+  for (let y = 0; y < 32; y++) for (let x = 0; x < 32; x++) {
+    const i = (y * 32 + x) * 4, r = Math.hypot((x - 15.5) / 15.5, (y - 15.5) / 15.5);
+    glowPixels[i] = glowPixels[i + 1] = glowPixels[i + 2] = 255;
+    glowPixels[i + 3] = Math.round(Math.pow(Math.max(0, 1 - r), 1.6) * 255);
+  }
+  const glowTexture = own(new THREE.DataTexture(glowPixels, 32, 32));
+  glowTexture.needsUpdate = true; glowTexture.magFilter = THREE.LinearFilter;
+  const poolMat = basic('#ffc87b', { map: glowTexture, transparent: true, opacity: 0, depthWrite: false, blending: THREE.AdditiveBlending });
+  const poolGeo = own(new THREE.PlaneGeometry(.95, .95));
   const lampX = Math.min(w * .39, 2.7), lampZ = Math.min(d * .32, 1.3);
   [[-lampX, -.32], [lampX, .32], [-.32, -lampZ], [.32, lampZ]].forEach(([x, z]) => {
     rod(root, [x, parkY, z], [x, .68, z], .018, palette.iron);
@@ -138,8 +145,10 @@ export function createSceneLife({ THREE, scene, world, light, snapshot, lotViews
     for (const [node, material] of bindings) if (!isInWorld(node)) { node.material = material; bindings.delete(node); }
     movingParts.length = 0;
     world.traverse(node => {
-      if (node === root || node.parent === root) return;
-      for (let p = node.parent; p; p = p.parent) if (p === root) return;
+      // Each atmosphere module owns its materials. Only bind actual buildings,
+      // never another module's translucent particles or emissive decorations.
+      if (node.userData.cosmetic) return;
+      for (let p = node.parent; p; p = p.parent) if (p.userData.cosmetic) return;
       if (node.isMesh && !bindings.has(node)) {
         const original = node.material;
         const replacement = Array.isArray(original) ? original.map(copyWindowMaterial) : copyWindowMaterial(original);
@@ -151,31 +160,19 @@ export function createSceneLife({ THREE, scene, world, light, snapshot, lotViews
         movingParts.push(partStates.get(node));
       }
     });
+    weather.refresh();
     forced = true;
   }
   function applyLight() {
-    const duskColor = new THREE.Color('#ffbd83'), moonColor = new THREE.Color('#89a9e8');
-    for (const base of lightDefaults) {
-      const node = base.node;
-      if (node === light) {
-        node.color.copy(base.color).lerp(duskColor, warmth * .55).lerp(moonColor, night * .72);
-        node.intensity = base.intensity * (1 - night * .76);
-      } else if (node.isHemisphereLight) {
-        node.color.copy(base.color).lerp(new THREE.Color('#8caddd'), night * .72);
-        node.groundColor.copy(base.ground).lerp(new THREE.Color('#40506c'), night * .86);
-        node.intensity = base.intensity * (1 - night * .52);
-      } else if (node.isDirectionalLight) {
-        node.color.copy(base.color).lerp(new THREE.Color('#adc2f2'), night * .60); node.intensity = base.intensity * (1 - night * .05);
-      }
-    }
-    if (typeof environmentIntensity === 'number') scene.environmentIntensity = environmentIntensity * (1 - night * .55);
-    palette.lamp.emissiveIntensity = .28 + night * 1.45; poolMat.opacity = night * .16;
+    palette.lamp.emissiveIntensity = .28 + night * 1.8; poolMat.opacity = night * .38;
     palette.water.emissiveIntensity = .12 + night * .18;
     for (const entry of materialCopies.values()) {
       entry.material.emissive.copy(entry.base).lerp(entry.tint, night * .86);
       entry.material.emissiveIntensity = entry.intensity + night * entry.strength;
     }
-    fireflies.visible = night > .10; fireflies.material.uniforms.opacity.value = night * .70;
+    const climate = weather.getState();
+    fireflies.visible = night > .10 && climate.season !== 'winter' && climate.rain < .4;
+    fireflies.material.uniforms.opacity.value = night * .70;
   }
   function update(next) {
     if (disposed) return;
@@ -185,10 +182,17 @@ export function createSceneLife({ THREE, scene, world, light, snapshot, lotViews
     forced = true; requestRender();
   }
   function setTimeMode(value) {
-    if (!['auto','day','dusk','night'].includes(value) || disposed) return false;
+    if (disposed || !lighting.setTimeMode(value)) return false;
     mode = value; forced = true;
-    if (reduced) { night = value === 'night' ? 1 : value === 'dusk' ? .48 : 0; warmth = value === 'dusk' ? 1 : 0; applyLight(); }
     requestRender(); return true;
+  }
+  function setSeason(value) {
+    if (disposed || !weather.setSeason(value)) return false;
+    forced = true; requestRender(); return true;
+  }
+  function setWeather(value) {
+    if (disposed || !weather.setWeather(value)) return false;
+    forced = true; requestRender(); return true;
   }
   function emitSparks(position, color) {
     if (reduced || hidden || disposed) return;
@@ -222,10 +226,10 @@ export function createSceneLife({ THREE, scene, world, light, snapshot, lotViews
     const step = Math.min(.10, accumulator); accumulator = 0;
     const motionStep = paused || reduced ? 0 : step;
     if (!paused && !reduced) elapsed += step;
-    const targetNight = mode === 'night' ? 1 : mode === 'dusk' ? .48 : mode === 'auto' && !reduced ? .5 - .5 * Math.cos(TAU * elapsed / 180) : 0;
-    const targetWarmth = mode === 'dusk' ? 1 : mode === 'auto' && !reduced ? Math.exp(-Math.pow((targetNight - .48) / .22, 2)) : 0;
-    const blend = reduced ? 1 : 1 - Math.exp(-Math.max(step, 1/60) * 2.1);
-    night += (targetNight - night) * blend; warmth += (targetWarmth - warmth) * blend; applyLight();
+    weather.tick(step, { night, reduced, paused });
+    lighting.tick(step, { ...weather.getState(), reduced, paused });
+    night = lighting.getState().night;
+    applyLight();
     for (const p of pedestrians) {
       const angle = p.phase + elapsed * .11 * p.direction;
       p.object.position.set(Math.cos(angle) * p.radius, parkY + .004, Math.sin(angle) * p.radius);
@@ -265,12 +269,12 @@ export function createSceneLife({ THREE, scene, world, light, snapshot, lotViews
     if (typeof document !== 'undefined') document.removeEventListener('visibilitychange', visibilityChanged);
     for (const [node, material] of bindings) node.material = material;
     for (const part of movingParts) part.node.rotation.copy(part.base);
-    for (const base of lightDefaults) { base.node.color.copy(base.color); base.node.intensity = base.intensity; if (base.ground) base.node.groundColor.copy(base.ground); }
-    if (typeof environmentIntensity === 'number') scene.environmentIntensity = environmentIntensity;
+    weather.dispose(); lighting.dispose();
     root.removeFromParent(); owned.forEach(resource => resource.dispose?.()); owned.clear(); bindings.clear(); materialCopies.clear(); movingParts.length = 0; sparkEvents.length = 0;
   }
   bindBuildings(); tick(0, 0);
-  return { update, tick, effect, setTimeMode, getTimeMode: () => mode, getNightFactor: () => night,
+  return { update, tick, effect, setTimeMode, setSeason, setWeather, getTimeMode: () => mode, getNightFactor: () => night,
+    getAtmosphere: () => ({ ...lighting.getState(), ...weather.getState(), timeMode: mode }),
     setInteractionPaused: value => { const next=!!value;if(next===paused)return;paused=next;if(!paused){forced=true;requestRender();} }, dispose,
     // Bounded diagnostic counts support resource/reset checks without exposing rules.
     stats: () => ({ owned: owned.size, materialBindings: bindings.size, movingParts: movingParts.length, pedestrians: pedestrians.length, particles: 36 + 16 + sparkLimit, disposed }) };

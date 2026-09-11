@@ -1,7 +1,7 @@
 import * as THREE from './assets/vendor/three/three.module.min.js';
 import { GLTFLoader } from './assets/vendor/three/addons/loaders/GLTFLoader.js';
 import { mergeGeometries } from './assets/vendor/three/addons/utils/BufferGeometryUtils.js';
-import { createSceneLife } from './scene-life.js?v=20260912-21';
+import { createSceneLife } from './scene-life.js?v=20260912-23';
 
 // All route positions, ownership and prices come from the game. This view never
 // changes a rule or finishes an action; its animation is entirely cosmetic.
@@ -32,6 +32,18 @@ let inspection = null;
 let studioEnvironment = null;
 let travelArrow = null;
 let sceneLife = null, cameraControls = null, timeMode = 'auto';
+let seasonMode = 'auto', weatherMode = 'auto', lastAtmosphereReadout = 0;
+const ATMOSPHERE_MODES = {
+  time: { auto:'自然流转', dawn:'清晨', day:'白天', dusk:'夕照', night:'月夜' },
+  season: { auto:'四季轮换', spring:'春日', summer:'盛夏', autumn:'金秋', winter:'冬日' },
+  weather: { auto:'随季节', clear:'晴朗', rain:'下雨', snow:'飘雪' },
+};
+try {
+  const saved = JSON.parse(localStorage.getItem('monopoly.city.atmosphere.v1') || '{}');
+  if (Object.hasOwn(ATMOSPHERE_MODES.time,saved.time)) timeMode=saved.time;
+  if (Object.hasOwn(ATMOSPHERE_MODES.season,saved.season)) seasonMode=saved.season;
+  if (Object.hasOwn(ATMOSPHERE_MODES.weather,saved.weather)) weatherMode=saved.weather;
+} catch (_) { /* Private browsing can disable local preferences. */ }
 let cameraView = { yaw:null, elevation:null, zoom:1, modified:false, facingYaw:null };
 let cameraGesture = { pointers:new Map(), dragged:false, pinchDistance:0 };
 let suppressSceneClickUntil = 0;
@@ -49,7 +61,7 @@ const ASSET_BUNDLES = [
 const projection = new THREE.Vector3();
 const raycaster = new THREE.Raycaster();
 const pointer = new THREE.Vector2();
-const api = { update, effect, reset, projectTile, inspectTile, closeInspection, resetView:()=>resetCameraView(true), zoomBy:factor=>changeCameraView(0,0,factor), getView:()=>({...cameraView}), setTimeMode:setCityTimeMode, getTimeMode:()=>sceneLife?.getTimeMode()||timeMode, refreshAssets:()=>loadModelKit(true), ready: false };
+const api = { update, effect, reset, projectTile, inspectTile, closeInspection, resetView:()=>resetCameraView(true), zoomBy:factor=>changeCameraView(0,0,factor), getView:()=>({...cameraView}), setTimeMode:setCityTimeMode, getTimeMode:()=>sceneLife?.getTimeMode()||timeMode, setSeason:mode=>setCityClimate('season',mode), setWeather:mode=>setCityClimate('weather',mode), getAtmosphere:()=>sceneLife?.getAtmosphere(), refreshAssets:()=>loadModelKit(true), ready: false };
 window.CityScene = api;
 
 function own(resource) { resources.add(resource); return resource; }
@@ -260,22 +272,59 @@ function syncCameraControls(){
   const allowed=canMoveCamera();
   cameraControls.querySelectorAll('button').forEach(button=>{button.disabled=!allowed||(button.dataset.camera==='out'&&cameraView.zoom<=CAMERA_LIMITS.minZoom)||(button.dataset.camera==='in'&&cameraView.zoom>=CAMERA_LIMITS.maxZoom);});
   cameraControls.querySelector('output').textContent=`${Math.round(cameraView.zoom*100)}%`;
-  const timeSelect=cameraControls.querySelector('select');timeSelect.disabled=!allowed;timeSelect.value=timeMode;
+  cameraControls.querySelectorAll('select').forEach(select=>{
+    select.disabled=!allowed;select.value=select.dataset.atmosphere==='time'?timeMode:select.dataset.atmosphere==='season'?seasonMode:weatherMode;
+  });
   if(!allowed&&cameraGesture.pointers.size)cancelCameraGesture();
 }
 function setCityTimeMode(mode){
-  if(!['auto','day','dusk','night'].includes(mode))return false;
+  if(!Object.hasOwn(ATMOSPHERE_MODES.time,mode))return false;
   timeMode=mode;sceneLife?.setTimeMode(mode);renderDirty=true;
-  if(cameraControls)cameraControls.querySelector('select').value=mode;
+  syncCameraControls();saveAtmospherePreferences();
   return true;
+}
+function setCityClimate(kind,mode){
+  if(!['season','weather'].includes(kind)||!Object.hasOwn(ATMOSPHERE_MODES[kind],mode))return false;
+  if(kind==='season'){seasonMode=mode;sceneLife?.setSeason(mode);}
+  else{weatherMode=mode;sceneLife?.setWeather(mode);}
+  renderDirty=true;syncCameraControls();saveAtmospherePreferences();return true;
+}
+function saveAtmospherePreferences(){
+  try{localStorage.setItem('monopoly.city.atmosphere.v1',JSON.stringify({time:timeMode,season:seasonMode,weather:weatherMode}));}catch(_){}
+}
+function syncAtmosphereReadout(){
+  const atmosphere=sceneLife?.getAtmosphere();if(!atmosphere||!wrap)return;
+  const period=atmosphere.night>.72?'月夜':atmosphere.warmth>.4?(atmosphere.hour<12?'晨光':'夕照'):'日光';
+  const weatherLabel=ATMOSPHERE_MODES.weather[atmosphere.weather]||'晴朗';
+  const seasonLabel=ATMOSPHERE_MODES.season[atmosphere.season]||'春日';
+  const label=`${seasonLabel} · ${weatherLabel} · ${period}`;
+  const badge=cameraControls?.querySelector('.city-atmosphere-current');
+  if(badge&&badge.textContent!==label)badge.textContent=label;
+  const symbol=cameraControls?.querySelector('.city-atmosphere-symbol');
+  if(symbol)symbol.textContent=atmosphere.weather==='snow'?'❄':atmosphere.weather==='rain'?'☂':atmosphere.night>.72?'☾':'☼';
+  wrap.dataset.season=atmosphere.season;wrap.dataset.weather=atmosphere.weather;
+  wrap.dataset.timeMode=timeMode;wrap.dataset.night=atmosphere.night.toFixed(2);
 }
 function mountCameraControls(){
   const stage=wrap.parentElement;
   cameraControls=document.createElement('div');cameraControls.className='city-camera-controls';cameraControls.setAttribute('role','group');cameraControls.setAttribute('aria-label','调整棋盘视角');
   cameraControls.innerHTML='<span id="city-camera-help" class="city-camera-help">拖动转一转 · 滚轮或双指缩放。键盘方向键转动，＋ / − 缩放，Home 回正。</span><button type="button" data-camera="left" aria-label="向左转动棋盘" title="向左转">↶</button><button type="button" data-camera="right" aria-label="向右转动棋盘" title="向右转">↷</button><span class="city-camera-divider"></span><button type="button" data-camera="out" aria-label="缩小棋盘" title="缩小">−</button><output aria-label="棋盘缩放比例">100%</output><button type="button" data-camera="in" aria-label="放大棋盘" title="放大">＋</button><button type="button" data-camera="reset" class="city-camera-reset">回正</button>';
-  const timeControl=document.createElement('label');timeControl.className='city-time-control';timeControl.innerHTML='<span>光照</span><select aria-label="小城光照"><option value="auto">自动</option><option value="day">白天</option><option value="dusk">黄昏</option><option value="night">夜晚</option></select>';cameraControls.appendChild(timeControl);
-  timeControl.querySelector('select').value=timeMode;
-  timeControl.addEventListener('change',event=>{event.stopPropagation();setCityTimeMode(event.target.value);});
+  const atmosphereControl=document.createElement('details');atmosphereControl.className='city-atmosphere';
+  atmosphereControl.innerHTML='<summary title="切换季节、天气与光照"><span class="city-atmosphere-symbol" aria-hidden="true">☼</span><span class="city-atmosphere-current">小城气候</span><span class="city-atmosphere-expand" aria-hidden="true">⌄</span></summary><div class="city-atmosphere-panel"></div>';
+  const atmospherePanel=atmosphereControl.querySelector('.city-atmosphere-panel');
+  for(const [kind,title] of [['time','光照'],['season','季节'],['weather','天气']]){
+    const row=document.createElement('label');row.className='city-time-control';
+    row.innerHTML=`<span>${title}</span><select data-atmosphere="${kind}" aria-label="小城${title}">${Object.entries(ATMOSPHERE_MODES[kind]).map(([value,text])=>`<option value="${value}">${text}</option>`).join('')}</select>`;
+    row.querySelector('select').value=kind==='time'?timeMode:kind==='season'?seasonMode:weatherMode;
+    atmospherePanel.appendChild(row);
+  }
+  const climateHint=document.createElement('p');climateHint.textContent='换个季节，换种心情。';atmospherePanel.appendChild(climateHint);
+  atmosphereControl.addEventListener('change',event=>{
+    event.stopPropagation();const kind=event.target.dataset.atmosphere;
+    if(kind==='time')setCityTimeMode(event.target.value);else setCityClimate(kind,event.target.value);
+  });
+  atmosphereControl.addEventListener('keydown',event=>{if(event.key==='Escape'){atmosphereControl.open=false;atmosphereControl.querySelector('summary').focus();event.stopPropagation();}});
+  cameraControls.appendChild(atmosphereControl);
   stage.appendChild(cameraControls);
   cameraControls.addEventListener('click',event=>{
     const action=event.target.closest('[data-camera]');if(!action||action.disabled)return;event.stopPropagation();
@@ -374,6 +423,7 @@ function buildMap(data) {
   try{
     sceneLife=createSceneLife({THREE,scene,world,renderer,light,snapshot:data,lotViews,boardBounds,requestRender:()=>{renderDirty=true;}});
     sceneLife.setTimeMode(timeMode);
+    sceneLife.setSeason(seasonMode);sceneLife.setWeather(weatherMode);syncAtmosphereReadout();
   }catch(error){console.warn('City atmosphere is temporarily unavailable.',error);sceneLife=null;}
   resize();
 }
@@ -965,6 +1015,7 @@ function tick(time){
   const delta=Math.min(.1,(time-lastTime)/1000);lastTime=time;
   sceneLife?.setInteractionPaused(Boolean(inspection||cameraGesture.pointers.size));
   const living=sceneLife?.tick(time,delta);
+  if(time-lastAtmosphereReadout>250){lastAtmosphereReadout=time;syncAtmosphereReadout();}
   const moving=[...pawnViews.values()].some((view)=>view.active||view.shieldUntil)||[...lotViews.values()].some((view)=>view.born)||pulses.length;
   if(!moving&&!renderDirty&&!living)return;renderDirty=false;
   pawnViews.forEach((view)=>{
