@@ -63,5 +63,60 @@ const kinds={renovation:'build',district:'build',shield:'card',express:'card',sw
   const h=harness({reduced:true});h.api.play({type:'income',chanceKind:'bonus',actor,rival,beneficiaries:[actor,rival],amount:180,outcomeLabel:'双方分红'});
   assert.equal(h.q('.drama-amount').textContent,'180');assert(h.q('.drama-chance-outcome'));await h.reset();count++;
  }
+ {
+  const h=harness();
+  for(const event of [
+   {type:'rent',amount:60,payerCashAfter:900,from:actor,to:rival},
+   {type:'buy',amount:200,to:actor,rival,buildingLevel:0,isLarge:false,districtCount:1},
+   {type:'build',amount:100,to:actor}, {type:'income',amount:200,to:actor},
+   {type:'notice',amount:0}, {type:'rent',amount:0,payerCashAfter:0,from:actor,to:rival},
+   {type:'relief',amount:0,to:actor}
+  ]){
+   let done=false;const p=h.api.play({...event,title:'结算',message:'真实到账记录。',sessionId:1}).then(()=>done=true);
+   assert.equal(h.all('.drama-speech').length,0,'routine event stays quiet');
+   assert(h.q('.drama-pause'));assert(h.q('.drama-skip'));assert.equal(h.q('.drama-message').textContent,'真实到账记录。');
+   if(event.amount>0){assert(h.q('.drama-amount'));await h.clock.advance(500);h.q('.drama-pause').click();await h.clock.advance(20000);assert(!done);assert.equal(h.q('.drama-amount').textContent,String(event.amount));}
+   await h.skip();await p;
+  }
+  assert.equal(h.clock.timers.size,0);assert.equal(h.randomCalls(),0);count++;
+ }
+ {
+  const h=harness(),rent={type:'rent',amount:540,payerCashAfter:500,from:actor,to:rival,sessionId:2};
+  h.api.play(rent);assert.equal(h.all('.drama-speech').length,2);await h.skip();
+  h.api.play({...rent,leadChanged:true});assert.equal(h.all('.drama-speech').length,0,'back-to-back reactions are suppressed');assert(h.q('.drama-lead-badge'),'reversal feedback is retained');await h.skip();
+  for(let i=0;i<3;i++){h.api.play({type:'income',amount:200,to:actor,sessionId:2});await h.skip();}
+  h.api.play(rent);assert.equal(h.all('.drama-speech').length,2,'later major rent may react again');await h.reset();count++;
+ }
+ {
+  const h=harness(),event={type:'card',chanceKind:'swap',actor,rival,amount:0,sessionId:3};
+  h.api.play(event);assert.equal(h.all('.drama-speech').length,2);await h.skip();
+  for(let i=0;i<5;i++){h.api.play({type:'notice',sessionId:3});await h.skip();}
+  h.api.play(event);assert.equal(h.all('.drama-speech').length,0,'repeated chance flavor is silent in same game');assert(h.q('#drama-layer').classList.contains('is-chance'));await h.skip();
+  h.api.play({...event,sessionId:4});assert.equal(h.all('.drama-speech').length,2,'new session resets frequency');await h.reset();
+  h.api.play({...event,sessionId:4});assert.equal(h.all('.drama-speech').length,2,'explicit preview/game reset also resets frequency');await h.reset();count++;
+ }
+ {
+  const h=harness();let activeDone=false,queuedDone=false;
+  h.api.play({type:'notice',sessionId:5}).then(()=>activeDone=true);
+  h.api.play({type:'card',chanceKind:'express',actor,rival,sessionId:5}).then(()=>queuedDone=true);
+  await h.reset();assert(activeDone);assert(queuedDone);assert.equal(h.clock.timers.size,0);
+  h.api.play({type:'card',chanceKind:'express',actor,rival,sessionId:5});assert.equal(h.all('.drama-speech').length,2,'canceled queue cannot consume a reaction');await h.reset();count++;
+ }
+ {
+  for(const event of [
+   {type:'rent',amount:80,payerCashAfter:60,from:actor,to:rival},
+   {type:'rent',amount:100,payerCashAfter:0,from:actor,to:rival},
+   {type:'rent',amount:160,payerCashAfter:600,leadChanged:true,from:actor,to:rival},
+   {type:'shield',expectedAmount:600,to:actor,rival},
+   {type:'buy',amount:250,to:actor,rival,isLarge:true,buildingLevel:0,districtCount:1},
+   {type:'buy',amount:250,to:actor,rival,buildingLevel:1,districtCount:1},
+   {type:'buy',amount:250,to:actor,rival,buildingLevel:0,districtCount:2}
+  ]){const h=harness();h.api.play(event);assert.equal(h.all('.drama-speech').length,2,'important event retains a reaction');await h.reset();}
+  count++;
+ }
+ {
+  const h=harness();let done=false;const p=h.api.play({type:'rent',amount:60,payerCashAfter:900,from:actor,to:rival,message:'支付 ¥60。'}).then(()=>done=true);
+  await h.clock.advance(2999);assert(!done);await h.clock.advance(1);await p;assert.equal(h.clock.timers.size,0);count++;
+ }
  console.log('PASS',count,'chance presentation / ledger / actor / timing / cleanup checks');
 })().catch(e=>{console.error(e);process.exitCode=1});

@@ -12,7 +12,7 @@ run('world=new THREE.Group();labels=document.createElement("div");');
 const game=fs.readFileSync(root+'game.js','utf8');
 const createBoard=game.slice(game.indexOf('function createBoard('),game.indexOf('function prepareOpeningLots('));
 const maps=vm.runInNewContext(game.slice(0,game.indexOf('const CARD_POOL'))+createBoard+';Object.fromEntries(Object.values(MAP_PRESETS).map(map=>[map.id,{map,board:createBoard(map)}]));');
-let ownedParcels=0,largeParcels=0,rayChecks=0;
+let ownedParcels=0,largeParcels=0,rayChecks=0,specialFrames=0;
 for(const mapId of ['classic','compact','expansion']){
  const {board}=maps[mapId];board.forEach(t=>{if(t.lot&&!t.isLargeSecondary){t.lot.ownerId=t.index%2?'human':'ai';t.lot.level=1;}});
  context.data={mapId,sessionId:'frames',board,players:[{id:'human'},{id:'ai'}]};
@@ -20,8 +20,15 @@ for(const mapId of ['classic','compact','expansion']){
  run(`var px=data.board.map(t=>t.x),py=data.board.map(t=>t.y);boardBounds={minX:Math.min(...px),maxX:Math.max(...px),minY:Math.min(...py),maxY:Math.max(...py)};boardBounds.cx=(boardBounds.minX+boardBounds.maxX)/2;boardBounds.cy=(boardBounds.minY+boardBounds.maxY)/2;data.board.forEach(t=>stepViews.set(t.index,{center:tilePosition(t)}));data.board.filter(t=>!t.isLargeSecondary).forEach(t=>makeLot(t,data));`);
  const views=run('[...lotViews.values()]');
  for(const view of views){
-  assert.equal(view.ownerFrame.visible,!!view.tile.lot);assert.equal(view.group.getObjectsByProperty('name','ownership_frame').length,1);
-  if(!view.tile.lot)continue;
+  assert.equal(view.ownerFrame.visible,true);
+  if(!view.tile.lot){
+   specialFrames++;assert.equal(view.group.getObjectsByProperty('name','special_tile_frame').length,1);
+   assert.equal(view.flag.visible,false,'public sites never pretend to have a player owner');
+   const color=view.ownerMaterial.color.getHexString();assert.ok(!['348d87','d77b59','c5b696'].includes(color),'public site has its own category colour');
+   context.view=view;run('effect({type:"select",tiles:[view.tile.index]})');assert.equal(view.ownerMaterial.color.getHexString(),color,'special category survives selection');
+   assert.ok(view.label.dataset.special);continue;
+  }
+  assert.equal(view.group.getObjectsByProperty('name','ownership_frame').length,1);
   ownedParcels++;if(view.tile.lot.isLarge)largeParcels++;
   const frame=view.ownerFrame,outline=view.outline;
   assert.notEqual(frame.material,outline.material);assert.equal(frame.material.emissive.getHex(),0);
@@ -51,4 +58,4 @@ assert.equal(run("resolveAsset(bankTile,{mapId:'classic'}).key"),'vault_bank');
 assert.equal(run("resolveAsset(bankTile,{mapId:'compact'}).key"),'compact_vault_bank');
 assert.equal(run("resolveAsset(bankTile,{mapId:'expansion'}).key"),'expansion_vault_bank');
 run("modelLibrary.delete('compact_vault_bank')");assert.equal(run("resolveAsset(bankTile,{mapId:'compact'}).key"),'vault_bank');
-console.log(JSON.stringify({ownedParcels,largeParcels,rayChecks,modelRouting:'passed',failures:0}));
+console.log(JSON.stringify({ownedParcels,largeParcels,specialFrames,rayChecks,modelRouting:'passed',failures:0}));

@@ -1,3 +1,5 @@
+import { createRoofSnow } from './scene-snow.js?v=20260912-24';
+
 // The weather is cosmetic: its own deterministic clock and generator never
 // consume dice/card randomness, advance a turn, or schedule another frame.
 export function createCityWeather({ THREE, world, boardBounds, renderer, requestRender = () => {} }) {
@@ -6,6 +8,7 @@ export function createCityWeather({ THREE, world, boardBounds, renderer, request
   const TAU = Math.PI * 2, SEASON_SECONDS = 100;
   const owned = new Set(), bindings = new Map(), materialCopies = new Map();
   const root = new THREE.Group(); root.name = 'city_weather'; root.userData.cosmetic = true; world.add(root);
+  const roofSnow = createRoofSnow({ THREE, world, requestRender });
   const own = resource => { owned.add(resource); return resource; };
   const w = Math.max(3, boardBounds?.w || 11.55), d = Math.max(3, boardBounds?.d || 9.9);
   const parkW = Math.max(1, w - 4.7), parkD = Math.max(1, d - 4.65);
@@ -121,7 +124,7 @@ export function createCityWeather({ THREE, world, boardBounds, renderer, request
   }
 
   function inWorld(node) { for (let p = node; p; p = p.parent) if (p === world) return true; return false; }
-  function isWeatherNode(node) { for (let p = node; p; p = p.parent) if (p === root) return true; return false; }
+  function isWeatherNode(node) { for (let p = node; p; p = p.parent) if (p === root || p.userData.cosmetic) return true; return false; }
   function classify(material) {
     if (!material?.isMeshStandardMaterial || !material.color) return null;
     const name = material.name || '';
@@ -169,7 +172,7 @@ export function createCityWeather({ THREE, world, boardBounds, renderer, request
     const active = new Set();
     for (const { original } of bindings.values()) for (const mat of Array.isArray(original) ? original : [original]) active.add(mat);
     for (const [original, entry] of materialCopies) if (!active.has(original)) { entry.copy.dispose(); owned.delete(entry.copy); materialCopies.delete(original); }
-    forced = true; applyPalette(); requestRender();
+    roofSnow.refresh(); forced = true; applyPalette(); requestRender();
   }
   function resolve() {
     season = seasonMode === 'auto' ? SEASONS[Math.floor(elapsed / SEASON_SECONDS) % 4] : seasonMode;
@@ -255,7 +258,7 @@ export function createCityWeather({ THREE, world, boardBounds, renderer, request
   function tick(delta, { night = 0, paused = false, reduced = false } = {}) {
     if (disposed || (typeof document !== 'undefined' && document.hidden)) return false;
     const accessibilityChanged = motionReduced !== reduced; motionReduced = reduced;
-    if (paused && !forced && !accessibilityChanged) return false;
+    if (paused && !forced && !accessibilityChanged) return roofSnow.tick(0, { snow, rain, snowfall: weather === 'snow', season, reduced, paused });
     const dt = Math.min(.1, Math.max(0, Number.isFinite(delta) ? delta : 0));
     accumulator += dt;
     if (accumulator < 1 / 30 && !forced && !reduced && !accessibilityChanged) return false;
@@ -272,15 +275,16 @@ export function createCityWeather({ THREE, world, boardBounds, renderer, request
     nightValue = clamp(Number.isFinite(night) ? night : 0);
     SEASONS.forEach(name => { weights[name] += ((name === season ? 1 : 0) - weights[name]) * paletteBlend; });
     applyPalette(); updateMotion(reduced);
+    const roofChanged = roofSnow.tick(step, { snow, rain, snowfall: weather === 'snow', season, reduced, paused });
     const changed = forced || !reduced || previous.some((value, i) => Math.abs(value - [cloud, rain, snow, wetness, nightValue, ...Object.values(weights)][i]) > .0001);
-    forced = false; return changed;
+    forced = false; return changed || roofChanged;
   }
   function dispose() {
     if (disposed) return; disposed = true;
     for (const [node, entry] of bindings) restoreBinding(node, entry);
-    root.removeFromParent(); owned.forEach(resource => resource.dispose?.()); owned.clear(); bindings.clear(); materialCopies.clear();
+    roofSnow.dispose(); root.removeFromParent(); owned.forEach(resource => resource.dispose?.()); owned.clear(); bindings.clear(); materialCopies.clear();
   }
-  function getState() { return { season, weather, cloud, rain, snow, wetness, seasonMode, weatherMode }; }
+  function getState() { return { season, weather, cloud, rain, snow, wetness, seasonMode, weatherMode, roofSnow: roofSnow.getState().amount }; }
   refresh(); updateMotion(false);
-  return { setSeason, setWeather, tick, getState, refresh, dispose };
+  return { setSeason, setWeather, tick, getState, refresh, dispose, needsWork: () => roofSnow.getState().pending > 0 };
 }

@@ -1,11 +1,13 @@
 import * as THREE from './assets/vendor/three/three.module.min.js';
 import { GLTFLoader } from './assets/vendor/three/addons/loaders/GLTFLoader.js';
 import { mergeGeometries } from './assets/vendor/three/addons/utils/BufferGeometryUtils.js';
-import { createSceneLife } from './scene-life.js?v=20260912-23';
+import { createSceneLife } from './scene-life.js?v=20260912-24';
 
 // All route positions, ownership and prices come from the game. This view never
 // changes a rule or finishes an action; its animation is entirely cosmetic.
-const STEP = 1.65;
+const STEP = 1.80;
+const WALK_SETBACK = 1.04;
+const SPECIAL_COLORS = { start:'#429faa', bank:'#d6ad48', construction:'#d49a43', card_draw:'#a482cd', chance:'#cc8cb4', teleport:'#54adc8', rush:'#78a369', junction:'#6e9daa' };
 const PALETTE = { cream: '#f3ecdc', edge: '#d9cbb3', grass: '#bac8a6', green: '#6b947b', leaf: '#70947a', dark: '#254d48', roof: '#bc7155', teal: '#438b88', gold: '#d6ac61', path: '#eee5d5', water: '#8dc8c5' };
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 const modelLibrary = new Map();
@@ -32,7 +34,7 @@ let inspection = null;
 let studioEnvironment = null;
 let travelArrow = null;
 let sceneLife = null, cameraControls = null, timeMode = 'auto';
-let seasonMode = 'auto', weatherMode = 'auto', lastAtmosphereReadout = 0;
+let seasonMode = 'auto', weatherMode = 'auto', outskirtsVisible=true, lastAtmosphereReadout = 0;
 const ATMOSPHERE_MODES = {
   time: { auto:'自然流转', dawn:'清晨', day:'白天', dusk:'夕照', night:'月夜' },
   season: { auto:'四季轮换', spring:'春日', summer:'盛夏', autumn:'金秋', winter:'冬日' },
@@ -43,6 +45,7 @@ try {
   if (Object.hasOwn(ATMOSPHERE_MODES.time,saved.time)) timeMode=saved.time;
   if (Object.hasOwn(ATMOSPHERE_MODES.season,saved.season)) seasonMode=saved.season;
   if (Object.hasOwn(ATMOSPHERE_MODES.weather,saved.weather)) weatherMode=saved.weather;
+  if(typeof saved.outskirts==='boolean')outskirtsVisible=saved.outskirts;
 } catch (_) { /* Private browsing can disable local preferences. */ }
 let cameraView = { yaw:null, elevation:null, zoom:1, modified:false, facingYaw:null };
 let cameraGesture = { pointers:new Map(), dragged:false, pinchDistance:0 };
@@ -275,6 +278,7 @@ function syncCameraControls(){
   cameraControls.querySelectorAll('select').forEach(select=>{
     select.disabled=!allowed;select.value=select.dataset.atmosphere==='time'?timeMode:select.dataset.atmosphere==='season'?seasonMode:weatherMode;
   });
+  const outskirtsToggle=cameraControls.querySelector('[data-outskirts-toggle]');if(outskirtsToggle){outskirtsToggle.disabled=!allowed;outskirtsToggle.checked=outskirtsVisible;}
   if(!allowed&&cameraGesture.pointers.size)cancelCameraGesture();
 }
 function setCityTimeMode(mode){
@@ -290,7 +294,7 @@ function setCityClimate(kind,mode){
   renderDirty=true;syncCameraControls();saveAtmospherePreferences();return true;
 }
 function saveAtmospherePreferences(){
-  try{localStorage.setItem('monopoly.city.atmosphere.v1',JSON.stringify({time:timeMode,season:seasonMode,weather:weatherMode}));}catch(_){}
+  try{localStorage.setItem('monopoly.city.atmosphere.v1',JSON.stringify({time:timeMode,season:seasonMode,weather:weatherMode,outskirts:outskirtsVisible}));}catch(_){}
 }
 function syncAtmosphereReadout(){
   const atmosphere=sceneLife?.getAtmosphere();if(!atmosphere||!wrap)return;
@@ -304,6 +308,8 @@ function syncAtmosphereReadout(){
   if(symbol)symbol.textContent=atmosphere.weather==='snow'?'❄':atmosphere.weather==='rain'?'☂':atmosphere.night>.72?'☾':'☼';
   wrap.dataset.season=atmosphere.season;wrap.dataset.weather=atmosphere.weather;
   wrap.dataset.timeMode=timeMode;wrap.dataset.night=atmosphere.night.toFixed(2);
+  wrap.dataset.outskirts=String(outskirtsVisible);
+  wrap.dataset.roofSnow=Number(atmosphere.roofSnow||0).toFixed(2);
 }
 function mountCameraControls(){
   const stage=wrap.parentElement;
@@ -319,8 +325,10 @@ function mountCameraControls(){
     atmospherePanel.appendChild(row);
   }
   const climateHint=document.createElement('p');climateHint.textContent='换个季节，换种心情。';atmospherePanel.appendChild(climateHint);
+  const outskirtsControl=document.createElement('label');outskirtsControl.className='city-outskirts-control';outskirtsControl.innerHTML='<span>周边小景</span><input type="checkbox" data-outskirts-toggle aria-label="显示周边小景">';
+  outskirtsControl.querySelector('input').checked=outskirtsVisible;atmospherePanel.insertBefore(outskirtsControl,climateHint);
   atmosphereControl.addEventListener('change',event=>{
-    event.stopPropagation();const kind=event.target.dataset.atmosphere;
+    event.stopPropagation();if(event.target.hasAttribute('data-outskirts-toggle')){outskirtsVisible=event.target.checked;sceneLife?.setOutskirtsVisible(outskirtsVisible);renderDirty=true;saveAtmospherePreferences();return;}const kind=event.target.dataset.atmosphere;
     if(kind==='time')setCityTimeMode(event.target.value);else setCityClimate(kind,event.target.value);
   });
   atmosphereControl.addEventListener('keydown',event=>{if(event.key==='Escape'){atmosphereControl.open=false;atmosphereControl.querySelector('summary').focus();event.stopPropagation();}});
@@ -423,7 +431,7 @@ function buildMap(data) {
   try{
     sceneLife=createSceneLife({THREE,scene,world,renderer,light,snapshot:data,lotViews,boardBounds,requestRender:()=>{renderDirty=true;}});
     sceneLife.setTimeMode(timeMode);
-    sceneLife.setSeason(seasonMode);sceneLife.setWeather(weatherMode);syncAtmosphereReadout();
+    sceneLife.setSeason(seasonMode);sceneLife.setWeather(weatherMode);sceneLife.setOutskirtsVisible(outskirtsVisible);syncAtmosphereReadout();
   }catch(error){console.warn('City atmosphere is temporarily unavailable.',error);sceneLife=null;}
   resize();
 }
@@ -460,19 +468,28 @@ function makePark(mapId) {
 function numberTexture(number) {
   const canvas = document.createElement('canvas'); canvas.width = 96; canvas.height = 96;
   const ctx = canvas.getContext('2d');
-  ctx.fillStyle = '#e8dcc7'; ctx.beginPath(); ctx.arc(48,48,42,0,Math.PI*2); ctx.fill();
-  ctx.lineWidth = 3; ctx.strokeStyle = '#c7b79a'; ctx.stroke();
-  ctx.font = '600 39px Arial'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillStyle = '#716752'; ctx.fillText(String(number + 1).padStart(2,'0'),48,51);
+  ctx.fillStyle = '#fff9e7'; ctx.beginPath(); ctx.arc(48,48,43,0,Math.PI*2); ctx.fill();
+  ctx.lineWidth = 4; ctx.strokeStyle = '#b6a381'; ctx.stroke();
+  ctx.font = '700 39px Arial'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillStyle = '#536657'; ctx.fillText(String(number + 1).padStart(2,'0'),48,51);
   const texture = own(new THREE.CanvasTexture(canvas)); texture.colorSpace = THREE.SRGBColorSpace; return texture;
 }
 function makeStep(tile) {
-  const modern=snapshot?.mapId!=='classic';
-  const center = tilePosition(tile), walk = center.clone().add(inward(center).multiplyScalar(modern?.84:.63)); walk.y = .205;
-  const disc = mesh(new THREE.PlaneGeometry(.30,.30), own(new THREE.MeshBasicMaterial({ map:numberTexture(tile.index), transparent:true, depthWrite:false })), world, walk.x, walk.y, walk.z);
+  const center = tilePosition(tile), edges=boundaryEdges(center), nearest=Math.min(...edges.map(edge=>edge.distance));
+  const sides=edges.filter(edge=>edge.distance<nearest+.001), corner=sides.length>1;
+  // A corner needs clearance on both axes; normalising a diagonal would push
+  // its landing point back inside the corner building's footprint.
+  const offset=new THREE.Vector3();sides.forEach(side=>offset.addScaledVector(side.normal,WALK_SETBACK));
+  const walk=center.clone().add(offset);walk.y=.255;
+  const size=corner?.76:.66, routeColor=tile.isStart?SPECIAL_COLORS.start:SPECIAL_COLORS[tile.special?.type];
+  const landing=new THREE.Group();landing.position.copy(walk);landing.position.y=.205;landing.name='landing_pad_'+tile.index;landing.userData.cosmetic=true;world.add(landing);
+  rounded(landing,size,.026,size,corner?.19:.16,routeColor||'#c2b191');
+  rounded(landing,size-.075,.018,size-.075,corner?.16:.13,'#faf2db',0,.027);
+  const disc = mesh(new THREE.PlaneGeometry(corner?.49:.43,corner?.49:.43), own(new THREE.MeshBasicMaterial({ map:numberTexture(tile.index), transparent:true, depthWrite:false })), world, walk.x, walk.y, walk.z);
   disc.rotation.x = -Math.PI/2; disc.castShadow = false;
-  const ring = mesh(new THREE.RingGeometry(modern?.24:.15,modern?.33:.195,36), own(new THREE.MeshBasicMaterial({ color:'#efba68', transparent:true, opacity:0, side:THREE.DoubleSide, depthWrite:false })), world, walk.x, .218, walk.z);
+  const ring = mesh(new THREE.RingGeometry(corner?.39:.34,corner?.445:.395,40), own(new THREE.MeshBasicMaterial({ color:'#efba68', transparent:true, opacity:0, side:THREE.DoubleSide, depthWrite:false })), world, walk.x, .261, walk.z);
   ring.rotation.x = -Math.PI/2;
-  stepViews.set(tile.index, { center, walk, ring });
+  ring.castShadow=false;
+  stepViews.set(tile.index, { center, walk, ring, landing, corner, normal:offset.clone().normalize() });
 }
 function makeRoads(data) {
   const edges = new Set(); const connections = [];
@@ -482,9 +499,9 @@ function makeRoads(data) {
   connections.forEach(([a,b]) => {
     const start = stepViews.get(a).walk, end = stepViews.get(b).walk;
     const length = start.distanceTo(end); const midpoint = start.clone().add(end).multiplyScalar(.5);
-    const road = box(world,data.mapId==='classic'?.16:.34,.014,length, data.mapId==='classic'?'#d3c7af':'#e7dac0',midpoint.x,.197,midpoint.z);
+    const road = box(world,.30,.014,length,'#e2d2b5',midpoint.x,.197,midpoint.z);
     road.rotation.y = Math.atan2(end.x-start.x,end.z-start.z); road.castShadow=false;
-    if(data.mapId!=='classic'){
+    {
       const shape=new THREE.Shape();shape.moveTo(-.085,-.07);shape.lineTo(0,.08);shape.lineTo(.085,-.07);shape.lineTo(0,-.025);shape.closePath();
       const arrow=mesh(new THREE.ShapeGeometry(shape),own(new THREE.MeshBasicMaterial({color:'#a99161',side:THREE.DoubleSide})),world,midpoint.x,.216,midpoint.z);
       arrow.rotation.set(-Math.PI/2,0,-Math.atan2(end.x-start.x,-(end.z-start.z)));arrow.castShadow=false;
@@ -509,7 +526,7 @@ function makeLot(tile, data) {
   const pulseMaterial = own(new THREE.MeshBasicMaterial({ color:PALETTE.gold, transparent:true, opacity:0, depthWrite:false }));
   // Event emphasis sits outside the parcel; ownership keeps its own color.
   const outline=roundedFrame(group,w+.12,.014,d+.12,.18,.035,pulseMaterial,.014);outline.name='event_frame';
-  const building = new THREE.Group(); building.position.y=.048; group.add(building);
+  const building = new THREE.Group(); building.position.y=.048; building.userData.snowTarget=true; group.add(building);
   const flag = new THREE.Group(); flag.position.set(-w/2+.19,.045,d/2-.26); group.add(flag);
   if(modern){const front=Math.abs(boundary.normal.x)>.5?w:d,span=Math.abs(boundary.normal.x)>.5?d:w;flag.position.copy(boundary.normal.clone().multiplyScalar(front/2-.23)).add(new THREE.Vector3(boundary.normal.z,0,-boundary.normal.x).multiplyScalar(-span/2+.19));flag.position.y=.045;flag.rotation.y=boundary.rotation;}
   cylinder(flag,.017,.38,PALETTE.dark,0,.19,0,8);
@@ -680,8 +697,11 @@ function proceduralSpecial(parent, type) {
 function updateLot(view,tile,data,initial=false) {
   view.tile=tile;
   const owner=data.players.find((p)=>p.id===tile.lot?.ownerId);
-  const color=owner?.id==='human'?'#348d87':owner?.id==='ai'?'#d77b59':'#c5b696';
-  view.ownerMaterial.color.set(color);view.ownerFrame.visible=Boolean(owner);view.flag.visible=Boolean(owner);
+  const specialColor=!tile.lot?(tile.isStart?SPECIAL_COLORS.start:SPECIAL_COLORS[tile.special?.type]):null;
+  const color=owner?.id==='human'?'#348d87':owner?.id==='ai'?'#d77b59':specialColor||'#c5b696';
+  view.ownerMaterial.color.set(color);view.ownerFrame.visible=Boolean(owner||specialColor);view.flag.visible=Boolean(owner);
+  view.ownerFrame.name=specialColor?'special_tile_frame':'ownership_frame';
+  view.ownerMaterial.emissive.set(specialColor||'#000000');view.ownerMaterial.emissiveIntensity=specialColor?.09:0;
   const level=tile.lot?.level||0;
   const asset=resolveAsset(tile,data,level);
   const modelName=asset.desired;
@@ -702,7 +722,7 @@ function updateLot(view,tile,data,initial=false) {
     view.label.dataset.rent=String(rent);
     view.label.dataset.level=String(level);view.label.classList.toggle('is-built-for-sale',!owner&&level>0);
     view.label.querySelector('.scene-tile-name').dataset.level=String(level);
-  }else {meta.textContent=tile.isStart?'起点 · 征用':tile.special?.label||'城市事件';view.label.style.setProperty('--owner-color','#ab9569');}
+  }else {meta.textContent=tile.isStart?'起点 · 征用':tile.special?.label||'城市事件';view.label.style.setProperty('--owner-color',specialColor||'#ab9569');view.label.dataset.special=tile.isStart?'start':tile.special?.type||'';}
   view.label.title=`第 ${tile.index+1} 格 · ${tile.name}${tile.lot?.isLarge?' · 双格地产':''} · ${meta.textContent}`;
   view.label.setAttribute('aria-label',view.label.title);
   view.label.classList.toggle('is-landmark',Boolean(tile.lot?.isLarge));
@@ -726,12 +746,10 @@ function makePawn(player) {
 }
 function pawnPosition(player){
   const step=stepViews.get(player.position)||stepViews.values().next().value;
-  const pos=step.walk.clone();pos.y=.235;
-  if(snapshot?.mapId==='classic'){pos.x+=player.id==='human'?-.15:.15;pos.z+=player.id==='human'?.04:-.04;}
-  else{
-    const normal=inward(step.center),tangent=new THREE.Vector3(normal.z,0,-normal.x);
-    pos.add(tangent.multiplyScalar(player.id==='human'?-.20:.20)).add(normal.multiplyScalar(.045));
-  }
+  const pos=step.walk.clone();pos.y=.265;
+  const normal=step.normal||inward(step.center),tangent=new THREE.Vector3(normal.z,0,-normal.x);
+  const sharing=snapshot?.players?.some(other=>other.id!==player.id&&other.position===player.position);
+  if(sharing)pos.addScaledVector(tangent,player.id==='human'?-.17:.17);
   return pos;
 }
 function update(data){
@@ -746,19 +764,20 @@ function update(data){
   data.board.filter((tile)=>!tile.isLargeSecondary).forEach((tile)=>{const view=lotViews.get(tile.index);if(view)updateLot(view,tile,data);});
   data.players.forEach((player)=>{
     const view=pawnViews.get(player.id);if(!view)return;
-    if(view.position!==player.position){
-      view.from.copy(view.group.position);view.target.copy(pawnPosition(player));view.position=player.position;view.started=performance.now();
+    const nextPawnPosition=pawnPosition(player);
+    if(view.position!==player.position||view.target.distanceToSquared(nextPawnPosition)>.0001){
+      view.from.copy(view.group.position);view.target.copy(nextPawnPosition);view.position=player.position;view.started=performance.now();
       view.teleport=view.from.distanceTo(view.target)>STEP*2.2;view.duration=reducedMotion.matches?0:view.teleport?470:190;view.active=true;
     }
     view.shield.visible=Boolean(player.effects?.shield||player.effects?.shieldCharges||player.effects?.rentShield);
     view.anchor.classList.toggle('is-current',data.currentPlayerId===player.id);
-    if(data.mapId!=='classic')view.anchor.textContent=`${player.id==='human'?'你':'对手'} · ${String(player.position+1).padStart(2,'0')}`;
+    view.anchor.textContent=`${player.id==='human'?'你':'对手'} · ${String(player.position+1).padStart(2,'0')}`;
     view.anchor.title=`${player.name}当前位于第 ${player.position+1} 格 · ${data.board[player.position]?.name||''}`;
   });
   const current=data.players.find((player)=>player.id===data.currentPlayerId);
   stepViews.forEach((step,index)=>{
     const landed=index===data.animation?.landedTile,moving=index===data.animation?.currentTile;
-    const standing=data.mapId!=='classic'&&index===current?.position;
+    const standing=index===current?.position;
     step.ring.material.opacity=(landed||moving) ? .85 : standing ? .70 : 0;
     step.ring.material.color.set(landed||moving?'#e6b253':current?.id==='ai'?'#d77b59':'#348d87');
   });

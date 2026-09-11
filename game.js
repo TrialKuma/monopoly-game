@@ -263,7 +263,7 @@ const CARD_POOL = [
   { id: "launch", name: "命定骰", icon: "🎯", description: "选择前进1~6步" },
   { id: "rewind", name: "时光回溯", icon: "⏪", description: "选择一方后退3步" },
   { id: "swap", name: "换位魔法", icon: "🔄", description: "和对手交换位置" },
-  { id: "freeze", name: "绊脚术", icon: "🪤", description: "对手下回合无法移动，但仍需结算地块" },
+  { id: "freeze", name: "绊脚术", icon: "🪤", description: "对手下回合停步并结算地块；温泉休息期间不追加结算" },
   { id: "combo", name: "连击鼓", icon: "🥁", description: "获得额外一回合" },
   { id: "shield", name: "护盾术", icon: "🛡️", description: "免疫下一次过路费" },
   { id: "doubleRent", name: "收租翻倍", icon: "💎", description: "地产下次被踩收费×2" },
@@ -1485,23 +1485,17 @@ async function processTurn(player, isExtraTurn = false) {
 
   if (player.effects.hotSpringRest) {
     player.effects.hotSpringRest = false;
-    pushLog(`${player.name} 在温泉庄园休息完毕，恢复行动。`);
+    // A rest already consumes this action. A trap laid during the same rest
+    // expires with it: settling the stationary lot again would collect rent
+    // and re-arm this rest indefinitely without a new landing.
+    const trappedWhileResting = player.effects.frozen;
+    player.effects.frozen = false;
+    pushLog(`${player.name} 在温泉庄园休息一回合，下回合恢复行动。${trappedWhileResting ? "绊脚效果同时结束，不重复收租或追加休息。" : ""}`);
     state.statusTitle = `${player.name} 休息结束`;
-    state.statusDescription = "温泉休息结束，准备恢复行动。";
+    state.statusDescription = "本回合休息结束，下回合恢复行动；停留期间不重复结算温泉。";
     render();
-    await showContinueModal({ label: "温泉休息", title: `♨️ ${player.name} 休息结束`, message: "温泉庄园的休息时间已过，下回合可以正常行动。" });
+    await showContinueModal({ label: "温泉休息", title: `♨️ ${player.name} 休息结束`, message: `本回合休息结束，下回合可以正常行动。${trappedWhileResting ? "绊脚效果一同消退，不重复收租，也不延长住宿。" : "停留期间不重复收租。"}` });
     if (!isSessionActive(sid)) return;
-    if (player.effects.frozen) {
-      player.effects.frozen = false;
-      pushLog(`${player.name} 刚从温泉醒来就被绊脚术绊住！重新入住温泉并结算！`);
-      await showContinueModal({ label: "绊脚效果", title: `${player.name} 被绊住！`, message: "绊脚术生效，无法移动，重新结算当前地块！" });
-      if (!isSessionActive(sid)) return;
-      const frozenTile = state.board[player.position];
-      state.animation.landedTile = frozenTile.index;
-      render();
-      await resolveLanding(player, frozenTile, sid);
-      if (!isSessionActive(sid) || state.gameOver) return;
-    }
     endTurn(); return;
   }
 
@@ -1744,6 +1738,8 @@ async function resolveLargeLotEffect(player, tile, sid) {
       message: `Lv.${lot.level} 商务运营收益 ${formatMoney(bonus)} 入账！${lot.level === 3 ? "\n建筑已满级，无需再升级。" : ""}`,
     });
   } else if (lot.effectId === "hot_spring_rest" && lot.ownerId && lot.ownerId !== player.id) {
+    // Relief has already scheduled one recovery action and takes precedence.
+    if (player.effects.bankruptcyRelief) return;
     if (player.effects.hotSpringRest) {
       pushLog(`${player.name} 已经在特殊休息状态中，不会重复触发。`);
     } else {
@@ -1753,7 +1749,7 @@ async function resolveLargeLotEffect(player, tile, sid) {
       await showContinueModal({
         label: "温泉庄园",
         title: `♨️ ${lotName} 生效！`,
-        message: `${player.name} 被迫在 ${lotName} 停留，下回合将休息一回合！`,
+        message: `${player.name} 下回合在 ${lotName} 休息一回合；休息期间不重复收租，绊脚也不会延长本次住宿。`,
       });
     }
   }
@@ -2421,8 +2417,9 @@ async function executeCardEffect(player, card, sid) {
         await showContinueModal({ label: "卡牌效果", title: "🪤 绊脚术 — 无效！", message: `${opp.name} 正处于破产救助状态，免疫绊脚术！` });
       } else {
         opp.effects.frozen = true;
-        pushLog(`绊脚术！${opp.name} 下回合无法移动，但仍需结算地块！`);
-        await showContinueModal({ label: "卡牌效果", title: "🪤 绊脚术！", message: `${opp.name} 被绊住，下回合无法移动，但仍需结算当前所在地块！` });
+        const restNote = opp.effects.hotSpringRest ? "对方正在温泉休息，绊脚与休息同时结束，不重复收租或追加休息。" : "下回合无法移动，但仍需结算当前所在地块！";
+        pushLog(`绊脚术！${opp.name} 被绊住。${restNote}`);
+        await showContinueModal({ label: "卡牌效果", title: "🪤 绊脚术！", message: `${opp.name} 被绊住。${restNote}` });
       }
       break;
     case "combo":
@@ -2603,8 +2600,12 @@ function aiChooseCard(cards, player) {
   const opp = getOpponent(player);
   const myLots = state.board.filter((t) => t.lot?.ownerId === player.id && !t.isLargeSecondary).length;
   const oppLots = state.board.filter((t) => t.lot?.ownerId === opp.id && !t.isLargeSecondary).length;
+  // These effects already consume the opponent's next action; a second trap
+  // adds nothing. Card draws still require a selection, so rank it last rather
+  // than returning no card and changing the mandatory-draw flow.
+  const redundantFreeze = opp.effects.hotSpringRest || opp.effects.frozen || opp.effects.bankruptcyRelief;
   const prio = {
-    rewind: oppLots > 0 ? 9 : 2, freeze: oppLots > 0 ? 7 : 3,
+    rewind: oppLots > 0 ? 9 : 2, freeze: redundantFreeze ? -1 : oppLots > 0 ? 7 : 3,
     slow: oppLots > 0 ? 7 : 3, doubleRent: myLots >= 2 ? 8 : 2,
     combo: 6, boost: 5, shield: oppLots >= 3 ? 7 : 3,
     launch: 6, teleport: 5, swap: 4,

@@ -27,12 +27,13 @@ export function createCityLighting({ THREE, scene, world, renderer, light, board
   const own = resource => { owned.add(resource); return resource; };
   const color = value => new THREE.Color(value);
   const colors = {
-    sun: color('#fff2d8'), amber: color('#ffac62'), moon: color('#b4d4ff'), cloud: color('#d6e1ec'),
-    skyDay: color('#b7d7ee'), skyDusk: color('#7394bc'), skyNight: color('#08172e'),
-    horizonDay: color('#edf1de'), horizonDusk: color('#ffd2a2'), horizonNight: color('#29465f'),
-    groundDay: color('#dbe4d7'), groundDusk: color('#e7d5bb'), groundNight: color('#9fb3bc'),
-    hemiDay: color('#c9e6ff'), hemiDusk: color('#91b6e5'), hemiNight: color('#709ccc'),
-    bounceDay: color('#dcc8a0'), bounceNight: color('#645947'), fillDay: color('#c5e9f5'), fillNight: color('#8fbbe8'),
+    sun: color('#fff2d8'), dawn: color('#c2e3ff'), amber: color('#ffce78'), moon: color('#b4d4ff'), cloud: color('#d6e1ec'),
+    skyDay: color('#b7d7ee'), skyDawn: color('#a1cbea'), skyDusk: color('#abb6c5'), skyNight: color('#08172e'),
+    horizonDay: color('#edf1de'), horizonDawn: color('#dfedf6'), horizonDusk: color('#ffe1a0'), horizonNight: color('#29465f'),
+    groundDay: color('#dbe4d7'), groundDawn: color('#ccdfe8'), groundDusk: color('#e9d5aa'), groundNight: color('#9fb3bc'),
+    hemiDay: color('#c9e6ff'), hemiDawn: color('#b0d8ff'), hemiDusk: color('#ced9e4'), hemiNight: color('#709ccc'),
+    bounceDay: color('#dcc8a0'), bounceDawn: color('#bed5e3'), bounceDusk: color('#e7c898'), bounceNight: color('#645947'),
+    fillDay: color('#c5e9f5'), fillDawn: color('#c6e5ff'), fillDusk: color('#f8dfb6'), fillNight: color('#8fbbe8'),
     snow: color('#edf3f5'), wet: color('#92aabb'),
   };
   const scratchColor = color('#ffffff'), skyColor = color('#ffffff'), horizonColor = color('#ffffff');
@@ -115,12 +116,12 @@ export function createCityLighting({ THREE, scene, world, renderer, light, board
     shadow.needsUpdate = true;
   }
 
-  function updateSky(daylight, warmth, night) {
-    const signature = [daylight, warmth, night, cloud, snow].map(value => Math.round(value * 110)).join(':');
+  function updateSky(daylight, dawn, dusk, night) {
+    const signature = [daylight, dawn, dusk, night, cloud, snow].map(value => Math.round(value * 110)).join(':');
     if (signature === lastSkySignature) return;
     lastSkySignature = signature;
-    skyColor.copy(colors.skyDay).lerp(colors.skyDusk, warmth * .66).lerp(colors.skyNight, night);
-    horizonColor.copy(colors.horizonDay).lerp(colors.horizonDusk, warmth * .88).lerp(colors.horizonNight, night * .90);
+    skyColor.copy(colors.skyDay).lerp(colors.skyDawn, dawn * .90).lerp(colors.skyDusk, dusk * .84).lerp(colors.skyNight, night);
+    horizonColor.copy(colors.horizonDay).lerp(colors.horizonDawn, dawn).lerp(colors.horizonDusk, dusk).lerp(colors.horizonNight, night * .90);
     skyColor.lerp(colors.cloud, cloud * daylight * .38);
     horizonColor.lerp(colors.cloud, cloud * .48 * daylight).lerp(colors.snow, snow * daylight * .10);
     for (let y = 0; y < 96; y++) {
@@ -141,6 +142,10 @@ export function createCityLighting({ THREE, scene, world, renderer, light, board
     const phase = (hour - 6) / 24 * TAU, altitude = Math.sin(phase);
     const daylight = smooth(-.15, .42, altitude), night = 1 - daylight;
     const warmth = Math.exp(-Math.pow((altitude - .28) / .30, 2)) * (1 - cloud * .57);
+    // Low sun is not always amber. A pale-blue morning and a honey-coloured
+    // evening each tint the complete rig, with an invisible handover at noon.
+    // `warmth` remains the existing low-sun indicator used by the clock label.
+    const evening = smooth(11, 13, hour), dawn = warmth * (1 - evening), dusk = warmth * evening;
     const sunPower = (.3 + 2.5 * Math.pow(Math.max(0, altitude), .38)) * daylight * (1 - cloud * .76);
     const moonPower = .64 * night * (1 - cloud * .55);
     const moonMix = moonPower / Math.max(.001, sunPower + moonPower);
@@ -152,20 +157,20 @@ export function createCityLighting({ THREE, scene, world, renderer, light, board
     if (light) {
       light.position.copy(keyDirection).multiplyScalar(lightDistance).add(target);
       light.target.position.copy(target); light.castShadow = true;
-      light.color.copy(colors.sun).lerp(colors.amber, warmth * .92).lerp(colors.moon, moonMix);
+      light.color.copy(colors.sun).lerp(colors.dawn, dawn).lerp(colors.amber, dusk * .96).lerp(colors.moon, moonMix);
       light.intensity = sunPower + moonPower; fitShadow();
     }
     for (const base of lights) {
       const node = base.node;
       if (node === light) continue;
       if (node.isHemisphereLight) {
-        node.color.copy(colors.hemiDay).lerp(colors.hemiDusk, warmth * .7).lerp(colors.hemiNight, night);
+        node.color.copy(colors.hemiDay).lerp(colors.hemiDawn, dawn * .85).lerp(colors.hemiDusk, dusk * .74).lerp(colors.hemiNight, night);
         node.color.lerp(colors.cloud, cloud * .27);
-        node.groundColor.copy(colors.bounceDay).lerp(colors.bounceNight, night).lerp(colors.snow, snow * daylight * .42);
+        node.groundColor.copy(colors.bounceDay).lerp(colors.bounceDawn, dawn * .86).lerp(colors.bounceDusk, dusk * .76).lerp(colors.bounceNight, night).lerp(colors.snow, snow * daylight * .42);
         node.intensity = mix(.77, .46, night) + cloud * .16 * daylight + snow * .09;
       } else if (node.isDirectionalLight) {
         node.position.set(-keyDirection.x * lightDistance * .65, lightDistance * .45, -keyDirection.z * lightDistance * .6);
-        node.color.copy(colors.fillDay).lerp(colors.fillNight, night);
+        node.color.copy(colors.fillDay).lerp(colors.fillDawn, dawn).lerp(colors.fillDusk, dusk * .72).lerp(colors.fillNight, night);
         node.intensity = mix(.30, .24, night) + cloud * .06;
       }
     }
@@ -173,12 +178,12 @@ export function createCityLighting({ THREE, scene, world, renderer, light, board
     if (renderer && Number.isFinite(original.exposure)) renderer.toneMappingExposure = mix(.96, .98, night) - warmth * .025;
     for (const lamp of parkLights) lamp.intensity = (1.7 + wetness * .5) * smooth(.12, .9, night);
     for (const { material } of groundCopies) {
-      material.color.copy(colors.groundDay).lerp(colors.groundDusk, warmth * .5).lerp(colors.groundNight, night * .55);
+      material.color.copy(colors.groundDay).lerp(colors.groundDawn, dawn * .85).lerp(colors.groundDusk, dusk * .72).lerp(colors.groundNight, night * .55);
       material.color.lerp(colors.wet, wetness * .14).lerp(colors.snow, snow * .27);
       material.roughness = mix(.96, .60, wetness); material.emissive.copy(colors.skyNight); material.emissiveIntensity = night * .25;
     }
-    updateSky(daylight, warmth, night);
-    state = { mode, hour, night, warmth, daylight, cloud, shadowSource: moonMix > .5 ? 'moon' : 'sun', sunAltitude: altitude, shadowElevation: keyDirection.y };
+    updateSky(daylight, dawn, dusk, night);
+    state = { mode, hour, night, warmth, dawn, dusk, daylight, cloud, shadowSource: moonMix > .5 ? 'moon' : 'sun', sunAltitude: altitude, shadowElevation: keyDirection.y };
   }
 
   function setTimeMode(value) {

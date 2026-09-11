@@ -51,6 +51,40 @@ test('night keeps a real elevated moon key and bounded warm shadowless park ligh
   f.api.dispose();
 });
 
+test('morning is pale blue and evening is golden across direct light, sky, fill and ground', () => {
+  const f = fixture();
+  const dawn = settle(f.api, 'dawn');
+  const morningKey = f.sun.color.clone(), morningGround = f.floor.material.color.clone();
+  const morningFill = f.fill.color.clone(), morningBounce = f.hemi.groundColor.clone();
+  const morningSky = f.scene.background.image.data.slice();
+  const dusk = settle(f.api, 'dusk');
+  const eveningSky = f.scene.background.image.data;
+  assert.ok(dawn.dawn > .9 && dawn.dusk < .01 && dusk.dusk > .9 && dusk.dawn < .01);
+  assert.ok(morningKey.b > morningKey.r * 1.3, 'morning has a visibly cool direct key');
+  assert.ok(f.sun.color.r > f.sun.color.b * 1.8, 'evening has a yellow-gold direct key');
+  assert.ok(morningFill.b > morningFill.r && f.fill.color.r > f.fill.color.b, 'opposite fill temperatures');
+  assert.ok(morningBounce.b > morningBounce.r && f.hemi.groundColor.r > f.hemi.groundColor.b, 'bounce follows each time of day');
+  assert.ok(morningGround.b > morningGround.r && f.floor.material.color.r > f.floor.material.color.b, 'ground follows each time of day');
+  assert.ok(morningSky[2] > morningSky[0] && eveningSky[0] > eveningSky[2] + 30, 'the visible horizon separates morning and evening');
+  assert.ok(morningSky[95 * 8 + 2] > morningSky[95 * 8], 'morning overhead sky stays blue');
+  f.api.dispose();
+});
+
+test('overcast morning and evening remain distinct and transition smoothly through noon', () => {
+  const f = fixture();
+  settle(f.api, 'dawn', { cloud: 1, rain: 1 }); const morning = f.sun.color.clone();
+  settle(f.api, 'dusk', { cloud: 1, rain: 1 }); const evening = f.sun.color.clone();
+  assert.ok(morning.b > morning.r && evening.r > evening.b, 'rain softens but does not reverse time-of-day colour');
+  settle(f.api, 'day'); f.api.setTimeMode('auto');
+  let previous = f.sun.color.clone();
+  for (let i = 0; i < 100; i++) {
+    f.api.tick(.1);
+    assert.ok(Math.max(Math.abs(f.sun.color.r - previous.r), Math.abs(f.sun.color.g - previous.g), Math.abs(f.sun.color.b - previous.b)) < .002, 'no noon colour jump');
+    previous.copy(f.sun.color);
+  }
+  f.api.dispose();
+});
+
 test('shadow camera contains every board corner through day, dusk, and night', () => {
   let corners = 0;
   for (const [width, depth] of [[11.55, 9.9], [14.85, 11.55], [18.15, 16.5]]) {

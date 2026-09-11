@@ -39,6 +39,11 @@
   // Rotate complete exchanges: the reply answers the actual preceding line.
   // This cosmetic history survives reset and never consumes the dice RNG.
   const lineCursors = new Map();
+  // Pace reactions by events actually displayed, not queued requests or dice
+  // randomness. Dialogue is an occasional reaction; every receipt still shows.
+  let reactionSession, reactionScene = 0, lastReactionScene = -Infinity;
+  const spokenChanceKinds = new Set();
+  const lastReactionByKind = new Map();
   const CHANCE_KINDS = new Set(['renovation','district','shield','express','swap','bank','bonus']);
   const EXCHANGES = {
     chance_renovation:[
@@ -103,6 +108,10 @@
       ['你看我像还有钱的样子吗？！','不像，像来气我的。'],
       ['要钱没有，骰子一颗。','……行，你掷吧。'],
     ],
+    thin:[
+      ['我就剩这点了，你还收？！','收完了才听见，不好意思啊。'],
+      ['再踩你一次我人就没了！','那你走路小心点。'],
+    ],
     zero:[
       ['零块钱，也要站这儿结账？','你别说，还挺有仪式感。'],
       ['这账单，主打一个陪伴。','忙活半天，收了个寂寞。'],
@@ -154,6 +163,49 @@
       opening:event.isOpeningBuilding === true && built, large:event.isLarge === true};
   }
 
+  function resetReactions(sessionId) {
+    reactionSession = sessionId;
+    reactionScene = 0;
+    lastReactionScene = -Infinity;
+    spokenChanceKinds.clear();
+    lastReactionByKind.clear();
+  }
+
+  function reactionFor(event, type, amount) {
+    if (event.sessionId != null && event.sessionId !== reactionSession) resetReactions(event.sessionId);
+    const scene = ++reactionScene;
+    let key = '', gap = 4;
+    if (CHANCE_KINDS.has(event.chanceKind)) {
+      if (spokenChanceKinds.has(event.chanceKind)) return [];
+      key = 'chance_' + event.chanceKind;
+      gap = 3;
+    } else if (type === 'rent') {
+      const cash = optionalNumber(event.payerCashAfter ?? event.from?.cashAfter);
+      // Zero-payment repetitions are not another crisis, and small routine
+      // rents do not need a conversation. The visible ledger remains intact.
+      if (amount <= 0) return [];
+      const lastCash = cash !== null && cash <= 100;
+      if (!event.leadChanged && !lastCash && amount < 300) return [];
+      key = lastCash ? 'rent_last_cash' : event.leadChanged ? 'rent_reversal' : 'rent_large';
+      if (lastCash || event.leadChanged) gap = 2;
+    } else if (type === 'buy') {
+      const facts = purchaseFacts(event);
+      if (!facts.chain && !facts.large && !facts.built) return [];
+      key = 'buy';
+    } else if (['shield', 'seize', 'relief'].includes(type)) {
+      if (type === 'relief' && amount <= 0) return [];
+      key = type;
+      gap = 2;
+    } else return [];
+    if (scene - lastReactionScene < gap || scene - (lastReactionByKind.get(key) ?? -Infinity) < 5) return [];
+    const lines = dialogue(event, type, amount);
+    if (!lines.length) return lines;
+    lastReactionScene = scene;
+    lastReactionByKind.set(key, scene);
+    if (CHANCE_KINDS.has(event.chanceKind)) spokenChanceKinds.add(event.chanceKind);
+    return lines;
+  }
+
   function dialogue(event, type, amount) {
     const say = (player, role, mood, face, words) => ({player, role, mood, face, words});
     if (CHANCE_KINDS.has(event.chanceKind)) {
@@ -166,7 +218,7 @@
     if (type === 'rent') {
       const cash = optionalNumber(event.payerCashAfter ?? event.from?.cashAfter);
       const exhausted = cash !== null && cash <= 0;
-      const key = exhausted ? (amount > 0 ? 'empty' : 'emptyZero') : amount <= 0 ? 'zero' : event.leadChanged ? (amount >= 300 ? 'hugeLead' : 'lead') : amount >= 300 ? 'huge' : 'rent';
+      const key = exhausted ? (amount > 0 ? 'empty' : 'emptyZero') : amount <= 0 ? 'zero' : event.leadChanged ? (amount >= 300 ? 'hugeLead' : 'lead') : cash !== null && cash <= 100 ? 'thin' : amount >= 300 ? 'huge' : 'rent';
       const [complaint, reply] = line(key);
       return [say(event.from,'付款方',exhausted?'panic':'complaint',exhausted?'😱':amount>=300?'😤':'😮',complaint), say(event.to,'收租方','proud',event.leadChanged?'😎':'😏',reply)];
     }
@@ -476,8 +528,8 @@
     const facts = purchaseFacts(event);
     const importantPurchase = type === 'buy' && (facts.chain || facts.large || facts.built);
     const major = type === 'rent' && (amount >= 300 || leadChanged) || ['seize', 'shield', 'relief', 'win'].includes(type) || type === 'bank' && amount >= 300 || importantPurchase;
-    const purchaseReply = type === 'buy' && event.rival?.name && event.rival.id !== event.to?.id;
-    let defaultDuration = type === 'win' ? 6500 : major ? 6000 : type === 'rent' || purchaseReply ? 4500 : 3000;
+    const reaction = reactionFor(event, type, amount);
+    let defaultDuration = type === 'win' ? 6500 : major ? (reaction.length ? 6000 : 4500) : reaction.length ? 4500 : 3000;
     if (chance) defaultDuration = Math.max(defaultDuration, 5200);
     const messageLength = String(event.message || '').length;
     if (messageLength > 50) defaultDuration = Math.max(defaultDuration, Math.min(10000, 1500 + messageLength * 55));
@@ -499,7 +551,7 @@
     kicker.prepend(element('i', 'drama-live-dot'));
     meta.append(kicker, element('span', 'drama-sequence', String(++eventNumber).padStart(2, '0')));
     content.appendChild(meta);
-    const speech = speechBubbles(dialogue(event, type, amount));
+    const speech = speechBubbles(reaction);
     if (speech) content.appendChild(speech);
     const body = element('div', 'drama-body');
     const symbol = element('div', 'drama-symbol');
@@ -664,6 +716,7 @@
       document.body.classList.remove('drama-playing');
       transferLayer?.replaceChildren();
       eventNumber = 0;
+      resetReactions();
     },
     setMuted(value) {
       muted = !!value;
