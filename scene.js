@@ -1,6 +1,7 @@
 import * as THREE from './assets/vendor/three/three.module.min.js';
 import { GLTFLoader } from './assets/vendor/three/addons/loaders/GLTFLoader.js';
 import { mergeGeometries } from './assets/vendor/three/addons/utils/BufferGeometryUtils.js';
+import { createSceneLife } from './scene-life.js?v=20260911-19';
 
 // All route positions, ownership and prices come from the game. This view never
 // changes a rule or finishes an action; its animation is entirely cosmetic.
@@ -20,6 +21,7 @@ const materials = new Map();
 const pulses = [];
 let scene, camera, renderer, world, labels, wrap, observer, frame = 0;
 let snapshot = null, mapKey = '', lastTime = 0, width = 1, height = 1;
+let rendererWidth = 0, rendererHeight = 0;
 let boardBounds, light, ground, disposed = false, selectedIndex = null;
 let modelLoadStarted = false;
 let modelsLoading = false;
@@ -27,17 +29,23 @@ let renderDirty = false;
 let inspection = null;
 let studioEnvironment = null;
 let travelArrow = null;
+let sceneLife = null, cameraControls = null, timeMode = 'auto';
+let cameraView = { yaw:null, elevation:null, zoom:1, modified:false, facingYaw:null };
+let cameraGesture = { pointers:new Map(), dragged:false, pinchDistance:0 };
+let suppressSceneClickUntil = 0;
+const CAMERA_LIMITS = { minZoom:.65, maxZoom:2.4, minElevation:.35, maxElevation:1.24 };
 const LANDMARKS = { classic: { 5:'finance', 7:'skyscraper', 14:'onsen' }, compact: { 2:'finance', 11:'onsen' }, expansion: { 7:'skyscraper', 26:'onsen' } };
 const SPECIAL_MODELS = { bank:'vault_bank',construction:'builders_guild',card_draw:'card_pavilion',chance:'chance_wheel',teleport:'teleport_gate',rush:'rush_station',junction:'junction_hub' };
 const ASSET_BUNDLES = [
   {file:'city-kit.glb',authored:false,pattern:/^(villa_[123]|shop_[123]|hotel_[123]|tower_[123]|plot_0|city_hall|bank|construction|card_station|tree|streetlamp|fountain)$/},
   {file:'landmarks.glb',authored:true,pattern:/^(skyscraper|finance|onsen)_[123]$/},
   {file:'specials.glb',authored:true,pattern:/^(civic_hall|vault_bank|builders_guild|card_pavilion|chance_wheel|teleport_gate|rush_station|junction_hub)$/},
+  {file:'life-specials.glb',authored:true,pattern:/^(chance_wheel|builders_guild)$/},
 ];
 const projection = new THREE.Vector3();
 const raycaster = new THREE.Raycaster();
 const pointer = new THREE.Vector2();
-const api = { update, effect, reset, projectTile, inspectTile, closeInspection, refreshAssets:()=>loadModelKit(true), ready: false };
+const api = { update, effect, reset, projectTile, inspectTile, closeInspection, resetView:()=>resetCameraView(true), zoomBy:factor=>changeCameraView(0,0,factor), getView:()=>({...cameraView}), setTimeMode:setCityTimeMode, getTimeMode:()=>sceneLife?.getTimeMode()||timeMode, refreshAssets:()=>loadModelKit(true), ready: false };
 window.CityScene = api;
 
 function own(resource) { resources.add(resource); return resource; }
@@ -96,7 +104,7 @@ function makeStudioEnvironment(targetRenderer){
     const geometry=new THREE.PlaneGeometry(w,h);const mat=new THREE.MeshBasicMaterial({color:new THREE.Color(i===0?1.8:1.2,i===0?1.55:1.35,i===0?1.12:1.45),side:THREE.DoubleSide});
     const panel=new THREE.Mesh(geometry,mat);panel.position.set(x,y,z);panel.lookAt(0,1,0);room.add(panel);panels.push(panel);
   });
-  const generator=new THREE.PMREMGenerator(targetRenderer);const target=generator.fromScene(room,.045,.1,40);
+  const generator=new THREE.PMREMGenerator(targetRenderer);const target=generator.fromScene(room,.04,.1,40);
   generator.dispose();panels.forEach((p)=>{p.geometry.dispose();p.material.dispose();});return target;
 }
 function mount() {
@@ -106,12 +114,14 @@ function mount() {
   if (renderer) return true;
   try {
     renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'high-performance' });
+    rendererWidth=0;rendererHeight=0;
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.65));
     renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     renderer.outputColorSpace = THREE.SRGBColorSpace;
     renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = .96;
     renderer.setClearColor('#dce4da', 0);
     renderer.domElement.setAttribute('aria-hidden', 'true');
+    wrap.removeAttribute('aria-hidden');wrap.tabIndex=0;wrap.setAttribute('role','group');wrap.setAttribute('aria-label','城市棋盘视角');wrap.setAttribute('aria-describedby','city-camera-help');
     wrap.appendChild(renderer.domElement);
     scene = new THREE.Scene();
     studioEnvironment=makeStudioEnvironment(renderer);scene.environment=studioEnvironment.texture;scene.environmentIntensity=.35;
@@ -132,6 +142,7 @@ function mount() {
     renderer.domElement.addEventListener('webglcontextrestored', () => { if (snapshot) update(snapshot); });
     observer = new ResizeObserver(resize); observer.observe(wrap);
     labels.addEventListener('click', (event) => {
+      if(!canSelectScene()||isSuppressedSceneClick(event))return;
       const button = event.target.closest('[data-scene-tile-index]');
       if (!button) return;
       selectSceneTile(Number(button.dataset.sceneTileIndex));
@@ -140,6 +151,7 @@ function mount() {
     labels.addEventListener('pointerover',refreshHoveredLabel);
     labels.addEventListener('pointerout',refreshHoveredLabel);
     renderer.domElement.addEventListener('click',(event)=>{
+      if(!canSelectScene()||isSuppressedSceneClick(event))return;
       const rect=renderer.domElement.getBoundingClientRect();
       pointer.set((event.clientX-rect.left)/rect.width*2-1,-(event.clientY-rect.top)/rect.height*2+1);
       raycaster.setFromCamera(pointer,camera);
@@ -148,6 +160,7 @@ function mount() {
       let node=hit.object;while(node&&node.userData.tileIndex===undefined)node=node.parent;
       if(node)selectSceneTile(node.userData.tileIndex);
     });
+    mountCameraControls();
     disposed = false; resize(); frame = requestAnimationFrame(tick);
     return true;
   } catch (error) {
@@ -163,13 +176,129 @@ function selectSceneTile(index){
   effect({type:'select',tiles:[index]});
   window.dispatchEvent(new CustomEvent('city:select',{detail:{index}}));
 }
+function canSelectScene(){
+  const drama=document.getElementById('drama-layer');
+  const modal=document.getElementById('event-overlay');
+  return Boolean(snapshot&&!inspection&&snapshot.phase!=='presenting'&&(!drama||drama.hidden)&&(!modal?.classList.contains('visible')||snapshot.targetSelection));
+}
+function canMoveCamera(){return canSelectScene()&&!document.getElementById('event-overlay')?.classList.contains('visible')&&!document.body.classList.contains('mode-start');}
+function isSuppressedSceneClick(event){return event.detail!==0&&performance.now()<suppressSceneClickUntil;}
+function resetCameraView(apply=false){
+  cancelCameraGesture();cameraView={yaw:null,elevation:null,zoom:1,modified:false,facingYaw:cameraView.facingYaw};
+  if(apply)resize();
+}
+function changeCameraView(yawDelta=0,elevationDelta=0,zoomFactor=1){
+  if(!canMoveCamera()||!Number.isFinite(zoomFactor)||zoomFactor<=0)return false;
+  if(cameraView.yaw===null)resize();
+  cameraView.yaw+=yawDelta;
+  cameraView.elevation=THREE.MathUtils.clamp(cameraView.elevation+elevationDelta,CAMERA_LIMITS.minElevation,CAMERA_LIMITS.maxElevation);
+  cameraView.zoom=THREE.MathUtils.clamp(cameraView.zoom*zoomFactor,CAMERA_LIMITS.minZoom,CAMERA_LIMITS.maxZoom);
+  cameraView.modified=true;
+  lotViews.forEach(view=>{view.screenPoint=null;});
+  resize();return true;
+}
+function cameraSurface(target){return Boolean(target?.closest?.('#city-canvas-wrap,[data-scene-tile-index]'));}
+function cancelCameraGesture(){
+  const stage=wrap?.parentElement;
+  const captured=[...cameraGesture.pointers.keys()];
+  if(cameraGesture.dragged)suppressSceneClickUntil=performance.now()+650;
+  cameraGesture={pointers:new Map(),dragged:false,pinchDistance:0};
+  captured.forEach(id=>{try{if(stage?.hasPointerCapture(id))stage.releasePointerCapture(id);}catch(_){}});
+  stage?.classList.remove('is-camera-dragging');
+}
+function cameraPointerDown(event){
+  if(!canMoveCamera()||!cameraSurface(event.target)||(event.pointerType==='mouse'&&event.button!==0)||cameraGesture.pointers.size>=2)return;
+  cameraGesture.pointers.set(event.pointerId,{x:event.clientX,y:event.clientY,startX:event.clientX,startY:event.clientY,type:event.pointerType});
+  if(cameraGesture.pointers.size===2){
+    const [a,b]=[...cameraGesture.pointers.values()];cameraGesture.pinchDistance=Math.hypot(a.x-b.x,a.y-b.y);cameraGesture.dragged=true;
+    cameraGesture.pointers.forEach((_,id)=>{try{wrap.parentElement.setPointerCapture(id);}catch(_){}});
+    event.preventDefault();
+  }
+}
+function cameraPointerMove(event){
+  const entry=cameraGesture.pointers.get(event.pointerId);if(!entry)return;
+  if(!canMoveCamera()){cancelCameraGesture();return;}
+  const dx=event.clientX-entry.x,dy=event.clientY-entry.y;entry.x=event.clientX;entry.y=event.clientY;
+  if(cameraGesture.pointers.size===2){
+    const [a,b]=[...cameraGesture.pointers.values()],distance=Math.hypot(a.x-b.x,a.y-b.y);
+    if(cameraGesture.pinchDistance>4&&distance>4)changeCameraView(0,0,distance/cameraGesture.pinchDistance);
+    cameraGesture.pinchDistance=distance;cameraGesture.dragged=true;event.preventDefault();
+  }else{
+    if(!cameraGesture.dragged&&Math.hypot(entry.x-entry.startX,entry.y-entry.startY)<(entry.type==='touch'?8:6))return;
+    if(!cameraGesture.dragged){cameraGesture.dragged=true;try{wrap.parentElement.setPointerCapture(event.pointerId);}catch(_){}}
+    changeCameraView(-dx*.007,dy*.004);event.preventDefault();
+  }
+  wrap.parentElement.classList.add('is-camera-dragging');suppressSceneClickUntil=performance.now()+650;
+}
+function cameraPointerUp(event){
+  if(!cameraGesture.pointers.has(event.pointerId))return;
+  cameraGesture.pointers.delete(event.pointerId);
+  try{if(wrap.parentElement.hasPointerCapture(event.pointerId))wrap.parentElement.releasePointerCapture(event.pointerId);}catch(_){}
+  if(cameraGesture.dragged)suppressSceneClickUntil=performance.now()+650;
+  if(!cameraGesture.pointers.size)cancelCameraGesture();
+  else{cameraGesture.pinchDistance=0;cameraGesture.pointers.forEach(entry=>{entry.startX=entry.x;entry.startY=entry.y;});}
+}
+function syncCameraControls(){
+  if(!cameraControls)return;
+  const allowed=canMoveCamera();
+  cameraControls.querySelectorAll('button').forEach(button=>{button.disabled=!allowed||(button.dataset.camera==='out'&&cameraView.zoom<=CAMERA_LIMITS.minZoom)||(button.dataset.camera==='in'&&cameraView.zoom>=CAMERA_LIMITS.maxZoom);});
+  cameraControls.querySelector('output').textContent=`${Math.round(cameraView.zoom*100)}%`;
+  const timeSelect=cameraControls.querySelector('select');timeSelect.disabled=!allowed;timeSelect.value=timeMode;
+  if(!allowed&&cameraGesture.pointers.size)cancelCameraGesture();
+}
+function setCityTimeMode(mode){
+  if(!['auto','day','dusk','night'].includes(mode))return false;
+  timeMode=mode;sceneLife?.setTimeMode(mode);renderDirty=true;
+  if(cameraControls)cameraControls.querySelector('select').value=mode;
+  return true;
+}
+function mountCameraControls(){
+  const stage=wrap.parentElement;
+  cameraControls=document.createElement('div');cameraControls.className='city-camera-controls';cameraControls.setAttribute('role','group');cameraControls.setAttribute('aria-label','调整棋盘视角');
+  cameraControls.innerHTML='<span id="city-camera-help" class="city-camera-help">拖动转一转 · 滚轮或双指缩放。键盘方向键转动，＋ / − 缩放，Home 回正。</span><button type="button" data-camera="left" aria-label="向左转动棋盘" title="向左转">↶</button><button type="button" data-camera="right" aria-label="向右转动棋盘" title="向右转">↷</button><span class="city-camera-divider"></span><button type="button" data-camera="out" aria-label="缩小棋盘" title="缩小">−</button><output aria-label="棋盘缩放比例">100%</output><button type="button" data-camera="in" aria-label="放大棋盘" title="放大">＋</button><button type="button" data-camera="reset" class="city-camera-reset">回正</button>';
+  const timeControl=document.createElement('label');timeControl.className='city-time-control';timeControl.innerHTML='<span>光照</span><select aria-label="小城光照"><option value="auto">自动</option><option value="day">白天</option><option value="dusk">黄昏</option><option value="night">夜晚</option></select>';cameraControls.appendChild(timeControl);
+  timeControl.querySelector('select').value=timeMode;
+  timeControl.addEventListener('change',event=>{event.stopPropagation();setCityTimeMode(event.target.value);});
+  stage.appendChild(cameraControls);
+  cameraControls.addEventListener('click',event=>{
+    const action=event.target.closest('[data-camera]');if(!action||action.disabled)return;event.stopPropagation();
+    if(action.dataset.camera==='reset')resetCameraView(true);
+    else if(action.dataset.camera==='left'||action.dataset.camera==='right')changeCameraView(action.dataset.camera==='left'?-.25:.25);
+    else changeCameraView(0,0,action.dataset.camera==='in'?1.18:1/1.18);
+  });
+  stage.addEventListener('pointerdown',cameraPointerDown);
+  stage.addEventListener('pointermove',cameraPointerMove);
+  stage.addEventListener('pointerup',cameraPointerUp);stage.addEventListener('pointercancel',cameraPointerUp);
+  // A click can leave the board before it reaches the drag threshold.
+  window.addEventListener('pointerup',cameraPointerUp);window.addEventListener('pointercancel',cameraPointerUp);
+  // Touch initially captures on its label/canvas. Transferring that capture to
+  // the stage is part of starting a drag, not the end of the gesture.
+  stage.addEventListener('lostpointercapture',event=>{if(event.target===stage&&!stage.hasPointerCapture(event.pointerId)&&cameraGesture.pointers.has(event.pointerId))cameraPointerUp(event);});
+  stage.addEventListener('click',event=>{if(isSuppressedSceneClick(event)&&!event.target.closest('.city-camera-controls')){event.preventDefault();event.stopImmediatePropagation();}},true);
+  stage.addEventListener('wheel',event=>{
+    if(!canMoveCamera()||!cameraSurface(event.target))return;
+    event.preventDefault();const unit=event.deltaMode===1?16:event.deltaMode===2?height:1;
+    changeCameraView(0,0,Math.exp(-THREE.MathUtils.clamp(event.deltaY*unit,-160,160)*.0018));
+  },{passive:false});
+  stage.addEventListener('keydown',event=>{
+    if(!canMoveCamera()||event.altKey||event.ctrlKey||event.metaKey||event.target.matches('select')||!(event.target===wrap||event.target.closest('.city-camera-controls')))return;
+    const keys=['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','+','=','-','_','Home'];if(!keys.includes(event.key))return;
+    event.preventDefault();event.stopPropagation();
+    if(event.key==='Home')resetCameraView(true);
+    else if(['+','=','-','_'].includes(event.key))changeCameraView(0,0,['+','='].includes(event.key)?1.15:1/1.15);
+    else changeCameraView(event.key==='ArrowLeft'?-.18:event.key==='ArrowRight'?.18:0,event.key==='ArrowUp'?.08:event.key==='ArrowDown'?-.08:0);
+  });
+  window.addEventListener('blur',cancelCameraGesture);
+}
 function clearMap() {
+  sceneLife?.dispose();sceneLife=null;
   world?.clear(); labels?.replaceChildren(); lotViews.clear(); pawnViews.clear(); stepViews.clear();
   travelArrow = null;
   resources.forEach((resource) => resource.dispose?.()); resources.clear(); materials.clear(); pulses.length = 0;
 }
 function reset() {
   closeInspection();
+  resetCameraView();cameraView.facingYaw=null;
   clearMap(); snapshot = null; mapKey = ''; selectedIndex = null;
   document.body.classList.remove('scene-ready'); api.ready = false;
 }
@@ -224,6 +353,10 @@ function buildMap(data) {
     travelArrow.innerHTML='<svg viewBox="0 0 28 20" aria-hidden="true"><path d="M3 10H23M17 4L23 10L17 16"/></svg>';
     labels.appendChild(travelArrow);
   }
+  try{
+    sceneLife=createSceneLife({THREE,scene,world,renderer,light,snapshot:data,lotViews,boardBounds,requestRender:()=>{renderDirty=true;}});
+    sceneLife.setTimeMode(timeMode);
+  }catch(error){console.warn('City atmosphere is temporarily unavailable.',error);sceneLife=null;}
   resize();
 }
 function makePark(mapId) {
@@ -391,9 +524,20 @@ function optimizeModel(source) {
   // Batch those static details by material once, keeping the browser draw count low.
   const object=source.clone(true);object.position.set(0,0,0);object.updateMatrixWorld(true);
   const batches=new Map();const result=new THREE.Group();result.name=source.name;
+  const movingRoots=new Set();
+  const isMoving=child=>child.name?.startsWith('life_')||Boolean(child.userData?.lifePart);
+  object.traverse(child=>{
+    if(child===object||!isMoving(child))return;
+    let parent=child.parent;while(parent&&parent!==object){if(isMoving(parent))return;parent=parent.parent;}
+    movingRoots.add(child);
+    const copy=child.clone(true);child.matrixWorld.decompose(copy.position,copy.quaternion,copy.scale);
+    copy.traverse(part=>{if(part.isMesh){part.castShadow=true;part.receiveShadow=true;modelResources.add(part.geometry);}});
+    result.add(copy);
+  });
   object.traverse((child)=>{
     if(!child.isMesh)return;
-    if(Array.isArray(child.material)){const copy=child.clone();copy.applyMatrix4(child.matrixWorld);result.add(copy);return;}
+    let parent=child;while(parent&&parent!==object){if(movingRoots.has(parent))return;parent=parent.parent;}
+    if(Array.isArray(child.material)){const copy=child.clone();child.matrixWorld.decompose(copy.position,copy.quaternion,copy.scale);copy.castShadow=true;copy.receiveShadow=true;modelResources.add(copy.geometry);result.add(copy);return;}
     const key=child.material.uuid;
     if(!batches.has(key))batches.set(key,{material:child.material,geometries:[]});
     const geometry=child.geometry.clone();geometry.applyMatrix4(child.matrixWorld);
@@ -521,7 +665,7 @@ function update(data){
   if(inspection&&inspection.sessionId!==data?.sessionId)closeInspection();
   snapshot=data;if(!data?.board?.length||!mount())return;
   const key=`${data.sessionId}:${data.mapId}:${data.board.length}`;
-  if(key!==mapKey){mapKey=key;buildMap(data);}
+  if(key!==mapKey){resetCameraView();cameraView.facingYaw=null;mapKey=key;buildMap(data);}
   if(data.selectedTile!==undefined){
     selectedIndex=data.selectedTile;
     labels.querySelectorAll('.scene-tile').forEach((node)=>node.classList.toggle('is-selected',Number(node.dataset.sceneTileIndex)===selectedIndex));
@@ -545,10 +689,12 @@ function update(data){
     step.ring.material.opacity=(landed||moving) ? .85 : standing ? .70 : 0;
     step.ring.material.color.set(landed||moving?'#e6b253':current?.id==='ai'?'#d77b59':'#348d87');
   });
+  sceneLife?.update(data);syncCameraControls();
   renderer.render(scene,camera);document.body.classList.add('scene-ready');api.ready=true;
   arrangeLabels();positionLabels();loadModelKit();
 }
 function effect(event={}){
+  sceneLife?.effect(event);
   const now=performance.now();
   renderDirty=true;
   const color=/shield/.test(event.type)?'#88d8c6':/seize|confisc|takeover|征用/.test(event.type)?'#d78560':/rent/.test(event.type)?'#e6bd64':'#87bdb0';
@@ -571,9 +717,11 @@ function arrangeLabels(){
   if(!camera)return;
   const placed=[];
   const candidates=[...lotViews.values()].map((view)=>{
-    const hovered=view.label.matches(':hover');
-    return {view,hovered,point:hovered&&view.screenPoint?{...view.screenPoint}:project(view.anchor),w:view.label.offsetWidth,h:view.label.offsetHeight};
-  }).sort((a,b)=>Number(b.hovered)-Number(a.hovered)||a.point.y-b.point.y);
+    const point=project(view.anchor),visible=point.x>=10&&point.x<=width-10&&point.y>=8&&point.y<=height-8;
+    view.label.hidden=!visible;
+    const hovered=!cameraGesture.dragged&&view.label.matches(':hover');
+    return {view,visible,hovered,point:hovered&&view.screenPoint?{...view.screenPoint}:point,w:view.label.offsetWidth,h:view.label.offsetHeight};
+  }).filter(item=>item.visible).sort((a,b)=>Number(b.hovered)-Number(a.hovered)||a.point.y-b.point.y);
   const offsets=[];
   for(let x=-7;x<=7;x++)for(let y=-7;y<=7;y++)offsets.push({x:x*7,y:y*7,d:x*x+y*y});
   offsets.sort((a,b)=>a.d-b.d||Math.abs(a.x)-Math.abs(b.x));
@@ -598,8 +746,8 @@ function arrangeLabels(){
 function positionLabels(){
   if(!camera)return;
   lotViews.forEach((view)=>{const p=view.screenPoint||project(view.anchor);view.label.style.transform=`translate(${p.x.toFixed(1)}px,${p.y.toFixed(1)}px) translate(-50%,-50%)`;});
-  stepViews.forEach((step)=>{if(step.label){const p=project(step.walk);step.label.style.transform=`translate(${p.x.toFixed(1)}px,${p.y.toFixed(1)}px) translate(-50%,-50%)`;}});
-  pawnViews.forEach((view)=>{const p=project(view.group.position.clone().add(new THREE.Vector3(0,.76,0)));view.anchor.style.transform=`translate(${p.x.toFixed(1)}px,${p.y.toFixed(1)}px) translate(-50%,-50%)`;});
+  stepViews.forEach((step)=>{if(step.label){const p=project(step.walk);step.label.hidden=p.x<8||p.x>width-8||p.y<8||p.y>height-8;step.label.style.transform=`translate(${p.x.toFixed(1)}px,${p.y.toFixed(1)}px) translate(-50%,-50%)`;}});
+  pawnViews.forEach((view)=>{const p=project(view.group.position.clone().add(new THREE.Vector3(0,.76,0)));view.anchor.hidden=p.x<12||p.x>width-12||p.y<8||p.y>height-8;view.anchor.style.transform=`translate(${p.x.toFixed(1)}px,${p.y.toFixed(1)}px) translate(-50%,-50%)`;});
   if(travelArrow){
     const current=snapshot.players.find((player)=>player.id===snapshot.currentPlayerId);
     const route=current?.effects?.reversed?snapshot.navigation?.prev:snapshot.navigation?.next;
@@ -607,6 +755,7 @@ function positionLabels(){
     travelArrow.hidden=!from||!to||Boolean(snapshot.gameOver);
     if(from&&to){
       const a=project(from.walk),b=project(to.walk),x=a.x+(b.x-a.x)*.60,y=a.y+(b.y-a.y)*.60;
+      travelArrow.hidden=travelArrow.hidden||x<15||x>width-15||y<12||y>height-12;
       travelArrow.style.transform=`translate(${x.toFixed(1)}px,${y.toFixed(1)}px) translate(-50%,-50%) rotate(${Math.atan2(b.y-a.y,b.x-a.x)}rad)`;
       travelArrow.dataset.player=current.id;travelArrow.dataset.from=String(current.position);travelArrow.dataset.next=String(next);
       travelArrow.setAttribute('aria-label',`${current.id==='human'?'你':'对手'}${current.effects?.reversed?'逆行':''}下一步：第 ${next+1} 格 ${snapshot.board[next]?.name||''}`);
@@ -631,7 +780,8 @@ function framingForLot(view){
 }
 function resize(){
   if(!renderer||!wrap)return;
-  const rect=wrap.getBoundingClientRect();width=Math.max(1,rect.width);height=Math.max(1,rect.height);renderer.setSize(width,height,false);
+  const rect=wrap.getBoundingClientRect();width=Math.max(1,rect.width);height=Math.max(1,rect.height);
+  if(rendererWidth!==width||rendererHeight!==height){renderer.setSize(width,height,false);rendererWidth=width;rendererHeight=height;}
   labels.classList.toggle('scene-labels-compact',width<720);
   labels.classList.toggle('scene-labels-tiny',width<460);
   if(boardBounds){
@@ -647,12 +797,15 @@ function resize(){
       const portrait=THREE.MathUtils.clamp((1.40-aspect)/.65,0,1);
       yaw=THREE.MathUtils.lerp(.10,-1.47,portrait);elevation=THREE.MathUtils.lerp(.62,.93,portrait);
     }
+    if(cameraView.facingYaw===null)cameraView.facingYaw=yaw;
+    if(cameraView.modified){yaw=cameraView.yaw;elevation=cameraView.elevation;}
+    else{cameraView.yaw=yaw;cameraView.elevation=elevation;}
     camera.position.set(Math.sin(yaw)*22,Math.tan(elevation)*22,Math.cos(yaw)*22);camera.lookAt(0,0,0);camera.updateMatrixWorld(true);
     if(snapshot?.mapId!=='classic')lotViews.forEach((view)=>{
-      // Signs need their illustrated front to stay visible. Square civic plots
-      // may turn by quarter-turns without changing their footprint or route.
-      if(['chance','card_draw','bank','rush','teleport'].includes(view.tile.special?.type)){
-        view.readableRotation=Math.round(yaw/(Math.PI/2))*(Math.PI/2);
+      // Choose a readable initial frontage once. Buildings remain physical
+      // objects when the player rotates the camera, never facing billboards.
+      if(view.readableRotation===undefined&&['chance','card_draw','bank','rush','teleport'].includes(view.tile.special?.type)){
+        view.readableRotation=Math.round(cameraView.facingYaw/(Math.PI/2))*(Math.PI/2);
         view.building?.children.forEach((model)=>{model.rotation.y=(model.userData.cityBaseRotationY||0)+view.readableRotation;});
       }
       const normal=view.boundary.normal.clone();
@@ -671,18 +824,21 @@ function resize(){
       include(view.anchor);
     });
     const spanX=Math.max(...xs)-Math.min(...xs),spanY=Math.max(...ys)-Math.min(...ys);
-    const vertical=Math.max(spanY/2*height/Math.max(1,height-30),spanX/(2*aspect)*width/Math.max(1,width-30));
+    const vertical=Math.max(spanY/2*height/Math.max(1,height-30),spanX/(2*aspect)*width/Math.max(1,width-30))/cameraView.zoom;
     const centerY=(Math.max(...ys)+Math.min(...ys))/2;
     const centerX=(Math.max(...xs)+Math.min(...xs))/2;
     camera.left=centerX-vertical*aspect;camera.right=centerX+vertical*aspect;camera.top=vertical+centerY;camera.bottom=-vertical+centerY;camera.updateProjectionMatrix();
   }
+  lotViews.forEach(view=>{view.screenPoint=null;});
   arrangeLabels();positionLabels();
+  syncCameraControls();
   renderDirty=true;
 }
 function inspectTile(index,level){
   let tile=snapshot?.board?.find((item)=>item.index===Number(index));
   if(!tile)return false;
   if(tile.isLargeSecondary)tile=snapshot.board[tile.largePrimaryIndex];
+  cancelCameraGesture();
   closeInspection();
   const dialog=document.createElement('dialog');dialog.id='city-building-inspection';dialog.className='city-model-dialog';dialog.setAttribute('aria-labelledby','city-model-title');
   dialog.innerHTML=`<header class="city-model-header"><div><p class="city-model-eyebrow">建造预览</p><h2 id="city-model-title"></h2></div><button type="button" class="city-model-close" data-model-close aria-label="关闭建筑预览">✕</button></header><div class="city-model-stage"><div class="city-model-canvas"></div><span class="city-model-level-badge"></span><p class="city-model-hint">拖动转一转 · 看看每一面</p></div><footer class="city-model-footer"><div class="city-model-levels" role="group" aria-label="预览建筑等级"><button type="button" data-model-level="1">Lv.1</button><button type="button" data-model-level="2">Lv.2</button><button type="button" data-model-level="3">Lv.3</button></div><div class="city-model-view-tools" role="group" aria-label="调整建筑视角"><button type="button" data-model-turn="-1" aria-label="向左转动建筑">↶</button><button type="button" data-model-turn="1" aria-label="向右转动建筑">↷</button><span></span><button type="button" data-model-zoom="-1" aria-label="缩小建筑">−</button><button type="button" data-model-zoom="1" aria-label="放大建筑">＋</button><button type="button" data-model-reset>恢复视角</button></div><p class="city-model-disclaimer">这里可以看看升级后的样子，不改变当前对局。</p></footer>`;
@@ -691,6 +847,7 @@ function inspectTile(index,level){
   const requestedLevel=Number(level??(tile.lot?.level||3));
   const state={dialog,tile,mapId:snapshot.mapId,sessionId:snapshot.sessionId,level:tile.lot?THREE.MathUtils.clamp(Number.isFinite(requestedLevel)?Math.round(requestedLevel):3,1,3):0,returnFocus,renderer:null,scene:null,camera:null,pivot:null,environment:null,observer:null,resources:[],angle:0,zoom:1,elevation:.78,bounds:null,drag:null};
   inspection=state;
+  syncCameraControls();
   dialog.querySelector('#city-model-title').textContent=tile.name;
   dialog.querySelector('.city-model-levels').hidden=!tile.lot;
   dialog.addEventListener('cancel',(event)=>{event.preventDefault();event.stopPropagation();closeInspection();});
@@ -771,13 +928,17 @@ function closeInspection(){
   const state=inspection;if(!state)return;inspection=null;
   state.observer?.disconnect();state.environment?.dispose();state.resources.forEach((resource)=>resource.dispose?.());state.renderer?.dispose();state.renderer?.forceContextLoss();
   if(state.dialog.open)state.dialog.close();state.dialog.remove();document.body.classList.remove('city-inspection-open');
+  syncCameraControls();
   if(state.returnFocus?.isConnected)state.returnFocus.focus({preventScroll:true});
 }
 function tick(time){
   if(disposed)return;frame=requestAnimationFrame(tick);
-  if(!snapshot||document.hidden||time-lastTime<24)return;lastTime=time;
+  if(!snapshot||document.hidden||time-lastTime<24)return;
+  const delta=Math.min(.1,(time-lastTime)/1000);lastTime=time;
+  sceneLife?.setInteractionPaused(Boolean(inspection||cameraGesture.pointers.size));
+  const living=sceneLife?.tick(time,delta);
   const moving=[...pawnViews.values()].some((view)=>view.active||view.shieldUntil)||[...lotViews.values()].some((view)=>view.born)||pulses.length;
-  if(!moving&&!renderDirty)return;renderDirty=false;
+  if(!moving&&!renderDirty&&!living)return;renderDirty=false;
   pawnViews.forEach((view)=>{
     if(view.active){
       const t=view.duration===0?1:Math.min(1,(time-view.started)/view.duration);
@@ -803,16 +964,20 @@ function tick(time){
 async function loadModelKit(force=false){
   if(modelsLoading||(modelLoadStarted&&!force))return;modelLoadStarted=true;modelsLoading=true;
   const remaining=ASSET_BUNDLES.filter((bundle)=>force||!loadedBundles.has(bundle.file));
-  const results=await Promise.allSettled(remaining.map(async(bundle)=>{
-    const gltf=await new GLTFLoader().loadAsync(`./assets/models/${bundle.file}?v=20260911-11${force?`&refresh=${Date.now()}`:''}`);
+  const results=await Promise.allSettled(remaining.map(bundle=>new GLTFLoader().loadAsync(`./assets/models/${bundle.file}?v=20260911-12${force?`&refresh=${Date.now()}`:''}`)));
+  // Fetch concurrently, register in declared order so animated replacements
+  // consistently supersede their static fallback, regardless of network order.
+  results.forEach((result,i)=>{
+    const bundle=remaining[i];
+    if(result.status==='rejected'){console.info(`The fallback city model remains available for ${bundle.file}.`,result.reason?.message);return;}
+    const gltf=result.value;
     gltf.scene.traverse((object)=>{
       if(!bundle.pattern.test(object.name))return;
       if(bundle.authored){authoredModels.add(object.name);assetEnvelopes.set(object.name,calculateEnvelope(object));}
       modelLibrary.set(object.name,optimizeModel(object));
     });
     loadedBundles.add(bundle.file);
-  }));
-  results.forEach((result,i)=>{if(result.status==='rejected')console.info(`The fallback city model remains available for ${remaining[i].file}.`,result.reason?.message);});
+  });
   modelsLoading=false;
   if(snapshot){const saved=snapshot;buildMap(saved);update(saved);}
   if(inspection)renderInspectionModel();

@@ -108,7 +108,7 @@
     document.getElementById('showcase-open-btn').classList.toggle('hidden',!preview);
     if(lastCameraSession!==state.sessionId){lastCameraSession=state.sessionId;inspectorKey='';mapGuide.open=false;}
     document.getElementById('victory-rule').textContent=preview?`${map.name} · 示例局面`:state.gameMode==='bankruptcy'?'破产淘汰 · 坚持到最后':`${getMaxRounds()} 回合后，现金最多者获胜`;
-    document.getElementById('scene-caption-text').textContent=preview?'演出预览 · 每一笔钱都经过真实规则结算':state.phase==='presenting'?'好戏正在发生':state.animation.diceRolling?'骰子停下前，一切都有可能':'轻点地块，看看这是谁的地盘';
+    document.getElementById('scene-caption-text').textContent=preview?'演出预览 · 每一笔钱都经过真实规则结算':state.phase==='presenting'?'好戏正在发生':state.animation.diceRolling?'骰子停下前，一切都有可能':window.CityScene?.ready?'拖动转转小城 · 滚轮或双指缩放 · 点地块看详情':'轻点地块，看看这是谁的地盘';
     updateCash();updateInspector();syncCityScene();
     inspector.querySelectorAll('[data-inspect-building]').forEach(button=>{button.disabled=!window.CityScene?.inspectTile||(state.busy&&!preview);});
     const m=state.modal,tile=state.board[currentPlayer().position];
@@ -124,7 +124,8 @@
     const named=state.board.find(t=>!t.isLargeSecondary&&text.includes(t.name));
     const target=named||tile, to=person(currentPlayer());
     let type='notice';
-    if(cfg.label==='破产救助'||cfg.label==='等待救援')type='relief';
+    if(cfg.label==='先手决定')type='notice';
+    else if(cfg.label==='破产救助'||cfg.label==='等待救援')type='relief';
     else if(/征用成功|发动征用|地标易主/.test(text))type='seize';
     else if(/免费升级|免费建造|升级了|升至|升级到|建造完成/.test(text))type='build';
     else if(/买下了|购买完成/.test(text))type='buy';
@@ -132,7 +133,24 @@
     else if(['卡牌效果','翻牌事件','绊脚效果','骰6再动'].includes(cfg.label))type='card';
     else if(/收益|补给|获得|奖励/.test(text))type='income';
     const value=Number((text.match(/¥([\d,]+)/)||[])[1]?.replaceAll(',',''))||0;
-    return {type,title:cfg.title,message:cfg.message,amount:value,to,tiles:target?[target.index]:[],tileName:target?.name,...cfg.drama};
+    const event={type,title:cfg.title,message:cfg.message,amount:value,to,tiles:target?[target.index]:[],tileName:target?.name,...cfg.drama};
+    // Read the settled ledger, never infer a player's balance from the animation.
+    const payer=event.from?.id?getPlayerById(event.from.id):null;
+    const recipient=event.to?.id?getPlayerById(event.to.id):null;
+    if(payer)event.payerCashAfter=payer.cash;
+    if(recipient)event.cashAfter=recipient.cash;
+    if(event.type==='buy') {
+      const purchased=state.board[event.tiles?.[0]];
+      const primary=purchased?.isLargeSecondary?state.board[purchased.largePrimaryIndex]:purchased;
+      if(primary?.lot) {
+        event.tileName=primary.name;
+        event.isLarge=!!primary.lot.isLarge;
+        event.buildingLevel=primary.lot.level;
+        event.isOpeningBuilding=primary.lot.level>0&&!!state.openingLots?.includes(primary.index);
+        event.districtCount=getDistrictOwnerLots(primary.lot.district,recipient?.id||primary.lot.ownerId).length;
+      }
+    }
+    return event;
   }
   async function present(cfg) {
     const sid=state.sessionId,serial=++eventSerial,event=inferEvent(cfg);
@@ -182,6 +200,15 @@
       if(type==='seize'){
         showcaseTargets.district.forEach(i=>{state.board[i].lot.ownerId='human';});ai.position=0;state.currentPlayerIndex=1;render();
         await resolveStartTakeover(ai,sid);
+      } else if(type==='buy'){
+        const tile=state.board[showcaseTargets.build];
+        tile.lot.ownerId=null;tile.lot.level=state.openingLots?.includes(tile.index)?1:0;
+        human.position=tile.index;selected=tile.index;render();
+        await sleep(250);if(!isSessionActive(sid))return;
+        if(buyLot(human,tile)) {
+          render();
+          await present({label:'购买完成',title:`${tile.name}，归你了！`,message:`花费 ${money(tile.lot.price)}，这座小城又多了一块你的地盘。${purchaseBuildingNote(tile.lot)}`,drama:{type:'buy',amount:tile.lot.price,to:human,tiles:[tile.index],tileName:tile.name}});
+        }
       } else if(type==='build'){
         const tile=state.board[showcaseTargets.build];tile.lot.ownerId='human';tile.lot.level=1;human.position=tile.index;render();
         await sleep(250);if(!isSessionActive(sid))return;

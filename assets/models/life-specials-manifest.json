@@ -1,0 +1,29 @@
+{
+  "assets": [
+    "chance_wheel",
+    "builders_guild"
+  ],
+  "parts": {
+    "life_wheel_rotor": {
+      "parent": "chance_wheel",
+      "pivot_gltf": [
+        0,
+        0.69,
+        0.005
+      ],
+      "axis": "Z"
+    },
+    "life_crane_pendulum": {
+      "parent": "builders_guild",
+      "pivot_gltf": [
+        0.32,
+        1.33,
+        -0.17
+      ],
+      "axis": "Z",
+      "swing_radians": 0.13
+    }
+  },
+  "source": "art/build_scene_life.py",
+  "bytes": 1156556
+}

@@ -2071,7 +2071,10 @@ async function resolveChance(player, tile, sid) {
             ],
           });
           if (!isSessionActive(sid)) return;
-          if (dec === "buy" && buyLot(player, selected)) { render(); await sleep(420); }
+          if (dec === "buy" && buyLot(player, selected)) {
+            render();
+            await showContinueModal({ label: "购买完成", title: `${selected.name}，归你了！`, message: `花费 ${formatMoney(selected.lot.price)}，这次机会抓住了！${purchaseBuildingNote(selected.lot)}`, drama: { type: "buy", amount: selected.lot.price, to: player, tiles: [selected.index], tileName: selected.name } });
+          }
         }
       }
     }

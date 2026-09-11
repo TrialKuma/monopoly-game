@@ -1,7 +1,8 @@
 /*
  * GameDrama — presentation only. No access to game state.
  * play({ type, title, message, amount, expectedAmount, from, to,
- *        tiles, tileName, leadChanged?, duration?, sessionId? }): Promise<void>
+ *        tiles, tileName, leadChanged?, duration?, sessionId?, payerCashAfter?,
+ *        cashAfter?, districtCount?, isLarge?, buildingLevel?, isOpeningBuilding? }): Promise<void>
  * from/to: { id: 'human'|'ai', name, color }. Amounts are positive magnitudes.
  * reset() cancels every animation, pending event and sound; all promises resolve.
  * setMuted(boolean) follows the game's sound preference.
@@ -27,12 +28,91 @@
   };
   const LABELS = {rent:'地产收益', seize:'产权风暴', shield:'绝境脱身', relief:'命运转机', build:'城市生长', buy:'版图扩张', bank:'金库时刻', card:'命运揭晓', income:'现金入账', win:'全城见证', notice:'城市快讯'};
   const TITLES = {rent:'租金到账', seize:'地盘易主', shield:'护盾救场', relief:'绝处逢生', build:'新楼落成', buy:'这块地，归你了', bank:'金库开启', card:'好戏开场', income:'意外之财', win:'本局赢家', notice:'命运转动'};
-  let layer, transferLayer, audioContext, active, eventNumber = 0, muted = false;
+  let layer, boardStage, transferLayer, audioContext, active, eventNumber = 0, muted = false;
   const queue = [];
   const motionPreference = window.matchMedia?.('(prefers-reduced-motion: reduce)');
   const reduced = () => !!motionPreference?.matches;
   const fmt = value => Math.round(Math.abs(Number(value) || 0)).toLocaleString('zh-CN');
   const finiteAmount = value => Number.isFinite(Number(value)) ? Math.abs(Number(value)) : 0;
+  const optionalNumber = value => value != null && value !== '' && Number.isFinite(Number(value)) ? Number(value) : null;
+  // Dialogue uses its own rotation, never the random source used by game dice.
+  // Keep this tiny cosmetic history across reset so the next game opens differently.
+  const lineCursors = new Map();
+  const LINES = {
+    rentPay:['又要交租啦？','这一脚，踩得有点贵！','好好好，钱给你！'],
+    rentCollect:['承让，租金收下啦！','欢迎光临我的地盘！','这一站，轮到我收钱！'],
+    hugePay:['我靠你抢钱啊？！','这一脚，钱包都瘪了！','这租金，认真的吗？！'],
+    hugeCollect:['这块地，真给力！','这笔租金，漂亮！','等的就是这一脚！'],
+    emptyPay:['没钱了呀！','钱包见底啦！','救命，真的一滴不剩了！'],
+    zeroCollect:['下次路过，还来坐坐！','这张账单，可不便宜！','我的地盘可有点厉害！'],
+    leadPay:['等等，怎么你反超了？','这一笔也太狠了！','风向说变就变啊！'],
+    leadCollect:['轮到我领先啦！','这一笔，反超！','好戏才刚开始！'],
+    shield:['护盾在手，这笔免单！','嘿，这次收不到啦！','我的护盾，来得正好！'],
+    shieldMiss:['啊？这笔被挡住了！','差一点就到账了！','护盾还真救了你！'],
+    relief:['活过来了！还能再来！','好险，终于缓过一口气！','钱到账了，先喘口气！'],
+    buy:['拿下了！','好地段到手！','这一块，我收下啦！','我的地盘又大一点！'],
+    buyDistrict:['连锁地盘，成了！','这条街，越来越有看头！','好地段，连起来更香！'],
+    buyLarge:['这大地块，我拿下了！','这么大一片，归我啦！','大地段到手，舒服！'],
+    buyOpening:['连楼一起拿下，舒服！','房子都盖好了，真香！','带着楼到手，漂亮！'],
+    seize:['我的地盘啊！','怎么说征就征啊？！','这一下，太突然了！']
+  };
+
+  function line(key) {
+    const choices = LINES[key];
+    const index = lineCursors.get(key) || 0;
+    lineCursors.set(key, (index + 1) % choices.length);
+    return choices[index];
+  }
+
+  function purchaseFacts(event) {
+    const districtCount = optionalNumber(event.districtCount);
+    const buildingLevel = optionalNumber(event.buildingLevel);
+    const built = buildingLevel !== null && buildingLevel > 0;
+    return {districtCount, buildingLevel, built, chain:districtCount !== null && districtCount >= 2,
+      opening:event.isOpeningBuilding === true && built, large:event.isLarge === true};
+  }
+
+  function dialogue(event, type, amount) {
+    const say = (player, role, mood, face, key) => ({player, role, mood, face, words:line(key)});
+    if (type === 'rent') {
+      const cash = optionalNumber(event.payerCashAfter ?? event.from?.cashAfter);
+      const exhausted = cash !== null && cash <= 0;
+      const payer = exhausted ? ['panic','😱','emptyPay'] : event.leadChanged ? ['surprised','😵','leadPay'] : amount >= 300 ? ['complaint','😤','hugePay'] : ['complaint','😮','rentPay'];
+      const collector = event.leadChanged ? ['proud','😎','leadCollect'] : amount <= 0 ? ['proud','😏','zeroCollect'] : amount >= 300 ? ['proud','🤩','hugeCollect'] : ['proud','😄','rentCollect'];
+      return [say(event.from,'付款方',...payer), say(event.to,'收租方',...collector)];
+    }
+    if (type === 'buy') {
+      const facts = purchaseFacts(event);
+      const key = facts.chain ? 'buyDistrict' : facts.opening || facts.built ? 'buyOpening' : facts.large ? 'buyLarge' : 'buy';
+      return [say(event.to,'买家','joyful','🤩',key)];
+    }
+    if (type === 'shield') {
+      const lines = [say(event.to,'免付方','relieved','😌','shield')];
+      if (event.from?.name && event.from.id !== event.to?.id) lines.push(say(event.from,'收租方','surprised','😳','shieldMiss'));
+      return lines;
+    }
+    if (type === 'relief') return [say(event.to,'获得救助','relieved','🥹','relief')];
+    if (type === 'seize' && event.from?.name) return [say(event.from,'原地主','panic','😱','seize')];
+    return [];
+  }
+
+  function speechBubbles(lines) {
+    if (!lines.length) return null;
+    const strip = element('div', 'drama-dialogue' + (lines.length === 1 ? ' is-solo' : ''));
+    lines.forEach((spoken, index) => {
+      const bubble = element('div', `drama-speech is-${spoken.mood}`);
+      bubble.dataset.speaker = spoken.player?.id || spoken.role;
+      bubble.style.setProperty('--speech-order', index);
+      if (spoken.player?.color) bubble.style.setProperty('--speaker-color', spoken.player.color);
+      const who = element('div', 'drama-speaker');
+      const face = element('span', 'drama-speaker-face', spoken.face);
+      face.setAttribute('aria-hidden', 'true');
+      who.append(face, element('b', 'drama-speaker-name', spoken.player?.name || spoken.role), element('span', 'drama-speaker-role', spoken.role));
+      bubble.append(who, element('p', 'drama-speech-words', spoken.words));
+      strip.appendChild(bubble);
+    });
+    return strip;
+  }
 
   function element(tag, className, text) {
     const node = document.createElement(tag);
@@ -44,12 +124,15 @@
   function mount() {
     const stage = document.getElementById('board-stage') || document.querySelector('.board-stage');
     if (!stage) return false;
-    if (!layer?.isConnected || layer.parentElement !== stage) {
+    boardStage = stage;
+    // Viewport placement keeps the controls visible even on a short mobile board.
+    // Portaling out also avoids the board's clipping and transformed ancestors.
+    if (!layer?.isConnected || layer.parentElement !== document.body) {
       layer?.remove();
       layer = element('div', 'drama-layer');
       layer.id = 'drama-layer';
       layer.hidden = true;
-      stage.appendChild(layer);
+      document.body.appendChild(layer);
     }
     if (!transferLayer?.isConnected) {
       transferLayer = element('div', 'drama-transfers');
@@ -105,7 +188,10 @@
       if (major) tone(job, 110, 0, .45, .03, 'triangle');
     } else if (type === 'win') {
       [261.63, 329.63, 392, 523.25, 659.25].forEach((f, i) => tone(job, f, .12 * i, .44, .018));
-    } else if (type === 'build' || type === 'buy') {
+    } else if (type === 'buy') {
+      [523.25, 659.25, 783.99].forEach((frequency, i) => tone(job, frequency, .07 + i * .09, .24, .017));
+      if (major) tone(job, 1046.5, .38, .36, .012);
+    } else if (type === 'build') {
       tone(job, 392, .07, .2, .02); tone(job, 523.25, .17, .28, .02);
     }
   }
@@ -167,7 +253,7 @@
     if (!amount || reduced()) return;
     const fromAnchor = playerAnchor(event.from);
     const toAnchor = playerAnchor(event.to);
-    const scene = anchorCenter(layer.parentElement);
+    const scene = anchorCenter(boardStage?.isConnected ? boardStage : layer);
     const from = fromAnchor ? anchorCenter(fromAnchor) : {x:scene.x, y:scene.y};
     const to = toAnchor ? anchorCenter(toAnchor) : null;
     if (!to) return;
@@ -212,6 +298,40 @@
     }
   }
 
+  function purchaseBurst(job, card, important) {
+    if (reduced()) return;
+    const stage = layer.getBoundingClientRect();
+    const box = card.getBoundingClientRect();
+    const decorations = [];
+    for (let i = 0; i < (important ? 26 : 16); i++) {
+      const side = i % 2 ? 1 : -1;
+      const kind = i % 6 === 0 ? 'coin' : i % 3 === 0 ? 'ribbon' : 'star';
+      const piece = element('i', `drama-purchase-particle is-${kind}`, kind === 'coin' ? '¥' : kind === 'star' ? '✦' : '');
+      piece.setAttribute('aria-hidden', 'true');
+      piece.style.left = (side < 0 ? box.left - stage.left + 8 : box.right - stage.left - 8) + 'px';
+      piece.style.top = (box.top - stage.top + 22 + (i * 29) % Math.max(30, box.height * .65)) + 'px';
+      piece.style.setProperty('--particle-color', ['#efbb43','#2c9b8c','#e98958','#e1b252'][i % 4]);
+      layer.appendChild(piece);
+      job.nodes.add(piece);
+      const drift = side * (22 + (i * 13) % 65);
+      const lift = 20 + (i * 17) % 85;
+      const animation = animate(job, piece, [
+        {transform:'translate(0,0) rotate(0deg) scale(.5)', opacity:0},
+        {transform:`translate(${drift * .5}px,${-lift}px) rotate(${side * 70}deg) scale(1)`, opacity:1, offset:.38},
+        {transform:`translate(${drift}px,${28 + i % 4 * 12}px) rotate(${side * 150}deg) scale(.7)`, opacity:0}
+      ], {duration:1100 + i % 5 * 120, delay:60 + i % 6 * 65, fill:'both', easing:'cubic-bezier(.2,.65,.3,1)'});
+      decorations.push({piece, animation});
+    }
+    // Pausing is for reading: finish the flourish and keep all words on screen.
+    job.clearCelebration = () => {
+      decorations.forEach(({piece, animation}) => {
+        try { animation?.cancel(); } catch (_) {}
+        piece.remove();
+        job.nodes.delete(piece);
+      });
+    };
+  }
+
   function stopAutoAdvance(job) {
     if (!job.auto) return;
     for (const key of ['leaveTimer', 'endTimer']) {
@@ -240,6 +360,7 @@
       layer.classList.remove('is-leaving');
       // Reading should never leave a monetary amount stranded mid-count.
       job.settleAmount?.();
+      job.clearCelebration?.();
     } else {
       auto.paused = false;
       scheduleAutoAdvance(job);
@@ -255,7 +376,9 @@
     const type = Object.hasOwn(SVG, event.type) ? event.type : 'notice';
     const amount = finiteAmount(event.amount);
     const leadChanged = type === 'rent' && !!event.leadChanged;
-    const major = type === 'rent' && (amount >= 300 || leadChanged) || ['seize', 'shield', 'relief', 'win'].includes(type) || type === 'bank' && amount >= 300;
+    const facts = purchaseFacts(event);
+    const importantPurchase = type === 'buy' && (facts.chain || facts.large || facts.built);
+    const major = type === 'rent' && (amount >= 300 || leadChanged) || ['seize', 'shield', 'relief', 'win'].includes(type) || type === 'bank' && amount >= 300 || importantPurchase;
     let defaultDuration = type === 'win' ? 6500 : major ? 6000 : type === 'rent' ? 4500 : 3000;
     const messageLength = String(event.message || '').length;
     if (messageLength > 50) defaultDuration = Math.max(defaultDuration, Math.min(10000, 1500 + messageLength * 55));
@@ -263,6 +386,7 @@
     layer.replaceChildren();
     layer.className = `drama-layer drama-kind-${type}${major ? ' is-major' : ' is-minor'}${leadChanged ? ' is-lead-change' : ''}${reduced() ? ' is-reduced-motion' : ''}`;
     layer.hidden = false;
+    document.body.classList.add('drama-playing');
     layer.style.setProperty('--drama-duration', duration + 'ms');
     const glow = element('div', 'drama-ambient');
     layer.appendChild(glow);
@@ -270,11 +394,14 @@
     card.setAttribute('role', 'status');
     card.setAttribute('aria-live', 'polite');
     card.setAttribute('aria-atomic', 'true');
+    const content = element('div', 'drama-content');
     const meta = element('div', 'drama-meta');
     const kicker = element('span', 'drama-kicker', LABELS[type]);
     kicker.prepend(element('i', 'drama-live-dot'));
     meta.append(kicker, element('span', 'drama-sequence', String(++eventNumber).padStart(2, '0')));
-    card.appendChild(meta);
+    content.appendChild(meta);
+    const speech = speechBubbles(dialogue(event, type, amount));
+    if (speech) content.appendChild(speech);
     const body = element('div', 'drama-body');
     const symbol = element('div', 'drama-symbol');
     symbol.innerHTML = SVG[type];
@@ -283,6 +410,7 @@
     let title = event.title || TITLES[type];
     if (type === 'rent' && amount >= 300) title = event.tiles?.length > 1 ? '连锁收租' : '重磅账单';
     if (leadChanged) title = '这一笔，局势反转！';
+    if (type === 'buy') title = facts.chain ? '街区连锁，拿下了！' : facts.built ? '连楼一起，拿下了！' : facts.large ? '大地块，拿下了！' : '拿下了！';
     const heading = element('h3', 'drama-title', title);
     copy.appendChild(heading);
     if (type === 'seize') copy.appendChild(element('span', 'drama-stamp', '征用令'));
@@ -308,8 +436,17 @@
             counter.textContent = fmt(amount);
           };
         }
+        if (type === 'buy') numberLine.appendChild(element('span', 'drama-amount-unit', '买入花费'));
       }
       copy.appendChild(numberLine);
+    }
+    if (type === 'buy') {
+      const ribbon = element('div', 'drama-purchase-ribbon');
+      ribbon.appendChild(element('span', 'drama-purchase-tag', '地产到手'));
+      if (facts.chain) ribbon.appendChild(element('span', 'drama-purchase-tag', `街区已拥有 ${Math.floor(facts.districtCount)} 处`));
+      if (facts.large) ribbon.appendChild(element('span', 'drama-purchase-tag', '大型地产'));
+      if (facts.built) ribbon.appendChild(element('span', 'drama-purchase-tag', `${facts.opening ? '开业楼 · ' : ''}Lv.${Math.floor(facts.buildingLevel)} 建筑保留`));
+      copy.appendChild(ribbon);
     }
     if (event.message) copy.appendChild(element('p', 'drama-message', event.message));
     const detail = element('div', 'drama-detail');
@@ -326,7 +463,8 @@
     }
     if (detail.childNodes.length) copy.appendChild(detail);
     body.append(symbol, copy);
-    card.appendChild(body);
+    content.appendChild(body);
+    card.appendChild(content);
     const footer = element('div', 'drama-footer');
     const timing = element('div', 'drama-timing');
     const autoStatus = element('span', 'drama-auto-status', '自动继续');
@@ -356,12 +494,20 @@
       if (sceneEffect && typeof sceneEffect.catch === 'function') sceneEffect.catch(() => {});
     } catch (_) { /* The board is an optional companion, never a dependency. */ }
     sound(job, type, major);
+    if (type === 'rent' && amount >= 300) {
+      tone(job, 185, 0, .11, .012, 'triangle');
+      tone(job, 139, .10, .14, .010, 'triangle');
+    }
     if (['rent', 'bank', 'income', 'relief'].includes(type)) {
       coins(job, event);
       if (type === 'rent' || type === 'bank') delay(job, () => signedCounter(job, event.from, amount, '-'), 280);
       delay(job, () => signedCounter(job, event.to, amount, '+'), 460);
     }
     if (type === 'win') confetti(job);
+    if (type === 'buy') {
+      purchaseBurst(job, card, importantPurchase);
+      delay(job, () => {if (!job.auto?.paused) signedCounter(job, event.to, amount, '-');}, 280);
+    }
     job.auto = {remaining:duration, started:0, paused:false, leaveTimer:null, endTimer:null};
     scheduleAutoAdvance(job);
   }
@@ -380,6 +526,7 @@
       job.sounds.forEach(({osc, gain}) => {try {osc.stop(); osc.disconnect(); gain.disconnect();} catch (_) {}});
       job.nodes.forEach(node => node.remove());
       if (layer) {layer.hidden = true; layer.replaceChildren();}
+      document.body.classList.remove('drama-playing');
       active = null;
       request.resolve();
       // Resolve first so game-state continuations can run before the next event.
@@ -405,6 +552,7 @@
       queue.splice(0).forEach(request => request.resolve());
       active?.finish();
       if (layer) {layer.hidden = true; layer.replaceChildren();}
+      document.body.classList.remove('drama-playing');
       transferLayer?.replaceChildren();
       eventNumber = 0;
     },
