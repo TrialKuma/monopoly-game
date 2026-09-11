@@ -2,7 +2,7 @@
  * GameDrama — presentation only. No access to game state.
  * play({ type, title, message, amount, expectedAmount, from, to,
  *        tiles, tileName, leadChanged?, duration?, sessionId?, payerCashAfter?,
- *        cashAfter?, districtCount?, isLarge?, buildingLevel?, isOpeningBuilding? }): Promise<void>
+ *        cashAfter?, districtCount?, isLarge?, buildingLevel?, isOpeningBuilding?, rival? }): Promise<void>
  * from/to: { id: 'human'|'ai', name, color }. Amounts are positive magnitudes.
  * reset() cancels every animation, pending event and sound; all promises resolve.
  * setMuted(boolean) follows the game's sound preference.
@@ -35,30 +35,82 @@
   const fmt = value => Math.round(Math.abs(Number(value) || 0)).toLocaleString('zh-CN');
   const finiteAmount = value => Number.isFinite(Number(value)) ? Math.abs(Number(value)) : 0;
   const optionalNumber = value => value != null && value !== '' && Number.isFinite(Number(value)) ? Number(value) : null;
-  // Dialogue uses its own rotation, never the random source used by game dice.
-  // Keep this tiny cosmetic history across reset so the next game opens differently.
+  // Rotate complete exchanges: the reply answers the actual preceding line.
+  // This cosmetic history survives reset and never consumes the dice RNG.
   const lineCursors = new Map();
+  const EXCHANGES = {
+    rent:[
+      ['怎么又是你家啊？','缘分，付一下。'],
+      ['行，算我请你喝奶茶。','少糖，谢谢老板。'],
+      ['我还没站稳就扣钱？！','不耽误，边走边扣。'],
+      ['这笔账我可记下了啊。','记吧，钱我先收了。'],
+    ],
+    huge:[
+      ['卧槽，一脚踩掉这么多？！','你要不坐会儿？都花这钱了。'],
+      ['你这地是金子做的？！','快了，靠你呢。'],
+      ['这是地块还是地雷啊？！','你一来就爆金币。'],
+      ['我靠你抢钱啊？！','过奖了，主要是你骰子好。'],
+    ],
+    hugeLead:[
+      ['我靠你抢钱啊？！','这不比抢省事多了。'],
+      ['钱给你，第一也给你是吧？！','哎呀，太客气了。'],
+      ['我怎么还把你喂起来了？！','谢谢老板，老板糊涂！'],
+      ['不是！我这就给你打工了？！','这班上的，我很满意。'],
+    ],
+    lead:[
+      ['不是，怎么就你第一了？！','谢了啊，主要靠你。'],
+      ['我就领先了这么一会儿？！','坐够了吧，该我了。'],
+      ['我刚攒的啊！刚攒的！！','没事，我替你存着。'],
+    ],
+    empty:[
+      ['没钱了呀！真没了！','你倒是给我喊心虚了。'],
+      ['你看看我还剩啥？！','还剩一颗骰子。'],
+      ['给我留两块行不行？！','你早说啊，都收完了。'],
+      ['裤兜都翻给你了！','别翻了，留条裤子。'],
+    ],
+    emptyZero:[
+      ['没钱了呀！真没了！','……你是真一点都没剩。'],
+      ['你看我像还有钱的样子吗？！','不像，像来气我的。'],
+      ['要钱没有，骰子一颗。','……行，你掷吧。'],
+    ],
+    zero:[
+      ['零块钱，也要站这儿结账？','你别说，还挺有仪式感。'],
+      ['这账单，主打一个陪伴。','忙活半天，收了个寂寞。'],
+    ],
+    shield:[
+      ['收啊，你倒是收啊！','卧槽，我都数上了！'],
+      ['不好意思，这把有盾。','你怎么还自带免单啊？！'],
+      ['这钱你是一分也别想拿。','我笑到一半，你给我来这个？'],
+      ['哎，白走！气不气？','你等下次没盾的。'],
+    ],
+    buy:[
+      ['买了！下回给我踩这儿！','你想得倒挺美。'],
+      ['这地我先占了啊。','占吧，骰子不归你管。'],
+      ['来，叫声房东听听。','楼都没盖，你急什么。'],
+    ],
+    buyDistrict:[
+      ['连起来了，专等你了！','你搁这儿设卡收费呢？！'],
+      ['这回可不止一家收钱了。','一条街合伙坑我是吧。'],
+      ['来，看看我这收费站。','你是真没打算让我富啊。'],
+    ],
+    buyLarge:[
+      ['这么大一块，总能踩中了吧？！','你这是买地还是撒网啊？'],
+      ['买了！这下看你往哪儿躲！','你问骰子去，别问我。'],
+      ['这位置，不当房东可惜了。','你先别给我安排上。'],
+    ],
+    buyOpening:[
+      ['卧槽，买地还带楼？！','怎么便宜都让你捡了？'],
+      ['这楼也归我？那我不客气了。','行，你小子是真会捡啊。'],
+      ['钥匙一拿，直接当房东？','坏了，还真让你赶上了。'],
+    ],
+  };
   const LINES = {
-    rentPay:['又要交租啦？','这一脚，踩得有点贵！','好好好，钱给你！'],
-    rentCollect:['承让，租金收下啦！','欢迎光临我的地盘！','这一站，轮到我收钱！'],
-    hugePay:['我靠你抢钱啊？！','这一脚，钱包都瘪了！','这租金，认真的吗？！'],
-    hugeCollect:['这块地，真给力！','这笔租金，漂亮！','等的就是这一脚！'],
-    emptyPay:['没钱了呀！','钱包见底啦！','救命，真的一滴不剩了！'],
-    zeroCollect:['下次路过，还来坐坐！','这张账单，可不便宜！','我的地盘可有点厉害！'],
-    leadPay:['等等，怎么你反超了？','这一笔也太狠了！','风向说变就变啊！'],
-    leadCollect:['轮到我领先啦！','这一笔，反超！','好戏才刚开始！'],
-    shield:['护盾在手，这笔免单！','嘿，这次收不到啦！','我的护盾，来得正好！'],
-    shieldMiss:['啊？这笔被挡住了！','差一点就到账了！','护盾还真救了你！'],
-    relief:['活过来了！还能再来！','好险，终于缓过一口气！','钱到账了，先喘口气！'],
-    buy:['拿下了！','好地段到手！','这一块，我收下啦！','我的地盘又大一点！'],
-    buyDistrict:['连锁地盘，成了！','这条街，越来越有看头！','好地段，连起来更香！'],
-    buyLarge:['这大地块，我拿下了！','这么大一片，归我啦！','大地段到手，舒服！'],
-    buyOpening:['连楼一起拿下，舒服！','房子都盖好了，真香！','带着楼到手，漂亮！'],
-    seize:['我的地盘啊！','怎么说征就征啊？！','这一下，太突然了！']
+    relief:['扶我起来，我还能送！','复活！刚才谁在笑？！','别催，我缓口气再挨打。','有钱了！虽然就这么点。'],
+    seize:['我地呢？我那么大块地呢？！','这地方刚才还归我呢？！','我不同意！……不同意有用吗？'],
   };
 
   function line(key) {
-    const choices = LINES[key];
+    const choices = EXCHANGES[key] || LINES[key];
     const index = lineCursors.get(key) || 0;
     lineCursors.set(key, (index + 1) % choices.length);
     return choices[index];
@@ -73,26 +125,31 @@
   }
 
   function dialogue(event, type, amount) {
-    const say = (player, role, mood, face, key) => ({player, role, mood, face, words:line(key)});
+    const say = (player, role, mood, face, words) => ({player, role, mood, face, words});
     if (type === 'rent') {
       const cash = optionalNumber(event.payerCashAfter ?? event.from?.cashAfter);
       const exhausted = cash !== null && cash <= 0;
-      const payer = exhausted ? ['panic','😱','emptyPay'] : event.leadChanged ? ['surprised','😵','leadPay'] : amount >= 300 ? ['complaint','😤','hugePay'] : ['complaint','😮','rentPay'];
-      const collector = event.leadChanged ? ['proud','😎','leadCollect'] : amount <= 0 ? ['proud','😏','zeroCollect'] : amount >= 300 ? ['proud','🤩','hugeCollect'] : ['proud','😄','rentCollect'];
-      return [say(event.from,'付款方',...payer), say(event.to,'收租方',...collector)];
+      const key = exhausted ? (amount > 0 ? 'empty' : 'emptyZero') : amount <= 0 ? 'zero' : event.leadChanged ? (amount >= 300 ? 'hugeLead' : 'lead') : amount >= 300 ? 'huge' : 'rent';
+      const [complaint, reply] = line(key);
+      return [say(event.from,'付款方',exhausted?'panic':'complaint',exhausted?'😱':amount>=300?'😤':'😮',complaint), say(event.to,'收租方','proud',event.leadChanged?'😎':'😏',reply)];
     }
     if (type === 'buy') {
       const facts = purchaseFacts(event);
       const key = facts.chain ? 'buyDistrict' : facts.opening || facts.built ? 'buyOpening' : facts.large ? 'buyLarge' : 'buy';
-      return [say(event.to,'买家','joyful','🤩',key)];
-    }
-    if (type === 'shield') {
-      const lines = [say(event.to,'免付方','relieved','😌','shield')];
-      if (event.from?.name && event.from.id !== event.to?.id) lines.push(say(event.from,'收租方','surprised','😳','shieldMiss'));
+      const [boast, reply] = line(key);
+      const lines = [say(event.to,'买家','joyful','🤩',boast)];
+      if (event.rival?.name && event.rival.id !== event.to?.id) lines.push(say(event.rival,'对手','complaint','🙄',reply));
       return lines;
     }
-    if (type === 'relief') return [say(event.to,'获得救助','relieved','🥹','relief')];
-    if (type === 'seize' && event.from?.name) return [say(event.from,'原地主','panic','😱','seize')];
+    if (type === 'shield') {
+      const [taunt, reply] = line('shield');
+      const lines = [say(event.to,'免付方','relieved','😌',taunt)];
+      const landlord = event.rival || event.from;
+      if (landlord?.name && landlord.id !== event.to?.id) lines.push(say(landlord,'收租方','surprised','😳',reply));
+      return lines;
+    }
+    if (type === 'relief') return [say(event.to,'获得救助','relieved','🥹',line('relief'))];
+    if (type === 'seize' && event.from?.name) return [say(event.from,'原地主','panic','😱',line('seize'))];
     return [];
   }
 
@@ -379,7 +436,8 @@
     const facts = purchaseFacts(event);
     const importantPurchase = type === 'buy' && (facts.chain || facts.large || facts.built);
     const major = type === 'rent' && (amount >= 300 || leadChanged) || ['seize', 'shield', 'relief', 'win'].includes(type) || type === 'bank' && amount >= 300 || importantPurchase;
-    let defaultDuration = type === 'win' ? 6500 : major ? 6000 : type === 'rent' ? 4500 : 3000;
+    const purchaseReply = type === 'buy' && event.rival?.name && event.rival.id !== event.to?.id;
+    let defaultDuration = type === 'win' ? 6500 : major ? 6000 : type === 'rent' || purchaseReply ? 4500 : 3000;
     const messageLength = String(event.message || '').length;
     if (messageLength > 50) defaultDuration = Math.max(defaultDuration, Math.min(10000, 1500 + messageLength * 55));
     const duration = Number.isFinite(Number(event.duration)) && event.duration != null ? Math.max(defaultDuration, Math.min(10000, Number(event.duration))) : defaultDuration;

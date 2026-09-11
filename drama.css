@@ -61,7 +61,7 @@ body.drama-playing { overflow:hidden; overscroll-behavior:none; }
 .drama-sequence { color:#929888; font-family:Georgia, "Times New Roman", serif; font-style:italic; font-size:15px; font-variant-numeric:tabular-nums; }
 .drama-dialogue { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; margin:0 0 20px; }
 .drama-dialogue.is-solo { grid-template-columns:minmax(0,1fr); }
-.drama-speech { --speech-paper:#fffdf7; --speech-border:#bdd7ca; position:relative; min-width:0; padding:10px 12px 11px; background:var(--speech-paper); border:2px solid var(--speech-border); border-radius:17px 17px 17px 5px; box-shadow:0 3px 0 color-mix(in srgb,var(--speech-border) 45%,transparent); animation:drama-speech-pop .38s calc(var(--speech-order,0) * 70ms) cubic-bezier(.2,.85,.3,1.1) both; }
+.drama-speech { --speech-paper:#fffdf7; --speech-border:#bdd7ca; position:relative; min-width:0; padding:10px 12px 11px; background:var(--speech-paper); border:2px solid var(--speech-border); border-radius:17px 17px 17px 5px; box-shadow:0 3px 0 color-mix(in srgb,var(--speech-border) 45%,transparent); animation:drama-speech-pop .38s calc(var(--speech-order,0) * 440ms) cubic-bezier(.2,.85,.3,1.1) both; }
 .drama-speech::after { content:""; position:absolute; left:22px; bottom:-7px; width:10px; height:10px; background:var(--speech-paper); border-bottom:2px solid var(--speech-border); border-right:2px solid var(--speech-border); transform:rotate(45deg); }
 .drama-speech.is-complaint,.drama-speech.is-panic,.drama-speech.is-surprised { --speech-paper:#fff4e9; --speech-border:#e9b190; border-radius:17px 17px 5px 17px; }
 .drama-speech.is-panic { --speech-paper:#fff0e7; --speech-border:#df967a; }

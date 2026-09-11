@@ -134,12 +134,18 @@
     else if(/收益|补给|获得|奖励/.test(text))type='income';
     const value=Number((text.match(/¥([\d,]+)/)||[])[1]?.replaceAll(',',''))||0;
     const event={type,title:cfg.title,message:cfg.message,amount:value,to,tiles:target?[target.index]:[],tileName:target?.name,...cfg.drama};
+    // The blocked landlord and the buyer's opponent can answer in the banter.
+    if(event.type==='shield'&&!event.from&&!event.rival) {
+      const ownerId=state.board[event.tiles?.[0]]?.lot?.ownerId;
+      if(ownerId&&ownerId!==event.to?.id)event.rival=person(getPlayerById(ownerId));
+    }
     // Read the settled ledger, never infer a player's balance from the animation.
     const payer=event.from?.id?getPlayerById(event.from.id):null;
     const recipient=event.to?.id?getPlayerById(event.to.id):null;
     if(payer)event.payerCashAfter=payer.cash;
     if(recipient)event.cashAfter=recipient.cash;
     if(event.type==='buy') {
+      if(recipient)event.rival=person(getOpponent(recipient));
       const purchased=state.board[event.tiles?.[0]];
       const primary=purchased?.isLargeSecondary?state.board[purchased.largePrimaryIndex]:purchased;
       if(primary?.lot) {
