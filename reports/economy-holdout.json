@@ -1,0 +1,1189 @@
+{
+  "seedStart": 9320001,
+  "seeds": 5000,
+  "methodology": {
+    "policy": "Identical shipped AI for both players",
+    "startup": "Actual startNewGame, mode choice, coin flip, compensation and subsequent real rules. Coin outcome is controlled but its RNG draw is still consumed.",
+    "unit": "One independent seed per map; no mirrored game counted as extra evidence.",
+    "legacy": "Only old round boundary is normalized to equal turns, before comparing old economy/chance rules.",
+    "cash": "Both players sampled after each complete normal round; extras and relief rests retain real rules.",
+    "errors": "Any error, unequal scheduled turns, invalid cash or cash-ledger mismatch stops the run.",
+    "ci": "Normal 95% approximation across independent seed outcomes; pointwise per map."
+  },
+  "results": [
+    {
+      "name": "classic-old-equal-rounds",
+      "map": "classic",
+      "sourceRef": "46fcb9b72de4e858b0f644f50a798a51e4b88da5",
+      "sourceSha256": "2b3c2b03f9aa7c0e8cf070e65ffe39d6acf7fa3884704d327d79591e5aa6e627",
+      "summary": {
+        "n": 5000,
+        "firstWins": 3016,
+        "secondWins": 1983,
+        "draws": 1,
+        "firstWinRate": 0.6032,
+        "secondWinRate": 0.3966,
+        "drawRate": 0.0002,
+        "firstWinCI": [
+          0.5896377732506022,
+          0.6167622267493977
+        ],
+        "firstScore": 0.6033,
+        "ci": [
+          0.5897397750116172,
+          0.6168602249883827
+        ],
+        "poorRate": 0.020783333333333334,
+        "atReliefFloorRate": 0.05698,
+        "thinCashRate": 0.09490666666666667,
+        "latePoorRate": 0.04040909090909091,
+        "meanCash": 1338.84402,
+        "buyOffers": 15.138,
+        "buyTooPoor": 0.0614,
+        "buyTooPoorRate": 0.0040560179680274805,
+        "buildOffers": 15.3988,
+        "buildTooPoor": 0.0738,
+        "buildTooPoorRate": 0.004792581240096631,
+        "buyReserveSkips": 0.1044,
+        "buildReserveSkips": 0.299,
+        "hugeRents": 1.2852,
+        "rents": 17.8698,
+        "incompleteRentRate": 0.07833327737299801,
+        "rentFlips": 2.5968,
+        "bigRentFlips": 0.9926,
+        "reliefs": 1.3998,
+        "reliefRests": 1.273,
+        "money": {
+          "buy": {
+            "in": 0,
+            "out": 2292.2239999999874
+          },
+          "bank": {
+            "in": 145.224200000004,
+            "out": 274.2366000000037
+          },
+          "rent": {
+            "in": 3741.579599999998,
+            "out": 3741.579599999998
+          },
+          "build": {
+            "in": 0,
+            "out": 1512.6519999999934
+          },
+          "start": {
+            "in": 2877.8399999998696,
+            "out": 0
+          },
+          "largeIncome": {
+            "in": 352.11999999999244,
+            "out": 0
+          },
+          "other": {
+            "in": 838.2820000000016,
+            "out": 0
+          },
+          "chance": {
+            "in": 227.3466000000028,
+            "out": 103.96080000000114
+          },
+          "construction": {
+            "in": 0.6240000000000002,
+            "out": 0
+          },
+          "card_draw": {
+            "in": 0.6060000000000001,
+            "out": 0
+          }
+        },
+        "chance": {},
+        "finalMeanCash": 1729.4847,
+        "bankLeft": 129.0124
+      }
+    },
+    {
+      "name": "classic-new-without-compensation",
+      "map": "classic",
+      "economy": {
+        "secondPlayerBonus": 0
+      },
+      "sourceSha256": "7438264aa033a843e795ef655b533ea99d90ba90a212c60773348e8dcdb9689b",
+      "summary": {
+        "n": 5000,
+        "firstWins": 3009,
+        "secondWins": 1991,
+        "draws": 0,
+        "firstWinRate": 0.6018,
+        "secondWinRate": 0.3982,
+        "drawRate": 0,
+        "firstWinCI": [
+          0.5882296445753079,
+          0.6153703554246921
+        ],
+        "firstScore": 0.6018,
+        "ci": [
+          0.5882296445753081,
+          0.6153703554246919
+        ],
+        "poorRate": 0.020356666666666665,
+        "atReliefFloorRate": 0.061283333333333335,
+        "thinCashRate": 0.10049,
+        "latePoorRate": 0.03777272727272727,
+        "meanCash": 1353.8278666666668,
+        "buyOffers": 15.0724,
+        "buyTooPoor": 0.0648,
+        "buyTooPoorRate": 0.004299248958360978,
+        "buildOffers": 15.1178,
+        "buildTooPoor": 0.0714,
+        "buildTooPoorRate": 0.0047229094180370156,
+        "buyReserveSkips": 0.1172,
+        "buildReserveSkips": 0.3092,
+        "hugeRents": 1.508,
+        "rents": 17.6922,
+        "incompleteRentRate": 0.08880749708911272,
+        "rentFlips": 2.6004,
+        "bigRentFlips": 1.055,
+        "reliefs": 1.5712,
+        "reliefRests": 1.4316,
+        "money": {
+          "buy": {
+            "in": 0,
+            "out": 2277.461999999988
+          },
+          "bank": {
+            "in": 187.29220000000066,
+            "out": 257.20340000000795
+          },
+          "rent": {
+            "in": 3934.820800000003,
+            "out": 3934.820800000003
+          },
+          "build": {
+            "in": 0,
+            "out": 1517.8748000000035
+          },
+          "start": {
+            "in": 2853.299999999875,
+            "out": 0
+          },
+          "largeIncome": {
+            "in": 389.76599999999354,
+            "out": 0
+          },
+          "other": {
+            "in": 861.4910000000027,
+            "out": 0
+          },
+          "chance": {
+            "in": 143.77999999999986,
+            "out": 0
+          },
+          "construction": {
+            "in": 0.48000000000000015,
+            "out": 0
+          },
+          "card_draw": {
+            "in": 0.6720000000000002,
+            "out": 0
+          }
+        },
+        "chance": {
+          "bonus": 0.36799999999999566,
+          "swap": 0.2998,
+          "express": 0.4883999999999894,
+          "shield": 0.3559999999999966,
+          "renovation": 0.6647999999999754,
+          "bank": 0.3665999999999959,
+          "district": 0.4799999999999888
+        },
+        "finalMeanCash": 1792.1205,
+        "bankLeft": 143.2312
+      }
+    },
+    {
+      "name": "classic-final",
+      "map": "classic",
+      "sourceSha256": "7438264aa033a843e795ef655b533ea99d90ba90a212c60773348e8dcdb9689b",
+      "summary": {
+        "n": 5000,
+        "firstWins": 2782,
+        "secondWins": 2218,
+        "draws": 0,
+        "firstWinRate": 0.5564,
+        "secondWinRate": 0.4436,
+        "drawRate": 0,
+        "firstWinCI": [
+          0.5426277837803526,
+          0.5701722162196474
+        ],
+        "firstScore": 0.5564,
+        "ci": [
+          0.5426277837803529,
+          0.5701722162196471
+        ],
+        "poorRate": 0.014653333333333334,
+        "atReliefFloorRate": 0.045906666666666665,
+        "thinCashRate": 0.07547,
+        "latePoorRate": 0.03001818181818182,
+        "meanCash": 1591.2184466666668,
+        "buyOffers": 15.0518,
+        "buyTooPoor": 0.0428,
+        "buyTooPoorRate": 0.0028435137325768345,
+        "buildOffers": 15.2136,
+        "buildTooPoor": 0.0504,
+        "buildTooPoorRate": 0.003312825366777094,
+        "buyReserveSkips": 0.082,
+        "buildReserveSkips": 0.2398,
+        "hugeRents": 1.6888,
+        "rents": 17.8304,
+        "incompleteRentRate": 0.07025080760947595,
+        "rentFlips": 1.8938,
+        "bigRentFlips": 1.0114,
+        "reliefs": 1.2526,
+        "reliefRests": 1.1296,
+        "money": {
+          "opening": {
+            "in": 500.0000000000452,
+            "out": 0
+          },
+          "buy": {
+            "in": 0,
+            "out": 2285.3209999999885
+          },
+          "bank": {
+            "in": 189.26000000000067,
+            "out": 257.61800000000784
+          },
+          "rent": {
+            "in": 4086.963200000009,
+            "out": 4086.963200000009
+          },
+          "build": {
+            "in": 0,
+            "out": 1538.9052000000036
+          },
+          "start": {
+            "in": 2868.11999999987,
+            "out": 0
+          },
+          "largeIncome": {
+            "in": 390.46999999999235,
+            "out": 0
+          },
+          "other": {
+            "in": 801.4950000000019,
+            "out": 0
+          },
+          "chance": {
+            "in": 143.30799999999985,
+            "out": 0
+          },
+          "construction": {
+            "in": 0.48000000000000015,
+            "out": 0
+          },
+          "card_draw": {
+            "in": 0.7450000000000002,
+            "out": 0
+          }
+        },
+        "chance": {
+          "bonus": 0.3685999999999957,
+          "swap": 0.30459999999999976,
+          "express": 0.4937999999999894,
+          "shield": 0.3581999999999963,
+          "renovation": 0.6639999999999757,
+          "bank": 0.3655999999999962,
+          "district": 0.4867999999999887
+        },
+        "finalMeanCash": 2006.0169,
+        "bankLeft": 141.478
+      }
+    },
+    {
+      "name": "compact-old-equal-rounds",
+      "map": "compact",
+      "sourceRef": "46fcb9b72de4e858b0f644f50a798a51e4b88da5",
+      "sourceSha256": "2b3c2b03f9aa7c0e8cf070e65ffe39d6acf7fa3884704d327d79591e5aa6e627",
+      "summary": {
+        "n": 5000,
+        "firstWins": 2935,
+        "secondWins": 2065,
+        "draws": 0,
+        "firstWinRate": 0.587,
+        "secondWinRate": 0.413,
+        "drawRate": 0,
+        "firstWinCI": [
+          0.5733507565671478,
+          0.6006492434328521
+        ],
+        "firstScore": 0.587,
+        "ci": [
+          0.5733507565671481,
+          0.6006492434328519
+        ],
+        "poorRate": 0.015573076923076924,
+        "atReliefFloorRate": 0.05611923076923077,
+        "thinCashRate": 0.08163076923076923,
+        "latePoorRate": 0.03384285714285714,
+        "meanCash": 1729.250373076923,
+        "buyOffers": 10.2978,
+        "buyTooPoor": 0.029,
+        "buyTooPoorRate": 0.0028161354852492765,
+        "buildOffers": 11.4022,
+        "buildTooPoor": 0.0296,
+        "buildTooPoorRate": 0.0025959902474960972,
+        "buyReserveSkips": 0.0226,
+        "buildReserveSkips": 0.1422,
+        "hugeRents": 1.956,
+        "rents": 13.8784,
+        "incompleteRentRate": 0.0946795019598801,
+        "rentFlips": 2.1132,
+        "bigRentFlips": 0.8592,
+        "reliefs": 1.314,
+        "reliefRests": 1.173,
+        "money": {
+          "construction": {
+            "in": 42.40800000000057,
+            "out": 0
+          },
+          "buy": {
+            "in": 0,
+            "out": 1497.6009999999953
+          },
+          "chance": {
+            "in": 259.1510000000024,
+            "out": 116.0234000000016
+          },
+          "build": {
+            "in": 0,
+            "out": 1185.150000000002
+          },
+          "bank": {
+            "in": 126.95660000000328,
+            "out": 254.44420000000795
+          },
+          "rent": {
+            "in": 3644.211800000001,
+            "out": 3644.211800000001
+          },
+          "start": {
+            "in": 2990.519999999879,
+            "out": 0
+          },
+          "other": {
+            "in": 706.2649999999983,
+            "out": 0
+          },
+          "largeIncome": {
+            "in": 278.88800000000265,
+            "out": 0
+          },
+          "rush": {
+            "in": 29.719999999999597,
+            "out": 0
+          },
+          "teleport": {
+            "in": 27.999999999999634,
+            "out": 0
+          },
+          "card_draw": {
+            "in": 1.2200000000000004,
+            "out": 0
+          }
+        },
+        "chance": {},
+        "finalMeanCash": 2304.955,
+        "bankLeft": 127.4876
+      }
+    },
+    {
+      "name": "compact-new-without-compensation",
+      "map": "compact",
+      "economy": {
+        "secondPlayerBonus": 0
+      },
+      "sourceSha256": "7438264aa033a843e795ef655b533ea99d90ba90a212c60773348e8dcdb9689b",
+      "summary": {
+        "n": 5000,
+        "firstWins": 2923,
+        "secondWins": 2077,
+        "draws": 0,
+        "firstWinRate": 0.5846,
+        "secondWinRate": 0.4154,
+        "drawRate": 0,
+        "firstWinCI": [
+          0.5709391678695733,
+          0.5982608321304267
+        ],
+        "firstScore": 0.5846,
+        "ci": [
+          0.5709391678695731,
+          0.5982608321304269
+        ],
+        "poorRate": 0.015023076923076924,
+        "atReliefFloorRate": 0.061088461538461536,
+        "thinCashRate": 0.08591538461538462,
+        "latePoorRate": 0.03127142857142857,
+        "meanCash": 1762.109,
+        "buyOffers": 10.2008,
+        "buyTooPoor": 0.0282,
+        "buyTooPoorRate": 0.0027644890596815936,
+        "buildOffers": 10.8954,
+        "buildTooPoor": 0.0324,
+        "buildTooPoorRate": 0.0029737320337022964,
+        "buyReserveSkips": 0.0238,
+        "buildReserveSkips": 0.1554,
+        "hugeRents": 2.1948,
+        "rents": 13.6268,
+        "incompleteRentRate": 0.10560072797722136,
+        "rentFlips": 2.1156,
+        "bigRentFlips": 0.9222,
+        "reliefs": 1.439,
+        "reliefRests": 1.2942,
+        "money": {
+          "construction": {
+            "in": 42.408000000000555,
+            "out": 0
+          },
+          "buy": {
+            "in": 0,
+            "out": 1481.720999999999
+          },
+          "largeIncome": {
+            "in": 317.7080000000056,
+            "out": 0
+          },
+          "build": {
+            "in": 0,
+            "out": 1154.0531999999962
+          },
+          "rent": {
+            "in": 3812.1737999999955,
+            "out": 3812.1737999999955
+          },
+          "start": {
+            "in": 3006.95999999989,
+            "out": 0
+          },
+          "chance": {
+            "in": 152.81199999999953,
+            "out": 0
+          },
+          "bank": {
+            "in": 181.05620000000127,
+            "out": 232.95300000000717
+          },
+          "other": {
+            "in": 714.2479999999988,
+            "out": 0
+          },
+          "rush": {
+            "in": 27.679999999999612,
+            "out": 0
+          },
+          "teleport": {
+            "in": 28.119999999999628,
+            "out": 0
+          },
+          "card_draw": {
+            "in": 1.4170000000000005,
+            "out": 0
+          }
+        },
+        "chance": {
+          "district": 0.5681999999999829,
+          "bonus": 0.4319999999999915,
+          "swap": 0.3397999999999973,
+          "express": 0.566199999999985,
+          "shield": 0.4013999999999941,
+          "renovation": 0.77219999999997,
+          "bank": 0.4295999999999925
+        },
+        "finalMeanCash": 2401.841,
+        "bankLeft": 137.8168
+      }
+    },
+    {
+      "name": "compact-final",
+      "map": "compact",
+      "sourceSha256": "7438264aa033a843e795ef655b533ea99d90ba90a212c60773348e8dcdb9689b",
+      "summary": {
+        "n": 5000,
+        "firstWins": 2778,
+        "secondWins": 2221,
+        "draws": 1,
+        "firstWinRate": 0.5556,
+        "secondWinRate": 0.4442,
+        "drawRate": 0.0002,
+        "firstWinCI": [
+          0.5418252842191292,
+          0.5693747157808707
+        ],
+        "firstScore": 0.5557,
+        "ci": [
+          0.5419269895067635,
+          0.5694730104932364
+        ],
+        "poorRate": 0.010873076923076923,
+        "atReliefFloorRate": 0.04751153846153846,
+        "thinCashRate": 0.06693461538461538,
+        "latePoorRate": 0.025971428571428572,
+        "meanCash": 2004.2544923076923,
+        "buyOffers": 10.2104,
+        "buyTooPoor": 0.0228,
+        "buyTooPoorRate": 0.002233017315678132,
+        "buildOffers": 10.8898,
+        "buildTooPoor": 0.022,
+        "buildTooPoorRate": 0.0020202391228489043,
+        "buyReserveSkips": 0.0204,
+        "buildReserveSkips": 0.1154,
+        "hugeRents": 2.362,
+        "rents": 13.7166,
+        "incompleteRentRate": 0.08563346601927592,
+        "rentFlips": 1.5622,
+        "bigRentFlips": 0.9178,
+        "reliefs": 1.1746,
+        "reliefRests": 1.0364,
+        "money": {
+          "opening": {
+            "in": 500.0000000000452,
+            "out": 0
+          },
+          "construction": {
+            "in": 42.408000000000555,
+            "out": 0
+          },
+          "buy": {
+            "in": 0,
+            "out": 1485.063999999998
+          },
+          "largeIncome": {
+            "in": 319.0400000000056,
+            "out": 0
+          },
+          "build": {
+            "in": 0,
+            "out": 1159.218199999997
+          },
+          "rent": {
+            "in": 3945.960800000008,
+            "out": 3945.960800000008
+          },
+          "start": {
+            "in": 3014.2799999998874,
+            "out": 0
+          },
+          "chance": {
+            "in": 151.79999999999953,
+            "out": 0
+          },
+          "bank": {
+            "in": 181.8232000000013,
+            "out": 233.97540000000723
+          },
+          "other": {
+            "in": 675.471999999999,
+            "out": 0
+          },
+          "rush": {
+            "in": 22.639999999999723,
+            "out": 0
+          },
+          "teleport": {
+            "in": 22.159999999999744,
+            "out": 0
+          },
+          "card_draw": {
+            "in": 1.3220000000000003,
+            "out": 0
+          }
+        },
+        "chance": {
+          "district": 0.5671999999999834,
+          "bonus": 0.4307999999999916,
+          "swap": 0.34199999999999703,
+          "express": 0.5645999999999847,
+          "shield": 0.4027999999999941,
+          "renovation": 0.77399999999997,
+          "bank": 0.43799999999999156
+        },
+        "finalMeanCash": 2626.3438,
+        "bankLeft": 139.7522
+      }
+    },
+    {
+      "name": "expansion-old-equal-rounds",
+      "map": "expansion",
+      "sourceRef": "46fcb9b72de4e858b0f644f50a798a51e4b88da5",
+      "sourceSha256": "2b3c2b03f9aa7c0e8cf070e65ffe39d6acf7fa3884704d327d79591e5aa6e627",
+      "summary": {
+        "n": 5000,
+        "firstWins": 2930,
+        "secondWins": 2070,
+        "draws": 0,
+        "firstWinRate": 0.586,
+        "secondWinRate": 0.414,
+        "drawRate": 0,
+        "firstWinCI": [
+          0.5723458873507485,
+          0.5996541126492514
+        ],
+        "firstScore": 0.586,
+        "ci": [
+          0.572345887350749,
+          0.599654112649251
+        ],
+        "poorRate": 0.03162,
+        "atReliefFloorRate": 0.0777,
+        "thinCashRate": 0.1394425,
+        "latePoorRate": 0.04832857142857143,
+        "meanCash": 1212.686155,
+        "buyOffers": 19.425,
+        "buyTooPoor": 0.1458,
+        "buyTooPoorRate": 0.007505791505791505,
+        "buildOffers": 20.877,
+        "buildTooPoor": 0.1718,
+        "buildTooPoorRate": 0.008229151698040907,
+        "buyReserveSkips": 0.2524,
+        "buildReserveSkips": 0.8044,
+        "hugeRents": 2.038,
+        "rents": 22.8916,
+        "incompleteRentRate": 0.09500428104632266,
+        "rentFlips": 3.2782,
+        "bigRentFlips": 1.3794,
+        "reliefs": 2.1748,
+        "reliefRests": 2.0708,
+        "money": {
+          "construction": {
+            "in": 39.50400000000035,
+            "out": 0
+          },
+          "bank": {
+            "in": 179.77980000000505,
+            "out": 306.3023999999985
+          },
+          "buy": {
+            "in": 0,
+            "out": 2641.5290000000127
+          },
+          "build": {
+            "in": 0,
+            "out": 1947.1952000000013
+          },
+          "rent": {
+            "in": 5179.295599999997,
+            "out": 5179.295599999997
+          },
+          "start": {
+            "in": 3115.979999999841,
+            "out": 0
+          },
+          "chance": {
+            "in": 396.5270000000066,
+            "out": 188.3680000000032
+          },
+          "largeIncome": {
+            "in": 244.32199999999844,
+            "out": 0
+          },
+          "other": {
+            "in": 911.896000000002,
+            "out": 0
+          },
+          "teleport": {
+            "in": 30.399999999999554,
+            "out": 0
+          },
+          "rush": {
+            "in": 14.159999999999888,
+            "out": 0
+          }
+        },
+        "chance": {},
+        "finalMeanCash": 1524.5871,
+        "bankLeft": 126.5226
+      }
+    },
+    {
+      "name": "expansion-new-without-compensation",
+      "map": "expansion",
+      "economy": {
+        "secondPlayerBonus": 0
+      },
+      "sourceSha256": "7438264aa033a843e795ef655b533ea99d90ba90a212c60773348e8dcdb9689b",
+      "summary": {
+        "n": 5000,
+        "firstWins": 2888,
+        "secondWins": 2112,
+        "draws": 0,
+        "firstWinRate": 0.5776,
+        "secondWinRate": 0.4224,
+        "drawRate": 0,
+        "firstWinCI": [
+          0.5639072698292595,
+          0.5912927301707405
+        ],
+        "firstScore": 0.5776,
+        "ci": [
+          0.5639072698292596,
+          0.5912927301707404
+        ],
+        "poorRate": 0.0132525,
+        "atReliefFloorRate": 0.0418625,
+        "thinCashRate": 0.0670225,
+        "latePoorRate": 0.022523809523809522,
+        "meanCash": 1999.855295,
+        "buyOffers": 19.1494,
+        "buyTooPoor": 0.0492,
+        "buyTooPoorRate": 0.002569271099877803,
+        "buildOffers": 20.3832,
+        "buildTooPoor": 0.0746,
+        "buildTooPoorRate": 0.0036598767612543662,
+        "buyReserveSkips": 0.0984,
+        "buildReserveSkips": 0.338,
+        "hugeRents": 3.3108,
+        "rents": 23.5336,
+        "incompleteRentRate": 0.0537019410544923,
+        "rentFlips": 2.943,
+        "bigRentFlips": 1.3016,
+        "reliefs": 1.2638,
+        "reliefRests": 1.1954,
+        "money": {
+          "construction": {
+            "in": 39.43200000000035,
+            "out": 0
+          },
+          "bank": {
+            "in": 276.9205999999983,
+            "out": 281.66720000000277
+          },
+          "buy": {
+            "in": 0,
+            "out": 2640.8980000000065
+          },
+          "build": {
+            "in": 0,
+            "out": 2013.4560000000004
+          },
+          "rent": {
+            "in": 6338.5652000000055,
+            "out": 6338.5652000000055
+          },
+          "start": {
+            "in": 4688.729999999825,
+            "out": 0
+          },
+          "other": {
+            "in": 748.8120000000033,
+            "out": 0
+          },
+          "largeIncome": {
+            "in": 275.8939999999985,
+            "out": 0
+          },
+          "chance": {
+            "in": 349.6920000000044,
+            "out": 0
+          },
+          "teleport": {
+            "in": 17.67999999999983,
+            "out": 0
+          },
+          "rush": {
+            "in": 7.960000000000006,
+            "out": 0
+          }
+        },
+        "chance": {
+          "renovation": 1.2739999999999414,
+          "swap": 0.5743999999999845,
+          "express": 0.9161999999999657,
+          "shield": 0.6285999999999796,
+          "bonus": 0.7067999999999741,
+          "bank": 0.7019999999999744,
+          "district": 0.9341999999999623
+        },
+        "finalMeanCash": 2734.5497,
+        "bankLeft": 145.1466
+      }
+    },
+    {
+      "name": "expansion-final",
+      "map": "expansion",
+      "sourceSha256": "7438264aa033a843e795ef655b533ea99d90ba90a212c60773348e8dcdb9689b",
+      "summary": {
+        "n": 5000,
+        "firstWins": 2802,
+        "secondWins": 2198,
+        "draws": 0,
+        "firstWinRate": 0.5604,
+        "secondWinRate": 0.4396,
+        "drawRate": 0,
+        "firstWinCI": [
+          0.5466408245635671,
+          0.5741591754364329
+        ],
+        "firstScore": 0.5604,
+        "ci": [
+          0.5466408245635669,
+          0.5741591754364331
+        ],
+        "poorRate": 0.0112475,
+        "atReliefFloorRate": 0.03669,
+        "thinCashRate": 0.05866,
+        "latePoorRate": 0.019466666666666667,
+        "meanCash": 2144.8975525,
+        "buyOffers": 19.1258,
+        "buyTooPoor": 0.0408,
+        "buyTooPoorRate": 0.00213324409959322,
+        "buildOffers": 20.3948,
+        "buildTooPoor": 0.0664,
+        "buildTooPoorRate": 0.0032557318532174867,
+        "buyReserveSkips": 0.0816,
+        "buildReserveSkips": 0.2826,
+        "hugeRents": 3.4142,
+        "rents": 23.7334,
+        "incompleteRentRate": 0.04816840402133702,
+        "rentFlips": 2.623,
+        "bigRentFlips": 1.298,
+        "reliefs": 1.1432,
+        "reliefRests": 1.079,
+        "money": {
+          "opening": {
+            "in": 300.00000000000983,
+            "out": 0
+          },
+          "construction": {
+            "in": 39.43200000000035,
+            "out": 0
+          },
+          "bank": {
+            "in": 277.6585999999983,
+            "out": 281.63160000000306
+          },
+          "buy": {
+            "in": 0,
+            "out": 2641.244000000004
+          },
+          "build": {
+            "in": 0,
+            "out": 2021.6227999999999
+          },
+          "rent": {
+            "in": 6454.319199999983,
+            "out": 6454.319199999983
+          },
+          "start": {
+            "in": 4695.029999999828,
+            "out": 0
+          },
+          "other": {
+            "in": 727.3560000000019,
+            "out": 0
+          },
+          "largeIncome": {
+            "in": 275.30399999999867,
+            "out": 0
+          },
+          "chance": {
+            "in": 348.7920000000039,
+            "out": 0
+          },
+          "teleport": {
+            "in": 16.47999999999986,
+            "out": 0
+          },
+          "rush": {
+            "in": 7.280000000000006,
+            "out": 0
+          }
+        },
+        "chance": {
+          "renovation": 1.2655999999999417,
+          "swap": 0.5727999999999843,
+          "express": 0.9185999999999651,
+          "shield": 0.6279999999999794,
+          "bonus": 0.7059999999999745,
+          "district": 0.9353999999999622,
+          "bank": 0.708399999999974
+        },
+        "finalMeanCash": 2871.4171,
+        "bankLeft": 145.653
+      }
+    }
+  ],
+  "actualGames": 45000,
+  "complete": true,
+  "pairedComparisons": [
+    {
+      "label": "classic-old-equal-rounds -> classic-final",
+      "firstWin": {
+        "n": 5000,
+        "mean": -0.0468,
+        "low": -0.06199903592145804,
+        "high": -0.03160096407854196
+      },
+      "score": {
+        "n": 5000,
+        "mean": -0.0469,
+        "low": -0.06210006302710632,
+        "high": -0.03169993697289367
+      },
+      "poorRate": {
+        "n": 5000,
+        "mean": -0.0061300000000000295,
+        "low": -0.007071769780803046,
+        "high": -0.005188230219197013
+      },
+      "thinCashRate": {
+        "n": 5000,
+        "mean": -0.019436666666666547,
+        "low": -0.02209233553859844,
+        "high": -0.016780997794734652
+      },
+      "hugeRents": {
+        "n": 5000,
+        "mean": 0.4036,
+        "low": 0.3577439210031108,
+        "high": 0.4494560789968892
+      },
+      "bigRentFlips": {
+        "n": 5000,
+        "mean": 0.0188,
+        "low": -0.021998894628896416,
+        "high": 0.05959889462889642
+      },
+      "reliefs": {
+        "n": 5000,
+        "mean": -0.1472,
+        "low": -0.19899320264609294,
+        "high": -0.09540679735390706
+      }
+    },
+    {
+      "label": "classic-new-without-compensation -> classic-final",
+      "firstWin": {
+        "n": 5000,
+        "mean": -0.0454,
+        "low": -0.051656609191928105,
+        "high": -0.0391433908080719
+      },
+      "score": {
+        "n": 5000,
+        "mean": -0.0454,
+        "low": -0.051656609191928105,
+        "high": -0.0391433908080719
+      },
+      "poorRate": {
+        "n": 5000,
+        "mean": -0.00570333333333336,
+        "low": -0.0063542934118815415,
+        "high": -0.005052373254785178
+      },
+      "thinCashRate": {
+        "n": 5000,
+        "mean": -0.025019999999999577,
+        "low": -0.02631049121464459,
+        "high": -0.023729508785354566
+      },
+      "hugeRents": {
+        "n": 5000,
+        "mean": 0.1808,
+        "low": 0.1622181819805653,
+        "high": 0.19938181801943466
+      },
+      "bigRentFlips": {
+        "n": 5000,
+        "mean": -0.0436,
+        "low": -0.07531520899046842,
+        "high": -0.011884791009531583
+      },
+      "reliefs": {
+        "n": 5000,
+        "mean": -0.3186,
+        "low": -0.34392667394063736,
+        "high": -0.2932733260593626
+      }
+    },
+    {
+      "label": "compact-old-equal-rounds -> compact-final",
+      "firstWin": {
+        "n": 5000,
+        "mean": -0.0314,
+        "low": -0.0465839684467649,
+        "high": -0.016216031553235095
+      },
+      "score": {
+        "n": 5000,
+        "mean": -0.0313,
+        "low": -0.046485392316537144,
+        "high": -0.016114607683462855
+      },
+      "poorRate": {
+        "n": 5000,
+        "mean": -0.004700000000000023,
+        "low": -0.0055487343027628274,
+        "high": -0.0038512656972372176
+      },
+      "thinCashRate": {
+        "n": 5000,
+        "mean": -0.014696153846153826,
+        "low": -0.01742083708926675,
+        "high": -0.011971470603040902
+      },
+      "hugeRents": {
+        "n": 5000,
+        "mean": 0.406,
+        "low": 0.34990164164931503,
+        "high": 0.462098358350685
+      },
+      "bigRentFlips": {
+        "n": 5000,
+        "mean": 0.0586,
+        "low": 0.018550877683868358,
+        "high": 0.09864912231613164
+      },
+      "reliefs": {
+        "n": 5000,
+        "mean": -0.1394,
+        "low": -0.19246861152009548,
+        "high": -0.08633138847990453
+      }
+    },
+    {
+      "label": "compact-new-without-compensation -> compact-final",
+      "firstWin": {
+        "n": 5000,
+        "mean": -0.029,
+        "low": -0.0338460073914025,
+        "high": -0.024153992608597505
+      },
+      "score": {
+        "n": 5000,
+        "mean": -0.0289,
+        "low": -0.03373455955036331,
+        "high": -0.024065440449636686
+      },
+      "poorRate": {
+        "n": 5000,
+        "mean": -0.004150000000000019,
+        "low": -0.004743454164351055,
+        "high": -0.0035565458356489835
+      },
+      "thinCashRate": {
+        "n": 5000,
+        "mean": -0.01898076923076922,
+        "low": -0.02002663411220481,
+        "high": -0.017934904349333633
+      },
+      "hugeRents": {
+        "n": 5000,
+        "mean": 0.1672,
+        "low": 0.1498959170347383,
+        "high": 0.18450408296526166
+      },
+      "bigRentFlips": {
+        "n": 5000,
+        "mean": -0.0044,
+        "low": -0.033064214567368404,
+        "high": 0.0242642145673684
+      },
+      "reliefs": {
+        "n": 5000,
+        "mean": -0.2644,
+        "low": -0.28539684982813607,
+        "high": -0.24340315017186398
+      }
+    },
+    {
+      "label": "expansion-old-equal-rounds -> expansion-final",
+      "firstWin": {
+        "n": 5000,
+        "mean": -0.0256,
+        "low": -0.04207835128333605,
+        "high": -0.00912164871666395
+      },
+      "score": {
+        "n": 5000,
+        "mean": -0.0256,
+        "low": -0.04207835128333605,
+        "high": -0.00912164871666395
+      },
+      "poorRate": {
+        "n": 5000,
+        "mean": -0.020372500000000168,
+        "low": -0.02130611422434659,
+        "high": -0.019438885775653746
+      },
+      "thinCashRate": {
+        "n": 5000,
+        "mean": -0.08078250000000008,
+        "low": -0.08343699648505709,
+        "high": -0.07812800351494306
+      },
+      "hugeRents": {
+        "n": 5000,
+        "mean": 1.3762,
+        "low": 1.302928126439198,
+        "high": 1.449471873560802
+      },
+      "bigRentFlips": {
+        "n": 5000,
+        "mean": -0.0814,
+        "low": -0.13903359045350738,
+        "high": -0.023766409546492624
+      },
+      "reliefs": {
+        "n": 5000,
+        "mean": -1.0316,
+        "low": -1.0834337615666516,
+        "high": -0.9797662384333485
+      }
+    },
+    {
+      "label": "expansion-new-without-compensation -> expansion-final",
+      "firstWin": {
+        "n": 5000,
+        "mean": -0.0172,
+        "low": -0.021539447242642472,
+        "high": -0.012860552757357528
+      },
+      "score": {
+        "n": 5000,
+        "mean": -0.0172,
+        "low": -0.021539447242642472,
+        "high": -0.012860552757357528
+      },
+      "poorRate": {
+        "n": 5000,
+        "mean": -0.0020050000000000003,
+        "low": -0.0024818194267698696,
+        "high": -0.001528180573230131
+      },
+      "thinCashRate": {
+        "n": 5000,
+        "mean": -0.008362500000000007,
+        "low": -0.00917579232188071,
+        "high": -0.007549207678119304
+      },
+      "hugeRents": {
+        "n": 5000,
+        "mean": 0.1034,
+        "low": 0.08149647029487052,
+        "high": 0.12530352970512948
+      },
+      "bigRentFlips": {
+        "n": 5000,
+        "mean": -0.0036,
+        "low": -0.03061925333133566,
+        "high": 0.02341925333133566
+      },
+      "reliefs": {
+        "n": 5000,
+        "mean": -0.1206,
+        "low": -0.13693575295753813,
+        "high": -0.10426424704246186
+      }
+    }
+  ]
+}

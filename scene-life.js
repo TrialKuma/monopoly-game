@@ -123,8 +123,8 @@ export function createSceneLife({ THREE, scene, world, light, snapshot, lotViews
   function copyWindowMaterial(original) {
     if (!original?.isMeshStandardMaterial) return original;
     const name = original.name || '';
-    const warm = /warm (lit|light|welcome|amber)|window glass|window recess|enamel window/i.test(name);
-    const cool = /turquoise glass|deep sea glass|soft teal architectural glass|portal cyan/i.test(name);
+    const warm = /warm (lit|light|welcome|amber|lantern glass)|window glass|window recess|enamel window/i.test(name);
+    const cool = /turquoise glass|deep sea glass|deep blue glazing|soft teal architectural glass|portal cyan/i.test(name);
     const anonymousLamp = !name && original.emissiveIntensity > .05 && original.emissive?.r > original.emissive?.b * 1.3;
     if (!warm && !cool && !anonymousLamp) return original;
     if (!materialCopies.has(original)) {
@@ -202,7 +202,10 @@ export function createSceneLife({ THREE, scene, world, light, snapshot, lotViews
   }
   function effect(event = {}) {
     if (disposed) return;
-    const indices = new Set(event.tiles || (event.tileIndex != null ? [event.tileIndex] : []));
+    // The wheel belongs to the place where a chance event started, even when
+    // its effect lands elsewhere. A shared tile must only trigger once.
+    const indices = new Set([...(event.tiles || (event.tileIndex != null ? [event.tileIndex] : [])), ...(event.triggerTiles || [])]
+      .map(tile => Number(typeof tile === 'object' && tile !== null ? tile.index : tile)).filter(Number.isInteger));
     for (const part of movingParts) if (indices.has(part.tileIndex)) {
       part.spin = part.kind === 'wheel' ? 9 : 1;
       part.node.getWorldPosition(point); world.worldToLocal(point); emitSparks(point, part.kind === 'wheel' ? '#ffe799' : '#ffbd67');

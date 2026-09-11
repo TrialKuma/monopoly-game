@@ -6,9 +6,9 @@
   <meta name="theme-color" content="#173d3a">
   <title>环城大富翁 · 好戏开场</title>
   <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="presentation.css?v=20260911-20">
-  <link rel="stylesheet" href="scene.css?v=20260911-20">
-  <link rel="stylesheet" href="drama.css?v=20260911-20">
+  <link rel="stylesheet" href="presentation.css?v=20260912-21">
+  <link rel="stylesheet" href="scene.css?v=20260912-21">
+  <link rel="stylesheet" href="drama.css?v=20260912-21">
 </head>
 <body class="mode-start">
   <div id="start-screen" class="start-screen">
@@ -66,7 +66,7 @@
           <div class="center-actions"><span id="center-phase-badge" class="center-badge">等待掷骰</span><button id="roll-btn" class="primary-btn center-roll-btn">掷骰子 <span>↗</span></button></div>
           <div class="round-progress" id="round-progress"><div class="round-progress-bar" id="round-progress-bar"></div></div>
         </section>
-        <div id="showcase-controls" class="showcase-controls hidden"><div><b>演出预览</b><span>示例局面 · 不计入历史战绩</span></div><div class="showcase-buttons"><button data-showcase="rent">连锁收租</button><button data-showcase="seize">地标征用</button><button data-showcase="shield">护盾救场</button><button data-showcase="relief">绝境救助</button><button data-showcase="buy">买地开张</button><button data-showcase="build">建筑升级</button><button data-showcase="route" id="showcase-route-btn" hidden>快线追租</button><button id="showcase-exit-btn">开始正式对局 ↗</button></div></div>
+        <div id="showcase-controls" class="showcase-controls hidden"><div><b>演出预览</b><span>示例局面 · 不计入历史战绩</span></div><div class="showcase-buttons"><button data-showcase="rent">连锁收租</button><button data-showcase="seize">地标征用</button><button data-showcase="shield">护盾救场</button><button data-showcase="relief">绝境救助</button><button data-showcase="buy">买地开张</button><button data-showcase="build">建筑升级</button><button data-showcase="chance">城市奇遇</button><button data-showcase="route" id="showcase-route-btn" hidden>快线追租</button><button id="showcase-exit-btn">开始正式对局 ↗</button></div></div>
       </section>
       <aside class="sidebar">
         <section class="card status-card"><div class="panel-title-row"><p class="panel-label">这局，谁占上风</p><div class="dice-box" id="dice-box">—</div></div><h2 id="turn-title">准备开场</h2><p id="turn-description" class="muted"></p><div class="scoreboard" id="scoreboard"></div><p class="victory-rule" id="victory-rule">30 回合后，现金最多者获胜</p></section>
@@ -79,11 +79,11 @@
               <li>同街区连锁收费：该街区内所有你的地产一起算，2 块×1.2，3 块×1.5。</li>
               <li>掷出 6 点可获得额外一个完整回合（每次最多触发一次）。</li>
               <li>部分大型地产拥有专属效果，例如额外收益或让对手下回合休息。</li>
-              <li>每局开始抛硬币决定先手，正面玩家先，反面 AI 先。</li>
+              <li>每局抛硬币决定先手；后手获得额外开局金。回合制双方的基础轮次数相同。</li>
               <li>翻牌格：随机抽 3 张卡牌选 1 张发动，许多卡牌可选择对自己或对手使用。</li>
               <li>城建局：选择免费升级自己或拆除对手一层建筑！</li>
               <li>银行金库：强制掷骰存钱，存满后下个人全部提走！</li>
-              <li>机会格：触发随机事件，含空地购买机会，好坏难料！</li>
+              <li>机会格：街区翻新、换位、神秘专车、免单券……每次揭晓，都可能改变下一笔账单。</li>
               <li>紧凑冲突的冲刺站随机前进 2–4 格；都市大环线的快线随机前进 3–5 格。抵达地产后照常买地、升级或交租。</li>
               <li>传送港随机送到地产并立即结算。都市大环线开局每个街区随机一处无主地产预建一级，买下即可经营。</li>
               <li>停留市政府可发动征用令，解除对手一块地产的归属（建筑保留）！</li>
@@ -99,9 +99,9 @@
     </main>
   </div>
 
-  <script src="drama.js?v=20260911-20"></script>
-  <script src="game.js?v=20260911-20"></script>
-  <script src="presentation.js?v=20260911-20"></script>
-  <script type="module" src="scene.js?v=20260911-20"></script>
+  <script src="drama.js?v=20260912-21"></script>
+  <script src="game.js?v=20260912-21"></script>
+  <script src="presentation.js?v=20260912-21"></script>
+  <script type="module" src="scene.js?v=20260912-21"></script>
 </body>
 </html>

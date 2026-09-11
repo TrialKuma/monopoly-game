@@ -1,7 +1,7 @@
 import * as THREE from './assets/vendor/three/three.module.min.js';
 import { GLTFLoader } from './assets/vendor/three/addons/loaders/GLTFLoader.js';
 import { mergeGeometries } from './assets/vendor/three/addons/utils/BufferGeometryUtils.js';
-import { createSceneLife } from './scene-life.js?v=20260911-19';
+import { createSceneLife } from './scene-life.js?v=20260912-21';
 
 // All route positions, ownership and prices come from the game. This view never
 // changes a rule or finishes an action; its animation is entirely cosmetic.
@@ -41,6 +41,8 @@ const ASSET_BUNDLES = [
   {file:'landmarks.glb',authored:true,pattern:/^(skyscraper|finance|onsen)_[123]$/},
   {file:'specials.glb',authored:true,pattern:/^(civic_hall|vault_bank|builders_guild|card_pavilion|chance_wheel|teleport_gate|rush_station|junction_hub)$/},
   {file:'life-specials.glb',authored:true,pattern:/^(chance_wheel|builders_guild)$/},
+  {file:'compact-specials.glb',authored:true,pattern:/^compact_(civic_hall|vault_bank|builders_guild|card_pavilion|chance_wheel|teleport_gate|rush_station)$/},
+  {file:'expansion-specials.glb',authored:true,pattern:/^expansion_(civic_hall|vault_bank|builders_guild|card_pavilion|chance_wheel|teleport_gate|rush_station)$/},
 ];
 const projection = new THREE.Vector3();
 const raycaster = new THREE.Raycaster();
@@ -74,6 +76,19 @@ function rounded(parent, w, h, d, radius, color, x = 0, y = 0, z = 0) {
   const g = new THREE.ExtrudeGeometry(s, { depth: h, bevelEnabled: false, curveSegments: 5 });
   g.rotateX(-Math.PI / 2);
   return mesh(g, color, parent, x, y, z);
+}
+function roundedFrame(parent,w,h,d,radius,thickness,color,y=0){
+  const draw=(path,width,depth,r)=>{
+    const x=-width/2,z=-depth/2;
+    path.moveTo(x+r,z);path.lineTo(x+width-r,z);path.quadraticCurveTo(x+width,z,x+width,z+r);
+    path.lineTo(x+width,z+depth-r);path.quadraticCurveTo(x+width,z+depth,x+width-r,z+depth);
+    path.lineTo(x+r,z+depth);path.quadraticCurveTo(x,z+depth,x,z+depth-r);
+    path.lineTo(x,z+r);path.quadraticCurveTo(x,z,x+r,z);path.closePath();return path;
+  };
+  const shape=draw(new THREE.Shape(),w,d,radius);
+  shape.holes.push(draw(new THREE.Path(),w-2*thickness,d-2*thickness,Math.max(.008,radius-thickness)));
+  const geometry=new THREE.ExtrudeGeometry(shape,{depth:h,bevelEnabled:false,curveSegments:8});geometry.rotateX(-Math.PI/2);
+  const frame=mesh(geometry,color,parent,0,y,0);frame.castShadow=false;return frame;
 }
 function tree(parent, x, z, size = 1) {
   const g = new THREE.Group(); g.position.set(x, 0, z); g.scale.setScalar(size); parent.add(g);
@@ -433,11 +448,14 @@ function makeLot(tile, data) {
   const boundary=boundaryFor(position),modern=data.mapId!=='classic';
   rounded(group,w,.08,d,.13,PALETTE.cream,0,-.07);
   rounded(group,w-.12,.03,d-.12,.09,tile.lot ? '#c5cfad' : '#ded3bc',0,.011);
-  const ownerMaterial = own(new THREE.MeshStandardMaterial({ color:'#d9cbb3', roughness:.72, emissive:'#000000' }));
-  const ownerStripe = rounded(group,modern&&Math.abs(boundary.normal.x)>.5?d-.12:w-.12,.027,.075,.025,ownerMaterial,0,.054,d/2-.10);
-  if(modern){const depth=Math.abs(boundary.normal.x)>.5?w:d;ownerStripe.position.copy(boundary.normal.clone().multiplyScalar(depth/2-.10));ownerStripe.position.y=.054;ownerStripe.rotation.y=boundary.rotation;}
+  const ownerMaterial = own(new THREE.MeshStandardMaterial({ color:'#c5b696', roughness:.84, emissive:'#000000' }));
+  // A single closed deed boundary, in parcel coordinates. The two physical
+  // steps of a large lot share this one frame, independent of its frontage.
+  const ownerFrame=roundedFrame(group,w-.055,.024,d-.055,.105,.070,ownerMaterial,.044);
+  ownerFrame.name='ownership_frame';ownerFrame.visible=false;
   const pulseMaterial = own(new THREE.MeshBasicMaterial({ color:PALETTE.gold, transparent:true, opacity:0, depthWrite:false }));
-  const outline = rounded(group,w+.16,.025,d+.16,.16,pulseMaterial,0,-.011); outline.castShadow=false;
+  // Event emphasis sits outside the parcel; ownership keeps its own color.
+  const outline=roundedFrame(group,w+.12,.014,d+.12,.18,.035,pulseMaterial,.014);outline.name='event_frame';
   const building = new THREE.Group(); building.position.y=.048; group.add(building);
   const flag = new THREE.Group(); flag.position.set(-w/2+.19,.045,d/2-.26); group.add(flag);
   if(modern){const front=Math.abs(boundary.normal.x)>.5?w:d,span=Math.abs(boundary.normal.x)>.5?d:w;flag.position.copy(boundary.normal.clone().multiplyScalar(front/2-.23)).add(new THREE.Vector3(boundary.normal.z,0,-boundary.normal.x).multiplyScalar(-span/2+.19));flag.position.y=.045;flag.rotation.y=boundary.rotation;}
@@ -453,7 +471,7 @@ function makeLot(tile, data) {
   button.innerHTML='<span class="scene-tile-name"></span><span class="scene-tile-meta"></span>';
   button.querySelector('.scene-tile-name').textContent=tile.name;
   labels.appendChild(button);
-  const view={tile, mapId:data.mapId, boundary, group, building, ownerMaterial, ownerStripe, flag, flagCloth, outline, label:button, anchor, w, d, signature:'', modelName:'', born:0};
+  const view={tile, mapId:data.mapId, boundary, group, building, ownerMaterial, ownerFrame, flag, flagCloth, outline, label:button, anchor, w, d, signature:'', modelName:'', born:0};
   lotViews.set(tile.index,view); updateLot(view,tile,data,true);
   if (secondary) {
     // Both physical step positions remain separately selectable even when they share a deed.
@@ -482,8 +500,10 @@ function cloneAuthoredModel(source){
 function resolveAsset(tile,data,level=tile.lot?.level||0){
   const family=tile.lot?.landmarkKey||LANDMARKS[data.mapId]?.[tile.isLargeSecondary?tile.largePrimaryIndex:tile.index];
   const fallback=tile.isStart?'city_hall':tile.lot?(level===0?'plot_0':`${tile.lot.theme?.key||'villa'}_${level}`):({bank:'bank',construction:'construction',card_draw:'card_station'}[tile.special?.type]||'card_station');
-  const desired=tile.isStart?'civic_hall':tile.lot?(level===0?'plot_0':family?`${family}_${level}`:fallback):(SPECIAL_MODELS[tile.special?.type]||fallback);
-  const key=modelLibrary.has(desired)?desired:fallback;
+  const shared=tile.isStart?'civic_hall':tile.lot?(level===0?'plot_0':family?`${family}_${level}`:fallback):(SPECIAL_MODELS[tile.special?.type]||fallback);
+  const themedSpecial=!tile.lot&&['compact','expansion'].includes(data.mapId)&&shared!=='junction_hub';
+  const desired=themedSpecial?`${data.mapId}_${shared}`:shared;
+  const key=modelLibrary.has(desired)?desired:modelLibrary.has(shared)?shared:fallback;
   return {family,desired,key,source:modelLibrary.get(key),authored:authoredModels.has(key),level};
 }
 function lotModelRotation(view){return view.mapId==='classic'?(view.d>view.w?Math.PI/2:0):(view.readableRotation??view.boundary.rotation);}
@@ -608,7 +628,7 @@ function updateLot(view,tile,data,initial=false) {
   view.tile=tile;
   const owner=data.players.find((p)=>p.id===tile.lot?.ownerId);
   const color=owner?.id==='human'?'#348d87':owner?.id==='ai'?'#d77b59':'#c5b696';
-  view.ownerMaterial.color.set(color); view.flag.visible=Boolean(owner);
+  view.ownerMaterial.color.set(color);view.ownerFrame.visible=Boolean(owner);view.flag.visible=Boolean(owner);
   const level=tile.lot?.level||0;
   const asset=resolveAsset(tile,data,level);
   const modelName=asset.desired;
@@ -697,11 +717,16 @@ function effect(event={}){
   sceneLife?.effect(event);
   const now=performance.now();
   renderDirty=true;
-  const color=/shield/.test(event.type)?'#88d8c6':/seize|confisc|takeover|征用/.test(event.type)?'#d78560':/rent/.test(event.type)?'#e6bd64':'#87bdb0';
+  const color=event.type==='select'?'#efcc79':/shield/.test(event.type)?'#88d8c6':/seize|confisc|takeover|征用/.test(event.type)?'#d78560':/rent/.test(event.type)?'#e6bd64':'#87bdb0';
+  const affected=new Set();
   (event.tiles||[]).forEach((entry,i)=>{
     const index=Number(typeof entry==='object'?entry.index:entry);
     const primary=snapshot?.board.find((tile)=>tile.index===index)?.largePrimaryIndex;
     const view=lotViews.get(primary??index);if(!view)return;
+    if(affected.has(view))return;affected.add(view);
+    // One pulse owns each outer frame, even when both steps of a large lot
+    // occur in the event or a fresh event replaces a selection highlight.
+    for(let n=pulses.length-1;n>=0;n--)if(pulses[n].view===view)pulses.splice(n,1);
     view.outline.material.color.set(color);
     pulses.push({view,started:now+i*(reducedMotion.matches?0:110),duration:reducedMotion.matches?400:1600,type:event.type});
     view.label.classList.remove('is-event');void view.label.offsetWidth;view.label.classList.add('is-event');
@@ -841,7 +866,7 @@ function inspectTile(index,level){
   cancelCameraGesture();
   closeInspection();
   const dialog=document.createElement('dialog');dialog.id='city-building-inspection';dialog.className='city-model-dialog';dialog.setAttribute('aria-labelledby','city-model-title');
-  dialog.innerHTML=`<header class="city-model-header"><div><p class="city-model-eyebrow">建造预览</p><h2 id="city-model-title"></h2></div><button type="button" class="city-model-close" data-model-close aria-label="关闭建筑预览">✕</button></header><div class="city-model-stage"><div class="city-model-canvas"></div><span class="city-model-level-badge"></span><p class="city-model-hint">拖动转一转 · 看看每一面</p></div><footer class="city-model-footer"><div class="city-model-levels" role="group" aria-label="预览建筑等级"><button type="button" data-model-level="1">Lv.1</button><button type="button" data-model-level="2">Lv.2</button><button type="button" data-model-level="3">Lv.3</button></div><div class="city-model-view-tools" role="group" aria-label="调整建筑视角"><button type="button" data-model-turn="-1" aria-label="向左转动建筑">↶</button><button type="button" data-model-turn="1" aria-label="向右转动建筑">↷</button><span></span><button type="button" data-model-zoom="-1" aria-label="缩小建筑">−</button><button type="button" data-model-zoom="1" aria-label="放大建筑">＋</button><button type="button" data-model-reset>恢复视角</button></div><p class="city-model-disclaimer">这里可以看看升级后的样子，不改变当前对局。</p></footer>`;
+  dialog.innerHTML=`<header class="city-model-header"><div><p class="city-model-eyebrow">${tile.lot?'建造预览':'地标近看'}</p><h2 id="city-model-title"></h2></div><button type="button" class="city-model-close" data-model-close aria-label="关闭近看">✕</button></header><div class="city-model-stage"><div class="city-model-canvas"></div><span class="city-model-level-badge"></span><p class="city-model-hint">拖动转一转 · 看看每一面</p></div><footer class="city-model-footer"><div class="city-model-levels" role="group" aria-label="预览建筑等级"><button type="button" data-model-level="1">Lv.1</button><button type="button" data-model-level="2">Lv.2</button><button type="button" data-model-level="3">Lv.3</button></div><div class="city-model-view-tools" role="group" aria-label="调整建筑视角"><button type="button" data-model-turn="-1" aria-label="向左转动建筑">↶</button><button type="button" data-model-turn="1" aria-label="向右转动建筑">↷</button><span></span><button type="button" data-model-zoom="-1" aria-label="缩小建筑">−</button><button type="button" data-model-zoom="1" aria-label="放大建筑">＋</button><button type="button" data-model-reset>恢复视角</button></div><p class="city-model-disclaimer">${tile.lot?'这里可以看看升级后的样子，不改变当前对局。':'拖动或缩放，看看这座城市地标的细节。'}</p></footer>`;
   const returnFocus=document.activeElement;
   document.body.appendChild(dialog);document.body.classList.add('city-inspection-open');
   const requestedLevel=Number(level??(tile.lot?.level||3));
@@ -955,16 +980,15 @@ function tick(time){
     if(view.born){const t=Math.min(1,(time-view.born)/650);view.building.scale.y=reducedMotion.matches?1:1-Math.pow(1-t,3)*.22;if(t===1){view.born=0;view.building.scale.y=1;}}
   });
   for(let i=pulses.length-1;i>=0;i--){const pulse=pulses[i];const elapsed=time-pulse.started;if(elapsed<0)continue;const t=elapsed/pulse.duration;
-    if(t>=1){pulse.view.outline.material.opacity=0;pulse.view.ownerMaterial.emissive.set('#000000');pulse.view.label.classList.remove('is-event');pulses.splice(i,1);continue;}
+    if(t>=1){pulse.view.outline.material.opacity=0;pulse.view.label.classList.remove('is-event');pulses.splice(i,1);continue;}
     pulse.view.outline.material.opacity=reducedMotion.matches?.45:Math.sin(t*Math.PI)*.83;
-    pulse.view.ownerMaterial.emissive.copy(pulse.view.outline.material.color).multiplyScalar(Math.sin(t*Math.PI)*.25);
   }
   positionLabels();renderer.render(scene,camera);
 }
 async function loadModelKit(force=false){
   if(modelsLoading||(modelLoadStarted&&!force))return;modelLoadStarted=true;modelsLoading=true;
   const remaining=ASSET_BUNDLES.filter((bundle)=>force||!loadedBundles.has(bundle.file));
-  const results=await Promise.allSettled(remaining.map(bundle=>new GLTFLoader().loadAsync(`./assets/models/${bundle.file}?v=20260911-12${force?`&refresh=${Date.now()}`:''}`)));
+  const results=await Promise.allSettled(remaining.map(bundle=>new GLTFLoader().loadAsync(`./assets/models/${bundle.file}?v=20260912-21${force?`&refresh=${Date.now()}`:''}`)));
   // Fetch concurrently, register in declared order so animated replacements
   // consistently supersede their static fallback, regardless of network order.
   results.forEach((result,i)=>{

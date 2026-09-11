@@ -56,7 +56,7 @@ const CLASSIC_DISTRICT_COLORS = {
 const CLASSIC_SPECIAL_TILES = {
   4:  { type: "bank", label: "金库", color: "#bfdbfe", description: "存钱或提款！" },
   9:  { type: "card_draw", label: "翻牌格", color: "#e9d5ff", description: "翻牌选卡发动！" },
-  13: { type: "chance", label: "机会格", color: "#fbcfe8", description: "触发随机事件。" },
+  13: { type: "chance", label: "机会格", color: "#fbcfe8", description: "街区翻新、换位、专车等城市奇遇。" },
   17: { type: "construction", label: "城建局", color: "#fef08a", description: "建造或拆除！" },
   20: { type: "card_draw", label: "翻牌格", color: "#e9d5ff", description: "翻牌选卡发动！" },
 };
@@ -103,7 +103,7 @@ const COMPACT_DISTRICT_COLORS = {
 const COMPACT_SPECIAL_TILES = {
   5:  { type: "construction", label: "城建局", color: "#fef08a", description: "建造或拆除！" },
   6:  { type: "card_draw", label: "翻牌格", color: "#e9d5ff", description: "翻牌选卡发动！" },
-  7:  { type: "chance", label: "机会格", color: "#fbcfe8", description: "触发随机事件。" },
+  7:  { type: "chance", label: "机会格", color: "#fbcfe8", description: "街区翻新、换位、专车等城市奇遇。" },
   8:  { type: "rush", label: "冲刺站", color: "#fdba74", rushMin: 2, rushMax: 4, description: "随机冲刺 2–4 格，到达后立即结算。" },
   9:  { type: "bank", label: "金库", color: "#bfdbfe", description: "存钱或提款！" },
   13: { type: "teleport", label: "传送港", color: "#a7f3d0", settleArrival: true, description: "随机传送到一块地产，到达后立即结算。" },
@@ -159,10 +159,10 @@ const EXPANSION_SPECIAL_TILES = {
   5:  { type: "construction", label: "开发局", color: "#fef08a", description: "强化建设节奏。" },
   10: { type: "card_draw", label: "翻牌格", color: "#e9d5ff", description: "翻牌选卡发动！" },
   12: { type: "rush", label: "城市快线", color: "#fdba74", rushMin: 3, rushMax: 5, description: "随机冲刺 3–5 格，到达后立即结算。" },
-  14: { type: "chance", label: "机会格", color: "#fbcfe8", description: "触发随机事件。" },
+  14: { type: "chance", label: "机会格", color: "#fbcfe8", description: "街区翻新、换位、专车等城市奇遇。" },
   16: { type: "teleport", label: "传送港", color: "#a7f3d0", settleArrival: true, description: "随机传送到一块地产，到达后立即结算。" },
   19: { type: "card_draw", label: "命运转盘", color: "#e9d5ff", description: "翻牌选卡发动！" },
-  22: { type: "chance", label: "机会格", color: "#fbcfe8", description: "触发随机事件。" },
+  22: { type: "chance", label: "机会格", color: "#fbcfe8", description: "街区翻新、换位、专车等城市奇遇。" },
 };
 const EXPANSION_LOT_CONFIGS = {
   1:  { price: 80,  buildCosts: [0, 38, 66, 100], tolls: [18, 52, 112, 188], themeIdx: 0 },
@@ -199,9 +199,10 @@ const MAP_PRESETS = {
   classic: {
     id: "classic",
     maxRounds: 30,
+    economy: { secondPlayerBonus: 500 },
     name: "经典环线",
     boardTitle: "环形线路 · 22 格",
-    startDescription: "经典 22 格环形线路，节奏均衡，适合标准对局。",
+    startDescription: "经典 22 格环形线路，节奏均衡。起始 ¥1600，后手额外补给 ¥500。",
     modeLabel: "环形地图休闲对战",
     grid: { columns: 7, rows: 6, cellMin: 90, cellMinTablet: 56, cellMinMobile: 44, height: "min(90vh, 1080px)", heightTablet: "min(85vh, 660px)", heightMobile: "min(80vh, 520px)", centerWidth: "min(340px, calc(100% - 160px))", centerWidthTablet: "min(280px, calc(100% - 60px))", centerWidthMobile: "min(240px, calc(100% - 40px))" },
     routePositions: CLASSIC_ROUTE_POSITIONS,
@@ -216,9 +217,10 @@ const MAP_PRESETS = {
   compact: {
     id: "compact",
     maxRounds: 26,
+    economy: { secondPlayerBonus: 500 },
     name: "紧凑冲突",
     boardTitle: "紧凑冲突 · 18 格",
-    startDescription: "18 格短环线：随机冲刺 2–4 格，传送后立即结算，三个街区更快连锁收租。",
+    startDescription: "18 格短环线，冲刺与传送加快连锁收租。起始 ¥1600，后手额外补给 ¥500。",
     modeLabel: "高冲突短局",
     grid: { columns: 6, rows: 5, cellMin: 104, cellMinTablet: 64, cellMinMobile: 48, height: "min(82vh, 900px)", heightTablet: "min(76vh, 620px)", heightMobile: "min(72vh, 480px)", centerWidth: "min(300px, calc(100% - 120px))", centerWidthTablet: "min(260px, calc(100% - 56px))", centerWidthMobile: "min(220px, calc(100% - 32px))" },
     routePositions: COMPACT_ROUTE_POSITIONS,
@@ -233,11 +235,12 @@ const MAP_PRESETS = {
   expansion: {
     id: "expansion",
     maxRounds: 40,
+    economy: { startCash: 2000, startBonus: 450, secondPlayerBonus: 300 },
     openingBuildings: true,
     reliefShield: true,
     name: "都市大环线",
     boardTitle: "都市大环线 · 28 格",
-    startDescription: "28 格大环线：六个街区各有一处随机 Lv.1 地产开业，城市快线与传送让整座城都能碰面。",
+    startDescription: "28 格大环线，六街区各有一处 Lv.1 地产开业。起始 ¥2000，后手额外 ¥300，每圈补给 ¥450。",
     modeLabel: "六街区都市大环线",
     grid: { columns: 10, rows: 6, cellMin: 78, cellMinTablet: 50, cellMinMobile: 38, height: "min(84vh, 820px)", heightTablet: "min(76vh, 650px)", heightMobile: "min(68vh, 500px)", centerWidth: "min(420px, calc(100% - 160px))", centerWidthTablet: "min(330px, calc(100% - 80px))", centerWidthMobile: "min(250px, calc(100% - 45px))" },
     routePositions: EXPANSION_ROUTE_POSITIONS,
@@ -672,6 +675,11 @@ function getMaxRounds(mapId = state?.currentMapId ?? selectedMapId) {
   return getMapConfig(mapId).maxRounds || CONFIG.maxRounds;
 }
 
+function getMapEconomy(mapId = state?.currentMapId ?? selectedMapId) {
+  return { startCash: CONFIG.startCash, startBonus: CONFIG.startBonus, bankThreshold: 200,
+    secondPlayerBonus: 0, ...getMapConfig(mapId).economy };
+}
+
 function getBoardLength() {
   return state.board?.length || getMapConfig().routePositions.length;
 }
@@ -719,19 +727,23 @@ function initializeGame(mapId = selectedMapId) {
   window.GamePresentation?.onReset();
   if (modalResolver) { modalResolver("cancel"); modalResolver = null; }
   const mapCfg = getMapConfig(mapId);
+  const economy = getMapEconomy(mapCfg.id);
   selectedMapId = mapCfg.id;
   state = {
     sessionId: ++sessionCounter,
     round: 1,
     currentPlayerIndex: 0,
+    firstPlayerIndex: 0,
+    initiativeResolved: false,
+    openingCompensation: null,
     phase: "await_roll",
     currentMapId: mapCfg.id,
     board: createBoard(mapCfg),
     openingLots: [],
     players: PLAYER_DEFS.map((p) => ({
       ...p,
-      cash: CONFIG.startCash,
-      displayedCash: CONFIG.startCash,
+      cash: economy.startCash,
+      displayedCash: economy.startCash,
       cashDelta: 0, cashDeltaVisible: false, cashPulse: false,
       cashAnimFrame: null, cashChangeToken: 0, pendingCashDelta: 0,
       position: 0,
@@ -746,7 +758,7 @@ function initializeGame(mapId = selectedMapId) {
     modal: defaultModal(),
   };
   state.openingLots = prepareOpeningLots(state.board, mapCfg);
-  pushLog(`游戏开始，双方初始资金均为 ${formatMoney(CONFIG.startCash)}。`);
+  pushLog(`游戏开始，双方初始资金均为 ${formatMoney(economy.startCash)}。`);
   if (state.openingLots.length) {
     const names = state.openingLots.map((index) => state.board[index].name).join("、");
     pushLog(`新城开业：${names} 已建成 Lv.1，均为无主地产，仍按原地价购买。`);
@@ -874,6 +886,21 @@ async function selectGameMode(sid) {
   return choice === "bankruptcy" ? "bankruptcy" : "rounds";
 }
 
+function settleFirstPlayer(humanFirst, sid = state.sessionId) {
+  if (!isSessionActive(sid) || state.initiativeResolved) return false;
+  state.firstPlayerIndex = humanFirst ? 0 : 1;
+  state.currentPlayerIndex = state.firstPlayerIndex;
+  state.initiativeResolved = true;
+  const second = state.players[1 - state.firstPlayerIndex];
+  const amount = getMapEconomy().secondPlayerBonus;
+  state.openingCompensation = { playerId: second.id, amount };
+  if (amount > 0) {
+    updatePlayerCash(second, amount, false);
+    pushLog(`${second.name} 后手行动，领取 ${formatMoney(amount)} 开局补给。`);
+  }
+  return true;
+}
+
 async function coinFlipForFirstPlayer(sid) {
   await showModal({
     label: "先手决定",
@@ -884,12 +911,19 @@ async function coinFlipForFirstPlayer(sid) {
   if (!isSessionActive(sid)) return undefined;
   const humanFirst = Math.random() < 0.5;
   pushLog(`先手决定：硬币 ${humanFirst ? "正面" : "反面"}，${humanFirst ? "玩家" : "AI 对手"}先手！`);
+  settleFirstPlayer(humanFirst, sid);
+  const compensation = state.openingCompensation;
+  const second = getPlayerById(compensation.playerId);
+  const supplyMessage = compensation.amount > 0
+    ? `\n${second.name} 后手行动，${formatMoney(compensation.amount)} 开局补给已到账。${state.gameMode === "rounds" ? `双方各有 ${getMaxRounds()} 个正常轮次，额外行动另计。` : "本局采用破产淘汰制。"}`
+    : "";
   await showContinueModal({
     label: "先手决定",
     title: humanFirst ? "🪙 正面！玩家先手！" : "🪙 反面！AI 先手！",
-    message: humanFirst
+    message: (humanFirst
       ? "玩家获得先手权，祝你好运！"
-      : "AI 率先行动，准备好应对挑战！",
+      : "AI 率先行动，准备好应对挑战！") + supplyMessage,
+    drama: { type: "notice", amount: 0 },
   });
   if (!isSessionActive(sid)) return undefined;
   return humanFirst;
@@ -1189,7 +1223,7 @@ function renderBoard() {
 function renderStartTile(tile) {
   return `<div class="tile-header"><span class="tile-name">${tile.name}</span></div>
     <span class="lot-badge" style="background:#fde68a;">市政府</span>
-    <div class="lot-body"><div class="lot-owner">经过领 ${formatMoney(CONFIG.startBonus)}</div></div>
+    <div class="lot-body"><div class="lot-owner">经过领 ${formatMoney(getMapEconomy().startBonus)}</div></div>
     <div class="sprite-wrap">${createStartSvg()}</div>
     <div class="token-row">${renderTokens(tile.index)}</div>`;
 }
@@ -1250,7 +1284,7 @@ function renderSpecialTile(tile) {
   let extra = "";
   if (tile.special.type === "bank") {
     const pool = state.bankPool || 0;
-    const threshold = 200;
+    const threshold = getMapEconomy().bankThreshold;
     extra = pool >= threshold
       ? `<div class="bank-pool bank-full">金库 ${formatMoney(pool)} 可提！</div>`
       : `<div class="bank-pool">金库 ${formatMoney(pool)} / ${formatMoney(threshold)}</div>`;
@@ -1585,15 +1619,15 @@ async function animateMovement(player, steps, sid) {
     let startUpgradeMsg = "";
     if (crossedStart) {
       state.passedStartThisTurn = true;
-      updatePlayerCash(player, CONFIG.startBonus, false);
+      updatePlayerCash(player, getMapEconomy().startBonus, false);
       const buildable = state.board.filter((t) => t.lot?.ownerId === player.id && t.lot.level === 0 && !t.isLargeSecondary);
       if (buildable.length > 0) {
         const target = buildable[Math.floor(Math.random() * buildable.length)];
         target.lot.level = 1;
         startUpgradeMsg = `\n${target.name} 自动建造至 Lv.1！`;
-        pushLog(`${player.name} 经过市政府，获得 ${formatMoney(CONFIG.startBonus)}。${target.name} 自动建造至 Lv.1。`);
+        pushLog(`${player.name} 经过市政府，获得 ${formatMoney(getMapEconomy().startBonus)}。${target.name} 自动建造至 Lv.1。`);
       } else {
-        pushLog(`${player.name} 经过市政府，获得 ${formatMoney(CONFIG.startBonus)} 奖励。`);
+        pushLog(`${player.name} 经过市政府，获得 ${formatMoney(getMapEconomy().startBonus)} 奖励。`);
       }
     }
     render();
@@ -1603,7 +1637,8 @@ async function animateMovement(player, steps, sid) {
       render();
       await showContinueModal({
         label: "市政府补给", title: "市政府补给",
-        message: `${player.name} 经过市政府，领取了 ${formatMoney(CONFIG.startBonus)} 补给资金。${startUpgradeMsg}`,
+        message: `${player.name} 经过市政府，领取了 ${formatMoney(getMapEconomy().startBonus)} 补给资金。${startUpgradeMsg}`,
+        drama: { type: "income", amount: getMapEconomy().startBonus, to: player },
       });
       if (!isSessionActive(sid)) return;
     }
@@ -1862,7 +1897,7 @@ function scoreAiTargetTile(player, tile) {
   if (tile.isSpecial) {
     if (tile.special.type === "construction" || tile.special.type === "card_draw") score += 3;
     if (tile.special.type === "chance" || tile.special.type === "teleport") score += 2;
-    if (tile.special.type === "bank") score += state.bankPool >= 200 ? 5 : 1;
+    if (tile.special.type === "bank") score += state.bankPool >= getMapEconomy().bankThreshold ? 5 : 1;
   }
   return score;
 }
@@ -1949,7 +1984,7 @@ async function resolveRushTile(player, sid, tile = state.board[player.position])
 async function resolveSpecialTile(player, tile, sid) {
   if (tile.special.type === "bank") {
     playSound("special", { rate: 0.9 });
-    const threshold = 200;
+    const threshold = getMapEconomy().bankThreshold;
     if (state.bankPool >= threshold) {
       const payout = state.bankPool;
       state.bankPool = 0;
@@ -2012,82 +2047,90 @@ async function resolveSpecialTile(player, tile, sid) {
 }
 
 async function resolveChance(player, tile, sid) {
+  if (!isSessionActive(sid) || state.gameOver) return;
   playSound("special", { rate: 1.04 });
-  const roll = Math.random();
-  let msg = "";
-  let handled = false;
-  if (roll < 0.09) {
-    const b = 320; updatePlayerCash(player, b, false);
-    msg = `投资大获成功！获得 ${formatMoney(b)} 回报！`;
-  } else if (roll < 0.22) {
-    const b = 160; updatePlayerCash(player, b, false);
-    msg = `好运降临，获得 ${formatMoney(b)}。`;
-  } else if (roll < 0.33) {
-    const b = 80; updatePlayerCash(player, b, false);
-    msg = `小额奖励，获得 ${formatMoney(b)}。`;
-  } else if (roll < 0.38) {
-    msg = "一切如常，什么也没有发生。";
-  } else if (roll < 0.50) {
-    const l = Math.min(player.cash, 80); updatePlayerCash(player, -l, false);
-    msg = `临时维修支出，支付 ${formatMoney(l)}。`;
-  } else if (roll < 0.59) {
-    const l = Math.min(player.cash, 150); updatePlayerCash(player, -l, false);
-    msg = `突发罚款！损失 ${formatMoney(l)}！`;
-  } else if (roll < 0.70) {
-    const opp = getOpponent(player);
-    const s = Math.min(opp.cash, 100);
-    updatePlayerCash(player, s, false); updatePlayerCash(opp, -s, false);
-    msg = `商业间谍！从 ${opp.name} 夺取 ${formatMoney(s)}！`;
-  } else if (roll < 0.82) {
-    const emptyLots = state.board.filter((t) => t.lot && !t.lot.ownerId && !t.isLargeSecondary);
-    if (emptyLots.length === 0) {
-      const b = 80; updatePlayerCash(player, b, false);
-      msg = `政府公示空地购买机会，但已无空地可买，获得 ${formatMoney(b)} 补偿。`;
-    } else {
-      const weighted = emptyLots.map((t) => ({ tile: t, weight: t.lot.isLarge ? 0.3 : 1 }));
-      const totalWeight = weighted.reduce((s, w) => s + w.weight, 0);
-      let wRoll = Math.random() * totalWeight;
-      let selected = weighted[0].tile;
-      for (const w of weighted) { wRoll -= w.weight; if (wRoll <= 0) { selected = w.tile; break; } }
-      handled = true;
-      pushLog(`${player.name} 在 ${tile.name} 触发空地购买机会：${selected.name}！`);
-      if (player.isAi) {
-        if (shouldAiBuy(player, selected.lot) && buyLot(player, selected, false)) {
-          render();
-          await showContinueModal({ label: "功能地块", title: selected.lot.level > 0 ? "开业地产购买机会！" : "空地购买机会！", message: `AI 趁机买下了 ${selected.name}（${formatMoney(selected.lot.price)}）！${purchaseBuildingNote(selected.lot)}` });
-        } else {
-          await showContinueModal({ label: "功能地块", title: "空地购买机会", message: `AI 放弃购买 ${selected.name}。` });
-        }
-      } else {
-        if (player.cash < selected.lot.price) {
-          await showContinueModal({ label: "功能地块", title: "空地购买机会", message: `发现空地 ${selected.name}（${formatMoney(selected.lot.price)}），但你只有 ${formatMoney(player.cash)}，无法购买。` });
-        } else {
-          const dec = await showModal({
-            label: "功能地块", title: selected.lot.level > 0 ? "🏗️ 开业地产购买机会！" : "🏗️ 空地购买机会！",
-            message: `政府公示：${selected.name}（${selected.lot.theme.label}）以底价 ${formatMoney(selected.lot.price)} 出售！\n当前现金：${formatMoney(player.cash)}${purchaseBuildingNote(selected.lot)}`,
-            buttons: [
-              { id: "buy", label: `购买 ${formatMoney(selected.lot.price)}`, variant: "primary" },
-              { id: "skip", label: "放弃", variant: "ghost" },
-            ],
-          });
-          if (!isSessionActive(sid)) return;
-          if (dec === "buy" && buyLot(player, selected)) {
-            render();
-            await showContinueModal({ label: "购买完成", title: `${selected.name}，归你了！`, message: `花费 ${formatMoney(selected.lot.price)}，这次机会抓住了！${purchaseBuildingNote(selected.lot)}`, drama: { type: "buy", amount: selected.lot.price, to: player, tiles: [selected.index], tileName: selected.name } });
-          }
-        }
-      }
-    }
+  const opp = getOpponent(player);
+  const lots = state.board.filter(t => t.lot && !t.isLargeSecondary);
+  const ownedBuildable = lots.filter(t => t.lot.ownerId === player.id && t.lot.level < 3);
+  const freeBuildable = ownedBuildable.length ? ownedBuildable : lots.filter(t => !t.lot.ownerId && t.lot.level < 3);
+  const districts = [...new Set(lots.filter(t => t.lot.level < 3).map(t => t.lot.district))];
+  // Only draw events that can actually happen. No empty result or follow-up choice.
+  const events = [
+    { kind: "renovation", weight: 22, available: freeBuildable.length > 0 },
+    { kind: "district", weight: 16, available: districts.length > 0 },
+    { kind: "shield", weight: 12, available: !player.effects.shield },
+    { kind: "express", weight: 16, available: lots.length > 0 },
+    { kind: "swap", weight: 10, available: player.position !== opp.position },
+    { kind: "bank", weight: 12, available: true },
+    { kind: "bonus", weight: 12, available: true },
+  ].filter(event => event.available);
+  let draw = Math.random() * events.reduce((sum, event) => sum + event.weight, 0);
+  const selected = events.find(event => (draw -= event.weight) < 0) || events[events.length - 1];
+  const pick = choices => choices[Math.floor(Math.random() * choices.length)];
+  const drama = { type: "card", amount: 0, chanceKind: selected.kind, actor: player, rival: opp,
+    to: player, tiles: [tile.index], triggerTiles: [tile.index], tileName: tile.name, outcomeLabel: "" };
+  let title, message, arrival = null;
+
+  if (selected.kind === "renovation") {
+    const target = pick(freeBuildable);
+    target.lot.level++;
+    const ownerName = target.lot.ownerId ? player.name : "无主地产";
+    title = "装修队找上门了！";
+    message = `市政装修队免费给 ${target.name} 加盖一层，升至 Lv.${target.lot.level}。\n${ownerName}，产权不变；没有扣除现金。`;
+    Object.assign(drama, { type: "build", tiles: [target.index], tileName: target.name,
+      outcomeLabel: `${target.name} → Lv.${target.lot.level}` });
+  } else if (selected.kind === "district") {
+    const district = pick(districts);
+    const changed = lots.filter(t => t.lot.district === district && t.lot.level < 3);
+    changed.forEach(t => t.lot.level++);
+    title = "整条街，翻新了！";
+    message = `${district} 获得城市改造：${changed.map(t => `${t.name} Lv.${t.lot.level}`).join("、")}。\n这些地产各免费升一级，产权不变，新的租金立即生效。`;
+    Object.assign(drama, { type: "build", tiles: changed.map(t => t.index), tileName: district,
+      outcomeLabel: `${district} · ${changed.length} 处升级` });
+  } else if (selected.kind === "shield") {
+    player.effects.shield = true;
+    title = "免租通行证，到手！";
+    message = `${player.name} 领到一次过路护盾，下一笔租金免交；这次只是领取，还没有消耗。`;
+    drama.outcomeLabel = "已获得一次过路护盾";
+  } else if (selected.kind === "express") {
+    // Choose physical destination tiles, retaining the larger lots' double footprint.
+    arrival = pick(state.board.filter(t => t.lot));
+    player.position = arrival.index;
+    state.animation.currentTile = null;
+    state.animation.landedTile = arrival.index;
+    title = "搭错车，直接到站！";
+    message = `${player.name} 被送到 ${arrival.name}！\n跳跃不领经过市政府补给；现在按这块地产的实际情况结算。`;
+    Object.assign(drama, { tiles: [arrival.index], tileName: arrival.name, outcomeLabel: `已抵达 ${arrival.name}` });
+  } else if (selected.kind === "swap") {
+    [player.position, opp.position] = [opp.position, player.position];
+    state.animation.currentTile = null;
+    state.animation.landedTile = player.position;
+    title = "走错片场，位置换了！";
+    message = `${player.name} 与 ${opp.name} 交换了位置。\n${player.name} 现在位于 ${state.board[player.position].name}，${opp.name} 位于 ${state.board[opp.position].name}；本次不结算落点，下次从新位置行动。`;
+    Object.assign(drama, { tiles: [player.position, opp.position], outcomeLabel: "双方位置已交换" });
+  } else if (selected.kind === "bank") {
+    const amount = getMapEconomy().bankThreshold;
+    state.bankPool += amount;
+    title = "赞助商给金库加码了！";
+    message = `城市赞助商向公共金库注入 ${formatMoney(amount)}，池中现在共有 ${formatMoney(state.bankPool)}。\n下一位踩中金库的人可以取走全部存款。`;
+    Object.assign(drama, { type: "bank", amount, from: { id: "city", name: "城市赞助商" },
+      to: { id: "bank", name: "银行金库" }, tiles: state.board.filter(t => t.special?.type === "bank").map(t => t.index),
+      tileName: "银行金库", outcomeLabel: `金库已增加 ${formatMoney(amount)}` });
   } else {
-    const opp = getOpponent(player);
-    const t = state.board.find((x) => x.lot?.ownerId === opp.id && x.lot.level > 0 && !x.isLargeSecondary);
-    if (t) { t.lot.level -= 1; msg = `自然灾害！${opp.name} 的 ${t.name} 降级到 Lv.${t.lot.level}！`; }
-    else { const b = 100; updatePlayerCash(player, b, false); msg = `对手无建筑可损坏，改领 ${formatMoney(b)} 补偿。`; }
+    const opened = lots.filter(t => t.lot.level > 0).length;
+    const amount = 120 + Math.min(180, opened * 10);
+    state.players.forEach(p => updatePlayerCash(p, amount, false));
+    title = "夜市开张，街坊分红！";
+    message = `全城已有 ${opened} 处建筑，夜市带来生意。\n${player.name} 与 ${opp.name} 各领 ${formatMoney(amount)}，双方现金均已到账。`;
+    Object.assign(drama, { type: "income", amount, from: { id: "city", name: "夜市分红" },
+      to: player, beneficiaries: [...state.players], outcomeLabel: `双方各到账 ${formatMoney(amount)}` });
   }
-  if (!handled) {
-    pushLog(`${player.name} 在 ${tile.name} 触发机会事件。${msg}`);
-    await showContinueModal({ label: "功能地块", title: `${tile.name} 生效`, message: msg });
-  }
+  pushLog(`${player.name} 在 ${tile.name} 遇到「${title}」${message.replace(/\n/g, " ")}`);
+  render();
+  await showContinueModal({ label: "机会事件", title, message, drama });
+  if (!isSessionActive(sid) || state.gameOver) return;
+  // One landing only; neither relocation traverses a route nor grants a dice action.
+  if (arrival) await resolveLanding(player, arrival, sid);
 }
 
 async function resolveTeleportTile(player, sid, tile = state.board[player.position]) {
@@ -2574,9 +2617,8 @@ function aiChooseCard(cards, player) {
 function endTurn() {
   if (state.gameOver) return;
   hideModal(false); clearHighlights(); state.busy = false;
-  if (state.currentPlayerIndex === state.players.length - 1) {
-    state.round += 1; state.currentPlayerIndex = 0;
-  } else { state.currentPlayerIndex += 1; }
+  state.currentPlayerIndex = (state.currentPlayerIndex + 1) % state.players.length;
+  if (state.currentPlayerIndex === state.firstPlayerIndex) state.round += 1;
   if (state.gameMode === "rounds" && state.round > getMaxRounds()) { finishGame("rounds"); return; }
   if (currentPlayer().isAi) { setAiTurnStatus(); render(); void startAiTurnWithDelay(state.sessionId); }
   else { setHumanTurnStatus(); render(); }
@@ -2747,7 +2789,7 @@ function buildTooltipContent(idx) {
       <div class="tt-name">起点 · 市政府</div>
       <span class="tt-badge" style="background:#fde68a;">奖励地块</span>
       ${preview}
-      <div class="tt-row">经过自动领取 ¥${CONFIG.startBonus}</div>
+      <div class="tt-row">经过自动领取 ¥${getMapEconomy().startBonus}</div>
       <div class="tt-row">停留可强制收购对手一处地产</div>`;
   }
 

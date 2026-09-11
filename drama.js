@@ -2,7 +2,8 @@
  * GameDrama — presentation only. No access to game state.
  * play({ type, title, message, amount, expectedAmount, from, to,
  *        tiles, tileName, leadChanged?, duration?, sessionId?, payerCashAfter?,
- *        cashAfter?, districtCount?, isLarge?, buildingLevel?, isOpeningBuilding?, rival? }): Promise<void>
+ *        cashAfter?, districtCount?, isLarge?, buildingLevel?, isOpeningBuilding?, rival?,
+ *        chanceKind?, outcomeLabel?, actor?, beneficiaries? }): Promise<void>
  * from/to: { id: 'human'|'ai', name, color }. Amounts are positive magnitudes.
  * reset() cancels every animation, pending event and sound; all promises resolve.
  * setMuted(boolean) follows the game's sound preference.
@@ -38,7 +39,36 @@
   // Rotate complete exchanges: the reply answers the actual preceding line.
   // This cosmetic history survives reset and never consumes the dice RNG.
   const lineCursors = new Map();
+  const CHANCE_KINDS = new Set(['renovation','district','shield','express','swap','bank','bonus']);
   const EXCHANGES = {
+    chance_renovation:[
+      ['白盖一层？还有这种好事？！','别光高兴，先看看地是谁的。'],
+      ['工人都来了，钱谁付啊？！','城市请客，房东偷着乐吧。'],
+    ],
+    chance_district:[
+      ['整条街都给升？这么大方？！','等收租的时候你再说大方。'],
+      ['我靠，这条街怎么一夜长高了？！','账单也跟着长高了。'],
+    ],
+    chance_shield:[
+      ['免单券！我先揣兜里了啊。','怎么还没收你钱，你先防上了？！'],
+      ['这玩意儿，可比打折狠多了。','你别冲着我家笑行不行。'],
+    ],
+    chance_express:[
+      ['我靠，怎么直接给我送这儿了？！','欢迎乘坐命运盲盒号。'],
+      ['这车没刹车是吧？！','目的地到了，账单另算。'],
+    ],
+    chance_swap:[
+      ['哎？！谁把我搬这儿了？！','你的位置挺好，现在我站了。'],
+      ['不是，我这路白走了？！','谢谢啊，替我踩这么远。'],
+    ],
+    chance_bank:[
+      ['钱进金库了？现在过去来得及吗？！','来得及看我取走。'],
+      ['金库加钱了！骰子你争点气啊！','你喊小声点，我骰子也听见了。'],
+    ],
+    chance_bonus:[
+      ['哎哟，终于轮到城市给我打钱了！','别激动，我也领了。'],
+      ['今晚这钱，我就笑纳了啊。','巧了，我也没打算客气。'],
+    ],
     rent:[
       ['怎么又是你家啊？','缘分，付一下。'],
       ['行，算我请你喝奶茶。','少糖，谢谢老板。'],
@@ -126,6 +156,13 @@
 
   function dialogue(event, type, amount) {
     const say = (player, role, mood, face, words) => ({player, role, mood, face, words});
+    if (CHANCE_KINDS.has(event.chanceKind)) {
+      const [first, reply] = line('chance_' + event.chanceKind);
+      const actor = event.actor || event.to;
+      const lines = [say(actor,'奇遇当事人','surprised','😲',first)];
+      if (event.rival?.name && event.rival.id !== actor?.id) lines.push(say(event.rival,'对手','proud','😏',reply));
+      return lines;
+    }
     if (type === 'rent') {
       const cash = optionalNumber(event.payerCashAfter ?? event.from?.cashAfter);
       const exhausted = cash !== null && cash <= 0;
@@ -431,6 +468,9 @@
 
   function render(job, event) {
     const type = Object.hasOwn(SVG, event.type) ? event.type : 'notice';
+    const chance = CHANCE_KINDS.has(event.chanceKind);
+    const beneficiaries = event.chanceKind === 'bonus' && Array.isArray(event.beneficiaries)
+      ? event.beneficiaries.filter((p,i,all) => p?.id && all.findIndex(q => q?.id === p.id) === i) : [];
     const amount = finiteAmount(event.amount);
     const leadChanged = type === 'rent' && !!event.leadChanged;
     const facts = purchaseFacts(event);
@@ -438,11 +478,12 @@
     const major = type === 'rent' && (amount >= 300 || leadChanged) || ['seize', 'shield', 'relief', 'win'].includes(type) || type === 'bank' && amount >= 300 || importantPurchase;
     const purchaseReply = type === 'buy' && event.rival?.name && event.rival.id !== event.to?.id;
     let defaultDuration = type === 'win' ? 6500 : major ? 6000 : type === 'rent' || purchaseReply ? 4500 : 3000;
+    if (chance) defaultDuration = Math.max(defaultDuration, 5200);
     const messageLength = String(event.message || '').length;
     if (messageLength > 50) defaultDuration = Math.max(defaultDuration, Math.min(10000, 1500 + messageLength * 55));
     const duration = Number.isFinite(Number(event.duration)) && event.duration != null ? Math.max(defaultDuration, Math.min(10000, Number(event.duration))) : defaultDuration;
     layer.replaceChildren();
-    layer.className = `drama-layer drama-kind-${type}${major ? ' is-major' : ' is-minor'}${leadChanged ? ' is-lead-change' : ''}${reduced() ? ' is-reduced-motion' : ''}`;
+    layer.className = `drama-layer drama-kind-${type}${major ? ' is-major' : ' is-minor'}${chance ? ' is-chance' : ''}${leadChanged ? ' is-lead-change' : ''}${reduced() ? ' is-reduced-motion' : ''}`;
     layer.hidden = false;
     document.body.classList.add('drama-playing');
     layer.style.setProperty('--drama-duration', duration + 'ms');
@@ -454,7 +495,7 @@
     card.setAttribute('aria-atomic', 'true');
     const content = element('div', 'drama-content');
     const meta = element('div', 'drama-meta');
-    const kicker = element('span', 'drama-kicker', LABELS[type]);
+    const kicker = element('span', 'drama-kicker', chance ? '城市奇遇 · 已揭晓' : LABELS[type]);
     kicker.prepend(element('i', 'drama-live-dot'));
     meta.append(kicker, element('span', 'drama-sequence', String(++eventNumber).padStart(2, '0')));
     content.appendChild(meta);
@@ -471,6 +512,7 @@
     if (type === 'buy') title = facts.chain ? '街区连锁，拿下了！' : facts.built ? '连楼一起，拿下了！' : facts.large ? '大地块，拿下了！' : '拿下了！';
     const heading = element('h3', 'drama-title', title);
     copy.appendChild(heading);
+    if (chance && event.outcomeLabel) copy.appendChild(element('span', 'drama-chance-outcome', event.outcomeLabel));
     if (type === 'seize') copy.appendChild(element('span', 'drama-stamp', '征用令'));
     const showAmount = amount > 0 || type === 'shield';
     if (showAmount) {
@@ -480,7 +522,7 @@
         if (expected) numberLine.appendChild(element('del', 'drama-expected-amount', '¥' + fmt(expected)));
         numberLine.append(element('span', 'drama-currency', '¥'), element('strong', 'drama-amount', '0'), element('span', 'drama-amount-unit', '本次免付'));
       } else {
-        const prefix = ['relief', 'income'].includes(type) ? '+¥' : '¥';
+        const prefix = ['relief', 'income'].includes(type) || event.chanceKind === 'bank' ? '+¥' : '¥';
         numberLine.append(element('span', 'drama-currency', prefix));
         const counter = element('strong', 'drama-amount', !reduced() && amount >= 100 ? '0' : fmt(amount));
         numberLine.appendChild(counter);
@@ -495,6 +537,8 @@
           };
         }
         if (type === 'buy') numberLine.appendChild(element('span', 'drama-amount-unit', '买入花费'));
+        if (beneficiaries.length) numberLine.appendChild(element('span', 'drama-amount-unit', '每人到账'));
+        if (event.chanceKind === 'bank') numberLine.appendChild(element('span', 'drama-amount-unit', '金库增加'));
       }
       copy.appendChild(numberLine);
     }
@@ -508,7 +552,9 @@
     }
     if (event.message) copy.appendChild(element('p', 'drama-message', event.message));
     const detail = element('div', 'drama-detail');
-    if (event.from?.name || event.to?.name) {
+    if (beneficiaries.length) {
+      beneficiaries.forEach(p => detail.appendChild(element('span', 'drama-person drama-to', p.name)));
+    } else if (event.from?.name || event.to?.name) {
       if (event.from?.name) detail.appendChild(element('span', 'drama-person drama-from', event.from.name));
       if (event.from?.name && event.to?.name) detail.appendChild(element('span', 'drama-transfer-arrow', '→'));
       if (event.to?.name) detail.appendChild(element('span', 'drama-person drama-to', event.to.name));
@@ -556,7 +602,12 @@
       tone(job, 185, 0, .11, .012, 'triangle');
       tone(job, 139, .10, .14, .010, 'triangle');
     }
-    if (['rent', 'bank', 'income', 'relief'].includes(type)) {
+    if (beneficiaries.length) {
+      beneficiaries.forEach((p,i) => {
+        coins(job, {...event,to:p});
+        delay(job, () => signedCounter(job,p,amount,'+'),460+i*120);
+      });
+    } else if (event.chanceKind !== 'bank' && ['rent', 'bank', 'income', 'relief'].includes(type)) {
       coins(job, event);
       if (type === 'rent' || type === 'bank') delay(job, () => signedCounter(job, event.from, amount, '-'), 280);
       delay(job, () => signedCounter(job, event.to, amount, '+'), 460);

@@ -225,3 +225,7 @@ body.drama-playing { overflow:hidden; overscroll-behavior:none; }
   .drama-progress i {transform:scaleX(1); opacity:.35;}
   .drama-kind-shield .drama-symbol-orbit {opacity:.6;}
 }
+.drama-layer.is-chance { --drama-accent:#7760ae; }
+.is-chance .drama-symbol { color:#7760ae; background:linear-gradient(135deg,#f0e8fc,#fff3d7); }
+.drama-chance-outcome { display:inline-flex; align-items:center; margin:8px 0 2px; padding:6px 11px; border:1px solid #a88acb66; border-radius:999px; background:#f4ebff; color:#61498d; font-size:12px; font-weight:800; letter-spacing:.04em; }
+.drama-chance-outcome::before { content:'✦'; margin-right:7px; color:#b38839; }
