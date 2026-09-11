@@ -12,6 +12,9 @@ const modelLibrary = new Map();
 const authoredModels = new Set();
 const assetEnvelopes = new Map();
 const loadedBundles = new Set();
+const modelPriorities = new Map();
+const bundleRequests = new Map();
+const failedBundles = new Set();
 const modelResources = new Set();
 const lotViews = new Map();
 const pawnViews = new Map();
@@ -23,8 +26,7 @@ let scene, camera, renderer, world, labels, wrap, observer, frame = 0;
 let snapshot = null, mapKey = '', lastTime = 0, width = 1, height = 1;
 let rendererWidth = 0, rendererHeight = 0;
 let boardBounds, light, ground, disposed = false, selectedIndex = null;
-let modelLoadStarted = false;
-let modelsLoading = false;
+let assetRefreshFrame = 0, sceneryRefreshNeeded = false;
 let renderDirty = false;
 let inspection = null;
 let studioEnvironment = null;
@@ -37,12 +39,12 @@ const CAMERA_LIMITS = { minZoom:.65, maxZoom:2.4, minElevation:.35, maxElevation
 const LANDMARKS = { classic: { 5:'finance', 7:'skyscraper', 14:'onsen' }, compact: { 2:'finance', 11:'onsen' }, expansion: { 7:'skyscraper', 26:'onsen' } };
 const SPECIAL_MODELS = { bank:'vault_bank',construction:'builders_guild',card_draw:'card_pavilion',chance:'chance_wheel',teleport:'teleport_gate',rush:'rush_station',junction:'junction_hub' };
 const ASSET_BUNDLES = [
-  {file:'city-kit.glb',authored:false,pattern:/^(villa_[123]|shop_[123]|hotel_[123]|tower_[123]|plot_0|city_hall|bank|construction|card_station|tree|streetlamp|fountain)$/},
-  {file:'landmarks.glb',authored:true,pattern:/^(skyscraper|finance|onsen)_[123]$/},
-  {file:'specials.glb',authored:true,pattern:/^(civic_hall|vault_bank|builders_guild|card_pavilion|chance_wheel|teleport_gate|rush_station|junction_hub)$/},
-  {file:'life-specials.glb',authored:true,pattern:/^(chance_wheel|builders_guild)$/},
-  {file:'compact-specials.glb',authored:true,pattern:/^compact_(civic_hall|vault_bank|builders_guild|card_pavilion|chance_wheel|teleport_gate|rush_station)$/},
-  {file:'expansion-specials.glb',authored:true,pattern:/^expansion_(civic_hall|vault_bank|builders_guild|card_pavilion|chance_wheel|teleport_gate|rush_station)$/},
+  {file:'city-kit.glb',version:'20260911-12',authored:false,pattern:/^(villa_[123]|shop_[123]|hotel_[123]|tower_[123]|plot_0|city_hall|bank|construction|card_station|tree|streetlamp|fountain)$/},
+  {file:'landmarks.glb',version:'20260911-12',authored:true,pattern:/^(skyscraper|finance|onsen)_[123]$/},
+  {file:'specials.glb',version:'20260911-12',authored:true,pattern:/^(civic_hall|vault_bank|builders_guild|card_pavilion|chance_wheel|teleport_gate|rush_station|junction_hub)$/},
+  {file:'life-specials.glb',version:'20260911-12',authored:true,pattern:/^(chance_wheel|builders_guild)$/},
+  {file:'compact-specials.glb',mapId:'compact',version:'20260912-21',authored:true,pattern:/^compact_(civic_hall|vault_bank|builders_guild|card_pavilion|chance_wheel|teleport_gate|rush_station)$/},
+  {file:'expansion-specials.glb',mapId:'expansion',version:'20260912-21',authored:true,pattern:/^expansion_(civic_hall|vault_bank|builders_guild|card_pavilion|chance_wheel|teleport_gate|rush_station)$/},
 ];
 const projection = new THREE.Vector3();
 const raycaster = new THREE.Raycaster();
@@ -313,6 +315,7 @@ function clearMap() {
 }
 function reset() {
   closeInspection();
+  cancelAnimationFrame(assetRefreshFrame);assetRefreshFrame=0;sceneryRefreshNeeded=false;
   resetCameraView();cameraView.facingYaw=null;
   clearMap(); snapshot = null; mapKey = ''; selectedIndex = null;
   document.body.classList.remove('scene-ready'); api.ready = false;
@@ -632,7 +635,7 @@ function updateLot(view,tile,data,initial=false) {
   const level=tile.lot?.level||0;
   const asset=resolveAsset(tile,data,level);
   const modelName=asset.desired;
-  const signature=`${modelName}:${asset.key}:${Boolean(asset.source)}`;
+  const signature=`${modelName}:${asset.key}:${asset.source?.uuid||'fallback'}`;
   if(view.signature!==signature){
     view.building.clear(); view.signature=signature;view.modelName=modelName;
     view.building.add(createLotModel(tile,data,level,view).model);
@@ -910,7 +913,7 @@ function inspectTile(index,level){
     state.observer=new ResizeObserver(()=>renderInspection());state.observer.observe(canvasWrap);
     renderInspectionModel();
     dialog.querySelector('[data-model-close]').focus({preventScroll:true});
-    if(loadedBundles.size<ASSET_BUNDLES.length)void loadModelKit(true);
+    void loadModelKit(false,true);
     return true;
   }catch(error){
     console.warn('The building preview could not start.',error);
@@ -985,27 +988,58 @@ function tick(time){
   }
   positionLabels();renderer.render(scene,camera);
 }
-async function loadModelKit(force=false){
-  if(modelsLoading||(modelLoadStarted&&!force))return;modelLoadStarted=true;modelsLoading=true;
-  const remaining=ASSET_BUNDLES.filter((bundle)=>force||!loadedBundles.has(bundle.file));
-  const results=await Promise.allSettled(remaining.map(bundle=>new GLTFLoader().loadAsync(`./assets/models/${bundle.file}?v=20260912-21${force?`&refresh=${Date.now()}`:''}`)));
-  // Fetch concurrently, register in declared order so animated replacements
-  // consistently supersede their static fallback, regardless of network order.
-  results.forEach((result,i)=>{
-    const bundle=remaining[i];
-    if(result.status==='rejected'){console.info(`The fallback city model remains available for ${bundle.file}.`,result.reason?.message);return;}
-    const gltf=result.value;
-    gltf.scene.traverse((object)=>{
-      if(!bundle.pattern.test(object.name))return;
-      if(bundle.authored){authoredModels.add(object.name);assetEnvelopes.set(object.name,calculateEnvelope(object));}
-      modelLibrary.set(object.name,optimizeModel(object));
-    });
-    loadedBundles.add(bundle.file);
+function installModelBundle(bundle,gltf){
+  const priority=ASSET_BUNDLES.indexOf(bundle),entries=[];
+  let matched=0;
+  gltf.scene.traverse(object=>{
+    if(!bundle.pattern.test(object.name))return;
+    matched++;
+    // The movable replacement wins even when its smaller file arrives first.
+    if(priority<(modelPriorities.get(object.name)??-1))return;
+    entries.push({name:object.name,model:optimizeModel(object),envelope:bundle.authored?calculateEnvelope(object):null});
   });
-  modelsLoading=false;
-  if(snapshot){const saved=snapshot;buildMap(saved);update(saved);}
-  if(inspection)renderInspectionModel();
-  window.dispatchEvent(new CustomEvent('city:models-ready',{detail:{count:modelLibrary.size,bundles:[...loadedBundles]}}));
+  if(!matched)throw Error(`No compatible models in ${bundle.file}`);
+  entries.forEach(({name,model,envelope})=>{
+    modelLibrary.set(name,model);modelPriorities.set(name,priority);
+    if(bundle.authored){authoredModels.add(name);assetEnvelopes.set(name,envelope);}
+  });
+  loadedBundles.add(bundle.file);failedBundles.delete(bundle.file);
 }
-window.addEventListener('pagehide',()=>{disposed=true;closeInspection();cancelAnimationFrame(frame);observer?.disconnect();clearMap();modelResources.forEach((resource)=>resource.dispose());studioEnvironment?.dispose();renderer?.dispose();});
+function scheduleModelRefresh(bundle){
+  if(!snapshot&&!inspection)return;
+  if(bundle.mapId&&bundle.mapId!==snapshot?.mapId&&bundle.mapId!==inspection?.mapId)return;
+  sceneryRefreshNeeded=sceneryRefreshNeeded||bundle.file==='city-kit.glb';
+  if(assetRefreshFrame)return;
+  assetRefreshFrame=requestAnimationFrame(()=>{
+    assetRefreshFrame=0;const rebuildScenery=sceneryRefreshNeeded;sceneryRefreshNeeded=false;
+    if(disposed)return;
+    if(snapshot){
+      if(rebuildScenery)buildMap(snapshot);
+      else snapshot.board.filter(tile=>!tile.isLargeSecondary).forEach(tile=>{const view=lotViews.get(tile.index);if(view)updateLot(view,tile,snapshot,true);});
+      // Preserve the current pawns, camera and atmosphere when only buildings arrive.
+      update(snapshot);if(!rebuildScenery)resize();
+    }
+    if(inspection)renderInspectionModel();
+    window.dispatchEvent(new CustomEvent('city:models-ready',{detail:{count:modelLibrary.size,bundles:[...loadedBundles]}}));
+  });
+}
+async function loadModelKit(force=false,retryMissing=false){
+  if(disposed||!snapshot)return;
+  const needed=ASSET_BUNDLES.filter(bundle=>!bundle.mapId||bundle.mapId===snapshot.mapId);
+  const requests=[];
+  needed.forEach(bundle=>{
+    const pending=bundleRequests.get(bundle.file);
+    if(pending){requests.push(pending);return;}
+    if(!force&&(loadedBundles.has(bundle.file)||failedBundles.has(bundle.file)&&!retryMissing))return;
+    const request=Promise.resolve()
+      .then(()=>new GLTFLoader().loadAsync(`./assets/models/${bundle.file}?v=${bundle.version}${force?`&refresh=${Date.now()}`:''}`))
+      .then(gltf=>{if(!disposed){installModelBundle(bundle,gltf);scheduleModelRefresh(bundle);}})
+      .catch(error=>{if(!disposed){failedBundles.add(bundle.file);console.info(`The fallback city model remains available for ${bundle.file}. Open a building preview to retry.`,error?.message);}})
+      .finally(()=>bundleRequests.delete(bundle.file));
+    bundleRequests.set(bundle.file,request);requests.push(request);
+  });
+  // Callers may await the batch, but each successful package installs immediately.
+  return Promise.allSettled(requests);
+}
+window.addEventListener('pagehide',()=>{disposed=true;closeInspection();cancelAnimationFrame(frame);cancelAnimationFrame(assetRefreshFrame);observer?.disconnect();clearMap();modelResources.forEach((resource)=>resource.dispose());studioEnvironment?.dispose();renderer?.dispose();});
 window.dispatchEvent(new CustomEvent('city:ready'));

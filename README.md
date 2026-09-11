@@ -70,6 +70,8 @@ python -m http.server 8876
 
 城市资产由真实 Blender 建模生成。基础库保留 20 个模型；第二轮增加 9 个分级地标与 8 个特殊地块模型。摩天楼使用真实增长的细长塔身和金色冠顶；金融中心是错落双塔；温泉庄园由多栋楼阁、汤池、瀑布、拱桥与庭院组成。特殊地块通过穹顶、圆形金库门、塔吊、巨牌、转盘和门架等不同轮廓识别。
 
+模型包下载完成后分别显示，不必等全套到齐；新特殊建筑仅加载所选地图的一套，切图时再补另一套。已下载的公共模型复用缓存，网络失败时仍可操作棋盘，并可在近看时重试缺失建筑。
+
 - `assets/models/city-kit.glb`：游戏加载的模型库，约 2.9 MB。
 - `assets/models/city-kit.blend`：可编辑的 Blender 模型库，含预览相机与灯光。
 - `art/build_city_kit.py`：完整建模与导出脚本。
@@ -92,6 +94,7 @@ node tests/chance-presentation.test.cjs
 node tests/check-ownership-frames.mjs
 node tests/check-map-specials.mjs
 node tests/check-chance-scene-trigger.mjs
+node tests/check-model-loading.mjs
 ```
 
 分别覆盖真实开局与资金规则、奇遇金额和阅读时间、产权边界、真实 GLB 模型与动件、机会触发格反馈。模型检查使用仓库自带的 Three.js；它们不替代浏览器视觉检查。
