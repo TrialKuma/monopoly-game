@@ -22,4 +22,18 @@ function run(event){
 }
 const idle=run({tiles:[9]}),direct=run({tiles:[7]}),trigger=run({tiles:[9],triggerTiles:[7]}),duplicate=run({tiles:[7,7],triggerTiles:[7,7]});
 assert.ok(trigger>idle*10,'chance origin wheel accelerates when only bank is highlighted');assert.ok(Math.abs(direct-trigger)<1e-10);assert.ok(Math.abs(direct-duplicate)<1e-10,'union triggers a movable part once');
+// New destinations move the central-life root; building effects must retain
+// their own world-space origin instead of inheriting the garden's offset.
+for(const mapId of ['harbor','alpine']){
+ const scene=new THREE.Scene(),world=new THREE.Group(),light=new THREE.DirectionalLight();scene.add(world,light);
+ const model=asset.clone(true);model.userData.tileIndex=7;model.position.set(3,0,-2);world.add(model);
+ const controller=createSceneLife({THREE,scene,world,light,boardBounds:{w:10.8,d:14.4},snapshot:{mapId,board:Array(24)},lotViews:new Map([[7,{building:model}]])});
+ controller.effect({triggerTiles:[7]});controller.tick(0,0);
+ const life=world.getObjectByName('city_life'),sparks=life.children.find(node=>node.isPoints&&node.geometry.attributes.position.count===20);
+ assert.equal(life.position.z,2,'destination garden uses its translated root');
+ const particle=new THREE.Vector3().fromBufferAttribute(sparks.geometry.attributes.position,0);sparks.localToWorld(particle);
+ const origin=model.getObjectByName('life_compact_wheel_rotor').getWorldPosition(new THREE.Vector3());
+ assert.ok(particle.distanceTo(origin)<1e-6,`${mapId}: particle starts at the building, not the translated garden`);
+ controller.dispose();
+}
 console.log(JSON.stringify({idle,direct,trigger,duplicate,failures:0}));

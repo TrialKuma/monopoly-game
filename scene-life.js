@@ -2,7 +2,8 @@
 // Articulated Blender parts are kept by scene.js before its static mesh batching.
 import { createCityLighting } from './scene-lighting.js?v=20260912-24';
 import { createCityWeather } from './scene-weather.js?v=20260912-24';
-import { createCityOutskirts } from './scene-outskirts.js?v=20260912-24';
+import { createCityOutskirts } from './scene-outskirts.js?v=20261023-1';
+import { createDestinationScene } from './scene-destinations.js?v=20261023-1';
 export function shouldPreserveLifeNode(node) {
   return !!node?.userData?.lifePart || /^life_(wheel_rotor|crane_pendulum)$/.test(node?.name || '');
 }
@@ -25,6 +26,8 @@ export function createSceneLife({ THREE, scene, world, light, snapshot, lotViews
   const lighting = createCityLighting({ THREE, scene, world, renderer, light, boardBounds, requestRender });
   const weather = createCityWeather({ THREE, world, renderer, boardBounds, requestRender });
   const outskirts = createCityOutskirts({ THREE, world, boardBounds, mapId:snapshot?.mapId, requestRender });
+  const destination = createDestinationScene({THREE,world,boardBounds,mapId:snapshot?.mapId,requestRender});
+  if(destination){outskirts.setVisible(false);root.position.z=2;}
   const own = resource => { owned.add(resource); return resource; };
   const standard = (color, extra = {}) => own(new THREE.MeshStandardMaterial({ color, roughness: .65, ...extra }));
   const basic = (color, extra = {}) => own(new THREE.MeshBasicMaterial({ color, ...extra }));
@@ -214,7 +217,7 @@ export function createSceneLife({ THREE, scene, world, light, snapshot, lotViews
       .map(tile => Number(typeof tile === 'object' && tile !== null ? tile.index : tile)).filter(Number.isInteger));
     for (const part of movingParts) if (indices.has(part.tileIndex)) {
       part.spin = part.kind === 'wheel' ? 9 : 1;
-      part.node.getWorldPosition(point); world.worldToLocal(point); emitSparks(point, part.kind === 'wheel' ? '#ffe799' : '#ffbd67');
+      part.node.getWorldPosition(point); root.worldToLocal(point); emitSparks(point, part.kind === 'wheel' ? '#ffe799' : '#ffbd67');
     }
     forced = true; requestRender();
   }
@@ -232,6 +235,7 @@ export function createSceneLife({ THREE, scene, world, light, snapshot, lotViews
     lighting.tick(step, { ...weather.getState(), reduced, paused });
     night = lighting.getState().night;
     outskirts.tick(step, { night, reduced, paused });
+    destination?.tick(step, {night,reduced,paused});
     applyLight();
     for (const p of pedestrians) {
       const angle = p.phase + elapsed * .11 * p.direction;
@@ -272,13 +276,13 @@ export function createSceneLife({ THREE, scene, world, light, snapshot, lotViews
     if (typeof document !== 'undefined') document.removeEventListener('visibilitychange', visibilityChanged);
     for (const [node, material] of bindings) node.material = material;
     for (const part of movingParts) part.node.rotation.copy(part.base);
-    weather.dispose(); outskirts.dispose(); lighting.dispose();
+    weather.dispose(); outskirts.dispose(); destination?.dispose(); lighting.dispose();
     root.removeFromParent(); owned.forEach(resource => resource.dispose?.()); owned.clear(); bindings.clear(); materialCopies.clear(); movingParts.length = 0; sparkEvents.length = 0;
   }
   bindBuildings(); tick(0, 0);
   return { update, tick, effect, setTimeMode, setSeason, setWeather, getTimeMode: () => mode, getNightFactor: () => night,
-    setOutskirtsVisible: value => { if(disposed)return false;forced=true;return outskirts.setVisible(value); },
-    getAtmosphere: () => ({ ...lighting.getState(), ...weather.getState(), timeMode: mode }),
+    setOutskirtsVisible: value => { if(disposed)return false;forced=true;if(destination){destination.setVisible(value);return true;}return outskirts.setVisible(value); },
+    getAtmosphere: () => ({ ...lighting.getState(), ...weather.getState(), timeMode: mode, destination:destination?.getState() }),
     setInteractionPaused: value => { const next=!!value;if(next===paused)return;paused=next;if(!paused){forced=true;requestRender();} }, dispose,
     // Bounded diagnostic counts support resource/reset checks without exposing rules.
     stats: () => ({ owned: owned.size, materialBindings: bindings.size, movingParts: movingParts.length, pedestrians: pedestrians.length, particles: 36 + 16 + sparkLimit, disposed }) };

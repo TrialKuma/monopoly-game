@@ -13,11 +13,41 @@
   let eventSerial = 0;
   let showcaseMapId = 'classic';
   let showcaseTargets = null;
+  const mobileQuery = window.matchMedia('(max-width: 820px) and (orientation: portrait), (max-width: 600px)');
+  const sidebar = document.querySelector('.sidebar');
+  const sheetBackdrop = document.getElementById('mobile-sheet-backdrop');
+  let sheetReturnFocus = null;
+  function closeMobilePanel() {
+    if (!document.body.classList.contains('mobile-sheet-open')) return;
+    document.body.classList.remove('mobile-sheet-open');
+    delete sidebar.dataset.panel;
+    sheetBackdrop.hidden = true;
+    document.querySelectorAll('[data-mobile-panel]').forEach(button => button.setAttribute('aria-expanded', 'false'));
+    sidebar.removeAttribute('role');sidebar.removeAttribute('aria-modal');
+    document.querySelector('.board-section').inert=false;document.querySelector('.topbar').inert=false;
+    if (sheetReturnFocus?.isConnected) sheetReturnFocus.focus({preventScroll:true});
+    sheetReturnFocus = null;
+  }
+  function openMobilePanel(panel, trigger) {
+    if (!mobileQuery.matches) return;
+    sheetReturnFocus = trigger || document.activeElement;
+    sidebar.dataset.panel = panel;
+    document.getElementById('mobile-sheet-title').textContent = {property:'地块信息',log:'小城快报',rules:'游戏规则'}[panel];
+    if (panel === 'rules') sidebar.querySelector('.rules').open = true;
+    document.body.classList.add('mobile-sheet-open');
+    sidebar.setAttribute('role','dialog');sidebar.setAttribute('aria-modal','true');sidebar.setAttribute('aria-labelledby','mobile-sheet-title');
+    document.querySelector('.board-section').inert=true;document.querySelector('.topbar').inert=true;
+    sheetBackdrop.hidden = false;
+    document.querySelectorAll('[data-mobile-panel]').forEach(button => button.setAttribute('aria-expanded', String(button.dataset.mobilePanel === panel)));
+    document.getElementById('mobile-sheet-close').focus({preventScroll:true});
+  }
   const mapGuide = document.getElementById('map-guide');
   const mapGuides = {
     classic: {title:'经典环线 · 街坊间的财富拉锯',copy:'沿 22 格环线前进，同街区地产连锁收租。机会广场可能改造街区、互换位置或送上免单券，下一步随时变天。'},
     compact: {title:'短环追逐 · 冲刺也可能冲进账单',copy:'沿 18 格短环线前进，三个街区更容易连锁收租。冲刺站随机再走 2–8 格；传送港落地后立即结算，护盾同样能挡租。回合制救助获得 ¥200 和一次免租，不再额外罚停。'},
     expansion: {title:'大城开业 · 每圈经过全部六个街区',copy:'沿 28 格大环线依次前进。开局每街区随机一处无主地产预建 Lv.1，买下即用。城市快线随机再走 3–5 格，传送港落地后立即结算。回合制救助附带一次过路护盾，帮助脱困再起。'},
+    harbor: {title:'潮汐港湾 · 22 格滨水长街',copy:'30 回合，沿纵向港湾环线经营。较低的街铺地价与每圈 ¥320 补给，让早点成街更有回报。完成对局收集潮汐海螺。'},
+    alpine: {title:'云岭温泉 · 24 格山城环线',copy:'30 回合，温泉、商会与观景酒店占据双格地段。缆车再前进 2–4 格，沿路结算；完成对局收集山泉晶石。'},
   };
   const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const money = n => `¥${Math.round(n).toLocaleString('zh-CN')}`;
@@ -85,6 +115,7 @@
   function update() {
     if(!state.players)return;
     const inMenu=!document.getElementById('start-screen').classList.contains('hidden');
+    if(inMenu||state.modal.visible||state.phase==='presenting')closeMobilePanel();
     document.body.classList.toggle('mode-start',inMenu);
     document.body.classList.toggle('mode-showcase',preview&&!inMenu);
     document.body.classList.toggle('ai-turn',!inMenu&&!state.gameOver&&document.body.dataset.turn==='ai');
@@ -101,7 +132,7 @@
     }
     const routeButton=document.getElementById('showcase-route-btn');
     routeButton.hidden=!preview||!state.board.some(t=>t.special?.type==='rush');
-    routeButton.textContent=map.id==='expansion'?'城市快线':'冲刺追租';
+    routeButton.textContent=map.id==='expansion'?'城市快线':map.id==='alpine'?'缆车穿城':'冲刺追租';
     document.querySelectorAll('#start-map-options [data-map-id]').forEach(button=>{
       const option=getMapConfig(button.dataset.mapId);
       button.querySelector('.map-option-meta').textContent=`${option.routePositions.length} 格 · ${getMaxRounds(option.id)} 回合`;
@@ -110,7 +141,6 @@
     document.getElementById('showcase-open-btn').classList.toggle('hidden',!preview);
     if(lastCameraSession!==state.sessionId){lastCameraSession=state.sessionId;inspectorKey='';mapGuide.open=false;}
     document.getElementById('victory-rule').textContent=preview?`${map.name} · 示例局面`:state.gameMode==='bankruptcy'?'破产淘汰 · 坚持到最后':`${getMaxRounds()} 回合后，现金最多者获胜`;
-    document.getElementById('scene-caption-text').textContent=preview?'演出预览 · 每一笔钱都经过真实规则结算':state.phase==='presenting'?'好戏正在发生':state.animation.diceRolling?'骰子停下前，一切都有可能':window.CityScene?.ready?'拖动转转小城 · 滚轮或双指缩放 · 点地块看详情':'轻点地块，看看这是谁的地盘';
     updateCash();updateInspector();syncCityScene();
     inspector.querySelectorAll('[data-inspect-building]').forEach(button=>{button.disabled=!window.CityScene?.inspectTile||(state.busy&&!preview);});
     const m=state.modal,tile=state.board[currentPlayer().position];
@@ -184,10 +214,13 @@
     if(!isSessionActive(sid)||serial!==eventSerial)return;
     state.phase='locked';state.busy=true;render();
   }
-  function onReset() {eventSerial++;selected=null;inspectorKey='';previewBusy=false;if(!preparingPreview)preview=false;document.body.classList.remove('selecting-target');}
-  function celebrate(winner,tied) {
+  function onReset() {eventSerial++;selected=null;inspectorKey='';previewBusy=false;if(!preparingPreview)preview=false;document.body.classList.remove('selecting-target');closeMobilePanel();}
+  async function celebrate(winner,tied) {
     if(preview)return;
-    void window.GameDrama?.play({type:'win',title:tied?'这局，平分秋色！':`${winner.name}，笑到最后！`,message:getWinnerText(),amount:winner.cash,to:person(winner),tiles:[],sessionId:state.sessionId});
+    const sid=state.sessionId;
+    await window.GameDrama?.play({type:'win',title:tied?'这局，平分秋色！':`${winner.name}，笑到最后！`,message:getWinnerText(),amount:winner.cash,to:person(winner),tiles:[],sessionId:sid});
+    if(!isSessionActive(sid))return;
+    window.GameProgression?.showResult(state.citySettlement,{onReplay:()=>void startNewGame(),onHome:()=>{showStartScreen();render();}});
   }
   function setupShowcase() {
     showcaseMapId=selectedMapId;
@@ -252,7 +285,16 @@
   inspector.addEventListener('click',inspectBuilding);
   propertyPreview.addEventListener('click',inspectBuilding);
   window.addEventListener('city:ready',()=>{syncCityScene();render();});
-  window.addEventListener('city:select',e=>selectTile(e.detail.index));
+  window.addEventListener('city:select',e=>{selectTile(e.detail.index);if(!state.modal.visible&&!state.busy)openMobilePanel('property');});
+  document.querySelector('.mobile-tools').addEventListener('click',e=>{
+    const button=e.target.closest('[data-mobile-panel]');if(!button)return;
+    if(button.dataset.mobilePanel==='property'&&selected==null)selectTile(currentPlayer().position);
+    openMobilePanel(button.dataset.mobilePanel,button);
+  });
+  document.getElementById('mobile-sheet-close').addEventListener('click',closeMobilePanel);
+  sheetBackdrop.addEventListener('click',closeMobilePanel);
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!document.body.classList.contains('city-inspection-open'))closeMobilePanel();});
+  mobileQuery.addEventListener('change',()=>{if(!mobileQuery.matches)closeMobilePanel();});
   document.getElementById('start-showcase-btn').addEventListener('click',setupShowcase);
   document.getElementById('showcase-open-btn').addEventListener('click',setupShowcase);
   document.getElementById('showcase-exit-btn').addEventListener('click',()=>void startNewGame());

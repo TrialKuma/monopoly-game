@@ -53,5 +53,6 @@ for(const {map,board} of maps){
   }
   console.log('PASS '+map.id+': '+steps.length+' landing pads with authored buildings at max level');
 }
-assert.equal(corners,12);assert.equal(landings,68);assert.equal(sharedChecks,68);
+const expectedLandings=maps.reduce((sum,{board})=>sum+board.length,0);
+assert.equal(corners,maps.length*4);assert.equal(landings,expectedLandings);assert.equal(sharedChecks,expectedLandings);
 console.log(JSON.stringify({landings,corners,sharedChecks,clearanceChecks,failures:0}));

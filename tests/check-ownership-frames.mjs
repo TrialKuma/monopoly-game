@@ -13,7 +13,7 @@ const game=fs.readFileSync(root+'game.js','utf8');
 const createBoard=game.slice(game.indexOf('function createBoard('),game.indexOf('function prepareOpeningLots('));
 const maps=vm.runInNewContext(game.slice(0,game.indexOf('const CARD_POOL'))+createBoard+';Object.fromEntries(Object.values(MAP_PRESETS).map(map=>[map.id,{map,board:createBoard(map)}]));');
 let ownedParcels=0,largeParcels=0,rayChecks=0,specialFrames=0;
-for(const mapId of ['classic','compact','expansion']){
+for(const mapId of Object.keys(maps)){
  const {board}=maps[mapId];board.forEach(t=>{if(t.lot&&!t.isLargeSecondary){t.lot.ownerId=t.index%2?'human':'ai';t.lot.level=1;}});
  context.data={mapId,sessionId:'frames',board,players:[{id:'human'},{id:'ai'}]};
  run('clearMap();snapshot=data;');

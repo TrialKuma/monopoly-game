@@ -1,7 +1,7 @@
 import * as THREE from './assets/vendor/three/three.module.min.js';
 import { GLTFLoader } from './assets/vendor/three/addons/loaders/GLTFLoader.js';
 import { mergeGeometries } from './assets/vendor/three/addons/utils/BufferGeometryUtils.js';
-import { createSceneLife } from './scene-life.js?v=20260912-24';
+import { createSceneLife } from './scene-life.js?v=20261023-1';
 
 // All route positions, ownership and prices come from the game. This view never
 // changes a rule or finishes an action; its animation is entirely cosmetic.
@@ -47,7 +47,9 @@ try {
   if (Object.hasOwn(ATMOSPHERE_MODES.weather,saved.weather)) weatherMode=saved.weather;
   if(typeof saved.outskirts==='boolean')outskirtsVisible=saved.outskirts;
 } catch (_) { /* Private browsing can disable local preferences. */ }
-let cameraView = { yaw:null, elevation:null, zoom:1, modified:false, facingYaw:null };
+let cameraView = { yaw:null, elevation:null, zoom:1, modified:false, facingYaw:null, mode:'local', following:true };
+const cameraFocus = new THREE.Vector3(0,.2,0);
+let cameraFocusReady = false, lastLocalCamera = false;
 let cameraGesture = { pointers:new Map(), dragged:false, pinchDistance:0 };
 let suppressSceneClickUntil = 0;
 const CAMERA_LIMITS = { minZoom:.65, maxZoom:2.4, minElevation:.35, maxElevation:1.24 };
@@ -64,7 +66,7 @@ const ASSET_BUNDLES = [
 const projection = new THREE.Vector3();
 const raycaster = new THREE.Raycaster();
 const pointer = new THREE.Vector2();
-const api = { update, effect, reset, projectTile, inspectTile, closeInspection, resetView:()=>resetCameraView(true), zoomBy:factor=>changeCameraView(0,0,factor), getView:()=>({...cameraView}), setTimeMode:setCityTimeMode, getTimeMode:()=>sceneLife?.getTimeMode()||timeMode, setSeason:mode=>setCityClimate('season',mode), setWeather:mode=>setCityClimate('weather',mode), getAtmosphere:()=>sceneLife?.getAtmosphere(), refreshAssets:()=>loadModelKit(true), ready: false };
+const api = { update, effect, reset, projectTile, inspectTile, closeInspection, resetView:()=>resetCameraView(true), setViewMode:setCameraMode, zoomBy:factor=>changeCameraView(0,0,factor), getView:()=>({...cameraView,local:isLocalCamera(),target:{x:cameraFocus.x,z:cameraFocus.z}}), setTimeMode:setCityTimeMode, getTimeMode:()=>sceneLife?.getTimeMode()||timeMode, setSeason:mode=>setCityClimate('season',mode), setWeather:mode=>setCityClimate('weather',mode), getAtmosphere:()=>sceneLife?.getAtmosphere(), refreshAssets:()=>loadModelKit(true), ready: false };
 window.CityScene = api;
 
 function own(resource) { resources.add(resource); return resource; }
@@ -215,9 +217,21 @@ function canSelectScene(){
 }
 function canMoveCamera(){return canSelectScene()&&!document.getElementById('event-overlay')?.classList.contains('visible')&&!document.body.classList.contains('mode-start');}
 function isSuppressedSceneClick(event){return event.detail!==0&&performance.now()<suppressSceneClickUntil;}
+function isLocalCamera(){
+  // Board-wide card and city-hall choices must keep every legal target visible.
+  return cameraView.mode==='local'&&!snapshot?.targetSelection&&!document.body?.classList.contains('mode-start')&&!document.body?.classList.contains('mode-showcase')&&snapshot?.phase!=='preview';
+}
 function resetCameraView(apply=false){
-  cancelCameraGesture();cameraView={yaw:null,elevation:null,zoom:1,modified:false,facingYaw:cameraView.facingYaw};
+  cancelCameraGesture();cameraView={yaw:null,elevation:null,zoom:1,modified:false,facingYaw:cameraView.facingYaw,mode:apply?cameraView.mode:'local',following:true};
+  // A new board starts at its pawn. Returning from an inspection eases back
+  // from the current focus instead of jumping to a new point.
+  if(!apply)cameraFocusReady=false;
   if(apply)resize();
+}
+function setCameraMode(mode){
+  if(!['local','overview'].includes(mode)||!canMoveCamera())return false;
+  cameraView.mode=mode;cameraView.zoom=1;cameraView.following=true;
+  cameraFocusReady=false;cancelCameraGesture();resize();return true;
 }
 function changeCameraView(yawDelta=0,elevationDelta=0,zoomFactor=1){
   if(!canMoveCamera()||!Number.isFinite(zoomFactor)||zoomFactor<=0)return false;
@@ -225,7 +239,7 @@ function changeCameraView(yawDelta=0,elevationDelta=0,zoomFactor=1){
   cameraView.yaw+=yawDelta;
   cameraView.elevation=THREE.MathUtils.clamp(cameraView.elevation+elevationDelta,CAMERA_LIMITS.minElevation,CAMERA_LIMITS.maxElevation);
   cameraView.zoom=THREE.MathUtils.clamp(cameraView.zoom*zoomFactor,CAMERA_LIMITS.minZoom,CAMERA_LIMITS.maxZoom);
-  cameraView.modified=true;
+  cameraView.modified=true;cameraView.following=false;
   lotViews.forEach(view=>{view.screenPoint=null;});
   resize();return true;
 }
@@ -275,6 +289,10 @@ function syncCameraControls(){
   const allowed=canMoveCamera();
   cameraControls.querySelectorAll('button').forEach(button=>{button.disabled=!allowed||(button.dataset.camera==='out'&&cameraView.zoom<=CAMERA_LIMITS.minZoom)||(button.dataset.camera==='in'&&cameraView.zoom>=CAMERA_LIMITS.maxZoom);});
   cameraControls.querySelector('output').textContent=`${Math.round(cameraView.zoom*100)}%`;
+  const local=isLocalCamera(),modeButton=cameraControls.querySelector('[data-camera="mode"]'),resetButton=cameraControls.querySelector('[data-camera="reset"]');
+  if(modeButton){modeButton.hidden=document.body.classList.contains('mode-showcase')||document.body.classList.contains('mode-start')||snapshot?.phase==='preview';modeButton.style.display=modeButton.hidden?'none':'';modeButton.textContent=local?'全图':'局部';modeButton.setAttribute('aria-label',local?'查看整张地图':'切换局部跟随镜头');modeButton.setAttribute('aria-pressed',String(!local));}
+  if(resetButton){resetButton.textContent=local?'跟随':'回正';resetButton.setAttribute('aria-label',local?'恢复跟随你的棋子':'恢复默认棋盘视角');resetButton.setAttribute('aria-pressed',String(local&&cameraView.following));}
+  wrap.dataset.cameraMode=local?'local':'overview';wrap.dataset.cameraFollowing=String(local&&cameraView.following);
   cameraControls.querySelectorAll('select').forEach(select=>{
     select.disabled=!allowed;select.value=select.dataset.atmosphere==='time'?timeMode:select.dataset.atmosphere==='season'?seasonMode:weatherMode;
   });
@@ -314,7 +332,7 @@ function syncAtmosphereReadout(){
 function mountCameraControls(){
   const stage=wrap.parentElement;
   cameraControls=document.createElement('div');cameraControls.className='city-camera-controls';cameraControls.setAttribute('role','group');cameraControls.setAttribute('aria-label','调整棋盘视角');
-  cameraControls.innerHTML='<span id="city-camera-help" class="city-camera-help">拖动转一转 · 滚轮或双指缩放。键盘方向键转动，＋ / − 缩放，Home 回正。</span><button type="button" data-camera="left" aria-label="向左转动棋盘" title="向左转">↶</button><button type="button" data-camera="right" aria-label="向右转动棋盘" title="向右转">↷</button><span class="city-camera-divider"></span><button type="button" data-camera="out" aria-label="缩小棋盘" title="缩小">−</button><output aria-label="棋盘缩放比例">100%</output><button type="button" data-camera="in" aria-label="放大棋盘" title="放大">＋</button><button type="button" data-camera="reset" class="city-camera-reset">回正</button>';
+  cameraControls.innerHTML='<span id="city-camera-help" class="city-camera-help">拖动旋转，双指或滚轮缩放；方向键转动，＋ / − 缩放，Home 恢复跟随。</span><button type="button" data-camera="mode" class="city-camera-mode">全图</button><button type="button" data-camera="left" aria-label="向左转动棋盘" title="向左转">↶</button><button type="button" data-camera="right" aria-label="向右转动棋盘" title="向右转">↷</button><span class="city-camera-divider"></span><button type="button" data-camera="out" aria-label="缩小棋盘" title="缩小">−</button><output aria-label="棋盘缩放比例">100%</output><button type="button" data-camera="in" aria-label="放大棋盘" title="放大">＋</button><button type="button" data-camera="reset" class="city-camera-reset">跟随</button>';
   const atmosphereControl=document.createElement('details');atmosphereControl.className='city-atmosphere';
   atmosphereControl.innerHTML='<summary title="切换季节、天气与光照"><span class="city-atmosphere-symbol" aria-hidden="true">☼</span><span class="city-atmosphere-current">小城气候</span><span class="city-atmosphere-expand" aria-hidden="true">⌄</span></summary><div class="city-atmosphere-panel"></div>';
   const atmospherePanel=atmosphereControl.querySelector('.city-atmosphere-panel');
@@ -337,6 +355,7 @@ function mountCameraControls(){
   cameraControls.addEventListener('click',event=>{
     const action=event.target.closest('[data-camera]');if(!action||action.disabled)return;event.stopPropagation();
     if(action.dataset.camera==='reset')resetCameraView(true);
+    else if(action.dataset.camera==='mode')setCameraMode(isLocalCamera()?'overview':'local');
     else if(action.dataset.camera==='left'||action.dataset.camera==='right')changeCameraView(action.dataset.camera==='left'?-.25:.25);
     else changeCameraView(0,0,action.dataset.camera==='in'?1.18:1/1.18);
   });
@@ -436,6 +455,7 @@ function buildMap(data) {
   resize();
 }
 function makePark(mapId) {
+  if(['harbor','alpine'].includes(mapId))return;
   const parks = [{ x: 0, z: 0, w: boardBounds.w - 4.7, d: boardBounds.d - 4.65 }];
   parks.forEach((p) => {
     if (p.w < 1 || p.d < 1) return;
@@ -757,6 +777,7 @@ function update(data){
   snapshot=data;if(!data?.board?.length||!mount())return;
   const key=`${data.sessionId}:${data.mapId}:${data.board.length}`;
   if(key!==mapKey){resetCameraView();cameraView.facingYaw=null;mapKey=key;buildMap(data);}
+  if(lastLocalCamera!==isLocalCamera())resize();
   if(data.selectedTile!==undefined){
     selectedIndex=data.selectedTile;
     labels.querySelectorAll('.scene-tile').forEach((node)=>node.classList.toggle('is-selected',Number(node.dataset.sceneTileIndex)===selectedIndex));
@@ -844,7 +865,23 @@ function positionLabels(){
   if(!camera)return;
   lotViews.forEach((view)=>{const p=view.screenPoint||project(view.anchor);view.label.style.transform=`translate(${p.x.toFixed(1)}px,${p.y.toFixed(1)}px) translate(-50%,-50%)`;});
   stepViews.forEach((step)=>{if(step.label){const p=project(step.walk);step.label.hidden=p.x<8||p.x>width-8||p.y<8||p.y>height-8;step.label.style.transform=`translate(${p.x.toFixed(1)}px,${p.y.toFixed(1)}px) translate(-50%,-50%)`;}});
-  pawnViews.forEach((view)=>{const p=project(view.group.position.clone().add(new THREE.Vector3(0,.76,0)));view.anchor.hidden=p.x<12||p.x>width-12||p.y<8||p.y>height-8;view.anchor.style.transform=`translate(${p.x.toFixed(1)}px,${p.y.toFixed(1)}px) translate(-50%,-50%)`;});
+  const pawnLabels=[];
+  pawnViews.forEach((view)=>{
+    const point=project(view.group.position.clone().add(new THREE.Vector3(0,.76,0)));
+    view.anchor.hidden=point.x<12||point.x>width-12||point.y<8||point.y>height-8;
+    if(!view.anchor.hidden)pawnLabels.push({view,point,w:view.anchor.offsetWidth||48,h:view.anchor.offsetHeight||22});
+  });
+  pawnLabels.sort((a,b)=>a.point.x-b.point.x);
+  for(let i=1;i<pawnLabels.length;i++){
+    const left=pawnLabels[i-1],right=pawnLabels[i],gap=6;
+    if(right.point.x-left.point.x<(left.w+right.w)/2+gap&&Math.abs(right.point.y-left.point.y)<(left.h+right.h)/2+3){
+      // Pawns sharing a landing stand a little apart; their wider name badges
+      // need separate room too, especially when the full map is on a phone.
+      const total=left.w+right.w+gap,center=THREE.MathUtils.clamp((left.point.x+right.point.x)/2,total/2+5,width-total/2-5);
+      left.point.x=center-(right.w+gap)/2;right.point.x=center+(left.w+gap)/2;
+    }
+  }
+  pawnLabels.forEach(({view,point,w})=>{point.x=THREE.MathUtils.clamp(point.x,w/2+5,width-w/2-5);view.anchor.style.transform=`translate(${point.x.toFixed(1)}px,${point.y.toFixed(1)}px) translate(-50%,-50%)`;});
   if(travelArrow){
     const current=snapshot.players.find((player)=>player.id===snapshot.currentPlayerId);
     const route=current?.effects?.reversed?snapshot.navigation?.prev:snapshot.navigation?.next;
@@ -875,6 +912,31 @@ function framingForLot(view){
   );
   return boxes.map((box)=>box.clone().applyMatrix4(rotation).translate(offset));
 }
+function followCamera(delta){
+  if(!camera||!cameraFocusReady||!isLocalCamera()||!cameraView.following||inspection||cameraGesture.pointers.size)return false;
+  const pawn=pawnViews.get('human');if(!pawn)return false;
+  // Track the ground position only: stepping hops, dice and the opponent's
+  // turn must not make the camera bob, turn or switch subjects.
+  const dx=pawn.group.position.x-cameraFocus.x,dz=pawn.group.position.z-cameraFocus.z;
+  const distance=Math.hypot(dx,dz),deadZone=.36;
+  if(distance<=deadZone+.001)return false;
+  let amount;
+  if(reducedMotion.matches){
+    // In reduced motion the whole trip completes before one static reframe.
+    if(pawn.active||typeof snapshot?.animation?.currentTile==='number')return false;
+    amount=1;
+  }else{
+    // A dead zone absorbs small changes (including co-located pawn spacing).
+    // Exponential easing is stable at different frame rates; bounded travel
+    // also gives teleports a comfortable transition without forcing rotation.
+    amount=Math.min((1-Math.exp(-delta/.32))*(distance-deadZone),18*delta)/distance;
+  }
+  const x=dx*amount,z=dz*amount;
+  cameraFocus.x+=x;cameraFocus.z+=z;camera.position.x+=x;camera.position.z+=z;
+  camera.updateMatrixWorld(true);
+  lotViews.forEach(view=>{view.screenPoint=null;});arrangeLabels();
+  return true;
+}
 function resize(){
   if(!renderer||!wrap)return;
   const rect=wrap.getBoundingClientRect();width=Math.max(1,rect.width);height=Math.max(1,rect.height);
@@ -882,6 +944,7 @@ function resize(){
   labels.classList.toggle('scene-labels-compact',width<720);
   labels.classList.toggle('scene-labels-tiny',width<460);
   if(boardBounds){
+    const local=isLocalCamera();lastLocalCamera=local;
     // A wide game canvas needs a more frontal view; a portrait canvas keeps the
     // familiar high three-quarter miniature view. The route itself never moves.
     const aspect=width/height;
@@ -910,6 +973,18 @@ function resize(){
       const depth=Math.abs(normal.x)>.5?view.w:view.d;
       view.anchor.copy(view.group.position).add(normal.multiplyScalar(depth/2+.26));view.anchor.y=.07;
     });
+    if(local){
+      if(!cameraFocusReady){
+        const pawn=pawnViews.get('human');
+        cameraFocus.set(pawn?.group.position.x||0,.2,pawn?.group.position.z||0);cameraFocusReady=true;
+      }
+      camera.position.add(cameraFocus);camera.lookAt(cameraFocus);camera.updateMatrixWorld(true);
+      // Keep nearby buildings legible on a phone instead of fitting the full
+      // island into its narrow width. A small upward framing bias leaves room
+      // above the pawn for tall buildings and below it for the action bar.
+      const vertical=Math.max(3.9,3.5/aspect)/cameraView.zoom,centerY=.55;
+      camera.left=-vertical*aspect;camera.right=vertical*aspect;camera.top=vertical+centerY;camera.bottom=-vertical+centerY;camera.updateProjectionMatrix();
+    }else{
     camera.left=-1;camera.right=1;camera.top=1;camera.bottom=-1;camera.updateProjectionMatrix();
     const xs=[],ys=[];
     const include=(point)=>{const p=point.clone().project(camera);xs.push(p.x);ys.push(p.y);};
@@ -925,6 +1000,7 @@ function resize(){
     const centerY=(Math.max(...ys)+Math.min(...ys))/2;
     const centerX=(Math.max(...xs)+Math.min(...xs))/2;
     camera.left=centerX-vertical*aspect;camera.right=centerX+vertical*aspect;camera.top=vertical+centerY;camera.bottom=-vertical+centerY;camera.updateProjectionMatrix();
+    }
   }
   lotViews.forEach(view=>{view.screenPoint=null;});
   arrangeLabels();positionLabels();
@@ -1036,7 +1112,6 @@ function tick(time){
   const living=sceneLife?.tick(time,delta);
   if(time-lastAtmosphereReadout>250){lastAtmosphereReadout=time;syncAtmosphereReadout();}
   const moving=[...pawnViews.values()].some((view)=>view.active||view.shieldUntil)||[...lotViews.values()].some((view)=>view.born)||pulses.length;
-  if(!moving&&!renderDirty&&!living)return;renderDirty=false;
   pawnViews.forEach((view)=>{
     if(view.active){
       const t=view.duration===0?1:Math.min(1,(time-view.started)/view.duration);
@@ -1049,6 +1124,8 @@ function tick(time){
     }
     if(view.shieldUntil&&time>view.shieldUntil){view.shieldUntil=0;const p=snapshot.players.find((p)=>p.id===view.anchor.dataset.playerAnchor);view.shield.visible=Boolean(p?.effects?.shield);}
   });
+  const cameraMoving=followCamera(delta);
+  if(!moving&&!renderDirty&&!living&&!cameraMoving)return;renderDirty=false;
   lotViews.forEach((view)=>{
     if(view.born){const t=Math.min(1,(time-view.born)/650);view.building.scale.y=reducedMotion.matches?1:1-Math.pow(1-t,3)*.22;if(t===1){view.born=0;view.building.scale.y=1;}}
   });

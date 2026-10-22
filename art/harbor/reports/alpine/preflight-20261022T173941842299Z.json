@@ -1,0 +1,72 @@
+{
+  "status": "checked_without_gpu_initialization",
+  "checked_utc": "2026-10-22T17:39:41.841798+00:00",
+  "generation_started": false,
+  "weights": {
+    "ready": true,
+    "models": [
+      {
+        "name": "Pixal3D",
+        "revision": "b0cb2e1b794cab9aa0ac38a95d794a4d9337437f",
+        "ready": true,
+        "missing_or_wrong_size": []
+      },
+      {
+        "name": "DINOv3",
+        "revision": "3c276edd87d6f6e569ff0c4400e086807d0f3881",
+        "ready": true,
+        "missing_or_wrong_size": []
+      }
+    ],
+    "local_naf_weights": true,
+    "local_naf_code": true,
+    "validation": "Existing manifest and current sizes; large weights are not rehashed per part."
+  },
+  "resources": {
+    "gpu": "NVIDIA GeForce RTX 5070 Ti",
+    "total_physical_vram_gib": 15.9208984375,
+    "free_physical_vram_gib": 14.5126953125,
+    "gpu_utilization_percent": 1,
+    "total_ram_gib": 31.152122497558594,
+    "available_ram_gib": 18.52770233154297
+  },
+  "parts": [
+    {
+      "asset_id": "alpine-windmill-v01",
+      "input": "H:\\代码项目\\monopoly\\art\\harbor\\references\\alpine-windmill-stylized.png",
+      "input_sha256": "7a8f4f5481f0d531899ed212b691fee2b800651ceb5b0133488f05308d2116a3",
+      "input_size": [
+        1254,
+        1254
+      ],
+      "alpha_bbox": [
+        30,
+        15,
+        1232,
+        1224
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "output": "H:\\代码项目\\monopoly\\art\\harbor\\source\\alpine-windmill-v01-pixal-1024-9247.glb",
+      "report": "H:\\代码项目\\monopoly\\art\\harbor\\reports\\alpine\\alpine-windmill-v01-pixal-1024-9247.json"
+    }
+  ],
+  "configuration": {
+    "resolution": 1024,
+    "seed": 9247,
+    "low_vram": true,
+    "strict_naf": true,
+    "texture_size": 4096,
+    "sampler_steps_each": 12,
+    "min_free_vram_guard_gib": 12.0,
+    "min_free_ram_guard_gib": 11.0
+  },
+  "notes": [
+    "No precision, view-count or texture-size downgrade occurs on failure.",
+    "Native 1536 is available but has not been proven to fit this GPU.",
+    "Queue mode starts a fresh sequential process per part, releasing model memory.",
+    "Each --run acquires the shared local_gpu_lock.py protocol before bootstrap; busy means stop, not takeover."
+  ]
+}

@@ -478,46 +478,6 @@
     };
   }
 
-  function stopAutoAdvance(job) {
-    if (!job.auto) return;
-    for (const key of ['leaveTimer', 'endTimer']) {
-      clearTimeout(job.auto[key]);
-      job.timers.delete(job.auto[key]);
-      job.auto[key] = null;
-    }
-  }
-
-  function scheduleAutoAdvance(job) {
-    const auto = job.auto;
-    if (!auto || auto.paused || job.done) return;
-    stopAutoAdvance(job);
-    auto.started = performance.now();
-    auto.leaveTimer = delay(job, () => layer.classList.add('is-leaving'), Math.max(0, auto.remaining - 180));
-    auto.endTimer = delay(job, () => job.finish(), auto.remaining);
-  }
-
-  function toggleAutoAdvance(job, button, status) {
-    const auto = job.auto;
-    if (!auto || job.done) return;
-    if (!auto.paused) {
-      auto.remaining = Math.max(0, auto.remaining - (performance.now() - auto.started));
-      auto.paused = true;
-      stopAutoAdvance(job);
-      layer.classList.remove('is-leaving');
-      // Reading should never leave a monetary amount stranded mid-count.
-      job.settleAmount?.();
-      job.clearCelebration?.();
-    } else {
-      auto.paused = false;
-      scheduleAutoAdvance(job);
-    }
-    layer.classList.toggle('is-paused', auto.paused);
-    button.textContent = auto.paused ? '继续自动' : '停住看';
-    button.setAttribute('aria-pressed', String(auto.paused));
-    button.setAttribute('aria-label', auto.paused ? '恢复本次演出的自动继续' : '暂停自动继续，停住阅读本次事件');
-    status.textContent = auto.paused ? '已停住' : '自动继续';
-  }
-
   function render(job, event) {
     const type = Object.hasOwn(SVG, event.type) ? event.type : 'notice';
     const chance = CHANCE_KINDS.has(event.chanceKind);
@@ -532,16 +492,10 @@
     const importantPurchase = type === 'buy' && (facts.chain || facts.large || facts.built);
     const major = type === 'rent' && (amount >= 300 || leadChanged) || ['seize', 'shield', 'relief', 'win'].includes(type) || type === 'bank' && amount >= 300 || importantPurchase;
     const reaction = reactionFor(event, type, amount);
-    let defaultDuration = type === 'win' ? 6500 : major ? (reaction.length ? 6000 : 4500) : reaction.length ? 4500 : 3000;
-    if (chance) defaultDuration = Math.max(defaultDuration, 5200);
-    const messageLength = String(event.message || '').length;
-    if (messageLength > 50) defaultDuration = Math.max(defaultDuration, Math.min(10000, 1500 + messageLength * 55));
-    const duration = Number.isFinite(Number(event.duration)) && event.duration != null ? Math.max(defaultDuration, Math.min(10000, Number(event.duration))) : defaultDuration;
     layer.replaceChildren();
     layer.className = `drama-layer drama-kind-${type}${major ? ' is-major' : ' is-minor'}${chance ? ' is-chance' : ''}${leadChanged ? ' is-lead-change' : ''}${reduced() ? ' is-reduced-motion' : ''}`;
     layer.hidden = false;
     document.body.classList.add('drama-playing');
-    layer.style.setProperty('--drama-duration', duration + 'ms');
     const glow = element('div', 'drama-ambient');
     layer.appendChild(glow);
     const card = element('section', 'drama-card');
@@ -634,24 +588,13 @@
     content.appendChild(body);
     card.appendChild(content);
     const footer = element('div', 'drama-footer');
-    const timing = element('div', 'drama-timing');
-    const autoStatus = element('span', 'drama-auto-status', '自动继续');
-    const progress = element('span', 'drama-progress');
-    progress.setAttribute('aria-hidden', 'true');
-    progress.appendChild(element('i'));
-    timing.append(autoStatus, progress);
     const playback = element('div', 'drama-playback-actions');
-    const pause = element('button', 'drama-pause', '停住看');
-    pause.type = 'button';
-    pause.setAttribute('aria-pressed', 'false');
-    pause.setAttribute('aria-label', '暂停自动继续，停住阅读本次事件');
-    pause.addEventListener('click', () => toggleAutoAdvance(job, pause, autoStatus));
-    const skip = element('button', 'drama-skip', '继续');
+    const skip = element('button', 'drama-skip', type === 'win' ? '查看结算' : '继续');
     skip.type = 'button';
-    skip.setAttribute('aria-label', '跳过本次演出，继续游戏');
+    skip.setAttribute('aria-label', type === 'win' ? '查看本局结算' : '确认本次事件，继续游戏');
     skip.addEventListener('click', () => job.finish(), {once:true});
-    playback.append(pause, skip);
-    footer.append(timing, playback);
+    playback.append(skip);
+    footer.append(playback);
     card.appendChild(footer);
     layer.appendChild(card);
     if (!reduced()) {
@@ -686,10 +629,9 @@
     if (type === 'win') confetti(job);
     if (type === 'buy') {
       purchaseBurst(job, card, importantPurchase);
-      delay(job, () => {if (!job.auto?.paused) signedCounter(job, event.to, amount, '-');}, 280);
+      delay(job, () => signedCounter(job, event.to, amount, '-'), 280);
     }
-    job.auto = {remaining:duration, started:0, paused:false, leaveTimer:null, endTimer:null};
-    scheduleAutoAdvance(job);
+    // The result waits for an explicit confirmation; animation timers never advance play.
   }
 
   function drain() {

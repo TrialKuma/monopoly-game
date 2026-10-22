@@ -185,6 +185,105 @@ const EXPANSION_LOT_CONFIGS = {
 };
 
 
+// Tall maps keep paired properties on straight, adjacent parts of the route.
+const HARBOR_ROUTE_POSITIONS = [
+  { x: 1, y: 1 }, { x: 2, y: 1 }, { x: 3, y: 1 }, { x: 4, y: 1 }, { x: 5, y: 1 },
+  { x: 5, y: 2 }, { x: 5, y: 3 }, { x: 5, y: 4 }, { x: 5, y: 5 },
+  { x: 5, y: 6 }, { x: 5, y: 7 }, { x: 5, y: 8 }, { x: 4, y: 8 },
+  { x: 3, y: 8 }, { x: 2, y: 8 }, { x: 1, y: 8 }, { x: 1, y: 7 },
+  { x: 1, y: 6 }, { x: 1, y: 5 }, { x: 1, y: 4 }, { x: 1, y: 3 }, { x: 1, y: 2 },
+];
+const HARBOR_TILE_NAMES = [
+  "港务大厅", "贝壳巷", "帆影街", "海风里", "港湾金库",
+  "海港商会", "海港商会", "港湾观景楼", "港湾观景楼",
+  "漂流邮局", "渔火街", "珊瑚里", "白帆集", "潮汐广场",
+  "海崖温泉", "海崖温泉", "落霞湾", "船坞工坊",
+  "蓝窗巷", "水手街", "远航驿站", "归帆里",
+];
+const HARBOR_LARGE_LOT_LINKS = { 6: 5, 8: 7, 15: 14 };
+const HARBOR_DISTRICT_CONFIG = {
+  1: "海风街区", 2: "海风街区", 3: "海风街区",
+  5: "灯塔街区", 6: "灯塔街区", 7: "灯塔街区", 8: "灯塔街区",
+  10: "渔火街区", 11: "渔火街区", 12: "渔火街区",
+  14: "海崖街区", 15: "海崖街区", 16: "海崖街区",
+  18: "归帆街区", 19: "归帆街区", 21: "归帆街区",
+};
+const HARBOR_DISTRICT_COLORS = {
+  "海风街区": "#9edac8", "灯塔街区": "#a7c8ed", "渔火街区": "#efc891",
+  "海崖街区": "#e7b5c6", "归帆街区": "#b9c4e5",
+};
+const HARBOR_SPECIAL_TILES = {
+  4: { ...CLASSIC_SPECIAL_TILES[4], label: "港湾金库" },
+  9: { ...CLASSIC_SPECIAL_TILES[9], label: "漂流邮局" },
+  13: { ...CLASSIC_SPECIAL_TILES[13], label: "潮汐广场" },
+  17: { ...CLASSIC_SPECIAL_TILES[17], label: "船坞工坊" },
+  20: { ...CLASSIC_SPECIAL_TILES[20], label: "远航驿站" },
+};
+const HARBOR_LOT_CONFIGS = {
+  1: { price: 85, buildCosts: [0, 40, 70, 110], tolls: [20, 60, 130, 220], themeIdx: 0 },
+  2: { price: 95, buildCosts: [0, 45, 78, 118], tolls: [22, 66, 145, 240], themeIdx: 0 },
+  3: { price: 105, buildCosts: [0, 48, 80, 125], tolls: [25, 72, 152, 250], themeIdx: 0 },
+  5: { price: 260, buildCosts: [0, 80, 135, 190], tolls: [58, 145, 290, 475], themeIdx: 3, effectId: "finance_bonus", landmarkKey: "finance" },
+  7: { price: 230, buildCosts: [0, 75, 125, 180], tolls: [52, 132, 260, 430], themeIdx: 3, effectId: "tower_bonus", landmarkKey: "skyscraper" },
+  10: { price: 125, buildCosts: [0, 52, 90, 135], tolls: [30, 82, 175, 285], themeIdx: 1 },
+  11: { price: 140, buildCosts: [0, 55, 94, 142], tolls: [32, 88, 188, 305], themeIdx: 1 },
+  12: { price: 155, buildCosts: [0, 60, 100, 150], tolls: [36, 96, 200, 325], themeIdx: 1 },
+  14: { price: 300, buildCosts: [0, 95, 150, 220], tolls: [68, 170, 335, 550], themeIdx: 2, effectId: "hot_spring_rest", landmarkKey: "onsen" },
+  16: { price: 170, buildCosts: [0, 60, 105, 165], tolls: [40, 110, 225, 370], themeIdx: 2 },
+  18: { price: 75, buildCosts: [0, 40, 70, 105], tolls: [18, 54, 118, 195], themeIdx: 0 },
+  19: { price: 85, buildCosts: [0, 42, 74, 112], tolls: [20, 60, 130, 215], themeIdx: 0 },
+  21: { price: 98, buildCosts: [0, 47, 80, 120], tolls: [23, 68, 145, 240], themeIdx: 0 },
+};
+const ALPINE_ROUTE_POSITIONS = [
+  { x: 1, y: 1 }, { x: 2, y: 1 }, { x: 3, y: 1 }, { x: 4, y: 1 }, { x: 5, y: 1 }, { x: 6, y: 1 },
+  { x: 6, y: 2 }, { x: 6, y: 3 }, { x: 6, y: 4 }, { x: 6, y: 5 }, { x: 6, y: 6 }, { x: 6, y: 7 },
+  { x: 6, y: 8 }, { x: 5, y: 8 }, { x: 4, y: 8 }, { x: 3, y: 8 }, { x: 2, y: 8 }, { x: 1, y: 8 },
+  { x: 1, y: 7 }, { x: 1, y: 6 }, { x: 1, y: 5 }, { x: 1, y: 4 }, { x: 1, y: 3 }, { x: 1, y: 2 },
+];
+const ALPINE_TILE_NAMES = [
+  "山城会馆", "松风径", "山间邮局", "杉影台", "雪松集", "匠人山房",
+  "映湖里", "山岚商会", "山岚商会", "山城金库", "云顶酒店", "云顶酒店",
+  "雾岚街", "山泉广场", "云岭温泉", "云岭温泉", "枫叶馆", "木屋巷",
+  "钟声里", "山麓集", "旅人驿站", "暖泉街", "归林里", "山间缆车",
+];
+const ALPINE_LARGE_LOT_LINKS = { 8: 7, 11: 10, 15: 14 };
+const ALPINE_DISTRICT_CONFIG = {
+  1: "松风街区", 3: "松风街区", 4: "松风街区",
+  6: "风车街区", 7: "风车街区", 8: "风车街区",
+  10: "云顶街区", 11: "云顶街区", 12: "云顶街区",
+  14: "温泉街区", 15: "温泉街区", 16: "温泉街区",
+  17: "山麓街区", 18: "山麓街区", 19: "山麓街区",
+  21: "归林街区", 22: "归林街区",
+};
+const ALPINE_DISTRICT_COLORS = {
+  "松风街区": "#b0d4bc", "风车街区": "#e2cbaa", "云顶街区": "#afcddd",
+  "温泉街区": "#e5b7c2", "山麓街区": "#c3bfdc", "归林街区": "#d0d3a4",
+};
+const ALPINE_SPECIAL_TILES = {
+  2: { type: "card_draw", label: "山间邮局", color: "#e9d5ff", description: "翻牌选卡发动！" },
+  5: { type: "construction", label: "匠人山房", color: "#fef08a", description: "免费升级自己或拆除对手一层建筑。" },
+  9: { type: "bank", label: "山城金库", color: "#bfdbfe", description: "存钱或提款！" },
+  13: { type: "chance", label: "山泉广场", color: "#fbcfe8", description: "街区翻新、换位、专车等城市奇遇。" },
+  20: { type: "card_draw", label: "旅人驿站", color: "#e9d5ff", description: "翻牌选卡发动！" },
+  23: { type: "rush", label: "山间缆车", color: "#c5dbc9", rushMin: 2, rushMax: 4, description: "乘缆车随机前进 2–4 格，抵达后立即结算。" },
+};
+const ALPINE_LOT_CONFIGS = {
+  1: { price: 95, buildCosts: [0, 42, 75, 115], tolls: [22, 62, 135, 225], themeIdx: 0 },
+  3: { price: 115, buildCosts: [0, 48, 82, 128], tolls: [26, 72, 152, 250], themeIdx: 0 },
+  4: { price: 155, buildCosts: [0, 60, 98, 150], tolls: [36, 96, 192, 320], themeIdx: 1 },
+  6: { price: 135, buildCosts: [0, 52, 90, 138], tolls: [30, 82, 170, 280], themeIdx: 0 },
+  7: { price: 260, buildCosts: [0, 85, 140, 200], tolls: [58, 145, 292, 480], themeIdx: 3, effectId: "finance_bonus", landmarkKey: "finance" },
+  10: { price: 285, buildCosts: [0, 95, 150, 215], tolls: [62, 158, 316, 520], themeIdx: 2, effectId: "tower_bonus", landmarkKey: "skyscraper" },
+  12: { price: 175, buildCosts: [0, 65, 105, 160], tolls: [40, 108, 215, 350], themeIdx: 1 },
+  14: { price: 330, buildCosts: [0, 105, 165, 235], tolls: [72, 182, 360, 580], themeIdx: 2, effectId: "hot_spring_rest", landmarkKey: "onsen" },
+  16: { price: 210, buildCosts: [0, 75, 120, 180], tolls: [46, 124, 245, 395], themeIdx: 2 },
+  17: { price: 145, buildCosts: [0, 55, 92, 142], tolls: [32, 86, 178, 292], themeIdx: 0 },
+  18: { price: 165, buildCosts: [0, 62, 102, 155], tolls: [38, 100, 205, 335], themeIdx: 3 },
+  19: { price: 180, buildCosts: [0, 66, 110, 165], tolls: [42, 112, 224, 365], themeIdx: 1 },
+  21: { price: 130, buildCosts: [0, 52, 88, 135], tolls: [28, 78, 164, 270], themeIdx: 0 },
+  22: { price: 195, buildCosts: [0, 70, 115, 175], tolls: [44, 118, 235, 380], themeIdx: 2 },
+};
+
 function makeLoopNavigation(length) {
   const next = {};
   const prev = {};
@@ -253,6 +352,44 @@ const MAP_PRESETS = {
     specialTiles: EXPANSION_SPECIAL_TILES,
     lotConfigs: EXPANSION_LOT_CONFIGS,
     navigation: makeLoopNavigation(EXPANSION_ROUTE_POSITIONS.length),
+  },
+  harbor: {
+    id: "harbor",
+    maxRounds: 30,
+    economy: { startCash: 1700, startBonus: 320, secondPlayerBonus: 400, bankThreshold: 240 },
+    ticketPrice: 250, collectionId: "harbor_shell", collectionName: "潮汐海螺",
+    name: "潮汐港湾",
+    boardTitle: "潮汐港湾 · 22 格",
+    startDescription: "纵向 22 格海港，商街低价入手。起始 ¥1700，后手额外 ¥400，每圈补给 ¥320。",
+    modeLabel: "海港纵向环线",
+    grid: { columns: 5, rows: 8, cellMin: 90, cellMinTablet: 58, cellMinMobile: 40, height: "min(96vh, 1160px)", heightTablet: "min(90vh, 880px)", heightMobile: "min(82vh, 660px)", centerWidth: "min(250px, calc(100% - 160px))", centerWidthTablet: "min(220px, calc(100% - 60px))", centerWidthMobile: "min(180px, calc(100% - 40px))" },
+    routePositions: HARBOR_ROUTE_POSITIONS,
+    tileNames: HARBOR_TILE_NAMES,
+    largeLotLinks: HARBOR_LARGE_LOT_LINKS,
+    districtConfig: HARBOR_DISTRICT_CONFIG,
+    districtColors: HARBOR_DISTRICT_COLORS,
+    specialTiles: HARBOR_SPECIAL_TILES,
+    lotConfigs: HARBOR_LOT_CONFIGS,
+    navigation: makeLoopNavigation(HARBOR_ROUTE_POSITIONS.length),
+  },
+  alpine: {
+    id: "alpine",
+    maxRounds: 30,
+    economy: { startCash: 1900, startBonus: 350, secondPlayerBonus: 450, bankThreshold: 250 },
+    ticketPrice: 350, collectionId: "alpine_crystal", collectionName: "山泉晶石",
+    name: "云岭温泉",
+    boardTitle: "云岭温泉 · 24 格",
+    startDescription: "24 格山城环线，缆车前进 2–4 格，温泉与观景地标更丰厚。起始 ¥1900，每圈补给 ¥350。",
+    modeLabel: "山城温泉环线",
+    grid: { columns: 6, rows: 8, cellMin: 88, cellMinTablet: 56, cellMinMobile: 40, height: "min(96vh, 1140px)", heightTablet: "min(90vh, 860px)", heightMobile: "min(82vh, 650px)", centerWidth: "min(280px, calc(100% - 160px))", centerWidthTablet: "min(240px, calc(100% - 60px))", centerWidthMobile: "min(200px, calc(100% - 40px))" },
+    routePositions: ALPINE_ROUTE_POSITIONS,
+    tileNames: ALPINE_TILE_NAMES,
+    largeLotLinks: ALPINE_LARGE_LOT_LINKS,
+    districtConfig: ALPINE_DISTRICT_CONFIG,
+    districtColors: ALPINE_DISTRICT_COLORS,
+    specialTiles: ALPINE_SPECIAL_TILES,
+    lotConfigs: ALPINE_LOT_CONFIGS,
+    navigation: makeLoopNavigation(ALPINE_ROUTE_POSITIONS.length),
   },
 };
 
@@ -716,7 +853,11 @@ function renderStartMapOptions() {
     btn.classList.toggle("active", active);
     btn.setAttribute("aria-pressed", active ? "true" : "false");
   });
-  if (startMapDescriptionEl) startMapDescriptionEl.textContent = mapCfg.startDescription;
+  if (startMapDescriptionEl) startMapDescriptionEl.textContent = `${mapCfg.startDescription} · 门票 ¥${getMapTicket(mapCfg)} · 收集${mapCfg.collectionName || "城市印章"}`;
+}
+
+function getMapTicket(map = getMapConfig()) {
+  return map.ticketPrice ?? (map.id === "expansion" ? 200 : 100);
 }
 
 function setSelectedMap(mapId) {
@@ -726,6 +867,7 @@ function setSelectedMap(mapId) {
 
 function initializeGame(mapId = selectedMapId) {
   window.GameDrama?.reset();
+  window.GameProgression?.resetResult();
   window.GamePresentation?.onReset();
   if (modalResolver) { modalResolver("cancel"); modalResolver = null; }
   const mapCfg = getMapConfig(mapId);
@@ -733,6 +875,8 @@ function initializeGame(mapId = selectedMapId) {
   selectedMapId = mapCfg.id;
   state = {
     sessionId: ++sessionCounter,
+    runId: window.GameProgression?.createRunId(),
+    isFormalRun: false,
     round: 1,
     currentPlayerIndex: 0,
     firstPlayerIndex: 0,
@@ -788,6 +932,7 @@ const historyCloseBtn = document.getElementById("history-close-btn");
 const modeEyebrowEl = document.getElementById("mode-eyebrow");
 const startMapOptionsEl = document.getElementById("start-map-options");
 const startMapDescriptionEl = document.getElementById("start-map-description");
+window.addEventListener("city-progress-change", renderStartMapOptions);
 
 function showStartScreen() {
   renderStartMapOptions();
@@ -818,7 +963,7 @@ historyOverlayEl?.addEventListener("click", (e) => {
 
 // ─── 历史对局记录 ──────────────────────────────────────────
 function loadHistory() {
-  try { return JSON.parse(localStorage.getItem(HISTORY_KEY) || "[]"); }
+  try { const records = JSON.parse(localStorage.getItem(HISTORY_KEY) || "[]"); return Array.isArray(records) ? records.filter(r => r && typeof r === "object") : []; }
   catch { return []; }
 }
 function saveGameResult(reason, winnerId) {
@@ -832,7 +977,7 @@ function saveGameResult(reason, winnerId) {
     mapName: mapCfg.name,
     mode: state.gameMode,
     roundLimit: getMaxRounds(),
-    rounds: state.round - 1,
+    rounds: reason === "rounds" ? state.round - 1 : state.round,
     winner: winnerId,
     players: state.players.map((p) => ({ id: p.id, name: p.name, cash: p.cash })),
   };
@@ -885,7 +1030,7 @@ async function selectGameMode(sid) {
     ],
   });
   if (!isSessionActive(sid)) return undefined;
-  return choice === "bankruptcy" ? "bankruptcy" : "rounds";
+  return choice === "bankruptcy" ? "bankruptcy" : choice === "rounds" ? "rounds" : undefined;
 }
 
 function settleFirstPlayer(humanFirst, sid = state.sessionId) {
@@ -907,7 +1052,7 @@ async function coinFlipForFirstPlayer(sid) {
   await showModal({
     label: "先手决定",
     title: "掷硬币！",
-    message: "正面 = 玩家先手\n反面 = AI 先手\n\n抛出硬币，决定谁率先行动！",
+    message: "正面你先手，反面对手先手。",
     buttons: [{ id: "flip", label: "🪙 抛出硬币", variant: "primary" }],
   });
   if (!isSessionActive(sid)) return undefined;
@@ -943,10 +1088,23 @@ async function startNewGame() {
   state.gameMode = mode;
   updateModeEyebrow();
 
+  if (window.GameProgression?.enter) {
+    const map = getMapConfig(), price = getMapTicket(map);
+    const info = window.GameProgression.getEntryInfo({mapId:map.id,price});
+    if (!info.ok || !info.canEnter) { showStartScreen();render();window.GameProgression.showEntryError(info);return; }
+    const accepted = await showModal({label:"出发",title:`前往${map.name}`,message:`仓库支付 ¥${price} 门票，余额 ¥${info.wallet - price}。\n完成对局后，剩余现金与${map.collectionName || "城市印章"}带回仓库。`,buttons:[{id:"cancel",label:"再想想",variant:"ghost"},{id:"enter",label:`支付 ¥${price} · 出发`,variant:"primary"}]});
+    if (!isSessionActive(sid)) return;
+    if (accepted !== "enter") {showStartScreen();render();return;}
+    const entry=window.GameProgression.enter({runId:state.runId,mapId:map.id,mapName:map.name,price,collectionId:map.collectionId || "city_stamp"});
+    if (!entry.ok) {showStartScreen();render();window.GameProgression.showEntryError(entry);return;}
+    state.ticketPaid = true;
+  }
+
   // 硬币决定先手
   const humanFirst = await coinFlipForFirstPlayer(sid);
   if (!isSessionActive(sid)) return;
   if (humanFirst === undefined) { showStartScreen(); return; }
+  state.isFormalRun = true;
   if (!humanFirst) {
     state.currentPlayerIndex = 1;
     setAiTurnStatus();
@@ -1315,7 +1473,7 @@ function renderScoreboard() {
   if (winner) {
     const wb = document.createElement("div");
     wb.className = "winner-banner";
-    wb.innerHTML = `<div class="winner-text">${winner}</div>
+    wb.innerHTML = `<div class="winner-text">${winner}</div>${window.GameProgression?.resultMarkup(state.citySettlement) || ""}
       <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
         <button class="play-again-btn" type="button">🎮 再来一局</button>
         <button class="view-history-btn" type="button">📋 历史记录</button>
@@ -2672,6 +2830,7 @@ async function startAiTurnWithDelay(sid) {
 }
 
 function finishGame(reason = "rounds") {
+  if (state.gameOver) return;
   state.gameOver = true; state.phase = "locked"; state.busy = false; hideModal(false);
   const rank = [...state.players].sort((a, b) => b.cash - a.cash);
   const top = rank[0];
@@ -2687,7 +2846,16 @@ function finishGame(reason = "rounds") {
     const loser = rank[rank.length - 1];
     pushLog(`${roundLabel}结束，${top.name}（${formatMoney(top.cash)}）击败${loser.name}（${formatMoney(loser.cash)}）！`);
   }
-  saveGameResult(reason, tied.length > 1 ? "draw" : top.id);
+  const winnerId = tied.length > 1 ? "draw" : top.id;
+  const mapCfg = getMapConfig(state.currentMapId);
+  state.citySettlement = window.GameProgression?.settle({
+    runId: state.runId, mapId: mapCfg.id, mapName: mapCfg.name, mode: state.gameMode,
+    reason, rounds: reason === "rounds" ? state.round - 1 : state.round,
+    humanCash: state.players.find(p => p.id === "human").cash, winnerId,
+    collectionCount: 1 + Number(winnerId === "human") + Number(state.board.some(t => !t.isLargeSecondary && t.lot?.isLarge && t.lot.ownerId === "human" && t.lot.level === 3)),
+    eligible: state.isFormalRun === true,
+  });
+  if (state.isFormalRun) saveGameResult(reason, winnerId);
   playSound("win");
   render();
   window.GamePresentation?.celebrate(top, tied.length > 1);
@@ -2963,7 +3131,10 @@ document.addEventListener("pointerdown", unlockBgmPlayback, { once: true });
 document.addEventListener("keydown", unlockBgmPlayback, { once: true });
 document.addEventListener("visibilitychange", syncBgmPlayback);
 rollBtn.addEventListener("click", () => void playHumanTurn());
-restartBtn.addEventListener("click", () => { initializeGame(); showStartScreen(); });
+restartBtn.addEventListener("click", () => {
+  if (state.ticketPaid && !state.gameOver && !window.confirm("返回首页会结束本局，门票不退，未结算的金币和收藏品不会带回。确定返回？")) return;
+  initializeGame(); showStartScreen();
+});
 scoreboardEl.addEventListener("click", (e) => {
   if (e.target.closest(".play-again-btn")) void startNewGame();
   if (e.target.closest(".view-history-btn")) showHistoryOverlay();

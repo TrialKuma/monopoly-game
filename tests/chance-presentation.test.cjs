@@ -45,8 +45,9 @@ const kinds={renovation:'build',district:'build',shield:'card',express:'card',sw
   assert.deepEqual(h.all('.drama-speech').map(n=>n.dataset.speaker),['human','ai']);
   assert.equal(h.q('.drama-amount'),null);
   assert.equal(h.q('.drama-expected-amount'),null);
-  await h.clock.advance(1000);h.q('.drama-pause').click();await h.clock.advance(9000);assert(!done);
-  h.q('.drama-pause').click();await h.clock.advance(4199);assert(!done);await h.clock.advance(1);await p;
+  assert.equal(h.q('.drama-pause'),null);assert.equal(h.q('.drama-progress'),null);
+  await h.clock.advance(30000);assert(!done,'chance result waits for the player');
+  await h.skip();await p;
   assert.equal(h.clock.timers.size,0);assert.equal(h.randomCalls(),0);count++;
  }
  {
@@ -75,8 +76,8 @@ const kinds={renovation:'build',district:'build',shield:'card',express:'card',sw
   ]){
    let done=false;const p=h.api.play({...event,title:'结算',message:'真实到账记录。',sessionId:1}).then(()=>done=true);
    assert.equal(h.all('.drama-speech').length,0,'routine event stays quiet');
-   assert(h.q('.drama-pause'));assert(h.q('.drama-skip'));assert.equal(h.q('.drama-message').textContent,'真实到账记录。');
-   if(event.amount>0){assert(h.q('.drama-amount'));await h.clock.advance(500);h.q('.drama-pause').click();await h.clock.advance(20000);assert(!done);assert.equal(h.q('.drama-amount').textContent,String(event.amount));}
+   assert.equal(h.q('.drama-pause'),null);assert(h.q('.drama-skip'));assert.equal(h.q('.drama-message').textContent,'真实到账记录。');
+   if(event.amount>0){assert(h.q('.drama-amount'));await h.clock.advance(20000);assert(!done);assert.equal(h.q('.drama-amount').textContent,String(event.amount));}
    await h.skip();await p;
   }
   assert.equal(h.clock.timers.size,0);assert.equal(h.randomCalls(),0);count++;
@@ -117,7 +118,7 @@ const kinds={renovation:'build',district:'build',shield:'card',express:'card',sw
  }
  {
   const h=harness();let done=false;const p=h.api.play({type:'rent',amount:60,payerCashAfter:900,from:actor,to:rival,message:'支付 ¥60。'}).then(()=>done=true);
-  await h.clock.advance(2999);assert(!done);await h.clock.advance(1);await p;assert.equal(h.clock.timers.size,0);count++;
+  await h.clock.advance(60000);assert(!done,'ordinary receipt never advances on a timer');await h.skip();await p;assert.equal(h.clock.timers.size,0);count++;
  }
  {
   for(const reduced of [false,true]) {
