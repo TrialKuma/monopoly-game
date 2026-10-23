@@ -1,7 +1,9 @@
 import * as THREE from './assets/vendor/three/three.module.min.js';
-import { GLTFLoader } from './assets/vendor/three/addons/loaders/GLTFLoader.js';
 import { mergeGeometries } from './assets/vendor/three/addons/utils/BufferGeometryUtils.js';
-import { createSceneLife } from './scene-life.js?v=20261023-1';
+import { createSceneLife } from './scene-life.js?v=20261023-3';
+import { createStreetFoundation } from './scene-streets.js?v=20261023-3';
+import { createRegionalPark } from './scene-regional-parks.js?v=20261023-3';
+import { loadSharedModelAsset, forgetSharedModelAsset, ownsSharedModelResource, disposeSharedModelAssets } from './scene-model-cache.js?v=20261023-3';
 
 // All route positions, ownership and prices come from the game. This view never
 // changes a rule or finishes an action; its animation is entirely cosmetic.
@@ -34,6 +36,7 @@ let inspection = null;
 let studioEnvironment = null;
 let travelArrow = null;
 let sceneLife = null, cameraControls = null, timeMode = 'auto';
+let streetFoundation=null;
 let seasonMode = 'auto', weatherMode = 'auto', outskirtsVisible=true, lastAtmosphereReadout = 0;
 const ATMOSPHERE_MODES = {
   time: { auto:'自然流转', dawn:'清晨', day:'白天', dusk:'夕照', night:'月夜' },
@@ -62,6 +65,7 @@ const ASSET_BUNDLES = [
   {file:'life-specials.glb',version:'20260911-12',authored:true,pattern:/^(chance_wheel|builders_guild)$/},
   {file:'compact-specials.glb',mapId:'compact',version:'20260912-21',authored:true,pattern:/^compact_(civic_hall|vault_bank|builders_guild|card_pavilion|chance_wheel|teleport_gate|rush_station)$/},
   {file:'expansion-specials.glb',mapId:'expansion',version:'20260912-21',authored:true,pattern:/^expansion_(civic_hall|vault_bank|builders_guild|card_pavilion|chance_wheel|teleport_gate|rush_station)$/},
+  ...['classic','compact','expansion','harbor','alpine'].map(mapId=>({file:`regions/${mapId}.glb`,mapId,version:'20261023-3',authored:true,pattern:new RegExp(`^${mapId}_(?:(?:villa|shop|hotel|tower|skyscraper|finance|onsen)_[123]|civic_hall|vault_bank|builders_guild|card_pavilion|chance_wheel|teleport_gate|rush_station|junction_hub)$`)})),
 ];
 const projection = new THREE.Vector3();
 const raycaster = new THREE.Raycaster();
@@ -150,7 +154,7 @@ function mount() {
     renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'high-performance' });
     rendererWidth=0;rendererHeight=0;
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.65));
-    renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFShadowMap;
     renderer.outputColorSpace = THREE.SRGBColorSpace;
     renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = .96;
     renderer.setClearColor('#dce4da', 0);
@@ -385,6 +389,7 @@ function mountCameraControls(){
 }
 function clearMap() {
   sceneLife?.dispose();sceneLife=null;
+  streetFoundation?.dispose();streetFoundation=null;
   world?.clear(); labels?.replaceChildren(); lotViews.clear(); pawnViews.clear(); stepViews.clear();
   travelArrow = null;
   resources.forEach((resource) => resource.dispose?.()); resources.clear(); materials.clear(); pulses.length = 0;
@@ -432,15 +437,14 @@ function buildMap(data) {
   boardBounds.cy = (boardBounds.minY + boardBounds.maxY) / 2;
   boardBounds.w = (boardBounds.maxX - boardBounds.minX + 1) * STEP;
   boardBounds.d = (boardBounds.maxY - boardBounds.minY + 1) * STEP;
-  rounded(world, boardBounds.w + 1.2, .38, boardBounds.d + 1.2, .48, '#d0bc9c', 0, -.42);
-  rounded(world, boardBounds.w + 1.28, .10, boardBounds.d + 1.28, .49, PALETTE.cream, 0, -.08);
-  rounded(world, boardBounds.w + .82, .08, boardBounds.d + .82, .36, '#bbcbaa', 0, .01);
+  streetFoundation=createStreetFoundation({THREE,world,boardBounds,mapId:data.mapId});
   ground = mesh(new THREE.PlaneGeometry(200, 200), '#dbe3d7', world, 0, -.44, 0);
   ground.rotation.x = -Math.PI / 2; ground.castShadow = false;
   makePark(data.mapId);
   data.board.forEach((tile) => makeStep(tile));
   makeRoads(data);
   data.board.filter((tile) => !tile.isLargeSecondary).forEach((tile) => makeLot(tile, data));
+  streetFoundation.finish();
   data.players.forEach((player) => makePawn(player));
   if(data.mapId!=='classic'){
     travelArrow=document.createElement('span');travelArrow.className='scene-travel-arrow';travelArrow.setAttribute('role','img');
@@ -455,35 +459,7 @@ function buildMap(data) {
   resize();
 }
 function makePark(mapId) {
-  if(['harbor','alpine'].includes(mapId))return;
-  const parks = [{ x: 0, z: 0, w: boardBounds.w - 4.7, d: boardBounds.d - 4.65 }];
-  parks.forEach((p) => {
-    if (p.w < 1 || p.d < 1) return;
-    const g = new THREE.Group(); g.position.set(p.x, .1, p.z); world.add(g);
-    rounded(g, p.w, .035, p.d, .22, '#acbf9c');
-    rounded(g, p.w - .2, .018, .4, .15, '#e2d8c1', 0, .04);
-    rounded(g, .4, .018, p.d - .2, .15, '#e2d8c1', 0, .045);
-    cylinder(g, Math.min(.86, p.d * .36), .08, PALETTE.cream, 0, .085);
-    cylinder(g, Math.min(.73, p.d * .3), .045, PALETTE.water, 0, .14);
-    const fountain = modelLibrary.get('fountain');
-    if (fountain) { const fountainModel = cloneModel(fountain, .95, .65); fountainModel.position.y = .16; g.add(fountainModel); }
-    else {
-      cylinder(g, .13, .38, '#eee5d0', 0, .31);
-      cylinder(g, .29, .05, PALETTE.cream, 0, .5);
-      mesh(new THREE.SphereGeometry(.10, 16, 12), '#fbf2d9', g, 0, .58, 0);
-    }
-    const tx = p.w / 2 - .35, tz = p.d / 2 - .34;
-    [[-tx,-tz],[tx,-tz],[-tx,tz],[tx,tz]].forEach(([x,z], i) => tree(g, x, z, .92 + (i % 2) * .15));
-    if (p.d > 2.4) {
-      [[-tx,0],[tx,0],[-tx*.55,-tz],[tx*.55,tz]].forEach(([x,z]) => tree(g,x,z,.77));
-      bench(g, -.95, .70); bench(g, .95, -.70, Math.PI);
-      lamp(g,-1.2,-.75); lamp(g,1.2,.75);
-      for (const side of [-1,1]) {
-        rounded(g, 1.1, .05, .36, .1, '#728f67', side * (tx - .6), .055, -tz);
-        for (let i = 0; i < 5; i++) mesh(new THREE.IcosahedronGeometry(.075, 0), i%2 ? '#e4b87c' : '#cb866c', g, side*(tx-.98+i*.18), .16, -tz);
-      }
-    }
-  });
+  createRegionalPark({THREE,world,boardBounds,mapId,own});
 }
 function numberTexture(number) {
   const canvas = document.createElement('canvas'); canvas.width = 96; canvas.height = 96;
@@ -518,6 +494,7 @@ function makeRoads(data) {
   else data.board.forEach((tile,i)=>addEdge(tile.index,data.board[(i+1)%data.board.length].index));
   connections.forEach(([a,b]) => {
     const start = stepViews.get(a).walk, end = stepViews.get(b).walk;
+    streetFoundation?.road(start,end);
     const length = start.distanceTo(end); const midpoint = start.clone().add(end).multiplyScalar(.5);
     const road = box(world,.30,.014,length,'#e2d2b5',midpoint.x,.197,midpoint.z);
     road.rotation.y = Math.atan2(end.x-start.x,end.z-start.z); road.castShadow=false;
@@ -537,7 +514,8 @@ function makeLot(tile, data) {
   const group = new THREE.Group(); group.position.copy(position); group.userData.tileIndex=tile.index; world.add(group);
   const boundary=boundaryFor(position),modern=data.mapId!=='classic';
   rounded(group,w,.08,d,.13,PALETTE.cream,0,-.07);
-  rounded(group,w-.12,.03,d-.12,.09,tile.lot ? '#c5cfad' : '#ded3bc',0,.011);
+  rounded(group,w-.12,.03,d-.12,.09,tile.lot ? streetFoundation.theme.garden : streetFoundation.theme.pavement,0,.011);
+  streetFoundation.parcel(group,w,d,!!tile.lot);
   const ownerMaterial = own(new THREE.MeshStandardMaterial({ color:'#c5b696', roughness:.84, emissive:'#000000' }));
   // A single closed deed boundary, in parcel coordinates. The two physical
   // steps of a large lot share this one frame, independent of its frontage.
@@ -591,8 +569,9 @@ function resolveAsset(tile,data,level=tile.lot?.level||0){
   const family=tile.lot?.landmarkKey||LANDMARKS[data.mapId]?.[tile.isLargeSecondary?tile.largePrimaryIndex:tile.index];
   const fallback=tile.isStart?'city_hall':tile.lot?(level===0?'plot_0':`${tile.lot.theme?.key||'villa'}_${level}`):({bank:'bank',construction:'construction',card_draw:'card_station'}[tile.special?.type]||'card_station');
   const shared=tile.isStart?'civic_hall':tile.lot?(level===0?'plot_0':family?`${family}_${level}`:fallback):(SPECIAL_MODELS[tile.special?.type]||fallback);
-  const themedSpecial=!tile.lot&&['compact','expansion'].includes(data.mapId)&&shared!=='junction_hub';
-  const desired=themedSpecial?`${data.mapId}_${shared}`:shared;
+  // Every occupied parcel and public building uses the selected region's own
+  // architecture. Level-zero plots remain playable while the art downloads.
+  const desired=tile.lot&&level===0?shared:`${data.mapId}_${shared}`;
   const key=modelLibrary.has(desired)?desired:modelLibrary.has(shared)?shared:fallback;
   return {family,desired,key,source:modelLibrary.get(key),authored:authoredModels.has(key),level};
 }
@@ -1179,8 +1158,8 @@ async function loadModelKit(force=false,retryMissing=false){
     if(pending){requests.push(pending);return;}
     if(!force&&(loadedBundles.has(bundle.file)||failedBundles.has(bundle.file)&&!retryMissing))return;
     const request=Promise.resolve()
-      .then(()=>new GLTFLoader().loadAsync(`./assets/models/${bundle.file}?v=${bundle.version}${force?`&refresh=${Date.now()}`:''}`))
-      .then(gltf=>{if(!disposed){installModelBundle(bundle,gltf);scheduleModelRefresh(bundle);}})
+      .then(()=>loadSharedModelAsset(bundle.file,{version:bundle.version,force}))
+      .then(gltf=>{if(!disposed){try{installModelBundle(bundle,gltf);scheduleModelRefresh(bundle);}catch(error){forgetSharedModelAsset(bundle.file,gltf);throw error;}}})
       .catch(error=>{if(!disposed){failedBundles.add(bundle.file);console.info(`The fallback city model remains available for ${bundle.file}. Open a building preview to retry.`,error?.message);}})
       .finally(()=>bundleRequests.delete(bundle.file));
     bundleRequests.set(bundle.file,request);requests.push(request);
@@ -1188,5 +1167,5 @@ async function loadModelKit(force=false,retryMissing=false){
   // Callers may await the batch, but each successful package installs immediately.
   return Promise.allSettled(requests);
 }
-window.addEventListener('pagehide',()=>{disposed=true;closeInspection();cancelAnimationFrame(frame);cancelAnimationFrame(assetRefreshFrame);observer?.disconnect();clearMap();modelResources.forEach((resource)=>resource.dispose());studioEnvironment?.dispose();renderer?.dispose();});
+window.addEventListener('pagehide',()=>{disposed=true;closeInspection();cancelAnimationFrame(frame);cancelAnimationFrame(assetRefreshFrame);observer?.disconnect();clearMap();modelResources.forEach(resource=>{if(!ownsSharedModelResource(resource))resource.dispose();});modelResources.clear();disposeSharedModelAssets();studioEnvironment?.dispose();renderer?.dispose();});
 window.dispatchEvent(new CustomEvent('city:ready'));

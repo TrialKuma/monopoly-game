@@ -1,0 +1,213 @@
+{
+  "schemaVersion": 1,
+  "status": "frozen_runtime_assets",
+  "frozenAtUtc": "2026-10-23T02:59:58.7882483Z",
+  "builder": {
+    "path": "art/build_regional_city.py",
+    "sha256": "8c565edff0e0be121a6cb4ae552499c6e4c5f43c9aedd5cf85a3201c4adac148"
+  },
+  "totalAssets": 145,
+  "authoredFromThreeViews": 140,
+  "reviewedPixalMultiview": 5,
+  "originConvention": "Ground-centred identity roots; glTF Y up and +Z front.",
+  "validation": {
+    "command": "node tests/check-regional-kit.mjs",
+    "result": "PASS: all 145 exported assets",
+    "coverage": [
+      "29 named roots per map",
+      "playable bounds and grounding",
+      "level growth",
+      "wheel and pendulum animation nodes",
+      "exact approved neural source hashes",
+      "original embedded texture bytes and UVs retained",
+      "approved villa_2 cannot regress to an authored intermediate"
+    ]
+  },
+  "maps": [
+    {
+      "map": "classic",
+      "path": "assets/models/regions/classic.glb",
+      "sha256": "912b0a2512d3df677fcbbf8cecd28da409231a9846f4480cf2fcc26dbaa1bf18",
+      "bytes": 30007156,
+      "assets": 29,
+      "authoredFromThreeViews": 28,
+      "reviewedPixalMultiview": 1,
+      "triangles": 608647.0,
+      "aiVilla2": {
+        "name": "classic_villa_2",
+        "source": "assets/models/regions-ai/classic_house.glb",
+        "sourceSha256": "327102fea0bf328a3d0f9c5eae6333c0e1706eb2708b90d90a3af4c4e44698a3",
+        "triangles": 180779
+      },
+      "manifestPath": "assets/models/regions/classic-manifest.json",
+      "manifestSha256": "1dd9e0597a3d7cdfb5dc4656c2f46360cb4b4f0fb34ccc9f99339d50eeb77104",
+      "references": [
+        {
+          "path": "art/regions/references/classic-core-three-views.png",
+          "sha256": "7a510d06e2c7e3900218f42bbb1fce320ff48fe559940ff0c882c77c23cbec93"
+        },
+        {
+          "path": "art/regions/references/classic-landmarks-three-views.png",
+          "sha256": "0fe5b5ef621e22024da754c815473b2d6dc9da268ba22158b7c340096d1dd394"
+        },
+        {
+          "path": "art/regions/references/classic-public-three-views.png",
+          "sha256": "d8f98ef426d9fd8d89e76b226273af6b3cf9131ab8fa23210977a1c447d6b176"
+        }
+      ],
+      "previews": [
+        "art/regions/renders/classic-core-isometric.png",
+        "art/regions/renders/classic-large-isometric.png",
+        "art/regions/renders/classic-public-isometric.png"
+      ]
+    },
+    {
+      "map": "compact",
+      "path": "assets/models/regions/compact.glb",
+      "sha256": "13ff47e0d2e312cebdff03350b85641ad4c93e84a7bd295365cc74457e61f44f",
+      "bytes": 29797564,
+      "assets": 29,
+      "authoredFromThreeViews": 28,
+      "reviewedPixalMultiview": 1,
+      "triangles": 565925.0,
+      "aiVilla2": {
+        "name": "compact_villa_2",
+        "source": "assets/models/regions-ai/compact_house.glb",
+        "sourceSha256": "910d04124cf9487318c5492f15d691b3fc426d2acc2ca1c0585fb6bef86891e4",
+        "triangles": 183105
+      },
+      "manifestPath": "assets/models/regions/compact-manifest.json",
+      "manifestSha256": "d0dca748c698e56bdf93e6de1332b9cc7b59dd83e3e87e01b0b958bbc77807ad",
+      "references": [
+        {
+          "path": "art/regions/references/compact-core-three-views.png",
+          "sha256": "540011b71c005893c4725964fcc138fe6b96a393ff567922bbdf8e7261e602dd"
+        },
+        {
+          "path": "art/regions/references/compact-landmarks-three-views.png",
+          "sha256": "9710ac2dd088f48a41e99ae06af8c8bb5d486e56c6a9cd638b6e375dda903fea"
+        },
+        {
+          "path": "art/regions/references/compact-public-three-views.png",
+          "sha256": "afd6ca4fa70445379a95a69a592f43bef3f2e800e7f4e24385db4a46148d66d2"
+        }
+      ],
+      "previews": [
+        "art/regions/renders/compact-core-isometric.png",
+        "art/regions/renders/compact-large-isometric.png",
+        "art/regions/renders/compact-public-isometric.png"
+      ]
+    },
+    {
+      "map": "expansion",
+      "path": "assets/models/regions/expansion.glb",
+      "sha256": "8263e7dad39ec2f6a2b0bc48787f9811d88d05c87f91f870a5001433c5b106dc",
+      "bytes": 24708476,
+      "assets": 29,
+      "authoredFromThreeViews": 28,
+      "reviewedPixalMultiview": 1,
+      "triangles": 458375.0,
+      "aiVilla2": {
+        "name": "expansion_villa_2",
+        "source": "assets/models/regions-ai/expansion_house.glb",
+        "sourceSha256": "182f4eb522f183f2a2dea13a7e0133dddf0bafcc4026409310feceb361b9c561",
+        "triangles": 179871
+      },
+      "manifestPath": "assets/models/regions/expansion-manifest.json",
+      "manifestSha256": "1fd43c9214e652067928ce3948c1663aa54ba8216a292d99f22244c0a1f1fba6",
+      "references": [
+        {
+          "path": "art/regions/references/expansion-core-three-views.png",
+          "sha256": "04e3c62368766eda17341c19f08eb34be110f7b3c62d98428d94124a4c1f3c6f"
+        },
+        {
+          "path": "art/regions/references/expansion-landmarks-three-views.png",
+          "sha256": "83022dc9bdb504da2a2b610f62885f352c7d2d2880add5ec7519677b5d6b32bc"
+        },
+        {
+          "path": "art/regions/references/expansion-public-three-views.png",
+          "sha256": "3dae3acaf6f96a0df06670638bb12eab30cbee9f502caa4bb2b5c77dfcb50b1e"
+        }
+      ],
+      "previews": [
+        "art/regions/renders/expansion-core-isometric.png",
+        "art/regions/renders/expansion-large-isometric.png",
+        "art/regions/renders/expansion-public-isometric.png"
+      ]
+    },
+    {
+      "map": "harbor",
+      "path": "assets/models/regions/harbor.glb",
+      "sha256": "69bc658020f4508ee628ffc978d1587c2c29aa0c728c6a1537e62b8ed12bc9f0",
+      "bytes": 33559472,
+      "assets": 29,
+      "authoredFromThreeViews": 28,
+      "reviewedPixalMultiview": 1,
+      "triangles": 626039.0,
+      "aiVilla2": {
+        "name": "harbor_villa_2",
+        "source": "assets/models/regions-ai/harbor_house.glb",
+        "sourceSha256": "25b47e1d472e232510496a5ac1bab1a8082eeefeb5682bc6063209fe39d72ca2",
+        "triangles": 181055
+      },
+      "manifestPath": "assets/models/regions/harbor-manifest.json",
+      "manifestSha256": "7cf0a33254b4576275e68f50c66bf903f9e0f2b719d5a2f9d006aad383874c5f",
+      "references": [
+        {
+          "path": "art/regions/references/harbor-core-three-views.png",
+          "sha256": "94733f8bb47e47630baf619071d532474024cedd6384247658451c3221132316"
+        },
+        {
+          "path": "art/regions/references/harbor-landmarks-three-views.png",
+          "sha256": "a8cb2f9b9345c5e841b90675e06bf74510d6baaa017aa1a226ee46bdd5860aad"
+        },
+        {
+          "path": "art/regions/references/harbor-public-three-views.png",
+          "sha256": "a6d414c96955cb1d84f4698a22dbcdd32b10e17b42c372a8bd4812bda097ea15"
+        }
+      ],
+      "previews": [
+        "art/regions/renders/harbor-core-isometric.png",
+        "art/regions/renders/harbor-large-isometric.png",
+        "art/regions/renders/harbor-public-isometric.png"
+      ]
+    },
+    {
+      "map": "alpine",
+      "path": "assets/models/regions/alpine.glb",
+      "sha256": "3f6004e3b113a1e651e219224e185240d6ec5352687cb7b7f00fbed1cf20ea49",
+      "bytes": 28361192,
+      "assets": 29,
+      "authoredFromThreeViews": 28,
+      "reviewedPixalMultiview": 1,
+      "triangles": 535509.0,
+      "aiVilla2": {
+        "name": "alpine_villa_2",
+        "source": "assets/models/regions-ai/alpine_house.glb",
+        "sourceSha256": "3534766503c4e01753841e8dfdaf95addd85acc942e973b4f90f3a558c9d9d92",
+        "triangles": 179921
+      },
+      "manifestPath": "assets/models/regions/alpine-manifest.json",
+      "manifestSha256": "4faea102bfb870785333aaf4bccd15db6c017ec7c53cde4529a4564e4fa146e5",
+      "references": [
+        {
+          "path": "art/regions/references/alpine-core-three-views.png",
+          "sha256": "df5216ec48e0ed3c5a79a1e852ab3c55c46a843dac6a972a05c09889e701b01c"
+        },
+        {
+          "path": "art/regions/references/alpine-landmarks-three-views.png",
+          "sha256": "8e6ae0caa58733a84f23a826fd6a86ee84f12c0325a4877266e42f9a290f2960"
+        },
+        {
+          "path": "art/regions/references/alpine-public-three-views.png",
+          "sha256": "77c9a7550725f7c042419d7a7982fac2efe82e7e6736dcd78e14cc67b0ae503a"
+        }
+      ],
+      "previews": [
+        "art/regions/renders/alpine-core-isometric.png",
+        "art/regions/renders/alpine-large-isometric.png",
+        "art/regions/renders/alpine-public-isometric.png"
+      ]
+    }
+  ]
+}

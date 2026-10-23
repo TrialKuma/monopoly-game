@@ -36,6 +36,8 @@ def arguments():
     parser.add_argument('--height', type=float, default=3.0)
     parser.add_argument('--footprint', type=float, default=3.0)
     parser.add_argument('--triangles', type=int, default=24000)
+    parser.add_argument('--decimation-passes', type=int, choices=[1, 2, 3], default=1,
+                        help='One conservative pass by default; extra passes are diagnostic only.')
     parser.add_argument('--texture-size', type=int, default=1024)
     parser.add_argument('--weld-distance', type=float, default=.000001)
     parser.add_argument('--remesh-bake', action='store_true')
@@ -511,7 +513,9 @@ def render_exported(path, args, expected_height, source_preview=False):
         radians = math.radians(angle + 28)
         camera.location = Vector((math.sin(radians) * 3.2, -math.cos(radians) * 3.2, 1.75)) * height
         camera.rotation_euler = (target - camera.location).to_track_quat('-Z', 'Y').to_euler()
-        preview = ROOT / 'art/harbor/renders' / f'{args.name}-{label}.png'
+        render_directory = resolve(getattr(args, 'render_directory', 'art/harbor/renders'))
+        render_directory.mkdir(parents=True, exist_ok=True)
+        preview = render_directory / f'{args.name}-{label}.png'
         scene.render.filepath = str(preview)
         bpy.ops.render.render(write_still=True)
         reimport['images'].append(str(preview))
@@ -523,7 +527,7 @@ def render_exported(path, args, expected_height, source_preview=False):
         camera.rotation_euler = (target - camera.location).to_track_quat('-Z', 'Y').to_euler()
         for label, fraction in [('quarter', .25), ('half', .5)]:
             scene.frame_set(1 + round(frames * fraction))
-            preview = ROOT / 'art/harbor/renders' / f'{args.name}-animation-{label}.png'
+            preview = render_directory / f'{args.name}-animation-{label}.png'
             scene.render.filepath = str(preview)
             bpy.ops.render.render(write_still=True)
             reimport['images'].append(str(preview))
@@ -579,7 +583,7 @@ def main():
     print('SOURCE_CLEANUP', source_vertices, welded_vertices, triangles(body),
           source_validation_changed, flush=True)
     decimation_passes = []
-    for pass_index in range(3):
+    for pass_index in range(args.decimation_passes):
         before = triangles(body)
         if before <= args.triangles * 1.01:
             break

@@ -112,7 +112,8 @@ export function createCityLighting({ THREE, scene, world, renderer, light, board
     camera.left = centerX - spanX / 2; camera.right = centerX + spanX / 2;
     camera.bottom = centerY - spanY / 2; camera.top = centerY + spanY / 2;
     camera.near = Math.max(.1, minDepth - 4); camera.far = maxDepth + 4; camera.updateProjectionMatrix();
-    shadow.normalBias = .012; shadow.bias = -.000035; shadow.radius = mix(2.3, 4.5, cloud);
+    // PCF uses this radius; the former PCF_SOFT shader ignored it entirely.
+    shadow.normalBias = .012; shadow.bias = -.000035; shadow.radius = mix(4, 6, cloud);
     shadow.needsUpdate = true;
   }
 
@@ -146,7 +147,7 @@ export function createCityLighting({ THREE, scene, world, renderer, light, board
     // evening each tint the complete rig, with an invisible handover at noon.
     // `warmth` remains the existing low-sun indicator used by the clock label.
     const evening = smooth(11, 13, hour), dawn = warmth * (1 - evening), dusk = warmth * evening;
-    const sunPower = (.3 + 2.5 * Math.pow(Math.max(0, altitude), .38)) * daylight * (1 - cloud * .76);
+    const sunPower = (.3 + 1.6 * Math.pow(Math.max(0, altitude), .38)) * daylight * (1 - cloud * .76);
     const moonPower = .64 * night * (1 - cloud * .55);
     const moonMix = moonPower / Math.max(.001, sunPower + moonPower);
     sunDirection.set(-Math.cos(phase), Math.max(.40, altitude), .36 + Math.sin(phase * .8) * .18).normalize();
@@ -167,14 +168,14 @@ export function createCityLighting({ THREE, scene, world, renderer, light, board
         node.color.copy(colors.hemiDay).lerp(colors.hemiDawn, dawn * .85).lerp(colors.hemiDusk, dusk * .74).lerp(colors.hemiNight, night);
         node.color.lerp(colors.cloud, cloud * .27);
         node.groundColor.copy(colors.bounceDay).lerp(colors.bounceDawn, dawn * .86).lerp(colors.bounceDusk, dusk * .76).lerp(colors.bounceNight, night).lerp(colors.snow, snow * daylight * .42);
-        node.intensity = mix(.77, .46, night) + cloud * .16 * daylight + snow * .09;
+        node.intensity = mix(1.05, .46, night) + cloud * .16 * daylight + snow * .09;
       } else if (node.isDirectionalLight) {
         node.position.set(-keyDirection.x * lightDistance * .65, lightDistance * .45, -keyDirection.z * lightDistance * .6);
         node.color.copy(colors.fillDay).lerp(colors.fillDawn, dawn).lerp(colors.fillDusk, dusk * .72).lerp(colors.fillNight, night);
-        node.intensity = mix(.30, .24, night) + cloud * .06;
+        node.intensity = mix(.50, .24, night) + cloud * .06;
       }
     }
-    scene.environmentIntensity = mix(.31, .115, night) + cloud * daylight * .035;
+    scene.environmentIntensity = mix(.48, .115, night) + cloud * daylight * .035;
     if (renderer && Number.isFinite(original.exposure)) renderer.toneMappingExposure = mix(.96, .98, night) - warmth * .025;
     for (const lamp of parkLights) lamp.intensity = (1.7 + wetness * .5) * smooth(.12, .9, night);
     for (const { material } of groundCopies) {

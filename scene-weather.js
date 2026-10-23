@@ -1,4 +1,4 @@
-import { createRoofSnow } from './scene-snow.js?v=20260912-24';
+import { createRoofSnow } from './scene-snow.js?v=20261023-3';
 
 // The weather is cosmetic: its own deterministic clock and generator never
 // consume dice/card randomness, advance a turn, or schedule another frame.
@@ -124,15 +124,18 @@ export function createCityWeather({ THREE, world, boardBounds, renderer, request
   }
 
   function inWorld(node) { for (let p = node; p; p = p.parent) if (p === world) return true; return false; }
-  function isWeatherNode(node) { for (let p = node; p; p = p.parent) if (p === root || p.userData.cosmetic) return true; return false; }
+  function isWeatherNode(node) { for (let p = node; p; p = p.parent) { if(p===root)return true;if(p.userData.seasonalScenery)return false;if(p.userData.cosmetic)return true; } return false; }
   function classify(material) {
     if (!material?.isMeshStandardMaterial || !material.color) return null;
-    const name = material.name || '';
-    if (/window|glazing|glass|lantern|lamp|portal|lit |light$|warm light/i.test(name)) return null;
+    if(Object.hasOwn(seasonalColors,material.userData.seasonalKind))return material.userData.seasonalKind;
+    // Exported names use spaces, slashes and underscores. Match semantic words,
+    // never fragments: the regional prefix "alpine" is not a pine tree.
+    const name = (material.name || '').replace(/([a-z])([A-Z])/g, '$1 $2').replace(/[^a-z0-9]+/gi, ' ').trim().toLowerCase();
+    if (/\b(?:windows?|glazing|glass|lanterns?|lamps?|portal|lit)\b|\blight$|\bwarm lights?\b/.test(name)) return null;
     if (material.emissive && material.emissiveIntensity * (material.emissive.r + material.emissive.g + material.emissive.b) > .02) return null;
-    if (/pine|evergreen/i.test(name)) return 'evergreen';
-    if (/leaf sage|shrub crown|topiary spring|maple tangerine/i.test(name)) return 'crown';
-    if (/garden jade|foliage|jade shrub|topiary jade|maple vermilion/i.test(name)) return 'leaf';
+    if (/\b(?:pines?|evergreens?)\b/.test(name)) return 'evergreen';
+    if (/\b(?:leaf sage|shrub crown|topiary spring|maple tangerine)\b/.test(name)) return 'crown';
+    if (/\b(?:garden jade|foliage|jade shrub|topiary jade|maple vermilion|leaf|leaves)\b/.test(name)) return 'leaf';
     if (name) return null;
     const hex = material.color.getHexString();
     if (hex === '70947a') return 'leaf';

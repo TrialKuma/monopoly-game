@@ -1,0 +1,85 @@
+{
+  "status": "superseded_before_inference",
+  "generation_started": false,
+  "checked_utc": "2026-10-23T01:54:02.262500+00:00",
+  "resources": {
+    "gpu": "NVIDIA GeForce RTX 5070 Ti",
+    "total_physical_vram_gib": 15.9208984375,
+    "free_physical_vram_gib": 14.185546875,
+    "gpu_utilization_percent": 7,
+    "total_ram_gib": 31.152122497558594,
+    "available_ram_gib": 15.019367218017578
+  },
+  "weights": {
+    "ready": true,
+    "models": [
+      {
+        "name": "Pixal3D",
+        "revision": "b0cb2e1b794cab9aa0ac38a95d794a4d9337437f",
+        "ready": true,
+        "missing_or_wrong_size": []
+      },
+      {
+        "name": "DINOv3",
+        "revision": "3c276edd87d6f6e569ff0c4400e086807d0f3881",
+        "ready": true,
+        "missing_or_wrong_size": []
+      }
+    ],
+    "local_naf_weights": true,
+    "local_naf_code": true,
+    "validation": "Existing manifest and current sizes; large weights are not rehashed per part."
+  },
+  "gpu_lock_probe": {
+    "status": "released",
+    "pid": 32808,
+    "host": "NeoRic",
+    "label": "monopoly-companion-buildings-preflight",
+    "acquired_utc": "2026-10-23T01:54:02.261473+00:00",
+    "lock_path": "C:\\Users\\A\\.codex\\shared-resource-locks\\pixal-gpu0.lock",
+    "token": "859e5748267f475f9639edcaaf8e29b0",
+    "metadata_is_advisory": true
+  },
+  "configuration": {
+    "resolution": 1024,
+    "seed": 9247,
+    "sampler_steps": {
+      "ss": 12,
+      "shape": 12,
+      "tex": 12
+    },
+    "native_checkpoint_dtypes_preserved": true,
+    "original_texture_size": 4096,
+    "parameter_empty": true,
+    "single_use_lifetime": true,
+    "min_free_ram_gib": 11.0,
+    "min_free_vram_gib": 12.0
+  },
+  "postprocess": {
+    "triangles_initial": 90000,
+    "triangles_if_needed": 120000,
+    "texture_size": 1024,
+    "keep_source_uv": true,
+    "one_collapse_from_original": true,
+    "animation": false,
+    "cpu_render_threads": 4,
+    "raw_sources_read_only": true
+  },
+  "assets": [
+    {
+      "name": "alpine_chalet",
+      "asset_id": "alpine-chalet-v01",
+      "description": "Three-storey timber-beam and stone-base hot-spring lodge",
+      "output": "assets/models/harbor/alpine_chalet.glb",
+      "reference_status": "awaiting_root_imagegen_reference"
+    },
+    {
+      "name": "harbor_townhouse",
+      "asset_id": "harbor-townhouse-v01",
+      "description": "Teal-tiled waterfront arcade shop",
+      "output": "assets/models/harbor/harbor_townhouse.glb",
+      "reference_status": "awaiting_root_imagegen_reference"
+    }
+  ],
+  "superseded_by": "Five themed building kits from multi-view design references"
+}

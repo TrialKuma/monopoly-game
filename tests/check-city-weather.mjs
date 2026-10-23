@@ -1,9 +1,8 @@
 import assert from 'node:assert/strict';
-import fs from 'node:fs';
 import { pathToFileURL, fileURLToPath } from 'node:url';
+import {loadGeometryGLB,regionalAssetURL} from './gltf-geometry-fixture.mjs';
 const root = fileURLToPath(new URL('../', import.meta.url));
 const THREE = await import(pathToFileURL(root + 'assets/vendor/three/three.module.min.js'));
-const { GLTFLoader } = await import(pathToFileURL(root + 'assets/vendor/three/addons/loaders/GLTFLoader.js'));
 const { createCityWeather } = await import(pathToFileURL(root + 'scene-weather.js'));
 let checks = 0;
 const check = (name, fn) => { fn(); checks++; console.log('PASS ' + name); };
@@ -88,22 +87,101 @@ check('identical worlds and tick sequences yield identical cosmetic transforms',
   }
   wa.dispose(); wb.dispose();
 });
+check('plant names match whole words across exported separators, not Alpine or pineapple', () => {
+  const testWorld = new THREE.Group();
+  const plants = ['Pine needles', 'Landmark / Jade pine foliage', 'Landmark / New pine tips', 'Park/evergreen_crown', 'Map_topiary_spring', 'alpine/leaf'];
+  const architecture = ['alpine/roof', 'alpine/wall', 'alpine/wood', 'alpine/wood_light', 'Alpine sandstone', 'Pineapple ceramic', 'Springfield brick'];
+  const rows = [...plants, ...architecture].map(name => {
+    const material = new THREE.MeshStandardMaterial({ color: '#cb6144' }); material.name = name;
+    const mesh = new THREE.Mesh(geo, material); testWorld.add(mesh); return { mesh, material, plant: plants.includes(name) };
+  });
+  const effect = createCityWeather({ THREE, world: testWorld, boardBounds: bounds });
+  for (const season of ['spring', 'summer', 'autumn', 'winter']) {
+    effect.setSeason(season); effect.tick(0, { reduced: true });
+    for (const { mesh, material, plant } of rows) {
+      assert.equal(mesh.material !== material, plant, material.name + ': only plants get seasonal copies');
+      assert.equal(mesh.material.color.equals(material.color), !plant, material.name + ': only plants change color');
+      assert.equal(material.color.getHexString(), 'cb6144', material.name + ': preserve source');
+    }
+  }
+  effect.dispose(); rows.forEach(({ mesh, material }) => { assert.equal(mesh.material, material); material.dispose(); });
+});
+
+// Use the actual exported material names and colors, including all the variants
+// that were accidentally caught by /pine/ inside the alpine regional prefix.
+{
+  const gltf = await loadGeometryGLB(regionalAssetURL('alpine'));
+  const testWorld = new THREE.Group(), outside = gltf.scene.clone(true); outside.userData.cosmetic = true;
+  testWorld.add(gltf.scene, outside);
+  const originals = new Map(), sourceColors = new Map(), outsideMaterials = new Map();
+  gltf.scene.traverse(node => {
+    if (!node.isMesh) return;
+    originals.set(node, node.material);
+    for (const material of Array.isArray(node.material) ? node.material : [node.material]) sourceColors.set(material, { color: material.color.clone(), roughness: material.roughness });
+  });
+  outside.traverse(node => { if (node.isMesh) outsideMaterials.set(node, node.material); });
+  const effect = createCityWeather({ THREE, world: testWorld, boardBounds: bounds });
+  check('actual Alpine roofs, walls and timber retain their authored color in all seasons and weather', () => {
+    const names = new Set([...sourceColors.keys()].map(material => material.name));
+    for (const name of ['alpine/roof', 'alpine/roof_edge', 'alpine/wall', 'alpine/wood', 'alpine/wood_light', 'alpine/leaf']) assert(names.has(name), name + ' exists in actual asset');
+    for (const season of ['spring', 'summer', 'autumn', 'winter']) for (const weather of ['clear', 'rain', 'snow']) {
+      effect.setSeason(season); effect.setWeather(weather); effect.tick(0, { reduced: true });
+      for (const [node, original] of originals) {
+        const before = Array.isArray(original) ? original : [original], after = Array.isArray(node.material) ? node.material : [node.material];
+        before.forEach((material, index) => {
+          const plant = material.name === 'alpine/leaf', source = sourceColors.get(material);
+          assert.equal(after[index] !== material, plant, `${season}/${weather}: ${material.name} only foliage is rebound`);
+          if (plant) assert.equal(after[index].color.equals(source.color), false, material.name + ' changes with season');
+          else { assert(after[index].color.equals(source.color), material.name + ' retains color'); assert.equal(after[index].roughness, source.roughness); }
+          assert(material.color.equals(source.color), material.name + ' shared source is unchanged');
+        });
+      }
+      for (const [node, material] of outsideMaterials) assert.equal(node.material, material, 'cosmetic outskirts preserve original materials');
+    }
+  });
+  effect.dispose();
+  for (const [node, material] of originals) assert.equal(node.material, material);
+  const resources = new Set(sourceColors.keys()); gltf.scene.traverse(node => { if (node.geometry) resources.add(node.geometry); }); resources.forEach(resource => resource.dispose());
+}
 
 const kits = ['city-kit', 'specials', 'landmarks', 'compact-specials', 'expansion-specials'];
+{
+  const {createRegionalPark}=await import(pathToFileURL(root+'scene-regional-parks.js'));
+  check('actual regional garden plants change seasons while masonry and cafe canopies retain their colors',()=>{
+    for(const mapId of ['classic','compact','expansion']){
+      const parkWorld=new THREE.Group(),resources=new Set();
+      createRegionalPark({THREE,world:parkWorld,boardBounds:bounds,mapId,own:r=>{resources.add(r);return r;}});
+      const originals=new Map();parkWorld.traverse(n=>{if(n.isMesh)originals.set(n,n.material);});
+      const effect=createCityWeather({THREE,world:parkWorld,boardBounds:bounds});
+      effect.setSeason('spring');effect.tick(0,{reduced:true});
+      const spring=new Map([...originals].map(([n])=>[n,n.material.color.clone()]));
+      effect.setSeason('winter');effect.tick(0,{reduced:true});
+      let plantCount=0,structureCount=0;
+      for(const [node,material] of originals){
+        if(material.userData.seasonalKind){plantCount++;assert.notEqual(node.material,material,mapId+' plant gets local material');assert(!node.material.color.equals(spring.get(node)),mapId+' plant changes season');}
+        else{structureCount++;assert.equal(node.material,material,mapId+' structure unchanged');}
+      }
+      assert(plantCount>=3&&structureCount>=5,`${mapId}: ${plantCount} plant batches and ${structureCount} structural batches tested`);
+      effect.dispose();for(const [node,material] of originals)assert.equal(node.material,material);
+      resources.forEach(r=>r.dispose());
+    }
+  });
+}
 let foliageMeshes = 0, windows = 0;
 for (const kit of kits) {
-  const bytes = fs.readFileSync(root + `assets/models/${kit}.glb`);
-  const gltf = await new GLTFLoader().parseAsync(bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength), '');
+  const gltf = await loadGeometryGLB(pathToFileURL(root + `assets/models/${kit}.glb`));
   const kitWorld = new THREE.Group(); kitWorld.add(gltf.scene);
   const originals = new Map(); gltf.scene.traverse(node => { if (node.isMesh) originals.set(node, node.material); });
   const climate = createCityWeather({ THREE, world: kitWorld, boardBounds: bounds }); climate.setSeason('winter'); climate.tick(0, { reduced: true });
   let seasonal = 0;
   for (const [node, material] of originals) {
     if (node.material !== material) { seasonal++; foliageMeshes++; }
+    if (['Landmark / Jade pine foliage', 'Landmark / New pine tips'].includes(material.name)) assert.notEqual(node.material, material, 'legacy pine material still changes with season');
     if (/window|glazing|glass|lantern|portal/i.test(material.name)) { windows++; assert.equal(node.material, material, kit + ': preserve ' + material.name); }
   }
   assert.ok(seasonal > 0, kit + ' binds authored foliage'); climate.dispose();
   for (const [node, material] of originals) assert.equal(node.material, material);
+  const resources = new Set(); gltf.scene.traverse(node => { if (node.geometry) resources.add(node.geometry); if (node.material) for (const material of Array.isArray(node.material) ? node.material : [node.material]) resources.add(material); }); resources.forEach(resource => resource.dispose());
   console.log(`PASS ${kit}: ${seasonal} authored foliage meshes tinted; all materials restored`); checks++;
 }
 weather.dispose();

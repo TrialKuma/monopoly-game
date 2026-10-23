@@ -1,0 +1,1562 @@
+{
+  "status": "all_five_verified",
+  "created_at_utc": "2026-10-23T02:56:50.910084+00:00",
+  "scope": "Five sparse feature residences supplementing the authored regional game kit",
+  "input_origin": "AI design board plus three independently generated single-view RGBA images; byte-identical copies; no montage proxy",
+  "camera_boundary": "Official assumed 0/90/180 degree orbit with 20 degree FOV; design images are not measured calibrated photographs",
+  "gpu_memory_boundary": "RTX 5070 Ti has 15.92 GiB physical VRAM. Measured native MV peak allocation reaches approximately 16.37 GiB, requiring Windows WDDM shared-memory spill; not a dedicated-16-GB-only claim. No user programs were closed.",
+  "processing_boundary": "Raw native GLBs untouched. One conservative reduction from source, original generated UVs/materials, 2048 texture derivatives. Local topology repairs are explicitly identified per asset. Normal/UV quantization uses KHR_mesh_quantization.",
+  "runtime_scope": "Use one or two residences per map. Repeating approximately 180k-triangle meshes across dozens of lots is outside the validated scope. Gameplay upgrades and surrounding buildings use the separately authored modular kit.",
+  "assets": [
+    {
+      "region": "alpine",
+      "name": "alpine_house",
+      "status": "ready_for_runtime",
+      "path": "assets/models/regions-ai/alpine_house.glb",
+      "root_node": "alpine_house",
+      "static": true,
+      "up_axis": "Y",
+      "front_axis": "+Z",
+      "triangles": 179921,
+      "bytes": 8506536,
+      "sha256": "3534766503c4e01753841e8dfdaf95addd85acc942e973b4f90f3a558c9d9d92",
+      "bounds_gltf": {
+        "min": [
+          -1.4478543996810913,
+          0.0,
+          -0.9637249708175659
+        ],
+        "max": [
+          1.4478543996810913,
+          3.0,
+          0.9637249708175659
+        ]
+      },
+      "textures": [
+        {
+          "name": "Image_0",
+          "size": [
+            2048,
+            2048
+          ]
+        },
+        {
+          "name": "Image_1",
+          "size": [
+            2048,
+            2048
+          ]
+        }
+      ],
+      "geometry_origin": "Actual native Pixal3D multiview source only. No substitute building or manually added geometry.",
+      "local_topology_repair": null,
+      "visual_review": {
+        "status": "passed",
+        "views": [
+          "H:/代码项目/monopoly/art/themed-city-kit/renders/alpine_house-front.png",
+          "H:/代码项目/monopoly/art/themed-city-kit/renders/alpine_house-right.png",
+          "H:/代码项目/monopoly/art/themed-city-kit/renders/alpine_house-back.png",
+          "H:/代码项目/monopoly/art/themed-city-kit/renders/alpine_house-left.png"
+        ],
+        "notes": "Inspected four fresh imports of the final 179921-triangle GLB against the unchanged raw-source views. Continuous roof, chimney, stone foundation, timber facade, balcony and all three distinct facade layouts retained. Front arch door, rear double windows and side door agree with the reference set. Retained 2048 textures to avoid visible color bleeding from the dense source UV atlas at 1024. Fine texture detail is softer than the 4096 raw source; small neural foliage irregularities remain. Accepted for one or two sparse buildings per region, not mass repetition.",
+        "source_comparison": "art/themed-city-kit/renders/alpine_house_raw-{front,right,back,left}.png"
+      },
+      "source": {
+        "path": "H:\\代码项目\\monopoly\\art\\themed-city-kit\\source\\alpine-house-mv-v01-pixal-mv-1024-9247.glb",
+        "sha256": "b31e50610cef3c2a1d3c581cbf380fcbb5538a6aef9307fe122c2cc98e590db0",
+        "bytes": 46466188
+      },
+      "source_board": {
+        "path": "H:\\代码项目\\monopoly\\art\\regions\\references\\alpine-core-three-views.png",
+        "sha256": "df5216ec48e0ed3c5a79a1e852ab3c55c46a843dac6a972a05c09889e701b01c",
+        "bytes": 2204959
+      },
+      "source_single_views": [
+        {
+          "path": "H:\\代码项目\\monopoly\\art\\regions\\references\\alpine-house-front.png",
+          "sha256": "b8a6639685f03452bc68b91af39e9bdc5e1e3f4cef515dacdc2a6e01ef60c873",
+          "bytes": 1730459,
+          "view": "front",
+          "size": [
+            1254,
+            1254
+          ],
+          "alpha_bbox": [
+            0,
+            23,
+            1232,
+            1254
+          ],
+          "solid_alpha_bbox": [
+            86,
+            75,
+            1161,
+            1127
+          ],
+          "subject_height_fraction": 0.8389154704944178,
+          "alpha_extrema": [
+            0,
+            255
+          ]
+        },
+        {
+          "path": "H:\\代码项目\\monopoly\\art\\regions\\references\\alpine-house-side.png",
+          "sha256": "d633539c79672a60e4f35d91f6b395f8e263d435149fc9f2c62c2a8c74d9c858",
+          "bytes": 1219496,
+          "view": "right",
+          "size": [
+            1254,
+            1254
+          ],
+          "alpha_bbox": [
+            49,
+            21,
+            1216,
+            1198
+          ],
+          "solid_alpha_bbox": [
+            286,
+            66,
+            988,
+            1146
+          ],
+          "subject_height_fraction": 0.861244019138756,
+          "alpha_extrema": [
+            0,
+            255
+          ]
+        },
+        {
+          "path": "H:\\代码项目\\monopoly\\art\\regions\\references\\alpine-house-back.png",
+          "sha256": "8cb328fbda6e544bd6d2eba6409f808db5143c1429a412ac889828860e20621e",
+          "bytes": 1720485,
+          "view": "back",
+          "size": [
+            1254,
+            1254
+          ],
+          "alpha_bbox": [
+            0,
+            55,
+            1235,
+            1254
+          ],
+          "solid_alpha_bbox": [
+            118,
+            93,
+            1136,
+            1187
+          ],
+          "subject_height_fraction": 0.8724082934609251,
+          "alpha_extrema": [
+            0,
+            255
+          ]
+        }
+      ],
+      "inference_input_views": [
+        {
+          "path": "H:\\代码项目\\monopoly\\art\\themed-city-kit\\inputs\\alpine-house-v01\\view00_azim000.png",
+          "sha256": "b8a6639685f03452bc68b91af39e9bdc5e1e3f4cef515dacdc2a6e01ef60c873",
+          "size": [
+            1254,
+            1254
+          ],
+          "alpha_bbox": [
+            0,
+            23,
+            1232,
+            1254
+          ],
+          "camera_to_world": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              -1.0,
+              -3.1192049980163574
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "path": "H:\\代码项目\\monopoly\\art\\themed-city-kit\\inputs\\alpine-house-v01\\view01_azim090.png",
+          "sha256": "d633539c79672a60e4f35d91f6b395f8e263d435149fc9f2c62c2a8c74d9c858",
+          "size": [
+            1254,
+            1254
+          ],
+          "alpha_bbox": [
+            49,
+            21,
+            1216,
+            1198
+          ],
+          "camera_to_world": [
+            [
+              0.0,
+              0.0,
+              1.0,
+              3.1192049980163574
+            ],
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "path": "H:\\代码项目\\monopoly\\art\\themed-city-kit\\inputs\\alpine-house-v01\\view02_azim180.png",
+          "sha256": "8cb328fbda6e544bd6d2eba6409f808db5143c1429a412ac889828860e20621e",
+          "size": [
+            1254,
+            1254
+          ],
+          "alpha_bbox": [
+            0,
+            55,
+            1235,
+            1254
+          ],
+          "camera_to_world": [
+            [
+              -1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              3.1192049980163574
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      ],
+      "framing_height_spread_fraction": 0.03349282296650724,
+      "camera_calibration": "assumed_standard_orbit_not_measured",
+      "azimuths_degrees": [
+        0,
+        90,
+        180
+      ],
+      "horizontal_fov_degrees": 20,
+      "native_pipeline": "Pixal3DMVImageTo3DPipeline.run_mv",
+      "pipeline_config": "pipeline_mv.json",
+      "resolution": 1024,
+      "seed": 9247,
+      "native_inference_seconds": 563.06,
+      "peak_cuda_allocated_gib": 16.37,
+      "gpu_lock_released": true,
+      "processing_report": "art/themed-city-kit/reports/alpine_house-processing.json",
+      "inference_report": "art/themed-city-kit/reports/alpine-house-mv-v01/alpine-house-mv-v01-pixal-mv-1024-9247.json"
+    },
+    {
+      "region": "classic",
+      "name": "classic_house",
+      "status": "ready_for_runtime",
+      "path": "assets/models/regions-ai/classic_house.glb",
+      "root_node": "classic_house",
+      "static": true,
+      "up_axis": "Y",
+      "front_axis": "+Z",
+      "triangles": 180779,
+      "bytes": 7684584,
+      "sha256": "327102fea0bf328a3d0f9c5eae6333c0e1706eb2708b90d90a3af4c4e44698a3",
+      "bounds_gltf": {
+        "min": [
+          -1.1965336799621582,
+          0.0,
+          -0.8952785134315491
+        ],
+        "max": [
+          1.1965336799621582,
+          3.0,
+          0.8952785134315491
+        ]
+      },
+      "textures": [
+        {
+          "name": "Image_0",
+          "size": [
+            2048,
+            2048
+          ]
+        },
+        {
+          "name": "Image_1",
+          "size": [
+            2048,
+            2048
+          ]
+        }
+      ],
+      "geometry_origin": "Actual native Pixal3D multiview AI building, with local topology patches only at the inspected front stone foundation and outer window corner. No substitute building or global hole filling.",
+      "local_topology_repair": {
+        "authorization": "Parent approved only the inspected bottom stone base and outer-window-corner defects; no global filling or covering box",
+        "patches": [
+          {
+            "name": "front_foundation_gap",
+            "x": [
+              0.32,
+              1.055
+            ],
+            "z": [
+              0.035,
+              0.16
+            ],
+            "added_triangles": 555,
+            "source_vertices_reused": 107,
+            "front_plane_y": -0.5805331068992615,
+            "adjacent_material_samples": 775,
+            "method": "Local missing-surface ray classification; source-rim vertex snapping; adjacent source UV islands copied without editing texture pixels"
+          },
+          {
+            "name": "front_window_outer_corner",
+            "x": [
+              0.785,
+              0.925
+            ],
+            "z": [
+              0.285,
+              0.455
+            ],
+            "added_triangles": 301,
+            "source_vertices_reused": 12,
+            "front_plane_y": -0.5809622007369996,
+            "adjacent_material_samples": 487,
+            "method": "Local missing-surface ray classification; source-rim vertex snapping; adjacent source UV islands copied without editing texture pixels"
+          }
+        ],
+        "tool": {
+          "path": "H:\\代码项目\\monopoly\\art\\themed-city-kit\\tools\\repair_classic_local_surfaces.py",
+          "sha256": "b6285c2c5a7e4d3ddadfd90a0941dc0133c64f338caaab2ec2cb87b20b9338ed",
+          "bytes": 7039
+        },
+        "raw_source_unchanged": true
+      },
+      "visual_review": {
+        "status": "passed",
+        "views": [
+          "H:\\代码项目\\monopoly\\art\\themed-city-kit\\renders\\classic_house-front.png",
+          "H:\\代码项目\\monopoly\\art\\themed-city-kit\\renders\\classic_house-right.png",
+          "H:\\代码项目\\monopoly\\art\\themed-city-kit\\renders\\classic_house-back.png",
+          "H:\\代码项目\\monopoly\\art\\themed-city-kit\\renders\\classic_house-left.png"
+        ],
+        "notes": "Inspected the actual final GLB front, right, back and left renders. Local foundation and outer window-corner surfaces restored with 856 adjacent-UV triangles; original doors, windows, roof, drainpipes and walls retained. No building proxy or global fill. Slight neural foliage/stone-edge irregularity remains at close inspection; intended for one or two sparse landmark residences per region."
+      },
+      "source": {
+        "path": "H:\\代码项目\\monopoly\\art\\themed-city-kit\\source\\classic-house-mv-v01-pixal-mv-1024-9247.glb",
+        "sha256": "2bcb272c41fabca430e0330fc124b549265b15288d745e790c661c5a87179a41",
+        "bytes": 40598792
+      },
+      "source_board": {
+        "path": "H:\\代码项目\\monopoly\\art\\regions\\references\\classic-core-three-views.png",
+        "sha256": "7a510d06e2c7e3900218f42bbb1fce320ff48fe559940ff0c882c77c23cbec93",
+        "bytes": 2070856
+      },
+      "source_single_views": [
+        {
+          "path": "H:\\代码项目\\monopoly\\art\\regions\\references\\classic-house-front.png",
+          "sha256": "cf00901dec85fad439ff8a9cfd61e350f7862a2e3122b7e8c9fc56c53df509ee",
+          "bytes": 1612245,
+          "view": "front",
+          "size": [
+            1254,
+            1254
+          ],
+          "alpha_bbox": [
+            0,
+            0,
+            1236,
+            1201
+          ],
+          "solid_alpha_bbox": [
+            169,
+            58,
+            1092,
+            1188
+          ],
+          "subject_height_fraction": 0.9011164274322169,
+          "alpha_extrema": [
+            0,
+            255
+          ]
+        },
+        {
+          "path": "H:\\代码项目\\monopoly\\art\\regions\\references\\classic-house-side.png",
+          "sha256": "52b447b8dafb0bcd112df9487d7cdddf92d81ca0cc0c7bb2a3ac3ebf04815bd4",
+          "bytes": 1000062,
+          "view": "right",
+          "size": [
+            1254,
+            1254
+          ],
+          "alpha_bbox": [
+            0,
+            0,
+            1228,
+            1214
+          ],
+          "solid_alpha_bbox": [
+            321,
+            37,
+            958,
+            1110
+          ],
+          "subject_height_fraction": 0.8556618819776715,
+          "alpha_extrema": [
+            0,
+            255
+          ]
+        },
+        {
+          "path": "H:\\代码项目\\monopoly\\art\\regions\\references\\classic-house-back.png",
+          "sha256": "1edaf9e0e097c19bb6512eb24293e965a26e83c526c0bace4ac5ae7b5bdde793",
+          "bytes": 1454872,
+          "view": "back",
+          "size": [
+            1254,
+            1254
+          ],
+          "alpha_bbox": [
+            0,
+            0,
+            1234,
+            1232
+          ],
+          "solid_alpha_bbox": [
+            202,
+            74,
+            1053,
+            1156
+          ],
+          "subject_height_fraction": 0.8628389154704944,
+          "alpha_extrema": [
+            0,
+            255
+          ]
+        }
+      ],
+      "inference_input_views": [
+        {
+          "path": "H:\\代码项目\\monopoly\\art\\themed-city-kit\\inputs\\classic-house-v01\\view00_azim000.png",
+          "sha256": "cf00901dec85fad439ff8a9cfd61e350f7862a2e3122b7e8c9fc56c53df509ee",
+          "size": [
+            1254,
+            1254
+          ],
+          "alpha_bbox": [
+            0,
+            0,
+            1236,
+            1201
+          ],
+          "camera_to_world": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              -1.0,
+              -3.1192049980163574
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "path": "H:\\代码项目\\monopoly\\art\\themed-city-kit\\inputs\\classic-house-v01\\view01_azim090.png",
+          "sha256": "52b447b8dafb0bcd112df9487d7cdddf92d81ca0cc0c7bb2a3ac3ebf04815bd4",
+          "size": [
+            1254,
+            1254
+          ],
+          "alpha_bbox": [
+            0,
+            0,
+            1228,
+            1214
+          ],
+          "camera_to_world": [
+            [
+              0.0,
+              0.0,
+              1.0,
+              3.1192049980163574
+            ],
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "path": "H:\\代码项目\\monopoly\\art\\themed-city-kit\\inputs\\classic-house-v01\\view02_azim180.png",
+          "sha256": "1edaf9e0e097c19bb6512eb24293e965a26e83c526c0bace4ac5ae7b5bdde793",
+          "size": [
+            1254,
+            1254
+          ],
+          "alpha_bbox": [
+            0,
+            0,
+            1234,
+            1232
+          ],
+          "camera_to_world": [
+            [
+              -1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              3.1192049980163574
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      ],
+      "framing_height_spread_fraction": 0.045454545454545414,
+      "camera_calibration": "assumed_standard_orbit_not_measured",
+      "azimuths_degrees": [
+        0,
+        90,
+        180
+      ],
+      "horizontal_fov_degrees": 20,
+      "native_pipeline": "Pixal3DMVImageTo3DPipeline.run_mv",
+      "pipeline_config": "pipeline_mv.json",
+      "resolution": 1024,
+      "seed": 9247,
+      "native_inference_seconds": 222.02,
+      "peak_cuda_allocated_gib": 16.365,
+      "gpu_lock_released": true,
+      "processing_report": "art/themed-city-kit/reports/classic_house-processing.json",
+      "inference_report": "art/themed-city-kit/reports/classic-house-mv-v01/classic-house-mv-v01-pixal-mv-1024-9247.json"
+    },
+    {
+      "region": "compact",
+      "name": "compact_house",
+      "status": "ready_for_runtime",
+      "path": "assets/models/regions-ai/compact_house.glb",
+      "root_node": "compact_house",
+      "static": true,
+      "up_axis": "Y",
+      "front_axis": "+Z",
+      "triangles": 183105,
+      "bytes": 8722288,
+      "sha256": "910d04124cf9487318c5492f15d691b3fc426d2acc2ca1c0585fb6bef86891e4",
+      "bounds_gltf": {
+        "min": [
+          -1.3236122131347656,
+          0.0,
+          -1.285170078277588
+        ],
+        "max": [
+          1.3236122131347656,
+          3.0,
+          1.285170078277588
+        ]
+      },
+      "textures": [
+        {
+          "name": "Image_0",
+          "size": [
+            2048,
+            2048
+          ]
+        },
+        {
+          "name": "Image_1",
+          "size": [
+            2048,
+            2048
+          ]
+        }
+      ],
+      "geometry_origin": "Actual native Pixal3D multiview AI building with one localized rear-corner surface bridge. Original geometry and UVs retained; no proxy building or global fill.",
+      "local_topology_repair": {
+        "scope": "Only the inspected narrow rear-corner cavity also present in the untouched raw model; adjacent rear plaster and wooden skirt surfaces",
+        "patches": [
+          {
+            "name": "rear_corner_cavity",
+            "x": [
+              -0.945,
+              -0.795
+            ],
+            "z": [
+              0.04,
+              1.025
+            ],
+            "added_triangles": 3380,
+            "source_vertices_reused": 17,
+            "method": "Rim-plane bridge only where original rear rays fall into cavity; adjacent original plaster / wood UV samples"
+          }
+        ],
+        "tool": {
+          "path": "H:\\代码项目\\monopoly\\art\\themed-city-kit\\tools\\repair_compact_rear_corner.py",
+          "sha256": "5e92b51a722815be816535dc59575045c4e428807bf367eccdc791398d8e94b0",
+          "bytes": 6394
+        },
+        "raw_source_unchanged": true
+      },
+      "visual_review": {
+        "status": "passed",
+        "views": [
+          "H:\\代码项目\\monopoly\\art\\themed-city-kit\\renders\\compact_house-front.png",
+          "H:\\代码项目\\monopoly\\art\\themed-city-kit\\renders\\compact_house-right.png",
+          "H:\\代码项目\\monopoly\\art\\themed-city-kit\\renders\\compact_house-back.png",
+          "H:\\代码项目\\monopoly\\art\\themed-city-kit\\renders\\compact_house-left.png"
+        ],
+        "notes": "Inspected final GLB from all four sides and compared original raw front/back renders. The original rear-corner cavity is closed by a narrow 3,380-face rim-plane bridge using original adjacent plaster/wood/stone UV samples. Original doors, window openings, ceramic tiles, timber, lantern and entrance curtain remain intact. Minor source neural asymmetry and fine chipped eaves remain; approved for sparse map residences."
+      },
+      "source": {
+        "path": "H:\\代码项目\\monopoly\\art\\themed-city-kit\\source\\compact-house-mv-v01-pixal-mv-1024-9247.glb",
+        "sha256": "06996b140f83e904faf0f9b5930fcea1a49e06fad4b6403b4f51c33af1dcdcc4",
+        "bytes": 43538496
+      },
+      "source_board": {
+        "path": "H:\\代码项目\\monopoly\\art\\regions\\references\\compact-core-three-views.png",
+        "sha256": "540011b71c005893c4725964fcc138fe6b96a393ff567922bbdf8e7261e602dd",
+        "bytes": 2203011
+      },
+      "source_single_views": [
+        {
+          "path": "H:\\代码项目\\monopoly\\art\\regions\\references\\compact-house-front.png",
+          "sha256": "6ee312de77a0c08a306cc95d03a154897175147e685c0554c3b4e815651027dc",
+          "bytes": 1935209,
+          "view": "front",
+          "size": [
+            1254,
+            1254
+          ],
+          "alpha_bbox": [
+            0,
+            39,
+            1236,
+            1224
+          ],
+          "solid_alpha_bbox": [
+            97,
+            73,
+            1153,
+            1210
+          ],
+          "subject_height_fraction": 0.9066985645933014,
+          "alpha_extrema": [
+            0,
+            255
+          ]
+        },
+        {
+          "path": "H:\\代码项目\\monopoly\\art\\regions\\references\\compact-house-side.png",
+          "sha256": "c1253522b9637686a9aabd024610f3935cd3a6cc3a40e31828910addfc504c22",
+          "bytes": 1461841,
+          "view": "right",
+          "size": [
+            1254,
+            1254
+          ],
+          "alpha_bbox": [
+            0,
+            37,
+            1240,
+            1210
+          ],
+          "solid_alpha_bbox": [
+            160,
+            67,
+            1127,
+            1201
+          ],
+          "subject_height_fraction": 0.9043062200956937,
+          "alpha_extrema": [
+            0,
+            255
+          ]
+        },
+        {
+          "path": "H:\\代码项目\\monopoly\\art\\regions\\references\\compact-house-back.png",
+          "sha256": "a909d588593a52b71871f6a188e460d2a216144f90ad09af1deefed4b4ee506a",
+          "bytes": 1576608,
+          "view": "back",
+          "size": [
+            1254,
+            1254
+          ],
+          "alpha_bbox": [
+            0,
+            1,
+            1206,
+            1254
+          ],
+          "solid_alpha_bbox": [
+            162,
+            115,
+            1093,
+            1181
+          ],
+          "subject_height_fraction": 0.8500797448165869,
+          "alpha_extrema": [
+            0,
+            255
+          ]
+        }
+      ],
+      "inference_input_views": [
+        {
+          "path": "H:\\代码项目\\monopoly\\art\\themed-city-kit\\inputs\\compact-house-v01\\view00_azim000.png",
+          "sha256": "6ee312de77a0c08a306cc95d03a154897175147e685c0554c3b4e815651027dc",
+          "size": [
+            1254,
+            1254
+          ],
+          "alpha_bbox": [
+            0,
+            39,
+            1236,
+            1224
+          ],
+          "camera_to_world": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              -1.0,
+              -3.1192049980163574
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "path": "H:\\代码项目\\monopoly\\art\\themed-city-kit\\inputs\\compact-house-v01\\view01_azim090.png",
+          "sha256": "c1253522b9637686a9aabd024610f3935cd3a6cc3a40e31828910addfc504c22",
+          "size": [
+            1254,
+            1254
+          ],
+          "alpha_bbox": [
+            0,
+            37,
+            1240,
+            1210
+          ],
+          "camera_to_world": [
+            [
+              0.0,
+              0.0,
+              1.0,
+              3.1192049980163574
+            ],
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "path": "H:\\代码项目\\monopoly\\art\\themed-city-kit\\inputs\\compact-house-v01\\view02_azim180.png",
+          "sha256": "a909d588593a52b71871f6a188e460d2a216144f90ad09af1deefed4b4ee506a",
+          "size": [
+            1254,
+            1254
+          ],
+          "alpha_bbox": [
+            0,
+            1,
+            1206,
+            1254
+          ],
+          "camera_to_world": [
+            [
+              -1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              3.1192049980163574
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      ],
+      "framing_height_spread_fraction": 0.05661881977671457,
+      "camera_calibration": "assumed_standard_orbit_not_measured",
+      "azimuths_degrees": [
+        0,
+        90,
+        180
+      ],
+      "horizontal_fov_degrees": 20,
+      "native_pipeline": "Pixal3DMVImageTo3DPipeline.run_mv",
+      "pipeline_config": "pipeline_mv.json",
+      "resolution": 1024,
+      "seed": 9247,
+      "native_inference_seconds": 333.34,
+      "peak_cuda_allocated_gib": 16.369,
+      "gpu_lock_released": true,
+      "processing_report": "art/themed-city-kit/reports/compact_house-processing.json",
+      "inference_report": "art/themed-city-kit/reports/compact-house-mv-v01/compact-house-mv-v01-pixal-mv-1024-9247.json"
+    },
+    {
+      "region": "harbor",
+      "name": "harbor_house",
+      "status": "ready_for_runtime",
+      "path": "assets/models/regions-ai/harbor_house.glb",
+      "root_node": "harbor_house",
+      "static": true,
+      "up_axis": "Y",
+      "front_axis": "+Z",
+      "triangles": 181055,
+      "bytes": 9081028,
+      "sha256": "25b47e1d472e232510496a5ac1bab1a8082eeefeb5682bc6063209fe39d72ca2",
+      "bounds_gltf": {
+        "min": [
+          -1.357216477394104,
+          0.0,
+          -0.9923509955406189
+        ],
+        "max": [
+          1.357216477394104,
+          3.0,
+          0.9923509955406189
+        ]
+      },
+      "textures": [
+        {
+          "name": "Image_0",
+          "size": [
+            2048,
+            2048
+          ]
+        },
+        {
+          "name": "Image_1",
+          "size": [
+            2048,
+            2048
+          ]
+        }
+      ],
+      "geometry_origin": "Actual native Pixal3D multiview AI building with documented local facade patches using adjacent source UVs. All original building surfaces retained, no proxy or global fill.",
+      "local_topology_repair": {
+        "scope": "Small inspected original neural cavities under the two front lanterns and the rear lower window sill; no doors or intentional window openings filled",
+        "patches": [
+          {
+            "name": "front_right_lamp_wall",
+            "x": [
+              -0.078,
+              0.18
+            ],
+            "z": [
+              0.38,
+              0.84
+            ],
+            "side": -1,
+            "plane": -0.745,
+            "added_triangles": 1076,
+            "source_vertices_reused": 32,
+            "method": "Only through-cavity ray samples in explicit inspected regions; adjacent original stone/plaster UV sample; all existing source faces retained"
+          },
+          {
+            "name": "front_left_lamp_wall",
+            "x": [
+              -0.96,
+              -0.72
+            ],
+            "z": [
+              0.48,
+              0.85
+            ],
+            "side": -1,
+            "plane": -0.745,
+            "added_triangles": 104,
+            "source_vertices_reused": 16,
+            "method": "Only through-cavity ray samples in explicit inspected regions; adjacent original stone/plaster UV sample; all existing source faces retained"
+          },
+          {
+            "name": "rear_lower_window_wall",
+            "x": [
+              0.03,
+              1.055
+            ],
+            "z": [
+              0.285,
+              0.44
+            ],
+            "side": 1,
+            "plane": 0.714,
+            "added_triangles": 86,
+            "source_vertices_reused": 15,
+            "method": "Only through-cavity ray samples in explicit inspected regions; adjacent original stone/plaster UV sample; all existing source faces retained"
+          }
+        ],
+        "tool": {
+          "path": "H:\\代码项目\\monopoly\\art\\themed-city-kit\\tools\\repair_harbor_facades.py",
+          "sha256": "b2bd5b3eb3cf2d7feb6a6fa67be906935c66f0f8eada59f3eadc36e49f2bbb20",
+          "bytes": 6196
+        },
+        "raw_source_unchanged": true
+      },
+      "visual_review": {
+        "status": "passed",
+        "views": [
+          "H:\\代码项目\\monopoly\\art\\themed-city-kit\\renders\\harbor_house-front.png",
+          "H:\\代码项目\\monopoly\\art\\themed-city-kit\\renders\\harbor_house-right.png",
+          "H:\\代码项目\\monopoly\\art\\themed-city-kit\\renders\\harbor_house-back.png",
+          "H:\\代码项目\\monopoly\\art\\themed-city-kit\\renders\\harbor_house-left.png"
+        ],
+        "notes": "Inspected actual final GLB four-sided renders and compared untouched raw front/back. Original lantern-wall through-cavities filled using 1,266 adjacent-UV faces; rear lower-wall seam locally bridged. Source tiled hip roof, arched windows, shutters, flower boxes, balcony and door retained. Small dark source-texture edges and slight surface irregularities remain around lamp/sill and fine eaves; intended for sparse mobile map residences. Native reconstruction produced two chimney stacks from the assumed-camera design views; no claim of exact calibrated reproduction."
+      },
+      "source": {
+        "path": "H:\\代码项目\\monopoly\\art\\themed-city-kit\\source\\harbor-house-mv-v01-pixal-mv-1024-9247.glb",
+        "sha256": "183aed744994496a084d42a15a4866a45404efe659e8e6a5873e9782598877c7",
+        "bytes": 44642192
+      },
+      "source_board": {
+        "path": "H:\\代码项目\\monopoly\\art\\regions\\references\\harbor-core-three-views.png",
+        "sha256": "94733f8bb47e47630baf619071d532474024cedd6384247658451c3221132316",
+        "bytes": 2249149
+      },
+      "source_single_views": [
+        {
+          "path": "H:\\代码项目\\monopoly\\art\\regions\\references\\harbor-house-front.png",
+          "sha256": "f7b5bdd61e0209ff1ad8304ca3dbb245d6ebcbe2ad68757657364e8c5759ae28",
+          "bytes": 1877884,
+          "view": "front",
+          "size": [
+            1254,
+            1254
+          ],
+          "alpha_bbox": [
+            0,
+            18,
+            1222,
+            1254
+          ],
+          "solid_alpha_bbox": [
+            131,
+            71,
+            1117,
+            1183
+          ],
+          "subject_height_fraction": 0.886762360446571,
+          "alpha_extrema": [
+            0,
+            255
+          ]
+        },
+        {
+          "path": "H:\\代码项目\\monopoly\\art\\regions\\references\\harbor-house-side.png",
+          "sha256": "d9255460221528893f816c66f5b56570f41a2c11f7f82c71d0e2228a3789ed9b",
+          "bytes": 1510879,
+          "view": "right",
+          "size": [
+            1254,
+            1254
+          ],
+          "alpha_bbox": [
+            0,
+            21,
+            1228,
+            1254
+          ],
+          "solid_alpha_bbox": [
+            250,
+            54,
+            1004,
+            1207
+          ],
+          "subject_height_fraction": 0.919457735247209,
+          "alpha_extrema": [
+            0,
+            255
+          ]
+        },
+        {
+          "path": "H:\\代码项目\\monopoly\\art\\regions\\references\\harbor-house-back.png",
+          "sha256": "07cc18b946cc754e4e338214faae330ff1ac02d616a22a916641f3934ed67037",
+          "bytes": 1605770,
+          "view": "back",
+          "size": [
+            1254,
+            1254
+          ],
+          "alpha_bbox": [
+            0,
+            23,
+            1232,
+            1254
+          ],
+          "solid_alpha_bbox": [
+            162,
+            67,
+            1107,
+            1148
+          ],
+          "subject_height_fraction": 0.8620414673046252,
+          "alpha_extrema": [
+            0,
+            255
+          ]
+        }
+      ],
+      "inference_input_views": [
+        {
+          "path": "H:\\代码项目\\monopoly\\art\\themed-city-kit\\inputs\\harbor-house-v01\\view00_azim000.png",
+          "sha256": "f7b5bdd61e0209ff1ad8304ca3dbb245d6ebcbe2ad68757657364e8c5759ae28",
+          "size": [
+            1254,
+            1254
+          ],
+          "alpha_bbox": [
+            0,
+            18,
+            1222,
+            1254
+          ],
+          "camera_to_world": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              -1.0,
+              -3.1192049980163574
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "path": "H:\\代码项目\\monopoly\\art\\themed-city-kit\\inputs\\harbor-house-v01\\view01_azim090.png",
+          "sha256": "d9255460221528893f816c66f5b56570f41a2c11f7f82c71d0e2228a3789ed9b",
+          "size": [
+            1254,
+            1254
+          ],
+          "alpha_bbox": [
+            0,
+            21,
+            1228,
+            1254
+          ],
+          "camera_to_world": [
+            [
+              0.0,
+              0.0,
+              1.0,
+              3.1192049980163574
+            ],
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "path": "H:\\代码项目\\monopoly\\art\\themed-city-kit\\inputs\\harbor-house-v01\\view02_azim180.png",
+          "sha256": "07cc18b946cc754e4e338214faae330ff1ac02d616a22a916641f3934ed67037",
+          "size": [
+            1254,
+            1254
+          ],
+          "alpha_bbox": [
+            0,
+            23,
+            1232,
+            1254
+          ],
+          "camera_to_world": [
+            [
+              -1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              3.1192049980163574
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      ],
+      "framing_height_spread_fraction": 0.05741626794258381,
+      "camera_calibration": "assumed_standard_orbit_not_measured",
+      "azimuths_degrees": [
+        0,
+        90,
+        180
+      ],
+      "horizontal_fov_degrees": 20,
+      "native_pipeline": "Pixal3DMVImageTo3DPipeline.run_mv",
+      "pipeline_config": "pipeline_mv.json",
+      "resolution": 1024,
+      "seed": 9247,
+      "native_inference_seconds": 320.55,
+      "peak_cuda_allocated_gib": 16.368,
+      "gpu_lock_released": true,
+      "processing_report": "art/themed-city-kit/reports/harbor_house-processing.json",
+      "inference_report": "art/themed-city-kit/reports/harbor-house-mv-v01/harbor-house-mv-v01-pixal-mv-1024-9247.json"
+    },
+    {
+      "region": "expansion",
+      "name": "expansion_house",
+      "status": "ready_for_runtime",
+      "path": "assets/models/regions-ai/expansion_house.glb",
+      "root_node": "expansion_house",
+      "static": true,
+      "up_axis": "Y",
+      "front_axis": "+Z",
+      "triangles": 179871,
+      "bytes": 7707512,
+      "sha256": "182f4eb522f183f2a2dea13a7e0133dddf0bafcc4026409310feceb361b9c561",
+      "bounds_gltf": {
+        "min": [
+          -1.3438494205474854,
+          0.0,
+          -1.3406144380569458
+        ],
+        "max": [
+          1.3438494205474854,
+          3.0,
+          1.3406144380569458
+        ]
+      },
+      "textures": [
+        {
+          "name": "Image_0",
+          "size": [
+            2048,
+            2048
+          ]
+        },
+        {
+          "name": "Image_1",
+          "size": [
+            2048,
+            2048
+          ]
+        }
+      ],
+      "geometry_origin": "Actual native Pixal3D multiview source only. No substitute building or manually added geometry.",
+      "local_topology_repair": null,
+      "visual_review": {
+        "status": "passed",
+        "views": [
+          "H:\\代码项目\\monopoly\\art\\themed-city-kit\\renders\\expansion_house-front.png",
+          "H:\\代码项目\\monopoly\\art\\themed-city-kit\\renders\\expansion_house-right.png",
+          "H:\\代码项目\\monopoly\\art\\themed-city-kit\\renders\\expansion_house-back.png",
+          "H:\\代码项目\\monopoly\\art\\themed-city-kit\\renders\\expansion_house-left.png"
+        ],
+        "notes": "Inspected the actual final GLB front, right, back and left; compared raw original front/back. Brick facade, stairs, railings, basement windows, rear service door and chimney remain complete. Fine flat-roof and parapet-back unevenness, thin dark seams and minor brick texture distortion are also present in the native source and remain documented. No local patch or substitute geometry added. Approved for one or two sparse mobile map residences, not architectural-survey fidelity."
+      },
+      "source": {
+        "path": "H:\\代码项目\\monopoly\\art\\themed-city-kit\\source\\expansion-house-mv-v01-pixal-mv-1024-9247.glb",
+        "sha256": "b5b9c2d10ba7063b42c24fe7e643c080f24347251a538f4b99730466bec44f5c",
+        "bytes": 40791340
+      },
+      "source_board": {
+        "path": "H:\\代码项目\\monopoly\\art\\regions\\references\\expansion-core-three-views.png",
+        "sha256": "04e3c62368766eda17341c19f08eb34be110f7b3c62d98428d94124a4c1f3c6f",
+        "bytes": 2106183
+      },
+      "source_single_views": [
+        {
+          "path": "H:\\代码项目\\monopoly\\art\\regions\\references\\expansion-house-front.png",
+          "sha256": "9b44bd56018fa62c694dfc762c40bb732bc0a6af37fd1442b64dcbfbfad60d25",
+          "bytes": 1664175,
+          "view": "front",
+          "size": [
+            1254,
+            1254
+          ],
+          "alpha_bbox": [
+            0,
+            0,
+            1232,
+            1254
+          ],
+          "solid_alpha_bbox": [
+            130,
+            46,
+            1123,
+            1191
+          ],
+          "subject_height_fraction": 0.9130781499202552,
+          "alpha_extrema": [
+            0,
+            255
+          ]
+        },
+        {
+          "path": "H:\\代码项目\\monopoly\\art\\regions\\references\\expansion-house-side.png",
+          "sha256": "d4428caa4b47798f1bece13328340f968fd7289b967e87fd5f56b9154f36fba6",
+          "bytes": 1237674,
+          "view": "right",
+          "size": [
+            1254,
+            1254
+          ],
+          "alpha_bbox": [
+            0,
+            20,
+            1174,
+            1214
+          ],
+          "solid_alpha_bbox": [
+            156,
+            88,
+            1060,
+            1155
+          ],
+          "subject_height_fraction": 0.8508771929824561,
+          "alpha_extrema": [
+            0,
+            255
+          ]
+        },
+        {
+          "path": "H:\\代码项目\\monopoly\\art\\regions\\references\\expansion-house-back.png",
+          "sha256": "74be5b7e20bb544819e3276197d397894e75f6974dfba3745ff3cf83784379b5",
+          "bytes": 1470936,
+          "view": "back",
+          "size": [
+            1254,
+            1254
+          ],
+          "alpha_bbox": [
+            0,
+            0,
+            1251,
+            1254
+          ],
+          "solid_alpha_bbox": [
+            212,
+            56,
+            1067,
+            1182
+          ],
+          "subject_height_fraction": 0.89792663476874,
+          "alpha_extrema": [
+            0,
+            255
+          ]
+        }
+      ],
+      "inference_input_views": [
+        {
+          "path": "H:\\代码项目\\monopoly\\art\\themed-city-kit\\inputs\\expansion-house-v01\\view00_azim000.png",
+          "sha256": "9b44bd56018fa62c694dfc762c40bb732bc0a6af37fd1442b64dcbfbfad60d25",
+          "size": [
+            1254,
+            1254
+          ],
+          "alpha_bbox": [
+            0,
+            0,
+            1232,
+            1254
+          ],
+          "camera_to_world": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              -1.0,
+              -3.1192049980163574
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "path": "H:\\代码项目\\monopoly\\art\\themed-city-kit\\inputs\\expansion-house-v01\\view01_azim090.png",
+          "sha256": "d4428caa4b47798f1bece13328340f968fd7289b967e87fd5f56b9154f36fba6",
+          "size": [
+            1254,
+            1254
+          ],
+          "alpha_bbox": [
+            0,
+            20,
+            1174,
+            1214
+          ],
+          "camera_to_world": [
+            [
+              0.0,
+              0.0,
+              1.0,
+              3.1192049980163574
+            ],
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        },
+        {
+          "path": "H:\\代码项目\\monopoly\\art\\themed-city-kit\\inputs\\expansion-house-v01\\view02_azim180.png",
+          "sha256": "74be5b7e20bb544819e3276197d397894e75f6974dfba3745ff3cf83784379b5",
+          "size": [
+            1254,
+            1254
+          ],
+          "alpha_bbox": [
+            0,
+            0,
+            1251,
+            1254
+          ],
+          "camera_to_world": [
+            [
+              -1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              1.0,
+              3.1192049980163574
+            ],
+            [
+              0.0,
+              1.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              1.0
+            ]
+          ]
+        }
+      ],
+      "framing_height_spread_fraction": 0.062200956937799035,
+      "camera_calibration": "assumed_standard_orbit_not_measured",
+      "azimuths_degrees": [
+        0,
+        90,
+        180
+      ],
+      "horizontal_fov_degrees": 20,
+      "native_pipeline": "Pixal3DMVImageTo3DPipeline.run_mv",
+      "pipeline_config": "pipeline_mv.json",
+      "resolution": 1024,
+      "seed": 9247,
+      "native_inference_seconds": 288.73,
+      "peak_cuda_allocated_gib": 16.368,
+      "gpu_lock_released": true,
+      "processing_report": "art/themed-city-kit/reports/expansion_house-processing.json",
+      "inference_report": "art/themed-city-kit/reports/expansion-house-mv-v01/expansion-house-mv-v01-pixal-mv-1024-9247.json"
+    }
+  ]
+}

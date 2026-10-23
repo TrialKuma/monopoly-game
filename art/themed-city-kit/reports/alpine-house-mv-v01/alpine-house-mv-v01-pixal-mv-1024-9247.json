@@ -1,0 +1,238 @@
+{
+  "status": "generated_unrigged_part_candidate",
+  "started_utc": "2026-10-23T02:08:38.338121+00:00",
+  "generation_started": true,
+  "local_inference_only": true,
+  "asset_id": "alpine-house-mv-v01",
+  "weights": {
+    "ready": true,
+    "models": [
+      {
+        "name": "sparse_structure_decoder",
+        "checkpoint": "C:\\Users\\A\\.codex\\worktrees\\0b69\\厂长\\grande-art-lab\\source\\experimental\\models\\Pixal3D\\ckpts\\ss_dec_conv3d_16l8_fp16.safetensors",
+        "bytes": 147591972,
+        "ready": true
+      },
+      {
+        "name": "sparse_structure_flow_model",
+        "checkpoint": "C:\\Users\\A\\.codex\\worktrees\\0b69\\厂长\\grande-art-lab\\source\\experimental\\models\\Pixal3D\\ckpts\\ss_flow_img_dit_1_3B_64_bf16_mv.safetensors",
+        "bytes": 5359822584,
+        "ready": true
+      },
+      {
+        "name": "shape_slat_decoder",
+        "checkpoint": "C:\\Users\\A\\.codex\\worktrees\\0b69\\厂长\\grande-art-lab\\source\\experimental\\models\\Pixal3D\\ckpts\\shape_dec_next_dc_f16c32_fp16.safetensors",
+        "bytes": 948490494,
+        "ready": true
+      },
+      {
+        "name": "shape_slat_flow_model_512",
+        "checkpoint": "C:\\Users\\A\\.codex\\worktrees\\0b69\\厂长\\grande-art-lab\\source\\experimental\\models\\Pixal3D\\ckpts\\slat_flow_img2shape_dit_1_3B_512_bf16_mv.safetensors",
+        "bytes": 5546764048,
+        "ready": true
+      },
+      {
+        "name": "shape_slat_flow_model_1024",
+        "checkpoint": "C:\\Users\\A\\.codex\\worktrees\\0b69\\厂长\\grande-art-lab\\source\\experimental\\models\\Pixal3D\\ckpts\\slat_flow_img2shape_dit_1_3B_1024_bf16_mv.safetensors",
+        "bytes": 5546764048,
+        "ready": true
+      },
+      {
+        "name": "tex_slat_decoder",
+        "checkpoint": "C:\\Users\\A\\.codex\\worktrees\\0b69\\厂长\\grande-art-lab\\source\\experimental\\models\\Pixal3D\\ckpts\\tex_dec_next_dc_f16c32_fp16.safetensors",
+        "bytes": 948458812,
+        "ready": true
+      },
+      {
+        "name": "tex_slat_flow_model_1024",
+        "checkpoint": "C:\\Users\\A\\.codex\\worktrees\\0b69\\厂长\\grande-art-lab\\source\\experimental\\models\\Pixal3D\\ckpts\\slat_flow_imgshape2tex_dit_1_3B_1024_bf16_mv.safetensors",
+        "bytes": 5546960656,
+        "ready": true
+      }
+    ],
+    "config": "C:\\Users\\A\\.codex\\worktrees\\0b69\\厂长\\grande-art-lab\\source\\experimental\\models\\Pixal3D\\pipeline_mv.json",
+    "config_sha256": "3bd8f005301423604aafbfab126639c675d7dc6968b8113271433f6593901715"
+  },
+  "resources_before": {
+    "gpu": "NVIDIA GeForce RTX 5070 Ti",
+    "total_physical_vram_gib": 15.9208984375,
+    "free_physical_vram_gib": 14.1845703125,
+    "gpu_utilization_percent": 7,
+    "total_ram_gib": 31.152122497558594,
+    "available_ram_gib": 16.30223846435547
+  },
+  "output": "H:\\代码项目\\monopoly\\art\\themed-city-kit\\source\\alpine-house-mv-v01-pixal-mv-1024-9247.glb",
+  "input": "H:\\代码项目\\monopoly\\art\\themed-city-kit\\inputs\\alpine-house-v01\\transforms.json",
+  "input_sha256": "05bd0d8984ddd6cb3e1e7e2e50a58bb63939829b3cd3dfcf68c1fe0f2c33f8ec",
+  "input_views": [
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\themed-city-kit\\inputs\\alpine-house-v01\\view00_azim000.png",
+      "sha256": "b8a6639685f03452bc68b91af39e9bdc5e1e3f4cef515dacdc2a6e01ef60c873",
+      "size": [
+        1254,
+        1254
+      ],
+      "alpha_bbox": [
+        0,
+        23,
+        1232,
+        1254
+      ],
+      "camera_to_world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          -1.0,
+          -3.1192049980163574
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\themed-city-kit\\inputs\\alpine-house-v01\\view01_azim090.png",
+      "sha256": "d633539c79672a60e4f35d91f6b395f8e263d435149fc9f2c62c2a8c74d9c858",
+      "size": [
+        1254,
+        1254
+      ],
+      "alpha_bbox": [
+        49,
+        21,
+        1216,
+        1198
+      ],
+      "camera_to_world": [
+        [
+          0.0,
+          0.0,
+          1.0,
+          3.1192049980163574
+        ],
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\themed-city-kit\\inputs\\alpine-house-v01\\view02_azim180.png",
+      "sha256": "8cb328fbda6e544bd6d2eba6409f808db5143c1429a412ac889828860e20621e",
+      "size": [
+        1254,
+        1254
+      ],
+      "alpha_bbox": [
+        0,
+        55,
+        1235,
+        1254
+      ],
+      "camera_to_world": [
+        [
+          -1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          3.1192049980163574
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    }
+  ],
+  "assumed_cameras": true,
+  "camera_calibration": "assumed_standard_orbit_not_measured",
+  "source_board": {
+    "path": "H:\\代码项目\\monopoly\\art\\regions\\references\\alpine-core-three-views.png",
+    "sha256": "df5216ec48e0ed3c5a79a1e852ab3c55c46a843dac6a972a05c09889e701b01c",
+    "bytes": 2204959
+  },
+  "view_count": 3,
+  "camera_angle_x": 0.3490658503988659,
+  "mesh_scale": 1.0,
+  "native_entrypoint": "inference_mv.py:run_inference / Pixal3DMVImageTo3DPipeline.run_mv",
+  "resolution": 1024,
+  "seed": 9247,
+  "low_vram": true,
+  "strict_naf": true,
+  "texture_size": 4096,
+  "sampler_steps": {
+    "ss": 12,
+    "shape": 12,
+    "tex": 12
+  },
+  "native_checkpoint_dtypes_preserved": true,
+  "pipeline_config": "pipeline_mv.json",
+  "multiview_fusion": "average",
+  "shared_files_write_protected": true,
+  "cache_directory": "H:\\代码项目\\monopoly\\art\\themed-city-kit\\pixal-cache",
+  "runner_sha256": "1e2a7e60bb6fe49513a49796058089f8f22a6ecf37bcc3785c99fa9d97da3b7b",
+  "lifetime_adapter_sha256": "a815f73fbb24f0e7e4eb171ffa0f40472ef30346a109410399a2f7e404db47d7",
+  "gpu_lock": {
+    "status": "released",
+    "pid": 39852,
+    "host": "NeoRic",
+    "label": "monopoly-native-multiview-alpine-house-mv-v01",
+    "acquired_utc": "2026-10-23T02:08:38.405969+00:00",
+    "lock_path": "C:\\Users\\A\\.codex\\shared-resource-locks\\pixal-gpu0.lock",
+    "token": "8d010d8f40b649dabb4dcc30764c2bf7",
+    "metadata_is_advisory": true
+  },
+  "torch": "2.10.0+cu130",
+  "natten": "0.21.6",
+  "cuda": "13.0",
+  "cuda_free_gib": 14.6845703125,
+  "cuda_total_gib": 15.89398193359375,
+  "output_bytes": 46466188,
+  "output_sha256": "b31e50610cef3c2a1d3c581cbf380fcbb5538a6aef9307fe122c2cc98e590db0",
+  "input_unchanged": true,
+  "seconds": 563.06,
+  "finished_utc": "2026-10-23T02:18:01.464749+00:00",
+  "peak_allocated_gib": 16.37
+}

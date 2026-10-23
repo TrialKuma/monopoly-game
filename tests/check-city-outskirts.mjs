@@ -1,133 +1,74 @@
 import assert from 'node:assert/strict';
 import * as THREE from '../assets/vendor/three/three.module.min.js';
-import { createCityOutskirts } from '../scene-outskirts.js';
+import {createCityOutskirts} from '../scene-outskirts.js';
+import {createRegionalPark} from '../scene-regional-parks.js';
 
-let checks = 0;
-const test = (name, run) => { run(); checks++; console.log(`PASS ${name}`); };
-function fixture(mapId = 'compact', w = 12.6, d = 10.8) {
-  const world = new THREE.Group();
-  const borrowedGeometry = new THREE.BoxGeometry(1, 1, 1), borrowedMaterial = new THREE.MeshStandardMaterial();
-  const borrowed = new THREE.Mesh(borrowedGeometry, borrowedMaterial); world.add(borrowed);
-  let requests = 0;
-  const api = createCityOutskirts({ THREE, world, boardBounds: { w, d }, mapId, requestRender: () => requests++ });
-  return { world, root: world.getObjectByName('city_outskirts'), api, borrowed, requests: () => requests };
+let checks=0;
+async function test(name,run){await run();checks++;console.log(`PASS ${name}`);}
+const pending=()=>new Promise(()=>{});
+function fixture(mapId='compact',w=12.6,d=10.8,loadSceneryBundle=pending){
+ const world=new THREE.Group(),borrowed=new THREE.Mesh(new THREE.BoxGeometry(1,1,1),new THREE.MeshStandardMaterial());world.add(borrowed);let requests=0;
+ const api=createCityOutskirts({THREE,world,boardBounds:{w,d},mapId,loadSceneryBundle,requestRender:()=>requests++});
+ return {world,root:world.getObjectByName('city_outskirts'),api,borrowed,requests:()=>requests};
+}
+function shapeData(root){const values=[];root.updateMatrixWorld(true);root.traverse(n=>{if(n.isMesh){values.push(Array.from(n.geometry.attributes.position.array));values.push(n.matrixWorld.toArray());}});return values;}
+function fakeBundle(mapId,regional=true){
+ const scene=new THREE.Group(),material=new THREE.MeshStandardMaterial({color:'#ccc9a9'}),geometry=new THREE.BoxGeometry(1,1,1);
+ for(const key of ['villa_3','shop_2','hotel_2','tower_2']){const group=new THREE.Group();group.name=regional?`${mapId}_${key}`:key;const mesh=new THREE.Mesh(geometry,material);mesh.position.y=.5;group.add(mesh);scene.add(group);}
+ return {scene,material,geometry};
 }
 
-test('layered scenery stays clear of the plinth, keeps near sightlines low and has a fixed draw budget', () => {
-  for (const [mapId, w, d] of [['classic', 12.6, 10.8], ['compact', 16.2, 12.6], ['expansion', 19.8, 18]]) {
-    const f = fixture(mapId, w, d); let count = 0;
-    const matrix = new THREE.Matrix4(), vertex = new THREE.Vector3();
-    f.root.updateMatrixWorld(true);
-    f.root.traverse(node => {
-      if (!node.isMesh) return;
-      count++;
-      assert.equal(node.castShadow, false, 'exterior adds no shadow casters');
-      const intersections = []; node.raycast({}, intersections); assert.equal(intersections.length, 0, 'decoration cannot intercept tiles');
-      const positions = node.geometry.attributes.position;
-      for (let instance = 0; instance < (node.isInstancedMesh ? node.count : 1); instance++) {
-        if (node.isInstancedMesh) { node.getMatrixAt(instance, matrix); matrix.premultiply(node.matrixWorld); }
-        else matrix.copy(node.matrixWorld);
-        for (let i = 0; i < positions.count; i++) {
-          vertex.fromBufferAttribute(positions, i).applyMatrix4(matrix);
-          assert.ok(Number.isFinite(vertex.x) && Number.isFinite(vertex.y) && Number.isFinite(vertex.z));
-          assert.ok(Math.abs(vertex.x) > w / 2 + .64 || Math.abs(vertex.z) > d / 2 + .64, `${mapId}/${node.name} intersects plinth at ${vertex.toArray()}`);
-          const outward = Math.max(Math.abs(vertex.x) - w / 2, Math.abs(vertex.z) - d / 2);
-          assert.ok(vertex.y < 1.3 && vertex.y > -.47, 'bounded miniature silhouette');
-          if (outward < 1.55) assert.ok(vertex.y < .12, `${node.name} obscures the near board edge`);
-          assert.ok(Math.abs(vertex.x) < w / 2 + 5.3 && Math.abs(vertex.z) < d / 2 + 5.3, 'landscape remains bounded');
-        }
-      }
-    });
-    assert.ok(count <= 34 && count >= 24, `bounded draw count ${count}`);
-    f.api.dispose();
-  }
-});
-
-test('all four edges and corners have layered scenery, with distinct map themes', () => {
-  const themes = new Set();
-  for (const mapId of ['classic', 'compact', 'expansion']) {
-    const f = fixture(mapId); themes.add(f.root.userData.theme);
-    for (let i = 0; i < 4; i++) {
-      assert.ok(f.root.getObjectByName(`outskirts_district_${i}`), `edge ${i} has scenery`);
-      assert.ok(f.root.getObjectByName(`outskirts_corner_garden_${i}`), `corner ${i} has scenery`);
-    }
-    assert.ok(f.root.getObjectByName('outskirts_tree_crowns').count >= 40, 'continuous tree line');
-    assert.ok(f.root.getObjectByName('outskirts_neighbourhood_homes').count >= 12, 'distant neighbourhood layer');
-    assert.equal(!!f.root.getObjectByName('outskirts_beach_parasols'), mapId === 'compact');
-    assert.equal(!!f.root.getObjectByName('outskirts_boardwalk_decks'), mapId === 'compact');
-    assert.equal(f.root.getObjectByName('outskirts_neighbourhood_roofs').geometry.type, mapId === 'expansion' ? 'BoxGeometry' : 'CylinderGeometry');
-    f.api.tick(0, { night: 1 });
-    assert.ok(f.root.getObjectByName('outskirts_neighbourhood_windows').material.emissiveIntensity > .9);
-    f.api.dispose();
-  }
-  assert.equal(themes.size, 3);
-});
-
-test('scenery placement is deterministic and independent of global random values', () => {
-  const random = Math.random;
-  // Three.js calls Math.random when assigning UUIDs; constructing decorative
-  // objects is unavoidable, but their geometry and placement must not use it.
-  let seed = 0;
-  Math.random = () => (++seed % 100) / 100;
-  const first = fixture('expansion');
-  Math.random = () => 0.73;
-  let second;
-  try {
-    second = fixture('expansion');
-    const matrices = root => {
-      const result = []; root.traverse(node => { if (node.isInstancedMesh) result.push(Array.from(node.instanceMatrix.array)); }); return result;
-    };
-    assert.deepEqual(matrices(first.root), matrices(second.root));
-  } finally { Math.random = random; first.api.dispose(); second?.api.dispose(); }
-});
-
-test('motion and night glow pause, support reduced motion and consume no gameplay RNG', () => {
-  const f = fixture();
-  const boat = f.root.getObjectByName('outskirts_boat_0');
-  const initial = boat.position.clone();
-  const random = Math.random; Math.random = () => { throw new Error('outskirts consumed gameplay RNG'); };
-  try {
-    assert.equal(f.api.tick(.1), true); assert.notDeepEqual(boat.position, initial);
-    const moved = boat.position.clone(), rotation = boat.rotation.toArray();
-    assert.equal(f.api.tick(.1, { paused: true }), false);
-    assert.equal(f.api.tick(.1, { reduced: true }), false);
-    assert.deepEqual(boat.position, moved); assert.deepEqual(boat.rotation.toArray(), rotation);
-    assert.equal(f.api.tick(.1, { paused: true, night: 1 }), true);
-    const lamps = f.root.getObjectByName('outskirts_lamp_globes');
-    assert.ok(lamps.material.emissiveIntensity > 1.5);
-    assert.equal(f.api.tick(.1, { paused: true, night: 1 }), false);
-    assert.equal(f.requests(), 1, 'caller owns the frame loop');
-  } finally { Math.random = random; f.api.dispose(); }
-});
-
-test('surroundings can be hidden without advancing their motion or disturbing the board', () => {
-  const f = fixture(); const boat = f.root.getObjectByName('outskirts_boat_0');
-  const position = boat.position.clone();
-  assert.equal(f.api.setVisible(false), true); assert.equal(f.root.visible, false);
-  assert.equal(f.api.tick(.1, { night: 1 }), false); assert.deepEqual(boat.position, position);
-  assert.equal(f.borrowed.visible, true); assert.equal(f.requests(), 2);
-  f.api.setVisible(false); assert.equal(f.requests(), 2, 'unchanged visibility skips a render');
-  assert.equal(f.api.setVisible(true), true); assert.equal(f.root.visible, true);
-  assert.equal(f.api.tick(.1), true); assert.notDeepEqual(boat.position, position);
-  f.api.dispose(); assert.equal(f.api.setVisible(true), false);
-});
-
-test('disposal releases each owned resource once and preserves borrowed scene content', () => {
-  const f = fixture(); const resources = new Set();
-  f.root.traverse(node => {
-    if (!node.isMesh) return;
-    resources.add(node.geometry); resources.add(node.material);
-    if (node.isInstancedMesh) resources.add(node);
+await test('regional landscape is clear of the board, has low near edges and stays within a mobile draw budget',()=>{
+ for(const [mapId,w,d] of [['classic',12.6,10.8],['compact',16.2,12.6],['expansion',19.8,18]]){
+  const f=fixture(mapId,w,d);let count=0,triangles=0,shadowDraws=0;f.root.updateMatrixWorld(true);
+  f.root.traverse(node=>{
+   if(!node.isMesh)return;count++;triangles+=(node.geometry.index?.count||node.geometry.attributes.position.count)/3;
+   if(node.castShadow)shadowDraws++;const intersections=[];node.raycast({},intersections);assert.equal(intersections.length,0);
+   const positions=node.geometry.attributes.position;
+   for(let i=0;i<positions.count;i++){
+    const v=new THREE.Vector3().fromBufferAttribute(positions,i).applyMatrix4(node.matrixWorld);
+    assert(v.toArray().every(Number.isFinite));assert(Math.abs(v.x)>w/2+.64||Math.abs(v.z)>d/2+.64,`${mapId} intersects plinth ${v.toArray()}`);
+    const outward=Math.max(Math.abs(v.x)-w/2,Math.abs(v.z)-d/2);
+    assert(v.y<1.31&&v.y>-.47,`${mapId} landscape height ${v.y}`);if(outward<1.55)assert(v.y<.12,`${mapId} near edge ${v.toArray()}`);
+    assert(Math.abs(v.x)<w/2+5.3&&Math.abs(v.z)<d/2+5.3);
+   }
   });
-  let releases = 0, borrowedReleases = 0;
-  resources.forEach(resource => resource.addEventListener('dispose', () => releases++));
-  f.borrowed.geometry.addEventListener('dispose', () => borrowedReleases++);
-  f.borrowed.material.addEventListener('dispose', () => borrowedReleases++);
-  f.api.dispose(); f.api.dispose();
-  assert.equal(releases, resources.size); assert.equal(borrowedReleases, 0);
-  assert.equal(f.world.getObjectByName('city_outskirts'), undefined);
-  assert.equal(f.world.children.length, 1); assert.equal(f.world.children[0], f.borrowed);
-  assert.equal(f.api.tick(.1), false);
+  assert(shadowDraws<=12,`${mapId} shadow pass stays bounded`);assert(count>=10&&count<=24,`${mapId} ${count} landscape draws`);assert(triangles<200000,`${mapId} ${triangles} landscape triangles`);f.api.dispose();
+ }
 });
-
-console.log(`${checks} city outskirts checks passed.`);
+await test('all four edges and corners carry distinct regional environments',()=>{
+ const themes=new Set();for(const mapId of ['classic','compact','expansion']){const f=fixture(mapId);themes.add(f.root.userData.theme);for(let i=0;i<4;i++){assert(f.root.getObjectByName(`outskirts_district_${i}`));assert(f.root.getObjectByName(`outskirts_corner_garden_${i}`));}assert(!f.root.getObjectByName('outskirts_neighbourhood_homes'),'no provisional block buildings');f.api.dispose();}assert.equal(themes.size,3);
+});
+await test('scenery geometry is deterministic and independent of gameplay randomness',()=>{
+ const random=Math.random;let first,second;try{let seed=0;Math.random=()=>++seed%100/100;first=fixture('expansion');Math.random=()=>.73;second=fixture('expansion');assert.deepEqual(shapeData(first.root),shapeData(second.root));}finally{Math.random=random;first?.api.dispose();second?.api.dispose();}
+});
+await test('night lighting, visibility and paused updates consume no gameplay RNG or extra frame requests',()=>{
+ const f=fixture(),random=Math.random;Math.random=()=>{throw new Error('gameplay RNG consumed');};try{
+  assert.equal(f.api.tick(.1),false);assert.equal(f.api.tick(.1,{paused:true,reduced:true,night:1}),true);assert.equal(f.api.tick(.1,{night:1}),false);
+  assert.equal(f.api.setVisible(false),true);assert.equal(f.api.tick(.1,{night:0}),false);assert.equal(f.root.visible,false);assert.equal(f.borrowed.visible,true);assert.equal(f.requests(),2);
+  f.api.setVisible(false);assert.equal(f.requests(),2);f.api.setVisible(true);assert.equal(f.api.tick(.1,{night:0}),true);assert.equal(f.requests(),3);
+ }finally{Math.random=random;f.api.dispose();}assert.equal(f.api.setVisible(true),false);
+});
+await test('real regional nodes replace every neighbourhood plot and stay separately owned',async()=>{
+ for(const mapId of ['classic','compact','expansion']){
+  const bundle=fakeBundle(mapId),requests=[],f=fixture(mapId,12.6,10.8,async file=>{requests.push(file);return bundle;});await f.api.loading;
+  assert.deepEqual(requests,[`regions/${mapId}.glb`]);assert.equal(f.api.getState().regional,true);assert.equal(f.api.getState().ready,true);assert.equal(f.api.getState().buildings,mapId==='expansion'?11:12);
+  const neighbourhood=f.root.getObjectByName('outskirts_regional_neighbourhood');assert(neighbourhood);let draws=0;neighbourhood.traverse(n=>{if(n.isMesh)draws++;});assert.equal(draws,1,'regional copies merge by material');
+  let releases=0;bundle.geometry.addEventListener('dispose',()=>releases++);bundle.material.addEventListener('dispose',()=>releases++);f.api.dispose();assert.equal(releases,0,'cache owns source resources');bundle.geometry.dispose();bundle.material.dispose();
+ }
+});
+await test('regional network failure uses existing GLB architecture, and late loads cannot revive removed scenes',async()=>{
+ const bundle=fakeBundle('compact',false),calls=[],f=fixture('compact',12.6,10.8,async file=>{calls.push(file);if(file.startsWith('regions/'))throw new Error('network');return bundle;});await f.api.loading;
+ assert.deepEqual(calls,['regions/compact.glb','city-kit.glb']);assert.equal(f.api.getState().regional,false);assert.equal(f.api.getState().buildings,12);f.api.dispose();
+ let resolve;const late=fixture('classic',12.6,10.8,()=>new Promise(r=>resolve=r));late.api.dispose();resolve(fakeBundle('classic'));await late.api.loading;assert.equal(late.world.children.length,1);assert.equal(late.api.getState().ready,false);
+});
+await test('disposal releases owned geometry and materials exactly once while preserving the board',()=>{
+ const f=fixture(),resources=new Set();f.root.traverse(n=>{if(n.isMesh){resources.add(n.geometry);resources.add(n.material);}});let releases=0,borrowed=0;resources.forEach(r=>r.addEventListener('dispose',()=>releases++));f.borrowed.geometry.addEventListener('dispose',()=>borrowed++);f.borrowed.material.addEventListener('dispose',()=>borrowed++);f.api.dispose();f.api.dispose();assert.equal(releases,resources.size);assert.equal(borrowed,0);assert.equal(f.world.children.length,1);assert.equal(f.api.tick(.1),false);
+});
+await test('all regional courtyard parks fit inside their playable-route clearance',()=>{
+ for(const [mapId,w,d] of [['classic',12.6,10.8],['compact',10.8,9],['expansion',18,10.8]]){
+  const world=new THREE.Group(),owned=new Set(),bounds={w,d};const root=createRegionalPark({THREE,world,boardBounds:bounds,mapId,own:r=>{owned.add(r);return r;}});assert(root);const box=new THREE.Box3().setFromObject(root);
+  assert(box.min.x>-(bounds.w-4.7)/2&&box.max.x<(bounds.w-4.7)/2);assert(box.min.z>-(bounds.d-4.65)/2&&box.max.z<(bounds.d-4.65)/2);let draws=0;root.traverse(n=>{if(n.isMesh)draws++;});assert(draws<24);owned.forEach(r=>r.dispose());
+ }
+});
+console.log(`${checks} regional scenery checks passed.`);

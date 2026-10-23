@@ -9,8 +9,11 @@ export function createRoofSnow({ THREE, world, requestRender = () => {} }) {
   material.name = 'Cosmetic roof snow';
   let amount = 0, disposed = false, stamp = 0, trianglesProcessed = 0;
   const clamp = value => Math.max(0, Math.min(1, value));
-  const excludedMaterial = /window|glazing|glass|lantern|lamp|light|portal|water|pool|spring[s ]|foam|foliage|leaf|shrub|topiary|pine|maple|soil|earth|card heart|cherry card|fortune amethyst/i;
-  const excludedPart = /(?:^life_|card(?:_| )?(?:panel|face|heart|suit)|window|glaz|lamp|lantern|foliage|tree|shrub|water|pool)/i;
+  const words = name => (name || '').replace(/([a-z])([A-Z])/g, '$1 $2').replace(/[^a-z0-9]+/gi, ' ').trim().toLowerCase();
+  // Surface types are complete words. "alpine" is architecture, "wood_light"
+  // describes a timber shade, and only hot springs (not spring stone) are water.
+  const excludedMaterial = /\b(?:windows?|glazing|glass|lanterns?|lamps?|portal|water|pools?|hot springs?|foam|foliage|leaf|leaves|shrubs?|topiary|pines?|evergreens?|maple|soil|earth|card heart|cherry card|fortune amethyst|warm lights?)\b|^lights?$/;
+  const excludedPart = /\b(?:card (?:panel|face|heart|suit)|windows?|glaz(?:ing|e|ed)?|lamps?|lanterns?|foliage|trees?|shrubs?|water|pools?)\b/;
   function belongs(node) { for (let p = node; p; p = p.parent) if (p === world) return true; return false; }
   function cosmetic(node) { for (let p = node; p; p = p.parent) if (p.userData.cosmetic) return true; return false; }
   function partsFor(model) {
@@ -19,7 +22,7 @@ export function createRoofSnow({ THREE, world, requestRender = () => {} }) {
       if (node.userData.cosmetic || node.userData.lifePart || node.name?.startsWith('life_')) return;
       node.updateMatrix();
       const local = node === model ? matrix : matrix.clone().multiply(node.matrix);
-      const forbidden = blocked || excludedPart.test(node.name || '');
+      const forbidden = blocked || excludedPart.test(words(node.name));
       if (node.isMesh && node.geometry?.attributes.position && !node.isInstancedMesh) {
         const geometry = node.geometry;
         if (!geometry.boundingBox) geometry.computeBoundingBox();
@@ -38,7 +41,7 @@ export function createRoofSnow({ THREE, world, requestRender = () => {} }) {
   }
   function eligible(material, forbidden) {
     if (!material || forbidden || material.visible === false || material.opacity < .85) return false;
-    if (excludedMaterial.test(material.name || '')) return false;
+    if (excludedMaterial.test(words(material.name))) return false;
     if (material.emissive && material.emissiveIntensity * (material.emissive.r + material.emissive.g + material.emissive.b) > .04) return false;
     return true;
   }

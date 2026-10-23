@@ -1,0 +1,341 @@
+{
+  "status": "ready_for_runtime",
+  "visual_review": {
+    "status": "passed",
+    "views": [
+      "H:/代码项目/monopoly/art/themed-city-kit/renders/alpine_house-front.png",
+      "H:/代码项目/monopoly/art/themed-city-kit/renders/alpine_house-right.png",
+      "H:/代码项目/monopoly/art/themed-city-kit/renders/alpine_house-back.png",
+      "H:/代码项目/monopoly/art/themed-city-kit/renders/alpine_house-left.png"
+    ],
+    "notes": "Inspected four fresh imports of the final 179921-triangle GLB against the unchanged raw-source views. Continuous roof, chimney, stone foundation, timber facade, balcony and all three distinct facade layouts retained. Front arch door, rear double windows and side door agree with the reference set. Retained 2048 textures to avoid visible color bleeding from the dense source UV atlas at 1024. Fine texture detail is softer than the 4096 raw source; small neural foliage irregularities remain. Accepted for one or two sparse buildings per region, not mass repetition.",
+    "source_comparison": "art/themed-city-kit/renders/alpine_house_raw-{front,right,back,left}.png"
+  },
+  "created_at_utc": "2026-10-23T02:24:24.499137+00:00",
+  "source": {
+    "path": "H:\\代码项目\\monopoly\\art\\themed-city-kit\\source\\alpine-house-mv-v01-pixal-mv-1024-9247.glb",
+    "sha256": "b31e50610cef3c2a1d3c581cbf380fcbb5538a6aef9307fe122c2cc98e590db0",
+    "bytes": 46466188
+  },
+  "source_objects": [
+    {
+      "name": "geometry_0",
+      "triangles": 992518,
+      "uv_layers": 1,
+      "materials": [
+        "Material_0"
+      ]
+    }
+  ],
+  "source_triangles": 992518,
+  "source_vertices": 853915,
+  "welded_vertices": 480783,
+  "decimation_passes": [
+    {
+      "pass": 1,
+      "before": 982579,
+      "after": 179921,
+      "validation_changed": true
+    }
+  ],
+  "requested_triangles": 180000,
+  "source_appearance_bake": null,
+  "animation": null,
+  "output": {
+    "path": "H:\\代码项目\\monopoly\\assets\\models\\regions-ai\\alpine_house.glb",
+    "sha256": "3534766503c4e01753841e8dfdaf95addd85acc942e973b4f90f3a558c9d9d92",
+    "bytes": 8506536
+  },
+  "blend": "H:\\代码项目\\monopoly\\art\\themed-city-kit\\blender\\alpine_house.blend",
+  "tool": {
+    "path": "H:\\代码项目\\monopoly\\art\\themed-city-kit\\reports\\alpine_house-processing-source.py",
+    "sha256": "771e818d2e05973d076d248b0e131c7f767e80bde0434cb76c30000462a63a5d",
+    "bytes": 6826
+  },
+  "shared_processing_tool": {
+    "path": "H:\\代码项目\\monopoly\\art\\harbor\\tools\\process_generated_model.py",
+    "sha256": "cf3af156fa145e1ad0843317fe32931f8083728515488faeb170637505e62cc5",
+    "bytes": 34605
+  },
+  "reference": {
+    "path": "H:\\代码项目\\monopoly\\art\\themed-city-kit\\inputs\\alpine-house-v01\\transforms.json",
+    "sha256": "05bd0d8984ddd6cb3e1e7e2e50a58bb63939829b3cd3dfcf68c1fe0f2c33f8ec",
+    "bytes": 4140
+  },
+  "inference_report": {
+    "path": "H:\\代码项目\\monopoly\\art\\themed-city-kit\\reports\\alpine-house-mv-v01\\alpine-house-mv-v01-pixal-mv-1024-9247.json",
+    "sha256": "576966385868562bc2e61ce0139621955f270bce7ea42fb926029fce182a7701",
+    "bytes": 7357
+  },
+  "input_views": [
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\themed-city-kit\\inputs\\alpine-house-v01\\view00_azim000.png",
+      "sha256": "b8a6639685f03452bc68b91af39e9bdc5e1e3f4cef515dacdc2a6e01ef60c873",
+      "size": [
+        1254,
+        1254
+      ],
+      "alpha_bbox": [
+        0,
+        23,
+        1232,
+        1254
+      ],
+      "camera_to_world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          -1.0,
+          -3.1192049980163574
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\themed-city-kit\\inputs\\alpine-house-v01\\view01_azim090.png",
+      "sha256": "d633539c79672a60e4f35d91f6b395f8e263d435149fc9f2c62c2a8c74d9c858",
+      "size": [
+        1254,
+        1254
+      ],
+      "alpha_bbox": [
+        49,
+        21,
+        1216,
+        1198
+      ],
+      "camera_to_world": [
+        [
+          0.0,
+          0.0,
+          1.0,
+          3.1192049980163574
+        ],
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\themed-city-kit\\inputs\\alpine-house-v01\\view02_azim180.png",
+      "sha256": "8cb328fbda6e544bd6d2eba6409f808db5143c1429a412ac889828860e20621e",
+      "size": [
+        1254,
+        1254
+      ],
+      "alpha_bbox": [
+        0,
+        55,
+        1235,
+        1254
+      ],
+      "camera_to_world": [
+        [
+          -1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          3.1192049980163574
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    }
+  ],
+  "source_board": {
+    "path": "H:\\代码项目\\monopoly\\art\\regions\\references\\alpine-core-three-views.png",
+    "sha256": "df5216ec48e0ed3c5a79a1e852ab3c55c46a843dac6a972a05c09889e701b01c",
+    "bytes": 2204959
+  },
+  "assumed_cameras": true,
+  "camera_calibration": "assumed_standard_orbit_not_measured",
+  "geometry_origin": "Actual native Pixal3D multiview source only. No substitute building or manually added geometry.",
+  "preservation": "Original generated UVs, material assignments and textures retained; one conservative collapse from raw source.",
+  "orientation": {
+    "enabled": true,
+    "candidate_degrees": 0.31403502256426125,
+    "applied_degrees": 0.31403502256426125,
+    "underside_area": 0.13777998407702424,
+    "normal_agreement": 0.9252641600681397,
+    "yaw_degrees": 180,
+    "pitch_degrees": 0,
+    "roll_degrees": 0,
+    "uniform_scale": 3.3341985757946566
+  },
+  "height": 3.0,
+  "bounds_blender": {
+    "min": [
+      -1.4478543996810913,
+      -0.9637249708175659,
+      0.0
+    ],
+    "max": [
+      1.4478543996810913,
+      0.9637249708175659,
+      3.0
+    ]
+  },
+  "bounds_gltf": {
+    "min": [
+      -1.4478543996810913,
+      0.0,
+      -0.9637249708175659
+    ],
+    "max": [
+      1.4478543996810913,
+      3.0,
+      0.9637249708175659
+    ]
+  },
+  "textures": [
+    {
+      "name": "Image_0",
+      "original_size": [
+        4096,
+        4096
+      ],
+      "size": [
+        2048,
+        2048
+      ]
+    },
+    {
+      "name": "Image_1",
+      "original_size": [
+        4096,
+        4096
+      ],
+      "size": [
+        2048,
+        2048
+      ]
+    }
+  ],
+  "quantization": {
+    "source": "H:\\代码项目\\monopoly\\assets\\models\\regions-ai\\alpine_house.glb",
+    "output": "H:\\代码项目\\monopoly\\assets\\models\\regions-ai\\alpine_house.glb",
+    "sourceBytes": 11816620,
+    "outputBytes": 8506536,
+    "sourceSha256": "853f03ba3a3c16efe6b227e1af7d8dc3f6a7aff6b4ed0962c50b3db936d12063",
+    "outputSha256": "3534766503c4e01753841e8dfdaf95addd85acc942e973b4f90f3a558c9d9d92",
+    "positionFaceAndTextureBytesUnchanged": true,
+    "attributes": [
+      {
+        "accessor": 1,
+        "semantic": "NORMAL",
+        "count": 275853,
+        "maximumAngularErrorDegrees": 0.3801877016239917
+      },
+      {
+        "accessor": 2,
+        "semantic": "TEXCOORD_0",
+        "count": 275853,
+        "maximumUVError": 7.629510948348184e-06,
+        "maximumTexelErrorAt1024": 0.00781261921110854
+      }
+    ]
+  },
+  "glb_validation": {
+    "version": 2,
+    "triangles": 179921,
+    "meshes": 1,
+    "materials": 1,
+    "images": 2,
+    "all_primitives_have_uv": true,
+    "animations": [],
+    "all_images_embedded": true,
+    "external_buffers": []
+  },
+  "export_reimport_validation": {
+    "triangles": 179921,
+    "bounds_min": [
+      -1.4478543996810913,
+      -0.9637249708175659,
+      0.0
+    ],
+    "bounds_max": [
+      1.4478543996810913,
+      0.9637249708175659,
+      3.0
+    ],
+    "dimensions_xyz_blender": [
+      2.8957087993621826,
+      1.9274499416351318,
+      3.0
+    ],
+    "texture_sizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          2048,
+          2048
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          2048,
+          2048
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 24,
+    "images": [
+      "H:\\代码项目\\monopoly\\art\\themed-city-kit\\renders\\alpine_house-front.png",
+      "H:\\代码项目\\monopoly\\art\\themed-city-kit\\renders\\alpine_house-right.png",
+      "H:\\代码项目\\monopoly\\art\\themed-city-kit\\renders\\alpine_house-back.png",
+      "H:\\代码项目\\monopoly\\art\\themed-city-kit\\renders\\alpine_house-left.png"
+    ]
+  },
+  "raw_source_unchanged": true,
+  "tool_current_source_path": "H:\\代码项目\\monopoly\\art\\themed-city-kit\\tools\\process_multiview_house.py"
+}

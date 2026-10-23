@@ -1,0 +1,241 @@
+{
+  "status": "generated_unrigged_part_candidate",
+  "started_utc": "2026-10-23T02:42:48.816287+00:00",
+  "generation_started": true,
+  "local_inference_only": true,
+  "asset_id": "harbor-house-mv-v01",
+  "weights": {
+    "ready": true,
+    "models": [
+      {
+        "name": "sparse_structure_decoder",
+        "checkpoint": "C:\\Users\\A\\.codex\\worktrees\\0b69\\厂长\\grande-art-lab\\source\\experimental\\models\\Pixal3D\\ckpts\\ss_dec_conv3d_16l8_fp16.safetensors",
+        "bytes": 147591972,
+        "ready": true
+      },
+      {
+        "name": "sparse_structure_flow_model",
+        "checkpoint": "C:\\Users\\A\\.codex\\worktrees\\0b69\\厂长\\grande-art-lab\\source\\experimental\\models\\Pixal3D\\ckpts\\ss_flow_img_dit_1_3B_64_bf16_mv.safetensors",
+        "bytes": 5359822584,
+        "ready": true
+      },
+      {
+        "name": "shape_slat_decoder",
+        "checkpoint": "C:\\Users\\A\\.codex\\worktrees\\0b69\\厂长\\grande-art-lab\\source\\experimental\\models\\Pixal3D\\ckpts\\shape_dec_next_dc_f16c32_fp16.safetensors",
+        "bytes": 948490494,
+        "ready": true
+      },
+      {
+        "name": "shape_slat_flow_model_512",
+        "checkpoint": "C:\\Users\\A\\.codex\\worktrees\\0b69\\厂长\\grande-art-lab\\source\\experimental\\models\\Pixal3D\\ckpts\\slat_flow_img2shape_dit_1_3B_512_bf16_mv.safetensors",
+        "bytes": 5546764048,
+        "ready": true
+      },
+      {
+        "name": "shape_slat_flow_model_1024",
+        "checkpoint": "C:\\Users\\A\\.codex\\worktrees\\0b69\\厂长\\grande-art-lab\\source\\experimental\\models\\Pixal3D\\ckpts\\slat_flow_img2shape_dit_1_3B_1024_bf16_mv.safetensors",
+        "bytes": 5546764048,
+        "ready": true
+      },
+      {
+        "name": "tex_slat_decoder",
+        "checkpoint": "C:\\Users\\A\\.codex\\worktrees\\0b69\\厂长\\grande-art-lab\\source\\experimental\\models\\Pixal3D\\ckpts\\tex_dec_next_dc_f16c32_fp16.safetensors",
+        "bytes": 948458812,
+        "ready": true
+      },
+      {
+        "name": "tex_slat_flow_model_1024",
+        "checkpoint": "C:\\Users\\A\\.codex\\worktrees\\0b69\\厂长\\grande-art-lab\\source\\experimental\\models\\Pixal3D\\ckpts\\slat_flow_imgshape2tex_dit_1_3B_1024_bf16_mv.safetensors",
+        "bytes": 5546960656,
+        "ready": true
+      }
+    ],
+    "config": "C:\\Users\\A\\.codex\\worktrees\\0b69\\厂长\\grande-art-lab\\source\\experimental\\models\\Pixal3D\\pipeline_mv.json",
+    "config_sha256": "3bd8f005301423604aafbfab126639c675d7dc6968b8113271433f6593901715"
+  },
+  "resources_before": {
+    "gpu": "NVIDIA GeForce RTX 5070 Ti",
+    "total_physical_vram_gib": 15.9208984375,
+    "free_physical_vram_gib": 14.5576171875,
+    "gpu_utilization_percent": 3,
+    "total_ram_gib": 31.152122497558594,
+    "available_ram_gib": 20.014205932617188
+  },
+  "output": "H:\\代码项目\\monopoly\\art\\themed-city-kit\\source\\harbor-house-mv-v01-pixal-mv-1024-9247.glb",
+  "input": "H:\\代码项目\\monopoly\\art\\themed-city-kit\\inputs\\harbor-house-v01\\transforms.json",
+  "input_sha256": "9a5e3717c6b6ea9ecbb8bf45b3ce32eb65305fe397132853a951967f19ee366f",
+  "input_views": [
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\themed-city-kit\\inputs\\harbor-house-v01\\view00_azim000.png",
+      "sha256": "f7b5bdd61e0209ff1ad8304ca3dbb245d6ebcbe2ad68757657364e8c5759ae28",
+      "size": [
+        1254,
+        1254
+      ],
+      "alpha_bbox": [
+        0,
+        18,
+        1222,
+        1254
+      ],
+      "camera_to_world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          -1.0,
+          -3.1192049980163574
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\themed-city-kit\\inputs\\harbor-house-v01\\view01_azim090.png",
+      "sha256": "d9255460221528893f816c66f5b56570f41a2c11f7f82c71d0e2228a3789ed9b",
+      "size": [
+        1254,
+        1254
+      ],
+      "alpha_bbox": [
+        0,
+        21,
+        1228,
+        1254
+      ],
+      "camera_to_world": [
+        [
+          0.0,
+          0.0,
+          1.0,
+          3.1192049980163574
+        ],
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\themed-city-kit\\inputs\\harbor-house-v01\\view02_azim180.png",
+      "sha256": "07cc18b946cc754e4e338214faae330ff1ac02d616a22a916641f3934ed67037",
+      "size": [
+        1254,
+        1254
+      ],
+      "alpha_bbox": [
+        0,
+        23,
+        1232,
+        1254
+      ],
+      "camera_to_world": [
+        [
+          -1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          3.1192049980163574
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    }
+  ],
+  "assumed_cameras": true,
+  "camera_calibration": "assumed_standard_orbit_not_measured",
+  "source_board": {
+    "path": "H:\\代码项目\\monopoly\\art\\regions\\references\\harbor-core-three-views.png",
+    "sha256": "94733f8bb47e47630baf619071d532474024cedd6384247658451c3221132316",
+    "bytes": 2249149
+  },
+  "view_count": 3,
+  "camera_angle_x": 0.3490658503988659,
+  "mesh_scale": 1.0,
+  "native_entrypoint": "inference_mv.py:run_inference / Pixal3DMVImageTo3DPipeline.run_mv",
+  "resolution": 1024,
+  "seed": 9247,
+  "low_vram": true,
+  "strict_naf": true,
+  "texture_size": 4096,
+  "sampler_steps": {
+    "ss": 12,
+    "shape": 12,
+    "tex": 12
+  },
+  "native_checkpoint_dtypes_preserved": true,
+  "pipeline_config": "pipeline_mv.json",
+  "multiview_fusion": "average",
+  "shared_files_write_protected": true,
+  "cache_directory": "H:\\代码项目\\monopoly\\art\\themed-city-kit\\pixal-cache",
+  "runner_sha256": "f6d1fe1a07182e164d0dde43a98e4aab0262844c1377b5c8c66a0ab7bbd362ca",
+  "runner_source_snapshot": "H:\\代码项目\\monopoly\\art\\themed-city-kit\\reports\\harbor-house-mv-v01\\runner-source.py",
+  "post_projection_allocator_cleanup": "Release only unused CUDA cached blocks after complete native conditioner return",
+  "projection_cache_adapter_sha256": "aabecb5acc98a013068a5891226fe1034f764585383290c6917cce230c203bcb",
+  "lifetime_adapter_sha256": "a815f73fbb24f0e7e4eb171ffa0f40472ef30346a109410399a2f7e404db47d7",
+  "gpu_lock": {
+    "status": "released",
+    "pid": 17532,
+    "host": "NeoRic",
+    "label": "monopoly-native-multiview-harbor-house-mv-v01",
+    "acquired_utc": "2026-10-23T02:42:48.911040+00:00",
+    "lock_path": "C:\\Users\\A\\.codex\\shared-resource-locks\\pixal-gpu0.lock",
+    "token": "9dc2272bc0c140218ab8c89ea66c6ceb",
+    "metadata_is_advisory": true
+  },
+  "torch": "2.10.0+cu130",
+  "natten": "0.21.6",
+  "cuda": "13.0",
+  "cuda_free_gib": 14.6845703125,
+  "cuda_total_gib": 15.89398193359375,
+  "output_bytes": 44642192,
+  "output_sha256": "183aed744994496a084d42a15a4866a45404efe659e8e6a5873e9782598877c7",
+  "input_unchanged": true,
+  "seconds": 320.55,
+  "finished_utc": "2026-10-23T02:48:09.436732+00:00",
+  "peak_allocated_gib": 16.368
+}

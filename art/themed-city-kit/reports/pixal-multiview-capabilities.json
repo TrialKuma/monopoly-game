@@ -1,0 +1,166 @@
+{
+  "status": "native_multiview_five_assets_generated_and_verified",
+  "first_runtime_asset": {
+    "path": "assets/models/regions-ai/alpine_house.glb",
+    "report": "art/themed-city-kit/reports/alpine_house-processing.json",
+    "triangles": 179921,
+    "bytes": 8506536,
+    "sha256": "3534766503c4e01753841e8dfdaf95addd85acc942e973b4f90f3a558c9d9d92",
+    "visual_review": "passed four final exported GLB views against four unchanged raw-source views",
+    "deployment_scope": "One or two sparse examples per region; dense regular-property kit is authored separately."
+  },
+  "checked_utc": "2026-10-23T01:56:45.056712+00:00",
+  "generation_started": true,
+  "first_completed_inference": {
+    "asset_id": "alpine-house-mv-v01",
+    "report": "art/themed-city-kit/reports/alpine-house-mv-v01/alpine-house-mv-v01-pixal-mv-1024-9247.json",
+    "finished_utc": "2026-10-23T02:18:01.464749+00:00",
+    "seconds": 563.06,
+    "output_bytes": 46466188,
+    "output_sha256": "b31e50610cef3c2a1d3c581cbf380fcbb5538a6aef9307fe122c2cc98e590db0",
+    "peak_cuda_allocated_gib": 16.37,
+    "physical_vram_gib": 15.9208984375,
+    "memory_boundary": "Completed on RTX 5070 Ti under Windows WDDM, with measured allocation exceeding physical VRAM and shared-memory spill. This is not a claim of fitting exclusively in 16 GiB dedicated VRAM.",
+    "inputs": "Three independent square RGBA images, copied byte-for-byte from ImageGen outputs; no montage input.",
+    "camera_calibration": "Assumed standard 0/90/180 degree orbit at 20 degree FOV, not measured cameras."
+  },
+  "official_commit": "f7cf38429b0bd264f1995f0f8743a88b1c728b94",
+  "native_multiview_supported": true,
+  "native_entrypoint": "inference_mv.py:run_inference(views_dir,output_path,num_views,...)",
+  "native_pipeline": "Pixal3DMVImageTo3DPipeline.run_mv",
+  "input_requirements": [
+    "Separate images of the same consistent object; no montage input",
+    "transforms.json with per-frame 4x4 camera-to-world matrix and horizontal camera_angle_x",
+    "One consistent mesh_scale/framing; no independent object crop/resize",
+    "First frame is canonical front, world Z up, camera at (0,-d,0)",
+    "RGBA alpha supported; unmasked inputs require the original matting model"
+  ],
+  "reference_board_boundary": "ImageGen orthographic design boards are useful modeling references but do not contain measured perspective camera matrices. A guessed 20-degree orbit may run but is an assumed-camera reconstruction, not exact calibrated multi-view reproduction.",
+  "weights": [
+    {
+      "name": "sparse_structure_decoder",
+      "path": "C:\\Users\\A\\.codex\\worktrees\\0b69\\厂长\\grande-art-lab\\source\\experimental\\models\\Pixal3D\\ckpts\\ss_dec_conv3d_16l8_fp16.safetensors",
+      "exists": true,
+      "bytes": 147591972
+    },
+    {
+      "name": "sparse_structure_flow_model",
+      "path": "C:\\Users\\A\\.codex\\worktrees\\0b69\\厂长\\grande-art-lab\\source\\experimental\\models\\Pixal3D\\ckpts\\ss_flow_img_dit_1_3B_64_bf16_mv.safetensors",
+      "exists": true,
+      "bytes": 5359822584
+    },
+    {
+      "name": "shape_slat_decoder",
+      "path": "C:\\Users\\A\\.codex\\worktrees\\0b69\\厂长\\grande-art-lab\\source\\experimental\\models\\Pixal3D\\ckpts\\shape_dec_next_dc_f16c32_fp16.safetensors",
+      "exists": true,
+      "bytes": 948490494
+    },
+    {
+      "name": "shape_slat_flow_model_512",
+      "path": "C:\\Users\\A\\.codex\\worktrees\\0b69\\厂长\\grande-art-lab\\source\\experimental\\models\\Pixal3D\\ckpts\\slat_flow_img2shape_dit_1_3B_512_bf16_mv.safetensors",
+      "exists": true,
+      "bytes": 5546764048
+    },
+    {
+      "name": "shape_slat_flow_model_1024",
+      "path": "C:\\Users\\A\\.codex\\worktrees\\0b69\\厂长\\grande-art-lab\\source\\experimental\\models\\Pixal3D\\ckpts\\slat_flow_img2shape_dit_1_3B_1024_bf16_mv.safetensors",
+      "exists": true,
+      "bytes": 5546764048
+    },
+    {
+      "name": "tex_slat_decoder",
+      "path": "C:\\Users\\A\\.codex\\worktrees\\0b69\\厂长\\grande-art-lab\\source\\experimental\\models\\Pixal3D\\ckpts\\tex_dec_next_dc_f16c32_fp16.safetensors",
+      "exists": true,
+      "bytes": 948458812
+    },
+    {
+      "name": "tex_slat_flow_model_1024",
+      "path": "C:\\Users\\A\\.codex\\worktrees\\0b69\\厂长\\grande-art-lab\\source\\experimental\\models\\Pixal3D\\ckpts\\slat_flow_imgshape2tex_dit_1_3B_1024_bf16_mv.safetensors",
+      "exists": true,
+      "bytes": 5546960656
+    }
+  ],
+  "all_pipeline_weights_present": true,
+  "current_project_runner": "art/themed-city-kit/tools/run_pixal_multiview.py calls actual inference_mv.py and run_mv with pipeline_mv.json and four native *_mv flow weights. A separate run_mv-aware lifetime adapter retires completed stages without changing native sampling values. First full inference completed successfully; eight CPU lifetime checks passed.",
+  "memory_evidence": "Native MV code projects views sequentially and averages in place, but DINO batches B*V. First completed native trial peaked at 16.37 GiB CUDA allocation and 22.23 GiB reserved, exceeding 15.92 GiB physical VRAM; Windows shared memory allowed completion. A transient unrelated large Node working set also caused RAM pressure. No user programs were closed.",
+  "evidence": [
+    {
+      "path": "C:\\Users\\A\\.codex\\worktrees\\0b69\\厂长\\grande-art-lab\\source\\experimental\\Pixal3D\\README.md",
+      "sha256": "01cffd279ea9a98ed760961291904a93713dbf938ccc17e0b3ee5afa10b9e602"
+    },
+    {
+      "path": "C:\\Users\\A\\.codex\\worktrees\\0b69\\厂长\\grande-art-lab\\source\\experimental\\Pixal3D\\inference_mv.py",
+      "sha256": "e19d81817fcc0e7fd8c4010b194f6d959265ecb0763162f9a1bf06255d72a275"
+    },
+    {
+      "path": "C:\\Users\\A\\.codex\\worktrees\\0b69\\厂长\\grande-art-lab\\source\\experimental\\models\\Pixal3D\\pipeline_mv.json",
+      "sha256": "3bd8f005301423604aafbfab126639c675d7dc6968b8113271433f6593901715"
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\harbor\\tools\\pixal_single_use_lifetime.py",
+      "sha256": "dd2989847cc9e133323666cbabc5ab036243bf635e427230fff178cd4f8748e0"
+    }
+  ],
+  "upgrade_choices": [
+    {
+      "method": "Retain a complete neural body and add independent wings/garden/balcony structures",
+      "preserves_entire_original_ai_body": true,
+      "limitation": "A fused original roof cannot be lifted to insert a new floor without cutting the original mesh; external additions only."
+    },
+    {
+      "method": "Generate whole separate L1/L2/L3 assets from consistent reference sets",
+      "preserves_entire_original_ai_body_per_level": true,
+      "limitation": "Swaps complete assets; cross-level detail consistency must be visually checked."
+    },
+    {
+      "method": "Model a modular kit from the AI three-view design board",
+      "preserves_entire_original_ai_body": false,
+      "source_label": "AI reference design + authored Blender game geometry",
+      "approach": "Separate stone plinth, ground facade, repeatable floor bands, cornices, roof, balconies, eaves, tiles and windows. Insert real floor modules and reposition roof; keep original module dimensions instead of scaling the entire building."
+    }
+  ],
+  "final_assets_manifest": "H:\\代码项目\\monopoly\\art\\themed-city-kit\\reports\\approved-houses.json",
+  "completed_assets": [
+    {
+      "region": "alpine",
+      "sha256": "3534766503c4e01753841e8dfdaf95addd85acc942e973b4f90f3a558c9d9d92",
+      "bytes": 8506536,
+      "triangles": 179921,
+      "native_inference_seconds": 563.06,
+      "peak_cuda_allocated_gib": 16.37
+    },
+    {
+      "region": "classic",
+      "sha256": "327102fea0bf328a3d0f9c5eae6333c0e1706eb2708b90d90a3af4c4e44698a3",
+      "bytes": 7684584,
+      "triangles": 180779,
+      "native_inference_seconds": 222.02,
+      "peak_cuda_allocated_gib": 16.365
+    },
+    {
+      "region": "compact",
+      "sha256": "910d04124cf9487318c5492f15d691b3fc426d2acc2ca1c0585fb6bef86891e4",
+      "bytes": 8722288,
+      "triangles": 183105,
+      "native_inference_seconds": 333.34,
+      "peak_cuda_allocated_gib": 16.369
+    },
+    {
+      "region": "harbor",
+      "sha256": "25b47e1d472e232510496a5ac1bab1a8082eeefeb5682bc6063209fe39d72ca2",
+      "bytes": 9081028,
+      "triangles": 181055,
+      "native_inference_seconds": 320.55,
+      "peak_cuda_allocated_gib": 16.368
+    },
+    {
+      "region": "expansion",
+      "sha256": "182f4eb522f183f2a2dea13a7e0133dddf0bafcc4026409310feceb361b9c561",
+      "bytes": 7707512,
+      "triangles": 179871,
+      "native_inference_seconds": 288.73,
+      "peak_cuda_allocated_gib": 16.368
+    }
+  ],
+  "projection_cache_cleanup": "After each complete native conditioner return, only unused CUDA allocator blocks are released. Returned object and live tensor values remain unchanged. This improves later-stage headroom but does not reduce the measured dense-projection peak below physical VRAM."
+}

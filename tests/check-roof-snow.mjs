@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import vm from 'node:vm';
 import { fileURLToPath, pathToFileURL } from 'node:url';
+import {loadGeometryGLB,regionalAssetURL} from './gltf-geometry-fixture.mjs';
 const root = fileURLToPath(new URL('../', import.meta.url));
 const THREE = await import(pathToFileURL(root + 'assets/vendor/three/three.module.min.js'));
 const { GLTFLoader } = await import(pathToFileURL(root + 'assets/vendor/three/addons/loaders/GLTFLoader.js'));
@@ -83,6 +84,22 @@ check('glass, panels and moving parts do not grow snow', () => {
   target(testWorld, model); const effect = createRoofSnow({ THREE, world: testWorld }); effect.refresh(); drain(effect);
   assert.equal(effect.getState().caps, 0); effect.dispose(); glass.dispose();
 });
+check('Alpine architecture grows snow while complete plant and hot-spring surface names stay excluded', () => {
+  const architectural = ['alpine/roof', 'alpine/wall', 'alpine/wood', 'alpine/wood_light', 'Alpine sandstone', 'Spring stone', 'Springfield limestone', 'Pineapple ceramic'];
+  const excluded = ['Pine needles', 'Landmark / Jade pine foliage', 'Landmark / New pine tips', 'Park/evergreen_crown', 'Landmark / Milky turquoise hot springs', 'Map_topiary_spring', 'Map_warm_light', 'Light', 'alpine/water', 'alpine/leaf', 'alpine/glass'];
+  const testWorld = new THREE.Group();
+  const rows = [...architectural, ...excluded].map((name, index) => {
+    const model = block('classification_' + index), material = roofMaterial.clone(); material.name = name;
+    model.children[0].material = material;
+    // A street facade contains the letters "tree", but is not a tree part.
+    model.children[0].name = 'street_facade';
+    target(testWorld, model, index); return { model, material, eligible: architectural.includes(name) };
+  });
+  const effect = createRoofSnow({ THREE, world: testWorld }); effect.refresh(); drain(effect, { snowfall: true, reduced: true });
+  for (const { model, material, eligible } of rows) assert.equal(Boolean(cap(model)), eligible, material.name + ': snow eligibility follows the surface type');
+  assert.equal(effect.getState().caps, architectural.length); effect.dispose();
+  for (const { model, material } of rows) { model.children[0].geometry.dispose(); material.dispose(); }
+});
 check('no global random draws occur in extraction or accumulation', () => {
   const pendingWorld = new THREE.Group(), pendingModel = block('fresh_pending_roof'); target(pendingWorld, pendingModel);
   const pending = createRoofSnow({ THREE, world: pendingWorld }); pending.refresh();
@@ -94,9 +111,8 @@ check('no global random draws occur in extraction or accumulation', () => {
 });
 
 let actualModels = 0, totalCaps = 0, totalTriangles = 0, widestCap = 0, integrationModel = null; const coverage = [];
-for (const kit of ['city-kit', 'specials', 'landmarks', 'compact-specials', 'expansion-specials']) {
-  const bytes = fs.readFileSync(root + `assets/models/${kit}.glb`);
-  const gltf = await new GLTFLoader().parseAsync(bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength), '');
+for (const kit of ['city-kit', 'specials', 'landmarks', 'compact-specials', 'expansion-specials', 'regions/alpine']) {
+  const gltf = await loadGeometryGLB(kit.startsWith('regions/') ? regionalAssetURL(kit.slice(8)) : pathToFileURL(root + `assets/models/${kit}.glb`));
   const actualWorld = new THREE.Group(), models = [];
   for (const source of gltf.scene.children) {
     if (/^(?:plot_0|fountain|tree|streetlamp)$/.test(source.name)) continue;
