@@ -1,4 +1,4 @@
-import { loadSharedModelAsset, disposeSharedModelAssets, regionalSceneryDirectory } from './scene-model-cache.js?v=20261024-blender-release2';
+import { loadSharedModelAsset, disposeSharedModelAssets, regionalSceneryDirectory } from './scene-model-cache.js?v=20261025-landmarks3';
 import { buildDestinationGarden, batchGardenBuilding, instanceGardenBuildings } from './scene-garden-kit.js?v=20261025-terrain3';
 
 // Destination art is cosmetic. The authored meshes keep their colors and rigid
@@ -8,7 +8,7 @@ const THEMES = {
   alpine: { file:'harbor/alpine_windmill.glb', name:'alpine_windmill', water:'#7abfc4', stone:'#c4c7b2', land:'#adc4a3', roof:'#477e73', flower:'#d9ad84' },
 };
 function loadModel(file) {
-  return loadSharedModelAsset(file,{version:'20261024-blender-release2'});
+  return loadSharedModelAsset(file,{version:'20261025-landmarks3'});
 }
 export function createDestinationScene({THREE, world, boardBounds, mapId, requestRender=()=>{}}) {
   const theme=THEMES[mapId];if(!theme)return null;

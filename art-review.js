@@ -1,8 +1,9 @@
 import * as THREE from './assets/vendor/three/three.module.min.js';
-import { makeStudioEnvironment } from './scene-environment.js?v=20261024-blender-release2';
+import { makeStudioEnvironment } from './scene-environment.js?v=20261025-landmarks3';
 import { GLTFLoader } from './assets/vendor/three/addons/loaders/GLTFLoader.js';
 import { createOwnershipRoofs } from './scene-ownership-roofs.js?v=20261025-items1';
 import { createFunctionalLandmark } from './scene-functional-landmarks.js?v=20261025-items1';
+import { createThermalSteam } from './scene-thermal-steam.js?v=20261025-landmarks3';
 
 const $=id=>document.getElementById(id),region=$('region'),family=$('family'),level=$('level'),stage=$('stage');
 const params=new URLSearchParams(location.search),candidateMode=params.get('stage')==='candidate';
@@ -41,6 +42,7 @@ async function loadProductionProgress(){
 }
 loadProductionProgress();
 const galleryLink=document.createElement('a');galleryLink.textContent='整套建筑对照 ↗';galleryLink.style.fontSize='13px';document.querySelector('nav').append(galleryLink);
+const upgradeLink=document.createElement('a');upgradeLink.textContent='二级 → 满级对照 ↗';upgradeLink.style.fontSize='13px';upgradeLink.hidden=candidateMode;document.querySelector('nav').append(upgradeLink);
 if(candidateMode){document.querySelector('h1').textContent='历史 AI 建筑 · 制作记录';document.querySelector('header p').textContent='当前显示旧 AI 候选，正式游戏已改用 Blender 建筑。右侧为该件当时送入 Pixal3D 的参考图。';}
 const entries=[['villa','住宅','core'],['shop','商铺','core'],['hotel','旅馆','core'],['tower','公馆','core'],['onsen','温泉庄园','landmarks'],['finance','商会','landmarks'],['skyscraper','大酒店','landmarks'],['civic_hall','市政厅','public'],['vault_bank','银行','public'],['builders_guild','工坊','public'],['card_pavilion','卡牌店','public'],['chance_wheel','幸运亭','public'],['teleport_gate','交通门','public'],['rush_station','快线站','public'],['junction_hub','路口驿站','public']];
 entries.push(['hero','景观地标','scenic']);
@@ -80,7 +82,7 @@ const pivot=new THREE.Group();scene.add(pivot);let bundle=null,candidateReceipt=
 async function sha256(bytes){const digest=await crypto.subtle.digest('SHA-256',bytes);return Array.from(new Uint8Array(digest),v=>v.toString(16).padStart(2,'0')).join('');}
 async function loadReviewModel(file){
   const loader=new GLTFLoader();
-  if(!candidateMode)return {gltf:await loader.loadAsync(`${file}?v=20261024-blender-release2`),report:null};
+  if(!candidateMode)return {gltf:await loader.loadAsync(`${file}?v=20261025-landmarks3`),report:null};
   const stamp=Date.now(),response=await fetch(`${file.replace(/\.glb$/,'.json')}?review=${stamp}`);
   if(!response.ok)throw Error('这栋建筑尚未完成候选导出。');const report=await response.json();
   const modelResponse=await fetch(`${file}?review=${stamp}`);if(!modelResponse.ok)throw Error('候选模型尚未载入。');
@@ -110,12 +112,12 @@ function setupMotion(object){
   if(bundle.animations?.length){mixer=new THREE.AnimationMixer(object);for(const clip of bundle.animations)mixer.clipAction(clip).play();}
   // Hero clips already animate their articulated parts. Public lot buildings
   // have no clips and use the game's wheel/pendulum motion instead.
-  if(!mixer)object.traverse(node=>{if(node.userData.lifePart)movingParts.push({node,rotation:node.rotation.clone(),kind:node.userData.lifePart});});
+  if(!mixer)object.traverse(node=>{if(node.userData.lifePart||node.userData.thermalSteam)movingParts.push({node,rotation:node.rotation.clone(),kind:node.userData.thermalSteam?'steam':node.userData.lifePart});});
   motionToggle.hidden=!mixer&&!movingParts.length;motionElapsed=0;
 }
 function animateMotion(time){
   if(disposed||!motionPlaying)return;const delta=Math.min(.05,(time-lastMotionTime)/1000);lastMotionTime=time;motionElapsed+=delta;mixer?.update(delta);
-  for(const part of movingParts)part.node.rotation.z=part.rotation.z+(part.kind==='wheel'?motionElapsed*.35:Math.sin(motionElapsed*.8)*.08);
+  for(const part of movingParts){if(part.kind==='steam')part.node.material.uniforms.time.value=motionElapsed;else part.node.rotation.z=part.rotation.z+(part.kind==='wheel'?motionElapsed*.35:Math.sin(motionElapsed*.8)*.08);}
   render();motionFrame=requestAnimationFrame(animateMotion);
 }
 motionToggle.addEventListener('click',()=>{
@@ -127,6 +129,7 @@ function render(){if(disposed)return;const w=Math.max(1,stage.clientWidth),h=Mat
 async function update(){
  const token=++request,map=region.value;
  galleryLink.href=`./art-board.html?map=${map}${candidateMode?'&artStage=candidate':''}`;
+ upgradeLink.href=`./art/blender-city/level3-review.html#${map}`;
  const heroOption=[...family.options].find(option=>option.value==='hero');heroOption.disabled=!scenic[map];
  if(family.value==='hero'&&!scenic[map])family.value='villa';
  const selected=entries.find(x=>x[0]===family.value),hero=selected[2]==='scenic',publicBuilding=selected[2]==='public';level.disabled=publicBuilding||hero;
@@ -149,6 +152,7 @@ async function update(){
    pivot.clear();const object=source.clone(true);object.position.set(0,0,0);let triangles=0;
    ownerChoice.disabled=publicBuilding||hero;
    if(!candidateMode){
+     const steam=createThermalSteam({THREE,model:object,own:resource=>{reviewResources.add(resource);return resource;}});if(steam)object.add(steam);
      if(!publicBuilding&&!hero)reviewRoofs.set(object,ownerChoice.value);
      else if(publicBuilding){
        const type={civic_hall:'start',vault_bank:'bank',builders_guild:'construction',card_pavilion:'card_draw',chance_wheel:'chance',teleport_gate:'teleport',rush_station:'rush',junction_hub:'junction'}[family.value];

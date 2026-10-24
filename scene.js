@@ -1,12 +1,13 @@
 import * as THREE from './assets/vendor/three/three.module.min.js';
-import { makeStudioEnvironment } from './scene-environment.js?v=20261024-blender-release2';
+import { makeStudioEnvironment } from './scene-environment.js?v=20261025-landmarks3';
 import { mergeGeometries } from './assets/vendor/three/addons/utils/BufferGeometryUtils.js';
-import { createSceneLife } from './scene-life.js?v=20261025-items1';
+import { createSceneLife } from './scene-life.js?v=20261025-landmarks3';
 import { createStreetFoundation } from './scene-streets.js?v=20261024-1';
 import { createRegionalPark } from './scene-regional-parks.js?v=20261025-terrain3';
 import { createOwnershipRoofs } from './scene-ownership-roofs.js?v=20261025-items1';
 import { createFunctionalLandmark } from './scene-functional-landmarks.js?v=20261025-items1';
-import { loadSharedModelAsset, forgetSharedModelAsset, releaseSharedModelAsset, releaseSupersededModelAssets, ownsSharedModelResource, disposeSharedModelAssets } from './scene-model-cache.js?v=20261024-blender-release2';
+import { createThermalSteam } from './scene-thermal-steam.js?v=20261025-landmarks3';
+import { loadSharedModelAsset, forgetSharedModelAsset, releaseSharedModelAsset, releaseSupersededModelAssets, ownsSharedModelResource, disposeSharedModelAssets } from './scene-model-cache.js?v=20261025-landmarks3';
 
 // All route positions, ownership and prices come from the game. This view never
 // changes a rule or finishes an action; its animation is entirely cosmetic.
@@ -68,7 +69,7 @@ const LANDMARKS = { classic: { 5:'finance', 7:'skyscraper', 14:'onsen' }, compac
 const SPECIAL_MODELS = { bank:'vault_bank',construction:'builders_guild',card_draw:'card_pavilion',chance:'chance_wheel',teleport:'teleport_gate',rush:'rush_station',junction:'junction_hub' };
 const ASSET_BUNDLES = [
   {file:'city-kit.glb',version:'20260911-12',authored:false,pattern:/^(plot_0|tree|streetlamp|fountain)$/},
-  ...['classic','compact','expansion','harbor','alpine'].map(mapId=>({file:`regions/${mapId}.glb`,mapId,version:'20261024-blender-release2',authored:true,pattern:new RegExp(`^${mapId}_(?:(?:villa|shop|hotel|tower|skyscraper|finance|onsen)_[123]|civic_hall|vault_bank|builders_guild|card_pavilion|chance_wheel|teleport_gate|rush_station|junction_hub)$`)})),
+  ...['classic','compact','expansion','harbor','alpine'].map(mapId=>({file:`regions/${mapId}.glb`,mapId,version:'20261025-landmarks3',authored:true,pattern:new RegExp(`^${mapId}_(?:(?:villa|shop|hotel|tower|skyscraper|finance|onsen)_[123]|civic_hall|vault_bank|builders_guild|card_pavilion|chance_wheel|teleport_gate|rush_station|junction_hub)$`)})),
 ];
 const projection = new THREE.Vector3();
 const raycaster = new THREE.Raycaster();
@@ -486,7 +487,7 @@ function buildMap(data) {
   resize();
 }
 function makePark(mapId) {
-  createRegionalPark({THREE,world,boardBounds,mapId,own,loadSceneryBundle:file=>loadSharedModelAsset(file,{version:'20261024-blender-release2'}),requestRender:()=>{renderDirty=true;}});
+  createRegionalPark({THREE,world,boardBounds,mapId,own,loadSceneryBundle:file=>loadSharedModelAsset(file,{version:'20261025-landmarks3'}),requestRender:()=>{renderDirty=true;}});
 }
 function numberTexture(number) {
   const canvas = document.createElement('canvas'); canvas.width = 96; canvas.height = 96;
@@ -615,6 +616,7 @@ function createLotModel(tile,data,level,view=null,ownResource=own){
     else model.userData.pendingModel=asset.desired;
   }
   if(asset.source){
+    const steam=createThermalSteam({THREE,model,own:ownResource});if(steam)model.add(steam);
     if(tile.lot)roofController().set(model,tile.lot.ownerId);
     else {
       const service=createFunctionalLandmark({THREE,mapId:data.mapId,type:tile.isStart?'start':tile.special?.type,model,own:ownResource});
@@ -697,8 +699,10 @@ function updateLot(view,tile,data,initial=false) {
   const signature=`${modelName}:${asset.key}:${asset.source?.uuid||'fallback'}`;
   if(view.signature!==signature){
     view.building.children.forEach(model=>ownershipRoofs?.release(model));
+    view.modelResources?.forEach(resource=>{resource.dispose?.();resources.delete(resource);});
+    view.modelResources=new Set();
     view.building.clear(); view.signature=signature;view.modelName=modelName;
-    view.building.add(createLotModel(tile,data,level,view).model);
+    view.building.add(createLotModel(tile,data,level,view,resource=>{view.modelResources.add(resource);return own(resource);}).model);
     view.label.dataset.modelKey=asset.desired;view.label.dataset.loadedModel=asset.source?asset.key:'';
     if(!initial){view.born=performance.now();view.building.scale.y=reducedMotion.matches?1:.78;effect({type:'upgrade',tiles:[tile.index]});}
   }
@@ -926,12 +930,14 @@ function resize(){
     const aspect=width/height;
     const wide=THREE.MathUtils.clamp((aspect-1.05)/.85,0,1);
     let yaw=THREE.MathUtils.lerp(.65,.10,wide);
-    let elevation=THREE.MathUtils.lerp(.91,.62,wide);
+    // Keep the pawn's head and chest visible beside the taller level-three
+    // landmarks. This is a fixed default, not another moving camera effect.
+    let elevation=THREE.MathUtils.lerp(1.08,.62,wide);
     if(snapshot?.mapId==='expansion'){
       // Turn toward the long side on a phone: the 28-step rectangle then uses
       // the available height instead of squeezing ten buildings across 390px.
       const portrait=THREE.MathUtils.clamp((1.40-aspect)/.65,0,1);
-      yaw=THREE.MathUtils.lerp(.10,-1.47,portrait);elevation=THREE.MathUtils.lerp(.62,.93,portrait);
+      yaw=THREE.MathUtils.lerp(.10,-1.47,portrait);elevation=THREE.MathUtils.lerp(.62,1.08,portrait);
     }
     if(cameraView.facingYaw===null)cameraView.facingYaw=yaw;
     if(cameraView.modified){yaw=cameraView.yaw;elevation=cameraView.elevation;}

@@ -1,5 +1,5 @@
 import * as THREE from './assets/vendor/three/three.module.min.js';
-import { makeStudioEnvironment } from './scene-environment.js?v=20261024-blender-release2';
+import { makeStudioEnvironment } from './scene-environment.js?v=20261025-landmarks3';
 import {GLTFLoader} from './assets/vendor/three/addons/loaders/GLTFLoader.js';
 const $=id=>document.getElementById(id),region=$('region'),board=$('board'),cards=$('cards'),params=new URLSearchParams(location.search);
 const candidate=params.get('artStage')==='candidate';
@@ -29,7 +29,7 @@ async function load(){
   const current=++token,map=region.value;views=[];cards.replaceChildren();dispose(bundle);bundle=null;$('error').hidden=true;$('status').textContent='模型载入中';requestDraw();
   const url=familyReview?`./art/full-ai-city/packed/families/${map}-${familyReview}.glb`:candidate?`./art/full-ai-city/packed/${map}.glb`:`./assets/models/regions/${map}.glb`;
   try{
-    const gltf=await new GLTFLoader().loadAsync(`${url}?v=20261024-blender-release2`);if(current!==token||disposed){dispose(gltf);return;}bundle=gltf;let authored=0,loaded=0;
+    const gltf=await new GLTFLoader().loadAsync(`${url}?v=20261025-landmarks3`);if(current!==token||disposed){dispose(gltf);return;}bundle=gltf;let authored=0,loaded=0;
     for(const asset of assets){
       const source=gltf.scene.getObjectByName(`${map}_${asset.name}`);if(!source)throw new Error(`缺少${asset.label}，整套资源尚未完成。`);
       const card=document.createElement('a');card.className='card';const query=new URLSearchParams({map,family:asset.family,level:String(asset.level)});if(candidate)query.set('stage','candidate');card.href=`./art-review.html?${query}`;

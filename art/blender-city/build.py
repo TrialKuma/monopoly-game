@@ -108,7 +108,7 @@ def fit(root,asset):
     elif asset in PUBLIC:envelope=(1.04,1.04,1.40)
     else:
         family,level=asset.rsplit('_',1);level=int(level)
-        envelope=(2.50,1.02,[1.10,1.65,2.25][level-1]) if family in ('skyscraper','finance','onsen') else (.99,.99,[.78,1.16,1.60][level-1])
+        envelope=(2.50,1.02,[1.10,1.65,2.60][level-1]) if family in ('skyscraper','finance','onsen') else (.99,.99,[.78,1.16,1.76][level-1])
     factor=min(a/b for a,b in zip(envelope,size))
     correction_file=HERE/'placement-corrections.json'
     if correction_file.exists():
@@ -118,6 +118,14 @@ def fit(root,asset):
             root['placementReview']=correction
     center=Vector(((lo.x+hi.x)/2,(lo.y+hi.y)/2,lo.z))
     transform=Matrix.Diagonal((factor,factor,factor,1))@Matrix.Translation(-center)
+    # Author pool anchors beside the actual bath geometry; export once in the
+    # same Y-up coordinates as glTF. Runtime steam never guesses from a bbox.
+    if 'thermalPools' in root:
+        pools=[]
+        for x,y,z,w,d in root['thermalPools']:
+            point=transform@Vector((x,y,z))
+            pools.append([point.x,point.z,-point.y,w*factor,d*factor])
+        root['thermalPools']=pools
     # Preserve identity roots and meaningful movable origins, including keyframes.
     for o in root.children:
         o.matrix_basis=transform@o.matrix_basis

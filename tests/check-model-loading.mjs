@@ -105,7 +105,7 @@ function fixture(mapId = 'classic') {
 {
  const f=fixture();let complete=false;const batch=f.load().then(()=>complete=true);void f.load();await drain();
  assert.deepEqual(f.downloads.map(x=>x.file).sort(),filesFor('classic').sort());
- assert.equal(f.downloads.find(x=>x.file==='regions/classic.glb').url,'./assets/models/regions/classic.glb?v=20261024-blender-release2');
+ assert.equal(f.downloads.find(x=>x.file==='regions/classic.glb').url,'./assets/models/regions/classic.glb?v=20261025-landmarks3');
  assert(f.downloads.filter(x=>commonFiles.includes(x.file)).every(x=>x.url.endsWith('?v=20260911-12')));
  await f.finish('city-kit.glb');assert(f.model('tree'));assert(!f.model('city_hall'));assert(!f.model('villa_1'));assert.equal(complete,false);await f.flushFrames();assert.equal(f.stats.builds,1);assert.equal(f.stats.updates,1);
  assert.equal(f.run('resolveAsset({special:{type:"bank"}},{mapId:"classic"}).source'),undefined,'no old architecture substitutes for a pending neural model');

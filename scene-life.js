@@ -11,7 +11,7 @@ export function shouldPreserveLifeNode(node) {
 export function createSceneLife({ THREE, scene, world, light, snapshot, lotViews, boardBounds, renderer, requestRender = () => {} }) {
   const TAU = Math.PI * 2;
   const owned = new Set(), materialCopies = new Map(), bindings = new Map();
-  const movingParts = [], pedestrians = [], ripples = [], lamps = [];
+  const movingParts = [], pedestrians = [], ripples = [], lamps = [], thermalSteam = [];
   const partStates = new WeakMap();
   const root = new THREE.Group(); root.name = 'city_life'; root.userData.cosmetic = true; world.add(root);
   const media = typeof window !== 'undefined' ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
@@ -149,7 +149,9 @@ export function createSceneLife({ THREE, scene, world, light, snapshot, lotViews
     // Drop references to upgraded/destroyed building instances during a game.
     for (const [node, material] of bindings) if (!isInWorld(node)) { node.material = material; bindings.delete(node); }
     movingParts.length = 0;
+    thermalSteam.length = 0;
     world.traverse(node => {
+      if (node.userData.thermalSteam) thermalSteam.push(node);
       // Each atmosphere module owns its materials. Only bind actual buildings,
       // never another module's translucent particles or emissive decorations.
       if (node.userData.cosmetic) return;
@@ -237,6 +239,7 @@ export function createSceneLife({ THREE, scene, world, light, snapshot, lotViews
     outskirts.tick(step, { night, reduced, paused });
     destination?.tick(step, {night,reduced,paused});
     applyLight();
+    for (const steam of thermalSteam) steam.material.uniforms.time.value = elapsed;
     for (const p of pedestrians) {
       const angle = p.phase + elapsed * .11 * p.direction;
       p.object.position.set(Math.cos(angle) * p.radius, parkY + .004, Math.sin(angle) * p.radius);
@@ -277,7 +280,7 @@ export function createSceneLife({ THREE, scene, world, light, snapshot, lotViews
     for (const [node, material] of bindings) node.material = material;
     for (const part of movingParts) part.node.rotation.copy(part.base);
     weather.dispose(); outskirts.dispose(); destination?.dispose(); lighting.dispose();
-    root.removeFromParent(); owned.forEach(resource => resource.dispose?.()); owned.clear(); bindings.clear(); materialCopies.clear(); movingParts.length = 0; sparkEvents.length = 0;
+    root.removeFromParent(); owned.forEach(resource => resource.dispose?.()); owned.clear(); bindings.clear(); materialCopies.clear(); movingParts.length = 0; sparkEvents.length = 0; thermalSteam.length = 0;
   }
   bindBuildings(); tick(0, 0);
   return { update, tick, effect, setTimeMode, setSeason, setWeather, getTimeMode: () => mode, getNightFactor: () => night,
@@ -285,5 +288,5 @@ export function createSceneLife({ THREE, scene, world, light, snapshot, lotViews
     getAtmosphere: () => ({ ...lighting.getState(), ...weather.getState(), timeMode: mode, destination:destination?.getState() }),
     setInteractionPaused: value => { const next=!!value;if(next===paused)return;paused=next;if(!paused){forced=true;requestRender();} }, dispose,
     // Bounded diagnostic counts support resource/reset checks without exposing rules.
-    stats: () => ({ owned: owned.size, materialBindings: bindings.size, movingParts: movingParts.length, pedestrians: pedestrians.length, particles: 36 + 16 + sparkLimit, disposed }) };
+    stats: () => ({ owned: owned.size, materialBindings: bindings.size, movingParts: movingParts.length, pedestrians: pedestrians.length, thermalBaths: thermalSteam.length, particles: 36 + 16 + sparkLimit + thermalSteam.reduce((total,node)=>total+node.geometry.attributes.position.count,0), disposed }) };
 }

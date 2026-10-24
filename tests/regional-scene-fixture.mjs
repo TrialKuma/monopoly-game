@@ -9,6 +9,7 @@ import {mergeGeometries} from '../assets/vendor/three/addons/utils/BufferGeometr
 import {createStreetFoundation} from '../scene-streets.js';
 import {createOwnershipRoofs} from '../scene-ownership-roofs.js';
 import {createFunctionalLandmark} from '../scene-functional-landmarks.js';
+import {createThermalSteam} from '../scene-thermal-steam.js';
 import {loadGeometryGLB,regionalAssetURL} from './gltf-geometry-fixture.mjs';
 
 export {THREE};
@@ -40,7 +41,7 @@ export async function regionalFixture(mapId){
   assert(MAP_IDS.includes(mapId),`unknown map ${mapId}`);
   const assetUrl=regionalAssetURL(mapId);
   assert(fs.existsSync(assetUrl),`required regional GLB is missing: ${fileURLToPath(assetUrl)}`);
-  const context=vm.createContext({THREE,GLTFLoader,mergeGeometries,createStreetFoundation,createOwnershipRoofs,createFunctionalLandmark,performance,console,CustomEvent:class{},document:{createElement:()=>new Element(),body:{classList:{remove(){}}}},window:{matchMedia:()=>({matches:false}),addEventListener(){},dispatchEvent(){}}});
+  const context=vm.createContext({THREE,GLTFLoader,mergeGeometries,createStreetFoundation,createOwnershipRoofs,createFunctionalLandmark,createThermalSteam,performance,console,CustomEvent:class{},document:{createElement:()=>new Element(),body:{classList:{remove(){}}}},window:{matchMedia:()=>({matches:false}),addEventListener(){},dispatchEvent(){}}});
   const run=code=>vm.runInContext(code,context);
   run(fs.readFileSync(new URL('../scene.js',import.meta.url),'utf8').replace(/^import .*;\r?\n/gm,''));
   run('world=new THREE.Group();labels=document.createElement("div");numberTexture=()=>own(new THREE.Texture());');

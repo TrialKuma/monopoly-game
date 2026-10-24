@@ -93,6 +93,7 @@ function packageFile(file,region,expected,{far=false,hero=false,nearManifest=nul
       if(key==='compact/villa_2')assert.equal(report.maxColorError,0,'accepted benchmark colors remain exact');
     }
     const original=glb(originalBytes),originalRoots=original.doc.scenes[original.doc.scene||0].nodes;
+    if(extra.family==='onsen')assert.deepEqual(extra.thermalPools,original.doc.nodes[originalRoots[0]].extras.thermalPools,`${key}: authored pool anchors survive publishing`);
     assert.equal(originalRoots.length,1);assert.equal(measure(original,originalRoots[0]).fingerprint,m.fingerprint,'original geometry and transforms survive packaging exactly');
     assert(Math.abs(m.box.min.y)<.002,`${key}: ground contact`);
     assert(Math.abs(m.box.min.x+m.box.max.x)<.002&&Math.abs(m.box.min.z+m.box.max.z)<.002,`${key}: centered parcel`);
@@ -122,7 +123,10 @@ function packageFile(file,region,expected,{far=false,hero=false,nearManifest=nul
   }
   if(!far&&!hero){
     assert.equal(asset.doc.animations?.length||0,0,'public parts are driven once by the game');
-    for(const family of families)assert(heights.get(`${family}_1`)<heights.get(`${family}_2`)&&heights.get(`${family}_2`)<heights.get(`${family}_3`),`${region}/${family}: levels visibly grow`);
+    for(const family of families){
+      assert(heights.get(`${family}_1`)<heights.get(`${family}_2`)&&heights.get(`${family}_2`)<heights.get(`${family}_3`),`${region}/${family}: levels visibly grow`);
+      assert(heights.get(`${family}_3`)>=heights.get(`${family}_2`)*1.45,`${region}/${family}: upgraded silhouette preserves at least 45% height growth`);
+    }
   }
   console.log(`PASS ${file}: ${expected.length} authored buildings, original references, actual bounds and geometry`);return manifest;
 }

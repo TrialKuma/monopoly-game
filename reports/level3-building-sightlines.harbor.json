@@ -1,0 +1,317 @@
+{
+  "mapId": "harbor",
+  "mode": "default camera: head and chest centers must be clear; peripheral samples are reported",
+  "centerGate": {
+    "enabled": true,
+    "passed": true
+  },
+  "geometry": "double-sided opaque surfaces; no-pick ignored",
+  "viewport": {
+    "width": 390,
+    "height": 844
+  },
+  "productionCamera": {
+    "yaw": 0.65,
+    "elevation": 1.08,
+    "zoom": 1
+  },
+  "cameraOverrides": {},
+  "camera": {
+    "yaw": 0.65,
+    "elevation": 1.08,
+    "zoom": 1
+  },
+  "sampling": {
+    "poses": [
+      "single human",
+      "single ai",
+      "shared human",
+      "shared ai"
+    ],
+    "parts": [
+      {
+        "part": "head",
+        "height": 0.315,
+        "radius": 0.085
+      },
+      {
+        "part": "chest",
+        "height": 0.15,
+        "radius": 0.065
+      }
+    ],
+    "samplesPerPart": 9
+  },
+  "levels": [
+    1,
+    2,
+    3
+  ],
+  "assetPath": "H:\\代码项目\\monopoly\\assets\\models\\regions\\harbor.glb",
+  "assetSha256": "5a6cda3ab3e4e0bd35b31c625552840a8e96001f3bef57abf54f61ea6ce652d3",
+  "sceneSha256": "12a6572896d7ad658b07816b4df38fd0646465c7ec5d28203c6d30f711081af2",
+  "counts": {
+    "tiles": 66,
+    "poses": 264,
+    "targets": 528,
+    "rays": 4752,
+    "blockedRays": 7,
+    "blockedTargets": 3,
+    "fullyBlockedTargets": 0,
+    "blockedCenters": 0,
+    "bothCentersBlockedPoses": 0,
+    "anyBlockedPoses": 3,
+    "tilesWithBlockedRays": 2,
+    "tilesWithBothCentersBlocked": 0
+  },
+  "perLevel": [
+    {
+      "level": 1,
+      "counts": {
+        "tiles": 22,
+        "poses": 88,
+        "targets": 176,
+        "rays": 1584,
+        "blockedRays": 0,
+        "blockedTargets": 0,
+        "fullyBlockedTargets": 0,
+        "blockedCenters": 0,
+        "bothCentersBlockedPoses": 0,
+        "anyBlockedPoses": 0,
+        "tilesWithBlockedRays": 0,
+        "tilesWithBothCentersBlocked": 0
+      },
+      "blockedRayRatio": 0,
+      "tilesWithBlockedRays": [],
+      "tilesWithBothCentersBlocked": []
+    },
+    {
+      "level": 2,
+      "counts": {
+        "tiles": 22,
+        "poses": 88,
+        "targets": 176,
+        "rays": 1584,
+        "blockedRays": 0,
+        "blockedTargets": 0,
+        "fullyBlockedTargets": 0,
+        "blockedCenters": 0,
+        "bothCentersBlockedPoses": 0,
+        "anyBlockedPoses": 0,
+        "tilesWithBlockedRays": 0,
+        "tilesWithBothCentersBlocked": 0
+      },
+      "blockedRayRatio": 0,
+      "tilesWithBlockedRays": [],
+      "tilesWithBothCentersBlocked": []
+    },
+    {
+      "level": 3,
+      "counts": {
+        "tiles": 22,
+        "poses": 88,
+        "targets": 176,
+        "rays": 1584,
+        "blockedRays": 7,
+        "blockedTargets": 3,
+        "fullyBlockedTargets": 0,
+        "blockedCenters": 0,
+        "bothCentersBlockedPoses": 0,
+        "anyBlockedPoses": 3,
+        "tilesWithBlockedRays": 2,
+        "tilesWithBothCentersBlocked": 0
+      },
+      "blockedRayRatio": 0.004419191919191919,
+      "tilesWithBlockedRays": [
+        6,
+        8
+      ],
+      "tilesWithBothCentersBlocked": []
+    }
+  ],
+  "blockedRayRatio": 0.001473063973063973,
+  "obstacles": [
+    {
+      "tileIndex": 5,
+      "tileNumber": 6,
+      "tileName": "海港商会",
+      "asset": "harbor_finance_3",
+      "mesh": "",
+      "point": [
+        3.3352,
+        2.6013,
+        -3.5562
+      ],
+      "rays": 6
+    },
+    {
+      "tileIndex": 7,
+      "tileNumber": 8,
+      "tileName": "港湾观景楼",
+      "asset": "harbor_skyscraper_3",
+      "mesh": "",
+      "point": [
+        3.3264,
+        2.574,
+        -0.1378
+      ],
+      "rays": 1
+    }
+  ],
+  "meshes": [
+    [
+      "",
+      7
+    ]
+  ],
+  "findings": [
+    {
+      "level": 3,
+      "tileIndex": 5,
+      "tileNumber": 6,
+      "tileName": "海港商会",
+      "mode": "single",
+      "player": "human",
+      "part": "chest",
+      "pawnPosition": [
+        2.56,
+        0.265,
+        -4.5
+      ],
+      "blocked": 3,
+      "samples": 9,
+      "centerBlocked": false,
+      "obstacles": [
+        {
+          "sample": 1,
+          "tileIndex": 5,
+          "tileNumber": 6,
+          "tileName": "海港商会",
+          "asset": "harbor_finance_3",
+          "mesh": "",
+          "point": [
+            3.3279,
+            2.6294,
+            -3.5973
+          ]
+        },
+        {
+          "sample": 7,
+          "tileIndex": 5,
+          "tileNumber": 6,
+          "tileName": "海港商会",
+          "asset": "harbor_finance_3",
+          "mesh": "",
+          "point": [
+            3.2905,
+            2.5359,
+            -3.539
+          ]
+        },
+        {
+          "sample": 8,
+          "tileIndex": 5,
+          "tileNumber": 6,
+          "tileName": "海港商会",
+          "asset": "harbor_finance_3",
+          "mesh": "",
+          "point": [
+            3.3352,
+            2.6013,
+            -3.5562
+          ]
+        }
+      ]
+    },
+    {
+      "level": 3,
+      "tileIndex": 5,
+      "tileNumber": 6,
+      "tileName": "海港商会",
+      "mode": "single",
+      "player": "ai",
+      "part": "chest",
+      "pawnPosition": [
+        2.56,
+        0.265,
+        -4.5
+      ],
+      "blocked": 3,
+      "samples": 9,
+      "centerBlocked": false,
+      "obstacles": [
+        {
+          "sample": 1,
+          "tileIndex": 5,
+          "tileNumber": 6,
+          "tileName": "海港商会",
+          "asset": "harbor_finance_3",
+          "mesh": "",
+          "point": [
+            3.3279,
+            2.6294,
+            -3.5973
+          ]
+        },
+        {
+          "sample": 7,
+          "tileIndex": 5,
+          "tileNumber": 6,
+          "tileName": "海港商会",
+          "asset": "harbor_finance_3",
+          "mesh": "",
+          "point": [
+            3.2905,
+            2.5359,
+            -3.539
+          ]
+        },
+        {
+          "sample": 8,
+          "tileIndex": 5,
+          "tileNumber": 6,
+          "tileName": "海港商会",
+          "asset": "harbor_finance_3",
+          "mesh": "",
+          "point": [
+            3.3352,
+            2.6013,
+            -3.5562
+          ]
+        }
+      ]
+    },
+    {
+      "level": 3,
+      "tileIndex": 7,
+      "tileNumber": 8,
+      "tileName": "港湾观景楼",
+      "mode": "shared",
+      "player": "human",
+      "part": "chest",
+      "pawnPosition": [
+        2.56,
+        0.265,
+        -1.07
+      ],
+      "blocked": 1,
+      "samples": 9,
+      "centerBlocked": false,
+      "obstacles": [
+        {
+          "sample": 8,
+          "tileIndex": 7,
+          "tileNumber": 8,
+          "tileName": "港湾观景楼",
+          "asset": "harbor_skyscraper_3",
+          "mesh": "",
+          "point": [
+            3.3264,
+            2.574,
+            -0.1378
+          ]
+        }
+      ]
+    }
+  ]
+}

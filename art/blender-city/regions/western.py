@@ -273,7 +273,7 @@ def hip(b,w,d,z,h,region='classic',dormers=0):
     vv=[tuple(p) for p in low+high];b.poly(vv,[(0,3,2,1),(0,1,5,4),(1,2,6,5),(2,3,7,6),(3,0,4,7),(4,5,6,7)],'roof')
     for side in range(4):
         a,c=low[side],low[(side+1)%4];aa,cc=high[side],high[(side+1)%4]
-        cols=max(4,round((c-a).length/.19));rows=max(4,round(h/.115)) if classic else 5
+        cols=max(4,round((c-a).length/getattr(b,'roof_pitch',.19)));rows=max(4,round(h/.115)) if classic else 5
         for row in range(rows):
             for col in range(cols):roof_tile(b,a,c,aa,cc,row,rows,col,cols,not classic)
         b.rod(tuple(a+Vector((0,0,.027))),tuple(aa+Vector((0,0,.028))),.024 if classic else .034,'roof_edge',8)
@@ -356,28 +356,28 @@ def dome(b,x,y,z,r,h,region='classic',glass=False):
     b.sphere((x,y,z+h+.12),(.045,.045,.055),'gold',12,6)
 
 
-def rounded_tower(b,x,y,z,r,h,floors,region='classic',roof=True,facings=(0,PI/2,PI,PI*1.5)):
+def rounded_tower(b,x,y,z,r,h,floors,region='classic',roof=True,facings=(0,PI/2,PI,PI*1.5),window_height=None):
     b.cylinder((x,y,z+h/2),r,h,'wall',32)
     for j in range(floors):
         bottom=z+j*h/floors
         b.cylinder((x,y,bottom+.03),r+.045,.065,'trim',32)
         for a in facings:
-            with b.at((x,y,0),a):pane(b,0,-r-.008,bottom+.19,.32,min(.60,h/floors-.28),True,False)
+            with b.at((x,y,0),a):pane(b,0,-r-.008,bottom+.19,.32,min(.60,h/floors-.28) if window_height is None else window_height,True,False)
     b.cylinder((x,y,z+h-.025),r+.055,.09,'trim',32)
     if roof:dome(b,x,y,z+h+.04,r+.10,.47 if region=='classic' else .32,region)
 
 
-def shell(b,w,d,floors,region,front='normal',balconies=False,columns=2,offset=0,sparse=False,hidden=(),omit_front=()):
-    h=floors*1.0;top=.17+h
+def shell(b,w,d,floors,region,front='normal',balconies=False,columns=2,offset=0,sparse=False,hidden=(),omit_front=(),storey=1.0):
+    h=floors*storey;top=.17+h
     foundation(b,w,d);b.box((0,0,.17+h/2),(w,d,h),'wall');masonry(b,w,d,.16,.23)
     for a,span,dep in ((0,w,d),(PI,w,d),(PI/2,d,w),(-PI/2,d,w)):
         if a in hidden:continue
         with b.facing(a):
             for side in (-1,1):
-                for j in range(max(4,round(h/.22))):
-                    hh=h/max(4,round(h/.22));b.box((side*(span/2-.035),-dep/2-.022,.17+(j+.5)*hh),(.14,.085,hh-.014),'stone' if j%2 else 'trim')
+                for j in range(max(4,round(h/getattr(b,'quoin_pitch',.22)))):
+                    hh=h/max(4,round(h/getattr(b,'quoin_pitch',.22)));b.box((side*(span/2-.035),-dep/2-.022,.17+(j+.5)*hh),(.14,.085,hh-.014),'stone' if j%2 else 'trim')
             for floor in range(floors):
-                z=.17+floor
+                z=.17+floor*storey
                 if floor>0:b.box((0,-dep/2-.035,z-.025),(span+.13,.12,.07),'trim')
                 if a==0 and floor==0 and front in ('shop','arcade','blank','offdoor','door'):continue
                 count=columns if a in (0,PI) else max(1,round(span/1.05))
@@ -385,7 +385,7 @@ def shell(b,w,d,floors,region,front='normal',balconies=False,columns=2,offset=0,
                 for k in range(count):
                     if a==0 and k in omit_front:continue
                     xx=(k-(count-1)/2)*step
-                    pane(b,xx,-dep/2,z+.18,.33 if count>2 else .41,.60,region=='harbor',floor>0 and (not sparse or a==0),flowers=(floor>0 and (a==0 or a==PI and floor==floors-1) and not balconies and not sparse))
+                    pane(b,xx,-dep/2,z+.18,.33 if count>2 else .41,.60*storey,region=='harbor',floor>0 and (not sparse or a==0),flowers=(floor>0 and (a==0 or a==PI and floor==floors-1) and not balconies and not sparse))
                     if balconies and floor>0 and (a==0 or not sparse and a==PI):iron(b,xx,-dep/2,z+.105,.53,a==0 and (floor==1 or not sparse))
             # A real rear entry distinguishes back from front with no plain wall.
             if a==PI:door(b,span*.27,-dep/2,.16,.32,.66,region)
@@ -461,7 +461,298 @@ def pergola(b,x,y,z,w,d):
     for k in range(8):leaf(b,(x-w*.4+k*w*.8/7,y+d*.42,z+.78),-PI*.3,.15)
 
 
+def roof_lantern(b,x,y,z,w,d,h,region,clock=False):
+    """A legible elevated pavilion; four real openings and a complete roof."""
+    with b.at((x,y,0)):
+        b.box((0,0,z+.045),(w+.12,d+.12,.09),'trim')
+        b.box((0,0,z+h*.50),(w,d,h),'wall')
+        for a,span,depth in ((0,w,d),(PI,w,d),(PI/2,d,w),(-PI/2,d,w)):
+            with b.facing(a):
+                pane(b,0,-depth/2-.012,z+.12,min(.44,span*.60),h-.20,True,False)
+        if clock:
+            base.clock_face(b,0,-d/2-.06,z+h*.56,min(w,h)*.24)
+        hip(b,w+.17,d+.17,z+h+.03,.44 if region=='classic' else .31,region,0)
+
+
+def chateau_spire(b,x,y,z,r,h):
+    b.cylinder((x,y,z+h/2),r,h,'roof',24,top=.035)
+    for i in range(10):
+        a=i*math.tau/10
+        b.rod((x+r*math.cos(a),y+r*math.sin(a),z+.015),
+              (x+.035*math.cos(a),y+.035*math.sin(a),z+h),.010,'roof_edge',6)
+    b.cylinder((x,y,z+h+.045),.025,.15,'gold',8)
+
+
+def prestige_core(region,family,mats):
+    """L3 changes the skyline, not just the count of identical storeys."""
+    b=Mesh(f'{region}_{family}_3',mats);b.compact_dome=True
+    w=2.50;d=1.70;y=-d/2
+    storey=1.16;lift=3*(storey-1)
+    top=shell(b,w,d,3,region,'shop' if family=='shop' else 'door',False,3,sparse=True,storey=storey)
+    if family=='shop':shopfront(b,w,d,region,3)
+    else:
+        door(b,0,y,.16,.52,.88,region,True)
+        for xx in (-.74,.74):pane(b,xx,y,.37,.37,.63,region=='harbor',False)
+        for xx in (-.40,.40):lantern(b,xx,y,.94)
+    if region=='classic':
+        if family=='villa':
+            # Chateau residence: steep central roof framed by two proud turrets.
+            hip(b,2.62,1.84,top+.08,.72,region,1)
+            for xx in (-.91,.91):
+                rounded_tower(b,xx,-.55,.17,.33,3.79+lift,3,region,False,(0,PI/2 if xx>0 else -PI/2))
+                chateau_spire(b,xx,-.55,3.925+lift,.43,.57)
+            iron(b,0,y,.21+storey,1.18,True,.32)
+            b.xz_shape([(-.59,0),(.59,0),(0,.27)],(0,y-.09,1.17),.26,'trim')
+        elif family=='shop':
+            # A roof-top winter market hall is a different shape to the L2 shop.
+            b.box((0,0,top+.08),(2.64,1.85,.13),'trim')
+            dome(b,0,.13,top+.13,.83,.61,region,True)
+            roof_lantern(b,-.90,-.30,top+.10,.48,.58,.64,region,True)
+            roof_lantern(b,.90,-.30,top+.10,.48,.58,.64,region)
+            iron(b,0,y,top+.13,1.15,False,.27)
+            for j in (1,2):iron(b,0,y,.22+j*storey,2.19,False,.26)
+        elif family=='hotel':
+            # Three distinct roof pavilions and a grand projecting porte-cochere.
+            for xx in (-.86,.86):
+                with b.at((xx,0,0)):hip(b,.92,1.86,top+.08,.64,region,1)
+            b.box((0,0,top+.16),(1.02,1.28,.32),'wall')
+            roof_lantern(b,0,0,top+.30,1.02,1.28,.72,region)
+            for xx in (-.64,.64):b.cylinder((xx,y-.26,.70),.073,1.04,'trim',12)
+            dome(b,0,y-.22,1.24,.76,.24,region,True)
+            for j in (1,2):iron(b,0,y,.22+j*storey,2.20,False,.30)
+        else:
+            # The mansion gains an entire crown pavilion, with two copper cupolas.
+            hip(b,2.64,1.86,top+.08,.58,region,1)
+            roof_lantern(b,0,.13,top+.54,1.12,1.10,.75,region)
+            for xx in (-.91,.91):
+                rounded_tower(b,xx,y+.12,.17,.28,3.35+lift,3,region,False,(0,))
+                dome(b,xx,y+.12,3.57+lift,.38,.46,region)
+            for j in (1,2):iron(b,0,y,.22+j*storey,.94,True,.32)
+        for xx in (-.87,.87):chimney(b,xx,.59,top+.38,region,.39)
+    else:
+        # Coastal L3 roofs use white stepped terraces and bright vaulted pavilions.
+        b.box((0,0,top+.075),(2.65,1.84,.13),'trim')
+        if family=='villa':
+            roof_lantern(b,-.61,.20,top+.13,1.03,1.12,.63,region)
+            rounded_tower(b,.77,.25,top+.14,.31,.43,1,region,False,(0,PI/2))
+            dome(b,.77,.25,top+.60,.40,.40,region)
+            pergola(b,.48,-.46,top+.14,1.08,.47)
+            for j in (1,2):iron(b,0,y,.22+j*storey,2.16,False,.30)
+        elif family=='shop':
+            for xx in (-.87,.87):
+                with b.at((xx,.08,0)):gable(b,.88,1.37,top+.10,.44,region)
+            roof_lantern(b,0,.16,top+.13,.87,.96,.82,region,True)
+            arcade(b,2.42,y-.13,.20+2*storey,3,.85*storey,.24)
+            iron(b,0,y-.05,.20+2*storey,2.38,False,.28)
+        elif family=='hotel':
+            # An asymmetric double lookout replaces the former single tiny turret.
+            with b.at((0,.10,0)):hip(b,2.55,1.25,top+.10,.42,region)
+            for xx,extra in ((-.93,.35),(.93,.65)):
+                rounded_tower(b,xx,-.39,2.18+lift,.32,1.55+extra,2,region,False,(0,PI/2 if xx>0 else -PI/2))
+                dome(b,xx,-.39,3.77+extra+lift,.42,.38,region)
+            arcade(b,2.57,y-.20,.17,3,1.01,.29)
+            for j in (1,2):arcade(b,2.47,y-.05,.21+j*storey,3,.83*storey,.19)
+        else:
+            # A palatial round belvedere gives the mansion its own broad crown.
+            rounded_tower(b,0,.14,top+.14,.61,.69,1,region,False)
+            dome(b,0,.14,top+.88,.72,.59,region)
+            for xx in (-.93,.93):
+                with b.at((xx,.15,0)):hip(b,.57,1.16,top+.12,.36,region)
+            arcade(b,2.38,y-.07,.20+2*storey,3,.85*storey,.24)
+            iron(b,0,y-.08,.20+2*storey,2.34,False,.29)
+            pergola(b,0,-.57,top+.15,1.30,.43)
+    for xx in (-1.08,1.08):plant(b,xx,y-.17,.14,.14,True)
+    for xx in (-w/2+.015,w/2-.015):b.rod((xx,d/2+.053,.20),(xx,d/2+.053,top-.04),.021,'metal',8)
+    return b.finish(bevel=.007)
+
+
+def bath_pool(b,x,y,w,d,z=.23,round_pool=False):
+    """Broad visible water, a raised tiled coping and actual descending steps."""
+    if round_pool:
+        b.cylinder((x,y,z),w*.5,.20,'stone',32)
+        b.cylinder((x,y,z+.11),w*.46,.05,'trim',32)
+        b.cylinder((x,y,z+.14),w*.40,.018,'water',32)
+    else:
+        b.box((x,y,z),(w,d,.20),'stone')
+        b.box((x,y,z+.11),(w-.11,d-.11,.025),'water')
+        for xx in (-w/2,w/2):b.box((x+xx,y,z+.15),(.10,d+.08,.14),'trim')
+        for yy in (-d/2,d/2):b.box((x,y+yy,z+.15),(w+.08,.10,.14),'trim')
+        for k in range(3):b.box((x-w*.30+k*.11,y,z+.14-k*.025),(.11,d*.36,.045),'trim')
+        # Two pale surface arcs break the flat-water/fountain reading at game size.
+        for k in range(2):b.box((x+w*.13,y-.11+k*.19,z+.127),(w*.30,.018,.006),'petal')
+
+
+def bath_complex(region,level,mats):
+    if level==3:return grand_bath(region,mats)
+    b=Mesh(f'{region}_onsen_{level}',mats);b.compact_dome=True
+    foundation(b,5.55,2.26)
+    # The resort buildings occupy the rear third, leaving the baths unroofed.
+    central_h=[.96,1.35,2.00][level-1]
+    for xx in (-1.91,1.91):
+        with b.at((xx,.62,0)):
+            top=shell(b,1.53,.98,1,region,'door',False,2,sparse=True)
+            door(b,0,-.49,.17,.42,.84,region,True)
+            hip(b,1.65,1.10,top+.05,.40,region,0)
+    b.box((0,.65,.17+central_h/2),(2.22,.95,central_h),'wall')
+    for xx in (-.76,0,.76):
+        pane(b,xx,.163,.24,.46,min(1.46,central_h-.20),True,False)
+    for xx in (-1.09,1.09):b.box((xx,.13,.17+central_h/2),(.12,.12,central_h),'trim')
+    if level==1:
+        with b.at((0,.65,0)):hip(b,2.34,1.08,.19+central_h,.43,region,0)
+    elif region=='classic':
+        dome(b,0,.65,.19+central_h,1.04,.66 if level==2 else .93,region,True)
+        if level==3:
+            for xx in (-1.91,1.91):roof_lantern(b,xx,.62,1.62,.65,.64,.62,region)
+    else:
+        with b.at((0,.65,0)):hip(b,2.34,1.08,.19+central_h,.35,region,0)
+        if level==3:
+            rounded_tower(b,0,.66,central_h+.49,.52,.59,1,region,False)
+            dome(b,0,.66,central_h+1.13,.64,.58,region)
+        else:dome(b,0,.66,central_h+.47,.63,.49,region)
+    # Bath terraces: L1 one generous pool; L2 hot/cold split; L3 a resort circuit.
+    bath_pool(b,0,-.58,2.42,1.00)
+    if level>=2:
+        for xx in (-2.02,2.02):bath_pool(b,xx,-.61,1.05,.91,.23,level==3)
+    else:
+        for xx in (-1.91,1.91):
+            b.box((xx,-.47,.25),(.98,.38,.16),'wood_light')
+            b.box((xx,-.47,.35),(.53,.31,.025),'petal')
+    # Folded towels and bathing benches read as spa furnishings, not a bank fountain.
+    for xx in (-1.36,1.36):
+        b.box((xx,-.55,.28),(.22,.65,.16),'wood')
+        for k in range(3):b.box((xx,-.72+k*.15,.38),(.20,.12,.045),'petal')
+    for xx in (-2.61,2.61):plant(b,xx,-.13,.17,.14,True)
+    for xx in (-.91,.91):lantern(b,xx,.12,.83)
+    # The regional bath sign is a raised water-wave crest above the centre entry.
+    for k in range(3):
+        points=[(-.18,.00),(-.09,.035),(0,0),(.09,-.035),(.18,0)]
+        for (x0,z0),(x1,z1) in zip(points,points[1:]):b.rod((x0,.12,.81+k*.12+z0),(x1,.12,.81+k*.12+z1),.025,'water',6)
+    root=b.finish(bevel=.007)
+    root['thermalPools']=[[0,-.58,.351,2.31,.89]]+([[xx,-.61,.37 if level==3 else .351,.84,.84 if level==3 else .80] for xx in (-2.02,2.02)] if level>=2 else [])
+    return root
+
+
+def oval_dome(b,x,y,z,rx,ry,h,region,glass=False):
+    start=len(b.vertices);dome(b,x,y,z,rx,h,region,glass)
+    # The rear bath house has a wide barrel-like crown within its shallow parcel.
+    center_y=y+b.offset.y
+    for i in range(start,len(b.vertices)):
+        px,py,pz=b.vertices[i];b.vertices[i]=(px,center_y+(py-center_y)*ry/rx,pz)
+
+
+def grand_bath(region,mats):
+    b=Mesh(f'{region}_onsen_3',mats);b.compact_dome=True;b.roof_pitch=.25
+    foundation(b,5.55,2.26)
+    # The thermal hall is a single monumental vaulted space, not a small hotel.
+    h=3.58;w=2.70;d=1.12;y=.54
+    b.box((0,y,.17+h/2),(w,d,h),'wall')
+    with b.at((0,y,0)):masonry(b,w,d,.17,.31)
+    for a,span,depth in ((0,w,d),(PI,w,d),(PI/2,d,w),(-PI/2,d,w)):
+        with b.at((0,y,0),a):
+            for xx in (-span*.39,span*.39):b.box((xx,-depth/2-.04,1.99),(.17,.15,3.64),'trim')
+            count=3 if a in (0,PI) else 1
+            for k in range(count):
+                xx=(k-(count-1)/2)*.76
+                pane(b,xx,-depth/2,.36,.50 if count==3 else .56,2.68,True,False)
+            b.box((0,-depth/2-.05,3.41),(span+.12,.19,.16),'trim')
+    with b.at((0,y,0)):cornice(b,w,d,3.79,region=='classic')
+    oval_dome(b,0,y,3.84,1.47,.66,1.08,region,region=='classic')
+    for xx in (-2.10,2.10):
+        with b.at((xx,.54,0)):
+            side=shell(b,1.20,1.05,1,region,'door',False,1,sparse=True)
+            door(b,0,-.525,.17,.43,.83,region)
+            hip(b,1.34,1.18,side+.07,.44,region,0)
+        if region=='classic':roof_lantern(b,xx,.54,1.65,.58,.62,.56,region)
+        else:pergola(b,xx,.06,1.66,.97,.75)
+    # Terraced thermal circuit: raised warm pool spills into the long lower pool.
+    bath_pool(b,0,-.33,2.50,.43,.65)
+    bath_pool(b,0,-.91,2.50,.43,.23)
+    b.box((0,-.605,.56),(1.86,.032,.35),'water')
+    for xx in (-2.05,2.05):bath_pool(b,xx,-.72,1.08,.97,.23,True)
+    for xx in (-1.43,1.43):
+        for k in range(4):b.box((xx,-.91+k*.16,.22+k*.14),(.28,.18,.16),'trim')
+        b.box((xx,-.11,.89),(.21,.17,.05),'petal')
+    for xx in (-2.65,2.65):plant(b,xx,-.19,.17,.13,True)
+    for xx in (-.94,.94):lantern(b,xx,-.07,1.15)
+    for k in range(3):
+        for x0,x1,z0,z1 in ((-.27,-.135,0,.05),(-.135,0,.05,0),(0,.135,0,-.05),(.135,.27,-.05,0)):
+            b.rod((x0,-.075,3.52+k*.10+z0),(x1,-.075,3.52+k*.10+z1),.022,'water',6)
+    root=b.finish(bevel=.007)
+    root['thermalPools']=[[0,-.33,.771,2.39,.32],[0,-.91,.351,2.39,.32],[-2.05,-.72,.37,.86,.86],[2.05,-.72,.37,.86,.86]]
+    return root
+
+
+def prestige_large(region,family,mats):
+    b=Mesh(f'{region}_{family}_3',mats);b.compact_dome=True;b.roof_pitch=.28;b.quoin_pitch=.31
+    foundation(b,5.60,2.24)
+    if family=='skyscraper':
+        # The central palace has five complete floors; the attached wings stop at two.
+        with b.at((0,.11,0)):
+            top=shell(b,2.82,1.76,5,region,'door',False,3,sparse=True,hidden=(PI/2,-PI/2))
+            for a in (PI/2,-PI/2):
+                with b.facing(a):
+                    for j in (2,3,4):
+                        for xx in (-.43,.43):pane(b,xx,-1.41,.35+j,.39,.65,region=='harbor',False)
+        for xx in (-2.08,2.08):wide_block(b,xx,.11,1.32,1.76,2,region,False,True)
+        door(b,0,-.77,.17,.68,1.18,region,True)
+        if region=='classic':
+            hip(b,3.00,1.94,top+.08,.98,region,2)
+            roof_lantern(b,0,.12,top+.88,1.48,1.15,.55,region)
+            for xx in (-2.17,2.17):
+                rounded_tower(b,xx,-.50,.17,.40,2.81,2,region,False,(0,PI/2 if xx>0 else -PI/2))
+                chateau_spire(b,xx,-.50,3.00,.51,.73)
+            iron(b,0,-.78,1.22,2.50,False,.27)
+            oval_dome(b,0,-.88,1.49,.91,.45,.29,region,True)
+        else:
+            b.box((0,.11,top+.08),(2.98,1.93,.14),'trim')
+            roof_lantern(b,0,.30,top+.15,1.75,1.30,.88,region)
+            pergola(b,0,-.52,top+.14,2.11,.55)
+            for xx,extra in ((-2.20,.0),(2.20,.38)):
+                rounded_tower(b,xx,-.28,.17,.37,2.87+extra,3,region,False,(0,PI/2 if xx>0 else -PI/2))
+                dome(b,xx,-.28,3.08+extra,.48,.45,region)
+            for j in (2,4):arcade(b,2.73,-.79,.17+j,3,.88,.22)
+            arcade(b,5.32,-.85,.17,5,1.10,.29)
+    elif region=='classic':
+        # A broad rotunda and a giant column portico dominate the stock exchange.
+        top=wide_block(b,0,.10,2.78,1.78,3,region,False,False)
+        for xx in (-2.08,2.08):wide_block(b,xx,.10,1.30,1.78,2,region,False,True)
+        rounded_tower(b,0,.12,top+.05,1.10,1.40,1,region,False,tuple(i*math.tau/8 for i in range(8)),window_height=1.03)
+        for a in (i*math.tau/8+math.pi/8 for i in range(8)):
+            with b.at((0,.12,0),a):
+                b.box((0,-1.105,top+.74),(.065,.065,1.24),'trim')
+                b.box((0,-1.105,top+1.36),(.11,.09,.065),'trim')
+        oval_dome(b,0,.12,top+1.51,1.30,1.03,1.23,region)
+        for xx in (-1.05,-.63,.63,1.05):
+            b.cylinder((xx,-.91,1.65),.085,2.96,'trim',16)
+            b.box((xx,-.91,3.13),(.24,.25,.15),'trim')
+        b.xz_shape([(-1.39,0),(1.39,0),(0,.63)],(0,-.88,3.23),.35,'trim')
+        base.clock_face(b,0,-1.075,3.47,.25,coin=True)
+        door(b,0,-.81,.17,.72,1.44,region,True)
+        for k in range(3):b.box((0,-1.00-k*.06,.12-k*.025),(2.42+k*.08,.22,.08),'trim')
+    else:
+        # Maritime trading hall: a broad stepped roof and a full-height arcaded facade.
+        top=wide_block(b,0,.10,2.80,1.78,5,region,False,False)
+        for a in (PI/2,-PI/2):
+            with b.at((0,.10,0),a):
+                for j in (1,2,3,4):
+                    for xx in (-.43,.43):pane(b,xx,-1.40,.35+j,.39,.65,True,False)
+        for xx in (-2.08,2.08):wide_block(b,xx,.10,1.30,1.78,1,region,False,True)
+        hip(b,3.00,1.97,top+.08,.99,region,0)
+        for j in (0,2,4):arcade(b,2.76,-.83,.17+j,3,.98,.24)
+        b.xz_shape([(-1.25,0),(-.87,.28),(-.60,.61),(0,1.02),(.60,.61),(.87,.28),(1.25,0)],(0,-.78,top-.01),.26,'wall')
+        base.clock_face(b,0,-.94,top+.45,.31,coin=True)
+        for xx in (-2.08,2.08):
+            rounded_tower(b,xx,.11,1.65,.40,.90,1,region,False)
+            dome(b,xx,.11,2.60,.51,.46,region)
+        door(b,0,-.81,.17,.74,1.35,region,True)
+        for xx in (-2.42,2.42):crate(b,xx,-1.00,.19,.29)
+    plant_positions=(-2.61,2.61) if region=='harbor' and family=='skyscraper' else (-2.61,-1.28,1.28,2.61)
+    for xx in plant_positions:plant(b,xx,-.97,.17,.14,True)
+    return b.finish(bevel=.007)
+
+
 def core(region,family,level,mats):
+    if level==3:return prestige_core(region,family,mats)
     b=Mesh(f'{region}_{family}_{level}',mats)
     b.compact_dome=region=='harbor' and family=='hotel' and level==3
     w=2.18 if family in ('villa','shop') else 2.50;d=1.70 if family!='tower' else 1.90
@@ -557,6 +848,8 @@ def wide_block(b,x,y,w,d,floors,region,balconies=False,roof=True,omit_outer=Fals
 
 
 def large(region,family,level,mats):
+    if family=='onsen':return bath_complex(region,level,mats)
+    if level==3:return prestige_large(region,family,mats)
     b=Mesh(f'{region}_{family}_{level}',mats)
     w=5.60;d=2.24;floors=level
     if family=='skyscraper':floors=max(2,level) if region=='classic' else 3 if level==2 else 2

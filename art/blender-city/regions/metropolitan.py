@@ -203,6 +203,7 @@ def shell(b,w,d,floors,storey=1.45,ground=.30,front=True,faces=None):
     return top
 
 def core(family,level,mats):
+    if level==3:return landmark_core(family,mats)
     b=Mesh(f'expansion_{family}_{level}',mats)
     w=3.05 if family!='tower' else 2.50;d=2.45;storey=1.42
     base(b,w,d);top=shell(b,w,d,level,storey,front=False)
@@ -240,6 +241,91 @@ def core(family,level,mats):
     escape(b,w,d,level,storey)
     return b.finish(bevel=.015)
 
+def terrace_rail(b,w,d,z):
+    """Readable roof garden balustrade, with open gaps instead of a solid box."""
+    for angle,span,depth in ((0,w,d),(math.pi,w,d),(math.pi/2,d,w),(-math.pi/2,d,w)):
+        with b.facing(angle):
+            b.box((0,-depth/2,z+.23),(span+.04,.10,.09),'roof_edge')
+            for i in range(7):b.box((-span/2+i*span/6,-depth/2,z+.11),(.065,.075,.24),'roof')
+
+def pinnacle(b,w,d,z,h=.90):
+    """Setback copper lantern with a broad gold fan visible from the board."""
+    for j in range(3):
+        ww=w*(1-j*.21);dd=d*(1-j*.20)
+        b.box((0,0,z+.13+j*.20),(ww,dd,.25),'roof')
+        b.box((0,0,z+.27+j*.20),(ww+.035,dd+.035,.045),'roof_edge')
+    for x in (-.23,0,.23):
+        hh=h*(1-abs(x)*1.15)
+        b.box((x,-d*.24,z+.50+hh/2),(.085,.075,hh),'wood_light')
+    b.xz_shape([(-w*.16,0),(w*.16,0),(w*.10,h*.36),(0,h*.50),(-w*.10,h*.36)],(0,-d*.23,z+.67),.11,'wood_light')
+
+def landmark_core(family,mats):
+    """L3 is a new rooftop silhouette, not another repeated storey."""
+    b=Mesh(f'expansion_{family}_3',mats);b.bevel_min=.07
+    w=3.05;d=2.45;y=-d/2
+    base(b,w,d)
+    floors=3 if family=='tower' else 2;storey=1.22 if family=='tower' else 1.88
+    top=shell(b,w,d,floors,storey,front=False)
+    for f in range(floors):
+        for x in (-w*.31,0,w*.31):
+            if f or x:window(b,x,y,.55+f*storey,.52,storey-.43,fan=f==floors-1)
+    door(b,0,y,w=.63,h=1.08,double=family!='villa')
+    crown(b,w,d,top,.35,False)
+    if family=='villa':
+        # A recessed penthouse and a real open roof garden replace the flat box.
+        with b.at((0,.19,0)):
+            pent=shell(b,1.96,1.65,1,.91,top+.18)
+            copper_roof(b,2.17,1.88,pent+.04,.54)
+            crest(b,0,-.98,pent+.10,.83,.48)
+        terrace_rail(b,w-.08,d-.08,top+.30)
+        for x in (-1.22,1.22):planter(b,x,-.88,top+.15,.16)
+        canopy(b,y,1.50,1.32,.30,False)
+    elif family=='shop':
+        # Monumental market clerestory, framed by two golden corner pylons.
+        with b.at((0,.11,0)):
+            b.box((0,0,top+.72),(1.76,1.89,1.20),'stone')
+            window(b,0,-.945,top+.18,1.40,1.09,True)
+            barrel(b,1.87,2.00,top+1.32,.43,True)
+        for x in (-1.20,1.20):
+            with b.at((x,0,0)):
+                b.box((0,0,top+.34),(.54,1.91,.44),'wall')
+                copper_roof(b,.69,2.02,top+.57,.37)
+        for x in (-.93,.93):
+            b.box((x,y-.10,.98),(.83,.16,1.22),'accent')
+            b.box((x,y-.21,1.03),(.71,.035,1.04),'glass')
+            for dx in (-.36,.36):b.box((x+dx,y-.24,1.03),(.045,.06,1.10),'wood_light')
+        canopy(b,y,1.74,w+.09,.31);stripe_awning(b,y-.03,1.60,w+.18)
+        crest(b,0,y-.12,top+.18,1.38,.73)
+    elif family=='hotel':
+        # The upper floor splits into an observation salon and two roof terraces.
+        with b.at((0,.06,0)):
+            pent=shell(b,1.48,1.91,1,1.17,top+.15)
+            copper_roof(b,1.70,2.10,pent+.04,.64)
+            crest(b,0,-1.10,pent+.02,.92,.51)
+        for x in (-1.22,1.22):
+            with b.at((x,0,0)):
+                b.box((0,0,top+.42),(.55,1.93,.49),'wall')
+                window(b,0,-.965,top+.22,.30,.36)
+                copper_roof(b,.73,2.13,top+.69,.43)
+        canopy(b,y,1.64,w+.07,.49)
+        for x in (-.69,.69):lantern(b,x,y,1.0)
+        for x in (-1.32,1.32):
+            b.box((x,y-.09,1.55),(.16,.15,2.50),'stone')
+            b.box((x,y-.18,1.55),(.043,.04,2.55),'wood_light')
+    else:
+        # Stone shoulders carry a three-stage copper crown with a gold fan spire.
+        for x in (-.47,.47):
+            b.box((x,y-.10,(top+.30)/2),(.19,.18,top-.20),'stone')
+            b.box((x,y-.205,(top+.30)/2),(.055,.04,top-.10),'wood_light')
+        with b.at((0,.05,0)):
+            b.box((0,0,top+.43),(1.80,1.70,.62),'wall')
+            for x in (-.48,.48):window(b,x,-.85,top+.25,.43,.45)
+            pinnacle(b,2.00,1.89,top+.75,.89)
+        canopy(b,y,1.62,1.51,.35)
+    for x in (-.56,.56):planter(b,x,y-.22,r=.11)
+    escape(b,w,d,floors,storey)
+    return b.finish(bevel=.014)
+
 def barrel(b,w,d,z,h,glass=False):
     # Ribbed barrel vault running across the facade, not a spherical approximation.
     n=16;verts=[]
@@ -267,15 +353,16 @@ def tower_mass(b,x,y,w,d,floors,ground=.30,step=True,faces=None):
         return top
 
 def large(family,level,mats):
+    if family=='onsen':return thermal_resort(level,mats)
     b=Mesh(f'expansion_{family}_{level}',mats);w=6.9;d=2.45;y=-d/2
     b.bevel_min=.11
     base(b,w,d)
     if family=='skyscraper':
         # Five adjoining masses follow the stepped silhouette of the three-view.
-        heights={1:(2,2,2),2:(2,5,3),3:(3,4,5)}[level]
-        for x,width,floors,dd in ((-2.63,1.22,heights[0],2.25),(2.63,1.22,heights[0],2.25),(-1.43,1.10,heights[1],2.40),(1.43,1.10,heights[1],2.40),(0,1.65,heights[2],2.55)):
+        heights={1:(2,2,2),2:(2,5,3),3:(3,4,6)}[level]
+        for x,width,floors,dd in ((-2.63,1.22,heights[0],2.25),(2.63,1.22,heights[0],2.25),(-1.43,1.10,heights[1],2.40),(1.43,1.10,heights[1],2.40),(0,1.85 if level==3 else 1.65,heights[2],2.55)):
             faces=(0,math.pi,math.pi/2) if x>2 else (0,math.pi,-math.pi/2) if x< -2 else (0,math.pi)
-            top=tower_mass(b,x,0,width,dd,floors,faces=faces)
+            top=tower_mass(b,x,0,width,dd,floors,step=not(level==3 and x==0),faces=faces)
             with b.at((x,0,0)):
                 # The one upper storey above the adjoining wing is visible.
                 if abs(x)<2 and floors>min(heights):
@@ -286,14 +373,24 @@ def large(family,level,mats):
                             b.box((0,-width/2-.03,top-.03),(dd+.06,.08,.08),'stone')
                 for xx in (-width*.30,width*.30):
                     b.box((xx,-dd/2-.115,(top+.30)/2),(.075,.08,top-.20),'wood_light')
-                crest(b,0,-dd/2-.17,top+.35,width*.6,.55)
+                if level!=3 or x!=0:crest(b,0,-dd/2-.17,top+.35,width*.6,.55)
         for x in (-.57,.57):b.box((x,y-.20,1.55),(.13,.18,2.5),'stone')
         door(b,0,y-.10,w=.85,h=1.50,double=True);canopy(b,y-.15,1.95,1.85,.48)
+        if level==3:
+            # The L2 twin towers become a single commanding central landmark.
+            # Two lateral gold-edged setbacks reinforce the diagonal silhouette.
+            with b.at((0,0,0)):pinnacle(b,1.91,2.55,7.43,1.00)
+            for x in (-1.43,1.43):
+                with b.at((x,0,0)):
+                    for dx in (-.28,.28):b.box((dx,-1.29,2.93),(.09,.08,4.75),'wood_light')
+                    crest(b,0,-1.31,5.07,.81,.86)
+            for x in (-2.64,2.64):
+                with b.at((x,0,0)):copper_roof(b,1.35,2.38,4.06,.60)
     elif family=='finance':
-        floors=level;body=.30+floors*1.15
+        floors=4 if level==3 else level;body=.30+floors*1.15
         top=shell(b,4.25,d,floors,1.15,front=False,faces=(0,math.pi));barrel(b,4.25,d+.10,body+.07,.57)
         for x in (-2.65,2.65):
-            tower_mass(b,x,0,1.26,d,1 if level==1 else level+1,faces=(0,math.pi,math.pi/2 if x>0 else -math.pi/2))
+            tower_mass(b,x,0,1.26,d,1 if level==1 else (5 if level==3 else level+1),step=level!=3,faces=(0,math.pi,math.pi/2 if x>0 else -math.pi/2))
             with b.at((x,0,0)):crest(b,0,y-.13,body+.30,.69,.72)
         for x in (-1.45,1.45):
             for f in range(floors):window(b,x,y,.55+f*1.15,.55,.72)
@@ -302,11 +399,19 @@ def large(family,level,mats):
         crest(b,0,y-.14,body+.37,1.25,.83)
         door(b,0,y-.16,w=.85,h=1.23,double=True);canopy(b,y-.18,1.75,1.60,.37)
         for x in (-.66,.66):lantern(b,x,y-.13,1.04)
-        if level in (1,3):clock(b,0,y-.31,body+.06,.38,coin=level==1)
+        if level==1:clock(b,0,y-.31,body+.06,.38,coin=True)
         if level==3:
             for x in (-2.65,2.65):
-                b.rod((x,0,5.72),(x,0,6.48),.047,'wood_light',8)
-                crest(b,x,y-.14,4.97,.69,.90)
+                b.rod((x,0,6.87),(x,0,7.63),.047,'wood_light',8)
+                crest(b,x,y-.14,6.12,.69,.90)
+                with b.at((x,0,0)):pinnacle(b,1.19,2.26,6.20,.95)
+            # Broad copper rotunda and the oversized clock distinguish the
+            # exchange from residential towers even in the overhead camera.
+            b.cylinder((0,0,body+.61),.88,.28,'stone',24)
+            kit.dome(b,0,0,body+.75,.92,.76,'roof')
+            b.cylinder((0,0,body+1.52),.17,.24,'wood_light',12,top=.08)
+            clock(b,0,y-.36,body+.14,.58)
+            for x in (-1.00,1.00):crest(b,x,y-.20,body+.07,.56,.83)
     else:
         # Public bath: a glazed copper-ribbed winter garden between two piers.
         floors=1 if level==1 else 2;body=.30+floors*1.12
@@ -342,6 +447,139 @@ def large(family,level,mats):
         for x in (-2.00,2.00):planter(b,x,y-.34,r=.16)
     for x in (-3.10,3.10):planter(b,x,y-.18,r=.14)
     return b.finish(bevel=.014)
+
+def thermal_pool(b,x,y,w,d,z=.40):
+    """A sunken bath with a visible water plane, not a blue facade stripe."""
+    with b.at((x,y,0)):
+        b.box((0,0,z-.16),(w,d,.28),'stone')
+        b.box((0,0,z-.005),(w-.20,d-.20,.035),'water')
+        for side in (-1,1):
+            b.box((side*(w/2-.07),0,z+.025),(.14,d,.10),'trim')
+            b.box((0,side*(d/2-.07),z+.025),(w,.14,.10),'trim')
+        # Submerged seats, a copper spout and two stainless pool-entry rails.
+        b.box((0,d*.25,z+.005),(w-.37,.17,.06),'stone')
+        b.rod((w*.26,d*.39,z+.07),(w*.26,d*.39,z+.35),.032,'wood_light',8)
+        b.rod((w*.26,d*.39,z+.35),(w*.26,d*.23,z+.35),.032,'wood_light',8)
+        for xx in (-.12,.12):
+            b.rod((xx,-d*.45,z+.04),(xx,-d*.45,z+.29),.026,'metal',8)
+            b.rod((xx,-d*.45,z+.29),(xx,-d*.18,z+.29),.026,'metal',8)
+            b.rod((xx,-d*.18,z+.29),(xx,-d*.18,z-.03),.026,'metal',8)
+        # A broad smooth ripple makes the warm-water surface legible on a phone.
+        for i in range(16):
+            a=i*math.tau/16;c=(i+1)*math.tau/16
+            b.rod((math.cos(a)*w*.19,math.sin(a)*d*.19,z+.020),(math.cos(c)*w*.19,math.sin(c)*d*.19,z+.020),.010,'trim',6)
+
+def steam_crest(b,x,y,z,w=1.0):
+    # Three rising curls above a shallow bowl are the public-bath emblem.
+    for i in range(12):
+        a=math.pi+i*math.pi/12;c=math.pi+(i+1)*math.pi/12
+        b.rod((x+math.cos(a)*w*.45,y,z+math.sin(a)*w*.12),(x+math.cos(c)*w*.45,y,z+math.sin(c)*w*.12),.030,'wood_light',8)
+    for k in (-1,0,1):
+        for i in range(6):
+            zz=i*.075;next_z=(i+1)*.075
+            b.rod((x+k*w*.24+math.sin(i*.9)*.048,y,z+.08+zz),(x+k*w*.24+math.sin((i+1)*.9)*.048,y,z+.08+next_z),.025,'wood_light',8)
+
+def thermal_resort(level,mats):
+    if level==3:return thermal_palace(mats)
+    b=Mesh(f'expansion_onsen_{level}',mats);b.bevel_min=.11
+    w=6.9;d=2.90;base(b,w,d)
+    # Baths occupy the entire exposed front courtyard. The hotel wing is kept
+    # narrow and behind them, so it cannot hide the water in the game camera.
+    rear_y=.80;hall_d=1.18;hall_w=4.05;floors=1 if level<3 else 2
+    with b.at((0,rear_y,0)):
+        top=shell(b,hall_w,hall_d,floors,1.05,front=False,faces=(0,math.pi))
+        for x in (-1.49,-.77,.77,1.49):window(b,x,-hall_d/2,.55,.50,.73,True)
+        if level==3:
+            for x in (-1.50,1.50):window(b,x,-hall_d/2,1.61,.64,.78,True,True)
+        door(b,0,-hall_d/2,w=.53,h=.92)
+        barrel(b,hall_w+.04,hall_d+.11,top+.07,.42,level>1)
+        steam_crest(b,0,-hall_d/2-.19,top+.04,.91)
+    side_floors={1:1,2:2,3:3}[level]
+    for x in (-2.68,2.68):
+        with b.at((x,.31,0)):
+            tower_top=tower_mass(b,0,0,1.25,1.96,side_floors,step=level>1,faces=(0,math.pi,math.pi/2 if x>0 else -math.pi/2))
+            if level==1:copper_roof(b,1.42,2.11,tower_top+.31,.45)
+            if level==3:
+                b.cylinder((0,0,tower_top+.85),.36,.22,'stone',16)
+                kit.dome(b,0,0,tower_top+.96,.47,.53,'roof')
+                b.cylinder((0,0,tower_top+1.51),.07,.18,'wood_light',10)
+    if level==3:
+        # Tall glass rotunda at the rear leaves both bathing terraces open.
+        with b.at((0,.80,0)):
+            b.box((0,0,2.66),(1.45,1.26,.66),'stone')
+            window(b,0,-.63,1.50,1.07,1.42,True)
+            kit.dome(b,0,0,3.04,.89,1.09,'water')
+            for i in range(10):
+                a=i*math.tau/10
+                for j in range(7):
+                    t=j*math.pi/14;tt=(j+1)*math.pi/14
+                    b.rod((.91*math.cos(t)*math.cos(a),.91*math.cos(t)*math.sin(a),3.04+1.11*math.sin(t)),(.91*math.cos(tt)*math.cos(a),.91*math.cos(tt)*math.sin(a),3.04+1.11*math.sin(tt)),.025,'wood_light',6)
+            b.cylinder((0,0,4.19),.13,.19,'wood_light',12,top=.07)
+        for x in (-1.96,1.96):planter(b,x,.02,.25,.15)
+    if level==1:thermal_pool(b,0,-.60,3.96,1.60,.44)
+    else:
+        for x in (-1.05,1.05):thermal_pool(b,x,-.60,1.92,1.60,.44 if level==2 else .52)
+        if level==3:
+            # Terraced bath deck, bronze towel benches and stone water cascade.
+            for x in (-1.87,1.87):b.box((x,-.18,.60),(.23,.65,.17),'wood_light')
+            b.box((0,-.30,.58),(.23,.26,.75),'stone')
+            b.box((0,-.46,.67),(.13,.035,.42),'water')
+    for x in (-3.05,3.05):planter(b,x,-.94,.22,.15)
+    root=b.finish(bevel=.014)
+    root['thermalPools']=([[0,-.60,.44,3.76,1.40]] if level==1 else [[x,-.60,.44 if level==2 else .52,1.72,1.40] for x in (-1.05,1.05)])
+    return root
+
+def thermal_palace(mats):
+    """L3 urban spa: a glazed bath palace between open elevated spring decks."""
+    b=Mesh('expansion_onsen_3',mats);b.bevel_min=.11
+    base(b,6.9,2.90)
+    with b.at((0,.80,0)):
+        hall=shell(b,4.05,1.18,3,1.05,front=False,faces=(0,math.pi))
+        for f in range(3):
+            for x in (-1.50,1.50):window(b,x,-.59,.54+f*1.05,.62,.76,True,f==2)
+        barrel(b,4.09,1.31,hall+.07,.43,True)
+        # A full-height arch of glazing and broad stone piers hold the tall dome.
+        b.box((0,0,2.73),(1.92,1.35,4.84),'stone')
+        for angle in (0,math.pi):
+            with b.facing(angle):
+                window(b,0,-.675,.56,1.49,4.30,True)
+                for x in (-.89,.89):b.box((x,-.76,2.78),(.22,.20,4.86),'trim')
+                b.box((0,-.76,5.11),(2.13,.20,.16),'wood_light')
+        door(b,0,-.675,w=.70,h=1.05,double=True)
+        steam_crest(b,0,-.88,4.58,1.17)
+        # Elliptical copper-ribbed glass dome: shallow in depth to keep the
+        # pools uncovered while its broad arch remains a real building crown.
+        rx=1.13;ry=.73;h=1.44;z=5.17;n=20;rings=10;verts=[]
+        for j in range(rings+1):
+            t=j*math.pi/(2*rings)
+            for i in range(n):
+                a=i*math.tau/n;verts.append((rx*math.cos(t)*math.cos(a),ry*math.cos(t)*math.sin(a),z+h*math.sin(t)))
+        b.poly(verts,[(j*n+i,j*n+(i+1)%n,(j+1)*n+(i+1)%n,(j+1)*n+i) for j in range(rings) for i in range(n)],'water',True)
+        for i in range(12):
+            a=i*math.tau/12
+            for j in range(8):
+                t=j*math.pi/16;tt=(j+1)*math.pi/16
+                b.rod(((rx+.012)*math.cos(t)*math.cos(a),(ry+.012)*math.cos(t)*math.sin(a),z+(h+.012)*math.sin(t)),((rx+.012)*math.cos(tt)*math.cos(a),(ry+.012)*math.cos(tt)*math.sin(a),z+(h+.012)*math.sin(tt)),.029,'wood_light',6)
+        b.cylinder((0,0,6.64),.12,.14,'wood_light',12,top=.08)
+    for x in (-2.68,2.68):
+        with b.at((x,.31,0)):
+            tower_mass(b,0,0,1.25,1.96,2,step=False,faces=(0,math.pi,math.pi/2 if x>0 else -math.pi/2))
+            thermal_pool(b,0,0,1.07,1.73,2.99)
+            # The side-pavilion roof is now a visibly usable hot-spring terrace.
+            for yy in (-.79,.79):
+                for xx in (-.54,.54):b.box((xx,yy,3.23),(.065,.065,.39),'wood_light')
+                b.box((0,yy,3.44),(1.14,.075,.055),'wood_light')
+        sign=-1 if x<0 else 1
+        b.box((sign*2.03,-.12,1.73),(.18,.27,2.49),'stone')
+        b.box((sign*2.03,-.265,1.72),(.125,.035,2.40),'water')
+        for zz in (.54,1.34,2.14,2.94):
+            b.cylinder((sign*2.03,-.17,zz),.18,.10,'trim',12)
+            b.cylinder((sign*2.03,-.17,zz+.055),.14,.015,'water',12)
+    for x in (-1.05,1.05):thermal_pool(b,x,-.60,1.92,1.60,.52)
+    for x in (-3.05,3.05):planter(b,x,-.94,.22,.15)
+    root=b.finish(bevel=.014)
+    root['thermalPools']=[[x,-.60,.52,1.72,1.40] for x in (-1.05,1.05)]+[[x,.31,2.99,.87,1.53] for x in (-2.68,2.68)]
+    return root
 
 def clock(b,x,y,z,r=.30,coin=False,information=False):
     # Existing semantic emblem, enlarged to match this kit's source units.

@@ -254,7 +254,7 @@ def door(b,region,x,y,z=.17,w=.66,h=.98):
             b.cylinder((x-w*.29,y-.145,zz),.02,.01,'bronze',8)
         b.rod((x+w*.20,y-.12,z+.48),(x+w*.20,y-.16,z+.48),.035,'bronze',10)
 
-def timber_shell(b,region,w,d,floors,storey=1.12,balconies=False,window_count=2,facades=None,front_limit=None):
+def timber_shell(b,region,w,d,floors,storey=1.12,balconies=False,window_count=2,facades=None,front_limit=None,flowerboxes=True):
     bottom=.18;top=bottom+floors*storey
     b.box((0,0,(bottom+top)/2),(w,d,top-bottom),'wall')
     if region=='alpine':masonry(b,w,d,.17,min(.94,storey-.12),4,facades,front_limit)
@@ -281,7 +281,7 @@ def timber_shell(b,region,w,d,floors,storey=1.12,balconies=False,window_count=2,
                     x=(k-(count-1)/2)*(span-.28)/count
                     if angle==0 and front_limit is not None and abs(x)>front_limit:continue
                     if region=='compact':grid_window(b,x,-depth/2-.045,z+.31,ww,.56,6,2)
-                    else:shutter_window(b,x,-depth/2-.045,z+.31,min(.47,ww-.08),.56,flowers=level>0 and not balconies)
+                    else:shutter_window(b,x,-depth/2-.045,z+.31,min(.47,ww-.08),.56,flowers=flowerboxes and level>0 and not balconies)
                 if balconies and level>0 and angle in (0,math.pi):railing(b,min(span-.18,front_limit*2) if angle==0 and front_limit is not None else span-.18,-depth/2-.25,z+.20,region,region=='alpine')
         if region=='compact' and level>0:eave(b,w,d,z+.07)
     return top
@@ -404,6 +404,309 @@ def pool(b,x,y,z,w=1.4,d=.60):
     for sign in (-1,1):
         for i in range(7):b.box((x-w/2+(i+.5)*w/7,y+sign*(d/2+.05),z),(w/7-.014,.16,.17),'stone2' if i%2 else 'stone')
         b.box((x+sign*(w/2+.06),y,z),(.17,d+.27,.17),'stone')
+
+def summit_roof(b,region,w,d,z,rise=.48,axis=None):
+    """Hero roofs keep the full ceramic profile with fewer invisible courses."""
+    axis=axis or ('x' if region=='compact' else 'y')
+    gable_infill(b,w,d,z,rise,axis=='y')
+    roof(b,region,w+.30,d+.30,z+.015,rise,axis,cols=10,rows=3)
+
+def summit_room(b,region,w,d,z,height=.94,balconies=False,axis=None):
+    with b.at((0,0,z)):
+        top=timber_shell(b,region,w,d,1,height,balconies=False,window_count=2)
+        # Ground-floor openings are deliberately authored here: these rooms
+        # sit above a roof, so they need windows rather than another entrance.
+        for x in (-w*.24,w*.24):
+            if region=='compact':grid_window(b,x,-d/2-.05,.34,min(.55,w*.36),height*.55,4,2)
+            else:shutter_window(b,x,-d/2-.05,.32,min(.40,w*.32),height*.56,False)
+        if balconies:railing(b,w+.04,-d/2-.23,.22,region,region=='alpine')
+        summit_roof(b,region,w,d,top,.46,axis)
+    return z+top+.46
+
+def ridge_crest(b,x,y,z):
+    # Paired swept bronze ridge ornaments read as a castle crown at phone size.
+    for s in (-1,1):
+        beam(b,(x+s*.28,y,z),(x+s*.41,y,z+.18),.070,.075,'bronze')
+        beam(b,(x+s*.41,y,z+.18),(x+s*.37,y,z+.29),.058,.065,'bronze')
+
+def level3_core(region,family,mats):
+    """A distinct premium silhouette; never simply a third identical floor."""
+    b=Mesh(f'{region}_{family}_3',mats)
+    w=2.44 if family!='hotel' else 2.62;d=1.92
+    base(b,w,d)
+    floors=2 if region=='alpine' and family=='tower' else 3
+    top=timber_shell(b,region,w,d,floors,1.14 if floors==2 else 1.06,balconies=False,window_count=2,flowerboxes=False)
+    y=-d/2-.065
+    if family in ('hotel','tower'):
+        for story in range(1,floors):railing(b,w-.14,y-.17,.38+story*1.06,region,region=='alpine' and family=='hotel' and story==1)
+    if family=='shop':shopfront(b,region,w,d,3)
+    else:
+        door(b,region,0,y,w=.78,h=1.06)
+        for x in (-w*.33,w*.33):
+            if region=='compact':grid_window(b,x,y,.45,.49,.63,5,2)
+            else:shutter_window(b,x,y,.44,.40,.60)
+        for x in (-w*.43,w*.43):pot(b,x,y-.20,flowers=region=='alpine')
+    for x in (-.63,.63):lantern(b,x,y-.15,1.06,region)
+    if region=='compact':
+        summit_roof(b,region,w,d,top,.43)
+        if family=='tower':
+            # The Kyoto mansion becomes a tiered plaster-and-timber keep.
+            # Broad lower eaves, a recessed middle tier and a high lookout
+            # create three readable silhouettes, not one stretched tenement.
+            summit=summit_room(b,region,2.03,1.49,top+.20,.92,True,'y')
+            ridge_crest(b,0,0,summit+.07)
+            with b.at((0,-d/2-.03,0)):front_gable(b,region,1.26,.77,1.32,.46)
+            noren(b,y-.22,1.31,1.04)
+        elif family=='villa':
+            # A generous cross-gabled family estate, distinct from the keep.
+            summit_room(b,region,1.62,1.31,top+.08,.90,True,'y')
+            with b.at((-.68,-.86,0)):front_gable(b,region,.78,.54,top+.10,.42)
+            noren(b,y-.18,1.27,.92)
+        elif family=='shop':
+            summit_room(b,region,1.46,1.32,top+.16,1.04,False)
+            # A wide shop crest and paired banners mark the merchant guild.
+            b.box((0,y-.12,2.15),(1.64,.10,.35),'indigo')
+            for x in (-.55,0,.55):emblem(b,x,y-.19,2.15,'coin',.115)
+            for x in (-w*.45,w*.45):
+                b.box((x,y-.17,1.84),(.21,.045,.80),'indigo')
+                b.box((x,y-.20,1.84),(.048,.025,.39),'cream')
+        else:
+            summit_room(b,region,1.77,1.38,top+.16,1.10,True)
+            for x in (-.80,.80):
+                with b.at((x,-.67,0)):front_gable(b,region,.70,.65,top+.08,.43)
+            with b.at((0,-d/2-.07,0)):front_gable(b,region,1.15,.78,1.25,.42)
+            noren(b,y-.22,1.24,.90)
+    else:
+        summit_roof(b,region,w,d,top,.76)
+        if family=='tower':
+            # Stone corner quoins and a tall open bellvedere are a real
+            # regional mansion crown rather than Kyoto's stacked pavilion.
+            with b.at((0,.05,top+.26)):
+                timber_shell(b,region,1.58,1.28,1,1.00,window_count=1)
+                shutter_window(b,0,-.69,.38,.74,.67,False,True)
+                for x in (-.68,.68):
+                    for yy in (-.55,.55):b.box((x,yy,1.48),(.12,.12,.59),'wood')
+                b.cylinder((0,0,1.47),.28,.37,'bronze',14,top=.15)
+                summit_roof(b,region,1.65,1.39,1.84,.71)
+            for s in (-1,1):
+                for j in range(8):b.box((s*(w/2-.04),y-.02,.34+j*.27),(.22,.15,.19),'stone2' if j%2 else 'stone')
+        elif family=='shop':
+            # A marketplace clock-and-bell turret over a broad bakery hall.
+            clock_tower(b,region,0,.02,top+.38,1.03)
+            for x in (-.78,.78):
+                with b.at((x,-.60,0)):front_gable(b,region,.67,.54,top+.10,.53)
+        elif family=='villa':
+            summit_room(b,region,1.48,1.38,top+.04,1.25,True,'x')
+            with b.at((.77,-.66,0)):front_gable(b,region,.76,.65,top+.03,.62)
+            chimney(b,-.82,.44,top+.35)
+            railing(b,w-.12,y-.19,1.54,region,True)
+        else:
+            summit_room(b,region,1.58,1.44,top+.14,1.06,True)
+            for x in (-.83,.83):
+                with b.at((x,-.61,0)):front_gable(b,region,.73,.68,top+.10,.61)
+            with b.at((0,-d/2-.07,0)):front_gable(b,region,1.19,.80,1.27,.49)
+            for x in (-.99,.99):
+                b.box((x,.40,top+.72),(.25,.27,.72),'stone')
+                b.box((x,.40,top+1.11),(.34,.35,.10),'stone2')
+                b.box((x,.40,top+1.18),(.23,.24,.055),'dark')
+    return b.finish(bevel=.006)
+
+def thermal_badge(b,x,y,z):
+    """Bath + three steam curls is language-independent, fully solid geometry."""
+    b.box((x,y,z),(1.04,.12,.66),'indigo')
+    for k in range(10):
+        a=math.pi+math.pi*k/10;c=math.pi+math.pi*(k+1)/10
+        b.rod((x+.34*math.cos(a),y-.08,z-.03+.12*math.sin(a)),(x+.34*math.cos(c),y-.08,z-.03+.12*math.sin(c)),.025,'cream',6)
+    for off in (-.23,0,.23):
+        for k in range(5):
+            zz=z-.01+k*.05;xx=x+off+math.sin(k*1.35)*.025
+            zz2=zz+.05;xx2=x+off+math.sin((k+1)*1.35)*.025
+            b.rod((xx,y-.08,zz),(xx2,y-.08,zz2),.018,'cream',6)
+
+def thermal_pool(b,x,y,z,w,d,region):
+    # The open sky above the water is intentional: roofs no longer hide it.
+    b.box((x,y,z-.09),(w+.18,d+.18,.25),'stone')
+    b.box((x,y,z+.045),(w,d,.045),'water')
+    for s in (-1,1):
+        b.box((x,y+s*(d/2+.035),z+.10),(w+.18,.15,.15),'stone2')
+        b.box((x+s*(w/2+.035),y,z+.10),(.15,d+.15,.15),'stone2')
+    for k in range(5):
+        xx=x-w*.38+k*w*.19;yy=y+d*.38
+        b.sphere((xx,yy,z+.15),(.19,.13,.14),'stone2' if k%2 else 'stone',7,3)
+    # Waterfall spill at the rear and broad concentric ripple arcs.
+    b.box((x+w*.28,y+d*.45,z+.30),(.38,.23,.47),'stone')
+    b.box((x+w*.28,y+d*.33,z+.29),(.21,.028,.36),'water')
+    for radius in (.18,.29):
+        for k in range(9):
+            a=math.pi+k*math.pi/9;c=math.pi+(k+1)*math.pi/9
+            b.rod((x+w*.27+math.cos(a)*radius,y+d*.17+math.sin(a)*radius,z+.074),(x+w*.27+math.cos(c)*radius,y+d*.17+math.sin(c)*radius,z+.074),.009,'cream',5)
+
+def thermal_resort(region,level,mats):
+    """An open U-plan bath garden, visible from the actual elevated game camera."""
+    if level==3:return thermal_palace(region,mats)
+    b=Mesh(f'{region}_onsen_{level}',mats)
+    w=6.65;d=2.85;base(b,w,d)
+    # A narrow rear hall and short end pavilions leave the whole front centre
+    # uncovered. The pool occupies a third of the footprint, at every level.
+    with b.at((0,.77,0)):
+        top=timber_shell(b,region,6.28,1.15,level if level<3 else 2,.93,window_count=5,flowerboxes=False)
+        summit_roof(b,region,6.28,1.15,top,.44,'x')
+        door(b,region,0,-.65,.18,.76,.87)
+    for s in (-1,1):
+        with b.at((s*2.60,-.26,0)):
+            side_top=timber_shell(b,region,1.12,1.75,1 if level==1 else 2,.88,window_count=1,flowerboxes=False)
+            summit_roof(b,region,1.12,1.75,side_top,.42,'y')
+            door(b,region,0,-.93,.18,.57,.81)
+            lantern(b,0,-1.02,1.04,region)
+    if level==3:
+        with b.at((0,.70,0)):
+            summit_room(b,region,2.25,1.14,top+.12,1.16,True,'y' if region=='alpine' else 'x')
+            if region=='compact':ridge_crest(b,0,0,top+1.98)
+        thermal_pool(b,-.84,-.60,.23,1.43,1.16,region)
+        thermal_pool(b,.84,-.60,.23,1.43,1.16,region)
+        # A low timber footbridge between the two pools frames the courtyard.
+        b.box((0,-.60,.31),(.26,1.42,.10),'wood')
+        for s in (-1,1):
+            for yy in (-1.20,0):b.box((s*.19,yy,.53),(.045,.045,.44),'wood')
+            b.box((s*.19,-.60,.74),(.045,1.24,.05),'lightwood')
+    else:thermal_pool(b,0,-.60,.23,2.85,1.16,region)
+    thermal_badge(b,0,.10,1.04 if level==1 else 1.72)
+    # Deck stools, rolled towels, planting and stone lanterns are deliberately
+    # kept on the wings so neither the water nor the walking route is hidden.
+    for s in (-1,1):
+        pot(b,s*1.93,-1.06,flowers=region=='alpine')
+        b.cylinder((s*1.93,-.49,.34),.18,.22,'wood',12)
+        b.rod((s*1.93-.12,-.49,.48),(s*1.93+.12,-.49,.48),.062,'cream',10)
+        b.cylinder((s*1.88,.08,.31),.16,.44,'stone',8)
+        b.box((s*1.88,.08,.62),(.29,.29,.22),'glass')
+        b.cylinder((s*1.88,.08,.80),.25,.17,'roof',4,top=.07)
+    root=b.finish(bevel=.006)
+    root['thermalPools']=[[-.84,-.60,.298,1.43,1.16],[.84,-.60,.298,1.43,1.16]] if level==3 else [[0,-.60,.298,2.85,1.16]]
+    return root
+
+def level3_large(region,family,mats):
+    """The highest tier is a dominant broad keep with subordinate side halls."""
+    b=Mesh(f'{region}_{family}_3',mats);w=6.55;d=2.16;base(b,w,d)
+    central_width=3.28 if family=='skyscraper' else 3.13
+    # Deliberately no continuous high horizontal slab: the centre is a real
+    # three/four-storey body, while the lower wings visibly frame its height.
+    for s in (-1,1):
+        # Inner wing walls are genuinely buried in the main hall, rather than
+        # leaving a sliver of undecorated facade visible through a side gap.
+        with b.at((s*(central_width/2+.65),-.02,0)):
+            t=timber_shell(b,region,1.40,1.91,2,.98,window_count=1,facades=(0,math.pi,math.pi/2 if s>0 else math.pi*1.5),flowerboxes=False)
+            summit_roof(b,region,1.40,1.91,t,.64,'y')
+            door(b,region,0,-1.02,.18,.64,.94)
+    floors=4 if region=='alpine' and family=='finance' else 3
+    top=timber_shell(b,region,central_width,2.04,floors,1.24,window_count=3 if region=='compact' else 2,flowerboxes=False)
+    y=-1.09;door(b,region,0,y,.18,1.08,1.30)
+    for x in (-.77,.77):b.box((x,y-.22,.96),(.16,.16,1.57),'wood')
+    with b.at((0,y+.03,0)):front_gable(b,region,1.94,.78,1.75,.56)
+    for x in (-1.10,1.10):lantern(b,x,y-.18,1.33,region)
+    if region=='compact':
+        summit_roof(b,region,central_width,2.04,top,.56,'x')
+        if family=='skyscraper':
+            summit_room(b,region,2.81,1.72,top+.20,1.31,True)
+            crest=summit_room(b,region,2.12,1.42,top+1.81,1.06,True,'y')
+            ridge_crest(b,0,0,crest+.08)
+        else:
+            # A glazed ceremonial exchange hall, with full-height timber
+            # bays on every facade and twin projecting roof gables.
+            crest=exchange_hall(b,2.69,1.73,top+.28,1.82)
+            ridge_crest(b,0,0,crest+.08)
+            for x in (-1.30,1.30):
+                b.box((x,y-.12,2.12),(.42,.055,1.74),'indigo');emblem(b,x,y-.18,2.34,'coin',.18)
+                crates(b,x-.10,y-.15,.06)
+        for z in (1.42,2.66):railing(b,central_width-.14,y-.17,z,region)
+    else:
+        summit_roof(b,region,central_width,2.04,top,.76,'y')
+        if family=='skyscraper':
+            summit_room(b,region,2.61,1.69,top+.26,1.44,False,'y')
+            # The grand hotel ends in a panoramic suite, not the exchange's
+            # civic clock face. Large gables and a balcony identify lodging.
+            observation_suite(b,2.03,1.40,top+1.92)
+            for z in (1.42,2.66):railing(b,central_width-.16,y-.18,z,region,z==1.42)
+            for x in (-2.49,2.49):chimney(b,x,.36,2.65)
+        else:
+            clock_tower(b,region,0,.03,top+.32,2.27)
+            for s in (-1,1):
+                for j in range(17):b.box((s*(central_width/2-.05),y-.02,.35+j*.28),(.24,.15,.20),'stone2' if j%2 else 'stone')
+            for x in (-1.15,1.15):
+                b.box((x,y-.11,2.06),(.42,.05,1.72),'indigo');emblem(b,x,y-.16,2.26,'coin',.19)
+    return b.finish(bevel=.006)
+
+def exchange_hall(b,w,d,z,height):
+    with b.at((0,0,z)):
+        b.box((0,0,.18+height/2),(w,d,height),'wall')
+        for angle,span,depth in directions(w,d):
+            with b.facing(angle):
+                for x in (-span/2,span/2):b.box((x,-depth/2-.035,.18+height/2),(.12,.12,height+.10),'wood')
+                for zz in (.22,.18+height*.54,.18+height):b.box((0,-depth/2-.065,zz),(span+.10,.12,.10),'wood')
+                count=3 if angle in (0,math.pi) else 2
+                for k in range(count):
+                    xx=(k-(count-1)/2)*(span-.16)/count
+                    grid_window(b,xx,-depth/2-.08,.34,(span-.16)/count-.13,height-.29,6,5)
+        railing(b,w+.02,-d/2-.21,.22,'compact')
+        summit_roof(b,'compact',w,d,.18+height,.50,'x')
+        for xx in (-.71,.71):
+            with b.at((xx,-d/2+.03,0)):front_gable(b,'compact',1.05,.74,.18+height+.03,.65)
+    return z+.18+height+.73
+
+def observation_suite(b,w,d,z):
+    with b.at((0,0,z)):
+        b.box((0,0,.68),(w,d,1.00),'wall')
+        for angle,span,depth in directions(w,d):
+            with b.facing(angle):
+                for x in (-span/2,span/2):b.box((x,-depth/2-.03,.69),(.10,.10,1.06),'wood')
+                for zz in (.22,1.16):b.box((0,-depth/2-.03,zz),(span+.09,.09,.09),'wood')
+                for x in (-span*.25,span*.25):grid_window(b,x,-depth/2-.06,.36,span*.43,.69,3,2)
+        railing(b,w+.04,-d/2-.21,.22,'alpine',False)
+        summit_roof(b,'alpine',w,d,1.19,.66,'y')
+
+def thermal_palace(region,mats):
+    """High bathhouse behind an uncovered terraced rock-water courtyard."""
+    b=Mesh(f'{region}_onsen_3',mats);base(b,6.65,2.85)
+    for s in (-1,1):
+        with b.at((s*2.60,-.20,0)):
+            top=timber_shell(b,region,1.15,1.82,2,1.01,window_count=1,flowerboxes=False)
+            summit_roof(b,region,1.15,1.82,top,.53,'y')
+            door(b,region,0,-.98,.18,.61,.93)
+            lantern(b,0,-1.03,1.12,region)
+    # This broad three-storey hall is the primary landmark. Its front face
+    # stays behind the pool edge; no eave crosses the bath's exposed centre.
+    with b.at((0,.81,0)):
+        top=timber_shell(b,region,3.33,1.16,3,1.24,window_count=3,flowerboxes=False)
+        summit_roof(b,region,3.33,1.16,top,.54,'x')
+        door(b,region,0,-.65,.18,.88,1.12)
+        crest=summit_room(b,region,2.54,1.08,top+.24,1.42,False,'x' if region=='compact' else 'y')
+        if region=='compact':ridge_crest(b,0,0,crest+.08)
+    for s in (-1,1):
+        # Short connecting roof galleries explain the U-shaped circulation.
+        with b.at((s*1.96,.86,0)):
+            b.box((0,0,1.24),(.56,.93,2.12),'wall')
+            summit_roof(b,region,.56,.93,2.30,.33,'x')
+    thermal_pool(b,-.84,-.61,.23,1.43,1.16,region)
+    b.box((.84,-.61,.43),(1.61,1.34,.50),'stone')
+    thermal_pool(b,.84,-.61,.73,1.43,1.16,region)
+    # A stepped centre bridge links the high bath terrace to the entrance.
+    for j in range(5):
+        yy=-1.36+j*.28;zz=.22+j*.105
+        b.box((0,yy,zz/2+.08),(.32,.30,zz),'wood')
+        for s in (-1,1):b.box((s*.22,yy,zz+.28),(.05,.05,.40),'wood')
+        if j<4:
+            for s in (-1,1):beam(b,(s*.22,yy,zz+.48),(s*.22,yy+.28,zz+.585),.047,.047,'lightwood')
+    # Broad rock outcrop and a spill channel establish natural hot-spring water.
+    for s in (-1,1):
+        for j in range(3):b.sphere((s*1.79,-1.11+j*.43,.33+j*.06),(.20,.23,.24),'stone2' if j%2 else 'stone',7,3)
+        pot(b,s*2.00,-1.14,flowers=region=='alpine')
+        b.cylinder((s*1.91,.03,.43),.18,.58,'stone',8)
+        b.box((s*1.91,.03,.81),(.29,.29,.23),'glass')
+        b.cylinder((s*1.91,.03,.99),.25,.17,'roof',4,top=.07)
+    b.box((.12,-.76,.54),(.08,.24,.35),'water')
+    thermal_badge(b,0,.10,2.19)
+    root=b.finish(bevel=.006)
+    root['thermalPools']=[[-.84,-.61,.298,1.43,1.16],[.84,-.61,.798,1.43,1.16]]
+    return root
 
 def large(region,family,level,mats):
     b=Mesh(f'{region}_{family}_{level}',mats);w=6.85;d=2.25;floor=1.08
@@ -682,7 +985,9 @@ def build(region,asset):
         if asset in ('windmill','alpine_windmill'):root=windmill(mats)
         elif asset.rsplit('_',1)[-1].isdigit():
             family,level=asset.rsplit('_',1);level=int(level)
-            root=core(region,family,level,mats) if family in ('villa','shop','hotel','tower') else large(region,family,level,mats)
+            if family=='onsen':root=thermal_resort(region,level,mats)
+            elif level==3:root=level3_core(region,family,mats) if family in ('villa','shop','hotel','tower') else level3_large(region,family,mats)
+            else:root=core(region,family,level,mats) if family in ('villa','shop','hotel','tower') else large(region,family,level,mats)
         else:root=public(region,asset,mats)
     root.name=f'{region}_{asset}'
     root['region']=region;root['sourceType']='blender_authored';root['front']='Blender -Y / glTF +Z';root['origin']='ground centre'

@@ -106,7 +106,17 @@ function inspectSource(catalog,region,asset,{far=false,smoke=false,sourceRoot=HE
   if(asset==='builders_guild')assert(measured.parts.includes('pendulum'));
   let nearSourceSha256;
   if(far){nearSourceSha256=hash(read(`${HERE}/models/${region}/${asset}/model.glb`));assert.equal(record.nearSourceSha256,nearSourceSha256,`${name}: far derivative must match current near source`);}
+  const thermalPools=node.extras?.thermalPools;
+  if(ref.family==='onsen'){
+    assert(Array.isArray(thermalPools)&&thermalPools.length>0&&thermalPools.length<=4,`${name}: authored bath surfaces required`);
+    for(const pool of thermalPools){
+      assert(Array.isArray(pool)&&pool.length===5&&pool.every(Number.isFinite),`${name}: finite pool coordinates`);
+      const [x,y,z,w,d]=pool;assert(w>.1&&d>.1,`${name}: readable bath size`);
+      assert(x-w/2>=measured.bounds.min[0]-.002&&x+w/2<=measured.bounds.max[0]+.002&&y>=0&&y<=measured.bounds.max[1]&&z-d/2>=measured.bounds.min[2]-.002&&z+d/2<=measured.bounds.max[2]+.002,`${name}: water anchors remain on the parcel`);
+    }
+  }
   const provenance={sourceType:SOURCE,region,asset,family:ref.family,level:ref.level,referenceViews:ref.referenceViews,sourceFile:file,sourceSha256:hash(bytes),processingReport:recordFile,processingReportSha256:hash(read(recordFile)),builder:record.builder,builderSha256:record.builderSha256,pipelineSha256:record.pipelineSha256,authoredArchitecture:true,...(record.storageCompression?{storageCompression:record.storageCompression}:{}),...(far?{nearSourceSha256,detailLevel:'far'}:{detailLevel:hero?'hero':'near'})};
+  if(thermalPools)provenance.thermalPools=structuredClone(thermalPools);
   return {region,asset,name,bytes,parsed,record,measured,provenance};
 }
 function remapMaterial(value,textureOffset){
