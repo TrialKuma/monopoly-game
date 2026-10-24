@@ -1,0 +1,106 @@
+{
+  "region": "alpine",
+  "asset": "hotel_2",
+  "name": "alpine_hotel_2",
+  "sourceType": "authored_blender_reference_rebuild",
+  "family": "hotel",
+  "level": 2,
+  "referenceViews": [
+    {
+      "view": "front",
+      "path": "art/full-ai-city/inputs/alpine/hotel_2/944d6b20c602f97d/view00_azim000.png",
+      "sha256": "d6a3a06711867682b9fa6133e7dd716f7c0b55b129f19b17be0fe9727f885913"
+    },
+    {
+      "view": "right",
+      "path": "art/full-ai-city/inputs/alpine/hotel_2/944d6b20c602f97d/view01_azim090.png",
+      "sha256": "9d93d6b189fce0a91719264c1ca4c23579c82ecbb0218a1811ff9ab604631c66"
+    },
+    {
+      "view": "back",
+      "path": "art/full-ai-city/inputs/alpine/hotel_2/944d6b20c602f97d/view02_azim180.png",
+      "sha256": "f144e85f177a8b030a7f1e7b76e3f0dfabd02a48f3255cea2afd9bc0fa9d3109"
+    }
+  ],
+  "triangles": 13440,
+  "size": [
+    0.9900000095367432,
+    1.117308259010315,
+    0.980036735534668
+  ],
+  "bounds": {
+    "min": [
+      -0.4950000047683716,
+      0.0,
+      -0.490018367767334
+    ],
+    "max": [
+      0.4950000047683716,
+      1.117308259010315,
+      0.490018367767334
+    ]
+  },
+  "scale": 0.31629391814793406,
+  "bytes": 1378592,
+  "sha256": "a1be4f158c9a29fc9c9d3ce05301c13e03e5fd40497901cce863ce677e5d26fa",
+  "builder": "art/blender-city/regions/eastern.py",
+  "builderSha256": "12b8c65dc3316d4d9a68ef1d46743e5b0271de3c7514fbf26b1830625585a028",
+  "pipelineSha256": "299a3de32ea2fe7238f6bd22334a9f5446946e50b5c38efd0e3c9678171ee259",
+  "surface": {
+    "materials": 3,
+    "textureSize": 512,
+    "vertexColours": true,
+    "aoSamples": 32,
+    "directionalLightingBaked": false
+  },
+  "status": "built_pending_scene_review",
+  "seconds": 0.39,
+  "detailLevel": "far",
+  "nearSource": "art/blender-city/models/alpine/hotel_2/model.glb",
+  "nearSourceSha256": "980c312976cef6cbbf5d12eb1485d139086826d82d7771973e49169049f83049",
+  "farBuilder": "art/blender-city/make_far.py",
+  "farBuilderSha256": "3a0f041886a8bf7996a90089c5bf40dcf530e9aca8028b678b94f527a702377f",
+  "sourceTriangles": 33032,
+  "simplification": {
+    "method": "Blender collapse with existing UV and vertex color layers",
+    "target": 14000,
+    "passes": [
+      {
+        "before": 33032,
+        "after": 13440,
+        "ratio": 0.4068781787357713
+      }
+    ],
+    "rescaling": false,
+    "centeringOffsetBlender": [
+      -0.0,
+      1.4901161193847656e-08,
+      -0.0
+    ],
+    "textures": [
+      {
+        "size": [
+          512,
+          512
+        ],
+        "before": [
+          1024,
+          1024
+        ]
+      }
+    ]
+  },
+  "nearStorageCompression": {
+    "configuration": "normal16_uv16_color8",
+    "afterSha256": "980c312976cef6cbbf5d12eb1485d139086826d82d7771973e49169049f83049",
+    "originalSha256": "c6f47cf61ba964580fe7a2b062cb7ec83bec9efabcc6cfc7d7e7a4f5ec627fdc",
+    "originalBytes": 3397864,
+    "report": {
+      "path": "art/blender-city/reports/storage-compression/alpine/hotel_2-980c312976cef6cb.json",
+      "sha256": "e5e67eaadb3fcd332e69bc2f6f1a67baeccd47a07c09607fb7295dd7df6d0c0a"
+    },
+    "maxNormalError": 1.5258319748912008e-05,
+    "maxUVError": 7.629323589553039e-06,
+    "maxColorError": 0.001953154802777135
+  }
+}

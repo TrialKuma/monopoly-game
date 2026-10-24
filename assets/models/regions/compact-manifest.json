@@ -1,38 +1,35 @@
 {
-  "schemaVersion": 2,
+  "schemaVersion": 3,
   "region": "compact",
   "coordinateSystem": "glTF Y-up; +Z front",
-  "sourceType": "pixal_native_multiview",
+  "sourceType": "authored_blender_reference_rebuild",
   "assets": [
     {
       "name": "compact_villa_1",
       "size": [
-        0.99,
-        0.5391810947656631,
-        0.655114933848381
+        0.9899999499320984,
+        0.5905932188034058,
+        0.7009991705417633
       ],
       "bounds": {
         "min": [
-          -0.495,
-          0.0,
-          -0.3275574669241905
+          -0.4949999749660492,
+          0,
+          -0.35049957036972046
         ],
         "max": [
-          0.495,
-          0.5391810947656631,
-          0.3275574669241905
+          0.4949999749660492,
+          0.5905932188034058,
+          0.35049960017204285
         ]
       },
-      "triangles": 29943,
+      "triangles": 15588,
       "source": {
-        "sourceType": "pixal_native_multiview",
+        "sourceType": "authored_blender_reference_rebuild",
+        "region": "compact",
+        "asset": "villa_1",
         "family": "villa",
         "level": 1,
-        "sourceFile": "assets/models/regions-ai/full/compact/villa_1/506f13ee10235a61.glb",
-        "sourceSha256": "506f13ee10235a612bc4c9daca5989bbc73ae3fea5e257aea4c8985a5b070b8d",
-        "inferenceReport": "art/full-ai-city/reports/compact--villa_1-a011/compact--villa_1-a011-pixal-mv-1024-9247.json",
-        "reference": "art/full-ai-city/references/compact/villa_1/reference.json",
-        "rawSourceSha256": "783d10287c56b19d023fa035c6cd92092004a65f45be69ff484501f1354e9e7c",
         "referenceViews": [
           {
             "view": "front",
@@ -50,47 +47,56 @@
             "sha256": "0bd62b0b062b11f77134bebe06a60b0479a8f0694983457a5a25a5ca6295133b"
           }
         ],
-        "normalisationScale": 0.99,
-        "placementReview": {
-          "independentParcelScale": 0.99,
-          "scale": 0.99,
-          "reason": "independent_uniform_parcel_fit",
-          "relativeToIndependentFit": 1.0,
-          "sharedCameraReviewRequired": true
+        "sourceFile": "art/blender-city/models/compact/villa_1/model.glb",
+        "sourceSha256": "1ffad66984a77eb65f2db1a3689dd89fd9852c0422a10c349d4dd2916839ee30",
+        "processingReport": "art/blender-city/models/compact/villa_1/model.json",
+        "processingReportSha256": "3251008847d4b112dc0ab5dd206c2425dc721b3b514a0d89428769b7eba6860c",
+        "builder": "art/blender-city/regions/eastern.py",
+        "builderSha256": "12b8c65dc3316d4d9a68ef1d46743e5b0271de3c7514fbf26b1830625585a028",
+        "pipelineSha256": "299a3de32ea2fe7238f6bd22334a9f5446946e50b5c38efd0e3c9678171ee259",
+        "authoredArchitecture": true,
+        "storageCompression": {
+          "configuration": "normal16_uv16_color8",
+          "afterSha256": "1ffad66984a77eb65f2db1a3689dd89fd9852c0422a10c349d4dd2916839ee30",
+          "originalSha256": "b723191a521d4b7edb1e0d67283f9ac5813e4c820ac30555df1d712e92b8feb0",
+          "originalBytes": 2009920,
+          "report": {
+            "path": "art/blender-city/reports/storage-compression/compact/villa_1-1ffad66984a77eb6.json",
+            "sha256": "e9d777ba2ca135ce6d39900d8187164a7ad62d9f829fecb2ea2dae88a7758271"
+          },
+          "maxNormalError": 0.000015233948185144897,
+          "maxUVError": 0.000007629506400819164,
+          "maxColorError": 0.0019378957808804664
         },
-        "reviewStatus": "approved",
-        "triangleBudget": 30000
+        "detailLevel": "near"
       }
     },
     {
       "name": "compact_villa_2",
       "size": [
-        0.9519550952648654,
-        1.0780733813526278,
-        0.9234362322050211
+        0.9900000095367432,
+        1.0812287330627441,
+        0.8098868429660797
       ],
       "bounds": {
         "min": [
-          -0.4759775476324327,
-          0.0,
-          -0.46171811610251057
+          -0.4950000047683716,
+          0,
+          -0.40494343638420105
         ],
         "max": [
-          0.4759775476324327,
-          1.0780733813526278,
-          0.4617181161025106
+          0.4950000047683716,
+          1.0812287330627441,
+          0.40494340658187866
         ]
       },
-      "triangles": 44948,
+      "triangles": 41116,
       "source": {
-        "sourceType": "pixal_native_multiview",
+        "sourceType": "authored_blender_reference_rebuild",
+        "region": "compact",
+        "asset": "villa_2",
         "family": "villa",
         "level": 2,
-        "sourceFile": "assets/models/regions-ai/full/compact/villa_2/a5a8f33f417bc0d4.glb",
-        "sourceSha256": "a5a8f33f417bc0d477b8d071cd09e3b22b675da06348675a43eef0b37f6d8bb2",
-        "inferenceReport": "art/themed-city-kit/reports/compact-house-mv-v01/compact-house-mv-v01-pixal-mv-1024-9247.json",
-        "reference": "art/themed-city-kit/inputs/compact-house-v01/transforms.json",
-        "rawSourceSha256": "06996b140f83e904faf0f9b5930fcea1a49e06fad4b6403b4f51c33af1dcdcc4",
         "referenceViews": [
           {
             "view": "front",
@@ -108,52 +114,56 @@
             "sha256": "a909d588593a52b71871f6a188e460d2a216144f90ad09af1deefed4b4ee506a"
           }
         ],
-        "normalisationScale": 1.079219537876054,
-        "placementReview": {
-          "independentParcelScale": 1.1223505686473811,
-          "scale": 1.079219537876054,
-          "reason": "uniform_fit_below_next_upgrade",
-          "nextLevel": "villa_3",
-          "nextLevelHeight": 1.2535736992472417,
-          "maximumHeight": 1.0780733813526278,
-          "heightRatio": 0.86,
-          "relativeToIndependentFit": 0.9615708032978438,
-          "sharedCameraReviewRequired": true
+        "sourceFile": "art/blender-city/models/compact/villa_2/model.glb",
+        "sourceSha256": "92ac4b70058f4011e676c8728e6cc1958728523399ee7b84af0416e168594c89",
+        "processingReport": "art/blender-city/models/compact/villa_2/model.json",
+        "processingReportSha256": "e964f51b52b632f38366d33a1ed6b14f2ab5f018e0e7695e0b7a67109ff04588",
+        "builder": "art/blender-city/regions/eastern.py",
+        "builderSha256": "12b8c65dc3316d4d9a68ef1d46743e5b0271de3c7514fbf26b1830625585a028",
+        "pipelineSha256": "299a3de32ea2fe7238f6bd22334a9f5446946e50b5c38efd0e3c9678171ee259",
+        "authoredArchitecture": true,
+        "storageCompression": {
+          "configuration": "normal16_uv16_color16",
+          "afterSha256": "92ac4b70058f4011e676c8728e6cc1958728523399ee7b84af0416e168594c89",
+          "originalSha256": "4f968d54c610de116655ae994cb6a6295943bac6d2fc749cca4c1cb9213b1bcc",
+          "originalBytes": 4532860,
+          "report": {
+            "path": "art/blender-city/reports/storage-compression/compact/villa_2-92ac4b70058f4011.json",
+            "sha256": "984c3f0180b29a7f0232dd201b909576ae6e92c8acc4d522638efd23a415b888"
+          },
+          "maxNormalError": 0.000015246823385051123,
+          "maxUVError": 0.00000762946956572863,
+          "maxColorError": 0
         },
-        "reviewStatus": "approved",
-        "triangleBudget": 45000,
-        "budgetReason": "The 30k derivative visibly bent the second-floor wooden window bars and roof ribs. A source-derived 44,948-triangle reduction with 0.002 voxel resolution restores these shapes, independently compared against raw source and prior 30k versions; this exception is limited to this building."
+        "detailLevel": "near"
       }
     },
     {
       "name": "compact_villa_3",
       "size": [
-        0.8767373280278442,
-        1.2535736992472417,
-        0.99
+        0.9900000095367432,
+        1.4813413619995117,
+        0.8579086363315582
       ],
       "bounds": {
         "min": [
-          -0.4383686640139221,
-          0.0,
-          -0.495
+          -0.4950000047683716,
+          0,
+          -0.4289543330669403
         ],
         "max": [
-          0.4383686640139221,
-          1.2535736992472417,
-          0.495
+          0.4950000047683716,
+          1.4813413619995117,
+          0.4289543032646179
         ]
       },
-      "triangles": 44926,
+      "triangles": 23492,
       "source": {
-        "sourceType": "pixal_native_multiview",
+        "sourceType": "authored_blender_reference_rebuild",
+        "region": "compact",
+        "asset": "villa_3",
         "family": "villa",
         "level": 3,
-        "sourceFile": "assets/models/regions-ai/full/compact/villa_3/fdf50daf20eec664.glb",
-        "sourceSha256": "fdf50daf20eec664dc0d200d1bbfa400e64de6643c508853060257674bb23164",
-        "inferenceReport": "art/full-ai-city/reports/compact--villa_3-a001/compact--villa_3-a001-pixal-mv-1024-9247.json",
-        "reference": "art/full-ai-city/inputs/compact/villa_3/54a77fbcebd16955/reference.json",
-        "rawSourceSha256": "b7e7f6ca4c4b8895c07e2b2c1d211719c7532eccde014575116b2ca3bfd86ff9",
         "referenceViews": [
           {
             "view": "front",
@@ -171,48 +181,56 @@
             "sha256": "d0ef69c273d980ab3439cc89642928e63ade2a90146204b2bed95c78602f4e39"
           }
         ],
-        "normalisationScale": 1.2535737739660613,
-        "placementReview": {
-          "independentParcelScale": 1.2535737739660613,
-          "scale": 1.2535737739660613,
-          "reason": "independent_uniform_parcel_fit",
-          "relativeToIndependentFit": 1.0,
-          "sharedCameraReviewRequired": true
+        "sourceFile": "art/blender-city/models/compact/villa_3/model.glb",
+        "sourceSha256": "58e9e84cf7d7a3497dfd997fc3b9bd62acba9e9c1e2ef68a28d02216cd52418d",
+        "processingReport": "art/blender-city/models/compact/villa_3/model.json",
+        "processingReportSha256": "c34e027d2697349ab0095bde4addf1ba2c413fe76e04ba5205c289656364a798",
+        "builder": "art/blender-city/regions/eastern.py",
+        "builderSha256": "12b8c65dc3316d4d9a68ef1d46743e5b0271de3c7514fbf26b1830625585a028",
+        "pipelineSha256": "299a3de32ea2fe7238f6bd22334a9f5446946e50b5c38efd0e3c9678171ee259",
+        "authoredArchitecture": true,
+        "storageCompression": {
+          "configuration": "normal16_uv16_color8",
+          "afterSha256": "58e9e84cf7d7a3497dfd997fc3b9bd62acba9e9c1e2ef68a28d02216cd52418d",
+          "originalSha256": "e18b3c6c619c0bc672bbce2b89a614a94fb5aab69898e4eca0e4026a5e99a5d3",
+          "originalBytes": 2530280,
+          "report": {
+            "path": "art/blender-city/reports/storage-compression/compact/villa_3-58e9e84cf7d7a349.json",
+            "sha256": "3c3d3798d9abb66e66806eccca99f0f48ed774713a18f8dc0269f394a2f83b21"
+          },
+          "maxNormalError": 0.000015233948185144897,
+          "maxUVError": 0.00000762949639621091,
+          "maxColorError": 0.0019378957808804664
         },
-        "reviewStatus": "approved",
-        "triangleBudget": 45000,
-        "budgetReason": "This individual three-storey villa preserves layered blue roof tiles, front balcony, narrow eaves and plaster/timber faces using the existing45k/.0015 budget. Four bounded native plaster supports resolve demonstrated large side reduction triangles without a new inference or budget increase."
+        "detailLevel": "near"
       }
     },
     {
       "name": "compact_shop_1",
       "size": [
-        0.99,
-        0.5876185737620935,
-        0.7028738798423935
+        0.9900000095367432,
+        0.7007708549499512,
+        0.8335158824920654
       ],
       "bounds": {
         "min": [
-          -0.495,
-          0.0,
-          -0.35143693992119673
+          -0.4950000047683716,
+          0,
+          -0.4167579412460327
         ],
         "max": [
-          0.495,
-          0.5876185737620935,
-          0.35143693992119673
+          0.4950000047683716,
+          0.7007708549499512,
+          0.4167579412460327
         ]
       },
-      "triangles": 29978,
+      "triangles": 13244,
       "source": {
-        "sourceType": "pixal_native_multiview",
+        "sourceType": "authored_blender_reference_rebuild",
+        "region": "compact",
+        "asset": "shop_1",
         "family": "shop",
         "level": 1,
-        "sourceFile": "assets/models/regions-ai/full/compact/shop_1/e03247bcd3d43cc8.glb",
-        "sourceSha256": "e03247bcd3d43cc85f47436368222ce7993f8eb404a4e5d00c006445da7644ef",
-        "inferenceReport": "art/full-ai-city/reports/compact--shop_1-a001/compact--shop_1-a001-pixal-mv-1024-9247.json",
-        "reference": "art/full-ai-city/inputs/compact/shop_1/0e0123916b589f62/reference.json",
-        "rawSourceSha256": "4d60ac5523185201c2cc30830d067d3f4b668079a0c25af4690c10c14e17a11e",
         "referenceViews": [
           {
             "view": "front",
@@ -230,47 +248,56 @@
             "sha256": "e4b4ffb21dcc7c6bfe9a207d8de99fc752f20658fd428567f873ea2f65f16de0"
           }
         ],
-        "normalisationScale": 0.9900000590086019,
-        "placementReview": {
-          "independentParcelScale": 0.9900000590086019,
-          "scale": 0.9900000590086019,
-          "reason": "independent_uniform_parcel_fit",
-          "relativeToIndependentFit": 1.0,
-          "sharedCameraReviewRequired": true
+        "sourceFile": "art/blender-city/models/compact/shop_1/model.glb",
+        "sourceSha256": "36d00d423336d523163095c7f6a49b0d2ffd9ae366f46bf3c19657b04a75b2ab",
+        "processingReport": "art/blender-city/models/compact/shop_1/model.json",
+        "processingReportSha256": "2240e89aa3b10fa87667d5a17539a20d2357203ba44ff423f150858954cf4617",
+        "builder": "art/blender-city/regions/eastern.py",
+        "builderSha256": "12b8c65dc3316d4d9a68ef1d46743e5b0271de3c7514fbf26b1830625585a028",
+        "pipelineSha256": "299a3de32ea2fe7238f6bd22334a9f5446946e50b5c38efd0e3c9678171ee259",
+        "authoredArchitecture": true,
+        "storageCompression": {
+          "configuration": "normal16_uv16_color8",
+          "afterSha256": "36d00d423336d523163095c7f6a49b0d2ffd9ae366f46bf3c19657b04a75b2ab",
+          "originalSha256": "97507d25681f7c11149e143f31aedf6cb344c1509f526010b3716606fe19dd3f",
+          "originalBytes": 1834852,
+          "report": {
+            "path": "art/blender-city/reports/storage-compression/compact/shop_1-36d00d423336d523.json",
+            "sha256": "5356547bfe69132dca426dcd34c48dd859e00323ad594974fa2926785a8a60b3"
+          },
+          "maxNormalError": 0.00001525346471797917,
+          "maxUVError": 0.000007629462744407345,
+          "maxColorError": 0.0019378957808804664
         },
-        "reviewStatus": "approved",
-        "triangleBudget": 30000
+        "detailLevel": "near"
       }
     },
     {
       "name": "compact_shop_2",
       "size": [
-        0.8385561176337473,
-        0.8845584153806341,
-        0.7353114427693457
+        0.9900000095367432,
+        1.091055989265442,
+        0.8596509993076324
       ],
       "bounds": {
         "min": [
-          -0.41927805881687363,
-          0.0,
-          -0.36765572138467284
+          -0.4950000047683716,
+          0,
+          -0.4298255145549774
         ],
         "max": [
-          0.41927805881687363,
-          0.8845584153806341,
-          0.36765572138467284
+          0.4950000047683716,
+          1.091055989265442,
+          0.42982548475265503
         ]
       },
-      "triangles": 29988,
+      "triangles": 17924,
       "source": {
-        "sourceType": "pixal_native_multiview",
+        "sourceType": "authored_blender_reference_rebuild",
+        "region": "compact",
+        "asset": "shop_2",
         "family": "shop",
         "level": 2,
-        "sourceFile": "assets/models/regions-ai/full/compact/shop_2/370ab05824ed8be2.glb",
-        "sourceSha256": "370ab05824ed8be201c43107235831bbf180b1f979498fb20e3ae9e52f1d09a9",
-        "inferenceReport": "art/full-ai-city/reports/compact--shop_2-a005/compact--shop_2-a005-pixal-mv-1024-29478.json",
-        "reference": "art/full-ai-city/inputs/compact/shop_2/6d30c66b7b227466/reference.json",
-        "rawSourceSha256": "ceaff45db26067a6385b782e3288c6cd4e9d6b77cbd3b78acf7fd4ab28259f6d",
         "referenceViews": [
           {
             "view": "front",
@@ -288,51 +315,56 @@
             "sha256": "344032cd942dc7fb8acb131e0e53a0fb423b9dd144f888925687d750189472cf"
           }
         ],
-        "normalisationScale": 0.8845584153806341,
-        "placementReview": {
-          "independentParcelScale": 1.0443103482423215,
-          "scale": 0.8845584153806341,
-          "reason": "uniform_fit_below_next_upgrade",
-          "nextLevel": "shop_3",
-          "nextLevelHeight": 1.0285562969542257,
-          "maximumHeight": 0.8845584153806341,
-          "heightRatio": 0.86,
-          "relativeToIndependentFit": 0.8470263814482296,
-          "sharedCameraReviewRequired": true
+        "sourceFile": "art/blender-city/models/compact/shop_2/model.glb",
+        "sourceSha256": "63c4e015aa0fcd675f2594aa8f924daa43ddba4f12c6ab2b4a771f7314edd6b3",
+        "processingReport": "art/blender-city/models/compact/shop_2/model.json",
+        "processingReportSha256": "73342abcc302fda4c39e21f1d70d733ee3f634d044ad34f9e1949876daa802df",
+        "builder": "art/blender-city/regions/eastern.py",
+        "builderSha256": "12b8c65dc3316d4d9a68ef1d46743e5b0271de3c7514fbf26b1830625585a028",
+        "pipelineSha256": "299a3de32ea2fe7238f6bd22334a9f5446946e50b5c38efd0e3c9678171ee259",
+        "authoredArchitecture": true,
+        "storageCompression": {
+          "configuration": "normal16_uv16_color8",
+          "afterSha256": "63c4e015aa0fcd675f2594aa8f924daa43ddba4f12c6ab2b4a771f7314edd6b3",
+          "originalSha256": "8260015b94de9a96199025ad989bfcaf9128eca0ee5f9bd5aeff31d5c7a8d29e",
+          "originalBytes": 2176288,
+          "report": {
+            "path": "art/blender-city/reports/storage-compression/compact/shop_2-63c4e015aa0fcd67.json",
+            "sha256": "80cf90a19d507097fcaa49341fa43770c1f595c6ee2117c3013ba62028468419"
+          },
+          "maxNormalError": 0.00001525346471797917,
+          "maxUVError": 0.000007628616901400598,
+          "maxColorError": 0.0019378957808804664
         },
-        "reviewStatus": "approved",
-        "triangleBudget": 30000
+        "detailLevel": "near"
       }
     },
     {
       "name": "compact_shop_3",
       "size": [
-        0.9900000000000001,
-        1.0285562969542257,
-        0.620418102653114
+        0.9900000095367432,
+        1.4813413619995117,
+        0.8596509993076324
       ],
       "bounds": {
         "min": [
-          -0.49500000000000005,
-          0.0,
-          -0.310209051326557
+          -0.4950000047683716,
+          0,
+          -0.4298255145549774
         ],
         "max": [
-          0.49500000000000005,
-          1.0285562969542257,
-          0.310209051326557
+          0.4950000047683716,
+          1.4813413619995117,
+          0.42982548475265503
         ]
       },
-      "triangles": 44947,
+      "triangles": 22604,
       "source": {
-        "sourceType": "pixal_native_multiview",
+        "sourceType": "authored_blender_reference_rebuild",
+        "region": "compact",
+        "asset": "shop_3",
         "family": "shop",
         "level": 3,
-        "sourceFile": "assets/models/regions-ai/full/compact/shop_3/709b942a6c50ffc5.glb",
-        "sourceSha256": "709b942a6c50ffc5d4db96978854d1ac9adbeab7cedfd0020e34a6a189146ba0",
-        "inferenceReport": "art/full-ai-city/reports/compact--shop_3-a003/compact--shop_3-a003-pixal-mv-1024-29477.json",
-        "reference": "art/full-ai-city/inputs/compact/shop_3/5bb53796619543bb/reference.json",
-        "rawSourceSha256": "c30c28978b46b124855961a6fc005a0df62412136640f0d34fba06e5dba11240",
         "referenceViews": [
           {
             "view": "front",
@@ -350,48 +382,56 @@
             "sha256": "c6545c8e0daf29948cf3a5c10b6fc65f83da1d849e175e3afb7d4c54aab7b610"
           }
         ],
-        "normalisationScale": 1.028556358260962,
-        "placementReview": {
-          "independentParcelScale": 1.028556358260962,
-          "scale": 1.028556358260962,
-          "reason": "independent_uniform_parcel_fit",
-          "relativeToIndependentFit": 1.0,
-          "sharedCameraReviewRequired": true
+        "sourceFile": "art/blender-city/models/compact/shop_3/model.glb",
+        "sourceSha256": "4738828e800c7e20e6a8f7645ae76f8aa891470d77db4a537220535ef5dd3894",
+        "processingReport": "art/blender-city/models/compact/shop_3/model.json",
+        "processingReportSha256": "ef491973403e881d76905b3394cfc6766f6d1e3123dc19b20863e0c459b2fe45",
+        "builder": "art/blender-city/regions/eastern.py",
+        "builderSha256": "12b8c65dc3316d4d9a68ef1d46743e5b0271de3c7514fbf26b1830625585a028",
+        "pipelineSha256": "299a3de32ea2fe7238f6bd22334a9f5446946e50b5c38efd0e3c9678171ee259",
+        "authoredArchitecture": true,
+        "storageCompression": {
+          "configuration": "normal16_uv16_color8",
+          "afterSha256": "4738828e800c7e20e6a8f7645ae76f8aa891470d77db4a537220535ef5dd3894",
+          "originalSha256": "b44ca61466a82b06d1366504cb7685ec4f39c935ee5e373dbd7d7a5ad69837c3",
+          "originalBytes": 2468632,
+          "report": {
+            "path": "art/blender-city/reports/storage-compression/compact/shop_3-4738828e800c7e20.json",
+            "sha256": "1636a7cf874d1661b0d00741fa6332874aa9b6dbbe421507ec66987f1fd5bd9e"
+          },
+          "maxNormalError": 0.00001525346471797917,
+          "maxUVError": 0.000007629287209209856,
+          "maxColorError": 0.0019378957808804664
         },
-        "reviewStatus": "approved",
-        "triangleBudget": 45000,
-        "budgetReason": "This individual three-storey shop keeps shallow roof tiles, narrow window lattices, balcony and storefront goods at the existing fine45k budget; one bounded cloth support resolves the demonstrated large curtain triangle loss without increasing the budget."
+        "detailLevel": "near"
       }
     },
     {
       "name": "compact_hotel_1",
       "size": [
-        0.99,
-        0.5053200137615204,
-        0.6000642192363739
+        0.9899999499320984,
+        0.63383948802948,
+        0.8937105238437653
       ],
       "bounds": {
         "min": [
-          -0.495,
-          0.0,
-          -0.30003210961818694
+          -0.4949999749660492,
+          0,
+          -0.44685524702072144
         ],
         "max": [
-          0.495,
-          0.5053200137615204,
-          0.30003210961818694
+          0.4949999749660492,
+          0.63383948802948,
+          0.4468552768230438
         ]
       },
-      "triangles": 29994,
+      "triangles": 20268,
       "source": {
-        "sourceType": "pixal_native_multiview",
+        "sourceType": "authored_blender_reference_rebuild",
+        "region": "compact",
+        "asset": "hotel_1",
         "family": "hotel",
         "level": 1,
-        "sourceFile": "assets/models/regions-ai/full/compact/hotel_1/1d298255c1063e19.glb",
-        "sourceSha256": "1d298255c1063e19dc2511b46199871f2e1da5112ae181f42cb5f8ad39f5469c",
-        "inferenceReport": "art/full-ai-city/reports/compact--hotel_1-a001/compact--hotel_1-a001-pixal-mv-1024-9247.json",
-        "reference": "art/full-ai-city/inputs/compact/hotel_1/b1ff35c306c37471/reference.json",
-        "rawSourceSha256": "90dccdb8da5234f0cf87a6d3efeffed9b5649c1accdc44eb7a718e11312e1ecf",
         "referenceViews": [
           {
             "view": "front",
@@ -409,47 +449,56 @@
             "sha256": "cbfe9960320308599dbe12e24a1578183992c69828455741a3ddbf719462fe40"
           }
         ],
-        "normalisationScale": 0.99,
-        "placementReview": {
-          "independentParcelScale": 0.99,
-          "scale": 0.99,
-          "reason": "independent_uniform_parcel_fit",
-          "relativeToIndependentFit": 1.0,
-          "sharedCameraReviewRequired": true
+        "sourceFile": "art/blender-city/models/compact/hotel_1/model.glb",
+        "sourceSha256": "82d9ec32c353fccf02ba140c04572bc173f1dd72fc4f607f18502f43704419d6",
+        "processingReport": "art/blender-city/models/compact/hotel_1/model.json",
+        "processingReportSha256": "f96c6c16fd14d1eeba3ce2248ef83bcba1df675e7bea66965d5cfd97ade269af",
+        "builder": "art/blender-city/regions/eastern.py",
+        "builderSha256": "12b8c65dc3316d4d9a68ef1d46743e5b0271de3c7514fbf26b1830625585a028",
+        "pipelineSha256": "299a3de32ea2fe7238f6bd22334a9f5446946e50b5c38efd0e3c9678171ee259",
+        "authoredArchitecture": true,
+        "storageCompression": {
+          "configuration": "normal16_uv16_color8",
+          "afterSha256": "82d9ec32c353fccf02ba140c04572bc173f1dd72fc4f607f18502f43704419d6",
+          "originalSha256": "c76bd59a511d79d7a45dd844da5478102dcbdd5ffa47b92fe2c45261c0e9a43e",
+          "originalBytes": 2394128,
+          "report": {
+            "path": "art/blender-city/reports/storage-compression/compact/hotel_1-82d9ec32c353fccf.json",
+            "sha256": "cb2260d6920e11bab793af9c89fb8192d3d49f1773d447645484a35668434e40"
+          },
+          "maxNormalError": 0.000015245553691700664,
+          "maxUVError": 0.00000762945592308606,
+          "maxColorError": 0.0019378957808804664
         },
-        "reviewStatus": "approved",
-        "triangleBudget": 30000
+        "detailLevel": "near"
       }
     },
     {
       "name": "compact_hotel_2",
       "size": [
-        0.99,
-        0.8228999723732455,
-        0.8064340350886604
+        0.9899999499320984,
+        0.9868481159210205,
+        0.9261747300624847
       ],
       "bounds": {
         "min": [
-          -0.495,
-          0.0,
-          -0.4032170175443302
+          -0.4949999749660492,
+          0,
+          -0.4630873501300812
         ],
         "max": [
-          0.495,
-          0.8228999723732455,
-          0.4032170175443302
+          0.4949999749660492,
+          0.9868481159210205,
+          0.46308737993240356
         ]
       },
-      "triangles": 44962,
+      "triangles": 30984,
       "source": {
-        "sourceType": "pixal_native_multiview",
+        "sourceType": "authored_blender_reference_rebuild",
+        "region": "compact",
+        "asset": "hotel_2",
         "family": "hotel",
         "level": 2,
-        "sourceFile": "assets/models/regions-ai/full/compact/hotel_2/e4e9a0da2e6783ad.glb",
-        "sourceSha256": "e4e9a0da2e6783ad3d3e59b109276005678af0e4ca9ab47cf1d85506972de6c6",
-        "inferenceReport": "art/full-ai-city/reports/compact--hotel_2-a002/compact--hotel_2-a002-pixal-mv-1024-29465.json",
-        "reference": "art/full-ai-city/inputs/compact/hotel_2/1e7169e5b0785322/reference.json",
-        "rawSourceSha256": "28feff8aedfb60c3bc5cc425d5bbe9d909eb542b75b9025077e08799a954523e",
         "referenceViews": [
           {
             "view": "front",
@@ -467,48 +516,56 @@
             "sha256": "a37d83da3d8efffbd1df2576f62d9816655f442143415837b78ad66bab6c7de0"
           }
         ],
-        "normalisationScale": 0.9900000590086019,
-        "placementReview": {
-          "independentParcelScale": 0.9900000590086019,
-          "scale": 0.9900000590086019,
-          "reason": "independent_uniform_parcel_fit",
-          "relativeToIndependentFit": 1.0,
-          "sharedCameraReviewRequired": true
+        "sourceFile": "art/blender-city/models/compact/hotel_2/model.glb",
+        "sourceSha256": "51f0a4ac753e04478fa545d96c3cbf2978f730caf973c84a53d5fef7bff4005b",
+        "processingReport": "art/blender-city/models/compact/hotel_2/model.json",
+        "processingReportSha256": "43b7a2cc3578fb6fee3e6c15de67d9fe3c815032d6a91105bf41c26310c4093a",
+        "builder": "art/blender-city/regions/eastern.py",
+        "builderSha256": "12b8c65dc3316d4d9a68ef1d46743e5b0271de3c7514fbf26b1830625585a028",
+        "pipelineSha256": "299a3de32ea2fe7238f6bd22334a9f5446946e50b5c38efd0e3c9678171ee259",
+        "authoredArchitecture": true,
+        "storageCompression": {
+          "configuration": "normal16_uv16_color8",
+          "afterSha256": "51f0a4ac753e04478fa545d96c3cbf2978f730caf973c84a53d5fef7bff4005b",
+          "originalSha256": "d879a20de8ed33b0ea5714f08256db98e6388f63e5cbc48e08af48436d6a2206",
+          "originalBytes": 3071632,
+          "report": {
+            "path": "art/blender-city/reports/storage-compression/compact/hotel_2-51f0a4ac753e0447.json",
+            "sha256": "e392fc12c718c136953c2f1158bd82081032594b86dd64417d69148419ec939f"
+          },
+          "maxNormalError": 0.000015245553691700664,
+          "maxUVError": 0.000007629498215200314,
+          "maxColorError": 0.0019378957808804664
         },
-        "reviewStatus": "approved",
-        "triangleBudget": 45000,
-        "budgetReason": "Individual45k exception preserves thin entrance and gable/eave framing; actual256px and five-side final views reviewed."
+        "detailLevel": "near"
       }
     },
     {
       "name": "compact_hotel_3",
       "size": [
-        0.99,
-        0.9756203708422405,
-        0.7009717375619255
+        0.9899999499320984,
+        1.339856743812561,
+        0.9261747300624847
       ],
       "bounds": {
         "min": [
-          -0.495,
-          0.0,
-          -0.3504858687809628
+          -0.4949999749660492,
+          0,
+          -0.4630873501300812
         ],
         "max": [
-          0.495,
-          0.9756203708422405,
-          0.3504858687809628
+          0.4949999749660492,
+          1.339856743812561,
+          0.46308737993240356
         ]
       },
-      "triangles": 44913,
+      "triangles": 38320,
       "source": {
-        "sourceType": "pixal_native_multiview",
+        "sourceType": "authored_blender_reference_rebuild",
+        "region": "compact",
+        "asset": "hotel_3",
         "family": "hotel",
         "level": 3,
-        "sourceFile": "assets/models/regions-ai/full/compact/hotel_3/a9adba283e164d78.glb",
-        "sourceSha256": "a9adba283e164d78422a128beb87e94def17610f2223a72ff24a99acad5a1b1e",
-        "inferenceReport": "art/full-ai-city/reports/compact--hotel_3-a003/compact--hotel_3-a003-pixal-mv-1024-29453.json",
-        "reference": "art/full-ai-city/inputs/compact/hotel_3/ef949057b35f7a28/reference.json",
-        "rawSourceSha256": "b7021f31ce86fbdb779f1e9b3b28e7664115978d3a0ccbd1d02ea4337778c0ac",
         "referenceViews": [
           {
             "view": "front",
@@ -526,48 +583,56 @@
             "sha256": "996485bb52b9c8af2a85cd340034e74815dbbaad4c888e9d06c08c256e6ebb3e"
           }
         ],
-        "normalisationScale": 0.9900000590086019,
-        "placementReview": {
-          "independentParcelScale": 0.9900000590086019,
-          "scale": 0.9900000590086019,
-          "reason": "independent_uniform_parcel_fit",
-          "relativeToIndependentFit": 1.0,
-          "sharedCameraReviewRequired": true
+        "sourceFile": "art/blender-city/models/compact/hotel_3/model.glb",
+        "sourceSha256": "629ba010ca702498455960857595a86b21e14f5b5b970bb85aee2bbacb01a25f",
+        "processingReport": "art/blender-city/models/compact/hotel_3/model.json",
+        "processingReportSha256": "6705506706f3a4b42cbc072d3cdb5a90773161a9af0d3670cdfe5eb5bf15e27b",
+        "builder": "art/blender-city/regions/eastern.py",
+        "builderSha256": "12b8c65dc3316d4d9a68ef1d46743e5b0271de3c7514fbf26b1830625585a028",
+        "pipelineSha256": "299a3de32ea2fe7238f6bd22334a9f5446946e50b5c38efd0e3c9678171ee259",
+        "authoredArchitecture": true,
+        "storageCompression": {
+          "configuration": "normal16_uv16_color8",
+          "afterSha256": "629ba010ca702498455960857595a86b21e14f5b5b970bb85aee2bbacb01a25f",
+          "originalSha256": "ce06a0978dc500c6898bcb9873cab1b5ac698a800ea8a9987b18bf79bcb8cd5e",
+          "originalBytes": 3813784,
+          "report": {
+            "path": "art/blender-city/reports/storage-compression/compact/hotel_3-629ba010ca702498.json",
+            "sha256": "77029eb0606de15a2997bc2048939f8226c2bc621168d46ff0fcd52dd7b8c6dc"
+          },
+          "maxNormalError": 0.000015205276399199441,
+          "maxUVError": 0.000007629118268015489,
+          "maxColorError": 0.0019378957808804664
         },
-        "reviewStatus": "approved",
-        "triangleBudget": 45000,
-        "budgetReason": "This individual three-storey inn retains two balconies, three tiled eave courses and thin plaster panels using the existing45k/.0015 derivative after four bounded native supports. No additional budget increase; mobile review confirms the main wall losses are resolved."
+        "detailLevel": "near"
       }
     },
     {
       "name": "compact_tower_1",
       "size": [
-        0.99,
-        0.6804956531524659,
-        0.6553337377309799
+        0.8171297311782837,
+        0.7799999713897705,
+        0.7087487876415253
       ],
       "bounds": {
         "min": [
-          -0.495,
-          0.0,
-          -0.32766686886548996
+          -0.40856486558914185,
+          0,
+          -0.35437437891960144
         ],
         "max": [
-          0.495,
-          0.6804956531524659,
-          0.32766686886548996
+          0.40856486558914185,
+          0.7799999713897705,
+          0.35437440872192383
         ]
       },
-      "triangles": 29995,
+      "triangles": 23360,
       "source": {
-        "sourceType": "pixal_native_multiview",
+        "sourceType": "authored_blender_reference_rebuild",
+        "region": "compact",
+        "asset": "tower_1",
         "family": "tower",
         "level": 1,
-        "sourceFile": "assets/models/regions-ai/full/compact/tower_1/96683de748627ca1.glb",
-        "sourceSha256": "96683de748627ca1c28e89e61d1e762c79cd43df3bd7aca005b0e0d665adb7a2",
-        "inferenceReport": "art/full-ai-city/reports/compact--tower_1-a002/compact--tower_1-a002-pixal-mv-1024-29467.json",
-        "reference": "art/full-ai-city/inputs/compact/tower_1/a9eca6d5c8fbb712/reference.json",
-        "rawSourceSha256": "07a706fabd1727b690f4ee0c16c180518eb804c78c25da11aeb6638adc8c2bd5",
         "referenceViews": [
           {
             "view": "front",
@@ -585,47 +650,56 @@
             "sha256": "dd4b2b3be00a78cf2be669c813acb28a5b99c949c1c7f434626598251b0a0197"
           }
         ],
-        "normalisationScale": 0.99,
-        "placementReview": {
-          "independentParcelScale": 0.99,
-          "scale": 0.99,
-          "reason": "independent_uniform_parcel_fit",
-          "relativeToIndependentFit": 1.0,
-          "sharedCameraReviewRequired": true
+        "sourceFile": "art/blender-city/models/compact/tower_1/model.glb",
+        "sourceSha256": "6d185bfe047fea7120f88b26df2068b8e091ca73dc26fac769104d2fa4a2e27f",
+        "processingReport": "art/blender-city/models/compact/tower_1/model.json",
+        "processingReportSha256": "fa4b7016ae0c15e6528fb1f0f6dc82fd5c08d03ec9a2ef5060e6a1e39fc92afc",
+        "builder": "art/blender-city/regions/eastern.py",
+        "builderSha256": "12b8c65dc3316d4d9a68ef1d46743e5b0271de3c7514fbf26b1830625585a028",
+        "pipelineSha256": "299a3de32ea2fe7238f6bd22334a9f5446946e50b5c38efd0e3c9678171ee259",
+        "authoredArchitecture": true,
+        "storageCompression": {
+          "configuration": "normal16_uv16_color8",
+          "afterSha256": "6d185bfe047fea7120f88b26df2068b8e091ca73dc26fac769104d2fa4a2e27f",
+          "originalSha256": "f5394f0b30eb23216762bdf1d58f0d245cf6973a58ca4f7073e59785717c7c07",
+          "originalBytes": 2665240,
+          "report": {
+            "path": "art/blender-city/reports/storage-compression/compact/tower_1-6d185bfe047fea71.json",
+            "sha256": "e2bf71308bec1416a06f7eda1c925ff925ec5f5290e19dfe522f216f266eb957"
+          },
+          "maxNormalError": 0.000015236043724886628,
+          "maxUVError": 0.000007629457287383623,
+          "maxColorError": 0.0019378957808804664
         },
-        "reviewStatus": "approved",
-        "triangleBudget": 30000
+        "detailLevel": "near"
       }
     },
     {
       "name": "compact_tower_2",
       "size": [
-        0.9900000000000001,
-        1.025211281776212,
-        0.9618836491215509
+        0.8711728453636169,
+        1.159999966621399,
+        0.7858259975910187
       ],
       "bounds": {
         "min": [
-          -0.49500000000000005,
-          0.0,
-          -0.48094182456077544
+          -0.43558642268180847,
+          0,
+          -0.39291298389434814
         ],
         "max": [
-          0.49500000000000005,
-          1.025211281776212,
-          0.48094182456077544
+          0.43558642268180847,
+          1.159999966621399,
+          0.39291301369667053
         ]
       },
-      "triangles": 29981,
+      "triangles": 29576,
       "source": {
-        "sourceType": "pixal_native_multiview",
+        "sourceType": "authored_blender_reference_rebuild",
+        "region": "compact",
+        "asset": "tower_2",
         "family": "tower",
         "level": 2,
-        "sourceFile": "assets/models/regions-ai/full/compact/tower_2/233359a1a44c4598.glb",
-        "sourceSha256": "233359a1a44c45988494dd7dc2e6936222e87159c634e6ad0601de2f7b1ef45f",
-        "inferenceReport": "art/full-ai-city/reports/compact--tower_2-a002/compact--tower_2-a002-pixal-mv-1024-9247.json",
-        "reference": "art/full-ai-city/inputs/compact/tower_2/bfd959b6199970b1/reference.json",
-        "rawSourceSha256": "6f1289da6e9d1e39394a748de9139f8af4c21c36db1a917698a8a1616187a1ba",
         "referenceViews": [
           {
             "view": "front",
@@ -643,47 +717,56 @@
             "sha256": "fbfdc54519b9b6bd16112e008fb7077eb76b52318d98fe236807e9a11ed523bd"
           }
         ],
-        "normalisationScale": 1.0252113428835699,
-        "placementReview": {
-          "independentParcelScale": 1.0252113428835699,
-          "scale": 1.0252113428835699,
-          "reason": "independent_uniform_parcel_fit",
-          "relativeToIndependentFit": 1.0,
-          "sharedCameraReviewRequired": true
+        "sourceFile": "art/blender-city/models/compact/tower_2/model.glb",
+        "sourceSha256": "219b8e14f3e43b72eeb877b408e1cd11c75cb9df0c6f2e4647006e0a782ac1ae",
+        "processingReport": "art/blender-city/models/compact/tower_2/model.json",
+        "processingReportSha256": "c8b3732a1ff3cbdbe8b514a4341a7302402b0f91b40b9b7c84fce38e6c74854f",
+        "builder": "art/blender-city/regions/eastern.py",
+        "builderSha256": "12b8c65dc3316d4d9a68ef1d46743e5b0271de3c7514fbf26b1830625585a028",
+        "pipelineSha256": "299a3de32ea2fe7238f6bd22334a9f5446946e50b5c38efd0e3c9678171ee259",
+        "authoredArchitecture": true,
+        "storageCompression": {
+          "configuration": "normal16_uv16_color8",
+          "afterSha256": "219b8e14f3e43b72eeb877b408e1cd11c75cb9df0c6f2e4647006e0a782ac1ae",
+          "originalSha256": "8f10f8cfbc999d739b0d41d5383183bf1af05c1e93050b47ef47228345fb0789",
+          "originalBytes": 3024220,
+          "report": {
+            "path": "art/blender-city/reports/storage-compression/compact/tower_2-219b8e14f3e43b72.json",
+            "sha256": "224b18057d1ed85243e27467d0845f3b0df7f73ba34a2c0934549fbfb9db2866"
+          },
+          "maxNormalError": 0.000015236043724886628,
+          "maxUVError": 0.000007629106216988646,
+          "maxColorError": 0.0019378957808804664
         },
-        "reviewStatus": "approved",
-        "triangleBudget": 30000
+        "detailLevel": "near"
       }
     },
     {
       "name": "compact_tower_3",
       "size": [
-        0.99,
-        1.2362450178253,
-        0.8668577432540516
+        0.9364853799343109,
+        1.600000023841858,
+        0.8447400033473969
       ],
       "bounds": {
         "min": [
-          -0.495,
-          0.0,
-          -0.4334288716270258
+          -0.46824270486831665,
+          0,
+          -0.42236998677253723
         ],
         "max": [
-          0.495,
-          1.2362450178253,
-          0.4334288716270258
+          0.46824267506599426,
+          1.600000023841858,
+          0.4223700165748596
         ]
       },
-      "triangles": 44938,
+      "triangles": 39144,
       "source": {
-        "sourceType": "pixal_native_multiview",
+        "sourceType": "authored_blender_reference_rebuild",
+        "region": "compact",
+        "asset": "tower_3",
         "family": "tower",
         "level": 3,
-        "sourceFile": "assets/models/regions-ai/full/compact/tower_3/e230ae0fcf6e78ab.glb",
-        "sourceSha256": "e230ae0fcf6e78ab58c1ed22b5ad6c94b23ffed253e27864b0c3d5c094ff5704",
-        "inferenceReport": "art/full-ai-city/reports/compact--tower_3-a002/compact--tower_3-a002-pixal-mv-1024-29466.json",
-        "reference": "art/full-ai-city/inputs/compact/tower_3/99b3b667a8244932/reference.json",
-        "rawSourceSha256": "473bec7b4daf1031124fd439acaa7398ff56a02b35de39b2b771475b38593101",
         "referenceViews": [
           {
             "view": "front",
@@ -701,48 +784,56 @@
             "sha256": "729b00eaabb5366e924b9069df5673cddbe51b294177f621ed8b60f4343befe7"
           }
         ],
-        "normalisationScale": 1.2362450178253,
-        "placementReview": {
-          "independentParcelScale": 1.2362450178253,
-          "scale": 1.2362450178253,
-          "reason": "independent_uniform_parcel_fit",
-          "relativeToIndependentFit": 1.0,
-          "sharedCameraReviewRequired": true
+        "sourceFile": "art/blender-city/models/compact/tower_3/model.glb",
+        "sourceSha256": "71933fd7538970bd489cc0346723cf8cb02839f2349c9290f52cac464869b402",
+        "processingReport": "art/blender-city/models/compact/tower_3/model.json",
+        "processingReportSha256": "076577596e112ca17eb90c9f1c1938cdb3a9719a70c0f0c3384bdf925472e57a",
+        "builder": "art/blender-city/regions/eastern.py",
+        "builderSha256": "12b8c65dc3316d4d9a68ef1d46743e5b0271de3c7514fbf26b1830625585a028",
+        "pipelineSha256": "299a3de32ea2fe7238f6bd22334a9f5446946e50b5c38efd0e3c9678171ee259",
+        "authoredArchitecture": true,
+        "storageCompression": {
+          "configuration": "normal16_uv16_color8",
+          "afterSha256": "71933fd7538970bd489cc0346723cf8cb02839f2349c9290f52cac464869b402",
+          "originalSha256": "6056927fc6545d545eb4739df169bb1b31afc8e74d56299908f926d2ff93ed92",
+          "originalBytes": 3888980,
+          "report": {
+            "path": "art/blender-city/reports/storage-compression/compact/tower_3-71933fd7538970bd.json",
+            "sha256": "6fc0d63e99172490e0f53fa315426e29d91f8596040ce28a396cd7f9d7cc625b"
+          },
+          "maxNormalError": 0.000015236043724886628,
+          "maxUVError": 0.00000762935724138436,
+          "maxColorError": 0.0019378957808804664
         },
-        "reviewStatus": "approved",
-        "triangleBudget": 45000,
-        "budgetReason": "Specific45k derivative retains the thin blue entrance cloth, curved roof edges and open cupola framing while closing the two measured source wall gaps; not a change to the ordinary default."
+        "detailLevel": "near"
       }
     },
     {
       "name": "compact_skyscraper_1",
       "size": [
-        1.9200840324418829,
-        1.1,
-        0.7727342619683909
+        2.2717831134796143,
+        0.8980821967124939,
+        1.0199999809265137
       ],
       "bounds": {
         "min": [
-          -0.9600420162209414,
-          0.0,
-          -0.38636713098419545
+          -1.1358915567398071,
+          0,
+          -0.5099999904632568
         ],
         "max": [
-          0.9600420162209414,
-          1.1,
-          0.38636713098419545
+          1.1358915567398071,
+          0.8980821967124939,
+          0.5099999904632568
         ]
       },
-      "triangles": 44983,
+      "triangles": 38084,
       "source": {
-        "sourceType": "pixal_native_multiview",
+        "sourceType": "authored_blender_reference_rebuild",
+        "region": "compact",
+        "asset": "skyscraper_1",
         "family": "skyscraper",
         "level": 1,
-        "sourceFile": "assets/models/regions-ai/full/compact/skyscraper_1/2b5bec88b6dd3ff2.glb",
-        "sourceSha256": "2b5bec88b6dd3ff2436e8309711e3d42918b34edf24ab73d147bb31b2d095bbe",
-        "inferenceReport": "art/full-ai-city/reports/compact--skyscraper_1-a001/compact--skyscraper_1-a001-pixal-mv-1024-9247.json",
-        "reference": "art/full-ai-city/inputs/compact/skyscraper_1/e15cda3392f463a7/reference.json",
-        "rawSourceSha256": "c9f9d2d655ef538d2d4acb34d4972b4ca9a58f0894fc7e4fb1e016215f1a34ea",
         "referenceViews": [
           {
             "view": "front",
@@ -760,47 +851,56 @@
             "sha256": "7e8ee302c16b276d2c87adc824785ded730a5c34fcddf6f59019a05550bc28a3"
           }
         ],
-        "normalisationScale": 1.9200840324418829,
-        "placementReview": {
-          "independentParcelScale": 1.9200840324418829,
-          "scale": 1.9200840324418829,
-          "reason": "independent_uniform_parcel_fit",
-          "relativeToIndependentFit": 1.0,
-          "sharedCameraReviewRequired": true
+        "sourceFile": "art/blender-city/models/compact/skyscraper_1/model.glb",
+        "sourceSha256": "c6269a172aa570d654c70cc03199799a01016b2a156a3b28ba965f28139751d8",
+        "processingReport": "art/blender-city/models/compact/skyscraper_1/model.json",
+        "processingReportSha256": "f9c91089f7b282a2d2fd7f98fbd0c1951fdb6aad607a0c54af3fcf3d46989681",
+        "builder": "art/blender-city/regions/eastern.py",
+        "builderSha256": "12b8c65dc3316d4d9a68ef1d46743e5b0271de3c7514fbf26b1830625585a028",
+        "pipelineSha256": "299a3de32ea2fe7238f6bd22334a9f5446946e50b5c38efd0e3c9678171ee259",
+        "authoredArchitecture": true,
+        "storageCompression": {
+          "configuration": "normal16_uv16_color8",
+          "afterSha256": "c6269a172aa570d654c70cc03199799a01016b2a156a3b28ba965f28139751d8",
+          "originalSha256": "7a51c9fc2d53ba51c50e2d9d43b948655089aafb35e38e2ef3eac4843f939e7f",
+          "originalBytes": 3834264,
+          "report": {
+            "path": "art/blender-city/reports/storage-compression/compact/skyscraper_1-c6269a172aa570d6.json",
+            "sha256": "29ca515736abb077bac43ac9c79b7cb9028e14a79d4d8e4ebe6191b5e9316d94"
+          },
+          "maxNormalError": 0.00001525559027198975,
+          "maxUVError": 0.000007629392712232841,
+          "maxColorError": 0.0018768596932936601
         },
-        "reviewStatus": "approved",
-        "triangleBudget": 45000
+        "detailLevel": "near"
       }
     },
     {
       "name": "compact_skyscraper_2",
       "size": [
-        2.391864015794111,
-        1.5042046237899305,
-        0.880185928971223
+        2.2030322551727295,
+        1.1945703029632568,
+        1.0199999809265137
       ],
       "bounds": {
         "min": [
-          -1.1959320078970554,
-          0.0,
-          -0.4400929644856115
+          -1.1015161275863647,
+          0,
+          -0.5099999904632568
         ],
         "max": [
-          1.1959320078970554,
-          1.5042046237899305,
-          0.4400929644856115
+          1.1015161275863647,
+          1.1945703029632568,
+          0.5099999904632568
         ]
       },
-      "triangles": 44991,
+      "triangles": 54320,
       "source": {
-        "sourceType": "pixal_native_multiview",
+        "sourceType": "authored_blender_reference_rebuild",
+        "region": "compact",
+        "asset": "skyscraper_2",
         "family": "skyscraper",
         "level": 2,
-        "sourceFile": "assets/models/regions-ai/full/compact/skyscraper_2/b4811c0f03c507b3.glb",
-        "sourceSha256": "b4811c0f03c507b3f72967eca05c9c4bec2fea829831ba1cc3fec942341ecd71",
-        "inferenceReport": "art/full-ai-city/reports/compact--skyscraper_2-a002/compact--skyscraper_2-a002-pixal-mv-1024-29481.json",
-        "reference": "art/full-ai-city/inputs/compact/skyscraper_2/fdf73e26144e6aa2/reference.json",
-        "rawSourceSha256": "4743c04ce7a2b04f7a21ffe6fe75cdb1a961681819042a8e222b8b73cb510df7",
         "referenceViews": [
           {
             "view": "front",
@@ -818,51 +918,56 @@
             "sha256": "a935b2fad4caa4c6d9f011b6864492be228b039556662f39ac230631115f587c"
           }
         ],
-        "normalisationScale": 2.391864015794111,
-        "placementReview": {
-          "independentParcelScale": 2.5,
-          "scale": 2.391864015794111,
-          "reason": "uniform_fit_below_next_upgrade",
-          "nextLevel": "skyscraper_3",
-          "nextLevelHeight": 1.7490751439417793,
-          "maximumHeight": 1.5042046237899303,
-          "heightRatio": 0.86,
-          "relativeToIndependentFit": 0.9567456063176444,
-          "sharedCameraReviewRequired": true
+        "sourceFile": "art/blender-city/models/compact/skyscraper_2/model.glb",
+        "sourceSha256": "0422c79688fb2c2be277e81a9609f25ba9f9fde08007c17bfcfbef64d750f5de",
+        "processingReport": "art/blender-city/models/compact/skyscraper_2/model.json",
+        "processingReportSha256": "89fd56788d0772fabba453e09b01ffe12e166a82c5ba0c0d22cb0e9d552054d2",
+        "builder": "art/blender-city/regions/eastern.py",
+        "builderSha256": "12b8c65dc3316d4d9a68ef1d46743e5b0271de3c7514fbf26b1830625585a028",
+        "pipelineSha256": "299a3de32ea2fe7238f6bd22334a9f5446946e50b5c38efd0e3c9678171ee259",
+        "authoredArchitecture": true,
+        "storageCompression": {
+          "configuration": "normal16_uv16_color8",
+          "afterSha256": "0422c79688fb2c2be277e81a9609f25ba9f9fde08007c17bfcfbef64d750f5de",
+          "originalSha256": "2e0d17759bb0de8d83d10477a22f31440e18a0fe22191753ecb17f5c4db2263a",
+          "originalBytes": 5008744,
+          "report": {
+            "path": "art/blender-city/reports/storage-compression/compact/skyscraper_2-0422c79688fb2c2b.json",
+            "sha256": "dec8182ea0faf8f88842d48baa336e0cfc74901c7fc7f12bbd96db5d671de620"
+          },
+          "maxNormalError": 0.000015236975075882953,
+          "maxUVError": 0.000007629498670003176,
+          "maxColorError": 0.0018768596932936601
         },
-        "reviewStatus": "approved",
-        "triangleBudget": 45000
+        "detailLevel": "near"
       }
     },
     {
       "name": "compact_skyscraper_3",
       "size": [
-        2.380546921378878,
-        1.7490751439417793,
-        1.02
+        2.2030322551727295,
+        1.5182371139526367,
+        1.0199999809265137
       ],
       "bounds": {
         "min": [
-          -1.190273460689439,
-          0.0,
-          -0.51
+          -1.1015161275863647,
+          0,
+          -0.5099999904632568
         ],
         "max": [
-          1.190273460689439,
-          1.7490751439417793,
-          0.51
+          1.1015161275863647,
+          1.5182371139526367,
+          0.5099999904632568
         ]
       },
-      "triangles": 44992,
+      "triangles": 70556,
       "source": {
-        "sourceType": "pixal_native_multiview",
+        "sourceType": "authored_blender_reference_rebuild",
+        "region": "compact",
+        "asset": "skyscraper_3",
         "family": "skyscraper",
         "level": 3,
-        "sourceFile": "assets/models/regions-ai/full/compact/skyscraper_3/e5073f2eb23f6203.glb",
-        "sourceSha256": "e5073f2eb23f620336c1e5f27e52a3b5a5f9a09c6bc9c3f910f4fa8297284c62",
-        "inferenceReport": "art/full-ai-city/reports/compact--skyscraper_3-a001/compact--skyscraper_3-a001-pixal-mv-1024-9247.json",
-        "reference": "art/full-ai-city/inputs/compact/skyscraper_3/e63872518c802ff0/reference.json",
-        "rawSourceSha256": "e007da8db7de665472bc06794bcc94eb1b4f88948fab462c152410abdb275db0",
         "referenceViews": [
           {
             "view": "front",
@@ -880,47 +985,56 @@
             "sha256": "aa0038486e9c1445086218cdb9153a84d5b75f127b0cb0363adf554a80b0f773"
           }
         ],
-        "normalisationScale": 2.380546921378878,
-        "placementReview": {
-          "independentParcelScale": 2.380546921378878,
-          "scale": 2.380546921378878,
-          "reason": "independent_uniform_parcel_fit",
-          "relativeToIndependentFit": 1.0,
-          "sharedCameraReviewRequired": true
+        "sourceFile": "art/blender-city/models/compact/skyscraper_3/model.glb",
+        "sourceSha256": "fa7a0bc58d8fd267486063623e83b5c1cd978f171767e4b98d66b6cf4f8e3565",
+        "processingReport": "art/blender-city/models/compact/skyscraper_3/model.json",
+        "processingReportSha256": "16699ccd68ecbdb64ae13e60e479d0c3a995f21d94847fe28a1d188bf1fe684e",
+        "builder": "art/blender-city/regions/eastern.py",
+        "builderSha256": "12b8c65dc3316d4d9a68ef1d46743e5b0271de3c7514fbf26b1830625585a028",
+        "pipelineSha256": "299a3de32ea2fe7238f6bd22334a9f5446946e50b5c38efd0e3c9678171ee259",
+        "authoredArchitecture": true,
+        "storageCompression": {
+          "configuration": "normal16_uv16_color8",
+          "afterSha256": "fa7a0bc58d8fd267486063623e83b5c1cd978f171767e4b98d66b6cf4f8e3565",
+          "originalSha256": "28146617f7a7f49e915a3191f25e302728046c64d2d081a52c74eaf9147ebb23",
+          "originalBytes": 6299472,
+          "report": {
+            "path": "art/blender-city/reports/storage-compression/compact/skyscraper_3-fa7a0bc58d8fd267.json",
+            "sha256": "7651b32967c978c93d2f1efefeac0f858fa18156e41d74062dd9c952a027715f"
+          },
+          "maxNormalError": 0.00001525559027198975,
+          "maxUVError": 0.000007629498670003176,
+          "maxColorError": 0.0018768596932936601
         },
-        "reviewStatus": "approved",
-        "triangleBudget": 45000
+        "detailLevel": "near"
       }
     },
     {
       "name": "compact_finance_1",
       "size": [
-        2.5,
-        1.097225770354271,
-        0.8057280629873276
+        2.2717831134796143,
+        0.8331829309463501,
+        1.0199999809265137
       ],
       "bounds": {
         "min": [
-          -1.25,
-          0.0,
-          -0.4028640314936638
+          -1.1358915567398071,
+          0,
+          -0.5099999904632568
         ],
         "max": [
-          1.25,
-          1.097225770354271,
-          0.4028640314936638
+          1.1358915567398071,
+          0.8331829309463501,
+          0.5099999904632568
         ]
       },
-      "triangles": 44996,
+      "triangles": 40212,
       "source": {
-        "sourceType": "pixal_native_multiview",
+        "sourceType": "authored_blender_reference_rebuild",
+        "region": "compact",
+        "asset": "finance_1",
         "family": "finance",
         "level": 1,
-        "sourceFile": "assets/models/regions-ai/full/compact/finance_1/b8feff20a7da7c29.glb",
-        "sourceSha256": "b8feff20a7da7c29a0307535be3ec1f9a0e9d1be93253cc9ccb5de08b6c1ea7e",
-        "inferenceReport": "art/full-ai-city/reports/compact--finance_1-a001/compact--finance_1-a001-pixal-mv-1024-9247.json",
-        "reference": "art/full-ai-city/inputs/compact/finance_1/2d1198d0bdd3dd2f/reference.json",
-        "rawSourceSha256": "e4fcf3beb8aa9ed89c7419efa89ae04758fc1fdf4b44ea7dd9c18b223476e867",
         "referenceViews": [
           {
             "view": "front",
@@ -938,47 +1052,56 @@
             "sha256": "82fe9b956b1c39c363ac675c920a75c7c9c5d45e16a2cbed94ad1add60b4544c"
           }
         ],
-        "normalisationScale": 2.5,
-        "placementReview": {
-          "independentParcelScale": 2.5,
-          "scale": 2.5,
-          "reason": "independent_uniform_parcel_fit",
-          "relativeToIndependentFit": 1.0,
-          "sharedCameraReviewRequired": true
+        "sourceFile": "art/blender-city/models/compact/finance_1/model.glb",
+        "sourceSha256": "eba918f1fadb70f0c38752d4e414194f22670f67c70c48553d59ddbdb257bbb0",
+        "processingReport": "art/blender-city/models/compact/finance_1/model.json",
+        "processingReportSha256": "29c879f9203e7f6ce19a96fcfc64f3865035f2a693cc4770443b147a3a8d8a45",
+        "builder": "art/blender-city/regions/eastern.py",
+        "builderSha256": "12b8c65dc3316d4d9a68ef1d46743e5b0271de3c7514fbf26b1830625585a028",
+        "pipelineSha256": "299a3de32ea2fe7238f6bd22334a9f5446946e50b5c38efd0e3c9678171ee259",
+        "authoredArchitecture": true,
+        "storageCompression": {
+          "configuration": "normal16_uv16_color8",
+          "afterSha256": "eba918f1fadb70f0c38752d4e414194f22670f67c70c48553d59ddbdb257bbb0",
+          "originalSha256": "cdbf80a73e8d9eee4baea08b819135e10da38549542d4e99014d892f9f4fb860",
+          "originalBytes": 3978492,
+          "report": {
+            "path": "art/blender-city/reports/storage-compression/compact/finance_1-eba918f1fadb70f0.json",
+            "sha256": "374c8e9bd6b113fd5942838a79b7146d6677d757ebefb6b172d2d57d68cf737d"
+          },
+          "maxNormalError": 0.00001525559027198975,
+          "maxUVError": 0.000007629245371787441,
+          "maxColorError": 0.0018768596932936601
         },
-        "reviewStatus": "approved",
-        "triangleBudget": 45000
+        "detailLevel": "near"
       }
     },
     {
       "name": "compact_finance_2",
       "size": [
-        2.1841299482966767,
-        1.3369595885276797,
-        0.9612309346468725
+        2.221306562423706,
+        1.1410220861434937,
+        1.0199999809265137
       ],
       "bounds": {
         "min": [
-          -1.0920649741483384,
-          0.0,
-          -0.48061546732343624
+          -1.110653281211853,
+          0,
+          -0.5099999904632568
         ],
         "max": [
-          1.0920649741483384,
-          1.3369595885276797,
-          0.48061546732343624
+          1.110653281211853,
+          1.1410220861434937,
+          0.5099999904632568
         ]
       },
-      "triangles": 44984,
+      "triangles": 53188,
       "source": {
-        "sourceType": "pixal_native_multiview",
+        "sourceType": "authored_blender_reference_rebuild",
+        "region": "compact",
+        "asset": "finance_2",
         "family": "finance",
         "level": 2,
-        "sourceFile": "assets/models/regions-ai/full/compact/finance_2/2422acc0545dfe9c.glb",
-        "sourceSha256": "2422acc0545dfe9c5d58db1305b48a50d2447ab022f51f41ccc0456e30f4b772",
-        "inferenceReport": "art/full-ai-city/reports/compact--finance_2-a001/compact--finance_2-a001-pixal-mv-1024-9247.json",
-        "reference": "art/full-ai-city/inputs/compact/finance_2/e3063d2784efeab3/reference.json",
-        "rawSourceSha256": "3fff250eea35a11ef5e5b6cd0d2568033adad2ec3dd369b8b2209e32bc8ca064",
         "referenceViews": [
           {
             "view": "front",
@@ -996,51 +1119,56 @@
             "sha256": "e94a1258851ba4172bdca2a4b60f9ff9e390f9ba94e6154cc8e38d85d4685020"
           }
         ],
-        "normalisationScale": 2.1841299482966767,
-        "placementReview": {
-          "independentParcelScale": 2.3176663036557827,
-          "scale": 2.1841299482966767,
-          "reason": "uniform_fit_below_next_upgrade",
-          "nextLevel": "finance_3",
-          "nextLevelHeight": 1.554604172706604,
-          "maximumHeight": 1.3369595885276795,
-          "heightRatio": 0.86,
-          "relativeToIndependentFit": 0.9423832692616397,
-          "sharedCameraReviewRequired": true
+        "sourceFile": "art/blender-city/models/compact/finance_2/model.glb",
+        "sourceSha256": "a5cc8f2bf6cb028c57e14da6f934c8d0d5b1728dac43de9d97eb2b6e3b894233",
+        "processingReport": "art/blender-city/models/compact/finance_2/model.json",
+        "processingReportSha256": "2fc70543a07391ccddfa18b2a4b32689c7336c10e6657c5dd869a68e4dc294f1",
+        "builder": "art/blender-city/regions/eastern.py",
+        "builderSha256": "12b8c65dc3316d4d9a68ef1d46743e5b0271de3c7514fbf26b1830625585a028",
+        "pipelineSha256": "299a3de32ea2fe7238f6bd22334a9f5446946e50b5c38efd0e3c9678171ee259",
+        "authoredArchitecture": true,
+        "storageCompression": {
+          "configuration": "normal16_uv16_color8",
+          "afterSha256": "a5cc8f2bf6cb028c57e14da6f934c8d0d5b1728dac43de9d97eb2b6e3b894233",
+          "originalSha256": "01dd5c03543668d735accbc10145d3465633ba5739906f59e5a6c9acb3e12116",
+          "originalBytes": 4937368,
+          "report": {
+            "path": "art/blender-city/reports/storage-compression/compact/finance_2-a5cc8f2bf6cb028c.json",
+            "sha256": "5de96fc7b929f34c85b7bd0be34193510defb77733cea471017cffd6f47bfa22"
+          },
+          "maxNormalError": 0.00001525559027198975,
+          "maxUVError": 0.00000762840589541014,
+          "maxColorError": 0.0018768596932936601
         },
-        "reviewStatus": "approved",
-        "triangleBudget": 45000
+        "detailLevel": "near"
       }
     },
     {
       "name": "compact_finance_3",
       "size": [
-        2.5,
-        1.554604172706604,
-        0.7654345035552979
+        2.221306562423706,
+        1.3404592275619507,
+        1.0199999809265137
       ],
       "bounds": {
         "min": [
-          -1.25,
-          0.0,
-          -0.3827172517776489
+          -1.110653281211853,
+          0,
+          -0.5099999904632568
         ],
         "max": [
-          1.25,
-          1.554604172706604,
-          0.3827172517776489
+          1.110653281211853,
+          1.3404592275619507,
+          0.5099999904632568
         ]
       },
-      "triangles": 44984,
+      "triangles": 53776,
       "source": {
-        "sourceType": "pixal_native_multiview",
+        "sourceType": "authored_blender_reference_rebuild",
+        "region": "compact",
+        "asset": "finance_3",
         "family": "finance",
         "level": 3,
-        "sourceFile": "assets/models/regions-ai/full/compact/finance_3/5ddad6aa707f27ef.glb",
-        "sourceSha256": "5ddad6aa707f27ef2df3a1236a6da2b6582165e84569075995f200a40a568f3c",
-        "inferenceReport": "art/full-ai-city/reports/compact--finance_3-a001/compact--finance_3-a001-pixal-mv-1024-9247.json",
-        "reference": "art/full-ai-city/inputs/compact/finance_3/f90757ab137524b9/reference.json",
-        "rawSourceSha256": "b373a61c80461d3eb9a6b299804e95d7029208891669906891a506129cf295d0",
         "referenceViews": [
           {
             "view": "front",
@@ -1058,47 +1186,56 @@
             "sha256": "241dbab07509fc9c2fd87a2171863e17aa2255656c05d765edef8979ffc4815a"
           }
         ],
-        "normalisationScale": 2.5,
-        "placementReview": {
-          "independentParcelScale": 2.5,
-          "scale": 2.5,
-          "reason": "independent_uniform_parcel_fit",
-          "relativeToIndependentFit": 1.0,
-          "sharedCameraReviewRequired": true
+        "sourceFile": "art/blender-city/models/compact/finance_3/model.glb",
+        "sourceSha256": "85fac878c6df1d51f0c8fe10c15f81db1e1c766a8a1f1fa76312431616bc2465",
+        "processingReport": "art/blender-city/models/compact/finance_3/model.json",
+        "processingReportSha256": "4f75a7290c220a305b77474883792a4a4405dad2e010b520b089fc4c8cb124ad",
+        "builder": "art/blender-city/regions/eastern.py",
+        "builderSha256": "771d7c0f514a3d6114e0377abde156a2c42966ab9625c7ffd985e7e3d324c9c2",
+        "pipelineSha256": "8bfd4f54084734f345ca7531d288c1c733355eaec2aea576afa225121a97aedf",
+        "authoredArchitecture": true,
+        "storageCompression": {
+          "configuration": "normal16_uv16_color8",
+          "afterSha256": "85fac878c6df1d51f0c8fe10c15f81db1e1c766a8a1f1fa76312431616bc2465",
+          "originalSha256": "1158807c5ef1d1afdea3ba37916e7cc484ae47b574f94f7dc55a4ec3f6b751b7",
+          "originalBytes": 4975812,
+          "report": {
+            "path": "art/blender-city/reports/storage-compression/compact/finance_3-85fac878c6df1d51.json",
+            "sha256": "cce80d1328f4332b7b014429f23126793e15ae2d913f3c0d64605b9312beefa2"
+          },
+          "maxNormalError": 0.00001525559027198975,
+          "maxUVError": 0.000007629418178445313,
+          "maxColorError": 0.0018768596932936601
         },
-        "reviewStatus": "approved",
-        "triangleBudget": 45000
+        "detailLevel": "near"
       }
     },
     {
       "name": "compact_onsen_1",
       "size": [
-        2.4488782978429895,
-        0.8758941182404909,
-        0.8945623966235627
+        2.1331493854522705,
+        0.600429117679596,
+        1.0200001001358032
       ],
       "bounds": {
         "min": [
-          -1.2244391489214947,
-          0.0,
-          -0.44728119831178137
+          -1.0665746927261353,
+          0,
+          -0.5100000500679016
         ],
         "max": [
-          1.2244391489214947,
-          0.8758941182404909,
-          0.44728119831178137
+          1.0665746927261353,
+          0.600429117679596,
+          0.5100000500679016
         ]
       },
-      "triangles": 44995,
+      "triangles": 36152,
       "source": {
-        "sourceType": "pixal_native_multiview",
+        "sourceType": "authored_blender_reference_rebuild",
+        "region": "compact",
+        "asset": "onsen_1",
         "family": "onsen",
         "level": 1,
-        "sourceFile": "assets/models/regions-ai/full/compact/onsen_1/f72ef36d7adb2491.glb",
-        "sourceSha256": "f72ef36d7adb24910af862a56246b7560efb50bf927836113c16f6db209ebdf1",
-        "inferenceReport": "art/full-ai-city/reports/compact--onsen_1-a002/compact--onsen_1-a002-pixal-mv-1024-29480.json",
-        "reference": "art/full-ai-city/inputs/compact/onsen_1/44d2fe79d5bfcb87/reference.json",
-        "rawSourceSha256": "96e1092f2677e5ac4e22928ad9dfc2e73f9cb66fe5e28c58912219be9a91bd02",
         "referenceViews": [
           {
             "view": "front",
@@ -1116,51 +1253,56 @@
             "sha256": "ef11ff9abe427ade80c007911ba8118b4f30c43fd5401738283d572bc4a3c24e"
           }
         ],
-        "normalisationScale": 2.4488782978429895,
-        "placementReview": {
-          "independentParcelScale": 2.5,
-          "scale": 2.4488782978429895,
-          "reason": "uniform_fit_below_next_upgrade",
-          "nextLevel": "onsen_2",
-          "nextLevelHeight": 1.01848153283778,
-          "maximumHeight": 0.8758941182404909,
-          "heightRatio": 0.86,
-          "relativeToIndependentFit": 0.9795513191371958,
-          "sharedCameraReviewRequired": true
+        "sourceFile": "art/blender-city/models/compact/onsen_1/model.glb",
+        "sourceSha256": "5b5f46501bf700a22a31eb0392c140ac86c1851111411bb71a9e8eda8da53988",
+        "processingReport": "art/blender-city/models/compact/onsen_1/model.json",
+        "processingReportSha256": "e73bbf35f58b669388d94af09f529375fd857df41e48adca52d7ef04d03d7c64",
+        "builder": "art/blender-city/regions/eastern.py",
+        "builderSha256": "12b8c65dc3316d4d9a68ef1d46743e5b0271de3c7514fbf26b1830625585a028",
+        "pipelineSha256": "299a3de32ea2fe7238f6bd22334a9f5446946e50b5c38efd0e3c9678171ee259",
+        "authoredArchitecture": true,
+        "storageCompression": {
+          "configuration": "normal16_uv16_color8",
+          "afterSha256": "5b5f46501bf700a22a31eb0392c140ac86c1851111411bb71a9e8eda8da53988",
+          "originalSha256": "e1208b1f30b1231f2b9a3806ef61bfb9c6616304279034edafdc059b5932fbf8",
+          "originalBytes": 3484540,
+          "report": {
+            "path": "art/blender-city/reports/storage-compression/compact/onsen_1-5b5f46501bf700a2.json",
+            "sha256": "631197598ad572bd3f3f01a236971c2329466eb511e834447c64459994167251"
+          },
+          "maxNormalError": 0.00001525559027198975,
+          "maxUVError": 0.00000762939453125,
+          "maxColorError": 0.0019378957808804664
         },
-        "reviewStatus": "approved",
-        "triangleBudget": 45000
+        "detailLevel": "near"
       }
     },
     {
       "name": "compact_onsen_2",
       "size": [
-        1.7142584933166432,
-        1.01848153283778,
-        0.7347631946014043
+        2.072421073913574,
+        0.8765362501144409,
+        1.0199999809265137
       ],
       "bounds": {
         "min": [
-          -0.8571292466583216,
-          0.0,
-          -0.36738159730070213
+          -1.036210536956787,
+          0,
+          -0.5099999904632568
         ],
         "max": [
-          0.8571292466583216,
-          1.01848153283778,
-          0.36738159730070213
+          1.036210536956787,
+          0.8765362501144409,
+          0.5099999904632568
         ]
       },
-      "triangles": 44995,
+      "triangles": 51100,
       "source": {
-        "sourceType": "pixal_native_multiview",
+        "sourceType": "authored_blender_reference_rebuild",
+        "region": "compact",
+        "asset": "onsen_2",
         "family": "onsen",
         "level": 2,
-        "sourceFile": "assets/models/regions-ai/full/compact/onsen_2/79732371aa40963c.glb",
-        "sourceSha256": "79732371aa40963cc5f758ecea9e7af9f1b641ce9f4766353b64f9538b5cef7c",
-        "inferenceReport": "art/full-ai-city/reports/compact--onsen_2-a001/compact--onsen_2-a001-pixal-mv-1024-9247.json",
-        "reference": "art/full-ai-city/inputs/compact/onsen_2/4f26aa22d8272ece/reference.json",
-        "rawSourceSha256": "cfcc5bb0656115605461b6ccf64b8dfa9e76115af4a225e277674367ff03fe23",
         "referenceViews": [
           {
             "view": "front",
@@ -1178,51 +1320,56 @@
             "sha256": "536de48a625f6475fee65d409d16284aed16daa892b8dbbdef808df33f8824ef"
           }
         ],
-        "normalisationScale": 1.7142584933166432,
-        "placementReview": {
-          "independentParcelScale": 2.379737684236524,
-          "scale": 1.7142584933166432,
-          "reason": "uniform_fit_below_next_upgrade",
-          "nextLevel": "onsen_3",
-          "nextLevelHeight": 1.1842808521369537,
-          "maximumHeight": 1.01848153283778,
-          "heightRatio": 0.86,
-          "relativeToIndependentFit": 0.7203560731386316,
-          "sharedCameraReviewRequired": true
+        "sourceFile": "art/blender-city/models/compact/onsen_2/model.glb",
+        "sourceSha256": "287bc48b6c9fcfaceed6b84d8599e4748a950c11573d6414e4df43a5a0ac448f",
+        "processingReport": "art/blender-city/models/compact/onsen_2/model.json",
+        "processingReportSha256": "bd6d8728dc83f01b6886a632890a21f364120a407801f2a082a7e30a923b8168",
+        "builder": "art/blender-city/regions/eastern.py",
+        "builderSha256": "12b8c65dc3316d4d9a68ef1d46743e5b0271de3c7514fbf26b1830625585a028",
+        "pipelineSha256": "299a3de32ea2fe7238f6bd22334a9f5446946e50b5c38efd0e3c9678171ee259",
+        "authoredArchitecture": true,
+        "storageCompression": {
+          "configuration": "normal16_uv16_color8",
+          "afterSha256": "287bc48b6c9fcfaceed6b84d8599e4748a950c11573d6414e4df43a5a0ac448f",
+          "originalSha256": "2e842e371b9aa499c9e3798bb34f00232c2579249175d7ac0cb55e8d755c5225",
+          "originalBytes": 4789684,
+          "report": {
+            "path": "art/blender-city/reports/storage-compression/compact/onsen_2-287bc48b6c9fcfac.json",
+            "sha256": "7e74293037f0ea6d06ff286451c4b510e239975321fc2c536d287b836975ccca"
+          },
+          "maxNormalError": 0.00001525559027198975,
+          "maxUVError": 0.000007629477296544618,
+          "maxColorError": 0.0019378957808804664
         },
-        "reviewStatus": "approved",
-        "triangleBudget": 45000
+        "detailLevel": "near"
       }
     },
     {
       "name": "compact_onsen_3",
       "size": [
-        2.0990107563388856,
-        1.1842808521369537,
-        1.02
+        2.072421073913574,
+        1.1669175624847412,
+        1.0199999809265137
       ],
       "bounds": {
         "min": [
-          -1.0495053781694428,
-          0.0,
-          -0.51
+          -1.036210536956787,
+          0,
+          -0.5099999904632568
         ],
         "max": [
-          1.0495053781694428,
-          1.1842808521369537,
-          0.51
+          1.036210536956787,
+          1.1669175624847412,
+          0.5099999904632568
         ]
       },
-      "triangles": 44989,
+      "triangles": 57492,
       "source": {
-        "sourceType": "pixal_native_multiview",
+        "sourceType": "authored_blender_reference_rebuild",
+        "region": "compact",
+        "asset": "onsen_3",
         "family": "onsen",
         "level": 3,
-        "sourceFile": "assets/models/regions-ai/full/compact/onsen_3/86e21f54f46a0e6c.glb",
-        "sourceSha256": "86e21f54f46a0e6c2d2b25ad4b11d076d96bf0aec0c40ad33c4ac79f425b922c",
-        "inferenceReport": "art/full-ai-city/reports/compact--onsen_3-a001/compact--onsen_3-a001-pixal-mv-1024-9247.json",
-        "reference": "art/full-ai-city/inputs/compact/onsen_3/96e17bf5b407cd6f/reference.json",
-        "rawSourceSha256": "de194976c069e251e09fbe7d4732b8eed2902139897c934ab127374d6a8e68ad",
         "referenceViews": [
           {
             "view": "front",
@@ -1240,47 +1387,56 @@
             "sha256": "9fec956002e27f71862060b6d455a6fdaab26a540f9d10af2a97b03cd73f3f26"
           }
         ],
-        "normalisationScale": 2.0990107563388856,
-        "placementReview": {
-          "independentParcelScale": 2.0990107563388856,
-          "scale": 2.0990107563388856,
-          "reason": "independent_uniform_parcel_fit",
-          "relativeToIndependentFit": 1.0,
-          "sharedCameraReviewRequired": true
+        "sourceFile": "art/blender-city/models/compact/onsen_3/model.glb",
+        "sourceSha256": "79b2244da64cd0a0fef911c08c0985620ff414a5ee72672c8325a013324ac962",
+        "processingReport": "art/blender-city/models/compact/onsen_3/model.json",
+        "processingReportSha256": "23fee1512b1c64ac6520525145b6dcfb1bb241723dbe9774bb7ec7f0437cc2a2",
+        "builder": "art/blender-city/regions/eastern.py",
+        "builderSha256": "771d7c0f514a3d6114e0377abde156a2c42966ab9625c7ffd985e7e3d324c9c2",
+        "pipelineSha256": "8bfd4f54084734f345ca7531d288c1c733355eaec2aea576afa225121a97aedf",
+        "authoredArchitecture": true,
+        "storageCompression": {
+          "configuration": "normal16_uv16_color8",
+          "afterSha256": "79b2244da64cd0a0fef911c08c0985620ff414a5ee72672c8325a013324ac962",
+          "originalSha256": "45a2cbe98ba65e5e08db3f13bc29ca29aca41253101c6b230dd0944fa0d6e5bd",
+          "originalBytes": 5312596,
+          "report": {
+            "path": "art/blender-city/reports/storage-compression/compact/onsen_3-79b2244da64cd0a0.json",
+            "sha256": "24a08d784710e02a1354cb547cc383595cbad3cb07627ce1fb0acebd3828de21"
+          },
+          "maxNormalError": 0.00001525559027198975,
+          "maxUVError": 0.00000762947820609483,
+          "maxColorError": 0.0019378957808804664
         },
-        "reviewStatus": "approved",
-        "triangleBudget": 45000
+        "detailLevel": "near"
       }
     },
     {
       "name": "compact_civic_hall",
       "size": [
-        1.04,
-        1.0115981435775758,
-        0.8217397451400758
+        1.040000081062317,
+        1.3780595064163208,
+        0.9769749343395233
       ],
       "bounds": {
         "min": [
-          -0.52,
-          0.0,
-          -0.4108698725700379
+          -0.5200000405311584,
+          0,
+          -0.48848748207092285
         ],
         "max": [
-          0.52,
-          1.0115981435775758,
-          0.4108698725700379
+          0.5200000405311584,
+          1.3780595064163208,
+          0.48848745226860046
         ]
       },
-      "triangles": 29960,
+      "triangles": 27348,
       "source": {
-        "sourceType": "pixal_native_multiview",
+        "sourceType": "authored_blender_reference_rebuild",
+        "region": "compact",
+        "asset": "civic_hall",
         "family": "civic_hall",
         "level": 0,
-        "sourceFile": "assets/models/regions-ai/full/compact/civic_hall/90974747091f048c.glb",
-        "sourceSha256": "90974747091f048c0e3f295b205790234d17b67297a8ecb93893eeedd3d7cc4e",
-        "inferenceReport": "art/full-ai-city/reports/compact--civic_hall-a010/compact--civic_hall-a010-pixal-mv-1024-29479.json",
-        "reference": "art/full-ai-city/references/compact/civic_hall/reference.json",
-        "rawSourceSha256": "a576dd849d25a2710224d78b33bed2fc064fc10e6769ae4211961101bac540ce",
         "referenceViews": [
           {
             "view": "front",
@@ -1298,47 +1454,56 @@
             "sha256": "8ab2648061500beb1090f21c030fdc2833efb705896fe307fd63dd11d2e6d4a3"
           }
         ],
-        "normalisationScale": 1.04,
-        "placementReview": {
-          "independentParcelScale": 1.04,
-          "scale": 1.04,
-          "reason": "independent_uniform_parcel_fit",
-          "relativeToIndependentFit": 1.0,
-          "sharedCameraReviewRequired": true
+        "sourceFile": "art/blender-city/models/compact/civic_hall/model.glb",
+        "sourceSha256": "adfc2d67c627687a9c2040f609faa000ac778d3334f85ad0ae038685ab3b4caf",
+        "processingReport": "art/blender-city/models/compact/civic_hall/model.json",
+        "processingReportSha256": "a713523b4a70a8241a4986f2bfa0ec6c308cba210bc0c44bf50b1c1b89675e4d",
+        "builder": "art/blender-city/regions/eastern.py",
+        "builderSha256": "12b8c65dc3316d4d9a68ef1d46743e5b0271de3c7514fbf26b1830625585a028",
+        "pipelineSha256": "299a3de32ea2fe7238f6bd22334a9f5446946e50b5c38efd0e3c9678171ee259",
+        "authoredArchitecture": true,
+        "storageCompression": {
+          "configuration": "normal16_uv16_color8",
+          "afterSha256": "adfc2d67c627687a9c2040f609faa000ac778d3334f85ad0ae038685ab3b4caf",
+          "originalSha256": "e681f5a502f070d4c51d4728b8649002f70c527afcba9a14bf6125693821d0d0",
+          "originalBytes": 2850692,
+          "report": {
+            "path": "art/blender-city/reports/storage-compression/compact/civic_hall-adfc2d67c627687a.json",
+            "sha256": "d5f93f864f4e0a5de928a223a876199e2dcfcfff93271e00b0816d7e713883d3"
+          },
+          "maxNormalError": 0.000015258319748912008,
+          "maxUVError": 0.000007628906125156654,
+          "maxColorError": 0.0019378957808804664
         },
-        "reviewStatus": "approved",
-        "triangleBudget": 30000
+        "detailLevel": "near"
       }
     },
     {
       "name": "compact_vault_bank",
       "size": [
-        1.0370342683792115,
-        0.8323072290420532,
-        1.04
+        1.040000081062317,
+        0.8140608072280884,
+        0.8823311030864716
       ],
       "bounds": {
         "min": [
-          -0.5185171341896058,
-          0.0,
-          -0.52
+          -0.5200000405311584,
+          0,
+          -0.441165566444397
         ],
         "max": [
-          0.5185171341896058,
-          0.8323072290420532,
-          0.52
+          0.5200000405311584,
+          0.8140608072280884,
+          0.4411655366420746
         ]
       },
-      "triangles": 29985,
+      "triangles": 14668,
       "source": {
-        "sourceType": "pixal_native_multiview",
+        "sourceType": "authored_blender_reference_rebuild",
+        "region": "compact",
+        "asset": "vault_bank",
         "family": "vault_bank",
         "level": 0,
-        "sourceFile": "assets/models/regions-ai/full/compact/vault_bank/f0280ffbdc6b03aa.glb",
-        "sourceSha256": "f0280ffbdc6b03aa20c0d9917f0b34631d366bcaca672552a53d9836d82f693d",
-        "inferenceReport": "art/full-ai-city/reports/compact--vault_bank-a009/compact--vault_bank-a009-pixal-mv-1024-9247.json",
-        "reference": "art/full-ai-city/references/compact/vault_bank/reference.json",
-        "rawSourceSha256": "f9d08238d8f7cb8deadd40a5019270e77b7680d1bdc772e8482e2661f4ae821a",
         "referenceViews": [
           {
             "view": "front",
@@ -1356,47 +1521,56 @@
             "sha256": "7556ed9648e66f83550e8112612ad4cadf489dba07dc5ccc0cce336bc55d9e88"
           }
         ],
-        "normalisationScale": 1.04,
-        "placementReview": {
-          "independentParcelScale": 1.04,
-          "scale": 1.04,
-          "reason": "independent_uniform_parcel_fit",
-          "relativeToIndependentFit": 1.0,
-          "sharedCameraReviewRequired": true
+        "sourceFile": "art/blender-city/models/compact/vault_bank/model.glb",
+        "sourceSha256": "87c8207445640ab99b90a6fb06931f44fc0259c0028ec170774776f497aa56c5",
+        "processingReport": "art/blender-city/models/compact/vault_bank/model.json",
+        "processingReportSha256": "82612f5a00bdc12b6b1a7601ace13bd0f72bed7bc5d05933a2053552e72d84f7",
+        "builder": "art/blender-city/regions/eastern.py",
+        "builderSha256": "771d7c0f514a3d6114e0377abde156a2c42966ab9625c7ffd985e7e3d324c9c2",
+        "pipelineSha256": "8bfd4f54084734f345ca7531d288c1c733355eaec2aea576afa225121a97aedf",
+        "authoredArchitecture": true,
+        "storageCompression": {
+          "configuration": "normal16_uv16_color8",
+          "afterSha256": "87c8207445640ab99b90a6fb06931f44fc0259c0028ec170774776f497aa56c5",
+          "originalSha256": "6daf6b54ed91b56c9702b82bb4804d8481584b9527c28963f76f78906e3dfa61",
+          "originalBytes": 1936488,
+          "report": {
+            "path": "art/blender-city/reports/storage-compression/compact/vault_bank-87c8207445640ab9.json",
+            "sha256": "6c4e31adb26322a750161e56045a68a1e4f2354d7f75dd3fd88dd683347595e0"
+          },
+          "maxNormalError": 0.000015205276399199441,
+          "maxUVError": 0.000007629382707638466,
+          "maxColorError": 0.0019378957808804664
         },
-        "reviewStatus": "approved",
-        "triangleBudget": 30000
+        "detailLevel": "near"
       }
     },
     {
       "name": "compact_builders_guild",
       "size": [
-        1.04,
-        0.9908249171093402,
-        0.8299265847713091
+        1.0399999579611947,
+        0.838895320892334,
+        0.8172985315322876
       ],
       "bounds": {
         "min": [
-          -0.52,
-          0.0,
-          -0.4149632923856546
+          -0.5199999809265137,
+          0,
+          -0.4086492657661438
         ],
         "max": [
-          0.52,
-          0.9908249171093402,
-          0.4149632923856546
+          0.519999977034681,
+          0.838895320892334,
+          0.4086492657661438
         ]
       },
-      "triangles": 29987,
+      "triangles": 20300,
       "source": {
-        "sourceType": "pixal_native_multiview",
+        "sourceType": "authored_blender_reference_rebuild",
+        "region": "compact",
+        "asset": "builders_guild",
         "family": "builders_guild",
         "level": 0,
-        "sourceFile": "assets/models/regions-ai/full/compact/builders_guild/d873e501eb843d4e.glb",
-        "sourceSha256": "d873e501eb843d4ecbc89bd8a694836835a7c05474d18e74cfc8f9e7adccacd9",
-        "inferenceReport": "art/full-ai-city/reports/compact--builders_guild-a001/compact--builders_guild-a001-pixal-mv-1024-9247.json",
-        "reference": "art/full-ai-city/references/compact/builders_guild/reference.json",
-        "rawSourceSha256": "d46d4d70a09235f4755d558ee366f431df8cab0db8c0ea3af45993bc4d676ad2",
         "referenceViews": [
           {
             "view": "front",
@@ -1414,47 +1588,56 @@
             "sha256": "abb5c48bc206dbcc67a93e84fad483ccb4c2e3ab7b36e3f64fcf82c7ab6b99c8"
           }
         ],
-        "normalisationScale": 1.0380681795564661,
-        "placementReview": {
-          "independentParcelScale": 1.0380681795564661,
-          "scale": 1.0380681795564661,
-          "reason": "independent_uniform_parcel_fit",
-          "relativeToIndependentFit": 1.0,
-          "sharedCameraReviewRequired": true
+        "sourceFile": "art/blender-city/models/compact/builders_guild/model.glb",
+        "sourceSha256": "e3d1a41876bbf4820ad26f3c80e5115a1eecf6c4e1e61b6d8a11db3022318450",
+        "processingReport": "art/blender-city/models/compact/builders_guild/model.json",
+        "processingReportSha256": "1396f033d738dc5f98077a1474429e85e53a76a1676f29684ee603a4cf5e6d5b",
+        "builder": "art/blender-city/regions/eastern.py",
+        "builderSha256": "771d7c0f514a3d6114e0377abde156a2c42966ab9625c7ffd985e7e3d324c9c2",
+        "pipelineSha256": "8bfd4f54084734f345ca7531d288c1c733355eaec2aea576afa225121a97aedf",
+        "authoredArchitecture": true,
+        "storageCompression": {
+          "configuration": "normal16_uv16_color8",
+          "afterSha256": "e3d1a41876bbf4820ad26f3c80e5115a1eecf6c4e1e61b6d8a11db3022318450",
+          "originalSha256": "93153b0947ed8ecc87ab1517b3a6967e7544bf01918634c443b82a9233beeb9d",
+          "originalBytes": 2375972,
+          "report": {
+            "path": "art/blender-city/reports/storage-compression/compact/builders_guild-e3d1a41876bbf482.json",
+            "sha256": "3cdc1869ebbe78bbc0dde45231061656940ab6987e56f4196943601acfffb0d3"
+          },
+          "maxNormalError": 0.000015258499834303052,
+          "maxUVError": 0.000007629003442533033,
+          "maxColorError": 0.0019378957808804664
         },
-        "reviewStatus": "approved",
-        "triangleBudget": 30000
+        "detailLevel": "near"
       }
     },
     {
       "name": "compact_card_pavilion",
       "size": [
-        1.04,
-        0.8618609512961478,
-        1.0011956096408134
+        1.0399999618530273,
+        0.816996693611145,
+        0.8873885869979858
       ],
       "bounds": {
         "min": [
-          -0.52,
-          0.0,
-          -0.5005978048204067
+          -0.5199999809265137,
+          0,
+          -0.4436942934989929
         ],
         "max": [
-          0.52,
-          0.8618609512961478,
-          0.5005978048204067
+          0.5199999809265137,
+          0.816996693611145,
+          0.4436942934989929
         ]
       },
-      "triangles": 29986,
+      "triangles": 14996,
       "source": {
-        "sourceType": "pixal_native_multiview",
+        "sourceType": "authored_blender_reference_rebuild",
+        "region": "compact",
+        "asset": "card_pavilion",
         "family": "card_pavilion",
         "level": 0,
-        "sourceFile": "assets/models/regions-ai/full/compact/card_pavilion/1175572946ba5ab8.glb",
-        "sourceSha256": "1175572946ba5ab8f185884d0a96c297a71d7377124f783b1382495b8f8931aa",
-        "inferenceReport": "art/full-ai-city/reports/compact--card_pavilion-a009/compact--card_pavilion-a009-pixal-mv-1024-9247.json",
-        "reference": "art/full-ai-city/references/compact/card_pavilion/reference.json",
-        "rawSourceSha256": "a32b53ec0433c07d2e95d90de7317023c5febb05270d02aca6722b24586525cb",
         "referenceViews": [
           {
             "view": "front",
@@ -1472,47 +1655,56 @@
             "sha256": "8859d6e91218940f4c2b77f1d6058bfda3c9a8f9e316681f563f19dd83e89dab"
           }
         ],
-        "normalisationScale": 1.0400000619888343,
-        "placementReview": {
-          "independentParcelScale": 1.0400000619888343,
-          "scale": 1.0400000619888343,
-          "reason": "independent_uniform_parcel_fit",
-          "relativeToIndependentFit": 1.0,
-          "sharedCameraReviewRequired": true
+        "sourceFile": "art/blender-city/models/compact/card_pavilion/model.glb",
+        "sourceSha256": "1cb030503590d599868dccc04448a8d0a669f5abe3f4aacb742a11e5dc01b4f6",
+        "processingReport": "art/blender-city/models/compact/card_pavilion/model.json",
+        "processingReportSha256": "7c8ba0b4281d09c4f8e49d43cf8c55626f3c541142ec25dcc28a2fa2c083f457",
+        "builder": "art/blender-city/regions/eastern.py",
+        "builderSha256": "094809ebace0cddb9b2a33fa2beb5d816c6d79dee841e2481c8d83715668e90a",
+        "pipelineSha256": "8bfd4f54084734f345ca7531d288c1c733355eaec2aea576afa225121a97aedf",
+        "authoredArchitecture": true,
+        "storageCompression": {
+          "configuration": "normal16_uv16_color8",
+          "afterSha256": "1cb030503590d599868dccc04448a8d0a669f5abe3f4aacb742a11e5dc01b4f6",
+          "originalSha256": "bcb2ccd7e6c9e0044742f4601f9d38d0bc517b95ce5770d334da62b4c24560d9",
+          "originalBytes": 1938552,
+          "report": {
+            "path": "art/blender-city/reports/storage-compression/compact/card_pavilion-1cb030503590d599.json",
+            "sha256": "43c3bdb536b71149b708cbc37cc1e9f32e61eac18156db2e2ad7fe3dc1874333"
+          },
+          "maxNormalError": 0.000015258499834303052,
+          "maxUVError": 0.000007629493667726805,
+          "maxColorError": 0.0019378957808804664
         },
-        "reviewStatus": "approved",
-        "triangleBudget": 30000
+        "detailLevel": "near"
       }
     },
     {
       "name": "compact_chance_wheel",
       "size": [
-        1.04,
-        0.9700382647767388,
-        0.7559350649184235
+        1.0399999860687963,
+        0.949153482913971,
+        0.8716357350349426
       ],
       "bounds": {
         "min": [
-          -0.52,
-          0.0,
-          -0.3779675324592118
+          -0.5199999809265137,
+          0,
+          -0.4358178675174713
         ],
         "max": [
-          0.52,
-          0.9700382647767389,
-          0.3779675324592118
+          0.5200000051422826,
+          0.949153482913971,
+          0.4358178675174713
         ]
       },
-      "triangles": 31689,
+      "triangles": 15600,
       "source": {
-        "sourceType": "pixal_native_multiview",
+        "sourceType": "authored_blender_reference_rebuild",
+        "region": "compact",
+        "asset": "chance_wheel",
         "family": "chance_wheel",
         "level": 0,
-        "sourceFile": "assets/models/regions-ai/full/compact/chance_wheel/14f4c5d53e1d8d49.glb",
-        "sourceSha256": "14f4c5d53e1d8d49c7ab035115fd685442e2dff034cfa0bfb618adac0f074de9",
-        "inferenceReport": "art/full-ai-city/reports/compact--chance_wheel-a001/compact--chance_wheel-a001-pixal-mv-1024-9247.json",
-        "reference": "art/full-ai-city/references/compact/chance_wheel/reference.json",
-        "rawSourceSha256": "986eca4fbae7faff6040dd70ba674c7f0ab139981abdf664d3ee71dd2f5d234e",
         "referenceViews": [
           {
             "view": "front",
@@ -1530,47 +1722,56 @@
             "sha256": "e6f689473d98bba0c7f29985482f545e07a3908de0fcd5d7f2c3e5bce19449d0"
           }
         ],
-        "normalisationScale": 1.039912076277721,
-        "placementReview": {
-          "independentParcelScale": 1.039912076277721,
-          "scale": 1.039912076277721,
-          "reason": "independent_uniform_parcel_fit",
-          "relativeToIndependentFit": 1.0,
-          "sharedCameraReviewRequired": true
+        "sourceFile": "art/blender-city/models/compact/chance_wheel/model.glb",
+        "sourceSha256": "6a2a2212c91f79ca1a4081510656ed0b5815b0957dcbe287771128a734e3f082",
+        "processingReport": "art/blender-city/models/compact/chance_wheel/model.json",
+        "processingReportSha256": "cc9dd31d89fa0dda524b9c9026fddc7995a806117e7971ed386420e8e6d66ad1",
+        "builder": "art/blender-city/regions/eastern.py",
+        "builderSha256": "771d7c0f514a3d6114e0377abde156a2c42966ab9625c7ffd985e7e3d324c9c2",
+        "pipelineSha256": "8bfd4f54084734f345ca7531d288c1c733355eaec2aea576afa225121a97aedf",
+        "authoredArchitecture": true,
+        "storageCompression": {
+          "configuration": "normal16_uv16_color8",
+          "afterSha256": "6a2a2212c91f79ca1a4081510656ed0b5815b0957dcbe287771128a734e3f082",
+          "originalSha256": "94d19afc0d4e20290d069a72cb5b4f993906af7ca7c70160a6b7d5c5d74eeed4",
+          "originalBytes": 1983548,
+          "report": {
+            "path": "art/blender-city/reports/storage-compression/compact/chance_wheel-6a2a2212c91f79ca.json",
+            "sha256": "262cc15dfbb28951faa5886581260e6bd85ecf3fd4a6009b81f8f6245846b60e"
+          },
+          "maxNormalError": 0.000015215752278835426,
+          "maxUVError": 0.000007629161697053578,
+          "maxColorError": 0.0018768596932936601
         },
-        "reviewStatus": "approved",
-        "triangleBudget": 30000
+        "detailLevel": "near"
       }
     },
     {
       "name": "compact_teleport_gate",
       "size": [
-        1.04,
-        0.8554837989807129,
-        0.5233147907257081
+        1.040000081062317,
+        0.838931143283844,
+        0.8059101104736328
       ],
       "bounds": {
         "min": [
-          -0.52,
-          0.0,
-          -0.26165739536285404
+          -0.5200000405311584,
+          0,
+          -0.4029550552368164
         ],
         "max": [
-          0.52,
-          0.8554837989807129,
-          0.26165739536285404
+          0.5200000405311584,
+          0.838931143283844,
+          0.4029550552368164
         ]
       },
-      "triangles": 29985,
+      "triangles": 15416,
       "source": {
-        "sourceType": "pixal_native_multiview",
+        "sourceType": "authored_blender_reference_rebuild",
+        "region": "compact",
+        "asset": "teleport_gate",
         "family": "teleport_gate",
         "level": 0,
-        "sourceFile": "assets/models/regions-ai/full/compact/teleport_gate/e6e6bddfcff8f804.glb",
-        "sourceSha256": "e6e6bddfcff8f8048a6cb14b62c0216a7f7f8b6a6011d8f260c063c91a321b3e",
-        "inferenceReport": "art/full-ai-city/reports/compact--teleport_gate-a009/compact--teleport_gate-a009-pixal-mv-1024-9247.json",
-        "reference": "art/full-ai-city/inputs/compact/teleport_gate/96227a31d506bf2e/reference.json",
-        "rawSourceSha256": "b0fa12b45a5bb680578e4b5018bdb4692e69f16411f5fd6565b1ec5fb1343949",
         "referenceViews": [
           {
             "view": "front",
@@ -1588,47 +1789,56 @@
             "sha256": "a1221502af4a22c4ff08793782bdd6612dcf70c148d515fcd29fe51a94ad3751"
           }
         ],
-        "normalisationScale": 1.04,
-        "placementReview": {
-          "independentParcelScale": 1.04,
-          "scale": 1.04,
-          "reason": "independent_uniform_parcel_fit",
-          "relativeToIndependentFit": 1.0,
-          "sharedCameraReviewRequired": true
+        "sourceFile": "art/blender-city/models/compact/teleport_gate/model.glb",
+        "sourceSha256": "9999728e73b594256ed1b002028deed95a1515e5e644b1d38b2ed1041ff27f22",
+        "processingReport": "art/blender-city/models/compact/teleport_gate/model.json",
+        "processingReportSha256": "2f0448131511c6a7489324208a59a98c6ac5b89b933d846720d53bc161f79dd7",
+        "builder": "art/blender-city/regions/eastern.py",
+        "builderSha256": "12b8c65dc3316d4d9a68ef1d46743e5b0271de3c7514fbf26b1830625585a028",
+        "pipelineSha256": "299a3de32ea2fe7238f6bd22334a9f5446946e50b5c38efd0e3c9678171ee259",
+        "authoredArchitecture": true,
+        "storageCompression": {
+          "configuration": "normal16_uv16_color8",
+          "afterSha256": "9999728e73b594256ed1b002028deed95a1515e5e644b1d38b2ed1041ff27f22",
+          "originalSha256": "32c75afe3f0538fbcc483f81c27d815be41d37bd38b56996724fdae1631f9b21",
+          "originalBytes": 1959032,
+          "report": {
+            "path": "art/blender-city/reports/storage-compression/compact/teleport_gate-9999728e73b59425.json",
+            "sha256": "74aadba6f3dde4cbb95e52bef2a477d5adeb8c313052e2406904d027da3ce9e5"
+          },
+          "maxNormalError": 0.000015160245942280604,
+          "maxUVError": 0.00000762939453125,
+          "maxColorError": 0.0018768596932936601
         },
-        "reviewStatus": "approved",
-        "triangleBudget": 30000
+        "detailLevel": "near"
       }
     },
     {
       "name": "compact_rush_station",
       "size": [
-        1.04,
-        0.6984758234024048,
-        0.8301725196838379
+        1.0399999618530273,
+        0.816996693611145,
+        0.8873885869979858
       ],
       "bounds": {
         "min": [
-          -0.52,
-          0.0,
-          -0.41508625984191894
+          -0.5199999809265137,
+          0,
+          -0.4436942934989929
         ],
         "max": [
-          0.52,
-          0.6984758234024048,
-          0.41508625984191894
+          0.5199999809265137,
+          0.816996693611145,
+          0.4436942934989929
         ]
       },
-      "triangles": 29986,
+      "triangles": 14588,
       "source": {
-        "sourceType": "pixal_native_multiview",
+        "sourceType": "authored_blender_reference_rebuild",
+        "region": "compact",
+        "asset": "rush_station",
         "family": "rush_station",
         "level": 0,
-        "sourceFile": "assets/models/regions-ai/full/compact/rush_station/9ecbe94eb0903173.glb",
-        "sourceSha256": "9ecbe94eb09031738821b3fe8e31b51dcdb1494902c238442725993a27344eb7",
-        "inferenceReport": "art/full-ai-city/reports/compact--rush_station-a009/compact--rush_station-a009-pixal-mv-1024-9247.json",
-        "reference": "art/full-ai-city/inputs/compact/rush_station/ebdc53f2b8a37b37/reference.json",
-        "rawSourceSha256": "562108561f8cbeac37f1a7ea89071ba261204449f90c8d9eeac4aa680939e9f6",
         "referenceViews": [
           {
             "view": "front",
@@ -1646,47 +1856,56 @@
             "sha256": "8893a4eaa7f280e7057597cb7ae29ae8abf919d38a986b7dabfc117190a3fece"
           }
         ],
-        "normalisationScale": 1.04,
-        "placementReview": {
-          "independentParcelScale": 1.04,
-          "scale": 1.04,
-          "reason": "independent_uniform_parcel_fit",
-          "relativeToIndependentFit": 1.0,
-          "sharedCameraReviewRequired": true
+        "sourceFile": "art/blender-city/models/compact/rush_station/model.glb",
+        "sourceSha256": "f088326fa134a9c0d82ad816c30a67b35ae880243cb4082a0c818cff85c070ae",
+        "processingReport": "art/blender-city/models/compact/rush_station/model.json",
+        "processingReportSha256": "192c87483d3ae855725530b6d596f2c6b4ff6141d69f01aa177a2125954f6759",
+        "builder": "art/blender-city/regions/eastern.py",
+        "builderSha256": "771d7c0f514a3d6114e0377abde156a2c42966ab9625c7ffd985e7e3d324c9c2",
+        "pipelineSha256": "8bfd4f54084734f345ca7531d288c1c733355eaec2aea576afa225121a97aedf",
+        "authoredArchitecture": true,
+        "storageCompression": {
+          "configuration": "normal16_uv16_color8",
+          "afterSha256": "f088326fa134a9c0d82ad816c30a67b35ae880243cb4082a0c818cff85c070ae",
+          "originalSha256": "59367932ed333b0489723516a9683805d7894ac6d9dcc9b8584fed4e4e3af9a2",
+          "originalBytes": 1917888,
+          "report": {
+            "path": "art/blender-city/reports/storage-compression/compact/rush_station-f088326fa134a9c0.json",
+            "sha256": "65b56b782af18a1a4daa5bd7b45b325f2978568b42ad048bc6897b99d891353c"
+          },
+          "maxNormalError": 0.000015258499834303052,
+          "maxUVError": 0.000007629196258379656,
+          "maxColorError": 0.0019378957808804664
         },
-        "reviewStatus": "approved",
-        "triangleBudget": 30000
+        "detailLevel": "near"
       }
     },
     {
       "name": "compact_junction_hub",
       "size": [
-        1.04,
-        0.8766414546966553,
-        0.7729576969146729
+        1.040000081062317,
+        0.7201710939407349,
+        0.7822205424308777
       ],
       "bounds": {
         "min": [
-          -0.52,
-          0.0,
-          -0.38647884845733643
+          -0.5200000405311584,
+          0,
+          -0.39111027121543884
         ],
         "max": [
-          0.52,
-          0.8766414546966553,
-          0.38647884845733643
+          0.5200000405311584,
+          0.7201710939407349,
+          0.39111027121543884
         ]
       },
-      "triangles": 29974,
+      "triangles": 14744,
       "source": {
-        "sourceType": "pixal_native_multiview",
+        "sourceType": "authored_blender_reference_rebuild",
+        "region": "compact",
+        "asset": "junction_hub",
         "family": "junction_hub",
         "level": 0,
-        "sourceFile": "assets/models/regions-ai/full/compact/junction_hub/967bc1d0b18f5152.glb",
-        "sourceSha256": "967bc1d0b18f51526ffb9c269e64f964d9c727c296d7b1dafc9512a3b1aca548",
-        "inferenceReport": "art/full-ai-city/reports/compact--junction_hub-a009/compact--junction_hub-a009-pixal-mv-1024-9247.json",
-        "reference": "art/full-ai-city/inputs/compact/junction_hub/8dd98f760a944b9d/reference.json",
-        "rawSourceSha256": "6eda4e141f097bbfd4065a75549ba106fe4af2b277cd6718b04180bfde261dbf",
         "referenceViews": [
           {
             "view": "front",
@@ -1704,20 +1923,208 @@
             "sha256": "75ba64b1b1b3e77bdb50dee85842dc0a72f2ea5bffd2f2bb028c735bedab61ac"
           }
         ],
-        "normalisationScale": 1.04,
-        "placementReview": {
-          "independentParcelScale": 1.04,
-          "scale": 1.04,
-          "reason": "independent_uniform_parcel_fit",
-          "relativeToIndependentFit": 1.0,
-          "sharedCameraReviewRequired": true
+        "sourceFile": "art/blender-city/models/compact/junction_hub/model.glb",
+        "sourceSha256": "73d950bfc61ba549b2f964d89f3a21f000d89b1cae392dbeebddca7b350cfbf3",
+        "processingReport": "art/blender-city/models/compact/junction_hub/model.json",
+        "processingReportSha256": "cacd444d4f8071827f53c1b4dba2ca75a4e7f679cf3c3a22e6021ba099c1bf59",
+        "builder": "art/blender-city/regions/eastern.py",
+        "builderSha256": "771d7c0f514a3d6114e0377abde156a2c42966ab9625c7ffd985e7e3d324c9c2",
+        "pipelineSha256": "8bfd4f54084734f345ca7531d288c1c733355eaec2aea576afa225121a97aedf",
+        "authoredArchitecture": true,
+        "storageCompression": {
+          "configuration": "normal16_uv16_color8",
+          "afterSha256": "73d950bfc61ba549b2f964d89f3a21f000d89b1cae392dbeebddca7b350cfbf3",
+          "originalSha256": "d1e2bc8d1e5b8de95838ae7cc064f4ecf14ce50cc948489bdbc07f0c17f5dba3",
+          "originalBytes": 1929300,
+          "report": {
+            "path": "art/blender-city/reports/storage-compression/compact/junction_hub-73d950bfc61ba549.json",
+            "sha256": "a6cfb11435b72b922eab16c34674f4580a684b63b29e7be46925125d6bcbca67"
+          },
+          "maxNormalError": 0.000015258499834303052,
+          "maxUVError": 0.000007628861559250133,
+          "maxColorError": 0.0019378957808804664
         },
-        "reviewStatus": "approved",
-        "triangleBudget": 30000
+        "detailLevel": "near"
       }
     }
   ],
-  "packedAtUtc": "2026-10-24T10:46:32.125976+00:00",
-  "sha256": "18939c15a6547620d0869ad51a22d3d40eae79a3d1f9c4feefaee4287dabb7f7",
-  "bytes": 43931040
+  "binarySegments": [
+    {
+      "source": "art/blender-city/models/compact/villa_1/model.glb",
+      "sha256": "ee168b0f3c2dbe01a4cc2eb2280fa1a7977a85956b1405a09e389bc15ed189d9",
+      "offset": 0,
+      "bytes": 1669596
+    },
+    {
+      "source": "art/blender-city/models/compact/villa_2/model.glb",
+      "sha256": "87276e88ee42256752675d4854b6db3b486fef3053203c354e12f936c020ad51",
+      "offset": 1669596,
+      "bytes": 3966852
+    },
+    {
+      "source": "art/blender-city/models/compact/villa_3/model.glb",
+      "sha256": "8dbfa18451e463d08e15bfbf6316f0e42287f816b1211f8cad0026a3023b3129",
+      "offset": 5636448,
+      "bytes": 2007032
+    },
+    {
+      "source": "art/blender-city/models/compact/shop_1/model.glb",
+      "sha256": "76a815d5632686f3a6a9c8fc75a92772a8421dc0d3a65cf35aaf8290bb7bbdda",
+      "offset": 7643480,
+      "bytes": 1542980
+    },
+    {
+      "source": "art/blender-city/models/compact/shop_2/model.glb",
+      "sha256": "079057067f619dbadd11746337224008fd2618fc0cc7dba893082857acf4027f",
+      "offset": 9186460,
+      "bytes": 1779004
+    },
+    {
+      "source": "art/blender-city/models/compact/shop_3/model.glb",
+      "sha256": "21a6f28db4607d4ce40dfcc9b50911b9b6c2979ca85e8d2d2fe2ce62b0e54b15",
+      "offset": 10965464,
+      "bytes": 1965892
+    },
+    {
+      "source": "art/blender-city/models/compact/hotel_1/model.glb",
+      "sha256": "9fbfb27e05234ff376040282783d2feb0528228260dab67d8ecf05435cb2237d",
+      "offset": 12931356,
+      "bytes": 1950276
+    },
+    {
+      "source": "art/blender-city/models/compact/hotel_2/model.glb",
+      "sha256": "191898482afb974a6fe70b4ed16ec19054055adde96b8a902a6ed56f091f8cc7",
+      "offset": 14881632,
+      "bytes": 2385616
+    },
+    {
+      "source": "art/blender-city/models/compact/hotel_3/model.glb",
+      "sha256": "0f2fda98310295b87b898266b2b156a49b7005b24db7e28bc8f6df5ed15ad6d6",
+      "offset": 17267248,
+      "bytes": 2959620
+    },
+    {
+      "source": "art/blender-city/models/compact/tower_1/model.glb",
+      "sha256": "db785af4d8491c5fe7727db08576ce5159f15befff50a32cf96af6e46d40e6a8",
+      "offset": 20226868,
+      "bytes": 2145828
+    },
+    {
+      "source": "art/blender-city/models/compact/tower_2/model.glb",
+      "sha256": "f8cc3f9b4bbf36a999cad9615490eac47d69ffdf3f6d03450ff95b16d31227e5",
+      "offset": 22372696,
+      "bytes": 2361864
+    },
+    {
+      "source": "art/blender-city/models/compact/tower_3/model.glb",
+      "sha256": "a6e226c69f110f011dbb4f23b78edf280ecabdba9bf9b1bf6ac8da7edcfc4244",
+      "offset": 24734560,
+      "bytes": 3007072
+    },
+    {
+      "source": "art/blender-city/models/compact/skyscraper_1/model.glb",
+      "sha256": "065f67f28b4255ac764d13f351d0f9182c060e0bc696eeac0fcc77bb20173f56",
+      "offset": 27741632,
+      "bytes": 3000052
+    },
+    {
+      "source": "art/blender-city/models/compact/skyscraper_2/model.glb",
+      "sha256": "55f6f3204c3fc2a4cfb4e71754accc2857b638c1a23cfba2c655640b4f2e0d21",
+      "offset": 30741684,
+      "bytes": 3814484
+    },
+    {
+      "source": "art/blender-city/models/compact/skyscraper_3/model.glb",
+      "sha256": "3d9c72ba8c945f4370e77f5d4a2f23ae93e77cbf8ff2d952053cf3dd260e2a5f",
+      "offset": 34556168,
+      "bytes": 4745148
+    },
+    {
+      "source": "art/blender-city/models/compact/finance_1/model.glb",
+      "sha256": "5eeb52111a0841e7bb2156ced8928c8be8237a589476e44fbb1ede932ec831fc",
+      "offset": 39301316,
+      "bytes": 3098716
+    },
+    {
+      "source": "art/blender-city/models/compact/finance_2/model.glb",
+      "sha256": "1f6d7f85d8ef80f38ad85c6d8523d7402b28d6914d3b58fddce50bb5f8b572f5",
+      "offset": 42400032,
+      "bytes": 3773472
+    },
+    {
+      "source": "art/blender-city/models/compact/finance_3/model.glb",
+      "sha256": "04d7f20e06deeae2d29958ed05e82938c784e5c7e31053255f46b88a4ce4d079",
+      "offset": 46173504,
+      "bytes": 3801356
+    },
+    {
+      "source": "art/blender-city/models/compact/onsen_1/model.glb",
+      "sha256": "c0458125d129ca3e253b1fce6b6855ebcca23abeb7c7f7b2902e7fd61b6a70cc",
+      "offset": 49974860,
+      "bytes": 2693352
+    },
+    {
+      "source": "art/blender-city/models/compact/onsen_2/model.glb",
+      "sha256": "bb1e63fe09ebdaea7825ff2304695917ce83df20ac2bfbb3c6a60ca78fa5c6f1",
+      "offset": 52668212,
+      "bytes": 3668784
+    },
+    {
+      "source": "art/blender-city/models/compact/onsen_3/model.glb",
+      "sha256": "7cffc17d776d02d2ebb10b34be5de89596f30c4a6262221c1142e994f64438e4",
+      "offset": 56336996,
+      "bytes": 4045768
+    },
+    {
+      "source": "art/blender-city/models/compact/civic_hall/model.glb",
+      "sha256": "f97179fac37b5c46a1c11ddfb87ee83377fb53c25d49e435cc02b88c0b8c39df",
+      "offset": 60382764,
+      "bytes": 2249096
+    },
+    {
+      "source": "art/blender-city/models/compact/vault_bank/model.glb",
+      "sha256": "e4390913107454aaf23aac4776263f8caf9d0add97b3cb3534205307ba82cba0",
+      "offset": 62631860,
+      "bytes": 1609792
+    },
+    {
+      "source": "art/blender-city/models/compact/builders_guild/model.glb",
+      "sha256": "e047f103075fd04dd5d7b0b6cc0ce289fd6dda0ffd50052cfadac85d649239a4",
+      "offset": 64241652,
+      "bytes": 1915104
+    },
+    {
+      "source": "art/blender-city/models/compact/card_pavilion/model.glb",
+      "sha256": "f47a09c7c9f71a371d1c6d8f9be7e4d079506db3ec6a460bcc76883d05fc1f79",
+      "offset": 66156756,
+      "bytes": 1605600
+    },
+    {
+      "source": "art/blender-city/models/compact/chance_wheel/model.glb",
+      "sha256": "aa1f6fe3397b35eb03ada416900da9769754ca5dbad038aa7f620e45889bbde9",
+      "offset": 67762356,
+      "bytes": 1636136
+    },
+    {
+      "source": "art/blender-city/models/compact/teleport_gate/model.glb",
+      "sha256": "d6b93aa59881fa1a94e8ea3f68e368f7206039b4439843401e4171952bb00732",
+      "offset": 69398492,
+      "bytes": 1616860
+    },
+    {
+      "source": "art/blender-city/models/compact/rush_station/model.glb",
+      "sha256": "41ba34dda9074f042aa5cad75ebea3a606414cc3bb53bfdc9ec23a6c0b0125c9",
+      "offset": 71015352,
+      "bytes": 1592412
+    },
+    {
+      "source": "art/blender-city/models/compact/junction_hub/model.glb",
+      "sha256": "fc2807c896599aa078a54947a9193b93c1c2689e1664f04fae14d23a7f723f13",
+      "offset": 72607764,
+      "bytes": 1599452
+    }
+  ],
+  "packedAtUtc": "2026-10-24T15:49:08.014Z",
+  "sha256": "e2baf650913901c8c6e0588493224592b178a58838f9d68a2230c156bcd27f78",
+  "bytes": 74365752
 }

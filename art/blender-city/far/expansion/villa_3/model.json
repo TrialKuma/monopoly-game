@@ -1,0 +1,106 @@
+{
+  "region": "expansion",
+  "asset": "villa_3",
+  "name": "expansion_villa_3",
+  "sourceType": "authored_blender_reference_rebuild",
+  "family": "villa",
+  "level": 3,
+  "referenceViews": [
+    {
+      "view": "front",
+      "path": "art/full-ai-city/inputs/expansion/villa_3/cf4c87ccb4e2b0d7/view00_azim000.png",
+      "sha256": "20c14ab37836034b5c2899ed17cf86a102e5f9878c71a6a03f1f414fbcf78f77"
+    },
+    {
+      "view": "right",
+      "path": "art/full-ai-city/inputs/expansion/villa_3/cf4c87ccb4e2b0d7/view01_azim090.png",
+      "sha256": "64be6d2396a89a8c65aaba96d31280157d47d27cb00d48554b5ccbefee12f5c8"
+    },
+    {
+      "view": "back",
+      "path": "art/full-ai-city/inputs/expansion/villa_3/cf4c87ccb4e2b0d7/view02_azim180.png",
+      "sha256": "f776e5be0c6450482e37640e18a7f3e9a47110e717c2a696d9daecc2968fa5ae"
+    }
+  ],
+  "triangles": 13440,
+  "size": [
+    0.9878444671630859,
+    1.5999999046325684,
+    0.9510894417762756
+  ],
+  "bounds": {
+    "min": [
+      -0.49392223358154297,
+      0.0,
+      -0.4755447208881378
+    ],
+    "max": [
+      0.49392223358154297,
+      1.5999999046325684,
+      0.4755447208881378
+    ]
+  },
+  "scale": 0.29064486225946146,
+  "bytes": 1259160,
+  "sha256": "b86b51d933ad7358449bae120aba63b06ab84c1d338be4514519cf7a8445055e",
+  "builder": "art/blender-city/regions/metropolitan.py",
+  "builderSha256": "ed3b6cc9021457641e2c1ad7c97559779395c11efc4268bc6bc9156f8be006c4",
+  "pipelineSha256": "8bfd4f54084734f345ca7531d288c1c733355eaec2aea576afa225121a97aedf",
+  "surface": {
+    "materials": 3,
+    "textureSize": 512,
+    "vertexColours": true,
+    "aoSamples": 32,
+    "directionalLightingBaked": false
+  },
+  "status": "built_pending_scene_review",
+  "seconds": 0.89,
+  "detailLevel": "far",
+  "nearSource": "art/blender-city/models/expansion/villa_3/model.glb",
+  "nearSourceSha256": "76040c977b4983cb7a7baeb72664ca843412ac20682fdcb81315d7109a6ffddb",
+  "farBuilder": "art/blender-city/make_far.py",
+  "farBuilderSha256": "3a0f041886a8bf7996a90089c5bf40dcf530e9aca8028b678b94f527a702377f",
+  "sourceTriangles": 29476,
+  "simplification": {
+    "method": "Blender collapse with existing UV and vertex color layers",
+    "target": 14000,
+    "passes": [
+      {
+        "before": 29476,
+        "after": 13440,
+        "ratio": 0.4559641742434523
+      }
+    ],
+    "rescaling": false,
+    "centeringOffsetBlender": [
+      -0.0,
+      9.557604789733887e-05,
+      -0.0
+    ],
+    "textures": [
+      {
+        "size": [
+          512,
+          512
+        ],
+        "before": [
+          1024,
+          1024
+        ]
+      }
+    ]
+  },
+  "nearStorageCompression": {
+    "configuration": "normal16_uv16_color8",
+    "afterSha256": "76040c977b4983cb7a7baeb72664ca843412ac20682fdcb81315d7109a6ffddb",
+    "originalSha256": "f358df32a31de906c77b42574db48b0c606a748c1a836c59da68b15b3dc1e98c",
+    "originalBytes": 2919264,
+    "report": {
+      "path": "art/blender-city/reports/storage-compression/expansion/villa_3-76040c977b4983cb.json",
+      "sha256": "50d7292b9d132cb2f5a0a5084937bbba2875544e41e54e510c0aad5200c5ab22"
+    },
+    "maxNormalError": 1.5153158943292944e-05,
+    "maxUVError": 7.629459106373027e-06,
+    "maxColorError": 0.001953154802777135
+  }
+}

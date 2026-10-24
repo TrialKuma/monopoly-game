@@ -1,38 +1,35 @@
 {
-  "schemaVersion": 2,
+  "schemaVersion": 3,
   "region": "harbor",
   "coordinateSystem": "glTF Y-up; +Z front",
-  "sourceType": "pixal_native_multiview",
+  "sourceType": "authored_blender_reference_rebuild",
   "assets": [
     {
       "name": "harbor_lighthouse",
       "size": [
-        2.8,
-        3.037472459717517,
-        2.4232207186569603
+        2.7999998415878053,
+        3.0121209621429443,
+        1.6708624362945557
       ],
       "bounds": {
         "min": [
-          -1.3999999999999997,
-          0.0,
-          -1.2116103593284802
+          -1.399999976158142,
+          0,
+          -0.8354312181472778
         ],
         "max": [
-          1.4,
-          3.037472459717517,
-          1.2116103593284802
+          1.3999998654296633,
+          3.0121209621429443,
+          0.8354312181472778
         ]
       },
-      "triangles": 44986,
+      "triangles": 22366,
       "source": {
-        "sourceType": "pixal_native_multiview",
+        "sourceType": "authored_blender_reference_rebuild",
+        "region": "harbor",
+        "asset": "harbor_lighthouse",
         "family": "lighthouse",
         "level": 0,
-        "sourceFile": "assets/models/regions-ai/full/harbor/lighthouse/84d1959110d80513.glb",
-        "sourceSha256": "84d1959110d80513419bc74b2a71ed37db19efcf92b027d785e951faa6369f0a",
-        "inferenceReport": "art/full-ai-city/reports/harbor--lighthouse-a001/harbor--lighthouse-a001-pixal-mv-1024-9247.json",
-        "reference": "art/full-ai-city/references/harbor/lighthouse/reference.json",
-        "rawSourceSha256": "bf9f9b920e10169aae450c25136638e91a0b4cbef57165752954ae26adc6c289",
         "referenceViews": [
           {
             "view": "front",
@@ -50,20 +47,40 @@
             "sha256": "aa9650b6916487e25b8920e81f0b0288d30819dabc30bf88f15c09e5ed834915"
           }
         ],
-        "normalisationScale": 3.037737712641844,
-        "placementReview": {
-          "independentParcelScale": 3.037737712641844,
-          "scale": 3.037737712641844,
-          "reason": "independent_uniform_parcel_fit",
-          "relativeToIndependentFit": 1.0,
-          "sharedCameraReviewRequired": true
+        "sourceFile": "art/blender-city/models/harbor/harbor_lighthouse/model.glb",
+        "sourceSha256": "b1cde16ddd3cab39a7130ed63a879ede9660244717bdf00d6f6f69bf9993982f",
+        "processingReport": "art/blender-city/models/harbor/harbor_lighthouse/model.json",
+        "processingReportSha256": "e997fb2bb22e150189a5409bc7c3489ec6d535dd2f5459ac194f601cac9a26c6",
+        "builder": "art/blender-city/regions/western.py",
+        "builderSha256": "ce0b17b382989c25a5cfd0c3013c402f5e979c7f61bca1adfa17bd9bc9899853",
+        "pipelineSha256": "8bfd4f54084734f345ca7531d288c1c733355eaec2aea576afa225121a97aedf",
+        "authoredArchitecture": true,
+        "storageCompression": {
+          "configuration": "normal16_uv16_color8",
+          "afterSha256": "b1cde16ddd3cab39a7130ed63a879ede9660244717bdf00d6f6f69bf9993982f",
+          "originalSha256": "3aefe4d95a5a49dbfe80be3db8a52196d88f3ec11919df0ea129c506ddf4a7d7",
+          "originalBytes": 2535044,
+          "report": {
+            "path": "art/blender-city/reports/storage-compression/harbor/harbor_lighthouse-b1cde16ddd3cab39.json",
+            "sha256": "0f8053379f7d3b6c82020c23fa4c4de3c28574fa15e724a28da39a343afd3a16"
+          },
+          "maxNormalError": 0.000015250421455892393,
+          "maxUVError": 0.00000762939453125,
+          "maxColorError": 0.0019226367589837423
         },
-        "reviewStatus": "approved",
-        "triangleBudget": 45000
+        "detailLevel": "hero"
       }
     }
   ],
-  "packedAtUtc": "2026-10-24T10:46:41.655177+00:00",
-  "sha256": "487a9d8b5f769676b4c4659dbf11c33bb75d77c9576f360b367dc97dd6e7323f",
-  "bytes": 1978920
+  "binarySegments": [
+    {
+      "source": "art/blender-city/models/harbor/harbor_lighthouse/model.glb",
+      "sha256": "cacdc09455d96632a6426c252d690a62e5f07b6ab0704dbc6fa8876af5006282",
+      "offset": 0,
+      "bytes": 2097036
+    }
+  ],
+  "packedAtUtc": "2026-10-24T15:49:10.287Z",
+  "sha256": "cab65fbcd5873d7dad094226ba5aac0ad52b3de122df3df6b9ecfaacd4672643",
+  "bytes": 2104884
 }

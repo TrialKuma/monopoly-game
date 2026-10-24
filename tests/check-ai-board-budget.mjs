@@ -24,7 +24,8 @@ function measure(roots){
 }
 try{
   const models=fixture.run('[...modelLibrary.values()]');
-  assert.equal(models.filter(model=>model.userData.sourceType==='pixal_native_multiview').length,29,'resource acceptance requires the complete new regional architecture');
+  const expectedSource=process.argv.includes('--candidate')?'pixal_native_multiview':'authored_blender_reference_rebuild';
+  assert.equal(models.filter(model=>model.userData.sourceType===expectedSource).length,29,'resource acceptance requires every building in the selected release');
   const library=measure(models);
   // Conservative uncompressed RGBA8 plus a complete mip chain, including
   // library textures whose corresponding level may not yet be visible.

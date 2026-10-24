@@ -1,10 +1,10 @@
 import * as THREE from './assets/vendor/three/three.module.min.js';
-import { makeStudioEnvironment } from './scene-environment.js?v=20261024-4';
+import { makeStudioEnvironment } from './scene-environment.js?v=20261024-blender-release2';
 import { mergeGeometries } from './assets/vendor/three/addons/utils/BufferGeometryUtils.js';
-import { createSceneLife } from './scene-life.js?v=20261024-4';
+import { createSceneLife } from './scene-life.js?v=20261024-blender-release2';
 import { createStreetFoundation } from './scene-streets.js?v=20261024-1';
 import { createRegionalPark } from './scene-regional-parks.js?v=20261024-1';
-import { loadSharedModelAsset, forgetSharedModelAsset, releaseSharedModelAsset, releaseSupersededModelAssets, ownsSharedModelResource, disposeSharedModelAssets } from './scene-model-cache.js?v=20261024-1';
+import { loadSharedModelAsset, forgetSharedModelAsset, releaseSharedModelAsset, releaseSupersededModelAssets, ownsSharedModelResource, disposeSharedModelAssets } from './scene-model-cache.js?v=20261024-blender-release2';
 
 // All route positions, ownership and prices come from the game. This view never
 // changes a rule or finishes an action; its animation is entirely cosmetic.
@@ -64,7 +64,7 @@ const LANDMARKS = { classic: { 5:'finance', 7:'skyscraper', 14:'onsen' }, compac
 const SPECIAL_MODELS = { bank:'vault_bank',construction:'builders_guild',card_draw:'card_pavilion',chance:'chance_wheel',teleport:'teleport_gate',rush:'rush_station',junction:'junction_hub' };
 const ASSET_BUNDLES = [
   {file:'city-kit.glb',version:'20260911-12',authored:false,pattern:/^(plot_0|tree|streetlamp|fountain)$/},
-  ...['classic','compact','expansion','harbor','alpine'].map(mapId=>({file:`regions/${mapId}.glb`,mapId,version:'20261024-4',authored:true,pattern:new RegExp(`^${mapId}_(?:(?:villa|shop|hotel|tower|skyscraper|finance|onsen)_[123]|civic_hall|vault_bank|builders_guild|card_pavilion|chance_wheel|teleport_gate|rush_station|junction_hub)$`)})),
+  ...['classic','compact','expansion','harbor','alpine'].map(mapId=>({file:`regions/${mapId}.glb`,mapId,version:'20261024-blender-release2',authored:true,pattern:new RegExp(`^${mapId}_(?:(?:villa|shop|hotel|tower|skyscraper|finance|onsen)_[123]|civic_hall|vault_bank|builders_guild|card_pavilion|chance_wheel|teleport_gate|rush_station|junction_hub)$`)})),
 ];
 const projection = new THREE.Vector3();
 const raycaster = new THREE.Raycaster();
@@ -476,7 +476,7 @@ function buildMap(data) {
   resize();
 }
 function makePark(mapId) {
-  createRegionalPark({THREE,world,boardBounds,mapId,own,loadSceneryBundle:file=>loadSharedModelAsset(file,{version:'20261024-4'}),requestRender:()=>{renderDirty=true;}});
+  createRegionalPark({THREE,world,boardBounds,mapId,own,loadSceneryBundle:file=>loadSharedModelAsset(file,{version:'20261024-blender-release2'}),requestRender:()=>{renderDirty=true;}});
 }
 function numberTexture(number) {
   const canvas = document.createElement('canvas'); canvas.width = 96; canvas.height = 96;
@@ -626,7 +626,7 @@ function calculateEnvelope(source){
   return {bounds,boxes};
 }
 function optimizeModel(source) {
-  // Combine static surfaces once while retaining neural textures and independently
+  // Combine static surfaces once while retaining authored colors and independently
   // moving components. Runtime copies share these resources across placements.
   const object=source.clone(true);object.position.set(0,0,0);object.updateMatrixWorld(true);
   const batches=new Map();const result=new THREE.Group();result.name=source.name;result.userData={...source.userData};

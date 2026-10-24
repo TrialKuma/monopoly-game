@@ -1,0 +1,106 @@
+{
+  "region": "harbor",
+  "asset": "hotel_2",
+  "name": "harbor_hotel_2",
+  "sourceType": "authored_blender_reference_rebuild",
+  "family": "hotel",
+  "level": 2,
+  "referenceViews": [
+    {
+      "view": "front",
+      "path": "art/full-ai-city/inputs/harbor/hotel_2/d8cac7cbfeb56f69/view00_azim000.png",
+      "sha256": "1a4efefe5535901069b61fba5a00fc75efdb7616463e7cbf7ddca533f548c4ea"
+    },
+    {
+      "view": "right",
+      "path": "art/full-ai-city/inputs/harbor/hotel_2/d8cac7cbfeb56f69/view01_azim090.png",
+      "sha256": "50837e6938e1ea1bb893ae05bc7f3d8da5afe0abb4071ce7a61264fe870be002"
+    },
+    {
+      "view": "back",
+      "path": "art/full-ai-city/inputs/harbor/hotel_2/d8cac7cbfeb56f69/view02_azim180.png",
+      "sha256": "fbaf176182d6564fcf3b71c17eb126203b972c5d1a78e8e493241f73e61766c7"
+    }
+  ],
+  "triangles": 13440,
+  "size": [
+    0.9501591920852661,
+    1.1579304933547974,
+    0.8918741345405579
+  ],
+  "bounds": {
+    "min": [
+      -0.47507959604263306,
+      0.0,
+      -0.44593706727027893
+    ],
+    "max": [
+      0.47507959604263306,
+      1.1579304933547974,
+      0.44593706727027893
+    ]
+  },
+  "scale": 0.3357453040854801,
+  "bytes": 1420112,
+  "sha256": "1e2cb1f154e30403949e10a71bd64e246a729f03a4e4ba06fabce47fec707e90",
+  "builder": "art/blender-city/regions/western.py",
+  "builderSha256": "ce0b17b382989c25a5cfd0c3013c402f5e979c7f61bca1adfa17bd9bc9899853",
+  "pipelineSha256": "8bfd4f54084734f345ca7531d288c1c733355eaec2aea576afa225121a97aedf",
+  "surface": {
+    "materials": 3,
+    "textureSize": 512,
+    "vertexColours": true,
+    "aoSamples": 32,
+    "directionalLightingBaked": false
+  },
+  "status": "built_pending_scene_review",
+  "seconds": 0.4,
+  "detailLevel": "far",
+  "nearSource": "art/blender-city/models/harbor/hotel_2/model.glb",
+  "nearSourceSha256": "2f247cba5b0cccae2cd0978b7f8defc0e5f289df0205242a77d8521f08620a25",
+  "farBuilder": "art/blender-city/make_far.py",
+  "farBuilderSha256": "a54a8ed6742117b72a3e524a548f79cc0ff93f6096ac1b0ff3341c37ba6789c3",
+  "sourceTriangles": 35976,
+  "simplification": {
+    "method": "Blender collapse with existing UV and vertex color layers",
+    "target": 14000,
+    "passes": [
+      {
+        "before": 35976,
+        "after": 13440,
+        "ratio": 0.3735823882588392
+      }
+    ],
+    "rescaling": false,
+    "centeringOffsetBlender": [
+      -0.0,
+      0.0002351701259613037,
+      -0.0
+    ],
+    "textures": [
+      {
+        "size": [
+          512,
+          512
+        ],
+        "before": [
+          1024,
+          1024
+        ]
+      }
+    ]
+  },
+  "nearStorageCompression": {
+    "configuration": "normal16_uv16_color8",
+    "afterSha256": "2f247cba5b0cccae2cd0978b7f8defc0e5f289df0205242a77d8521f08620a25",
+    "originalSha256": "a9fecedb774b9422fc37a72477f343070c41bfbf0306527172cd74a60af1c002",
+    "originalBytes": 3457988,
+    "report": {
+      "path": "art/blender-city/reports/storage-compression/harbor/hotel_2-2f247cba5b0cccae.json",
+      "sha256": "a29e2f4f373e91aafced7fbae8d187cca6275d6887abf17297f894a8bcd8a165"
+    },
+    "maxNormalError": 1.5250421455892393e-05,
+    "maxUVError": 7.629290847299686e-06,
+    "maxColorError": 0.0019226367589837423
+  }
+}

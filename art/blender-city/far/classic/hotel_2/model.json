@@ -1,0 +1,106 @@
+{
+  "region": "classic",
+  "asset": "hotel_2",
+  "name": "classic_hotel_2",
+  "sourceType": "authored_blender_reference_rebuild",
+  "family": "hotel",
+  "level": 2,
+  "referenceViews": [
+    {
+      "view": "front",
+      "path": "art/full-ai-city/inputs/classic/hotel_2/25c52f23f076b364/view00_azim000.png",
+      "sha256": "b1cacb6aba06c12dcdfed8dd8511f8e6427412442c8a94db40012f176a0174b4"
+    },
+    {
+      "view": "right",
+      "path": "art/full-ai-city/inputs/classic/hotel_2/25c52f23f076b364/view01_azim090.png",
+      "sha256": "a8728fcbfcf12463078fdd4c0a2732dccfed4ff37376eb200244b99bbc9b1de1"
+    },
+    {
+      "view": "back",
+      "path": "art/full-ai-city/inputs/classic/hotel_2/25c52f23f076b364/view02_azim180.png",
+      "sha256": "713a2c041608c3a399eb465a9cebdd2775971a6f78ca02a905b11efc841fbfa0"
+    }
+  ],
+  "triangles": 13440,
+  "size": [
+    0.9899999499320984,
+    1.1235265731811523,
+    0.9732821583747864
+  ],
+  "bounds": {
+    "min": [
+      -0.4949999749660492,
+      0.0,
+      -0.4866410791873932
+    ],
+    "max": [
+      0.4949999749660492,
+      1.1235265731811523,
+      0.4866410791873932
+    ]
+  },
+  "scale": 0.3523131744339934,
+  "bytes": 1417536,
+  "sha256": "497391c502a6cbda82c1672d4c64383aaaeee3b2ba35456b63bfaeddce0c1182",
+  "builder": "art/blender-city/regions/western.py",
+  "builderSha256": "ce0b17b382989c25a5cfd0c3013c402f5e979c7f61bca1adfa17bd9bc9899853",
+  "pipelineSha256": "8bfd4f54084734f345ca7531d288c1c733355eaec2aea576afa225121a97aedf",
+  "surface": {
+    "materials": 3,
+    "textureSize": 512,
+    "vertexColours": true,
+    "aoSamples": 32,
+    "directionalLightingBaked": false
+  },
+  "status": "built_pending_scene_review",
+  "seconds": 0.39,
+  "detailLevel": "far",
+  "nearSource": "art/blender-city/models/classic/hotel_2/model.glb",
+  "nearSourceSha256": "c09293ca1107a21ccfb22a8d8c3831130187f4f0a4cf46ffaf80012ec5090316",
+  "farBuilder": "art/blender-city/make_far.py",
+  "farBuilderSha256": "a54a8ed6742117b72a3e524a548f79cc0ff93f6096ac1b0ff3341c37ba6789c3",
+  "sourceTriangles": 32492,
+  "simplification": {
+    "method": "Blender collapse with existing UV and vertex color layers",
+    "target": 14000,
+    "passes": [
+      {
+        "before": 32492,
+        "after": 13440,
+        "ratio": 0.41364028068447617
+      }
+    ],
+    "rescaling": false,
+    "centeringOffsetBlender": [
+      -0.0,
+      0.003452390432357788,
+      -0.0
+    ],
+    "textures": [
+      {
+        "size": [
+          512,
+          512
+        ],
+        "before": [
+          1024,
+          1024
+        ]
+      }
+    ]
+  },
+  "nearStorageCompression": {
+    "configuration": "normal16_uv16_color8",
+    "afterSha256": "c09293ca1107a21ccfb22a8d8c3831130187f4f0a4cf46ffaf80012ec5090316",
+    "originalSha256": "01e088748b619caee3f40496719ebed2f8668c582b3cfe008146668bcb0e4dcd",
+    "originalBytes": 3370536,
+    "report": {
+      "path": "art/blender-city/reports/storage-compression/classic/hotel_2-c09293ca1107a21c.json",
+      "sha256": "d5ede95ca9d7f485d285d4fdf422f1fc2a4a5f4bed6d9a613ec526d31220dbfb"
+    },
+    "maxNormalError": 1.525654708961488e-05,
+    "maxUVError": 7.629323589553039e-06,
+    "maxColorError": 0.0019226367589837423
+  }
+}

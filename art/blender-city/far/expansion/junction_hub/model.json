@@ -1,0 +1,106 @@
+{
+  "region": "expansion",
+  "asset": "junction_hub",
+  "name": "expansion_junction_hub",
+  "sourceType": "authored_blender_reference_rebuild",
+  "family": "junction_hub",
+  "level": 0,
+  "referenceViews": [
+    {
+      "view": "front",
+      "path": "art/full-ai-city/inputs/expansion/junction_hub/a9cc0541db882eda/view00_azim000.png",
+      "sha256": "e96efd53986c933a918ea6f78416634ce9754f2166354223d6bf188f817043fc"
+    },
+    {
+      "view": "right",
+      "path": "art/full-ai-city/inputs/expansion/junction_hub/a9cc0541db882eda/view01_azim090.png",
+      "sha256": "84e4d016283421d6f76ebabbf955efcea600432978f033b86bce49aed016cc19"
+    },
+    {
+      "view": "back",
+      "path": "art/full-ai-city/inputs/expansion/junction_hub/a9cc0541db882eda/view02_azim180.png",
+      "sha256": "951a272ad8253df38da6d513ba0cdf5b482c9b91052bfd61a72f56bd3a4a08c7"
+    }
+  ],
+  "triangles": 13440,
+  "size": [
+    1.0399999618530273,
+    1.0659294128417969,
+    0.8327573537826538
+  ],
+  "bounds": {
+    "min": [
+      -0.5199999809265137,
+      0.0,
+      -0.4163786768913269
+    ],
+    "max": [
+      0.5199999809265137,
+      1.0659294128417969,
+      0.4163786768913269
+    ]
+  },
+  "scale": 0.2856800533574483,
+  "bytes": 1319132,
+  "sha256": "57322457130eae5e8443f3d64afdad46f09e0666902d1a306d89d80a8037bb4b",
+  "builder": "art/blender-city/regions/metropolitan.py",
+  "builderSha256": "ed3b6cc9021457641e2c1ad7c97559779395c11efc4268bc6bc9156f8be006c4",
+  "pipelineSha256": "8bfd4f54084734f345ca7531d288c1c733355eaec2aea576afa225121a97aedf",
+  "surface": {
+    "materials": 3,
+    "textureSize": 512,
+    "vertexColours": true,
+    "aoSamples": 32,
+    "directionalLightingBaked": false
+  },
+  "status": "built_pending_scene_review",
+  "seconds": 0.27,
+  "detailLevel": "far",
+  "nearSource": "art/blender-city/models/expansion/junction_hub/model.glb",
+  "nearSourceSha256": "ed832261266434d2868ce2060fe6b60b38a1d7bacb5ece8298781b85699bd106",
+  "farBuilder": "art/blender-city/make_far.py",
+  "farBuilderSha256": "3a0f041886a8bf7996a90089c5bf40dcf530e9aca8028b678b94f527a702377f",
+  "sourceTriangles": 16828,
+  "simplification": {
+    "method": "Blender collapse with existing UV and vertex color layers",
+    "target": 14000,
+    "passes": [
+      {
+        "before": 16828,
+        "after": 13440,
+        "ratio": 0.7986688851913477
+      }
+    ],
+    "rescaling": false,
+    "centeringOffsetBlender": [
+      -0.0,
+      -0.0,
+      -0.0
+    ],
+    "textures": [
+      {
+        "size": [
+          512,
+          512
+        ],
+        "before": [
+          1024,
+          1024
+        ]
+      }
+    ]
+  },
+  "nearStorageCompression": {
+    "configuration": "normal16_uv16_color8",
+    "afterSha256": "ed832261266434d2868ce2060fe6b60b38a1d7bacb5ece8298781b85699bd106",
+    "originalSha256": "0a765e8f3a3c1d6642d5d6dfe93505c6718c6a32618d79ce37a7c7030bdcd2f8",
+    "originalBytes": 2021700,
+    "report": {
+      "path": "art/blender-city/reports/storage-compression/expansion/junction_hub-ed832261266434d2.json",
+      "sha256": "766e2d02a02dc6d423a86632ffef3dbf47c1d7e33140d20eda377923bcf4b313"
+    },
+    "maxNormalError": 1.5252466062376513e-05,
+    "maxUVError": 7.62911622165241e-06,
+    "maxColorError": 0.001953154802777135
+  }
+}

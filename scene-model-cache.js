@@ -25,7 +25,7 @@ export function createModelAssetCache({load=url=>new GLTFLoader().loadAsync(url)
     }
   }
   function closedError(){const error=new Error('Model asset cache is disposed');error.name='AbortError';return error;}
-  function loadAsset(file,{version='20261024-1',force=false}={}){
+  function loadAsset(file,{version='20261024-blender-release2',force=false}={}){
     if(disposed)return Promise.reject(closedError());
     const key=`${file}?v=${version}`,previous=entries.get(key);
     if(previous&&(!force||previous.pending))return previous.promise;

@@ -1,0 +1,483 @@
+{
+  "checkedAtUtc": "2026-10-24T15:51:14.958Z",
+  "sourceType": "authored_blender_reference_rebuild",
+  "releaseSha256": "240e1f8471abfe670a89e49a16078ff8bf90baa6a76d83a098d9a04fd864fe5d",
+  "releaseStatus": "published",
+  "counts": {
+    "playableBuildings": 145,
+    "landmarks": 2,
+    "farBuildings": 25,
+    "uiPreviews": 145
+  },
+  "packages": [
+    {
+      "path": "assets/models/regions/classic.glb",
+      "sha256": "869fe7378ab697add8eb3a72a89af8320e5f34a74c45a7f0088e22f3ff9dd940",
+      "bytes": 80713768
+    },
+    {
+      "path": "assets/models/regions-far/classic.glb",
+      "sha256": "845281bcdc37c5fb1dbaca8c848c3885a04aa9d99457e0b35a3b6c7bde555b34",
+      "bytes": 7164588
+    },
+    {
+      "path": "assets/models/regions/compact.glb",
+      "sha256": "e2baf650913901c8c6e0588493224592b178a58838f9d68a2230c156bcd27f78",
+      "bytes": 74365752
+    },
+    {
+      "path": "assets/models/regions-far/compact.glb",
+      "sha256": "991a1ee2b3120d04c3ea3672f0cc49cbbd4937c689606860d77919cf255f9476",
+      "bytes": 6989820
+    },
+    {
+      "path": "assets/models/regions/expansion.glb",
+      "sha256": "53c24b5b4e4b0479ae8a58e0a95f08d2acbd0e2848a675a2d4c069eeb092d55c",
+      "bytes": 62664372
+    },
+    {
+      "path": "assets/models/regions-far/expansion.glb",
+      "sha256": "b69476e091390f685f4eb463d6d8a44cf141647fd7e97bd0a661e93119be4711",
+      "bytes": 6622932
+    },
+    {
+      "path": "assets/models/regions/harbor.glb",
+      "sha256": "fe4683cb30dd961cbcb6931aaed70bcd66cdd239f74da7930e7c8d46c2e649de",
+      "bytes": 81728656
+    },
+    {
+      "path": "assets/models/regions-far/harbor.glb",
+      "sha256": "abe7e57cccf161338fda2918b84d2f0c515c588b20a8a82a9544463948077421",
+      "bytes": 7136932
+    },
+    {
+      "path": "assets/models/harbor/harbor_lighthouse.glb",
+      "sha256": "cab65fbcd5873d7dad094226ba5aac0ad52b3de122df3df6b9ecfaacd4672643",
+      "bytes": 2104884
+    },
+    {
+      "path": "assets/models/regions/alpine.glb",
+      "sha256": "926bdf2ac6cfdcdbc7bb7045a9c61cd025385a6ed53ed6c2eef8552f307635c5",
+      "bytes": 90791748
+    },
+    {
+      "path": "assets/models/regions-far/alpine.glb",
+      "sha256": "21b867d29f7d028b72af5f9cd15b3f4fd69ab6e5c29e9604a0a438204742bf31",
+      "bytes": 6833788
+    },
+    {
+      "path": "assets/models/harbor/alpine_windmill.glb",
+      "sha256": "b9f60e27720ecaaf12a69cc0b59ade53c43d2eee39112e47388c1231abb8d811",
+      "bytes": 3452924
+    }
+  ],
+  "cacheVersion": "20261024-blender-release2",
+  "results": [
+    {
+      "command": "node tests/check-blender-city.mjs",
+      "exitCode": 0,
+      "seconds": 6.908,
+      "summary": "PASS 145 model-bound UI previews and region/level/public-building routing",
+      "metrics": []
+    },
+    {
+      "command": "node tests/check-ai-board-budget.mjs",
+      "exitCode": 0,
+      "seconds": 4.184,
+      "summary": "{\"maps\":5,\"pixelsRendered\":false,\"phonePerformanceMeasured\":false,\"failures\":0}",
+      "metrics": [
+        {
+          "mapId": "classic",
+          "library": {
+            "triangles": 974314,
+            "draws": 90,
+            "uniqueAttributeMiB": 55.8126277923584
+          },
+          "textureRGBA8MipEstimateMiB": 154.66666666666666,
+          "levels": [
+            {
+              "level": 1,
+              "buildings": 19,
+              "triangles": 412226,
+              "draws": 60,
+              "uniqueAttributeMiB": 15.744535446166992
+            },
+            {
+              "level": 2,
+              "buildings": 19,
+              "triangles": 530278,
+              "draws": 60,
+              "uniqueAttributeMiB": 18.25436019897461
+            },
+            {
+              "level": 3,
+              "buildings": 19,
+              "triangles": 697382,
+              "draws": 60,
+              "uniqueAttributeMiB": 21.86207389831543
+            }
+          ],
+          "pixelsRendered": false,
+          "phonePerformanceMeasured": false,
+          "failures": 0
+        },
+        {
+          "mapId": "compact",
+          "library": {
+            "triangles": 908160,
+            "draws": 81,
+            "uniqueAttributeMiB": 49.5389518737793
+          },
+          "textureRGBA8MipEstimateMiB": 170.66666666666669,
+          "levels": [
+            {
+              "level": 1,
+              "buildings": 16,
+              "triangles": 305460,
+              "draws": 47,
+              "uniqueAttributeMiB": 11.839996337890625
+            },
+            {
+              "level": 2,
+              "buildings": 16,
+              "triangles": 465704,
+              "draws": 47,
+              "uniqueAttributeMiB": 15.563697814941406
+            },
+            {
+              "level": 3,
+              "buildings": 16,
+              "triangles": 389244,
+              "draws": 47,
+              "uniqueAttributeMiB": 14.94317626953125
+            }
+          ],
+          "pixelsRendered": false,
+          "phonePerformanceMeasured": false,
+          "failures": 0
+        },
+        {
+          "mapId": "expansion",
+          "library": {
+            "triangles": 756878,
+            "draws": 88,
+            "uniqueAttributeMiB": 39.564863204956055
+          },
+          "textureRGBA8MipEstimateMiB": 154.66666666666666,
+          "levels": [
+            {
+              "level": 1,
+              "buildings": 26,
+              "triangles": 401298,
+              "draws": 80,
+              "uniqueAttributeMiB": 9.97787857055664
+            },
+            {
+              "level": 2,
+              "buildings": 26,
+              "triangles": 565386,
+              "draws": 80,
+              "uniqueAttributeMiB": 13.011734008789062
+            },
+            {
+              "level": 3,
+              "buildings": 26,
+              "triangles": 697914,
+              "draws": 80,
+              "uniqueAttributeMiB": 14.786260604858398
+            }
+          ],
+          "pixelsRendered": false,
+          "phonePerformanceMeasured": false,
+          "failures": 0
+        },
+        {
+          "mapId": "harbor",
+          "library": {
+            "triangles": 1020672,
+            "draws": 90,
+            "uniqueAttributeMiB": 56.090192794799805
+          },
+          "textureRGBA8MipEstimateMiB": 154.66666666666666,
+          "levels": [
+            {
+              "level": 1,
+              "buildings": 19,
+              "triangles": 436474,
+              "draws": 60,
+              "uniqueAttributeMiB": 15.713020324707031
+            },
+            {
+              "level": 2,
+              "buildings": 19,
+              "triangles": 575566,
+              "draws": 60,
+              "uniqueAttributeMiB": 19.703842163085938
+            },
+            {
+              "level": 3,
+              "buildings": 19,
+              "triangles": 684684,
+              "draws": 60,
+              "uniqueAttributeMiB": 21.80165672302246
+            }
+          ],
+          "pixelsRendered": false,
+          "phonePerformanceMeasured": false,
+          "failures": 0
+        },
+        {
+          "mapId": "alpine",
+          "library": {
+            "triangles": 1154910,
+            "draws": 88,
+            "uniqueAttributeMiB": 64.6710090637207
+          },
+          "textureRGBA8MipEstimateMiB": 154.66666666666666,
+          "levels": [
+            {
+              "level": 1,
+              "buildings": 21,
+              "triangles": 574478,
+              "draws": 65,
+              "uniqueAttributeMiB": 21.709503173828125
+            },
+            {
+              "level": 2,
+              "buildings": 21,
+              "triangles": 718354,
+              "draws": 65,
+              "uniqueAttributeMiB": 25.87818145751953
+            },
+            {
+              "level": 3,
+              "buildings": 21,
+              "triangles": 847606,
+              "draws": 65,
+              "uniqueAttributeMiB": 30.083141326904297
+            }
+          ],
+          "pixelsRendered": false,
+          "phonePerformanceMeasured": false,
+          "failures": 0
+        },
+        {
+          "maps": 5,
+          "pixelsRendered": false,
+          "phonePerformanceMeasured": false,
+          "failures": 0
+        }
+      ]
+    },
+    {
+      "command": "node tests/check-regional-scenery-budget.mjs",
+      "exitCode": 0,
+      "seconds": 2.043,
+      "summary": "PASS all five actual loaded regional scenery budgets (one 768 MiB worker per map)",
+      "metrics": [
+        {
+          "mapId": "classic",
+          "buildings": 12,
+          "neighbourhood": {
+            "triangles": 161280,
+            "geometryMiB": 2.183074951171875,
+            "draws": 6
+          },
+          "complete": {
+            "triangles": 324048,
+            "geometryMiB": 17.084930419921875,
+            "draws": 30
+          },
+          "pixelsRendered": false,
+          "failures": 0
+        },
+        {
+          "mapId": "compact",
+          "buildings": 12,
+          "neighbourhood": {
+            "triangles": 161280,
+            "geometryMiB": 2.07000732421875,
+            "draws": 6
+          },
+          "complete": {
+            "triangles": 269456,
+            "geometryMiB": 11.97381591796875,
+            "draws": 21
+          },
+          "pixelsRendered": false,
+          "failures": 0
+        },
+        {
+          "mapId": "expansion",
+          "buildings": 11,
+          "neighbourhood": {
+            "triangles": 147840,
+            "geometryMiB": 2.0748138427734375,
+            "draws": 6
+          },
+          "complete": {
+            "triangles": 265072,
+            "geometryMiB": 12.569534301757812,
+            "draws": 25
+          },
+          "pixelsRendered": false,
+          "failures": 0
+        },
+        {
+          "mapId": "harbor",
+          "buildings": 2,
+          "neighbourhood": {
+            "triangles": 26880,
+            "geometryMiB": 2.17987060546875,
+            "draws": 6
+          },
+          "complete": {
+            "triangles": 229014,
+            "geometryMiB": 19.678211212158203,
+            "draws": 58
+          },
+          "pixelsRendered": false,
+          "failures": 0
+        },
+        {
+          "mapId": "alpine",
+          "buildings": 4,
+          "neighbourhood": {
+            "triangles": 61440,
+            "geometryMiB": 2.18475341796875,
+            "draws": 6
+          },
+          "complete": {
+            "triangles": 219772,
+            "geometryMiB": 15.837028503417969,
+            "draws": 56
+          },
+          "pixelsRendered": false,
+          "failures": 0
+        }
+      ]
+    },
+    {
+      "command": "node tests/check-landing-clearance.mjs",
+      "exitCode": 0,
+      "seconds": 4.013,
+      "summary": "{\"maps\":5,\"landings\":342,\"corners\":60,\"sharedChecks\":342,\"clearanceChecks\":9234,\"failures\":0}",
+      "metrics": [
+        {
+          "mapId": "classic",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "assetPath": "H:\\代码项目\\monopoly\\assets\\models\\regions\\classic.glb",
+          "landings": 66,
+          "corners": 12,
+          "sharedChecks": 66,
+          "clearanceChecks": 1782,
+          "failures": 0
+        },
+        {
+          "mapId": "compact",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "assetPath": "H:\\代码项目\\monopoly\\assets\\models\\regions\\compact.glb",
+          "landings": 54,
+          "corners": 12,
+          "sharedChecks": 54,
+          "clearanceChecks": 1458,
+          "failures": 0
+        },
+        {
+          "mapId": "expansion",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "assetPath": "H:\\代码项目\\monopoly\\assets\\models\\regions\\expansion.glb",
+          "landings": 84,
+          "corners": 12,
+          "sharedChecks": 84,
+          "clearanceChecks": 2268,
+          "failures": 0
+        },
+        {
+          "mapId": "harbor",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "assetPath": "H:\\代码项目\\monopoly\\assets\\models\\regions\\harbor.glb",
+          "landings": 66,
+          "corners": 12,
+          "sharedChecks": 66,
+          "clearanceChecks": 1782,
+          "failures": 0
+        },
+        {
+          "mapId": "alpine",
+          "levels": [
+            1,
+            2,
+            3
+          ],
+          "assetPath": "H:\\代码项目\\monopoly\\assets\\models\\regions\\alpine.glb",
+          "landings": 72,
+          "corners": 12,
+          "sharedChecks": 72,
+          "clearanceChecks": 1944,
+          "failures": 0
+        },
+        {
+          "maps": 5,
+          "landings": 342,
+          "corners": 60,
+          "sharedChecks": 342,
+          "clearanceChecks": 9234,
+          "failures": 0
+        }
+      ]
+    },
+    {
+      "command": "node tests/check-model-loading.mjs",
+      "exitCode": 0,
+      "seconds": 0.104,
+      "summary": "PASS: 8 model-loading scenarios covering selected-region architecture, absence of old substitutes, progressive props, retries, scoped memory, reset and disposal.",
+      "metrics": []
+    },
+    {
+      "command": "node tests/check-model-cache.mjs",
+      "exitCode": 0,
+      "seconds": 0.104,
+      "summary": "{\"checks\":11,\"failures\":0}",
+      "metrics": [
+        {
+          "checks": 11,
+          "failures": 0
+        }
+      ]
+    },
+    {
+      "command": "node tests/check-chance-scene-trigger.mjs",
+      "exitCode": 0,
+      "seconds": 1.217,
+      "summary": "{\"idle\":0.011500000000000002,\"direct\":0.4615,\"trigger\":0.4615,\"duplicate\":0.4615,\"failures\":0}",
+      "metrics": [
+        {
+          "idle": 0.011500000000000002,
+          "direct": 0.4615,
+          "trigger": 0.4615,
+          "duplicate": 0.4615,
+          "failures": 0
+        }
+      ]
+    }
+  ],
+  "passed": true,
+  "limits": "Actual exported assets and scene controllers tested without pixel rendering. Portrait browser evidence is recorded separately. No claim of phone hardware FPS or user visual approval."
+}

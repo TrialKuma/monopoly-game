@@ -1,14 +1,14 @@
-import { loadSharedModelAsset, disposeSharedModelAssets, regionalSceneryDirectory } from './scene-model-cache.js?v=20261024-1';
+import { loadSharedModelAsset, disposeSharedModelAssets, regionalSceneryDirectory } from './scene-model-cache.js?v=20261024-blender-release2';
 import { buildDestinationGarden, batchGardenBuilding, instanceGardenBuildings } from './scene-garden-kit.js?v=20261024-1';
 
-// Destination art is cosmetic. The generated meshes keep their UVs and rigid
+// Destination art is cosmetic. The authored meshes keep their colors and rigid
 // part animation clips; they never enter the board's static mesh batching.
 const THEMES = {
   harbor: { file:'harbor/harbor_lighthouse.glb', name:'harbor_lighthouse', water:'#63acb9', stone:'#dacba7', land:'#b4c79c', roof:'#307f84', flower:'#e6988f' },
   alpine: { file:'harbor/alpine_windmill.glb', name:'alpine_windmill', water:'#7abfc4', stone:'#c4c7b2', land:'#adc4a3', roof:'#477e73', flower:'#d9ad84' },
 };
 function loadModel(file) {
-  return loadSharedModelAsset(file,{version:'20261024-4'});
+  return loadSharedModelAsset(file,{version:'20261024-blender-release2'});
 }
 export function createDestinationScene({THREE, world, boardBounds, mapId, requestRender=()=>{}}) {
   const theme=THEMES[mapId];if(!theme)return null;
@@ -22,17 +22,17 @@ export function createDestinationScene({THREE, world, boardBounds, mapId, reques
   const regionLoading=loadModel(`${regionalSceneryDirectory}/${mapId}.glb`).then(gltf=>{
     if(disposed)return;
     for(const plot of plots)if(!gltf.scene.getObjectByName(`${mapId}_${plot.asset}`))throw new Error(`Missing regional building ${mapId}_${plot.asset}`);
-    const prepared=new Map(),village=new THREE.Group();let allNeural=true;root.userData.regionalBuildings=0;
+    const prepared=new Map(),village=new THREE.Group();let allInstanceable=true;root.userData.regionalBuildings=0;
     for(const plot of plots){
       const name=`${mapId}_${plot.asset}`,source=gltf.scene.getObjectByName(name);if(!source)continue;
-      const neural=source.userData.sourceType==='pixal_native_multiview';allNeural=allNeural&&neural;
-      if(!prepared.has(name))prepared.set(name,neural?source:batchGardenBuilding({THREE,source,own}));
+      const instanceable=['pixal_native_multiview','authored_blender_reference_rebuild'].includes(source.userData.sourceType);allInstanceable=allInstanceable&&instanceable;
+      if(!prepared.has(name))prepared.set(name,instanceable?source:batchGardenBuilding({THREE,source,own}));
       const building=prepared.get(name).clone(true);building.name=`scenic_${name}`;building.rotation.y=plot.rotation;
       let bounds=new THREE.Box3().setFromObject(building),size=bounds.getSize(new THREE.Vector3());building.scale.setScalar(Math.min(plot.width/Math.max(size.x,size.z),plot.height/size.y));
       bounds=new THREE.Box3().setFromObject(building);const center=bounds.getCenter(new THREE.Vector3());building.position.set(plot.x-center.x,plot.y-bounds.min.y,plot.z-center.z);
       village.add(building);root.userData.regionalBuildings++;
     }
-    if(village.children.length){const batch=(allNeural?instanceGardenBuildings:batchGardenBuilding)({THREE,source:village,own});batch.name=`destination_${mapId}_village`;perimeter.add(batch);}
+    if(village.children.length){const batch=(allInstanceable?instanceGardenBuildings:batchGardenBuilding)({THREE,source:village,own});batch.name=`destination_${mapId}_village`;perimeter.add(batch);}
     regionReady=true;ready=heroReady;requestRender();
   }).catch(error=>{if(!disposed){failed=true;ready=false;console.warn(`Regional scenery ${mapId} unavailable`,error.message);}});
   const heroLoading=loadModel(theme.file).then(gltf=>{

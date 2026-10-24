@@ -2937,7 +2937,7 @@ function createRegionalBuildingSprite(asset, label) {
   const candidate = new URLSearchParams(location.search).get('artStage') === 'candidate';
   const directory = candidate ? 'art/full-ai-city/packed/previews' : 'assets/buildings/regions';
   const mapId = state?.currentMapId ?? selectedMapId;
-  return `<img class="building-sprite" src="${directory}/${mapId}/${asset}.png?v=20261024-4" alt="${label}" loading="lazy" decoding="async" draggable="false">`;
+  return `<img class="building-sprite" src="${directory}/${mapId}/${asset}.png?v=20261024-blender-release2" alt="${label}" loading="lazy" decoding="async" draggable="false">`;
 }
 
 function createStartSvg() {

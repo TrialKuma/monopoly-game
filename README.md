@@ -75,11 +75,13 @@ python -m http.server 8876
 
 四季有各自的树色、地面色彩和环境粒子：春日花瓣、盛夏雨丝与涟漪、金秋落叶、冬日飘雪。积雪沿建筑实际屋顶形成薄层，持续飘雪约 8–10 秒逐渐积满，停雪后缓慢消融，雨水加快融雪；玻璃、水池和转动部件不被整块涂白。季节可自动轮换，天气也可单独选择晴朗、下雨或飘雪。所有变化只影响画面，不改变骰子、经济、事件概率或胜负。减少动态效果时保留静态积雪、季节与光照，隐藏页面时暂停环境动画。
 
-棋盘外围有连续的岸线、绿植、路灯与社区。新地图的灯塔和风车由 ImageGen 参考图经过本机 Pixal3D 生成带纹理模型，保留真实网格并整理可动部件；中央庭院和外围景观单独组织，数字落点不被装饰占用。气候条内可关闭“周边小景”，选择会在本机保留。
+棋盘外围有连续的岸线、绿植、路灯与社区。灯塔和风车沿用已有三视图，在 Blender 中重建规整轮廓和独立活动部件；中央庭院和外围景观单独组织，数字落点不被装饰占用。气候条内可关闭“周边小景”，选择会在本机保留。
 
-五张地图采用法式街区、京都町屋、纽约装饰艺术、地中海岸、阿尔卑斯山城五种建筑语言。本轮 145 个可玩建筑及灯塔、风车已分别完成三视图、Pixal3D 多视图生成、手机模型处理和五面检查，147 件近景与 25 件同源远景均已逐件批准。五图的成组建筑与手机视口游戏画面均已实际验收通过，退出确认已完成实测。147 件近景及 25 件远景已于 2026-10-24 全量接入正式游戏，模型、贴图、来源、预算和 145 个界面预览的发布检查通过；正式入口的港湾 390 像素视口加载、升级与确认事件烟测通过，控制台无警告或错误。当前状态、发布后的最小检查清单和实际限制见 [本轮交付记录](art/full-ai-city/reports/runtime-integration-preparation-20261024.json)。
+五张地图采用法式街区、京都町屋、纽约装饰艺术、地中海岸、阿尔卑斯山城五种建筑语言。正式建筑改为沿用已有三视图的 Blender 重建版本，以京都住宅样板的规整瓦片、梁柱、窗格和倒角为制作标准，覆盖 145 个可玩建筑、灯塔和风车，以及 25 个同设计远景。小住宅、商铺和公共建筑同样使用完整构件；升级通过楼层、体块、附楼和屋顶变化体现。正式资源、来源、几何统计与本轮检查结果以 [Blender 发布记录](art/blender-city/release.json) 为准。画面检查和资源预算分别记录，桌面浏览器的竖屏模拟不代表实测手机帧率。
 
-打开 [建筑与三视图对照](http://localhost:8876/art-review.html)，可以切换正式资源和全量重制候选，查看单栋实际模型及该次推理使用的三个输入视图。当前精确审核数量来自 `art/full-ai-city/approved-assets.json`。本轮流程与验收约束见 [全量 AI 建筑重做](art/full-ai-city/README.md)，上一版记录见 [历史五城建筑记录](art/regions/README.md)。
+近景的存储压缩保留顶点位置、三角拓扑和 ORM 贴图原字节；法线使用 16 位、范围内 UV 使用 16 位、顶点色通常使用 8 位，京都住宅二级样板保留 16 位颜色。这是误差受限的量化，并非无损压缩，逐资产误差与前后散列记录在 `art/blender-city/reports/storage-compression/`。所有正式预览都从最终压缩后的 GLB 重新读取渲染。远景另从同一设计制作较低面数版本，近景不为缩小下载包而减面。
+
+打开 [建筑与三视图对照](http://localhost:8876/art-review.html)，默认查看游戏中的 Blender 模型和沿用的正、侧、背三张设计图；[整套建筑对照](http://localhost:8876/art-board.html) 可查看每张地图的全部 29 栋建筑，同一建筑族的三个等级使用相同镜头比例。版本选择中的“历史 AI 候选”只用于回看旧制作结果。历史 Pixal3D 推理、模型与验收记录保留在 [全量 AI 建筑档案](art/full-ai-city/README.md)，其中的旧批准记录不代表 Blender 版本的视觉验收，也不能覆盖用户后续对旧模型质量的否定。
 
 中央喷泉的水流与涟漪、散步的小人、热气球和点状微光让城市保持生气；机会广场转盘、城建局吊索摆锤使用独立部件围绕真实轴心运动。
 
@@ -96,16 +98,17 @@ python -m http.server 8876
 - `scene-streets.js`：地区铺装、倒角路缘和石砌沙盘基础。
 - `art-review.html`：实际建筑与生成三视图的对照验收页。
 - `art-board.html`：每图 29 件建筑的统一尺度对照。
-- `art/full-ai-city/`：本轮逐件三视图、生成证据、冻结审核图和发布流程。
+- `art/blender-city/`：当前 Blender 重建脚本、三视图目录、编辑源与发布记录。
+- `art/full-ai-city/`：历史逐件三视图、AI 生成证据、冻结审核图和旧发布流程；原始记录保持不变。
 - `art/build_regional_city.py` / `art/regions/`：上一版制作脚本与历史来源；旧脚本不会覆盖正式地区模型。
-- `scene-destinations.js`：港湾/温泉场景、真实生成 GLB 与部件动画、景观批处理。
+- `scene-destinations.js`：港湾/温泉场景、正式 GLB 与部件动画、景观批处理。
 - `progression.js`、`progression.css`：仓库、门票、收藏品、局外升级、本机榜与结算。
 - `mobile.css`：竖屏视口、底部操作与信息抽屉。
 - `presentation.js`：连接游戏状态与表现层，更新信息面板，组织事件演出和独立预览。
 - `drama.js`：收租、征用、护盾等事件的画面、节奏与音效反馈。
 - `index.html`、`presentation.css`：页面结构和新版界面样式；`styles.css` 保留原棋盘回退样式，`scene.css` 与 `drama.css` 分别配合城市和演出。
 
-以下是早期 Blender 资产库的历史制作入口，部分公共景观仍复用；它们不是本轮 147 件三视图神经建筑的来源。早期基础库保留 20 个模型，第二轮增加 9 个分级地标与 8 个特殊地块模型。摩天楼使用真实增长的细长塔身和金色冠顶；金融中心是错落双塔；温泉庄园由多栋楼阁、汤池、瀑布、拱桥与庭院组成。特殊地块通过穹顶、圆形金库门、塔吊、巨牌、转盘和门架等不同轮廓识别。
+以下是早期 Blender 资产库的历史制作入口，部分公共景观和基础建模方法仍复用；本轮建筑的具体生成入口与参考图绑定见 `art/blender-city/`。早期基础库保留 20 个模型，第二轮增加 9 个分级地标与 8 个特殊地块模型。摩天楼使用真实增长的细长塔身和金色冠顶；金融中心是错落双塔；温泉庄园由多栋楼阁、汤池、瀑布、拱桥与庭院组成。特殊地块通过穹顶、圆形金库门、塔吊、巨牌、转盘和门架等不同轮廓识别。
 
 模型包下载完成后分别显示，不必等全套到齐；新特殊建筑仅加载所选地图的一套，切图时再补另一套。已下载的公共模型复用缓存，网络失败时仍可操作棋盘，并可在近看时重试缺失建筑。
 
@@ -120,19 +123,22 @@ python -m http.server 8876
 - `art/README.md`：重新生成方法和模型坐标说明。
 - `art/map-specials/`：海湾小镇与都会交通城的两张 ImageGen 概念板、完整提示词及实际 Blender 渲染。
 - `art/build_map_specials.py`、`assets/models/compact-specials.glb`、`expansion-specials.glb`：按照概念板建立的两套独立特殊建筑，每套七种轮廓；对应 `.blend` 保留可编辑模型。这是当时的经典地图特殊建筑接入方案，本轮地区模型不再沿用这套来源。
-- `art/harbor/`：上一版灯塔和风车的 ImageGen 参考、推理证据及整理记录；本轮来源位于 `art/full-ai-city/`。`assets/models/harbor/` 为正式主景包的安装位置，实际版本以 `art/regions/runtime-release.json` 为准。原始高面数输出与运行缓存仅保存在本机。
+- `art/harbor/`：历史灯塔和风车的 ImageGen 参考、推理证据及整理记录。`assets/models/harbor/` 为正式 Blender 主景包的安装位置，实际版本以 `art/blender-city/release.json` 为准。历史原始高面数输出与运行缓存仅保存在本机。
 
 ## 验证
 
-本轮全量发布完成后，必须对正式资源运行以下最小检查；它们不会替代五图的实际画面验收。2026-10-24 全量发布后已通过这五项检查，其中第一项包含全部 145 个正式预览及地图、等级、公共建筑路由检查。
+本轮全量发布对正式资源运行以下检查；它们不会替代五图的实际画面验收。第一项覆盖 145 个可玩建筑、2 个活动主景和 25 个远景的原三视图来源、真实几何统计、尺寸、升级成长和动件，并包含全部 145 个正式 UI 预览的模型绑定与地图、等级、公共建筑路由。预算检查加载实际模型与场景，报告几何、纹理估算和绘制次数。
 
 ```powershell
-node tests/check-full-ai-city.mjs
-node tests/check-ai-far-assets.mjs
-node tests/check-ai-landmarks.mjs
+node tests/check-blender-city.mjs
+node tests/check-ai-board-budget.mjs
 node tests/check-regional-scenery-budget.mjs
-node tests/check-provenance-git-bytes.mjs
+node tests/check-model-loading.mjs
+node tests/check-model-cache.mjs
+node tests/check-camera-follow.mjs
 ```
+
+`check-ai-board-budget.mjs` 保留历史文件名，默认检查当前 Blender 正式资源；`--candidate` 检查历史 AI 候选。原 AI 来源检查没有放宽：`check-full-ai-city.mjs --candidate`、`check-ai-far-assets.mjs --candidate`、`check-ai-landmarks.mjs --candidate` 仍用于旧候选档案，不应用于新的 Blender 正式包。`check-regional-kit.mjs` 默认转到当前 Blender 检查，带 `--candidate` 时转到旧 AI 检查。
 
 下列是按改动范围使用的游戏与场景回归入口，只需要 Node.js，无需安装其他依赖：
 
@@ -156,7 +162,7 @@ node tests/check-camera-follow.mjs
 node tests/new-maps.test.cjs
 node tests/progression.test.cjs
 node tests/progression-game.test.cjs
-node tests/check-ai-landmarks.mjs
+node tests/check-blender-city.mjs
 ```
 
 分别覆盖真实开局与资金规则、奇遇金额和手动继续、产权边界、真实 GLB 模型与动件、机会触发格反馈，以及门票、结算去重、收藏消耗、存档迁移和五图镜头跟随。模型检查使用仓库自带的 Three.js；它们不替代浏览器视觉检查。

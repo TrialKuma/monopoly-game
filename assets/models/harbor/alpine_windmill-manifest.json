@@ -1,38 +1,35 @@
 {
-  "schemaVersion": 2,
+  "schemaVersion": 3,
   "region": "alpine",
   "coordinateSystem": "glTF Y-up; +Z front",
-  "sourceType": "pixal_native_multiview",
+  "sourceType": "authored_blender_reference_rebuild",
   "assets": [
     {
       "name": "alpine_windmill",
       "size": [
-        2.8,
-        2.7272586017710267,
-        2.4012684317075688
+        2.800000253518199,
+        2.936050597031688,
+        1.9817054271697998
       ],
       "bounds": {
         "min": [
-          -1.4,
-          0.0,
-          -1.2006342158537844
+          -1.4000001581507675,
+          0,
+          -0.9908527135848999
         ],
         "max": [
-          1.4000000000000001,
-          2.7272586017710267,
-          1.2006342158537844
+          1.4000000953674316,
+          2.936050597031688,
+          0.9908527135848999
         ]
       },
-      "triangles": 44987,
+      "triangles": 42294,
       "source": {
-        "sourceType": "pixal_native_multiview",
+        "sourceType": "authored_blender_reference_rebuild",
+        "region": "alpine",
+        "asset": "alpine_windmill",
         "family": "windmill",
         "level": 0,
-        "sourceFile": "assets/models/regions-ai/full/alpine/windmill/ec2f3790f57208f9.glb",
-        "sourceSha256": "ec2f3790f57208f9ab1dd69f645d689cf66c3fed626833c27f3bd240e8a7188c",
-        "inferenceReport": "art/full-ai-city/reports/alpine--windmill-a001/alpine--windmill-a001-pixal-mv-1024-9247.json",
-        "reference": "art/full-ai-city/references/alpine/windmill/reference.json",
-        "rawSourceSha256": "43a03b5a6f5fdba6a43966c6c7c9fc5262cae672f2fb9f9328cb44242a8c89bb",
         "referenceViews": [
           {
             "view": "front",
@@ -50,20 +47,40 @@
             "sha256": "45e049e7609d92d83d978d7ad08242e14be7d25cb8ba9d707d554cb8e0b36d13"
           }
         ],
-        "normalisationScale": 2.7907681129482365,
-        "placementReview": {
-          "independentParcelScale": 2.7907681129482365,
-          "scale": 2.7907681129482365,
-          "reason": "independent_uniform_parcel_fit",
-          "relativeToIndependentFit": 1.0,
-          "sharedCameraReviewRequired": true
+        "sourceFile": "art/blender-city/models/alpine/alpine_windmill/model.glb",
+        "sourceSha256": "0742db043923c53209270fdecca633fd6b46e570a2b51889318ba5bdcca8ea11",
+        "processingReport": "art/blender-city/models/alpine/alpine_windmill/model.json",
+        "processingReportSha256": "5b7fa740cd9092094e899b789566d0173ea2b532ed6d569e8fd6a4928e0a77ff",
+        "builder": "art/blender-city/regions/eastern.py",
+        "builderSha256": "12b8c65dc3316d4d9a68ef1d46743e5b0271de3c7514fbf26b1830625585a028",
+        "pipelineSha256": "8bfd4f54084734f345ca7531d288c1c733355eaec2aea576afa225121a97aedf",
+        "authoredArchitecture": true,
+        "storageCompression": {
+          "configuration": "normal16_uv16_color8",
+          "afterSha256": "0742db043923c53209270fdecca633fd6b46e570a2b51889318ba5bdcca8ea11",
+          "originalSha256": "b5b63fed2e72c07bfc0bfe0845d2ee4ad0dad6ad88ed97d6c3315d292ef2d142",
+          "originalBytes": 4442340,
+          "report": {
+            "path": "art/blender-city/reports/storage-compression/alpine/alpine_windmill-0742db043923c532.json",
+            "sha256": "09a8e93e286a6a5d85b3321f6852d53725899025ca8729fc2f672a6aff375461"
+          },
+          "maxNormalError": 0.000015247030756171398,
+          "maxUVError": 0.00000762939453125,
+          "maxColorError": 0.001953154802777135
         },
-        "reviewStatus": "approved",
-        "triangleBudget": 45000
+        "detailLevel": "hero"
       }
     }
   ],
-  "packedAtUtc": "2026-10-24T10:46:41.711060+00:00",
-  "sha256": "bc98074611bfe277ad97d19e6b27971023ac69348455722820d6f34296f18b38",
-  "bytes": 4108480
+  "binarySegments": [
+    {
+      "source": "art/blender-city/models/alpine/alpine_windmill/model.glb",
+      "sha256": "25c7d6ccc3902d43496845686d88934a0ff8b73d862706106c23e102fdcaa542",
+      "offset": 0,
+      "bytes": 3445140
+    }
+  ],
+  "packedAtUtc": "2026-10-24T15:49:11.282Z",
+  "sha256": "b9f60e27720ecaaf12a69cc0b59ade53c43d2eee39112e47388c1231abb8d811",
+  "bytes": 3452924
 }

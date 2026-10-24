@@ -64,7 +64,7 @@ try{
   assert.equal(downloads.filter(file=>file===`regions-far/${mapId}.glb`).length,1,'scenery decodes the reviewed far derivatives only once');
   assert.equal(await assetCache.load(`regions/${mapId}.glb`),sharedSource,'later consumers receive the same GLTF resource tree');
   const state=api.getState();assert(state.ready&&!state.failed,`${mapId} finishes actual GLB loading`);
-  assert(!resolvedNames.includes(`${mapId}_villa_2`),'detailed neural villa_2 is never expanded into distant scenery');
+  assert(!resolvedNames.includes(`${mapId}_villa_2`),'near-detail villa_2 is never expanded into distant scenery');
   if(mapId!=='expansion')assert(resolvedNames.includes(`${mapId}_villa_3`),'distant houses use the lightweight regional villa_3');
   const neighbourhood=world.getObjectByName(['harbor','alpine'].includes(mapId)?`destination_${mapId}_village`:'outskirts_regional_neighbourhood');
   assert(neighbourhood,`${mapId} has a populated real regional neighbourhood`);
@@ -80,9 +80,9 @@ try{
   assert(buildings.triangles<200000,`${mapId}: ${buildings.triangles} loaded neighbourhood triangles exceed 200k`);
   assert(buildings.geometryMiB<20,`${mapId}: loaded neighbourhood geometry must stay below 20 MiB`);
   assert(buildings.draws<=20,`${mapId}: loaded neighbourhood draw count`);
-  assert(complete.triangles<600000,`${mapId}: complete scenery, including the AI centerpiece, exceeds 600k triangles`);
+  assert(complete.triangles<600000,`${mapId}: complete scenery, including the centerpiece, exceeds 600k triangles`);
   assert(complete.draws<=75,`${mapId}: complete scenery draw count`);
-  console.log(`PASS ${mapId}: actual loaded scenery uses lightweight regional houses, with no neural-villa duplication`);
+  console.log(`PASS ${mapId}: actual loaded scenery uses lightweight regional houses, with no near-detail villa duplication`);
   console.log(JSON.stringify({mapId,buildings:expectedBuildings,neighbourhood:buildings,complete,pixelsRendered:false,failures:0}));
 }finally{
   api.dispose();disposeAssets();assetCache.dispose();

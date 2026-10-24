@@ -1,3 +1,4 @@
-// The former five-house exception is retired. Every actual gameplay building
-// must satisfy the same native multiview, visual and mobile asset contract.
-import './check-full-ai-city.mjs';
+// Production architecture follows the current Blender contract. Historical
+// AI candidates retain their independent strict source/approval audit.
+if(process.argv.includes('--candidate'))await import('./check-full-ai-city.mjs');
+else await import('./check-blender-city.mjs');
