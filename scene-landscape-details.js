@@ -1,3 +1,5 @@
+import { enrichDestinationTerrain } from './scene-destination-terrain.js?v=20261025-terrain3';
+
 // Close-range landscape surfaces and planting. These details stay inside the
 // existing garden or beyond the playable plinth and consume no game RNG.
 export function applyMeadowSurface(grass) {
@@ -108,5 +110,6 @@ export function enrichDestinationLandscape({THREE,own,garden,root,perimeter,alpi
       }
     }
   }
+  enrichDestinationTerrain({THREE,own,garden,root,perimeter,alpine,w,d,innerW,innerD});
   root.userData.landscapeDetail={water:'slow-ripple-and-depth',planting:alpine?'meadow-verges-and-rock-strata':'lavender-agave-and-moorings',footprint:'courtyard-and-outer-perimeter'};
 }

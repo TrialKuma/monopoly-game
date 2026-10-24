@@ -1,4 +1,5 @@
-import { createGardenKit } from './scene-garden-kit.js?v=20261025-landscape3';
+import { createGardenKit } from './scene-garden-kit.js?v=20261025-terrain3';
+import { createTerrainLayerKit } from './scene-terrain-kit.js?v=20261025-terrain3';
 
 const PALETTES={
   classic:{stone:'#b9b4a1',stoneLight:'#ded4b9',stoneDark:'#8c9682',path:'#d6c9aa',mortar:'#a4a18c',soil:'#817b58',grass:'#9bb17e',timber:'#86704e',timberLight:'#b79a6c',metal:'#475e55',leaf:'#537450',leafLight:'#83a16b',flowers:'#cc879c',flowerLight:'#efcf9b',water:'#76aaa5'},
@@ -42,7 +43,7 @@ function regionalPieces({THREE,kit,root,own,mapId}){
     for(let i=0;i<12;i++){const a=i*2.399,r=size*(.25+noise(seed+i)*.35);add(petalGeometry,c.flowerLight,[x+Math.cos(a)*r,y+.009,z+Math.sin(a)*r],[.018,.006,.026],a,parent);}
   }
   function bamboo(a,b,y,parent=root){
-    const start=new THREE.Vector3(a[0],y,a[1]),end=new THREE.Vector3(b[0],y,b[1]),count=Math.max(2,Math.ceil(start.distanceTo(end)/.13));
+    const start=new THREE.Vector3(a[0],y,a[1]),end=new THREE.Vector3(b[0],y,b[1]),count=Math.max(2,Math.ceil(start.distanceTo(end)/.18));
     for(let i=0;i<=count;i++){const p=start.clone().lerp(end,i/count),h=.42+noise(i)*.04;rod([p.x,y,p.z],[p.x,y+h,p.z],.018,c.timberLight,parent);for(const h of [.12,.31])collar(p.x,y+h,p.z,.023,.022,c.timber,parent);}
     for(const h of [.12,.31])rod([a[0],y+h,a[1]],[b[0],y+h,b[1]],.021,c.timber,parent);
     // Living bamboo rises behind the woven screen, with clear joint collars and
@@ -131,6 +132,7 @@ export function createRegionalPark({THREE,world,boardBounds,mapId,own,loadScener
   const w=boardBounds.w-4.7,d=boardBounds.d-4.65;if(w<1||d<1)return null;
   const root=new THREE.Group();root.name=`regional_park_${mapId}`;root.userData.cosmetic=true;root.userData.seasonalScenery=true;world.add(root);
   const kit=createGardenKit({THREE,own,root,palette:PALETTES[mapId]});
+  const terrain=createTerrainLayerKit({THREE,own,garden:kit,root});
   const {colors:c,island,pavedPath,bankEllipse,boulder,bush,broadTree,stoneArch,woodBridge,lantern,stone}=kit;
   const {disc,clippedTree,hedge,parterre,cherry,bamboo,stoneLantern,bench,cafe,pavilion,treeGrate,streetBed,pondPlants}=regionalPieces({THREE,kit,root,own,mapId});
   island(0,0,w*.45,d*.45,.08,.025,2,c.grass);
@@ -138,7 +140,13 @@ export function createRegionalPark({THREE,world,boardBounds,mapId,own,loadScener
   if(mapId==='classic'){
     pavedPath([[-w*.46,.14,0],[0,.14,0],[w*.46,.14,0]],.65,11);pavedPath([[0,.14,-d*.46],[0,.14,0],[0,.14,d*.46]],.65,12);
     for(const sx of [-1,1])for(const sz of [-1,1]){
-      const x=sx*w*.27,z=sz*d*.27;parterre(x,z,Math.min(.72,w*.15),Math.min(.56,d*.16),.13);
+      const x=sx*w*.27,z=sz*d*.18;
+      // Each quadrant is a complete garden terrace: a planted upper lawn,
+      // clipped parterre and a long reflecting rill, rather than isolated props.
+      terrain.mound({x:sx*w*.28,z:sz*d*.29,rx:w*.19,rz:d*.18,y:.105,height:.09,seed:10+sx+sz});
+      parterre(x,z,Math.min(.75,w*.15),Math.min(.42,d*.10),.15);
+      terrain.watercourse({points:[[sx*w*.14,.205,sz*d*.34],[sx*w*.28,.205,sz*d*.34],[sx*w*.39,.205,sz*d*.32]],width:Math.min(.43,d*.075),bankWidth:.11,seed:20+sx+sz,bankMaterial:c.stoneLight});
+      terrain.patch({x:sx*w*.28,z:sz*d*.405,rx:w*.13,rz:d*.025,y:.16,seed:30+sx+sz,material:c.flowers});
       clippedTree(sx*tx,.12,sz*tz,.85);stone(x,.17,z,.25,.07,.25,1,c.stoneLight);disc(x,.28,z,.11,.16,c.stone);
     }
     for(const side of [-1,1]){bench(side*1.12,.14,.64,side*Math.PI/2);lantern(side*1.15,.14,-.65);}
@@ -150,24 +158,36 @@ export function createRegionalPark({THREE,world,boardBounds,mapId,own,loadScener
     // with clustered cherry crowns and bamboo screens rather than beach props.
     island(0,0,Math.min(1.3,w*.29),Math.min(1.02,d*.30),.12,.025,20,c.water);
     bankEllipse(0,0,Math.min(1.32,w*.29),Math.min(1.04,d*.30),.105,.075,26);
+    terrain.watercourse({points:[[-w*.43,.19,-d*.08],[-w*.28,.19,-d*.10],[-.8,.19,-.1],[.65,.19,.15],[w*.29,.19,d*.18],[w*.40,.19,d*.25]],width:.48,bankWidth:.20,seed:41,bankMaterial:c.path});
+    for(const [i,[sx,sz]] of [[-1,-1],[1,1],[-1,1]].entries()){
+      const x=sx*tx,z=sz*tz;
+      terrain.mound({x,z,rx:Math.min(.62,w*.10),rz:Math.min(.54,d*.12),y:.11,height:.14,seed:50+i});
+      terrain.patch({x:x-sx*.23,z:z-sz*.16,rx:.39,rz:.30,y:.19,seed:60+i,material:c.leaf});
+    }
     pavedPath([[-w*.43,.145,d*.29],[-w*.27,.145,.65],[-.9,.145,-d*.27],[.35,.145,-d*.34],[w*.4,.145,-d*.12]],.47,44);
     woodBridge([[.72,.21,.55],[1.06,.32,.05],[1.0,.21,-.48]],.48);
-    for(const [i,[x,z]] of [[-tx,-tz],[tx,tz],[-tx,tz]].entries()){cherry(x,.14,z,.9+(i%2)*.1,100+i);boulder(x*.72,.19,z*.72,.26,.18,.35,17+i);}
+    for(const [i,[x,z]] of [[-tx,-tz],[tx,tz],[-tx,tz]].entries()){cherry(x,.24,z,.9+(i%2)*.1,100+i);boulder(x*.72,.19,z*.72,.26,.18,.35,17+i);}
     bamboo([-tx+.05,-tz],[tx*.45,-tz],.13);bamboo([tx,-tz*.5],[tx,tz*.5],.13);
     stoneLantern(-1.45,.15,.35);stoneLantern(.55,.15,-tz*.85);bench(tx*.4,.15,tz*.88);
     for(let i=0;i<6;i++)stone(-.5+i*.18,.17,.7+Math.sin(i)*.13,.16,.04,.17,63+i,c.stoneDark);
     pondPlants(-.73,.157,-.15,6);pondPlants(.1,.157,-.64,7);
     // Raked gravel and offset moss stones provide a dry garden beside the pond.
-    island(-tx*.65,tz*.68,.45,.30,.13,.016,3,c.path);
-    for(let i=0;i<5;i++)kit.ribbon([[-tx*.65-.36,.158,tz*.68+(i-2)*.072],[-tx*.65,.158,tz*.68+(i-2)*.072+.035],[-tx*.65+.36,.158,tz*.68+(i-2)*.072]],.012,c.mortar,root,16);
+    terrain.patch({x:-tx*.65,z:tz*.68,rx:.66,rz:.41,y:.15,seed:3,material:c.path});
+    for(let i=0;i<5;i++)kit.ribbon([[-tx*.65-.48,.178,tz*.68+(i-2)*.10],[-tx*.65,.178,tz*.68+(i-2)*.10+.035],[-tx*.65+.48,.178,tz*.68+(i-2)*.10]],.012,c.mortar,root,16);
     boulder(-tx*.65,.20,tz*.68,.13,.12,.15,14);kit.groundCover(-tx*.65,.15,tz*.68,.20,18);
   }else{
     pavedPath([[-w*.46,.14,0],[0,.14,0],[w*.46,.14,0]],.76,70);pavedPath([[0,.14,-d*.46],[0,.14,0],[0,.14,d*.46]],.76,71);
     for(const sx of [-1,1])for(const sz of [-1,1]){
-      const x=sx*w*.29,z=sz*d*.30;streetBed(x,.12,z,Math.min(.9,w*.16),Math.min(.65,d*.17));
+      const x=sx*w*.29,z=sz*d*.30,rx=Math.min(2.4,w*.18),rz=Math.min(1.65,d*.16);
+      // Broad rain gardens occupy the urban blocks between the main avenues.
+      // Water and gravel settle below the planted back slope, leaving sightlines
+      // across the central fountain and all four paths intact.
+      terrain.mound({x,z:z+sz*rz*.30,rx,rz:rz*.84,y:.105,height:.15,seed:80+sx+sz});
+      terrain.watercourse({points:[[x-rx*.9,.18,z-sz*rz*.47],[x,.18,z-sz*rz*.68],[x+rx*.9,.18,z-sz*rz*.40]],width:Math.min(.48,rz*.4),bankWidth:.17,seed:85+sx+sz,bankMaterial:c.stoneDark});
+      terrain.patch({x,z:z+sz*rz*.70,rx:rx*.78,rz:rz*.22,y:.20,seed:90+sx+sz,material:c.leafLight});
       const pavilionClearing=sx===1&&sz===-1&&w>4&&d>3;
-      for(let i=0;i<3;i++){if(!pavilionClearing)broadTree(x+(i-1)*.46,.16,z+(i%2)*.22,.76,87+i);bush(x+(i-1)*.4,.16,z-.3,.17,92+i);}
-      bench(x,.17,z-sz*.56,sz<0?0:Math.PI);
+      for(let i=0;i<3;i++){if(!pavilionClearing)broadTree(x+(i-1)*rx*.47,.23,z+sz*rz*.34,.76,87+i);bush(x+(i-1)*rx*.46,.19,z+sz*rz*.65,.17,92+i);}
+      bench(x,.17,z-sz*(rz+.13),sz<0?0:Math.PI);
     }
     if(w>4&&d>3)pavilion(w*.28,.18,-d*.29,.78);
     for(const side of [-1,1]){lantern(side*1.15,.15,.7);lantern(side*1.15,.15,-.7);}
@@ -203,6 +223,7 @@ export function fillRegionalScenicBuildings({THREE,root,bundle,mapId}){
 // buildings on the distant terrace. Each edge is authored in outward-local Z.
 export function createRegionalSurroundings({THREE,root,own,boardBounds,mapId}){
   const palette=PALETTES[mapId]||PALETTES.classic,kit=createGardenKit({THREE,own,root,palette}),plots=[];
+  const terrain=createTerrainLayerKit({THREE,own,garden:kit,root});
   const {colors:c,add,material,island,pavedPath,ribbon,wall,bush,broadTree,stone,rod,stoneArch,woodBridge,boulder,lantern}=kit;
   const {clippedTree,parterre,cherry,bamboo,stoneLantern,bench,cafe,pavilion,treeGrate,streetBed,pondPlants}=regionalPieces({THREE,kit,root,own,mapId});
   const w=boardBounds.w,d=boardBounds.d,urban=mapId==='expansion',japanese=mapId==='compact';
@@ -218,6 +239,7 @@ export function createRegionalSurroundings({THREE,root,own,boardBounds,mapId}){
   const asphalt=material('#7d8b88'),stripe=material('#ddd7bf');
   sections.forEach((section,s)=>{
     const g=new THREE.Group();g.name=`outskirts_district_${s}`;g.position.set(section.x,0,section.z);g.rotation.y=section.rotation;root.add(g);
+    const detail=new THREE.Group();detail.name='terrain_detail';detail.userData.terrainLayer=true;g.add(detail);
     const half=section.length/2-.35;
     ribbon([[-half,-.32,2],[0,-.32,2],[half,-.32,2]],3.8,c.grass,g);
     pavedPath([[-half,-.26,.28],[0,-.26,.28],[half,-.26,.28]],.35,10+s,g);
@@ -231,17 +253,38 @@ export function createRegionalSurroundings({THREE,root,own,boardBounds,mapId}){
         for(const side of [-1,1]){rod([x+side*.35,-.24,1.72],[x+side*.35,.05,1.72],.025,c.metal,g);stone(x+side*.35,.055,1.72,.06,.025,.07,0,c.stoneLight,g);}
         if(i%2===0){streetBed(x-.65,-.24,2.55,.28,.20,g);bush(x-.65,-.16,2.55,.24,39+i,g,true);}
       }
+      // Broad planted drainage beds break up the green strips between urban
+      // blocks. The shallow water and stepped grass stay below the promenade.
+      terrain.watercourse({points:[[-half*.94,-.27,2.83],[-half*.45,-.27,2.74],[half*.40,-.27,2.86],[half*.94,-.27,2.72]],width:.32,bankWidth:.13,seed:200+s,parent:g,bankMaterial:c.stoneDark});
+      for(const side of [-1,1]){
+        terrain.mound({x:side*half*.62,z:2.42,rx:half*.27,rz:.27,y:-.29,height:.13,seed:210+s+side,parent:g});
+        terrain.patch({x:side*half*.62,z:2.48,rx:half*.24,rz:.12,y:-.18,seed:220+s+side,parent:g,material:c.leafLight});
+        kit.groundCover(side*half*.45,-.22,2.61,.24,240+s+side,detail,'reeds');
+      }
       if(s===2)pavilion(0,-.22,3.05,.94,g);
     }else if(japanese){
-      ribbon([[-half,-.29,1.24],[-half*.35,-.29,1.5],[half*.35,-.29,1.2],[half,-.29,1.45]],.85,c.water,g);
+      terrain.watercourse({points:[[-half,-.29,1.24],[-half*.35,-.29,1.5],[half*.35,-.29,1.2],[half,-.29,1.45]],width:.78,bankWidth:.19,seed:260+s,parent:g,bankMaterial:c.path});
       wall([[-half,-.40,.75],[0,-.40,.9],[half,-.40,.95]],.12,50+s,g);
       woodBridge([[-half*.22,-.20,1.02],[-half*.18,-.04,1.42],[-half*.15,-.20,1.93]],.53,g);
       pavedPath([[-half,-.25,2.17],[0,-.25,2.1],[half,-.25,2.25]],.43,60+s,g);
-      for(let i=0;i<4;i++){const x=(i-1.5)*section.length*.21;cherry(x,-.24,2.35,.88+(i%2)*.1,70+i,g);bamboo([x-.45,2.8],[x+.45,2.8],-.23,g);stoneLantern(x+.4,-.24,1.93,g);boulder(x-.4,-.21,1.76,.23,.15,.25,20+i,g);}
+      for(let i=0;i<4;i++){
+        const x=(i-1.5)*section.length*.21;
+        cherry(x,-.24,2.35,.88+(i%2)*.1,70+i,g);
+        if(i%2===0)bamboo([x-.60,2.8],[x+.60,2.8],-.23,g);
+        stoneLantern(x+.4,-.24,1.93,g);boulder(x-.4,-.21,1.76,.23,.15,.25,20+i,g);
+        terrain.mound({x:x+.50,z:2.65,rx:Math.min(.63,section.length*.07),rz:.35,y:-.30,height:.14,seed:280+s*4+i,parent:g});
+        terrain.patch({x:x+.52,z:2.60,rx:.40,rz:.22,y:-.21,seed:300+s*4+i,parent:g,material:c.leaf});
+      }
       for(const x of [-half*.6,half*.58]){pondPlants(x,-.279,1.35,4+s,g);kit.groundCover(x+.3,-.24,1.95,.18,s+31,g,'reeds');}
     }else{
+      terrain.watercourse({points:[[-half,-.29,.93],[0,-.29,.93],[half,-.29,.93]],width:.27,bankWidth:.10,seed:320+s,parent:g,bankMaterial:c.stoneLight});
       pavedPath([[-half,-.26,1.4],[0,-.26,1.4],[half,-.26,1.4]],.55,80+s,g);
-      for(let i=0;i<4;i++){const x=(i-1.5)*section.length*.21;parterre(x,2.12,.54,.39,-.24,g);clippedTree(x,-.23,2.85,.87,g);lantern(x+.43,-.25,.92,g);}
+      for(let i=0;i<4;i++){
+        const x=(i-1.5)*section.length*.21;
+        terrain.mound({x,z:2.12,rx:Math.min(.76,section.length*.08),rz:.52,y:-.31,height:.10,seed:340+s*4+i,parent:g});
+        parterre(x,2.12,.54,.39,-.24,g);clippedTree(x,-.23,2.85,.87,g);lantern(x+.43,-.25,.92,g);
+        terrain.patch({x,z:2.63,rx:Math.min(.70,section.length*.07),rz:.12,y:-.25,seed:360+s*4+i,parent:g,material:c.flowers});
+      }
       for(const side of [-1,1]){cafe(side*half*.58,-.24,1.25,g);bench(side*half*.85,-.23,2.12,Math.PI/2,g);}
     }
     for(let i=0;i<3;i++){
@@ -253,9 +296,42 @@ export function createRegionalSurroundings({THREE,root,own,boardBounds,mapId}){
   });
   for(const [i,[sx,sz]] of [[-1,-1],[1,-1],[1,1],[-1,1]].entries()){
     const x=sx*(w/2+2.35),z=sz*(d/2+2.35),g=new THREE.Group();g.name=`outskirts_corner_garden_${i}`;root.add(g);
-    island(x,z,1.2,1.2,-.36,.09,100+i,c.grass,g);
-    if(japanese){cherry(x,-.25,z,1.1,110+i,g);boulder(x+.5,-.2,z-.35,.35,.24,.3,115+i,g);bush(x-.45,-.24,z+.45,.3,120+i,g);}
-    else{broadTree(x-.25,-.25,z-.15,.94,130+i,g);broadTree(x+.4,-.25,z+.35,.7,140+i,g);bush(x-.5,-.24,z+.44,.32,150+i,g,true);}
+    const detail=new THREE.Group();detail.name='terrain_detail';detail.userData.terrainLayer=true;g.add(detail);
+    // A corner is a complete shoreline composition, not a few ornaments on a
+    // large lawn. The broad basin occupies about a third of its visible land;
+    // two overlapping low shoulders carry the existing trees behind the water.
+    terrain.mound({x:x+sx*.30,z:z+sz*.38,rx:1.94,rz:1.82,y:-.35,height:.24,seed:380+i,parent:g});
+    terrain.mound({x:x+sx*.66,z:z+sz*.85,rx:1.30,rz:.94,y:-.19,height:.17,seed:384+i,parent:g,material:c.leafLight});
+    terrain.mound({x:x+sx*1.01,z:z-sz*.17,rx:.72,rz:1.21,y:-.25,height:.16,seed:388+i,parent:g,material:c.leafLight});
+    const poolX=x-sx*.43,poolZ=z-sz*.43;
+    if(japanese){
+      // Offset lobes give the Japanese pond an irregular, continuous shore.
+      // Every gravel layer lies below the water, so overlaps cannot draw an
+      // artificial white bank across the surface.
+      for(const [dx,dz,rx,rz] of [[0,0,1.43,1.13],[-sx*.71,sz*.28,.77,.64]]){
+        terrain.patch({x:poolX+dx,z:poolZ+dz,rx:rx+.16,rz:rz+.14,y:-.245,height:.008,seed:390+i,parent:g,material:c.path});
+        terrain.patch({x:poolX+dx,z:poolZ+dz,rx,rz,y:-.21,height:0,seed:390+i,parent:g,material:c.water});
+      }
+    }else if(urban){
+      // New York's park corners collect runoff in long planted wetland beds.
+      terrain.patch({x:poolX,z:poolZ,rx:1.85,rz:1.03,y:-.245,height:.008,seed:390+i,parent:g,material:c.stoneDark});
+      terrain.patch({x:poolX,z:poolZ,rx:1.68,rz:.84,y:-.21,height:0,seed:390+i,parent:g,material:c.water});
+    }else{
+      // The French garden keeps a formal chamfered basin, distinct from the
+      // natural pond and elongated wetland in the other two regions.
+      const bank=stone(poolX+sx*.14,-.245,poolZ+sz*.14,2.90,.012,2.90,0,c.stoneLight,detail);
+      const water=stone(poolX+sx*.14,-.21,poolZ+sz*.14,2.62,.002,2.48,0,c.water,detail);
+      for(const mesh of [bank,water]){mesh.rotation.y=0;mesh.castShadow=false;mesh.userData.terrainLayer=true;}
+    }
+    // Broad planted contours stay visible at the overview camera. Their low
+    // profile and existing seasonal materials keep the board's edges readable.
+    terrain.patch({x:x+sx*.36,z:z+sz*.69,rx:.88,rz:.36,y:-.055,seed:410+i,parent:g,material:urban?c.leaf:c.flowers});
+    if(japanese){cherry(x+sx*.58,-.07,z+sz*.72,.96,110+i,g);boulder(x+sx*.74,-.10,z-sz*.18,.38,.20,.33,115+i,g);bush(x+sx*.95,-.12,z+sz*.36,.3,120+i,g);}
+    else{broadTree(x+sx*.32,-.08,z+sz*.80,.88,130+i,g);broadTree(x+sx*.99,-.10,z+sz*.20,.66,140+i,g);bush(x+sx*.70,-.12,z-sz*.52,.32,150+i,g,true);}
+    for(let j=0;j<3;j++){
+      kit.groundCover(x+sx*(.34+j*.23),-.15,z-sz*(.80-j*.20),.25,420+i*3+j,detail,japanese||urban?'reeds':'grass');
+      boulder(x+sx*(.55+j*.16),-.17,z-sz*(.48-j*.25),.29-j*.025,.11,.22,440+i*3+j,detail);
+    }
   }
   kit.finish();root.traverse(node=>{if(node.isMesh){
     // Trees and furniture ground the diorama with short contact shadows. Flat

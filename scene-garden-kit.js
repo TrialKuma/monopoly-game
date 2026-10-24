@@ -1,5 +1,5 @@
 import { mergeGeometries } from './assets/vendor/three/addons/utils/BufferGeometryUtils.js';
-import { enrichDestinationLandscape, applyMeadowSurface } from './scene-landscape-details.js?v=20261025-landscape3';
+import { enrichDestinationLandscape, applyMeadowSurface } from './scene-landscape-details.js?v=20261025-terrain3';
 
 // Authored landscape shapes shared by destination gardens. All random-looking
 // variation is a pure function of a local seed, independent of the dice RNG.

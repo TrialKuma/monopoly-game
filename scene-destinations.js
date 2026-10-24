@@ -1,5 +1,5 @@
 import { loadSharedModelAsset, disposeSharedModelAssets, regionalSceneryDirectory } from './scene-model-cache.js?v=20261024-blender-release2';
-import { buildDestinationGarden, batchGardenBuilding, instanceGardenBuildings } from './scene-garden-kit.js?v=20261025-landscape3';
+import { buildDestinationGarden, batchGardenBuilding, instanceGardenBuildings } from './scene-garden-kit.js?v=20261025-terrain3';
 
 // Destination art is cosmetic. The authored meshes keep their colors and rigid
 // part animation clips; they never enter the board's static mesh batching.

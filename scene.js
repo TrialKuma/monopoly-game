@@ -1,9 +1,9 @@
 import * as THREE from './assets/vendor/three/three.module.min.js';
 import { makeStudioEnvironment } from './scene-environment.js?v=20261024-blender-release2';
 import { mergeGeometries } from './assets/vendor/three/addons/utils/BufferGeometryUtils.js';
-import { createSceneLife } from './scene-life.js?v=20261025-landscape3';
+import { createSceneLife } from './scene-life.js?v=20261025-terrain3';
 import { createStreetFoundation } from './scene-streets.js?v=20261024-1';
-import { createRegionalPark } from './scene-regional-parks.js?v=20261025-landscape3';
+import { createRegionalPark } from './scene-regional-parks.js?v=20261025-terrain3';
 import { loadSharedModelAsset, forgetSharedModelAsset, releaseSharedModelAsset, releaseSupersededModelAssets, ownsSharedModelResource, disposeSharedModelAssets } from './scene-model-cache.js?v=20261024-blender-release2';
 
 // All route positions, ownership and prices come from the game. This view never
