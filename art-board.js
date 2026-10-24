@@ -1,4 +1,5 @@
 import * as THREE from './assets/vendor/three/three.module.min.js';
+import { makeStudioEnvironment } from './scene-environment.js?v=20261024-4';
 import {GLTFLoader} from './assets/vendor/three/addons/loaders/GLTFLoader.js';
 const $=id=>document.getElementById(id),region=$('region'),board=$('board'),cards=$('cards'),params=new URLSearchParams(location.search);
 const candidate=params.get('artStage')==='candidate';
@@ -10,6 +11,7 @@ const assets=[...families.flatMap(([family,label])=>[1,2,3].map(level=>({name:`$
 if(familyReview){document.body.classList.add('family-review');document.querySelector('h1').textContent=`${families.find(([name])=>name===familyReview)[1]} · 三级对照`;}
 const renderer=new THREE.WebGLRenderer({antialias:true,powerPreference:'low-power'});renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1;renderer.setClearColor('#e9e8df');board.prepend(renderer.domElement);
 let bundle=null,views=[],view='iso',token=0,disposed=false,frame=0;
+const environment=makeStudioEnvironment(renderer);
 function dispose(gltf){if(!gltf)return;const resources=new Set(),images=new Set();gltf.scene.traverse(n=>{if(n.geometry)resources.add(n.geometry);for(const m of Array.isArray(n.material)?n.material:[n.material])if(m){resources.add(m);for(const value of Object.values(m))if(value?.isTexture){resources.add(value);const data=value.source?.data;for(const image of Array.isArray(data)?data:[data])if(image?.close)images.add(image);}}});resources.forEach(r=>r.dispose());images.forEach(i=>i.close());}
 function draw(){
   frame=0;if(disposed)return;const w=board.clientWidth,h=cards.clientHeight;renderer.setSize(w,h,false);renderer.setScissorTest(false);renderer.clear();renderer.setScissorTest(true);
@@ -27,13 +29,14 @@ async function load(){
   const current=++token,map=region.value;views=[];cards.replaceChildren();dispose(bundle);bundle=null;$('error').hidden=true;$('status').textContent='模型载入中';requestDraw();
   const url=familyReview?`./art/full-ai-city/packed/families/${map}-${familyReview}.glb`:candidate?`./art/full-ai-city/packed/${map}.glb`:`./assets/models/regions/${map}.glb`;
   try{
-    const gltf=await new GLTFLoader().loadAsync(`${url}?v=20261024-1`);if(current!==token||disposed){dispose(gltf);return;}bundle=gltf;let native=0;
+    const gltf=await new GLTFLoader().loadAsync(`${url}?v=20261024-4`);if(current!==token||disposed){dispose(gltf);return;}bundle=gltf;let native=0;
     for(const asset of assets){
       const source=gltf.scene.getObjectByName(`${map}_${asset.name}`);if(!source)throw new Error(`缺少${asset.label}，整套资源尚未完成。`);
       const card=document.createElement('a');card.className='card';const query=new URLSearchParams({map,family:asset.family,level:String(asset.level)});if(candidate)query.set('stage','candidate');card.href=`./art-review.html?${query}`;
       const title=document.createElement('b');title.textContent=asset.label;const detail=document.createElement('span');let triangles=0;source.traverse(n=>{if(n.isMesh)triangles+=(n.geometry.index?.count||n.geometry.attributes.position.count)/3;});
       const neural=source.userData.sourceType==='pixal_native_multiview';native+=Number(neural);detail.textContent=neural?'三视图 AI 建模':'旧版资源';card.append(title,detail);cards.append(card);
       const scene=new THREE.Scene(),object=source.clone(true);scene.add(object);scene.add(new THREE.HemisphereLight('#fff8eb','#a5b7a0',1.3));const sun=new THREE.DirectionalLight('#fff0da',2.5);sun.position.set(-4,8,6);scene.add(sun);const fill=new THREE.DirectionalLight('#d5eafa',.8);fill.position.set(5,4,-3);scene.add(fill);
+      scene.environment=environment.texture;scene.environmentIntensity=.4;
       const bounds=new THREE.Box3().setFromObject(object);views.push({family:asset.family,card,scene,camera:new THREE.OrthographicCamera(-2,2,2,-2,.1,100),center:bounds.getCenter(new THREE.Vector3()),size:bounds.getSize(new THREE.Vector3())});
     }
     // The same camera scale within each family preserves visible upgrade size.
@@ -42,4 +45,4 @@ async function load(){
   }catch(error){if(current!==token||disposed)return;$('status').textContent='未载入完整建筑集';$('error').textContent=error.message;$('error').hidden=false;requestDraw();}
 }
 region.addEventListener('change',load);document.querySelector('nav').addEventListener('click',event=>{const button=event.target.closest('[data-view]');if(!button)return;view=button.dataset.view;document.querySelectorAll('[data-view]').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));requestDraw();});
-const observer=new ResizeObserver(requestDraw);observer.observe(board);window.addEventListener('pagehide',()=>{disposed=true;token++;cancelAnimationFrame(frame);observer.disconnect();dispose(bundle);renderer.dispose();},{once:true});load();
+const observer=new ResizeObserver(requestDraw);observer.observe(board);window.addEventListener('pagehide',()=>{disposed=true;token++;cancelAnimationFrame(frame);observer.disconnect();dispose(bundle);environment.dispose();renderer.dispose();},{once:true});load();

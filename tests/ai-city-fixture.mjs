@@ -5,6 +5,9 @@ import path from 'node:path';
 import crypto from 'node:crypto';
 import {fileURLToPath} from 'node:url';
 import {verifyMechanicalDerivative} from './mechanical-surface-fixture.mjs';
+import {verifyExportedSurfaceRepair,verifyAtlasIslandRepair,verifyKyotoStyleRepair} from './fidelity-surface-fixture.mjs';
+import {verifyFidelityWheel} from './fidelity-wheel-fixture.mjs';
+import {verifyTextureCompression} from './fidelity-compression-fixture.mjs';
 export const root=fileURLToPath(new URL('..',import.meta.url));
 export const hash=bytes=>crypto.createHash('sha256').update(bytes).digest('hex');
 export function local(value){
@@ -330,6 +333,12 @@ export function verifyPostNativeUVCorrection(processing){
   return frozen;
 }
 export function verifySourceTransfer(processing,context={}){
+  const fidelityAPI={receipt,glb,scalar,imageHashes,verifySourceTransfer};
+  if(processing.textureCompression)return verifyTextureCompression(processing,context,fidelityAPI);
+  if(processing.shadingOnlyRefinement||processing.localWheelTextureRepair)return verifyFidelityWheel(processing,context,fidelityAPI);
+  if(processing.localSurfaceRepair?.sourceCandidate)return verifyExportedSurfaceRepair(processing,context,fidelityAPI);
+  if(processing.localAtlasIslandRepair)return verifyAtlasIslandRepair(processing,context,fidelityAPI);
+  if(processing.localStyleRefinement)return verifyKyotoStyleRepair(processing,context,fidelityAPI);
   if(processing.postNativeUVCorrection)return verifyPostNativeUVCorrection(processing);
   if(processing.nativeSurfaceExport)return verifyNativeSurfaceExport(processing,context);
   if(processing.textureOnlyReprocessing?.nativeUVReceipt)verifyNativeUVTransfer(processing,context);

@@ -1,0 +1,469 @@
+{
+  "status": "exported_pending_visual_review",
+  "createdAt": "2026-10-23T06:58:07.533157+00:00",
+  "region": "harbor",
+  "asset": "chance_wheel",
+  "source": {
+    "rawGLB": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\harbor--chance_wheel-a001-pixal-mv-1024-9247.glb",
+      "sha256": "fafa4b96f6b71b4800ba9b961b6054e7378582aaccd6a9ad62681f8888a96242",
+      "bytes": 40860584
+    }
+  },
+  "inferenceReport": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\harbor--chance_wheel-a001\\harbor--chance_wheel-a001-pixal-mv-1024-9247.json",
+    "sha256": "01483e9c52ad57cf772eac785da95b2351a86dd4e82613d6c4b207528f2d6537",
+    "bytes": 8179
+  },
+  "reference": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\inputs\\harbor\\chance_wheel\\252c59093679417c\\reference.json",
+    "sha256": "40a9e773b38b7733ac27b808dfcd5e3693a847a638b49e49b62953124fe38ab9",
+    "bytes": 4448
+  },
+  "processingTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\0b30bf7033964099fe401ebb74ad63208ade2fa5834e0678095b6d633f25a9ad-repair_harbor_wheel_color.py",
+    "sha256": "0b30bf7033964099fe401ebb74ad63208ade2fa5834e0678095b6d633f25a9ad",
+    "bytes": 12100
+  },
+  "assumedCameras": true,
+  "cameraCalibration": "assumed_standard_orbit_not_measured",
+  "nativePipeline": "Pixal3DMVImageTo3DPipeline.run_mv",
+  "nativeResolution": 1024,
+  "seed": 9247,
+  "geometryOrigin": "Actual native three-view neural building with source-derived mobile geometry and explicitly recorded bounded local mechanical boundary repairs. No replacement building or replacement wheel.",
+  "orientation": {
+    "up": "Y",
+    "front": "+Z",
+    "groundY": 0,
+    "maxEdge": 1
+  },
+  "requestedTriangles": 30000,
+  "limitations": [
+    "Assumed camera reference reconstruction, not exact measured architecture",
+    "Final candidate requires actual rendered visual approval"
+  ],
+  "animation": {
+    "driver": "scene-life",
+    "autoplayClip": false,
+    "node": "harbor__chance_wheel__neural_wheel",
+    "lifePart": "wheel",
+    "localRotationAxis": "Z",
+    "geometryOrigin": "Original neural-derived component with 555 explicitly recorded local boundary-repair and bridge triangles; no replacement mechanical object",
+    "poseReview": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\harbor-wheel-color-v1\\motion\\review.json",
+      "sha256": "db2ac45cc100487a13557c48240a79d04b3572b45f5347ec941a43843c3b8158",
+      "bytes": 4107
+    },
+    "frames": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\harbor-wheel-color-v1\\motion\\pose-0-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\harbor-wheel-color-v1\\motion\\pose-0-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\harbor-wheel-color-v1\\motion\\pose-0-iso.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\harbor-wheel-color-v1\\motion\\pose-45-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\harbor-wheel-color-v1\\motion\\pose-45-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\harbor-wheel-color-v1\\motion\\pose-45-iso.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\harbor-wheel-color-v1\\motion\\pose-90-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\harbor-wheel-color-v1\\motion\\pose-90-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\harbor-wheel-color-v1\\motion\\pose-90-iso.png"
+    ]
+  },
+  "processingComplete": true,
+  "lod": "near",
+  "processingRevision": 0,
+  "derivation": {
+    "rawTriangles": 986419,
+    "weldedTriangles": 980759,
+    "remeshedTriangles": 2443008,
+    "voxelSize": 0.003,
+    "finalTriangles": 29986,
+    "atlasArea": 0.458285794279234,
+    "singleReductionPass": true,
+    "inheritedUVRemovedBeforeReduction": true,
+    "sourceMaterialsUntouched": true,
+    "uvUnwrap": {
+      "angleDegrees": 89,
+      "islandMargin": 2e-05,
+      "marginMethod": "SCALED",
+      "nominalMarginPixels": null
+    }
+  },
+  "bake": {
+    "method": "Bounded actual-original-neural-texture nearest plate sampling into unchanged existing wheel UV pixels. No flat palette or reference painting.",
+    "priorBake": {
+      "method": "Original reviewed base color and ORM bytes preserved; legacy rebaked normalTexture detached. Real geometry normals provide shading.",
+      "priorBake": {
+        "hitCoverageAreaWeighted": 0.99973666379249,
+        "cageExtrusion": 0.02,
+        "maxRayDistance": 0.06,
+        "maps": [
+          {
+            "role": "base",
+            "size": [
+              1024,
+              1024
+            ]
+          },
+          {
+            "role": "orm",
+            "size": [
+              512,
+              512
+            ]
+          },
+          {
+            "role": "normal",
+            "size": [
+              1024,
+              1024
+            ]
+          }
+        ],
+        "method": "Selected-to-active CPU bake from original neural source onto a source-derived voxel surface reduced without inherited UV constraints; no authored substitute building"
+      }
+    }
+  },
+  "processedCandidate": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\harbor-wheel-color-v1\\chance_wheel.glb",
+    "sha256": "accd8ba5fe1198620fa98bc7f09883547aba36dd3c592487eb7380e5ca88fa9f",
+    "bytes": 3575296
+  },
+  "glbValidation": {
+    "version": 2,
+    "triangles": 31551,
+    "meshes": 2,
+    "materials": 1,
+    "images": 3,
+    "all_primitives_have_uv": true,
+    "animations": [],
+    "all_images_embedded": true,
+    "external_buffers": []
+  },
+  "triangles": 31551,
+  "renderedCandidate": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\harbor-wheel-color-v1\\renders\\lod-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\harbor-wheel-color-v1\\renders\\lod-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\harbor-wheel-color-v1\\renders\\lod-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\harbor-wheel-color-v1\\renders\\lod-left.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\harbor-wheel-color-v1\\renders\\lod-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.5008549094200134,
+        -0.44060981273651123,
+        0.0006705456762574613
+      ],
+      "max": [
+        0.49955594539642334,
+        0.441407710313797,
+        0.9519414305686951
+      ]
+    },
+    "triangles": 31551,
+    "textureSizes": [
+      {
+        "name": "harbor__chance_wheel__base",
+        "size": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "name": "harbor__chance_wheel__orm",
+        "size": [
+          512,
+          512
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "renderedSource": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\shading-harbor-wheel\\source-review\\raw-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\shading-harbor-wheel\\source-review\\raw-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.5,
+        -0.44118353724479675,
+        0.0
+      ],
+      "max": [
+        0.5,
+        0.44118353724479675,
+        0.9511141180992126
+      ]
+    },
+    "triangles": 986419,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "bounds": {
+    "min": [
+      -0.5008549094200134,
+      0.0006705456762574613,
+      -0.441407710313797
+    ],
+    "max": [
+      0.49955594539642334,
+      0.9519414305686951,
+      0.44060981273651123
+    ],
+    "coordinateSystem": "GLTF Y-up; +Z front"
+  },
+  "textureSizes": [
+    {
+      "name": "harbor__chance_wheel__base",
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "name": "harbor__chance_wheel__orm",
+      "size": [
+        512,
+        512
+      ]
+    }
+  ],
+  "rawSourceUnchanged": true,
+  "completedAt": "2026-10-24T09:56:44.705862+00:00",
+  "derivedFromStaticCandidate": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\candidate-history\\harbor\\chance_wheel\\0621e225e7b516a6c40b920863be667a8568da7c4cfc97a392b99741d63b9c6c\\chance_wheel.glb",
+    "sha256": "0621e225e7b516a6c40b920863be667a8568da7c4cfc97a392b99741d63b9c6c",
+    "bytes": 1548584
+  },
+  "componentSeparation": {
+    "source": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\mechanical-repairs\\harbor\\chance_wheel\\a9148dbfec37e641\\source-static-0621e225.glb",
+      "sha256": "0621e225e7b516a6c40b920863be667a8568da7c4cfc97a392b99741d63b9c6c",
+      "bytes": 1548584
+    },
+    "output": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\component-candidates\\harbor\\chance_wheel.glb",
+      "sha256": "a9148dbfec37e641d2c6d0818253aaa6976f1fb2821e1965b0545c5abf7d8b8d",
+      "bytes": 1808368
+    },
+    "staticTriangles": 30375,
+    "movingTriangles": 1176,
+    "originalTriangles": 29986,
+    "finalTriangles": 31551,
+    "newFacesAdded": 555,
+    "splitSourceTriangles": 106,
+    "originalVerticesMoved": 0,
+    "embeddedImageHashesUnchanged": true,
+    "originalMaterialUnchanged": true,
+    "selection": {
+      "name": "harbor__chance_wheel__neural_wheel",
+      "lifePart": "wheel",
+      "shape": "measured_inner_disk_precise_clipping_and_boundary_closure",
+      "center": [
+        0.348,
+        0.313,
+        0.1503
+      ],
+      "axis": [
+        0.31933697173647924,
+        0.0033824499320816858,
+        0.9476351922098672
+      ],
+      "radius": 0.16,
+      "depth": [
+        -0.012,
+        0.06
+      ],
+      "reviewNotes": "All nine actual 0/45/90 front/right/isometric images and four neutral-material front/right images at 0/90 were inspected individually. Existing painted inner plate and hub rotate, while original outer bronze rim, pointer, rear pedestal and whole building stay fixed. The earlier foreground copper strip no longer moves. A narrow native pointer-occlusion mark and slightly uneven local relief remain on the painted plate; neutral material shows continuous geometry, not a through-hole. At mobile scale this is a minor inherited surface imperfection. New internal side/back closure and tiny nonplanar hub-boundary fan are explicit local mechanical repair, not a new complete disc."
+    },
+    "driver": "scene-life; local Z rotation; no autoplay GLTF clip",
+    "localRepair": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\mechanical-repairs\\harbor\\chance_wheel\\a9148dbfec37e641\\repair-report-final.json",
+      "sha256": "901b7783adfe9f2324b2b0550431528539e5f6cd4016737a878ba5251ff4628e",
+      "bytes": 295977
+    },
+    "verification": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\mechanical-repairs\\harbor\\chance_wheel\\a9148dbfec37e641\\verification-frozen.json",
+      "sha256": "b447dc5197aba3a36989ece4171d40b6660a6852a7caaf1fb588238fc61772dd",
+      "bytes": 1187
+    },
+    "tool": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\mechanical-repairs\\harbor\\chance_wheel\\a9148dbfec37e641\\repair_harbor_wheel_boundary.py",
+      "sha256": "f89e734ebd09ac2012ac82ba1c58d133f51694cc7c18000e2e9397d8c3be514e",
+      "bytes": 15964
+    },
+    "status": "geometry_verified_and_actual_poses_reviewed_pending_external_final_approval"
+  },
+  "componentLocalRepair": {
+    "newFacesAdded": 555,
+    "splitSourceTriangles": 106,
+    "originalVerticesMoved": 0,
+    "localRepair": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\component-repairs\\harbor\\chance_wheel\\a9148dbfec37e641d2c6d0818253aaa6976f1fb2821e1965b0545c5abf7d8b8d\\repair-report-final.json",
+      "sha256": "901b7783adfe9f2324b2b0550431528539e5f6cd4016737a878ba5251ff4628e",
+      "bytes": 295977
+    },
+    "verification": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\component-repairs\\harbor\\chance_wheel\\a9148dbfec37e641d2c6d0818253aaa6976f1fb2821e1965b0545c5abf7d8b8d\\verification-frozen.json",
+      "sha256": "b447dc5197aba3a36989ece4171d40b6660a6852a7caaf1fb588238fc61772dd",
+      "bytes": 1187
+    },
+    "tool": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\component-repairs\\harbor\\chance_wheel\\a9148dbfec37e641d2c6d0818253aaa6976f1fb2821e1965b0545c5abf7d8b8d\\repair_harbor_wheel_boundary.py",
+      "sha256": "f89e734ebd09ac2012ac82ba1c58d133f51694cc7c18000e2e9397d8c3be514e",
+      "bytes": 15964
+    }
+  },
+  "componentVisualReview": {
+    "status": "passed_by_processing_agent_pending_external_approval",
+    "notes": "All nine actual 0/45/90 front/right/isometric images and four neutral-material front/right images at 0/90 were inspected individually. Existing painted inner plate and hub rotate, while original outer bronze rim, pointer, rear pedestal and whole building stay fixed. The earlier foreground copper strip no longer moves. A narrow native pointer-occlusion mark and slightly uneven local relief remain on the painted plate; neutral material shows continuous geometry, not a through-hole. At mobile scale this is a minor inherited surface imperfection. New internal side/back closure and tiny nonplanar hub-boundary fan are explicit local mechanical repair, not a new complete disc."
+  },
+  "componentTools": [
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\5ef865750c005ad1c449653f1e25b1e6d3a77dad5a7cbd41ecb5273b83364789-neural_component.py",
+      "sha256": "5ef865750c005ad1c449653f1e25b1e6d3a77dad5a7cbd41ecb5273b83364789",
+      "bytes": 11603
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\a05381f29dd4d1c10b92b6eade3b5130223422118f258cb980dcb645de3b93b3-finalize_component.py",
+      "sha256": "a05381f29dd4d1c10b92b6eade3b5130223422118f258cb980dcb645de3b93b3",
+      "bytes": 4855
+    }
+  ],
+  "geometryAndMotionInheritedFrom": {
+    "path": "art/full-ai-city/processed/harbor/chance_wheel/a9148dbfec37e641-f62ca1dbba30159a.json",
+    "sha256": "f62ca1dbba30159acea52ce50b36863a177de779fb1f58e05f3a5202b4be5e34"
+  },
+  "priorShadingOnlyRefinement": {
+    "sourceCandidate": {
+      "path": "assets/models/regions-ai/full/harbor/chance_wheel/a9148dbfec37e641.glb",
+      "sha256": "a9148dbfec37e641d2c6d0818253aaa6976f1fb2821e1965b0545c5abf7d8b8d"
+    },
+    "sourceProcessingReport": {
+      "path": "art/full-ai-city/processed/harbor/chance_wheel/a9148dbfec37e641-f62ca1dbba30159a.json",
+      "sha256": "f62ca1dbba30159acea52ce50b36863a177de779fb1f58e05f3a5202b4be5e34"
+    },
+    "removedNormalTextureMaterials": [
+      0
+    ],
+    "allBinaryPayloadBytesUnchanged": true,
+    "geometryUVImagesHierarchyAnimationUnchanged": true,
+    "reason": "Preserve the inspected mechanical repair and original atlas; remove only the diagnosed noisy tangent-space normal bake. No new color sampling, image/model generation or extra reduction."
+  },
+  "localWheelTextureRepair": {
+    "method": "Bounded actual-original-neural-texture nearest plate sampling into unchanged existing wheel UV pixels. No flat palette or reference painting.",
+    "sourceCandidate": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\shading-harbor-wheel\\chance_wheel.glb",
+      "sha256": "c949f9bcdbdbd1e8804dba7157477215069e61cef8fef39579e7aa9c410a3486",
+      "bytes": 1808340
+    },
+    "sourceRaw": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\harbor--chance_wheel-a001-pixal-mv-1024-9247.glb",
+      "sha256": "fafa4b96f6b71b4800ba9b961b6054e7378582aaccd6a9ad62681f8888a96242",
+      "bytes": 40860584
+    },
+    "sourceNormalization": {
+      "enabled": true,
+      "candidate_degrees": 1.5666936373353038,
+      "applied_degrees": 1.5666936373353038,
+      "underside_area": 0.16380018921027995,
+      "normal_agreement": 0.951756805231348,
+      "yaw_degrees": 180,
+      "pitch_degrees": 0,
+      "roll_degrees": 0,
+      "uniform_scale": 1.140423731601668
+    },
+    "wheelNode": 2,
+    "selectedFrontPlateFaces": 208,
+    "sourcePlateTriangles": 5092,
+    "paintRadius": [
+      0.029,
+      0.147
+    ],
+    "sourceLocalDepth": [
+      -0.02,
+      0.009
+    ],
+    "targetLocalDepth": [
+      -0.015,
+      0.015
+    ],
+    "atlasSize": 1024,
+    "changedPixels": 3388,
+    "untouchedPixels": 1045188,
+    "allPixelsOutsideSelectedWheelUVUnchangedBeforeEncoding": true,
+    "overlappingPaintUVPixelsSkipped": 0,
+    "sourceDistanceQuantiles": [
+      0.00018354583880864084,
+      0.0007254328462295233,
+      0.001230578781105577,
+      0.014516581781208515
+    ],
+    "distanceRejectedPixels": 0,
+    "preservation": {
+      "positionsIndicesNormalsUVHierarchyAnimationUnchanged": true,
+      "materialsTextureReferencesAndSamplerUnchanged": true,
+      "onlyReplacedImageIndex": 1,
+      "preservedBufferViews": [
+        {
+          "bufferView": 0,
+          "sha256": "fa5aac1424ef72f6e39d48c4fbf58ca46f5b99425586bfcb595bdd6eceb16e46"
+        },
+        {
+          "bufferView": 2,
+          "sha256": "8497e52eea492775c4e777acb7ed6e768e1961bdb55edb4d09c0b3aea52c662b"
+        },
+        {
+          "bufferView": 3,
+          "sha256": "7a814d51009317e05461679304c040a8c400f0bb50732801ebac74f18a4c6d49"
+        },
+        {
+          "bufferView": 4,
+          "sha256": "ba6f975cb65e2042dc038a2d90b627c1135b149cbd5c969cc7b07621161776af"
+        },
+        {
+          "bufferView": 5,
+          "sha256": "f74a15fda2a4e8628347b8819ddb6f072913962b089b000b30193193d19dd75d"
+        },
+        {
+          "bufferView": 6,
+          "sha256": "bfbf11333933b8b9bd9189a5792a4b5ec529ce59d5526997dd3857580ed78e66"
+        },
+        {
+          "bufferView": 7,
+          "sha256": "4387b302953e762d03193e0be88b968012da26a1f2bab6d27e4b9870f2cbfa3a"
+        },
+        {
+          "bufferView": 8,
+          "sha256": "4d74c4b6d4f3d222ad85fe064ecd09712daaf4085a333f70a3f205e2b85077dd"
+        },
+        {
+          "bufferView": 9,
+          "sha256": "ae5f8747a43460fdaf8c7affee06c5a3840fb009089f9ee1164c3769a81cc29f"
+        },
+        {
+          "bufferView": 10,
+          "sha256": "9f3f9188c8eb156ceb2e57162ca4cd4e64b217fadb9700e68a59311f1c195c7e"
+        }
+      ]
+    }
+  }
+}

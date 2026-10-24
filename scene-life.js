@@ -2,8 +2,8 @@
 // Articulated Blender parts are kept by scene.js before its static mesh batching.
 import { createCityLighting } from './scene-lighting.js?v=20261024-1';
 import { createCityWeather } from './scene-weather.js?v=20261024-1';
-import { createCityOutskirts } from './scene-outskirts.js?v=20261024-1';
-import { createDestinationScene } from './scene-destinations.js?v=20261024-1';
+import { createCityOutskirts } from './scene-outskirts.js?v=20261024-4';
+import { createDestinationScene } from './scene-destinations.js?v=20261024-4';
 export function shouldPreserveLifeNode(node) {
   return !!node?.userData?.lifePart || /^life_(wheel_rotor|crane_pendulum)$/.test(node?.name || '');
 }

@@ -5,7 +5,7 @@ import { batchGardenBuilding, instanceGardenBuildings } from './scene-garden-kit
 // Regional architecture is shared by all scenic copies. The selected map owns
 // only its merged placement geometry, never the GLTF cache's materials/textures.
 function loadBundle(file){
-  return loadSharedModelAsset(file,{version:file==='city-kit.glb'?'20260911-12':'20261024-1'});
+  return loadSharedModelAsset(file,{version:file==='city-kit.glb'?'20260911-12':'20261024-4'});
 }
 export function createCityOutskirts({THREE,world,boardBounds,mapId='classic',requestRender=()=>{},loadSceneryBundle=loadBundle}){
   const root=new THREE.Group();root.name='city_outskirts';root.userData.cosmetic=true;world.add(root);

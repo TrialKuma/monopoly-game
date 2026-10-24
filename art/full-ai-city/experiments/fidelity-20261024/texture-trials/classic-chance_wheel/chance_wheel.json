@@ -1,0 +1,499 @@
+{
+  "status": "exported_pending_visual_review",
+  "createdAt": "2026-10-24T09:49:19.787552+00:00",
+  "region": "classic",
+  "asset": "chance_wheel",
+  "source": {
+    "rawGLB": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\classic--chance_wheel-a001-pixal-mv-1024-9247.glb",
+      "sha256": "91fc8cc60e033de16ef10373de13de81883e41600db98e1ee327dba58a8477ef",
+      "bytes": 37578716
+    }
+  },
+  "inferenceReport": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\classic--chance_wheel-a001\\classic--chance_wheel-a001-pixal-mv-1024-9247.json",
+    "sha256": "341b3cd3db60370c4699592d8308e3e218db9dffa0778162eb338968598d037e",
+    "bytes": 8157
+  },
+  "reference": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\references\\classic\\chance_wheel\\reference.json",
+    "sha256": "aed83279e000fdc7c85d28fe009135828290d6cdf2731f43ea88198668196bc1",
+    "bytes": 4037
+  },
+  "processingTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\classic-chance_wheel\\tools\\c8e7cb1f25d382a25729be876aa0d953a97abd3f2ae5db66841e7dc0dcefa7a7-refresh_baked_textures.py",
+    "sha256": "c8e7cb1f25d382a25729be876aa0d953a97abd3f2ae5db66841e7dc0dcefa7a7",
+    "bytes": 17719
+  },
+  "assumedCameras": true,
+  "cameraCalibration": "assumed_standard_orbit_not_measured",
+  "nativePipeline": "Pixal3DMVImageTo3DPipeline.run_mv",
+  "nativeResolution": 1024,
+  "seed": 9247,
+  "geometryOrigin": "Only the actual neural source reduced and rebaked; no authored substitute geometry or manually constructed surfaces",
+  "orientation": {
+    "up": "Y",
+    "front": "+Z",
+    "groundY": 0,
+    "maxEdge": 1
+  },
+  "requestedTriangles": 30000,
+  "limitations": [
+    "Assumed camera reference reconstruction, not exact measured architecture",
+    "Final candidate requires actual rendered visual approval",
+    "Texture-only repair preserves all original geometry and does not straighten source reconstruction defects."
+  ],
+  "animation": {
+    "driver": "scene-life",
+    "autoplayClip": false,
+    "node": "classic__chance_wheel__neural_wheel",
+    "lifePart": "wheel",
+    "localRotationAxis": "Z",
+    "geometryOrigin": "Only original neural-derived faces, no added geometry",
+    "poseReview": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\classic-chance_wheel\\motion\\review.json",
+      "sha256": "2937fea305d164ddbb8e9417e0f6ded86a5acaa22a6c332d7662e5bd17cb1bcf",
+      "bytes": 4278
+    },
+    "frames": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\classic-chance_wheel\\motion\\pose-0-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\classic-chance_wheel\\motion\\pose-0-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\classic-chance_wheel\\motion\\pose-0-iso.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\classic-chance_wheel\\motion\\pose-45-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\classic-chance_wheel\\motion\\pose-45-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\classic-chance_wheel\\motion\\pose-45-iso.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\classic-chance_wheel\\motion\\pose-90-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\classic-chance_wheel\\motion\\pose-90-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\classic-chance_wheel\\motion\\pose-90-iso.png"
+    ]
+  },
+  "processingComplete": true,
+  "lod": "near",
+  "processingRevision": 0,
+  "derivation": {
+    "rawTriangles": 937991,
+    "weldedTriangles": 934766,
+    "remeshedTriangles": 2177868,
+    "voxelSize": 0.003,
+    "finalTriangles": 29988,
+    "atlasArea": 0.40959226104967167,
+    "singleReductionPass": true,
+    "inheritedUVRemovedBeforeReduction": true,
+    "sourceMaterialsUntouched": true
+  },
+  "bake": {
+    "method": "CPU closest-original-triangle projection with float64 barycentric original UV and bilinear original texture sampling; geometric normals retained, no directional normal-map rebake or invented color",
+    "coveredAtlasPixels": 1709674,
+    "nearestLookupSuccessFraction": 1.0,
+    "notRayCoverage": true,
+    "sourceDistanceQuantiles": [
+      0.00010371048483648337,
+      0.000643188532558269,
+      0.0011228865652810783,
+      0.005981013178825378
+    ],
+    "sourceDistanceQuantileLevels": [
+      0.5,
+      0.95,
+      0.99,
+      1
+    ],
+    "overTwoPercentMaxEdge": 0.0,
+    "distanceReviewRequired": false,
+    "visualGeometryReviewRequired": true,
+    "barycentricOriginalRange": [
+      -0.0004052829522724899,
+      1.0
+    ],
+    "degenerateOrInvalidBarycentricCount": 0,
+    "closestSourceVertexFallbackFraction": 0.0,
+    "barycentricPointReconstructionErrorQuantiles": [
+      7.353711459060217e-09,
+      4.133243080143022e-08,
+      1.2058247215749261e-06
+    ],
+    "atlasOverlapPixelsWithDifferentSurface": 9056,
+    "seconds": 15.069225300001563,
+    "maps": [
+      {
+        "role": "base",
+        "size": [
+          2048,
+          2048
+        ]
+      },
+      {
+        "role": "orm",
+        "size": [
+          1024,
+          1024
+        ]
+      }
+    ]
+  },
+  "processedCandidate": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\classic-chance_wheel\\chance_wheel.glb",
+    "sha256": "5c689ab416ffde8a7e104d294e0d444df9162cbcd195211de09da9d34dc7e0ba",
+    "bytes": 3926264
+  },
+  "glbValidation": {
+    "version": 2,
+    "triangles": 29988,
+    "meshes": 2,
+    "materials": 1,
+    "images": 3,
+    "all_primitives_have_uv": true,
+    "animations": [],
+    "all_images_embedded": true,
+    "external_buffers": []
+  },
+  "triangles": 29988,
+  "renderedCandidate": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\classic-chance_wheel\\renders\\lod-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\classic-chance_wheel\\renders\\lod-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\classic-chance_wheel\\renders\\lod-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\classic-chance_wheel\\renders\\lod-left.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\classic-chance_wheel\\renders\\lod-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.5005122423171997,
+        -0.46015819907188416,
+        -6.23114246991463e-05
+      ],
+      "max": [
+        0.49933087825775146,
+        0.45941969752311707,
+        0.9904513955116272
+      ]
+    },
+    "triangles": 29988,
+    "textureSizes": [
+      {
+        "name": "classic__chance_wheel__base",
+        "size": [
+          2048,
+          2048
+        ]
+      },
+      {
+        "name": "classic__chance_wheel__orm",
+        "size": [
+          1024,
+          1024
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "renderedSource": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\classic-chance_wheel\\source-review\\raw-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\classic-chance_wheel\\source-review\\raw-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.5,
+        -0.46010658144950867,
+        0.0
+      ],
+      "max": [
+        0.5,
+        0.46010658144950867,
+        0.9902204871177673
+      ]
+    },
+    "triangles": 937991,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "bounds": {
+    "min": [
+      -0.5005122423171997,
+      -6.23114246991463e-05,
+      -0.45941969752311707
+    ],
+    "max": [
+      0.49933087825775146,
+      0.9904513955116272,
+      0.46015819907188416
+    ],
+    "coordinateSystem": "GLTF Y-up; +Z front"
+  },
+  "textureSizes": [
+    {
+      "name": "classic__chance_wheel__base",
+      "size": [
+        2048,
+        2048
+      ]
+    },
+    {
+      "name": "classic__chance_wheel__orm",
+      "size": [
+        1024,
+        1024
+      ]
+    }
+  ],
+  "rawSourceUnchanged": true,
+  "completedAt": "2026-10-24T09:49:55.121596+00:00",
+  "derivedFromStaticCandidate": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\candidate-history\\classic\\chance_wheel\\f36cf5b34d2b69b535fc873c82be9617bdad019a319bc5b3c4689b0fe610528c\\chance_wheel.glb",
+    "sha256": "f36cf5b34d2b69b535fc873c82be9617bdad019a319bc5b3c4689b0fe610528c",
+    "bytes": 1377668
+  },
+  "componentSeparation": {
+    "source": {
+      "path": "art\\full-ai-city\\candidates\\classic\\chance_wheel.glb",
+      "sha256": "f36cf5b34d2b69b535fc873c82be9617bdad019a319bc5b3c4689b0fe610528c"
+    },
+    "output": {
+      "path": "art\\full-ai-city\\component-candidates\\classic\\chance_wheel.glb",
+      "sha256": "58998dcb9fd7645266ed498837db3a153754e141c675b2d040064f011d620a39",
+      "bytes": 1562952
+    },
+    "staticTriangles": 28900,
+    "movingTriangles": 1088,
+    "triangleTotalPreserved": 29988,
+    "poseZeroMaxPositionError": 7.373909399754908e-09,
+    "embeddedImageHashesUnchanged": true,
+    "selection": {
+      "name": "classic__chance_wheel__neural_wheel",
+      "lifePart": "wheel",
+      "center": [
+        0.363,
+        0.267,
+        0.144
+      ],
+      "axis": [
+        0.682788074,
+        0.029186027,
+        0.730033278
+      ],
+      "radius": 0.185,
+      "depth": [
+        -0.035,
+        0.035
+      ],
+      "measurement": "PCA of original near-mesh wheel color samples plus rendered front/right/iso inspection. Selection is only existing neural-derived triangles. Pivot refined against the actual hub cap vertices and front/iso CPU projections; selection volume unchanged.",
+      "selectionCenter": [
+        0.35,
+        0.265,
+        0.153
+      ]
+    },
+    "driver": "scene-life; no autoplay GLTF clip",
+    "newFacesAdded": 0
+  },
+  "componentTools": [
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\333d56b36782e578d1258d90a9dddcf32246da9c48203ee8f72f70c581da69a1-neural_component.py",
+      "sha256": "333d56b36782e578d1258d90a9dddcf32246da9c48203ee8f72f70c581da69a1",
+      "bytes": 9639
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\92328d50082a4cc9f952d6232e3f562f7ed991c18ab0a43d3888f405a13699a7-finalize_component.py",
+      "sha256": "92328d50082a4cc9f952d6232e3f562f7ed991c18ab0a43d3888f405a13699a7",
+      "bytes": 3275
+    }
+  ],
+  "textureTransferTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\classic-chance_wheel\\tools\\fbab2f26c5a0e8b0063598e5d935825fc555c5d999dccab23c87b36ca0925214-bake_nearest_surface.py",
+    "sha256": "fbab2f26c5a0e8b0063598e5d935825fc555c5d999dccab23c87b36ca0925214",
+    "bytes": 7557
+  },
+  "textureOnlyReprocessing": {
+    "sourceCandidate": {
+      "path": "assets/models/regions-ai/full/classic/chance_wheel.glb",
+      "sha256": "58998dcb9fd7645266ed498837db3a153754e141c675b2d040064f011d620a39"
+    },
+    "sourceProcessingReport": {
+      "path": "art/full-ai-city/processed/classic/chance_wheel.json",
+      "sha256": "a3fb7856d17c9ffb3c60aef1385124343201c95b74ad0357fc4ae30bb3d06778"
+    },
+    "positionsUnchanged": true,
+    "faceIndicesUnchanged": true,
+    "cornerNormalsUnchanged": true,
+    "UVBytesUnchanged": true,
+    "additionalRemeshOrSimplification": false,
+    "sourceTexture": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\classic--chance_wheel-a001-pixal-mv-1024-9247.glb",
+      "sha256": "91fc8cc60e033de16ef10373de13de81883e41600db98e1ee327dba58a8477ef",
+      "bytes": 37578716
+    },
+    "normalization": {
+      "enabled": true,
+      "candidate_degrees": 1.1127500870295592,
+      "applied_degrees": 1.1127500870295592,
+      "underside_area": 0.114825384388477,
+      "normal_agreement": 0.9377203766698433,
+      "yaw_degrees": 180,
+      "pitch_degrees": 0,
+      "roll_degrees": 0,
+      "uniform_scale": 1.0922926939535147
+    },
+    "samplingRestInstances": [
+      {
+        "node": 0,
+        "name": "classic__chance_wheel__neural_lod",
+        "triangles": 28900,
+        "restWorldMatrix": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      {
+        "node": 2,
+        "name": "classic__chance_wheel__neural_wheel",
+        "triangles": 1088,
+        "restWorldMatrix": [
+          [
+            0.730525665175382,
+            -0.011518779415585318,
+            0.6827880858955001,
+            0.363
+          ],
+          [
+            -0.011518779415585318,
+            0.9995076255432219,
+            0.029186027508477524,
+            0.267
+          ],
+          [
+            -0.6827880858955001,
+            -0.029186027508477524,
+            0.7300332907186038,
+            0.144
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      }
+    ],
+    "preservation": {
+      "allGeometryUVNormalAndAnimationBytesUnchanged": true,
+      "nodeHierarchyAndRestTransformsUnchanged": true,
+      "materialAndTextureIndicesUnchanged": true,
+      "meshPrimitiveReferencesUnchanged": true,
+      "onlyMaterialChange": "Removed legacy baked normalTexture binding",
+      "preservedBufferViews": [
+        {
+          "bufferView": 0,
+          "bytes": 195717,
+          "sha256": "683d7782a196a60ed9c182a74d64ec1de041552b6e166ebc992506a7048881fd"
+        },
+        {
+          "bufferView": 3,
+          "bytes": 406692,
+          "sha256": "90b7f7bc7436dd1398865b2e0a5faeab994f6eb782d2ebcdafcfd21e0a3bb8aa"
+        },
+        {
+          "bufferView": 4,
+          "bytes": 135564,
+          "sha256": "43dbd92c839564dc73468c0cade4ecbec6fe9738d8c3275ede4b8670be46c4c5"
+        },
+        {
+          "bufferView": 5,
+          "bytes": 135564,
+          "sha256": "474dc44704f835e59fa02367b5d92653fdeb3f1a499aacccb8104d06cd38c823"
+        },
+        {
+          "bufferView": 6,
+          "bytes": 346800,
+          "sha256": "3085bd81115f67a0a3d22a6cd7b139ce5347d43e47bacf6e4c83704e47b23ad0"
+        },
+        {
+          "bufferView": 7,
+          "bytes": 15732,
+          "sha256": "67a49b6a4977a497db9cec024434e888379f022087c05ee208e7fe0093324900"
+        },
+        {
+          "bufferView": 8,
+          "bytes": 5244,
+          "sha256": "432d404622074ebd48eb45f8eb86d16403e65a819e7556896585fde52b5d3de6"
+        },
+        {
+          "bufferView": 9,
+          "bytes": 5244,
+          "sha256": "0a930c988cb4d4f2bdc3e6451a51b729e0aab21fbca071b949dddc5945e971db"
+        },
+        {
+          "bufferView": 10,
+          "bytes": 13056,
+          "sha256": "b195e0d3c370978d620734fc6643cee308943333d8cf4ae3eb54594f4cfad1dc"
+        }
+      ],
+      "replacedImageViews": [
+        1,
+        2
+      ],
+      "originalNormalImageRetainedUnreferenced": true
+    },
+    "maps": {
+      "base": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\classic-chance_wheel\\base.jpg",
+        "sha256": "8099b94bbbd884407baf7c2bd571b5ee97d72055738f50d65cd75e25080476d6",
+        "bytes": 1725046
+      },
+      "orm": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\classic-chance_wheel\\orm.png",
+        "sha256": "38ac24221151f63d40a3e639a92540defe881fee67a893f30943e88387c0df76",
+        "bytes": 937555
+      }
+    },
+    "atlasOverlapReviewRequired": true,
+    "diagnosticOnly": false
+  },
+  "textureOrigin": "Original source PBR sampled at the existing approved UVs through closest source triangle; 2K base and 1K ORM, geometric normals retained. No new images generated by AI.",
+  "geometryAndMotionInheritedFrom": {
+    "path": "art/full-ai-city/processed/classic/chance_wheel.json",
+    "sha256": "a3fb7856d17c9ffb3c60aef1385124343201c95b74ad0357fc4ae30bb3d06778"
+  }
+}

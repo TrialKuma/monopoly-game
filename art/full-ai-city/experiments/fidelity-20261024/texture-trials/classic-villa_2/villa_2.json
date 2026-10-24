@@ -1,0 +1,364 @@
+{
+  "status": "exported_pending_visual_review",
+  "createdAt": "2026-10-24T09:44:47.110991+00:00",
+  "region": "classic",
+  "asset": "villa_2",
+  "source": {
+    "rawGLB": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\classic--villa_2-a001-pixal-mv-1024-18341.glb",
+      "sha256": "2c4f88789bdf84f437ce1c954e7375b71dc65d95e56bce8957db5c0a82e5f32e",
+      "bytes": 41869212
+    }
+  },
+  "inferenceReport": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\classic--villa_2-a001\\classic--villa_2-a001-pixal-mv-1024-18341.json",
+    "sha256": "5b658e839359611163cb229ed406548aca6eabb3e0a0e121bffcf02226e1ce32",
+    "bytes": 8027
+  },
+  "reference": {
+    "path": "H:\\代码项目\\monopoly\\art\\themed-city-kit\\inputs\\classic-house-v01\\transforms.json",
+    "sha256": "b73421a3f55bd22c92f546abaff15a3a3fe70b15012ef81a828a6ffb50a6056b",
+    "bytes": 4143
+  },
+  "processingTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\classic-villa_2\\tools\\c8e7cb1f25d382a25729be876aa0d953a97abd3f2ae5db66841e7dc0dcefa7a7-refresh_baked_textures.py",
+    "sha256": "c8e7cb1f25d382a25729be876aa0d953a97abd3f2ae5db66841e7dc0dcefa7a7",
+    "bytes": 17719
+  },
+  "assumedCameras": true,
+  "cameraCalibration": "assumed_standard_orbit_not_measured",
+  "nativePipeline": "Pixal3DMVImageTo3DPipeline.run_mv",
+  "nativeResolution": 1024,
+  "seed": 18341,
+  "geometryOrigin": "Only the actual neural source reduced and rebaked; no authored substitute geometry or manually constructed surfaces",
+  "orientation": {
+    "up": "Y",
+    "front": "+Z",
+    "groundY": 0,
+    "maxEdge": 1
+  },
+  "requestedTriangles": 30000,
+  "limitations": [
+    "Assumed camera reference reconstruction, not exact measured architecture",
+    "Final candidate requires actual rendered visual approval",
+    "Texture-only repair preserves all original geometry and does not straighten source reconstruction defects."
+  ],
+  "animation": null,
+  "processingComplete": true,
+  "lod": "near",
+  "derivation": {
+    "rawTriangles": 984635,
+    "weldedTriangles": 980399,
+    "remeshedTriangles": 1656064,
+    "voxelSize": 0.003,
+    "finalTriangles": 29994,
+    "atlasArea": 0.43758125596330877,
+    "singleReductionPass": true,
+    "inheritedUVRemovedBeforeReduction": true,
+    "sourceMaterialsUntouched": true
+  },
+  "bake": {
+    "method": "CPU closest-original-triangle projection with float64 barycentric original UV and bilinear original texture sampling; geometric normals retained, no directional normal-map rebake or invented color",
+    "coveredAtlasPixels": 1828067,
+    "nearestLookupSuccessFraction": 1.0,
+    "notRayCoverage": true,
+    "sourceDistanceQuantiles": [
+      0.0001275302784051746,
+      0.000786627491470426,
+      0.0014176134066656233,
+      0.006303407251834869
+    ],
+    "sourceDistanceQuantileLevels": [
+      0.5,
+      0.95,
+      0.99,
+      1
+    ],
+    "overTwoPercentMaxEdge": 0.0,
+    "distanceReviewRequired": false,
+    "visualGeometryReviewRequired": true,
+    "barycentricOriginalRange": [
+      -0.0003540644042863384,
+      1.0
+    ],
+    "degenerateOrInvalidBarycentricCount": 0,
+    "closestSourceVertexFallbackFraction": 0.0,
+    "barycentricPointReconstructionErrorQuantiles": [
+      5.737097779364494e-09,
+      3.822086981847179e-08,
+      1.1023962042865563e-06
+    ],
+    "atlasOverlapPixelsWithDifferentSurface": 4474,
+    "seconds": 15.614063799999713,
+    "maps": [
+      {
+        "role": "base",
+        "size": [
+          2048,
+          2048
+        ]
+      },
+      {
+        "role": "orm",
+        "size": [
+          1024,
+          1024
+        ]
+      }
+    ]
+  },
+  "processedCandidate": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\classic-villa_2\\villa_2.glb",
+    "sha256": "a329f2d9ef698fbf82ef614d9409900a143fd2f392173012b2f88533ccae8917",
+    "bytes": 3199692
+  },
+  "glbValidation": {
+    "version": 2,
+    "triangles": 29994,
+    "meshes": 1,
+    "materials": 1,
+    "images": 3,
+    "all_primitives_have_uv": true,
+    "animations": [],
+    "all_images_embedded": true,
+    "external_buffers": []
+  },
+  "triangles": 29994,
+  "renderedCandidate": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\classic-villa_2\\renders\\lod-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\classic-villa_2\\renders\\lod-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\classic-villa_2\\renders\\lod-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\classic-villa_2\\renders\\lod-left.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\classic-villa_2\\renders\\lod-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.397813081741333,
+        -0.2956813871860504,
+        -0.0002983032027259469
+      ],
+      "max": [
+        0.39930763840675354,
+        0.2957451343536377,
+        0.9996811151504517
+      ]
+    },
+    "triangles": 29994,
+    "textureSizes": [
+      {
+        "name": "classic__villa_2__base",
+        "size": [
+          2048,
+          2048
+        ]
+      },
+      {
+        "name": "classic__villa_2__orm",
+        "size": [
+          1024,
+          1024
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "renderedSource": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\classic-villa_2\\source-review\\raw-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\classic-villa_2\\source-review\\raw-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.39804717898368835,
+        -0.29584914445877075,
+        0.0
+      ],
+      "max": [
+        0.39804717898368835,
+        0.29584914445877075,
+        1.0
+      ]
+    },
+    "triangles": 984635,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "bounds": {
+    "min": [
+      -0.397813081741333,
+      -0.0002983032027259469,
+      -0.2957451343536377
+    ],
+    "max": [
+      0.39930763840675354,
+      0.9996811151504517,
+      0.2956813871860504
+    ],
+    "coordinateSystem": "GLTF Y-up; +Z front"
+  },
+  "textureSizes": [
+    {
+      "name": "classic__villa_2__base",
+      "size": [
+        2048,
+        2048
+      ]
+    },
+    {
+      "name": "classic__villa_2__orm",
+      "size": [
+        1024,
+        1024
+      ]
+    }
+  ],
+  "rawSourceUnchanged": true,
+  "completedAt": "2026-10-24T09:44:58.587530+00:00",
+  "textureTransferTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\classic-villa_2\\tools\\fbab2f26c5a0e8b0063598e5d935825fc555c5d999dccab23c87b36ca0925214-bake_nearest_surface.py",
+    "sha256": "fbab2f26c5a0e8b0063598e5d935825fc555c5d999dccab23c87b36ca0925214",
+    "bytes": 7557
+  },
+  "textureOnlyReprocessing": {
+    "sourceCandidate": {
+      "path": "assets/models/regions-ai/full/classic/villa_2.glb",
+      "sha256": "9fc6d3c7d5ea9080debfc7317e3c9abfe64c8e42e5f6fc771829d30100ec464c"
+    },
+    "sourceProcessingReport": {
+      "path": "art/full-ai-city/processed/classic/villa_2.json",
+      "sha256": "cba0971746836cb76e3938b519507a460fa3ba6781e07a62676fe66bdd192c75"
+    },
+    "positionsUnchanged": true,
+    "faceIndicesUnchanged": true,
+    "cornerNormalsUnchanged": true,
+    "UVBytesUnchanged": true,
+    "additionalRemeshOrSimplification": false,
+    "sourceTexture": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\classic--villa_2-a001-pixal-mv-1024-18341.glb",
+      "sha256": "2c4f88789bdf84f437ce1c954e7375b71dc65d95e56bce8957db5c0a82e5f32e",
+      "bytes": 41869212
+    },
+    "normalization": {
+      "enabled": true,
+      "candidate_degrees": 0.31403502256426125,
+      "applied_degrees": 0.31403502256426125,
+      "underside_area": 0.10104162931005979,
+      "normal_agreement": 0.9626569176079278,
+      "yaw_degrees": 180,
+      "pitch_degrees": 0,
+      "roll_degrees": 0,
+      "uniform_scale": 1.0602268996645954
+    },
+    "samplingRestInstances": [
+      {
+        "node": 0,
+        "name": "classic__villa_2__neural_lod",
+        "triangles": 29994,
+        "restWorldMatrix": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      }
+    ],
+    "preservation": {
+      "allGeometryUVNormalAndAnimationBytesUnchanged": true,
+      "nodeHierarchyAndRestTransformsUnchanged": true,
+      "materialAndTextureIndicesUnchanged": true,
+      "meshPrimitiveReferencesUnchanged": true,
+      "onlyMaterialChange": "Removed legacy baked normalTexture binding",
+      "preservedBufferViews": [
+        {
+          "bufferView": 0,
+          "bytes": 458508,
+          "sha256": "898edbd1cd7a1133589030f56dfb9ccb60739f84880314fcdd3f547ae9973964"
+        },
+        {
+          "bufferView": 1,
+          "bytes": 152836,
+          "sha256": "cbec31c4882f5c342904044a10fbe02f80eddcda5ec7c335698d05cefe065f42"
+        },
+        {
+          "bufferView": 2,
+          "bytes": 152836,
+          "sha256": "31c3abf0ae8a2eb2a24fb8ccb1f2770f28aade2431ebb5fc866e3d855b65bec3"
+        },
+        {
+          "bufferView": 3,
+          "bytes": 179964,
+          "sha256": "c08e34cb494d3a95568f7fe0edc4ef7197064a52bccc817173a23f0e64fa82c2"
+        },
+        {
+          "bufferView": 4,
+          "bytes": 221980,
+          "sha256": "5a87d8e0e392fd8f709094acf6e26eef1e034071d57957783659720c433036cb"
+        }
+      ],
+      "replacedImageViews": [
+        5,
+        6
+      ],
+      "originalNormalImageRetainedUnreferenced": true
+    },
+    "maps": {
+      "base": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\classic-villa_2\\base.jpg",
+        "sha256": "e16afc5c291fda28f93e52565ea01f1a149bd6cbbb27d0887bf8b8407b008eb6",
+        "bytes": 1696289
+      },
+      "orm": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\classic-villa_2\\orm.png",
+        "sha256": "3e94395d1f7bf7fce56a0dc1dd229292203a08db27ef2c3405fe67d7ba61a43b",
+        "bytes": 335028
+      }
+    },
+    "atlasOverlapReviewRequired": false,
+    "diagnosticOnly": false
+  },
+  "textureOrigin": "Original source PBR sampled at the existing approved UVs through closest source triangle; 2K base and 1K ORM, geometric normals retained. No new images generated by AI.",
+  "geometryAndMotionInheritedFrom": {
+    "path": "art/full-ai-city/processed/classic/villa_2.json",
+    "sha256": "cba0971746836cb76e3938b519507a460fa3ba6781e07a62676fe66bdd192c75"
+  }
+}

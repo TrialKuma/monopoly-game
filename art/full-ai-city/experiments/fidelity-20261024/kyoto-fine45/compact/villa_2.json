@@ -1,0 +1,275 @@
+{
+  "status": "exported_pending_visual_review",
+  "createdAt": "2026-10-24T09:50:53.240871+00:00",
+  "region": "compact",
+  "asset": "villa_2",
+  "source": {
+    "rawGLB": {
+      "path": "H:\\代码项目\\monopoly\\art\\themed-city-kit\\source\\compact-house-mv-v01-pixal-mv-1024-9247.glb",
+      "sha256": "06996b140f83e904faf0f9b5930fcea1a49e06fad4b6403b4f51c33af1dcdcc4",
+      "bytes": 43538496
+    }
+  },
+  "inferenceReport": {
+    "path": "H:\\代码项目\\monopoly\\art\\themed-city-kit\\reports\\compact-house-mv-v01\\compact-house-mv-v01-pixal-mv-1024-9247.json",
+    "sha256": "6e57956dc90be400f45deaddf3a856cd2eaebb65a7193b6c53996ae5e0754f7e",
+    "bytes": 7723
+  },
+  "reference": {
+    "path": "H:\\代码项目\\monopoly\\art\\themed-city-kit\\inputs\\compact-house-v01\\transforms.json",
+    "sha256": "3217390ff99020d8b9d190ba089e1db10e6678044c523b96e68396695f17a6d2",
+    "bytes": 4145
+  },
+  "processingTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\01259185d3327c7a75b8df2e595381e45eccf13901ce96ea80844701e548295e-process_lod.py",
+    "sha256": "01259185d3327c7a75b8df2e595381e45eccf13901ce96ea80844701e548295e",
+    "bytes": 34836
+  },
+  "assumedCameras": true,
+  "cameraCalibration": "assumed_standard_orbit_not_measured",
+  "nativePipeline": "Pixal3DMVImageTo3DPipeline.run_mv",
+  "nativeResolution": 1024,
+  "seed": 9247,
+  "geometryOrigin": "Only the actual neural source reduced and rebaked; no authored substitute geometry or manually constructed surfaces",
+  "orientation": {
+    "up": "Y",
+    "front": "+Z",
+    "groundY": 0,
+    "maxEdge": 1
+  },
+  "requestedTriangles": 45000,
+  "limitations": [
+    "Assumed camera reference reconstruction, not exact measured architecture",
+    "Final candidate requires actual rendered visual approval"
+  ],
+  "animation": null,
+  "processingComplete": true,
+  "lod": "near",
+  "processingRevision": 0,
+  "derivation": {
+    "rawTriangles": 968825,
+    "weldedTriangles": 960751,
+    "remeshedTriangles": 6381624,
+    "voxelSize": 0.002,
+    "finalTriangles": 44948,
+    "atlasArea": 0.38386408842509,
+    "singleReductionPass": true,
+    "inheritedUVRemovedBeforeReduction": true,
+    "sourceMaterialsUntouched": true,
+    "uvUnwrap": {
+      "angleDegrees": 66.0,
+      "islandMargin": 2e-05,
+      "marginMethod": "SCALED",
+      "nominalMarginPixels": null
+    }
+  },
+  "bake": {
+    "method": "CPU closest-original-triangle projection with float64 barycentric original UV and bilinear original texture sampling; geometric normals retained, no directional normal-map rebake or invented color",
+    "coveredAtlasPixels": 1601193,
+    "nearestLookupSuccessFraction": 1.0,
+    "notRayCoverage": true,
+    "sourceDistanceQuantiles": [
+      0.00018294493202120066,
+      0.0008998042554594569,
+      0.0014870749460533265,
+      0.007130204234272242
+    ],
+    "sourceDistanceQuantileLevels": [
+      0.5,
+      0.95,
+      0.99,
+      1
+    ],
+    "overTwoPercentMaxEdge": 0.0,
+    "distanceReviewRequired": false,
+    "visualGeometryReviewRequired": true,
+    "barycentricOriginalRange": [
+      -0.00021288053485538083,
+      1.0
+    ],
+    "degenerateOrInvalidBarycentricCount": 0,
+    "closestSourceVertexFallbackFraction": 0.0,
+    "barycentricPointReconstructionErrorQuantiles": [
+      8.007249504766883e-09,
+      4.2313423938885216e-08,
+      2.2607124370546945e-06
+    ],
+    "atlasOverlapPixelsWithDifferentSurface": 8707,
+    "seconds": 21.844576299998153,
+    "maps": [
+      {
+        "role": "base",
+        "size": [
+          2048,
+          2048
+        ]
+      },
+      {
+        "role": "orm",
+        "size": [
+          1024,
+          1024
+        ]
+      }
+    ]
+  },
+  "textureTransferTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\fbab2f26c5a0e8b0063598e5d935825fc555c5d999dccab23c87b36ca0925214-bake_nearest_surface.py",
+    "sha256": "fbab2f26c5a0e8b0063598e5d935825fc555c5d999dccab23c87b36ca0925214",
+    "bytes": 7557
+  },
+  "quantization": {
+    "source": "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\kyoto-fine45\\compact\\villa_2.glb",
+    "output": "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\kyoto-fine45\\compact\\villa_2.glb",
+    "sourceBytes": 3279772,
+    "outputBytes": 2527564,
+    "sourceSha256": "32a06066e59b98b17d68dd4f37ace43f048dfe39526fc779e91decaa45d7c274",
+    "outputSha256": "015df80c41b34a6f0582ce602b30712ee9a70534f36176cb3ffd9470d4829c67",
+    "positionFaceAndTextureBytesUnchanged": true,
+    "attributes": [
+      {
+        "accessor": 1,
+        "semantic": "NORMAL",
+        "count": 62697,
+        "maximumAngularErrorDegrees": 0.3790333984491807
+      },
+      {
+        "accessor": 2,
+        "semantic": "TEXCOORD_0",
+        "count": 62697,
+        "maximumUVError": 7.629470929970683e-06,
+        "maximumTexelErrorAt1024": 0.00781257823228998
+      }
+    ]
+  },
+  "processedCandidate": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\kyoto-fine45\\compact\\villa_2.glb",
+    "sha256": "015df80c41b34a6f0582ce602b30712ee9a70534f36176cb3ffd9470d4829c67",
+    "bytes": 2527564
+  },
+  "glbValidation": {
+    "version": 2,
+    "triangles": 44948,
+    "meshes": 1,
+    "materials": 1,
+    "images": 2,
+    "all_primitives_have_uv": true,
+    "animations": [],
+    "all_images_embedded": true,
+    "external_buffers": []
+  },
+  "triangles": 44948,
+  "renderedCandidate": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\kyoto-fine45\\renders\\compact\\villa_2\\lod-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\kyoto-fine45\\renders\\compact\\villa_2\\lod-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\kyoto-fine45\\renders\\compact\\villa_2\\lod-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\kyoto-fine45\\renders\\compact\\villa_2\\lod-left.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\kyoto-fine45\\renders\\compact\\villa_2\\lod-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.4412844181060791,
+        -0.4277489483356476,
+        0.0003325818688608706
+      ],
+      "max": [
+        0.44079291820526123,
+        0.4279029369354248,
+        0.9997149109840393
+      ]
+    },
+    "triangles": 44948,
+    "textureSizes": [
+      {
+        "name": "compact__villa_2__nearest_base",
+        "size": [
+          2048,
+          2048
+        ]
+      },
+      {
+        "name": "compact__villa_2__nearest_orm",
+        "size": [
+          1024,
+          1024
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "renderedSource": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\kyoto-fine45\\renders\\compact\\villa_2\\raw-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\kyoto-fine45\\renders\\compact\\villa_2\\raw-iso.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\kyoto-fine45\\renders\\compact\\villa_2\\raw-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\kyoto-fine45\\renders\\compact\\villa_2\\raw-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\kyoto-fine45\\renders\\compact\\villa_2\\raw-left.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.4408634901046753,
+        -0.428079754114151,
+        0.0
+      ],
+      "max": [
+        0.4408634901046753,
+        0.428079754114151,
+        1.0
+      ]
+    },
+    "triangles": 968825,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "bounds": {
+    "min": [
+      -0.4412844181060791,
+      0.0003325818688608706,
+      -0.4279029369354248
+    ],
+    "max": [
+      0.44079291820526123,
+      0.9997149109840393,
+      0.4277489483356476
+    ],
+    "coordinateSystem": "GLTF Y-up; +Z front"
+  },
+  "textureSizes": [
+    {
+      "name": "compact__villa_2__nearest_base",
+      "size": [
+        2048,
+        2048
+      ]
+    },
+    {
+      "name": "compact__villa_2__nearest_orm",
+      "size": [
+        1024,
+        1024
+      ]
+    }
+  ],
+  "rawSourceUnchanged": true,
+  "completedAt": "2026-10-24T09:53:56.200292+00:00"
+}

@@ -1,0 +1,158 @@
+{
+  "schemaVersion": 1,
+  "createdAt": "2026-10-24T10:17:22.133335+00:00",
+  "status": "ready_for_root_independent_visual_review_not_approved",
+  "candidate": {
+    "path": "art/full-ai-city/experiments/fidelity-20261024/harbor-wheel-color-v3/chance_wheel.glb",
+    "sha256": "62fa8956706aaf08a89df0eac7bfabf7ec50856a530267d4bf28e8eb07effdac",
+    "bytes": 1904160
+  },
+  "processingReport": {
+    "path": "art/full-ai-city/experiments/fidelity-20261024/harbor-wheel-color-v3/chance_wheel.json",
+    "sha256": "3aeca524c9925c98a4e0277130a479aeeea41c1deda1cf94721fa89bb85bd4aa",
+    "bytes": 20550
+  },
+  "priorCandidate": {
+    "path": "art/full-ai-city/experiments/fidelity-20261024/harbor-wheel-color-v2/chance_wheel.glb",
+    "sha256": "8d61fb7d3499b409ad4137bf83d5a37b84566dc51a32c2c62235e8f4c93644f3",
+    "bytes": 1870328
+  },
+  "originalShadingCandidate": {
+    "path": "art/full-ai-city/experiments/fidelity-20261024/shading-harbor-wheel/chance_wheel.glb",
+    "sha256": "c949f9bcdbdbd1e8804dba7157477215069e61cef8fef39579e7aa9c410a3486",
+    "bytes": 1808340
+  },
+  "scope": "Fix only the wheel-only sparse image retention mask, preserving all conservative UV triangle bounding boxes and a four-texel gutter. The bounded actual-original paint sampling remains identical; no geometry, UV, motion or static-image changes. No AI inference.",
+  "improvement": "Viewed all five new sides plus all nine 0/45/90 front/right/iso frames and the original/v2/v3 closeup sheet. Broad brown-yellow paint streaks remain removed. The masked-away thin UV regions found during v2 final audit are restored. No visible shape, static-pointer, seam or motion regression observed.",
+  "newMustFixVisualRegressionObserved": false,
+  "v2AuditCorrection": "Earlier five-view/motion visual review missed sparse-atlas losses on 114 thin/subpixel wheel triangles. Systematic UV samples exposed 595 newly black samples. V3 repairs this rather than reusing the earlier visual conclusion.",
+  "coverageVerification": {
+    "path": "art/full-ai-city/experiments/fidelity-20261024/harbor-wheel-color-v3/uv-coverage-verification.json",
+    "sha256": "930ebee72f2802409398f0645dd0139445e01427378e2ab38e18c7628547ce0d",
+    "bytes": 1508
+  },
+  "preservation": {
+    "sampleLocations": 8232,
+    "newBlackSamples": 0,
+    "newBlackBilinearNeighborSamples": 0,
+    "v2BlackSamplesRestored": 595,
+    "v2AffectedFacesRestored": 114,
+    "allOriginalBufferViewsByteIdentical": true,
+    "allGeometryUVNormalsNodeHierarchyAnimationsIdentical": true,
+    "wheelOnlyMaterialAndImageRetained": true,
+    "changedGeometryFromV2": false
+  },
+  "size": {
+    "v3Bytes": 1904160,
+    "increaseVersusV2Bytes": 33832,
+    "increaseVersusOriginalShadingCandidateBytes": 95820,
+    "additionalTextureVersusV2": false,
+    "extraTextureVersusOriginal": {
+      "width": 1024,
+      "height": 1024,
+      "mipmaps": true
+    }
+  },
+  "limitations": [
+    "Unchanged source roof, wall, foliage and rim geometry remain soft/irregular.",
+    "1K wheel atlas and existing UVs still limit close-up sector-edge smoothness.",
+    "Sample verification covers base-level nearest/bilinear UV corner/midpoint/centroid footprints; it is not exhaustive proof of every mip at every distance. Conservative bounding rectangles plus four-texel gutters retain all triangle interiors.",
+    "Browser live-motion approval remains with root."
+  ],
+  "comparisons": [
+    {
+      "path": "art/full-ai-city/experiments/fidelity-20261024/harbor-wheel-color-v3/five-view-comparison.png",
+      "sha256": "6e1bb0c925e83603e27fb201ba8b762d1f2552ef29e63993476b6cc254b6c615",
+      "bytes": 2334994
+    },
+    {
+      "path": "art/full-ai-city/experiments/fidelity-20261024/harbor-wheel-color-v3/wheel-motion-comparison.png",
+      "sha256": "ad2bb4458ed041010a5f60f1c9f9eb57aa6ef31013690af8c572eaac0eaf3f91",
+      "bytes": 725257
+    },
+    {
+      "path": "art/full-ai-city/experiments/fidelity-20261024/harbor-wheel-color-v3/motion-nine-views.png",
+      "sha256": "6874ff771ea7ff6934b001243216f6d3f449353167f52043e36996ca485beb05",
+      "bytes": 1474239
+    }
+  ],
+  "fiveViews": [
+    {
+      "path": "art/full-ai-city/experiments/fidelity-20261024/harbor-wheel-color-v3/renders/lod-front.png",
+      "sha256": "c05a2c34259d64999f5cb9df08ca2eca82b065249b6a1f4a37cd39ba99141c0e",
+      "bytes": 253650
+    },
+    {
+      "path": "art/full-ai-city/experiments/fidelity-20261024/harbor-wheel-color-v3/renders/lod-right.png",
+      "sha256": "afd2b85aad2b113a1897cf6f08884cd7d3e8da554e8f469f894c02c4027152cf",
+      "bytes": 226076
+    },
+    {
+      "path": "art/full-ai-city/experiments/fidelity-20261024/harbor-wheel-color-v3/renders/lod-back.png",
+      "sha256": "97c8ea809637bd8ebbc4ae95f1032baebea7fd6203d7da79f9eb3666a465702f",
+      "bytes": 244583
+    },
+    {
+      "path": "art/full-ai-city/experiments/fidelity-20261024/harbor-wheel-color-v3/renders/lod-left.png",
+      "sha256": "241a3fe111bf7690731d55ab6682696d2df33a5d33a3e89aa54537036e180a25",
+      "bytes": 224133
+    },
+    {
+      "path": "art/full-ai-city/experiments/fidelity-20261024/harbor-wheel-color-v3/renders/lod-iso.png",
+      "sha256": "ac08732a3bf05399a34c3da4d60da10cd2f30176935d1e0b46dee67d122b7d24",
+      "bytes": 263529
+    }
+  ],
+  "motionReview": {
+    "path": "art/full-ai-city/experiments/fidelity-20261024/harbor-wheel-color-v3/motion/review.json",
+    "sha256": "731b1bad44a2e868b3af64772836a1e95aa0538a6bacbbcb8f65930933270a3a",
+    "bytes": 4566
+  },
+  "motionFrames": [
+    {
+      "path": "art/full-ai-city/experiments/fidelity-20261024/harbor-wheel-color-v3/motion/pose-0-front.png",
+      "sha256": "7728e5188f99db791f686efef4eff04567d41f178c12dab246c0ac0d2f6e12ea",
+      "bytes": 253650
+    },
+    {
+      "path": "art/full-ai-city/experiments/fidelity-20261024/harbor-wheel-color-v3/motion/pose-0-right.png",
+      "sha256": "d38521719bde279cf7bfc2543ef6c87467cc48933336502db5a7892aad5f91b3",
+      "bytes": 226076
+    },
+    {
+      "path": "art/full-ai-city/experiments/fidelity-20261024/harbor-wheel-color-v3/motion/pose-0-iso.png",
+      "sha256": "3f53bb43c4d657d698f2e1b27ed2f58ba8cbe28b40da454256fdebd68c6b6811",
+      "bytes": 263529
+    },
+    {
+      "path": "art/full-ai-city/experiments/fidelity-20261024/harbor-wheel-color-v3/motion/pose-45-front.png",
+      "sha256": "6f916521ad52827a08eb7be10d389d777674782ee41e6158ddbf5cd062f9856e",
+      "bytes": 254004
+    },
+    {
+      "path": "art/full-ai-city/experiments/fidelity-20261024/harbor-wheel-color-v3/motion/pose-45-right.png",
+      "sha256": "f90d503a80af2e3230c4b9c62810f9995457ab9a7d1af64caf2b86321531d1ee",
+      "bytes": 226388
+    },
+    {
+      "path": "art/full-ai-city/experiments/fidelity-20261024/harbor-wheel-color-v3/motion/pose-45-iso.png",
+      "sha256": "ac7851283472ba1f1d9b59f0a2eacddd3d2ac14cef225343bc05342230eab6a7",
+      "bytes": 263833
+    },
+    {
+      "path": "art/full-ai-city/experiments/fidelity-20261024/harbor-wheel-color-v3/motion/pose-90-front.png",
+      "sha256": "0a7a72acaf9176e5a4684d002bd6f986b6d2a0d1fe90299bd481f131b4808331",
+      "bytes": 253915
+    },
+    {
+      "path": "art/full-ai-city/experiments/fidelity-20261024/harbor-wheel-color-v3/motion/pose-90-right.png",
+      "sha256": "4ace9aaf52820403feddd2fee9956eac981258e859e8ec5a1be42de8402c8272",
+      "bytes": 226458
+    },
+    {
+      "path": "art/full-ai-city/experiments/fidelity-20261024/harbor-wheel-color-v3/motion/pose-90-iso.png",
+      "sha256": "4524dfc2efcf253be7e84b89cb9a946c224c30501a1e30261c02c4b88b67a69e",
+      "bytes": 263979
+    }
+  ]
+}

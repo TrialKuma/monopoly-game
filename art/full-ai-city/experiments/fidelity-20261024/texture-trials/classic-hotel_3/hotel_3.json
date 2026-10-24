@@ -1,0 +1,371 @@
+{
+  "status": "exported_pending_visual_review",
+  "createdAt": "2026-10-24T09:47:29.409928+00:00",
+  "region": "classic",
+  "asset": "hotel_3",
+  "source": {
+    "rawGLB": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\classic--hotel_3-a001-pixal-mv-1024-9247.glb",
+      "sha256": "783fdfe4d2ffe785b6939f7babaf8510720334032c3ad590be89ba189eb6042b",
+      "bytes": 42695040
+    }
+  },
+  "inferenceReport": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\classic--hotel_3-a001\\classic--hotel_3-a001-pixal-mv-1024-9247.json",
+    "sha256": "4c875a0b1f4311d49e8f6d87422741b5c179d64231c80b4565e6388a19ce835a",
+    "bytes": 8075
+  },
+  "reference": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\references\\classic\\hotel_3\\reference.json",
+    "sha256": "850fe4cb4dd8460d8931dcfabafec408a682514f7cc9f5f1d5f9359a92891389",
+    "bytes": 4020
+  },
+  "processingTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\classic-hotel_3\\tools\\c8e7cb1f25d382a25729be876aa0d953a97abd3f2ae5db66841e7dc0dcefa7a7-refresh_baked_textures.py",
+    "sha256": "c8e7cb1f25d382a25729be876aa0d953a97abd3f2ae5db66841e7dc0dcefa7a7",
+    "bytes": 17719
+  },
+  "assumedCameras": true,
+  "cameraCalibration": "assumed_standard_orbit_not_measured",
+  "nativePipeline": "Pixal3DMVImageTo3DPipeline.run_mv",
+  "nativeResolution": 1024,
+  "seed": 9247,
+  "geometryOrigin": "Only the actual neural source reduced and rebaked; no authored substitute geometry or manually constructed surfaces",
+  "orientation": {
+    "up": "Y",
+    "front": "+Z",
+    "groundY": 0,
+    "maxEdge": 1
+  },
+  "requestedTriangles": 45000,
+  "limitations": [
+    "Assumed camera reference reconstruction, not exact measured architecture",
+    "Final candidate requires actual rendered visual approval",
+    "Texture-only repair preserves all original geometry and does not straighten source reconstruction defects."
+  ],
+  "animation": null,
+  "processingComplete": true,
+  "lod": "near",
+  "processingRevision": 2,
+  "sourceArtifactCleanup": {
+    "method": "Delete source-derived triangles entirely below z=0.014 when original UV-centroid mean RGB is below 0.18 or their XY centroid is more than 0.012 from the actual foundation vertices at z=0.014..0.04. This removes detached colored floor remnants as well as the dark sheet; no new faces added",
+    "deletedTriangles": 65116,
+    "originalTriangles": 980104,
+    "foundationSampleVertices": 19875
+  },
+  "derivation": {
+    "rawTriangles": 980104,
+    "weldedTriangles": 911538,
+    "remeshedTriangles": 1391352,
+    "voxelSize": 0.003,
+    "finalTriangles": 44993,
+    "atlasArea": 0.37021670631348114,
+    "singleReductionPass": true,
+    "inheritedUVRemovedBeforeReduction": true,
+    "sourceMaterialsUntouched": true
+  },
+  "bake": {
+    "method": "CPU closest-original-triangle projection with float64 barycentric original UV and bilinear original texture sampling; geometric normals retained, no directional normal-map rebake or invented color",
+    "coveredAtlasPixels": 1551073,
+    "nearestLookupSuccessFraction": 1.0,
+    "notRayCoverage": true,
+    "sourceDistanceQuantiles": [
+      0.00013617285003419966,
+      0.0007670294144190847,
+      0.0013841125834733253,
+      0.006667763460427523
+    ],
+    "sourceDistanceQuantileLevels": [
+      0.5,
+      0.95,
+      0.99,
+      1
+    ],
+    "overTwoPercentMaxEdge": 0.0,
+    "distanceReviewRequired": false,
+    "visualGeometryReviewRequired": true,
+    "barycentricOriginalRange": [
+      -0.0004357640574421172,
+      1.0
+    ],
+    "degenerateOrInvalidBarycentricCount": 0,
+    "closestSourceVertexFallbackFraction": 0.0,
+    "barycentricPointReconstructionErrorQuantiles": [
+      4.950715552965662e-09,
+      4.047592699602879e-08,
+      1.2261242541394177e-06
+    ],
+    "atlasOverlapPixelsWithDifferentSurface": 2834,
+    "seconds": 19.000590200004808,
+    "maps": [
+      {
+        "role": "base",
+        "size": [
+          2048,
+          2048
+        ]
+      },
+      {
+        "role": "orm",
+        "size": [
+          1024,
+          1024
+        ]
+      }
+    ]
+  },
+  "processedCandidate": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\classic-hotel_3\\hotel_3.glb",
+    "sha256": "ce8c413ad00e129acaab6f7618a60b78ce724b05046d4a13e44d347bd044fc2a",
+    "bytes": 4449040
+  },
+  "glbValidation": {
+    "version": 2,
+    "triangles": 44993,
+    "meshes": 1,
+    "materials": 1,
+    "images": 3,
+    "all_primitives_have_uv": true,
+    "animations": [],
+    "all_images_embedded": true,
+    "external_buffers": []
+  },
+  "triangles": 44993,
+  "renderedCandidate": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\classic-hotel_3\\renders\\lod-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\classic-hotel_3\\renders\\lod-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\classic-hotel_3\\renders\\lod-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\classic-hotel_3\\renders\\lod-left.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\classic-hotel_3\\renders\\lod-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.3497367203235626,
+        -0.2822556793689728,
+        0.00034677848452702165
+      ],
+      "max": [
+        0.34856680035591125,
+        0.24322780966758728,
+        0.8797999620437622
+      ]
+    },
+    "triangles": 44993,
+    "textureSizes": [
+      {
+        "name": "classic__hotel_3__base",
+        "size": [
+          2048,
+          2048
+        ]
+      },
+      {
+        "name": "classic__hotel_3__orm",
+        "size": [
+          1024,
+          1024
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "renderedSource": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\classic-hotel_3\\source-review\\raw-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\classic-hotel_3\\source-review\\raw-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.5,
+        -0.44329532980918884,
+        0.0
+      ],
+      "max": [
+        0.5,
+        0.44329532980918884,
+        0.8798763751983643
+      ]
+    },
+    "triangles": 980104,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "bounds": {
+    "min": [
+      -0.3497367203235626,
+      0.00034677848452702165,
+      -0.24322780966758728
+    ],
+    "max": [
+      0.34856680035591125,
+      0.8797999620437622,
+      0.2822556793689728
+    ],
+    "coordinateSystem": "GLTF Y-up; +Z front"
+  },
+  "textureSizes": [
+    {
+      "name": "classic__hotel_3__base",
+      "size": [
+        2048,
+        2048
+      ]
+    },
+    {
+      "name": "classic__hotel_3__orm",
+      "size": [
+        1024,
+        1024
+      ]
+    }
+  ],
+  "rawSourceUnchanged": true,
+  "completedAt": "2026-10-24T09:47:40.679214+00:00",
+  "textureTransferTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\classic-hotel_3\\tools\\fbab2f26c5a0e8b0063598e5d935825fc555c5d999dccab23c87b36ca0925214-bake_nearest_surface.py",
+    "sha256": "fbab2f26c5a0e8b0063598e5d935825fc555c5d999dccab23c87b36ca0925214",
+    "bytes": 7557
+  },
+  "textureOnlyReprocessing": {
+    "sourceCandidate": {
+      "path": "assets/models/regions-ai/full/classic/hotel_3.glb",
+      "sha256": "a8f1a10dbec7a3f20dc76b43eb974f8492f5ce56a6acb1ba37bbccae170f6336"
+    },
+    "sourceProcessingReport": {
+      "path": "art/full-ai-city/processed/classic/hotel_3.json",
+      "sha256": "26e54b7ebfde23537b980a2e83a4a57c570c330303c3e0b280a5665be3cb90e0"
+    },
+    "positionsUnchanged": true,
+    "faceIndicesUnchanged": true,
+    "cornerNormalsUnchanged": true,
+    "UVBytesUnchanged": true,
+    "additionalRemeshOrSimplification": false,
+    "sourceTexture": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\classic--hotel_3-a001-pixal-mv-1024-9247.glb",
+      "sha256": "783fdfe4d2ffe785b6939f7babaf8510720334032c3ad590be89ba189eb6042b",
+      "bytes": 42695040
+    },
+    "normalization": {
+      "enabled": true,
+      "candidate_degrees": 0.10467831195095843,
+      "applied_degrees": 0.10467831195095843,
+      "underside_area": 0.7663522574315724,
+      "normal_agreement": 0.9930720433871192,
+      "yaw_degrees": 180,
+      "pitch_degrees": 0,
+      "roll_degrees": 0,
+      "uniform_scale": 1.0649385140334962
+    },
+    "samplingRestInstances": [
+      {
+        "node": 0,
+        "name": "classic__hotel_3__neural_lod",
+        "triangles": 44993,
+        "restWorldMatrix": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      }
+    ],
+    "preservation": {
+      "allGeometryUVNormalAndAnimationBytesUnchanged": true,
+      "nodeHierarchyAndRestTransformsUnchanged": true,
+      "materialAndTextureIndicesUnchanged": true,
+      "meshPrimitiveReferencesUnchanged": true,
+      "onlyMaterialChange": "Removed legacy baked normalTexture binding",
+      "preservedBufferViews": [
+        {
+          "bufferView": 0,
+          "bytes": 694488,
+          "sha256": "b86851134f62531dee71f352809929735399ce501d6e52b0108deaeddac7f035"
+        },
+        {
+          "bufferView": 1,
+          "bytes": 231496,
+          "sha256": "038a7a997321b7220546afaeda569bb9d01a0ca819e3aacc082eed144da14078"
+        },
+        {
+          "bufferView": 2,
+          "bytes": 231496,
+          "sha256": "999b17282226b96fa57685e865bda0e5b41e990d9b31dd4cd001f19de541e1f2"
+        },
+        {
+          "bufferView": 3,
+          "bytes": 269958,
+          "sha256": "72e79e80f256d5b0555c703517c15c44268abaacccdb46c154a0d9c522c00d77"
+        },
+        {
+          "bufferView": 4,
+          "bytes": 241344,
+          "sha256": "d92b1fc6daf4365c7b367f972dd624ea3788aa31c34c209ce8e1dec33ffad816"
+        }
+      ],
+      "replacedImageViews": [
+        5,
+        6
+      ],
+      "originalNormalImageRetainedUnreferenced": true
+    },
+    "maps": {
+      "base": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\classic-hotel_3\\base.jpg",
+        "sha256": "6b14d1176660a821dba3d6e304bd62f117c11a3e79a74ee72b3e960b6a6040b0",
+        "bytes": 2148217
+      },
+      "orm": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\classic-hotel_3\\orm.png",
+        "sha256": "968cbb2039d083a5bd87249603e846b9b0f6b3d2cb72428c60d3a36884d6f9c2",
+        "bytes": 629779
+      }
+    },
+    "atlasOverlapReviewRequired": false,
+    "diagnosticOnly": false
+  },
+  "textureOrigin": "Original source PBR sampled at the existing approved UVs through closest source triangle; 2K base and 1K ORM, geometric normals retained. No new images generated by AI.",
+  "geometryAndMotionInheritedFrom": {
+    "path": "art/full-ai-city/processed/classic/hotel_3.json",
+    "sha256": "26e54b7ebfde23537b980a2e83a4a57c570c330303c3e0b280a5665be3cb90e0"
+  }
+}

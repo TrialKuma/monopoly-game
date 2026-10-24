@@ -27,13 +27,10 @@ def sample(image,uv):
     x0=floor[:,0];x1=np.minimum(floor[:,0]+1,width-1);y0=floor[:,1];y1=np.minimum(floor[:,1]+1,height-1)
     return (pixels[y0,x0]*(1-f[:,0,None])+pixels[y0,x1]*f[:,0,None])*(1-f[:,1,None])+(pixels[y1,x0]*(1-f[:,0,None])+pixels[y1,x1]*f[:,0,None])*f[:,1,None]
 
-def bake(source,low,args):
-    started=time.monotonic();high=source.data;mesh=low.data
-    hv=array(high.vertices,'co',3);hf=array(high.loops,'vertex_index',1,np.int32).reshape(-1,3)
-    hu=array(high.uv_layers.active.data,'uv',2).reshape(-1,3,2)
+def rasterize_existing_uv(mesh,size):
+    """Shared existing-UV rasterization for transfer and cheap preflight audits."""
     lv=array(mesh.vertices,'co',3);lf=array(mesh.loops,'vertex_index',1,np.int32).reshape(-1,3);lu=array(mesh.uv_layers.active.data,'uv',2).reshape(-1,3,2)
-    tree=BVHTree.FromPolygons(hv.tolist(),hf.tolist(),all_triangles=True)
-    size=args.texture_size;locations=np.zeros((size,size,3),np.float32);valid=np.zeros((size,size),bool);uv_overlap_pixels=0
+    locations=np.zeros((size,size,3),np.float32);valid=np.zeros((size,size),bool);uv_overlap_pixels=0
     for face,uv in zip(lf,lu):
         q=uv*size-.5;lo=np.maximum(0,np.ceil(q.min(0)).astype(int));hi=np.minimum(size-1,np.floor(q.max(0)).astype(int))
         if np.any(hi<lo):continue
@@ -44,6 +41,15 @@ def bake(source,low,args):
         a,b,c=lv[face];new_locations=a+(b-a)*u[inside,None]+(c-a)*v[inside,None]
         uv_overlap_pixels+=int((valid[y[inside],x[inside]]&(np.linalg.norm(locations[y[inside],x[inside]]-new_locations,axis=1)>.001)).sum())
         locations[y[inside],x[inside]]=new_locations;valid[y[inside],x[inside]]=True
+    return locations,valid,uv_overlap_pixels
+
+
+def bake(source,low,args):
+    started=time.monotonic();high=source.data;mesh=low.data
+    hv=array(high.vertices,'co',3);hf=array(high.loops,'vertex_index',1,np.int32).reshape(-1,3)
+    hu=array(high.uv_layers.active.data,'uv',2).reshape(-1,3,2)
+    tree=BVHTree.FromPolygons(hv.tolist(),hf.tolist(),all_triangles=True)
+    size=args.texture_size;locations,valid,uv_overlap_pixels=rasterize_existing_uv(mesh,size)
     points=locations[valid];hits=np.empty_like(points);polygons=np.empty(len(points),np.int32);distances=np.empty(len(points),np.float32)
     for i,point in enumerate(points):
         hit,normal,face,distance=tree.find_nearest(point)

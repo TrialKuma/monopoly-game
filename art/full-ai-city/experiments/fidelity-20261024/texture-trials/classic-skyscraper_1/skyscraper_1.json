@@ -1,0 +1,371 @@
+{
+  "status": "exported_pending_visual_review",
+  "createdAt": "2026-10-24T09:48:45.135153+00:00",
+  "region": "classic",
+  "asset": "skyscraper_1",
+  "source": {
+    "rawGLB": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\classic--skyscraper_1-a001-pixal-mv-1024-9247.glb",
+      "sha256": "91f43f9484165cb40acfb254f8d591893dca1f04fa06605d674b4139a2a70c8a",
+      "bytes": 43045128
+    }
+  },
+  "inferenceReport": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\classic--skyscraper_1-a001\\classic--skyscraper_1-a001-pixal-mv-1024-9247.json",
+    "sha256": "68fd45a4277ecbfdd60510e3bd68edd3b44792d96020fafb101fe8f6e64247ba",
+    "bytes": 8155
+  },
+  "reference": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\references\\classic\\skyscraper_1\\reference.json",
+    "sha256": "2604652dfe3cf79ec028421faff9484b8418ee50a50c9eb91e71a9701f7fb737",
+    "bytes": 4051
+  },
+  "processingTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\classic-skyscraper_1\\tools\\c8e7cb1f25d382a25729be876aa0d953a97abd3f2ae5db66841e7dc0dcefa7a7-refresh_baked_textures.py",
+    "sha256": "c8e7cb1f25d382a25729be876aa0d953a97abd3f2ae5db66841e7dc0dcefa7a7",
+    "bytes": 17719
+  },
+  "assumedCameras": true,
+  "cameraCalibration": "assumed_standard_orbit_not_measured",
+  "nativePipeline": "Pixal3DMVImageTo3DPipeline.run_mv",
+  "nativeResolution": 1024,
+  "seed": 9247,
+  "geometryOrigin": "Only the actual neural source reduced and rebaked; no authored substitute geometry or manually constructed surfaces",
+  "orientation": {
+    "up": "Y",
+    "front": "+Z",
+    "groundY": 0,
+    "maxEdge": 1
+  },
+  "requestedTriangles": 45000,
+  "limitations": [
+    "Assumed camera reference reconstruction, not exact measured architecture",
+    "Final candidate requires actual rendered visual approval",
+    "Texture-only repair preserves all original geometry and does not straighten source reconstruction defects."
+  ],
+  "animation": null,
+  "processingComplete": true,
+  "lod": "near",
+  "processingRevision": 1,
+  "sourceArtifactCleanup": {
+    "method": "Delete source-derived triangles entirely below z=0.014 when original UV-centroid mean RGB is below 0.18 or their XY centroid is more than 0.012 from the actual foundation vertices at z=0.014..0.04. This removes detached colored floor remnants as well as the dark sheet; no new faces added",
+    "deletedTriangles": 25182,
+    "originalTriangles": 968467,
+    "foundationSampleVertices": 25860
+  },
+  "derivation": {
+    "rawTriangles": 968467,
+    "weldedTriangles": 938920,
+    "remeshedTriangles": 1223376,
+    "voxelSize": 0.003,
+    "finalTriangles": 44954,
+    "atlasArea": 0.3753099427559644,
+    "singleReductionPass": true,
+    "inheritedUVRemovedBeforeReduction": true,
+    "sourceMaterialsUntouched": true
+  },
+  "bake": {
+    "method": "CPU closest-original-triangle projection with float64 barycentric original UV and bilinear original texture sampling; geometric normals retained, no directional normal-map rebake or invented color",
+    "coveredAtlasPixels": 1565183,
+    "nearestLookupSuccessFraction": 1.0,
+    "notRayCoverage": true,
+    "sourceDistanceQuantiles": [
+      0.0001782449398888275,
+      0.000870609167031943,
+      0.0016575042833574109,
+      0.00632488401606679
+    ],
+    "sourceDistanceQuantileLevels": [
+      0.5,
+      0.95,
+      0.99,
+      1
+    ],
+    "overTwoPercentMaxEdge": 0.0,
+    "distanceReviewRequired": false,
+    "visualGeometryReviewRequired": true,
+    "barycentricOriginalRange": [
+      -0.00024520631832786394,
+      1.0
+    ],
+    "degenerateOrInvalidBarycentricCount": 0,
+    "closestSourceVertexFallbackFraction": 0.0,
+    "barycentricPointReconstructionErrorQuantiles": [
+      4.3606320944598655e-09,
+      3.625331535863211e-08,
+      7.710985906277765e-07
+    ],
+    "atlasOverlapPixelsWithDifferentSurface": 9549,
+    "seconds": 15.953482099997927,
+    "maps": [
+      {
+        "role": "base",
+        "size": [
+          2048,
+          2048
+        ]
+      },
+      {
+        "role": "orm",
+        "size": [
+          1024,
+          1024
+        ]
+      }
+    ]
+  },
+  "processedCandidate": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\classic-skyscraper_1\\skyscraper_1.glb",
+    "sha256": "40969c39bc09c162c9c0baa393378335487488c1b8b8d101833d574515e8efe9",
+    "bytes": 5277968
+  },
+  "glbValidation": {
+    "version": 2,
+    "triangles": 44954,
+    "meshes": 1,
+    "materials": 1,
+    "images": 3,
+    "all_primitives_have_uv": true,
+    "animations": [],
+    "all_images_embedded": true,
+    "external_buffers": []
+  },
+  "triangles": 44954,
+  "renderedCandidate": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\classic-skyscraper_1\\renders\\lod-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\classic-skyscraper_1\\renders\\lod-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\classic-skyscraper_1\\renders\\lod-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\classic-skyscraper_1\\renders\\lod-left.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\classic-skyscraper_1\\renders\\lod-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.4948142468929291,
+        -0.19884683191776276,
+        -7.558449578937143e-05
+      ],
+      "max": [
+        0.49335306882858276,
+        0.18072544038295746,
+        0.6405558586120605
+      ]
+    },
+    "triangles": 44954,
+    "textureSizes": [
+      {
+        "name": "classic__skyscraper_1__base",
+        "size": [
+          2048,
+          2048
+        ]
+      },
+      {
+        "name": "classic__skyscraper_1__orm",
+        "size": [
+          1024,
+          1024
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "renderedSource": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\classic-skyscraper_1\\source-review\\raw-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\classic-skyscraper_1\\source-review\\raw-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.5,
+        -0.1989346146583557,
+        0.0
+      ],
+      "max": [
+        0.5,
+        0.1989346146583557,
+        0.6400551795959473
+      ]
+    },
+    "triangles": 968467,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "bounds": {
+    "min": [
+      -0.4948142468929291,
+      -7.558449578937143e-05,
+      -0.18072544038295746
+    ],
+    "max": [
+      0.49335306882858276,
+      0.6405558586120605,
+      0.19884683191776276
+    ],
+    "coordinateSystem": "GLTF Y-up; +Z front"
+  },
+  "textureSizes": [
+    {
+      "name": "classic__skyscraper_1__base",
+      "size": [
+        2048,
+        2048
+      ]
+    },
+    {
+      "name": "classic__skyscraper_1__orm",
+      "size": [
+        1024,
+        1024
+      ]
+    }
+  ],
+  "rawSourceUnchanged": true,
+  "completedAt": "2026-10-24T09:48:55.867130+00:00",
+  "textureTransferTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\classic-skyscraper_1\\tools\\fbab2f26c5a0e8b0063598e5d935825fc555c5d999dccab23c87b36ca0925214-bake_nearest_surface.py",
+    "sha256": "fbab2f26c5a0e8b0063598e5d935825fc555c5d999dccab23c87b36ca0925214",
+    "bytes": 7557
+  },
+  "textureOnlyReprocessing": {
+    "sourceCandidate": {
+      "path": "assets/models/regions-ai/full/classic/skyscraper_1.glb",
+      "sha256": "347132c29e0b65c172756cbb3753dc53683f4ef9f4f6362b46e759c757078168"
+    },
+    "sourceProcessingReport": {
+      "path": "art/full-ai-city/processed/classic/skyscraper_1.json",
+      "sha256": "4bb51f81f688715418a23fc20820e0c71fcb42e5094b7c7d156f4a2c90ebfb0d"
+    },
+    "positionsUnchanged": true,
+    "faceIndicesUnchanged": true,
+    "cornerNormalsUnchanged": true,
+    "UVBytesUnchanged": true,
+    "additionalRemeshOrSimplification": false,
+    "sourceTexture": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\classic--skyscraper_1-a001-pixal-mv-1024-9247.glb",
+      "sha256": "91f43f9484165cb40acfb254f8d591893dca1f04fa06605d674b4139a2a70c8a",
+      "bytes": 43045128
+    },
+    "normalization": {
+      "enabled": true,
+      "candidate_degrees": 1.0102593632738155,
+      "applied_degrees": 1.0102593632738155,
+      "underside_area": 0.26202257149342234,
+      "normal_agreement": 0.9768833784628967,
+      "yaw_degrees": 180,
+      "pitch_degrees": 0,
+      "roll_degrees": 0,
+      "uniform_scale": 0.9985097239323101
+    },
+    "samplingRestInstances": [
+      {
+        "node": 0,
+        "name": "classic__skyscraper_1__neural_lod",
+        "triangles": 44954,
+        "restWorldMatrix": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      }
+    ],
+    "preservation": {
+      "allGeometryUVNormalAndAnimationBytesUnchanged": true,
+      "nodeHierarchyAndRestTransformsUnchanged": true,
+      "materialAndTextureIndicesUnchanged": true,
+      "meshPrimitiveReferencesUnchanged": true,
+      "onlyMaterialChange": "Removed legacy baked normalTexture binding",
+      "preservedBufferViews": [
+        {
+          "bufferView": 0,
+          "bytes": 712440,
+          "sha256": "380affaa532b6ea776c32726a6f4c3722d6cc4e54328fa3079b9c138c7c1b840"
+        },
+        {
+          "bufferView": 1,
+          "bytes": 237480,
+          "sha256": "f2ab7688da85bbbf5ced048896993cfb8e87e4b419d455b024e88c96180559bc"
+        },
+        {
+          "bufferView": 2,
+          "bytes": 237480,
+          "sha256": "87efe91cd56f5fdb59d283b10723b1abd595e6314441dc5d82f44e992deb374e"
+        },
+        {
+          "bufferView": 3,
+          "bytes": 269724,
+          "sha256": "c7f9f535526bc346cc4e0e5e18bc1a33d67d5f23ff98582ef90a9d823ae41804"
+        },
+        {
+          "bufferView": 4,
+          "bytes": 276396,
+          "sha256": "2ae9824c9bcd6bbab837eb69ae0a41e50e35f8bfbe738ad5ac2f4b467694ef94"
+        }
+      ],
+      "replacedImageViews": [
+        5,
+        6
+      ],
+      "originalNormalImageRetainedUnreferenced": true
+    },
+    "maps": {
+      "base": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\classic-skyscraper_1\\base.jpg",
+        "sha256": "b3a8fe57b06e7ff404b453580536ae246bbf4188c758c57ef59750aeaa1b150f",
+        "bytes": 2394500
+      },
+      "orm": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\classic-skyscraper_1\\orm.png",
+        "sha256": "f50adf2ee058a5c1786ccc51d90b2703d131279ea197f7edbe13ee3feaa24efe",
+        "bytes": 1147654
+      }
+    },
+    "atlasOverlapReviewRequired": true,
+    "diagnosticOnly": false
+  },
+  "textureOrigin": "Original source PBR sampled at the existing approved UVs through closest source triangle; 2K base and 1K ORM, geometric normals retained. No new images generated by AI.",
+  "geometryAndMotionInheritedFrom": {
+    "path": "art/full-ai-city/processed/classic/skyscraper_1.json",
+    "sha256": "4bb51f81f688715418a23fc20820e0c71fcb42e5094b7c7d156f4a2c90ebfb0d"
+  }
+}

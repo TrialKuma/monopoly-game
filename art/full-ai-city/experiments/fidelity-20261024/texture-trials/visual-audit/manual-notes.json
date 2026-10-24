@@ -1,0 +1,60 @@
+{
+  "alpine/villa_2": {
+    "recommendation": "ready_for_root_review",
+    "note": "逐一对比旧 iso 与新 front/right/back/left/iso：红瓦、木门、石基表面原有碎黑脏斑明显减少，木梁、窗格和盆栽颜色仍跟随原表面，五面未见新增重影、翻转或色块串位。保留原模型不齐的瓦片和石块轮廓。本次是纹理与材质改善，并未矫正几何；约 1.04% 旧 UV 冲突已在五面目视复核，未见对应的明显新污染。"
+  },
+  "expansion/villa_2": {
+    "recommendation": "ready_for_root_review",
+    "note": "旧新 iso 对比可见平屋顶杂乱刻痕、石框脏斑减少，绿色女儿墙、红砖、浅色立柱与暖窗分区连续。已检查新五面，无新增纹理倒置或重影。台阶边缘、后墙轻微折痕和不齐的石线为保留几何，未声称由本次纹理修复消除。"
+  },
+  "classic/shop_1": {
+    "recommendation": "pending_local_geometry_diagnosis",
+    "note": "五面已检查，灰蓝屋顶较旧 iso 更均匀，店面窗框保持原位置；右墙窗左上出现清晰黑三角，不能仅以原版存在其他裂痕为由通过。已交几何代理限定该区域区分真孔与反向角法线。黄色橱窗中的旧杂纹仍存在。"
+  },
+  "classic/villa_2": {
+    "recommendation": "ready_for_root_review",
+    "note": "已比较旧 iso、旧正面与新五面：石墙和灰蓝屋顶的碎斑减少，绿门、黄窗、蓝灰百叶窗位置一致，无新大范围串色或重影。正面檐口的小黑缝在旧正面中同样存在，原窗台花饰与檐口不齐保留；本次只改善表面。"
+  },
+  "classic/hotel_1": {
+    "recommendation": "ready_for_root_review",
+    "note": "旧新 iso 对比屋瓦和门廊石柱更平整干净；新五面保持淡墙、蓝灰瓦、深门和黄窗的原分区，侧墙及背墙没有新增重影、倒置或色块。原模型盆栽团块、弯曲落水管与略不齐的屋檐保留。"
+  },
+  "classic/shop_2": {
+    "recommendation": "ready_for_root_review",
+    "note": "逐一检查旧 iso 与新五面：深色屋顶和浅墙原碎脏斑减少，绿色店面、雨棚、百叶窗及花箱仍保持色区与位置，侧背面未见新增色块错位。原橱窗里的模糊商品、花箱轮廓与屋檐不齐保留。该 near 获批后须重做并复核同项 far，不能直接保留旧 far 来源绑定。",
+    "requiresFarRefresh": true
+  },
+  "classic/hotel_2": {
+    "recommendation": "pending_local_geometry_diagnosis",
+    "note": "五面已检查，屋瓦和墙面比旧 iso 干净。背面右沿竖缝在旧背面同样可见，但仍是明显缺陷；交几何代理限定该区域判断真孔或角法线，不直接通过。最终 near 获批后需要同步 far。",
+    "requiresFarRefresh": true
+  },
+  "classic/hotel_3": {
+    "recommendation": "ready_for_root_review",
+    "note": "已比较旧 iso、旧背面与新五面：屋顶和墙面颗粒脏斑减少，阳台、绿色百叶窗、门廊和黄窗保持相同位置与配色，没有新增整片串色或重影。背面右上窗的缺口和窗框不齐在旧背面中存在，仍保留；本项只推荐此次材质改善。"
+  },
+  "classic/shop_3": {
+    "recommendation": "pending_local_geometry_diagnosis",
+    "note": "五面检查完成，屋顶和浅墙比旧 iso 干净；背面右老虎窗顶存在明显黑裂口，旧背面亦可见，仍交几何代理区分实体孔和反向角法线，不按纹理完成自动通过。"
+  },
+  "classic/skyscraper_1": {
+    "recommendation": "ready_for_root_review",
+    "note": "旧新 iso 与新五面已逐一检查：蓝色曲面屋顶、米色石墙和紫蓝门篷的杂斑减轻，金色装饰与黄窗位置保持，窄侧面及背面无新增大色块、上下倒置或重影。原雕饰、窗框的轻微不齐保留。"
+  },
+  "classic/chance_wheel": {
+    "recommendation": "ready_for_root_review",
+    "note": "已比较旧 iso 与新五面，并检查转盘 0/45/90 度各 front/right/iso 共九帧：蓝瓦、浅墙与绿色柜台的脏斑减少，转盘红蓝米色扇区随原组件转动，未见贴图滑动或重复重影，底座保持原位置。原侧窗木板和石框不齐保留。几何、节点和转轴字节保持原样。"
+  },
+  "classic/builders_guild": {
+    "recommendation": "pending_local_color_repair",
+    "note": "旧新 iso、新五面及吊锤 0/-7/+7 度九帧已查看，主要墙瓦更干净、吊锤纹理稳定。但新左侧屋面老虎窗上方出现两条细玫红线，旧图不明显；暂不通过，限定对应错色区域检查原模取色并局部修复。"
+  },
+  "compact/builders_guild": {
+    "recommendation": "ready_for_root_review",
+    "note": "已对比旧 iso、新五面，并检查吊箱 0/-7/+7 度 front/right/iso 九帧：灰瓦和木柱表面的深色杂斑减少，木纹、米色墙、暖窗仍清晰，吊箱色块随组件稳定移动。未见新增色块串位或重影。旧模型翘瓦、不齐的木材和敞开工坊内部形体保留。"
+  },
+  "alpine/windmill": {
+    "recommendation": "ready_for_root_review",
+    "note": "已对比旧 iso、新五面及风叶 0/45/90 度九帧：白墙、石基、红瓦更干净，叶面白布和木边在实际动画姿态中没有新增滑动、串色或重影。旧版屋面裂口、尖突出、歪瓦及木棚不齐仍可见，原 iso 中亦存在；本次仅推荐材质改善，不将这些既有几何缺陷描述成已修复。"
+  }
+}

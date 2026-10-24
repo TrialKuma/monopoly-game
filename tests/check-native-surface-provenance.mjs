@@ -16,7 +16,10 @@ for(const [label,alter] of [
   const changed=structuredClone(processing);alter(changed);
   assert.throws(()=>verifyNativeSurfaceExport(changed),undefined,`${key}: reject ${label}`);
 }
-const repairs=approved.filter(item=>item.processing.localSurfaceRepair);
+// Native-source repair and post-export local repair are distinct contracts.
+// The latter is covered by check-fidelity-surface-provenance.mjs and the
+// shared verifyApproval dispatch, not this legacy native-source entry point.
+const repairs=approved.filter(item=>item.processing.localSurfaceRepair?.receipt);
 for(const {processing} of repairs){
   const repair=processing.localSurfaceRepair,raw=processing.source.rawGLB;verifyLocalSurfaceRepair(repair,raw);
   for(const alter of [r=>r.source.sha256='0'.repeat(64),r=>r.newTriangles++,r=>r.regions=[]]){

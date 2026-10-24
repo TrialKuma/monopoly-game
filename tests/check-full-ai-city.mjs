@@ -6,6 +6,7 @@ import crypto from 'node:crypto';
 import {fileURLToPath} from 'node:url';
 import {Matrix4,Vector3,Quaternion,Box3} from '../assets/vendor/three/three.module.min.js';
 import {verifyApproval,scalar} from './ai-city-fixture.mjs';
+import {verifyNormalTextureRemoval} from './fidelity-wheel-fixture.mjs';
 
 const root=fileURLToPath(new URL('..',import.meta.url));
 const maps=['classic','compact','expansion','harbor','alpine'];
@@ -38,14 +39,27 @@ function transform(node){return node.matrix?new Matrix4().fromArray(node.matrix)
 // One already-reviewed rotor has 500 disclosed vertex-colored occlusion caps.
 // This exact-source exception must not permit arbitrary untextured buildings.
 function verifyReviewedColorRepair(packed,node,primitive,entry,source,processing){
-  assert.equal(entry.candidate.sha256,'7b02e48fcfab206058d07adb79960975b92527a75d1cabf0cb292d5b1ec8d23c','only the frozen Alpine rotor uses interpolated cap colors');
+  const originalSha='7b02e48fcfab206058d07adb79960975b92527a75d1cabf0cb292d5b1ec8d23c';
+  const label='only the frozen Alpine rotor or its exact normal-binding-only derivative uses interpolated cap colors';
+  assert.equal(entry.candidate.sha256,processing.processedCandidate.sha256,label);
+  let approval=entry;
+  if(entry.candidate.sha256!==originalSha){
+    const shading=processing.shadingOnlyRefinement;
+    assert(shading&&!processing.localWheelTextureRepair&&shading.sourceCandidate.sha256===originalSha,label);
+    const prior=JSON.parse(receipt(shading.sourceProcessingReport));
+    assert.equal(prior.processedCandidate.sha256,originalSha,label);
+    assert.deepEqual(processing.componentLocalRepair,prior.componentLocalRepair,label);
+    verifyNormalTextureRemoval(glb(receipt(shading.sourceCandidate)),source,shading.removedNormalTextureMaterials);
+    approval=entry.previousDecisions?.find(row=>row.status==='approved'&&row.candidate.sha256===originalSha&&row.processingReport.sha256===shading.sourceProcessingReport.sha256);
+    assert(approval,label);receipt(approval.processingReport);receipt(approval.candidate);
+  }
   assert.equal(node.name,'alpine__chance_wheel__neural_wheel');
   assert.equal(node.extras?.lifePart,'wheel');
   const link=processing.componentLocalRepair;
   assert.equal(link?.newFacesAdded,500);
   const repair=JSON.parse(receipt(link.localRepair));receipt(link.verification);receipt(link.tool);
-  assert.equal(repair.output.sha256,entry.candidate.sha256);assert.equal(repair.addedCapTriangles,500);
-  assert(repair.colorRepairReason.length>30&&entry.reviewNote.includes('vertex-color interpolation'),'color interpolation is explicitly disclosed and reviewed');
+  assert.equal(repair.output.sha256,originalSha);assert.equal(repair.addedCapTriangles,500);
+  assert(repair.colorRepairReason.length>30&&approval.reviewNote.includes('vertex-color interpolation'),'color interpolation is explicitly disclosed and reviewed');
   const originalNode=source.doc.nodes.find(n=>n.name===node.name);
   const original=source.doc.meshes[originalNode.mesh].primitives.filter(p=>!source.doc.materials[p.material].pbrMetallicRoughness.baseColorTexture);
   assert.equal(original.length,1);

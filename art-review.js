@@ -1,4 +1,5 @@
 import * as THREE from './assets/vendor/three/three.module.min.js';
+import { makeStudioEnvironment } from './scene-environment.js?v=20261024-4';
 import { GLTFLoader } from './assets/vendor/three/addons/loaders/GLTFLoader.js';
 
 const $=id=>document.getElementById(id),region=$('region'),family=$('family'),level=$('level'),stage=$('stage');
@@ -58,13 +59,14 @@ function setReferenceViews(views){
 const renderer=new THREE.WebGLRenderer({antialias:true,powerPreference:'low-power'});renderer.setPixelRatio(Math.min(devicePixelRatio,1.7));renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1;
 renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFShadowMap;stage.append(renderer.domElement);
 const scene=new THREE.Scene();scene.background=new THREE.Color('#e9e8df');const camera=new THREE.OrthographicCamera(-2,2,2,-2,.1,100);
+const environment=makeStudioEnvironment(renderer);scene.environment=environment.texture;scene.environmentIntensity=.4;
 scene.add(new THREE.HemisphereLight('#fff8eb','#a5b7a0',1.3));const sun=new THREE.DirectionalLight('#fff0da',2.5);sun.position.set(-4,8,6);sun.castShadow=true;sun.shadow.mapSize.set(2048,2048);Object.assign(sun.shadow.camera,{left:-4,right:4,top:6,bottom:-4,near:.1,far:25});sun.shadow.bias=-.00005;sun.shadow.normalBias=.006;sun.shadow.radius=3;scene.add(sun);const fill=new THREE.DirectionalLight('#d5eafa',.8);fill.position.set(5,4,-3);scene.add(fill);
 const floor=new THREE.Mesh(new THREE.PlaneGeometry(100,100),new THREE.MeshStandardMaterial({color:'#e9e8df',roughness:1}));floor.rotation.x=-Math.PI/2;floor.position.y=-.015;floor.receiveShadow=true;scene.add(floor);
 const pivot=new THREE.Group();scene.add(pivot);let bundle=null,candidateReceipt=null,candidateInputs=[],currentRegion='',request=0,yaw=.6,elevation=.45,zoom=1,bounds=new THREE.Box3(),disposed=false;
 async function sha256(bytes){const digest=await crypto.subtle.digest('SHA-256',bytes);return Array.from(new Uint8Array(digest),v=>v.toString(16).padStart(2,'0')).join('');}
 async function loadReviewModel(file){
   const loader=new GLTFLoader();
-  if(!candidateMode)return {gltf:await loader.loadAsync(`${file}?v=20261024-1`),report:null};
+  if(!candidateMode)return {gltf:await loader.loadAsync(`${file}?v=20261024-4`),report:null};
   const stamp=Date.now(),response=await fetch(`${file.replace(/\.glb$/,'.json')}?review=${stamp}`);
   if(!response.ok)throw Error('这栋建筑尚未完成候选导出。');const report=await response.json();
   const modelResponse=await fetch(`${file}?review=${stamp}`);if(!modelResponse.ok)throw Error('候选模型尚未载入。');
@@ -147,4 +149,4 @@ async function update(){
 for(const el of [region,family,level])el.addEventListener('change',update);
 document.querySelector('.views').addEventListener('click',e=>{const button=e.target.closest('[data-view]');if(!button)return;const view=button.dataset.view;yaw={iso:.6,front:0,side:Math.PI/2,back:Math.PI,left:-Math.PI/2}[view];elevation=view==='iso'?.45:0;zoom=1;selectReference({front:'front',side:'right',back:'back'}[view]);document.querySelectorAll('[data-view]').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));render();});
 let drag=null;stage.addEventListener('pointerdown',e=>{drag={id:e.pointerId,x:e.clientX,y:e.clientY,yaw,elevation};stage.setPointerCapture(e.pointerId);});stage.addEventListener('pointermove',e=>{if(!drag||drag.id!==e.pointerId)return;yaw=drag.yaw+(e.clientX-drag.x)*.008;elevation=Math.max(-.1,Math.min(1.2,drag.elevation+(e.clientY-drag.y)*.006));render();});for(const event of ['pointerup','pointercancel'])stage.addEventListener(event,()=>drag=null);stage.addEventListener('wheel',e=>{e.preventDefault();zoom=Math.max(.7,Math.min(2.3,zoom*Math.exp(-e.deltaY*.001)));render();},{passive:false});
-const observer=new ResizeObserver(render);observer.observe(stage);window.addEventListener('pagehide',()=>{disposed=true;request++;stopMotion();observer.disconnect();disposeBundle(bundle);floor.geometry.dispose();floor.material.dispose();renderer.dispose();},{once:true});update();
+const observer=new ResizeObserver(render);observer.observe(stage);window.addEventListener('pagehide',()=>{disposed=true;request++;stopMotion();observer.disconnect();disposeBundle(bundle);floor.geometry.dispose();floor.material.dispose();environment.dispose();renderer.dispose();},{once:true});update();

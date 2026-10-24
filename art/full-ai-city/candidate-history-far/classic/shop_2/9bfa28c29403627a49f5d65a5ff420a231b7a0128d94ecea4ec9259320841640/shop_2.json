@@ -1,0 +1,286 @@
+{
+  "status": "exported_pending_visual_review",
+  "createdAt": "2026-10-23T06:11:21.080967+00:00",
+  "region": "classic",
+  "asset": "shop_2",
+  "source": {
+    "rawGLB": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\classic--shop_2-a001-pixal-mv-1024-9247.glb",
+      "sha256": "ebbabd9bb0e8e260f10d8e0b3d4c7de607443574cafaa79d53fa1b2d689c507e",
+      "bytes": 42222688
+    }
+  },
+  "inferenceReport": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\classic--shop_2-a001\\classic--shop_2-a001-pixal-mv-1024-9247.json",
+    "sha256": "faeb88b798b91c1a8db2a0d0c7019b5df827a0e279225f9eef2d3168038bc897",
+    "bytes": 8067
+  },
+  "reference": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\references\\classic\\shop_2\\reference.json",
+    "sha256": "804508474027674abb827200cd6c433822e2215e08ae874c7c71cd12df6943fc",
+    "bytes": 4012
+  },
+  "processingTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\715f7c85ba34d10623c70a9b8376636c466671aa96bbb2bbe17326e6041e6410-process_lod.py",
+    "sha256": "715f7c85ba34d10623c70a9b8376636c466671aa96bbb2bbe17326e6041e6410",
+    "bytes": 21445
+  },
+  "assumedCameras": true,
+  "cameraCalibration": "assumed_standard_orbit_not_measured",
+  "nativePipeline": "Pixal3DMVImageTo3DPipeline.run_mv",
+  "nativeResolution": 1024,
+  "seed": 9247,
+  "geometryOrigin": "Only the actual neural source reduced and rebaked; no authored substitute geometry or manually constructed surfaces",
+  "orientation": {
+    "up": "Y",
+    "front": "+Z",
+    "groundY": 0,
+    "maxEdge": 1
+  },
+  "requestedTriangles": 12000,
+  "limitations": [
+    "Assumed camera reference reconstruction, not exact measured architecture",
+    "Final candidate requires actual rendered visual approval"
+  ],
+  "animation": null,
+  "processingComplete": true,
+  "lod": "far",
+  "processingRevision": 0,
+  "derivedFromNear": {
+    "path": "H:\\代码项目\\monopoly\\assets\\models\\regions-ai\\full\\classic\\shop_2.glb",
+    "sha256": "1a5c3203208abcaa99c8f3ba62869197040e8b84b93d02e75f05d194732cb17c",
+    "bytes": 1426044
+  },
+  "derivedFromNearReport": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\processed\\classic\\shop_2.json",
+    "sha256": "401cea22cc5877ec4a93db630630946efc1315b74a6590dec85fc5bd6168be91",
+    "bytes": 7483
+  },
+  "farSimplification": {
+    "source": {
+      "path": "H:\\代码项目\\monopoly\\assets\\models\\regions-ai\\full\\classic\\shop_2.glb",
+      "sha256": "1a5c3203208abcaa99c8f3ba62869197040e8b84b93d02e75f05d194732cb17c"
+    },
+    "output": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\far-preserved\\classic\\shop_2.npz",
+    "outputSha256": "b8b4af5b2662047e3d6bb4d21bd2d36d1ded0004e952c6ea63c873e1a3a3b699",
+    "tool": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\3026f84a64e3f6f2d3d5ee12f1f49380bb3afd3ec3db43e3c8c89bec5e711298-simplify_far_surface.py",
+      "sha256": "3026f84a64e3f6f2d3d5ee12f1f49380bb3afd3ec3db43e3c8c89bec5e711298",
+      "pymeshlabVersion": "2025.7.post1"
+    },
+    "sourceTriangles": 29986,
+    "actualTriangles": 12000,
+    "actualVertices": 5804,
+    "method": "PyMeshLab quadric collapse preserving boundary, normal and topology with planar quadrics",
+    "settings": {
+      "targetfacenum": 12000,
+      "qualitythr": 0.3,
+      "preserveboundary": true,
+      "boundaryweight": 20.0,
+      "preservenormal": true,
+      "preservetopology": true,
+      "optimalplacement": true,
+      "planarquadric": true,
+      "planarweight": 0.01,
+      "autoclean": true
+    },
+    "geometryOrigin": "Only existing approved neural-derived surface simplified; no authored geometry"
+  },
+  "derivation": {
+    "rawTriangles": 993973,
+    "weldedTriangles": 12000,
+    "remeshedTriangles": 12000,
+    "voxelSize": 0,
+    "finalTriangles": 12000,
+    "atlasArea": 0.5542563410573191,
+    "singleReductionPass": true,
+    "inheritedUVRemovedBeforeReduction": true,
+    "sourceMaterialsUntouched": true,
+    "nearTriangles": 29986
+  },
+  "bake": {
+    "hitCoverageAreaWeighted": 0.9995712499451824,
+    "cageExtrusion": 0.02,
+    "maxRayDistance": 0.06,
+    "maps": [
+      {
+        "role": "base",
+        "size": [
+          512,
+          512
+        ]
+      },
+      {
+        "role": "orm",
+        "size": [
+          256,
+          256
+        ]
+      }
+    ],
+    "method": "CPU selected-to-active bake from the exact approved neural-derived near mesh/materials onto its welded, UV-free, single-pass reduced far surface. No further voxelization or authored geometry."
+  },
+  "farShading": {
+    "normals": "actual_geometry_only",
+    "baseColorSize": 512,
+    "ormSize": 256,
+    "reason": "Actual diagnostic isolated second-generation tangent-space normal rebake as the cause of black dormers/chimneys. Keep the verified geometric normals and original-near-derived color/ORM, omit normalTexture."
+  },
+  "quantization": {
+    "source": "H:\\代码项目\\monopoly\\art\\full-ai-city\\candidates-far\\classic\\shop_2.glb",
+    "output": "H:\\代码项目\\monopoly\\art\\full-ai-city\\candidates-far\\classic\\shop_2.glb",
+    "sourceBytes": 633056,
+    "outputBytes": 454276,
+    "sourceSha256": "9deac724a8bfa8a9be2afbe7eb1b535993c47f54c8cddeb16ff7cdb432e3487b",
+    "outputSha256": "9bfa28c29403627a49f5d65a5ff420a231b7a0128d94ecea4ec9259320841640",
+    "positionFaceAndTextureBytesUnchanged": true,
+    "attributes": [
+      {
+        "accessor": 1,
+        "semantic": "NORMAL",
+        "count": 14911,
+        "maximumAngularErrorDegrees": 0.37112066026307866
+      },
+      {
+        "accessor": 2,
+        "semantic": "TEXCOORD_0",
+        "count": 14911,
+        "maximumUVError": 7.629510038853482e-06,
+        "maximumTexelErrorAt1024": 0.007812618279785966
+      }
+    ]
+  },
+  "processedCandidate": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\candidates-far\\classic\\shop_2.glb",
+    "sha256": "9bfa28c29403627a49f5d65a5ff420a231b7a0128d94ecea4ec9259320841640",
+    "bytes": 454276
+  },
+  "glbValidation": {
+    "version": 2,
+    "triangles": 12000,
+    "meshes": 1,
+    "materials": 1,
+    "images": 2,
+    "all_primitives_have_uv": true,
+    "animations": [],
+    "all_images_embedded": true,
+    "external_buffers": []
+  },
+  "triangles": 12000,
+  "renderedCandidate": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders-far\\classic\\shop_2\\lod-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders-far\\classic\\shop_2\\lod-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders-far\\classic\\shop_2\\lod-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders-far\\classic\\shop_2\\lod-left.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders-far\\classic\\shop_2\\lod-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.37752604484558105,
+        -0.29115432500839233,
+        0.0010520898504182696
+      ],
+      "max": [
+        0.37692466378211975,
+        0.2891349196434021,
+        0.9989705681800842
+      ]
+    },
+    "triangles": 12000,
+    "textureSizes": [
+      {
+        "name": "classic__shop_2__base",
+        "size": [
+          512,
+          512
+        ]
+      },
+      {
+        "name": "classic__shop_2__orm",
+        "size": [
+          256,
+          256
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "renderedSource": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders-far\\classic\\shop_2\\raw-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders-far\\classic\\shop_2\\raw-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.3796966075897217,
+        -0.2908203899860382,
+        0.0
+      ],
+      "max": [
+        0.3796966075897217,
+        0.2908203899860382,
+        1.0
+      ]
+    },
+    "triangles": 993973,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "bounds": {
+    "min": [
+      -0.37752604484558105,
+      0.0010520898504182696,
+      -0.2891349196434021
+    ],
+    "max": [
+      0.37692466378211975,
+      0.9989705681800842,
+      0.29115432500839233
+    ],
+    "coordinateSystem": "GLTF Y-up; +Z front"
+  },
+  "textureSizes": [
+    {
+      "name": "classic__shop_2__base",
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "name": "classic__shop_2__orm",
+      "size": [
+        256,
+        256
+      ]
+    }
+  ],
+  "rawSourceUnchanged": true,
+  "completedAt": "2026-10-23T06:11:48.361041+00:00",
+  "reviewSheet": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders-far\\classic\\shop_2\\review-sheet.jpg",
+    "sha256": "97ee1a316193917a9fa3bc736c8fca7910f4faab28666ee06e1e935f8044df4d",
+    "bytes": 265977,
+    "content": "Unmodified CPU render images composed with labels for visual comparison only"
+  }
+}

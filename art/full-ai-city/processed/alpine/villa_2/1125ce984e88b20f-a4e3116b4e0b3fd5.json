@@ -1,0 +1,426 @@
+{
+  "status": "exported_pending_visual_review",
+  "createdAt": "2026-10-24T17:39:58.902654+08:00",
+  "region": "alpine",
+  "asset": "villa_2",
+  "source": {
+    "rawGLB": {
+      "path": "H:\\代码项目\\monopoly\\art\\themed-city-kit\\source\\alpine-house-mv-v01-pixal-mv-1024-9247.glb",
+      "sha256": "b31e50610cef3c2a1d3c581cbf380fcbb5538a6aef9307fe122c2cc98e590db0",
+      "bytes": 46466188
+    }
+  },
+  "inferenceReport": {
+    "path": "H:\\代码项目\\monopoly\\art\\themed-city-kit\\reports\\alpine-house-mv-v01\\alpine-house-mv-v01-pixal-mv-1024-9247.json",
+    "sha256": "576966385868562bc2e61ce0139621955f270bce7ea42fb926029fce182a7701",
+    "bytes": 7357
+  },
+  "reference": {
+    "path": "H:\\代码项目\\monopoly\\art\\themed-city-kit\\inputs\\alpine-house-v01\\transforms.json",
+    "sha256": "05bd0d8984ddd6cb3e1e7e2e50a58bb63939829b3cd3dfcf68c1fe0f2c33f8ec",
+    "bytes": 4140
+  },
+  "processingTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\alpine-villa2-overlap-review\\tools\\44343084bc7dd4cfc4cd3a14b18159f99fa801662877e90e6d2201051755f01b-refresh_baked_textures.py",
+    "sha256": "44343084bc7dd4cfc4cd3a14b18159f99fa801662877e90e6d2201051755f01b",
+    "bytes": 17477
+  },
+  "assumedCameras": true,
+  "cameraCalibration": "assumed_standard_orbit_not_measured",
+  "nativePipeline": "Pixal3DMVImageTo3DPipeline.run_mv",
+  "nativeResolution": 1024,
+  "seed": 9247,
+  "geometryOrigin": "Only the actual neural source reduced and rebaked; no authored substitute geometry or manually constructed surfaces",
+  "orientation": {
+    "up": "Y",
+    "front": "+Z",
+    "groundY": 0,
+    "maxEdge": 1
+  },
+  "requestedTriangles": 30000,
+  "limitations": [
+    "Assumed camera reference reconstruction, not exact measured architecture",
+    "Final candidate requires actual rendered visual approval",
+    "Texture-only repair preserves all original geometry and does not straighten source reconstruction defects."
+  ],
+  "animation": null,
+  "processingComplete": true,
+  "derivation": {
+    "rawTriangles": 992518,
+    "weldedTriangles": 982579,
+    "remeshedTriangles": 2915072,
+    "voxelSize": 0.003,
+    "finalTriangles": 29978,
+    "atlasArea": 0.4456734567182774,
+    "singleReductionPass": true,
+    "inheritedUVRemovedBeforeReduction": true,
+    "sourceMaterialsUntouched": true
+  },
+  "bake": {
+    "method": "CPU closest-original-triangle projection with float64 barycentric original UV and bilinear original texture sampling; geometric normals retained, no directional normal-map rebake or invented color",
+    "coveredAtlasPixels": 1849836,
+    "nearestLookupSuccessFraction": 1.0,
+    "notRayCoverage": true,
+    "sourceDistanceQuantiles": [
+      0.00019356622215127572,
+      0.0010529010905884206,
+      0.0020233118440955815,
+      0.0076332357712090015
+    ],
+    "sourceDistanceQuantileLevels": [
+      0.5,
+      0.95,
+      0.99,
+      1
+    ],
+    "overTwoPercentMaxEdge": 0.0,
+    "distanceReviewRequired": false,
+    "visualGeometryReviewRequired": true,
+    "barycentricOriginalRange": [
+      -0.0009965713706665547,
+      1.0
+    ],
+    "degenerateOrInvalidBarycentricCount": 0,
+    "closestSourceVertexFallbackFraction": 0.0,
+    "barycentricPointReconstructionErrorQuantiles": [
+      7.348956048423872e-09,
+      4.2916855849393274e-08,
+      3.7298483314328206e-06
+    ],
+    "atlasOverlapPixelsWithDifferentSurface": 19182,
+    "seconds": 18.165372399998887,
+    "maps": [
+      {
+        "role": "base",
+        "size": [
+          2048,
+          2048
+        ]
+      },
+      {
+        "role": "orm",
+        "size": [
+          1024,
+          1024
+        ]
+      }
+    ]
+  },
+  "processedCandidate": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\candidates\\alpine\\villa_2.glb",
+    "sha256": "1125ce984e88b20fcd6ddd2c2676089abf0783afa900761c71fa76a9a8868a17",
+    "bytes": 3182200
+  },
+  "glbValidation": {
+    "version": 2,
+    "triangles": 29978,
+    "meshes": 1,
+    "materials": 1,
+    "images": 3,
+    "all_primitives_have_uv": true,
+    "animations": [],
+    "all_images_embedded": true,
+    "external_buffers": []
+  },
+  "triangles": 29978,
+  "renderedCandidate": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\alpine-villa2-overlap-review\\renders\\lod-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\alpine-villa2-overlap-review\\renders\\lod-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\alpine-villa2-overlap-review\\renders\\lod-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\alpine-villa2-overlap-review\\renders\\lod-left.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\alpine-villa2-overlap-review\\renders\\lod-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.4812021553516388,
+        -0.32098129391670227,
+        -0.0010713781230151653
+      ],
+      "max": [
+        0.4828445315361023,
+        0.32079246640205383,
+        0.9998262524604797
+      ]
+    },
+    "triangles": 29978,
+    "textureSizes": [
+      {
+        "name": "alpine__villa_2__base",
+        "size": [
+          2048,
+          2048
+        ]
+      },
+      {
+        "name": "alpine__villa_2__orm",
+        "size": [
+          1024,
+          1024
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "renderedSource": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\alpine-villa2-overlap-review\\source-review\\raw-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\alpine-villa2-overlap-review\\source-review\\raw-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.4823833107948303,
+        -0.32117053866386414,
+        0.0
+      ],
+      "max": [
+        0.4823833107948303,
+        0.32117053866386414,
+        1.0
+      ]
+    },
+    "triangles": 992518,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "bounds": {
+    "min": [
+      -0.4812021553516388,
+      -0.0010713781230151653,
+      -0.32079246640205383
+    ],
+    "max": [
+      0.4828445315361023,
+      0.9998262524604797,
+      0.32098129391670227
+    ],
+    "coordinateSystem": "GLTF Y-up; +Z front"
+  },
+  "textureSizes": [
+    {
+      "name": "alpine__villa_2__base",
+      "size": [
+        2048,
+        2048
+      ]
+    },
+    {
+      "name": "alpine__villa_2__orm",
+      "size": [
+        1024,
+        1024
+      ]
+    }
+  ],
+  "rawSourceUnchanged": true,
+  "completedAt": "2026-10-24T17:40:11.514884+08:00",
+  "textureTransferTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\alpine-villa2-overlap-review\\tools\\fbab2f26c5a0e8b0063598e5d935825fc555c5d999dccab23c87b36ca0925214-bake_nearest_surface.py",
+    "sha256": "fbab2f26c5a0e8b0063598e5d935825fc555c5d999dccab23c87b36ca0925214",
+    "bytes": 7557
+  },
+  "textureOnlyReprocessing": {
+    "sourceCandidate": {
+      "path": "assets/models/regions-ai/full/alpine/villa_2.glb",
+      "sha256": "e1e36d5658b158e22f849c9623f0f580a2219d31a33720163b6f4d3a8b4009a5"
+    },
+    "sourceProcessingReport": {
+      "path": "art/full-ai-city/processed/alpine/villa_2.json",
+      "sha256": "9f8bdcc3c2f15a84256d51a9001b16febe4cd9ed4c828522e2f0c23a5970f762"
+    },
+    "positionsUnchanged": true,
+    "faceIndicesUnchanged": true,
+    "cornerNormalsUnchanged": true,
+    "UVBytesUnchanged": true,
+    "additionalRemeshOrSimplification": false,
+    "sourceTexture": {
+      "path": "H:\\代码项目\\monopoly\\art\\themed-city-kit\\source\\alpine-house-mv-v01-pixal-mv-1024-9247.glb",
+      "sha256": "b31e50610cef3c2a1d3c581cbf380fcbb5538a6aef9307fe122c2cc98e590db0",
+      "bytes": 46466188
+    },
+    "normalization": {
+      "enabled": true,
+      "candidate_degrees": 0.2373881338022591,
+      "applied_degrees": 0.2373881338022591,
+      "underside_area": 0.13443393301562143,
+      "normal_agreement": 0.9216015301137322,
+      "yaw_degrees": 180,
+      "pitch_degrees": 0,
+      "roll_degrees": 0,
+      "uniform_scale": 1.1109688434762592
+    },
+    "samplingRestInstances": [
+      {
+        "node": 0,
+        "name": "alpine__villa_2__neural_lod",
+        "triangles": 29978,
+        "restWorldMatrix": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      }
+    ],
+    "preservation": {
+      "allGeometryUVNormalAndAnimationBytesUnchanged": true,
+      "nodeHierarchyAndRestTransformsUnchanged": true,
+      "materialAndTextureIndicesUnchanged": true,
+      "meshPrimitiveReferencesUnchanged": true,
+      "onlyMaterialChange": "Removed legacy baked normalTexture binding",
+      "preservedBufferViews": [
+        {
+          "bufferView": 0,
+          "bytes": 508188,
+          "sha256": "5741d0dac04ab1117f6cca1169bf80e8ff4ac6bb49ff6b4eda47bb5bdff73d16"
+        },
+        {
+          "bufferView": 1,
+          "bytes": 169396,
+          "sha256": "c45e01bdce0083fbbfcffe149db46abe360d946e0b7a64b8188eb6bc6494d625"
+        },
+        {
+          "bufferView": 2,
+          "bytes": 169396,
+          "sha256": "ae48984e5d46012e4187ae79592bdc576da66eaafe44bf18fa64c81227cb164e"
+        },
+        {
+          "bufferView": 3,
+          "bytes": 179868,
+          "sha256": "3d59de73083627558b13364dd60159ae8bb303a3c0806005ef5ed03f656c4543"
+        },
+        {
+          "bufferView": 4,
+          "bytes": 273391,
+          "sha256": "41097342a0fa7af837018e508939349c9b2ee87b0a81272546427da68963c45c"
+        }
+      ],
+      "replacedImageViews": [
+        5,
+        6
+      ],
+      "originalNormalImageRetainedUnreferenced": true
+    },
+    "maps": {
+      "base": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\alpine-villa2-overlap-review\\base.jpg",
+        "sha256": "90fe82dd9b62a485646a43869e90990fb2e2cd5636b22c685ea29ae90550628e",
+        "bytes": 1608738
+      },
+      "orm": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\alpine-villa2-overlap-review\\orm.png",
+        "sha256": "49684ac6b898a8de17cda654adaeb013ac9ad4a8c251d6b2670a0e351de13eb8",
+        "bytes": 270976
+      }
+    },
+    "atlasOverlapReviewRequired": true,
+    "diagnosticOnly": true
+  },
+  "textureOrigin": "Original source PBR sampled at the existing approved UVs through closest source triangle; 2K base and 1K ORM, geometric normals retained. No new images generated by AI.",
+  "geometryAndMotionInheritedFrom": {
+    "path": "art/full-ai-city/processed/alpine/villa_2.json",
+    "sha256": "9f8bdcc3c2f15a84256d51a9001b16febe4cd9ed4c828522e2f0c23a5970f762"
+  },
+  "processingCompletionNote": "Texture sampling and all five actual renders completed. Processing completion is independent from visual approval; atlasOverlapReviewRequired and diagnosticOnly remain recorded. No model or image reprocessing occurred in this metadata correction.",
+  "promotedFrom": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\alpine-villa2-overlap-review\\villa_2.json",
+    "sha256": "e6a9d5060c853cf46414b785cb821faaca58c83a12964678dd21a4f074308ea1",
+    "bytes": 12256
+  },
+  "supersedesApproval": {
+    "candidate": {
+      "path": "assets/models/regions-ai/full/alpine/villa_2.glb",
+      "sha256": "e1e36d5658b158e22f849c9623f0f580a2219d31a33720163b6f4d3a8b4009a5"
+    },
+    "processingReport": {
+      "path": "art/full-ai-city/processed/alpine/villa_2.json",
+      "sha256": "9f8bdcc3c2f15a84256d51a9001b16febe4cd9ed4c828522e2f0c23a5970f762"
+    },
+    "reviewedAtUtc": "2026-10-23T05:45:25.645543+00:00",
+    "status": "staged_only_pending_new_visual_approval"
+  },
+  "processingRevision": 0,
+  "reviewSheet": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\alpine-villa2-overlap-review\\renders\\review-sheet.jpg",
+    "sha256": "1c08fc915107c73da9e3b4d46499f9fb8cab609142bccee081788936496273c2",
+    "bytes": 351911,
+    "candidateSha256": "1125ce984e88b20fcd6ddd2c2676089abf0783afa900761c71fa76a9a8868a17",
+    "sourceImages": [
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\alpine-villa2-overlap-review\\source-review\\raw-front.png",
+        "sha256": "08ff26121e50b9cb98850c434b6103e4be06c2d06614abd5e9c828d9bc09477a",
+        "label": "AI raw front"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\alpine-villa2-overlap-review\\source-review\\raw-iso.png",
+        "sha256": "3ca4fcecbb6497ee4f455784a9bd4a9e5c85ee747a65629094899b6ee4240586",
+        "label": "AI raw iso"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\alpine-villa2-overlap-review\\renders\\lod-front.png",
+        "sha256": "b3be5431a9902af9551296607a87845d32c1b2e2d28838c9f3adc9772f99dc25",
+        "label": "LOD front"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\alpine-villa2-overlap-review\\renders\\lod-right.png",
+        "sha256": "0f73e0612ba1d0685d8b0ad4a7707d265500d5cba883cdc86bcc36cb7437471d",
+        "label": "LOD right"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\alpine-villa2-overlap-review\\renders\\lod-back.png",
+        "sha256": "389aa98cdaef73147645a0566bb9376485353fe1db9f6809ee9bf17a40c0e43f",
+        "label": "LOD back"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\alpine-villa2-overlap-review\\renders\\lod-left.png",
+        "sha256": "8d7779b324c1c1c47270df4d3a58dc3f948de300e26627f8106e5194fee80037",
+        "label": "LOD left"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\alpine-villa2-overlap-review\\renders\\lod-iso.png",
+        "sha256": "b58c4a82d048645343fcd5fce2714771d680aa5a1f972c0944e19ce459c2c15c",
+        "label": "LOD iso"
+      }
+    ],
+    "content": "Unmodified CPU render images composed with labels for visual comparison only"
+  }
+}

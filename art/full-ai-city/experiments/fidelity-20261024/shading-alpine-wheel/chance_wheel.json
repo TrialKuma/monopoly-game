@@ -1,0 +1,367 @@
+{
+  "status": "exported_pending_visual_review",
+  "createdAt": "2026-10-23T06:07:31.749349+00:00",
+  "region": "alpine",
+  "asset": "chance_wheel",
+  "source": {
+    "rawGLB": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\alpine--chance_wheel-a001-pixal-mv-1024-9247.glb",
+      "sha256": "0b1d24e90c6a333bfaf041a9df5083bd34776dc966107074b493c3fae7fbad2c",
+      "bytes": 44377556
+    }
+  },
+  "inferenceReport": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\alpine--chance_wheel-a001\\alpine--chance_wheel-a001-pixal-mv-1024-9247.json",
+    "sha256": "7cdf102f575b77b2fbfde4f48a73ea80733616f4c8e227a3b4fcc7927bf48f9d",
+    "bytes": 8178
+  },
+  "reference": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\inputs\\alpine\\chance_wheel\\27bff82aeb339c26\\reference.json",
+    "sha256": "df8549c4c04ef1f2e19e52b23bf4177738a29ac019155aafefe8b37cef8474ec",
+    "bytes": 4447
+  },
+  "processingTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\fb2d4932daf4362cc3f83a221862f6a8805b4c4969bb64c6451815ed1ee9844a-refresh_repaired_shading.py",
+    "sha256": "fb2d4932daf4362cc3f83a221862f6a8805b4c4969bb64c6451815ed1ee9844a",
+    "bytes": 4136
+  },
+  "assumedCameras": true,
+  "cameraCalibration": "assumed_standard_orbit_not_measured",
+  "nativePipeline": "Pixal3DMVImageTo3DPipeline.run_mv",
+  "nativeResolution": 1024,
+  "seed": 9247,
+  "geometryOrigin": "Actual native three-view neural building with source-derived mobile geometry and explicitly recorded bounded local mechanical boundary repairs. No replacement building or replacement wheel.",
+  "orientation": {
+    "up": "Y",
+    "front": "+Z",
+    "groundY": 0,
+    "maxEdge": 1
+  },
+  "requestedTriangles": 30000,
+  "limitations": [
+    "Assumed camera reference reconstruction, not exact measured architecture",
+    "Final candidate requires actual rendered visual approval"
+  ],
+  "animation": {
+    "driver": "scene-life",
+    "autoplayClip": false,
+    "node": "alpine__chance_wheel__neural_wheel",
+    "lifePart": "wheel",
+    "localRotationAxis": "Z",
+    "geometryOrigin": "Original neural-derived component with 500 explicitly recorded local boundary-repair and bridge triangles; no replacement mechanical object",
+    "poseReview": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\shading-alpine-wheel\\motion\\review.json",
+      "sha256": "b698abadf2e46b11f02bebbd4cdbe770bc34f71245efd9458da007bc139f2483",
+      "bytes": 4109
+    },
+    "frames": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\shading-alpine-wheel\\motion\\pose-0-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\shading-alpine-wheel\\motion\\pose-0-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\shading-alpine-wheel\\motion\\pose-0-iso.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\shading-alpine-wheel\\motion\\pose-45-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\shading-alpine-wheel\\motion\\pose-45-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\shading-alpine-wheel\\motion\\pose-45-iso.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\shading-alpine-wheel\\motion\\pose-90-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\shading-alpine-wheel\\motion\\pose-90-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\shading-alpine-wheel\\motion\\pose-90-iso.png"
+    ]
+  },
+  "processingComplete": true,
+  "lod": "near",
+  "processingRevision": 0,
+  "derivation": {
+    "rawTriangles": 984832,
+    "weldedTriangles": 977534,
+    "remeshedTriangles": 3005636,
+    "voxelSize": 0.003,
+    "finalTriangles": 29970,
+    "atlasArea": 0.41461843917683744,
+    "singleReductionPass": true,
+    "inheritedUVRemovedBeforeReduction": true,
+    "sourceMaterialsUntouched": true
+  },
+  "bake": {
+    "method": "Original reviewed base color and ORM bytes preserved; legacy rebaked normalTexture detached. Real geometry normals provide shading.",
+    "priorBake": {
+      "hitCoverageAreaWeighted": 0.999500517396719,
+      "cageExtrusion": 0.02,
+      "maxRayDistance": 0.06,
+      "maps": [
+        {
+          "role": "base",
+          "size": [
+            1024,
+            1024
+          ]
+        },
+        {
+          "role": "orm",
+          "size": [
+            512,
+            512
+          ]
+        },
+        {
+          "role": "normal",
+          "size": [
+            1024,
+            1024
+          ]
+        }
+      ],
+      "method": "Selected-to-active CPU bake from original neural source onto a source-derived voxel surface reduced without inherited UV constraints; no authored substitute building"
+    }
+  },
+  "processedCandidate": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\shading-alpine-wheel\\chance_wheel.glb",
+    "sha256": "5fd20f1da7956b46f616c96490f4635a5c521bf3495e267b6501131c8233a2ef",
+    "bytes": 2423860
+  },
+  "glbValidation": {
+    "version": 2,
+    "triangles": 31432,
+    "meshes": 2,
+    "materials": 2,
+    "images": 3,
+    "all_primitives_have_uv": true,
+    "animations": [],
+    "all_images_embedded": true,
+    "external_buffers": []
+  },
+  "triangles": 31432,
+  "renderedCandidate": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\shading-alpine-wheel\\renders\\lod-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\shading-alpine-wheel\\renders\\lod-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\shading-alpine-wheel\\renders\\lod-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\shading-alpine-wheel\\renders\\lod-left.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\shading-alpine-wheel\\renders\\lod-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.48584702610969543,
+        -0.41458970308303833,
+        0.00024404980649705976
+      ],
+      "max": [
+        0.48390042781829834,
+        0.4137197434902191,
+        0.9990203380584717
+      ]
+    },
+    "triangles": 31432,
+    "textureSizes": [
+      {
+        "name": "alpine__chance_wheel__base",
+        "size": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "name": "alpine__chance_wheel__orm",
+        "size": [
+          512,
+          512
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "renderedSource": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\shading-alpine-wheel\\source-review\\raw-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\shading-alpine-wheel\\source-review\\raw-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.48363620042800903,
+        -0.4147176742553711,
+        0.0
+      ],
+      "max": [
+        0.48363620042800903,
+        0.4147176742553711,
+        1.0
+      ]
+    },
+    "triangles": 984832,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "bounds": {
+    "min": [
+      -0.48584702610969543,
+      0.00024404980649705976,
+      -0.4137197434902191
+    ],
+    "max": [
+      0.48390042781829834,
+      0.9990203380584717,
+      0.41458970308303833
+    ],
+    "coordinateSystem": "GLTF Y-up; +Z front"
+  },
+  "textureSizes": [
+    {
+      "name": "alpine__chance_wheel__base",
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "name": "alpine__chance_wheel__orm",
+      "size": [
+        512,
+        512
+      ]
+    }
+  ],
+  "rawSourceUnchanged": true,
+  "completedAt": "2026-10-24T09:42:46.879590+00:00",
+  "derivedFromStaticCandidate": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\candidate-history\\alpine\\chance_wheel\\31068718b92b5fbb791d2daf5ca0aab26157f7f8cd454ddace310e3948ce75b6\\chance_wheel.glb",
+    "sha256": "31068718b92b5fbb791d2daf5ca0aab26157f7f8cd454ddace310e3948ce75b6",
+    "bytes": 1484888
+  },
+  "componentSeparation": {
+    "source": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\alpine-wheel-repair\\source-near.glb",
+      "sha256": "31068718b92b5fbb791d2daf5ca0aab26157f7f8cd454ddace310e3948ce75b6",
+      "bytes": 1484888
+    },
+    "output": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\component-candidates\\alpine\\chance_wheel.glb",
+      "sha256": "7b02e48fcfab206058d07adb79960975b92527a75d1cabf0cb292d5b1ec8d23c",
+      "bytes": 2423888
+    },
+    "staticTriangles": 30368,
+    "movingTriangles": 1064,
+    "originalTriangles": 29970,
+    "finalTriangles": 31432,
+    "newFacesAdded": 500,
+    "splitSourceTriangles": 227,
+    "originalVerticesMoved": 0,
+    "embeddedImageHashesUnchanged": true,
+    "originalMaterialUnchanged": true,
+    "selection": {
+      "name": "alpine__chance_wheel__neural_wheel",
+      "lifePart": "wheel",
+      "shape": "measured_inner_disk_with_local_boundary_repair",
+      "center": [
+        0.339,
+        0.275,
+        0.2255
+      ],
+      "axis": [
+        0.09599993546886507,
+        -0.0019999986556013555,
+        0.9953793309062386
+      ],
+      "radius": 0.132,
+      "depth": [
+        -0.025,
+        0.0185
+      ],
+      "reviewNotes": "Inner original neural colored surfaces rotate, real outer rim/stand/hub/pointer fixed. Added 500 local repair and side bridge triangles. All original PBR/image data unchanged; added patches propagate sampled native colors. Geometry and actual poses inspected; extreme close-up color strip and existing rear relief require external art review."
+    },
+    "driver": "scene-life; local Z rotation; no autoplay GLTF clip",
+    "localRepair": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\alpine-wheel-repair\\repair-report.json",
+      "sha256": "24da36e8e72aac018aafb794929465ed92d86cdb12ca91e2cbe9cf569ffaa303",
+      "bytes": 1164271
+    },
+    "verification": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\alpine-wheel-repair\\verification.json",
+      "sha256": "9675ded1de5657ac9485421b309087c84532c886b83e0161d95b3049f855df4a",
+      "bytes": 2098
+    },
+    "poseReview": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\alpine-wheel-repair\\renders\\review.json",
+      "sha256": "70391bac371fb7340eafca109392824cea19b12c95274e8b6b0e8e166948e088",
+      "bytes": 5660
+    },
+    "tool": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\alpine-wheel-repair\\repair.py",
+      "sha256": "5e1159f53af8fcd2ed49e94aef4647d30703c70dab66a227633f6538b35a2bb9",
+      "bytes": 20754
+    },
+    "status": "geometry_verified_pending_external_visual_decision"
+  },
+  "componentLocalRepair": {
+    "newFacesAdded": 500,
+    "splitSourceTriangles": 227,
+    "originalVerticesMoved": 0,
+    "localRepair": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\component-repairs\\alpine\\chance_wheel\\7b02e48fcfab206058d07adb79960975b92527a75d1cabf0cb292d5b1ec8d23c\\repair-report.json",
+      "sha256": "24da36e8e72aac018aafb794929465ed92d86cdb12ca91e2cbe9cf569ffaa303",
+      "bytes": 1164271
+    },
+    "verification": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\component-repairs\\alpine\\chance_wheel\\7b02e48fcfab206058d07adb79960975b92527a75d1cabf0cb292d5b1ec8d23c\\verification.json",
+      "sha256": "9675ded1de5657ac9485421b309087c84532c886b83e0161d95b3049f855df4a",
+      "bytes": 2098
+    },
+    "tool": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\component-repairs\\alpine\\chance_wheel\\7b02e48fcfab206058d07adb79960975b92527a75d1cabf0cb292d5b1ec8d23c\\repair.py",
+      "sha256": "5e1159f53af8fcd2ed49e94aef4647d30703c70dab66a227633f6538b35a2bb9",
+      "bytes": 20754
+    }
+  },
+  "componentVisualReview": {
+    "status": "passed_by_processing_agent_pending_external_approval",
+    "notes": "Inner original neural colored surfaces rotate, real outer rim/stand/hub/pointer fixed. Added 500 local repair and side bridge triangles. All original PBR/image data unchanged; added patches propagate sampled native colors. Geometry and actual poses inspected; extreme close-up color strip and existing rear relief require external art review."
+  },
+  "componentTools": [
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\5ef865750c005ad1c449653f1e25b1e6d3a77dad5a7cbd41ecb5273b83364789-neural_component.py",
+      "sha256": "5ef865750c005ad1c449653f1e25b1e6d3a77dad5a7cbd41ecb5273b83364789",
+      "bytes": 11603
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\a05381f29dd4d1c10b92b6eade3b5130223422118f258cb980dcb645de3b93b3-finalize_component.py",
+      "sha256": "a05381f29dd4d1c10b92b6eade3b5130223422118f258cb980dcb645de3b93b3",
+      "bytes": 4855
+    }
+  ],
+  "geometryAndMotionInheritedFrom": {
+    "path": "art/full-ai-city/processed/alpine/chance_wheel/7b02e48fcfab2060-d61bc19cda981e13.json",
+    "sha256": "d61bc19cda981e13c4f83cea445e2780cfd4e75a2995943f664b91dc1ae0a4c0"
+  },
+  "shadingOnlyRefinement": {
+    "sourceCandidate": {
+      "path": "assets/models/regions-ai/full/alpine/chance_wheel/7b02e48fcfab2060.glb",
+      "sha256": "7b02e48fcfab206058d07adb79960975b92527a75d1cabf0cb292d5b1ec8d23c"
+    },
+    "sourceProcessingReport": {
+      "path": "art/full-ai-city/processed/alpine/chance_wheel/7b02e48fcfab2060-d61bc19cda981e13.json",
+      "sha256": "d61bc19cda981e13c4f83cea445e2780cfd4e75a2995943f664b91dc1ae0a4c0"
+    },
+    "removedNormalTextureMaterials": [
+      0
+    ],
+    "allBinaryPayloadBytesUnchanged": true,
+    "geometryUVImagesHierarchyAnimationUnchanged": true,
+    "reason": "Preserve the inspected mechanical repair and original atlas; remove only the diagnosed noisy tangent-space normal bake. No new color sampling, image/model generation or extra reduction."
+  }
+}

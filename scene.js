@@ -1,6 +1,7 @@
 import * as THREE from './assets/vendor/three/three.module.min.js';
+import { makeStudioEnvironment } from './scene-environment.js?v=20261024-4';
 import { mergeGeometries } from './assets/vendor/three/addons/utils/BufferGeometryUtils.js';
-import { createSceneLife } from './scene-life.js?v=20261024-1';
+import { createSceneLife } from './scene-life.js?v=20261024-4';
 import { createStreetFoundation } from './scene-streets.js?v=20261024-1';
 import { createRegionalPark } from './scene-regional-parks.js?v=20261024-1';
 import { loadSharedModelAsset, forgetSharedModelAsset, releaseSharedModelAsset, releaseSupersededModelAssets, ownsSharedModelResource, disposeSharedModelAssets } from './scene-model-cache.js?v=20261024-1';
@@ -63,7 +64,7 @@ const LANDMARKS = { classic: { 5:'finance', 7:'skyscraper', 14:'onsen' }, compac
 const SPECIAL_MODELS = { bank:'vault_bank',construction:'builders_guild',card_draw:'card_pavilion',chance:'chance_wheel',teleport:'teleport_gate',rush:'rush_station',junction:'junction_hub' };
 const ASSET_BUNDLES = [
   {file:'city-kit.glb',version:'20260911-12',authored:false,pattern:/^(plot_0|tree|streetlamp|fountain)$/},
-  ...['classic','compact','expansion','harbor','alpine'].map(mapId=>({file:`regions/${mapId}.glb`,mapId,version:'20261024-1',authored:true,pattern:new RegExp(`^${mapId}_(?:(?:villa|shop|hotel|tower|skyscraper|finance|onsen)_[123]|civic_hall|vault_bank|builders_guild|card_pavilion|chance_wheel|teleport_gate|rush_station|junction_hub)$`)})),
+  ...['classic','compact','expansion','harbor','alpine'].map(mapId=>({file:`regions/${mapId}.glb`,mapId,version:'20261024-4',authored:true,pattern:new RegExp(`^${mapId}_(?:(?:villa|shop|hotel|tower|skyscraper|finance|onsen)_[123]|civic_hall|vault_bank|builders_guild|card_pavilion|chance_wheel|teleport_gate|rush_station|junction_hub)$`)})),
 ];
 const projection = new THREE.Vector3();
 const raycaster = new THREE.Raycaster();
@@ -132,16 +133,6 @@ function bench(parent, x, z, angle = 0) {
   box(g, .5, .06, .03, '#bc9470', 0, .35, -.085);
   box(g, .035, .18, .2, PALETTE.dark, -.17, .09);
   box(g, .035, .18, .2, PALETTE.dark, .17, .09);
-}
-function makeStudioEnvironment(targetRenderer){
-  const room=new THREE.Scene();room.background=new THREE.Color('#b8c6c0');
-  const panels=[];
-  [[-4,5,3,4.2,5.2],[5,3,-2,3,4],[0,7,-5,5,3]].forEach(([x,y,z,w,h],i)=>{
-    const geometry=new THREE.PlaneGeometry(w,h);const mat=new THREE.MeshBasicMaterial({color:new THREE.Color(i===0?1.8:1.2,i===0?1.55:1.35,i===0?1.12:1.45),side:THREE.DoubleSide});
-    const panel=new THREE.Mesh(geometry,mat);panel.position.set(x,y,z);panel.lookAt(0,1,0);room.add(panel);panels.push(panel);
-  });
-  const generator=new THREE.PMREMGenerator(targetRenderer);const target=generator.fromScene(room,.04,.1,40);
-  generator.dispose();panels.forEach((p)=>{p.geometry.dispose();p.material.dispose();});return target;
 }
 function mount() {
   wrap = document.getElementById('city-canvas-wrap');
@@ -485,7 +476,7 @@ function buildMap(data) {
   resize();
 }
 function makePark(mapId) {
-  createRegionalPark({THREE,world,boardBounds,mapId,own,loadSceneryBundle:loadSharedModelAsset,requestRender:()=>{renderDirty=true;}});
+  createRegionalPark({THREE,world,boardBounds,mapId,own,loadSceneryBundle:file=>loadSharedModelAsset(file,{version:'20261024-4'}),requestRender:()=>{renderDirty=true;}});
 }
 function numberTexture(number) {
   const canvas = document.createElement('canvas'); canvas.width = 96; canvas.height = 96;

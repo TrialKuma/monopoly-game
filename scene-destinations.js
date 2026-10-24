@@ -8,7 +8,7 @@ const THEMES = {
   alpine: { file:'harbor/alpine_windmill.glb', name:'alpine_windmill', water:'#7abfc4', stone:'#c4c7b2', land:'#adc4a3', roof:'#477e73', flower:'#d9ad84' },
 };
 function loadModel(file) {
-  return loadSharedModelAsset(file);
+  return loadSharedModelAsset(file,{version:'20261024-4'});
 }
 export function createDestinationScene({THREE, world, boardBounds, mapId, requestRender=()=>{}}) {
   const theme=THEMES[mapId];if(!theme)return null;

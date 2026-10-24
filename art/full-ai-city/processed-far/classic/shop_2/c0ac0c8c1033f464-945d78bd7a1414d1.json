@@ -1,0 +1,385 @@
+{
+  "status": "exported_pending_visual_review",
+  "createdAt": "2026-10-24T10:03:27.206809+00:00",
+  "region": "classic",
+  "asset": "shop_2",
+  "source": {
+    "rawGLB": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\classic--shop_2-a001-pixal-mv-1024-9247.glb",
+      "sha256": "ebbabd9bb0e8e260f10d8e0b3d4c7de607443574cafaa79d53fa1b2d689c507e",
+      "bytes": 42222688
+    }
+  },
+  "inferenceReport": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\classic--shop_2-a001\\classic--shop_2-a001-pixal-mv-1024-9247.json",
+    "sha256": "faeb88b798b91c1a8db2a0d0c7019b5df827a0e279225f9eef2d3168038bc897",
+    "bytes": 8067
+  },
+  "reference": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\references\\classic\\shop_2\\reference.json",
+    "sha256": "804508474027674abb827200cd6c433822e2215e08ae874c7c71cd12df6943fc",
+    "bytes": 4012
+  },
+  "processingTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\01259185d3327c7a75b8df2e595381e45eccf13901ce96ea80844701e548295e-process_lod.py",
+    "sha256": "01259185d3327c7a75b8df2e595381e45eccf13901ce96ea80844701e548295e",
+    "bytes": 34836
+  },
+  "assumedCameras": true,
+  "cameraCalibration": "assumed_standard_orbit_not_measured",
+  "nativePipeline": "Pixal3DMVImageTo3DPipeline.run_mv",
+  "nativeResolution": 1024,
+  "seed": 9247,
+  "geometryOrigin": "Exact approved neural-derived near geometry, including any explicitly disclosed bounded local repairs, simplified for far use. No substitute building or newly authored geometry in this far stage.",
+  "orientation": {
+    "up": "Y",
+    "front": "+Z",
+    "groundY": 0,
+    "maxEdge": 1
+  },
+  "requestedTriangles": 12000,
+  "limitations": [
+    "Assumed camera reference reconstruction, not exact measured architecture",
+    "Final candidate requires actual rendered visual approval"
+  ],
+  "animation": null,
+  "processingComplete": true,
+  "lod": "far",
+  "processingRevision": 0,
+  "derivedFromNear": {
+    "path": "H:\\代码项目\\monopoly\\assets\\models\\regions-ai\\full\\classic\\shop_2\\3dce8f12eed55016.glb",
+    "sha256": "3dce8f12eed550166bcaa25508fba06eee26077b4c7cf23cd354756192b00af0",
+    "bytes": 3324200
+  },
+  "derivedFromNearReport": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\processed\\classic\\shop_2\\3dce8f12eed55016-0f0d2a55beedbcc0.json",
+    "sha256": "0f0d2a55beedbcc0a7c4d32f2d71216f6678e1c6b429e97ff25be80143e54bd1",
+    "bytes": 15105
+  },
+  "farSimplification": {
+    "source": {
+      "path": "H:\\代码项目\\monopoly\\assets\\models\\regions-ai\\full\\classic\\shop_2\\3dce8f12eed55016.glb",
+      "sha256": "3dce8f12eed550166bcaa25508fba06eee26077b4c7cf23cd354756192b00af0"
+    },
+    "output": "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\far-classic-shop2-surface.npz",
+    "outputSha256": "b8b4af5b2662047e3d6bb4d21bd2d36d1ded0004e952c6ea63c873e1a3a3b699",
+    "tool": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\e1cebc38c56c536fc09ec03ec4c1cad0060e4f6c21693fa5284e689cf37b9f7b-simplify_far_surface.py",
+      "sha256": "e1cebc38c56c536fc09ec03ec4c1cad0060e4f6c21693fa5284e689cf37b9f7b",
+      "pymeshlabVersion": "2025.7.post1"
+    },
+    "sourceTriangles": 29986,
+    "actualTriangles": 12000,
+    "actualVertices": 5804,
+    "method": "PyMeshLab quadric collapse preserving boundary, normal and topology with planar quadrics",
+    "settings": {
+      "targetfacenum": 12000,
+      "qualitythr": 0.3,
+      "preserveboundary": true,
+      "boundaryweight": 20.0,
+      "preservenormal": true,
+      "preservetopology": true,
+      "optimalplacement": true,
+      "planarquadric": true,
+      "planarweight": 0.01,
+      "autoclean": true
+    },
+    "geometryOrigin": "Only existing approved neural-derived surface simplified; no authored geometry",
+    "sourceCleanup": []
+  },
+  "derivation": {
+    "rawTriangles": 993973,
+    "weldedTriangles": 12000,
+    "remeshedTriangles": 12000,
+    "voxelSize": 0,
+    "finalTriangles": 12000,
+    "atlasArea": 0.5542563410573191,
+    "singleReductionPass": true,
+    "inheritedUVRemovedBeforeReduction": true,
+    "sourceMaterialsUntouched": true,
+    "uvUnwrap": {
+      "angleDegrees": 89,
+      "islandMargin": 2e-05,
+      "marginMethod": "SCALED",
+      "nominalMarginPixels": null
+    },
+    "nearTriangles": 29986
+  },
+  "bake": {
+    "method": "CPU closest-original-surface float64 PBR transfer from the exact approved near mesh/materials onto its source-derived far surface. No further voxelization or authored geometry.",
+    "coveredAtlasPixels": 143876,
+    "nearestLookupSuccessFraction": 1.0,
+    "notRayCoverage": true,
+    "sourceDistanceQuantiles": [
+      0.00031960663909558207,
+      0.0022439640015363693,
+      0.0036726847756654024,
+      0.008369632996618748
+    ],
+    "sourceDistanceQuantileLevels": [
+      0.5,
+      0.95,
+      0.99,
+      1
+    ],
+    "overTwoPercentMaxEdge": 0.0,
+    "distanceReviewRequired": false,
+    "visualGeometryReviewRequired": true,
+    "barycentricOriginalRange": [
+      -1.6247197482277542e-05,
+      1.0
+    ],
+    "degenerateOrInvalidBarycentricCount": 0,
+    "closestSourceVertexFallbackFraction": 0.0,
+    "barycentricPointReconstructionErrorQuantiles": [
+      5.731497950681043e-09,
+      3.8941695834222544e-08,
+      5.111499662055475e-07
+    ],
+    "atlasOverlapPixelsWithDifferentSurface": 1734,
+    "seconds": 1.80407639999612,
+    "maps": [
+      {
+        "role": "base",
+        "size": [
+          512,
+          512
+        ]
+      },
+      {
+        "role": "orm",
+        "size": [
+          256,
+          256
+        ]
+      }
+    ]
+  },
+  "textureTransferTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\fbab2f26c5a0e8b0063598e5d935825fc555c5d999dccab23c87b36ca0925214-bake_nearest_surface.py",
+    "sha256": "fbab2f26c5a0e8b0063598e5d935825fc555c5d999dccab23c87b36ca0925214",
+    "bytes": 7557
+  },
+  "farShading": {
+    "normals": "actual_geometry_only",
+    "baseColorSize": 512,
+    "ormSize": 256,
+    "reason": "Actual diagnostic isolated second-generation tangent-space normal rebake as the cause of black dormers/chimneys. Keep the verified geometric normals and original-near-derived color/ORM, omit normalTexture."
+  },
+  "nearSourceGeometryOrigin": "Only the actual neural source reduced and rebaked; no authored substitute geometry or manually constructed surfaces",
+  "quantization": {
+    "source": "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\far-classic-shop2\\classic\\shop_2.glb",
+    "output": "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\far-classic-shop2\\classic\\shop_2.glb",
+    "sourceBytes": 638412,
+    "outputBytes": 459632,
+    "sourceSha256": "63aa4d63ce800c7ee62bd3506bcc24b057a4ec6d6a21b052c3ca1cbe6978236c",
+    "outputSha256": "c0ac0c8c1033f4641cac2f5f06928251b06f836061e9b74bcffc2ef0f8fc2e27",
+    "positionFaceAndTextureBytesUnchanged": true,
+    "attributes": [
+      {
+        "accessor": 1,
+        "semantic": "NORMAL",
+        "count": 14911,
+        "maximumAngularErrorDegrees": 0.37112066026307866
+      },
+      {
+        "accessor": 2,
+        "semantic": "TEXCOORD_0",
+        "count": 14911,
+        "maximumUVError": 7.629510038853482e-06,
+        "maximumTexelErrorAt1024": 0.007812618279785966
+      }
+    ]
+  },
+  "processedCandidate": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\candidates-far\\classic\\shop_2.glb",
+    "sha256": "c0ac0c8c1033f4641cac2f5f06928251b06f836061e9b74bcffc2ef0f8fc2e27",
+    "bytes": 459632
+  },
+  "glbValidation": {
+    "version": 2,
+    "triangles": 12000,
+    "meshes": 1,
+    "materials": 1,
+    "images": 2,
+    "all_primitives_have_uv": true,
+    "animations": [],
+    "all_images_embedded": true,
+    "external_buffers": []
+  },
+  "triangles": 12000,
+  "renderedCandidate": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\far-classic-shop2\\renders\\classic\\shop_2\\lod-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\far-classic-shop2\\renders\\classic\\shop_2\\lod-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\far-classic-shop2\\renders\\classic\\shop_2\\lod-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\far-classic-shop2\\renders\\classic\\shop_2\\lod-left.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\far-classic-shop2\\renders\\classic\\shop_2\\lod-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.37752604484558105,
+        -0.29115432500839233,
+        0.0010520898504182696
+      ],
+      "max": [
+        0.37692466378211975,
+        0.2891349196434021,
+        0.9989705681800842
+      ]
+    },
+    "triangles": 12000,
+    "textureSizes": [
+      {
+        "name": "classic__shop_2__nearest_base",
+        "size": [
+          512,
+          512
+        ]
+      },
+      {
+        "name": "classic__shop_2__nearest_orm",
+        "size": [
+          256,
+          256
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "renderedSource": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\far-classic-shop2\\renders\\classic\\shop_2\\raw-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\far-classic-shop2\\renders\\classic\\shop_2\\raw-iso.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\far-classic-shop2\\renders\\classic\\shop_2\\raw-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\far-classic-shop2\\renders\\classic\\shop_2\\raw-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\far-classic-shop2\\renders\\classic\\shop_2\\raw-left.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.3796966075897217,
+        -0.2908203899860382,
+        0.0
+      ],
+      "max": [
+        0.3796966075897217,
+        0.2908203899860382,
+        1.0
+      ]
+    },
+    "triangles": 993973,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "bounds": {
+    "min": [
+      -0.37752604484558105,
+      0.0010520898504182696,
+      -0.2891349196434021
+    ],
+    "max": [
+      0.37692466378211975,
+      0.9989705681800842,
+      0.29115432500839233
+    ],
+    "coordinateSystem": "GLTF Y-up; +Z front"
+  },
+  "textureSizes": [
+    {
+      "name": "classic__shop_2__nearest_base",
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "name": "classic__shop_2__nearest_orm",
+      "size": [
+        256,
+        256
+      ]
+    }
+  ],
+  "rawSourceUnchanged": true,
+  "completedAt": "2026-10-24T10:04:09.243635+00:00",
+  "promotedFrom": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\far-classic-shop2\\classic\\shop_2.json",
+    "sha256": "276314a561a807978e7ad093f7f645d0e6f9eaa447afdd533d4f92c1c7f0583f",
+    "bytes": 11612
+  },
+  "supersedesApproval": {
+    "candidate": {
+      "path": "assets/models/regions-ai/far/classic/shop_2.glb",
+      "sha256": "9bfa28c29403627a49f5d65a5ff420a231b7a0128d94ecea4ec9259320841640"
+    },
+    "processingReport": {
+      "path": "art/full-ai-city/processed-far/classic/shop_2.json",
+      "sha256": "2b338bac7eeac367e3034c304b63afd1117bc588458447278c96e6f6a4ef6623"
+    },
+    "reviewedAtUtc": "2026-10-23T06:18:04.579426+00:00",
+    "status": "staged_only_pending_new_visual_approval"
+  },
+  "reviewSheet": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\far-classic-shop2\\renders\\classic\\shop_2\\review-sheet.jpg",
+    "sha256": "fba2973a45ab745eaf7777621f940e41df2bd983fdc8d417e64e2638283c5e76",
+    "bytes": 268302,
+    "candidateSha256": "c0ac0c8c1033f4641cac2f5f06928251b06f836061e9b74bcffc2ef0f8fc2e27",
+    "sourceImages": [
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\far-classic-shop2\\renders\\classic\\shop_2\\raw-front.png",
+        "sha256": "9e62b32380f1ebbbc3b56eb74237963b133a0f231c40213d06e2c5de826e0c4a",
+        "label": "AI raw front"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\far-classic-shop2\\renders\\classic\\shop_2\\raw-iso.png",
+        "sha256": "459ee1d822068f02de30eb380df3555c5dbfa0db2d7eda1ff4e4632ce211ded9",
+        "label": "AI raw iso"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\far-classic-shop2\\renders\\classic\\shop_2\\lod-front.png",
+        "sha256": "89c86e82d4455da0fd003cf07f4b409b18908b47d18ca6b95f591194f8188a19",
+        "label": "LOD front"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\far-classic-shop2\\renders\\classic\\shop_2\\lod-right.png",
+        "sha256": "dff3280e44a0dbbbc6fd0425a8f4eb459239367b67e92cd0625547b43d816ffb",
+        "label": "LOD right"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\far-classic-shop2\\renders\\classic\\shop_2\\lod-back.png",
+        "sha256": "cafdcfaadab126638502a433ec8a0d73525d9d056297aa4fdcf37fbe8ca59cbe",
+        "label": "LOD back"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\far-classic-shop2\\renders\\classic\\shop_2\\lod-left.png",
+        "sha256": "fb74d3bc05f6d23a17d114da64282e0a8a44cd6a04be67954bb37b8f4e190ecd",
+        "label": "LOD left"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\far-classic-shop2\\renders\\classic\\shop_2\\lod-iso.png",
+        "sha256": "3f265550467f1402c45da1fec24a0792f76635598508f575d1065c2d1fbc972d",
+        "label": "LOD iso"
+      }
+    ],
+    "content": "Unmodified CPU render images composed with labels for visual comparison only"
+  }
+}

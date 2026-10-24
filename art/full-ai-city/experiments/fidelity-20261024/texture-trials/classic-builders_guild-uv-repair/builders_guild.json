@@ -1,0 +1,507 @@
+{
+  "status": "exported_pending_visual_review",
+  "createdAt": "2026-10-24T10:07:57.801205+00:00",
+  "region": "classic",
+  "asset": "builders_guild",
+  "source": {
+    "rawGLB": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\classic--builders_guild-a001-pixal-mv-1024-9247.glb",
+      "sha256": "0163daa4305454a1628bf1dade5e8caf119f26f1c93435bf894ada40c9f3fd9a",
+      "bytes": 42494432
+    }
+  },
+  "inferenceReport": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\classic--builders_guild-a001\\classic--builders_guild-a001-pixal-mv-1024-9247.json",
+    "sha256": "ff211d376554bc64ccb3f04bd2cd3ae55c5f5354e25f208111fff3098e689a17",
+    "bytes": 8176
+  },
+  "reference": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\references\\classic\\builders_guild\\reference.json",
+    "sha256": "82bdf6ba4a30d82cc86619226b0cfac38443f5a841268fbc53c2dc79c60ed982",
+    "bytes": 4051
+  },
+  "processingTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\classic-builders_guild-uv-repair\\tools\\f09e5b605b4ff51ba306d8c3623c4dcfc0d10883e96e56c9572b9f741cb24c82-repair_guild_uv_slivers.py",
+    "sha256": "f09e5b605b4ff51ba306d8c3623c4dcfc0d10883e96e56c9572b9f741cb24c82",
+    "bytes": 11059
+  },
+  "assumedCameras": true,
+  "cameraCalibration": "assumed_standard_orbit_not_measured",
+  "nativePipeline": "Pixal3DMVImageTo3DPipeline.run_mv",
+  "nativeResolution": 1024,
+  "seed": 9247,
+  "geometryOrigin": "Only the actual neural source reduced and rebaked; no authored substitute geometry or manually constructed surfaces",
+  "orientation": {
+    "up": "Y",
+    "front": "+Z",
+    "groundY": 0,
+    "maxEdge": 1
+  },
+  "requestedTriangles": 30000,
+  "limitations": [
+    "Assumed camera reference reconstruction, not exact measured architecture",
+    "Final candidate requires actual rendered visual approval",
+    "Texture-only repair preserves all original geometry and does not straighten source reconstruction defects."
+  ],
+  "animation": {
+    "driver": "scene-life",
+    "autoplayClip": false,
+    "node": "classic__builders_guild__neural_pendulum",
+    "lifePart": "pendulum",
+    "localRotationAxis": "Z",
+    "geometryOrigin": "Only original neural-derived faces, no added geometry",
+    "poseReview": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\classic-builders_guild-uv-repair\\motion\\review.json",
+      "sha256": "91e151f5f35b02408243e813dd7c35ea1a804a86dec8d453e6dd8fa3d65dffe1",
+      "bytes": 4401
+    },
+    "frames": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\classic-builders_guild-uv-repair\\motion\\pose-0-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\classic-builders_guild-uv-repair\\motion\\pose-0-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\classic-builders_guild-uv-repair\\motion\\pose-0-iso.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\classic-builders_guild-uv-repair\\motion\\pose--7-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\classic-builders_guild-uv-repair\\motion\\pose--7-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\classic-builders_guild-uv-repair\\motion\\pose--7-iso.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\classic-builders_guild-uv-repair\\motion\\pose-7-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\classic-builders_guild-uv-repair\\motion\\pose-7-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\classic-builders_guild-uv-repair\\motion\\pose-7-iso.png"
+    ]
+  },
+  "processingComplete": true,
+  "lod": "near",
+  "processingRevision": 0,
+  "derivation": {
+    "rawTriangles": 966195,
+    "weldedTriangles": 961606,
+    "remeshedTriangles": 2379668,
+    "voxelSize": 0.003,
+    "finalTriangles": 29987,
+    "atlasArea": 0.40569770212582335,
+    "singleReductionPass": true,
+    "inheritedUVRemovedBeforeReduction": true,
+    "sourceMaterialsUntouched": true
+  },
+  "bake": {
+    "method": "CPU closest-original-triangle projection with float64 barycentric original UV and bilinear original texture sampling; geometric normals retained, no directional normal-map rebake or invented color",
+    "coveredAtlasPixels": 1691713,
+    "nearestLookupSuccessFraction": 1.0,
+    "notRayCoverage": true,
+    "sourceDistanceQuantiles": [
+      0.00025447236839681864,
+      0.001153999613597989,
+      0.002086409162729978,
+      0.007695559412240982
+    ],
+    "sourceDistanceQuantileLevels": [
+      0.5,
+      0.95,
+      0.99,
+      1
+    ],
+    "overTwoPercentMaxEdge": 0.0,
+    "distanceReviewRequired": false,
+    "visualGeometryReviewRequired": true,
+    "barycentricOriginalRange": [
+      -0.0001567366411711098,
+      1.0
+    ],
+    "degenerateOrInvalidBarycentricCount": 0,
+    "closestSourceVertexFallbackFraction": 0.0,
+    "barycentricPointReconstructionErrorQuantiles": [
+      5.417806322289532e-09,
+      3.5608500237514217e-08,
+      7.96923022120174e-07
+    ],
+    "atlasOverlapPixelsWithDifferentSurface": 8501,
+    "seconds": 17.603404800000135,
+    "maps": [
+      {
+        "role": "base",
+        "size": [
+          2048,
+          2048
+        ]
+      },
+      {
+        "role": "orm",
+        "size": [
+          1024,
+          1024
+        ]
+      }
+    ]
+  },
+  "processedCandidate": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\classic-builders_guild-uv-repair\\builders_guild.glb",
+    "sha256": "6a9228a91c636c74b1b96eb6744fc6648f58b6c97cbcfe26eea6c2c288be0b07",
+    "bytes": 7842188
+  },
+  "glbValidation": {
+    "version": 2,
+    "triangles": 29987,
+    "meshes": 2,
+    "materials": 1,
+    "images": 3,
+    "all_primitives_have_uv": true,
+    "animations": [],
+    "all_images_embedded": true,
+    "external_buffers": []
+  },
+  "triangles": 29987,
+  "renderedCandidate": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\classic-builders_guild-uv-repair\\renders\\lod-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\classic-builders_guild-uv-repair\\renders\\lod-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\classic-builders_guild-uv-repair\\renders\\lod-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\classic-builders_guild-uv-repair\\renders\\lod-left.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\classic-builders_guild-uv-repair\\renders\\lod-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.5017656683921814,
+        -0.3982725143432617,
+        0.00047112253378145397
+      ],
+      "max": [
+        0.49984872341156006,
+        0.397202730178833,
+        0.8420080542564392
+      ]
+    },
+    "triangles": 29987,
+    "textureSizes": [
+      {
+        "name": "classic__builders_guild__base",
+        "size": [
+          2048,
+          2048
+        ]
+      },
+      {
+        "name": "classic__builders_guild__orm",
+        "size": [
+          1024,
+          1024
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "renderedSource": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\classic-builders_guild\\source-review\\raw-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\classic-builders_guild\\source-review\\raw-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.5,
+        -0.39697450399398804,
+        0.0
+      ],
+      "max": [
+        0.5,
+        0.39697450399398804,
+        0.8439636826515198
+      ]
+    },
+    "triangles": 966195,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "bounds": {
+    "min": [
+      -0.5017656683921814,
+      0.00047112253378145397,
+      -0.397202730178833
+    ],
+    "max": [
+      0.49984872341156006,
+      0.8420080542564392,
+      0.3982725143432617
+    ],
+    "coordinateSystem": "GLTF Y-up; +Z front"
+  },
+  "textureSizes": [
+    {
+      "name": "classic__builders_guild__base",
+      "size": [
+        2048,
+        2048
+      ]
+    },
+    {
+      "name": "classic__builders_guild__orm",
+      "size": [
+        1024,
+        1024
+      ]
+    }
+  ],
+  "rawSourceUnchanged": true,
+  "completedAt": "2026-10-24T10:08:31.153782+00:00",
+  "derivedFromStaticCandidate": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\candidate-history\\classic\\builders_guild\\71977654354095646104ffba8d15f84dd0f7478d6c36eb0ab3de2998abefc22b\\builders_guild.glb",
+    "sha256": "71977654354095646104ffba8d15f84dd0f7478d6c36eb0ab3de2998abefc22b",
+    "bytes": 1606232
+  },
+  "componentSeparation": {
+    "source": {
+      "path": "art\\full-ai-city\\candidates\\classic\\builders_guild.glb",
+      "sha256": "71977654354095646104ffba8d15f84dd0f7478d6c36eb0ab3de2998abefc22b"
+    },
+    "output": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\component-candidates\\classic\\builders_guild.glb",
+      "sha256": "dc23dc81a414f3acc8c583a4828b3e19030157683f97812104ed66e69c2f89d1",
+      "bytes": 1787944
+    },
+    "staticTriangles": 29564,
+    "movingTriangles": 423,
+    "triangleTotalPreserved": 29987,
+    "poseZeroMaxPositionError": 2.980232227667301e-09,
+    "embeddedImageHashesUnchanged": true,
+    "selection": {
+      "name": "classic__builders_guild__neural_pendulum",
+      "lifePart": "pendulum",
+      "shape": "box",
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "center": [
+        0.423,
+        0.403,
+        0.325
+      ],
+      "min": [
+        0.345,
+        0.15,
+        0.255
+      ],
+      "max": [
+        0.51,
+        0.403,
+        0.405
+      ],
+      "keepLargestConnected": true,
+      "measurement": "Inspected front and right actual candidate renders. Existing cargo and lower hanging chain are isolated from the fixed crane beam and building. Pending asymmetric pose review; no added surfaces.",
+      "reviewNotes": "Actual 0, -7 and +7 degree front/right/isometric exports inspected: original neural cargo and lower chain swing intact, upper pulley, beam, wall and roof remain fixed. No new faces or image changes."
+    },
+    "driver": "scene-life; no autoplay GLTF clip",
+    "newFacesAdded": 0
+  },
+  "componentTools": [
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\5ef865750c005ad1c449653f1e25b1e6d3a77dad5a7cbd41ecb5273b83364789-neural_component.py",
+      "sha256": "5ef865750c005ad1c449653f1e25b1e6d3a77dad5a7cbd41ecb5273b83364789",
+      "bytes": 11603
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\50d0bb4d46460178e33e51a14e1ef31c02408ac8e7b7a2e2b053d0d0647ff3b9-finalize_component.py",
+      "sha256": "50d0bb4d46460178e33e51a14e1ef31c02408ac8e7b7a2e2b053d0d0647ff3b9",
+      "bytes": 3550
+    }
+  ],
+  "textureTransferTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\classic-builders_guild\\tools\\fbab2f26c5a0e8b0063598e5d935825fc555c5d999dccab23c87b36ca0925214-bake_nearest_surface.py",
+    "sha256": "fbab2f26c5a0e8b0063598e5d935825fc555c5d999dccab23c87b36ca0925214",
+    "bytes": 7557
+  },
+  "textureOrigin": "Existing 2K/1K source-derived atlas retained; exactly two inspected roof UV slivers now sample isolated original-source patches in unused atlas space.",
+  "geometryAndMotionInheritedFrom": {
+    "path": "art/full-ai-city/processed/classic/builders_guild/dc23dc81a414f3ac-c9ea0ff4fd0d1e5b.json",
+    "sha256": "c9ea0ff4fd0d1e5b6cc89f49ef70ad0d0ef4644ca6782a2fec1ada5cbc23c954"
+  },
+  "textureRefreshStage": {
+    "sourceCandidate": {
+      "path": "assets/models/regions-ai/full/classic/builders_guild/dc23dc81a414f3ac.glb",
+      "sha256": "dc23dc81a414f3acc8c583a4828b3e19030157683f97812104ed66e69c2f89d1"
+    },
+    "sourceProcessingReport": {
+      "path": "art/full-ai-city/processed/classic/builders_guild/dc23dc81a414f3ac-c9ea0ff4fd0d1e5b.json",
+      "sha256": "c9ea0ff4fd0d1e5b6cc89f49ef70ad0d0ef4644ca6782a2fec1ada5cbc23c954"
+    },
+    "positionsUnchanged": true,
+    "faceIndicesUnchanged": true,
+    "cornerNormalsUnchanged": true,
+    "UVBytesUnchanged": true,
+    "additionalRemeshOrSimplification": false,
+    "sourceTexture": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\classic--builders_guild-a001-pixal-mv-1024-9247.glb",
+      "sha256": "0163daa4305454a1628bf1dade5e8caf119f26f1c93435bf894ada40c9f3fd9a",
+      "bytes": 42494432
+    },
+    "normalization": {
+      "enabled": true,
+      "candidate_degrees": 1.0631091259155527,
+      "applied_degrees": 1.0631091259155527,
+      "underside_area": 0.46728652149407834,
+      "normal_agreement": 0.9731296516712088,
+      "yaw_degrees": 180,
+      "pitch_degrees": 0,
+      "roll_degrees": 0,
+      "uniform_scale": 1.051108382871433
+    },
+    "samplingRestInstances": [
+      {
+        "node": 0,
+        "name": "classic__builders_guild__neural_lod",
+        "triangles": 29564,
+        "restWorldMatrix": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      {
+        "node": 2,
+        "name": "classic__builders_guild__neural_pendulum",
+        "triangles": 423,
+        "restWorldMatrix": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.423
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.403
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.325
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      }
+    ],
+    "preservation": {
+      "allGeometryUVNormalAndAnimationBytesUnchanged": true,
+      "nodeHierarchyAndRestTransformsUnchanged": true,
+      "materialAndTextureIndicesUnchanged": true,
+      "meshPrimitiveReferencesUnchanged": true,
+      "onlyMaterialChange": "Removed legacy baked normalTexture binding",
+      "preservedBufferViews": [
+        {
+          "bufferView": 0,
+          "bytes": 273827,
+          "sha256": "c892d6d047be424437b19c4a4c091105ca82021a4b8323a399655265dc0e3806"
+        },
+        {
+          "bufferView": 3,
+          "bytes": 489528,
+          "sha256": "02374a6509874218d97a9d58d03add4f6eb5a47a1b681dceb689b2763a73b979"
+        },
+        {
+          "bufferView": 4,
+          "bytes": 163176,
+          "sha256": "8d702aa68a8df1777c6bad4a7591172b6042da6db7fbab1ec8dd085ea1fe3c43"
+        },
+        {
+          "bufferView": 5,
+          "bytes": 163176,
+          "sha256": "6d9c29de8b32230121862767766378b5a277ad5b156e0929bd3381449df0bc78"
+        },
+        {
+          "bufferView": 6,
+          "bytes": 354768,
+          "sha256": "fb18cac6b018ed6f1ffff36c97523c9e93260c9f6324de7de371667cf43ea779"
+        },
+        {
+          "bufferView": 7,
+          "bytes": 6000,
+          "sha256": "c79d1d8eab5cbdd7b80584c31578d4595391a38da5c259f694f166e82652547e"
+        },
+        {
+          "bufferView": 8,
+          "bytes": 2000,
+          "sha256": "f0cce6b301a302d8905ff0f9b5efe7ad529a0e9090b9814ef3a626e25491b909"
+        },
+        {
+          "bufferView": 9,
+          "bytes": 2000,
+          "sha256": "73ff85cd8bd3e491093d2edcf799ee3dfd7c33b04b9d228ceb34d7269a6dcb16"
+        },
+        {
+          "bufferView": 10,
+          "bytes": 5076,
+          "sha256": "af4574bac471a4a4c13ee6fa4ff70ac2d9445a182e355a624d7ade4bce613047"
+        }
+      ],
+      "replacedImageViews": [
+        1,
+        2
+      ],
+      "originalNormalImageRetainedUnreferenced": true
+    },
+    "maps": {
+      "base": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\classic-builders_guild\\base.jpg",
+        "sha256": "2ce1b4ac4b7e51ea8c71471b45906d2e2a29c908536d8a94f452758e3e87c78c",
+        "bytes": 1937552
+      },
+      "orm": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\classic-builders_guild\\orm.png",
+        "sha256": "bcf4844503e7dc4d1fdb217056070b0c27848fa04c62dab7317738feaa01b5a8",
+        "bytes": 841541
+      }
+    },
+    "atlasOverlapReviewRequired": true,
+    "diagnosticOnly": false
+  },
+  "localAtlasIslandRepair": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\fidelity-20261024\\texture-trials\\classic-builders_guild-uv-repair\\local-uv-repair.json",
+    "sha256": "4f1f04e41fb6e2ba883ba3decec3d31eab8df8904bb4a8a00fdbefe1259bd419",
+    "bytes": 6007
+  }
+}

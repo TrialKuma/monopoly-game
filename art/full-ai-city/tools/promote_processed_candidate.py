@@ -1,14 +1,27 @@
-"""Move a reviewed isolated derivative into the candidate inbox, never approve it."""
+"""Stage an isolated derivative; an exact supersession never changes approval."""
 from pathlib import Path
 import argparse,json,shutil,subprocess,sys
 from prepare_triptych import ART,ROOT,atomic_json,evidence,sha
 
+def superseded_approval(approved,key,expected_sha):
+    previous=approved.get(key)
+    if previous is None:
+        if expected_sha:raise RuntimeError('No current approval matches --supersedes')
+        return None
+    if not expected_sha:raise RuntimeError('Approved derivatives are immutable; stage a revision with --supersedes and the exact current SHA')
+    if len(expected_sha)!=64 or any(c not in '0123456789abcdef' for c in expected_sha) or previous.get('candidate',{}).get('sha256')!=expected_sha:
+        raise RuntimeError('--supersedes does not match the current approved candidate SHA')
+    return previous
+
 def main():
-    parser=argparse.ArgumentParser();parser.add_argument('report',type=Path);args=parser.parse_args()
+    parser=argparse.ArgumentParser();parser.add_argument('report',type=Path)
+    parser.add_argument('--supersedes',metavar='SHA256',help='Stage a replacement for this exact approval; keep the approval and runtime unchanged')
+    args=parser.parse_args()
     report=json.loads(args.report.read_text('utf-8'));key=report['region']+'/'+report['asset']
     far=report.get('lod')=='far'
-    approved=json.loads((ART/('approved-far-assets.json' if far else 'approved-assets.json')).read_text('utf-8')).get('assets',{})
-    if key in approved:raise RuntimeError('Approved derivatives are immutable')
+    registry_path=ART/('approved-far-assets.json' if far else 'approved-assets.json')
+    approved=json.loads(registry_path.read_text('utf-8')).get('assets',{})
+    previous=superseded_approval(approved,key,args.supersedes)
     source=Path(report['processedCandidate']['path'])
     if not report.get('processingComplete') or sha(source)!=report['processedCandidate']['sha256']:raise RuntimeError('Incomplete or changed derivative')
     state=json.loads((ART/'queue'/report['region']/(report['asset']+'.json')).read_text('utf-8'))
@@ -23,13 +36,24 @@ def main():
     if far:
         near=json.loads((ART/'approved-assets.json').read_text('utf8')).get('assets',{}).get(key)
         if not near or report.get('derivedFromNear',{}).get('sha256')!=near['candidate']['sha256']:raise RuntimeError('Far derivative must retain the exact currently approved near source')
-    target=ART/('candidates-far' if far else 'candidates')/report['region']/(report['asset']+'.glb');target.parent.mkdir(parents=True,exist_ok=True)
+    # Recheck the precise approval immediately before candidate/history writes.
+    # Frozen approval bytes remain untouched until a separate visual decision.
+    previous=superseded_approval(json.loads(registry_path.read_text('utf-8')).get('assets',{}),key,args.supersedes)
+    target=ART/('candidates-far' if far else 'candidates')/report['region']/(report['asset']+'.glb')
     if source.resolve()==target.resolve():raise RuntimeError('Expected an isolated source candidate')
+    target.parent.mkdir(parents=True,exist_ok=True)
     if target.exists():
         history=ART/('candidate-history-far' if far else 'candidate-history')/report['region']/report['asset']/sha(target);history.mkdir(parents=True,exist_ok=True)
         for old in (target,target.with_suffix('.json')):
             if old.exists() and not (history/old.name).exists():shutil.copy2(old,history/old.name)
     report['promotedFrom']=evidence(args.report)
+    if previous:
+        report['supersedesApproval']={
+            'candidate':previous['candidate'],
+            'processingReport':previous['processingReport'],
+            'reviewedAtUtc':previous.get('reviewedAtUtc'),
+            'status':'staged_only_pending_new_visual_approval',
+        }
     report['processedCandidate']={**report['processedCandidate'],'path':str(target.resolve())}
     report['processingRevision']=state.get('processingRevision',0)
     report['status']='exported_pending_visual_review'
