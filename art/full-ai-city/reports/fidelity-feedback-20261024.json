@@ -1,0 +1,32 @@
+{
+  "date": "2026-10-24",
+  "scope": "Focused inspection of the user's current compact/villa_2 review; no claim about the other 146 near assets",
+  "status": "visual_fidelity_issue_confirmed_not_repaired",
+  "asset": "compact/villa_2",
+  "candidateSha256": "38edc0cf4b383e2af8f660b2abccc49a413dbb3c61fd5f596d763535c0d21922",
+  "evidence": {
+    "referenceFront": "art/themed-city-kit/inputs/compact-house-v01/view00_azim000.png",
+    "rawFront": "art/full-ai-city/reviews/compact/villa_2/38edc0cf4b383e2a/raw-front.png",
+    "runtimeAssetFront": "art/full-ai-city/reviews/compact/villa_2/38edc0cf4b383e2a/lod-front.png",
+    "processingReport": "art/full-ai-city/processed/compact/villa_2.json"
+  },
+  "observations": [
+    "The reference has clean roof planes, straight timber framing, readable orange window panes, and a distinct noren emblem and plant.",
+    "The neural source already has uneven roof/ridge and timber details, a distorted emblem, and a simplified plant. These losses precede mobile optimization.",
+    "The optimized render has additional mottling, softened details and dark base-edge artifacts compared with the source render. Reconstructed geometry, rebaked color and normal detail need separate inspection before choosing a repair.",
+    "The previous acceptance of small irregularities at phone scale was too lenient for the user's requested clean stylized appearance. Completed AI provenance and technical checks do not establish visual fidelity."
+  ],
+  "measuredProcessing": {
+    "rawTriangles": 968825,
+    "finalTriangles": 29964,
+    "voxelSize": 0.003,
+    "sourceTextureSize": 4096,
+    "bakedColorAndNormalTextureSize": 1024,
+    "atlasArea": 0.4390252576114823
+  },
+  "limitations": [
+    "These observations do not isolate the contribution of each optimization operation.",
+    "No controlled single-view versus multiview inference comparison was performed; this example cannot establish which is more accurate.",
+    "No image generation, model generation, asset replacement, or approval-record rewrite was performed for this focused diagnosis."
+  ]
+}

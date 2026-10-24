@@ -73,12 +73,16 @@ function fixture(width=390,height=620){
   assert.ok(a.position().distanceTo(new THREE.Vector3(15,.2,-9))>.36,'teleport is eased, not snapped');
 }
 
-// Manual orbit/zoom suspends following; returning resumes from the current location.
+// Orbit/zoom keep following; only an active gesture pauses it until release.
 {
   const f=fixture();f.run('changeCameraView(.3,0,1.15)');
-  assert.equal(f.run('cameraView.following'),false);const held=f.position();
+  assert.equal(f.run('cameraView.following'),true);const held=f.position();
+  const angle=f.run('cameraView.yaw'),zoom=f.run('cameraView.zoom');
+  f.run('cameraGesture.pointers.set(1,{x:0,y:0})');
   f.move(7,3);assert.equal(f.step(),false);assert.deepEqual(f.position(),held);
-  f.run('resetCameraView(true)');assert.deepEqual(f.position(),held);assert.equal(f.step(),true);
+  f.run('cameraPointerUp({pointerId:1})');assert.equal(f.step(),true);
+  assert.equal(f.run('cameraView.yaw'),angle);assert.equal(f.run('cameraView.zoom'),zoom);
+  const released=f.position();f.run('resetCameraView(true)');assert.deepEqual(f.position(),released);assert.equal(f.step(),true);
   assert.equal(f.run('setCameraMode("overview")'),true);const overview=f.run('camera.position.clone()');
   f.move(-8,-5);assert.equal(f.step(),false);assert.deepEqual(f.run('camera.position.clone()'),overview);
   f.run('setCameraMode("local")');assert.ok(f.position().distanceTo(new THREE.Vector3(-8,.2,-5))<.001);
@@ -97,22 +101,74 @@ function fixture(width=390,height=620){
 const game=fs.readFileSync(new URL('../game.js',import.meta.url),'utf8');
 const createBoard=game.slice(game.indexOf('function createBoard('),game.indexOf('function prepareOpeningLots('));
 const maps=vm.runInNewContext(game.slice(0,game.indexOf('const CARD_POOL'))+createBoard+';Object.values(MAP_PRESETS).map(map=>({map,board:createBoard(map)}));');
+
+// Exercise the production presentation snapshot, scene update and animation
+// tick together. This must move the camera without directly moving a pawn in
+// the test: real game positions are the only source of the animated target.
+const presentation=fs.readFileSync(new URL('../presentation.js',import.meta.url),'utf8');
+const snapshotFunction=presentation.slice(presentation.indexOf('  function snapshot()'),presentation.indexOf('  function syncCityScene()'));
+const gameplay=vm.createContext({});
+vm.runInContext(game.slice(0,game.indexOf('const CARD_POOL'))+createBoard+
+  game.slice(game.indexOf('function defaultEffects()'),game.indexOf('function getMaxRounds('))+
+  game.slice(game.indexOf('function currentPlayer()'),game.indexOf('function getPlayerById('))+
+  'let state,selected=null;function rentFor(){return {total:0};}'+snapshotFunction,gameplay);
+for(const {map,board} of maps){
+  gameplay.mapId=map.id;
+  vm.runInContext(`state={sessionId:17,currentMapId:mapId,board:createBoard(getMapConfig(mapId)),
+    players:PLAYER_DEFS.map(p=>({...p,position:0,effects:defaultEffects()})),currentPlayerIndex:0,
+    phase:'await_roll',animation:{currentTile:null,landedTile:null},targetSelection:null};`,gameplay);
+  const f=fixture(),data=()=>vm.runInContext('snapshot()',gameplay);let now=1000;
+  f.context.performance={now:()=>now};f.context.requestAnimationFrame=()=>1;
+  f.context.document.body.classList.add=key=>f.classes.add(key);
+  f.context.document.createElement=()=>({dataset:{},style:{},classList:{toggle(){}},setAttribute(){}});
+  f.context.snapshotData=data();
+  f.run(`snapshot=snapshotData;mapKey=snapshot.sessionId+':'+snapshot.mapId+':'+snapshot.board.length;
+    world=new THREE.Group();renderer.render=()=>{};labels.querySelectorAll=()=>[];labels.appendChild=()=>{};
+    mount=()=>true;loadModelKit=()=>{};pawnViews.clear();
+    const xs=snapshot.board.map(tile=>tile.x),zs=snapshot.board.map(tile=>tile.y);
+    const cx=(Math.min(...xs)+Math.max(...xs))/2,cz=(Math.min(...zs)+Math.max(...zs))/2;
+    boardBounds={w:(Math.max(...xs)-Math.min(...xs))*STEP,d:(Math.max(...zs)-Math.min(...zs))*STEP};
+    for(const tile of snapshot.board){const center=new THREE.Vector3((tile.x-cx)*STEP,.14,(tile.y-cz)*STEP);
+      stepViews.set(tile.index,{center,walk:center.clone(),normal:new THREE.Vector3(0,0,1),ring:{material:{color:new THREE.Color()}}});}
+    snapshot.players.forEach(makePawn);cameraFocusReady=false;resize();update(snapshotData);
+  `);
+  assert.equal(f.run('pawnViews.has(snapshot.players.find(p=>!p.isAi).id)'),true,'the real player definition has a scene pawn');
+  const initial=f.position();f.run('changeCameraView(.2,0,1.15)');
+  const yaw=f.run('cameraView.yaw');
+  for(let step=0;step<5;step++){
+    vm.runInContext('{const p=state.players.find(p=>!p.isAi);p.position=getMapConfig().navigation.next[p.position];state.animation.currentTile=p.position;}',gameplay);
+    f.context.snapshotData=data();f.run('update(snapshotData)');
+    assert.equal(f.run('pawnViews.get(snapshot.players.find(p=>!p.isAi).id).active'),true,'state movement starts the real pawn animation');
+    for(let frame=0;frame<6;frame++){now+=32;f.run(`tick(${now})`);}
+  }
+  vm.runInContext('state.animation.currentTile=null;',gameplay);f.context.snapshotData=data();f.run('update(snapshotData)');
+  for(let frame=0;frame<60;frame++){now+=32;f.run(`tick(${now})`);}
+  assert.ok(f.position().distanceTo(initial)>1,`${map.id}: changing game position moves the camera after manual orbit/zoom`);
+  assert.equal(f.run('cameraView.yaw'),yaw,'following preserves the chosen angle');
+  assert.ok(f.run('Math.hypot(cameraFocus.x-pawnViews.get("human").group.position.x,cameraFocus.z-pawnViews.get("human").group.position.z)')<.37);
+  const humanFocus=f.position();
+  vm.runInContext('state.currentPlayerIndex=1;state.players[1].position=10;state.animation.currentTile=10;',gameplay);
+  f.context.snapshotData=data();f.run('update(snapshotData)');
+  for(let frame=0;frame<30;frame++){now+=32;f.run(`tick(${now})`);}
+  assert.ok(f.position().distanceTo(humanFocus)<.02,'an opponent turn does not steal the camera');
+}
+
 let checkedFrames=0;
-for(const [width,height] of [[390,620],[360,560],[740,380]])for(const {map,board} of maps){
+for(const [width,height] of [[390,620],[360,560],[740,380]])for(const {map,board} of maps)for(const zoom of [1,2.4]){
   const f=fixture(width,height);f.context.map=map;
   f.run('snapshot.mapId=map.id');
   const cx=(Math.min(...board.map(t=>t.x))+Math.max(...board.map(t=>t.x)))/2;
   const cz=(Math.min(...board.map(t=>t.y))+Math.max(...board.map(t=>t.y)))/2;
   const coords=tile=>({x:(tile.x-cx)*1.8,z:(tile.y-cz)*1.8});
-  let tile=board[0],from=coords(tile);f.move(from.x,from.z);f.run('cameraFocusReady=false;resize()');
+  let tile=board[0],from=coords(tile);f.move(from.x,from.z);f.run(`cameraFocusReady=false;resize();changeCameraView(0,0,${zoom})`);
   for(let i=0;i<board.length;i++){
     tile=board[map.navigation.next[tile.index]];const to=coords(tile);
     for(let frame=1;frame<=11;frame++){
       f.move(from.x+(to.x-from.x)*frame/11,from.z+(to.z-from.z)*frame/11);f.step(1/60);
       const point=f.run('pawnViews.get("human").group.position.clone().project(camera)');
-      assert.ok(Math.abs(point.x)<.97&&Math.abs(point.y)<.97,`${map.id} ${width}x${height}: pawn stays visible during movement (${point.x}, ${point.y})`);checkedFrames++;
+      assert.ok(Math.abs(point.x)<.97&&Math.abs(point.y)<.97,`${map.id} ${width}x${height} zoom ${zoom}: pawn stays visible during movement (${point.x}, ${point.y})`);checkedFrames++;
     }
     from=to;
   }
 }
-console.log(`PASS local camera defaults, delayed follow, manual control, overview, reduced motion and ${checkedFrames} route frames`);
+console.log(`PASS local camera defaults, delayed follow, gesture release, overview, reduced motion, five real snapshot/update/tick paths and ${checkedFrames} route frames at normal/maximum zoom`);

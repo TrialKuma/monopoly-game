@@ -241,7 +241,10 @@ function changeCameraView(yawDelta=0,elevationDelta=0,zoomFactor=1){
   cameraView.yaw+=yawDelta;
   cameraView.elevation=THREE.MathUtils.clamp(cameraView.elevation+elevationDelta,CAMERA_LIMITS.minElevation,CAMERA_LIMITS.maxElevation);
   cameraView.zoom=THREE.MathUtils.clamp(cameraView.zoom*zoomFactor,CAMERA_LIMITS.minZoom,CAMERA_LIMITS.maxZoom);
-  cameraView.modified=true;cameraView.following=false;
+  // Orbit and zoom change how the player's neighbourhood is viewed, not the
+  // subject being followed. followCamera pauses only while fingers are held
+  // down, then eases back automatically when the gesture ends.
+  cameraView.modified=true;
   lotViews.forEach(view=>{view.screenPoint=null;});
   resize();return true;
 }
@@ -875,7 +878,8 @@ function followCamera(delta){
   // Track the ground position only: stepping hops, dice and the opponent's
   // turn must not make the camera bob, turn or switch subjects.
   const dx=pawn.group.position.x-cameraFocus.x,dz=pawn.group.position.z-cameraFocus.z;
-  const distance=Math.hypot(dx,dz),deadZone=.36;
+  const followScale=Math.max(1,cameraView.zoom);
+  const distance=Math.hypot(dx,dz),deadZone=.36/followScale;
   if(distance<=deadZone+.001)return false;
   let amount;
   if(reducedMotion.matches){
@@ -886,7 +890,10 @@ function followCamera(delta){
     // A dead zone absorbs small changes (including co-located pawn spacing).
     // Exponential easing is stable at different frame rates; bounded travel
     // also gives teleports a comfortable transition without forcing rotation.
-    amount=Math.min((1-Math.exp(-delta/.32))*(distance-deadZone),18*delta)/distance;
+    // A tighter zoom has less visible ground: shorten the lag proportionally
+    // so normal walking cannot carry the pawn outside the phone's viewport.
+    const lag=.32/followScale;
+    amount=Math.min((1-Math.exp(-delta/lag))*(distance-deadZone),18*delta)/distance;
   }
   const x=dx*amount,z=dz*amount;
   cameraFocus.x+=x;cameraFocus.z+=z;camera.position.x+=x;camera.position.z+=z;
