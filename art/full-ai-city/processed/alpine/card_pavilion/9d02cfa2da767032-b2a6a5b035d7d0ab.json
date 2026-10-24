@@ -1,0 +1,466 @@
+{
+  "status": "exported_pending_visual_review",
+  "createdAt": "2026-10-23T12:28:59.737461+00:00",
+  "region": "alpine",
+  "asset": "card_pavilion",
+  "lod": "near",
+  "processingRevision": 0,
+  "source": {
+    "rawGLB": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\alpine--card_pavilion-a001-pixal-mv-1024-9247.glb",
+      "sha256": "fec80b49fe4d04ba4678b64791b55d0d447b53fc2e6516511618bc395238dcaf",
+      "bytes": 41113900
+    }
+  },
+  "inferenceReport": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\alpine--card_pavilion-a001\\alpine--card_pavilion-a001-pixal-mv-1024-9247.json",
+    "sha256": "07fa78378850c657f1c704b0b01019964acd3a968e31ee1e7a714c54dd6e52d6",
+    "bytes": 9638
+  },
+  "reference": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\inputs\\alpine\\card_pavilion\\32bdb68c89b736d8\\reference.json",
+    "sha256": "2a07c489121bbbb816030464560b1241a9e60b66f40d58d1e7a9d63aa125aa6d",
+    "bytes": 4455
+  },
+  "processingTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\7a797107ab696da8746a713168b2ea8c3170945ae2f4647dcc26652f1e093900-process_native_mobile.py",
+    "sha256": "7a797107ab696da8746a713168b2ea8c3170945ae2f4647dcc26652f1e093900",
+    "bytes": 9168
+  },
+  "nativeSurfaceExport": {
+    "receipt": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\alpine--card_pavilion-fec80b49fe4d-surface-field-v1\\receipt.json",
+      "sha256": "dac2eb11b86bb9ff8a1300b6fa0da6d2469474fcad7efbfeb5f4aab5f9b2e4c9",
+      "bytes": 11446
+    },
+    "source": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\alpine--card_pavilion-fec80b49fe4d-surface-field-v1\\mobile-30000-1024.glb",
+      "sha256": "75f25dab11cf5fe118374a701115da35c592890f144aa9641a151655a378f68f",
+      "bytes": 1925432
+    },
+    "tensorArchive": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\alpine--card_pavilion-a001\\neural-export-inputs.pt",
+      "sha256": "d398ae23a258fb494f969aee4f0c0e2d379eb6ab6f0ff71201d162d6e78819ec",
+      "bytes": 626130973
+    }
+  },
+  "nativePipeline": "Pixal3DMVImageTo3DPipeline.run_mv",
+  "nativeResolution": 1024,
+  "seed": 9247,
+  "assumedCameras": true,
+  "cameraCalibration": "assumed_standard_orbit_not_measured",
+  "geometryOrigin": "Recorded low surface derived from the identical native raw, restored to original field coordinates, with native UV/material generation using the original neural high-surface BVH and attribute field. No authored replacement geometry.",
+  "textureOrigin": "Original neural attribute field sampled by the native UV/material operations with the recorded surface-stage override; no new neural inference or raw-UV rebake.",
+  "normalization": {
+    "enabled": true,
+    "candidate_degrees": 0.21670472016987377,
+    "applied_degrees": 0.21670472016987377,
+    "underside_area": 0.13587037878005503,
+    "normal_agreement": 0.923976118254613,
+    "yaw_degrees": 180,
+    "pitch_degrees": 0,
+    "roll_degrees": 0,
+    "uniform_scale": 1.0748312385487935
+  },
+  "orientation": {
+    "up": "Y",
+    "front": "+Z",
+    "groundY": 0,
+    "maxEdge": 1
+  },
+  "requestedTriangles": 30000,
+  "triangles": 29989,
+  "glbValidation": {
+    "version": 2,
+    "triangles": 29989,
+    "meshes": 1,
+    "materials": 1,
+    "images": 2,
+    "all_primitives_have_uv": true,
+    "animations": [],
+    "all_images_embedded": true,
+    "external_buffers": []
+  },
+  "quantization": {
+    "source": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--card_pavilion-fec80b49fe4d-surface-field-v1\\candidates\\alpine\\card_pavilion.glb",
+    "output": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--card_pavilion-fec80b49fe4d-surface-field-v1\\candidates\\alpine\\card_pavilion.glb",
+    "sourceBytes": 1599628,
+    "outputBytes": 1154080,
+    "sourceSha256": "9a286495ca4933fc088481993a5346b17609c32d61bf0ce43dc9465efb6ba007",
+    "outputSha256": "9d02cfa2da767032f4bcf9c844fe2b5fd6c0d99e78a5283b07049dcd9acc7074",
+    "positionFaceAndTextureBytesUnchanged": true,
+    "attributes": [
+      {
+        "accessor": 1,
+        "semantic": "NORMAL",
+        "count": 37142,
+        "maximumAngularErrorDegrees": 0.3715832877004197
+      },
+      {
+        "accessor": 2,
+        "semantic": "TEXCOORD_0",
+        "count": 37142,
+        "maximumUVError": 7.629510948348184e-06,
+        "maximumTexelErrorAt1024": 0.00781261921110854
+      }
+    ]
+  },
+  "processedCandidate": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\candidates\\alpine\\card_pavilion.glb",
+    "sha256": "9d02cfa2da767032f4bcf9c844fe2b5fd6c0d99e78a5283b07049dcd9acc7074",
+    "bytes": 1154080
+  },
+  "derivation": {
+    "method": "Recorded CPU surface derived from the same neural raw, inverse-normalized to field coordinates; a local native-export variant bypasses further mesh simplification/remeshing and uses native UV generation plus original neural high-surface BVH and field texture sampling. Only normalization, JPEG encoding and attribute quantization afterward.",
+    "voxelizedAgain": false,
+    "rebakedFromRawUV": false,
+    "facadeUVPreserved": true,
+    "normalizedTrianglesPreserved": true,
+    "geometrySurfaceInput": {
+      "receipt": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\alpine--card_pavilion-fec80b49fe4d-surface-field-v1\\geometry-source-proof.json",
+        "sha256": "f3f9b5270e2a3f8f0a575999d54051d0719279cfde15231bfddb03dc249a8aea",
+        "bytes": 4761
+      },
+      "method": "Only coordinate inversion of an existing source-derived low mesh; all candidate vertex/triangle identities preserved. No remeshing, replacement or newly authored geometry.",
+      "sourceRaw": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\alpine--card_pavilion-a001-pixal-mv-1024-9247.glb",
+        "sha256": "fec80b49fe4d04ba4678b64791b55d0d447b53fc2e6516511618bc395238dcaf",
+        "bytes": 41113900
+      },
+      "candidate": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\alpine--card_pavilion-fec80b49fe4d-surface-field-v1\\geometry-candidate.glb",
+        "sha256": "d8a6105b434a1a46a2e110f1b10859e76d51954feb566fa585a6475b5b7c444e",
+        "bytes": 1519284
+      },
+      "candidateReport": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\alpine--card_pavilion-fec80b49fe4d-surface-field-v1\\geometry-candidate-processing.json",
+        "sha256": "dc451476f0ce797494f83e4dcd2d2c1cd90747fa424b38d7ab616cc8b108f789",
+        "bytes": 9690
+      },
+      "originalCandidate": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\candidates\\alpine\\card_pavilion.glb",
+        "sha256": "d8a6105b434a1a46a2e110f1b10859e76d51954feb566fa585a6475b5b7c444e",
+        "bytes": 1519284
+      },
+      "fieldReceipt": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\alpine--card_pavilion-a001\\receipt.json",
+        "sha256": "1639320a255e4709619ea17266afb2d806e5ba499b43452315ebd8555f900db9",
+        "bytes": 3722
+      },
+      "output": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\alpine--card_pavilion-fec80b49fe4d-surface-field-v1\\geometry-surface.npz",
+        "sha256": "753dbbc84524d58b8de92c503cd41fc0aef128c65a21e121ea0be23df78fa8cc",
+        "bytes": 535916
+      },
+      "triangles": 29989,
+      "vertices": 14628,
+      "originalSplitVertices": 39655,
+      "exactCoincidentVerticesMerged": 25027,
+      "maximumPositionChangeFromWelding": 0,
+      "normalization": {
+        "enabled": true,
+        "candidate_degrees": 0.5248852567592291,
+        "applied_degrees": 0.5248852567592291,
+        "underside_area": 0.14846699736942826,
+        "normal_agreement": 0.9269958340480623,
+        "yaw_degrees": 180,
+        "pitch_degrees": 0,
+        "roll_degrees": 0,
+        "uniform_scale": 1.0746713029112027
+      },
+      "rawBlenderToNormalizedBlender": [
+        [
+          -1.0746707967306663,
+          4.21544019391356e-06,
+          -0.0009407003733243671,
+          0.0036692380561036244
+        ],
+        [
+          4.401481737912055e-06,
+          -1.074626132326574,
+          -0.00984317366424059,
+          0.00486880299351633
+        ],
+        [
+          -0.0009406990601883258,
+          -0.009843170822251501,
+          1.0746257172293956,
+          0.42093070353198037
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "inverse": [
+        [
+          -0.9305168027370114,
+          3.8105193001614613e-06,
+          -0.0008145161446282736,
+          0.003757123965575271
+        ],
+        [
+          3.6494315218073076e-06,
+          -0.93047812463815,
+          -0.008522831895538485,
+          0.008117822913880478
+        ],
+        [
+          -0.0008145164830997922,
+          -0.00852282929375913,
+          0.9304777710635633,
+          -0.3916221781629988
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "sampledNormalizationReconstructionMaxError": 1.159503672371452e-07,
+      "nativeBounds": {
+        "min": [
+          -0.46844267011393637,
+          -0.38886268570104726,
+          -0.335567167342339
+        ],
+        "max": [
+          0.461949860699447,
+          0.41351908257767833,
+          0.34583197843382424
+        ]
+      },
+      "tool": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\alpine--card_pavilion-fec80b49fe4d-surface-field-v1\\geometry-preparation-source.py",
+        "sha256": "956e46377da8eae51f4e9af858f698532b81fccbbf16f219a2f2adbb9ab1481a",
+        "bytes": 7005
+      },
+      "toolSnapshot": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\alpine--card_pavilion-fec80b49fe4d-surface-field-v1\\geometry-preparation-source.py",
+        "sha256": "956e46377da8eae51f4e9af858f698532b81fccbbf16f219a2f2adbb9ab1481a",
+        "bytes": 7005
+      },
+      "normalizationInput": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\alpine--card_pavilion-a001-pixal-mv-1024-9247.glb",
+        "sha256": "fec80b49fe4d04ba4678b64791b55d0d447b53fc2e6516511618bc395238dcaf",
+        "bytes": 41113900
+      },
+      "originalReceipt": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\alpine--card_pavilion-fec80b49fe4d-surface-field-v1\\geometry-source-original-receipt.json",
+        "sha256": "37c2a88b1a5057fb5311c147331c1a9b4586f56c07e8dbb534c44f6b10e8acfc",
+        "bytes": 4399
+      }
+    },
+    "nativePostprocessOverride": {
+      "original": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\alpine--card_pavilion-fec80b49fe4d-surface-field-v1\\original-native-exporter-source.py",
+        "sha256": "b6b79da5dfe13c22047a6257c6b2301c7ea31259dd9c82344db7e5c4cc707917",
+        "bytes": 8126
+      },
+      "scope": "Keep original neural geometry BVH for PBR lookup. Replace only the intermediate surface with this recorded existing source-derived low mesh; bypass further remeshing/simplification/cleanup, then use native unwrap/normals/field sampling.",
+      "sharedCodeModified": false,
+      "noNewGeometryAuthored": true,
+      "noNewGeometryAuthoredAppliesTo": "native_uv_material_replay_only",
+      "counts": {
+        "facesBeforeUnwrap": 29989
+      }
+    },
+    "nativeFieldLookup": {
+      "quantiles50_95_99_100": [
+        0.001013649278320372,
+        0.0018012681975960732,
+        0.0025834417901933193,
+        0.007008018437772989
+      ],
+      "fractionOverTwoPercent": 0.0,
+      "sampleCount": 621584,
+      "meaning": "Distance to original neural BVH before direct field sampling, not ray hit coverage"
+    }
+  },
+  "bake": {
+    "method": "Direct original neural attribute field sampling inside native to_glb; no Blender bake or nearest raw-image transfer",
+    "notRayCoverage": true
+  },
+  "animation": null,
+  "processingComplete": true,
+  "limitations": [
+    "Same assumed three-view cameras as original native raw",
+    "Diagnostic pending external visual approval; not a formal asset replacement"
+  ],
+  "renderedCandidate": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--card_pavilion-fec80b49fe4d-surface-field-v1\\candidates\\renders\\alpine\\card_pavilion\\lod-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--card_pavilion-fec80b49fe4d-surface-field-v1\\candidates\\renders\\alpine\\card_pavilion\\lod-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--card_pavilion-fec80b49fe4d-surface-field-v1\\candidates\\renders\\alpine\\card_pavilion\\lod-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--card_pavilion-fec80b49fe4d-surface-field-v1\\candidates\\renders\\alpine\\card_pavilion\\lod-left.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--card_pavilion-fec80b49fe4d-surface-field-v1\\candidates\\renders\\alpine\\card_pavilion\\lod-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.5,
+        -0.3660517930984497,
+        0.0
+      ],
+      "max": [
+        0.5,
+        0.3660517930984497,
+        0.8643364310264587
+      ]
+    },
+    "triangles": 29989,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          1024,
+          1024
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "sourceReviewReusedFrom": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--card_pavilion-fec80b49fe4d-surface-field-v1\\surface.candidate.json",
+    "sha256": "dc451476f0ce797494f83e4dcd2d2c1cd90747fa424b38d7ab616cc8b108f789",
+    "bytes": 9690
+  },
+  "renderedSource": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--card_pavilion-fec80b49fe4d-surface-field-v1\\candidates\\renders\\alpine\\card_pavilion\\raw-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--card_pavilion-fec80b49fe4d-surface-field-v1\\candidates\\renders\\alpine\\card_pavilion\\raw-iso.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--card_pavilion-fec80b49fe4d-surface-field-v1\\candidates\\renders\\alpine\\card_pavilion\\raw-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--card_pavilion-fec80b49fe4d-surface-field-v1\\candidates\\renders\\alpine\\card_pavilion\\raw-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--card_pavilion-fec80b49fe4d-surface-field-v1\\candidates\\renders\\alpine\\card_pavilion\\raw-left.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.4999999701976776,
+        -0.36578649282455444,
+        0.0
+      ],
+      "max": [
+        0.4999999701976776,
+        0.36578649282455444,
+        0.8666830062866211
+      ]
+    },
+    "triangles": 963582,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "bounds": {
+    "min": [
+      -0.5,
+      0.0,
+      -0.3660517930984497
+    ],
+    "max": [
+      0.5,
+      0.8643364310264587,
+      0.3660517930984497
+    ],
+    "coordinateSystem": "GLTF Y-up; +Z front"
+  },
+  "textureSizes": [
+    {
+      "name": "Image_0",
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "name": "Image_1",
+      "size": [
+        1024,
+        1024
+      ]
+    }
+  ],
+  "completedAt": "2026-10-23T12:29:11.229392+00:00",
+  "rawSourceUnchanged": true,
+  "promotedFrom": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--card_pavilion-fec80b49fe4d-surface-field-v1\\candidates\\alpine\\card_pavilion.json",
+    "sha256": "13307d49baa6cfe35633c38db74104b94f7e60fe026c4be825650784d9fae5fa",
+    "bytes": 19012
+  },
+  "reviewSheet": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--card_pavilion-fec80b49fe4d-surface-field-v1\\candidates\\renders\\alpine\\card_pavilion\\review-sheet.jpg",
+    "sha256": "c35411474f70b09c3671e72cb98b2707e54af8e8a90af29ec683288bf5c1612a",
+    "bytes": 306409,
+    "candidateSha256": "9d02cfa2da767032f4bcf9c844fe2b5fd6c0d99e78a5283b07049dcd9acc7074",
+    "sourceImages": [
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--card_pavilion-fec80b49fe4d-surface-field-v1\\candidates\\renders\\alpine\\card_pavilion\\raw-front.png",
+        "sha256": "c261932043503ad5e9e93f6485ff9e39a8f5a8ac3c244b550afe2c5f546f01aa",
+        "label": "AI raw front"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--card_pavilion-fec80b49fe4d-surface-field-v1\\candidates\\renders\\alpine\\card_pavilion\\raw-iso.png",
+        "sha256": "8c397a5f92cabdc2fef033a04579f8cec58bc9a775a154ea6cbb78d513b8a675",
+        "label": "AI raw iso"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--card_pavilion-fec80b49fe4d-surface-field-v1\\candidates\\renders\\alpine\\card_pavilion\\lod-front.png",
+        "sha256": "501e6a5f956e16c8b8732a03e09d3d1ca963bc56ce08f954c04aedc5ae8131e9",
+        "label": "LOD front"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--card_pavilion-fec80b49fe4d-surface-field-v1\\candidates\\renders\\alpine\\card_pavilion\\lod-right.png",
+        "sha256": "5fab2c55428efd11f3a29b0f4731560df46a9e1a843b9b9079ba568f8a9174fb",
+        "label": "LOD right"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--card_pavilion-fec80b49fe4d-surface-field-v1\\candidates\\renders\\alpine\\card_pavilion\\lod-back.png",
+        "sha256": "41fc660680242f9e2c59dae9d69fc02d499c24c1d9341e49aa596e5c215f1220",
+        "label": "LOD back"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--card_pavilion-fec80b49fe4d-surface-field-v1\\candidates\\renders\\alpine\\card_pavilion\\lod-left.png",
+        "sha256": "7dce3ee678613cdec34bfec450d16a530ec3f8b96e77016d2940b61746eae2c8",
+        "label": "LOD left"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--card_pavilion-fec80b49fe4d-surface-field-v1\\candidates\\renders\\alpine\\card_pavilion\\lod-iso.png",
+        "sha256": "cf7a777a313d84ed7bf30c10fffa3f70a44905c3ccf9558d7a9449d76d86e9ba",
+        "label": "LOD iso"
+      }
+    ],
+    "content": "Unmodified CPU render images composed with labels for visual comparison only"
+  },
+  "additionalSourceReview": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\source-comparisons\\alpine\\card_pavilion\\03f42a088d947870\\preservation.json",
+    "sha256": "2b7cde207112677bf57dbcf44a36346e6188ce5ae1b80cbec3cf77b7c53c5f03",
+    "bytes": 2739
+  }
+}

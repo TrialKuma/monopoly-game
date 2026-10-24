@@ -1,0 +1,277 @@
+{
+  "status": "generated_unrigged_part_candidate",
+  "started_utc": "2026-10-23T09:38:26.996369+00:00",
+  "generation_started": true,
+  "local_inference_only": true,
+  "asset_id": "alpine--shop_3-a002",
+  "weights": {
+    "ready": true,
+    "models": [
+      {
+        "name": "sparse_structure_decoder",
+        "checkpoint": "C:\\Users\\A\\.codex\\worktrees\\0b69\\厂长\\grande-art-lab\\source\\experimental\\models\\Pixal3D\\ckpts\\ss_dec_conv3d_16l8_fp16.safetensors",
+        "bytes": 147591972,
+        "ready": true
+      },
+      {
+        "name": "sparse_structure_flow_model",
+        "checkpoint": "C:\\Users\\A\\.codex\\worktrees\\0b69\\厂长\\grande-art-lab\\source\\experimental\\models\\Pixal3D\\ckpts\\ss_flow_img_dit_1_3B_64_bf16_mv.safetensors",
+        "bytes": 5359822584,
+        "ready": true
+      },
+      {
+        "name": "shape_slat_decoder",
+        "checkpoint": "C:\\Users\\A\\.codex\\worktrees\\0b69\\厂长\\grande-art-lab\\source\\experimental\\models\\Pixal3D\\ckpts\\shape_dec_next_dc_f16c32_fp16.safetensors",
+        "bytes": 948490494,
+        "ready": true
+      },
+      {
+        "name": "shape_slat_flow_model_512",
+        "checkpoint": "C:\\Users\\A\\.codex\\worktrees\\0b69\\厂长\\grande-art-lab\\source\\experimental\\models\\Pixal3D\\ckpts\\slat_flow_img2shape_dit_1_3B_512_bf16_mv.safetensors",
+        "bytes": 5546764048,
+        "ready": true
+      },
+      {
+        "name": "shape_slat_flow_model_1024",
+        "checkpoint": "C:\\Users\\A\\.codex\\worktrees\\0b69\\厂长\\grande-art-lab\\source\\experimental\\models\\Pixal3D\\ckpts\\slat_flow_img2shape_dit_1_3B_1024_bf16_mv.safetensors",
+        "bytes": 5546764048,
+        "ready": true
+      },
+      {
+        "name": "tex_slat_decoder",
+        "checkpoint": "C:\\Users\\A\\.codex\\worktrees\\0b69\\厂长\\grande-art-lab\\source\\experimental\\models\\Pixal3D\\ckpts\\tex_dec_next_dc_f16c32_fp16.safetensors",
+        "bytes": 948458812,
+        "ready": true
+      },
+      {
+        "name": "tex_slat_flow_model_1024",
+        "checkpoint": "C:\\Users\\A\\.codex\\worktrees\\0b69\\厂长\\grande-art-lab\\source\\experimental\\models\\Pixal3D\\ckpts\\slat_flow_imgshape2tex_dit_1_3B_1024_bf16_mv.safetensors",
+        "bytes": 5546960656,
+        "ready": true
+      }
+    ],
+    "config": "C:\\Users\\A\\.codex\\worktrees\\0b69\\厂长\\grande-art-lab\\source\\experimental\\models\\Pixal3D\\pipeline_mv.json",
+    "config_sha256": "3bd8f005301423604aafbfab126639c675d7dc6968b8113271433f6593901715"
+  },
+  "resources_before": {
+    "gpu": "NVIDIA GeForce RTX 5070 Ti",
+    "total_physical_vram_gib": 15.9208984375,
+    "free_physical_vram_gib": 14.896484375,
+    "gpu_utilization_percent": 1,
+    "total_ram_gib": 31.152122497558594,
+    "available_ram_gib": 20.013851165771484
+  },
+  "output": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\alpine--shop_3-a002-pixal-mv-1024-22423.glb",
+  "input": "H:\\代码项目\\monopoly\\art\\full-ai-city\\inputs\\alpine\\shop_3\\a8796b4ec767a38a\\transforms.json",
+  "input_sha256": "3135fe0662cb732e0c6d6e1796f3ee8c5721cd6d843da849b89cb346e90542df",
+  "input_views": [
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\inputs\\alpine\\shop_3\\a8796b4ec767a38a\\view00_azim000.png",
+      "sha256": "dbe37067a740d573a871c56b872297479fdd1463098d812a11b0014e7a6aef17",
+      "size": [
+        760,
+        760
+      ],
+      "alpha_bbox": [
+        101,
+        60,
+        659,
+        664
+      ],
+      "camera_to_world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          -1.0,
+          -3.1192049980163574
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\inputs\\alpine\\shop_3\\a8796b4ec767a38a\\view01_azim090.png",
+      "sha256": "4e69b59cc95d6f0aef9a368063fe5043bda4e7c34515f11a8ce264f271133bd2",
+      "size": [
+        760,
+        760
+      ],
+      "alpha_bbox": [
+        148,
+        57,
+        614,
+        664
+      ],
+      "camera_to_world": [
+        [
+          0.0,
+          0.0,
+          1.0,
+          3.1192049980163574
+        ],
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\inputs\\alpine\\shop_3\\a8796b4ec767a38a\\view02_azim180.png",
+      "sha256": "a9b7e11bf050b2cf462c3dd03d874e7603783e1c0f4d8e52f4feb171adab18c7",
+      "size": [
+        760,
+        760
+      ],
+      "alpha_bbox": [
+        103,
+        65,
+        655,
+        663
+      ],
+      "camera_to_world": [
+        [
+          -1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          3.1192049980163574
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    }
+  ],
+  "assumed_cameras": true,
+  "camera_calibration": "assumed_standard_orbit_not_measured",
+  "source_board": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\inputs\\alpine\\shop_3\\a8796b4ec767a38a\\source-triptych.png",
+    "sha256": "a8796b4ec767a38aac06726815bd94ca77ce188dab17151b5b0a0ad4831f3789",
+    "bytes": 1435770
+  },
+  "view_count": 3,
+  "camera_angle_x": 0.3490658503988659,
+  "mesh_scale": 1.0,
+  "native_entrypoint": "inference_mv.py:run_inference / Pixal3DMVImageTo3DPipeline.run_mv",
+  "resolution": 1024,
+  "seed": 22423,
+  "low_vram": true,
+  "strict_naf": true,
+  "texture_size": 4096,
+  "sampler_steps": {
+    "ss": 12,
+    "shape": 12,
+    "tex": 12
+  },
+  "native_checkpoint_dtypes_preserved": true,
+  "pipeline_config": "pipeline_mv.json",
+  "multiview_fusion": "average",
+  "shared_files_write_protected": true,
+  "cache_directory": "H:\\代码项目\\monopoly\\art\\full-ai-city\\cache",
+  "runner_sha256": "2f5ba82fd3c87626b529c4bd4bdf2ba22f53947beff885e50b30e4f2ffefb1f2",
+  "runner_source_snapshot": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\alpine--shop_3-a002\\runner-source.py",
+  "post_projection_allocator_cleanup": "Release only unused CUDA cached blocks after complete native conditioner return",
+  "projection_cache_adapter_sha256": "aabecb5acc98a013068a5891226fe1034f764585383290c6917cce230c203bcb",
+  "lifetime_adapter_sha256": "a815f73fbb24f0e7e4eb171ffa0f40472ef30346a109410399a2f7e404db47d7",
+  "gpu_lock": {
+    "status": "released",
+    "pid": 39352,
+    "host": "NeoRic",
+    "label": "monopoly-native-multiview-alpine--shop_3-a002",
+    "acquired_utc": "2026-10-23T09:38:27.058447+00:00",
+    "lock_path": "C:\\Users\\A\\.codex\\shared-resource-locks\\pixal-gpu0.lock",
+    "token": "693c06d09b6647398df3beff596e4e3a",
+    "metadata_is_advisory": true
+  },
+  "torch": "2.10.0+cu130",
+  "natten": "0.21.6",
+  "cuda": "13.0",
+  "cuda_free_gib": 14.6845703125,
+  "cuda_total_gib": 15.89398193359375,
+  "prior_source_export_replay": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\uv-replays\\legacy-alpine--builders_guild-7f8a525428b790a0c\\receipt.json",
+    "sha256": "5eb371c99b3aa390744475013017e99d5f922189c0b42955ff35d1be1aa9c891",
+    "bytes": 4003
+  },
+  "prior_source_export_replays": [
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\uv-replays\\legacy-alpine--builders_guild-7f8a525428b790a0c\\receipt.json",
+      "sha256": "5eb371c99b3aa390744475013017e99d5f922189c0b42955ff35d1be1aa9c891",
+      "bytes": 4003
+    }
+  ],
+  "prior_export_batch": {
+    "maximumJobs": 3,
+    "softSecondsLimit": 90,
+    "elapsedSeconds": 3.469,
+    "neuralModelSettingsChanged": false
+  },
+  "native_mobile_request": {
+    "status": "capture_enabled",
+    "captureOnly": true,
+    "minDiskGiB": 12,
+    "purpose": "Freeze original per-inference neural geometry and material field for later mobile export without another neural inference. No automatic approval or publication.",
+    "jobId": "alpine--shop_3-a002",
+    "policySha256": "7e58ddb0dbc94f1787443ccde94f97403b61417c87e9e697656e019222483934"
+  },
+  "native_mobile_export_receipt": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\alpine--shop_3-a002\\receipt.json",
+    "sha256": "9a4bd50fb40924f0d35c22a23d59b608a54a2a60bbd37a412518df79a627bda7",
+    "bytes": 3681
+  },
+  "output_bytes": 43087092,
+  "output_sha256": "67a5f43a7dc30961aae5c01fa0bfe1103e6b071daf143a129dc1adf9149989e5",
+  "input_unchanged": true,
+  "seconds": 274.81,
+  "finished_utc": "2026-10-23T09:43:01.868052+00:00",
+  "peak_allocated_gib": 16.366,
+  "batch_wrapper": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\alpine--shop_3-a002\\batch-wrapper-source.py",
+    "sha256": "1424c229b4f5ef8d265c00484bee92acb8340a12a79f499ca13f33d4091b7837"
+  },
+  "pipeline_boundary": "Original native 1024_cascade; no unsupported 512 branch, no persistent model lifetime changes"
+}

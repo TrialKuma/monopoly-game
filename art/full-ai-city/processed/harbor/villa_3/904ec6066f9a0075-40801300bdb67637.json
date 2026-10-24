@@ -1,0 +1,475 @@
+{
+  "status": "exported_pending_visual_review",
+  "createdAt": "2026-10-24T06:56:44.306723+00:00",
+  "region": "harbor",
+  "asset": "villa_3",
+  "lod": "near",
+  "processingRevision": 0,
+  "source": {
+    "rawGLB": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\harbor--villa_3-a010-pixal-mv-1024-29502.glb",
+      "sha256": "c8ddf70f89eb270106210a2cf07952d5ac2e7e0906ec857a108f2f7cdb973553",
+      "bytes": 43661488
+    }
+  },
+  "inferenceReport": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\harbor--villa_3-a010\\harbor--villa_3-a010-pixal-mv-1024-29502.json",
+    "sha256": "25c2cc66ede15508f68f4d9b3f7226f9d3e447f31a01ab9a3e88cd6976b1582d",
+    "bytes": 9340
+  },
+  "reference": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\inputs\\harbor\\villa_3\\ac66adc0d972237e\\reference.json",
+    "sha256": "914b9365dfbc459a83344124f7f646a646e858a18effb50afda78bec148b4f33",
+    "bytes": 4423
+  },
+  "processingTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\d0fe99e75121175cccb420b5c503d9926459607b997b8582bbce75e6983b35bb-process_native_mobile.py",
+    "sha256": "d0fe99e75121175cccb420b5c503d9926459607b997b8582bbce75e6983b35bb",
+    "bytes": 9752
+  },
+  "nativeSurfaceExport": {
+    "receipt": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\harbor--villa_3-c8ddf70f89eb-surface-field-v1-geometry-only\\receipt.json",
+      "sha256": "169116404b64cfae03df0ad857616bf6170078191397c0c89a2d3bcb9440cb29",
+      "bytes": 12636
+    },
+    "source": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\harbor--villa_3-c8ddf70f89eb-surface-field-v1-geometry-only\\mobile-30000-1024.glb",
+      "sha256": "60847dd7e6076c418dc5046b2a7e864aaaafa5ca2bd11a7619137dfb62a92289",
+      "bytes": 1919268
+    },
+    "tensorArchive": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\harbor--villa_3-a010\\neural-export-inputs.pt",
+      "sha256": "f8404785dc57079f178e685a38e36c1388723d73300282294c827de9e3724052",
+      "bytes": 416754845
+    }
+  },
+  "nativePipeline": "Pixal3DMVImageTo3DPipeline.run_mv",
+  "nativeResolution": 1024,
+  "seed": 29502,
+  "assumedCameras": true,
+  "cameraCalibration": "assumed_standard_orbit_not_measured",
+  "geometryOrigin": "Recorded low surface derived from the identical native raw, restored to original field coordinates, with native UV/material generation using the original neural high-surface BVH and attribute field. No authored replacement geometry.",
+  "textureOrigin": "Original neural attribute field sampled by the native UV/material operations with the recorded surface-stage override; no new neural inference or raw-UV rebake.",
+  "normalization": {
+    "enabled": true,
+    "candidate_degrees": 0.5609267242663584,
+    "applied_degrees": 0.5609267242663584,
+    "underside_area": 0.07296159799737367,
+    "normal_agreement": 0.9465737693677626,
+    "yaw_degrees": 180,
+    "pitch_degrees": 0,
+    "roll_degrees": 0,
+    "uniform_scale": 1.0655316723100101
+  },
+  "orientation": {
+    "up": "Y",
+    "front": "+Z",
+    "groundY": 0,
+    "maxEdge": 1
+  },
+  "requestedTriangles": 30000,
+  "triangles": 29949,
+  "glbValidation": {
+    "version": 2,
+    "triangles": 29949,
+    "meshes": 1,
+    "materials": 1,
+    "images": 2,
+    "all_primitives_have_uv": true,
+    "animations": [],
+    "all_images_embedded": true,
+    "external_buffers": []
+  },
+  "quantization": {
+    "source": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\harbor--villa_3-c8ddf70f89eb-surface-field-v1-geometry-only\\candidates\\harbor\\villa_3.glb",
+    "output": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\harbor--villa_3-c8ddf70f89eb-surface-field-v1-geometry-only\\candidates\\harbor\\villa_3.glb",
+    "sourceBytes": 1623976,
+    "outputBytes": 1173096,
+    "sourceSha256": "beb15ff886f129e2fa415f46a170adeacda179fa156a6d393ae2c8362c862c66",
+    "outputSha256": "904ec6066f9a007540445dea5460940643cf08ce78ab739969fc7730cdd10a4c",
+    "positionFaceAndTextureBytesUnchanged": true,
+    "attributes": [
+      {
+        "accessor": 1,
+        "semantic": "NORMAL",
+        "count": 37586,
+        "maximumAngularErrorDegrees": 0.3720541521452143
+      },
+      {
+        "accessor": 2,
+        "semantic": "TEXCOORD_0",
+        "count": 37586,
+        "maximumUVError": 7.629427273558864e-06,
+        "maximumTexelErrorAt1024": 0.007812533528124277
+      }
+    ]
+  },
+  "processedCandidate": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\candidates\\harbor\\villa_3.glb",
+    "sha256": "904ec6066f9a007540445dea5460940643cf08ce78ab739969fc7730cdd10a4c",
+    "bytes": 1173096
+  },
+  "derivation": {
+    "method": "Recorded CPU surface derived from the same neural raw, inverse-normalized to field coordinates; a local native-export variant bypasses further mesh simplification/remeshing and uses native UV generation plus original neural high-surface BVH and field texture sampling. Only normalization, JPEG encoding and attribute quantization afterward.",
+    "voxelizedAgain": false,
+    "rebakedFromRawUV": false,
+    "facadeUVPreserved": true,
+    "normalizedTrianglesPreserved": true,
+    "geometrySurfaceInput": {
+      "receipt": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\harbor--villa_3-c8ddf70f89eb-surface-field-v1-geometry-only\\geometry-source-proof.json",
+        "sha256": "029ff56163d846f846d05af4f3d260b5dabc8b2344fbebc9836aa0f721dc3ce8",
+        "bytes": 5878
+      },
+      "method": "Only coordinate inversion of an existing source-derived low mesh; all candidate vertex/triangle identities preserved. No remeshing, replacement or newly authored geometry.",
+      "sourceRaw": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\harbor--villa_3-a010-pixal-mv-1024-29502.glb",
+        "sha256": "c8ddf70f89eb270106210a2cf07952d5ac2e7e0906ec857a108f2f7cdb973553",
+        "bytes": 43661488
+      },
+      "candidate": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\harbor--villa_3-c8ddf70f89eb-surface-field-v1-geometry-only\\geometry-candidate.glb",
+        "sha256": "d6db39905d80aea6db6631b564983b50aad39f7e2a65329c85e6413d205ac183",
+        "bytes": 577116
+      },
+      "candidateReport": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\harbor--villa_3-c8ddf70f89eb-surface-field-v1-geometry-only\\geometry-candidate-processing.json",
+        "sha256": "8c1d0e1ebd6349109525971d37ecb9959906aa8fd8606f681bfcaec1d21ac341",
+        "bytes": 4683
+      },
+      "originalCandidate": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\geometry-only-low\\harbor--villa_3-c8ddf70f89eb2701-r0\\harbor\\villa_3.glb",
+        "sha256": "d6db39905d80aea6db6631b564983b50aad39f7e2a65329c85e6413d205ac183",
+        "bytes": 577116
+      },
+      "fieldReceipt": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\harbor--villa_3-a010\\receipt.json",
+        "sha256": "f50e3ba6cf674a0d802b0caf31aebb367b498446e15930e32b3dc880e7c8e300",
+        "bytes": 3687
+      },
+      "output": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\harbor--villa_3-c8ddf70f89eb-surface-field-v1-geometry-only\\geometry-surface.npz",
+        "sha256": "a3360d06893172ed103460762f2410f652d222fd0907ee3f440bcbe836b6e795",
+        "bytes": 535316
+      },
+      "triangles": 29949,
+      "vertices": 14618,
+      "originalSplitVertices": 16521,
+      "exactCoincidentVerticesMerged": 1903,
+      "maximumPositionChangeFromWelding": 0,
+      "normalization": {
+        "enabled": true,
+        "candidate_degrees": 0.2741122200199929,
+        "applied_degrees": 0.2741122200199929,
+        "underside_area": 0.10756618716525189,
+        "normal_agreement": 0.9380286453679411,
+        "yaw_degrees": 180,
+        "pitch_degrees": 0,
+        "roll_degrees": 0,
+        "uniform_scale": 1.0602445210767097
+      },
+      "rawBlenderToNormalizedBlender": [
+        [
+          -1.0602444433317781,
+          1.076635124016667e-06,
+          0.0004900376029874907,
+          0.0008669633530523895
+        ],
+        [
+          1.2616034395137081e-06,
+          -1.0602325414587754,
+          0.005048765920801307,
+          0.006770402832112055
+        ],
+        [
+          0.0004900333255525029,
+          0.0050487645641456025,
+          1.0602324280326791,
+          0.5014644165245581
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "inverse": [
+        [
+          -0.9431785213943867,
+          1.1181034313819333e-06,
+          0.00043593016450978135,
+          0.0005990901778330818
+        ],
+        [
+          9.535425457022508e-07,
+          -0.9431679233794426,
+          0.0044913110332941,
+          0.004133393286177845
+        ],
+        [
+          0.0004359271429514538,
+          0.004491309750376933,
+          0.9431678227982652,
+          -0.47299588785338126
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "sampledNormalizationReconstructionMaxError": 1.1403221601535401e-07,
+      "nativeBounds": {
+        "min": [
+          -0.3112255628206665,
+          -0.47194913170981845,
+          -0.2653987847736429
+        ],
+        "max": [
+          0.3089773067102159,
+          0.47135132915695116,
+          0.2753418134198292
+        ]
+      },
+      "tool": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\harbor--villa_3-c8ddf70f89eb-surface-field-v1-geometry-only\\geometry-preparation-source.py",
+        "sha256": "c4eec55644a998f870bd170aae5f8c5f060ba6af7ddbbe7025a44c5141846d8d",
+        "bytes": 8809
+      },
+      "toolSnapshot": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\harbor--villa_3-c8ddf70f89eb-surface-field-v1-geometry-only\\geometry-preparation-source.py",
+        "sha256": "c4eec55644a998f870bd170aae5f8c5f060ba6af7ddbbe7025a44c5141846d8d",
+        "bytes": 8809
+      },
+      "normalizationInput": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\harbor--villa_3-a010-pixal-mv-1024-29502.glb",
+        "sha256": "c8ddf70f89eb270106210a2cf07952d5ac2e7e0906ec857a108f2f7cdb973553",
+        "bytes": 43661488
+      },
+      "geometryOnly": true,
+      "geometryStageStatus": "geometry_ready_for_native_field",
+      "geometryPreExport": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\geometry-only-low\\harbor--villa_3-c8ddf70f89eb2701-r0\\harbor\\villa_3.geometry-before-export.npz",
+        "sha256": "828af7206ca2ec65faac4d86e41f60f96f5e287a474d81055481238bb46f60ca",
+        "bytes": 535316
+      },
+      "geometryExportPreservation": {
+        "preExport": {
+          "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\geometry-only-low\\harbor--villa_3-c8ddf70f89eb2701-r0\\harbor\\villa_3.geometry-before-export.npz",
+          "sha256": "828af7206ca2ec65faac4d86e41f60f96f5e287a474d81055481238bb46f60ca",
+          "bytes": 535316
+        },
+        "allOrientedTrianglesExactlyPreserved": true,
+        "trianglesCompared": 29949,
+        "maximumPositionChange": 0,
+        "vertexSplitsOrFaceOrderPermitted": true,
+        "method": "Exact per-corner float32 positions and cyclic oriented triangle multiset, including multiplicity; no nearest-point tolerance"
+      },
+      "originalReceipt": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\harbor--villa_3-c8ddf70f89eb-surface-field-v1-geometry-only\\geometry-source-original-receipt.json",
+        "sha256": "c1ea6c88c495a723d67413ea918e38aaeece714f3f91b4081c214333df0f48be",
+        "bytes": 5508
+      }
+    },
+    "nativePostprocessOverride": {
+      "original": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\harbor--villa_3-c8ddf70f89eb-surface-field-v1-geometry-only\\original-native-exporter-source.py",
+        "sha256": "b6b79da5dfe13c22047a6257c6b2301c7ea31259dd9c82344db7e5c4cc707917",
+        "bytes": 8126
+      },
+      "scope": "Keep original neural geometry BVH for PBR lookup. Replace only the intermediate surface with this recorded existing source-derived low mesh; bypass further remeshing/simplification/cleanup, then use native unwrap/normals/field sampling.",
+      "sharedCodeModified": false,
+      "noNewGeometryAuthored": true,
+      "noNewGeometryAuthoredAppliesTo": "native_uv_material_replay_only",
+      "counts": {
+        "facesBeforeUnwrap": 29949
+      }
+    },
+    "nativeFieldLookup": {
+      "quantiles50_95_99_100": [
+        0.0010033894795924425,
+        0.001978540327399969,
+        0.002806091448292136,
+        0.0065440405160188675
+      ],
+      "fractionOverTwoPercent": 0.0,
+      "sampleCount": 628970,
+      "meaning": "Distance to original neural BVH before direct field sampling, not ray hit coverage"
+    }
+  },
+  "bake": {
+    "method": "Direct original neural attribute field sampling inside native to_glb; no Blender bake or nearest raw-image transfer",
+    "notRayCoverage": true
+  },
+  "animation": null,
+  "processingComplete": true,
+  "limitations": [
+    "Same assumed three-view cameras as original native raw",
+    "Diagnostic pending external visual approval; not a formal asset replacement"
+  ],
+  "renderedCandidate": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\harbor--villa_3-c8ddf70f89eb-surface-field-v1-geometry-only\\candidates\\renders\\harbor\\villa_3\\lod-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\harbor--villa_3-c8ddf70f89eb-surface-field-v1-geometry-only\\candidates\\renders\\harbor\\villa_3\\lod-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\harbor--villa_3-c8ddf70f89eb-surface-field-v1-geometry-only\\candidates\\renders\\harbor\\villa_3\\lod-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\harbor--villa_3-c8ddf70f89eb-surface-field-v1-geometry-only\\candidates\\renders\\harbor\\villa_3\\lod-left.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\harbor--villa_3-c8ddf70f89eb-surface-field-v1-geometry-only\\candidates\\renders\\harbor\\villa_3\\lod-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.33038797974586487,
+        -0.28778189420700073,
+        0.0
+      ],
+      "max": [
+        0.33038797974586487,
+        0.28778189420700073,
+        1.0
+      ]
+    },
+    "triangles": 29949,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          1024,
+          1024
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "renderedSource": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\harbor--villa_3-c8ddf70f89eb-surface-field-v1-geometry-only\\candidates\\renders\\harbor\\villa_3\\raw-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\harbor--villa_3-c8ddf70f89eb-surface-field-v1-geometry-only\\candidates\\renders\\harbor\\villa_3\\raw-iso.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\harbor--villa_3-c8ddf70f89eb-surface-field-v1-geometry-only\\candidates\\renders\\harbor\\villa_3\\raw-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\harbor--villa_3-c8ddf70f89eb-surface-field-v1-geometry-only\\candidates\\renders\\harbor\\villa_3\\raw-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\harbor--villa_3-c8ddf70f89eb-surface-field-v1-geometry-only\\candidates\\renders\\harbor\\villa_3\\raw-left.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.32890990376472473,
+        -0.29012131690979004,
+        0.0
+      ],
+      "max": [
+        0.32890990376472473,
+        0.29012131690979004,
+        1.0
+      ]
+    },
+    "triangles": 947692,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "bounds": {
+    "min": [
+      -0.33038797974586487,
+      0.0,
+      -0.28778189420700073
+    ],
+    "max": [
+      0.33038797974586487,
+      1.0,
+      0.28778189420700073
+    ],
+    "coordinateSystem": "GLTF Y-up; +Z front"
+  },
+  "textureSizes": [
+    {
+      "name": "Image_0",
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "name": "Image_1",
+      "size": [
+        1024,
+        1024
+      ]
+    }
+  ],
+  "completedAt": "2026-10-24T06:57:20.911213+00:00",
+  "rawSourceUnchanged": true,
+  "promotedFrom": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\harbor--villa_3-c8ddf70f89eb-surface-field-v1-geometry-only\\candidates\\harbor\\villa_3.json",
+    "sha256": "96775f5e4b29951e561316037e0430136052e92af5eda3bfbf4f9ad088c5f83b",
+    "bytes": 20535
+  },
+  "reviewSheet": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\harbor--villa_3-c8ddf70f89eb-surface-field-v1-geometry-only\\candidates\\renders\\harbor\\villa_3\\review-sheet.jpg",
+    "sha256": "96d7bb01f2bb2dd8799679e4a892b34b7616bc578c24ac9d7bc9a7630b92bc18",
+    "bytes": 301869,
+    "candidateSha256": "904ec6066f9a007540445dea5460940643cf08ce78ab739969fc7730cdd10a4c",
+    "sourceImages": [
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\harbor--villa_3-c8ddf70f89eb-surface-field-v1-geometry-only\\candidates\\renders\\harbor\\villa_3\\raw-front.png",
+        "sha256": "ca46976108e6fc625119c6ab35345a2f18e0367449abd8bd69a2bf8270abd064",
+        "label": "AI raw front"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\harbor--villa_3-c8ddf70f89eb-surface-field-v1-geometry-only\\candidates\\renders\\harbor\\villa_3\\raw-iso.png",
+        "sha256": "dd86842db80be3ee8edd2014b921f9bce3be7852058c9f9187154d505aad1abd",
+        "label": "AI raw iso"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\harbor--villa_3-c8ddf70f89eb-surface-field-v1-geometry-only\\candidates\\renders\\harbor\\villa_3\\lod-front.png",
+        "sha256": "37718dbf4565b0ede0407649709a9ee7c02f3d75c0d549f2aebc0f750edf882f",
+        "label": "LOD front"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\harbor--villa_3-c8ddf70f89eb-surface-field-v1-geometry-only\\candidates\\renders\\harbor\\villa_3\\lod-right.png",
+        "sha256": "cd2b7469a804d862dc37ddf2e137fb22d40217dba9962ad1a673f9213c56232e",
+        "label": "LOD right"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\harbor--villa_3-c8ddf70f89eb-surface-field-v1-geometry-only\\candidates\\renders\\harbor\\villa_3\\lod-back.png",
+        "sha256": "718e9306118705606e451d00c665203297efb9b94c5b0fee7f7ad00edb4c7cfe",
+        "label": "LOD back"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\harbor--villa_3-c8ddf70f89eb-surface-field-v1-geometry-only\\candidates\\renders\\harbor\\villa_3\\lod-left.png",
+        "sha256": "1da3d3384cc043be06f46ba1cf8a15926628c2f46d93ead2c2bdf0026372087c",
+        "label": "LOD left"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\harbor--villa_3-c8ddf70f89eb-surface-field-v1-geometry-only\\candidates\\renders\\harbor\\villa_3\\lod-iso.png",
+        "sha256": "0fe342e49923435ece4268b506f7b2e9245f15e89d4f9f39f3cce2f6cf1bacf2",
+        "label": "LOD iso"
+      }
+    ],
+    "content": "Unmodified CPU render images composed with labels for visual comparison only"
+  }
+}

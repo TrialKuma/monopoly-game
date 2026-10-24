@@ -1,0 +1,52 @@
+{
+  "status": "rejected_native_export_source",
+  "region": "expansion",
+  "asset": "hotel_2",
+  "reviewer": "asset_production",
+  "recordedAtUtc": "2026-10-24T04:12:19.186652+00:00",
+  "source": {
+    "path": "art/full-ai-city/source/expansion--hotel_2-a012-pixal-mv-1024-29489.glb",
+    "sha256": "06f7798dbec86505628321052dc4837b348abcbd84ccfb67702d3821932a9f32",
+    "bytes": 41695620
+  },
+  "sourceLevel": "Native 1M export; no untouched decoder attribution is made.",
+  "inferenceReport": {
+    "path": "art/full-ai-city/reports/source-rejections/expansion/hotel_2/06f7798dbec86505/expansion--hotel_2-a012-pixal-mv-1024-29489.json",
+    "sha256": "715a4278cc16b7fe4ac04a92c1bfb0d8f1567ee874248b1cee9be6c1c7d684f8",
+    "bytes": 10167
+  },
+  "inputReference": {
+    "path": "art/full-ai-city/reports/source-rejections/expansion/hotel_2/06f7798dbec86505/input-reference.json",
+    "sha256": "a6b0c95cc6281df461160b01933284119e7c5c7402a8a7f84cd82a4fa5a756e7",
+    "bytes": 4408
+  },
+  "diagnostic": null,
+  "diagnosticTool": null,
+  "sourceComparisonReport": {
+    "path": "art/full-ai-city/reports/source-rejections/expansion/hotel_2/06f7798dbec86505/source-comparison-processing.json",
+    "sha256": "bbeed651440cc91239012d45c25eb2e5d958a9890d7049d37df9abae411c1a56",
+    "bytes": 20969
+  },
+  "sourceViewEvidenceMode": "Explicitly selected existing renderedSource views; no additional or neutral render implied",
+  "evidence": [
+    {
+      "path": "art/full-ai-city/reports/source-rejections/expansion/hotel_2/06f7798dbec86505/raw-front.png",
+      "sha256": "3a879516f96a65eaac0f16cef3869c792a23d82a9aa0764ec6fb3f81a0a89948",
+      "bytes": 251462
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/expansion/hotel_2/06f7798dbec86505/raw-iso.png",
+      "sha256": "dbdef6e5d5cdc5e9efee3ebc295e4407cfa64b17061734a099fedb49e058f002",
+      "bytes": 311194
+    }
+  ],
+  "finding": "Actually inspected the unchanged original triptych, second-source native front/iso, all final five and256px. This independent retry still has broken/open window panels on several elevations, detached and folded dark canopy pieces, front window/brick gaps and an unwanted projecting dark ground sheet with detached strips. The original native front/iso already shows these defects. They are broad and distributed, not a safe two-region patch. Freeze this second old-reference result and request one targeted reference revision emphasizing continuous opaque walls/glazing and a connected solid roof/canopy while preserving the Art Deco two-storey design. No third old-reference seed.",
+  "decision": "One targeted reference revision; no third seed on this old reference.",
+  "sourceUnchanged": true,
+  "notFinalCandidateReview": true,
+  "freezeTool": {
+    "path": "art/full-ai-city/reports/tool-snapshots/616860a00b28e670e1219d64c6cb5dad17f0946420568f786e80b6d789fb4a73-freeze_public_source_rejection.py",
+    "sha256": "616860a00b28e670e1219d64c6cb5dad17f0946420568f786e80b6d789fb4a73",
+    "bytes": 4304
+  }
+}

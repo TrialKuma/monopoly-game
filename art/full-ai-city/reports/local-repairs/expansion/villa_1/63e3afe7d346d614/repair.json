@@ -1,0 +1,230 @@
+{
+  "status": "local_repair_candidate_pending_visual_review",
+  "source": {
+    "path": "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\source\\expansion--villa_1-a003-pixal-mv-1024-29476.glb",
+    "sha256": "321f5b5ffa98032fea2c417a1490313d9d37ae5655f752c569ca9aacece59796",
+    "bytes": 39900052
+  },
+  "orientation": {
+    "enabled": true,
+    "candidate_degrees": 0.33571759148659897,
+    "applied_degrees": 0.33571759148659897,
+    "underside_area": 0.1612881011747004,
+    "normal_agreement": 0.9852468952012926,
+    "yaw_degrees": 180,
+    "pitch_degrees": 0,
+    "roll_degrees": 0,
+    "uniform_scale": 1.2280111467457722
+  },
+  "configuration": {
+    "path": "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\reports\\source-repairs-planned\\expansion\\villa_1\\321f5b5ffa98032f\\repair-config-v2-brick.json",
+    "sha256": "5ac6b8c19640f82efda32a1b9d6f03b981ed451a81f743439ed5ec54384082f0",
+    "bytes": 2148
+  },
+  "reviewEvidence": [
+    {
+      "path": "reports/source-repairs-planned/expansion/villa_1/321f5b5ffa98032f/review.json",
+      "sha256": "c6f38b8e8909368f40a54c8188bc415880969f2a80a4938a29adf54ae4a28b6a"
+    },
+    {
+      "path": "work/repair-expansion-villa1-321f5b5f-front-v1/visual-rejection.json",
+      "sha256": "8dfa7c8371dc45c26936a076ae1aaa14c54e596ee099ce8e760557759b8d13aa"
+    }
+  ],
+  "measurement": {
+    "path": "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\work\\facade-gaps\\expansion\\villa_1\\321f5b5ffa98-front\\inspection.json",
+    "sha256": "311633f16e4625d339af74e8a0eb63746eece42c8843f9dbfc5ff76f5b9bd3b0",
+    "bytes": 5890
+  },
+  "method": "Only explicitly measured and visually reviewed local gaps are closed from adjoining original surface and UV samples with0.006 inward closure. Original vertices, faces and image pixels are preserved. No replacement building or generated texture. See configuration and frozen prior review evidence for exact allowed regions.",
+  "repairs": [
+    {
+      "name": "Front brick above left window",
+      "specification": {
+        "name": "Front brick above left window",
+        "u": [
+          1,
+          0,
+          0
+        ],
+        "v": [
+          0,
+          0,
+          1
+        ],
+        "n": [
+          0,
+          -1,
+          0
+        ],
+        "roi": [
+          -0.364,
+          -0.222,
+          0.4,
+          0.55
+        ],
+        "defectDepth": 0.12,
+        "donorDepth": 0.215,
+        "donorMaxDepth": 0.235,
+        "donorNormal": 0.6,
+        "color": "brick",
+        "gridStep": 0.006,
+        "donorMargin": 0.05,
+        "flatPatchUV": true,
+        "donorMinRGB": 0.06,
+        "donorMaxColorRatio": 4.0
+      },
+      "missingSamples": 214,
+      "boundarySamples": 520,
+      "sampledDepthRange": [
+        -0.419269323348999,
+        0.24097895622253418
+      ],
+      "inwardClosureThickness": 0.006,
+      "outerSurfaceUnchanged": true,
+      "newVertices": 676,
+      "newTriangles": 1348
+    },
+    {
+      "name": "Front brick below left window",
+      "specification": {
+        "name": "Front brick below left window",
+        "u": [
+          1,
+          0,
+          0
+        ],
+        "v": [
+          0,
+          0,
+          1
+        ],
+        "n": [
+          0,
+          -1,
+          0
+        ],
+        "roi": [
+          -0.27,
+          -0.148,
+          0.06,
+          0.12
+        ],
+        "defectDepth": 0.12,
+        "donorDepth": 0.225,
+        "donorMaxDepth": 0.25,
+        "donorNormal": 0.6,
+        "color": "brick",
+        "gridStep": 0.006,
+        "donorMargin": 0.05,
+        "flatPatchUV": true,
+        "donorMinRGB": 0.06,
+        "donorMaxColorRatio": 4.0
+      },
+      "missingSamples": 94,
+      "boundarySamples": 396,
+      "sampledDepthRange": [
+        -0.41814661026000977,
+        0.337982177734375
+      ],
+      "inwardClosureThickness": 0.006,
+      "outerSurfaceUnchanged": true,
+      "newVertices": 322,
+      "newTriangles": 640
+    }
+  ],
+  "originalTriangles": 938306,
+  "originalVerticesMoved": 0,
+  "originalTrianglesDeleted": 0,
+  "artifactCleanup": {
+    "method": "No original faces deleted. Only the explicitly reviewed bounded source-surface regions in the configuration may receive additional triangles.",
+    "deletedTriangles": 0
+  },
+  "newTriangles": 1988,
+  "newVertices": 998,
+  "inverseSimilarityError": 8.882624125128302e-08,
+  "normalizedOutput": {
+    "path": "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\work\\repair-expansion-villa1-321f5b5f-front-v2-brick\\repaired-normalized.glb",
+    "sha256": "09e396a76a47f9372604bbf338a09e6bea0b9b21f5cecbabb52fb511afed9887",
+    "bytes": 44138860
+  },
+  "nativeOutput": {
+    "path": "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\work\\repair-expansion-villa1-321f5b5f-front-v2-brick\\repaired-native.glb",
+    "sha256": "63e3afe7d346d6145576117451fe5a769fca029ddbd01728a42c124cb46c2fa1",
+    "bytes": 44099772
+  },
+  "renders": {
+    "views": [
+      "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\work\\repair-expansion-villa1-321f5b5f-front-v2-brick\\repaired-front.png",
+      "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\work\\repair-expansion-villa1-321f5b5f-front-v2-brick\\repaired-right.png",
+      "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\work\\repair-expansion-villa1-321f5b5f-front-v2-brick\\repaired-back.png",
+      "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\work\\repair-expansion-villa1-321f5b5f-front-v2-brick\\repaired-left.png",
+      "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\work\\repair-expansion-villa1-321f5b5f-front-v2-brick\\repaired-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.5,
+        -0.49193310737609863,
+        0.0
+      ],
+      "max": [
+        0.5,
+        0.49193310737609863,
+        0.7570607662200928
+      ]
+    },
+    "triangles": 940294,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "reviewImages": [
+    {
+      "path": "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\work\\repair-expansion-villa1-321f5b5f-front-v2-brick\\repaired-front.png",
+      "sha256": "549890c25995e753c59e6151cfc0ca2a9eb0ed4cacc3b858b28c64370327e5ca",
+      "bytes": 235439
+    },
+    {
+      "path": "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\work\\repair-expansion-villa1-321f5b5f-front-v2-brick\\repaired-right.png",
+      "sha256": "7c1b4f3e0d96315745a248dc4c1983577924600f158806324d0fad7772514045",
+      "bytes": 212213
+    },
+    {
+      "path": "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\work\\repair-expansion-villa1-321f5b5f-front-v2-brick\\repaired-back.png",
+      "sha256": "665b00446e21a8e2c787038b052d9265401d6ae73e024b328bdb997a886e2001",
+      "bytes": 230348
+    },
+    {
+      "path": "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\work\\repair-expansion-villa1-321f5b5f-front-v2-brick\\repaired-left.png",
+      "sha256": "0c90c87ea0b8122c2af4650ebc53495fd4699213e83b7282218aa22e24657baa",
+      "bytes": 210275
+    },
+    {
+      "path": "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\work\\repair-expansion-villa1-321f5b5f-front-v2-brick\\repaired-iso.png",
+      "sha256": "91f3cc185118fafb1fa82667c1a89ea9ea083e674fae5b81715dbe34c2b50929",
+      "bytes": 313217
+    }
+  ],
+  "processingTool": {
+    "path": "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\f21173ee639bce54c9c7094ef6121aa6aea7401fc45edfff9d221c65a107ae79-repair_bounded_source_surface.py",
+    "sha256": "f21173ee639bce54c9c7094ef6121aa6aea7401fc45edfff9d221c65a107ae79",
+    "bytes": 13325
+  },
+  "completedAt": "2026-10-23T23:57:51.046351+00:00"
+}

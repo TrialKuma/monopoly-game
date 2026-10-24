@@ -1,0 +1,258 @@
+{
+  "status": "exported_pending_visual_review",
+  "createdAt": "2026-10-23T05:21:48.839464+00:00",
+  "region": "alpine",
+  "asset": "villa_2",
+  "source": {
+    "rawGLB": {
+      "path": "H:\\代码项目\\monopoly\\art\\themed-city-kit\\source\\alpine-house-mv-v01-pixal-mv-1024-9247.glb",
+      "sha256": "b31e50610cef3c2a1d3c581cbf380fcbb5538a6aef9307fe122c2cc98e590db0",
+      "bytes": 46466188
+    }
+  },
+  "inferenceReport": {
+    "path": "H:\\代码项目\\monopoly\\art\\themed-city-kit\\reports\\alpine-house-mv-v01\\alpine-house-mv-v01-pixal-mv-1024-9247.json",
+    "sha256": "576966385868562bc2e61ce0139621955f270bce7ea42fb926029fce182a7701",
+    "bytes": 7357
+  },
+  "reference": {
+    "path": "H:\\代码项目\\monopoly\\art\\themed-city-kit\\inputs\\alpine-house-v01\\transforms.json",
+    "sha256": "05bd0d8984ddd6cb3e1e7e2e50a58bb63939829b3cd3dfcf68c1fe0f2c33f8ec",
+    "bytes": 4140
+  },
+  "processingTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\1fa338f2127b3b2d6ed0fd78396104405ba94dac3711b5654fed3b8553dd4fcd-process_lod.py",
+    "sha256": "1fa338f2127b3b2d6ed0fd78396104405ba94dac3711b5654fed3b8553dd4fcd",
+    "bytes": 15446
+  },
+  "assumedCameras": true,
+  "cameraCalibration": "assumed_standard_orbit_not_measured",
+  "nativePipeline": "Pixal3DMVImageTo3DPipeline.run_mv",
+  "nativeResolution": 1024,
+  "seed": 9247,
+  "geometryOrigin": "Only the actual neural source reduced and rebaked; no authored substitute geometry or manually constructed surfaces",
+  "orientation": {
+    "up": "Y",
+    "front": "+Z",
+    "groundY": 0,
+    "maxEdge": 1
+  },
+  "requestedTriangles": 30000,
+  "limitations": [
+    "Assumed camera reference reconstruction, not exact measured architecture",
+    "Final candidate requires actual rendered visual approval"
+  ],
+  "animation": null,
+  "processingComplete": true,
+  "derivation": {
+    "rawTriangles": 992518,
+    "weldedTriangles": 982579,
+    "remeshedTriangles": 2915072,
+    "voxelSize": 0.003,
+    "finalTriangles": 29978,
+    "atlasArea": 0.4456734567182774,
+    "singleReductionPass": true,
+    "inheritedUVRemovedBeforeReduction": true,
+    "sourceMaterialsUntouched": true
+  },
+  "bake": {
+    "hitCoverageAreaWeighted": 0.9995632061394373,
+    "cageExtrusion": 0.02,
+    "maxRayDistance": 0.06,
+    "maps": [
+      {
+        "role": "base",
+        "size": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "role": "orm",
+        "size": [
+          512,
+          512
+        ]
+      },
+      {
+        "role": "normal",
+        "size": [
+          1024,
+          1024
+        ]
+      }
+    ],
+    "method": "Selected-to-active CPU bake from original neural source onto a source-derived voxel surface reduced without inherited UV constraints; no authored substitute building"
+  },
+  "quantization": {
+    "source": "H:\\代码项目\\monopoly\\art\\full-ai-city\\candidates\\alpine\\villa_2.glb",
+    "output": "H:\\代码项目\\monopoly\\art\\full-ai-city\\candidates\\alpine\\villa_2.glb",
+    "sourceBytes": 2080080,
+    "outputBytes": 1572044,
+    "sourceSha256": "a8f7cedc10b2b7ba3d01e3b6e1d61d1b0d06c84184b443ee8e0135a48e8f499b",
+    "outputSha256": "e1e36d5658b158e22f849c9623f0f580a2219d31a33720163b6f4d3a8b4009a5",
+    "positionFaceAndTextureBytesUnchanged": true,
+    "attributes": [
+      {
+        "accessor": 1,
+        "semantic": "NORMAL",
+        "count": 42349,
+        "maximumAngularErrorDegrees": 0.37484986003072857
+      },
+      {
+        "accessor": 2,
+        "semantic": "TEXCOORD_0",
+        "count": 42349,
+        "maximumUVError": 7.6293463272814055e-06,
+        "maximumTexelErrorAt1024": 0.007812450639136159
+      }
+    ]
+  },
+  "processedCandidate": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\candidates\\alpine\\villa_2.glb",
+    "sha256": "e1e36d5658b158e22f849c9623f0f580a2219d31a33720163b6f4d3a8b4009a5",
+    "bytes": 1572044
+  },
+  "glbValidation": {
+    "version": 2,
+    "triangles": 29978,
+    "meshes": 1,
+    "materials": 1,
+    "images": 3,
+    "all_primitives_have_uv": true,
+    "animations": [],
+    "all_images_embedded": true,
+    "external_buffers": []
+  },
+  "triangles": 29978,
+  "renderedCandidate": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\alpine\\villa_2\\lod-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\alpine\\villa_2\\lod-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\alpine\\villa_2\\lod-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\alpine\\villa_2\\lod-left.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\alpine\\villa_2\\lod-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.4812021553516388,
+        -0.32098129391670227,
+        -0.0010713781230151653
+      ],
+      "max": [
+        0.4828445315361023,
+        0.32079246640205383,
+        0.9998262524604797
+      ]
+    },
+    "triangles": 29978,
+    "textureSizes": [
+      {
+        "name": "alpine__villa_2__base",
+        "size": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "name": "alpine__villa_2__normal",
+        "size": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "name": "alpine__villa_2__orm",
+        "size": [
+          512,
+          512
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "renderedSource": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\alpine\\villa_2\\raw-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\alpine\\villa_2\\raw-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.4823833107948303,
+        -0.32117053866386414,
+        0.0
+      ],
+      "max": [
+        0.4823833107948303,
+        0.32117053866386414,
+        1.0
+      ]
+    },
+    "triangles": 992518,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "bounds": {
+    "min": [
+      -0.4812021553516388,
+      -0.0010713781230151653,
+      -0.32079246640205383
+    ],
+    "max": [
+      0.4828445315361023,
+      0.9998262524604797,
+      0.32098129391670227
+    ],
+    "coordinateSystem": "GLTF Y-up; +Z front"
+  },
+  "textureSizes": [
+    {
+      "name": "alpine__villa_2__base",
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "name": "alpine__villa_2__normal",
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "name": "alpine__villa_2__orm",
+      "size": [
+        512,
+        512
+      ]
+    }
+  ],
+  "rawSourceUnchanged": true,
+  "completedAt": "2026-10-23T05:23:17.384205+00:00",
+  "reviewSheet": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\alpine\\villa_2\\review-sheet.jpg",
+    "sha256": "1e4dfa31db1f10c7cc4499cbce129676ed8f8e8a79625e780d068fe4339c828d",
+    "bytes": 354802,
+    "content": "Unmodified CPU render images composed with labels for visual comparison only"
+  }
+}

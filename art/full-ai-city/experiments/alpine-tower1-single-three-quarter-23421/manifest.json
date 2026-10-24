@@ -1,0 +1,126 @@
+{
+  "status": "prepared_not_generated",
+  "createdAt": "2026-10-23T19:42:57.427839+00:00",
+  "experimentOnly": true,
+  "formal147MultiviewRequirementUnchanged": true,
+  "assetId": "alpine-tower1-single-three-quarter",
+  "baseline": {
+    "rawGLB": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\alpine--tower_1-a003-pixal-mv-1024-23421.glb",
+      "sha256": "2a8658414e5e379410bf4871708d975466678f4c2db756eb0701d9f529365f30",
+      "bytes": 41505644
+    },
+    "inferenceReport": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\alpine--tower_1-a003\\alpine--tower_1-a003-pixal-mv-1024-23421.json",
+      "sha256": "a157620b57ef9831004539bcff1462499a1e45cc54e90c8b893588a860f698de",
+      "bytes": 8808
+    },
+    "inputManifest": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\inputs\\alpine\\tower_1\\b80a19ec1ce6c82b\\transforms.json",
+      "sha256": "c2a01a3b0f9e792ea7afb77232effef64cfbcbe3598fb97a9df4869335d54409",
+      "bytes": 5680
+    },
+    "front": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\inputs\\alpine\\tower_1\\b80a19ec1ce6c82b\\view00_azim000.png",
+      "sha256": "5c68bf9ee4c66c58543b17400d9b6a7d8e2b77413c4655aafd25c3fd46ad7287",
+      "bytes": 547616
+    },
+    "reference": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\references\\alpine\\tower_1.png",
+      "sha256": "b80a19ec1ce6c82bfa1760c85544f1db372f3cbfbf24823e702912f6802dc587",
+      "bytes": 1724082
+    },
+    "sourceDiagnosis": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reviews-rejected\\alpine\\tower_1\\0bc46d6465a78e52\\raw-1m\\diagnosis.json",
+      "sha256": "456d75c00e4117cf888393d6b9e73e2334d24094092018879fefa47a377ce496",
+      "bytes": 3606
+    },
+    "reportedProcessSeconds": 246.66,
+    "peakAllocatedGiB": 16.365
+  },
+  "singleInput": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\alpine-tower1-single-three-quarter-23421\\inputs\\single.png",
+    "sha256": "7db3804f4e5c8ff3f99b44acea0714b700cfd24df34119cd7948c742aa68660e",
+    "bytes": 1664190
+  },
+  "reviewedInput": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\alpine-tower1-single-three-quarter-23421\\reference.png",
+    "sha256": "7db3804f4e5c8ff3f99b44acea0714b700cfd24df34119cd7948c742aa68660e",
+    "bytes": 1664190
+  },
+  "frozenReference": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\alpine-tower1-single-three-quarter-23421\\inputs\\reference-triptych.png",
+    "sha256": "b80a19ec1ce6c82bfa1760c85544f1db372f3cbfbf24823e702912f6802dc587",
+    "bytes": 1724082
+  },
+  "sameSettings": {
+    "seed": 23421,
+    "shapeResolution": 1024,
+    "samplerSteps": {
+      "ss": 12,
+      "shape": 12,
+      "tex": 12
+    },
+    "rawTextureSize": 4096,
+    "nativeRawTriangleTarget": 1000000,
+    "lowVRAM": true,
+    "manualHorizontalFovRadians": 0.3490658503988659,
+    "inputPixelsExactlySameFront": false,
+    "nativeCheckpointDtypesPreserved": true,
+    "streamingAndSingleUseLifecycle": true,
+    "reviewedSingleInputPixelsUnchanged": true
+  },
+  "differentSettings": {
+    "conditioning": "Official single pipeline.run with one separately generated front-right view versus preserved native run_mv baseline.",
+    "singlePipelineConfig": {
+      "path": "C:\\Users\\A\\.codex\\worktrees\\0b69\\厂长\\grande-art-lab\\source\\experimental\\models\\Pixal3D\\pipeline.json",
+      "sha256": "1647217de06e32477702d14895e826fea73497d94537b809a53637f13482a237",
+      "bytes": 4068
+    },
+    "multiviewPipelineConfig": {
+      "path": "C:\\Users\\A\\.codex\\worktrees\\0b69\\厂长\\grande-art-lab\\source\\experimental\\models\\Pixal3D\\pipeline_mv.json",
+      "sha256": "3bd8f005301423604aafbfab126639c675d7dc6968b8113271433f6593901715",
+      "bytes": 6036
+    },
+    "weights": "Single and MV checkpoints differ; equal integer seed does not imply an equivalent random process.",
+    "preprocessing": "Official single preprocessing is unchanged. This new reference differs in viewpoint and generated design details; it is not a controlled identical-input comparison.",
+    "camera": "Manual20-degree FOV retained as an experimental assumption; the generated view has no measured camera calibration."
+  },
+  "evaluation": [
+    "Original four-side geometry completeness with identical normalized framing",
+    "Front design agreement",
+    "Same mobile triangle/texture budget and postprocess comparison",
+    "Total generation and downstream processing wall time"
+  ],
+  "timingPolicy": {
+    "generation": "Separate process bootstrap/loading, native stage telemetry and4096 export; report total run_part wall time. Resource waits are separate attempts and excluded from inference comparison.",
+    "baseline": "Use existing MV stage log; disclose any prior-source export replay or CPU load differences rather than treating total time as controlled hardware benchmark.",
+    "postprocess": "Record CPU derivation, UV/field replay, render/review time separately. Do not compare only the fastest successful stage."
+  },
+  "limitations": [
+    "One paired sample cannot prove overall single-view or multiview superiority.",
+    "Unseen single-view sides are inferred and may differ from the design.",
+    "This output is excluded from canonical candidates, approvals and release bundles.",
+    "The newly generated three-quarter image changes both viewpoint and some design details. The previous single-front visual rejection remains unchanged."
+  ],
+  "command": [
+    "C:\\Users\\A\\.codex\\worktrees\\0b69\\厂长\\grande-art-lab\\source\\experimental\\pixal-env\\Scripts\\python.exe",
+    "-B",
+    "-u",
+    "H:\\代码项目\\monopoly\\art\\full-ai-city\\tools\\run_single_front_experiment.py",
+    "--run",
+    "--experiment-dir",
+    "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\alpine-tower1-single-three-quarter-23421",
+    "--single-input",
+    "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\alpine-tower1-single-three-quarter-23421\\reference.png",
+    "--input-sha256",
+    "7db3804f4e5c8ff3f99b44acea0714b700cfd24df34119cd7948c742aa68660e",
+    "--attempt",
+    "1"
+  ],
+  "referenceGeneration": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\alpine-tower1-single-three-quarter-23421\\reference.generation.json",
+    "sha256": "83eb690a8a5aa9b82cd77f493d5d5ca1bbd9ed63f0c6b5594588566f897b6237",
+    "bytes": 2348
+  }
+}

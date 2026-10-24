@@ -1,0 +1,292 @@
+{
+  "status": "generated_unrigged_part_candidate",
+  "started_utc": "2026-10-23T23:19:24.057481+00:00",
+  "generation_started": true,
+  "local_inference_only": true,
+  "asset_id": "compact--shop_3-a003",
+  "weights": {
+    "ready": true,
+    "models": [
+      {
+        "name": "sparse_structure_decoder",
+        "checkpoint": "C:\\Users\\A\\.codex\\worktrees\\0b69\\厂长\\grande-art-lab\\source\\experimental\\models\\Pixal3D\\ckpts\\ss_dec_conv3d_16l8_fp16.safetensors",
+        "bytes": 147591972,
+        "ready": true
+      },
+      {
+        "name": "sparse_structure_flow_model",
+        "checkpoint": "C:\\Users\\A\\.codex\\worktrees\\0b69\\厂长\\grande-art-lab\\source\\experimental\\models\\Pixal3D\\ckpts\\ss_flow_img_dit_1_3B_64_bf16_mv.safetensors",
+        "bytes": 5359822584,
+        "ready": true
+      },
+      {
+        "name": "shape_slat_decoder",
+        "checkpoint": "C:\\Users\\A\\.codex\\worktrees\\0b69\\厂长\\grande-art-lab\\source\\experimental\\models\\Pixal3D\\ckpts\\shape_dec_next_dc_f16c32_fp16.safetensors",
+        "bytes": 948490494,
+        "ready": true
+      },
+      {
+        "name": "shape_slat_flow_model_512",
+        "checkpoint": "C:\\Users\\A\\.codex\\worktrees\\0b69\\厂长\\grande-art-lab\\source\\experimental\\models\\Pixal3D\\ckpts\\slat_flow_img2shape_dit_1_3B_512_bf16_mv.safetensors",
+        "bytes": 5546764048,
+        "ready": true
+      },
+      {
+        "name": "shape_slat_flow_model_1024",
+        "checkpoint": "C:\\Users\\A\\.codex\\worktrees\\0b69\\厂长\\grande-art-lab\\source\\experimental\\models\\Pixal3D\\ckpts\\slat_flow_img2shape_dit_1_3B_1024_bf16_mv.safetensors",
+        "bytes": 5546764048,
+        "ready": true
+      },
+      {
+        "name": "tex_slat_decoder",
+        "checkpoint": "C:\\Users\\A\\.codex\\worktrees\\0b69\\厂长\\grande-art-lab\\source\\experimental\\models\\Pixal3D\\ckpts\\tex_dec_next_dc_f16c32_fp16.safetensors",
+        "bytes": 948458812,
+        "ready": true
+      },
+      {
+        "name": "tex_slat_flow_model_1024",
+        "checkpoint": "C:\\Users\\A\\.codex\\worktrees\\0b69\\厂长\\grande-art-lab\\source\\experimental\\models\\Pixal3D\\ckpts\\slat_flow_imgshape2tex_dit_1_3B_1024_bf16_mv.safetensors",
+        "bytes": 5546960656,
+        "ready": true
+      }
+    ],
+    "config": "C:\\Users\\A\\.codex\\worktrees\\0b69\\厂长\\grande-art-lab\\source\\experimental\\models\\Pixal3D\\pipeline_mv.json",
+    "config_sha256": "3bd8f005301423604aafbfab126639c675d7dc6968b8113271433f6593901715"
+  },
+  "resources_before": {
+    "gpu": "NVIDIA GeForce RTX 5070 Ti",
+    "total_physical_vram_gib": 15.9208984375,
+    "free_physical_vram_gib": 15.3076171875,
+    "gpu_utilization_percent": 0,
+    "total_ram_gib": 31.152122497558594,
+    "available_ram_gib": 23.063030242919922
+  },
+  "output": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\compact--shop_3-a003-pixal-mv-1024-29477.glb",
+  "input": "H:\\代码项目\\monopoly\\art\\full-ai-city\\inputs\\compact\\shop_3\\5bb53796619543bb\\transforms.json",
+  "input_sha256": "7e1493d4e23857dc33edeee2b087cbc837c7967e38b66e49e4fc8a49d5715746",
+  "input_views": [
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\inputs\\compact\\shop_3\\5bb53796619543bb\\view00_azim000.png",
+      "sha256": "12c7a8e2edc56c7232b8f71bec37b2755450eb5ca1ab42f99e9cc9ad56723c8a",
+      "size": [
+        760,
+        760
+      ],
+      "alpha_bbox": [
+        47,
+        32,
+        690,
+        715
+      ],
+      "camera_to_world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          -1.0,
+          -3.1192049980163574
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\inputs\\compact\\shop_3\\5bb53796619543bb\\view01_azim090.png",
+      "sha256": "835d5dbb1fd9336adbb54a9daba64b55ad31efd9b0039314f27f8b30f66056f9",
+      "size": [
+        760,
+        760
+      ],
+      "alpha_bbox": [
+        158,
+        33,
+        595,
+        730
+      ],
+      "camera_to_world": [
+        [
+          0.0,
+          0.0,
+          1.0,
+          3.1192049980163574
+        ],
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\inputs\\compact\\shop_3\\5bb53796619543bb\\view02_azim180.png",
+      "sha256": "c6545c8e0daf29948cf3a5c10b6fc65f83da1d849e175e3afb7d4c54aab7b610",
+      "size": [
+        760,
+        760
+      ],
+      "alpha_bbox": [
+        77,
+        33,
+        707,
+        716
+      ],
+      "camera_to_world": [
+        [
+          -1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          3.1192049980163574
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    }
+  ],
+  "assumed_cameras": true,
+  "camera_calibration": "assumed_standard_orbit_not_measured",
+  "source_board": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\inputs\\compact\\shop_3\\5bb53796619543bb\\source-triptych.png",
+    "sha256": "5bb53796619543bb4cd1f1ae0ead93bf3aeb8d1c0483aed810733ced2430edec",
+    "bytes": 1767418
+  },
+  "view_count": 3,
+  "camera_angle_x": 0.3490658503988659,
+  "mesh_scale": 1.0,
+  "native_entrypoint": "inference_mv.py:run_inference / Pixal3DMVImageTo3DPipeline.run_mv",
+  "resolution": 1024,
+  "seed": 29477,
+  "low_vram": true,
+  "strict_naf": true,
+  "texture_size": 4096,
+  "sampler_steps": {
+    "ss": 12,
+    "shape": 12,
+    "tex": 12
+  },
+  "native_checkpoint_dtypes_preserved": true,
+  "pipeline_config": "pipeline_mv.json",
+  "multiview_fusion": "average",
+  "shared_files_write_protected": true,
+  "cache_directory": "H:\\代码项目\\monopoly\\art\\full-ai-city\\cache",
+  "runner_sha256": "fc67056fffefc4d1cba774689d29317ae5f57bfea27ab342791bf1be58444f7e",
+  "runner_source_snapshot": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\compact--shop_3-a003\\runner-source.py",
+  "post_projection_allocator_cleanup": "Release only unused CUDA cached blocks after complete native conditioner return",
+  "projection_cache_adapter_sha256": "aabecb5acc98a013068a5891226fe1034f764585383290c6917cce230c203bcb",
+  "lifetime_adapter_sha256": "a815f73fbb24f0e7e4eb171ffa0f40472ef30346a109410399a2f7e404db47d7",
+  "gpu_lock": {
+    "status": "released",
+    "pid": 14088,
+    "host": "NeoRic",
+    "label": "monopoly-native-multiview-compact--shop_3-a003",
+    "acquired_utc": "2026-10-23T23:19:24.121067+00:00",
+    "lock_path": "C:\\Users\\A\\.codex\\shared-resource-locks\\pixal-gpu0.lock",
+    "token": "fe174b7f4e014aa594c9bc02837b8f83",
+    "metadata_is_advisory": true
+  },
+  "memory_reservation_admission": {
+    "fineVoxelWorkers": [],
+    "checkedAt": "2026-10-23T23:19:24.150094+00:00",
+    "transitionScanOnly": true,
+    "mutualExclusion": "shared operating-system GPU byte lock"
+  },
+  "memory_reservation_tool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\705848501583a3e6e40072356e3423c4d9c9ad763e84e0f3fa5c1c9ba85b47a8-native_memory_reservation.py",
+    "sha256": "705848501583a3e6e40072356e3423c4d9c9ad763e84e0f3fa5c1c9ba85b47a8"
+  },
+  "torch": "2.10.0+cu130",
+  "natten": "0.21.6",
+  "cuda": "13.0",
+  "cuda_free_gib": 14.6845703125,
+  "cuda_total_gib": 15.89398193359375,
+  "prior_source_export_replay": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\uv-replays\\far-nativeUV-harbor--hotel_2-b236c0831fcf6e96\\receipt.json",
+    "sha256": "c87011501bb454110c5777b0f9dc2f887c56cd0103f2b2192691d5de83351cdb",
+    "bytes": 3988
+  },
+  "prior_source_export_replays": [
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\compact-villa3-closed74-45k\\receipt.json",
+      "sha256": "90e3a12536ce02c3dd69740a138631019651e0189ee283d11693315c48764e06",
+      "bytes": 12980
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\uv-replays\\far-nativeUV-harbor--hotel_2-b236c0831fcf6e96\\receipt.json",
+      "sha256": "c87011501bb454110c5777b0f9dc2f887c56cd0103f2b2192691d5de83351cdb",
+      "bytes": 3988
+    }
+  ],
+  "prior_export_batch": {
+    "maximumJobs": 3,
+    "softSecondsLimit": 90,
+    "elapsedSeconds": 39.922,
+    "neuralModelSettingsChanged": false
+  },
+  "native_mobile_request": {
+    "status": "capture_enabled",
+    "captureOnly": true,
+    "minDiskGiB": 12,
+    "purpose": "Freeze original per-inference neural geometry and material field for later mobile export without another neural inference. No automatic approval or publication.",
+    "jobId": "compact--shop_3-a003",
+    "policySha256": "7e58ddb0dbc94f1787443ccde94f97403b61417c87e9e697656e019222483934"
+  },
+  "native_mobile_export_receipt": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\compact--shop_3-a003\\receipt.json",
+    "sha256": "3f58079be1e2de88d867c40442d7848fd61d69141390365d509d2ab869070f99",
+    "bytes": 3687
+  },
+  "output_bytes": 43743024,
+  "output_sha256": "c30c28978b46b124855961a6fc005a0df62412136640f0d34fba06e5dba11240",
+  "input_unchanged": true,
+  "seconds": 307.52,
+  "finished_utc": "2026-10-23T23:24:31.636048+00:00",
+  "peak_allocated_gib": 16.368,
+  "batch_wrapper": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\compact--shop_3-a003\\batch-wrapper-source.py",
+    "sha256": "1424c229b4f5ef8d265c00484bee92acb8340a12a79f499ca13f33d4091b7837"
+  },
+  "pipeline_boundary": "Original native 1024_cascade; no unsupported 512 branch, no persistent model lifetime changes"
+}

@@ -57,10 +57,16 @@ await test('real regional nodes replace every neighbourhood plot and stay separa
   let releases=0;bundle.geometry.addEventListener('dispose',()=>releases++);bundle.material.addEventListener('dispose',()=>releases++);f.api.dispose();assert.equal(releases,0,'cache owns source resources');bundle.geometry.dispose();bundle.material.dispose();
  }
 });
-await test('regional network failure uses existing GLB architecture, and late loads cannot revive removed scenes',async()=>{
+await test('regional network failure never substitutes old architecture, and late loads cannot revive removed scenes',async()=>{
  const bundle=fakeBundle('compact',false),calls=[],f=fixture('compact',12.6,10.8,async file=>{calls.push(file);if(file.startsWith('regions/'))throw new Error('network');return bundle;});await f.api.loading;
- assert.deepEqual(calls,['regions/compact.glb','city-kit.glb']);assert.equal(f.api.getState().regional,false);assert.equal(f.api.getState().buildings,12);f.api.dispose();
+ assert.deepEqual(calls,['regions/compact.glb']);assert.equal(f.api.getState().failed,true);assert.equal(f.api.getState().buildings,0);f.api.dispose();
  let resolve;const late=fixture('classic',12.6,10.8,()=>new Promise(r=>resolve=r));late.api.dispose();resolve(fakeBundle('classic'));await late.api.loading;assert.equal(late.world.children.length,1);assert.equal(late.api.getState().ready,false);
+});
+await test('an incomplete regional bundle cannot silently leave empty house plots',async()=>{
+ const bundle=fakeBundle('classic');bundle.scene.getObjectByName('classic_villa_3').removeFromParent();
+ const f=fixture('classic',12.6,10.8,async()=>bundle);await f.api.loading;
+ assert.equal(f.api.getState().ready,false);assert.equal(f.api.getState().failed,true);assert.equal(f.api.getState().buildings,0);
+ assert(!f.root.getObjectByName('outskirts_regional_neighbourhood'));f.api.dispose();bundle.geometry.dispose();bundle.material.dispose();
 });
 await test('disposal releases owned geometry and materials exactly once while preserving the board',()=>{
  const f=fixture(),resources=new Set();f.root.traverse(n=>{if(n.isMesh){resources.add(n.geometry);resources.add(n.material);}});let releases=0,borrowed=0;resources.forEach(r=>r.addEventListener('dispose',()=>releases++));f.borrowed.geometry.addEventListener('dispose',()=>borrowed++);f.borrowed.material.addEventListener('dispose',()=>borrowed++);f.api.dispose();f.api.dispose();assert.equal(releases,resources.size);assert.equal(borrowed,0);assert.equal(f.world.children.length,1);assert.equal(f.api.tick(.1),false);

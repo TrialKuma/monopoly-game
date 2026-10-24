@@ -1,9 +1,9 @@
 import * as THREE from './assets/vendor/three/three.module.min.js';
 import { mergeGeometries } from './assets/vendor/three/addons/utils/BufferGeometryUtils.js';
-import { createSceneLife } from './scene-life.js?v=20261023-3';
-import { createStreetFoundation } from './scene-streets.js?v=20261023-3';
-import { createRegionalPark } from './scene-regional-parks.js?v=20261023-3';
-import { loadSharedModelAsset, forgetSharedModelAsset, ownsSharedModelResource, disposeSharedModelAssets } from './scene-model-cache.js?v=20261023-3';
+import { createSceneLife } from './scene-life.js?v=20261024-1';
+import { createStreetFoundation } from './scene-streets.js?v=20261024-1';
+import { createRegionalPark } from './scene-regional-parks.js?v=20261024-1';
+import { loadSharedModelAsset, forgetSharedModelAsset, releaseSharedModelAsset, releaseSupersededModelAssets, ownsSharedModelResource, disposeSharedModelAssets } from './scene-model-cache.js?v=20261024-1';
 
 // All route positions, ownership and prices come from the game. This view never
 // changes a rule or finishes an action; its animation is entirely cosmetic.
@@ -20,6 +20,9 @@ const modelPriorities = new Map();
 const bundleRequests = new Map();
 const failedBundles = new Set();
 const modelResources = new Set();
+const modelGeometryRegions = new WeakMap();
+const obsoleteModelGeometry = new Set();
+const installedModelSources = new Map();
 const lotViews = new Map();
 const pawnViews = new Map();
 const stepViews = new Map();
@@ -59,13 +62,8 @@ const CAMERA_LIMITS = { minZoom:.65, maxZoom:2.4, minElevation:.35, maxElevation
 const LANDMARKS = { classic: { 5:'finance', 7:'skyscraper', 14:'onsen' }, compact: { 2:'finance', 11:'onsen' }, expansion: { 7:'skyscraper', 26:'onsen' } };
 const SPECIAL_MODELS = { bank:'vault_bank',construction:'builders_guild',card_draw:'card_pavilion',chance:'chance_wheel',teleport:'teleport_gate',rush:'rush_station',junction:'junction_hub' };
 const ASSET_BUNDLES = [
-  {file:'city-kit.glb',version:'20260911-12',authored:false,pattern:/^(villa_[123]|shop_[123]|hotel_[123]|tower_[123]|plot_0|city_hall|bank|construction|card_station|tree|streetlamp|fountain)$/},
-  {file:'landmarks.glb',version:'20260911-12',authored:true,pattern:/^(skyscraper|finance|onsen)_[123]$/},
-  {file:'specials.glb',version:'20260911-12',authored:true,pattern:/^(civic_hall|vault_bank|builders_guild|card_pavilion|chance_wheel|teleport_gate|rush_station|junction_hub)$/},
-  {file:'life-specials.glb',version:'20260911-12',authored:true,pattern:/^(chance_wheel|builders_guild)$/},
-  {file:'compact-specials.glb',mapId:'compact',version:'20260912-21',authored:true,pattern:/^compact_(civic_hall|vault_bank|builders_guild|card_pavilion|chance_wheel|teleport_gate|rush_station)$/},
-  {file:'expansion-specials.glb',mapId:'expansion',version:'20260912-21',authored:true,pattern:/^expansion_(civic_hall|vault_bank|builders_guild|card_pavilion|chance_wheel|teleport_gate|rush_station)$/},
-  ...['classic','compact','expansion','harbor','alpine'].map(mapId=>({file:`regions/${mapId}.glb`,mapId,version:'20261023-3',authored:true,pattern:new RegExp(`^${mapId}_(?:(?:villa|shop|hotel|tower|skyscraper|finance|onsen)_[123]|civic_hall|vault_bank|builders_guild|card_pavilion|chance_wheel|teleport_gate|rush_station|junction_hub)$`)})),
+  {file:'city-kit.glb',version:'20260911-12',authored:false,pattern:/^(plot_0|tree|streetlamp|fountain)$/},
+  ...['classic','compact','expansion','harbor','alpine'].map(mapId=>({file:`regions/${mapId}.glb`,mapId,version:'20261024-1',authored:true,pattern:new RegExp(`^${mapId}_(?:(?:villa|shop|hotel|tower|skyscraper|finance|onsen)_[123]|civic_hall|vault_bank|builders_guild|card_pavilion|chance_wheel|teleport_gate|rush_station|junction_hub)$`)})),
 ];
 const projection = new THREE.Vector3();
 const raycaster = new THREE.Raycaster();
@@ -394,11 +392,35 @@ function clearMap() {
   travelArrow = null;
   resources.forEach((resource) => resource.dispose?.()); resources.clear(); materials.clear(); pulses.length = 0;
 }
+function retireInactiveModels(activeMap){
+  // Called only after clearMap has detached buildings, weather bindings and
+  // scenic borrowers. Retain common props and the currently selected region.
+  for(const [name,model] of modelLibrary){
+    const region=/^(classic|compact|expansion|harbor|alpine)_/.exec(name)?.[1];
+    if(!region||region===activeMap)continue;
+    model.traverse(node=>{if(node.geometry){if(!ownsSharedModelResource(node.geometry))node.geometry.dispose();modelResources.delete(node.geometry);obsoleteModelGeometry.delete(node.geometry);}});
+    modelLibrary.delete(name);modelPriorities.delete(name);authoredModels.delete(name);assetEnvelopes.delete(name);
+  }
+  // Forced refreshes can leave earlier derived meshes outside modelLibrary
+  // while existing borrowers finish. Retire those generations with their map.
+  for(const geometry of modelResources){
+    const region=modelGeometryRegions.get(geometry);
+    if(region&&region!==activeMap){if(!ownsSharedModelResource(geometry))geometry.dispose();modelResources.delete(geometry);obsoleteModelGeometry.delete(geometry);}
+  }
+  for(const bundle of ASSET_BUNDLES)if(bundle.mapId&&bundle.mapId!==activeMap){
+    installedModelSources.delete(bundle.file);
+    loadedBundles.delete(bundle.file);failedBundles.delete(bundle.file);bundleRequests.delete(bundle.file);
+    releaseSharedModelAsset(bundle.file);
+  }
+  for(const mapId of ['classic','compact','expansion','harbor','alpine'])if(mapId!==activeMap)releaseSharedModelAsset(`regions-far/${mapId}.glb`);
+  if(activeMap!=='harbor')releaseSharedModelAsset('harbor/harbor_lighthouse.glb');
+  if(activeMap!=='alpine')releaseSharedModelAsset('harbor/alpine_windmill.glb');
+}
 function reset() {
   closeInspection();
   cancelAnimationFrame(assetRefreshFrame);assetRefreshFrame=0;sceneryRefreshNeeded=false;
   resetCameraView();cameraView.facingYaw=null;
-  clearMap(); snapshot = null; mapKey = ''; selectedIndex = null;
+  clearMap();retireInactiveModels(null); snapshot = null; mapKey = ''; selectedIndex = null;
   document.body.classList.remove('scene-ready'); api.ready = false;
 }
 function tilePosition(tile) {
@@ -431,6 +453,7 @@ function boundaryEdges(position){
 function boundaryFor(position){return boundaryEdges(position).sort((a,b)=>a.distance-b.distance)[0];}
 function buildMap(data) {
   clearMap();
+  retireInactiveModels(data.mapId);
   const xs = data.board.map((tile) => tile.x), ys = data.board.map((tile) => tile.y);
   boardBounds = { minX: Math.min(...xs), maxX: Math.max(...xs), minY: Math.min(...ys), maxY: Math.max(...ys) };
   boardBounds.cx = (boardBounds.minX + boardBounds.maxX) / 2;
@@ -459,7 +482,7 @@ function buildMap(data) {
   resize();
 }
 function makePark(mapId) {
-  createRegionalPark({THREE,world,boardBounds,mapId,own});
+  createRegionalPark({THREE,world,boardBounds,mapId,own,loadSceneryBundle:loadSharedModelAsset,requestRender:()=>{renderDirty=true;}});
 }
 function numberTexture(number) {
   const canvas = document.createElement('canvas'); canvas.width = 96; canvas.height = 96;
@@ -559,7 +582,7 @@ function cloneModel(source, targetWidth, maxHeight = 2) {
   return object;
 }
 function cloneAuthoredModel(source){
-  // Landmark levels are authored in game-world units. Never fit each level into
+  // Reviewed regional models are packaged in game-world units. Never fit each level into
   // a common height: that would make the final tower shorter and the estate shrink.
   const object=source.clone(true);object.position.set(0,0,0);
   object.traverse((child)=>{if(child.isMesh){child.castShadow=!child.material?.transparent;child.receiveShadow=true;}});
@@ -572,7 +595,7 @@ function resolveAsset(tile,data,level=tile.lot?.level||0){
   // Every occupied parcel and public building uses the selected region's own
   // architecture. Level-zero plots remain playable while the art downloads.
   const desired=tile.lot&&level===0?shared:`${data.mapId}_${shared}`;
-  const key=modelLibrary.has(desired)?desired:modelLibrary.has(shared)?shared:fallback;
+  const key=desired;
   return {family,desired,key,source:modelLibrary.get(key),authored:authoredModels.has(key),level};
 }
 function lotModelRotation(view){return view.mapId==='classic'?(view.d>view.w?Math.PI/2:0):(view.readableRotation??view.boundary.rotation);}
@@ -583,8 +606,8 @@ function createLotModel(tile,data,level,view=null){
     else model=cloneModel(asset.source,tile.lot?.isLarge?1.15:1.055,tile.lot?.theme?.key==='tower'?1.85:1.45);
   }else{
     model=new THREE.Group();
-    if(tile.lot)proceduralBuilding(model,tile.lot.theme?.key||'villa',level);
-    else proceduralSpecial(model,tile.isStart?'city_hall':tile.special?.type||'card_station');
+    if(tile.lot&&level===0)saleSign(model);
+    else model.userData.pendingModel=asset.desired;
   }
   if(view){
     model.userData.cityBaseRotationY=model.rotation.y;
@@ -609,10 +632,12 @@ function calculateEnvelope(source){
   return {bounds,boxes};
 }
 function optimizeModel(source) {
-  // The editable Blender kit contains individual windows, trim and shingles.
-  // Batch those static details by material once, keeping the browser draw count low.
+  // Combine static surfaces once while retaining neural textures and independently
+  // moving components. Runtime copies share these resources across placements.
   const object=source.clone(true);object.position.set(0,0,0);object.updateMatrixWorld(true);
-  const batches=new Map();const result=new THREE.Group();result.name=source.name;
+  const batches=new Map();const result=new THREE.Group();result.name=source.name;result.userData={...source.userData};
+  const region=/^(classic|compact|expansion|harbor|alpine)_/.exec(source.name)?.[1];
+  const remember=geometry=>{modelResources.add(geometry);if(region)modelGeometryRegions.set(geometry,region);};
   const movingRoots=new Set();
   const isMoving=child=>child.name?.startsWith('life_')||Boolean(child.userData?.lifePart);
   object.traverse(child=>{
@@ -620,13 +645,13 @@ function optimizeModel(source) {
     let parent=child.parent;while(parent&&parent!==object){if(isMoving(parent))return;parent=parent.parent;}
     movingRoots.add(child);
     const copy=child.clone(true);child.matrixWorld.decompose(copy.position,copy.quaternion,copy.scale);
-    copy.traverse(part=>{if(part.isMesh){part.castShadow=true;part.receiveShadow=true;modelResources.add(part.geometry);}});
+    copy.traverse(part=>{if(part.isMesh){part.castShadow=true;part.receiveShadow=true;remember(part.geometry);}});
     result.add(copy);
   });
   object.traverse((child)=>{
     if(!child.isMesh)return;
     let parent=child;while(parent&&parent!==object){if(movingRoots.has(parent))return;parent=parent.parent;}
-    if(Array.isArray(child.material)){const copy=child.clone();child.matrixWorld.decompose(copy.position,copy.quaternion,copy.scale);copy.castShadow=true;copy.receiveShadow=true;modelResources.add(copy.geometry);result.add(copy);return;}
+    if(Array.isArray(child.material)){const copy=child.clone();child.matrixWorld.decompose(copy.position,copy.quaternion,copy.scale);copy.castShadow=true;copy.receiveShadow=true;remember(copy.geometry);result.add(copy);return;}
     const key=child.material.uuid;
     if(!batches.has(key))batches.set(key,{material:child.material,geometries:[]});
     const geometry=child.geometry.clone();geometry.applyMatrix4(child.matrixWorld);
@@ -634,8 +659,8 @@ function optimizeModel(source) {
   });
   batches.forEach(({material,geometries})=>{
     const merged=mergeGeometries(geometries,false);
-    if(merged){modelResources.add(merged);const item=new THREE.Mesh(merged,material);item.castShadow=true;item.receiveShadow=true;result.add(item);geometries.forEach((g)=>g.dispose());}
-    else geometries.forEach((g)=>{modelResources.add(g);result.add(new THREE.Mesh(g,material));});
+    if(merged){remember(merged);const item=new THREE.Mesh(merged,material);item.castShadow=true;item.receiveShadow=true;result.add(item);geometries.forEach((g)=>g.dispose());}
+    else geometries.forEach((g)=>{remember(g);result.add(new THREE.Mesh(g,material));});
   });
   return result;
 }
@@ -645,53 +670,6 @@ function saleSign(parent) {
   box(parent,.48,.20,.035,PALETTE.cream,0,.32,.03);
   const coin=mesh(new THREE.CircleGeometry(.062,20),PALETTE.gold,parent,0,.33,.05); coin.castShadow=false;
   for(const x of [-.34,.34]) for(const z of [-.26,.26]) box(parent,.035,.07,.035,'#f3ede0',x,.035,z);
-}
-function proceduralBuilding(parent, theme, level) {
-  if (!level) { saleSign(parent); return; }
-  const height=.27+level*.28, roof=theme==='shop'||theme==='tower'?PALETTE.teal:theme==='hotel'?'#ba806d':PALETTE.roof;
-  const wall=theme==='hotel'?'#e7c1a5':theme==='tower'?'#c5d7d1':PALETTE.cream;
-  const w=theme==='tower'?.65:.86, d=.70;
-  box(parent,w+.10,.065,d+.10,'#ddcfb7');
-  box(parent,w,height,d,wall,0,.065+height/2);
-  for(let floor=0;floor<level;floor++) {
-    const y=.21+floor*.28;
-    for(let col=0;col<3;col++) {
-      box(parent,.12,.13,.015,PALETTE.dark,(col-1)*.23,y,d/2+.012);
-      box(parent,.15,.025,.03,'#f9efd9',(col-1)*.23,y-.078,d/2+.026);
-      box(parent,.015,.13,.13,PALETTE.dark,w/2+.012,y,(col-1)*.21);
-    }
-    box(parent,w+.03,.035,d+.03,'#fbf2df',0,.34+floor*.28);
-  }
-  box(parent,.17,.24,.025,PALETTE.dark,0,.19,d/2+.026);
-  if(theme==='villa'||theme==='hotel') {
-    const roofMesh=mesh(new THREE.CylinderGeometry(.0,.62,.28,4),roof,parent,0,height+.2,0); roofMesh.rotation.y=Math.PI/4; roofMesh.scale.z=.87;
-    box(parent,.09,.23,.1,wall,-.22,height+.25,-.13);
-  } else {
-    box(parent,w+.12,.07,d+.12,roof,0,height+.10);
-    box(parent,w*.7,.10,d*.68,wall,0,height+.18);
-    if(theme==='tower'){box(parent,.20,.28,.25,roof,0,height+.36);cylinder(parent,.014,.30,PALETTE.gold,0,height+.63,0,8);}
-    if(theme==='shop')for(let i=0;i<6;i++)box(parent,.15,.055,.21,i%2?PALETTE.cream:roof,(i-2.5)*.15,.39,d/2+.10);
-  }
-  tree(parent,-.50,-.19,.56);
-}
-function proceduralSpecial(parent, type) {
-  if(type==='city_hall'||type==='bank'){
-    box(parent,.98,.11,.76,PALETTE.cream); box(parent,.80,.42,.60,'#e9dbbb',0,.29);
-    for(let i=0;i<4;i++)cylinder(parent,.048,.40,PALETTE.cream,(i-1.5)*.21,.3,.34,12);
-    const roof=mesh(new THREE.CylinderGeometry(0,.68,.23,4),PALETTE.teal,parent,0,.62,0);roof.rotation.y=Math.PI/4;roof.scale.z=.82;
-    if(type==='city_hall'){cylinder(parent,.015,.35,PALETTE.gold,0,.90,0,8);box(parent,.18,.11,.015,PALETTE.roof,.08,1,0);}
-    else {const coin=mesh(new THREE.CylinderGeometry(.16,.16,.065,24),PALETTE.gold,parent,0,.87,0);coin.rotation.x=Math.PI/2;}
-  } else if(type==='construction') {
-    box(parent,.65,.37,.56,PALETTE.cream);box(parent,.74,.075,.65,PALETTE.gold,0,.42);
-    box(parent,.065,.95,.065,PALETTE.gold,-.37,.5,-.25);box(parent,.9,.055,.055,PALETTE.gold,-.1,.97,-.25);
-    box(parent,.015,.30,.015,PALETTE.dark,.29,.80,-.25);box(parent,.12,.08,.10,PALETTE.gold,.29,.63,-.25);
-  }else{
-    cylinder(parent,.43,.09,PALETTE.cream);cylinder(parent,.35,.065,PALETTE.teal,0,.12);
-    const g=new THREE.Group();parent.add(g);g.position.y=.46;g.rotation.set(-.15,Math.PI/7,-.15);
-    box(g,.38,.52,.09,'#fcf1d6',0,0);box(g,.28,.4,.012,type==='teleport'||type==='junction'?PALETTE.teal:'#bb8f68',0,0,.052);
-    mesh(new THREE.OctahedronGeometry(.105,0),PALETTE.gold,g,0,.04,.075);
-    lamp(parent,-.43,.2);tree(parent,.43,-.23,.61);
-  }
 }
 function updateLot(view,tile,data,initial=false) {
   view.tile=tile;
@@ -708,7 +686,7 @@ function updateLot(view,tile,data,initial=false) {
   if(view.signature!==signature){
     view.building.clear(); view.signature=signature;view.modelName=modelName;
     view.building.add(createLotModel(tile,data,level,view).model);
-    view.label.dataset.modelKey=asset.desired;view.label.dataset.loadedModel=asset.key;
+    view.label.dataset.modelKey=asset.desired;view.label.dataset.loadedModel=asset.source?asset.key:'';
     if(!initial){view.born=performance.now();view.building.scale.y=reducedMotion.matches?1:.78;effect({type:'upgrade',tiles:[tile.index]});}
   }
   if(tile.lot&&level===0&&owner)view.building.visible=false;else view.building.visible=true;
@@ -1052,8 +1030,10 @@ function renderInspectionModel(){
   state.pivot.add(current.model);
   const highest=createLotModel(state.tile,data,state.tile.lot?3:0).model;highest.updateMatrixWorld(true);
   state.bounds=new THREE.Box3().setFromObject(highest);
+  if(state.bounds.isEmpty())state.bounds.set(new THREE.Vector3(-.5,0,-.5),new THREE.Vector3(.5,1,.5));
+  state.dialog.querySelector('.city-model-hint').textContent=current.asset.source?'拖动转一转 · 看看每一面':failedBundles.has(`regions/${state.mapId}.glb`)?'建筑未载入，关闭后重开可重试':'建筑加载中…';
   state.elevation=state.bounds.max.y>2.5?.57:.78;
-  state.dialog.dataset.tileIndex=String(state.tile.index);state.dialog.dataset.modelKey=current.asset.desired;state.dialog.dataset.loadedModel=current.asset.key;state.dialog.dataset.level=String(state.level);
+  state.dialog.dataset.tileIndex=String(state.tile.index);state.dialog.dataset.modelKey=current.asset.desired;state.dialog.dataset.loadedModel=current.asset.source?current.asset.key:'';state.dialog.dataset.level=String(state.level);
   state.dialog.querySelector('.city-model-level-badge').textContent=state.tile.lot?`Lv.${state.level}${state.level===3?' · 满级':''}`:'城市地标';
   state.dialog.querySelectorAll('[data-model-level]').forEach((button)=>{const selected=Number(button.dataset.modelLevel)===state.level;button.classList.toggle('is-active',selected);button.setAttribute('aria-pressed',String(selected));});
   renderInspection();
@@ -1126,15 +1106,26 @@ function installModelBundle(bundle,gltf){
   });
   if(!matched)throw Error(`No compatible models in ${bundle.file}`);
   entries.forEach(({name,model,envelope})=>{
+    modelLibrary.get(name)?.traverse(node=>{if(node.geometry)obsoleteModelGeometry.add(node.geometry);});
     modelLibrary.set(name,model);modelPriorities.set(name,priority);
     if(bundle.authored){authoredModels.add(name);assetEnvelopes.set(name,envelope);}
   });
   loadedBundles.add(bundle.file);failedBundles.delete(bundle.file);
+  installedModelSources.set(bundle.file,gltf);
 }
-function scheduleModelRefresh(bundle){
+function retireReplacedModels(){
+  // This runs after the map and inspection have dropped their previous copies.
+  const retained=new Set();modelLibrary.forEach(model=>model.traverse(node=>{if(node.geometry)retained.add(node.geometry);}));
+  for(const geometry of obsoleteModelGeometry){
+    if(!retained.has(geometry)){if(!ownsSharedModelResource(geometry))geometry.dispose();modelResources.delete(geometry);}
+  }
+  obsoleteModelGeometry.clear();
+  for(const [file,gltf] of installedModelSources)releaseSupersededModelAssets(file,gltf);
+}
+function scheduleModelRefresh(bundle,force=false){
   if(!snapshot&&!inspection)return;
   if(bundle.mapId&&bundle.mapId!==snapshot?.mapId&&bundle.mapId!==inspection?.mapId)return;
-  sceneryRefreshNeeded=sceneryRefreshNeeded||bundle.file==='city-kit.glb';
+  sceneryRefreshNeeded=sceneryRefreshNeeded||bundle.file==='city-kit.glb'||(force&&!!bundle.mapId);
   if(assetRefreshFrame)return;
   assetRefreshFrame=requestAnimationFrame(()=>{
     assetRefreshFrame=0;const rebuildScenery=sceneryRefreshNeeded;sceneryRefreshNeeded=false;
@@ -1146,6 +1137,7 @@ function scheduleModelRefresh(bundle){
       update(snapshot);if(!rebuildScenery)resize();
     }
     if(inspection)renderInspectionModel();
+    if(rebuildScenery)retireReplacedModels();
     window.dispatchEvent(new CustomEvent('city:models-ready',{detail:{count:modelLibrary.size,bundles:[...loadedBundles]}}));
   });
 }
@@ -1159,9 +1151,9 @@ async function loadModelKit(force=false,retryMissing=false){
     if(!force&&(loadedBundles.has(bundle.file)||failedBundles.has(bundle.file)&&!retryMissing))return;
     const request=Promise.resolve()
       .then(()=>loadSharedModelAsset(bundle.file,{version:bundle.version,force}))
-      .then(gltf=>{if(!disposed){try{installModelBundle(bundle,gltf);scheduleModelRefresh(bundle);}catch(error){forgetSharedModelAsset(bundle.file,gltf);throw error;}}})
-      .catch(error=>{if(!disposed){failedBundles.add(bundle.file);console.info(`The fallback city model remains available for ${bundle.file}. Open a building preview to retry.`,error?.message);}})
-      .finally(()=>bundleRequests.delete(bundle.file));
+      .then(gltf=>{if(!disposed&&(!bundle.mapId||bundle.mapId===snapshot?.mapId)){try{installModelBundle(bundle,gltf);scheduleModelRefresh(bundle,force);}catch(error){forgetSharedModelAsset(bundle.file,gltf);throw error;}}})
+      .catch(error=>{if(!disposed&&error?.name!=='AbortError'&&(!bundle.mapId||bundle.mapId===snapshot?.mapId)){failedBundles.add(bundle.file);if(inspection)renderInspectionModel();console.info(`City model ${bundle.file} could not load. Open a building preview to retry.`,error?.message);}})
+      .finally(()=>{if(bundleRequests.get(bundle.file)===request)bundleRequests.delete(bundle.file);});
     bundleRequests.set(bundle.file,request);requests.push(request);
   });
   // Callers may await the batch, but each successful package installs immediately.

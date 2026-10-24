@@ -1,736 +1,1705 @@
 {
+  "schemaVersion": 2,
   "region": "expansion",
-  "reference": "art\\regions\\references\\expansion-core-three-views.png",
+  "coordinateSystem": "glTF Y-up; +Z front",
+  "sourceType": "pixal_native_multiview",
   "assets": [
     {
       "name": "expansion_villa_1",
+      "size": [
+        0.99,
+        0.7473277884721756,
+        0.9742085319757462
+      ],
       "bounds": {
         "min": [
-          -0.46950000524520874,
-          -0.48500001430511475,
-          0.0
+          -0.495,
+          0.0,
+          -0.4871042659878731
         ],
         "max": [
-          0.46950000524520874,
-          0.3995000123977661,
-          0.7425000071525574
+          0.495,
+          0.7473277884721756,
+          0.4871042659878731
         ]
       },
-      "size": [
-        0.9390000104904175,
-        0.8845000267028809,
-        0.7425000071525574
-      ],
-      "triangles": 3000,
+      "triangles": 29999,
       "source": {
-        "kind": "blender_three_view",
-        "reference": "art\\regions\\references\\expansion-core-three-views.png"
+        "sourceType": "pixal_native_multiview",
+        "family": "villa",
+        "level": 1,
+        "sourceFile": "assets/models/regions-ai/full/expansion/villa_1/2da8363994e6fdce.glb",
+        "sourceSha256": "2da8363994e6fdce160d70dca6d27481ab04fe332240e44afe30aa096413c95d",
+        "inferenceReport": "art/full-ai-city/reports/expansion--villa_1-a003/expansion--villa_1-a003-pixal-mv-1024-29476.json",
+        "reference": "art/full-ai-city/inputs/expansion/villa_1/51b6eb08dc09ba7b/reference.json",
+        "rawSourceSha256": "321f5b5ffa98032fea2c417a1490313d9d37ae5655f752c569ca9aacece59796",
+        "referenceViews": [
+          {
+            "view": "front",
+            "path": "art/full-ai-city/inputs/expansion/villa_1/51b6eb08dc09ba7b/view00_azim000.png",
+            "sha256": "d5953bc20fecb46e345459494296bf8e7d0f212c20bf260b54cf6b994ef1ae11"
+          },
+          {
+            "view": "right",
+            "path": "art/full-ai-city/inputs/expansion/villa_1/51b6eb08dc09ba7b/view01_azim090.png",
+            "sha256": "7f8fb9437c07c85bd34ff5fb373ccb0a55b0b071409f99f591a1e64247781f26"
+          },
+          {
+            "view": "back",
+            "path": "art/full-ai-city/inputs/expansion/villa_1/51b6eb08dc09ba7b/view02_azim180.png",
+            "sha256": "421eb817405aff8855c2a01b3d1f8e7ea45cf02fcfc608d7055057f80bf06c00"
+          }
+        ],
+        "normalisationScale": 0.99,
+        "placementReview": {
+          "independentParcelScale": 0.99,
+          "scale": 0.99,
+          "reason": "independent_uniform_parcel_fit",
+          "relativeToIndependentFit": 1.0,
+          "sharedCameraReviewRequired": true
+        },
+        "reviewStatus": "approved",
+        "triangleBudget": 30000
       }
     },
     {
       "name": "expansion_villa_2",
+      "size": [
+        0.99,
+        1.1051698195798318,
+        0.9882692314607148
+      ],
       "bounds": {
         "min": [
-          -0.5125000476837158,
-          -0.51126629114151,
-          0.0
+          -0.495,
+          0.0,
+          -0.4941346157303574
         ],
         "max": [
-          0.5125000476837158,
-          0.51126629114151,
-          1.1441013813018799
+          0.49499999999999994,
+          1.1051698195798318,
+          0.49413461573035744
         ]
       },
-      "size": [
-        1.0250000953674316,
-        1.02253258228302,
-        1.1441013813018799
-      ],
-      "triangles": 179871,
+      "triangles": 29998,
       "source": {
-        "kind": "reviewed_pixal_multiview",
-        "reference": "art/regions/references/expansion-core-three-views.png",
-        "sourceFile": "assets/models/regions-ai/expansion_house.glb",
-        "sourceSha256": "182f4eb522f183f2a2dea13a7e0133dddf0bafcc4026409310feceb361b9c561",
-        "budgetException": "Reviewed AI mesh retained without decimation; use at limited villa_2 locations and verify mobile frame time.",
-        "normalisationScale": 0.38136713248066667,
-        "aiHouseStatus": "approved_exact_source"
+        "sourceType": "pixal_native_multiview",
+        "family": "villa",
+        "level": 2,
+        "sourceFile": "assets/models/regions-ai/full/expansion/villa_2.glb",
+        "sourceSha256": "96a7d18457d9add7f5f40b5a421fc639fefe0bfdc35c3587f06df42c189a9749",
+        "inferenceReport": "art/themed-city-kit/reports/expansion-house-mv-v01/expansion-house-mv-v01-pixal-mv-1024-9247.json",
+        "reference": "art/themed-city-kit/inputs/expansion-house-v01/transforms.json",
+        "rawSourceSha256": "b5b9c2d10ba7063b42c24fe7e643c080f24347251a538f4b99730466bec44f5c",
+        "referenceViews": [
+          {
+            "view": "front",
+            "path": "art/themed-city-kit/inputs/expansion-house-v01/view00_azim000.png",
+            "sha256": "9b44bd56018fa62c694dfc762c40bb732bc0a6af37fd1442b64dcbfbfad60d25"
+          },
+          {
+            "view": "right",
+            "path": "art/themed-city-kit/inputs/expansion-house-v01/view01_azim090.png",
+            "sha256": "d4428caa4b47798f1bece13328340f968fd7289b967e87fd5f56b9154f36fba6"
+          },
+          {
+            "view": "back",
+            "path": "art/themed-city-kit/inputs/expansion-house-v01/view02_azim180.png",
+            "sha256": "74be5b7e20bb544819e3276197d397894e75f6974dfba3745ff3cf83784379b5"
+          }
+        ],
+        "normalisationScale": 1.105978961325131,
+        "placementReview": {
+          "independentParcelScale": 1.105978961325131,
+          "scale": 1.105978961325131,
+          "reason": "independent_uniform_parcel_fit",
+          "relativeToIndependentFit": 1.0,
+          "sharedCameraReviewRequired": true
+        },
+        "reviewStatus": "approved",
+        "triangleBudget": 30000
       }
     },
     {
       "name": "expansion_villa_3",
+      "size": [
+        0.99,
+        1.4098639660657044,
+        0.9577356487000466
+      ],
       "bounds": {
         "min": [
-          -0.46950000524520874,
-          -0.48500001430511475,
-          0.0
+          -0.495,
+          0.0,
+          -0.4788678243500233
         ],
         "max": [
-          0.46950000524520874,
-          0.4699999988079071,
-          1.5824999809265137
+          0.495,
+          1.4098639660657044,
+          0.4788678243500233
         ]
       },
-      "size": [
-        0.9390000104904175,
-        0.9550000131130219,
-        1.5824999809265137
-      ],
-      "triangles": 8744,
+      "triangles": 29993,
       "source": {
-        "kind": "blender_three_view",
-        "reference": "art\\regions\\references\\expansion-core-three-views.png"
+        "sourceType": "pixal_native_multiview",
+        "family": "villa",
+        "level": 3,
+        "sourceFile": "assets/models/regions-ai/full/expansion/villa_3/ec9f12bcabf7f525.glb",
+        "sourceSha256": "ec9f12bcabf7f525784c93f8c9bd9254908210e3651c3c9eb4c228a8da94349a",
+        "inferenceReport": "art/full-ai-city/reports/expansion--villa_3-a013/expansion--villa_3-a013-pixal-mv-1024-29499.json",
+        "reference": "art/full-ai-city/inputs/expansion/villa_3/cf4c87ccb4e2b0d7/reference.json",
+        "rawSourceSha256": "4a53d8ee31889765d686e88d8a9176aacc165739d943c71b360548e4e0aae270",
+        "referenceViews": [
+          {
+            "view": "front",
+            "path": "art/full-ai-city/inputs/expansion/villa_3/cf4c87ccb4e2b0d7/view00_azim000.png",
+            "sha256": "20c14ab37836034b5c2899ed17cf86a102e5f9878c71a6a03f1f414fbcf78f77"
+          },
+          {
+            "view": "right",
+            "path": "art/full-ai-city/inputs/expansion/villa_3/cf4c87ccb4e2b0d7/view01_azim090.png",
+            "sha256": "64be6d2396a89a8c65aaba96d31280157d47d27cb00d48554b5ccbefee12f5c8"
+          },
+          {
+            "view": "back",
+            "path": "art/full-ai-city/inputs/expansion/villa_3/cf4c87ccb4e2b0d7/view02_azim180.png",
+            "sha256": "f776e5be0c6450482e37640e18a7f3e9a47110e717c2a696d9daecc2968fa5ae"
+          }
+        ],
+        "normalisationScale": 1.4098639660657044,
+        "placementReview": {
+          "independentParcelScale": 1.4098639660657044,
+          "scale": 1.4098639660657044,
+          "reason": "independent_uniform_parcel_fit",
+          "relativeToIndependentFit": 1.0,
+          "sharedCameraReviewRequired": true
+        },
+        "reviewStatus": "approved",
+        "triangleBudget": 30000
       }
     },
     {
       "name": "expansion_shop_1",
+      "size": [
+        0.99,
+        0.7562971544265747,
+        0.8791368287801743
+      ],
       "bounds": {
         "min": [
-          -0.46950000524520874,
-          -0.5264999866485596,
-          0.0
+          -0.495,
+          0.0,
+          -0.43956841439008715
         ],
         "max": [
-          0.46950000524520874,
-          0.3995000123977661,
-          0.6650000214576721
+          0.495,
+          0.7562971544265747,
+          0.43956841439008715
         ]
       },
-      "size": [
-        0.9390000104904175,
-        0.9259999990463257,
-        0.6650000214576721
-      ],
-      "triangles": 3112,
+      "triangles": 29997,
       "source": {
-        "kind": "blender_three_view",
-        "reference": "art\\regions\\references\\expansion-core-three-views.png"
+        "sourceType": "pixal_native_multiview",
+        "family": "shop",
+        "level": 1,
+        "sourceFile": "assets/models/regions-ai/full/expansion/shop_1/77afab81a31b01fe.glb",
+        "sourceSha256": "77afab81a31b01fe5b4b09353f5610e40c36128d7f76d74719538c2c70614b39",
+        "inferenceReport": "art/full-ai-city/reports/expansion--shop_1-a013/expansion--shop_1-a013-pixal-mv-1024-29491.json",
+        "reference": "art/full-ai-city/inputs/expansion/shop_1/60e603c05a5d0f2d/reference.json",
+        "rawSourceSha256": "0228de92eca515e9bd6741eb7b07f769dd8903ee81c6746843a06c80e27e7a47",
+        "referenceViews": [
+          {
+            "view": "front",
+            "path": "art/full-ai-city/inputs/expansion/shop_1/60e603c05a5d0f2d/view00_azim000.png",
+            "sha256": "320fe38181a6ebc4b0cce4936b0424fe141eae3a86d87a9153b6a803f074cbbe"
+          },
+          {
+            "view": "right",
+            "path": "art/full-ai-city/inputs/expansion/shop_1/60e603c05a5d0f2d/view01_azim090.png",
+            "sha256": "f938f6773d35673eddacb715aa813278a1babdc18c1b52a9ff491a842f2e8ea2"
+          },
+          {
+            "view": "back",
+            "path": "art/full-ai-city/inputs/expansion/shop_1/60e603c05a5d0f2d/view02_azim180.png",
+            "sha256": "927d143c1564a4083894f17057d66836abe65edaabe771bf865c34bf716d746c"
+          }
+        ],
+        "normalisationScale": 0.99,
+        "placementReview": {
+          "independentParcelScale": 0.99,
+          "scale": 0.99,
+          "reason": "independent_uniform_parcel_fit",
+          "relativeToIndependentFit": 1.0,
+          "sharedCameraReviewRequired": true
+        },
+        "reviewStatus": "approved",
+        "triangleBudget": 30000
       }
     },
     {
       "name": "expansion_shop_2",
+      "size": [
+        0.9626026165965129,
+        1.0375360328894088,
+        0.8749147894111795
+      ],
       "bounds": {
         "min": [
-          -0.46950000524520874,
-          -0.5264999866485596,
-          0.0
+          -0.48130130829825646,
+          0.0,
+          -0.43745739470558975
         ],
         "max": [
-          0.46950000524520874,
-          0.4699999988079071,
-          1.0850000381469727
+          0.48130130829825646,
+          1.0375360328894088,
+          0.43745739470558975
         ]
       },
-      "size": [
-        0.9390000104904175,
-        0.9964999854564667,
-        1.0850000381469727
-      ],
-      "triangles": 5984,
+      "triangles": 30000,
       "source": {
-        "kind": "blender_three_view",
-        "reference": "art\\regions\\references\\expansion-core-three-views.png"
+        "sourceType": "pixal_native_multiview",
+        "family": "shop",
+        "level": 2,
+        "sourceFile": "assets/models/regions-ai/full/expansion/shop_2/4fa859448cd295d5.glb",
+        "sourceSha256": "4fa859448cd295d533ce09b6939791c45c92708d44f61b81312b2ef202a483a4",
+        "inferenceReport": "art/full-ai-city/reports/expansion--shop_2-a014/expansion--shop_2-a014-pixal-mv-1024-29495.json",
+        "reference": "art/full-ai-city/inputs/expansion/shop_2/025558a28b746dd6/reference.json",
+        "rawSourceSha256": "51c40f4ad89666e347fd818e34b1d13397ff31e35fe2f3796df7f9901f17fb3f",
+        "referenceViews": [
+          {
+            "view": "front",
+            "path": "art/full-ai-city/inputs/expansion/shop_2/025558a28b746dd6/view00_azim000.png",
+            "sha256": "02384655687d8779275b367044dfd80926e51da8fb7e4f6d1e6c2832d6da6305"
+          },
+          {
+            "view": "right",
+            "path": "art/full-ai-city/inputs/expansion/shop_2/025558a28b746dd6/view01_azim090.png",
+            "sha256": "b4dcd68547d49ee7d6e6e7d8b9028a8475394f07972964e401a79a00be419a11"
+          },
+          {
+            "view": "back",
+            "path": "art/full-ai-city/inputs/expansion/shop_2/025558a28b746dd6/view02_azim180.png",
+            "sha256": "de53baba92ae5df7ad1efdf419ebb4123dda65da33dc6b219390532cc0de997d"
+          }
+        ],
+        "normalisationScale": 1.0375360328894088,
+        "placementReview": {
+          "independentParcelScale": 1.0670661546633444,
+          "scale": 1.0375360328894088,
+          "reason": "uniform_fit_below_next_upgrade",
+          "nextLevel": "shop_3",
+          "nextLevelHeight": 1.206437247545824,
+          "maximumHeight": 1.0375360328894088,
+          "heightRatio": 0.86,
+          "relativeToIndependentFit": 0.972325875350013,
+          "sharedCameraReviewRequired": true
+        },
+        "reviewStatus": "approved",
+        "triangleBudget": 30000
       }
     },
     {
       "name": "expansion_shop_3",
+      "size": [
+        0.9110458577721929,
+        1.206437247545824,
+        0.99
+      ],
       "bounds": {
         "min": [
-          -0.46950000524520874,
-          -0.5264999866485596,
-          0.0
+          -0.45552292888609647,
+          0.0,
+          -0.495
         ],
         "max": [
-          0.46950000524520874,
-          0.4699999988079071,
-          1.5049999952316284
+          0.45552292888609647,
+          1.206437247545824,
+          0.495
         ]
       },
-      "size": [
-        0.9390000104904175,
-        0.9964999854564667,
-        1.5049999952316284
-      ],
-      "triangles": 8856,
+      "triangles": 29987,
       "source": {
-        "kind": "blender_three_view",
-        "reference": "art\\regions\\references\\expansion-core-three-views.png"
+        "sourceType": "pixal_native_multiview",
+        "family": "shop",
+        "level": 3,
+        "sourceFile": "assets/models/regions-ai/full/expansion/shop_3/fde2c62a0979b5d9.glb",
+        "sourceSha256": "fde2c62a0979b5d98db235b4414bc6c61bc17849de2390154bd30cfd053348e3",
+        "inferenceReport": "art/full-ai-city/reports/expansion--shop_3-a013/expansion--shop_3-a013-pixal-mv-1024-29493.json",
+        "reference": "art/full-ai-city/inputs/expansion/shop_3/8ca65fdac4d28435/reference.json",
+        "rawSourceSha256": "675c075917357ecca898d128479623be2776c36b85b8949c71759bcafb984bcc",
+        "referenceViews": [
+          {
+            "view": "front",
+            "path": "art/full-ai-city/inputs/expansion/shop_3/8ca65fdac4d28435/view00_azim000.png",
+            "sha256": "ba7216911708e8c3ce5ced157f1bef77ad7494f2f97cbea0b26684fb47d11319"
+          },
+          {
+            "view": "right",
+            "path": "art/full-ai-city/inputs/expansion/shop_3/8ca65fdac4d28435/view01_azim090.png",
+            "sha256": "e70cc9674f858475fc564b23fa124456049e7d9341b966d18bbe8ba1739aec68"
+          },
+          {
+            "view": "back",
+            "path": "art/full-ai-city/inputs/expansion/shop_3/8ca65fdac4d28435/view02_azim180.png",
+            "sha256": "c51125192770de859792d1919a5f3e93a1696527fae443f0abe47ec6a9f530ba"
+          }
+        ],
+        "normalisationScale": 1.206437247545824,
+        "placementReview": {
+          "independentParcelScale": 1.206437247545824,
+          "scale": 1.206437247545824,
+          "reason": "independent_uniform_parcel_fit",
+          "relativeToIndependentFit": 1.0,
+          "sharedCameraReviewRequired": true
+        },
+        "reviewStatus": "approved",
+        "triangleBudget": 30000
       }
     },
     {
       "name": "expansion_hotel_1",
+      "size": [
+        0.99,
+        0.5950471076397365,
+        0.839172184417974
+      ],
       "bounds": {
         "min": [
-          -0.46950000524520874,
-          -0.5237942337989807,
-          0.0
+          -0.495,
+          0.0,
+          -0.419586092208987
         ],
         "max": [
-          0.46950000524520874,
-          0.3995000123977661,
-          0.6650000214576721
+          0.495,
+          0.5950471076397365,
+          0.419586092208987
         ]
       },
-      "size": [
-        0.9390000104904175,
-        0.9232942461967468,
-        0.6650000214576721
-      ],
-      "triangles": 3436,
+      "triangles": 29991,
       "source": {
-        "kind": "blender_three_view",
-        "reference": "art\\regions\\references\\expansion-core-three-views.png"
+        "sourceType": "pixal_native_multiview",
+        "family": "hotel",
+        "level": 1,
+        "sourceFile": "assets/models/regions-ai/full/expansion/hotel_1/c1bf73830e6fb6a6.glb",
+        "sourceSha256": "c1bf73830e6fb6a60ef4a3401afef02cebace88a18b348cd48eadf52eb414b31",
+        "inferenceReport": "art/full-ai-city/reports/expansion--hotel_1-a012/expansion--hotel_1-a012-pixal-mv-1024-29488.json",
+        "reference": "art/full-ai-city/inputs/expansion/hotel_1/8e12a1e9306baf2e/reference.json",
+        "rawSourceSha256": "5388dfae02d510bf5c4b137fde606a0504a33ad5fe6f1acf024efad69c128a86",
+        "referenceViews": [
+          {
+            "view": "front",
+            "path": "art/full-ai-city/inputs/expansion/hotel_1/8e12a1e9306baf2e/view00_azim000.png",
+            "sha256": "01955f5a5fa15869984617c0865a6cc591beb37fabe1724a427c4bf4a6065fac"
+          },
+          {
+            "view": "right",
+            "path": "art/full-ai-city/inputs/expansion/hotel_1/8e12a1e9306baf2e/view01_azim090.png",
+            "sha256": "a3859da6f836b8e2a2fa635abd83cfe9e2a6e49522fd7d3086bd15cafef86087"
+          },
+          {
+            "view": "back",
+            "path": "art/full-ai-city/inputs/expansion/hotel_1/8e12a1e9306baf2e/view02_azim180.png",
+            "sha256": "78d990f81e189ef3c84eaa19cf914180452c0e5534f07a57997622085837e80c"
+          }
+        ],
+        "normalisationScale": 0.9900000590086019,
+        "placementReview": {
+          "independentParcelScale": 0.9900000590086019,
+          "scale": 0.9900000590086019,
+          "reason": "independent_uniform_parcel_fit",
+          "relativeToIndependentFit": 1.0,
+          "sharedCameraReviewRequired": true
+        },
+        "reviewStatus": "approved",
+        "triangleBudget": 30000
       }
     },
     {
       "name": "expansion_hotel_2",
+      "size": [
+        0.9608971128068294,
+        1.028751923844774,
+        0.8039732276290854
+      ],
       "bounds": {
         "min": [
-          -0.46950000524520874,
-          -0.5237942337989807,
-          0.0
+          -0.4804485564034147,
+          0.0,
+          -0.4019866138145427
         ],
         "max": [
-          0.46950000524520874,
-          0.4699999988079071,
-          1.0850000381469727
+          0.4804485564034147,
+          1.028751923844774,
+          0.4019866138145427
         ]
       },
-      "size": [
-        0.9390000104904175,
-        0.9937942326068878,
-        1.0850000381469727
-      ],
-      "triangles": 6308,
+      "triangles": 29993,
       "source": {
-        "kind": "blender_three_view",
-        "reference": "art\\regions\\references\\expansion-core-three-views.png"
+        "sourceType": "pixal_native_multiview",
+        "family": "hotel",
+        "level": 2,
+        "sourceFile": "assets/models/regions-ai/full/expansion/hotel_2/1aedc775f9144969.glb",
+        "sourceSha256": "1aedc775f9144969388339815a6219219497f218f1577f20494b6f940a9c301f",
+        "inferenceReport": "art/full-ai-city/reports/expansion--hotel_2-a013/expansion--hotel_2-a013-pixal-mv-1024-29489.json",
+        "reference": "art/full-ai-city/inputs/expansion/hotel_2/febb2b50142803a4/reference.json",
+        "rawSourceSha256": "079dc544934552407862f8cabd990c7dee8598576e21a1048c1fa9f322db988f",
+        "referenceViews": [
+          {
+            "view": "front",
+            "path": "art/full-ai-city/inputs/expansion/hotel_2/febb2b50142803a4/view00_azim000.png",
+            "sha256": "73ee5bc7b925cdd243bc5eaaa54ad0fb100279ee6a7938a381ddac4f52c3046e"
+          },
+          {
+            "view": "right",
+            "path": "art/full-ai-city/inputs/expansion/hotel_2/febb2b50142803a4/view01_azim090.png",
+            "sha256": "b738a47e4c96d21c73111c6bfcff4da3134efdc06be402d3be966a1a563f16cb"
+          },
+          {
+            "view": "back",
+            "path": "art/full-ai-city/inputs/expansion/hotel_2/febb2b50142803a4/view02_azim180.png",
+            "sha256": "15fc61fb096ed35bd6c61637262c8e39a9bd7296c036f124130ef2c600dc8247"
+          }
+        ],
+        "normalisationScale": 1.028751923844774,
+        "placementReview": {
+          "independentParcelScale": 1.0599099435644466,
+          "scale": 1.028751923844774,
+          "reason": "uniform_fit_below_next_upgrade",
+          "nextLevel": "hotel_3",
+          "nextLevelHeight": 1.1962231672613652,
+          "maximumHeight": 1.028751923844774,
+          "heightRatio": 0.86,
+          "relativeToIndependentFit": 0.9706031442493227,
+          "sharedCameraReviewRequired": true
+        },
+        "reviewStatus": "approved",
+        "triangleBudget": 30000
       }
     },
     {
       "name": "expansion_hotel_3",
+      "size": [
+        0.9014214459098888,
+        1.1962231672613652,
+        0.99
+      ],
       "bounds": {
         "min": [
-          -0.46950000524520874,
-          -0.5237942337989807,
-          0.0
+          -0.4507107229549444,
+          0.0,
+          -0.495
         ],
         "max": [
-          0.46950000524520874,
-          0.4699999988079071,
-          1.5049999952316284
+          0.4507107229549444,
+          1.1962231672613652,
+          0.495
         ]
       },
-      "size": [
-        0.9390000104904175,
-        0.9937942326068878,
-        1.5049999952316284
-      ],
-      "triangles": 9180,
+      "triangles": 29998,
       "source": {
-        "kind": "blender_three_view",
-        "reference": "art\\regions\\references\\expansion-core-three-views.png"
+        "sourceType": "pixal_native_multiview",
+        "family": "hotel",
+        "level": 3,
+        "sourceFile": "assets/models/regions-ai/full/expansion/hotel_3/297b4f0d8fd252ab.glb",
+        "sourceSha256": "297b4f0d8fd252ab6a02b26f0847db8beedca140a4d84ae8de7123f25111ec2c",
+        "inferenceReport": "art/full-ai-city/reports/expansion--hotel_3-a013/expansion--hotel_3-a013-pixal-mv-1024-29490.json",
+        "reference": "art/full-ai-city/inputs/expansion/hotel_3/9dc3ba347a7db6de/reference.json",
+        "rawSourceSha256": "aee6381b9a5aafa0bb96d5bf57c7bc2e91dec1502b02c5376df64bb999685426",
+        "referenceViews": [
+          {
+            "view": "front",
+            "path": "art/full-ai-city/inputs/expansion/hotel_3/9dc3ba347a7db6de/view00_azim000.png",
+            "sha256": "352a58a5ed17f4ab75f709bb215b25a95a900a1667d4f2890a7d281eb8df3cf4"
+          },
+          {
+            "view": "right",
+            "path": "art/full-ai-city/inputs/expansion/hotel_3/9dc3ba347a7db6de/view01_azim090.png",
+            "sha256": "8c3472d3e2e2ce4a201c8ef97189807d4eb18b3b2829c70b8aaef12bbb342434"
+          },
+          {
+            "view": "back",
+            "path": "art/full-ai-city/inputs/expansion/hotel_3/9dc3ba347a7db6de/view02_azim180.png",
+            "sha256": "d4f3afed633cf9f1e07ed4fd76f65d8e011fe79e5f240920166d8249b0b4db77"
+          }
+        ],
+        "normalisationScale": 1.1962231672613652,
+        "placementReview": {
+          "independentParcelScale": 1.1962231672613652,
+          "scale": 1.1962231672613652,
+          "reason": "independent_uniform_parcel_fit",
+          "relativeToIndependentFit": 1.0,
+          "sharedCameraReviewRequired": true
+        },
+        "reviewStatus": "approved",
+        "triangleBudget": 30000
       }
     },
     {
       "name": "expansion_tower_1",
+      "size": [
+        0.99,
+        0.7045698630809784,
+        0.8046431350708008
+      ],
       "bounds": {
         "min": [
-          -0.46950000524520874,
-          -0.48500001430511475,
-          0.0
+          -0.495,
+          0.0,
+          -0.4023215675354004
         ],
         "max": [
-          0.46950000524520874,
-          0.3995000123977661,
-          0.875
+          0.495,
+          0.7045698630809784,
+          0.4023215675354004
         ]
       },
-      "size": [
-        0.9390000104904175,
-        0.8845000267028809,
-        0.875
-      ],
-      "triangles": 3072,
+      "triangles": 29991,
       "source": {
-        "kind": "blender_three_view",
-        "reference": "art\\regions\\references\\expansion-core-three-views.png"
+        "sourceType": "pixal_native_multiview",
+        "family": "tower",
+        "level": 1,
+        "sourceFile": "assets/models/regions-ai/full/expansion/tower_1/92df2d548627d7bf.glb",
+        "sourceSha256": "92df2d548627d7bfdf360057bc51adc2d105893b6cd9a9d15453041691fb64bc",
+        "inferenceReport": "art/full-ai-city/reports/expansion--tower_1-a010/expansion--tower_1-a010-pixal-mv-1024-9247.json",
+        "reference": "art/full-ai-city/inputs/expansion/tower_1/b4d13815c4346b3f/reference.json",
+        "rawSourceSha256": "1265f939c98c80a897b37f08cb4be18891005e8afb2ee7b9feaec9bc83a2ba01",
+        "referenceViews": [
+          {
+            "view": "front",
+            "path": "art/full-ai-city/inputs/expansion/tower_1/b4d13815c4346b3f/view00_azim000.png",
+            "sha256": "b8b636e0b3b1a3c9af7b75d1662be06bae6e58bda989389964c59fa01d79b4ba"
+          },
+          {
+            "view": "right",
+            "path": "art/full-ai-city/inputs/expansion/tower_1/b4d13815c4346b3f/view01_azim090.png",
+            "sha256": "3cded163cfe8d3bd2fbad641091da74a8e3f816df63c4d18f5b0af27297aa8ae"
+          },
+          {
+            "view": "back",
+            "path": "art/full-ai-city/inputs/expansion/tower_1/b4d13815c4346b3f/view02_azim180.png",
+            "sha256": "7f1914cb0b68eaacb0d2d7d856285fabd55a2083a669051fef35a22d0e655504"
+          }
+        ],
+        "normalisationScale": 0.99,
+        "placementReview": {
+          "independentParcelScale": 0.99,
+          "scale": 0.99,
+          "reason": "independent_uniform_parcel_fit",
+          "relativeToIndependentFit": 1.0,
+          "sharedCameraReviewRequired": true
+        },
+        "reviewStatus": "approved",
+        "triangleBudget": 30000
       }
     },
     {
       "name": "expansion_tower_2",
+      "size": [
+        0.9413838920171764,
+        1.064917850153155,
+        0.9899999999999999
+      ],
       "bounds": {
         "min": [
-          -0.46950000524520874,
-          -0.48500001430511475,
-          0.0
+          -0.4706919460085882,
+          0.0,
+          -0.49499999999999994
         ],
         "max": [
-          0.46950000524520874,
-          0.4699999988079071,
-          1.2949999570846558
+          0.4706919460085882,
+          1.064917850153155,
+          0.49499999999999994
         ]
       },
-      "size": [
-        0.9390000104904175,
-        0.9550000131130219,
-        1.2949999570846558
-      ],
-      "triangles": 5944,
+      "triangles": 29997,
       "source": {
-        "kind": "blender_three_view",
-        "reference": "art\\regions\\references\\expansion-core-three-views.png"
+        "sourceType": "pixal_native_multiview",
+        "family": "tower",
+        "level": 2,
+        "sourceFile": "assets/models/regions-ai/full/expansion/tower_2/dcfbd03212dc6226.glb",
+        "sourceSha256": "dcfbd03212dc62268928470e2f092a1698f8ca936bf4c61d723e0fc87f189087",
+        "inferenceReport": "art/full-ai-city/reports/expansion--tower_2-a010/expansion--tower_2-a010-pixal-mv-1024-9247.json",
+        "reference": "art/full-ai-city/inputs/expansion/tower_2/52a147e87d5c3980/reference.json",
+        "rawSourceSha256": "1e9192533f2a0e00174932ba1f16852843fa37fdc3ffbbf827c9e48111efca32",
+        "referenceViews": [
+          {
+            "view": "front",
+            "path": "art/full-ai-city/inputs/expansion/tower_2/52a147e87d5c3980/view00_azim000.png",
+            "sha256": "aa94cececbca597f3545721f5dafed0760743d18f59e862d340faceca0869978"
+          },
+          {
+            "view": "right",
+            "path": "art/full-ai-city/inputs/expansion/tower_2/52a147e87d5c3980/view01_azim090.png",
+            "sha256": "29bed5d6353ef38186ecf0556ac6466d5dcb7dd49c9b3e3cb4a0b1192557f927"
+          },
+          {
+            "view": "back",
+            "path": "art/full-ai-city/inputs/expansion/tower_2/52a147e87d5c3980/view02_azim180.png",
+            "sha256": "dbf9d0c8b2c8e5923279da6f8a69c358c75c91bfce721884e0b60d046577f3cc"
+          }
+        ],
+        "normalisationScale": 1.064917850153155,
+        "placementReview": {
+          "independentParcelScale": 1.064917850153155,
+          "scale": 1.064917850153155,
+          "reason": "independent_uniform_parcel_fit",
+          "relativeToIndependentFit": 1.0,
+          "sharedCameraReviewRequired": true
+        },
+        "reviewStatus": "approved",
+        "triangleBudget": 30000
       }
     },
     {
       "name": "expansion_tower_3",
+      "size": [
+        0.9899999999999999,
+        1.2901044157460155,
+        0.9355743165071717
+      ],
       "bounds": {
         "min": [
-          -0.46950000524520874,
-          -0.48500001430511475,
-          0.0
+          -0.49499999999999994,
+          0.0,
+          -0.46778715825358586
         ],
         "max": [
-          0.46950000524520874,
-          0.4699999988079071,
-          1.715000033378601
+          0.49499999999999994,
+          1.2901044157460155,
+          0.46778715825358586
         ]
       },
-      "size": [
-        0.9390000104904175,
-        0.9550000131130219,
-        1.715000033378601
-      ],
-      "triangles": 8816,
+      "triangles": 29995,
       "source": {
-        "kind": "blender_three_view",
-        "reference": "art\\regions\\references\\expansion-core-three-views.png"
+        "sourceType": "pixal_native_multiview",
+        "family": "tower",
+        "level": 3,
+        "sourceFile": "assets/models/regions-ai/full/expansion/tower_3/528290db6a83ffcb.glb",
+        "sourceSha256": "528290db6a83ffcbaa4bdfbf4c9605c3c0de2f061345a2469a2b0b6b7fcfad31",
+        "inferenceReport": "art/full-ai-city/reports/expansion--tower_3-a012/expansion--tower_3-a012-pixal-mv-1024-29496.json",
+        "reference": "art/full-ai-city/inputs/expansion/tower_3/1250d9fffa85f848/reference.json",
+        "rawSourceSha256": "03684a9795e34fd914058ac632b5b4f0d6a1fcfd531bd36c2fcea92cec2e161e",
+        "referenceViews": [
+          {
+            "view": "front",
+            "path": "art/full-ai-city/inputs/expansion/tower_3/1250d9fffa85f848/view00_azim000.png",
+            "sha256": "346a3d386a1cf5402155b4177aee5c2d81dda2af04e12dc59dd3a94fb8be27ff"
+          },
+          {
+            "view": "right",
+            "path": "art/full-ai-city/inputs/expansion/tower_3/1250d9fffa85f848/view01_azim090.png",
+            "sha256": "19c66332cd9c1df6606fe654cc0d62b8be48efa508497951464cd4312c3cfeff"
+          },
+          {
+            "view": "back",
+            "path": "art/full-ai-city/inputs/expansion/tower_3/1250d9fffa85f848/view02_azim180.png",
+            "sha256": "fb39dcc8f3e90f133d9d0a4801c8dece079fdf2b628b7245b3c3149aedbb7816"
+          }
+        ],
+        "normalisationScale": 1.2901044926422356,
+        "placementReview": {
+          "independentParcelScale": 1.2901044926422356,
+          "scale": 1.2901044926422356,
+          "reason": "independent_uniform_parcel_fit",
+          "relativeToIndependentFit": 1.0,
+          "sharedCameraReviewRequired": true
+        },
+        "reviewStatus": "approved",
+        "triangleBudget": 30000
       }
     },
     {
       "name": "expansion_skyscraper_1",
+      "size": [
+        1.9693673608723428,
+        1.1,
+        0.591383943311054
+      ],
       "bounds": {
         "min": [
-          -1.2599999904632568,
-          -0.5199999809265137,
-          0.0
+          -0.9846836804361714,
+          0.0,
+          -0.295691971655527
         ],
         "max": [
-          1.2599999904632568,
-          0.5199999809265137,
-          1.25
+          0.9846836804361714,
+          1.1,
+          0.295691971655527
         ]
       },
-      "size": [
-        2.5199999809265137,
-        1.0399999618530273,
-        1.25
-      ],
-      "triangles": 11812,
+      "triangles": 44998,
       "source": {
-        "kind": "blender_three_view",
-        "reference": "art/regions/references/expansion-landmarks-three-views.png"
+        "sourceType": "pixal_native_multiview",
+        "family": "skyscraper",
+        "level": 1,
+        "sourceFile": "assets/models/regions-ai/full/expansion/skyscraper_1/4f1a7cfba8b5114a.glb",
+        "sourceSha256": "4f1a7cfba8b5114ae30f40f63a5abdd34016f783bdd84b51cbcbf6f76518212b",
+        "inferenceReport": "art/full-ai-city/reports/expansion--skyscraper_1-a001/expansion--skyscraper_1-a001-pixal-mv-1024-9247.json",
+        "reference": "art/full-ai-city/inputs/expansion/skyscraper_1/bb3bea9ebf74a5c3/reference.json",
+        "rawSourceSha256": "3718a491c93cf8af40b827362092749b7a93321345f7ec85c24314f3411636d1",
+        "referenceViews": [
+          {
+            "view": "front",
+            "path": "art/full-ai-city/inputs/expansion/skyscraper_1/bb3bea9ebf74a5c3/view00_azim000.png",
+            "sha256": "ed5cca4538d6d955d57d46d145b42e31e55814b37824692244c7626c533c995d"
+          },
+          {
+            "view": "right",
+            "path": "art/full-ai-city/inputs/expansion/skyscraper_1/bb3bea9ebf74a5c3/view01_azim090.png",
+            "sha256": "ceb91870f075701181b2d47822ed769d59c209119966d4c81b9c3c7054e4d130"
+          },
+          {
+            "view": "back",
+            "path": "art/full-ai-city/inputs/expansion/skyscraper_1/bb3bea9ebf74a5c3/view02_azim180.png",
+            "sha256": "27e8f4a8d91f5e3d73539c3e22eabad446137de44870bdd4e8a8f1bbe14f774a"
+          }
+        ],
+        "normalisationScale": 1.9693673608723428,
+        "placementReview": {
+          "independentParcelScale": 1.9693673608723428,
+          "scale": 1.9693673608723428,
+          "reason": "independent_uniform_parcel_fit",
+          "relativeToIndependentFit": 1.0,
+          "sharedCameraReviewRequired": true
+        },
+        "reviewStatus": "approved",
+        "triangleBudget": 45000
       }
     },
     {
       "name": "expansion_skyscraper_2",
+      "size": [
+        2.3173415839594966,
+        1.6499999999999997,
+        0.8553541319263068
+      ],
       "bounds": {
         "min": [
-          -1.2599999904632568,
-          -0.5199999809265137,
-          0.0
+          -1.1586707919797483,
+          0.0,
+          -0.4276770659631534
         ],
         "max": [
-          1.2599999904632568,
-          0.559499979019165,
-          1.7649999856948853
+          1.1586707919797483,
+          1.6499999999999997,
+          0.4276770659631534
         ]
       },
-      "size": [
-        2.5199999809265137,
-        1.0794999599456787,
-        1.7649999856948853
-      ],
-      "triangles": 22736,
+      "triangles": 44993,
       "source": {
-        "kind": "blender_three_view",
-        "reference": "art/regions/references/expansion-landmarks-three-views.png"
+        "sourceType": "pixal_native_multiview",
+        "family": "skyscraper",
+        "level": 2,
+        "sourceFile": "assets/models/regions-ai/full/expansion/skyscraper_2/86772d0200beab78.glb",
+        "sourceSha256": "86772d0200beab78c2cd8801f631a59365b4f9b0b495a40b10d93f3e0e834c26",
+        "inferenceReport": "art/full-ai-city/reports/expansion--skyscraper_2-a001/expansion--skyscraper_2-a001-pixal-mv-1024-9247.json",
+        "reference": "art/full-ai-city/inputs/expansion/skyscraper_2/f014f822fbb940a4/reference.json",
+        "rawSourceSha256": "ab6b91f8718a1f3c5d8bef67191f94e239daabb547c113d6f6a62727857d123d",
+        "referenceViews": [
+          {
+            "view": "front",
+            "path": "art/full-ai-city/inputs/expansion/skyscraper_2/f014f822fbb940a4/view00_azim000.png",
+            "sha256": "6ebad650a5ea51728c3ef605e790adf37dfaf9b9b5ccdb0eee6cc5e40aae4312"
+          },
+          {
+            "view": "right",
+            "path": "art/full-ai-city/inputs/expansion/skyscraper_2/f014f822fbb940a4/view01_azim090.png",
+            "sha256": "40815f6217e5c33a8c2d481bec058694c0aa55d88d6d2ceab81995e1c6dd3f2e"
+          },
+          {
+            "view": "back",
+            "path": "art/full-ai-city/inputs/expansion/skyscraper_2/f014f822fbb940a4/view02_azim180.png",
+            "sha256": "0839a6688ad43264fe0699952310a86ad46bac7e1b0df80ce05f4c88634286d1"
+          }
+        ],
+        "normalisationScale": 2.3173415839594966,
+        "placementReview": {
+          "independentParcelScale": 2.3173415839594966,
+          "scale": 2.3173415839594966,
+          "reason": "independent_uniform_parcel_fit",
+          "relativeToIndependentFit": 1.0,
+          "sharedCameraReviewRequired": true
+        },
+        "reviewStatus": "approved",
+        "triangleBudget": 45000
       }
     },
     {
       "name": "expansion_skyscraper_3",
+      "size": [
+        2.5,
+        2.1513427793979645,
+        0.9545787423849106
+      ],
       "bounds": {
         "min": [
-          -1.2599999904632568,
-          -0.5199999809265137,
-          0.0
+          -1.25,
+          0.0,
+          -0.4772893711924553
         ],
         "max": [
-          1.2599999904632568,
-          0.5199999809265137,
-          2.2799999713897705
+          1.25,
+          2.1513427793979645,
+          0.4772893711924553
         ]
       },
-      "size": [
-        2.5199999809265137,
-        1.0399999618530273,
-        2.2799999713897705
-      ],
-      "triangles": 22780,
+      "triangles": 44984,
       "source": {
-        "kind": "blender_three_view",
-        "reference": "art/regions/references/expansion-landmarks-three-views.png"
+        "sourceType": "pixal_native_multiview",
+        "family": "skyscraper",
+        "level": 3,
+        "sourceFile": "assets/models/regions-ai/full/expansion/skyscraper_3/ba60be29ab6fa783.glb",
+        "sourceSha256": "ba60be29ab6fa783f2aea7bcca352bd643ca81ff269f784dc1dd850f130152f3",
+        "inferenceReport": "art/full-ai-city/reports/expansion--skyscraper_3-a001/expansion--skyscraper_3-a001-pixal-mv-1024-9247.json",
+        "reference": "art/full-ai-city/inputs/expansion/skyscraper_3/82fe0b1ec834da1b/reference.json",
+        "rawSourceSha256": "e97085d7ea7d7595d77da407f3fef8d736419df24b039ec6a6f0cc8d08c1c2de",
+        "referenceViews": [
+          {
+            "view": "front",
+            "path": "art/full-ai-city/inputs/expansion/skyscraper_3/82fe0b1ec834da1b/view00_azim000.png",
+            "sha256": "b7cf60742219961219276fa544230036b6e4d6fce3fcc75821de57c93d3e755d"
+          },
+          {
+            "view": "right",
+            "path": "art/full-ai-city/inputs/expansion/skyscraper_3/82fe0b1ec834da1b/view01_azim090.png",
+            "sha256": "d4af9cb86ba48dc3a93752d3c5faa8ba214116e6587e3a298465319945cf7f53"
+          },
+          {
+            "view": "back",
+            "path": "art/full-ai-city/inputs/expansion/skyscraper_3/82fe0b1ec834da1b/view02_azim180.png",
+            "sha256": "662c8c28e45e137d3144dcd76d64d2628c256a293bbea075f3a1ef24422c6776"
+          }
+        ],
+        "normalisationScale": 2.5,
+        "placementReview": {
+          "independentParcelScale": 2.5,
+          "scale": 2.5,
+          "reason": "independent_uniform_parcel_fit",
+          "relativeToIndependentFit": 1.0,
+          "sharedCameraReviewRequired": true
+        },
+        "reviewStatus": "approved",
+        "triangleBudget": 45000
       }
     },
     {
       "name": "expansion_finance_1",
+      "size": [
+        2.1259496795052346,
+        1.1,
+        0.6082457348098338
+      ],
       "bounds": {
         "min": [
-          -1.2599999904632568,
-          -0.5199999809265137,
-          0.0
+          -1.0629748397526173,
+          0.0,
+          -0.3041228674049169
         ],
         "max": [
-          1.2599999904632568,
-          0.5199999809265137,
-          1.0600000619888306
+          1.0629748397526173,
+          1.1,
+          0.3041228674049169
         ]
       },
-      "size": [
-        2.5199999809265137,
-        1.0399999618530273,
-        1.0600000619888306
-      ],
-      "triangles": 12540,
+      "triangles": 44997,
       "source": {
-        "kind": "blender_three_view",
-        "reference": "art/regions/references/expansion-landmarks-three-views.png"
+        "sourceType": "pixal_native_multiview",
+        "family": "finance",
+        "level": 1,
+        "sourceFile": "assets/models/regions-ai/full/expansion/finance_1/2cb7caf84d26a237.glb",
+        "sourceSha256": "2cb7caf84d26a237d43d10ef63ab41c5f5549e4f4ca1bacce5398d212fc1e9c9",
+        "inferenceReport": "art/full-ai-city/reports/expansion--finance_1-a001/expansion--finance_1-a001-pixal-mv-1024-9247.json",
+        "reference": "art/full-ai-city/inputs/expansion/finance_1/60402ccb70d84340/reference.json",
+        "rawSourceSha256": "8bbcf8f6afc73b45222cf4b08964f155950f7cec7a81bf206542b441b386537d",
+        "referenceViews": [
+          {
+            "view": "front",
+            "path": "art/full-ai-city/inputs/expansion/finance_1/60402ccb70d84340/view00_azim000.png",
+            "sha256": "898420b44081043a8028e2c0a0055557462ee5e276f2fa83e05a99dfa310e407"
+          },
+          {
+            "view": "right",
+            "path": "art/full-ai-city/inputs/expansion/finance_1/60402ccb70d84340/view01_azim090.png",
+            "sha256": "b42dfe38ba437db11f42426c07d9b8e7fb30f0a1f2d689ab1ba9da6f50783540"
+          },
+          {
+            "view": "back",
+            "path": "art/full-ai-city/inputs/expansion/finance_1/60402ccb70d84340/view02_azim180.png",
+            "sha256": "b254257eb0572836d93cc4ab6c053329a3c7ec9112c3741532ce67e318f8e329"
+          }
+        ],
+        "normalisationScale": 2.1259496795052346,
+        "placementReview": {
+          "independentParcelScale": 2.1259496795052346,
+          "scale": 2.1259496795052346,
+          "reason": "independent_uniform_parcel_fit",
+          "relativeToIndependentFit": 1.0,
+          "sharedCameraReviewRequired": true
+        },
+        "reviewStatus": "approved",
+        "triangleBudget": 45000
       }
     },
     {
       "name": "expansion_finance_2",
+      "size": [
+        2.4386298671980664,
+        1.4725381731987,
+        0.7196518920068293
+      ],
       "bounds": {
         "min": [
-          -1.2599999904632568,
-          -0.5199999809265137,
-          0.0
+          -1.2193149335990332,
+          0.0,
+          -0.35982594600341467
         ],
         "max": [
-          1.2599999904632568,
-          0.5199999809265137,
-          1.4450000524520874
+          1.2193149335990332,
+          1.4725381731987,
+          0.35982594600341467
         ]
       },
-      "size": [
-        2.5199999809265137,
-        1.0399999618530273,
-        1.4450000524520874
-      ],
-      "triangles": 17676,
+      "triangles": 45000,
       "source": {
-        "kind": "blender_three_view",
-        "reference": "art/regions/references/expansion-landmarks-three-views.png"
+        "sourceType": "pixal_native_multiview",
+        "family": "finance",
+        "level": 2,
+        "sourceFile": "assets/models/regions-ai/full/expansion/finance_2/fcea97ee8dd63c86.glb",
+        "sourceSha256": "fcea97ee8dd63c865353db2ef096dd924c40fe5d16145657f892b7d2a923f686",
+        "inferenceReport": "art/full-ai-city/reports/expansion--finance_2-a001/expansion--finance_2-a001-pixal-mv-1024-9247.json",
+        "reference": "art/full-ai-city/inputs/expansion/finance_2/9e972323f4d27090/reference.json",
+        "rawSourceSha256": "44dc19f5006ea4af42ee5085f5a8c74aca9f1c2698b0fb287415ccbeccaefbf0",
+        "referenceViews": [
+          {
+            "view": "front",
+            "path": "art/full-ai-city/inputs/expansion/finance_2/9e972323f4d27090/view00_azim000.png",
+            "sha256": "2ef4dc7c0e21d38b60b04ba5b6dfba613368f6e0e8a2498fc7def4d445b69f3b"
+          },
+          {
+            "view": "right",
+            "path": "art/full-ai-city/inputs/expansion/finance_2/9e972323f4d27090/view01_azim090.png",
+            "sha256": "89ec3437a0d2670775501c60aa04f2eaa6dd841af6efb9672c2e5197746b28e7"
+          },
+          {
+            "view": "back",
+            "path": "art/full-ai-city/inputs/expansion/finance_2/9e972323f4d27090/view02_azim180.png",
+            "sha256": "e98e6858bb11f8d0642e2354062e886c8c20dda179436c0230b76112935ce9af"
+          }
+        ],
+        "normalisationScale": 2.4386298671980664,
+        "placementReview": {
+          "independentParcelScale": 2.5,
+          "scale": 2.4386298671980664,
+          "reason": "uniform_fit_below_next_upgrade",
+          "nextLevel": "finance_3",
+          "nextLevelHeight": 1.7122536897659302,
+          "maximumHeight": 1.4725381731987,
+          "heightRatio": 0.86,
+          "relativeToIndependentFit": 0.9754519468792265,
+          "sharedCameraReviewRequired": true
+        },
+        "reviewStatus": "approved",
+        "triangleBudget": 45000
       }
     },
     {
       "name": "expansion_finance_3",
+      "size": [
+        2.5,
+        1.7122536897659302,
+        0.912570133805275
+      ],
       "bounds": {
         "min": [
-          -1.2599999904632568,
-          -0.5199999809265137,
-          0.0
+          -1.25,
+          0.0,
+          -0.4562850669026375
         ],
         "max": [
-          1.2599999904632568,
-          0.5199999809265137,
-          1.8299999237060547
+          1.25,
+          1.7122536897659302,
+          0.4562850669026375
         ]
       },
-      "size": [
-        2.5199999809265137,
-        1.0399999618530273,
-        1.8299999237060547
-      ],
-      "triangles": 22812,
+      "triangles": 44987,
       "source": {
-        "kind": "blender_three_view",
-        "reference": "art/regions/references/expansion-landmarks-three-views.png"
+        "sourceType": "pixal_native_multiview",
+        "family": "finance",
+        "level": 3,
+        "sourceFile": "assets/models/regions-ai/full/expansion/finance_3/3d7feef2ce95c0d6.glb",
+        "sourceSha256": "3d7feef2ce95c0d6d790a972f4cb1b1641ac37e6002c576f0627f756937ba8ea",
+        "inferenceReport": "art/full-ai-city/reports/expansion--finance_3-a002/expansion--finance_3-a002-pixal-mv-1024-29487.json",
+        "reference": "art/full-ai-city/inputs/expansion/finance_3/93b8e3742982c53e/reference.json",
+        "rawSourceSha256": "3ccdc067c1c0d4664a4b7becf00c2ab17423f177c8e2d6cf26956979de62cc66",
+        "referenceViews": [
+          {
+            "view": "front",
+            "path": "art/full-ai-city/inputs/expansion/finance_3/93b8e3742982c53e/view00_azim000.png",
+            "sha256": "173274ddc26b4f442afd0559f98e5da34f1c31121b7816d8e6c80b7bc386a84a"
+          },
+          {
+            "view": "right",
+            "path": "art/full-ai-city/inputs/expansion/finance_3/93b8e3742982c53e/view01_azim090.png",
+            "sha256": "014454a9ea53a832c15d8ca7c54977494b3fe1d8b88eaaf87f88419306146aee"
+          },
+          {
+            "view": "back",
+            "path": "art/full-ai-city/inputs/expansion/finance_3/93b8e3742982c53e/view02_azim180.png",
+            "sha256": "4da95056e3441d38ecc8fc12ab15b1749b329fbbc8200192b976f4d712d9b849"
+          }
+        ],
+        "normalisationScale": 2.5,
+        "placementReview": {
+          "independentParcelScale": 2.5,
+          "scale": 2.5,
+          "reason": "independent_uniform_parcel_fit",
+          "relativeToIndependentFit": 1.0,
+          "sharedCameraReviewRequired": true
+        },
+        "reviewStatus": "approved",
+        "triangleBudget": 45000
       }
     },
     {
       "name": "expansion_onsen_1",
+      "size": [
+        2.368098798698462,
+        1.0762890167339194,
+        1.02
+      ],
       "bounds": {
         "min": [
-          -1.2599999904632568,
-          -0.5699999928474426,
-          0.0
+          -1.184049399349231,
+          0.0,
+          -0.51
         ],
         "max": [
-          1.2599999904632568,
-          0.5199999809265137,
-          0.8299999833106995
+          1.184049399349231,
+          1.0762890167339194,
+          0.51
         ]
       },
-      "size": [
-        2.5199999809265137,
-        1.0899999737739563,
-        0.8299999833106995
-      ],
-      "triangles": 12708,
+      "triangles": 44999,
       "source": {
-        "kind": "blender_three_view",
-        "reference": "art/regions/references/expansion-landmarks-three-views.png"
+        "sourceType": "pixal_native_multiview",
+        "family": "onsen",
+        "level": 1,
+        "sourceFile": "assets/models/regions-ai/full/expansion/onsen_1/0340aa91522d081a.glb",
+        "sourceSha256": "0340aa91522d081a19a9faec2c650a92d861ec42d45ff4bf5ac445958c4466e5",
+        "inferenceReport": "art/full-ai-city/reports/expansion--onsen_1-a001/expansion--onsen_1-a001-pixal-mv-1024-9247.json",
+        "reference": "art/full-ai-city/inputs/expansion/onsen_1/02fc214eb17e342b/reference.json",
+        "rawSourceSha256": "2f937ac0a4958e0796ac2c1cab05273900282b429c64e5e8c909abd17222ecc3",
+        "referenceViews": [
+          {
+            "view": "front",
+            "path": "art/full-ai-city/inputs/expansion/onsen_1/02fc214eb17e342b/view00_azim000.png",
+            "sha256": "22d41bd259e58dc91ada9a06650f2a98a5c00537e0c6ab99bbe95ef7773efa9c"
+          },
+          {
+            "view": "right",
+            "path": "art/full-ai-city/inputs/expansion/onsen_1/02fc214eb17e342b/view01_azim090.png",
+            "sha256": "1ae59e9862265796884f30eba9dc1c3b6ab26b82eba61ceb275c15f86674bbe2"
+          },
+          {
+            "view": "back",
+            "path": "art/full-ai-city/inputs/expansion/onsen_1/02fc214eb17e342b/view02_azim180.png",
+            "sha256": "76040efcf3a5d9c3d84327377b26e43abb5d49bd277f96af23b3eda1e00978ce"
+          }
+        ],
+        "normalisationScale": 2.368098939848158,
+        "placementReview": {
+          "independentParcelScale": 2.368098939848158,
+          "scale": 2.368098939848158,
+          "reason": "independent_uniform_parcel_fit",
+          "relativeToIndependentFit": 1.0,
+          "sharedCameraReviewRequired": true
+        },
+        "reviewStatus": "approved",
+        "triangleBudget": 45000
       }
     },
     {
       "name": "expansion_onsen_2",
+      "size": [
+        2.166794536734319,
+        1.256285483532263,
+        1.02
+      ],
       "bounds": {
         "min": [
-          -1.2599999904632568,
-          -0.5699999928474426,
-          0.0
+          -1.0833972683671595,
+          0.0,
+          -0.51
         ],
         "max": [
-          1.2599999904632568,
-          0.5199999809265137,
-          1.215000033378601
+          1.0833972683671595,
+          1.256285483532263,
+          0.51
         ]
       },
-      "size": [
-        2.5199999809265137,
-        1.0899999737739563,
-        1.215000033378601
-      ],
-      "triangles": 17548,
+      "triangles": 44997,
       "source": {
-        "kind": "blender_three_view",
-        "reference": "art/regions/references/expansion-landmarks-three-views.png"
+        "sourceType": "pixal_native_multiview",
+        "family": "onsen",
+        "level": 2,
+        "sourceFile": "assets/models/regions-ai/full/expansion/onsen_2/bf31459bab418bae.glb",
+        "sourceSha256": "bf31459bab418bae266bca28b878df2ca6b1504cc9617a3f57322ed814f38617",
+        "inferenceReport": "art/full-ai-city/reports/expansion--onsen_2-a001/expansion--onsen_2-a001-pixal-mv-1024-9247.json",
+        "reference": "art/full-ai-city/inputs/expansion/onsen_2/033d090ac791068e/reference.json",
+        "rawSourceSha256": "4fb08ce615df7c1fa80a3ca3c79b09eb6d130d0deef73c412b91406b6d539ca0",
+        "referenceViews": [
+          {
+            "view": "front",
+            "path": "art/full-ai-city/inputs/expansion/onsen_2/033d090ac791068e/view00_azim000.png",
+            "sha256": "b8ed7f89c32442aa7769d9a5cfa6fdb831fd465f9a20ddca67ff8a2a4a969f08"
+          },
+          {
+            "view": "right",
+            "path": "art/full-ai-city/inputs/expansion/onsen_2/033d090ac791068e/view01_azim090.png",
+            "sha256": "d9032a623857b92f6e70ed3801210615a27b8c70e457b24334f061a702ced3e9"
+          },
+          {
+            "view": "back",
+            "path": "art/full-ai-city/inputs/expansion/onsen_2/033d090ac791068e/view02_azim180.png",
+            "sha256": "e1a273d53b772ee798bb172ef4ceec31a0572c7939d38705a0718417a89c3ad3"
+          }
+        ],
+        "normalisationScale": 2.1667946658853454,
+        "placementReview": {
+          "independentParcelScale": 2.1667946658853454,
+          "scale": 2.1667946658853454,
+          "reason": "independent_uniform_parcel_fit",
+          "relativeToIndependentFit": 1.0,
+          "sharedCameraReviewRequired": true
+        },
+        "reviewStatus": "approved",
+        "triangleBudget": 45000
       }
     },
     {
       "name": "expansion_onsen_3",
+      "size": [
+        2.5,
+        1.4846235513687134,
+        0.919085219502449
+      ],
       "bounds": {
         "min": [
-          -1.2599999904632568,
-          -0.5699999928474426,
-          0.0
+          -1.25,
+          0.0,
+          -0.4595426097512245
         ],
         "max": [
-          1.2599999904632568,
-          0.5199999809265137,
-          1.600000023841858
+          1.25,
+          1.4846235513687134,
+          0.4595426097512245
         ]
       },
-      "size": [
-        2.5199999809265137,
-        1.0899999737739563,
-        1.600000023841858
-      ],
-      "triangles": 22388,
+      "triangles": 44985,
       "source": {
-        "kind": "blender_three_view",
-        "reference": "art/regions/references/expansion-landmarks-three-views.png"
+        "sourceType": "pixal_native_multiview",
+        "family": "onsen",
+        "level": 3,
+        "sourceFile": "assets/models/regions-ai/full/expansion/onsen_3/7b20123d4c49f192.glb",
+        "sourceSha256": "7b20123d4c49f192744fea6cc2fd43c470b91393774f7c7622282051dc578d55",
+        "inferenceReport": "art/full-ai-city/reports/expansion--onsen_3-a001/expansion--onsen_3-a001-pixal-mv-1024-9247.json",
+        "reference": "art/full-ai-city/inputs/expansion/onsen_3/a65f22b385a4efbf/reference.json",
+        "rawSourceSha256": "124c4aa0cb5c81e3e0322b26871f4ae7a9127a28164733e5a3586c756be27dc7",
+        "referenceViews": [
+          {
+            "view": "front",
+            "path": "art/full-ai-city/inputs/expansion/onsen_3/a65f22b385a4efbf/view00_azim000.png",
+            "sha256": "f09ba694634f887be28afdb59443f4877636ed4f61163d6ac35da0116f6fb53d"
+          },
+          {
+            "view": "right",
+            "path": "art/full-ai-city/inputs/expansion/onsen_3/a65f22b385a4efbf/view01_azim090.png",
+            "sha256": "ed2edcdeb390a16ba040ab3d80b90f858345d56ad567562f8d581ba4a56e8805"
+          },
+          {
+            "view": "back",
+            "path": "art/full-ai-city/inputs/expansion/onsen_3/a65f22b385a4efbf/view02_azim180.png",
+            "sha256": "e6baf6d34e91430491bbaf3760b9f89d8c33340c45f375f3e9880e6cc879244d"
+          }
+        ],
+        "normalisationScale": 2.5,
+        "placementReview": {
+          "independentParcelScale": 2.5,
+          "scale": 2.5,
+          "reason": "independent_uniform_parcel_fit",
+          "relativeToIndependentFit": 1.0,
+          "sharedCameraReviewRequired": true
+        },
+        "reviewStatus": "approved",
+        "triangleBudget": 45000
       }
     },
     {
       "name": "expansion_civic_hall",
+      "size": [
+        1.04,
+        1.1254229060068979,
+        0.9682984635484929
+      ],
       "bounds": {
         "min": [
-          -0.48500001430511475,
-          -0.46799999475479126,
-          0.0
+          -0.52,
+          0.0,
+          -0.48414923177424646
         ],
         "max": [
-          0.48500001430511475,
-          0.4399999976158142,
-          1.3300000429153442
+          0.52,
+          1.1254229060068979,
+          0.48414923177424646
         ]
       },
-      "size": [
-        0.9700000286102295,
-        0.9079999923706055,
-        1.3300000429153442
-      ],
-      "triangles": 8372,
+      "triangles": 29994,
       "source": {
-        "kind": "blender_three_view",
-        "reference": "art/regions/references/expansion-public-three-views.png"
+        "sourceType": "pixal_native_multiview",
+        "family": "civic_hall",
+        "level": 0,
+        "sourceFile": "assets/models/regions-ai/full/expansion/civic_hall/65ef06901111099d.glb",
+        "sourceSha256": "65ef06901111099dfdaeb24a1d10b64840b5cb12fd669f2c3673005c0130a59a",
+        "inferenceReport": "art/full-ai-city/reports/expansion--civic_hall-a008/expansion--civic_hall-a008-pixal-mv-1024-9247.json",
+        "reference": "art/full-ai-city/inputs/expansion/civic_hall/e1793e534d0ae514/reference.json",
+        "rawSourceSha256": "4c4c66175d2fb4eb0aed680ce7893cdc84e3d953b142a54aed301b7e7c83c40e",
+        "referenceViews": [
+          {
+            "view": "front",
+            "path": "art/full-ai-city/inputs/expansion/civic_hall/e1793e534d0ae514/view00_azim000.png",
+            "sha256": "64018cf475c9195d5bfe303eb298a0cc475ab84aaa6297b698f42256edebd47b"
+          },
+          {
+            "view": "right",
+            "path": "art/full-ai-city/inputs/expansion/civic_hall/e1793e534d0ae514/view01_azim090.png",
+            "sha256": "7965a5c162c415ed3ca468322429df303267d1a4b073fd091fb2e494c4c9ab83"
+          },
+          {
+            "view": "back",
+            "path": "art/full-ai-city/inputs/expansion/civic_hall/e1793e534d0ae514/view02_azim180.png",
+            "sha256": "ff4ca5e0ce7b049353893fdb31b0d7d9f36cfc0ff89ac503cdcb1cbd628ed156"
+          }
+        ],
+        "normalisationScale": 1.1254229060068979,
+        "placementReview": {
+          "independentParcelScale": 1.1254229060068979,
+          "scale": 1.1254229060068979,
+          "reason": "independent_uniform_parcel_fit",
+          "relativeToIndependentFit": 1.0,
+          "sharedCameraReviewRequired": true
+        },
+        "reviewStatus": "approved",
+        "triangleBudget": 30000
       }
     },
     {
       "name": "expansion_vault_bank",
+      "size": [
+        1.005207715034485,
+        0.9184858369827271,
+        1.04
+      ],
       "bounds": {
         "min": [
-          -0.48500001430511475,
-          -0.46799999475479126,
-          0.0
+          -0.5026038575172425,
+          0.0,
+          -0.52
         ],
         "max": [
-          0.48500001430511475,
-          0.4399999976158142,
-          0.9629999995231628
+          0.5026038575172425,
+          0.9184858369827271,
+          0.52
         ]
       },
-      "size": [
-        0.9700000286102295,
-        0.9079999923706055,
-        0.9629999995231628
-      ],
-      "triangles": 6772,
+      "triangles": 29986,
       "source": {
-        "kind": "blender_three_view",
-        "reference": "art/regions/references/expansion-public-three-views.png"
+        "sourceType": "pixal_native_multiview",
+        "family": "vault_bank",
+        "level": 0,
+        "sourceFile": "assets/models/regions-ai/full/expansion/vault_bank/da2f2d397e342497.glb",
+        "sourceSha256": "da2f2d397e34249716acf5e421a04ddb3023e61a8d44452a84d19fa0385a5420",
+        "inferenceReport": "art/full-ai-city/reports/expansion--vault_bank-a001/expansion--vault_bank-a001-pixal-mv-1024-9247.json",
+        "reference": "art/full-ai-city/inputs/expansion/vault_bank/e95fe793a53f7dae/reference.json",
+        "rawSourceSha256": "4e0341b6a78d3d26a4923e7583b0202baab2309505cb0809946ebb93b38b7644",
+        "referenceViews": [
+          {
+            "view": "front",
+            "path": "art/full-ai-city/inputs/expansion/vault_bank/e95fe793a53f7dae/view00_azim000.png",
+            "sha256": "eec7f123b038dfaad30b5952cd9a65dbaed3d34997a808d4dcfc2b53d2b85a71"
+          },
+          {
+            "view": "right",
+            "path": "art/full-ai-city/inputs/expansion/vault_bank/e95fe793a53f7dae/view01_azim090.png",
+            "sha256": "6cde68a95d70146e1f96b70a6a9fed6c9a228eff09d6eca0db36bc07f5755512"
+          },
+          {
+            "view": "back",
+            "path": "art/full-ai-city/inputs/expansion/vault_bank/e95fe793a53f7dae/view02_azim180.png",
+            "sha256": "a7c09d0ff99d6e140a798afe61729577f8de147f6531aa2c505c8c0e12fd0488"
+          }
+        ],
+        "normalisationScale": 1.04,
+        "placementReview": {
+          "independentParcelScale": 1.04,
+          "scale": 1.04,
+          "reason": "independent_uniform_parcel_fit",
+          "relativeToIndependentFit": 1.0,
+          "sharedCameraReviewRequired": true
+        },
+        "reviewStatus": "approved",
+        "triangleBudget": 30000
       }
     },
     {
       "name": "expansion_builders_guild",
+      "size": [
+        1.04,
+        0.938012837554819,
+        0.8233131153869325
+      ],
       "bounds": {
         "min": [
-          -0.48500001430511475,
-          -0.46799999475479126,
-          0.0
+          -0.5199999999999999,
+          0.0,
+          -0.4116565576934662
         ],
         "max": [
-          0.5299999713897705,
-          0.4399999976158142,
-          1.132900357246399
+          0.52,
+          0.938012837554819,
+          0.41165655769346626
         ]
       },
-      "size": [
-        1.0149999856948853,
-        0.9079999923706055,
-        1.132900357246399
-      ],
-      "triangles": 6176,
+      "triangles": 29989,
       "source": {
-        "kind": "blender_three_view",
-        "reference": "art/regions/references/expansion-public-three-views.png"
+        "sourceType": "pixal_native_multiview",
+        "family": "builders_guild",
+        "level": 0,
+        "sourceFile": "assets/models/regions-ai/full/expansion/builders_guild/8e708688eaaea6d7.glb",
+        "sourceSha256": "8e708688eaaea6d71c5e0214c70458aafd60ece66f0b5c00d0f557283b062e50",
+        "inferenceReport": "art/full-ai-city/reports/retexture/expansion/builders_guild/a70799dd592a0a7d-provenance/a073b8e719b2e4442feeaaef4e4ba12bd079a721bbec784ab8bf3b6659ea1c56-expansion--builders_guild-a001-pixal-mv-1024-9247.json",
+        "reference": "art/full-ai-city/reports/retexture/expansion/builders_guild/a70799dd592a0a7d-provenance/291a8561038acbbfae622cb65ce6feee56ad15ee9b8301bdbf1ef7f98eaa3b14-reference.json",
+        "rawSourceSha256": "f237bcc0a928abbbc82bfa1d197f64c6bcd975ebab3f983acff20bfa31de6626",
+        "referenceViews": [
+          {
+            "view": "front",
+            "path": "art/full-ai-city/inputs/expansion/builders_guild/5b5a2b9415fb5eae/view00_azim000.png",
+            "sha256": "628770a359f04b323655ed20a2ea5b1172a1c6f0d0d13081c86a8f85a815ce5b"
+          },
+          {
+            "view": "right",
+            "path": "art/full-ai-city/inputs/expansion/builders_guild/5b5a2b9415fb5eae/view01_azim090.png",
+            "sha256": "bbe3a265e51c55f3de26fbabeeffda8a26d6150f7521ed2857e6287d5e442c82"
+          },
+          {
+            "view": "back",
+            "path": "art/full-ai-city/inputs/expansion/builders_guild/5b5a2b9415fb5eae/view02_azim180.png",
+            "sha256": "f895e00acda2ec7216ce401e8af017ff08d94b3e592307c1fc6c5400cc0c36ad"
+          }
+        ],
+        "normalisationScale": 1.0381583565282735,
+        "placementReview": {
+          "independentParcelScale": 1.0381583565282735,
+          "scale": 1.0381583565282735,
+          "reason": "independent_uniform_parcel_fit",
+          "relativeToIndependentFit": 1.0,
+          "sharedCameraReviewRequired": true
+        },
+        "reviewStatus": "approved",
+        "triangleBudget": 30000
       }
     },
     {
       "name": "expansion_card_pavilion",
+      "size": [
+        1.04,
+        0.8998435640335083,
+        0.9342245531082154
+      ],
       "bounds": {
         "min": [
-          -0.48500001430511475,
-          -0.49900001287460327,
-          0.0
+          -0.52,
+          0.0,
+          -0.4671122765541077
         ],
         "max": [
-          0.48500001430511475,
-          0.484499990940094,
-          0.9629999995231628
+          0.52,
+          0.8998435640335083,
+          0.4671122765541077
         ]
       },
-      "size": [
-        0.9700000286102295,
-        0.9835000038146973,
-        0.9629999995231628
-      ],
-      "triangles": 9444,
+      "triangles": 29992,
       "source": {
-        "kind": "blender_three_view",
-        "reference": "art/regions/references/expansion-public-three-views.png"
+        "sourceType": "pixal_native_multiview",
+        "family": "card_pavilion",
+        "level": 0,
+        "sourceFile": "assets/models/regions-ai/full/expansion/card_pavilion/3c5655937355faff.glb",
+        "sourceSha256": "3c5655937355faffb05a0d4a5971c2b2a4bb58ceb7d1963d8e19e140a55a26a3",
+        "inferenceReport": "art/full-ai-city/reports/expansion--card_pavilion-a008/expansion--card_pavilion-a008-pixal-mv-1024-9247.json",
+        "reference": "art/full-ai-city/inputs/expansion/card_pavilion/3471741655737ff3/reference.json",
+        "rawSourceSha256": "a248cb22418a07f2e2fb9b22e2df5b0f5296864c0f8331c8d3b2862f23cd0bb6",
+        "referenceViews": [
+          {
+            "view": "front",
+            "path": "art/full-ai-city/inputs/expansion/card_pavilion/3471741655737ff3/view00_azim000.png",
+            "sha256": "363a82ca5ec693d718ae8c3046c4ab7020a2f73bffd3acee8bf3fb37859b26c0"
+          },
+          {
+            "view": "right",
+            "path": "art/full-ai-city/inputs/expansion/card_pavilion/3471741655737ff3/view01_azim090.png",
+            "sha256": "b37271b9d9a0c3d1f9e91f967daabc48e06b976c9fae1863ceace1a3a663cd53"
+          },
+          {
+            "view": "back",
+            "path": "art/full-ai-city/inputs/expansion/card_pavilion/3471741655737ff3/view02_azim180.png",
+            "sha256": "2d095ee1a6f61603c08e6a2d8907bc8868ade6fac70d6c8f91921bd0042b04fb"
+          }
+        ],
+        "normalisationScale": 1.04,
+        "placementReview": {
+          "independentParcelScale": 1.04,
+          "scale": 1.04,
+          "reason": "independent_uniform_parcel_fit",
+          "relativeToIndependentFit": 1.0,
+          "sharedCameraReviewRequired": true
+        },
+        "reviewStatus": "approved",
+        "triangleBudget": 30000
       }
     },
     {
       "name": "expansion_chance_wheel",
+      "size": [
+        1.04,
+        0.9888511312071042,
+        0.9351622838853362
+      ],
       "bounds": {
         "min": [
-          -0.48500001430511475,
-          -0.4399999976158142,
-          0.0
+          -0.52,
+          0.0,
+          -0.46758114194266814
         ],
         "max": [
-          0.5249999761581421,
-          0.4399999976158142,
-          0.9750000238418579
+          0.52,
+          0.9888511312071042,
+          0.4675811419426681
         ]
       },
-      "size": [
-        1.0099999904632568,
-        0.8799999952316284,
-        0.9750000238418579
-      ],
-      "triangles": 2896,
+      "triangles": 31739,
       "source": {
-        "kind": "blender_three_view",
-        "reference": "art/regions/references/expansion-public-three-views.png"
+        "sourceType": "pixal_native_multiview",
+        "family": "chance_wheel",
+        "level": 0,
+        "sourceFile": "assets/models/regions-ai/full/expansion/chance_wheel/63b83a39c30792e8.glb",
+        "sourceSha256": "63b83a39c30792e8817d8a68d8bd8555b8d3d752f466d993d1a12396e72c067b",
+        "inferenceReport": "art/full-ai-city/reports/expansion--chance_wheel-a001/expansion--chance_wheel-a001-pixal-mv-1024-9247.json",
+        "reference": "art/full-ai-city/inputs/expansion/chance_wheel/8b4832b7e1ff5d16/reference.json",
+        "rawSourceSha256": "f05d41993222025adb14f0e8fe59abe48fa2bf8eeaedcf8d409a054e47e1b0c0",
+        "referenceViews": [
+          {
+            "view": "front",
+            "path": "art/full-ai-city/inputs/expansion/chance_wheel/8b4832b7e1ff5d16/view00_azim000.png",
+            "sha256": "a158eca97b80231f68d4048f567611b3d8b8f303de03bb6a3874686edebc8a98"
+          },
+          {
+            "view": "right",
+            "path": "art/full-ai-city/inputs/expansion/chance_wheel/8b4832b7e1ff5d16/view01_azim090.png",
+            "sha256": "1c043d1c67975baa3178c42007f3d070e95c3b32b2eb21005c19cb9769a86e81"
+          },
+          {
+            "view": "back",
+            "path": "art/full-ai-city/inputs/expansion/chance_wheel/8b4832b7e1ff5d16/view02_azim180.png",
+            "sha256": "39c0d723475d6f577bc12c8e0976e19827284d5459ec30d68aed8357be129d07"
+          }
+        ],
+        "normalisationScale": 1.0439307590670457,
+        "placementReview": {
+          "independentParcelScale": 1.0439307590670457,
+          "scale": 1.0439307590670457,
+          "reason": "independent_uniform_parcel_fit",
+          "relativeToIndependentFit": 1.0,
+          "sharedCameraReviewRequired": true
+        },
+        "reviewStatus": "approved",
+        "triangleBudget": 30000
       }
     },
     {
       "name": "expansion_teleport_gate",
+      "size": [
+        1.04,
+        0.8351773118972778,
+        0.3303540682792664
+      ],
       "bounds": {
         "min": [
-          -0.5245000123977661,
-          -0.4399999976158142,
-          0.0
+          -0.52,
+          0.0,
+          -0.1651770341396332
         ],
         "max": [
-          0.5245000123977661,
-          0.4399999976158142,
-          1.0036134719848633
+          0.52,
+          0.8351773118972778,
+          0.1651770341396332
         ]
       },
-      "size": [
-        1.0490000247955322,
-        0.8799999952316284,
-        1.0036134719848633
-      ],
-      "triangles": 6592,
+      "triangles": 29988,
       "source": {
-        "kind": "blender_three_view",
-        "reference": "art/regions/references/expansion-public-three-views.png"
+        "sourceType": "pixal_native_multiview",
+        "family": "teleport_gate",
+        "level": 0,
+        "sourceFile": "assets/models/regions-ai/full/expansion/teleport_gate/5d55505814e73109.glb",
+        "sourceSha256": "5d55505814e731091b75343c531d585d57a706fc8c456b14ce86cba0409d4518",
+        "inferenceReport": "art/full-ai-city/reports/expansion--teleport_gate-a008/expansion--teleport_gate-a008-pixal-mv-1024-29486.json",
+        "reference": "art/full-ai-city/inputs/expansion/teleport_gate/b51b2a8056d316c8/reference.json",
+        "rawSourceSha256": "6577efd25e512de85320d7cdbd3b769a0cc497e601d4832454e1afc315b8b024",
+        "referenceViews": [
+          {
+            "view": "front",
+            "path": "art/full-ai-city/inputs/expansion/teleport_gate/b51b2a8056d316c8/view00_azim000.png",
+            "sha256": "4cb23c0865453f8b7a69d0cea11130542f95374d1e769693df6d64c29c9b4b98"
+          },
+          {
+            "view": "right",
+            "path": "art/full-ai-city/inputs/expansion/teleport_gate/b51b2a8056d316c8/view01_azim090.png",
+            "sha256": "f642cecd79126a2e941d086753610994083e23ef97e651a1a236d70d25ac0ac0"
+          },
+          {
+            "view": "back",
+            "path": "art/full-ai-city/inputs/expansion/teleport_gate/b51b2a8056d316c8/view02_azim180.png",
+            "sha256": "c6fc37e98fc39e818d209a585a211ca47574db2a51da7204138e6761bc3a73b5"
+          }
+        ],
+        "normalisationScale": 1.04,
+        "placementReview": {
+          "independentParcelScale": 1.04,
+          "scale": 1.04,
+          "reason": "independent_uniform_parcel_fit",
+          "relativeToIndependentFit": 1.0,
+          "sharedCameraReviewRequired": true
+        },
+        "reviewStatus": "approved",
+        "triangleBudget": 30000
       }
     },
     {
       "name": "expansion_rush_station",
+      "size": [
+        1.04,
+        0.7726393842697143,
+        0.957115044593811
+      ],
       "bounds": {
         "min": [
-          -0.48500001430511475,
-          -0.49000000953674316,
-          0.0
+          -0.52,
+          0.0,
+          -0.4785575222969055
         ],
         "max": [
-          0.48500001430511475,
-          0.4399999976158142,
-          0.8130000233650208
+          0.52,
+          0.7726393842697143,
+          0.4785575222969055
         ]
       },
-      "size": [
-        0.9700000286102295,
-        0.9300000071525574,
-        0.8130000233650208
-      ],
-      "triangles": 4700,
+      "triangles": 29991,
       "source": {
-        "kind": "blender_three_view",
-        "reference": "art/regions/references/expansion-public-three-views.png"
+        "sourceType": "pixal_native_multiview",
+        "family": "rush_station",
+        "level": 0,
+        "sourceFile": "assets/models/regions-ai/full/expansion/rush_station/8ff18f0fa0def5cd.glb",
+        "sourceSha256": "8ff18f0fa0def5cdf36285862c3a72dd72329d32df8c61ebe23fbe05d9a452a4",
+        "inferenceReport": "art/full-ai-city/reports/expansion--rush_station-a008/expansion--rush_station-a008-pixal-mv-1024-9247.json",
+        "reference": "art/full-ai-city/inputs/expansion/rush_station/7e2108c4f2f97e1a/reference.json",
+        "rawSourceSha256": "2c582261ac387dc366a72bfc651b69da4cafce8df84be508ab3961bfe88115f4",
+        "referenceViews": [
+          {
+            "view": "front",
+            "path": "art/full-ai-city/inputs/expansion/rush_station/7e2108c4f2f97e1a/view00_azim000.png",
+            "sha256": "bcf517b56e07d5128730f627908e4f4a34233aed00663e0be54b83ff9c912cb6"
+          },
+          {
+            "view": "right",
+            "path": "art/full-ai-city/inputs/expansion/rush_station/7e2108c4f2f97e1a/view01_azim090.png",
+            "sha256": "809d94b0b66d6679980f0177b0931b8dc5eb34ac75d5ecd9f4fd09e2b98169a3"
+          },
+          {
+            "view": "back",
+            "path": "art/full-ai-city/inputs/expansion/rush_station/7e2108c4f2f97e1a/view02_azim180.png",
+            "sha256": "6bd0c642e08129b3ec328aaf1eda43ba64002f7d074023e62e9d8de4e0e1c79b"
+          }
+        ],
+        "normalisationScale": 1.04,
+        "placementReview": {
+          "independentParcelScale": 1.04,
+          "scale": 1.04,
+          "reason": "independent_uniform_parcel_fit",
+          "relativeToIndependentFit": 1.0,
+          "sharedCameraReviewRequired": true
+        },
+        "reviewStatus": "approved",
+        "triangleBudget": 30000
       }
     },
     {
       "name": "expansion_junction_hub",
+      "size": [
+        1.04,
+        0.9186113643646241,
+        0.7248905658721924
+      ],
       "bounds": {
         "min": [
-          -0.48500001430511475,
-          -0.4429999887943268,
-          0.0
+          -0.52,
+          0.0,
+          -0.3624452829360962
         ],
         "max": [
-          0.49672308564186096,
-          0.4399999976158142,
-          0.8130000233650208
+          0.52,
+          0.9186113643646241,
+          0.3624452829360962
         ]
       },
-      "size": [
-        0.9817230999469757,
-        0.882999986410141,
-        0.8130000233650208
-      ],
-      "triangles": 4100,
+      "triangles": 29992,
       "source": {
-        "kind": "blender_three_view",
-        "reference": "art/regions/references/expansion-public-three-views.png"
+        "sourceType": "pixal_native_multiview",
+        "family": "junction_hub",
+        "level": 0,
+        "sourceFile": "assets/models/regions-ai/full/expansion/junction_hub/2765f9561060fbbc.glb",
+        "sourceSha256": "2765f9561060fbbc93274dd71a1d8fde855369ddbc5ed5d80284da6e35cfc6f3",
+        "inferenceReport": "art/full-ai-city/reports/expansion--junction_hub-a008/expansion--junction_hub-a008-pixal-mv-1024-9247.json",
+        "reference": "art/full-ai-city/inputs/expansion/junction_hub/a9cc0541db882eda/reference.json",
+        "rawSourceSha256": "3f206acdb7353c1fbe89c5241a110cbbabf9ec6f2cc2707632b3a2bdad2f7508",
+        "referenceViews": [
+          {
+            "view": "front",
+            "path": "art/full-ai-city/inputs/expansion/junction_hub/a9cc0541db882eda/view00_azim000.png",
+            "sha256": "e96efd53986c933a918ea6f78416634ce9754f2166354223d6bf188f817043fc"
+          },
+          {
+            "view": "right",
+            "path": "art/full-ai-city/inputs/expansion/junction_hub/a9cc0541db882eda/view01_azim090.png",
+            "sha256": "84e4d016283421d6f76ebabbf955efcea600432978f033b86bce49aed016cc19"
+          },
+          {
+            "view": "back",
+            "path": "art/full-ai-city/inputs/expansion/junction_hub/a9cc0541db882eda/view02_azim180.png",
+            "sha256": "951a272ad8253df38da6d513ba0cdf5b482c9b91052bfd61a72f56bd3a4a08c7"
+          }
+        ],
+        "normalisationScale": 1.04,
+        "placementReview": {
+          "independentParcelScale": 1.04,
+          "scale": 1.04,
+          "reason": "independent_uniform_parcel_fit",
+          "relativeToIndependentFit": 1.0,
+          "sharedCameraReviewRequired": true
+        },
+        "reviewStatus": "approved",
+        "triangleBudget": 30000
       }
     }
-  ]
+  ],
+  "packedAtUtc": "2026-10-24T08:15:43.652950+00:00",
+  "sha256": "b5a5b9bd0928bbd7e57a897a88f3913beb1dd8b6acac9b56d60bebdd910fc53a",
+  "bytes": 37333768
 }

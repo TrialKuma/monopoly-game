@@ -1,0 +1,67 @@
+{
+  "region": "classic",
+  "asset": "skyscraper_1",
+  "class": "large",
+  "status": "raw_ready",
+  "attempts": [
+    {
+      "id": "classic--skyscraper_1-a001",
+      "startedAt": "2026-10-23T05:38:19.498962+00:00",
+      "report": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\classic--skyscraper_1-a001\\classic--skyscraper_1-a001-pixal-mv-1024-9247.json",
+      "log": "H:\\代码项目\\monopoly\\art\\full-ai-city\\logs\\classic--skyscraper_1-a001.log",
+      "command": [
+        "C:\\Users\\A\\.codex\\worktrees\\0b69\\厂长\\grande-art-lab\\source\\experimental\\pixal-env\\Scripts\\python.exe",
+        "-B",
+        "-u",
+        "H:\\代码项目\\monopoly\\art\\full-ai-city\\tools\\run_raw_job.py",
+        "--job-id",
+        "classic--skyscraper_1-a001",
+        "--views-dir",
+        "H:\\代码项目\\monopoly\\art\\full-ai-city\\inputs\\classic\\skyscraper_1\\e22522729579605b",
+        "--seed",
+        "9247"
+      ],
+      "inputSourceHash": "e22522729579605b358a9723007d6cc0566f24c6951b0c38c16a12ab0e9df8eb",
+      "seed": 9247,
+      "pid": 17332,
+      "exitCode": 0,
+      "finishedAt": "2026-10-23T05:41:38.803506+00:00"
+    }
+  ],
+  "reference": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\references\\classic\\skyscraper_1\\reference.json",
+    "sha256": "2604652dfe3cf79ec028421faff9484b8418ee50a50c9eb91e71a9701f7fb737",
+    "bytes": 4051
+  },
+  "viewsDir": "H:\\代码项目\\monopoly\\art\\full-ai-city\\inputs\\classic\\skyscraper_1\\e22522729579605b",
+  "inputSha256": "9967a76ee3aeae872c35db0c1e86d564982cd5134a120e6b60f3641080d392a4",
+  "sourceSha256": "e22522729579605b358a9723007d6cc0566f24c6951b0c38c16a12ab0e9df8eb",
+  "inputSourceHash": "e22522729579605b358a9723007d6cc0566f24c6951b0c38c16a12ab0e9df8eb",
+  "updatedAt": "2026-10-24T07:03:59.318973+00:00",
+  "referenceReadiness": {
+    "ready": false,
+    "matchingHash": true,
+    "checkedAt": "2026-10-23T05:15:23.938910+00:00"
+  },
+  "generationMetadata": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\references\\classic\\skyscraper_1.generation.json",
+    "sha256": "436a198c675586faaf1dd6dc95f53fa360f4d8cc48b4b2ddba1c118bf2603d0f",
+    "bytes": 1483
+  },
+  "rawGLB": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\classic--skyscraper_1-a001-pixal-mv-1024-9247.glb",
+    "sha256": "91f43f9484165cb40acfb254f8d591893dca1f04fa06605d674b4139a2a70c8a",
+    "bytes": 43045128
+  },
+  "inferenceReport": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\classic--skyscraper_1-a001\\classic--skyscraper_1-a001-pixal-mv-1024-9247.json",
+    "sha256": "68fd45a4277ecbfdd60510e3bd68edd3b44792d96020fafb101fe8f6e64247ba",
+    "bytes": 8155
+  },
+  "processingRevision": 1,
+  "processingOverrides": {
+    "triangles": 45000,
+    "removeDarkGround": true
+  },
+  "processingRevisionReason": "Reviewer /root/outskirts rejects native extra black rectangular ground sheet. Delete only low inferred floor faces, preserve building and existing architectural plinth; no new geometry."
+}

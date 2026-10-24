@@ -1,0 +1,297 @@
+{
+  "status": "generated_unrigged_part_candidate",
+  "started_utc": "2026-10-23T23:00:09.128398+00:00",
+  "generation_started": true,
+  "local_inference_only": true,
+  "asset_id": "compact--card_pavilion-a009",
+  "weights": {
+    "ready": true,
+    "models": [
+      {
+        "name": "sparse_structure_decoder",
+        "checkpoint": "C:\\Users\\A\\.codex\\worktrees\\0b69\\厂长\\grande-art-lab\\source\\experimental\\models\\Pixal3D\\ckpts\\ss_dec_conv3d_16l8_fp16.safetensors",
+        "bytes": 147591972,
+        "ready": true
+      },
+      {
+        "name": "sparse_structure_flow_model",
+        "checkpoint": "C:\\Users\\A\\.codex\\worktrees\\0b69\\厂长\\grande-art-lab\\source\\experimental\\models\\Pixal3D\\ckpts\\ss_flow_img_dit_1_3B_64_bf16_mv.safetensors",
+        "bytes": 5359822584,
+        "ready": true
+      },
+      {
+        "name": "shape_slat_decoder",
+        "checkpoint": "C:\\Users\\A\\.codex\\worktrees\\0b69\\厂长\\grande-art-lab\\source\\experimental\\models\\Pixal3D\\ckpts\\shape_dec_next_dc_f16c32_fp16.safetensors",
+        "bytes": 948490494,
+        "ready": true
+      },
+      {
+        "name": "shape_slat_flow_model_512",
+        "checkpoint": "C:\\Users\\A\\.codex\\worktrees\\0b69\\厂长\\grande-art-lab\\source\\experimental\\models\\Pixal3D\\ckpts\\slat_flow_img2shape_dit_1_3B_512_bf16_mv.safetensors",
+        "bytes": 5546764048,
+        "ready": true
+      },
+      {
+        "name": "shape_slat_flow_model_1024",
+        "checkpoint": "C:\\Users\\A\\.codex\\worktrees\\0b69\\厂长\\grande-art-lab\\source\\experimental\\models\\Pixal3D\\ckpts\\slat_flow_img2shape_dit_1_3B_1024_bf16_mv.safetensors",
+        "bytes": 5546764048,
+        "ready": true
+      },
+      {
+        "name": "tex_slat_decoder",
+        "checkpoint": "C:\\Users\\A\\.codex\\worktrees\\0b69\\厂长\\grande-art-lab\\source\\experimental\\models\\Pixal3D\\ckpts\\tex_dec_next_dc_f16c32_fp16.safetensors",
+        "bytes": 948458812,
+        "ready": true
+      },
+      {
+        "name": "tex_slat_flow_model_1024",
+        "checkpoint": "C:\\Users\\A\\.codex\\worktrees\\0b69\\厂长\\grande-art-lab\\source\\experimental\\models\\Pixal3D\\ckpts\\slat_flow_imgshape2tex_dit_1_3B_1024_bf16_mv.safetensors",
+        "bytes": 5546960656,
+        "ready": true
+      }
+    ],
+    "config": "C:\\Users\\A\\.codex\\worktrees\\0b69\\厂长\\grande-art-lab\\source\\experimental\\models\\Pixal3D\\pipeline_mv.json",
+    "config_sha256": "3bd8f005301423604aafbfab126639c675d7dc6968b8113271433f6593901715"
+  },
+  "resources_before": {
+    "gpu": "NVIDIA GeForce RTX 5070 Ti",
+    "total_physical_vram_gib": 15.9208984375,
+    "free_physical_vram_gib": 15.0498046875,
+    "gpu_utilization_percent": 4,
+    "total_ram_gib": 31.152122497558594,
+    "available_ram_gib": 22.225284576416016
+  },
+  "output": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\compact--card_pavilion-a009-pixal-mv-1024-9247.glb",
+  "input": "H:\\代码项目\\monopoly\\art\\full-ai-city\\inputs\\compact\\card_pavilion\\fbd4d354c58244df\\transforms.json",
+  "input_sha256": "536b9713d103004b593666d462a0992603502c02d3ebd3f8735759d5cf7554ef",
+  "input_views": [
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\inputs\\compact\\card_pavilion\\fbd4d354c58244df\\view00_azim000.png",
+      "sha256": "fb66dd605ac10ada90ed873b0333ec527aa89fb4c44b26e587c2f535128a385a",
+      "size": [
+        724,
+        724
+      ],
+      "alpha_bbox": [
+        20,
+        9,
+        701,
+        684
+      ],
+      "camera_to_world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          -1.0,
+          -3.1192049980163574
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\inputs\\compact\\card_pavilion\\fbd4d354c58244df\\view01_azim090.png",
+      "sha256": "56853de17a338c5af8bec246cde2ca5c6edf3162a695a5f2b99f7b420a4792de",
+      "size": [
+        724,
+        724
+      ],
+      "alpha_bbox": [
+        13,
+        27,
+        702,
+        705
+      ],
+      "camera_to_world": [
+        [
+          0.0,
+          0.0,
+          1.0,
+          3.1192049980163574
+        ],
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\inputs\\compact\\card_pavilion\\fbd4d354c58244df\\view02_azim180.png",
+      "sha256": "8859d6e91218940f4c2b77f1d6058bfda3c9a8f9e316681f563f19dd83e89dab",
+      "size": [
+        724,
+        724
+      ],
+      "alpha_bbox": [
+        3,
+        21,
+        710,
+        674
+      ],
+      "camera_to_world": [
+        [
+          -1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          3.1192049980163574
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    }
+  ],
+  "assumed_cameras": true,
+  "camera_calibration": "assumed_standard_orbit_not_measured",
+  "source_board": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\references\\compact\\card_pavilion.png",
+    "sha256": "fbd4d354c58244dfb49b935426c1f2d3cc3fd12a032b7597760abaef8e397246",
+    "bytes": 1660265
+  },
+  "view_count": 3,
+  "camera_angle_x": 0.3490658503988659,
+  "mesh_scale": 1.0,
+  "native_entrypoint": "inference_mv.py:run_inference / Pixal3DMVImageTo3DPipeline.run_mv",
+  "resolution": 1024,
+  "seed": 9247,
+  "low_vram": true,
+  "strict_naf": true,
+  "texture_size": 4096,
+  "sampler_steps": {
+    "ss": 12,
+    "shape": 12,
+    "tex": 12
+  },
+  "native_checkpoint_dtypes_preserved": true,
+  "pipeline_config": "pipeline_mv.json",
+  "multiview_fusion": "average",
+  "shared_files_write_protected": true,
+  "cache_directory": "H:\\代码项目\\monopoly\\art\\full-ai-city\\cache",
+  "runner_sha256": "fc67056fffefc4d1cba774689d29317ae5f57bfea27ab342791bf1be58444f7e",
+  "runner_source_snapshot": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\compact--card_pavilion-a009\\runner-source.py",
+  "post_projection_allocator_cleanup": "Release only unused CUDA cached blocks after complete native conditioner return",
+  "projection_cache_adapter_sha256": "aabecb5acc98a013068a5891226fe1034f764585383290c6917cce230c203bcb",
+  "lifetime_adapter_sha256": "a815f73fbb24f0e7e4eb171ffa0f40472ef30346a109410399a2f7e404db47d7",
+  "gpu_lock": {
+    "status": "released",
+    "pid": 27448,
+    "host": "NeoRic",
+    "label": "monopoly-native-multiview-compact--card_pavilion-a009",
+    "acquired_utc": "2026-10-23T23:00:09.186430+00:00",
+    "lock_path": "C:\\Users\\A\\.codex\\shared-resource-locks\\pixal-gpu0.lock",
+    "token": "053670c4c2ff48259522cad2f1986165",
+    "metadata_is_advisory": true
+  },
+  "memory_reservation_admission": {
+    "fineVoxelWorkers": [],
+    "checkedAt": "2026-10-23T23:00:09.213953+00:00",
+    "transitionScanOnly": true,
+    "mutualExclusion": "shared operating-system GPU byte lock"
+  },
+  "memory_reservation_tool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\705848501583a3e6e40072356e3423c4d9c9ad763e84e0f3fa5c1c9ba85b47a8-native_memory_reservation.py",
+    "sha256": "705848501583a3e6e40072356e3423c4d9c9ad763e84e0f3fa5c1c9ba85b47a8"
+  },
+  "torch": "2.10.0+cu130",
+  "natten": "0.21.6",
+  "cuda": "13.0",
+  "cuda_free_gib": 14.6845703125,
+  "cuda_total_gib": 15.89398193359375,
+  "prior_source_export_replay": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\uv-replays\\far-nativeUV-compact--tower_2-ea222572083c36a0\\receipt.json",
+    "sha256": "702f992e2291b0ea7dfd9e614a48c8d5cfc38f0002eaec93a098a69f51023926",
+    "bytes": 4011
+  },
+  "prior_source_export_replays": [
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\expansion--tower_1-1265f939c98c-surface-field-v1\\receipt.json",
+      "sha256": "bc269ea06a96b196092d013bd614e0ea9159260f20d06c83acadf76928cf45c4",
+      "bytes": 11398
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\compact--shop_2-38a23134eeaa-surface-field-v1\\receipt.json",
+      "sha256": "9f730ef598b68e6a803932d19537779bccebe3570ce112c315387a7de8ae5283",
+      "bytes": 11337
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\uv-replays\\far-nativeUV-compact--tower_2-ea222572083c36a0\\receipt.json",
+      "sha256": "702f992e2291b0ea7dfd9e614a48c8d5cfc38f0002eaec93a098a69f51023926",
+      "bytes": 4011
+    }
+  ],
+  "prior_export_batch": {
+    "maximumJobs": 3,
+    "softSecondsLimit": 90,
+    "elapsedSeconds": 75.234,
+    "neuralModelSettingsChanged": false
+  },
+  "native_mobile_request": {
+    "status": "capture_enabled",
+    "captureOnly": true,
+    "minDiskGiB": 12,
+    "purpose": "Freeze original per-inference neural geometry and material field for later mobile export without another neural inference. No automatic approval or publication.",
+    "jobId": "compact--card_pavilion-a009",
+    "policySha256": "7e58ddb0dbc94f1787443ccde94f97403b61417c87e9e697656e019222483934"
+  },
+  "native_mobile_export_receipt": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\compact--card_pavilion-a009\\receipt.json",
+    "sha256": "1afe0a547a2db9e811ac5eaaf1c34f712318efeb4590c257aabd1dd46e621152",
+    "bytes": 3731
+  },
+  "output_bytes": 40235348,
+  "output_sha256": "a32b53ec0433c07d2e95d90de7317023c5febb05270d02aca6722b24586525cb",
+  "input_unchanged": true,
+  "seconds": 490.8,
+  "finished_utc": "2026-10-23T23:08:19.972941+00:00",
+  "peak_allocated_gib": 16.375,
+  "batch_wrapper": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\compact--card_pavilion-a009\\batch-wrapper-source.py",
+    "sha256": "1424c229b4f5ef8d265c00484bee92acb8340a12a79f499ca13f33d4091b7837"
+  },
+  "pipeline_boundary": "Original native 1024_cascade; no unsupported 512 branch, no persistent model lifetime changes"
+}

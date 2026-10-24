@@ -1,0 +1,208 @@
+{
+  "status": "local_repair_candidate_pending_visual_review",
+  "source": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\harbor--card_pavilion-a002-pixal-mv-1024-29482.glb",
+    "sha256": "a060beb2ed9083af2116c47c7cd48c3b2d4da38fdd6ae32ffa591475cddd0d2f",
+    "bytes": 41800912
+  },
+  "orientation": {
+    "enabled": true,
+    "candidate_degrees": 0.4476235442502201,
+    "applied_degrees": 0.4476235442502201,
+    "underside_area": 0.5268537509013242,
+    "normal_agreement": 0.9810756008428639,
+    "yaw_degrees": 180,
+    "pitch_degrees": 0,
+    "roll_degrees": 0,
+    "uniform_scale": 1.0945608262526287
+  },
+  "configuration": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\source-repairs-planned\\harbor\\card_pavilion\\a060beb2ed9083af\\rear-arch-config.json",
+    "sha256": "80ec2ca26e2d38893c1767171fc83e8440a6e7ae67fea086f3dcafd17d229fcc",
+    "bytes": 1327
+  },
+  "reviewEvidence": [
+    {
+      "path": "reports/source-repairs-planned/harbor/card_pavilion/a060beb2ed9083af/rear-arch-review.json",
+      "sha256": "eff224f6e551e488fc48381aa393e1362bb9a23a52679547ae2ba24c0571fe1c",
+      "bytes": 1064
+    }
+  ],
+  "measurement": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\core-surface-measurements\\harbor\\card_pavilion\\a060-rear-arch\\surface-measurements.json",
+    "sha256": "fe1d733cd92c61cbb0148d07f9c5fd41faa52deabee74739cdbf74e36a2f56b6",
+    "bytes": 108262
+  },
+  "method": "Only explicitly measured and visually reviewed local gaps are closed from adjoining original surface and UV samples with0.006 inward closure. Original vertices, faces and image pixels are preserved. No replacement building or generated texture. See configuration and frozen prior review evidence for exact allowed regions.",
+  "repairs": [
+    {
+      "name": "Rear right arch-adjacent plaster backing",
+      "specification": {
+        "name": "Rear right arch-adjacent plaster backing",
+        "u": [
+          -1,
+          0,
+          0
+        ],
+        "v": [
+          0,
+          0,
+          1
+        ],
+        "n": [
+          0,
+          1,
+          0
+        ],
+        "roi": [
+          0.143,
+          0.183,
+          0.454,
+          0.487
+        ],
+        "forceRoi": [
+          0.143,
+          0.183,
+          0.454,
+          0.487
+        ],
+        "defectDepth": 0.32,
+        "donorDepth": 0.346,
+        "donorMaxDepth": 0.355,
+        "donorNormal": 0.7,
+        "color": "plaster",
+        "gridStep": 0.003,
+        "donorMargin": 0.024,
+        "flatPatchUV": true,
+        "donorMinRGB": 0.5,
+        "donorMaxColorRatio": 1.5
+      },
+      "missingSamples": 154,
+      "boundarySamples": 501,
+      "sampledDepthRange": [
+        -0.19011902809143066,
+        0.378934383392334
+      ],
+      "inwardClosureThickness": 0.006,
+      "outerSurfaceUnchanged": true,
+      "newVertices": 416,
+      "newTriangles": 828
+    }
+  ],
+  "originalTriangles": 992239,
+  "originalVerticesMoved": 0,
+  "originalTrianglesDeleted": 0,
+  "artifactCleanup": {
+    "method": "No original faces deleted. Only the explicitly reviewed bounded source-surface regions in the configuration may receive additional triangles.",
+    "deletedTriangles": 0
+  },
+  "newTriangles": 828,
+  "newVertices": 416,
+  "inverseSimilarityError": 1.0526309163205738e-07,
+  "normalizedOutput": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-harbor-card-a060-rear-arch\\repaired-normalized.glb",
+    "sha256": "74f324679086457a0cf517605b40137268505954b75d998ab303c57de5c384d6",
+    "bytes": 42519372
+  },
+  "nativeOutput": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-harbor-card-a060-rear-arch\\repaired-native.glb",
+    "sha256": "2711b451e1e6fd75b98659c19d5fff4748f80ce45d1270a01ff3e01da9c6bf06",
+    "bytes": 42508956
+  },
+  "renders": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-harbor-card-a060-rear-arch\\repaired-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-harbor-card-a060-rear-arch\\repaired-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-harbor-card-a060-rear-arch\\repaired-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-harbor-card-a060-rear-arch\\repaired-left.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-harbor-card-a060-rear-arch\\repaired-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.5,
+        -0.42726919054985046,
+        0.0
+      ],
+      "max": [
+        0.5,
+        0.42726919054985046,
+        0.947691023349762
+      ]
+    },
+    "triangles": 993067,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "reviewImages": [
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\harbor\\card_pavilion\\2711b451e1e6fd75\\repaired-front.png",
+      "sha256": "f98d68e4061786090c1fd58469f9b7e2ecc6218819605434f6fec0e130959ee5",
+      "bytes": 261303
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\harbor\\card_pavilion\\2711b451e1e6fd75\\repaired-right.png",
+      "sha256": "e6792497bc7acebee8af83b68ba9d83e2323c3e412b098bebea9f5d4ae5ed89e",
+      "bytes": 228543
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\harbor\\card_pavilion\\2711b451e1e6fd75\\repaired-back.png",
+      "sha256": "60c4e4dbbe073222241291504dbbe94605505a738b989bd0e15fd618c3a22edf",
+      "bytes": 246229
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\harbor\\card_pavilion\\2711b451e1e6fd75\\repaired-left.png",
+      "sha256": "912abb3b2784c301a97feab2422d81cb547a609171d385e93d61223fb7124bf4",
+      "bytes": 238769
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\harbor\\card_pavilion\\2711b451e1e6fd75\\repaired-iso.png",
+      "sha256": "58bace186bd6f54205797abd2b5f92f47c7c799e82eae9c3fa87738fa08267c8",
+      "bytes": 305471
+    }
+  ],
+  "processingTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\f21173ee639bce54c9c7094ef6121aa6aea7401fc45edfff9d221c65a107ae79-repair_bounded_source_surface.py",
+    "sha256": "f21173ee639bce54c9c7094ef6121aa6aea7401fc45edfff9d221c65a107ae79",
+    "bytes": 13325
+  },
+  "completedAt": "2026-10-24T01:47:55.130643+00:00",
+  "sourcePreservation": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\harbor\\card_pavilion\\2711b451e1e6fd75\\preservation.json",
+    "sha256": "abfcd0aa21b18b504b74b4d89c51ea71219ee44d3aad8dfa63bdf67992a50cf6",
+    "bytes": 1097
+  },
+  "originalRepairReceipt": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-harbor-card-a060-rear-arch\\repair.json",
+    "sha256": "c376004028a0bddbf65aa55cfe847919f6658eaac7c99f46f29234109cb1cfd8",
+    "bytes": 6979
+  },
+  "sourceVisualReview": {
+    "status": "reviewed_for_derivative_processing",
+    "views": [
+      "front",
+      "right",
+      "back",
+      "left",
+      "iso"
+    ],
+    "note": "Actually inspected all five repaired source material views. The single small plaster opening above the rear-right window arch is now a continuous white wall, using828 added faces, while the stone arch, windows, roof, chimney, front cards and other sides remain unchanged. Original triangle positions, UV and image bytes verified exact. Accept for one unchanged30k/.003 native-field derivative only; final five-view and phone review are still required.",
+    "reviewer": "asset_production"
+  }
+}

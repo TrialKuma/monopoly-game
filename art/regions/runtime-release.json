@@ -1,213 +1,196 @@
 {
-  "schemaVersion": 1,
-  "status": "frozen_runtime_assets",
-  "frozenAtUtc": "2026-10-23T02:59:58.7882483Z",
-  "builder": {
-    "path": "art/build_regional_city.py",
-    "sha256": "8c565edff0e0be121a6cb4ae552499c6e4c5f43c9aedd5cf85a3201c4adac148"
-  },
-  "totalAssets": 145,
-  "authoredFromThreeViews": 140,
-  "reviewedPixalMultiview": 5,
+  "schemaVersion": 2,
+  "status": "published_after_full_visual_review",
+  "publishedAtUtc": "2026-10-24T08:15:59.269044+00:00",
+  "playableAssets": 145,
+  "centerpieceAssets": 2,
+  "nativeMultiviewBuildings": 147,
+  "authoredSubstituteBuildings": 0,
+  "farDerivatives": 25,
+  "farCountNote": "Derived from the corresponding approved near models; not additional native generations.",
   "originConvention": "Ground-centred identity roots; glTF Y up and +Z front.",
-  "validation": {
-    "command": "node tests/check-regional-kit.mjs",
-    "result": "PASS: all 145 exported assets",
-    "coverage": [
-      "29 named roots per map",
-      "playable bounds and grounding",
-      "level growth",
-      "wheel and pendulum animation nodes",
-      "exact approved neural source hashes",
-      "original embedded texture bytes and UVs retained",
-      "approved villa_2 cannot regress to an authored intermediate"
-    ]
+  "receipts": {
+    "builder": {
+      "path": "art/full-ai-city/tools/pack_runtime.py",
+      "sha256": "edc9669fbd5790d2e38620aa2b80829e334459322e55acb69796eab84bf9c1eb"
+    },
+    "approvedAssets": {
+      "path": "art/full-ai-city/approved-assets.json",
+      "sha256": "e2658e7d6bb0399ec6a4d71770d4756b262c8a2751a340544f8405fc70f973c3"
+    },
+    "approvedFarAssets": {
+      "path": "art/full-ai-city/approved-far-assets.json",
+      "sha256": "c84f1e7fac3de651d5f9093dda71bc807f5037766f597f3edf0db056c3ccf6d7"
+    },
+    "regionalReview": {
+      "path": "art/full-ai-city/regional-review.json",
+      "sha256": "18a52e3006e1fa7842457539f079534a53fd5f3462cf6157399143a87be0e773"
+    }
   },
-  "maps": [
+  "packages": [
     {
       "map": "classic",
+      "role": "playable",
       "path": "assets/models/regions/classic.glb",
-      "sha256": "912b0a2512d3df677fcbbf8cecd28da409231a9846f4480cf2fcc26dbaa1bf18",
-      "bytes": 30007156,
+      "sha256": "89d5d898bfb095153396b58386462fbb4bba912cf26ab55c134f36204196583f",
+      "bytes": 43942628,
       "assets": 29,
-      "authoredFromThreeViews": 28,
-      "reviewedPixalMultiview": 1,
-      "triangles": 608647.0,
-      "aiVilla2": {
-        "name": "classic_villa_2",
-        "source": "assets/models/regions-ai/classic_house.glb",
-        "sourceSha256": "327102fea0bf328a3d0f9c5eae6333c0e1706eb2708b90d90a3af4c4e44698a3",
-        "triangles": 180779
-      },
+      "triangles": 1034584,
       "manifestPath": "assets/models/regions/classic-manifest.json",
-      "manifestSha256": "1dd9e0597a3d7cdfb5dc4656c2f46360cb4b4f0fb34ccc9f99339d50eeb77104",
-      "references": [
-        {
-          "path": "art/regions/references/classic-core-three-views.png",
-          "sha256": "7a510d06e2c7e3900218f42bbb1fce320ff48fe559940ff0c882c77c23cbec93"
-        },
-        {
-          "path": "art/regions/references/classic-landmarks-three-views.png",
-          "sha256": "0fe5b5ef621e22024da754c815473b2d6dc9da268ba22158b7c340096d1dd394"
-        },
-        {
-          "path": "art/regions/references/classic-public-three-views.png",
-          "sha256": "d8f98ef426d9fd8d89e76b226273af6b3cf9131ab8fa23210977a1c447d6b176"
-        }
-      ],
-      "previews": [
-        "art/regions/renders/classic-core-isometric.png",
-        "art/regions/renders/classic-large-isometric.png",
-        "art/regions/renders/classic-public-isometric.png"
-      ]
+      "manifestSha256": "5533e0b20bd58fbb53a4e5ed930db5a604857c959033b68f8149106963dc9b6c"
     },
     {
       "map": "compact",
+      "role": "playable",
       "path": "assets/models/regions/compact.glb",
-      "sha256": "13ff47e0d2e312cebdff03350b85641ad4c93e84a7bd295365cc74457e61f44f",
-      "bytes": 29797564,
+      "sha256": "4b4275213e82650bda4e91e19b00659e100356b95f7d9efde235d30667b3d6c2",
+      "bytes": 41053244,
       "assets": 29,
-      "authoredFromThreeViews": 28,
-      "reviewedPixalMultiview": 1,
-      "triangles": 565925.0,
-      "aiVilla2": {
-        "name": "compact_villa_2",
-        "source": "assets/models/regions-ai/compact_house.glb",
-        "sourceSha256": "910d04124cf9487318c5492f15d691b3fc426d2acc2ca1c0585fb6bef86891e4",
-        "triangles": 183105
-      },
+      "triangles": 1080990,
       "manifestPath": "assets/models/regions/compact-manifest.json",
-      "manifestSha256": "d0dca748c698e56bdf93e6de1332b9cc7b59dd83e3e87e01b0b958bbc77807ad",
-      "references": [
-        {
-          "path": "art/regions/references/compact-core-three-views.png",
-          "sha256": "540011b71c005893c4725964fcc138fe6b96a393ff567922bbdf8e7261e602dd"
-        },
-        {
-          "path": "art/regions/references/compact-landmarks-three-views.png",
-          "sha256": "9710ac2dd088f48a41e99ae06af8c8bb5d486e56c6a9cd638b6e375dda903fea"
-        },
-        {
-          "path": "art/regions/references/compact-public-three-views.png",
-          "sha256": "afd6ca4fa70445379a95a69a592f43bef3f2e800e7f4e24385db4a46148d66d2"
-        }
-      ],
-      "previews": [
-        "art/regions/renders/compact-core-isometric.png",
-        "art/regions/renders/compact-large-isometric.png",
-        "art/regions/renders/compact-public-isometric.png"
-      ]
+      "manifestSha256": "13c05db7a0140c607849c6352624ff9055bb1a7292b258c6bd16c4e6dc8e42e7"
     },
     {
       "map": "expansion",
+      "role": "playable",
       "path": "assets/models/regions/expansion.glb",
-      "sha256": "8263e7dad39ec2f6a2b0bc48787f9811d88d05c87f91f870a5001433c5b106dc",
-      "bytes": 24708476,
+      "sha256": "b5a5b9bd0928bbd7e57a897a88f3913beb1dd8b6acac9b56d60bebdd910fc53a",
+      "bytes": 37333768,
       "assets": 29,
-      "authoredFromThreeViews": 28,
-      "reviewedPixalMultiview": 1,
-      "triangles": 458375.0,
-      "aiVilla2": {
-        "name": "expansion_villa_2",
-        "source": "assets/models/regions-ai/expansion_house.glb",
-        "sourceSha256": "182f4eb522f183f2a2dea13a7e0133dddf0bafcc4026409310feceb361b9c561",
-        "triangles": 179871
-      },
+      "triangles": 1006550,
       "manifestPath": "assets/models/regions/expansion-manifest.json",
-      "manifestSha256": "1fd43c9214e652067928ce3948c1663aa54ba8216a292d99f22244c0a1f1fba6",
-      "references": [
-        {
-          "path": "art/regions/references/expansion-core-three-views.png",
-          "sha256": "04e3c62368766eda17341c19f08eb34be110f7b3c62d98428d94124a4c1f3c6f"
-        },
-        {
-          "path": "art/regions/references/expansion-landmarks-three-views.png",
-          "sha256": "83022dc9bdb504da2a2b610f62885f352c7d2d2880add5ec7519677b5d6b32bc"
-        },
-        {
-          "path": "art/regions/references/expansion-public-three-views.png",
-          "sha256": "3dae3acaf6f96a0df06670638bb12eab30cbee9f502caa4bb2b5c77dfcb50b1e"
-        }
-      ],
-      "previews": [
-        "art/regions/renders/expansion-core-isometric.png",
-        "art/regions/renders/expansion-large-isometric.png",
-        "art/regions/renders/expansion-public-isometric.png"
-      ]
+      "manifestSha256": "f23694ce520d4f826515503dff81f5be0b01e5d7a6e1dcf1608a74c9cd45143b"
     },
     {
       "map": "harbor",
+      "role": "playable",
       "path": "assets/models/regions/harbor.glb",
-      "sha256": "69bc658020f4508ee628ffc978d1587c2c29aa0c728c6a1537e62b8ed12bc9f0",
-      "bytes": 33559472,
+      "sha256": "695c441e86e71ef1467070dd43a0f9fe5035e52f871436793ded3951c48a3dbb",
+      "bytes": 40794364,
       "assets": 29,
-      "authoredFromThreeViews": 28,
-      "reviewedPixalMultiview": 1,
-      "triangles": 626039.0,
-      "aiVilla2": {
-        "name": "harbor_villa_2",
-        "source": "assets/models/regions-ai/harbor_house.glb",
-        "sourceSha256": "25b47e1d472e232510496a5ac1bab1a8082eeefeb5682bc6063209fe39d72ca2",
-        "triangles": 181055
-      },
+      "triangles": 1035673,
       "manifestPath": "assets/models/regions/harbor-manifest.json",
-      "manifestSha256": "7cf0a33254b4576275e68f50c66bf903f9e0f2b719d5a2f9d006aad383874c5f",
-      "references": [
-        {
-          "path": "art/regions/references/harbor-core-three-views.png",
-          "sha256": "94733f8bb47e47630baf619071d532474024cedd6384247658451c3221132316"
-        },
-        {
-          "path": "art/regions/references/harbor-landmarks-three-views.png",
-          "sha256": "a8cb2f9b9345c5e841b90675e06bf74510d6baaa017aa1a226ee46bdd5860aad"
-        },
-        {
-          "path": "art/regions/references/harbor-public-three-views.png",
-          "sha256": "a6d414c96955cb1d84f4698a22dbcdd32b10e17b42c372a8bd4812bda097ea15"
-        }
-      ],
-      "previews": [
-        "art/regions/renders/harbor-core-isometric.png",
-        "art/regions/renders/harbor-large-isometric.png",
-        "art/regions/renders/harbor-public-isometric.png"
-      ]
+      "manifestSha256": "6559516d634bbe48761150950b559316d4828aae76b37d6d1db72d38244b3ab0"
     },
     {
       "map": "alpine",
+      "role": "playable",
       "path": "assets/models/regions/alpine.glb",
-      "sha256": "3f6004e3b113a1e651e219224e185240d6ec5352687cb7b7f00fbed1cf20ea49",
-      "bytes": 28361192,
+      "sha256": "703ed26288bade50d4e039bef6c1daec0f02de65bc2ac3a6e44871e341215d3f",
+      "bytes": 41413684,
       "assets": 29,
-      "authoredFromThreeViews": 28,
-      "reviewedPixalMultiview": 1,
-      "triangles": 535509.0,
-      "aiVilla2": {
-        "name": "alpine_villa_2",
-        "source": "assets/models/regions-ai/alpine_house.glb",
-        "sourceSha256": "3534766503c4e01753841e8dfdaf95addd85acc942e973b4f90f3a558c9d9d92",
-        "triangles": 179921
-      },
+      "triangles": 1080733,
       "manifestPath": "assets/models/regions/alpine-manifest.json",
-      "manifestSha256": "4faea102bfb870785333aaf4bccd15db6c017ec7c53cde4529a4564e4fa146e5",
-      "references": [
-        {
-          "path": "art/regions/references/alpine-core-three-views.png",
-          "sha256": "df5216ec48e0ed3c5a79a1e852ab3c55c46a843dac6a972a05c09889e701b01c"
-        },
-        {
-          "path": "art/regions/references/alpine-landmarks-three-views.png",
-          "sha256": "8e6ae0caa58733a84f23a826fd6a86ee84f12c0325a4877266e42f9a290f2960"
-        },
-        {
-          "path": "art/regions/references/alpine-public-three-views.png",
-          "sha256": "77c9a7550725f7c042419d7a7982fac2efe82e7e6736dcd78e14cc67b0ae503a"
-        }
-      ],
-      "previews": [
-        "art/regions/renders/alpine-core-isometric.png",
-        "art/regions/renders/alpine-large-isometric.png",
-        "art/regions/renders/alpine-public-isometric.png"
-      ]
+      "manifestSha256": "26852f2b7447efe475aad74fdbd28ddde2fdd5907f36675286824c1b8db03b1e"
+    },
+    {
+      "map": "harbor",
+      "role": "centerpiece",
+      "path": "assets/models/harbor/harbor_lighthouse.glb",
+      "sha256": "487a9d8b5f769676b4c4659dbf11c33bb75d77c9576f360b367dc97dd6e7323f",
+      "bytes": 1978920,
+      "assets": 1,
+      "triangles": 44986,
+      "manifestPath": "assets/models/harbor/harbor_lighthouse-manifest.json",
+      "manifestSha256": "cb2df2c7732988e64a8c1feb8a8154d19e16f5df7b979fbf489240d8f3d49a63"
+    },
+    {
+      "map": "alpine",
+      "role": "centerpiece",
+      "path": "assets/models/harbor/alpine_windmill.glb",
+      "sha256": "8fac8fc04afc50395eb0550bde4a4362901d5e2a39a5fc41014b3ecd9d8e4782",
+      "bytes": 2311108,
+      "assets": 1,
+      "triangles": 44987,
+      "manifestPath": "assets/models/harbor/alpine_windmill-manifest.json",
+      "manifestSha256": "3e5ba5616cf79225cbcc754ed65b0f26d90e2b2ef2071c5404165944ea1c8326"
+    },
+    {
+      "map": "classic",
+      "role": "far_derivative",
+      "path": "assets/models/regions-far/classic.glb",
+      "sha256": "760505293e7f2de24bdc0cba0d2bc0b4618ce3ea11a54ef8f1f7f207233f2ecc",
+      "bytes": 2652872,
+      "assets": 5,
+      "triangles": 71998,
+      "manifestPath": "assets/models/regions-far/classic-manifest.json",
+      "manifestSha256": "ad47434cc291796df487c491a3a7b90e50a02e2fb31484f0acbc607ff7a43f28"
+    },
+    {
+      "map": "compact",
+      "role": "far_derivative",
+      "path": "assets/models/regions-far/compact.glb",
+      "sha256": "ed35b90bc43eda5d331fb5fdd22467180d2aea4a918e2c7e9715b9b204dd6768",
+      "bytes": 2475392,
+      "assets": 5,
+      "triangles": 59999,
+      "manifestPath": "assets/models/regions-far/compact-manifest.json",
+      "manifestSha256": "f5f20867e3758389f0b0aac2be1a75a540d7e500e7b6e57924c2adb707e7d83f"
+    },
+    {
+      "map": "expansion",
+      "role": "far_derivative",
+      "path": "assets/models/regions-far/expansion.glb",
+      "sha256": "2705c6b392cf8ecacf49590872d2040fcd12981cfdbac0a1a51e9f79787cf07a",
+      "bytes": 2298696,
+      "assets": 5,
+      "triangles": 59997,
+      "manifestPath": "assets/models/regions-far/expansion-manifest.json",
+      "manifestSha256": "349f4be334670dc65a2cff07a4dabb7e9893b3bb5c5cc8df050362d132c8480a"
+    },
+    {
+      "map": "harbor",
+      "role": "far_derivative",
+      "path": "assets/models/regions-far/harbor.glb",
+      "sha256": "7bf2aa4f9b763f934ad5fd8af8be15856b6c21bb3d1cf7a3eefe38d2c6bef316",
+      "bytes": 2690024,
+      "assets": 5,
+      "triangles": 65998,
+      "manifestPath": "assets/models/regions-far/harbor-manifest.json",
+      "manifestSha256": "351222f7895f2920ef935f0a9e62a37b6507af5094a6ed6a05cb6a93ee38c3aa"
+    },
+    {
+      "map": "alpine",
+      "role": "far_derivative",
+      "path": "assets/models/regions-far/alpine.glb",
+      "sha256": "1412ab3a479e525a7b764b49dbdcda6715dcd4571b1af38b121f10cf67bc3c18",
+      "bytes": 2591492,
+      "assets": 5,
+      "triangles": 65997,
+      "manifestPath": "assets/models/regions-far/alpine-manifest.json",
+      "manifestSha256": "25369c3b6155ec0a88c87f7b1282f13346795279a49d1349259fb914650eb4eb"
+    }
+  ],
+  "buildingPreviews": [
+    {
+      "map": "classic",
+      "path": "assets/buildings/regions/classic/manifest.json",
+      "sha256": "d34fa93f17e62f5440b380f8953c97d7053434f11e2e1fd3d72a3a431522d539",
+      "assets": 29
+    },
+    {
+      "map": "compact",
+      "path": "assets/buildings/regions/compact/manifest.json",
+      "sha256": "936b1a59ef8bdc1d696a7b4ec919fb966e6fc95fd137399ee5cba7016ae5c200",
+      "assets": 29
+    },
+    {
+      "map": "expansion",
+      "path": "assets/buildings/regions/expansion/manifest.json",
+      "sha256": "1130a78b66b1ec84f34db181b084ce6a72d5d4b5a66b8cdd42321bd6eaffa2c6",
+      "assets": 29
+    },
+    {
+      "map": "harbor",
+      "path": "assets/buildings/regions/harbor/manifest.json",
+      "sha256": "d2fe7bd66f3e991ae32f323879c9b617784aaf88cb051779e80e50c009e49bfd",
+      "assets": 29
+    },
+    {
+      "map": "alpine",
+      "path": "assets/buildings/regions/alpine/manifest.json",
+      "sha256": "42bb6340e77df4c024d52c0ef88bde75d92a993b69628580e2309be60cf5848b",
+      "assets": 29
     }
   ]
 }

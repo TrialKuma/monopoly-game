@@ -1,0 +1,584 @@
+{
+  "status": "exported_pending_visual_review",
+  "createdAt": "2026-10-23T08:16:33.351323+00:00",
+  "region": "classic",
+  "asset": "finance_2",
+  "source": {
+    "rawGLB": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\classic--finance_2-a003-pixal-mv-1024-18341.glb",
+      "sha256": "23107bfa70822628fea1039625853d39d9287aa5a4f3cd95e9f12eb464244328",
+      "bytes": 40028712
+    }
+  },
+  "inferenceReport": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\classic--finance_2-a003\\classic--finance_2-a003-pixal-mv-1024-18341.json",
+    "sha256": "443d9f4f0496e61e1d5de74095ac9426ef12865bc31d274d7372edeb1eb12170",
+    "bytes": 9144
+  },
+  "reference": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\inputs\\classic\\finance_2\\c12193bd6c42d250\\reference.json",
+    "sha256": "9765daf635d60e34a5fad9b74d92ba1b23880621525fea812e07ceed3477e530",
+    "bytes": 4443
+  },
+  "processingTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\364e5afe80bef5786a38acff2c342b529d4b454559d2b48b5a0657771fdeb765-process_lod.py",
+    "sha256": "364e5afe80bef5786a38acff2c342b529d4b454559d2b48b5a0657771fdeb765",
+    "bytes": 25875
+  },
+  "assumedCameras": true,
+  "cameraCalibration": "assumed_standard_orbit_not_measured",
+  "nativePipeline": "Pixal3DMVImageTo3DPipeline.run_mv",
+  "nativeResolution": 1024,
+  "seed": 18341,
+  "geometryOrigin": "Actual native three-view neural building with explicitly recorded localized same-wall surface repairs, followed by source-derived remeshing and texture baking. No replacement building.",
+  "orientation": {
+    "up": "Y",
+    "front": "+Z",
+    "groundY": 0,
+    "maxEdge": 1
+  },
+  "requestedTriangles": 45000,
+  "limitations": [
+    "Assumed camera reference reconstruction, not exact measured architecture",
+    "Final candidate requires actual rendered visual approval"
+  ],
+  "animation": null,
+  "processingComplete": true,
+  "lod": "near",
+  "processingRevision": 0,
+  "localSurfaceRepair": {
+    "source": {
+      "path": "art\\full-ai-city\\work\\repair-finance2\\repaired-native.glb",
+      "sha256": "ee04e90a3169afa092711877c9e5b4434e479405239265d619827a5b45b13205",
+      "bytes": 41048432
+    },
+    "receipt": {
+      "path": "art\\full-ai-city\\reports\\local-repairs\\classic\\finance_2\\ee04e90a3169afa0\\repair.json",
+      "sha256": "4d8e515cdfbc09bf800a1211b3c283c7b3b0710d38e01ac40cac06342332933f",
+      "bytes": 10550
+    },
+    "method": "Six bounded missing glass-interior and cornice backing regions are locally closed using intact neighboring original surface depth and UV samples. Original neural vertices, faces, window frames, architectural volume and image pixels are untouched. Each patch closes 0.006 inward for derivative stability. No replacement building or new texture. Glass donors come from the original neighboring amber glass surface; stone donors remain original stone.",
+    "newTriangles": 8236,
+    "newVertices": 4144,
+    "originalVerticesMoved": 0,
+    "originalTrianglesDeleted": 0,
+    "regions": [
+      {
+        "name": "Left upper window missing glass interior",
+        "specification": {
+          "name": "Left upper window missing glass interior",
+          "u": [
+            0,
+            -1,
+            0
+          ],
+          "v": [
+            0,
+            0,
+            1
+          ],
+          "n": [
+            -1,
+            0,
+            0
+          ],
+          "roi": [
+            -0.027,
+            0.027,
+            0.277,
+            0.375
+          ],
+          "defectDepth": 0.4,
+          "donorDepth": 0.432,
+          "donorMaxDepth": 0.448,
+          "donorNormal": 0.65,
+          "color": "glass"
+        },
+        "missingSamples": 370,
+        "boundarySamples": 1001,
+        "sampledDepthRange": [
+          -2.0,
+          0.4667774438858032
+        ],
+        "inwardClosureThickness": 0.006,
+        "outerSurfaceUnchanged": true,
+        "newVertices": 1142,
+        "newTriangles": 2264
+      },
+      {
+        "name": "Left lower window missing glass interior",
+        "specification": {
+          "name": "Left lower window missing glass interior",
+          "u": [
+            0,
+            -1,
+            0
+          ],
+          "v": [
+            0,
+            0,
+            1
+          ],
+          "n": [
+            -1,
+            0,
+            0
+          ],
+          "roi": [
+            -0.027,
+            0.027,
+            0.126,
+            0.209
+          ],
+          "defectDepth": 0.4,
+          "donorDepth": 0.432,
+          "donorMaxDepth": 0.448,
+          "donorNormal": 0.65,
+          "color": "glass"
+        },
+        "missingSamples": 342,
+        "boundarySamples": 710,
+        "sampledDepthRange": [
+          -0.432192325592041,
+          0.46744823455810547
+        ],
+        "inwardClosureThickness": 0.006,
+        "outerSurfaceUnchanged": true,
+        "newVertices": 988,
+        "newTriangles": 1964
+      },
+      {
+        "name": "Front lower left center window bottom",
+        "specification": {
+          "name": "Front lower left center window bottom",
+          "u": [
+            1,
+            0,
+            0
+          ],
+          "v": [
+            0,
+            0,
+            1
+          ],
+          "n": [
+            0,
+            -1,
+            0
+          ],
+          "roi": [
+            -0.26,
+            -0.209,
+            0.08,
+            0.118
+          ],
+          "defectDepth": 0.1,
+          "donorDepth": 0.145,
+          "donorMaxDepth": 0.169,
+          "donorNormal": 0.65,
+          "color": "glass"
+        },
+        "missingSamples": 105,
+        "boundarySamples": 939,
+        "sampledDepthRange": [
+          -0.15289855003356934,
+          0.19550275802612305
+        ],
+        "inwardClosureThickness": 0.006,
+        "outerSurfaceUnchanged": true,
+        "newVertices": 328,
+        "newTriangles": 652
+      },
+      {
+        "name": "Front lower right center window bottom",
+        "specification": {
+          "name": "Front lower right center window bottom",
+          "u": [
+            1,
+            0,
+            0
+          ],
+          "v": [
+            0,
+            0,
+            1
+          ],
+          "n": [
+            0,
+            -1,
+            0
+          ],
+          "roi": [
+            0.185,
+            0.243,
+            0.08,
+            0.118
+          ],
+          "defectDepth": 0.1,
+          "donorDepth": 0.145,
+          "donorMaxDepth": 0.169,
+          "donorNormal": 0.65,
+          "color": "glass"
+        },
+        "missingSamples": 137,
+        "boundarySamples": 1108,
+        "sampledDepthRange": [
+          -0.15663790702819824,
+          0.18100225925445557
+        ],
+        "inwardClosureThickness": 0.006,
+        "outerSurfaceUnchanged": true,
+        "newVertices": 412,
+        "newTriangles": 820
+      },
+      {
+        "name": "Front lower right outer window bottom",
+        "specification": {
+          "name": "Front lower right outer window bottom",
+          "u": [
+            1,
+            0,
+            0
+          ],
+          "v": [
+            0,
+            0,
+            1
+          ],
+          "n": [
+            0,
+            -1,
+            0
+          ],
+          "roi": [
+            0.321,
+            0.38,
+            0.08,
+            0.118
+          ],
+          "defectDepth": 0.1,
+          "donorDepth": 0.145,
+          "donorMaxDepth": 0.169,
+          "donorNormal": 0.65,
+          "color": "glass"
+        },
+        "missingSamples": 96,
+        "boundarySamples": 1117,
+        "sampledDepthRange": [
+          -0.15546655654907227,
+          0.18493854999542236
+        ],
+        "inwardClosureThickness": 0.006,
+        "outerSurfaceUnchanged": true,
+        "newVertices": 334,
+        "newTriangles": 664
+      },
+      {
+        "name": "Short front central cornice backing gap",
+        "specification": {
+          "name": "Short front central cornice backing gap",
+          "u": [
+            1,
+            0,
+            0
+          ],
+          "v": [
+            0,
+            0,
+            1
+          ],
+          "n": [
+            0,
+            -1,
+            0
+          ],
+          "roi": [
+            -0.109,
+            -0.021,
+            0.373,
+            0.403
+          ],
+          "defectDepth": 0.1,
+          "donorDepth": 0.165,
+          "donorMaxDepth": 0.19,
+          "donorNormal": 0.55,
+          "color": "stone"
+        },
+        "missingSamples": 295,
+        "boundarySamples": 1401,
+        "sampledDepthRange": [
+          -0.1608278751373291,
+          0.18561458587646484
+        ],
+        "inwardClosureThickness": 0.006,
+        "outerSurfaceUnchanged": true,
+        "newVertices": 940,
+        "newTriangles": 1872
+      }
+    ]
+  },
+  "derivation": {
+    "rawTriangles": 932760,
+    "weldedTriangles": 938071,
+    "remeshedTriangles": 1541472,
+    "voxelSize": 0.003,
+    "finalTriangles": 44998,
+    "atlasArea": 0.3503652915442172,
+    "singleReductionPass": true,
+    "inheritedUVRemovedBeforeReduction": true,
+    "sourceMaterialsUntouched": true,
+    "uvUnwrap": {
+      "angleDegrees": 66.0,
+      "islandMargin": 2e-05,
+      "marginMethod": "SCALED",
+      "nominalMarginPixels": null
+    },
+    "repairedSourceTriangles": 940996
+  },
+  "bake": {
+    "method": "CPU closest-original-triangle projection with float64 barycentric original UV and bilinear original texture sampling; geometric normals retained, no directional normal-map rebake or invented color",
+    "coveredAtlasPixels": 368044,
+    "nearestLookupSuccessFraction": 1.0,
+    "notRayCoverage": true,
+    "sourceDistanceQuantiles": [
+      0.0001010544401651714,
+      0.0006519326940178869,
+      0.0012573749560397128,
+      0.00784307811409235
+    ],
+    "sourceDistanceQuantileLevels": [
+      0.5,
+      0.95,
+      0.99,
+      1
+    ],
+    "overTwoPercentMaxEdge": 0.0,
+    "distanceReviewRequired": false,
+    "visualGeometryReviewRequired": true,
+    "barycentricOriginalRange": [
+      -3.0137637330664863e-05,
+      1.0
+    ],
+    "degenerateOrInvalidBarycentricCount": 0,
+    "closestSourceVertexFallbackFraction": 0.0,
+    "barycentricPointReconstructionErrorQuantiles": [
+      5.494568021384089e-09,
+      3.351595618859496e-08,
+      1.550022782263658e-07
+    ],
+    "atlasOverlapPixelsWithDifferentSurface": 105,
+    "seconds": 7.946090099983849,
+    "maps": [
+      {
+        "role": "base",
+        "size": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "role": "orm",
+        "size": [
+          512,
+          512
+        ]
+      }
+    ],
+    "repairSourceNote": "Texture transfer uses the explicitly repaired neural source, retaining original PBR and locally interpolated same-wall UV. Repair receipt and unchanged original inference source are preserved separately."
+  },
+  "textureTransferTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\a2cb99c96fb8df396f16580a88a7c6151104ee3c927fe76cd161ee2d27bdfa42-bake_nearest_surface.py",
+    "sha256": "a2cb99c96fb8df396f16580a88a7c6151104ee3c927fe76cd161ee2d27bdfa42",
+    "bytes": 7317
+  },
+  "quantization": {
+    "source": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\finance2-repaired-surface\\candidates\\classic\\finance_2.glb",
+    "output": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\finance2-repaired-surface\\candidates\\classic\\finance_2.glb",
+    "sourceBytes": 2494632,
+    "outputBytes": 1796940,
+    "sourceSha256": "62ec2835e1eba5eb655ec7beb725a3e19a0c394630f8f36559ce91fe9d24adf8",
+    "outputSha256": "05c2a1e2be593c25d417e2fc4b02caf5f56f9edec142ec7fc0c0b581e08c16d5",
+    "positionFaceAndTextureBytesUnchanged": true,
+    "attributes": [
+      {
+        "accessor": 1,
+        "semantic": "NORMAL",
+        "count": 58154,
+        "maximumAngularErrorDegrees": 0.38425314409428146
+      },
+      {
+        "accessor": 2,
+        "semantic": "TEXCOORD_0",
+        "count": 58154,
+        "maximumUVError": 7.62942090704044e-06,
+        "maximumTexelErrorAt1024": 0.007812527008809411
+      }
+    ]
+  },
+  "processedCandidate": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\finance2-repaired-surface\\candidates\\classic\\finance_2.glb",
+    "sha256": "05c2a1e2be593c25d417e2fc4b02caf5f56f9edec142ec7fc0c0b581e08c16d5",
+    "bytes": 1796940
+  },
+  "glbValidation": {
+    "version": 2,
+    "triangles": 44998,
+    "meshes": 1,
+    "materials": 1,
+    "images": 2,
+    "all_primitives_have_uv": true,
+    "animations": [],
+    "all_images_embedded": true,
+    "external_buffers": []
+  },
+  "triangles": 44998,
+  "renderedCandidate": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\finance2-repaired-surface\\candidates\\renders\\classic\\finance_2\\lod-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\finance2-repaired-surface\\candidates\\renders\\classic\\finance_2\\lod-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\finance2-repaired-surface\\candidates\\renders\\classic\\finance_2\\lod-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\finance2-repaired-surface\\candidates\\renders\\classic\\finance_2\\lod-left.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\finance2-repaired-surface\\candidates\\renders\\classic\\finance_2\\lod-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.4998224973678589,
+        -0.2011704444885254,
+        0.00021583042689599097
+      ],
+      "max": [
+        0.4999242424964905,
+        0.20130564272403717,
+        0.7450028657913208
+      ]
+    },
+    "triangles": 44998,
+    "textureSizes": [
+      {
+        "name": "classic__finance_2__nearest_base",
+        "size": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "name": "classic__finance_2__nearest_orm",
+        "size": [
+          512,
+          512
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "renderedSource": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\finance2-repaired-surface\\candidates\\renders\\classic\\finance_2\\raw-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\finance2-repaired-surface\\candidates\\renders\\classic\\finance_2\\raw-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.5,
+        -0.2009274661540985,
+        0.0
+      ],
+      "max": [
+        0.5,
+        0.2009274661540985,
+        0.7464413046836853
+      ]
+    },
+    "triangles": 932760,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "renderedRepairedSource": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\finance2-repaired-surface\\candidates\\renders\\classic\\finance_2\\repaired-source-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\finance2-repaired-surface\\candidates\\renders\\classic\\finance_2\\repaired-source-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\finance2-repaired-surface\\candidates\\renders\\classic\\finance_2\\repaired-source-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.4999999701976776,
+        -0.2012856900691986,
+        0.0
+      ],
+      "max": [
+        0.4999999701976776,
+        0.2012856900691986,
+        0.7451025247573853
+      ]
+    },
+    "triangles": 940996,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "bounds": {
+    "min": [
+      -0.4998224973678589,
+      0.00021583042689599097,
+      -0.20130564272403717
+    ],
+    "max": [
+      0.4999242424964905,
+      0.7450028657913208,
+      0.2011704444885254
+    ],
+    "coordinateSystem": "GLTF Y-up; +Z front"
+  },
+  "textureSizes": [
+    {
+      "name": "classic__finance_2__nearest_base",
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "name": "classic__finance_2__nearest_orm",
+      "size": [
+        512,
+        512
+      ]
+    }
+  ],
+  "rawSourceUnchanged": true,
+  "completedAt": "2026-10-23T08:17:59.507989+00:00"
+}

@@ -1,0 +1,613 @@
+{
+  "status": "source_repair_visually_reviewed_pending_near_lod",
+  "source": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\classic--teleport_gate-a001-pixal-mv-1024-9247.glb",
+    "sha256": "612800f4cbf0312ba1df8983b8f39b0e7d1f8f66e900b6775a80d336b6f9cefa",
+    "bytes": 42095508
+  },
+  "orientation": {
+    "enabled": true,
+    "candidate_degrees": 1.1967962050968008,
+    "applied_degrees": 1.1967962050968008,
+    "underside_area": 0.09833952246722785,
+    "normal_agreement": 0.8923445389243074,
+    "yaw_degrees": 180,
+    "pitch_degrees": 0,
+    "roll_degrees": 0,
+    "uniform_scale": 1.0361266149320245
+  },
+  "method": "Only measured missing side-roof sectors and short arch-shoulder backing gaps and two measured rear molding/plinth openings are closed; v5 extends only the four arch-shoulder ROIs toward the center to +/-0.135 after direct triangle-ray evidence found an omitted front opening at x+0.1477/z0.552 from intact neighboring original surface depth and UV samples. Original neural vertices, faces and image pixels are untouched. The central passage, original windows and architectural volumes remain unchanged. Roof patches use original neighboring slate roof UV and stone patches use original stone. Patches close 0.006 inward for derivative stability, with no replacement building or newly painted texture.",
+  "repairs": [
+    {
+      "name": "left side dormer neighboring roof opening 1",
+      "specification": {
+        "name": "left side dormer neighboring roof opening 1",
+        "u": [
+          0,
+          -1,
+          0
+        ],
+        "v": [
+          0,
+          0,
+          1
+        ],
+        "n": [
+          -1,
+          0,
+          0
+        ],
+        "roi": [
+          -0.085,
+          -0.036,
+          0.62,
+          0.72
+        ],
+        "defectDepth": 0.35,
+        "donorDepth": 0.425,
+        "donorMaxDepth": 0.471,
+        "donorNormal": 0.55,
+        "color": "roof"
+      },
+      "missingSamples": 347,
+      "boundarySamples": 1548,
+      "sampledDepthRange": [
+        -0.22472262382507324,
+        0.47149646282196045
+      ],
+      "inwardClosureThickness": 0.006,
+      "outerSurfaceUnchanged": true,
+      "newVertices": 978,
+      "newTriangles": 1948
+    },
+    {
+      "name": "left side dormer neighboring roof opening 2",
+      "specification": {
+        "name": "left side dormer neighboring roof opening 2",
+        "u": [
+          0,
+          -1,
+          0
+        ],
+        "v": [
+          0,
+          0,
+          1
+        ],
+        "n": [
+          -1,
+          0,
+          0
+        ],
+        "roi": [
+          0.036,
+          0.087,
+          0.62,
+          0.72
+        ],
+        "defectDepth": 0.35,
+        "donorDepth": 0.425,
+        "donorMaxDepth": 0.471,
+        "donorNormal": 0.55,
+        "color": "roof"
+      },
+      "missingSamples": 313,
+      "boundarySamples": 1757,
+      "sampledDepthRange": [
+        0.22541511058807373,
+        0.47686612606048584
+      ],
+      "inwardClosureThickness": 0.006,
+      "outerSurfaceUnchanged": true,
+      "newVertices": 826,
+      "newTriangles": 1648
+    },
+    {
+      "name": "right side dormer neighboring roof opening 1",
+      "specification": {
+        "name": "right side dormer neighboring roof opening 1",
+        "u": [
+          0,
+          1,
+          0
+        ],
+        "v": [
+          0,
+          0,
+          1
+        ],
+        "n": [
+          1,
+          0,
+          0
+        ],
+        "roi": [
+          -0.045,
+          -0.01,
+          0.62,
+          0.735
+        ],
+        "defectDepth": 0.35,
+        "donorDepth": 0.425,
+        "donorMaxDepth": 0.471,
+        "donorNormal": 0.55,
+        "color": "roof"
+      },
+      "missingSamples": 430,
+      "boundarySamples": 1284,
+      "sampledDepthRange": [
+        0.21773874759674072,
+        0.46986234188079834
+      ],
+      "inwardClosureThickness": 0.006,
+      "outerSurfaceUnchanged": true,
+      "newVertices": 1148,
+      "newTriangles": 2292
+    },
+    {
+      "name": "right side dormer neighboring roof opening 2",
+      "specification": {
+        "name": "right side dormer neighboring roof opening 2",
+        "u": [
+          0,
+          1,
+          0
+        ],
+        "v": [
+          0,
+          0,
+          1
+        ],
+        "n": [
+          1,
+          0,
+          0
+        ],
+        "roi": [
+          0.07,
+          0.094,
+          0.62,
+          0.715
+        ],
+        "defectDepth": 0.35,
+        "donorDepth": 0.425,
+        "donorMaxDepth": 0.471,
+        "donorNormal": 0.55,
+        "color": "roof"
+      },
+      "missingSamples": 188,
+      "boundarySamples": 1328,
+      "sampledDepthRange": [
+        0.21511971950531006,
+        0.4636958837509155
+      ],
+      "inwardClosureThickness": 0.006,
+      "outerSurfaceUnchanged": true,
+      "newVertices": 588,
+      "newTriangles": 1172
+    },
+    {
+      "name": "front arch shoulder backing opening 1",
+      "specification": {
+        "name": "front arch shoulder backing opening 1",
+        "u": [
+          1,
+          0,
+          0
+        ],
+        "v": [
+          0,
+          0,
+          1
+        ],
+        "n": [
+          0,
+          -1,
+          0
+        ],
+        "roi": [
+          -0.228,
+          -0.135,
+          0.505,
+          0.572
+        ],
+        "defectDepth": 0.03,
+        "donorDepth": 0.055,
+        "donorMaxDepth": 0.121,
+        "donorNormal": 0.55,
+        "color": "stone"
+      },
+      "missingSamples": 506,
+      "boundarySamples": 2466,
+      "sampledDepthRange": [
+        -2.0,
+        0.15117323398590088
+      ],
+      "inwardClosureThickness": 0.006,
+      "outerSurfaceUnchanged": true,
+      "newVertices": 1338,
+      "newTriangles": 2668
+    },
+    {
+      "name": "front arch shoulder backing opening 2",
+      "specification": {
+        "name": "front arch shoulder backing opening 2",
+        "u": [
+          1,
+          0,
+          0
+        ],
+        "v": [
+          0,
+          0,
+          1
+        ],
+        "n": [
+          0,
+          -1,
+          0
+        ],
+        "roi": [
+          0.135,
+          0.222,
+          0.505,
+          0.572
+        ],
+        "defectDepth": 0.03,
+        "donorDepth": 0.055,
+        "donorMaxDepth": 0.121,
+        "donorNormal": 0.55,
+        "color": "stone"
+      },
+      "missingSamples": 524,
+      "boundarySamples": 2354,
+      "sampledDepthRange": [
+        -2.0,
+        0.12206006050109863
+      ],
+      "inwardClosureThickness": 0.006,
+      "outerSurfaceUnchanged": true,
+      "newVertices": 1384,
+      "newTriangles": 2764
+    },
+    {
+      "name": "back arch shoulder backing opening 1",
+      "specification": {
+        "name": "back arch shoulder backing opening 1",
+        "u": [
+          -1,
+          0,
+          0
+        ],
+        "v": [
+          0,
+          0,
+          1
+        ],
+        "n": [
+          0,
+          1,
+          0
+        ],
+        "roi": [
+          -0.228,
+          -0.135,
+          0.505,
+          0.572
+        ],
+        "defectDepth": 0.03,
+        "donorDepth": 0.055,
+        "donorMaxDepth": 0.121,
+        "donorNormal": 0.55,
+        "color": "stone"
+      },
+      "missingSamples": 247,
+      "boundarySamples": 2182,
+      "sampledDepthRange": [
+        -2.0,
+        0.173384428024292
+      ],
+      "inwardClosureThickness": 0.006,
+      "outerSurfaceUnchanged": true,
+      "newVertices": 734,
+      "newTriangles": 1464
+    },
+    {
+      "name": "back arch shoulder backing opening 2",
+      "specification": {
+        "name": "back arch shoulder backing opening 2",
+        "u": [
+          -1,
+          0,
+          0
+        ],
+        "v": [
+          0,
+          0,
+          1
+        ],
+        "n": [
+          0,
+          1,
+          0
+        ],
+        "roi": [
+          0.135,
+          0.222,
+          0.505,
+          0.572
+        ],
+        "defectDepth": 0.03,
+        "donorDepth": 0.055,
+        "donorMaxDepth": 0.121,
+        "donorNormal": 0.55,
+        "color": "stone"
+      },
+      "missingSamples": 307,
+      "boundarySamples": 1876,
+      "sampledDepthRange": [
+        -2.0,
+        0.1512669324874878
+      ],
+      "inwardClosureThickness": 0.006,
+      "outerSurfaceUnchanged": true,
+      "newVertices": 922,
+      "newTriangles": 1836
+    },
+    {
+      "name": "Rear left tower thin horizontal slit below middle molding",
+      "specification": {
+        "name": "Rear left tower thin horizontal slit below middle molding",
+        "u": [
+          -1,
+          0,
+          0
+        ],
+        "v": [
+          0,
+          0,
+          1
+        ],
+        "n": [
+          0,
+          1,
+          0
+        ],
+        "roi": [
+          -0.34,
+          -0.295,
+          0.296,
+          0.328
+        ],
+        "defectDepth": 0.06,
+        "donorDepth": 0.095,
+        "donorMaxDepth": 0.17,
+        "donorNormal": 0.55,
+        "color": "stone"
+      },
+      "missingSamples": 57,
+      "boundarySamples": 1649,
+      "sampledDepthRange": [
+        -0.12760567665100098,
+        0.13330137729644775
+      ],
+      "inwardClosureThickness": 0.006,
+      "outerSurfaceUnchanged": true,
+      "newVertices": 226,
+      "newTriangles": 448
+    },
+    {
+      "name": "Rear left outer plinth corner opening",
+      "specification": {
+        "name": "Rear left outer plinth corner opening",
+        "u": [
+          -1,
+          0,
+          0
+        ],
+        "v": [
+          0,
+          0,
+          1
+        ],
+        "n": [
+          0,
+          1,
+          0
+        ],
+        "roi": [
+          -0.47,
+          -0.438,
+          0.041,
+          0.065
+        ],
+        "defectDepth": 0.06,
+        "donorDepth": 0.095,
+        "donorMaxDepth": 0.17,
+        "donorNormal": 0.55,
+        "color": "stone"
+      },
+      "missingSamples": 96,
+      "boundarySamples": 411,
+      "sampledDepthRange": [
+        -0.06741881370544434,
+        0.14516115188598633
+      ],
+      "inwardClosureThickness": 0.006,
+      "outerSurfaceUnchanged": true,
+      "newVertices": 280,
+      "newTriangles": 556
+    }
+  ],
+  "originalTriangles": 997896,
+  "originalVerticesMoved": 0,
+  "originalTrianglesDeleted": 0,
+  "artifactCleanup": {
+    "method": "No original faces deleted. Only measured missing roof sectors beside the four side dormer edges and short arch shoulder backing gaps plus two measured rear molding/plinth openings receive boundary-derived closed patches. Existing windows and arch passage remain open as designed.",
+    "deletedTriangles": 0
+  },
+  "newTriangles": 16796,
+  "newVertices": 8424,
+  "inverseSimilarityError": 9.284549662424979e-08,
+  "normalizedOutput": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-teleport-v5\\repaired-normalized.glb",
+    "sha256": "ca86352b32aeb9cb88366142364754bb90166c3aed18bb7c9c953defb9c31a41",
+    "bytes": 43876080
+  },
+  "nativeOutput": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-teleport-v5\\repaired-native.glb",
+    "sha256": "359f583f3bdd889e4ec96f9d475727f5f398b865c204b2b00ff805f5c5107908",
+    "bytes": 43870048
+  },
+  "renders": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\classic\\teleport_gate\\359f583f3bdd889e\\views\\repaired-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\classic\\teleport_gate\\359f583f3bdd889e\\views\\repaired-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\classic\\teleport_gate\\359f583f3bdd889e\\views\\repaired-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\classic\\teleport_gate\\359f583f3bdd889e\\views\\repaired-left.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\classic\\teleport_gate\\359f583f3bdd889e\\views\\repaired-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.5,
+        -0.18632672727108002,
+        0.0
+      ],
+      "max": [
+        0.5,
+        0.18632672727108002,
+        0.9240379929542542
+      ]
+    },
+    "triangles": 1014692,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "reviewImages": [
+    {
+      "path": "art/full-ai-city/reports/local-repairs/classic/teleport_gate/359f583f3bdd889e/views/repaired-front.png",
+      "sha256": "c53c6969f6220ed0b833e534ec98e9dd7a65ec11a30af672ad39eab79cd2559c",
+      "bytes": 234738
+    },
+    {
+      "path": "art/full-ai-city/reports/local-repairs/classic/teleport_gate/359f583f3bdd889e/views/repaired-right.png",
+      "sha256": "4017673498e134d13eaffd798261669371aea21ad90766d521a6800055667639",
+      "bytes": 161397
+    },
+    {
+      "path": "art/full-ai-city/reports/local-repairs/classic/teleport_gate/359f583f3bdd889e/views/repaired-back.png",
+      "sha256": "8dec80eae1031550ae4545eaedc783be4641e6171ddaef7c702b3d9e2f00bc3c",
+      "bytes": 216217
+    },
+    {
+      "path": "art/full-ai-city/reports/local-repairs/classic/teleport_gate/359f583f3bdd889e/views/repaired-left.png",
+      "sha256": "e328838e449c662fec5175106094ad9b0216f79f30f67e496f74bca800aa39d3",
+      "bytes": 159522
+    },
+    {
+      "path": "art/full-ai-city/reports/local-repairs/classic/teleport_gate/359f583f3bdd889e/views/repaired-iso.png",
+      "sha256": "f306f943b550cb5d9d5cfe776e8daf365e994ed5bfef6f939225c7b3fa87acf1",
+      "bytes": 251158
+    }
+  ],
+  "processingTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\488b27e8f65c4f7689698bc75f5cf49fb6bd9041345f2c1bd6c2420a69d8bd78-repair_teleport_surface_v5.py",
+    "sha256": "488b27e8f65c4f7689698bc75f5cf49fb6bd9041345f2c1bd6c2420a69d8bd78",
+    "bytes": 13654
+  },
+  "completedAt": "2026-10-23T10:49:59.305361+00:00",
+  "originalRepairReport": {
+    "path": "art/full-ai-city/reports/local-repairs/classic/teleport_gate/359f583f3bdd889e/source-repair-report.json",
+    "sha256": "60e4c536afed40323ccbb0158fc4b547fb2e1faba696241b6ed57109d310bc93",
+    "bytes": 14465
+  },
+  "diagnosticImages": [
+    {
+      "path": "art/full-ai-city/reports/local-repairs/classic/teleport_gate/359f583f3bdd889e/gray/gray-front.png",
+      "sha256": "36ec341398553e1c1b63ffccbbedd4d0f2674fffeffd0dcc4bd89b067e528933",
+      "bytes": 677045
+    },
+    {
+      "path": "art/full-ai-city/reports/local-repairs/classic/teleport_gate/359f583f3bdd889e/gray/gray-back.png",
+      "sha256": "f683398417825810817183c5a544a436776957014148dcf9008ed5bbc04ef177",
+      "bytes": 631485
+    }
+  ],
+  "diagnosticTool": {
+    "path": "art/full-ai-city/reports/tool-snapshots/efa1bae3282db1495a6894a48765d3095dc7c80d3e3f271717727a37d874e48d-render_repair_gray.py",
+    "sha256": "efa1bae3282db1495a6894a48765d3095dc7c80d3e3f271717727a37d874e48d",
+    "bytes": 2437
+  },
+  "diagnosticReceipt": {
+    "path": "art/full-ai-city/reports/local-repairs/classic/teleport_gate/359f583f3bdd889e/gray/inspection.json",
+    "sha256": "a41714eb98d67fb9a3590b5fed8dc0c997ebfe5a2e47b26402664b941a521d92",
+    "bytes": 1432
+  },
+  "pixelRayDiagnostics": [
+    {
+      "path": "art/full-ai-city/reports/local-repairs/classic/teleport_gate/359f583f3bdd889e/measurements/teleport-v4-vs-bc6f-rays.json",
+      "sha256": "fa8fdd2af324ebe88a6a270dc4ed320277415b83134352c19e711a4df6748134",
+      "bytes": 10139
+    },
+    {
+      "path": "art/full-ai-city/reports/local-repairs/classic/teleport_gate/359f583f3bdd889e/measurements/teleport-v5-vs-v4fine-rays.json",
+      "sha256": "9b9602f1593f697df32902dfc3550d69d9dcdb9dccf6c8e94b72f436b81684d0",
+      "bytes": 10176
+    }
+  ],
+  "pixelRayDiagnosticTools": [
+    {
+      "path": "art/full-ai-city/reports/tool-snapshots/64284f0182e0fd8ec11a2cb91cc4101e39437f65212a23894f83a7f731a4254d-probe_teleport_v4.py",
+      "sha256": "64284f0182e0fd8ec11a2cb91cc4101e39437f65212a23894f83a7f731a4254d",
+      "bytes": 2188
+    },
+    {
+      "path": "art/full-ai-city/reports/tool-snapshots/0c874fab10fbea1244c4140f9b81a5f28f3f2176cf4288288fdf652967408706-probe_teleport_v5.py",
+      "sha256": "0c874fab10fbea1244c4140f9b81a5f28f3f2176cf4288288fdf652967408706",
+      "bytes": 2274
+    }
+  ],
+  "sourcePreservation": {
+    "path": "art/full-ai-city/reports/local-repairs/classic/teleport_gate/359f583f3bdd889e/preservation.json",
+    "sha256": "e489992a1cd239004dd934789422eff31e8f721632eff436dc1e435fe53db2df",
+    "bytes": 1412
+  },
+  "visualReview": {
+    "status": "source_repair_ready_for_derivation",
+    "reviewer": "/root/outskirts",
+    "recordedAtUtc": "2026-10-23T11:02:06.423190+00:00",
+    "views": [
+      "front",
+      "right",
+      "back",
+      "left",
+      "iso",
+      "neutral-front",
+      "neutral-back"
+    ],
+    "notes": "Individually inspected all five source color views and 1024px neutral front/back. Compared with v4, the measured omitted inner arch-shoulder openings are closed; pixel rays now hit the intended front or back side instead of traversing to the opposite surface. This changes only the inner extent of four existing bounded arch patches to +/-0.135; the four side-roof and two rear molding/plinth patches remain the same. Short stair-like thin dark seams at arch ends and a small original rear window-top nick remain visible in neutral views and are disclosed. At512px color scale the frame is continuous and readable. Proceed to0.0015voxel/30k derivation; enlarged seams or lost window panes must be rejected in its separate final review. No runtime approval is granted by this source receipt."
+  },
+  "runtimeApproved": false,
+  "freezeTool": {
+    "path": "art/full-ai-city/reports/tool-snapshots/14913c4f04f8daba810fb87babd36acc9d55bb5688a46c9ad180692829b3a489-freeze_teleport_v5.py",
+    "sha256": "14913c4f04f8daba810fb87babd36acc9d55bb5688a46c9ad180692829b3a489",
+    "bytes": 4095
+  }
+}

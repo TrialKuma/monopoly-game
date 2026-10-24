@@ -1,0 +1,48 @@
+{
+  "status": "rejected_native_export_source",
+  "region": "alpine",
+  "asset": "shop_1",
+  "reviewer": "progression_design",
+  "source": {
+    "path": "art/full-ai-city/source/alpine--shop_1-a002-pixal-mv-1024-21421.glb",
+    "sha256": "ba1b45111f33b95481413313b6c526061592aee5b59540347a43711847eb2b1c",
+    "bytes": 39872664
+  },
+  "sourceLevel": "Native 1M export; no untouched decoder attribution is made.",
+  "inferenceReport": {
+    "path": "art/full-ai-city/reports/source-rejections/alpine/shop_1/ba1b45111f33b954/alpine--shop_1-a002-pixal-mv-1024-21421.json",
+    "sha256": "3ed15d754ee38dfe5eba854c3bcbfa91cdb3d8be55a43dbd3e7c465b7e9a0f7a",
+    "bytes": 9840
+  },
+  "inputReference": {
+    "path": "art/full-ai-city/reports/source-rejections/alpine/shop_1/ba1b45111f33b954/input-reference.json",
+    "sha256": "7fb4f2ee0766fa0ea09718ccdf184297a071036219c0fb5c271970f93ba66646",
+    "bytes": 4415
+  },
+  "diagnostic": {
+    "path": "art/full-ai-city/reports/source-rejections/alpine/shop_1/ba1b45111f33b954/diagnostic.json",
+    "sha256": "eefddaa491f0a302a4b494964cfa7cfe7a5a0cc599d1167af46278a1a32214dd",
+    "bytes": 2046
+  },
+  "evidence": [
+    {
+      "path": "art/full-ai-city/reports/source-rejections/alpine/shop_1/ba1b45111f33b954/raw-front.png",
+      "sha256": "3a1bda949e32baf96a068c83d38c3223db9dfb8a52cb731c05d8b88ecd111804",
+      "bytes": 203558
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/alpine/shop_1/ba1b45111f33b954/raw-iso.png",
+      "sha256": "0d8591ce5dd4ced4e48b2dabb4d036914d0cfacbc5f58f575ad2af1f3cd76fc4",
+      "bytes": 230658
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/alpine/shop_1/ba1b45111f33b954/raw-grey-front-iso.png",
+      "sha256": "4666bdaffb83f4f76b34bb70666a6ef6c9b1e27677af8b95d121f42f12c997c4",
+      "bytes": 634649
+    }
+  ],
+  "finding": "Actually inspected native source front/iso and grey front-iso: roof ridge portions are staggered and disconnected beside the chimney, with a deep V-shaped roof recess. This is already present in the native 1M export and remains visible in the final phone-frame view. The prior reference side elevation has a sloping longitudinal ridge inconsistent with equal-height front/back gables. No untouched decoder attribution is made.",
+  "decision": "Second independent seed rejected. Hold this key and replace the inconsistent reference with one continuous front-to-back gable roof and a horizontal ridge/eave in the orthographic right view; remove the chimney. Do not retry the old input again.",
+  "sourceUnchanged": true,
+  "notFinalCandidateReview": true
+}

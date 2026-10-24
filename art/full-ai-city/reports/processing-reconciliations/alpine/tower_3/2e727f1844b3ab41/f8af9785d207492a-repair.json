@@ -1,0 +1,329 @@
+{
+  "status": "local_repair_candidate_pending_visual_review",
+  "source": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\alpine--tower_2-a001-pixal-mv-1024-9247.glb",
+    "sha256": "9df477b0c7d751c5b43ebfef83a5d729633ce44b71d297b3c1ed678fc79da1ef",
+    "bytes": 42491064
+  },
+  "orientation": {
+    "enabled": true,
+    "candidate_degrees": 0.47312512273352053,
+    "applied_degrees": 0.47312512273352053,
+    "underside_area": 0.09411459852668377,
+    "normal_agreement": 0.9554585377412471,
+    "yaw_degrees": 180,
+    "pitch_degrees": 0,
+    "roll_degrees": 0,
+    "uniform_scale": 1.1472968810776478
+  },
+  "method": "Only four bounded facade gaps confirmed in original gray renders and ray measurements are closed from adjoining original stone/plaster samples. All open balconies, doors, windows, source vertices, source faces and image pixels remain unchanged. Local surfaces reuse original stone/plaster UV samples with 0.006 inward closure; no replacement building or new texture.",
+  "repairs": [
+    {
+      "name": "Front stone gap immediately right of entrance",
+      "specification": {
+        "name": "Front stone gap immediately right of entrance",
+        "u": [
+          1,
+          0,
+          0
+        ],
+        "v": [
+          0,
+          0,
+          1
+        ],
+        "n": [
+          0,
+          -1,
+          0
+        ],
+        "roi": [
+          0.075,
+          0.135,
+          0.022,
+          0.105
+        ],
+        "defectDepth": 0.1,
+        "donorDepth": 0.15,
+        "donorMaxDepth": 0.31,
+        "donorNormal": 0.65,
+        "color": "stone"
+      },
+      "missingSamples": 152,
+      "boundarySamples": 1338,
+      "sampledDepthRange": [
+        -0.2827754020690918,
+        0.2591458559036255
+      ],
+      "inwardClosureThickness": 0.006,
+      "outerSurfaceUnchanged": true,
+      "newVertices": 456,
+      "newTriangles": 904
+    },
+    {
+      "name": "Rear lower left stone plinth gap",
+      "specification": {
+        "name": "Rear lower left stone plinth gap",
+        "u": [
+          -1,
+          0,
+          0
+        ],
+        "v": [
+          0,
+          0,
+          1
+        ],
+        "n": [
+          0,
+          1,
+          0
+        ],
+        "roi": [
+          -0.29,
+          -0.2,
+          0.009,
+          0.055
+        ],
+        "defectDepth": 0.1,
+        "donorDepth": 0.15,
+        "donorMaxDepth": 0.31,
+        "donorNormal": 0.65,
+        "color": "stone"
+      },
+      "missingSamples": 99,
+      "boundarySamples": 950,
+      "sampledDepthRange": [
+        -0.20421624183654785,
+        0.28750157356262207
+      ],
+      "inwardClosureThickness": 0.006,
+      "outerSurfaceUnchanged": true,
+      "newVertices": 334,
+      "newTriangles": 664
+    },
+    {
+      "name": "Front upper left plaster fracture beside balcony",
+      "specification": {
+        "name": "Front upper left plaster fracture beside balcony",
+        "u": [
+          1,
+          0,
+          0
+        ],
+        "v": [
+          0,
+          0,
+          1
+        ],
+        "n": [
+          0,
+          -1,
+          0
+        ],
+        "roi": [
+          -0.29,
+          -0.17,
+          0.375,
+          0.445
+        ],
+        "defectDepth": 0.1,
+        "donorDepth": 0.15,
+        "donorMaxDepth": 0.31,
+        "donorNormal": 0.65,
+        "color": "plaster"
+      },
+      "missingSamples": 24,
+      "boundarySamples": 1777,
+      "sampledDepthRange": [
+        -0.27171826362609863,
+        0.31495237350463867
+      ],
+      "inwardClosureThickness": 0.006,
+      "outerSurfaceUnchanged": true,
+      "newVertices": 252,
+      "newTriangles": 480
+    },
+    {
+      "name": "Rear upper left plaster fracture above timber",
+      "specification": {
+        "name": "Rear upper left plaster fracture above timber",
+        "u": [
+          -1,
+          0,
+          0
+        ],
+        "v": [
+          0,
+          0,
+          1
+        ],
+        "n": [
+          0,
+          1,
+          0
+        ],
+        "roi": [
+          -0.31,
+          -0.2,
+          0.307,
+          0.373
+        ],
+        "defectDepth": 0.1,
+        "donorDepth": 0.15,
+        "donorMaxDepth": 0.31,
+        "donorNormal": 0.65,
+        "color": "plaster"
+      },
+      "missingSamples": 15,
+      "boundarySamples": 1860,
+      "sampledDepthRange": [
+        -0.19804596900939941,
+        0.28780972957611084
+      ],
+      "inwardClosureThickness": 0.006,
+      "outerSurfaceUnchanged": true,
+      "newVertices": 186,
+      "newTriangles": 348
+    }
+  ],
+  "originalTriangles": 976833,
+  "originalVerticesMoved": 0,
+  "originalTrianglesDeleted": 0,
+  "artifactCleanup": {
+    "method": "No original faces deleted. Four measured stone/plaster facade gaps only. Existing balcony openings, framed windows, doors and roof tiles remain unchanged.",
+    "deletedTriangles": 0
+  },
+  "newTriangles": 2396,
+  "newVertices": 1228,
+  "inverseSimilarityError": 1.0135727440685471e-07,
+  "normalizedOutput": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-alpine-tower2-a001-v1\\repaired-normalized.glb",
+    "sha256": "6f32bae5488fca1a47aa2f5247dca1f57a6fcd319a65c2ee700ae678f63a47b9",
+    "bytes": 43395468
+  },
+  "nativeOutput": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-alpine-tower2-a001-v1\\repaired-native.glb",
+    "sha256": "8bfdea96be825f2a94b816a4d14896a9f50594d3c9b47dd9f61e53aaf7b7a7cf",
+    "bytes": 43384572
+  },
+  "renders": {
+    "views": [
+      "art/full-ai-city/reports/local-repairs/alpine/tower_2/8bfdea96be825f2a/repaired-front.png",
+      "art/full-ai-city/reports/local-repairs/alpine/tower_2/8bfdea96be825f2a/repaired-right.png",
+      "art/full-ai-city/reports/local-repairs/alpine/tower_2/8bfdea96be825f2a/repaired-back.png",
+      "art/full-ai-city/reports/local-repairs/alpine/tower_2/8bfdea96be825f2a/repaired-left.png",
+      "art/full-ai-city/reports/local-repairs/alpine/tower_2/8bfdea96be825f2a/repaired-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.5,
+        -0.3494946360588074,
+        0.0
+      ],
+      "max": [
+        0.5,
+        0.3494946360588074,
+        0.9026888608932495
+      ]
+    },
+    "triangles": 979229,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "reviewImages": [
+    {
+      "path": "art/full-ai-city/reports/local-repairs/alpine/tower_2/8bfdea96be825f2a/repaired-front.png",
+      "sha256": "aa57445bdd67d2f5c580617216cf2e290d726902c0fb40a2e5779b2fd104b99b",
+      "bytes": 240004
+    },
+    {
+      "path": "art/full-ai-city/reports/local-repairs/alpine/tower_2/8bfdea96be825f2a/repaired-right.png",
+      "sha256": "cab3be29eadb15be9c3fdd401327e1e396eb59dcbbda759e1a621df76cac9108",
+      "bytes": 213155
+    },
+    {
+      "path": "art/full-ai-city/reports/local-repairs/alpine/tower_2/8bfdea96be825f2a/repaired-back.png",
+      "sha256": "f20ea469535e5985512537d3a1b78d3ff06ef65410b5cb9f917056755c10bb48",
+      "bytes": 236311
+    },
+    {
+      "path": "art/full-ai-city/reports/local-repairs/alpine/tower_2/8bfdea96be825f2a/repaired-left.png",
+      "sha256": "260f11652c6c8123757d97a314bd86dae08e0007bb4c9e87719f78e9c01bdfbc",
+      "bytes": 220078
+    },
+    {
+      "path": "art/full-ai-city/reports/local-repairs/alpine/tower_2/8bfdea96be825f2a/repaired-iso.png",
+      "sha256": "e978364dddabdc0e84b05a11c9b5bbdb16e2c002ce28c2c218a1cb63676bf49e",
+      "bytes": 278473
+    }
+  ],
+  "processingTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\fab4aac3a21938a62de98b5cb28774d0e1a930a4108ac9d7a00e1fddb4eb32e6-repair_alpine_tower2_surface.py",
+    "sha256": "fab4aac3a21938a62de98b5cb28774d0e1a930a4108ac9d7a00e1fddb4eb32e6",
+    "bytes": 11913
+  },
+  "completedAt": "2026-10-23T11:45:33.292231+00:00",
+  "diagnosticImages": [
+    {
+      "path": "art/full-ai-city/reports/local-repairs/alpine/tower_2/8bfdea96be825f2a/gray/gray-front.png",
+      "sha256": "eef139cd078ad10876166bff797edcbf3a1606a96ceb4efffe063a6204c79006",
+      "bytes": 690682
+    },
+    {
+      "path": "art/full-ai-city/reports/local-repairs/alpine/tower_2/8bfdea96be825f2a/gray/gray-back.png",
+      "sha256": "11573b9208f5d9aec2bbcad8162d763ad4468f84e1249980d6beb7959bb2d13b",
+      "bytes": 682108
+    }
+  ],
+  "diagnosticReceipt": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\alpine\\tower_2\\8bfdea96be825f2a\\gray\\inspection.json",
+    "sha256": "a0cdabb7757ef56cf8a2ff619739d2ade132927d02d55897f183174450ee2026",
+    "bytes": 1471
+  },
+  "sourcePreservation": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\alpine\\tower_2\\8bfdea96be825f2a\\preservation.json",
+    "sha256": "1e0b874fa9e98e719a4987034b2252c5e95c0f391d29b8ac8ec6325329fa5a3a",
+    "bytes": 1086
+  },
+  "sourceBeforeRepairDiagnostic": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\alpine\\tower_2\\8bfdea96be825f2a\\before\\diagnostic.json",
+    "sha256": "6e7c1c1485ec6b48195fd592bc505f60e7a60e165d68a0105e0fccc8fa469e3c",
+    "bytes": 2019
+  },
+  "sourceVisualReview": {
+    "status": "reviewed_for_derivative_processing",
+    "reviewer": "/root",
+    "recordedAtUtc": "2026-10-23T11:51:01.722172+00:00",
+    "views": [
+      "front",
+      "right",
+      "back",
+      "left",
+      "iso"
+    ],
+    "grayViews": [
+      "front",
+      "back"
+    ],
+    "note": "Root inspected all five repaired normalized source colors and front/back 1024 neutral images, and compared the actual original source diagnosis. The entrance-side stone opening, rear plinth opening and two bounded plaster regions are filled from adjacent original surface/UV. Original 976833 triangles retain exact POSITION/UV and embedded images; 2396 local closure triangles added, none deleted. The gable, single chimney, balcony, windows, doors and stone silhouette remain unchanged. Original thin plaster fracture lines and small eave/window pinholes remain; derivative must not enlarge them. Raw left/right inspection images cover both native side orientations and are not calibrated semantic direction evidence. This approves only derivation, not the final runtime mesh."
+  },
+  "runtimeApproved": false
+}

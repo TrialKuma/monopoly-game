@@ -1,0 +1,277 @@
+{
+  "status": "generated_unrigged_part_candidate",
+  "started_utc": "2026-10-23T08:54:37.088979+00:00",
+  "generation_started": true,
+  "local_inference_only": true,
+  "asset_id": "classic--skyscraper_3-a003",
+  "weights": {
+    "ready": true,
+    "models": [
+      {
+        "name": "sparse_structure_decoder",
+        "checkpoint": "C:\\Users\\A\\.codex\\worktrees\\0b69\\厂长\\grande-art-lab\\source\\experimental\\models\\Pixal3D\\ckpts\\ss_dec_conv3d_16l8_fp16.safetensors",
+        "bytes": 147591972,
+        "ready": true
+      },
+      {
+        "name": "sparse_structure_flow_model",
+        "checkpoint": "C:\\Users\\A\\.codex\\worktrees\\0b69\\厂长\\grande-art-lab\\source\\experimental\\models\\Pixal3D\\ckpts\\ss_flow_img_dit_1_3B_64_bf16_mv.safetensors",
+        "bytes": 5359822584,
+        "ready": true
+      },
+      {
+        "name": "shape_slat_decoder",
+        "checkpoint": "C:\\Users\\A\\.codex\\worktrees\\0b69\\厂长\\grande-art-lab\\source\\experimental\\models\\Pixal3D\\ckpts\\shape_dec_next_dc_f16c32_fp16.safetensors",
+        "bytes": 948490494,
+        "ready": true
+      },
+      {
+        "name": "shape_slat_flow_model_512",
+        "checkpoint": "C:\\Users\\A\\.codex\\worktrees\\0b69\\厂长\\grande-art-lab\\source\\experimental\\models\\Pixal3D\\ckpts\\slat_flow_img2shape_dit_1_3B_512_bf16_mv.safetensors",
+        "bytes": 5546764048,
+        "ready": true
+      },
+      {
+        "name": "shape_slat_flow_model_1024",
+        "checkpoint": "C:\\Users\\A\\.codex\\worktrees\\0b69\\厂长\\grande-art-lab\\source\\experimental\\models\\Pixal3D\\ckpts\\slat_flow_img2shape_dit_1_3B_1024_bf16_mv.safetensors",
+        "bytes": 5546764048,
+        "ready": true
+      },
+      {
+        "name": "tex_slat_decoder",
+        "checkpoint": "C:\\Users\\A\\.codex\\worktrees\\0b69\\厂长\\grande-art-lab\\source\\experimental\\models\\Pixal3D\\ckpts\\tex_dec_next_dc_f16c32_fp16.safetensors",
+        "bytes": 948458812,
+        "ready": true
+      },
+      {
+        "name": "tex_slat_flow_model_1024",
+        "checkpoint": "C:\\Users\\A\\.codex\\worktrees\\0b69\\厂长\\grande-art-lab\\source\\experimental\\models\\Pixal3D\\ckpts\\slat_flow_imgshape2tex_dit_1_3B_1024_bf16_mv.safetensors",
+        "bytes": 5546960656,
+        "ready": true
+      }
+    ],
+    "config": "C:\\Users\\A\\.codex\\worktrees\\0b69\\厂长\\grande-art-lab\\source\\experimental\\models\\Pixal3D\\pipeline_mv.json",
+    "config_sha256": "3bd8f005301423604aafbfab126639c675d7dc6968b8113271433f6593901715"
+  },
+  "resources_before": {
+    "gpu": "NVIDIA GeForce RTX 5070 Ti",
+    "total_physical_vram_gib": 15.9208984375,
+    "free_physical_vram_gib": 14.8974609375,
+    "gpu_utilization_percent": 1,
+    "total_ram_gib": 31.152122497558594,
+    "available_ram_gib": 19.809574127197266
+  },
+  "output": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\classic--skyscraper_3-a003-pixal-mv-1024-19341.glb",
+  "input": "H:\\代码项目\\monopoly\\art\\full-ai-city\\inputs\\classic\\skyscraper_3\\4f935dc8e9880c2c\\transforms.json",
+  "input_sha256": "8f5fd7ac1a7e70be8142dda29ce5df1d1d902d286fae8189507f2a53d03dce24",
+  "input_views": [
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\inputs\\classic\\skyscraper_3\\4f935dc8e9880c2c\\view00_azim000.png",
+      "sha256": "8b934dd72dc64ff6b0d8f67d60efed55d9862e529656ac274a419ec88f428f59",
+      "size": [
+        914,
+        914
+      ],
+      "alpha_bbox": [
+        41,
+        141,
+        867,
+        777
+      ],
+      "camera_to_world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          -1.0,
+          -3.1192049980163574
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\inputs\\classic\\skyscraper_3\\4f935dc8e9880c2c\\view01_azim090.png",
+      "sha256": "6520b6c7077d14f6f328897c5376fa1dba94d019151097195eb65cb7701b68a2",
+      "size": [
+        914,
+        914
+      ],
+      "alpha_bbox": [
+        305,
+        144,
+        608,
+        769
+      ],
+      "camera_to_world": [
+        [
+          0.0,
+          0.0,
+          1.0,
+          3.1192049980163574
+        ],
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\inputs\\classic\\skyscraper_3\\4f935dc8e9880c2c\\view02_azim180.png",
+      "sha256": "0d6cc57e2829903b394f01c76af3324b5e57ad682edfdf12dee1798e7bfe85aa",
+      "size": [
+        914,
+        914
+      ],
+      "alpha_bbox": [
+        40,
+        141,
+        875,
+        781
+      ],
+      "camera_to_world": [
+        [
+          -1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          3.1192049980163574
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    }
+  ],
+  "assumed_cameras": true,
+  "camera_calibration": "assumed_standard_orbit_not_measured",
+  "source_board": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\inputs\\classic\\skyscraper_3\\4f935dc8e9880c2c\\source-triptych.png",
+    "sha256": "4f935dc8e9880c2cbbe278509ccc83d83e190700ac5caae59bde5aba704cba52",
+    "bytes": 1918347
+  },
+  "view_count": 3,
+  "camera_angle_x": 0.3490658503988659,
+  "mesh_scale": 1.0,
+  "native_entrypoint": "inference_mv.py:run_inference / Pixal3DMVImageTo3DPipeline.run_mv",
+  "resolution": 1024,
+  "seed": 19341,
+  "low_vram": true,
+  "strict_naf": true,
+  "texture_size": 4096,
+  "sampler_steps": {
+    "ss": 12,
+    "shape": 12,
+    "tex": 12
+  },
+  "native_checkpoint_dtypes_preserved": true,
+  "pipeline_config": "pipeline_mv.json",
+  "multiview_fusion": "average",
+  "shared_files_write_protected": true,
+  "cache_directory": "H:\\代码项目\\monopoly\\art\\full-ai-city\\cache",
+  "runner_sha256": "2f5ba82fd3c87626b529c4bd4bdf2ba22f53947beff885e50b30e4f2ffefb1f2",
+  "runner_source_snapshot": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\classic--skyscraper_3-a003\\runner-source.py",
+  "post_projection_allocator_cleanup": "Release only unused CUDA cached blocks after complete native conditioner return",
+  "projection_cache_adapter_sha256": "aabecb5acc98a013068a5891226fe1034f764585383290c6917cce230c203bcb",
+  "lifetime_adapter_sha256": "a815f73fbb24f0e7e4eb171ffa0f40472ef30346a109410399a2f7e404db47d7",
+  "gpu_lock": {
+    "status": "released",
+    "pid": 19484,
+    "host": "NeoRic",
+    "label": "monopoly-native-multiview-classic--skyscraper_3-a003",
+    "acquired_utc": "2026-10-23T08:54:37.153294+00:00",
+    "lock_path": "C:\\Users\\A\\.codex\\shared-resource-locks\\pixal-gpu0.lock",
+    "token": "853dc7e7cf42452293ea3ef0480b19eb",
+    "metadata_is_advisory": true
+  },
+  "torch": "2.10.0+cu130",
+  "natten": "0.21.6",
+  "cuda": "13.0",
+  "cuda_free_gib": 14.6845703125,
+  "cuda_total_gib": 15.89398193359375,
+  "prior_source_export_replay": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\classic--skyscraper_3-3db1ee9a25bd-surface-field-v1\\receipt.json",
+    "sha256": "d0a1ea77769891d315a403471003c159c5df568ab1cfc70d970c6932708fe2bc",
+    "bytes": 11460
+  },
+  "prior_source_export_replays": [
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\classic--skyscraper_3-3db1ee9a25bd-surface-field-v1\\receipt.json",
+      "sha256": "d0a1ea77769891d315a403471003c159c5df568ab1cfc70d970c6932708fe2bc",
+      "bytes": 11460
+    }
+  ],
+  "prior_export_batch": {
+    "maximumJobs": 3,
+    "softSecondsLimit": 90,
+    "elapsedSeconds": 28.5,
+    "neuralModelSettingsChanged": false
+  },
+  "native_mobile_request": {
+    "status": "capture_enabled",
+    "captureOnly": true,
+    "minDiskGiB": 12,
+    "purpose": "Freeze original per-inference neural geometry and material field for later mobile export without another neural inference. No automatic approval or publication.",
+    "jobId": "classic--skyscraper_3-a003",
+    "policySha256": "7e58ddb0dbc94f1787443ccde94f97403b61417c87e9e697656e019222483934"
+  },
+  "native_mobile_export_receipt": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\classic--skyscraper_3-a003\\receipt.json",
+    "sha256": "efd6687a0fcb590206348809535ce1158d799e153bce5f8a95deafedf647f0a4",
+    "bytes": 3722
+  },
+  "output_bytes": 44910964,
+  "output_sha256": "dae353d3f424de1bb80af865e09a1a9f50ce2cfc9e3288ab0929e188c09a1cde",
+  "input_unchanged": true,
+  "seconds": 183.91,
+  "finished_utc": "2026-10-23T08:57:41.057571+00:00",
+  "peak_allocated_gib": 16.36,
+  "batch_wrapper": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\classic--skyscraper_3-a003\\batch-wrapper-source.py",
+    "sha256": "1424c229b4f5ef8d265c00484bee92acb8340a12a79f499ca13f33d4091b7837"
+  },
+  "pipeline_boundary": "Original native 1024_cascade; no unsupported 512 branch, no persistent model lifetime changes"
+}

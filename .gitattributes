@@ -1,5 +1,6 @@
-# Preserve provenance hashes for authored scripts and asset manifests on Windows.
-art/** text=auto eol=lf
-assets/models/regions/** text=auto eol=lf
+# These files are bound by exact-byte provenance hashes. Python and Blender
+# receipts may contain CRLF on Windows; do not normalize either direction.
+art/** -text
+assets/models/** -text
 *.png binary
 *.glb binary

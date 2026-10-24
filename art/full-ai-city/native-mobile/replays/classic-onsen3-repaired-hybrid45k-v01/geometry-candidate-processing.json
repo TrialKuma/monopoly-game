@@ -1,0 +1,374 @@
+{
+  "status": "exported_pending_visual_review",
+  "createdAt": "2026-10-23T08:05:02.282771+00:00",
+  "region": "classic",
+  "asset": "onsen_3",
+  "source": {
+    "rawGLB": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\classic--onsen_3-a001-pixal-mv-1024-9247.glb",
+      "sha256": "91edafc803301744d24814f56a5d4d1aa39c65d12fabcd948686da645deb3242",
+      "bytes": 41167892
+    }
+  },
+  "inferenceReport": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\classic--onsen_3-a001\\classic--onsen_3-a001-pixal-mv-1024-9247.json",
+    "sha256": "6e4e9e993fbe24d7d6d7ecbaef8372e24f1df20cdb046b0b0cf90b42559299ec",
+    "bytes": 9077
+  },
+  "reference": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\references\\classic\\onsen_3\\reference.json",
+    "sha256": "c38fb564efd181337113007a1d0582ba775b8e547f3a53b723be5a0508cff741",
+    "bytes": 4018
+  },
+  "processingTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\364e5afe80bef5786a38acff2c342b529d4b454559d2b48b5a0657771fdeb765-process_lod.py",
+    "sha256": "364e5afe80bef5786a38acff2c342b529d4b454559d2b48b5a0657771fdeb765",
+    "bytes": 25875
+  },
+  "assumedCameras": true,
+  "cameraCalibration": "assumed_standard_orbit_not_measured",
+  "nativePipeline": "Pixal3DMVImageTo3DPipeline.run_mv",
+  "nativeResolution": 1024,
+  "seed": 9247,
+  "geometryOrigin": "Actual native three-view neural building with explicitly recorded localized same-wall surface repairs, followed by source-derived remeshing and texture baking. No replacement building.",
+  "orientation": {
+    "up": "Y",
+    "front": "+Z",
+    "groundY": 0,
+    "maxEdge": 1
+  },
+  "requestedTriangles": 45000,
+  "limitations": [
+    "Assumed camera reference reconstruction, not exact measured architecture",
+    "Final candidate requires actual rendered visual approval"
+  ],
+  "animation": null,
+  "processingComplete": true,
+  "lod": "near",
+  "processingRevision": 0,
+  "localSurfaceRepair": {
+    "source": {
+      "path": "art\\full-ai-city\\work\\repair-onsen3\\repaired-native.glb",
+      "sha256": "50ece06de10fffa9fdfc02c35b84a3e387fb626efef0888bb72071b412906065",
+      "bytes": 41268120
+    },
+    "receipt": {
+      "path": "art\\full-ai-city\\reports\\local-repairs\\classic\\onsen_3\\50ece06de10fffa9\\repair.json",
+      "sha256": "acb0636e4306db83d71ef0c1e1886cfb2f821e9ecf4b1e06e9aed2cefddf6af3",
+      "bytes": 6711
+    },
+    "method": "Only the measured small unframed wall opening below the rear dome cornice is filled from its intact boundary. Original neural vertices, faces and image pixels are untouched. The separate upper framed arch window remains unchanged. The patch reuses neighboring original stone UV samples and closes 0.006 inward so it survives derivative voxelization; no replacement building or new texture.",
+    "newTriangles": 420,
+    "newVertices": 212,
+    "originalVerticesMoved": 0,
+    "originalTrianglesDeleted": 0,
+    "regions": [
+      {
+        "name": "Small unframed oval hole below rear dome cornice",
+        "specification": {
+          "name": "Small unframed oval hole below rear dome cornice",
+          "u": [
+            -1,
+            0,
+            0
+          ],
+          "v": [
+            0,
+            0,
+            1
+          ],
+          "n": [
+            0,
+            1,
+            0
+          ],
+          "roi": [
+            0.043,
+            0.065,
+            0.201,
+            0.229
+          ],
+          "defectDepth": 0.1,
+          "donorDepth": 0.19,
+          "donorMaxDepth": 0.21,
+          "donorNormal": 0.65,
+          "color": "stone"
+        },
+        "missingSamples": 64,
+        "boundarySamples": 900,
+        "sampledDepthRange": [
+          -0.06864714622497559,
+          0.20117151737213135
+        ],
+        "inwardClosureThickness": 0.006,
+        "outerSurfaceUnchanged": true,
+        "newVertices": 212,
+        "newTriangles": 420
+      }
+    ]
+  },
+  "derivation": {
+    "rawTriangles": 942881,
+    "weldedTriangles": 940744,
+    "remeshedTriangles": 993600,
+    "voxelSize": 0.003,
+    "finalTriangles": 44986,
+    "atlasArea": 0.3720278865329258,
+    "singleReductionPass": true,
+    "inheritedUVRemovedBeforeReduction": true,
+    "sourceMaterialsUntouched": true,
+    "uvUnwrap": {
+      "angleDegrees": 66.0,
+      "islandMargin": 2e-05,
+      "marginMethod": "SCALED",
+      "nominalMarginPixels": null
+    },
+    "repairedSourceTriangles": 943301
+  },
+  "bake": {
+    "method": "CPU closest-original-triangle projection with float64 barycentric original UV and bilinear original texture sampling; geometric normals retained, no directional normal-map rebake or invented color",
+    "coveredAtlasPixels": 389536,
+    "nearestLookupSuccessFraction": 1.0,
+    "notRayCoverage": true,
+    "sourceDistanceQuantiles": [
+      0.00015787859592819586,
+      0.000797747474280186,
+      0.0013574005803093318,
+      0.005916337948292494
+    ],
+    "sourceDistanceQuantileLevels": [
+      0.5,
+      0.95,
+      0.99,
+      1
+    ],
+    "overTwoPercentMaxEdge": 0.0,
+    "distanceReviewRequired": false,
+    "visualGeometryReviewRequired": true,
+    "barycentricOriginalRange": [
+      -9.934932353862632e-05,
+      1.0
+    ],
+    "degenerateOrInvalidBarycentricCount": 0,
+    "closestSourceVertexFallbackFraction": 0.0,
+    "barycentricPointReconstructionErrorQuantiles": [
+      3.5309082215723948e-09,
+      2.380533834042642e-08,
+      2.11876517659433e-07
+    ],
+    "atlasOverlapPixelsWithDifferentSurface": 110,
+    "seconds": 9.903701999981422,
+    "maps": [
+      {
+        "role": "base",
+        "size": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "role": "orm",
+        "size": [
+          512,
+          512
+        ]
+      }
+    ],
+    "repairSourceNote": "Texture transfer uses the explicitly repaired neural source, retaining original PBR and locally interpolated same-wall UV. Repair receipt and unchanged original inference source are preserved separately."
+  },
+  "textureTransferTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\a2cb99c96fb8df396f16580a88a7c6151104ee3c927fe76cd161ee2d27bdfa42-bake_nearest_surface.py",
+    "sha256": "a2cb99c96fb8df396f16580a88a7c6151104ee3c927fe76cd161ee2d27bdfa42",
+    "bytes": 7317
+  },
+  "quantization": {
+    "source": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\onsen3-repaired-surface\\candidates\\classic\\onsen_3.glb",
+    "output": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\onsen3-repaired-surface\\candidates\\classic\\onsen_3.glb",
+    "sourceBytes": 2613964,
+    "outputBytes": 1902528,
+    "sourceSha256": "c1aa62f325d899d0b9d01867a47a3d707cb1399f6063708c9e62e8614e72cb01",
+    "outputSha256": "7ea5d8251a032e5ae8772ea46b5244e7bc23634b002c912ee43b9dd740b6508d",
+    "positionFaceAndTextureBytesUnchanged": true,
+    "attributes": [
+      {
+        "accessor": 1,
+        "semantic": "NORMAL",
+        "count": 59299,
+        "maximumAngularErrorDegrees": 0.37514640898051776
+      },
+      {
+        "accessor": 2,
+        "semantic": "TEXCOORD_0",
+        "count": 59299,
+        "maximumUVError": 7.629382707638466e-06,
+        "maximumTexelErrorAt1024": 0.007812487892621789
+      }
+    ]
+  },
+  "processedCandidate": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\onsen3-repaired-surface\\candidates\\classic\\onsen_3.glb",
+    "sha256": "7ea5d8251a032e5ae8772ea46b5244e7bc23634b002c912ee43b9dd740b6508d",
+    "bytes": 1902528
+  },
+  "glbValidation": {
+    "version": 2,
+    "triangles": 44986,
+    "meshes": 1,
+    "materials": 1,
+    "images": 2,
+    "all_primitives_have_uv": true,
+    "animations": [],
+    "all_images_embedded": true,
+    "external_buffers": []
+  },
+  "triangles": 44986,
+  "renderedCandidate": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\onsen3-repaired-surface\\candidates\\renders\\classic\\onsen_3\\lod-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\onsen3-repaired-surface\\candidates\\renders\\classic\\onsen_3\\lod-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\onsen3-repaired-surface\\candidates\\renders\\classic\\onsen_3\\lod-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\onsen3-repaired-surface\\candidates\\renders\\classic\\onsen_3\\lod-left.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\onsen3-repaired-surface\\candidates\\renders\\classic\\onsen_3\\lod-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.49957889318466187,
+        -0.21959546208381653,
+        0.0003009598876815289
+      ],
+      "max": [
+        0.5000666975975037,
+        0.21978546679019928,
+        0.5851556062698364
+      ]
+    },
+    "triangles": 44986,
+    "textureSizes": [
+      {
+        "name": "classic__onsen_3__nearest_base",
+        "size": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "name": "classic__onsen_3__nearest_orm",
+        "size": [
+          512,
+          512
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "renderedSource": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\onsen3-repaired-surface\\candidates\\renders\\classic\\onsen_3\\raw-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\onsen3-repaired-surface\\candidates\\renders\\classic\\onsen_3\\raw-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.5,
+        -0.2197418212890625,
+        0.0
+      ],
+      "max": [
+        0.5,
+        0.2197418212890625,
+        0.5858836770057678
+      ]
+    },
+    "triangles": 942881,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "renderedRepairedSource": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\onsen3-repaired-surface\\candidates\\renders\\classic\\onsen_3\\repaired-source-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\onsen3-repaired-surface\\candidates\\renders\\classic\\onsen_3\\repaired-source-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\onsen3-repaired-surface\\candidates\\renders\\classic\\onsen_3\\repaired-source-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.5,
+        -0.2197418212890625,
+        0.0
+      ],
+      "max": [
+        0.5,
+        0.2197418212890625,
+        0.5858836770057678
+      ]
+    },
+    "triangles": 943301,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "bounds": {
+    "min": [
+      -0.49957889318466187,
+      0.0003009598876815289,
+      -0.21978546679019928
+    ],
+    "max": [
+      0.5000666975975037,
+      0.5851556062698364,
+      0.21959546208381653
+    ],
+    "coordinateSystem": "GLTF Y-up; +Z front"
+  },
+  "textureSizes": [
+    {
+      "name": "classic__onsen_3__nearest_base",
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "name": "classic__onsen_3__nearest_orm",
+      "size": [
+        512,
+        512
+      ]
+    }
+  ],
+  "rawSourceUnchanged": true,
+  "completedAt": "2026-10-23T08:06:22.181497+00:00"
+}

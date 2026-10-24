@@ -1,0 +1,48 @@
+{
+  "status": "rejected_native_export_source",
+  "region": "alpine",
+  "asset": "shop_3",
+  "reviewer": "progression_design",
+  "source": {
+    "path": "art/full-ai-city/source/alpine--shop_3-a003-pixal-mv-1024-22423.glb",
+    "sha256": "7ee88017a05fcf4c56eb3bc614dd8aaa443c33f7d11c11a67f04d1e2c5270808",
+    "bytes": 44245788
+  },
+  "sourceLevel": "Native 1M export; no untouched decoder attribution is made.",
+  "inferenceReport": {
+    "path": "art/full-ai-city/reports/source-rejections/alpine/shop_3/7ee88017a05fcf4c/alpine--shop_3-a003-pixal-mv-1024-22423.json",
+    "sha256": "a2fa5986bd5961edb181998ed84cfa325372a91884fcde6f56c294830eef7bdc",
+    "bytes": 9567
+  },
+  "inputReference": {
+    "path": "art/full-ai-city/reports/source-rejections/alpine/shop_3/7ee88017a05fcf4c/input-reference.json",
+    "sha256": "f276c86ceba9fa1475e73e02ec980397dfb2d22beefc4185a218ed1c43eac186",
+    "bytes": 4407
+  },
+  "diagnostic": {
+    "path": "art/full-ai-city/reports/source-rejections/alpine/shop_3/7ee88017a05fcf4c/diagnostic.json",
+    "sha256": "c43c8f600b7f3da44f6a6ac68ba1ec5bd3283413100671f24c53ee6e95893429",
+    "bytes": 2048
+  },
+  "evidence": [
+    {
+      "path": "art/full-ai-city/reports/source-rejections/alpine/shop_3/7ee88017a05fcf4c/raw-front.png",
+      "sha256": "470467a3303bab3cc7c3c7e3ffd16c55646f89de9fcb77d4462dc3d78764b4aa",
+      "bytes": 236040
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/alpine/shop_3/7ee88017a05fcf4c/raw-iso.png",
+      "sha256": "6b1b23943cb2f1cecfb12b55bf17352d8df460b38606857762dfbdcdaef002f5",
+      "bytes": 304098
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/alpine/shop_3/7ee88017a05fcf4c/raw-grey-front-iso.png",
+      "sha256": "6e9db8242cb5eee82aca2be0a0b809656b00695957fb29123b472447d8203094",
+      "bytes": 835386
+    }
+  ],
+  "finding": "The first native export from revision2 was actually inspected in front/iso and 1024 neutral front-iso. The newly continuous gable roof reconstructs coherently, but substantial open horizontal wall bands remain under the upper balcony/wood beam, across the second-floor window heads, and vertically between second-floor windows; a smaller upper window corner hole remains. Neutral material confirms missing or folded solid plaster geometry rather than dark wood or glass. A broad detached ground sheet is also present; that removable exterior sheet does not explain the facade gaps. No untouched-decoder attribution is made.",
+  "decision": "Hold this exact source and retain revision2 input and all evidence. The roof-reference correction succeeded but the facade gaps persist. Coordinate a narrower facade simplification or justified bounded source repair before spending another blind retry; do not promote this intermediate candidate.",
+  "sourceUnchanged": true,
+  "notFinalCandidateReview": true
+}

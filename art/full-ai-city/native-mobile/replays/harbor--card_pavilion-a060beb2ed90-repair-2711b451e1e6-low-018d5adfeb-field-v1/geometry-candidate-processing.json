@@ -1,0 +1,388 @@
+{
+  "status": "exported_pending_visual_review",
+  "createdAt": "2026-10-24T01:52:34.282401+00:00",
+  "region": "harbor",
+  "asset": "card_pavilion",
+  "source": {
+    "rawGLB": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\harbor--card_pavilion-a002-pixal-mv-1024-29482.glb",
+      "sha256": "a060beb2ed9083af2116c47c7cd48c3b2d4da38fdd6ae32ffa591475cddd0d2f",
+      "bytes": 41800912
+    }
+  },
+  "inferenceReport": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\harbor--card_pavilion-a002\\harbor--card_pavilion-a002-pixal-mv-1024-29482.json",
+    "sha256": "87fbfa3f76cabecdaa87f1c25d648bd2b873ff50f839dc52af74259ffe64bc33",
+    "bytes": 10452
+  },
+  "reference": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\inputs\\harbor\\card_pavilion\\9d366651d3d06e4a\\reference.json",
+    "sha256": "1416887a4d389d6cabf4454288fadde007223e7d148f3f7626d8935a088289b5",
+    "bytes": 4451
+  },
+  "processingTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\01259185d3327c7a75b8df2e595381e45eccf13901ce96ea80844701e548295e-process_lod.py",
+    "sha256": "01259185d3327c7a75b8df2e595381e45eccf13901ce96ea80844701e548295e",
+    "bytes": 34836
+  },
+  "assumedCameras": true,
+  "cameraCalibration": "assumed_standard_orbit_not_measured",
+  "nativePipeline": "Pixal3DMVImageTo3DPipeline.run_mv",
+  "nativeResolution": 1024,
+  "seed": 29482,
+  "geometryOrigin": "Actual native three-view neural building with explicitly recorded bounded local repairs; localSurfaceRepair.method and face counts disclose whether these include boundary patches or a small mechanical connector. Followed by source-derived remeshing and texture transfer. No replacement building.",
+  "orientation": {
+    "up": "Y",
+    "front": "+Z",
+    "groundY": 0,
+    "maxEdge": 1
+  },
+  "requestedTriangles": 30000,
+  "limitations": [
+    "Assumed camera reference reconstruction, not exact measured architecture",
+    "Final candidate requires actual rendered visual approval"
+  ],
+  "animation": null,
+  "processingComplete": true,
+  "lod": "near",
+  "processingRevision": 0,
+  "localSurfaceRepair": {
+    "source": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-harbor-card-a060-rear-arch\\repaired-native.glb",
+      "sha256": "2711b451e1e6fd75b98659c19d5fff4748f80ce45d1270a01ff3e01da9c6bf06",
+      "bytes": 42508956
+    },
+    "receipt": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\harbor\\card_pavilion\\2711b451e1e6fd75\\repair.json",
+      "sha256": "3cc185572404c6aae82807e49815c6a5b3767bf96d2b5a3e1b26b87d5f317b9a",
+      "bytes": 8133
+    },
+    "method": "Only explicitly measured and visually reviewed local gaps are closed from adjoining original surface and UV samples with0.006 inward closure. Original vertices, faces and image pixels are preserved. No replacement building or generated texture. See configuration and frozen prior review evidence for exact allowed regions.",
+    "newTriangles": 828,
+    "newVertices": 416,
+    "originalVerticesMoved": 0,
+    "originalTrianglesDeleted": 0,
+    "regions": [
+      {
+        "name": "Rear right arch-adjacent plaster backing",
+        "specification": {
+          "name": "Rear right arch-adjacent plaster backing",
+          "u": [
+            -1,
+            0,
+            0
+          ],
+          "v": [
+            0,
+            0,
+            1
+          ],
+          "n": [
+            0,
+            1,
+            0
+          ],
+          "roi": [
+            0.143,
+            0.183,
+            0.454,
+            0.487
+          ],
+          "forceRoi": [
+            0.143,
+            0.183,
+            0.454,
+            0.487
+          ],
+          "defectDepth": 0.32,
+          "donorDepth": 0.346,
+          "donorMaxDepth": 0.355,
+          "donorNormal": 0.7,
+          "color": "plaster",
+          "gridStep": 0.003,
+          "donorMargin": 0.024,
+          "flatPatchUV": true,
+          "donorMinRGB": 0.5,
+          "donorMaxColorRatio": 1.5
+        },
+        "missingSamples": 154,
+        "boundarySamples": 501,
+        "sampledDepthRange": [
+          -0.19011902809143066,
+          0.378934383392334
+        ],
+        "inwardClosureThickness": 0.006,
+        "outerSurfaceUnchanged": true,
+        "newVertices": 416,
+        "newTriangles": 828
+      }
+    ]
+  },
+  "derivation": {
+    "rawTriangles": 992239,
+    "weldedTriangles": 985889,
+    "remeshedTriangles": 3640880,
+    "voxelSize": 0.003,
+    "finalTriangles": 29960,
+    "atlasArea": 0.4489730947298568,
+    "singleReductionPass": true,
+    "inheritedUVRemovedBeforeReduction": true,
+    "sourceMaterialsUntouched": true,
+    "uvUnwrap": {
+      "angleDegrees": 66.0,
+      "islandMargin": 2e-05,
+      "marginMethod": "SCALED",
+      "nominalMarginPixels": null
+    },
+    "repairedSourceTriangles": 993067
+  },
+  "bake": {
+    "method": "CPU closest-original-triangle projection with float64 barycentric original UV and bilinear original texture sampling; geometric normals retained, no directional normal-map rebake or invented color",
+    "coveredAtlasPixels": 468907,
+    "nearestLookupSuccessFraction": 1.0,
+    "notRayCoverage": true,
+    "sourceDistanceQuantiles": [
+      0.00023251937818713486,
+      0.001079070579726249,
+      0.0019336896482855083,
+      0.007028948049992323
+    ],
+    "sourceDistanceQuantileLevels": [
+      0.5,
+      0.95,
+      0.99,
+      1
+    ],
+    "overTwoPercentMaxEdge": 0.0,
+    "distanceReviewRequired": false,
+    "visualGeometryReviewRequired": true,
+    "barycentricOriginalRange": [
+      -5.55995299212492e-05,
+      1.0
+    ],
+    "degenerateOrInvalidBarycentricCount": 0,
+    "closestSourceVertexFallbackFraction": 0.0,
+    "barycentricPointReconstructionErrorQuantiles": [
+      6.712973221043275e-09,
+      4.296650959829007e-08,
+      2.3949428353982464e-07
+    ],
+    "atlasOverlapPixelsWithDifferentSurface": 1430,
+    "seconds": 9.68273009999757,
+    "maps": [
+      {
+        "role": "base",
+        "size": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "role": "orm",
+        "size": [
+          512,
+          512
+        ]
+      }
+    ],
+    "repairSourceNote": "Texture transfer uses the explicitly repaired neural source, retaining original PBR and locally interpolated same-wall UV. Repair receipt and unchanged original inference source are preserved separately."
+  },
+  "textureTransferTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\a2cb99c96fb8df396f16580a88a7c6151104ee3c927fe76cd161ee2d27bdfa42-bake_nearest_surface.py",
+    "sha256": "a2cb99c96fb8df396f16580a88a7c6151104ee3c927fe76cd161ee2d27bdfa42",
+    "bytes": 7317
+  },
+  "quantization": {
+    "source": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-harbor-card-pavilion-2711b451e1e6fd75\\candidates\\harbor\\card_pavilion.glb",
+    "output": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-harbor-card-pavilion-2711b451e1e6fd75\\candidates\\harbor\\card_pavilion.glb",
+    "sourceBytes": 1873592,
+    "outputBytes": 1372864,
+    "sourceSha256": "ca765682201a195b722537b355bd20492cd3e8619a5babcb962613bdb808207e",
+    "outputSha256": "018d5adfebf0ed536a545de1d7b3e8191572feba7ebd0d7a8a93e5f840f61e79",
+    "positionFaceAndTextureBytesUnchanged": true,
+    "attributes": [
+      {
+        "accessor": 1,
+        "semantic": "NORMAL",
+        "count": 41740,
+        "maximumAngularErrorDegrees": 0.37862638328105047
+      },
+      {
+        "accessor": 2,
+        "semantic": "TEXCOORD_0",
+        "count": 41740,
+        "maximumUVError": 7.629450011314987e-06,
+        "maximumTexelErrorAt1024": 0.007812556811586546
+      }
+    ]
+  },
+  "processedCandidate": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-harbor-card-pavilion-2711b451e1e6fd75\\candidates\\harbor\\card_pavilion.glb",
+    "sha256": "018d5adfebf0ed536a545de1d7b3e8191572feba7ebd0d7a8a93e5f840f61e79",
+    "bytes": 1372864
+  },
+  "glbValidation": {
+    "version": 2,
+    "triangles": 29960,
+    "meshes": 1,
+    "materials": 1,
+    "images": 2,
+    "all_primitives_have_uv": true,
+    "animations": [],
+    "all_images_embedded": true,
+    "external_buffers": []
+  },
+  "triangles": 29960,
+  "renderedCandidate": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-harbor-card-pavilion-2711b451e1e6fd75\\candidates\\renders\\harbor\\card_pavilion\\lod-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-harbor-card-pavilion-2711b451e1e6fd75\\candidates\\renders\\harbor\\card_pavilion\\lod-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-harbor-card-pavilion-2711b451e1e6fd75\\candidates\\renders\\harbor\\card_pavilion\\lod-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-harbor-card-pavilion-2711b451e1e6fd75\\candidates\\renders\\harbor\\card_pavilion\\lod-left.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-harbor-card-pavilion-2711b451e1e6fd75\\candidates\\renders\\harbor\\card_pavilion\\lod-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.4988381862640381,
+        -0.4274458885192871,
+        0.0001233192888321355
+      ],
+      "max": [
+        0.4988490045070648,
+        0.42568933963775635,
+        0.9469302296638489
+      ]
+    },
+    "triangles": 29960,
+    "textureSizes": [
+      {
+        "name": "harbor__card_pavilion__nearest_base",
+        "size": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "name": "harbor__card_pavilion__nearest_orm",
+        "size": [
+          512,
+          512
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "renderedSource": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-harbor-card-pavilion-2711b451e1e6fd75\\candidates\\renders\\harbor\\card_pavilion\\raw-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-harbor-card-pavilion-2711b451e1e6fd75\\candidates\\renders\\harbor\\card_pavilion\\raw-iso.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-harbor-card-pavilion-2711b451e1e6fd75\\candidates\\renders\\harbor\\card_pavilion\\raw-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-harbor-card-pavilion-2711b451e1e6fd75\\candidates\\renders\\harbor\\card_pavilion\\raw-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-harbor-card-pavilion-2711b451e1e6fd75\\candidates\\renders\\harbor\\card_pavilion\\raw-left.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.5,
+        -0.42726919054985046,
+        0.0
+      ],
+      "max": [
+        0.5,
+        0.42726919054985046,
+        0.947691023349762
+      ]
+    },
+    "triangles": 992239,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "renderedRepairedSource": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-harbor-card-pavilion-2711b451e1e6fd75\\candidates\\renders\\harbor\\card_pavilion\\repaired-source-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-harbor-card-pavilion-2711b451e1e6fd75\\candidates\\renders\\harbor\\card_pavilion\\repaired-source-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-harbor-card-pavilion-2711b451e1e6fd75\\candidates\\renders\\harbor\\card_pavilion\\repaired-source-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.5,
+        -0.42726919054985046,
+        0.0
+      ],
+      "max": [
+        0.5,
+        0.42726919054985046,
+        0.947691023349762
+      ]
+    },
+    "triangles": 993067,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "bounds": {
+    "min": [
+      -0.4988381862640381,
+      0.0001233192888321355,
+      -0.42568933963775635
+    ],
+    "max": [
+      0.4988490045070648,
+      0.9469302296638489,
+      0.4274458885192871
+    ],
+    "coordinateSystem": "GLTF Y-up; +Z front"
+  },
+  "textureSizes": [
+    {
+      "name": "harbor__card_pavilion__nearest_base",
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "name": "harbor__card_pavilion__nearest_orm",
+      "size": [
+        512,
+        512
+      ]
+    }
+  ],
+  "rawSourceUnchanged": true,
+  "completedAt": "2026-10-24T01:54:57.768844+00:00"
+}

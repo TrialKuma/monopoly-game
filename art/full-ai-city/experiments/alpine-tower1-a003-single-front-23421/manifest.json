@@ -1,0 +1,107 @@
+{
+  "status": "prepared_not_generated",
+  "createdAt": "2026-10-23T12:23:04.451938+00:00",
+  "experimentOnly": true,
+  "formal147MultiviewRequirementUnchanged": true,
+  "baseline": {
+    "rawGLB": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\alpine--tower_1-a003-pixal-mv-1024-23421.glb",
+      "sha256": "2a8658414e5e379410bf4871708d975466678f4c2db756eb0701d9f529365f30",
+      "bytes": 41505644
+    },
+    "inferenceReport": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\alpine--tower_1-a003\\alpine--tower_1-a003-pixal-mv-1024-23421.json",
+      "sha256": "a157620b57ef9831004539bcff1462499a1e45cc54e90c8b893588a860f698de",
+      "bytes": 8808
+    },
+    "inputManifest": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\inputs\\alpine\\tower_1\\b80a19ec1ce6c82b\\transforms.json",
+      "sha256": "c2a01a3b0f9e792ea7afb77232effef64cfbcbe3598fb97a9df4869335d54409",
+      "bytes": 5680
+    },
+    "front": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\inputs\\alpine\\tower_1\\b80a19ec1ce6c82b\\view00_azim000.png",
+      "sha256": "5c68bf9ee4c66c58543b17400d9b6a7d8e2b77413c4655aafd25c3fd46ad7287",
+      "bytes": 547616
+    },
+    "reference": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\references\\alpine\\tower_1.png",
+      "sha256": "b80a19ec1ce6c82bfa1760c85544f1db372f3cbfbf24823e702912f6802dc587",
+      "bytes": 1724082
+    },
+    "sourceDiagnosis": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reviews-rejected\\alpine\\tower_1\\0bc46d6465a78e52\\raw-1m\\diagnosis.json",
+      "sha256": "456d75c00e4117cf888393d6b9e73e2334d24094092018879fefa47a377ce496",
+      "bytes": 3606
+    },
+    "reportedProcessSeconds": 246.66,
+    "peakAllocatedGiB": 16.365
+  },
+  "singleInput": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\alpine-tower1-a003-single-front-23421\\inputs\\front.png",
+    "sha256": "5c68bf9ee4c66c58543b17400d9b6a7d8e2b77413c4655aafd25c3fd46ad7287",
+    "bytes": 547616
+  },
+  "frozenReference": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\alpine-tower1-a003-single-front-23421\\inputs\\reference-triptych.png",
+    "sha256": "b80a19ec1ce6c82bfa1760c85544f1db372f3cbfbf24823e702912f6802dc587",
+    "bytes": 1724082
+  },
+  "sameSettings": {
+    "seed": 23421,
+    "shapeResolution": 1024,
+    "samplerSteps": {
+      "ss": 12,
+      "shape": 12,
+      "tex": 12
+    },
+    "rawTextureSize": 4096,
+    "nativeRawTriangleTarget": 1000000,
+    "lowVRAM": true,
+    "manualHorizontalFovRadians": 0.3490658503988659,
+    "inputPixelsExactlySameFront": true,
+    "nativeCheckpointDtypesPreserved": true,
+    "streamingAndSingleUseLifecycle": true
+  },
+  "differentSettings": {
+    "conditioning": "Official single pipeline.run with one exact front versus native run_mv with three posed views fused by average",
+    "singlePipelineConfig": {
+      "path": "C:\\Users\\A\\.codex\\worktrees\\0b69\\厂长\\grande-art-lab\\source\\experimental\\models\\Pixal3D\\pipeline.json",
+      "sha256": "1647217de06e32477702d14895e826fea73497d94537b809a53637f13482a237",
+      "bytes": 4068
+    },
+    "multiviewPipelineConfig": {
+      "path": "C:\\Users\\A\\.codex\\worktrees\\0b69\\厂长\\grande-art-lab\\source\\experimental\\models\\Pixal3D\\pipeline_mv.json",
+      "sha256": "3bd8f005301423604aafbfab126639c675d7dc6968b8113271433f6593901715",
+      "bytes": 6036
+    },
+    "weights": "Single and MV checkpoints differ; equal integer seed does not imply an equivalent random process.",
+    "preprocessing": "Each official entrypoint retains its own preprocessing. Single preprocess_image may recenter/crop before conditioning; MV uses its official posed-view loader. Input file pixels are identical, not a claim of identical internal tensors.",
+    "camera": "Single uses the same supplied20-degree manual FOV and official inferred distance; MV uses the recorded assumed orbit matrices. No new calibrated camera is claimed."
+  },
+  "evaluation": [
+    "Original four-side geometry completeness with identical normalized framing",
+    "Front design agreement",
+    "Same mobile triangle/texture budget and postprocess comparison",
+    "Total generation and downstream processing wall time"
+  ],
+  "timingPolicy": {
+    "generation": "Separate process bootstrap/loading, native stage telemetry and4096 export; report total run_part wall time. Resource waits are separate attempts and excluded from inference comparison.",
+    "baseline": "Use existing MV stage log; disclose any prior-source export replay or CPU load differences rather than treating total time as controlled hardware benchmark.",
+    "postprocess": "Record CPU derivation, UV/field replay, render/review time separately. Do not compare only the fastest successful stage."
+  },
+  "limitations": [
+    "One paired sample cannot prove overall single-view or multiview superiority.",
+    "Unseen single-view sides are inferred and may differ from the design.",
+    "This output is excluded from canonical candidates, approvals and release bundles."
+  ],
+  "command": [
+    "C:\\Users\\A\\.codex\\worktrees\\0b69\\厂长\\grande-art-lab\\source\\experimental\\pixal-env\\Scripts\\python.exe",
+    "-B",
+    "-u",
+    "H:\\代码项目\\monopoly\\art\\full-ai-city\\tools\\run_single_front_experiment.py",
+    "--run",
+    "--attempt",
+    "1"
+  ]
+}

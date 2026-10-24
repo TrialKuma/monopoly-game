@@ -1,0 +1,24 @@
+{
+  "createdAt": "2026-10-23T09:35:21.342803+00:00",
+  "status": "passed",
+  "tool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\b68f51384aa716f33faebe91754790bb82b90a53c517b5d7f207625ce70f7d1f-cpu_blender_lease.py",
+    "sha256": "b68f51384aa716f33faebe91754790bb82b90a53c517b5d7f207625ce70f7d1f",
+    "bytes": 3093
+  },
+  "testTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\cpu-lease-check\\check.py",
+    "sha256": "c520450a1766b3f5132f956dba4ac6c3de13ceffdb4b591d3b43773d79a6793f",
+    "bytes": 368
+  },
+  "test": "Two real OS processes and isolated real Windows byte lock; mocked available RAM5GiB and no Blender. First process requires9GiB; second requires4.5GiB. Small process acquired and exited within4s while larger remained waiting. Only test waiting process was terminated after assertion; no production process terminated.",
+  "observedResult": "PASS: 9GiB waiter never blocks admitted4.5GiB task at5GiB available",
+  "productionThresholdsGiB": {
+    "sourceReconstruction": 9,
+    "coordinatePreparation": 8,
+    "smallFinalization": 4.5
+  },
+  "qualitySettingsChanged": false,
+  "nativeGPUQueueStopped": false,
+  "controllerReload": "Current CPU child stages finish before owned CPU controllers restart; no running Blender or inference interrupted."
+}

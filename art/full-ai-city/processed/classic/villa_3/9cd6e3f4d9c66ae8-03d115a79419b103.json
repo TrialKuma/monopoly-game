@@ -1,0 +1,903 @@
+{
+  "status": "exported_pending_visual_review",
+  "createdAt": "2026-10-23T07:23:45.818875+00:00",
+  "region": "classic",
+  "asset": "villa_3",
+  "source": {
+    "rawGLB": {
+      "path": "art/full-ai-city/source/classic--villa_3-a003-pixal-mv-1024-18342.glb",
+      "sha256": "a966874938b9d85215b844d0ddf643791a9ca37081b904ffbe95b7d2262f640a",
+      "bytes": 40411388
+    }
+  },
+  "inferenceReport": {
+    "path": "art/full-ai-city/reports/local-repairs/classic/villa_3/9cd6e3f4d9c66ae80-provenance/842e67b5c5bc604b712b54d292e399981ee5305a5eab92ac2c0a0dfc181345f8-classic--villa_3-a003-pixal-mv-1024-18342.json",
+    "sha256": "842e67b5c5bc604b712b54d292e399981ee5305a5eab92ac2c0a0dfc181345f8",
+    "bytes": 7730
+  },
+  "reference": {
+    "path": "art/full-ai-city/reports/local-repairs/classic/villa_3/9cd6e3f4d9c66ae80-provenance/fbc7bc5cb45078db00dc4aad4cfa2daaa26d95912fecc00e43547952fe3f524b-reference.json",
+    "sha256": "fbc7bc5cb45078db00dc4aad4cfa2daaa26d95912fecc00e43547952fe3f524b",
+    "bytes": 4144
+  },
+  "processingTool": {
+    "path": "art/full-ai-city/reports/tool-snapshots/11e7752039b6732a15425c01168ded6855d495f40c6c18273ff9384b4392e0b7-reuv_closed_candidate.py",
+    "sha256": "11e7752039b6732a15425c01168ded6855d495f40c6c18273ff9384b4392e0b7",
+    "bytes": 5308
+  },
+  "assumedCameras": true,
+  "cameraCalibration": "assumed_standard_orbit_not_measured",
+  "nativePipeline": "Pixal3DMVImageTo3DPipeline.run_mv",
+  "nativeResolution": 1024,
+  "seed": 18342,
+  "geometryOrigin": "Actual native three-view neural building with explicitly recorded localized same-wall surface repairs, followed by source-derived remeshing and texture baking. No replacement building.",
+  "orientation": {
+    "up": "Y",
+    "front": "+Z",
+    "groundY": 0,
+    "maxEdge": 1
+  },
+  "requestedTriangles": 45000,
+  "limitations": [
+    "Assumed camera reference reconstruction, not exact measured architecture",
+    "Final candidate requires actual rendered visual approval"
+  ],
+  "animation": null,
+  "processingComplete": true,
+  "lod": "near",
+  "processingRevision": 1,
+  "localSurfaceRepair": {
+    "source": {
+      "path": "art/full-ai-city/work/villa3-fine-nearest-45k/closed-patches/repaired-native.glb",
+      "sha256": "aba2e1bee7c5dd3b71463383926b614b472f46afa3ddebc0cad810c259bc8cb6",
+      "bytes": 43630344
+    },
+    "receipt": {
+      "path": "art/full-ai-city/reports/local-repairs/classic/villa_3/9cd6e3f4d9c66ae80-provenance/d3ecda4606f285cbbcfccd365397c77dbf24ccae31f404ee20496e7c0aa50da2-repair.json",
+      "sha256": "d3ecda4606f285cbbcfccd365397c77dbf24ccae31f404ee20496e7c0aa50da2",
+      "bytes": 27642
+    },
+    "method": "Previous source-derived irregular local patch outer surfaces remain exactly unchanged; give only those 11 patches 0.006 normalized inward thickness using reversed back faces and boundary bridge triangles. Original neural folds remain unchanged for this isolated voxel-robustness test. No whole wall or replacement building is constructed.",
+    "newTriangles": 12584,
+    "newVertices": 25104,
+    "originalVerticesMoved": 0,
+    "originalTrianglesDeleted": 0,
+    "regions": [
+      {
+        "regionIndex": 0,
+        "side": "rear",
+        "originalRepair": {
+          "side": "rear",
+          "originalGapGridBounds": {
+            "x": [
+              -0.287,
+              -0.22099999999999992
+            ],
+            "z": [
+              0.039000000000000014,
+              0.21900000000000017
+            ],
+            "pixels": 497
+          },
+          "newVertices": 848,
+          "newTriangles": 1416,
+          "measuredRearWallBoundarySamples": 1116,
+          "originalVerticesMoved": 0,
+          "originalTrianglesDeleted": 0
+        },
+        "firstExistingFace": 972614,
+        "existingVisibleFaces": 1416,
+        "visibleFacePositionsAndUVUnchanged": true,
+        "inwardThicknessNormalized": 0.006,
+        "newBackFaces": 1416,
+        "newEdgeFaces": 552,
+        "addedFaces": 1968,
+        "boundaryEdgesBefore": 276,
+        "boundaryEdgesAfter": 0,
+        "normalizedBounds": {
+          "min": [
+            -0.289000004529953,
+            0.028999999165534973,
+            -0.19583331048488617
+          ],
+          "max": [
+            -0.2150000035762787,
+            0.22100000083446503,
+            -0.16398760676383972
+          ]
+        },
+        "sourceUV": "Copied from the exact existing repaired patch vertex at the same boundary/cap corner; original same-wall UV interpolation receipt retained."
+      },
+      {
+        "regionIndex": 1,
+        "side": "rear",
+        "originalRepair": {
+          "side": "rear",
+          "originalGapGridBounds": {
+            "x": [
+              0.16100000000000042,
+              0.21900000000000047
+            ],
+            "z": [
+              0.18500000000000014,
+              0.21900000000000017
+            ],
+            "pixels": 338
+          },
+          "newVertices": 472,
+          "newTriangles": 840,
+          "measuredRearWallBoundarySamples": 444,
+          "originalVerticesMoved": 0,
+          "originalTrianglesDeleted": 0
+        },
+        "firstExistingFace": 974030,
+        "existingVisibleFaces": 840,
+        "visibleFacePositionsAndUVUnchanged": true,
+        "inwardThicknessNormalized": 0.006,
+        "newBackFaces": 840,
+        "newEdgeFaces": 204,
+        "addedFaces": 1044,
+        "boundaryEdgesBefore": 102,
+        "boundaryEdgesAfter": 0,
+        "normalizedBounds": {
+          "min": [
+            0.1589999943971634,
+            0.1809999942779541,
+            -0.19040419161319733
+          ],
+          "max": [
+            0.22100000083446503,
+            0.22100000083446503,
+            -0.17533966898918152
+          ]
+        },
+        "sourceUV": "Copied from the exact existing repaired patch vertex at the same boundary/cap corner; original same-wall UV interpolation receipt retained."
+      },
+      {
+        "regionIndex": 2,
+        "side": "rear",
+        "originalRepair": {
+          "side": "rear",
+          "originalGapGridBounds": {
+            "x": [
+              -0.287,
+              -0.23699999999999993
+            ],
+            "z": [
+              0.4770000000000004,
+              0.5550000000000005
+            ],
+            "pixels": 315
+          },
+          "newVertices": 491,
+          "newTriangles": 840,
+          "measuredRearWallBoundarySamples": 474,
+          "originalVerticesMoved": 0,
+          "originalTrianglesDeleted": 0
+        },
+        "firstExistingFace": 974870,
+        "existingVisibleFaces": 840,
+        "visibleFacePositionsAndUVUnchanged": true,
+        "inwardThicknessNormalized": 0.006,
+        "newBackFaces": 840,
+        "newEdgeFaces": 280,
+        "addedFaces": 1120,
+        "boundaryEdgesBefore": 140,
+        "boundaryEdgesAfter": 0,
+        "normalizedBounds": {
+          "min": [
+            -0.289000004529953,
+            0.4729999899864197,
+            -0.19664296507835388
+          ],
+          "max": [
+            -0.23499999940395355,
+            0.5569999814033508,
+            -0.1617792546749115
+          ]
+        },
+        "sourceUV": "Copied from the exact existing repaired patch vertex at the same boundary/cap corner; original same-wall UV interpolation receipt retained."
+      },
+      {
+        "regionIndex": 3,
+        "side": "front",
+        "originalRepair": {
+          "side": "front",
+          "originalGapGridBounds": {
+            "x": [
+              0.22700000000000048,
+              0.2570000000000005
+            ],
+            "z": [
+              0.5930000000000005,
+              0.6030000000000005
+            ],
+            "pixels": 83
+          },
+          "newVertices": 184,
+          "newTriangles": 312,
+          "measuredRearWallBoundarySamples": 232,
+          "originalVerticesMoved": 0,
+          "originalTrianglesDeleted": 0
+        },
+        "firstExistingFace": 975710,
+        "existingVisibleFaces": 312,
+        "visibleFacePositionsAndUVUnchanged": true,
+        "inwardThicknessNormalized": 0.006,
+        "newBackFaces": 312,
+        "newEdgeFaces": 108,
+        "addedFaces": 420,
+        "boundaryEdgesBefore": 54,
+        "boundaryEdgesAfter": 0,
+        "normalizedBounds": {
+          "min": [
+            0.22499999403953552,
+            0.5910000205039978,
+            0.11772999167442322
+          ],
+          "max": [
+            0.2590000033378601,
+            0.6110000014305115,
+            0.13277503848075867
+          ]
+        },
+        "sourceUV": "Copied from the exact existing repaired patch vertex at the same boundary/cap corner; original same-wall UV interpolation receipt retained."
+      },
+      {
+        "regionIndex": 4,
+        "side": "front",
+        "originalRepair": {
+          "side": "front",
+          "originalGapGridBounds": {
+            "x": [
+              -0.1889999999999999,
+              -0.16499999999999987
+            ],
+            "z": [
+              0.5910000000000005,
+              0.6050000000000005
+            ],
+            "pixels": 51
+          },
+          "newVertices": 121,
+          "newTriangles": 186,
+          "measuredRearWallBoundarySamples": 151,
+          "originalVerticesMoved": 0,
+          "originalTrianglesDeleted": 0
+        },
+        "firstExistingFace": 976022,
+        "existingVisibleFaces": 186,
+        "visibleFacePositionsAndUVUnchanged": true,
+        "inwardThicknessNormalized": 0.006,
+        "newBackFaces": 186,
+        "newEdgeFaces": 108,
+        "addedFaces": 294,
+        "boundaryEdgesBefore": 54,
+        "boundaryEdgesAfter": 0,
+        "normalizedBounds": {
+          "min": [
+            -0.19499999284744263,
+            0.5889999866485596,
+            0.13311299681663513
+          ],
+          "max": [
+            -0.16099999845027924,
+            0.609000027179718,
+            0.14500460028648376
+          ]
+        },
+        "sourceUV": "Copied from the exact existing repaired patch vertex at the same boundary/cap corner; original same-wall UV interpolation receipt retained."
+      },
+      {
+        "regionIndex": 5,
+        "side": "front",
+        "originalRepair": {
+          "side": "front",
+          "originalGapGridBounds": {
+            "x": [
+              0.1370000000000004,
+              0.16300000000000042
+            ],
+            "z": [
+              0.5850000000000005,
+              0.6050000000000005
+            ],
+            "pixels": 85
+          },
+          "newVertices": 195,
+          "newTriangles": 310,
+          "measuredRearWallBoundarySamples": 233,
+          "originalVerticesMoved": 0,
+          "originalTrianglesDeleted": 0
+        },
+        "firstExistingFace": 976208,
+        "existingVisibleFaces": 310,
+        "visibleFacePositionsAndUVUnchanged": true,
+        "inwardThicknessNormalized": 0.006,
+        "newBackFaces": 310,
+        "newEdgeFaces": 152,
+        "addedFaces": 462,
+        "boundaryEdgesBefore": 76,
+        "boundaryEdgesAfter": 0,
+        "normalizedBounds": {
+          "min": [
+            0.13099999725818634,
+            0.5830000042915344,
+            0.1156606376171112
+          ],
+          "max": [
+            0.16899999976158142,
+            0.6110000014305115,
+            0.13433906435966492
+          ]
+        },
+        "sourceUV": "Copied from the exact existing repaired patch vertex at the same boundary/cap corner; original same-wall UV interpolation receipt retained."
+      },
+      {
+        "regionIndex": 6,
+        "side": "front",
+        "originalRepair": {
+          "side": "front",
+          "originalGapGridBounds": {
+            "x": [
+              0.09100000000000036,
+              0.1310000000000004
+            ],
+            "z": [
+              0.5630000000000005,
+              0.6050000000000005
+            ],
+            "pixels": 223
+          },
+          "newVertices": 403,
+          "newTriangles": 672,
+          "measuredRearWallBoundarySamples": 278,
+          "originalVerticesMoved": 0,
+          "originalTrianglesDeleted": 0
+        },
+        "firstExistingFace": 976518,
+        "existingVisibleFaces": 672,
+        "visibleFacePositionsAndUVUnchanged": true,
+        "inwardThicknessNormalized": 0.006,
+        "newBackFaces": 672,
+        "newEdgeFaces": 260,
+        "addedFaces": 932,
+        "boundaryEdgesBefore": 130,
+        "boundaryEdgesAfter": 0,
+        "normalizedBounds": {
+          "min": [
+            0.08500000089406967,
+            0.5609999895095825,
+            0.11249956488609314
+          ],
+          "max": [
+            0.13699999451637268,
+            0.6150000095367432,
+            0.1453077495098114
+          ]
+        },
+        "sourceUV": "Copied from the exact existing repaired patch vertex at the same boundary/cap corner; original same-wall UV interpolation receipt retained."
+      },
+      {
+        "regionIndex": 7,
+        "side": "front",
+        "originalRepair": {
+          "side": "front",
+          "originalGapGridBounds": {
+            "x": [
+              0.2750000000000005,
+              0.28500000000000053
+            ],
+            "z": [
+              0.5930000000000005,
+              0.5990000000000005
+            ],
+            "pixels": 23
+          },
+          "newVertices": 63,
+          "newTriangles": 96,
+          "measuredRearWallBoundarySamples": 128,
+          "originalVerticesMoved": 0,
+          "originalTrianglesDeleted": 0
+        },
+        "firstExistingFace": 977190,
+        "existingVisibleFaces": 96,
+        "visibleFacePositionsAndUVUnchanged": true,
+        "inwardThicknessNormalized": 0.006,
+        "newBackFaces": 96,
+        "newEdgeFaces": 56,
+        "addedFaces": 152,
+        "boundaryEdgesBefore": 28,
+        "boundaryEdgesAfter": 0,
+        "normalizedBounds": {
+          "min": [
+            0.27300000190734863,
+            0.5910000205039978,
+            0.11887869238853455
+          ],
+          "max": [
+            0.28700000047683716,
+            0.6050000190734863,
+            0.13165327906608582
+          ]
+        },
+        "sourceUV": "Copied from the exact existing repaired patch vertex at the same boundary/cap corner; original same-wall UV interpolation receipt retained."
+      },
+      {
+        "regionIndex": 8,
+        "side": "front",
+        "originalRepair": {
+          "side": "front",
+          "originalGapGridBounds": {
+            "x": [
+              0.17900000000000044,
+              0.20900000000000046
+            ],
+            "z": [
+              0.5850000000000005,
+              0.6050000000000005
+            ],
+            "pixels": 111
+          },
+          "newVertices": 238,
+          "newTriangles": 382,
+          "measuredRearWallBoundarySamples": 255,
+          "originalVerticesMoved": 0,
+          "originalTrianglesDeleted": 0
+        },
+        "firstExistingFace": 977286,
+        "existingVisibleFaces": 382,
+        "visibleFacePositionsAndUVUnchanged": true,
+        "inwardThicknessNormalized": 0.006,
+        "newBackFaces": 382,
+        "newEdgeFaces": 176,
+        "addedFaces": 558,
+        "boundaryEdgesBefore": 88,
+        "boundaryEdgesAfter": 0,
+        "normalizedBounds": {
+          "min": [
+            0.17299999296665192,
+            0.5830000042915344,
+            0.11594495922327042
+          ],
+          "max": [
+            0.2150000035762787,
+            0.6110000014305115,
+            0.1341007649898529
+          ]
+        },
+        "sourceUV": "Copied from the exact existing repaired patch vertex at the same boundary/cap corner; original same-wall UV interpolation receipt retained."
+      },
+      {
+        "regionIndex": 9,
+        "side": "front",
+        "originalRepair": {
+          "side": "front",
+          "originalGapGridBounds": {
+            "x": [
+              -0.287,
+              -0.27699999999999997
+            ],
+            "z": [
+              0.5930000000000005,
+              0.6050000000000005
+            ],
+            "pixels": 28
+          },
+          "newVertices": 73,
+          "newTriangles": 106,
+          "measuredRearWallBoundarySamples": 78,
+          "originalVerticesMoved": 0,
+          "originalTrianglesDeleted": 0
+        },
+        "firstExistingFace": 977668,
+        "existingVisibleFaces": 106,
+        "visibleFacePositionsAndUVUnchanged": true,
+        "inwardThicknessNormalized": 0.006,
+        "newBackFaces": 106,
+        "newEdgeFaces": 76,
+        "addedFaces": 182,
+        "boundaryEdgesBefore": 38,
+        "boundaryEdgesAfter": 0,
+        "normalizedBounds": {
+          "min": [
+            -0.289000004529953,
+            0.5910000205039978,
+            0.1341991126537323
+          ],
+          "max": [
+            -0.2750000059604645,
+            0.609000027179718,
+            0.14501222968101501
+          ]
+        },
+        "sourceUV": "Copied from the exact existing repaired patch vertex at the same boundary/cap corner; original same-wall UV interpolation receipt retained."
+      },
+      {
+        "regionIndex": 10,
+        "side": "front",
+        "originalRepair": {
+          "side": "front",
+          "originalGapGridBounds": {
+            "x": [
+              -0.14699999999999985,
+              -0.13099999999999984
+            ],
+            "z": [
+              0.6010000000000005,
+              0.6050000000000005
+            ],
+            "pixels": 26
+          },
+          "newVertices": 74,
+          "newTriangles": 110,
+          "measuredRearWallBoundarySamples": 119,
+          "originalVerticesMoved": 0,
+          "originalTrianglesDeleted": 0
+        },
+        "firstExistingFace": 977774,
+        "existingVisibleFaces": 110,
+        "visibleFacePositionsAndUVUnchanged": true,
+        "inwardThicknessNormalized": 0.006,
+        "newBackFaces": 110,
+        "newEdgeFaces": 72,
+        "addedFaces": 182,
+        "boundaryEdgesBefore": 36,
+        "boundaryEdgesAfter": 0,
+        "normalizedBounds": {
+          "min": [
+            -0.1509999930858612,
+            0.597000002861023,
+            0.13507437705993652
+          ],
+          "max": [
+            -0.12700000405311584,
+            0.609000027179718,
+            0.1446281373500824
+          ]
+        },
+        "sourceUV": "Copied from the exact existing repaired patch vertex at the same boundary/cap corner; original same-wall UV interpolation receipt retained."
+      }
+    ]
+  },
+  "sourceArtifactCleanup": {
+    "method": "Delete source-derived triangles entirely below z=0.014 when original UV-centroid mean RGB is below 0.18 or their XY centroid is more than 0.012 from the actual foundation vertices at z=0.014..0.04. This removes detached colored floor remnants as well as the dark sheet; no new faces added",
+    "deletedTriangles": 64404,
+    "originalTriangles": 985198,
+    "foundationSampleVertices": 14952
+  },
+  "derivation": {
+    "rawTriangles": 972614,
+    "weldedTriangles": 918036,
+    "remeshedTriangles": 5753508,
+    "voxelSize": 0.0015,
+    "finalTriangles": 44970,
+    "atlasArea": 0.3489368164542147,
+    "singleReductionPass": true,
+    "inheritedUVRemovedBeforeReduction": true,
+    "sourceMaterialsUntouched": true,
+    "uvUnwrap": {
+      "angleDegrees": 66.0,
+      "islandMargin": 2e-05,
+      "marginMethod": "SCALED",
+      "nominalMarginPixels": null
+    },
+    "repairedSourceTriangles": 985198
+  },
+  "bake": {
+    "method": "CPU closest-original-triangle projection with float64 barycentric original UV and bilinear original texture sampling; geometric normals retained, no directional normal-map rebake or invented color",
+    "coveredAtlasPixels": 366070,
+    "nearestLookupSuccessFraction": 1.0,
+    "notRayCoverage": true,
+    "sourceDistanceQuantiles": [
+      0.0001018541915982496,
+      0.0005462044471642002,
+      0.0009518568980274721,
+      0.003026992315426469
+    ],
+    "sourceDistanceQuantileLevels": [
+      0.5,
+      0.95,
+      0.99,
+      1
+    ],
+    "overTwoPercentMaxEdge": 0.0,
+    "distanceReviewRequired": false,
+    "visualGeometryReviewRequired": true,
+    "barycentricOriginalRange": [
+      -0.0003015519620802818,
+      1.0
+    ],
+    "degenerateOrInvalidBarycentricCount": 0,
+    "closestSourceVertexFallbackFraction": 0.0,
+    "barycentricPointReconstructionErrorQuantiles": [
+      5.144497353627119e-09,
+      3.935625309892138e-08,
+      7.140369031718098e-07
+    ],
+    "atlasOverlapPixelsWithDifferentSurface": 455,
+    "seconds": 8.650052899989532,
+    "maps": [
+      {
+        "role": "base",
+        "size": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "role": "orm",
+        "size": [
+          512,
+          512
+        ]
+      }
+    ],
+    "repairSourceNote": "Exact inward-closed local-patch source preserved. Only UV layout and source-derived texture transfer changed in this pass."
+  },
+  "textureTransferTool": {
+    "path": "art/full-ai-city/reports/tool-snapshots/a2cb99c96fb8df396f16580a88a7c6151104ee3c927fe76cd161ee2d27bdfa42-bake_nearest_surface.py",
+    "sha256": "a2cb99c96fb8df396f16580a88a7c6151104ee3c927fe76cd161ee2d27bdfa42",
+    "bytes": 7317
+  },
+  "quantization": {
+    "source": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\villa3-fine-nearest-45k\\closed-patches\\angle66-candidates\\classic\\villa_3.glb",
+    "output": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\villa3-fine-nearest-45k\\closed-patches\\angle66-candidates\\classic\\villa_3.glb",
+    "sourceBytes": 2590340,
+    "outputBytes": 1862516,
+    "sourceSha256": "0200c6dbd9ff08d07ba8bd0d499b8f58157aa9e6e1facf632ba4ea106a0eb513",
+    "outputSha256": "9cd6e3f4d9c66ae805161dbfc7831cf71f06b81cbadb5ea8cdc2c10592aa694e",
+    "positionFaceAndTextureBytesUnchanged": true,
+    "attributes": [
+      {
+        "accessor": 1,
+        "semantic": "NORMAL",
+        "count": 60665,
+        "maximumAngularErrorDegrees": 0.3695334995506453
+      },
+      {
+        "accessor": 2,
+        "semantic": "TEXCOORD_0",
+        "count": 60665,
+        "maximumUVError": 7.62950912935878e-06,
+        "maximumTexelErrorAt1024": 0.007812617348463391
+      }
+    ]
+  },
+  "processedCandidate": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\candidates\\classic\\villa_3.glb",
+    "sha256": "9cd6e3f4d9c66ae805161dbfc7831cf71f06b81cbadb5ea8cdc2c10592aa694e",
+    "bytes": 1862516
+  },
+  "glbValidation": {
+    "version": 2,
+    "triangles": 44970,
+    "meshes": 1,
+    "materials": 1,
+    "images": 2,
+    "all_primitives_have_uv": true,
+    "animations": [],
+    "all_images_embedded": true,
+    "external_buffers": []
+  },
+  "triangles": 44970,
+  "renderedCandidate": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\villa3-fine-nearest-45k\\closed-patches\\angle66-candidates\\renders\\classic\\villa_3\\lod-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\villa3-fine-nearest-45k\\closed-patches\\angle66-candidates\\renders\\classic\\villa_3\\lod-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\villa3-fine-nearest-45k\\closed-patches\\angle66-candidates\\renders\\classic\\villa_3\\lod-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\villa3-fine-nearest-45k\\closed-patches\\angle66-candidates\\renders\\classic\\villa_3\\lod-left.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\villa3-fine-nearest-45k\\closed-patches\\angle66-candidates\\renders\\classic\\villa_3\\lod-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.35827162861824036,
+        -0.20552076399326324,
+        -4.9026850319933146e-05
+      ],
+      "max": [
+        0.32864025235176086,
+        0.22834183275699615,
+        0.8873860836029053
+      ]
+    },
+    "triangles": 44970,
+    "textureSizes": [
+      {
+        "name": "classic__villa_3__nearest_base",
+        "size": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "name": "classic__villa_3__nearest_orm",
+        "size": [
+          512,
+          512
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "renderedSource": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\villa3-fine-nearest-45k\\closed-patches\\candidates\\renders\\classic\\villa_3\\raw-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\villa3-fine-nearest-45k\\closed-patches\\candidates\\renders\\classic\\villa_3\\raw-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.5,
+        -0.3543401062488556,
+        0.0
+      ],
+      "max": [
+        0.5,
+        0.3543401062488556,
+        0.8877438306808472
+      ]
+    },
+    "triangles": 972614,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "renderedRepairedSource": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\villa3-fine-nearest-45k\\closed-patches\\candidates\\renders\\classic\\villa_3\\repaired-source-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\villa3-fine-nearest-45k\\closed-patches\\candidates\\renders\\classic\\villa_3\\repaired-source-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\villa3-fine-nearest-45k\\closed-patches\\candidates\\renders\\classic\\villa_3\\repaired-source-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.5,
+        -0.35434016585350037,
+        0.0
+      ],
+      "max": [
+        0.5,
+        0.35434016585350037,
+        0.8877537250518799
+      ]
+    },
+    "triangles": 985198,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "bounds": {
+    "min": [
+      -0.35827162861824036,
+      -4.9026850319933146e-05,
+      -0.22834183275699615
+    ],
+    "max": [
+      0.32864025235176086,
+      0.8873860836029053,
+      0.20552076399326324
+    ],
+    "coordinateSystem": "GLTF Y-up; +Z front"
+  },
+  "textureSizes": [
+    {
+      "name": "classic__villa_3__nearest_base",
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "name": "classic__villa_3__nearest_orm",
+      "size": [
+        512,
+        512
+      ]
+    }
+  ],
+  "rawSourceUnchanged": true,
+  "completedAt": "2026-10-23T07:36:30.434139+00:00",
+  "textureOnlyReprocessing": {
+    "sourceCandidate": {
+      "path": "art/full-ai-city/work/villa3-fine-nearest-45k/closed-patches/candidates/classic/villa_3.glb",
+      "sha256": "e391a2b034fcde538d782d0fd990fd161600192b67264570e278e9a4d639dfc3",
+      "bytes": 1767344
+    },
+    "sourceProcessingReport": {
+      "path": "art/full-ai-city/reports/local-repairs/classic/villa_3/9cd6e3f4d9c66ae80-provenance/778f6623174eeb1b316e1ea32b45928ef130d03d33b8fdf5a5111d23229c86cd-villa_3.json",
+      "sha256": "778f6623174eeb1b316e1ea32b45928ef130d03d33b8fdf5a5111d23229c86cd",
+      "bytes": 26599
+    },
+    "sourceBlend": {
+      "path": "art/full-ai-city/work/villa3-fine-nearest-45k/closed-patches/candidates/blender/classic/villa_3.blend",
+      "sha256": "bc874761f73f916e2a6049463cd8637802a544facd310b07dbbfb17b16b68ee6",
+      "bytes": 48356618
+    },
+    "positionsUnchanged": true,
+    "faceIndicesUnchanged": true,
+    "additionalRemeshOrSimplification": false,
+    "exportedTriangleCornerPositionsExactlyUnchanged": true
+  },
+  "promotedFrom": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\classic\\villa_3\\9cd6e3f4d9c66ae80-provenance\\5c7a996e48e4e1d3861f213889f66eaf8f2a2335f8afc35862a65f4fb2ea71a4-villa_3.json",
+    "sha256": "5c7a996e48e4e1d3861f213889f66eaf8f2a2335f8afc35862a65f4fb2ea71a4",
+    "bytes": 27623
+  },
+  "reviewSheet": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\villa3-fine-nearest-45k\\closed-patches\\angle66-candidates\\renders\\classic\\villa_3\\review-sheet.jpg",
+    "sha256": "315c10cdb900321c5822b3fd3d8fe4e9a44f556c090f0fc16203897ee41173c5",
+    "bytes": 272929,
+    "candidateSha256": "9cd6e3f4d9c66ae805161dbfc7831cf71f06b81cbadb5ea8cdc2c10592aa694e",
+    "sourceImages": [
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\villa3-fine-nearest-45k\\closed-patches\\candidates\\renders\\classic\\villa_3\\raw-front.png",
+        "sha256": "805698e87553e9018a61e9f4ef139f0b50f97c329e2d919bb9bcc00fecda57c9",
+        "label": "AI raw front"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\villa3-fine-nearest-45k\\closed-patches\\candidates\\renders\\classic\\villa_3\\raw-iso.png",
+        "sha256": "5458f7ba1552ec3c7d1edf95071bf5ff2cce423a1ea1c877384d0e677a27f897",
+        "label": "AI raw iso"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\villa3-fine-nearest-45k\\closed-patches\\angle66-candidates\\renders\\classic\\villa_3\\lod-front.png",
+        "sha256": "97f2dc2898dab2c79f15ce04bc2ae02fca2ba43bf21b49764761aa17a88e2ccc",
+        "label": "LOD front"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\villa3-fine-nearest-45k\\closed-patches\\angle66-candidates\\renders\\classic\\villa_3\\lod-right.png",
+        "sha256": "6f09aad6f425359b1e4184671b5e45b089d7a6d582ad83f3fa5e1b78129b606b",
+        "label": "LOD right"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\villa3-fine-nearest-45k\\closed-patches\\angle66-candidates\\renders\\classic\\villa_3\\lod-back.png",
+        "sha256": "e3ccdf6ee4d71aa82e6c64a141e0255c2ad7976278cb717306ed7132c36af15e",
+        "label": "LOD back"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\villa3-fine-nearest-45k\\closed-patches\\angle66-candidates\\renders\\classic\\villa_3\\lod-left.png",
+        "sha256": "2c6c60c34c2198c404a2063f6a0c7f73e80f4655121d3f7c23c8769d36273a0a",
+        "label": "LOD left"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\villa3-fine-nearest-45k\\closed-patches\\angle66-candidates\\renders\\classic\\villa_3\\lod-iso.png",
+        "sha256": "8a154333f38bb8077dcf95191d5b074183e662b5f32bb28552d5086f8d2f77b1",
+        "label": "LOD iso"
+      }
+    ],
+    "content": "Unmodified CPU render images composed with labels for visual comparison only"
+  }
+}

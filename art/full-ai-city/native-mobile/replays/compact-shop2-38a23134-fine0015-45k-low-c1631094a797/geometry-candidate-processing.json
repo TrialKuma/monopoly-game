@@ -1,0 +1,310 @@
+{
+  "status": "exported_pending_visual_review",
+  "createdAt": "2026-10-23T23:24:34.257741+00:00",
+  "region": "compact",
+  "asset": "shop_2",
+  "source": {
+    "rawGLB": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\compact--shop_2-a004-pixal-mv-1024-29462.glb",
+      "sha256": "38a23134eeaa4dd00176acf2ef9b8f03680f90749fe9b469567fa96a148462b5",
+      "bytes": 46910888
+    }
+  },
+  "inferenceReport": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\compact--shop_2-a004\\compact--shop_2-a004-pixal-mv-1024-29462.json",
+    "sha256": "5886021f755f193fa79e231a5be4c143104ea02006bbe68533da95313c221bb5",
+    "bytes": 10106
+  },
+  "reference": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\inputs\\compact\\shop_2\\6d30c66b7b227466\\reference.json",
+    "sha256": "ba82023d884fe77b2c0b3947de40ec9fb3e0faee665aadb5f625972b74cddc90",
+    "bytes": 4410
+  },
+  "processingTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\4686f6f288c17202449c212d33193c98a2fdfe0f47fbbe1d47284f432c7ed327-process_lod.py",
+    "sha256": "4686f6f288c17202449c212d33193c98a2fdfe0f47fbbe1d47284f432c7ed327",
+    "bytes": 28561
+  },
+  "assumedCameras": true,
+  "cameraCalibration": "assumed_standard_orbit_not_measured",
+  "nativePipeline": "Pixal3DMVImageTo3DPipeline.run_mv",
+  "nativeResolution": 1024,
+  "seed": 29462,
+  "geometryOrigin": "Only the actual neural source reduced and rebaked; no authored substitute geometry or manually constructed surfaces",
+  "orientation": {
+    "up": "Y",
+    "front": "+Z",
+    "groundY": 0,
+    "maxEdge": 1
+  },
+  "requestedTriangles": 45000,
+  "limitations": [
+    "Assumed camera reference reconstruction, not exact measured architecture",
+    "Final candidate requires actual rendered visual approval"
+  ],
+  "animation": null,
+  "processingComplete": true,
+  "lod": "near",
+  "processingRevision": 0,
+  "memoryReservation": {
+    "pid": 15464,
+    "status": "reserved",
+    "reason": "native_or_other_fine_residency",
+    "voxelThreshold": 0.0015,
+    "noGpuCompute": true,
+    "startedAt": "2026-10-23T23:21:39.348237+00:00",
+    "waitSeconds": 174.075,
+    "owner": {
+      "status": "held",
+      "pid": 14088,
+      "host": "NeoRic",
+      "label": "monopoly-native-multiview-compact--shop_3-a003",
+      "acquired_utc": "2026-10-23T23:19:24.121067+00:00",
+      "lock_path": "C:\\Users\\A\\.codex\\shared-resource-locks\\pixal-gpu0.lock",
+      "token": "fe174b7f4e014aa594c9bc02837b8f83",
+      "metadata_is_advisory": true
+    },
+    "reservation": {
+      "status": "held",
+      "pid": 15464,
+      "host": "NeoRic",
+      "label": "monopoly-fine-cpu-15464",
+      "acquired_utc": "2026-10-23T23:24:33.421613+00:00",
+      "lock_path": "C:\\Users\\A\\.codex\\shared-resource-locks\\pixal-gpu0.lock",
+      "token": "3a9b22ece6ca40fa952967d5ec26dcd3",
+      "metadata_is_advisory": true
+    },
+    "acquiredAt": "2026-10-23T23:24:33.423052+00:00",
+    "tool": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\705848501583a3e6e40072356e3423c4d9c9ad763e84e0f3fa5c1c9ba85b47a8-native_memory_reservation.py",
+      "sha256": "705848501583a3e6e40072356e3423c4d9c9ad763e84e0f3fa5c1c9ba85b47a8",
+      "bytes": 4247
+    }
+  },
+  "derivation": {
+    "rawTriangles": 1001179,
+    "weldedTriangles": 995366,
+    "remeshedTriangles": 15675768,
+    "voxelSize": 0.0015,
+    "finalTriangles": 44939,
+    "atlasArea": 0.35708608880305337,
+    "singleReductionPass": true,
+    "inheritedUVRemovedBeforeReduction": true,
+    "sourceMaterialsUntouched": true,
+    "uvUnwrap": {
+      "angleDegrees": 66.0,
+      "islandMargin": 2e-05,
+      "marginMethod": "SCALED",
+      "nominalMarginPixels": null
+    }
+  },
+  "bake": {
+    "method": "CPU closest-original-triangle projection with float64 barycentric original UV and bilinear original texture sampling; geometric normals retained, no directional normal-map rebake or invented color",
+    "coveredAtlasPixels": 370946,
+    "nearestLookupSuccessFraction": 1.0,
+    "notRayCoverage": true,
+    "sourceDistanceQuantiles": [
+      0.00030769521254114807,
+      0.0015145645302254707,
+      0.0025848580873571326,
+      0.00938153825700283
+    ],
+    "sourceDistanceQuantileLevels": [
+      0.5,
+      0.95,
+      0.99,
+      1
+    ],
+    "overTwoPercentMaxEdge": 0.0,
+    "distanceReviewRequired": false,
+    "visualGeometryReviewRequired": true,
+    "barycentricOriginalRange": [
+      -5.031959292508354e-05,
+      1.0
+    ],
+    "degenerateOrInvalidBarycentricCount": 0,
+    "closestSourceVertexFallbackFraction": 0.0,
+    "barycentricPointReconstructionErrorQuantiles": [
+      7.635497083572272e-09,
+      4.387914129272427e-08,
+      2.991337097375833e-07
+    ],
+    "atlasOverlapPixelsWithDifferentSurface": 3468,
+    "seconds": 8.186896900000647,
+    "maps": [
+      {
+        "role": "base",
+        "size": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "role": "orm",
+        "size": [
+          512,
+          512
+        ]
+      }
+    ]
+  },
+  "textureTransferTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\a2cb99c96fb8df396f16580a88a7c6151104ee3c927fe76cd161ee2d27bdfa42-bake_nearest_surface.py",
+    "sha256": "a2cb99c96fb8df396f16580a88a7c6151104ee3c927fe76cd161ee2d27bdfa42",
+    "bytes": 7317
+  },
+  "quantization": {
+    "source": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\compact-shop2-38a23134-fine0015-45k\\low\\compact\\shop_2.glb",
+    "output": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\compact-shop2-38a23134-fine0015-45k\\low\\compact\\shop_2.glb",
+    "sourceBytes": 3271560,
+    "outputBytes": 2377764,
+    "sourceSha256": "570218c00eef20b7220d24159f8ee2388b8e55968760a06b37ad342343394627",
+    "outputSha256": "c1631094a797d597188e0beab634510a8daf01f87581443ee8bb74fcc9756609",
+    "positionFaceAndTextureBytesUnchanged": true,
+    "attributes": [
+      {
+        "accessor": 1,
+        "semantic": "NORMAL",
+        "count": 74496,
+        "maximumAngularErrorDegrees": 0.3737213548730586
+      },
+      {
+        "accessor": 2,
+        "semantic": "TEXCOORD_0",
+        "count": 74496,
+        "maximumUVError": 7.629477296544618e-06,
+        "maximumTexelErrorAt1024": 0.007812584751661689
+      }
+    ]
+  },
+  "processedCandidate": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\compact-shop2-38a23134-fine0015-45k\\low\\compact\\shop_2.glb",
+    "sha256": "c1631094a797d597188e0beab634510a8daf01f87581443ee8bb74fcc9756609",
+    "bytes": 2377764
+  },
+  "glbValidation": {
+    "version": 2,
+    "triangles": 44939,
+    "meshes": 1,
+    "materials": 1,
+    "images": 2,
+    "all_primitives_have_uv": true,
+    "animations": [],
+    "all_images_embedded": true,
+    "external_buffers": []
+  },
+  "triangles": 44939,
+  "renderedCandidate": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\compact-shop2-38a23134-fine0015-45k\\low\\renders\\compact\\shop_2\\lod-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\compact-shop2-38a23134-fine0015-45k\\low\\renders\\compact\\shop_2\\lod-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\compact-shop2-38a23134-fine0015-45k\\low\\renders\\compact\\shop_2\\lod-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\compact-shop2-38a23134-fine0015-45k\\low\\renders\\compact\\shop_2\\lod-left.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\compact-shop2-38a23134-fine0015-45k\\low\\renders\\compact\\shop_2\\lod-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.4745655953884125,
+        -0.41776204109191895,
+        7.233334144984838e-06
+      ],
+      "max": [
+        0.47676339745521545,
+        0.4167715907096863,
+        0.9996837377548218
+      ]
+    },
+    "triangles": 44939,
+    "textureSizes": [
+      {
+        "name": "compact__shop_2__nearest_base",
+        "size": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "name": "compact__shop_2__nearest_orm",
+        "size": [
+          512,
+          512
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "renderedSource": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\compact-shop2-38a23134-fine0015-45k\\low\\renders\\compact\\shop_2\\raw-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\compact-shop2-38a23134-fine0015-45k\\low\\renders\\compact\\shop_2\\raw-iso.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\compact-shop2-38a23134-fine0015-45k\\low\\renders\\compact\\shop_2\\raw-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\compact-shop2-38a23134-fine0015-45k\\low\\renders\\compact\\shop_2\\raw-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\compact-shop2-38a23134-fine0015-45k\\low\\renders\\compact\\shop_2\\raw-left.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.4742857813835144,
+        -0.41723766922950745,
+        0.0
+      ],
+      "max": [
+        0.4742857813835144,
+        0.41723766922950745,
+        1.0
+      ]
+    },
+    "triangles": 1001179,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "bounds": {
+    "min": [
+      -0.4745655953884125,
+      7.233334144984838e-06,
+      -0.4167715907096863
+    ],
+    "max": [
+      0.47676339745521545,
+      0.9996837377548218,
+      0.41776204109191895
+    ],
+    "coordinateSystem": "GLTF Y-up; +Z front"
+  },
+  "textureSizes": [
+    {
+      "name": "compact__shop_2__nearest_base",
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "name": "compact__shop_2__nearest_orm",
+      "size": [
+        512,
+        512
+      ]
+    }
+  ],
+  "rawSourceUnchanged": true,
+  "completedAt": "2026-10-23T23:29:24.662054+00:00"
+}

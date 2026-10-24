@@ -1,736 +1,1726 @@
 {
+  "schemaVersion": 2,
   "region": "alpine",
-  "reference": "art\\regions\\references\\alpine-core-three-views.png",
+  "coordinateSystem": "glTF Y-up; +Z front",
+  "sourceType": "pixal_native_multiview",
   "assets": [
     {
       "name": "alpine_villa_1",
+      "size": [
+        0.99,
+        0.6358025407791138,
+        0.8204494142532348
+      ],
       "bounds": {
         "min": [
-          -0.48246079683303833,
-          -0.46799999475479126,
-          0.0
+          -0.495,
+          0.0,
+          -0.4102247071266174
         ],
         "max": [
-          0.48246079683303833,
-          0.46799999475479126,
-          0.7480000257492065
+          0.495,
+          0.6358025407791138,
+          0.4102247071266174
         ]
       },
-      "size": [
-        0.9649215936660767,
-        0.9359999895095825,
-        0.7480000257492065
-      ],
-      "triangles": 5788,
+      "triangles": 29986,
       "source": {
-        "kind": "blender_three_view",
-        "reference": "art\\regions\\references\\alpine-core-three-views.png"
+        "sourceType": "pixal_native_multiview",
+        "family": "villa",
+        "level": 1,
+        "sourceFile": "assets/models/regions-ai/full/alpine/villa_1/93e20193d3d1fc98.glb",
+        "sourceSha256": "93e20193d3d1fc984305e2a134742c748418daf915d8d44438b44060328383d9",
+        "inferenceReport": "art/full-ai-city/reports/alpine--villa_1-a001/alpine--villa_1-a001-pixal-mv-1024-9247.json",
+        "reference": "art/full-ai-city/inputs/alpine/villa_1/10f0220b5ffc2661/reference.json",
+        "rawSourceSha256": "ecebc4fc5592305f6457e331b916139ccc822e31bf59b0de87229046da29d95d",
+        "referenceViews": [
+          {
+            "view": "front",
+            "path": "art/full-ai-city/inputs/alpine/villa_1/10f0220b5ffc2661/view00_azim000.png",
+            "sha256": "86d145740b3cd6a6653d52a489c44f77b9700901efaa27c8d1e1830f859bb06a"
+          },
+          {
+            "view": "right",
+            "path": "art/full-ai-city/inputs/alpine/villa_1/10f0220b5ffc2661/view01_azim090.png",
+            "sha256": "8c9602c971c84aca98603cf53955216e0ee763854cf7b89a9f826bd0bf088b8c"
+          },
+          {
+            "view": "back",
+            "path": "art/full-ai-city/inputs/alpine/villa_1/10f0220b5ffc2661/view02_azim180.png",
+            "sha256": "bee22f9a17a94e0681cc2650734c33c165caa4bf5e70b9b2bccf5393f76ae048"
+          }
+        ],
+        "normalisationScale": 0.99,
+        "placementReview": {
+          "independentParcelScale": 0.99,
+          "scale": 0.99,
+          "reason": "independent_uniform_parcel_fit",
+          "relativeToIndependentFit": 1.0,
+          "sharedCameraReviewRequired": true
+        },
+        "reviewStatus": "approved",
+        "triangleBudget": 30000
       }
     },
     {
       "name": "alpine_villa_2",
+      "size": [
+        0.783405249765417,
+        0.8133511259794235,
+        0.521519278924664
+      ],
       "bounds": {
         "min": [
-          -0.512499988079071,
-          -0.34113168716430664,
-          0.0
+          -0.3917026248827085,
+          0.0,
+          -0.26075963946233194
         ],
         "max": [
-          0.512499988079071,
-          0.34113168716430664,
-          1.0619161128997803
+          0.3917026248827085,
+          0.8133511259794235,
+          0.260759639462332
         ]
       },
-      "size": [
-        1.024999976158142,
-        0.6822633743286133,
-        1.0619161128997803
-      ],
-      "triangles": 179921,
+      "triangles": 29978,
       "source": {
-        "kind": "reviewed_pixal_multiview",
-        "reference": "art/regions/references/alpine-core-three-views.png",
-        "sourceFile": "assets/models/regions-ai/alpine_house.glb",
-        "sourceSha256": "3534766503c4e01753841e8dfdaf95addd85acc942e973b4f90f3a558c9d9d92",
-        "budgetException": "Reviewed AI mesh retained without decimation; use at limited villa_2 locations and verify mobile frame time.",
-        "normalisationScale": 0.35397205693672285,
-        "aiHouseStatus": "approved_exact_source"
+        "sourceType": "pixal_native_multiview",
+        "family": "villa",
+        "level": 2,
+        "sourceFile": "assets/models/regions-ai/full/alpine/villa_2.glb",
+        "sourceSha256": "e1e36d5658b158e22f849c9623f0f580a2219d31a33720163b6f4d3a8b4009a5",
+        "inferenceReport": "art/themed-city-kit/reports/alpine-house-mv-v01/alpine-house-mv-v01-pixal-mv-1024-9247.json",
+        "reference": "art/themed-city-kit/inputs/alpine-house-v01/transforms.json",
+        "rawSourceSha256": "b31e50610cef3c2a1d3c581cbf380fcbb5538a6aef9307fe122c2cc98e590db0",
+        "referenceViews": [
+          {
+            "view": "front",
+            "path": "art/themed-city-kit/inputs/alpine-house-v01/view00_azim000.png",
+            "sha256": "b8a6639685f03452bc68b91af39e9bdc5e1e3f4cef515dacdc2a6e01ef60c873"
+          },
+          {
+            "view": "right",
+            "path": "art/themed-city-kit/inputs/alpine-house-v01/view01_azim090.png",
+            "sha256": "d633539c79672a60e4f35d91f6b395f8e263d435149fc9f2c62c2a8c74d9c858"
+          },
+          {
+            "view": "back",
+            "path": "art/themed-city-kit/inputs/alpine-house-v01/view02_azim180.png",
+            "sha256": "8cb328fbda6e544bd6d2eba6409f808db5143c1429a412ac889828860e20621e"
+          }
+        ],
+        "normalisationScale": 0.8126216918959663,
+        "placementReview": {
+          "independentParcelScale": 1.0269212201704097,
+          "scale": 0.8126216918959663,
+          "reason": "uniform_fit_below_next_upgrade",
+          "nextLevel": "villa_3",
+          "nextLevelHeight": 0.9457571232318878,
+          "maximumHeight": 0.8133511259794235,
+          "heightRatio": 0.86,
+          "relativeToIndependentFit": 0.791318434106482,
+          "sharedCameraReviewRequired": true
+        },
+        "reviewStatus": "approved",
+        "triangleBudget": 30000
       }
     },
     {
       "name": "alpine_villa_3",
+      "size": [
+        0.99,
+        0.9457571232318878,
+        0.7553076982498169
+      ],
       "bounds": {
         "min": [
-          -0.48344773054122925,
-          -0.5260000228881836,
-          0.0
+          -0.495,
+          0.0,
+          -0.37765384912490846
         ],
         "max": [
-          0.48344773054122925,
-          0.46799999475479126,
-          1.5140000581741333
+          0.495,
+          0.9457571232318878,
+          0.37765384912490846
         ]
       },
-      "size": [
-        0.9668954610824585,
-        0.9940000176429749,
-        1.5140000581741333
-      ],
-      "triangles": 14932,
+      "triangles": 44978,
       "source": {
-        "kind": "blender_three_view",
-        "reference": "art\\regions\\references\\alpine-core-three-views.png"
+        "sourceType": "pixal_native_multiview",
+        "family": "villa",
+        "level": 3,
+        "sourceFile": "assets/models/regions-ai/full/alpine/villa_3/c3c2c05c3fa80a69.glb",
+        "sourceSha256": "c3c2c05c3fa80a6981f0fa68843c7c4846749eabfd99ef49d9701d5e316ae6df",
+        "inferenceReport": "art/full-ai-city/reports/alpine--villa_3-a001/alpine--villa_3-a001-pixal-mv-1024-9247.json",
+        "reference": "art/full-ai-city/inputs/alpine/villa_3/ffc3ed55d7f568f8/reference.json",
+        "rawSourceSha256": "7a92547f1afe18119e28f7d0d44388546af97956a7f8d7c0599c5177de235ae6",
+        "referenceViews": [
+          {
+            "view": "front",
+            "path": "art/full-ai-city/inputs/alpine/villa_3/ffc3ed55d7f568f8/view00_azim000.png",
+            "sha256": "bcee5fe4536d7083c3a2f49164e9195d1e5fc5fae8ddf1a8b13e042ebdf452ad"
+          },
+          {
+            "view": "right",
+            "path": "art/full-ai-city/inputs/alpine/villa_3/ffc3ed55d7f568f8/view01_azim090.png",
+            "sha256": "e0991120088fc4d6b501b1aeca10ddbc94812b418343055d9ad624f14b97bca6"
+          },
+          {
+            "view": "back",
+            "path": "art/full-ai-city/inputs/alpine/villa_3/ffc3ed55d7f568f8/view02_azim180.png",
+            "sha256": "d585fe52b1edc1115c98db77da6b2c7dfe763aff7da32364ed3bbae315697316"
+          }
+        ],
+        "normalisationScale": 0.99,
+        "placementReview": {
+          "independentParcelScale": 0.99,
+          "scale": 0.99,
+          "reason": "independent_uniform_parcel_fit",
+          "relativeToIndependentFit": 1.0,
+          "sharedCameraReviewRequired": true
+        },
+        "reviewStatus": "approved",
+        "triangleBudget": 45000,
+        "budgetReason": "Individual three-storey chalet exception retains two flower balconies, shutter frames, stone reveals and thin bounded wall repairs after finer source-derived reconstruction. Does not raise the family or global default."
       }
     },
     {
       "name": "alpine_shop_1",
+      "size": [
+        0.99,
+        0.6625729125738143,
+        0.7864452964067459
+      ],
       "bounds": {
         "min": [
-          -0.48246079683303833,
-          -0.5040000081062317,
-          0.0
+          -0.495,
+          0.0,
+          -0.39322264820337294
         ],
         "max": [
-          0.48246079683303833,
-          0.46799999475479126,
-          0.7480000257492065
+          0.495,
+          0.6625729125738143,
+          0.39322264820337294
         ]
       },
-      "size": [
-        0.9649215936660767,
-        0.972000002861023,
-        0.7480000257492065
-      ],
-      "triangles": 6336,
+      "triangles": 29985,
       "source": {
-        "kind": "blender_three_view",
-        "reference": "art\\regions\\references\\alpine-core-three-views.png"
+        "sourceType": "pixal_native_multiview",
+        "family": "shop",
+        "level": 1,
+        "sourceFile": "assets/models/regions-ai/full/alpine/shop_1/1c1b93aada3bf321.glb",
+        "sourceSha256": "1c1b93aada3bf3219a24ba9b339e48ddce19b979e412d7590cf28d71affeb34d",
+        "inferenceReport": "art/full-ai-city/reports/alpine--shop_1-a003/alpine--shop_1-a003-pixal-mv-1024-21421.json",
+        "reference": "art/full-ai-city/inputs/alpine/shop_1/ea9486b77628af99/reference.json",
+        "rawSourceSha256": "1cb66238d6900e0bc638b006d2f8768861b3cd064359f7f7242e90496cafcfc9",
+        "referenceViews": [
+          {
+            "view": "front",
+            "path": "art/full-ai-city/inputs/alpine/shop_1/ea9486b77628af99/view00_azim000.png",
+            "sha256": "20cee6f504f41b332e0fc57b5cef64156715cccba6d00b2d99e4b32411281402"
+          },
+          {
+            "view": "right",
+            "path": "art/full-ai-city/inputs/alpine/shop_1/ea9486b77628af99/view01_azim090.png",
+            "sha256": "9a5831e50f4ebd74cd91e821edac503949a884539815800131d4e4dd98460e66"
+          },
+          {
+            "view": "back",
+            "path": "art/full-ai-city/inputs/alpine/shop_1/ea9486b77628af99/view02_azim180.png",
+            "sha256": "bdd166b3d737705df05bcd85fa880b751917eddf159201d7137c54f5f6630695"
+          }
+        ],
+        "normalisationScale": 0.99,
+        "placementReview": {
+          "independentParcelScale": 0.99,
+          "scale": 0.99,
+          "reason": "independent_uniform_parcel_fit",
+          "relativeToIndependentFit": 1.0,
+          "sharedCameraReviewRequired": true
+        },
+        "reviewStatus": "approved",
+        "triangleBudget": 30000
       }
     },
     {
       "name": "alpine_shop_2",
+      "size": [
+        0.9574262541091513,
+        0.8874185635397832,
+        0.8904172088423423
+      ],
       "bounds": {
         "min": [
-          -0.48344773054122925,
-          -0.5040000081062317,
-          0.0
+          -0.47871312705457564,
+          0.0,
+          -0.44520860442117116
         ],
         "max": [
-          0.48344773054122925,
-          0.46799999475479126,
-          1.1440000534057617
+          0.47871312705457564,
+          0.8874185635397832,
+          0.44520860442117116
         ]
       },
-      "size": [
-        0.9668954610824585,
-        0.972000002861023,
-        1.1440000534057617
-      ],
-      "triangles": 9568,
+      "triangles": 29979,
       "source": {
-        "kind": "blender_three_view",
-        "reference": "art\\regions\\references\\alpine-core-three-views.png"
+        "sourceType": "pixal_native_multiview",
+        "family": "shop",
+        "level": 2,
+        "sourceFile": "assets/models/regions-ai/full/alpine/shop_2/07c331b80aaa10bd.glb",
+        "sourceSha256": "07c331b80aaa10bd6cc8a1f2a49a8be4bd834e765706070ae9389a3b614c4e25",
+        "inferenceReport": "art/full-ai-city/reports/alpine--shop_2-a001/alpine--shop_2-a001-pixal-mv-1024-9247.json",
+        "reference": "art/full-ai-city/inputs/alpine/shop_2/8c5ab46b998d2478/reference.json",
+        "rawSourceSha256": "16f931b6751abdfb26c25a46ea1250ba08b6718e4bb064d1d0b61a5e9c29896b",
+        "referenceViews": [
+          {
+            "view": "front",
+            "path": "art/full-ai-city/inputs/alpine/shop_2/8c5ab46b998d2478/view00_azim000.png",
+            "sha256": "e6a15ffcb4d678af8100beb563d4fa886c7f822d2d0a7410fcb402efc414cfbe"
+          },
+          {
+            "view": "right",
+            "path": "art/full-ai-city/inputs/alpine/shop_2/8c5ab46b998d2478/view01_azim090.png",
+            "sha256": "6190421277b19f20639275d7b3c8712989846420de4f8822a2afe7f685f8f6fb"
+          },
+          {
+            "view": "back",
+            "path": "art/full-ai-city/inputs/alpine/shop_2/8c5ab46b998d2478/view02_azim180.png",
+            "sha256": "81e772d7a1a86ee528c104c7a82d85ea123cb37b75058a2d9ee5d1cb2bcc1201"
+          }
+        ],
+        "normalisationScale": 0.9574262541091513,
+        "placementReview": {
+          "independentParcelScale": 0.99,
+          "scale": 0.9574262541091513,
+          "reason": "uniform_fit_below_next_upgrade",
+          "nextLevel": "shop_3",
+          "nextLevelHeight": 1.031882050627655,
+          "maximumHeight": 0.8874185635397832,
+          "heightRatio": 0.86,
+          "relativeToIndependentFit": 0.9670972263728801,
+          "sharedCameraReviewRequired": true
+        },
+        "reviewStatus": "approved",
+        "triangleBudget": 30000
       }
     },
     {
       "name": "alpine_shop_3",
+      "size": [
+        0.9899999999999999,
+        1.031882050627655,
+        0.8686662686032322
+      ],
       "bounds": {
         "min": [
-          -0.48344773054122925,
-          -0.5040000081062317,
-          0.0
+          -0.49499999999999994,
+          0.0,
+          -0.4343331343016161
         ],
         "max": [
-          0.48344773054122925,
-          0.46799999475479126,
-          1.5140000581741333
+          0.49499999999999994,
+          1.031882050627655,
+          0.4343331343016161
         ]
       },
-      "size": [
-        0.9668954610824585,
-        0.972000002861023,
-        1.5140000581741333
-      ],
-      "triangles": 12040,
+      "triangles": 29989,
       "source": {
-        "kind": "blender_three_view",
-        "reference": "art\\regions\\references\\alpine-core-three-views.png"
+        "sourceType": "pixal_native_multiview",
+        "family": "shop",
+        "level": 3,
+        "sourceFile": "assets/models/regions-ai/full/alpine/shop_3/edcced061e18448c.glb",
+        "sourceSha256": "edcced061e18448cf108c706f370b425dc387c66a80bf18ebe4bd3086f1d5ade",
+        "inferenceReport": "art/full-ai-city/reports/alpine--shop_3-a004/alpine--shop_3-a004-pixal-mv-1024-22423.json",
+        "reference": "art/full-ai-city/inputs/alpine/shop_3/b01a20d1269f12d2/reference.json",
+        "rawSourceSha256": "35f61a74e4f63821cde93b58cf03f926870734681246961420181a4025684393",
+        "referenceViews": [
+          {
+            "view": "front",
+            "path": "art/full-ai-city/inputs/alpine/shop_3/b01a20d1269f12d2/view00_azim000.png",
+            "sha256": "94c3c431caf5683a489b7ffcd684b824efe119a1c705d5f2c84a5fc240bf42da"
+          },
+          {
+            "view": "right",
+            "path": "art/full-ai-city/inputs/alpine/shop_3/b01a20d1269f12d2/view01_azim090.png",
+            "sha256": "b82a31f237b35699a87a568fc5c53e88a43bb6db1d1923638959ed410386ca6d"
+          },
+          {
+            "view": "back",
+            "path": "art/full-ai-city/inputs/alpine/shop_3/b01a20d1269f12d2/view02_azim180.png",
+            "sha256": "a9eede1022a6fbdd3c4551b9a1da725f5eb3c9ef1e0115ab751c1ec790057674"
+          }
+        ],
+        "normalisationScale": 1.031882050627655,
+        "placementReview": {
+          "independentParcelScale": 1.031882050627655,
+          "scale": 1.031882050627655,
+          "reason": "independent_uniform_parcel_fit",
+          "relativeToIndependentFit": 1.0,
+          "sharedCameraReviewRequired": true
+        },
+        "reviewStatus": "approved",
+        "triangleBudget": 30000
       }
     },
     {
       "name": "alpine_hotel_1",
+      "size": [
+        0.9394424473298566,
+        0.6291726294501203,
+        0.8378376539892334
+      ],
       "bounds": {
         "min": [
-          -0.5022146105766296,
-          -0.5199999809265137,
-          0.0
+          -0.4697212236649283,
+          0.0,
+          -0.4189188269946167
         ],
         "max": [
-          0.5022146105766296,
-          0.4580000042915344,
-          0.7429999709129333
+          0.4697212236649283,
+          0.6291726294501203,
+          0.4189188269946167
         ]
       },
-      "size": [
-        1.0044292211532593,
-        0.9779999852180481,
-        0.7429999709129333
-      ],
-      "triangles": 6008,
+      "triangles": 29981,
       "source": {
-        "kind": "blender_three_view",
-        "reference": "art\\regions\\references\\alpine-core-three-views.png"
+        "sourceType": "pixal_native_multiview",
+        "family": "hotel",
+        "level": 1,
+        "sourceFile": "assets/models/regions-ai/full/alpine/hotel_1/fa292fea6067cda7.glb",
+        "sourceSha256": "fa292fea6067cda76a0fd8f208018d2f12d18a48ae10cde7f3cb329b8b4b1d81",
+        "inferenceReport": "art/full-ai-city/reports/alpine--hotel_1-a001/alpine--hotel_1-a001-pixal-mv-1024-9247.json",
+        "reference": "art/full-ai-city/inputs/alpine/hotel_1/6faafa66e65c9324/reference.json",
+        "rawSourceSha256": "b48c4a11a9fc7529ef7b6b61581880faf7675facfcd5ce1eecc231c2d6c7df77",
+        "referenceViews": [
+          {
+            "view": "front",
+            "path": "art/full-ai-city/inputs/alpine/hotel_1/6faafa66e65c9324/view00_azim000.png",
+            "sha256": "7a7f72ef02b64a4fcb47d9541d25076679de371f172d13a8f36f03ef2aa3d236"
+          },
+          {
+            "view": "right",
+            "path": "art/full-ai-city/inputs/alpine/hotel_1/6faafa66e65c9324/view01_azim090.png",
+            "sha256": "6b0573a8b30fb7c641b82a725f24fbb2ea3efddc9b79f087b28384d6bf517e43"
+          },
+          {
+            "view": "back",
+            "path": "art/full-ai-city/inputs/alpine/hotel_1/6faafa66e65c9324/view02_azim180.png",
+            "sha256": "063dbdd1fcc5ca710f7e89f24d736dbeb467cc025b4f2608dfe274cc2560587d"
+          }
+        ],
+        "normalisationScale": 0.9394424473298566,
+        "placementReview": {
+          "independentParcelScale": 0.99,
+          "scale": 0.9394424473298566,
+          "reason": "uniform_fit_below_next_upgrade",
+          "nextLevel": "hotel_2",
+          "nextLevelHeight": 0.7315960807559538,
+          "maximumHeight": 0.6291726294501203,
+          "heightRatio": 0.86,
+          "relativeToIndependentFit": 0.9489317649796531,
+          "sharedCameraReviewRequired": true
+        },
+        "reviewStatus": "approved",
+        "triangleBudget": 30000
       }
     },
     {
       "name": "alpine_hotel_2",
+      "size": [
+        0.99,
+        0.7315960807559538,
+        0.7694089698439223
+      ],
       "bounds": {
         "min": [
-          -0.503186821937561,
-          -0.5199999809265137,
-          0.0
+          -0.495,
+          0.0,
+          -0.38470448492196113
         ],
         "max": [
-          0.503186821937561,
-          0.515999972820282,
-          1.1339999437332153
+          0.495,
+          0.7315960807559538,
+          0.38470448492196113
         ]
       },
-      "size": [
-        1.006373643875122,
-        1.0359999537467957,
-        1.1339999437332153
-      ],
-      "triangles": 12652,
+      "triangles": 29995,
       "source": {
-        "kind": "blender_three_view",
-        "reference": "art\\regions\\references\\alpine-core-three-views.png"
+        "sourceType": "pixal_native_multiview",
+        "family": "hotel",
+        "level": 2,
+        "sourceFile": "assets/models/regions-ai/full/alpine/hotel_2/5b32c462093d5665.glb",
+        "sourceSha256": "5b32c462093d5665da3333f739c421d73c565028b6cadfb254b2da5a5a7b9a38",
+        "inferenceReport": "art/full-ai-city/reports/alpine--hotel_2-a003/alpine--hotel_2-a003-pixal-mv-1024-29412.json",
+        "reference": "art/full-ai-city/inputs/alpine/hotel_2/944d6b20c602f97d/reference.json",
+        "rawSourceSha256": "aa8055f7e92e8f8a6a4a1fcee3a5377252e44595d071ae3fe1d5357a728c9b50",
+        "referenceViews": [
+          {
+            "view": "front",
+            "path": "art/full-ai-city/inputs/alpine/hotel_2/944d6b20c602f97d/view00_azim000.png",
+            "sha256": "d6a3a06711867682b9fa6133e7dd716f7c0b55b129f19b17be0fe9727f885913"
+          },
+          {
+            "view": "right",
+            "path": "art/full-ai-city/inputs/alpine/hotel_2/944d6b20c602f97d/view01_azim090.png",
+            "sha256": "9d93d6b189fce0a91719264c1ca4c23579c82ecbb0218a1811ff9ab604631c66"
+          },
+          {
+            "view": "back",
+            "path": "art/full-ai-city/inputs/alpine/hotel_2/944d6b20c602f97d/view02_azim180.png",
+            "sha256": "f144e85f177a8b030a7f1e7b76e3f0dfabd02a48f3255cea2afd9bc0fa9d3109"
+          }
+        ],
+        "normalisationScale": 0.9900000590086019,
+        "placementReview": {
+          "independentParcelScale": 0.9900000590086019,
+          "scale": 0.9900000590086019,
+          "reason": "independent_uniform_parcel_fit",
+          "relativeToIndependentFit": 1.0,
+          "sharedCameraReviewRequired": true
+        },
+        "reviewStatus": "approved",
+        "triangleBudget": 30000
       }
     },
     {
       "name": "alpine_hotel_3",
+      "size": [
+        0.99,
+        0.9137995370506965,
+        0.8347225817872633
+      ],
       "bounds": {
         "min": [
-          -0.503186821937561,
-          -0.5199999809265137,
-          0.0
+          -0.495,
+          0.0,
+          -0.41736129089363166
         ],
         "max": [
-          0.503186821937561,
-          0.515999972820282,
-          1.4989999532699585
+          0.495,
+          0.9137995370506965,
+          0.41736129089363166
         ]
       },
-      "size": [
-        1.006373643875122,
-        1.0359999537467957,
-        1.4989999532699585
-      ],
-      "triangles": 18536,
+      "triangles": 44969,
       "source": {
-        "kind": "blender_three_view",
-        "reference": "art\\regions\\references\\alpine-core-three-views.png"
+        "sourceType": "pixal_native_multiview",
+        "family": "hotel",
+        "level": 3,
+        "sourceFile": "assets/models/regions-ai/full/alpine/hotel_3/84b15590268a1df0.glb",
+        "sourceSha256": "84b15590268a1df01f2d40d07eb3c28e838335c18b9a0115b5f55bf5aeafa511",
+        "inferenceReport": "art/full-ai-city/reports/alpine--hotel_3-a003/alpine--hotel_3-a003-pixal-mv-1024-30413.json",
+        "reference": "art/full-ai-city/inputs/alpine/hotel_3/d1380e42237fa135/reference.json",
+        "rawSourceSha256": "5655b93de6f940071ba5bb9c72c4fd889cf4d935acf1afb033431f9f6c9ddb1c",
+        "referenceViews": [
+          {
+            "view": "front",
+            "path": "art/full-ai-city/inputs/alpine/hotel_3/d1380e42237fa135/view00_azim000.png",
+            "sha256": "bd636f0facea115e98c965b6aa107a694d8a1d58d55d2cc223d96dbfadedc70b"
+          },
+          {
+            "view": "right",
+            "path": "art/full-ai-city/inputs/alpine/hotel_3/d1380e42237fa135/view01_azim090.png",
+            "sha256": "e0dab7dfbc7b424adc845bc926ba142f06d4f29e726f3a3f421335b049187b1d"
+          },
+          {
+            "view": "back",
+            "path": "art/full-ai-city/inputs/alpine/hotel_3/d1380e42237fa135/view02_azim180.png",
+            "sha256": "b4114dafcfdf3c2cbe357c9ba2d9a75eeb4c90fd62352f0c9b91923f7bc1cd2e"
+          }
+        ],
+        "normalisationScale": 0.9900000590086019,
+        "placementReview": {
+          "independentParcelScale": 0.9900000590086019,
+          "scale": 0.9900000590086019,
+          "reason": "independent_uniform_parcel_fit",
+          "relativeToIndependentFit": 1.0,
+          "sharedCameraReviewRequired": true
+        },
+        "reviewStatus": "approved",
+        "triangleBudget": 45000,
+        "budgetReason": "Three-storey chalet with two open balconies, railings, canopy and many framed windows. The finer 45k source-derived surface retains these structures and the bounded plaster repairs at phone size where the prior standard reconstruction enlarged defects."
       }
     },
     {
       "name": "alpine_tower_1",
+      "size": [
+        0.99,
+        0.6567748848661712,
+        0.8349891826503982
+      ],
       "bounds": {
         "min": [
-          -0.48246079683303833,
-          -0.4945000112056732,
-          0.0
+          -0.495,
+          0.0,
+          -0.4174945913251991
         ],
         "max": [
-          0.48246079683303833,
-          0.4945000112056732,
-          0.7480000257492065
+          0.495,
+          0.6567748848661712,
+          0.4174945913251991
         ]
       },
-      "size": [
-        0.9649215936660767,
-        0.9890000224113464,
-        0.7480000257492065
-      ],
-      "triangles": 7420,
+      "triangles": 44878,
       "source": {
-        "kind": "blender_three_view",
-        "reference": "art\\regions\\references\\alpine-core-three-views.png"
+        "sourceType": "pixal_native_multiview",
+        "family": "tower",
+        "level": 1,
+        "sourceFile": "assets/models/regions-ai/full/alpine/tower_1/8927bcff4baa4e7a.glb",
+        "sourceSha256": "8927bcff4baa4e7ac6b04b3b75a3a637cc7d10eeb3e8342aee261670ac114bdd",
+        "inferenceReport": "art/full-ai-city/reports/alpine--tower_1-a005/alpine--tower_1-a005-pixal-mv-1024-33421.json",
+        "reference": "art/full-ai-city/inputs/alpine/tower_1/acfc49b3af6f53c1/reference.json",
+        "rawSourceSha256": "8130298c9a2bfebb7adf8ea953190ebbc24418742843e4bf849a1c9987defdf8",
+        "referenceViews": [
+          {
+            "view": "front",
+            "path": "art/full-ai-city/inputs/alpine/tower_1/acfc49b3af6f53c1/view00_azim000.png",
+            "sha256": "998e5f2335cc8a1fb9499f002c5d97ff2ee6f7dd586b9ddb262e5b55d52024a9"
+          },
+          {
+            "view": "right",
+            "path": "art/full-ai-city/inputs/alpine/tower_1/acfc49b3af6f53c1/view01_azim090.png",
+            "sha256": "46656fe5ce70614c55f120222a712f3e3b72cfee0103e0d8141206c7d66be133"
+          },
+          {
+            "view": "back",
+            "path": "art/full-ai-city/inputs/alpine/tower_1/acfc49b3af6f53c1/view02_azim180.png",
+            "sha256": "36dfebd8514dd86f5d5250e74b9aeff2d8bd03455649c4a7a083b96203a52f91"
+          }
+        ],
+        "normalisationScale": 0.9900000590086019,
+        "placementReview": {
+          "independentParcelScale": 0.9900000590086019,
+          "scale": 0.9900000590086019,
+          "reason": "independent_uniform_parcel_fit",
+          "relativeToIndependentFit": 1.0,
+          "sharedCameraReviewRequired": true
+        },
+        "reviewStatus": "approved",
+        "triangleBudget": 45000,
+        "budgetReason": "Individual45k exception retains small facade and window trim with verified bounded same-source repairs; five-side and actual256px final renders reviewed."
       }
     },
     {
       "name": "alpine_tower_2",
+      "size": [
+        0.99,
+        0.8950189283501464,
+        0.6906291228907778
+      ],
       "bounds": {
         "min": [
-          -0.48344773054122925,
-          -0.5055000185966492,
-          0.0
+          -0.495,
+          0.0,
+          -0.3453145614453889
         ],
         "max": [
-          0.48344773054122925,
-          0.4945000112056732,
-          1.1440000534057617
+          0.495,
+          0.8950189283501464,
+          0.3453145614453889
         ]
       },
-      "size": [
-        0.9668954610824585,
-        1.0000000298023224,
-        1.1440000534057617
-      ],
-      "triangles": 10484,
+      "triangles": 44968,
       "source": {
-        "kind": "blender_three_view",
-        "reference": "art\\regions\\references\\alpine-core-three-views.png"
+        "sourceType": "pixal_native_multiview",
+        "family": "tower",
+        "level": 2,
+        "sourceFile": "assets/models/regions-ai/full/alpine/tower_2/e5811c91ce457286.glb",
+        "sourceSha256": "e5811c91ce457286d5c75cc47a2f88c81773eda2adf972a9f91ea43a8ee0b180",
+        "inferenceReport": "art/full-ai-city/reports/alpine--tower_2-a001/alpine--tower_2-a001-pixal-mv-1024-9247.json",
+        "reference": "art/full-ai-city/inputs/alpine/tower_2/94ca35c2e841ba37/reference.json",
+        "rawSourceSha256": "9df477b0c7d751c5b43ebfef83a5d729633ce44b71d297b3c1ed678fc79da1ef",
+        "referenceViews": [
+          {
+            "view": "front",
+            "path": "art/full-ai-city/inputs/alpine/tower_2/94ca35c2e841ba37/view00_azim000.png",
+            "sha256": "2e2423f7f708a39844835241525e3214e5d693c98fc6c9ada63fb6fa95f4c9c2"
+          },
+          {
+            "view": "right",
+            "path": "art/full-ai-city/inputs/alpine/tower_2/94ca35c2e841ba37/view01_azim090.png",
+            "sha256": "c64e3ee01fa22f1dd625a0d54295b935ee4454f40a84a1519ae01a2e250b13a6"
+          },
+          {
+            "view": "back",
+            "path": "art/full-ai-city/inputs/alpine/tower_2/94ca35c2e841ba37/view02_azim180.png",
+            "sha256": "921c82b2cb2a5eeab6403fd9d909a84d596d8f34e30c86a42327a96ab7acde98"
+          }
+        ],
+        "normalisationScale": 0.9900000590086019,
+        "placementReview": {
+          "independentParcelScale": 0.9900000590086019,
+          "scale": 0.9900000590086019,
+          "reason": "independent_uniform_parcel_fit",
+          "relativeToIndependentFit": 1.0,
+          "sharedCameraReviewRequired": true
+        },
+        "reviewStatus": "approved",
+        "triangleBudget": 45000,
+        "budgetReason": "Individual same-source comparison: the 30k derivative enlarged small repaired-window and eave seams; the 44,968-triangle derivative better retains balcony slats, stone corner strips and thin repaired facade boundaries at phone scale. Other ordinary assets keep their existing limit."
       }
     },
     {
       "name": "alpine_tower_3",
+      "size": [
+        0.99,
+        1.1691256329222182,
+        0.8602991696465941
+      ],
       "bounds": {
         "min": [
-          -0.48344773054122925,
-          -0.5055000185966492,
-          0.0
+          -0.495,
+          0.0,
+          -0.43014958482329707
         ],
         "max": [
-          0.48344773054122925,
-          0.4945000112056732,
-          1.5140000581741333
+          0.495,
+          1.1691256329222182,
+          0.43014958482329707
         ]
       },
-      "size": [
-        0.9668954610824585,
-        1.0000000298023224,
-        1.5140000581741333
-      ],
-      "triangles": 12988,
+      "triangles": 44944,
       "source": {
-        "kind": "blender_three_view",
-        "reference": "art\\regions\\references\\alpine-core-three-views.png"
+        "sourceType": "pixal_native_multiview",
+        "family": "tower",
+        "level": 3,
+        "sourceFile": "assets/models/regions-ai/full/alpine/tower_3/96268644d7c0830a.glb",
+        "sourceSha256": "96268644d7c0830ab9554fb2bceb13f6ef9fd1f6f89b175f33340c2b607239f3",
+        "inferenceReport": "art/full-ai-city/reports/alpine--tower_3-a014/alpine--tower_3-a014-pixal-mv-1024-34423.json",
+        "reference": "art/full-ai-city/inputs/alpine/tower_3/29111c28202612bb/reference.json",
+        "rawSourceSha256": "1f87b54f397a5d7bf0023484b3714542057891aa11fd3a8902ea9c18a44ce7bf",
+        "referenceViews": [
+          {
+            "view": "front",
+            "path": "art/full-ai-city/inputs/alpine/tower_3/29111c28202612bb/view00_azim000.png",
+            "sha256": "b607ba0667cd64c926eef1c76a134768b1ded78130d29cbc1a9ed549029ca6f5"
+          },
+          {
+            "view": "right",
+            "path": "art/full-ai-city/inputs/alpine/tower_3/29111c28202612bb/view01_azim090.png",
+            "sha256": "6f62eca1ca816e7999ad193eb74a6243a204a6dbe0854a1b7c0e161568f03a68"
+          },
+          {
+            "view": "back",
+            "path": "art/full-ai-city/inputs/alpine/tower_3/29111c28202612bb/view02_azim180.png",
+            "sha256": "34372a4cacfbcd9eaca0ec4b4c6dee9d710f280a554ce3ea241db93d3cc1d573"
+          }
+        ],
+        "normalisationScale": 1.1691257026075403,
+        "placementReview": {
+          "independentParcelScale": 1.1691257026075403,
+          "scale": 1.1691257026075403,
+          "reason": "independent_uniform_parcel_fit",
+          "relativeToIndependentFit": 1.0,
+          "sharedCameraReviewRequired": true
+        },
+        "reviewStatus": "approved",
+        "triangleBudget": 45000,
+        "budgetReason": "Three storeys with two open flower balconies, shutters, stone corners and the retained repaired plaster surfaces need the already reviewed45k derivative; no global budget increase."
       }
     },
     {
       "name": "alpine_skyscraper_1",
+      "size": [
+        1.9971428045801876,
+        1.1,
+        0.8615589562228714
+      ],
       "bounds": {
         "min": [
-          -1.2599999904632568,
-          -0.5199999809265137,
-          0.0
+          -0.9985714022900938,
+          0.0,
+          -0.4307794781114357
         ],
         "max": [
-          1.2599999904632568,
-          0.5199999809265137,
-          1.0199999809265137
+          0.9985714022900938,
+          1.1,
+          0.4307794781114357
         ]
       },
-      "size": [
-        2.5199999809265137,
-        1.0399999618530273,
-        1.0199999809265137
-      ],
-      "triangles": 13340,
+      "triangles": 44958,
       "source": {
-        "kind": "blender_three_view",
-        "reference": "art/regions/references/alpine-landmarks-three-views.png"
+        "sourceType": "pixal_native_multiview",
+        "family": "skyscraper",
+        "level": 1,
+        "sourceFile": "assets/models/regions-ai/full/alpine/skyscraper_1/568c3c6ffe5304ac.glb",
+        "sourceSha256": "568c3c6ffe5304ac82f8c2182721f8037aa80627a15549800404a92d5c7e2ed0",
+        "inferenceReport": "art/full-ai-city/reports/alpine--skyscraper_1-a002/alpine--skyscraper_1-a002-pixal-mv-1024-9247.json",
+        "reference": "art/full-ai-city/inputs/alpine/skyscraper_1/258a89e26b343d9c/reference.json",
+        "rawSourceSha256": "43e46e8118e6570412fd6e2ca54b4981a4d7b41f52281d841cb1c97bac9c1cbd",
+        "referenceViews": [
+          {
+            "view": "front",
+            "path": "art/full-ai-city/inputs/alpine/skyscraper_1/258a89e26b343d9c/view00_azim000.png",
+            "sha256": "cb54cdd4ac168e7cbdbb265dbb2eea71f6793ceebf92fa02b9d7be191761fb9d"
+          },
+          {
+            "view": "right",
+            "path": "art/full-ai-city/inputs/alpine/skyscraper_1/258a89e26b343d9c/view01_azim090.png",
+            "sha256": "d59796d0ebc130d6762c22f1877fb0fd5397ca8c9e024ea1d31f62591151ff0f"
+          },
+          {
+            "view": "back",
+            "path": "art/full-ai-city/inputs/alpine/skyscraper_1/258a89e26b343d9c/view02_azim180.png",
+            "sha256": "c7ec5ba4cef4e39d5dbcbed4b978eb83722196f98b86fffb7e02934c6588582e"
+          }
+        ],
+        "normalisationScale": 1.9971428045801876,
+        "placementReview": {
+          "independentParcelScale": 1.9971428045801876,
+          "scale": 1.9971428045801876,
+          "reason": "independent_uniform_parcel_fit",
+          "relativeToIndependentFit": 1.0,
+          "sharedCameraReviewRequired": true
+        },
+        "reviewStatus": "approved",
+        "triangleBudget": 45000
       }
     },
     {
       "name": "alpine_skyscraper_2",
+      "size": [
+        2.33871000979678,
+        1.3914498597383498,
+        0.6846649547882505
+      ],
       "bounds": {
         "min": [
-          -1.2599999904632568,
-          -0.5199999809265137,
-          0.0
+          -1.16935500489839,
+          0.0,
+          -0.34233247739412526
         ],
         "max": [
-          1.2599999904632568,
-          0.581000030040741,
-          1.4049999713897705
+          1.16935500489839,
+          1.3914498597383498,
+          0.34233247739412526
         ]
       },
-      "size": [
-        2.5199999809265137,
-        1.1010000109672546,
-        1.4049999713897705
-      ],
-      "triangles": 26660,
+      "triangles": 44978,
       "source": {
-        "kind": "blender_three_view",
-        "reference": "art/regions/references/alpine-landmarks-three-views.png"
+        "sourceType": "pixal_native_multiview",
+        "family": "skyscraper",
+        "level": 2,
+        "sourceFile": "assets/models/regions-ai/full/alpine/skyscraper_2/7bdbcadbd66da0bc.glb",
+        "sourceSha256": "7bdbcadbd66da0bc5ceea1f1465d9f75742510f86d8dfdf3e137cb8e3c72dd0a",
+        "inferenceReport": "art/full-ai-city/reports/alpine--skyscraper_2-a012/alpine--skyscraper_2-a012-pixal-mv-1024-29474.json",
+        "reference": "art/full-ai-city/inputs/alpine/skyscraper_2/1f0013da8d6a9158/reference.json",
+        "rawSourceSha256": "37a0dffc9243445eccda44e94644495f2ac38587abc02d05b702e6dcf67aefc1",
+        "referenceViews": [
+          {
+            "view": "front",
+            "path": "art/full-ai-city/inputs/alpine/skyscraper_2/1f0013da8d6a9158/view00_azim000.png",
+            "sha256": "f30e50dd62661c2e1a549b2b2907212afcccaf40fd2f9ef9127ff9c27fdb0de4"
+          },
+          {
+            "view": "right",
+            "path": "art/full-ai-city/inputs/alpine/skyscraper_2/1f0013da8d6a9158/view01_azim090.png",
+            "sha256": "5b3dfdf938dfc94c976b7250263c075e3121c49db2dbf33193bdbaccdc6fee2d"
+          },
+          {
+            "view": "back",
+            "path": "art/full-ai-city/inputs/alpine/skyscraper_2/1f0013da8d6a9158/view02_azim180.png",
+            "sha256": "de18e85d90ecfd9d898a8bef77f1db9a2e0ac9a84e5976543d874175e1cf52e3"
+          }
+        ],
+        "normalisationScale": 2.33871000979678,
+        "placementReview": {
+          "independentParcelScale": 2.5,
+          "scale": 2.33871000979678,
+          "reason": "uniform_fit_below_next_upgrade",
+          "nextLevel": "skyscraper_3",
+          "nextLevelHeight": 1.6179649531841278,
+          "maximumHeight": 1.39144985973835,
+          "heightRatio": 0.86,
+          "relativeToIndependentFit": 0.935484003918712,
+          "sharedCameraReviewRequired": true
+        },
+        "reviewStatus": "approved",
+        "triangleBudget": 45000
       }
     },
     {
       "name": "alpine_skyscraper_3",
+      "size": [
+        2.5,
+        1.6179649531841278,
+        0.9684024006128311
+      ],
       "bounds": {
         "min": [
-          -1.2599999904632568,
-          -0.5199999809265137,
-          0.0
+          -1.25,
+          0.0,
+          -0.48420120030641556
         ],
         "max": [
-          1.2599999904632568,
-          0.5199999809265137,
-          1.7899999618530273
+          1.25,
+          1.6179649531841278,
+          0.48420120030641556
         ]
       },
-      "size": [
-        2.5199999809265137,
-        1.0399999618530273,
-        1.7899999618530273
-      ],
-      "triangles": 27116,
+      "triangles": 44979,
       "source": {
-        "kind": "blender_three_view",
-        "reference": "art/regions/references/alpine-landmarks-three-views.png"
+        "sourceType": "pixal_native_multiview",
+        "family": "skyscraper",
+        "level": 3,
+        "sourceFile": "assets/models/regions-ai/full/alpine/skyscraper_3/392d363626ad27f0.glb",
+        "sourceSha256": "392d363626ad27f0eb34e993adbf1f2ea26c4ddb2446fd2cf8dea0a18511403c",
+        "inferenceReport": "art/full-ai-city/reports/alpine--skyscraper_3-a011/alpine--skyscraper_3-a011-pixal-mv-1024-29475.json",
+        "reference": "art/full-ai-city/inputs/alpine/skyscraper_3/19b8b3fbdef90d69/reference.json",
+        "rawSourceSha256": "fdad428066c130d31455e901a13f630c81d8eb52596aaedc317253f90813b4c2",
+        "referenceViews": [
+          {
+            "view": "front",
+            "path": "art/full-ai-city/inputs/alpine/skyscraper_3/19b8b3fbdef90d69/view00_azim000.png",
+            "sha256": "72641f49c5f25de8fad279e4a1fe11cd1b0904e1ab2fd14ed4abf5bc6544a897"
+          },
+          {
+            "view": "right",
+            "path": "art/full-ai-city/inputs/alpine/skyscraper_3/19b8b3fbdef90d69/view01_azim090.png",
+            "sha256": "2eaba2f48cd2aa2f2858415036f45bad5387592e5c671660352e1b738839a176"
+          },
+          {
+            "view": "back",
+            "path": "art/full-ai-city/inputs/alpine/skyscraper_3/19b8b3fbdef90d69/view02_azim180.png",
+            "sha256": "4a9fa5c90a676b52b1c75722cce1d6ed1c7a0e3203d486b0b4e1f8d4a8b864c5"
+          }
+        ],
+        "normalisationScale": 2.5,
+        "placementReview": {
+          "independentParcelScale": 2.5,
+          "scale": 2.5,
+          "reason": "independent_uniform_parcel_fit",
+          "relativeToIndependentFit": 1.0,
+          "sharedCameraReviewRequired": true
+        },
+        "reviewStatus": "approved",
+        "triangleBudget": 45000
       }
     },
     {
       "name": "alpine_finance_1",
+      "size": [
+        2.2552633941018216,
+        1.1,
+        0.7608579391196549
+      ],
       "bounds": {
         "min": [
-          -1.2599999904632568,
-          -0.5199999809265137,
-          0.0
+          -1.1276316970509108,
+          0.0,
+          -0.38042896955982747
         ],
         "max": [
-          1.2599999904632568,
-          0.5199999809265137,
-          1.2410000562667847
+          1.1276316970509108,
+          1.1,
+          0.38042896955982747
         ]
       },
-      "size": [
-        2.5199999809265137,
-        1.0399999618530273,
-        1.2410000562667847
-      ],
-      "triangles": 14096,
+      "triangles": 44993,
       "source": {
-        "kind": "blender_three_view",
-        "reference": "art/regions/references/alpine-landmarks-three-views.png"
+        "sourceType": "pixal_native_multiview",
+        "family": "finance",
+        "level": 1,
+        "sourceFile": "assets/models/regions-ai/full/alpine/finance_1/2aaa27b274932700.glb",
+        "sourceSha256": "2aaa27b2749327009b3fd5405592397a34f3c14818c058c704e5745a98361692",
+        "inferenceReport": "art/full-ai-city/reports/alpine--finance_1-a004/alpine--finance_1-a004-pixal-mv-1024-29471.json",
+        "reference": "art/full-ai-city/inputs/alpine/finance_1/e306995e833a1a0b/reference.json",
+        "rawSourceSha256": "62f8c243a54d03f4a1a5ceefc8e6547e260c11b112a918cd89c0823e5206555a",
+        "referenceViews": [
+          {
+            "view": "front",
+            "path": "art/full-ai-city/inputs/alpine/finance_1/e306995e833a1a0b/view00_azim000.png",
+            "sha256": "1cb48be844cec98a35bcb7700169860edbfd7407338de7bbb597571f4fea079b"
+          },
+          {
+            "view": "right",
+            "path": "art/full-ai-city/inputs/alpine/finance_1/e306995e833a1a0b/view01_azim090.png",
+            "sha256": "e3ca6fce8bd47b6b1cdfa4eaaa13919effb62a5b7daef52d7e253df804998195"
+          },
+          {
+            "view": "back",
+            "path": "art/full-ai-city/inputs/alpine/finance_1/e306995e833a1a0b/view02_azim180.png",
+            "sha256": "f50ab8139257b41d7a774013c1138ddf344915ec85f8d6886accf428158b94e4"
+          }
+        ],
+        "normalisationScale": 2.255263528526003,
+        "placementReview": {
+          "independentParcelScale": 2.255263528526003,
+          "scale": 2.255263528526003,
+          "reason": "independent_uniform_parcel_fit",
+          "relativeToIndependentFit": 1.0,
+          "sharedCameraReviewRequired": true
+        },
+        "reviewStatus": "approved",
+        "triangleBudget": 45000
       }
     },
     {
       "name": "alpine_finance_2",
+      "size": [
+        2.28689877307433,
+        1.593079220836116,
+        0.9223493200674803
+      ],
       "bounds": {
         "min": [
-          -1.2599999904632568,
-          -0.5199999809265137,
-          0.0
+          -1.143449386537165,
+          0.0,
+          -0.46117466003374014
         ],
         "max": [
-          1.2599999904632568,
-          0.5199999809265137,
-          1.6260000467300415
+          1.143449386537165,
+          1.593079220836116,
+          0.46117466003374014
         ]
       },
-      "size": [
-        2.5199999809265137,
-        1.0399999618530273,
-        1.6260000467300415
-      ],
-      "triangles": 19376,
+      "triangles": 44967,
       "source": {
-        "kind": "blender_three_view",
-        "reference": "art/regions/references/alpine-landmarks-three-views.png"
+        "sourceType": "pixal_native_multiview",
+        "family": "finance",
+        "level": 2,
+        "sourceFile": "assets/models/regions-ai/full/alpine/finance_2/96b8f4bfe22ea198.glb",
+        "sourceSha256": "96b8f4bfe22ea1984e4c1ebea2d8d2ddf8e652e62ac54cbf2c982e138d8d6687",
+        "inferenceReport": "art/full-ai-city/reports/alpine--finance_2-a003/alpine--finance_2-a003-pixal-mv-1024-29472.json",
+        "reference": "art/full-ai-city/inputs/alpine/finance_2/e6335ef509034263/reference.json",
+        "rawSourceSha256": "8454f1ca414c494a29b029ef878dba7c1fe372f7a8b8f2d591ba0b04dfc1aed4",
+        "referenceViews": [
+          {
+            "view": "front",
+            "path": "art/full-ai-city/inputs/alpine/finance_2/e6335ef509034263/view00_azim000.png",
+            "sha256": "32a6359fc3499bbf5d8ec0a3e3d6d54c98a6697fc10561bcfcfbd9607fe917de"
+          },
+          {
+            "view": "right",
+            "path": "art/full-ai-city/inputs/alpine/finance_2/e6335ef509034263/view01_azim090.png",
+            "sha256": "9fc89c1b553bccfc48e7b81ee995a4f9d3b1bacc6a46cf3a234a8d28d479429e"
+          },
+          {
+            "view": "back",
+            "path": "art/full-ai-city/inputs/alpine/finance_2/e6335ef509034263/view02_azim180.png",
+            "sha256": "120fe2c28c649f80ead263348af3742f7e9975cc1c0e3355dc726ecaec9590ec"
+          }
+        ],
+        "normalisationScale": 2.28689877307433,
+        "placementReview": {
+          "independentParcelScale": 2.3686097503627046,
+          "scale": 2.28689877307433,
+          "reason": "uniform_fit_below_next_upgrade",
+          "nextLevel": "finance_3",
+          "nextLevelHeight": 1.8524176986466467,
+          "maximumHeight": 1.5930792208361162,
+          "heightRatio": 0.86,
+          "relativeToIndependentFit": 0.9655025580824946,
+          "sharedCameraReviewRequired": true
+        },
+        "reviewStatus": "approved",
+        "triangleBudget": 45000
       }
     },
     {
       "name": "alpine_finance_3",
+      "size": [
+        2.5,
+        1.8524176986466467,
+        0.8090274518148572
+      ],
       "bounds": {
         "min": [
-          -1.2599999904632568,
-          -0.5199999809265137,
-          0.0
+          -1.25,
+          0.0,
+          -0.4045137259074286
         ],
         "max": [
-          1.2599999904632568,
-          0.5199999809265137,
-          2.010999917984009
+          1.25,
+          1.8524176986466467,
+          0.4045137259074286
         ]
       },
-      "size": [
-        2.5199999809265137,
-        1.0399999618530273,
-        2.010999917984009
-      ],
-      "triangles": 24656,
+      "triangles": 44984,
       "source": {
-        "kind": "blender_three_view",
-        "reference": "art/regions/references/alpine-landmarks-three-views.png"
+        "sourceType": "pixal_native_multiview",
+        "family": "finance",
+        "level": 3,
+        "sourceFile": "assets/models/regions-ai/full/alpine/finance_3/7d0d487e9e4056cd.glb",
+        "sourceSha256": "7d0d487e9e4056cd0745430425967fe74661406c4b13144934e5bf73b8f2e65d",
+        "inferenceReport": "art/full-ai-city/reports/alpine--finance_3-a002/alpine--finance_3-a002-pixal-mv-1024-9247.json",
+        "reference": "art/full-ai-city/inputs/alpine/finance_3/9d1da6402cd85358/reference.json",
+        "rawSourceSha256": "21d80a46261050f6396986fe37917415665ee6de9f94fadcffbdd14aec31fcaa",
+        "referenceViews": [
+          {
+            "view": "front",
+            "path": "art/full-ai-city/inputs/alpine/finance_3/9d1da6402cd85358/view00_azim000.png",
+            "sha256": "778d24820164f165f2b089c6ef3ec4adc06d7ef647ce082bac3f07129bb21654"
+          },
+          {
+            "view": "right",
+            "path": "art/full-ai-city/inputs/alpine/finance_3/9d1da6402cd85358/view01_azim090.png",
+            "sha256": "b20d3a8ad245f289aca4897804b4899f50afea5f53727a9f4dab1981f59af7ee"
+          },
+          {
+            "view": "back",
+            "path": "art/full-ai-city/inputs/alpine/finance_3/9d1da6402cd85358/view02_azim180.png",
+            "sha256": "10dedfcb3486031dddd8652c681244b09cc5111b3d1e117199cbcaeabd25fc85"
+          }
+        ],
+        "normalisationScale": 2.500000149011621,
+        "placementReview": {
+          "independentParcelScale": 2.500000149011621,
+          "scale": 2.500000149011621,
+          "reason": "independent_uniform_parcel_fit",
+          "relativeToIndependentFit": 1.0,
+          "sharedCameraReviewRequired": true
+        },
+        "reviewStatus": "approved",
+        "triangleBudget": 45000
       }
     },
     {
       "name": "alpine_onsen_1",
+      "size": [
+        1.7772985323517712,
+        0.840443643589301,
+        0.8143461775174297
+      ],
       "bounds": {
         "min": [
-          -1.2599999904632568,
-          -0.5827975273132324,
-          0.0
+          -0.8886492661758856,
+          0.0,
+          -0.40717308875871483
         ],
         "max": [
-          1.2599999904632568,
-          0.5199999809265137,
-          0.8090000152587891
+          0.8886492661758856,
+          0.840443643589301,
+          0.40717308875871483
         ]
       },
-      "size": [
-        2.5199999809265137,
-        1.102797508239746,
-        0.8090000152587891
-      ],
-      "triangles": 12524,
+      "triangles": 44983,
       "source": {
-        "kind": "blender_three_view",
-        "reference": "art/regions/references/alpine-landmarks-three-views.png"
+        "sourceType": "pixal_native_multiview",
+        "family": "onsen",
+        "level": 1,
+        "sourceFile": "assets/models/regions-ai/full/alpine/onsen_1/5dd92eaa37c69168.glb",
+        "sourceSha256": "5dd92eaa37c6916818cfd6785f7193e0c71eebd48ee6dc9db4a8d502b0f19d66",
+        "inferenceReport": "art/full-ai-city/reports/alpine--onsen_1-a003/alpine--onsen_1-a003-pixal-mv-1024-29473.json",
+        "reference": "art/full-ai-city/inputs/alpine/onsen_1/fb1dd12d028c1c59/reference.json",
+        "rawSourceSha256": "db62742a4d41cf3d3e25cc733132aaa3adf10aa4969a472a5ca2337bc8abcba8",
+        "referenceViews": [
+          {
+            "view": "front",
+            "path": "art/full-ai-city/inputs/alpine/onsen_1/fb1dd12d028c1c59/view00_azim000.png",
+            "sha256": "0ec91124b733d5698a160da09118ec4a5605092d93dd00ad5d49a7a103ee69bf"
+          },
+          {
+            "view": "right",
+            "path": "art/full-ai-city/inputs/alpine/onsen_1/fb1dd12d028c1c59/view01_azim090.png",
+            "sha256": "b3e8b977d52791bda865ed44c3cdcd33c1070dd887f269462f95540576ee35cb"
+          },
+          {
+            "view": "back",
+            "path": "art/full-ai-city/inputs/alpine/onsen_1/fb1dd12d028c1c59/view02_azim180.png",
+            "sha256": "16ce92cf9da28e093a59b1e36b2384ff0ad3d6e1858b6fba7528a0aa4d7b1b1d"
+          }
+        ],
+        "normalisationScale": 1.7772985323517712,
+        "placementReview": {
+          "independentParcelScale": 2.226134969436884,
+          "scale": 1.7772985323517712,
+          "reason": "uniform_fit_below_next_upgrade",
+          "nextLevel": "onsen_2",
+          "nextLevelHeight": 0.9772600506852338,
+          "maximumHeight": 0.840443643589301,
+          "heightRatio": 0.86,
+          "relativeToIndependentFit": 0.7983786054092447,
+          "sharedCameraReviewRequired": true
+        },
+        "reviewStatus": "approved",
+        "triangleBudget": 45000
       }
     },
     {
       "name": "alpine_onsen_2",
+      "size": [
+        1.8732555544035574,
+        0.9772600506852338,
+        0.5974778689312914
+      ],
       "bounds": {
         "min": [
-          -1.2599999904632568,
-          -0.5827975273132324,
-          0.0
+          -0.9366277772017787,
+          0.0,
+          -0.2987389344656457
         ],
         "max": [
-          1.2599999904632568,
-          0.5199999809265137,
-          1.1940001249313354
+          0.9366277772017787,
+          0.9772600506852338,
+          0.2987389344656457
         ]
       },
-      "size": [
-        2.5199999809265137,
-        1.102797508239746,
-        1.1940001249313354
-      ],
-      "triangles": 17588,
+      "triangles": 44995,
       "source": {
-        "kind": "blender_three_view",
-        "reference": "art/regions/references/alpine-landmarks-three-views.png"
+        "sourceType": "pixal_native_multiview",
+        "family": "onsen",
+        "level": 2,
+        "sourceFile": "assets/models/regions-ai/full/alpine/onsen_2/1ce208f295b4d8ae.glb",
+        "sourceSha256": "1ce208f295b4d8ae6d7ca086f8d3109f0ded9b02f545ea7c2b5e53ae1b6082db",
+        "inferenceReport": "art/full-ai-city/reports/alpine--onsen_2-a002/alpine--onsen_2-a002-pixal-mv-1024-9247.json",
+        "reference": "art/full-ai-city/inputs/alpine/onsen_2/093167830cfaaaec/reference.json",
+        "rawSourceSha256": "5368686b33a80d413b5b245c42119435ae20f1b1cb6c0f235e5044f475a5bc9c",
+        "referenceViews": [
+          {
+            "view": "front",
+            "path": "art/full-ai-city/inputs/alpine/onsen_2/093167830cfaaaec/view00_azim000.png",
+            "sha256": "44cf17f7e091bb256a55be1c55895fd8791c6b3e4f40ea0ac95665495264aa84"
+          },
+          {
+            "view": "right",
+            "path": "art/full-ai-city/inputs/alpine/onsen_2/093167830cfaaaec/view01_azim090.png",
+            "sha256": "6dd940b705b8b7584157b0b518c3f31ac4c7c892eb2ac273e8b14e66c0073a74"
+          },
+          {
+            "view": "back",
+            "path": "art/full-ai-city/inputs/alpine/onsen_2/093167830cfaaaec/view02_azim180.png",
+            "sha256": "f14ba495f78822c6ef8574368611f1c0e665d7ab90bd5813ed1bda046c066666"
+          }
+        ],
+        "normalisationScale": 1.8732555544035574,
+        "placementReview": {
+          "independentParcelScale": 2.5,
+          "scale": 1.8732555544035574,
+          "reason": "uniform_fit_below_next_upgrade",
+          "nextLevel": "onsen_3",
+          "nextLevelHeight": 1.1363488961456207,
+          "maximumHeight": 0.9772600506852338,
+          "heightRatio": 0.86,
+          "relativeToIndependentFit": 0.7493022217614229,
+          "sharedCameraReviewRequired": true
+        },
+        "reviewStatus": "approved",
+        "triangleBudget": 45000
       }
     },
     {
       "name": "alpine_onsen_3",
+      "size": [
+        2.032154678195315,
+        1.1363488961456207,
+        1.02
+      ],
       "bounds": {
         "min": [
-          -1.2599999904632568,
-          -0.5827975273132324,
-          0.0
+          -1.0160773390976574,
+          0.0,
+          -0.51
         ],
         "max": [
-          1.2599999904632568,
-          0.5199999809265137,
-          1.5790001153945923
+          1.0160773390976574,
+          1.1363488961456207,
+          0.51
         ]
       },
-      "size": [
-        2.5199999809265137,
-        1.102797508239746,
-        1.5790001153945923
-      ],
-      "triangles": 22652,
+      "triangles": 44981,
       "source": {
-        "kind": "blender_three_view",
-        "reference": "art/regions/references/alpine-landmarks-three-views.png"
+        "sourceType": "pixal_native_multiview",
+        "family": "onsen",
+        "level": 3,
+        "sourceFile": "assets/models/regions-ai/full/alpine/onsen_3/91486c75c33b3746.glb",
+        "sourceSha256": "91486c75c33b374694bbbb9a7b880ea8e496140dd23330235d0bbc7618fa9272",
+        "inferenceReport": "art/full-ai-city/reports/alpine--onsen_3-a002/alpine--onsen_3-a002-pixal-mv-1024-9247.json",
+        "reference": "art/full-ai-city/inputs/alpine/onsen_3/c6df7b0b04a37e5e/reference.json",
+        "rawSourceSha256": "a758b5a3c761eccf99d58a81f6515f1f94fdd456a6ccd2e5cd0f3df27c265ac7",
+        "referenceViews": [
+          {
+            "view": "front",
+            "path": "art/full-ai-city/inputs/alpine/onsen_3/c6df7b0b04a37e5e/view00_azim000.png",
+            "sha256": "e8c423ca0f2618d3c16a157ac7bc18256c02db25721b84fb2bf45514b903d409"
+          },
+          {
+            "view": "right",
+            "path": "art/full-ai-city/inputs/alpine/onsen_3/c6df7b0b04a37e5e/view01_azim090.png",
+            "sha256": "deae3abdbbf8c075ed44d993ef9117ea590afba8afa1c9706365a469175e331f"
+          },
+          {
+            "view": "back",
+            "path": "art/full-ai-city/inputs/alpine/onsen_3/c6df7b0b04a37e5e/view02_azim180.png",
+            "sha256": "5687f43566e0529d2b5499297e7416c86a5b26c88b1de4f4f19d63c3b064eaac"
+          }
+        ],
+        "normalisationScale": 2.032154678195315,
+        "placementReview": {
+          "independentParcelScale": 2.032154678195315,
+          "scale": 2.032154678195315,
+          "reason": "independent_uniform_parcel_fit",
+          "relativeToIndependentFit": 1.0,
+          "sharedCameraReviewRequired": true
+        },
+        "reviewStatus": "approved",
+        "triangleBudget": 45000
       }
     },
     {
       "name": "alpine_civic_hall",
+      "size": [
+        1.04,
+        1.0855243389805371,
+        0.8838267822573126
+      ],
       "bounds": {
         "min": [
-          -0.48500001430511475,
-          -0.46799999475479126,
-          0.0
+          -0.52,
+          0.0,
+          -0.4419133911286563
         ],
         "max": [
-          0.48500001430511475,
-          0.4399999976158142,
-          1.371000051498413
+          0.52,
+          1.0855243389805371,
+          0.4419133911286563
         ]
       },
-      "size": [
-        0.9700000286102295,
-        0.9079999923706055,
-        1.371000051498413
-      ],
-      "triangles": 10364,
+      "triangles": 29947,
       "source": {
-        "kind": "blender_three_view",
-        "reference": "art/regions/references/alpine-public-three-views.png"
+        "sourceType": "pixal_native_multiview",
+        "family": "civic_hall",
+        "level": 0,
+        "sourceFile": "assets/models/regions-ai/full/alpine/civic_hall/44497886837c4b1d.glb",
+        "sourceSha256": "44497886837c4b1de7e1dcbbfd49cc1276b06fc41e0980adec88ef8f10ed0bac",
+        "inferenceReport": "art/full-ai-city/reports/alpine--civic_hall-a003/alpine--civic_hall-a003-pixal-mv-1024-29431.json",
+        "reference": "art/full-ai-city/inputs/alpine/civic_hall/18c1020f10cf9804/reference.json",
+        "rawSourceSha256": "fdfdd60a7419e1cf0103d5a54ed9f1fd089da8475e07f44fe4c4c8bd9555291b",
+        "referenceViews": [
+          {
+            "view": "front",
+            "path": "art/full-ai-city/inputs/alpine/civic_hall/18c1020f10cf9804/view00_azim000.png",
+            "sha256": "205893af878d6244c8baf562c9da74dcf06b0874c46db7194ce1518d8ce71e41"
+          },
+          {
+            "view": "right",
+            "path": "art/full-ai-city/inputs/alpine/civic_hall/18c1020f10cf9804/view01_azim090.png",
+            "sha256": "d1dbf562e7fb911c9c651da8f2123ff73a3fee07a0220d89bd06fa5c8ae950bf"
+          },
+          {
+            "view": "back",
+            "path": "art/full-ai-city/inputs/alpine/civic_hall/18c1020f10cf9804/view02_azim180.png",
+            "sha256": "260cb88edaf547b17526bff1c3d88e7fb8e0ee1deb0645a2f89641427b25146e"
+          }
+        ],
+        "normalisationScale": 1.0855243389805371,
+        "placementReview": {
+          "independentParcelScale": 1.0855243389805371,
+          "scale": 1.0855243389805371,
+          "reason": "independent_uniform_parcel_fit",
+          "relativeToIndependentFit": 1.0,
+          "sharedCameraReviewRequired": true
+        },
+        "reviewStatus": "approved",
+        "triangleBudget": 30000
       }
     },
     {
       "name": "alpine_vault_bank",
+      "size": [
+        1.04,
+        0.8737564325332642,
+        1.0026073455810547
+      ],
       "bounds": {
         "min": [
-          -0.48500001430511475,
-          -0.46799999475479126,
-          0.0
+          -0.52,
+          0.0,
+          -0.5013036727905273
         ],
         "max": [
-          0.48500001430511475,
-          0.4399999976158142,
-          1.034000039100647
+          0.52,
+          0.8737564325332642,
+          0.5013036727905273
         ]
       },
-      "size": [
-        0.9700000286102295,
-        0.9079999923706055,
-        1.034000039100647
-      ],
-      "triangles": 8988,
+      "triangles": 29983,
       "source": {
-        "kind": "blender_three_view",
-        "reference": "art/regions/references/alpine-public-three-views.png"
+        "sourceType": "pixal_native_multiview",
+        "family": "vault_bank",
+        "level": 0,
+        "sourceFile": "assets/models/regions-ai/full/alpine/vault_bank/db74706e3925ba19.glb",
+        "sourceSha256": "db74706e3925ba19144092a1eb056d6ef04f8c8a5589f17967ac5064d712e540",
+        "inferenceReport": "art/full-ai-city/reports/alpine--vault_bank-a001/alpine--vault_bank-a001-pixal-mv-1024-9247.json",
+        "reference": "art/full-ai-city/inputs/alpine/vault_bank/ad665a2b7b941b17/reference.json",
+        "rawSourceSha256": "e454ee0b5003f4e2c3228cbdde7d0e00f8cf5df66d8b56ee000ad61b858cfdd0",
+        "referenceViews": [
+          {
+            "view": "front",
+            "path": "art/full-ai-city/inputs/alpine/vault_bank/ad665a2b7b941b17/view00_azim000.png",
+            "sha256": "2029ee68fd79999f46fad85aa60148acc478189538e47ac6f8a6df99322f382e"
+          },
+          {
+            "view": "right",
+            "path": "art/full-ai-city/inputs/alpine/vault_bank/ad665a2b7b941b17/view01_azim090.png",
+            "sha256": "093c459f1ec9822501d1d0d88586c3e67f04ed1df55e737380967eb8b187c66f"
+          },
+          {
+            "view": "back",
+            "path": "art/full-ai-city/inputs/alpine/vault_bank/ad665a2b7b941b17/view02_azim180.png",
+            "sha256": "8714680a0414294dc75ec59c713123b391ac6e470ad78cc482b34499e2a70160"
+          }
+        ],
+        "normalisationScale": 1.04,
+        "placementReview": {
+          "independentParcelScale": 1.04,
+          "scale": 1.04,
+          "reason": "independent_uniform_parcel_fit",
+          "relativeToIndependentFit": 1.0,
+          "sharedCameraReviewRequired": true
+        },
+        "reviewStatus": "approved",
+        "triangleBudget": 30000
       }
     },
     {
       "name": "alpine_builders_guild",
+      "size": [
+        1.04,
+        0.796634590202095,
+        0.8362843586923557
+      ],
       "bounds": {
         "min": [
-          -0.48500001430511475,
-          -0.46799999475479126,
-          0.0
+          -0.5200000000000001,
+          0.0,
+          -0.4181421793461779
         ],
         "max": [
-          0.5299999713897705,
-          0.4399999976158142,
-          1.132900357246399
+          0.52,
+          0.796634590202095,
+          0.41814217934617787
         ]
       },
-      "size": [
-        1.0149999856948853,
-        0.9079999923706055,
-        1.132900357246399
-      ],
-      "triangles": 8392,
+      "triangles": 29974,
       "source": {
-        "kind": "blender_three_view",
-        "reference": "art/regions/references/alpine-public-three-views.png"
+        "sourceType": "pixal_native_multiview",
+        "family": "builders_guild",
+        "level": 0,
+        "sourceFile": "assets/models/regions-ai/full/alpine/builders_guild/61e99b3c34189d30.glb",
+        "sourceSha256": "61e99b3c34189d3023f78fd049fad5157afd7c1f98e61abf027d8dfe25df18cc",
+        "inferenceReport": "art/full-ai-city/reports/alpine--builders_guild-a001/alpine--builders_guild-a001-pixal-mv-1024-9247.json",
+        "reference": "art/full-ai-city/inputs/alpine/builders_guild/ba3118c5148a8cee/reference.json",
+        "rawSourceSha256": "d3aefa70e16ee1ca3700be2a52b83f426ddb66d9a38fbe54cc588aa8baa2f93f",
+        "referenceViews": [
+          {
+            "view": "front",
+            "path": "art/full-ai-city/inputs/alpine/builders_guild/ba3118c5148a8cee/view00_azim000.png",
+            "sha256": "071be4bc9676346a1cb7f94a75674b217bd0fd15785ebcab6a6c56a28203bce9"
+          },
+          {
+            "view": "right",
+            "path": "art/full-ai-city/inputs/alpine/builders_guild/ba3118c5148a8cee/view01_azim090.png",
+            "sha256": "ca3f17e05bbad7fac9d46722f7e8e97d525f4a43d60103fffe67b1bac49441f4"
+          },
+          {
+            "view": "back",
+            "path": "art/full-ai-city/inputs/alpine/builders_guild/ba3118c5148a8cee/view02_azim180.png",
+            "sha256": "4be9fb1fe576c81c346beef79d001a3fbe6578e101243c28e0a93519ab67b53f"
+          }
+        ],
+        "normalisationScale": 1.0396256606972878,
+        "placementReview": {
+          "independentParcelScale": 1.0396256606972878,
+          "scale": 1.0396256606972878,
+          "reason": "independent_uniform_parcel_fit",
+          "relativeToIndependentFit": 1.0,
+          "sharedCameraReviewRequired": true
+        },
+        "reviewStatus": "approved",
+        "triangleBudget": 30000
       }
     },
     {
       "name": "alpine_card_pavilion",
+      "size": [
+        1.04,
+        0.8989098882675172,
+        0.7613877296447754
+      ],
       "bounds": {
         "min": [
-          -0.48500001430511475,
-          -0.5059999823570251,
-          0.0
+          -0.52,
+          0.0,
+          -0.3806938648223877
         ],
         "max": [
-          0.48500001430511475,
-          0.5059999823570251,
-          1.034000039100647
+          0.52,
+          0.8989098882675172,
+          0.3806938648223877
         ]
       },
-      "size": [
-        0.9700000286102295,
-        1.0119999647140503,
-        1.034000039100647
-      ],
-      "triangles": 12156,
+      "triangles": 29989,
       "source": {
-        "kind": "blender_three_view",
-        "reference": "art/regions/references/alpine-public-three-views.png"
+        "sourceType": "pixal_native_multiview",
+        "family": "card_pavilion",
+        "level": 0,
+        "sourceFile": "assets/models/regions-ai/full/alpine/card_pavilion/9d02cfa2da767032.glb",
+        "sourceSha256": "9d02cfa2da767032f4bcf9c844fe2b5fd6c0d99e78a5283b07049dcd9acc7074",
+        "inferenceReport": "art/full-ai-city/reports/alpine--card_pavilion-a001/alpine--card_pavilion-a001-pixal-mv-1024-9247.json",
+        "reference": "art/full-ai-city/inputs/alpine/card_pavilion/32bdb68c89b736d8/reference.json",
+        "rawSourceSha256": "fec80b49fe4d04ba4678b64791b55d0d447b53fc2e6516511618bc395238dcaf",
+        "referenceViews": [
+          {
+            "view": "front",
+            "path": "art/full-ai-city/inputs/alpine/card_pavilion/32bdb68c89b736d8/view00_azim000.png",
+            "sha256": "d7c8e98aa3599b12c8ba3da320f1d0dea2d44453fdeb9c815db93c90c1db20c6"
+          },
+          {
+            "view": "right",
+            "path": "art/full-ai-city/inputs/alpine/card_pavilion/32bdb68c89b736d8/view01_azim090.png",
+            "sha256": "6196867142c2c135cb4f938d900b1d3fc75ac07ca2c0344d99df03478d37cda8"
+          },
+          {
+            "view": "back",
+            "path": "art/full-ai-city/inputs/alpine/card_pavilion/32bdb68c89b736d8/view02_azim180.png",
+            "sha256": "0a191ffb0ae974473f9d79678981f35e9cbb687e92d1628af738c1988fd046c5"
+          }
+        ],
+        "normalisationScale": 1.04,
+        "placementReview": {
+          "independentParcelScale": 1.04,
+          "scale": 1.04,
+          "reason": "independent_uniform_parcel_fit",
+          "relativeToIndependentFit": 1.0,
+          "sharedCameraReviewRequired": true
+        },
+        "reviewStatus": "approved",
+        "triangleBudget": 30000
       }
     },
     {
       "name": "alpine_chance_wheel",
+      "size": [
+        1.04,
+        1.0711318040327453,
+        0.8883156340827599
+      ],
       "bounds": {
         "min": [
-          -0.49030494689941406,
-          -0.4399999976158142,
-          0.0
+          -0.52,
+          0.0,
+          -0.44415781704137997
         ],
         "max": [
-          0.5249999761581421,
-          0.4399999976158142,
-          1.00600004196167
+          0.52,
+          1.0711318040327455,
+          0.44415781704137997
         ]
       },
-      "size": [
-        1.0153049230575562,
-        0.8799999952316284,
-        1.00600004196167
-      ],
-      "triangles": 2832,
+      "triangles": 31432,
       "source": {
-        "kind": "blender_three_view",
-        "reference": "art/regions/references/alpine-public-three-views.png"
+        "sourceType": "pixal_native_multiview",
+        "family": "chance_wheel",
+        "level": 0,
+        "sourceFile": "assets/models/regions-ai/full/alpine/chance_wheel/7b02e48fcfab2060.glb",
+        "sourceSha256": "7b02e48fcfab206058d07adb79960975b92527a75d1cabf0cb292d5b1ec8d23c",
+        "inferenceReport": "art/full-ai-city/reports/alpine--chance_wheel-a001/alpine--chance_wheel-a001-pixal-mv-1024-9247.json",
+        "reference": "art/full-ai-city/inputs/alpine/chance_wheel/27bff82aeb339c26/reference.json",
+        "rawSourceSha256": "0b1d24e90c6a333bfaf041a9df5083bd34776dc966107074b493c3fae7fbad2c",
+        "referenceViews": [
+          {
+            "view": "front",
+            "path": "art/full-ai-city/inputs/alpine/chance_wheel/27bff82aeb339c26/view00_azim000.png",
+            "sha256": "28cd956263dec9683e085647407f6b4ff390b77b4c19add66107c714c2200824"
+          },
+          {
+            "view": "right",
+            "path": "art/full-ai-city/inputs/alpine/chance_wheel/27bff82aeb339c26/view01_azim090.png",
+            "sha256": "8efa690714caca4b90d87ecf6c1c2a93466df88df6107540f9fba3b713a54ecd"
+          },
+          {
+            "view": "back",
+            "path": "art/full-ai-city/inputs/alpine/chance_wheel/27bff82aeb339c26/view02_azim180.png",
+            "sha256": "f22b2ace76b013b808dcc5a034e5e293c6495c1780df9e9a9d754a89bd7d658d"
+          }
+        ],
+        "normalisationScale": 1.0724441665584643,
+        "placementReview": {
+          "independentParcelScale": 1.0724441665584643,
+          "scale": 1.0724441665584643,
+          "reason": "independent_uniform_parcel_fit",
+          "relativeToIndependentFit": 1.0,
+          "sharedCameraReviewRequired": true
+        },
+        "reviewStatus": "approved",
+        "triangleBudget": 30000
       }
     },
     {
       "name": "alpine_teleport_gate",
+      "size": [
+        1.04,
+        0.8827064418792725,
+        0.47935042142868045
+      ],
       "bounds": {
         "min": [
-          -0.5318713188171387,
-          -0.4399999976158142,
-          0.0
+          -0.52,
+          0.0,
+          -0.23967521071434023
         ],
         "max": [
-          0.5318713188171387,
-          0.4399999976158142,
-          1.0910000801086426
+          0.52,
+          0.8827064418792725,
+          0.23967521071434023
         ]
       },
-      "size": [
-        1.0637426376342773,
-        0.8799999952316284,
-        1.0910000801086426
-      ],
-      "triangles": 7776,
+      "triangles": 29991,
       "source": {
-        "kind": "blender_three_view",
-        "reference": "art/regions/references/alpine-public-three-views.png"
+        "sourceType": "pixal_native_multiview",
+        "family": "teleport_gate",
+        "level": 0,
+        "sourceFile": "assets/models/regions-ai/full/alpine/teleport_gate/2b0991e05b13804f.glb",
+        "sourceSha256": "2b0991e05b13804f50cd5f25a90eeb4f959ad9e6d8fb63ec3bff6d00c3ac5180",
+        "inferenceReport": "art/full-ai-city/reports/alpine--teleport_gate-a001/alpine--teleport_gate-a001-pixal-mv-1024-9247.json",
+        "reference": "art/full-ai-city/inputs/alpine/teleport_gate/156c3d71943daf56/reference.json",
+        "rawSourceSha256": "6b103b8eb4c23635c2a2a55af631eae6c6d0fab43f6e62802290eeec90bb391d",
+        "referenceViews": [
+          {
+            "view": "front",
+            "path": "art/full-ai-city/inputs/alpine/teleport_gate/156c3d71943daf56/view00_azim000.png",
+            "sha256": "b73155a216fb5c08e365e020513e8ac0db16f5e4f55f92c04bdca46f809eccc2"
+          },
+          {
+            "view": "right",
+            "path": "art/full-ai-city/inputs/alpine/teleport_gate/156c3d71943daf56/view01_azim090.png",
+            "sha256": "bbce340f6e7a29afa822a346c3691b428bcd007bc5ce08ef69d3bccaaab828fd"
+          },
+          {
+            "view": "back",
+            "path": "art/full-ai-city/inputs/alpine/teleport_gate/156c3d71943daf56/view02_azim180.png",
+            "sha256": "ffd8389b91def2fd2722c3eafffd0f186b460dc9d95f4bbfd741985336564212"
+          }
+        ],
+        "normalisationScale": 1.04,
+        "placementReview": {
+          "independentParcelScale": 1.04,
+          "scale": 1.04,
+          "reason": "independent_uniform_parcel_fit",
+          "relativeToIndependentFit": 1.0,
+          "sharedCameraReviewRequired": true
+        },
+        "reviewStatus": "approved",
+        "triangleBudget": 30000
       }
     },
     {
       "name": "alpine_rush_station",
+      "size": [
+        1.04,
+        0.6366572141647339,
+        0.8624101829528809
+      ],
       "bounds": {
         "min": [
-          -0.48500001430511475,
-          -0.49000000953674316,
-          0.0
+          -0.52,
+          0.0,
+          -0.4312050914764404
         ],
         "max": [
-          0.48500001430511475,
-          0.4399999976158142,
-          0.8840000033378601
+          0.52,
+          0.6366572141647339,
+          0.4312050914764404
         ]
       },
-      "size": [
-        0.9700000286102295,
-        0.9300000071525574,
-        0.8840000033378601
-      ],
-      "triangles": 5460,
+      "triangles": 29978,
       "source": {
-        "kind": "blender_three_view",
-        "reference": "art/regions/references/alpine-public-three-views.png"
+        "sourceType": "pixal_native_multiview",
+        "family": "rush_station",
+        "level": 0,
+        "sourceFile": "assets/models/regions-ai/full/alpine/rush_station/965981690ad539f8.glb",
+        "sourceSha256": "965981690ad539f81fe1aa65f899b7af5809f3225740c432e11cd9a14d41c67a",
+        "inferenceReport": "art/full-ai-city/reports/alpine--rush_station-a002/alpine--rush_station-a002-pixal-mv-1024-29464.json",
+        "reference": "art/full-ai-city/inputs/alpine/rush_station/14b79fb57db99507/reference.json",
+        "rawSourceSha256": "03fea4086616c76cffcbed3846646a3bcbe3c257a9057806f3ea71c9ac959d62",
+        "referenceViews": [
+          {
+            "view": "front",
+            "path": "art/full-ai-city/inputs/alpine/rush_station/14b79fb57db99507/view00_azim000.png",
+            "sha256": "865c2cd235c299da1670c400cc822023d09916d866c6093c28b71656bb41362b"
+          },
+          {
+            "view": "right",
+            "path": "art/full-ai-city/inputs/alpine/rush_station/14b79fb57db99507/view01_azim090.png",
+            "sha256": "e8ba80715b27b406bdf88e150aeb3f17c3f685319d5bcbd029341c70b6f81c82"
+          },
+          {
+            "view": "back",
+            "path": "art/full-ai-city/inputs/alpine/rush_station/14b79fb57db99507/view02_azim180.png",
+            "sha256": "3cdbedeb5a5dcacb8b735b50e4665e09a6b475f1065bbd108bbde05dd4afa140"
+          }
+        ],
+        "normalisationScale": 1.04,
+        "placementReview": {
+          "independentParcelScale": 1.04,
+          "scale": 1.04,
+          "reason": "independent_uniform_parcel_fit",
+          "relativeToIndependentFit": 1.0,
+          "sharedCameraReviewRequired": true
+        },
+        "reviewStatus": "approved",
+        "triangleBudget": 30000
       }
     },
     {
       "name": "alpine_junction_hub",
+      "size": [
+        1.04,
+        0.8945861673355103,
+        0.7165795373916626
+      ],
       "bounds": {
         "min": [
-          -0.48500001430511475,
-          -0.4429999887943268,
-          0.0
+          -0.52,
+          0.0,
+          -0.3582897686958313
         ],
         "max": [
-          0.49672308564186096,
-          0.4399999976158142,
-          0.8840000033378601
+          0.52,
+          0.8945861673355103,
+          0.3582897686958313
         ]
       },
-      "size": [
-        0.9817230999469757,
-        0.882999986410141,
-        0.8840000033378601
-      ],
-      "triangles": 4860,
+      "triangles": 29991,
       "source": {
-        "kind": "blender_three_view",
-        "reference": "art/regions/references/alpine-public-three-views.png"
+        "sourceType": "pixal_native_multiview",
+        "family": "junction_hub",
+        "level": 0,
+        "sourceFile": "assets/models/regions-ai/full/alpine/junction_hub/f35264b76ca430bb.glb",
+        "sourceSha256": "f35264b76ca430bb1c01ced5ec8e2a4782f8384eda30f213037aea081ba71ab9",
+        "inferenceReport": "art/full-ai-city/reports/alpine--junction_hub-a002/alpine--junction_hub-a002-pixal-mv-1024-29463.json",
+        "reference": "art/full-ai-city/inputs/alpine/junction_hub/9c41101a8470c6c0/reference.json",
+        "rawSourceSha256": "3729c37300cff2dc866f898cd0b51bb1aafbe6cd84a8fd9c0a2f81ea7ed804dc",
+        "referenceViews": [
+          {
+            "view": "front",
+            "path": "art/full-ai-city/inputs/alpine/junction_hub/9c41101a8470c6c0/view00_azim000.png",
+            "sha256": "29392e33261cea94dfcd2d573fc95ad2ebd0a76f3ce2b700c20f913d840ea083"
+          },
+          {
+            "view": "right",
+            "path": "art/full-ai-city/inputs/alpine/junction_hub/9c41101a8470c6c0/view01_azim090.png",
+            "sha256": "d5907c34df39b3839dc6914a159a4cd637d248cbff32acbd5e33f9e0f367f2e9"
+          },
+          {
+            "view": "back",
+            "path": "art/full-ai-city/inputs/alpine/junction_hub/9c41101a8470c6c0/view02_azim180.png",
+            "sha256": "1d17a6fbb6ba09be6100895e1f6c41580cdda94e1e84e9483db65e2b83bd9566"
+          }
+        ],
+        "normalisationScale": 1.04,
+        "placementReview": {
+          "independentParcelScale": 1.04,
+          "scale": 1.04,
+          "reason": "independent_uniform_parcel_fit",
+          "relativeToIndependentFit": 1.0,
+          "sharedCameraReviewRequired": true
+        },
+        "reviewStatus": "approved",
+        "triangleBudget": 30000
       }
     }
-  ]
+  ],
+  "packedAtUtc": "2026-10-24T08:15:49.604539+00:00",
+  "sha256": "703ed26288bade50d4e039bef6c1daec0f02de65bc2ac3a6e44871e341215d3f",
+  "bytes": 41413684
 }

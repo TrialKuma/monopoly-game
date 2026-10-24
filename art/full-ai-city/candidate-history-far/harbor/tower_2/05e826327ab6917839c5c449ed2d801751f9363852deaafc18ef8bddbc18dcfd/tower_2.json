@@ -1,0 +1,336 @@
+{
+  "status": "exported_pending_visual_review",
+  "createdAt": "2026-10-24T06:51:12.821451+00:00",
+  "region": "harbor",
+  "asset": "tower_2",
+  "source": {
+    "rawGLB": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\harbor--tower_2-a009-pixal-mv-1024-9247.glb",
+      "sha256": "ad83a606becd1958cfb9ea457f8451b4151c3c6a8660c9002dcf998d2fafefef",
+      "bytes": 45920048
+    }
+  },
+  "inferenceReport": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\harbor--tower_2-a009\\harbor--tower_2-a009-pixal-mv-1024-9247.json",
+    "sha256": "743bc157be2dc257e44864fe8889a0fb7a569b24c679de55054ff6e85246080a",
+    "bytes": 10123
+  },
+  "reference": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\inputs\\harbor\\tower_2\\1d7016d46b18c0ac\\reference.json",
+    "sha256": "b892ab055da421a23ef7e4eebbe8cd40962b4d3fd58f6d07a5e039b3a4112849",
+    "bytes": 4417
+  },
+  "processingTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\01259185d3327c7a75b8df2e595381e45eccf13901ce96ea80844701e548295e-process_lod.py",
+    "sha256": "01259185d3327c7a75b8df2e595381e45eccf13901ce96ea80844701e548295e",
+    "bytes": 34836
+  },
+  "assumedCameras": true,
+  "cameraCalibration": "assumed_standard_orbit_not_measured",
+  "nativePipeline": "Pixal3DMVImageTo3DPipeline.run_mv",
+  "nativeResolution": 1024,
+  "seed": 9247,
+  "geometryOrigin": "Exact approved neural-derived near geometry, including any explicitly disclosed bounded local repairs, simplified for far use. No substitute building or newly authored geometry in this far stage.",
+  "orientation": {
+    "up": "Y",
+    "front": "+Z",
+    "groundY": 0,
+    "maxEdge": 1
+  },
+  "requestedTriangles": 18000,
+  "limitations": [
+    "Assumed camera reference reconstruction, not exact measured architecture",
+    "Final candidate requires actual rendered visual approval"
+  ],
+  "animation": null,
+  "processingComplete": true,
+  "lod": "far",
+  "processingRevision": 0,
+  "derivedFromNear": {
+    "path": "H:\\代码项目\\monopoly\\assets\\models\\regions-ai\\full\\harbor\\tower_2\\9d2c16272fa7e934.glb",
+    "sha256": "9d2c16272fa7e93439b6460464655f53cc34a00fe07c6db638e645a0b39e521b",
+    "bytes": 1805576
+  },
+  "derivedFromNearReport": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\processed\\harbor\\tower_2\\9d2c16272fa7e934-d85b5af2cbd651e4.json",
+    "sha256": "d85b5af2cbd651e4da4e70b38188187a76778820166865324fdf295ddf5157bd",
+    "bytes": 19604
+  },
+  "farSimplification": {
+    "source": {
+      "path": "H:\\代码项目\\monopoly\\assets\\models\\regions-ai\\full\\harbor\\tower_2\\9d2c16272fa7e934.glb",
+      "sha256": "9d2c16272fa7e93439b6460464655f53cc34a00fe07c6db638e645a0b39e521b"
+    },
+    "output": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\far-preserved\\harbor\\tower_2.npz",
+    "outputSha256": "77b5a6504dc156ea960195e1cfac3c7b946e3ef4aadbf8d3660f30492a7f3057",
+    "tool": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\e1cebc38c56c536fc09ec03ec4c1cad0060e4f6c21693fa5284e689cf37b9f7b-simplify_far_surface.py",
+      "sha256": "e1cebc38c56c536fc09ec03ec4c1cad0060e4f6c21693fa5284e689cf37b9f7b",
+      "pymeshlabVersion": "2025.7.post1"
+    },
+    "sourceTriangles": 44858,
+    "actualTriangles": 18000,
+    "actualVertices": 7465,
+    "method": "PyMeshLab quadric collapse preserving boundary, normal and topology with planar quadrics",
+    "settings": {
+      "targetfacenum": 18000,
+      "qualitythr": 0.3,
+      "preserveboundary": true,
+      "boundaryweight": 20.0,
+      "preservenormal": true,
+      "preservetopology": true,
+      "optimalplacement": true,
+      "planarquadric": true,
+      "planarweight": 0.01,
+      "autoclean": true
+    },
+    "geometryOrigin": "Only existing approved neural-derived surface simplified; no authored geometry",
+    "sourceCleanup": []
+  },
+  "derivation": {
+    "rawTriangles": 961271,
+    "weldedTriangles": 18000,
+    "remeshedTriangles": 18000,
+    "voxelSize": 0,
+    "finalTriangles": 18000,
+    "atlasArea": 0.5012302475618996,
+    "singleReductionPass": true,
+    "inheritedUVRemovedBeforeReduction": true,
+    "sourceMaterialsUntouched": true,
+    "uvUnwrap": {
+      "angleDegrees": 89,
+      "islandMargin": 2e-05,
+      "marginMethod": "SCALED",
+      "nominalMarginPixels": null
+    },
+    "nearTriangles": 44858,
+    "rawTriangleCountEvidence": "Actual unchanged original raw GLB index count; native-field near report does not repeat a rawTriangles field."
+  },
+  "bake": {
+    "hitCoverageAreaWeighted": 0.9993211200746572,
+    "cageExtrusion": 0.02,
+    "maxRayDistance": 0.06,
+    "maps": [
+      {
+        "role": "base",
+        "size": [
+          512,
+          512
+        ]
+      },
+      {
+        "role": "orm",
+        "size": [
+          256,
+          256
+        ]
+      }
+    ],
+    "method": "CPU selected-to-active PBR bake from the exact approved near mesh/materials onto its source-derived far surface. No further voxelization or authored geometry."
+  },
+  "farShading": {
+    "normals": "actual_geometry_only",
+    "baseColorSize": 512,
+    "ormSize": 256,
+    "reason": "Actual diagnostic isolated second-generation tangent-space normal rebake as the cause of black dormers/chimneys. Keep the verified geometric normals and original-near-derived color/ORM, omit normalTexture."
+  },
+  "nearSourceGeometryOrigin": "Recorded low surface derived from the identical native raw, restored to original field coordinates, with native UV/material generation using the original neural high-surface BVH and attribute field. No authored replacement geometry.",
+  "quantization": {
+    "source": "H:\\代码项目\\monopoly\\art\\full-ai-city\\candidates-far\\harbor\\tower_2.glb",
+    "output": "H:\\代码项目\\monopoly\\art\\full-ai-city\\candidates-far\\harbor\\tower_2.glb",
+    "sourceBytes": 1186888,
+    "outputBytes": 821736,
+    "sourceSha256": "e910450dd11b4d78d57143a2f5b0a4914923d33656d2db14fe21aa006d5de024",
+    "outputSha256": "05e826327ab6917839c5c449ed2d801751f9363852deaafc18ef8bddbc18dcfd",
+    "positionFaceAndTextureBytesUnchanged": true,
+    "attributes": [
+      {
+        "accessor": 1,
+        "semantic": "NORMAL",
+        "count": 30442,
+        "maximumAngularErrorDegrees": 0.3764873734050374
+      },
+      {
+        "accessor": 2,
+        "semantic": "TEXCOORD_0",
+        "count": 30442,
+        "maximumUVError": 7.629399078834531e-06,
+        "maximumTexelErrorAt1024": 0.00781250465672656
+      }
+    ]
+  },
+  "processedCandidate": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\candidates-far\\harbor\\tower_2.glb",
+    "sha256": "05e826327ab6917839c5c449ed2d801751f9363852deaafc18ef8bddbc18dcfd",
+    "bytes": 821736
+  },
+  "glbValidation": {
+    "version": 2,
+    "triangles": 18000,
+    "meshes": 1,
+    "materials": 1,
+    "images": 2,
+    "all_primitives_have_uv": true,
+    "animations": [],
+    "all_images_embedded": true,
+    "external_buffers": []
+  },
+  "triangles": 18000,
+  "renderedCandidate": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders-far\\harbor\\tower_2\\lod-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders-far\\harbor\\tower_2\\lod-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders-far\\harbor\\tower_2\\lod-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders-far\\harbor\\tower_2\\lod-left.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders-far\\harbor\\tower_2\\lod-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.4460574686527252,
+        -0.4329666197299957,
+        0.0
+      ],
+      "max": [
+        0.44230109453201294,
+        0.4381008446216583,
+        0.9843167662620544
+      ]
+    },
+    "triangles": 18000,
+    "textureSizes": [
+      {
+        "name": "harbor__tower_2__base",
+        "size": [
+          512,
+          512
+        ]
+      },
+      {
+        "name": "harbor__tower_2__orm",
+        "size": [
+          256,
+          256
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "renderedSource": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders-far\\harbor\\tower_2\\raw-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders-far\\harbor\\tower_2\\raw-iso.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders-far\\harbor\\tower_2\\raw-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders-far\\harbor\\tower_2\\raw-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders-far\\harbor\\tower_2\\raw-left.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.44975775480270386,
+        -0.4415506422519684,
+        0.0
+      ],
+      "max": [
+        0.44975775480270386,
+        0.4415506422519684,
+        1.0
+      ]
+    },
+    "triangles": 961271,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "bounds": {
+    "min": [
+      -0.4460574686527252,
+      0.0,
+      -0.4381008446216583
+    ],
+    "max": [
+      0.44230109453201294,
+      0.9843167662620544,
+      0.4329666197299957
+    ],
+    "coordinateSystem": "GLTF Y-up; +Z front"
+  },
+  "textureSizes": [
+    {
+      "name": "harbor__tower_2__base",
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "name": "harbor__tower_2__orm",
+      "size": [
+        256,
+        256
+      ]
+    }
+  ],
+  "rawSourceUnchanged": true,
+  "completedAt": "2026-10-24T06:51:58.067244+00:00",
+  "reviewSheet": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders-far\\harbor\\tower_2\\review-sheet.jpg",
+    "sha256": "8375dfcfc6e95192641f088ee04eac75f6b44f176d005b0e5d0f13d759eff6ff",
+    "bytes": 337651,
+    "candidateSha256": "05e826327ab6917839c5c449ed2d801751f9363852deaafc18ef8bddbc18dcfd",
+    "sourceImages": [
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders-far\\harbor\\tower_2\\raw-front.png",
+        "sha256": "e8f989507f600bcceb2c4bfa693a3b95a4b70f4829c5e1e885a1c6a700b1b21e",
+        "label": "AI raw front"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders-far\\harbor\\tower_2\\raw-iso.png",
+        "sha256": "ceb61c468029506a11fdef5b2652fb76140ccd45ebaa3d5a1d3523404776df5a",
+        "label": "AI raw iso"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders-far\\harbor\\tower_2\\lod-front.png",
+        "sha256": "1d798f16ccd0a5affd3fa79830913f579c9734a2524852cb6cfcd3ff8bb8f25b",
+        "label": "LOD front"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders-far\\harbor\\tower_2\\lod-right.png",
+        "sha256": "39b2d73dc8448f6a8949072dab5d0d65a461182a1ab707e90454a020d37931c9",
+        "label": "LOD right"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders-far\\harbor\\tower_2\\lod-back.png",
+        "sha256": "1c6b0513b8b1de83f440ecd29b6a9c6d5c47edc567bbe4cd22e821ba0cf63bd4",
+        "label": "LOD back"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders-far\\harbor\\tower_2\\lod-left.png",
+        "sha256": "97a0cea0633635887164a736f51e66c4a0d7c1e253a175b1b6766c7859d2f7d2",
+        "label": "LOD left"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders-far\\harbor\\tower_2\\lod-iso.png",
+        "sha256": "fb4222f09f0ec4c333e4fead5045be74dc19a4237f9b010e6536a0e84c5d6a28",
+        "label": "LOD iso"
+      }
+    ],
+    "content": "Unmodified CPU render images composed with labels for visual comparison only"
+  }
+}

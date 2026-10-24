@@ -1,0 +1,57 @@
+{
+  "status": "rejected_native_export_source",
+  "region": "compact",
+  "asset": "skyscraper_2",
+  "reviewer": "asset_production",
+  "recordedAtUtc": "2026-10-24T01:14:37.383317+00:00",
+  "source": {
+    "path": "art/full-ai-city/source/compact--skyscraper_2-a001-pixal-mv-1024-9247.glb",
+    "sha256": "a326cbd35e2a7d2ed80ddbe2c63eee5008fbe76a3c09d01b1513e5b9b1b37563",
+    "bytes": 44093564
+  },
+  "sourceLevel": "Native 1M export; no untouched decoder attribution is made.",
+  "inferenceReport": {
+    "path": "art/full-ai-city/reports/source-rejections/compact/skyscraper_2/a326cbd35e2a7d2e/compact--skyscraper_2-a001-pixal-mv-1024-9247.json",
+    "sha256": "501c82efbc9db194213de58b50495f8be353a533f601a6c7e51bfb07f05f1810",
+    "bytes": 10171
+  },
+  "inputReference": {
+    "path": "art/full-ai-city/reports/source-rejections/compact/skyscraper_2/a326cbd35e2a7d2e/input-reference.json",
+    "sha256": "bd20ab139ad4b5f4a8e07e9d62f3a0153b435fce33dde7824089bd45b25f19f3",
+    "bytes": 4462
+  },
+  "diagnostic": null,
+  "diagnosticTool": null,
+  "sourceComparisonReport": {
+    "path": "art/full-ai-city/reports/source-rejections/compact/skyscraper_2/a326cbd35e2a7d2e/source-comparison-processing.json",
+    "sha256": "689a273a6ba0e897a4655e9383f171f519d8db21bcd2289bae1a8bf6b0951eed",
+    "bytes": 19879
+  },
+  "sourceViewEvidenceMode": "Explicitly selected existing renderedSource views; no additional or neutral render implied",
+  "evidence": [
+    {
+      "path": "art/full-ai-city/reports/source-rejections/compact/skyscraper_2/a326cbd35e2a7d2e/raw-front.png",
+      "sha256": "10838a0c82991fc6b8cb15d9606b3726b531f53ebcb792319e6d18a0fbc686ce",
+      "bytes": 199381
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/compact/skyscraper_2/a326cbd35e2a7d2e/raw-iso.png",
+      "sha256": "c0ab63de741e732f2df4d9c97265979e02d96ae71dad5dc7b1c4f30e8106f787",
+      "bytes": 209700
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/compact/skyscraper_2/a326cbd35e2a7d2e/raw-back.png",
+      "sha256": "855222fa002119f2b793a3c5f1d0b32a39e930509da1613c60f9a0701cdeb9ca",
+      "bytes": 189554
+    }
+  ],
+  "finding": "Actually inspected the current reference and native front, iso and back material views. Both loft faces are missing the white plaster panel beside the small central window, leaving a conspicuous dark open wedge under the dormer roof. The same defect survives native field final and remains visible in256px phone views. This is a native exported source defect, not an attribution to untouched decoder internals; main lower walls are otherwise coherent.",
+  "decision": "One first independent same-reference retry seed29481. Preserve the current source and every derivative; if the loft defect repeats, stop additional seeds and assess bounded source/reference correction.",
+  "sourceUnchanged": true,
+  "notFinalCandidateReview": true,
+  "freezeTool": {
+    "path": "art/full-ai-city/reports/tool-snapshots/616860a00b28e670e1219d64c6cb5dad17f0946420568f786e80b6d789fb4a73-freeze_public_source_rejection.py",
+    "sha256": "616860a00b28e670e1219d64c6cb5dad17f0946420568f786e80b6d789fb4a73",
+    "bytes": 4304
+  }
+}

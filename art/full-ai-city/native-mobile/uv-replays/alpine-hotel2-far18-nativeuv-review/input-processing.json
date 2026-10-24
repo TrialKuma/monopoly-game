@@ -1,0 +1,327 @@
+{
+  "status": "exported_pending_visual_review",
+  "createdAt": "2026-10-23T11:44:12.513847+00:00",
+  "region": "alpine",
+  "asset": "hotel_2",
+  "source": {
+    "rawGLB": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\alpine--hotel_2-a003-pixal-mv-1024-29412.glb",
+      "sha256": "aa8055f7e92e8f8a6a4a1fcee3a5377252e44595d071ae3fe1d5357a728c9b50",
+      "bytes": 41915508
+    }
+  },
+  "inferenceReport": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\alpine--hotel_2-a003\\alpine--hotel_2-a003-pixal-mv-1024-29412.json",
+    "sha256": "bdf2097e086ed8b4c258e2ccb62ba05a0fa8631c674cea9d718c62852d36567d",
+    "bytes": 9581
+  },
+  "reference": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\inputs\\alpine\\hotel_2\\944d6b20c602f97d\\reference.json",
+    "sha256": "e93867870bd9b87f260f2a0061dccae3ba46a9cce98fd699ff45a29f45b701aa",
+    "bytes": 4423
+  },
+  "processingTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\d1befe53381b9186da4b840298fc1d6b373524437790091b7f6e296bfcbf771b-process_lod.py",
+    "sha256": "d1befe53381b9186da4b840298fc1d6b373524437790091b7f6e296bfcbf771b",
+    "bytes": 27109
+  },
+  "assumedCameras": true,
+  "cameraCalibration": "assumed_standard_orbit_not_measured",
+  "nativePipeline": "Pixal3DMVImageTo3DPipeline.run_mv",
+  "nativeResolution": 1024,
+  "seed": 29412,
+  "geometryOrigin": "Exact approved neural-derived near geometry, including its disclosed bounded local repairs where present, simplified with topology and boundary preservation for far use. No substitute building; original inference remains separate and unchanged.",
+  "orientation": {
+    "up": "Y",
+    "front": "+Z",
+    "groundY": 0,
+    "maxEdge": 1
+  },
+  "requestedTriangles": 18000,
+  "limitations": [
+    "Assumed camera reference reconstruction, not exact measured architecture",
+    "Final candidate requires actual rendered visual approval"
+  ],
+  "animation": null,
+  "processingComplete": true,
+  "lod": "far",
+  "processingRevision": 1,
+  "derivedFromNear": {
+    "path": "H:\\代码项目\\monopoly\\assets\\models\\regions-ai\\full\\alpine\\hotel_2\\5b32c462093d5665.glb",
+    "sha256": "5b32c462093d5665da3333f739c421d73c565028b6cadfb254b2da5a5a7b9a38",
+    "bytes": 1099808
+  },
+  "derivedFromNearReport": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\processed\\alpine\\hotel_2\\5b32c462093d5665-4721c053eba320d0.json",
+    "sha256": "4721c053eba320d0f0af58b61b6708f14f06b5301c7bbbe9be4eaa281c20222a",
+    "bytes": 19014
+  },
+  "farSimplification": {
+    "source": {
+      "path": "H:\\代码项目\\monopoly\\assets\\models\\regions-ai\\full\\alpine\\hotel_2\\5b32c462093d5665.glb",
+      "sha256": "5b32c462093d5665da3333f739c421d73c565028b6cadfb254b2da5a5a7b9a38"
+    },
+    "output": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\alpine-hotel2-far18-nativeuv-review\\far-surface.npz",
+    "outputSha256": "856b374f328d8aca84855f6ee594f792c1da2e90a857499d13ae8fa7d6f3093f",
+    "tool": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\e1cebc38c56c536fc09ec03ec4c1cad0060e4f6c21693fa5284e689cf37b9f7b-simplify_far_surface.py",
+      "sha256": "e1cebc38c56c536fc09ec03ec4c1cad0060e4f6c21693fa5284e689cf37b9f7b",
+      "pymeshlabVersion": "2025.7.post1"
+    },
+    "sourceTriangles": 29995,
+    "actualTriangles": 17999,
+    "actualVertices": 8736,
+    "method": "PyMeshLab quadric collapse preserving boundary, normal and topology with planar quadrics",
+    "settings": {
+      "targetfacenum": 18000,
+      "qualitythr": 0.3,
+      "preserveboundary": true,
+      "boundaryweight": 20.0,
+      "preservenormal": true,
+      "preservetopology": true,
+      "optimalplacement": true,
+      "planarquadric": true,
+      "planarweight": 0.01,
+      "autoclean": true
+    },
+    "geometryOrigin": "Only existing approved neural-derived surface simplified; no authored geometry",
+    "sourceCleanup": []
+  },
+  "derivation": {
+    "rawTriangles": 980404,
+    "weldedTriangles": 17999,
+    "remeshedTriangles": 17999,
+    "voxelSize": 0,
+    "finalTriangles": 17999,
+    "atlasArea": 0.5179713237631279,
+    "singleReductionPass": true,
+    "inheritedUVRemovedBeforeReduction": true,
+    "sourceMaterialsUntouched": true,
+    "uvUnwrap": {
+      "angleDegrees": 66.0,
+      "islandMargin": 2e-05,
+      "marginMethod": "SCALED",
+      "nominalMarginPixels": null
+    },
+    "nearTriangles": 29995,
+    "rawTriangleCountEvidence": "Actual unchanged original raw GLB index count; native-field near report does not repeat a rawTriangles field."
+  },
+  "bake": {
+    "method": "CPU closest-original-surface float64 PBR transfer from the exact approved near mesh/materials onto its source-derived far surface. No further voxelization or authored geometry.",
+    "coveredAtlasPixels": 136016,
+    "nearestLookupSuccessFraction": 1.0,
+    "notRayCoverage": true,
+    "sourceDistanceQuantiles": [
+      0.00010052189463749528,
+      0.001489558519097045,
+      0.002780292893294245,
+      0.008918474428355694
+    ],
+    "sourceDistanceQuantileLevels": [
+      0.5,
+      0.95,
+      0.99,
+      1
+    ],
+    "overTwoPercentMaxEdge": 0.0,
+    "distanceReviewRequired": false,
+    "visualGeometryReviewRequired": true,
+    "barycentricOriginalRange": [
+      -1.0218775371828581e-05,
+      0.9982984223156965
+    ],
+    "degenerateOrInvalidBarycentricCount": 0,
+    "closestSourceVertexFallbackFraction": 0.0,
+    "barycentricPointReconstructionErrorQuantiles": [
+      6.8971155708039614e-09,
+      4.269924779070968e-08,
+      3.837574005079568e-07
+    ],
+    "atlasOverlapPixelsWithDifferentSurface": 293,
+    "seconds": 2.5245704000117257,
+    "maps": [
+      {
+        "role": "base",
+        "size": [
+          512,
+          512
+        ]
+      },
+      {
+        "role": "orm",
+        "size": [
+          256,
+          256
+        ]
+      }
+    ]
+  },
+  "textureTransferTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\a2cb99c96fb8df396f16580a88a7c6151104ee3c927fe76cd161ee2d27bdfa42-bake_nearest_surface.py",
+    "sha256": "a2cb99c96fb8df396f16580a88a7c6151104ee3c927fe76cd161ee2d27bdfa42",
+    "bytes": 7317
+  },
+  "farShading": {
+    "normals": "actual_geometry_only",
+    "baseColorSize": 512,
+    "ormSize": 256,
+    "reason": "Actual diagnostic isolated second-generation tangent-space normal rebake as the cause of black dormers/chimneys. Keep the verified geometric normals and original-near-derived color/ORM, omit normalTexture."
+  },
+  "nearSourceGeometryOrigin": "Recorded low surface derived from the identical native raw, restored to original field coordinates, with native UV/material generation using the original neural high-surface BVH and attribute field. No authored replacement geometry.",
+  "quantization": {
+    "source": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\alpine-hotel2-far18-nativeuv-review\\candidates\\alpine\\hotel_2.glb",
+    "output": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\alpine-hotel2-far18-nativeuv-review\\candidates\\alpine\\hotel_2.glb",
+    "sourceBytes": 915280,
+    "outputBytes": 647212,
+    "sourceSha256": "89ee3519ecbaeb6ee0bf5c89b02585530d8fe79b3aae9f9e416b97424c190fa8",
+    "outputSha256": "dc1686813d63a414a76f634106e7fb4806cc0b3772af0d838a9c075da0e0a3a7",
+    "positionFaceAndTextureBytesUnchanged": true,
+    "attributes": [
+      {
+        "accessor": 1,
+        "semantic": "NORMAL",
+        "count": 22352,
+        "maximumAngularErrorDegrees": 0.36610142946204793
+      },
+      {
+        "accessor": 2,
+        "semantic": "TEXCOORD_0",
+        "count": 22352,
+        "maximumUVError": 7.629299032863024e-06,
+        "maximumTexelErrorAt1024": 0.0078124022096517365
+      }
+    ]
+  },
+  "processedCandidate": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\alpine-hotel2-far18-nativeuv-review\\candidates\\alpine\\hotel_2.glb",
+    "sha256": "dc1686813d63a414a76f634106e7fb4806cc0b3772af0d838a9c075da0e0a3a7",
+    "bytes": 647212
+  },
+  "glbValidation": {
+    "version": 2,
+    "triangles": 17999,
+    "meshes": 1,
+    "materials": 1,
+    "images": 2,
+    "all_primitives_have_uv": true,
+    "animations": [],
+    "all_images_embedded": true,
+    "external_buffers": []
+  },
+  "triangles": 17999,
+  "renderedCandidate": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\alpine-hotel2-far18-nativeuv-review\\candidates\\renders\\alpine\\hotel_2\\lod-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\alpine-hotel2-far18-nativeuv-review\\candidates\\renders\\alpine\\hotel_2\\lod-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\alpine-hotel2-far18-nativeuv-review\\candidates\\renders\\alpine\\hotel_2\\lod-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\alpine-hotel2-far18-nativeuv-review\\candidates\\renders\\alpine\\hotel_2\\lod-left.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\alpine-hotel2-far18-nativeuv-review\\candidates\\renders\\alpine\\hotel_2\\lod-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.4997464418411255,
+        -0.38859036564826965,
+        0.00039326961268670857
+      ],
+      "max": [
+        0.49939385056495667,
+        0.38859036564826965,
+        0.7380733489990234
+      ]
+    },
+    "triangles": 17999,
+    "textureSizes": [
+      {
+        "name": "alpine__hotel_2__nearest_base",
+        "size": [
+          512,
+          512
+        ]
+      },
+      {
+        "name": "alpine__hotel_2__nearest_orm",
+        "size": [
+          256,
+          256
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "renderedSource": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\alpine-hotel2-far18-nativeuv-review\\candidates\\renders\\alpine\\hotel_2\\raw-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\alpine-hotel2-far18-nativeuv-review\\candidates\\renders\\alpine\\hotel_2\\raw-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.5,
+        -0.38994160294532776,
+        0.0
+      ],
+      "max": [
+        0.5,
+        0.38994160294532776,
+        0.7404718995094299
+      ]
+    },
+    "triangles": 980404,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "bounds": {
+    "min": [
+      -0.4997464418411255,
+      0.00039326961268670857,
+      -0.38859036564826965
+    ],
+    "max": [
+      0.49939385056495667,
+      0.7380733489990234,
+      0.38859036564826965
+    ],
+    "coordinateSystem": "GLTF Y-up; +Z front"
+  },
+  "textureSizes": [
+    {
+      "name": "alpine__hotel_2__nearest_base",
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "name": "alpine__hotel_2__nearest_orm",
+      "size": [
+        256,
+        256
+      ]
+    }
+  ],
+  "rawSourceUnchanged": true,
+  "completedAt": "2026-10-23T11:44:44.436865+00:00",
+  "farBudgetTrial": {
+    "requestedTriangles": 18000,
+    "automaticApproval": false,
+    "reason": "Explicit single-hotel far trial authorized after actual five-view comparison showed the twelve-thousand reduction enlarged the left lower windowsill and rear window-side wall openings; retain these thin facade surfaces at eighteen thousand triangles, preserving 512 base color and 256 ORM and the unchanged 200k neighbourhood budget."
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "status": "implementation_verified_not_camera_calibration",
+  "sources": {
+    "officialReadme": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\diagnostics\\native-mv-contract\\01cffd279ea9a98e-README.md",
+      "sha256": "01cffd279ea9a98ed760961291904a93713dbf938ccc17e0b3ee5afa10b9e602",
+      "bytes": 15918
+    },
+    "officialEntry": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\diagnostics\\native-mv-contract\\e19d81817fcc0e7f-inference_mv.py",
+      "sha256": "e19d81817fcc0e7fd8c4010b194f6d959265ecb0763162f9a1bf06255d72a275",
+      "bytes": 16486
+    },
+    "officialCameraRig": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\diagnostics\\native-mv-contract\\613b61891de982cd-transforms.json",
+      "sha256": "613b61891de982cdddeeb5deac2276ea2cbaaef08e1ba45f6e9af8ec579c8d5b",
+      "bytes": 1130
+    },
+    "inputPreparation": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\diagnostics\\native-mv-contract\\54ea2d63e4321e5d-prepare_triptych.py",
+      "sha256": "54ea2d63e4321e5d439fbf961607cc3e45d1e489e3449ae0b57ed2ed483af758",
+      "bytes": 8600
+    }
+  },
+  "actualInput": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\inputs\\classic\\skyscraper_3\\4f935dc8e9880c2c\\transforms.json",
+    "sha256": "8f5fd7ac1a7e70be8142dda29ce5df1d1d902d286fae8189507f2a53d03dce24",
+    "bytes": 5713
+  },
+  "facts": {
+    "steps": [
+      12,
+      12,
+      12
+    ],
+    "stepOrigin": "Default ss_sampling_steps, shape_slat_sampling_steps, tex_slat_sampling_steps in the actually used official run_inference. No wrapper override.",
+    "resolution": "1024_cascade",
+    "views": 3,
+    "azimuths": [
+      0,
+      90,
+      180
+    ],
+    "elevation": 0,
+    "horizontalFovDegrees": 20,
+    "cameraDistance": 3.1192049980163574,
+    "meshScale": 1,
+    "exactOfficialFirstThreePoses": true,
+    "cameraAxes": "Z-up world, own -Z view axis and own +Y image-up. Front camera(0,-d,0), right(+d,0,0), rear(0,+d,0). Right camera local image-X aligns world+Y, so object front appears on the left side of the right-side image.",
+    "nativePreprocessing": "Existing RGBA mask read unchanged. Entire square canvas LANCZOS-resized to512/1024, RGB premultiplied by alpha. No automatic per-view crop or independent subject normalization.",
+    "newSky3HeightFractions": [
+      0.649890590809628,
+      0.6466083150984683,
+      0.649890590809628
+    ],
+    "framingHeightSpread": 0.003282275711159688
+  },
+  "limits": [
+    "Official example permits an assumed eye-level orbit rig; no recovered metric camera calibration is claimed.",
+    "Same image mask height does not prove roof/side architectural projection consistency. Generated drawings may have implicit elevation or perspective deviations.",
+    "A decoder ROI confirms defects already exist before export for Tower2 only; it does not generalize that attribution to every asset."
+  ],
+  "controlledNextStep": "Root authorized new-reference Sky3 a004 with seed9247 only, comparing against new-reference a003 seed19341 and older-reference variants. No sampling, camera, model or resolution changes. If still defective, improve side-wall references rather than repeatedly changing seeds."
+}

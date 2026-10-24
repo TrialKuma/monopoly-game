@@ -1,0 +1,239 @@
+{
+  "status": "source_repair_visually_reviewed_pending_near_lod",
+  "source": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\compact--tower_3-a002-pixal-mv-1024-29466.glb",
+    "sha256": "473bec7b4daf1031124fd439acaa7398ff56a02b35de39b2b771475b38593101",
+    "bytes": 44949280
+  },
+  "orientation": {
+    "enabled": true,
+    "candidate_degrees": 1.0001370229238566,
+    "applied_degrees": 1.0001370229238566,
+    "underside_area": 0.11368441223922512,
+    "normal_agreement": 0.9466152946557479,
+    "yaw_degrees": 180,
+    "pitch_degrees": 0,
+    "roll_degrees": 0,
+    "uniform_scale": 1.0600076525286957
+  },
+  "configuration": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\source-repairs-planned\\compact\\tower_3\\473bec7b4daf1031\\repair-config.json",
+    "sha256": "aeaa3dacbc27e37f6fba6a5681b5f86f343aa570895151b3468a7e3ef15974a1",
+    "bytes": 1781
+  },
+  "reviewEvidence": [
+    {
+      "path": "reports/source-repairs-planned/compact/tower_3/473bec7b4daf1031/review.json",
+      "sha256": "9328bf1c8a2c8c4c3e859d29f5d4bf873a538346c4c7730aa1a6b61a6333bf82",
+      "bytes": 1755
+    },
+    {
+      "path": "reports/source-repairs-planned/compact/tower_3/473bec7b4daf1031/right-measurement.json",
+      "sha256": "b4a478657f49255efc3da5f468d085474da7d488406a17afbdec798595de4028",
+      "bytes": 6692
+    }
+  ],
+  "measurement": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\source-repairs-planned\\compact\\tower_3\\473bec7b4daf1031\\back-measurement.json",
+    "sha256": "30e988203539bdf869c7ddda36cb3a7772b48bdbacd525bf85f0ae7689c7d3e4",
+    "bytes": 24236
+  },
+  "method": "Only explicitly measured and visually reviewed local gaps are closed from adjoining original surface and UV samples with0.006 inward closure. Original vertices, faces and image pixels are preserved. No replacement building or generated texture. See configuration and frozen prior review evidence for exact allowed regions.",
+  "repairs": [
+    {
+      "name": "Small enclosed upper back plaster triangle",
+      "specification": {
+        "name": "Small enclosed upper back plaster triangle",
+        "u": [
+          -1,
+          0,
+          0
+        ],
+        "v": [
+          0,
+          0,
+          1
+        ],
+        "n": [
+          0,
+          1,
+          0
+        ],
+        "roi": [
+          -0.06,
+          -0.006,
+          0.498,
+          0.54
+        ],
+        "defectDepth": 0.18,
+        "donorDepth": 0.265,
+        "donorMaxDepth": 0.278,
+        "donorNormal": 0.65,
+        "color": "plaster"
+      },
+      "missingSamples": 81,
+      "boundarySamples": 525,
+      "sampledDepthRange": [
+        -0.23008346557617188,
+        0.27622127532958984
+      ],
+      "inwardClosureThickness": 0.006,
+      "outerSurfaceUnchanged": true,
+      "newVertices": 258,
+      "newTriangles": 512
+    },
+    {
+      "name": "Measured diagonal upper right plaster crack",
+      "specification": {
+        "name": "Measured diagonal upper right plaster crack",
+        "u": [
+          0,
+          1,
+          0
+        ],
+        "v": [
+          0,
+          0,
+          1
+        ],
+        "n": [
+          1,
+          0,
+          0
+        ],
+        "roi": [
+          -0.052,
+          0.07,
+          0.518,
+          0.636
+        ],
+        "defectDepth": 0.18,
+        "donorDepth": 0.221,
+        "donorMaxDepth": 0.232,
+        "donorNormal": 0.65,
+        "color": "plaster"
+      },
+      "missingSamples": 244,
+      "boundarySamples": 1330,
+      "sampledDepthRange": [
+        -0.3116297721862793,
+        0.2833700180053711
+      ],
+      "inwardClosureThickness": 0.006,
+      "outerSurfaceUnchanged": true,
+      "newVertices": 812,
+      "newTriangles": 1620
+    }
+  ],
+  "originalTriangles": 962942,
+  "originalVerticesMoved": 0,
+  "originalTrianglesDeleted": 0,
+  "artifactCleanup": {
+    "method": "No original faces deleted. Only the explicitly reviewed bounded source-surface regions in the configuration may receive additional triangles.",
+    "deletedTriangles": 0
+  },
+  "newTriangles": 2132,
+  "newVertices": 1070,
+  "inverseSimilarityError": 8.537463019875347e-08,
+  "normalizedOutput": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-compact-tower3-a002-two-walls-v1\\repaired-normalized.glb",
+    "sha256": "b3dff1aea6c28ec55abcc13d6321df6035b10afb9f2c5898ad179acbedf78820",
+    "bytes": 45253288
+  },
+  "nativeOutput": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-compact-tower3-a002-two-walls-v1\\repaired-native.glb",
+    "sha256": "1992735395b3afac8b7b006d00d8f8c0653af668877de7dc12b4c43b0841a9df",
+    "bytes": 45249196
+  },
+  "renders": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\compact\\tower_3\\1992735395b3afac\\repaired-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\compact\\tower_3\\1992735395b3afac\\repaired-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\compact\\tower_3\\1992735395b3afac\\repaired-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\compact\\tower_3\\1992735395b3afac\\repaired-left.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\compact\\tower_3\\1992735395b3afac\\repaired-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.3994159400463104,
+        -0.3558501899242401,
+        0.0
+      ],
+      "max": [
+        0.3994159400463104,
+        0.3558501899242401,
+        1.0
+      ]
+    },
+    "triangles": 965074,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "reviewImages": [
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\compact\\tower_3\\1992735395b3afac\\repaired-front.png",
+      "sha256": "ca9c29792bdb083013fcc433d180ead8c5664fdd0c67c66c7062601cbafef1b2",
+      "bytes": 228882
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\compact\\tower_3\\1992735395b3afac\\repaired-right.png",
+      "sha256": "2627422310d9e6ea7dda9a6583303e980ffcc7a412324266506b9ad1f29da704",
+      "bytes": 213155
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\compact\\tower_3\\1992735395b3afac\\repaired-back.png",
+      "sha256": "bcaac2ca64594a4d97b64bc44550b03f389c07f1167f4e84e996413024ca9e4f",
+      "bytes": 225419
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\compact\\tower_3\\1992735395b3afac\\repaired-left.png",
+      "sha256": "2cba463004d2b4a87390861160c688b78bc68db87646fad8c290e53e4b445ba0",
+      "bytes": 220007
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\compact\\tower_3\\1992735395b3afac\\repaired-iso.png",
+      "sha256": "c9e49a1b7d89e62052ad49f93d33efc754a1af507d6f61d641e97b63d28fbbd4",
+      "bytes": 281847
+    }
+  ],
+  "processingTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\2a658d865b65cf579ece09549dd92aad383f2cd45d0f3da5fa7d072a06e9e481-repair_bounded_source_surface.py",
+    "sha256": "2a658d865b65cf579ece09549dd92aad383f2cd45d0f3da5fa7d072a06e9e481",
+    "bytes": 11765
+  },
+  "completedAt": "2026-10-23T22:25:51.332400+00:00",
+  "originalRepairReceipt": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\compact\\tower_3\\1992735395b3afac\\original-repair.json",
+    "sha256": "45415b5f0c1ceaa9c3c9a735a807d090ca13aec0288fbf68e9d6a338836c382a",
+    "bytes": 7932
+  },
+  "originalSourcePreservationProof": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\compact\\tower_3\\1992735395b3afac\\preservation.json",
+    "sha256": "2b5436961d8c8354039612677363b80f00c81515b7c32234feb0f9f831428f2b",
+    "bytes": 1099
+  },
+  "visualReview": {
+    "status": "source_repair_ready_for_derivation",
+    "reviewer": "root",
+    "reviewedAt": "2026-10-23T22:31:05.694128+00:00",
+    "note": "Root actually reviewed all five repaired-source material views. Two measured upper rear/right plaster openings are closed using neighboring native plaster surfaces and original UV samples; a thin dark/jagged seam remains on the right patch and must be judged after final same-field export at phone scale. Original962942 triangles retain exact POSITION/UV and embedded image bytes;2132 bounded triangles added. Roofs, open cupola, balconies, timber frame and blue entrance curtain are unchanged. No neutral render or final runtime approval claimed."
+  },
+  "runtimeApproved": false
+}

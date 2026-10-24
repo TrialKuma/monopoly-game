@@ -1,0 +1,132 @@
+{
+  "status": "frozen_field_ready_for_optional_export",
+  "jobId": "alpine--shop_3-a002",
+  "request": {
+    "status": "capture_enabled",
+    "captureOnly": true,
+    "minDiskGiB": 12,
+    "purpose": "Freeze original per-inference neural geometry and material field for later mobile export without another neural inference. No automatic approval or publication.",
+    "jobId": "alpine--shop_3-a002",
+    "policySha256": "7e58ddb0dbc94f1787443ccde94f97403b61417c87e9e697656e019222483934"
+  },
+  "sameNativeRun": true,
+  "newNeuralInference": false,
+  "rawSourceReplaced": false,
+  "nativeExporter": {
+    "path": "C:\\Users\\A\\.codex\\worktrees\\0b69\\厂长\\grande-art-lab\\source\\experimental\\Pixal3D-Windows\\pixal3d_comfy\\postprocess.py",
+    "sha256": "b6b79da5dfe13c22047a6257c6b2301c7ea31259dd9c82344db7e5c4cc707917",
+    "bytes": 8126
+  },
+  "nativeExporterSnapshot": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\alpine--shop_3-a002\\native-exporter-source.py",
+    "sha256": "b6b79da5dfe13c22047a6257c6b2301c7ea31259dd9c82344db7e5c4cc707917",
+    "bytes": 8126
+  },
+  "nativeEntrypointWrapper": {
+    "path": "C:\\Users\\A\\.codex\\worktrees\\0b69\\厂长\\grande-art-lab\\tools\\run_pixal_local.py",
+    "sha256": "ba8f1137c050980cc6ff252bce45ae5c1058edf565451212c074eb7134f5b505",
+    "bytes": 9327
+  },
+  "adapter": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\alpine--shop_3-a002\\native-mobile-export-source.py",
+    "sha256": "af3a0f39998fc83bb0a80e7dda1b6ecc74ecacef61cad90f0177f5e9cd69e621",
+    "bytes": 6782
+  },
+  "diskFreeBytesBeforeCapture": 204840812544,
+  "estimatedTensorBytes": 534749412,
+  "minimumDiskReserveBytes": 12884901888,
+  "tensorArchive": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\alpine--shop_3-a002\\neural-export-inputs.pt",
+    "sha256": "c7ae34a4bb6e39030dad6109a4ab0f1d3123d714e2d91463f054bb9a94f3d2b0",
+    "bytes": 534751709
+  },
+  "tensorShapes": {
+    "vertices": {
+      "shape": [
+        7382472,
+        3
+      ],
+      "dtype": "torch.float32"
+    },
+    "faces": {
+      "shape": [
+        15072586,
+        3
+      ],
+      "dtype": "torch.int32"
+    },
+    "attr_volume": {
+      "shape": [
+        7369131,
+        6
+      ],
+      "dtype": "torch.float32"
+    },
+    "coords": {
+      "shape": [
+        7369131,
+        3
+      ],
+      "dtype": "torch.int32"
+    }
+  },
+  "originalParameters": {
+    "attr_layout": {
+      "base_color": {
+        "slice": [
+          0,
+          3,
+          null
+        ]
+      },
+      "metallic": {
+        "slice": [
+          3,
+          4,
+          null
+        ]
+      },
+      "roughness": {
+        "slice": [
+          4,
+          5,
+          null
+        ]
+      },
+      "alpha": {
+        "slice": [
+          5,
+          6,
+          null
+        ]
+      }
+    },
+    "grid_size": 1024,
+    "aabb": [
+      [
+        -0.5,
+        -0.5,
+        -0.5
+      ],
+      [
+        0.5,
+        0.5,
+        0.5
+      ]
+    ],
+    "decimation_target": 1000000,
+    "texture_size": 4096,
+    "remesh": true,
+    "remesh_band": 1,
+    "remesh_project": 0,
+    "use_tqdm": true
+  },
+  "rawGLB": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\alpine--shop_3-a002-pixal-mv-1024-22423.glb",
+    "sha256": "67a5f43a7dc30961aae5c01fa0bfe1103e6b071daf143a129dc1adf9149989e5",
+    "bytes": 43087092
+  },
+  "rawUnchanged": true,
+  "completedAt": "2026-10-23T09:43:01.736202+00:00",
+  "diskFreeBytesAfterCapture": 204203646976
+}

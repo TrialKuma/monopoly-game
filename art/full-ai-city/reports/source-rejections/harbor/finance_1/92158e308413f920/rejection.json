@@ -1,0 +1,57 @@
+{
+  "status": "rejected_native_export_source",
+  "region": "harbor",
+  "asset": "finance_1",
+  "reviewer": "asset_production",
+  "recordedAtUtc": "2026-10-24T02:06:28.629445+00:00",
+  "source": {
+    "path": "art/full-ai-city/source/harbor--finance_1-a001-pixal-mv-1024-9247.glb",
+    "sha256": "92158e308413f92000897d0b099b5ed73f5cff8ec05f736cf07eca8a7650dc47",
+    "bytes": 43032944
+  },
+  "sourceLevel": "Native 1M export; no untouched decoder attribution is made.",
+  "inferenceReport": {
+    "path": "art/full-ai-city/reports/source-rejections/harbor/finance_1/92158e308413f920/harbor--finance_1-a001-pixal-mv-1024-9247.json",
+    "sha256": "e5b0607271724669cda8036ea3a5aa63957d42a7b22f5d1b599cff50daaf15fe",
+    "bytes": 10136
+  },
+  "inputReference": {
+    "path": "art/full-ai-city/reports/source-rejections/harbor/finance_1/92158e308413f920/input-reference.json",
+    "sha256": "e92cd7bcdbacd095f33388a78200f4c91154991f364741e81f499b4f6ae893fc",
+    "bytes": 4443
+  },
+  "diagnostic": null,
+  "diagnosticTool": null,
+  "sourceComparisonReport": {
+    "path": "art/full-ai-city/reports/source-rejections/harbor/finance_1/92158e308413f920/source-comparison-processing.json",
+    "sha256": "b9a7c711dc2f36a3732789f2234f6a8f5209f52db57a9a0ce3882900348aafc5",
+    "bytes": 19533
+  },
+  "sourceViewEvidenceMode": "Explicitly selected existing renderedSource views; no additional or neutral render implied",
+  "evidence": [
+    {
+      "path": "art/full-ai-city/reports/source-rejections/harbor/finance_1/92158e308413f920/raw-front.png",
+      "sha256": "8c1ac30a936aaa4ab1a4b7d205b79a8a8fe88f3976953143a4bebb5186bb7e10",
+      "bytes": 199112
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/harbor/finance_1/92158e308413f920/raw-iso.png",
+      "sha256": "c2483c6526658d02f0e3a2608713ba6d0db8df1a87adc1cf7ccfeb0b1ebac0ca",
+      "bytes": 214394
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/harbor/finance_1/92158e308413f920/raw-right.png",
+      "sha256": "16d7e7a956a53acaf17c792f4de1a84a47cf2c4e76dd666734aa57364a0862e3",
+      "bytes": 134567
+    }
+  ],
+  "finding": "Actually inspected reference, native front/isometric/right, five final views and256px downsample. The main long blue roof, three-arch facade and rear windows are coherent, but native right elevation has one narrow vertical plaster opening immediately left of the shutter/window; final enlarges it into a bright conspicuous strip visible at phone scale. This is a localized wall defect, not a failed whole building. Preserve source and evaluate a single bounded neighboring-plaster backing, with existing original geometry/UV/images unchanged. No new source seed requested.",
+  "decision": "One strictly local right-window plaster backing evaluation; no raw seed or reference revision. Final native/phone review remains required.",
+  "sourceUnchanged": true,
+  "notFinalCandidateReview": true,
+  "freezeTool": {
+    "path": "art/full-ai-city/reports/tool-snapshots/616860a00b28e670e1219d64c6cb5dad17f0946420568f786e80b6d789fb4a73-freeze_public_source_rejection.py",
+    "sha256": "616860a00b28e670e1219d64c6cb5dad17f0946420568f786e80b6d789fb4a73",
+    "bytes": 4304
+  }
+}

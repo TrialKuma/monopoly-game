@@ -1,0 +1,170 @@
+{
+  "status": "source_repair_visually_reviewed_pending_near_lod",
+  "source": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\classic--junction_hub-a001-pixal-mv-1024-9247.glb",
+    "sha256": "2eaa6cb358bf7c4bde6d4636c5e52eb8f3207fb861d590c57d84b7252ad3f5c5",
+    "bytes": 38140048
+  },
+  "orientation": {
+    "enabled": true,
+    "candidate_degrees": 0.34034837970258824,
+    "applied_degrees": 0.34034837970258824,
+    "underside_area": 0.13684748381614792,
+    "normal_agreement": 0.9468503516126393,
+    "yaw_degrees": 180,
+    "pitch_degrees": 0,
+    "roll_degrees": 0,
+    "uniform_scale": 1.0828817618970072
+  },
+  "method": "Only the measured small opening inside the original map panel is filled by interpolation from its intact boundary. Original neural vertices, faces and image pixels are untouched. The new patch reuses neighboring original map UV samples and closes 0.006 inward so it survives derivative voxelization; no replacement building or generated new texture.",
+  "repairs": [
+    {
+      "name": "Small torn opening in original inset map display",
+      "specification": {
+        "name": "Small torn opening in original inset map display",
+        "u": [
+          1,
+          0,
+          0
+        ],
+        "v": [
+          0,
+          0,
+          1
+        ],
+        "n": [
+          0,
+          -1,
+          0
+        ],
+        "roi": [
+          0.12,
+          0.214,
+          0.157,
+          0.226
+        ],
+        "defectDepth": 0.15,
+        "donorDepth": 0.16,
+        "donorMaxDepth": 0.17,
+        "donorNormal": 0.99,
+        "color": "map"
+      },
+      "missingSamples": 195,
+      "boundarySamples": 3206,
+      "sampledDepthRange": [
+        -0.26813673973083496,
+        0.1657620668411255
+      ],
+      "inwardClosureThickness": 0.006,
+      "outerSurfaceUnchanged": true,
+      "newVertices": 740,
+      "newTriangles": 1476
+    }
+  ],
+  "originalTriangles": 955286,
+  "originalVerticesMoved": 0,
+  "originalTrianglesDeleted": 0,
+  "artifactCleanup": {
+    "method": "No original faces deleted; only the measured opening inside the original inset map panel is filled.",
+    "deletedTriangles": 0
+  },
+  "newTriangles": 1476,
+  "newVertices": 740,
+  "inverseSimilarityError": 1.0719521609248162e-07,
+  "normalizedOutput": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-junction-map\\repaired-normalized.glb",
+    "sha256": "5c012fe7d0a4c46d366834e5c072619043f59f68afa371a4f36b8079c57fd236",
+    "bytes": 38590312
+  },
+  "nativeOutput": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-junction-map\\repaired-native.glb",
+    "sha256": "cb23f7a7b5cc171f592a0682665dbf5bbd0d4ebb8e726b412d4ae55b85cde5e7",
+    "bytes": 38584404
+  },
+  "renders": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\classic\\junction_hub\\cb23f7a7b5cc171f\\repaired-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\classic\\junction_hub\\cb23f7a7b5cc171f\\repaired-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\classic\\junction_hub\\cb23f7a7b5cc171f\\repaired-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\classic\\junction_hub\\cb23f7a7b5cc171f\\repaired-left.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\classic\\junction_hub\\cb23f7a7b5cc171f\\repaired-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.5,
+        -0.34562984108924866,
+        0.0
+      ],
+      "max": [
+        0.5,
+        0.34562984108924866,
+        0.8747351765632629
+      ]
+    },
+    "triangles": 956762,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "reviewImages": [
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\classic\\junction_hub\\cb23f7a7b5cc171f\\repaired-front.png",
+      "sha256": "be618b77ea5a9662c39952874fa4ee31970fa63aa63c8949bb0a77473158e42a",
+      "bytes": 237994
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\classic\\junction_hub\\cb23f7a7b5cc171f\\repaired-right.png",
+      "sha256": "28f658b80f8d28754f3ded6bcc2b8f9fd7b0ef4aa7487b7eca9612425f45116f",
+      "bytes": 195907
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\classic\\junction_hub\\cb23f7a7b5cc171f\\repaired-back.png",
+      "sha256": "bac21c4c9417dbe73a5157ef105c39d3f9a05ba1ff85f94bc1c0ad7a837a7ae2",
+      "bytes": 228815
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\classic\\junction_hub\\cb23f7a7b5cc171f\\repaired-left.png",
+      "sha256": "97c6b4f019f3a76379d3765489b31f26ec9a2fb5d5442b65f921310d5a6b2ac3",
+      "bytes": 188673
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\classic\\junction_hub\\cb23f7a7b5cc171f\\repaired-iso.png",
+      "sha256": "f8211b217a6905d58fcd51941a3768595272364bc188c63526de9443d370e091",
+      "bytes": 280500
+    }
+  ],
+  "processingTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\ab526166c801d8eb73bd8085177d3852226d22469699b1cfcb695a66e715bbc6-repair_junction_map_surface.py",
+    "sha256": "ab526166c801d8eb73bd8085177d3852226d22469699b1cfcb695a66e715bbc6",
+    "bytes": 10705
+  },
+  "completedAt": "2026-10-23T07:33:52.919472+00:00",
+  "visualReview": {
+    "reviewedAtUtc": "2026-10-23T07:34:48.350338+00:00",
+    "decision": "Source repair acceptable for derivative processing; no runtime asset approval",
+    "views": [
+      "front",
+      "right",
+      "back",
+      "left",
+      "iso"
+    ],
+    "note": "Compared original raw/grey map-panel opening with all five repaired source views. The torn triangular opening is closed with a boundary-derived thin shell, retaining neighboring map colors and the entire original architectural body. The map is continuous in front and oblique views. Unmodified minor seam at the lower-left side-window corner remains and is explicitly not claimed as a total source cleanup. Final near reduction and texture transfer still require independent review."
+  }
+}

@@ -1,0 +1,208 @@
+{
+  "status": "local_repair_candidate_pending_visual_review",
+  "source": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\harbor--vault_bank-a002-pixal-mv-1024-29484.glb",
+    "sha256": "1f5b49e3a3339ca7e41e82ce72415b1d6fc65ee11bfce22072d3824d8ff21bd9",
+    "bytes": 44066364
+  },
+  "orientation": {
+    "enabled": true,
+    "candidate_degrees": 1.0202812784986341,
+    "applied_degrees": 1.0202812784986341,
+    "underside_area": 0.12576221321487194,
+    "normal_agreement": 0.919719635509293,
+    "yaw_degrees": 180,
+    "pitch_degrees": 0,
+    "roll_degrees": 0,
+    "uniform_scale": 1.1396733689403369
+  },
+  "configuration": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\source-repairs-planned\\harbor\\vault_bank\\1f5b49e3a3339ca7\\rear-header-config.json",
+    "sha256": "d9938bfdaf868da1b120da3b26d548af5537c44389c3a0c1d52b764959d7c37c",
+    "bytes": 1302
+  },
+  "reviewEvidence": [
+    {
+      "path": "reports/source-rejections/harbor/vault_bank/1f5b49e3a3339ca7/rejection.json",
+      "sha256": "4ad7f92ce59d9df60cd0673816e2e0b2aeac83d1c77fee426bf63cb0ac45526e",
+      "bytes": 3479
+    }
+  ],
+  "measurement": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\core-surface-measurements\\harbor\\vault_bank\\1f5b-rear-header\\surface-measurements.json",
+    "sha256": "d8b3e95e551933d33f07fff1006e412232d1da20342b94d8000f35fc2ccc56e4",
+    "bytes": 185391
+  },
+  "method": "Only explicitly measured and visually reviewed local gaps are closed from adjoining original surface and UV samples with0.006 inward closure. Original vertices, faces and image pixels are preserved. No replacement building or generated texture. See configuration and frozen prior review evidence for exact allowed regions.",
+  "repairs": [
+    {
+      "name": "Rear door header plaster backing",
+      "specification": {
+        "name": "Rear door header plaster backing",
+        "u": [
+          -1,
+          0,
+          0
+        ],
+        "v": [
+          0,
+          0,
+          1
+        ],
+        "n": [
+          0,
+          1,
+          0
+        ],
+        "roi": [
+          -0.096,
+          0.101,
+          0.372,
+          0.397
+        ],
+        "forceRoi": [
+          -0.096,
+          0.101,
+          0.372,
+          0.397
+        ],
+        "defectDepth": 0.35,
+        "donorDepth": 0.382,
+        "donorMaxDepth": 0.39,
+        "donorNormal": 0.7,
+        "color": "plaster",
+        "gridStep": 0.003,
+        "donorMargin": 0.024,
+        "flatPatchUV": true,
+        "donorMinRGB": 0.5,
+        "donorMaxColorRatio": 1.5
+      },
+      "missingSamples": 594,
+      "boundarySamples": 818,
+      "sampledDepthRange": [
+        -2.0,
+        0.4187765121459961
+      ],
+      "inwardClosureThickness": 0.006,
+      "outerSurfaceUnchanged": true,
+      "newVertices": 1496,
+      "newTriangles": 2988
+    }
+  ],
+  "originalTriangles": 940477,
+  "originalVerticesMoved": 0,
+  "originalTrianglesDeleted": 0,
+  "artifactCleanup": {
+    "method": "No original faces deleted. Only the explicitly reviewed bounded source-surface regions in the configuration may receive additional triangles.",
+    "deletedTriangles": 0
+  },
+  "newTriangles": 2988,
+  "newVertices": 1496,
+  "inverseSimilarityError": 8.268988471726857e-08,
+  "normalizedOutput": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-harbor-vault-1f5b-rear-header\\repaired-normalized.glb",
+    "sha256": "04012cc70ca2c7d2e81469b4d35fd3c2d344bb59eded33f88e88414362291254",
+    "bytes": 44441108
+  },
+  "nativeOutput": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-harbor-vault-1f5b-rear-header\\repaired-native.glb",
+    "sha256": "958d3f525a4af176a5e5d839ac68017aa45246bf93526c7c8605332a2b94e28c",
+    "bytes": 44437640
+  },
+  "renders": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-harbor-vault-1f5b-rear-header\\repaired-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-harbor-vault-1f5b-rear-header\\repaired-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-harbor-vault-1f5b-rear-header\\repaired-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-harbor-vault-1f5b-rear-header\\repaired-left.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-harbor-vault-1f5b-rear-header\\repaired-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.5,
+        -0.47983184456825256,
+        0.0
+      ],
+      "max": [
+        0.5,
+        0.47983184456825256,
+        0.7937481999397278
+      ]
+    },
+    "triangles": 943465,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "reviewImages": [
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\harbor\\vault_bank\\958d3f525a4af176\\repaired-front.png",
+      "sha256": "973e2b4c4ae303951dff8dd415b1433e2bd2cc100760ef90ce112bc82329e3af",
+      "bytes": 251789
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\harbor\\vault_bank\\958d3f525a4af176\\repaired-right.png",
+      "sha256": "9c2f78cedfc84db7816008e1c55e162caab859a03aad8087c25c42e7abf8110e",
+      "bytes": 224555
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\harbor\\vault_bank\\958d3f525a4af176\\repaired-back.png",
+      "sha256": "7e5b2dd9f5ba7ccb40204e56621948e089bb5b828377c580f3b1f55ce4d3c2f8",
+      "bytes": 236432
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\harbor\\vault_bank\\958d3f525a4af176\\repaired-left.png",
+      "sha256": "2f57496944f2fcd4e7b99cb86dd4b27cadc0d46915cf4f3019c063db7ad2db30",
+      "bytes": 219159
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\harbor\\vault_bank\\958d3f525a4af176\\repaired-iso.png",
+      "sha256": "f9c47222d01c80ddbaa29259a2ca554effae154dd57bdf2310771861c6efcbe8",
+      "bytes": 305479
+    }
+  ],
+  "processingTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\f21173ee639bce54c9c7094ef6121aa6aea7401fc45edfff9d221c65a107ae79-repair_bounded_source_surface.py",
+    "sha256": "f21173ee639bce54c9c7094ef6121aa6aea7401fc45edfff9d221c65a107ae79",
+    "bytes": 13325
+  },
+  "completedAt": "2026-10-24T02:22:49.074245+00:00",
+  "sourcePreservation": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\harbor\\vault_bank\\958d3f525a4af176\\preservation.json",
+    "sha256": "d63ca3617e51eebfb271700b43ebaee9bfaf3eb9a7696b30a25d0636044fb8b3",
+    "bytes": 1098
+  },
+  "originalRepairReceipt": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-harbor-vault-1f5b-rear-header\\repair.json",
+    "sha256": "89637ab2d316d1dbd06fc4e1d7c7403542feba0fbd5da09b614e158640953e36",
+    "bytes": 6969
+  },
+  "sourceVisualReview": {
+    "status": "reviewed_for_derivative_processing",
+    "views": [
+      "front",
+      "right",
+      "back",
+      "left",
+      "iso"
+    ],
+    "note": "Actually inspected all five repaired source material views. One bounded rear plaster strip above the door header now closes the visible horizontal slot using2988 added faces from measured adjacent wall depth and neutral original UV donors. Header, door, windows, blue roof and other sides remain unchanged; small original tile/base/corner chips remain outside the repair scope. Original triangle positions, UV and image bytes verified exact. Accept for one unchanged30k/.003 native-field derivative only; final five-view and phone review remain required.",
+    "reviewer": "asset_production"
+  }
+}

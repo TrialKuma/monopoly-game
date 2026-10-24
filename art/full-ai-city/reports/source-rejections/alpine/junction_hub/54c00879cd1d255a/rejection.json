@@ -1,0 +1,79 @@
+{
+  "status": "rejected_native_export_source",
+  "region": "alpine",
+  "asset": "junction_hub",
+  "reviewer": "/root/outskirts",
+  "recordedAtUtc": "2026-10-23T12:54:36.156211+00:00",
+  "source": {
+    "path": "art/full-ai-city/source/alpine--junction_hub-a001-pixal-mv-1024-9247.glb",
+    "sha256": "54c00879cd1d255aeba2be121bc20122e332e09fdf607b8d9df05fd9099be729",
+    "bytes": 42272172
+  },
+  "sourceLevel": "Native 1M export; no untouched decoder attribution is made.",
+  "inferenceReport": {
+    "path": "art/full-ai-city/reports/source-rejections/alpine/junction_hub/54c00879cd1d255a/alpine--junction_hub-a001-pixal-mv-1024-9247.json",
+    "sha256": "be5a7b77dd31cd47aec4d717eaff20fa9ee668dad6292bd44278bd8542a1fbde",
+    "bytes": 10176
+  },
+  "inputReference": {
+    "path": "art/full-ai-city/reports/source-rejections/alpine/junction_hub/54c00879cd1d255a/input-reference.json",
+    "sha256": "f6d913d786568f8a190fc94d7d24928de94f9159378ab046e14b374532e46f5e",
+    "bytes": 4451
+  },
+  "diagnostic": {
+    "path": "art/full-ai-city/reports/source-rejections/alpine/junction_hub/54c00879cd1d255a/source-inspection.json",
+    "sha256": "efd5b5369b0ed2e281daaa1f076a89a6d75fe15e8a595624971323a29964ebd1",
+    "bytes": 2519
+  },
+  "diagnosticTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\128f0187158a035f4d7e1b8bb5fbec7c559413d80cd6336639df3afc760eb994-render_raw_core_review.py",
+    "sha256": "128f0187158a035f4d7e1b8bb5fbec7c559413d80cd6336639df3afc760eb994",
+    "bytes": 3616
+  },
+  "evidence": [
+    {
+      "path": "art/full-ai-city/reports/source-rejections/alpine/junction_hub/54c00879cd1d255a/raw-front.png",
+      "sha256": "a1e71d1c4ed84d86a553bc5a0438ab6cf72b2ea161d359692770f3ded57f98cf",
+      "bytes": 236662
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/alpine/junction_hub/54c00879cd1d255a/raw-iso.png",
+      "sha256": "1fd48ba12824705241557198b71a122c6e53eb9ea27ff8fbb905ffa58a27b5ef",
+      "bytes": 275314
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/alpine/junction_hub/54c00879cd1d255a/raw-right.png",
+      "sha256": "c46e8eb45313a9021593da96e803283e638ccec2e6726de5d23ff934145a728c",
+      "bytes": 203315
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/alpine/junction_hub/54c00879cd1d255a/raw-back.png",
+      "sha256": "c4dc0d77b97adf33e5e164ab45ea87416281599670301efcd44bd3e275387061",
+      "bytes": 235974
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/alpine/junction_hub/54c00879cd1d255a/raw-left.png",
+      "sha256": "2e96c636c85ad859c7c91f7c3501d1e05cd285d2ef7ec6597e1e2051eee2e759",
+      "bytes": 201823
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/alpine/junction_hub/54c00879cd1d255a/raw-close-back-iso.png",
+      "sha256": "916c02b3daf67038cf5c249128fc5b3e621074d48127813484f16047e972c049",
+      "bytes": 892086
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/alpine/junction_hub/54c00879cd1d255a/raw-grey-back-iso.png",
+      "sha256": "d6bea17342c4de213b6065c134d73ac5aa417d661a072082a909d6238175d66f",
+      "bytes": 727445
+    }
+  ],
+  "finding": "Individually inspected the immutable three-view reference and native-export front, right, back, left and isometric color views, plus close and neutral rear-left isometric views. Front map display, signpost, right and rear facades remain coherent, but the unconditioned left facade has a large triangular opening between the ground-floor wall and corner stones that persists with neutral material. Its lower window has collapsed into disconnected blue shutter plaques over a blank plaster area; the upper window band contains scattered yellow/green patches and incomplete glazing, rather than a coherent window. These shape and facade failures already exist in the native 1M export and are not caused by the later 30k mesh or CPU texture transfer. Repairing them would require reconstructing a functional side facade rather than one bounded small wall gap. Reject this source for runtime use; retain all original bytes and diagnostic views.",
+  "decision": "One independent same-reference seed. If repeated major defects remain, review three-view consistency before further inference; no automatic approval.",
+  "sourceUnchanged": true,
+  "notFinalCandidateReview": true,
+  "freezeTool": {
+    "path": "art/full-ai-city/reports/tool-snapshots/ba7daec6779fb0b81145f2596b41709a294aad2c99d6c9e281682bc653bc4555-freeze_public_source_rejection.py",
+    "sha256": "ba7daec6779fb0b81145f2596b41709a294aad2c99d6c9e281682bc653bc4555",
+    "bytes": 3203
+  }
+}

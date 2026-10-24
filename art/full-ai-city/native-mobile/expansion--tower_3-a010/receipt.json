@@ -1,0 +1,132 @@
+{
+  "status": "frozen_field_ready_for_optional_export",
+  "jobId": "expansion--tower_3-a010",
+  "request": {
+    "status": "capture_enabled",
+    "captureOnly": true,
+    "minDiskGiB": 12,
+    "purpose": "Freeze original per-inference neural geometry and material field for later mobile export without another neural inference. No automatic approval or publication.",
+    "jobId": "expansion--tower_3-a010",
+    "policySha256": "7e58ddb0dbc94f1787443ccde94f97403b61417c87e9e697656e019222483934"
+  },
+  "sameNativeRun": true,
+  "newNeuralInference": false,
+  "rawSourceReplaced": false,
+  "nativeExporter": {
+    "path": "C:\\Users\\A\\.codex\\worktrees\\0b69\\厂长\\grande-art-lab\\source\\experimental\\Pixal3D-Windows\\pixal3d_comfy\\postprocess.py",
+    "sha256": "b6b79da5dfe13c22047a6257c6b2301c7ea31259dd9c82344db7e5c4cc707917",
+    "bytes": 8126
+  },
+  "nativeExporterSnapshot": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\expansion--tower_3-a010\\native-exporter-source.py",
+    "sha256": "b6b79da5dfe13c22047a6257c6b2301c7ea31259dd9c82344db7e5c4cc707917",
+    "bytes": 8126
+  },
+  "nativeEntrypointWrapper": {
+    "path": "C:\\Users\\A\\.codex\\worktrees\\0b69\\厂长\\grande-art-lab\\tools\\run_pixal_local.py",
+    "sha256": "ba8f1137c050980cc6ff252bce45ae5c1058edf565451212c074eb7134f5b505",
+    "bytes": 9327
+  },
+  "adapter": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\expansion--tower_3-a010\\native-mobile-export-source.py",
+    "sha256": "af3a0f39998fc83bb0a80e7dda1b6ecc74ecacef61cad90f0177f5e9cd69e621",
+    "bytes": 6782
+  },
+  "diskFreeBytesBeforeCapture": 118499794944,
+  "estimatedTensorBytes": 411209436,
+  "minimumDiskReserveBytes": 12884901888,
+  "tensorArchive": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\expansion--tower_3-a010\\neural-export-inputs.pt",
+    "sha256": "664db5066c1f7190bc090c87471140b2c27ea9fd2c8b0b0ca20abfacd5857508",
+    "bytes": 411211613
+  },
+  "tensorShapes": {
+    "vertices": {
+      "shape": [
+        5627925,
+        3
+      ],
+      "dtype": "torch.float32"
+    },
+    "faces": {
+      "shape": [
+        11772448,
+        3
+      ],
+      "dtype": "torch.int32"
+    },
+    "attr_volume": {
+      "shape": [
+        5622360,
+        6
+      ],
+      "dtype": "torch.float32"
+    },
+    "coords": {
+      "shape": [
+        5622360,
+        3
+      ],
+      "dtype": "torch.int32"
+    }
+  },
+  "originalParameters": {
+    "attr_layout": {
+      "base_color": {
+        "slice": [
+          0,
+          3,
+          null
+        ]
+      },
+      "metallic": {
+        "slice": [
+          3,
+          4,
+          null
+        ]
+      },
+      "roughness": {
+        "slice": [
+          4,
+          5,
+          null
+        ]
+      },
+      "alpha": {
+        "slice": [
+          5,
+          6,
+          null
+        ]
+      }
+    },
+    "grid_size": 1024,
+    "aabb": [
+      [
+        -0.5,
+        -0.5,
+        -0.5
+      ],
+      [
+        0.5,
+        0.5,
+        0.5
+      ]
+    ],
+    "decimation_target": 1000000,
+    "texture_size": 4096,
+    "remesh": true,
+    "remesh_band": 1,
+    "remesh_project": 0,
+    "use_tqdm": true
+  },
+  "rawGLB": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\expansion--tower_3-a010-pixal-mv-1024-9247.glb",
+    "sha256": "40c0536caab1c65bc9712de8076f1f57bb816ae85d4e644e64fb3cdd801294ae",
+    "bytes": 41478268
+  },
+  "rawUnchanged": true,
+  "completedAt": "2026-10-24T04:55:57.235827+00:00",
+  "diskFreeBytesAfterCapture": 118047096832
+}

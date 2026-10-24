@@ -1,0 +1,52 @@
+{
+  "status": "rejected_native_export_source",
+  "region": "compact",
+  "asset": "civic_hall",
+  "reviewer": "asset_production",
+  "recordedAtUtc": "2026-10-24T00:20:47.081902+00:00",
+  "source": {
+    "path": "art/full-ai-city/source/compact--civic_hall-a010-pixal-mv-1024-29479.glb",
+    "sha256": "a576dd849d25a2710224d78b33bed2fc064fc10e6769ae4211961101bac540ce",
+    "bytes": 39904596
+  },
+  "sourceLevel": "Native 1M export; no untouched decoder attribution is made.",
+  "inferenceReport": {
+    "path": "art/full-ai-city/reports/source-rejections/compact/civic_hall/a576dd849d25a271/compact--civic_hall-a010-pixal-mv-1024-29479.json",
+    "sha256": "779407e758fcb781d5a948c32e13b34d0609132613803700fb6a3db3a6b1e959",
+    "bytes": 10408
+  },
+  "inputReference": {
+    "path": "art/full-ai-city/reports/source-rejections/compact/civic_hall/a576dd849d25a271/input-reference.json",
+    "sha256": "f721e0166dbad9c692ff4b6cfc87d5e8c7bb5eaf9e597f85b4ff753737d02ce6",
+    "bytes": 4025
+  },
+  "diagnostic": null,
+  "diagnosticTool": null,
+  "sourceComparisonReport": {
+    "path": "art/full-ai-city/reports/source-rejections/compact/civic_hall/a576dd849d25a271/source-comparison-processing.json",
+    "sha256": "dd2fb4483f37bfb702db13478ee5f38422b1af165a528299e9a6b2d0e58c1bfa",
+    "bytes": 19690
+  },
+  "sourceViewEvidenceMode": "Explicitly selected existing renderedSource views; no additional or neutral render implied",
+  "evidence": [
+    {
+      "path": "art/full-ai-city/reports/source-rejections/compact/civic_hall/a576dd849d25a271/raw-right.png",
+      "sha256": "30a2646aaf50c044c51ab12b36c41eb44b2915e9429334b74d1c2f9d00bec136",
+      "bytes": 199396
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/compact/civic_hall/a576dd849d25a271/raw-left.png",
+      "sha256": "77cc396c57c7ba4427173a1311163c8b6362fab7bb5505f29f353f864c4cdc05",
+      "bytes": 200961
+    }
+  ],
+  "finding": "Actual existing native raw-right and raw-left images show matching lower-wall rectangular gaps immediately beside each lower window. The reference side view is continuous white plaster in these locations. These remain conspicuous at 256px in the final five-view sheet; the rest of the principal envelope is retained, and the former upper-back holes have improved.",
+  "decision": "No additional seed: first independent same-reference retry already used. Assess two bounded plaster-only closures against measured neighboring original surfaces, preserving original faces and UV images.",
+  "sourceUnchanged": true,
+  "notFinalCandidateReview": true,
+  "freezeTool": {
+    "path": "art/full-ai-city/reports/tool-snapshots/616860a00b28e670e1219d64c6cb5dad17f0946420568f786e80b6d789fb4a73-freeze_public_source_rejection.py",
+    "sha256": "616860a00b28e670e1219d64c6cb5dad17f0946420568f786e80b6d789fb4a73",
+    "bytes": 4304
+  }
+}

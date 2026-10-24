@@ -1,0 +1,787 @@
+{
+  "status": "exported_pending_visual_review",
+  "createdAt": "2026-10-24T06:10:52.754573+00:00",
+  "region": "expansion",
+  "asset": "tower_2",
+  "lod": "near",
+  "processingRevision": 0,
+  "source": {
+    "rawGLB": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\expansion--tower_2-a010-pixal-mv-1024-9247.glb",
+      "sha256": "1e9192533f2a0e00174932ba1f16852843fa37fdc3ffbbf827c9e48111efca32",
+      "bytes": 40549640
+    }
+  },
+  "inferenceReport": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\expansion--tower_2-a010\\expansion--tower_2-a010-pixal-mv-1024-9247.json",
+    "sha256": "a512b19dd0ed7b724b095497dd3d8e590be2117048d08acfee66836ff015e5dc",
+    "bytes": 10166
+  },
+  "reference": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\inputs\\expansion\\tower_2\\52a147e87d5c3980\\reference.json",
+    "sha256": "48ed6551d7ab074c4e4779927dd3b382f49b0686161d645d745060266b62c2b0",
+    "bytes": 4441
+  },
+  "processingTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\d0fe99e75121175cccb420b5c503d9926459607b997b8582bbce75e6983b35bb-process_native_mobile.py",
+    "sha256": "d0fe99e75121175cccb420b5c503d9926459607b997b8582bbce75e6983b35bb",
+    "bytes": 9752
+  },
+  "nativeSurfaceExport": {
+    "receipt": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\expansion--tower_2-1e9192533f2a-repair-cf54f5147754-low-cf901e4fc4-field-v1\\receipt.json",
+      "sha256": "b3c83d89fb52001b6839a23526bd29fdd0975f938939575ec14675105896e384",
+      "bytes": 17241
+    },
+    "source": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\expansion--tower_2-1e9192533f2a-repair-cf54f5147754-low-cf901e4fc4-field-v1\\mobile-30000-1024.glb",
+      "sha256": "22f140ad19125ed5404e1c49f1e1af2e90c567b2528248bbf80bfc7cc1340a5a",
+      "bytes": 1902600
+    },
+    "tensorArchive": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\expansion--tower_2-a010\\neural-export-inputs.pt",
+      "sha256": "aacb9092ffa7341f19d23ff899f57c5e313e82dc7632ea12988d60e27d2419bd",
+      "bytes": 691231901
+    }
+  },
+  "nativePipeline": "Pixal3DMVImageTo3DPipeline.run_mv",
+  "nativeResolution": 1024,
+  "seed": 9247,
+  "assumedCameras": true,
+  "cameraCalibration": "assumed_standard_orbit_not_measured",
+  "geometryOrigin": "Actual neural building with the explicitly recorded bounded local surface repair, followed by source-derived CPU mobile geometry and native UV/material sampling. The original inference, repair and low-surface sources are distinct; the UV/material replay adds no geometry.",
+  "textureOrigin": "Original neural attribute field sampled by the native UV/material operations with the recorded surface-stage override; no new neural inference or raw-UV rebake.",
+  "normalization": {
+    "enabled": true,
+    "candidate_degrees": 0.0,
+    "applied_degrees": 0.0,
+    "underside_area": 1.393603033670729,
+    "normal_agreement": 0.9958798515273889,
+    "yaw_degrees": 180,
+    "pitch_degrees": 0,
+    "roll_degrees": 0,
+    "uniform_scale": 1.1269874174284273
+  },
+  "orientation": {
+    "up": "Y",
+    "front": "+Z",
+    "groundY": 0,
+    "maxEdge": 1
+  },
+  "requestedTriangles": 30000,
+  "triangles": 29997,
+  "glbValidation": {
+    "version": 2,
+    "triangles": 29997,
+    "meshes": 1,
+    "materials": 1,
+    "images": 2,
+    "all_primitives_have_uv": true,
+    "animations": [],
+    "all_images_embedded": true,
+    "external_buffers": []
+  },
+  "quantization": {
+    "source": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\expansion--tower_2-1e9192533f2a-repair-cf54f5147754-low-cf901e4fc4-field-v1\\candidates\\expansion\\tower_2.glb",
+    "output": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\expansion--tower_2-1e9192533f2a-repair-cf54f5147754-low-cf901e4fc4-field-v1\\candidates\\expansion\\tower_2.glb",
+    "sourceBytes": 1464408,
+    "outputBytes": 1047576,
+    "sourceSha256": "0d0906fd1c8ae7a4624d6e2eae80b311ca4e8c8518403d8ff713b6220e328494",
+    "outputSha256": "dcfbd03212dc62268928470e2f092a1698f8ca936bf4c61d723e0fc87f189087",
+    "positionFaceAndTextureBytesUnchanged": true,
+    "attributes": [
+      {
+        "accessor": 1,
+        "semantic": "NORMAL",
+        "count": 34749,
+        "maximumAngularErrorDegrees": 0.37455026200045227
+      },
+      {
+        "accessor": 2,
+        "semantic": "TEXCOORD_0",
+        "count": 34749,
+        "maximumUVError": 7.62941363093017e-06,
+        "maximumTexelErrorAt1024": 0.007812519558072495
+      }
+    ]
+  },
+  "processedCandidate": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\candidates\\expansion\\tower_2.glb",
+    "sha256": "dcfbd03212dc62268928470e2f092a1698f8ca936bf4c61d723e0fc87f189087",
+    "bytes": 1047576
+  },
+  "derivation": {
+    "method": "Recorded CPU surface derived from the same neural raw, inverse-normalized to field coordinates; a local native-export variant bypasses further mesh simplification/remeshing and uses native UV generation plus original neural high-surface BVH and field texture sampling. Only normalization, JPEG encoding and attribute quantization afterward.",
+    "voxelizedAgain": false,
+    "rebakedFromRawUV": false,
+    "facadeUVPreserved": true,
+    "normalizedTrianglesPreserved": true,
+    "geometrySurfaceInput": {
+      "receipt": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\expansion--tower_2-1e9192533f2a-repair-cf54f5147754-low-cf901e4fc4-field-v1\\geometry-source-proof.json",
+        "sha256": "6e8b8beca0cbf5f06ed7f43a2be90286af52a40f3c3d5944a4cd09c01c5474ec",
+        "bytes": 9969
+      },
+      "method": "Coordinate inversion of the recorded neural-derived low surface including explicitly bounded local source repairs. This preparation only welds exact positions and changes coordinates; it adds no faces. Original raw inference and repair input remain distinct.",
+      "sourceRaw": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\expansion--tower_2-a010-pixal-mv-1024-9247.glb",
+        "sha256": "1e9192533f2a0e00174932ba1f16852843fa37fdc3ffbbf827c9e48111efca32",
+        "bytes": 40549640
+      },
+      "candidate": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\expansion--tower_2-1e9192533f2a-repair-cf54f5147754-low-cf901e4fc4-field-v1\\geometry-candidate.glb",
+        "sha256": "cf901e4fc4e19cd607ce39c94c83bb819f787425d33444ab97678183b45d8f7e",
+        "bytes": 1193348
+      },
+      "candidateReport": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\expansion--tower_2-1e9192533f2a-repair-cf54f5147754-low-cf901e4fc4-field-v1\\geometry-candidate-processing.json",
+        "sha256": "42990dfdf9ea32738dd961c7364cd404a31c9d5d86e50900f43a7941f4c3b063",
+        "bytes": 15565
+      },
+      "originalCandidate": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\expansion-tower2-cf54f5147754c5ca-default003-30k\\candidates\\expansion\\tower_2.glb",
+        "sha256": "cf901e4fc4e19cd607ce39c94c83bb819f787425d33444ab97678183b45d8f7e",
+        "bytes": 1193348
+      },
+      "fieldReceipt": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\expansion--tower_2-a010\\receipt.json",
+        "sha256": "b5679c70de6ad6003d0f0662fb84fbe2391fda35503c04a11532349e1786ded9",
+        "bytes": 3704
+      },
+      "output": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\expansion--tower_2-1e9192533f2a-repair-cf54f5147754-low-cf901e4fc4-field-v1\\geometry-surface.npz",
+        "sha256": "a446f7da3020be645032db4eade64f90329e5d0be7580540ebb259660527ad76",
+        "bytes": 536012
+      },
+      "triangles": 29997,
+      "vertices": 14628,
+      "originalSplitVertices": 38836,
+      "exactCoincidentVerticesMerged": 24208,
+      "maximumPositionChangeFromWelding": 0,
+      "normalization": {
+        "enabled": true,
+        "candidate_degrees": 0.0,
+        "applied_degrees": 0.0,
+        "underside_area": 1.4384872991016047,
+        "normal_agreement": 0.9940590048454967,
+        "yaw_degrees": 180,
+        "pitch_degrees": 0,
+        "roll_degrees": 0,
+        "uniform_scale": 1.1266031997751254
+      },
+      "rawBlenderToNormalizedBlender": [
+        [
+          -1.1266032355458626,
+          -8.80528016761477e-08,
+          -0.00024067291988290692,
+          0.00018485183844806714
+        ],
+        [
+          1.1481295900418682e-07,
+          -1.126603240574295,
+          -0.00015439420823243344,
+          -0.013893866635539709
+        ],
+        [
+          -0.00024067476806033264,
+          -0.00015439416554580143,
+          1.1266032250115459,
+          0.4777137141112404
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "inverse": [
+        [
+          -0.8876238970489095,
+          9.536104601622996e-08,
+          -0.00018962045873357347,
+          0.0002546645277666769
+        ],
+        [
+          -6.447185193116923e-08,
+          -0.8876239169249889,
+          -0.00012164354258530488,
+          -0.012274417523827357
+        ],
+        [
+          -0.00018962193677276513,
+          -0.00012164347480873516,
+          0.8876238886781443,
+          -0.42403175964055095
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "sampledNormalizationReconstructionMaxError": 1.2668608821525942e-07,
+      "nativeBounds": {
+        "min": [
+          -0.3926342439982336,
+          -0.42400135544843487,
+          -0.4247329913810411
+        ],
+        "max": [
+          0.39176387332191365,
+          0.4630685473989672,
+          0.40016432200250673
+        ]
+      },
+      "tool": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\expansion--tower_2-1e9192533f2a-repair-cf54f5147754-low-cf901e4fc4-field-v1\\geometry-preparation-source.py",
+        "sha256": "c4eec55644a998f870bd170aae5f8c5f060ba6af7ddbbe7025a44c5141846d8d",
+        "bytes": 8809
+      },
+      "toolSnapshot": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\expansion--tower_2-1e9192533f2a-repair-cf54f5147754-low-cf901e4fc4-field-v1\\geometry-preparation-source.py",
+        "sha256": "c4eec55644a998f870bd170aae5f8c5f060ba6af7ddbbe7025a44c5141846d8d",
+        "bytes": 8809
+      },
+      "normalizationInput": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-expansion-tower2-1e91-rear-local\\repaired-native.glb",
+        "sha256": "cf54f5147754c5cad0f1688359702d29cabd756755a26dc60661a8f6080c48ef",
+        "bytes": 43439616
+      },
+      "localSurfaceRepair": {
+        "source": {
+          "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-expansion-tower2-1e91-rear-local\\repaired-native.glb",
+          "sha256": "cf54f5147754c5cad0f1688359702d29cabd756755a26dc60661a8f6080c48ef",
+          "bytes": 43439616
+        },
+        "receipt": {
+          "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\expansion\\tower_2\\cf54f5147754c5ca\\repair.json",
+          "sha256": "7363c59aa9390611c69a2cbdc8dfd2fdba42b54ad83e7474dba424b075279aea",
+          "bytes": 10568
+        },
+        "method": "Only explicitly measured and visually reviewed local gaps are closed from adjoining original surface and UV samples with0.006 inward closure. Original vertices, faces and image pixels are preserved. No replacement building or generated texture. See configuration and frozen prior review evidence for exact allowed regions.",
+        "newTriangles": 4096,
+        "newVertices": 2054,
+        "originalVerticesMoved": 0,
+        "originalTrianglesDeleted": 0,
+        "regions": [
+          {
+            "name": "Rear upper brick strip beside escape platform",
+            "specification": {
+              "u": [
+                -1,
+                0,
+                0
+              ],
+              "v": [
+                0,
+                0,
+                1
+              ],
+              "n": [
+                0,
+                1,
+                0
+              ],
+              "defectDepth": 0.317,
+              "donorDepth": 0.32,
+              "donorMaxDepth": 0.325,
+              "donorNormal": 0.7,
+              "color": "brick",
+              "gridStep": 0.0035,
+              "donorMargin": 0.03,
+              "flatPatchUV": true,
+              "donorMinRGB": 0.1,
+              "donorMaxColorRatio": 5,
+              "name": "Rear upper brick strip beside escape platform",
+              "roi": [
+                -0.045,
+                -0.001,
+                0.415,
+                0.48
+              ]
+            },
+            "missingSamples": 111,
+            "boundarySamples": 553,
+            "sampledDepthRange": [
+              -0.28537702560424805,
+              0.36911606788635254
+            ],
+            "inwardClosureThickness": 0.006,
+            "outerSurfaceUnchanged": true,
+            "newVertices": 330,
+            "newTriangles": 656
+          },
+          {
+            "name": "Rear lower brick strip below escape platform",
+            "specification": {
+              "u": [
+                -1,
+                0,
+                0
+              ],
+              "v": [
+                0,
+                0,
+                1
+              ],
+              "n": [
+                0,
+                1,
+                0
+              ],
+              "defectDepth": 0.317,
+              "donorDepth": 0.32,
+              "donorMaxDepth": 0.325,
+              "donorNormal": 0.7,
+              "color": "brick",
+              "gridStep": 0.0035,
+              "donorMargin": 0.03,
+              "flatPatchUV": true,
+              "donorMinRGB": 0.1,
+              "donorMaxColorRatio": 5,
+              "name": "Rear lower brick strip below escape platform",
+              "roi": [
+                -0.025,
+                -0.003,
+                0.275,
+                0.375
+              ]
+            },
+            "missingSamples": 93,
+            "boundarySamples": 724,
+            "sampledDepthRange": [
+              -2.0,
+              0.3369368314743042
+            ],
+            "inwardClosureThickness": 0.006,
+            "outerSurfaceUnchanged": true,
+            "newVertices": 314,
+            "newTriangles": 624
+          },
+          {
+            "name": "Rear lower left stone pier local opening",
+            "specification": {
+              "u": [
+                -1,
+                0,
+                0
+              ],
+              "v": [
+                0,
+                0,
+                1
+              ],
+              "n": [
+                0,
+                1,
+                0
+              ],
+              "defectDepth": 0.325,
+              "donorDepth": 0.331,
+              "donorMaxDepth": 0.341,
+              "donorNormal": 0.7,
+              "color": "stone",
+              "gridStep": 0.0035,
+              "donorMargin": 0.03,
+              "flatPatchUV": true,
+              "donorMinRGB": 0.28,
+              "donorMaxColorRatio": 1.8,
+              "name": "Rear lower left stone pier local opening",
+              "roi": [
+                -0.362,
+                -0.31,
+                0.09,
+                0.29
+              ]
+            },
+            "missingSamples": 525,
+            "boundarySamples": 497,
+            "sampledDepthRange": [
+              -0.1931447982788086,
+              0.35405683517456055
+            ],
+            "inwardClosureThickness": 0.006,
+            "outerSurfaceUnchanged": true,
+            "newVertices": 1410,
+            "newTriangles": 2816
+          }
+        ]
+      },
+      "localRepairTool": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\f21173ee639bce54c9c7094ef6121aa6aea7401fc45edfff9d221c65a107ae79-repair_bounded_source_surface.py",
+        "sha256": "f21173ee639bce54c9c7094ef6121aa6aea7401fc45edfff9d221c65a107ae79",
+        "bytes": 13325
+      },
+      "repairAppliedBeforeReduction": true,
+      "originalReceipt": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\expansion--tower_2-1e9192533f2a-repair-cf54f5147754-low-cf901e4fc4-field-v1\\geometry-source-original-receipt.json",
+        "sha256": "002316ee39d10efdf6190d048cc1c65ab05fc9b7abe562b30dff5968b5d8f167",
+        "bytes": 9583
+      }
+    },
+    "nativePostprocessOverride": {
+      "original": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\expansion--tower_2-1e9192533f2a-repair-cf54f5147754-low-cf901e4fc4-field-v1\\original-native-exporter-source.py",
+        "sha256": "b6b79da5dfe13c22047a6257c6b2301c7ea31259dd9c82344db7e5c4cc707917",
+        "bytes": 8126
+      },
+      "scope": "Keep original neural geometry BVH for PBR lookup. Replace only the intermediate surface with this recorded existing source-derived low mesh; bypass further remeshing/simplification/cleanup, then use native unwrap/normals/field sampling.",
+      "sharedCodeModified": false,
+      "noNewGeometryAuthored": true,
+      "noNewGeometryAuthoredAppliesTo": "native_uv_material_replay_only",
+      "counts": {
+        "facesBeforeUnwrap": 29997
+      }
+    },
+    "nativeFieldLookup": {
+      "quantiles50_95_99_100": [
+        0.0009817715035751462,
+        0.0014445546548813581,
+        0.0020341055933386087,
+        0.021867983043193817
+      ],
+      "fractionOverTwoPercent": 0.00011233025725232437,
+      "sampleCount": 694381,
+      "meaning": "Distance to original neural BVH before direct field sampling, not ray hit coverage"
+    }
+  },
+  "bake": {
+    "method": "Direct original neural attribute field sampling inside native to_glb; no Blender bake or nearest raw-image transfer",
+    "notRayCoverage": true
+  },
+  "animation": null,
+  "processingComplete": true,
+  "limitations": [
+    "Same assumed three-view cameras as original native raw",
+    "Diagnostic pending external visual approval; not a formal asset replacement"
+  ],
+  "localSurfaceRepair": {
+    "source": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-expansion-tower2-1e91-rear-local\\repaired-native.glb",
+      "sha256": "cf54f5147754c5cad0f1688359702d29cabd756755a26dc60661a8f6080c48ef",
+      "bytes": 43439616
+    },
+    "receipt": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\expansion\\tower_2\\cf54f5147754c5ca\\repair.json",
+      "sha256": "7363c59aa9390611c69a2cbdc8dfd2fdba42b54ad83e7474dba424b075279aea",
+      "bytes": 10568
+    },
+    "method": "Only explicitly measured and visually reviewed local gaps are closed from adjoining original surface and UV samples with0.006 inward closure. Original vertices, faces and image pixels are preserved. No replacement building or generated texture. See configuration and frozen prior review evidence for exact allowed regions.",
+    "newTriangles": 4096,
+    "newVertices": 2054,
+    "originalVerticesMoved": 0,
+    "originalTrianglesDeleted": 0,
+    "regions": [
+      {
+        "name": "Rear upper brick strip beside escape platform",
+        "specification": {
+          "u": [
+            -1,
+            0,
+            0
+          ],
+          "v": [
+            0,
+            0,
+            1
+          ],
+          "n": [
+            0,
+            1,
+            0
+          ],
+          "defectDepth": 0.317,
+          "donorDepth": 0.32,
+          "donorMaxDepth": 0.325,
+          "donorNormal": 0.7,
+          "color": "brick",
+          "gridStep": 0.0035,
+          "donorMargin": 0.03,
+          "flatPatchUV": true,
+          "donorMinRGB": 0.1,
+          "donorMaxColorRatio": 5,
+          "name": "Rear upper brick strip beside escape platform",
+          "roi": [
+            -0.045,
+            -0.001,
+            0.415,
+            0.48
+          ]
+        },
+        "missingSamples": 111,
+        "boundarySamples": 553,
+        "sampledDepthRange": [
+          -0.28537702560424805,
+          0.36911606788635254
+        ],
+        "inwardClosureThickness": 0.006,
+        "outerSurfaceUnchanged": true,
+        "newVertices": 330,
+        "newTriangles": 656
+      },
+      {
+        "name": "Rear lower brick strip below escape platform",
+        "specification": {
+          "u": [
+            -1,
+            0,
+            0
+          ],
+          "v": [
+            0,
+            0,
+            1
+          ],
+          "n": [
+            0,
+            1,
+            0
+          ],
+          "defectDepth": 0.317,
+          "donorDepth": 0.32,
+          "donorMaxDepth": 0.325,
+          "donorNormal": 0.7,
+          "color": "brick",
+          "gridStep": 0.0035,
+          "donorMargin": 0.03,
+          "flatPatchUV": true,
+          "donorMinRGB": 0.1,
+          "donorMaxColorRatio": 5,
+          "name": "Rear lower brick strip below escape platform",
+          "roi": [
+            -0.025,
+            -0.003,
+            0.275,
+            0.375
+          ]
+        },
+        "missingSamples": 93,
+        "boundarySamples": 724,
+        "sampledDepthRange": [
+          -2.0,
+          0.3369368314743042
+        ],
+        "inwardClosureThickness": 0.006,
+        "outerSurfaceUnchanged": true,
+        "newVertices": 314,
+        "newTriangles": 624
+      },
+      {
+        "name": "Rear lower left stone pier local opening",
+        "specification": {
+          "u": [
+            -1,
+            0,
+            0
+          ],
+          "v": [
+            0,
+            0,
+            1
+          ],
+          "n": [
+            0,
+            1,
+            0
+          ],
+          "defectDepth": 0.325,
+          "donorDepth": 0.331,
+          "donorMaxDepth": 0.341,
+          "donorNormal": 0.7,
+          "color": "stone",
+          "gridStep": 0.0035,
+          "donorMargin": 0.03,
+          "flatPatchUV": true,
+          "donorMinRGB": 0.28,
+          "donorMaxColorRatio": 1.8,
+          "name": "Rear lower left stone pier local opening",
+          "roi": [
+            -0.362,
+            -0.31,
+            0.09,
+            0.29
+          ]
+        },
+        "missingSamples": 525,
+        "boundarySamples": 497,
+        "sampledDepthRange": [
+          -0.1931447982788086,
+          0.35405683517456055
+        ],
+        "inwardClosureThickness": 0.006,
+        "outerSurfaceUnchanged": true,
+        "newVertices": 1410,
+        "newTriangles": 2816
+      }
+    ]
+  },
+  "renderedCandidate": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\expansion--tower_2-1e9192533f2a-repair-cf54f5147754-low-cf901e4fc4-field-v1\\candidates\\renders\\expansion\\tower_2\\lod-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\expansion--tower_2-1e9192533f2a-repair-cf54f5147754-low-cf901e4fc4-field-v1\\candidates\\renders\\expansion\\tower_2\\lod-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\expansion--tower_2-1e9192533f2a-repair-cf54f5147754-low-cf901e4fc4-field-v1\\candidates\\renders\\expansion\\tower_2\\lod-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\expansion--tower_2-1e9192533f2a-repair-cf54f5147754-low-cf901e4fc4-field-v1\\candidates\\renders\\expansion\\tower_2\\lod-left.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\expansion--tower_2-1e9192533f2a-repair-cf54f5147754-low-cf901e4fc4-field-v1\\candidates\\renders\\expansion\\tower_2\\lod-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.44199836254119873,
+        -0.4648245871067047,
+        0.0
+      ],
+      "max": [
+        0.44199836254119873,
+        0.4648245871067047,
+        1.0
+      ]
+    },
+    "triangles": 29997,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          1024,
+          1024
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "sourceReviewReusedFrom": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\expansion--tower_2-1e9192533f2a-repair-cf54f5147754-low-cf901e4fc4-field-v1\\surface.candidate.json",
+    "sha256": "42990dfdf9ea32738dd961c7364cd404a31c9d5d86e50900f43a7941f4c3b063",
+    "bytes": 15565
+  },
+  "renderedSource": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\expansion--tower_2-1e9192533f2a-repair-cf54f5147754-low-cf901e4fc4-field-v1\\candidates\\renders\\expansion\\tower_2\\raw-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\expansion--tower_2-1e9192533f2a-repair-cf54f5147754-low-cf901e4fc4-field-v1\\candidates\\renders\\expansion\\tower_2\\raw-iso.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\expansion--tower_2-1e9192533f2a-repair-cf54f5147754-low-cf901e4fc4-field-v1\\candidates\\renders\\expansion\\tower_2\\raw-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\expansion--tower_2-1e9192533f2a-repair-cf54f5147754-low-cf901e4fc4-field-v1\\candidates\\renders\\expansion\\tower_2\\raw-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\expansion--tower_2-1e9192533f2a-repair-cf54f5147754-low-cf901e4fc4-field-v1\\candidates\\renders\\expansion\\tower_2\\raw-left.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.4422760307788849,
+        -0.4650614857673645,
+        0.0
+      ],
+      "max": [
+        0.4422760307788849,
+        0.4650614857673645,
+        1.0
+      ]
+    },
+    "triangles": 966651,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "bounds": {
+    "min": [
+      -0.44199836254119873,
+      0.0,
+      -0.4648245871067047
+    ],
+    "max": [
+      0.44199836254119873,
+      1.0,
+      0.4648245871067047
+    ],
+    "coordinateSystem": "GLTF Y-up; +Z front"
+  },
+  "textureSizes": [
+    {
+      "name": "Image_0",
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "name": "Image_1",
+      "size": [
+        1024,
+        1024
+      ]
+    }
+  ],
+  "completedAt": "2026-10-24T06:11:05.209056+00:00",
+  "rawSourceUnchanged": true,
+  "promotedFrom": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\expansion--tower_2-1e9192533f2a-repair-cf54f5147754-low-cf901e4fc4-field-v1\\candidates\\expansion\\tower_2.json",
+    "sha256": "c899572489ad9d784d93597acffe16b36a06f1a7871dfb6d45f483b7dcd9a7ce",
+    "bytes": 30602
+  },
+  "reviewSheet": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\expansion--tower_2-1e9192533f2a-repair-cf54f5147754-low-cf901e4fc4-field-v1\\candidates\\renders\\expansion\\tower_2\\review-sheet.jpg",
+    "sha256": "ed57528fac706502c8e9e870aa209c611869175eefe9af9c0afa8aeb896c763d",
+    "bytes": 311670,
+    "candidateSha256": "dcfbd03212dc62268928470e2f092a1698f8ca936bf4c61d723e0fc87f189087",
+    "sourceImages": [
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\expansion--tower_2-1e9192533f2a-repair-cf54f5147754-low-cf901e4fc4-field-v1\\candidates\\renders\\expansion\\tower_2\\raw-front.png",
+        "sha256": "b49637ebec24317ce5907816d161095959eede555a06c8890e12983f7324e73c",
+        "label": "AI raw front"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\expansion--tower_2-1e9192533f2a-repair-cf54f5147754-low-cf901e4fc4-field-v1\\candidates\\renders\\expansion\\tower_2\\raw-iso.png",
+        "sha256": "76636756ff5e9d575c44fda6eb01fea21a6150630793276f0ce776d34594285a",
+        "label": "AI raw iso"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\expansion--tower_2-1e9192533f2a-repair-cf54f5147754-low-cf901e4fc4-field-v1\\candidates\\renders\\expansion\\tower_2\\lod-front.png",
+        "sha256": "b6b6ebd516502a25c31431047536c2c5f3f882ea2d69e7cc5ccc41f1eeb5fb36",
+        "label": "LOD front"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\expansion--tower_2-1e9192533f2a-repair-cf54f5147754-low-cf901e4fc4-field-v1\\candidates\\renders\\expansion\\tower_2\\lod-right.png",
+        "sha256": "b068a979d787fef4acbcf7e716a678d783928bf6f2a0cbabb7663e48e6a9ee75",
+        "label": "LOD right"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\expansion--tower_2-1e9192533f2a-repair-cf54f5147754-low-cf901e4fc4-field-v1\\candidates\\renders\\expansion\\tower_2\\lod-back.png",
+        "sha256": "4b93bfd34728891f5d36ee06895cd1320fc7f4813c0d2eab0eacb7a269df5654",
+        "label": "LOD back"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\expansion--tower_2-1e9192533f2a-repair-cf54f5147754-low-cf901e4fc4-field-v1\\candidates\\renders\\expansion\\tower_2\\lod-left.png",
+        "sha256": "afb593ffac23ad5f9f7443b9ba64c18aec7cf402e2592da977870510bec17bd6",
+        "label": "LOD left"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\expansion--tower_2-1e9192533f2a-repair-cf54f5147754-low-cf901e4fc4-field-v1\\candidates\\renders\\expansion\\tower_2\\lod-iso.png",
+        "sha256": "855187f707a0b4cad01d0c1be9b43874a4f78872645ab1009d68c4554b8d28f2",
+        "label": "LOD iso"
+      }
+    ],
+    "content": "Unmodified CPU render images composed with labels for visual comparison only"
+  }
+}

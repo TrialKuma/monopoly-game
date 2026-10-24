@@ -2,9 +2,9 @@ import { GLTFLoader } from './assets/vendor/three/addons/loaders/GLTFLoader.js';
 
 // Board models, scenic copies and destination landmarks borrow one decoded GLB.
 // Consumers own only their derived geometry; this cache owns source materials,
-// textures, bitmaps and geometry until the page closes.
+// textures, bitmaps and geometry until all borrowers leave their generation.
 export function createModelAssetCache({load=url=>new GLTFLoader().loadAsync(url),now=Date.now}={}) {
-  const entries=new Map(),sources=new Set(),owned=new WeakSet(),released=new WeakSet(),closedImages=new WeakSet();
+  const entries=new Map(),sources=new Map(),epochs=new Map(),owned=new WeakSet(),released=new WeakSet(),closedImages=new WeakSet();
   let disposed=false,refreshId=0;
   function resources(gltf){
     const result=new Set();gltf.scene.traverse(node=>{
@@ -25,16 +25,16 @@ export function createModelAssetCache({load=url=>new GLTFLoader().loadAsync(url)
     }
   }
   function closedError(){const error=new Error('Model asset cache is disposed');error.name='AbortError';return error;}
-  function loadAsset(file,{version='20261023-3',force=false}={}){
+  function loadAsset(file,{version='20261024-1',force=false}={}){
     if(disposed)return Promise.reject(closedError());
     const key=`${file}?v=${version}`,previous=entries.get(key);
     if(previous&&(!force||previous.pending))return previous.promise;
-    const entry={file,pending:true,value:null,promise:null};entries.set(key,entry);
+    const epoch=epochs.get(file)||0,entry={file,pending:true,value:null,promise:null};entries.set(key,entry);
     const url=`./assets/models/${key}${force?`&refresh=${now()}-${++refreshId}`:''}`;
-    entry.promise=Promise.resolve().then(()=>{if(disposed)throw closedError();return load(url);}).then(gltf=>{
+    entry.promise=Promise.resolve().then(()=>{if(disposed||epoch!==(epochs.get(file)||0))throw closedError();return load(url);}).then(gltf=>{
       for(const resource of resources(gltf))owned.add(resource);
-      if(disposed){release(gltf);throw closedError();}
-      const region=/^regions\/([a-z]+)\.glb$/.exec(file)?.[1];
+      if(disposed||epoch!==(epochs.get(file)||0)){release(gltf);throw closedError();}
+      const region=/^regions(?:-far)?\/([a-z]+)\.glb$/.exec(file)?.[1];
       if(region){
         const pattern=new RegExp(`^${region}_(?:(?:villa|shop|hotel|tower|skyscraper|finance|onsen)_[123]|civic_hall|vault_bank|builders_guild|card_pavilion|chance_wheel|teleport_gate|rush_station|junction_hub)$`);
         let matched=false;gltf.scene.traverse(node=>{if(pattern.test(node.name))matched=true;});
@@ -42,19 +42,48 @@ export function createModelAssetCache({load=url=>new GLTFLoader().loadAsync(url)
       }
       // A forced replacement may leave old instances alive until the board's
       // queued refresh and scenic controller dispose. Keep those borrowed source
-      // resources valid; all generations are released together at pagehide.
-      sources.add(gltf);entry.value=gltf;return gltf;
+      // resources valid until the scene confirms every borrower was rebuilt.
+      sources.set(gltf,file);entry.value=gltf;return gltf;
     }).catch(error=>{if(entries.get(key)===entry)entries.delete(key);throw error;}).finally(()=>{entry.pending=false;});
     return entry.promise;
   }
   function forget(file,gltf){for(const [key,entry] of entries)if(entry.file===file&&entry.value===gltf)entries.delete(key);}
-  function dispose(){if(disposed)return;disposed=true;entries.clear();sources.forEach(release);sources.clear();}
-  return {load:loadAsset,forget,dispose,owns:resource=>owned.has(resource),getState:()=>({entries:entries.size,pending:[...entries.values()].filter(entry=>entry.pending).length,sources:sources.size,disposed})};
+  // Only the scene that has rebuilt every borrower may retire old generations.
+  // A newer in-flight replacement remains owned until it is installed as well.
+  function releaseSuperseded(file,retained){
+    if(sources.get(retained)!==file)return;
+    const current=new Set([retained]);
+    for(const entry of entries.values())if(entry.file===file&&entry.value)current.add(entry.value);
+    for(const [gltf,sourceFile] of sources)if(sourceFile===file&&!current.has(gltf)){release(gltf);sources.delete(gltf);}
+  }
+  // The caller must first detach every borrower. Region changes do that before
+  // releasing their textures, so five textured cities cannot accumulate in VRAM.
+  function releaseFile(file){
+    epochs.set(file,(epochs.get(file)||0)+1);
+    for(const [key,entry] of entries)if(entry.file===file)entries.delete(key);
+    for(const [gltf,sourceFile] of sources)if(sourceFile===file){release(gltf);sources.delete(gltf);}
+  }
+  function dispose(){if(disposed)return;disposed=true;entries.clear();sources.forEach((file,gltf)=>release(gltf));sources.clear();epochs.clear();}
+  return {load:loadAsset,forget,releaseFile,releaseSuperseded,dispose,owns:resource=>owned.has(resource),getState:()=>({entries:entries.size,pending:[...entries.values()].filter(entry=>entry.pending).length,sources:sources.size,disposed})};
 }
 
-const cache=createModelAssetCache();
+// The review build uses the same game and loading path with unpublished packs.
+// Only these local, known architecture filenames can be redirected by the flag.
+export function reviewModelURL(url,preview=false){
+  if(!preview)return url;
+  const region=/^\.\/assets\/models\/(regions|regions-far)\/(classic|compact|expansion|harbor|alpine)\.glb(\?.*)?$/.exec(url);
+  if(region)return `./art/full-ai-city/packed/${region[2]}${region[1]==='regions-far'?'-far':''}.glb${region[3]||''}`;
+  const hero=/^\.\/assets\/models\/harbor\/(harbor_lighthouse|alpine_windmill)\.glb(\?.*)?$/.exec(url);
+  return hero?`./art/full-ai-city/packed/${hero[1]}.glb${hero[2]||''}`:url;
+}
+const preview=typeof location!=='undefined'&&new URLSearchParams(location.search).get('artStage')==='candidate';
+// Distant architecture always uses the reviewed near-derived far package.
+export const regionalSceneryDirectory='regions-far';
+const cache=createModelAssetCache({load:url=>new GLTFLoader().loadAsync(reviewModelURL(url,preview))});
 export const loadSharedModelAsset=cache.load;
 export const forgetSharedModelAsset=cache.forget;
+export const releaseSharedModelAsset=cache.releaseFile;
+export const releaseSupersededModelAssets=cache.releaseSuperseded;
 export const ownsSharedModelResource=cache.owns;
 export const disposeSharedModelAssets=cache.dispose;
 if(typeof window!=='undefined')window.addEventListener('pagehide',disposeSharedModelAssets,{once:true});

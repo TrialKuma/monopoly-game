@@ -35,11 +35,15 @@ function imageDimensions(bytes) {
   throw new Error('Geometry-only image adapter supports embedded PNG/JPEG headers; use browser QA for pixel decoding.');
 }
 
-export function regionalAssetURL(mapId) {
-  const override = process.argv.find(arg => arg.startsWith('--region-file='))?.slice(14);
+export function regionalAssetURL(mapId,{far=false}={}) {
+  const flag=far?'--far-file=':'--region-file=';
+  const override = process.argv.find(arg => arg.startsWith(flag))?.slice(flag.length);
   const selected = process.argv.find(arg => arg.startsWith('--map='))?.slice(6);
-  if (override) assert(selected, '--region-file requires --map=<region> so another region cannot accidentally use this candidate');
-  return override && selected === mapId ? pathToFileURL(resolve(override)) : new URL(`../assets/models/regions/${mapId}.glb`, import.meta.url);
+  if (override) assert(selected, `${flag} requires --map=<region> so another region cannot accidentally use this candidate`);
+  if(override&&selected===mapId)return pathToFileURL(resolve(override));
+  return process.argv.includes('--candidate')
+    ?new URL(`../art/full-ai-city/packed/${mapId}${far?'-far':''}.glb`,import.meta.url)
+    :new URL(`../assets/models/${far?'regions-far':'regions'}/${mapId}.glb`,import.meta.url);
 }
 
 let parsing = false;

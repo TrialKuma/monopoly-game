@@ -1,0 +1,296 @@
+{
+  "status": "local_repair_candidate_pending_visual_review",
+  "source": {
+    "path": "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\source\\alpine--villa_1-a001-pixal-mv-1024-9247.glb",
+    "sha256": "ecebc4fc5592305f6457e331b916139ccc822e31bf59b0de87229046da29d95d",
+    "bytes": 39390720
+  },
+  "orientation": {
+    "enabled": true,
+    "candidate_degrees": 0.596102732100453,
+    "applied_degrees": 0.596102732100453,
+    "underside_area": 0.09142099905831765,
+    "normal_agreement": 0.8907569598981827,
+    "yaw_degrees": 180,
+    "pitch_degrees": 0,
+    "roll_degrees": 0,
+    "uniform_scale": 1.1520976635523967
+  },
+  "method": "Restricted missing original plaster and terracotta roof sectors restored from actual neighboring source surface depths and UV samples. Original neural vertex positions, original face prefix and embedded texture pixels preserved. Each local patch closes 0.006 inward. This isolated derivative requires source and reduced candidate visual review; no runtime approval or replacement building.",
+  "repairs": [
+    {
+      "name": "Front narrow plaster strip between doorway and right window",
+      "specification": {
+        "name": "Front narrow plaster strip between doorway and right window",
+        "u": [
+          1,
+          0,
+          0
+        ],
+        "v": [
+          0,
+          0,
+          1
+        ],
+        "n": [
+          0,
+          -1,
+          0
+        ],
+        "roi": [
+          0.075,
+          0.125,
+          0.08,
+          0.285
+        ],
+        "defectDepth": 0.24,
+        "donorDepth": 0.27,
+        "donorMaxDepth": 0.299,
+        "donorNormal": 0.6,
+        "color": "plaster"
+      },
+      "missingSamples": 995,
+      "boundarySamples": 1816,
+      "sampledDepthRange": [
+        -0.3093123435974121,
+        0.31049585342407227
+      ],
+      "inwardClosureThickness": 0.006,
+      "outerSurfaceUnchanged": true,
+      "newVertices": 2520,
+      "newTriangles": 5032
+    },
+    {
+      "name": "Front small opening above door arch below timber",
+      "specification": {
+        "name": "Front small opening above door arch below timber",
+        "u": [
+          1,
+          0,
+          0
+        ],
+        "v": [
+          0,
+          0,
+          1
+        ],
+        "n": [
+          0,
+          -1,
+          0
+        ],
+        "roi": [
+          -0.035,
+          0.035,
+          0.278,
+          0.35
+        ],
+        "defectDepth": 0.24,
+        "donorDepth": 0.27,
+        "donorMaxDepth": 0.299,
+        "donorNormal": 0.6,
+        "color": "plaster"
+      },
+      "missingSamples": 257,
+      "boundarySamples": 610,
+      "sampledDepthRange": [
+        -0.2900121212005615,
+        0.3171374797821045
+      ],
+      "inwardClosureThickness": 0.006,
+      "outerSurfaceUnchanged": true,
+      "newVertices": 742,
+      "newTriangles": 1480
+    },
+    {
+      "name": "Left roof isolated missing tile sector",
+      "specification": {
+        "name": "Left roof isolated missing tile sector",
+        "u": [
+          0,
+          -1,
+          0
+        ],
+        "v": [
+          0,
+          0,
+          1
+        ],
+        "n": [
+          -1,
+          0,
+          0
+        ],
+        "roi": [
+          -0.085,
+          -0.02,
+          0.35,
+          0.46
+        ],
+        "defectDepth": 0.15,
+        "donorDepth": 0.2,
+        "donorMaxDepth": 0.47,
+        "donorNormal": 0.2,
+        "color": "roof"
+      },
+      "missingSamples": 69,
+      "boundarySamples": 3503,
+      "sampledDepthRange": [
+        -0.36257481575012207,
+        0.47305119037628174
+      ],
+      "inwardClosureThickness": 0.006,
+      "outerSurfaceUnchanged": true,
+      "newVertices": 250,
+      "newTriangles": 496
+    },
+    {
+      "name": "Original ridge narrow open gaps between existing tiles",
+      "specification": {
+        "name": "Original ridge narrow open gaps between existing tiles",
+        "u": [
+          1,
+          0,
+          0
+        ],
+        "v": [
+          0,
+          1,
+          0
+        ],
+        "n": [
+          0,
+          0,
+          1
+        ],
+        "roi": [
+          -0.029,
+          0.029,
+          -0.34,
+          0.34
+        ],
+        "defectDepth": 0.52,
+        "donorDepth": 0.535,
+        "donorMaxDepth": 0.585,
+        "donorNormal": 0.3,
+        "color": "roof"
+      },
+      "missingSamples": 55,
+      "boundarySamples": 18090,
+      "sampledDepthRange": [
+        -2.0,
+        0.5696027278900146
+      ],
+      "inwardClosureThickness": 0.006,
+      "outerSurfaceUnchanged": true,
+      "newVertices": 274,
+      "newTriangles": 532
+    }
+  ],
+  "originalTriangles": 932424,
+  "originalVerticesMoved": 0,
+  "originalTrianglesDeleted": 0,
+  "artifactCleanup": {
+    "method": "No original faces deleted; only measured local source plaster and roof gaps receive source-neighbor-derived closed patches. Pending visual review.",
+    "deletedTriangles": 0
+  },
+  "newTriangles": 7540,
+  "newVertices": 3786,
+  "inverseSimilarityError": 7.353282294175756e-08,
+  "normalizedOutput": {
+    "path": "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\work\\repair-alpine-villa1-v2\\repaired-normalized.glb",
+    "sha256": "b4440d9f36097e02d0534e5eff2d9b0dbae34d5803c67e6244ea64e06959f74e",
+    "bytes": 40402900
+  },
+  "nativeOutput": {
+    "path": "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\work\\repair-alpine-villa1-v2\\repaired-native.glb",
+    "sha256": "927ed180c384535bb0d199091408914a635a321df26e9e1570fa982064aa295b",
+    "bytes": 40398760
+  },
+  "renders": {
+    "views": [
+      "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\work\\repair-alpine-villa1-v2\\repaired-front.png",
+      "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\work\\repair-alpine-villa1-v2\\repaired-right.png",
+      "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\work\\repair-alpine-villa1-v2\\repaired-back.png",
+      "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\work\\repair-alpine-villa1-v2\\repaired-left.png",
+      "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\work\\repair-alpine-villa1-v2\\repaired-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.5,
+        -0.4141901731491089,
+        0.0
+      ],
+      "max": [
+        0.5,
+        0.4141901731491089,
+        0.6400337815284729
+      ]
+    },
+    "triangles": 939964,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "reviewImages": [
+    {
+      "path": "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\work\\repair-alpine-villa1-v2\\repaired-front.png",
+      "sha256": "e4cbfb40717d3309a5f48729f81560fc47d1eabcb31bed03f82d7e115abbf237",
+      "bytes": 206091
+    },
+    {
+      "path": "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\work\\repair-alpine-villa1-v2\\repaired-right.png",
+      "sha256": "9c085ca297ed60e93a3f8497b59472135d3f3c625e7a907f942c4b960d0c004f",
+      "bytes": 191079
+    },
+    {
+      "path": "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\work\\repair-alpine-villa1-v2\\repaired-back.png",
+      "sha256": "a61a3a50bc1dcd52a1b9ef0b6fb79f3e61e87605e720f5f3b89017c2096dc3ca",
+      "bytes": 201578
+    },
+    {
+      "path": "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\work\\repair-alpine-villa1-v2\\repaired-left.png",
+      "sha256": "096b763135b288e03a5f74daaa0e13ba27ea604565fbd058816300c36b0ae8b9",
+      "bytes": 194237
+    },
+    {
+      "path": "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\work\\repair-alpine-villa1-v2\\repaired-iso.png",
+      "sha256": "91f874bf0a4ed17ef979b8f35cb7c3bbaab2dded05c91733cd4fb03d97e2568c",
+      "bytes": 256843
+    }
+  ],
+  "neutralReviewImages": [
+    {
+      "path": "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\work\\repair-alpine-villa1-v2\\repaired-gray-front-iso.png",
+      "sha256": "b87a653d59c768b60aa9a3937267b7a80bd516ec837f92b70385e1ec60ecc5ac",
+      "bytes": 686176
+    },
+    {
+      "path": "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\work\\repair-alpine-villa1-v2\\repaired-gray-back-iso.png",
+      "sha256": "3418d968c6107dd84779d0529027220df5aacfe27b84294e7e0c4c6bb14eaa3c",
+      "bytes": 683860
+    }
+  ],
+  "processingTool": {
+    "path": "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\bfdd6d569cd38245af59d05b0dad6dd9ebbfd9fec1222cd2f127e636a7fc26b6-repair_alpine_villa1_surface_v2.py",
+    "sha256": "bfdd6d569cd38245af59d05b0dad6dd9ebbfd9fec1222cd2f127e636a7fc26b6",
+    "bytes": 12962
+  },
+  "completedAt": "2026-10-23T12:05:01.228946+00:00"
+}

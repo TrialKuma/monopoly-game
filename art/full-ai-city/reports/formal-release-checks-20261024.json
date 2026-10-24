@@ -1,0 +1,45 @@
+{
+  "recordedAtUtc": "2026-10-24T08:19:53.480Z",
+  "status": "all_required_formal_checks_passed",
+  "scope": "After full five-region publication; no candidate flag.",
+  "regionalEvidenceValidation": "verified_map_style passed classic/compact/expansion/harbor/alpine before publication; packer reverified after deterministic repack.",
+  "checks": [
+    {
+      "name": "formal-near-and-previews",
+      "command": "node tests/check-full-ai-city.mjs",
+      "status": "passed",
+      "output": "PASS all five regions: 145 unique approved native three-view gameplay models; geometry, texture provenance, bounds and animation parts. PASS 145 model-bound UI previews and formal region/level/public-building routing.",
+      "initialFailure": {
+        "reason": "Release audit required a texture on the already-approved Alpine rotor's 500 vertex-colored local occlusion caps.",
+        "result": "Resolved in test only; exact candidate SHA, frozen repair receipt, cap count, material and full geometry/UV/normal/index/color values are checked. Negative wrong SHA, absent color and altered material cases rejected."
+      }
+    },
+    {
+      "name": "formal-far",
+      "command": "node tests/check-ai-far-assets.mjs",
+      "status": "passed",
+      "output": "PASS classic: 5 visually reviewed source-derived far LODs\nPASS compact: 5 visually reviewed source-derived far LODs\nPASS expansion: 5 visually reviewed source-derived far LODs\nPASS harbor: 5 visually reviewed source-derived far LODs\nPASS alpine: 5 visually reviewed source-derived far LODs\nVerified 25 far LOD derivatives; these are not counted as additional AI buildings.\n"
+    },
+    {
+      "name": "formal-heroes",
+      "command": "node tests/check-ai-landmarks.mjs",
+      "status": "passed",
+      "output": "PASS harbor/lighthouse: 44986 triangles; native three-view source, frozen visual evidence, 1 moving neural component(s)\nPASS alpine/windmill: 44987 triangles; native three-view source, frozen visual evidence, 1 moving neural component(s)\n"
+    },
+    {
+      "name": "formal-scenery-budget",
+      "command": "node --max-old-space-size=768 tests/check-regional-scenery-budget.mjs",
+      "status": "passed",
+      "output": "PASS classic: actual loaded scenery uses lightweight regional houses, with no neural-villa duplication\n{\"mapId\":\"classic\",\"buildings\":12,\"neighbourhood\":{\"triangles\":192000,\"geometryMiB\":0.9003829956054688,\"draws\":2},\"complete\":{\"triangles\":354768,\"geometryMiB\":15.802238464355469,\"draws\":26},\"pixelsRendered\":false,\"failures\":0}\nPASS compact: actual loaded scenery uses lightweight regional houses, with no neural-villa duplication\n{\"mapId\":\"compact\",\"buildings\":12,\"neighbourhood\":{\"triangles\":144000,\"geometryMiB\":0.8227348327636719,\"draws\":2},\"complete\":{\"triangles\":252176,\"geometryMiB\":10.726543426513672,\"draws\":17},\"pixelsRendered\":false,\"failures\":0}\nPASS expansion: actual loaded scenery uses lightweight regional houses, with no neural-villa duplication\n{\"mapId\":\"expansion\",\"buildings\":11,\"neighbourhood\":{\"triangles\":131989,\"geometryMiB\":0.7240753173828125,\"draws\":2},\"complete\":{\"triangles\":247781,\"geometryMiB\":10.576343536376953,\"draws\":19},\"pixelsRendered\":false,\"failures\":0}\nPASS harbor: actual loaded scenery uses lightweight regional houses, with no neural-villa duplication\n{\"mapId\":\"harbor\",\"buildings\":2,\"neighbourhood\":{\"triangles\":23999,\"geometryMiB\":0.7385959625244141,\"draws\":2},\"complete\":{\"triangles\":248753,\"geometryMiB\":18.64866065979004,\"draws\":52},\"pixelsRendered\":false,\"failures\":0}\nPASS alpine: actual loaded scenery uses lightweight regional houses, with no neural-villa duplication\n{\"mapId\":\"alpine\",\"buildings\":4,\"neighbourhood\":{\"triangles\":59998,\"geometryMiB\":0.9381809234619141,\"draws\":2},\"complete\":{\"triangles\":221023,\"geometryMiB\":13.561174392700195,\"draws\":50},\"pixelsRendered\":false,\"failures\":0}\nPASS all five actual loaded regional scenery budgets (one 768 MiB worker per map)\n"
+    },
+    {
+      "name": "provenance-git-bytes",
+      "command": "node tests/check-provenance-git-bytes.mjs",
+      "status": "passed",
+      "output": "PASS 7 actual provenance files retain exact Git bytes, including CRLF; future near/far/hero manifests protected\n"
+    }
+  ],
+  "assetChangesToResolveChecks": false,
+  "publication": "art/regions/runtime-release.json",
+  "unchangedChecksNotRepeated": "All172 portability and native repair proof suite, candidate board/landing checks and individual visual reviews retained; no media regeneration."
+}

@@ -1,0 +1,170 @@
+{
+  "status": "source_repair_visually_reviewed_pending_near_lod",
+  "source": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\classic--onsen_3-a001-pixal-mv-1024-9247.glb",
+    "sha256": "91edafc803301744d24814f56a5d4d1aa39c65d12fabcd948686da645deb3242",
+    "bytes": 41167892
+  },
+  "orientation": {
+    "enabled": true,
+    "candidate_degrees": 0.32864903938672335,
+    "applied_degrees": 0.32864903938672335,
+    "underside_area": 0.22491573562282766,
+    "normal_agreement": 0.9629148258465559,
+    "yaw_degrees": 180,
+    "pitch_degrees": 0,
+    "roll_degrees": 0,
+    "uniform_scale": 0.9984135801065873
+  },
+  "method": "Only the measured small unframed wall opening below the rear dome cornice is filled from its intact boundary. Original neural vertices, faces and image pixels are untouched. The separate upper framed arch window remains unchanged. The patch reuses neighboring original stone UV samples and closes 0.006 inward so it survives derivative voxelization; no replacement building or new texture.",
+  "repairs": [
+    {
+      "name": "Small unframed oval hole below rear dome cornice",
+      "specification": {
+        "name": "Small unframed oval hole below rear dome cornice",
+        "u": [
+          -1,
+          0,
+          0
+        ],
+        "v": [
+          0,
+          0,
+          1
+        ],
+        "n": [
+          0,
+          1,
+          0
+        ],
+        "roi": [
+          0.043,
+          0.065,
+          0.201,
+          0.229
+        ],
+        "defectDepth": 0.1,
+        "donorDepth": 0.19,
+        "donorMaxDepth": 0.21,
+        "donorNormal": 0.65,
+        "color": "stone"
+      },
+      "missingSamples": 64,
+      "boundarySamples": 900,
+      "sampledDepthRange": [
+        -0.06864714622497559,
+        0.20117151737213135
+      ],
+      "inwardClosureThickness": 0.006,
+      "outerSurfaceUnchanged": true,
+      "newVertices": 212,
+      "newTriangles": 420
+    }
+  ],
+  "originalTriangles": 942881,
+  "originalVerticesMoved": 0,
+  "originalTrianglesDeleted": 0,
+  "artifactCleanup": {
+    "method": "No original faces deleted; only the measured isolated unframed wall hole below the rear dome cornice is filled. The separate upper framed arch window remains unchanged.",
+    "deletedTriangles": 0
+  },
+  "newTriangles": 420,
+  "newVertices": 212,
+  "inverseSimilarityError": 7.485021669140224e-08,
+  "normalizedOutput": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-onsen3\\repaired-normalized.glb",
+    "sha256": "55a4fe5d23ffad2291a3d996eee551e7dc2f1cfe8579a70ce0f011230456b1dd",
+    "bytes": 41269956
+  },
+  "nativeOutput": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-onsen3\\repaired-native.glb",
+    "sha256": "50ece06de10fffa9fdfc02c35b84a3e387fb626efef0888bb72071b412906065",
+    "bytes": 41268120
+  },
+  "renders": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\classic\\onsen_3\\50ece06de10fffa9\\repaired-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\classic\\onsen_3\\50ece06de10fffa9\\repaired-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\classic\\onsen_3\\50ece06de10fffa9\\repaired-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\classic\\onsen_3\\50ece06de10fffa9\\repaired-left.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\classic\\onsen_3\\50ece06de10fffa9\\repaired-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.5,
+        -0.2197418212890625,
+        0.0
+      ],
+      "max": [
+        0.5,
+        0.2197418212890625,
+        0.5858836770057678
+      ]
+    },
+    "triangles": 943301,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "reviewImages": [
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\classic\\onsen_3\\50ece06de10fffa9\\repaired-front.png",
+      "sha256": "367f44e63d00d98c7ae1fa233a49e8dfc56d71f2952e7045ab2107dd0b3d174a",
+      "bytes": 184435
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\classic\\onsen_3\\50ece06de10fffa9\\repaired-right.png",
+      "sha256": "9ee78916d854bc55ccfd75bc631a02b835d3738fb06ef1c68625671e9d8e7819",
+      "bytes": 131138
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\classic\\onsen_3\\50ece06de10fffa9\\repaired-back.png",
+      "sha256": "890a6367973496b8a43b9a41379ec4a462ae7b1fb2554e91b42371d7867188bc",
+      "bytes": 178337
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\classic\\onsen_3\\50ece06de10fffa9\\repaired-left.png",
+      "sha256": "ee8d8f459c44488c1670ccfe211aac42ae1b414a2b5344e06ddd017114ac45ec",
+      "bytes": 129725
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\classic\\onsen_3\\50ece06de10fffa9\\repaired-iso.png",
+      "sha256": "2e39737493bc93f8969f9cd6937fda8fca3378055cf62a8d1e002dbf0ff7f16d",
+      "bytes": 199325
+    }
+  ],
+  "processingTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\8396cb965bd70d51abd0c5f396df00d7b5323d51307d29641aa7f9db04680850-repair_onsen3_surface.py",
+    "sha256": "8396cb965bd70d51abd0c5f396df00d7b5323d51307d29641aa7f9db04680850",
+    "bytes": 10826
+  },
+  "completedAt": "2026-10-23T07:50:29.987592+00:00",
+  "visualReview": {
+    "reviewedAtUtc": "2026-10-23T07:55:22.608835+00:00",
+    "decision": "Source repair acceptable for derivative processing; no runtime asset approval",
+    "views": [
+      "front",
+      "right",
+      "back",
+      "left",
+      "iso"
+    ],
+    "note": "Actual raw and grey rear diagnostics confirmed one isolated oval wall puncture below the dome cornice, distinct from the framed arch window higher up. The new local boundary-derived patch closes only that puncture; all five repaired views preserve the neural building, roof, glazing, columns and pool. The upper framed rear arch remains an open dark window as a source design variation. Final mobile low mesh and neural-field texture transfer still require independent review."
+  }
+}

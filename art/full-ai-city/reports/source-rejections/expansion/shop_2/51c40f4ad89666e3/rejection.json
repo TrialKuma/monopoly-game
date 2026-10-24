@@ -1,0 +1,62 @@
+{
+  "status": "rejected_native_export_source",
+  "region": "expansion",
+  "asset": "shop_2",
+  "reviewer": "asset_production",
+  "recordedAtUtc": "2026-10-24T05:13:38.216071+00:00",
+  "source": {
+    "path": "art/full-ai-city/source/expansion--shop_2-a014-pixal-mv-1024-29495.glb",
+    "sha256": "51c40f4ad89666e347fd818e34b1d13397ff31e35fe2f3796df7f9901f17fb3f",
+    "bytes": 37701368
+  },
+  "sourceLevel": "Native 1M export; no untouched decoder attribution is made.",
+  "inferenceReport": {
+    "path": "art/full-ai-city/reports/source-rejections/expansion/shop_2/51c40f4ad89666e3/expansion--shop_2-a014-pixal-mv-1024-29495.json",
+    "sha256": "d5f4a558d5d7aba4165715ac6fc1b54dbd3221200e44de04f02536f2f3eeba7f",
+    "bytes": 10158
+  },
+  "inputReference": {
+    "path": "art/full-ai-city/reports/source-rejections/expansion/shop_2/51c40f4ad89666e3/input-reference.json",
+    "sha256": "7ce3e987436c1449e1cafd1e99b4d680933993f9bfbca5b41758a2a722490165",
+    "bytes": 4430
+  },
+  "diagnostic": null,
+  "diagnosticTool": null,
+  "sourceComparisonReport": {
+    "path": "art/full-ai-city/reports/source-rejections/expansion/shop_2/51c40f4ad89666e3/source-comparison-processing.json",
+    "sha256": "12a40c88382c860f729553dd40671e689ae40df84070ad54ca45f6a0e259f395",
+    "bytes": 20919
+  },
+  "sourceViewEvidenceMode": "Explicitly selected existing renderedSource views; no additional or neutral render implied",
+  "evidence": [
+    {
+      "path": "art/full-ai-city/reports/source-rejections/expansion/shop_2/51c40f4ad89666e3/raw-front.png",
+      "sha256": "360a97d7400ef7aa31d3d4bbfec22ed0a7862162a1440e0b7620c6c773e64ddd",
+      "bytes": 247303
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/expansion/shop_2/51c40f4ad89666e3/raw-iso.png",
+      "sha256": "2f79d90d46c9b04cda03622ab6550796d22f6fa93fc5c2ab37df460addfa71c2",
+      "bytes": 340151
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/expansion/shop_2/51c40f4ad89666e3/raw-right.png",
+      "sha256": "dc10c1474b793fa5d27fe2a3e9002745fa009059d8704a8bf1bc4cecfe1275db",
+      "bytes": 234550
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/expansion/shop_2/51c40f4ad89666e3/raw-back.png",
+      "sha256": "3ae62109cfce6ade8a0f3032f4dc21445d925aeac205df38ec9aa66d58d8a5cc",
+      "bytes": 253970
+    }
+  ],
+  "finding": "Actually inspected reviewed revision025558a2 reference, existing native front/iso/right/back, all five final material views and256px. Closed opaque glazing and principal shape are improved. One phone-visible dominant defect remains: the upper right wall has a jagged long vertical opening between rear window and rear corner pier, already present in raw-right. Other small cornice/sill/base seams and isolated roof trim chips are accepted as phone-scale minor flaws rather than watertight requirements. Hold this second current-reference source for one strictly bounded brick-surface patch assessment at that right upper wall only, preserving all original triangles, UVs and embedded images. No further raw seed or reference revision.",
+  "decision": "One strictly local right-upper brick patch assessment; no further seed or reference revision. Preserve original geometry UV/image data.",
+  "sourceUnchanged": true,
+  "notFinalCandidateReview": true,
+  "freezeTool": {
+    "path": "art/full-ai-city/reports/tool-snapshots/616860a00b28e670e1219d64c6cb5dad17f0946420568f786e80b6d789fb4a73-freeze_public_source_rejection.py",
+    "sha256": "616860a00b28e670e1219d64c6cb5dad17f0946420568f786e80b6d789fb4a73",
+    "bytes": 4304
+  }
+}

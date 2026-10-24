@@ -1,0 +1,62 @@
+{
+  "status": "rejected_native_export_source",
+  "region": "harbor",
+  "asset": "skyscraper_1",
+  "reviewer": "asset_production",
+  "recordedAtUtc": "2026-10-24T02:27:28.161292+00:00",
+  "source": {
+    "path": "art/full-ai-city/source/harbor--skyscraper_1-a001-pixal-mv-1024-9247.glb",
+    "sha256": "782f2385ed9d5b931135d5112c99315bfc661a1920a7a8c654a0f34ae58b4bb4",
+    "bytes": 43338144
+  },
+  "sourceLevel": "Native 1M export; no untouched decoder attribution is made.",
+  "inferenceReport": {
+    "path": "art/full-ai-city/reports/source-rejections/harbor/skyscraper_1/782f2385ed9d5b93/harbor--skyscraper_1-a001-pixal-mv-1024-9247.json",
+    "sha256": "1e6da90e4f454c74dc0c4ba9334f0d30dcdc2832c7123a0561d64f7c32db5b94",
+    "bytes": 10737
+  },
+  "inputReference": {
+    "path": "art/full-ai-city/reports/source-rejections/harbor/skyscraper_1/782f2385ed9d5b93/input-reference.json",
+    "sha256": "d8be6c8d49e47a01b6f3e0c2cd467ef640fca07b25f0464b48122ff6820bbb19",
+    "bytes": 4460
+  },
+  "diagnostic": null,
+  "diagnosticTool": null,
+  "sourceComparisonReport": {
+    "path": "art/full-ai-city/reports/source-rejections/harbor/skyscraper_1/782f2385ed9d5b93/source-comparison-processing.json",
+    "sha256": "0bc96b3f5ae542f38f2c50e7a0d928657b6d6ac0c30087d5c7cf2e9abaa468ce",
+    "bytes": 19783
+  },
+  "sourceViewEvidenceMode": "Explicitly selected existing renderedSource views; no additional or neutral render implied",
+  "evidence": [
+    {
+      "path": "art/full-ai-city/reports/source-rejections/harbor/skyscraper_1/782f2385ed9d5b93/raw-front.png",
+      "sha256": "d338f6be3023b05ab3efc17e8f137015f422ed7817b20856f371c11e8499377e",
+      "bytes": 207908
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/harbor/skyscraper_1/782f2385ed9d5b93/raw-iso.png",
+      "sha256": "8364832d06623df70e7aeaecc2b7027d2bbe848b451025b0449932b05bb5cb98",
+      "bytes": 219017
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/harbor/skyscraper_1/782f2385ed9d5b93/raw-right.png",
+      "sha256": "abcdf98894328ee4e6950b83a8fb95d5477f3905d95bf04efd5c18fb2e72eb58",
+      "bytes": 131575
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/harbor/skyscraper_1/782f2385ed9d5b93/raw-back.png",
+      "sha256": "8af734723362479d3c8524a6b5c9f2c93150b0dd3b915f7fbba1f1c13eed0559",
+      "bytes": 196465
+    }
+  ],
+  "finding": "Actually inspected reference, native front/isometric/right/back, exact five final material views and256px downsample. Both final side upper storeys show a large open black wall bay around a floating window arch and plants; the inspected native-right view already has the missing upper plaster panel. Native back also has several irregular arch/eave wall chips, especially above the upper-right window. This is larger than a minor seam and remains apparent at phone scale. Freeze first source and perform one independent same-reference retry; no broad exporter claim and no automatic third seed.",
+  "decision": "First independent same-reference retry29485. If broad upper-wall loss repeats, evaluate a consistent reference revision rather than third blind seed or whole-storey hand reconstruction.",
+  "sourceUnchanged": true,
+  "notFinalCandidateReview": true,
+  "freezeTool": {
+    "path": "art/full-ai-city/reports/tool-snapshots/616860a00b28e670e1219d64c6cb5dad17f0946420568f786e80b6d789fb4a73-freeze_public_source_rejection.py",
+    "sha256": "616860a00b28e670e1219d64c6cb5dad17f0946420568f786e80b6d789fb4a73",
+    "bytes": 4304
+  }
+}

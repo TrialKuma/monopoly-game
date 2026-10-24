@@ -1,0 +1,62 @@
+{
+  "status": "rejected_native_export_source",
+  "region": "harbor",
+  "asset": "vault_bank",
+  "reviewer": "asset_production",
+  "recordedAtUtc": "2026-10-24T02:19:38.070484+00:00",
+  "source": {
+    "path": "art/full-ai-city/source/harbor--vault_bank-a002-pixal-mv-1024-29484.glb",
+    "sha256": "1f5b49e3a3339ca7e41e82ce72415b1d6fc65ee11bfce22072d3824d8ff21bd9",
+    "bytes": 44066364
+  },
+  "sourceLevel": "Native 1M export; no untouched decoder attribution is made.",
+  "inferenceReport": {
+    "path": "art/full-ai-city/reports/source-rejections/harbor/vault_bank/1f5b49e3a3339ca7/harbor--vault_bank-a002-pixal-mv-1024-29484.json",
+    "sha256": "0b92641f73848f3120a5cd3890cb548d053acdcf3c64288f50e7ff48bd3983a1",
+    "bytes": 9373
+  },
+  "inputReference": {
+    "path": "art/full-ai-city/reports/source-rejections/harbor/vault_bank/1f5b49e3a3339ca7/input-reference.json",
+    "sha256": "50b67304aa082c5a952b24a20481955ead289ad6c1785422ede33f3af33b3991",
+    "bytes": 4410
+  },
+  "diagnostic": null,
+  "diagnosticTool": null,
+  "sourceComparisonReport": {
+    "path": "art/full-ai-city/reports/source-rejections/harbor/vault_bank/1f5b49e3a3339ca7/source-comparison-processing.json",
+    "sha256": "deddcee7fc2c37584aa746c0a373da4797586a626df4a062da1fd36b93e1c4b8",
+    "bytes": 19584
+  },
+  "sourceViewEvidenceMode": "Explicitly selected existing renderedSource views; no additional or neutral render implied",
+  "evidence": [
+    {
+      "path": "art/full-ai-city/reports/source-rejections/harbor/vault_bank/1f5b49e3a3339ca7/raw-front.png",
+      "sha256": "53d43e2a88abd1318bee7c6593efd86437760f4005576d83c905a861adf503ef",
+      "bytes": 251861
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/harbor/vault_bank/1f5b49e3a3339ca7/raw-iso.png",
+      "sha256": "bb64e2e7302a69fc767929994b8dafebd6274992b211adfeca2f66ac3f810f21",
+      "bytes": 305645
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/harbor/vault_bank/1f5b49e3a3339ca7/raw-back.png",
+      "sha256": "c4573e3935481ccfe97e8d8fc3e9085a00501960bb7f5e9b2e9bb9a6e4b3b5ec",
+      "bytes": 236895
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/harbor/vault_bank/1f5b49e3a3339ca7/raw-left.png",
+      "sha256": "3d928276e335d64521488963af5864e674cac3630d4f2ca6191a19ae3e0924d8",
+      "bytes": 219148
+    }
+  ],
+  "finding": "Actually inspected unchanged reference, native retry front/isometric/back/left, exact five final material views and256px downsample. Retry repairs the earlier rear-right window-adjacent broad wall loss. One conspicuous horizontal open strip remains above the rear-door stone header, confirmed in native back and phone final. Smaller tile/eave/base chips are not the primary rejection and will be accepted if unchanged at phone scale. Restrict follow-up to one bounded rear-header plaster backing with original geometry and UV/images preserved; no third same-reference seed.",
+  "decision": "One strictly bounded rear-door header plaster repair; no further seed or reference revision. Final native/phone QA required.",
+  "sourceUnchanged": true,
+  "notFinalCandidateReview": true,
+  "freezeTool": {
+    "path": "art/full-ai-city/reports/tool-snapshots/616860a00b28e670e1219d64c6cb5dad17f0946420568f786e80b6d789fb4a73-freeze_public_source_rejection.py",
+    "sha256": "616860a00b28e670e1219d64c6cb5dad17f0946420568f786e80b6d789fb4a73",
+    "bytes": 4304
+  }
+}

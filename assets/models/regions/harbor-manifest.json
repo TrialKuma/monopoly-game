@@ -1,736 +1,1711 @@
 {
+  "schemaVersion": 2,
   "region": "harbor",
-  "reference": "art\\regions\\references\\harbor-core-three-views.png",
+  "coordinateSystem": "glTF Y-up; +Z front",
+  "sourceType": "pixal_native_multiview",
   "assets": [
     {
       "name": "harbor_villa_1",
+      "size": [
+        0.99,
+        0.7070141762495041,
+        0.8697189384698868
+      ],
       "bounds": {
         "min": [
-          -0.4625000059604645,
-          -0.4580000042915344,
-          0.0
+          -0.495,
+          0.0,
+          -0.4348594692349434
         ],
         "max": [
-          0.4625000059604645,
-          0.4580000042915344,
-          0.7516000270843506
+          0.495,
+          0.7070141762495041,
+          0.4348594692349434
         ]
       },
-      "size": [
-        0.925000011920929,
-        0.9160000085830688,
-        0.7516000270843506
-      ],
-      "triangles": 6532,
+      "triangles": 29987,
       "source": {
-        "kind": "blender_three_view",
-        "reference": "art\\regions\\references\\harbor-core-three-views.png"
+        "sourceType": "pixal_native_multiview",
+        "family": "villa",
+        "level": 1,
+        "sourceFile": "assets/models/regions-ai/full/harbor/villa_1/3195317326ccc91a.glb",
+        "sourceSha256": "3195317326ccc91a67e3db797fbed12081f213f5847a5898793142d388fce841",
+        "inferenceReport": "art/full-ai-city/reports/harbor--villa_1-a009/harbor--villa_1-a009-pixal-mv-1024-9247.json",
+        "reference": "art/full-ai-city/inputs/harbor/villa_1/ca1922a6154f93fa/reference.json",
+        "rawSourceSha256": "e54fde3bd511c555f3a6a04cc014d64722ad040f7d9d01327fa73d10aa344f9a",
+        "referenceViews": [
+          {
+            "view": "front",
+            "path": "art/full-ai-city/inputs/harbor/villa_1/ca1922a6154f93fa/view00_azim000.png",
+            "sha256": "a0b342104442df28d2f418ecad3ab0c683f423af05550df4027fce14b0ccd9ba"
+          },
+          {
+            "view": "right",
+            "path": "art/full-ai-city/inputs/harbor/villa_1/ca1922a6154f93fa/view01_azim090.png",
+            "sha256": "35d9ea3485d256c73201e1e8841fdf25156c43c201b0d532c05539997c71e66c"
+          },
+          {
+            "view": "back",
+            "path": "art/full-ai-city/inputs/harbor/villa_1/ca1922a6154f93fa/view02_azim180.png",
+            "sha256": "43609f9f9f2086c799e8f0a91b162db0aa3a0a7411017f72960c4d53befb17f7"
+          }
+        ],
+        "normalisationScale": 0.99,
+        "placementReview": {
+          "independentParcelScale": 0.99,
+          "scale": 0.99,
+          "reason": "independent_uniform_parcel_fit",
+          "relativeToIndependentFit": 1.0,
+          "sharedCameraReviewRequired": true
+        },
+        "reviewStatus": "approved",
+        "triangleBudget": 30000
       }
     },
     {
       "name": "harbor_villa_2",
+      "size": [
+        0.9899999999999999,
+        0.965810574797926,
+        0.6676888291968143
+      ],
       "bounds": {
         "min": [
-          -0.512499988079071,
-          -0.37472274899482727,
-          0.0
+          -0.49499999999999994,
+          0.0,
+          -0.33384441459840714
         ],
         "max": [
-          0.512499988079071,
-          0.37472274899482727,
-          1.1328332424163818
+          0.49499999999999994,
+          0.965810574797926,
+          0.3338444145984072
         ]
       },
-      "size": [
-        1.024999976158142,
-        0.7494454979896545,
-        1.1328332424163818
-      ],
-      "triangles": 181055,
+      "triangles": 44985,
       "source": {
-        "kind": "reviewed_pixal_multiview",
-        "reference": "art/regions/references/harbor-core-three-views.png",
-        "sourceFile": "assets/models/regions-ai/harbor_house.glb",
-        "sourceSha256": "25b47e1d472e232510496a5ac1bab1a8082eeefeb5682bc6063209fe39d72ca2",
-        "budgetException": "Reviewed AI mesh retained without decimation; use at limited villa_2 locations and verify mobile frame time.",
-        "normalisationScale": 0.37761109486676375,
-        "aiHouseStatus": "approved_exact_source"
+        "sourceType": "pixal_native_multiview",
+        "family": "villa",
+        "level": 2,
+        "sourceFile": "assets/models/regions-ai/full/harbor/villa_2/9edbb3489ce0c5ae.glb",
+        "sourceSha256": "9edbb3489ce0c5aed37e0d27901191e860f3cc88dc5553848abc599e42d351b7",
+        "inferenceReport": "art/full-ai-city/reports/harbor--villa_2-a002/harbor--villa_2-a002-pixal-mv-1024-18343.json",
+        "reference": "art/full-ai-city/inputs/harbor/villa_2/bb88929a0860827d/reference.json",
+        "rawSourceSha256": "9ed0c0d68175a174285c477f5c6f69b1ad75b0e019f7e7ff15c1ec7abdfd14d9",
+        "referenceViews": [
+          {
+            "view": "front",
+            "path": "art/full-ai-city/inputs/harbor/villa_2/bb88929a0860827d/view00_azim000.png",
+            "sha256": "10d09ead1f5519db8075e098acb133e874bdad41b2f3f97d6a1f10b39f917690"
+          },
+          {
+            "view": "right",
+            "path": "art/full-ai-city/inputs/harbor/villa_2/bb88929a0860827d/view01_azim090.png",
+            "sha256": "7d64b10d458e3ca3371e3eb21684e32debc12f110cddd42e2a6c4b8c71c803d5"
+          },
+          {
+            "view": "back",
+            "path": "art/full-ai-city/inputs/harbor/villa_2/bb88929a0860827d/view02_azim180.png",
+            "sha256": "b955655a7971181f19d9e0f651fb5c01566f2fb59a896edc28767c7fec3a17b8"
+          }
+        ],
+        "normalisationScale": 1.1057909427895805,
+        "placementReview": {
+          "independentParcelScale": 1.1057909427895805,
+          "scale": 1.1057909427895805,
+          "reason": "independent_uniform_parcel_fit",
+          "relativeToIndependentFit": 1.0,
+          "sharedCameraReviewRequired": true
+        },
+        "reviewStatus": "approved",
+        "triangleBudget": 45000,
+        "budgetReason": "原始神经住宅的薄瓦檐口和窗框在常规三万面表面出现破坏，因此保留已经核验的细采样四万五千面表面；此为单件普通建筑例外，未提高其他建筑预算。"
       }
     },
     {
       "name": "harbor_villa_3",
+      "size": [
+        0.99,
+        1.498238526658128,
+        0.862331842351164
+      ],
       "bounds": {
         "min": [
-          -0.4625000059604645,
-          -0.4945000112056732,
-          0.0
+          -0.495,
+          0.0,
+          -0.431165921175582
         ],
         "max": [
-          0.4625000059604645,
-          0.4945000112056732,
-          1.4615999460220337
+          0.495,
+          1.498238526658128,
+          0.431165921175582
         ]
       },
-      "size": [
-        0.925000011920929,
-        0.9890000224113464,
-        1.4615999460220337
-      ],
-      "triangles": 17116,
+      "triangles": 29949,
       "source": {
-        "kind": "blender_three_view",
-        "reference": "art\\regions\\references\\harbor-core-three-views.png"
+        "sourceType": "pixal_native_multiview",
+        "family": "villa",
+        "level": 3,
+        "sourceFile": "assets/models/regions-ai/full/harbor/villa_3/904ec6066f9a0075.glb",
+        "sourceSha256": "904ec6066f9a007540445dea5460940643cf08ce78ab739969fc7730cdd10a4c",
+        "inferenceReport": "art/full-ai-city/reports/harbor--villa_3-a010/harbor--villa_3-a010-pixal-mv-1024-29502.json",
+        "reference": "art/full-ai-city/inputs/harbor/villa_3/ac66adc0d972237e/reference.json",
+        "rawSourceSha256": "c8ddf70f89eb270106210a2cf07952d5ac2e7e0906ec857a108f2f7cdb973553",
+        "referenceViews": [
+          {
+            "view": "front",
+            "path": "art/full-ai-city/inputs/harbor/villa_3/ac66adc0d972237e/view00_azim000.png",
+            "sha256": "e854bdf7e236cb0ab6f92647d85e4789a47c8c796cea9387669d2e77a2ff5e4e"
+          },
+          {
+            "view": "right",
+            "path": "art/full-ai-city/inputs/harbor/villa_3/ac66adc0d972237e/view01_azim090.png",
+            "sha256": "b208f3f4c12c41c12e93b7e6f05db5a9189bde488975701a3a243b8a78f2cdcb"
+          },
+          {
+            "view": "back",
+            "path": "art/full-ai-city/inputs/harbor/villa_3/ac66adc0d972237e/view02_azim180.png",
+            "sha256": "51691cd48332f05a1a86c535fc774d9253ce65c609989365c07e5988dfbd112a"
+          }
+        ],
+        "normalisationScale": 1.498238526658128,
+        "placementReview": {
+          "independentParcelScale": 1.498238526658128,
+          "scale": 1.498238526658128,
+          "reason": "independent_uniform_parcel_fit",
+          "relativeToIndependentFit": 1.0,
+          "sharedCameraReviewRequired": true
+        },
+        "reviewStatus": "approved",
+        "triangleBudget": 30000
       }
     },
     {
       "name": "harbor_shop_1",
+      "size": [
+        0.99,
+        0.6494390738010406,
+        0.7848907148838044
+      ],
       "bounds": {
         "min": [
-          -0.4625000059604645,
-          -0.5040000081062317,
-          0.0
+          -0.495,
+          0.0,
+          -0.3924453574419022
         ],
         "max": [
-          0.4625000059604645,
-          0.4580000042915344,
-          0.7516000270843506
+          0.495,
+          0.6494390738010406,
+          0.3924453574419022
         ]
       },
-      "size": [
-        0.925000011920929,
-        0.9620000123977661,
-        0.7516000270843506
-      ],
-      "triangles": 6284,
+      "triangles": 29985,
       "source": {
-        "kind": "blender_three_view",
-        "reference": "art\\regions\\references\\harbor-core-three-views.png"
+        "sourceType": "pixal_native_multiview",
+        "family": "shop",
+        "level": 1,
+        "sourceFile": "assets/models/regions-ai/full/harbor/shop_1/05562a5e20190ce4.glb",
+        "sourceSha256": "05562a5e20190ce4a5c754935c2d51b0031af30c999717c65c7148866c5590d1",
+        "inferenceReport": "art/full-ai-city/reports/harbor--shop_1-a009/harbor--shop_1-a009-pixal-mv-1024-9247.json",
+        "reference": "art/full-ai-city/inputs/harbor/shop_1/79e5d96b4b34c3dc/reference.json",
+        "rawSourceSha256": "1ac065ab8a9ab20df2fff6becb2f2933f440ca2778dc7c0d9549e810afa0d087",
+        "referenceViews": [
+          {
+            "view": "front",
+            "path": "art/full-ai-city/inputs/harbor/shop_1/79e5d96b4b34c3dc/view00_azim000.png",
+            "sha256": "102585b3e31e160cbf1a5ed7372f51d3bdda41f9fe0b50f97319ad38d9db22c9"
+          },
+          {
+            "view": "right",
+            "path": "art/full-ai-city/inputs/harbor/shop_1/79e5d96b4b34c3dc/view01_azim090.png",
+            "sha256": "04049223b6035429aab21967fa738b1bf6bd5c7a2d93120ed79b6b737922dc8b"
+          },
+          {
+            "view": "back",
+            "path": "art/full-ai-city/inputs/harbor/shop_1/79e5d96b4b34c3dc/view02_azim180.png",
+            "sha256": "cbc7c522bd281febebebbca45423e42e56efbd21032589d8101924d6b133fc0d"
+          }
+        ],
+        "normalisationScale": 0.99,
+        "placementReview": {
+          "independentParcelScale": 0.99,
+          "scale": 0.99,
+          "reason": "independent_uniform_parcel_fit",
+          "relativeToIndependentFit": 1.0,
+          "sharedCameraReviewRequired": true
+        },
+        "reviewStatus": "approved",
+        "triangleBudget": 30000
       }
     },
     {
       "name": "harbor_shop_2",
+      "size": [
+        0.99,
+        1.0575341959179214,
+        0.781343001340522
+      ],
       "bounds": {
         "min": [
-          -0.4625000059604645,
-          -0.5040000081062317,
-          0.0
+          -0.495,
+          0.0,
+          -0.390671500670261
         ],
         "max": [
-          0.4625000059604645,
-          0.4945000112056732,
-          1.106600046157837
+          0.495,
+          1.0575341959179214,
+          0.390671500670261
         ]
       },
-      "size": [
-        0.925000011920929,
-        0.9985000193119049,
-        1.106600046157837
-      ],
-      "triangles": 12876,
+      "triangles": 29972,
       "source": {
-        "kind": "blender_three_view",
-        "reference": "art\\regions\\references\\harbor-core-three-views.png"
+        "sourceType": "pixal_native_multiview",
+        "family": "shop",
+        "level": 2,
+        "sourceFile": "assets/models/regions-ai/full/harbor/shop_2/819e4119bd2db981.glb",
+        "sourceSha256": "819e4119bd2db981bdad745d1c8133aebb969f18025dbbf239f92f8a084a760f",
+        "inferenceReport": "art/full-ai-city/reports/harbor--shop_2-a009/harbor--shop_2-a009-pixal-mv-1024-9247.json",
+        "reference": "art/full-ai-city/inputs/harbor/shop_2/69076a70f67bd9b1/reference.json",
+        "rawSourceSha256": "f0290260ecf3f93baa38085bfecfee0ea1f0d549330e78151cac9cc3e66925ab",
+        "referenceViews": [
+          {
+            "view": "front",
+            "path": "art/full-ai-city/inputs/harbor/shop_2/69076a70f67bd9b1/view00_azim000.png",
+            "sha256": "2b1a56b1f509f36d9e91f16e66ffdde99f38ca1a8d80830dc9b59fa5abdd1a6a"
+          },
+          {
+            "view": "right",
+            "path": "art/full-ai-city/inputs/harbor/shop_2/69076a70f67bd9b1/view01_azim090.png",
+            "sha256": "cce4aa7fa8a2b29c19fdd26cdd121315aac0eec5ca92baf322b42048397e0d92"
+          },
+          {
+            "view": "back",
+            "path": "art/full-ai-city/inputs/harbor/shop_2/69076a70f67bd9b1/view02_azim180.png",
+            "sha256": "1d0be3fcd696acd5edca7112daa706c87eb299e8d419a1326bf2113c37ae3f05"
+          }
+        ],
+        "normalisationScale": 1.0575341959179214,
+        "placementReview": {
+          "independentParcelScale": 1.0575341959179214,
+          "scale": 1.0575341959179214,
+          "reason": "independent_uniform_parcel_fit",
+          "relativeToIndependentFit": 1.0,
+          "sharedCameraReviewRequired": true
+        },
+        "reviewStatus": "approved",
+        "triangleBudget": 30000
       }
     },
     {
       "name": "harbor_shop_3",
+      "size": [
+        0.9855638098640055,
+        1.3429129249873526,
+        0.99
+      ],
       "bounds": {
         "min": [
-          -0.4625000059604645,
-          -0.5040000081062317,
-          0.0
+          -0.49278190493200275,
+          0.0,
+          -0.495
         ],
         "max": [
-          0.4625000059604645,
-          0.4945000112056732,
-          1.4615999460220337
+          0.49278190493200275,
+          1.3429129249873526,
+          0.495
         ]
       },
-      "size": [
-        0.925000011920929,
-        0.9985000193119049,
-        1.4615999460220337
-      ],
-      "triangles": 16868,
+      "triangles": 29975,
       "source": {
-        "kind": "blender_three_view",
-        "reference": "art\\regions\\references\\harbor-core-three-views.png"
+        "sourceType": "pixal_native_multiview",
+        "family": "shop",
+        "level": 3,
+        "sourceFile": "assets/models/regions-ai/full/harbor/shop_3/bc156870f095df8a.glb",
+        "sourceSha256": "bc156870f095df8a863d8bb57da1312a7b45cc9068427c17cc30f177488315bf",
+        "inferenceReport": "art/full-ai-city/reports/harbor--shop_3-a009/harbor--shop_3-a009-pixal-mv-1024-9247.json",
+        "reference": "art/full-ai-city/inputs/harbor/shop_3/7c0cb1436476b8e5/reference.json",
+        "rawSourceSha256": "549ef43620ada5d4f70f09cd059a32f38779fb77b1acb6dd475b0a76bd1d0bc2",
+        "referenceViews": [
+          {
+            "view": "front",
+            "path": "art/full-ai-city/inputs/harbor/shop_3/7c0cb1436476b8e5/view00_azim000.png",
+            "sha256": "cc5b2d6ce8065888223ea558284b6ea15ed802f9311422a0a34e20c5e1568a32"
+          },
+          {
+            "view": "right",
+            "path": "art/full-ai-city/inputs/harbor/shop_3/7c0cb1436476b8e5/view01_azim090.png",
+            "sha256": "1cf8a4429b87b63b0a051b246d0a6dc4b4ee88adc67f3f2dca4f9e56b90fab61"
+          },
+          {
+            "view": "back",
+            "path": "art/full-ai-city/inputs/harbor/shop_3/7c0cb1436476b8e5/view02_azim180.png",
+            "sha256": "37f1b97f6aae7066c5d6b1f5ecce468ad108a1a38a8c62845448b8eaa16c78d5"
+          }
+        ],
+        "normalisationScale": 1.3429129249873526,
+        "placementReview": {
+          "independentParcelScale": 1.3429129249873526,
+          "scale": 1.3429129249873526,
+          "reason": "independent_uniform_parcel_fit",
+          "relativeToIndependentFit": 1.0,
+          "sharedCameraReviewRequired": true
+        },
+        "reviewStatus": "approved",
+        "triangleBudget": 30000
       }
     },
     {
       "name": "harbor_hotel_1",
+      "size": [
+        0.99,
+        0.6204426396156931,
+        0.7395239454224077
+      ],
       "bounds": {
         "min": [
-          -0.48249998688697815,
-          -0.48500001430511475,
-          0.0
+          -0.495,
+          0.0,
+          -0.36976197271120387
         ],
         "max": [
-          0.48249998688697815,
-          0.4580000042915344,
-          0.7516000270843506
+          0.495,
+          0.6204426396156931,
+          0.36976197271120387
         ]
       },
-      "size": [
-        0.9649999737739563,
-        0.9430000185966492,
-        0.7516000270843506
-      ],
-      "triangles": 7536,
+      "triangles": 29995,
       "source": {
-        "kind": "blender_three_view",
-        "reference": "art\\regions\\references\\harbor-core-three-views.png"
+        "sourceType": "pixal_native_multiview",
+        "family": "hotel",
+        "level": 1,
+        "sourceFile": "assets/models/regions-ai/full/harbor/hotel_1/5631b9c390b1c1de.glb",
+        "sourceSha256": "5631b9c390b1c1deb12da83fa1e8613f7f10b0de43bd35ef84958737dfbe6dc5",
+        "inferenceReport": "art/full-ai-city/reports/harbor--hotel_1-a009/harbor--hotel_1-a009-pixal-mv-1024-9247.json",
+        "reference": "art/full-ai-city/inputs/harbor/hotel_1/51b085460e1a117e/reference.json",
+        "rawSourceSha256": "164438a8ad0560941878a3e01d1beef1047a841f58f44f6321e0619d66d62580",
+        "referenceViews": [
+          {
+            "view": "front",
+            "path": "art/full-ai-city/inputs/harbor/hotel_1/51b085460e1a117e/view00_azim000.png",
+            "sha256": "c40253cc648e0e0b887f1aaa7801d869fccec4ed9465418b118f20c4e419c532"
+          },
+          {
+            "view": "right",
+            "path": "art/full-ai-city/inputs/harbor/hotel_1/51b085460e1a117e/view01_azim090.png",
+            "sha256": "079f1bd1e23916a36885ed3438224fe0f42b636e06aa31013d77efedc5e0b6bc"
+          },
+          {
+            "view": "back",
+            "path": "art/full-ai-city/inputs/harbor/hotel_1/51b085460e1a117e/view02_azim180.png",
+            "sha256": "859b2e979fccf98d6f38a2145d65685cf80063f988b462dd0ef6de8ff775898e"
+          }
+        ],
+        "normalisationScale": 0.9900000590086019,
+        "placementReview": {
+          "independentParcelScale": 0.9900000590086019,
+          "scale": 0.9900000590086019,
+          "reason": "independent_uniform_parcel_fit",
+          "relativeToIndependentFit": 1.0,
+          "sharedCameraReviewRequired": true
+        },
+        "reviewStatus": "approved",
+        "triangleBudget": 30000
       }
     },
     {
       "name": "harbor_hotel_2",
+      "size": [
+        0.9084352900101161,
+        0.9912860496137078,
+        0.6203802655255455
+      ],
       "bounds": {
         "min": [
-          -0.48249998688697815,
-          -0.4945000112056732,
-          0.0
+          -0.45421764500505807,
+          0.0,
+          -0.31019013276277274
         ],
         "max": [
-          0.48249998688697815,
-          0.4945000112056732,
-          1.3250000476837158
+          0.45421764500505807,
+          0.9912860496137078,
+          0.31019013276277274
         ]
       },
-      "size": [
-        0.9649999737739563,
-        0.9890000224113464,
-        1.3250000476837158
-      ],
-      "triangles": 15444,
+      "triangles": 29996,
       "source": {
-        "kind": "blender_three_view",
-        "reference": "art\\regions\\references\\harbor-core-three-views.png"
+        "sourceType": "pixal_native_multiview",
+        "family": "hotel",
+        "level": 2,
+        "sourceFile": "assets/models/regions-ai/full/harbor/hotel_2/7d24ef79f61aeedf.glb",
+        "sourceSha256": "7d24ef79f61aeedf46264a25dc0a88768c794b5c6d4d116db01fc9ce7648d7e9",
+        "inferenceReport": "art/full-ai-city/reports/harbor--hotel_2-a001/harbor--hotel_2-a001-pixal-mv-1024-9247.json",
+        "reference": "art/full-ai-city/inputs/harbor/hotel_2/d8cac7cbfeb56f69/reference.json",
+        "rawSourceSha256": "1cc521721571f43a10cf0350ebbcc7ccf537b23f412019b8a9a0c7a5055eb413",
+        "referenceViews": [
+          {
+            "view": "front",
+            "path": "art/full-ai-city/inputs/harbor/hotel_2/d8cac7cbfeb56f69/view00_azim000.png",
+            "sha256": "1a4efefe5535901069b61fba5a00fc75efdb7616463e7cbf7ddca533f548c4ea"
+          },
+          {
+            "view": "right",
+            "path": "art/full-ai-city/inputs/harbor/hotel_2/d8cac7cbfeb56f69/view01_azim090.png",
+            "sha256": "50837e6938e1ea1bb893ae05bc7f3d8da5afe0abb4071ce7a61264fe870be002"
+          },
+          {
+            "view": "back",
+            "path": "art/full-ai-city/inputs/harbor/hotel_2/d8cac7cbfeb56f69/view02_azim180.png",
+            "sha256": "fbaf176182d6564fcf3b71c17eb126203b972c5d1a78e8e493241f73e61766c7"
+          }
+        ],
+        "normalisationScale": 0.9912860496137078,
+        "placementReview": {
+          "independentParcelScale": 1.0802895923458042,
+          "scale": 0.9912860496137078,
+          "reason": "uniform_fit_below_next_upgrade",
+          "nextLevel": "hotel_3",
+          "nextLevelHeight": 1.1526581972252417,
+          "maximumHeight": 0.9912860496137078,
+          "heightRatio": 0.86,
+          "relativeToIndependentFit": 0.9176114040506222,
+          "sharedCameraReviewRequired": true
+        },
+        "reviewStatus": "approved",
+        "triangleBudget": 30000
       }
     },
     {
       "name": "harbor_hotel_3",
+      "size": [
+        0.99,
+        1.1526581972252417,
+        0.9013741818264339
+      ],
       "bounds": {
         "min": [
-          -0.48249998688697815,
-          -0.4945000112056732,
-          0.0
+          -0.495,
+          0.0,
+          -0.45068709091321696
         ],
         "max": [
-          0.48249998688697815,
-          0.4945000112056732,
-          1.6799999475479126
+          0.495,
+          1.1526581972252417,
+          0.45068709091321696
         ]
       },
-      "size": [
-        0.9649999737739563,
-        0.9890000224113464,
-        1.6799999475479126
-      ],
-      "triangles": 20796,
+      "triangles": 29995,
       "source": {
-        "kind": "blender_three_view",
-        "reference": "art\\regions\\references\\harbor-core-three-views.png"
+        "sourceType": "pixal_native_multiview",
+        "family": "hotel",
+        "level": 3,
+        "sourceFile": "assets/models/regions-ai/full/harbor/hotel_3/6295d438a3dcd484.glb",
+        "sourceSha256": "6295d438a3dcd4841b99da86b3c1c29ab7a2e4bbc97a7b0b62ca76c579f7f6bf",
+        "inferenceReport": "art/full-ai-city/reports/harbor--hotel_3-a009/harbor--hotel_3-a009-pixal-mv-1024-9247.json",
+        "reference": "art/full-ai-city/inputs/harbor/hotel_3/697cde463c8f27f5/reference.json",
+        "rawSourceSha256": "1d27a1323609be95f7ae9fb628c6caae52a6b599018b0d7b7c96f6e74fe3cef9",
+        "referenceViews": [
+          {
+            "view": "front",
+            "path": "art/full-ai-city/inputs/harbor/hotel_3/697cde463c8f27f5/view00_azim000.png",
+            "sha256": "8eb138adf7501d07e00829f20ee485d6432531b3792e8923aa9e086109c413e4"
+          },
+          {
+            "view": "right",
+            "path": "art/full-ai-city/inputs/harbor/hotel_3/697cde463c8f27f5/view01_azim090.png",
+            "sha256": "7a26f05e777d0ad67120c62905995337d9b14085e91c29883198cae200596ad4"
+          },
+          {
+            "view": "back",
+            "path": "art/full-ai-city/inputs/harbor/hotel_3/697cde463c8f27f5/view02_azim180.png",
+            "sha256": "de75b5dd656a133abb49fb00e185845b733399de6e9264e0c1a68de2a4f53a45"
+          }
+        ],
+        "normalisationScale": 1.1526581972252417,
+        "placementReview": {
+          "independentParcelScale": 1.1526581972252417,
+          "scale": 1.1526581972252417,
+          "reason": "independent_uniform_parcel_fit",
+          "relativeToIndependentFit": 1.0,
+          "sharedCameraReviewRequired": true
+        },
+        "reviewStatus": "approved",
+        "triangleBudget": 30000
       }
     },
     {
       "name": "harbor_tower_1",
+      "size": [
+        0.9636965712265818,
+        0.78,
+        0.833531716154118
+      ],
       "bounds": {
         "min": [
-          -0.4555000066757202,
-          -0.4580000042915344,
-          0.0
+          -0.4818482856132909,
+          0.0,
+          -0.416765858077059
         ],
         "max": [
-          0.4555000066757202,
-          0.4580000042915344,
-          0.7574999928474426
+          0.4818482856132909,
+          0.78,
+          0.416765858077059
         ]
       },
-      "size": [
-        0.9110000133514404,
-        0.9160000085830688,
-        0.7574999928474426
-      ],
-      "triangles": 6600,
+      "triangles": 29810,
       "source": {
-        "kind": "blender_three_view",
-        "reference": "art\\regions\\references\\harbor-core-three-views.png"
+        "sourceType": "pixal_native_multiview",
+        "family": "tower",
+        "level": 1,
+        "sourceFile": "assets/models/regions-ai/full/harbor/tower_1/d1d309e4a1ddf206.glb",
+        "sourceSha256": "d1d309e4a1ddf206c1f6f1065f42750a71188435a88ce306a171fa1e85f9d7e8",
+        "inferenceReport": "art/full-ai-city/reports/harbor--tower_1-a009/harbor--tower_1-a009-pixal-mv-1024-9247.json",
+        "reference": "art/full-ai-city/inputs/harbor/tower_1/ea2797b39a766a04/reference.json",
+        "rawSourceSha256": "72753b0569f5fd8db27c6308521030778ea9c321e62a69ff44685ccb472c3682",
+        "referenceViews": [
+          {
+            "view": "front",
+            "path": "art/full-ai-city/inputs/harbor/tower_1/ea2797b39a766a04/view00_azim000.png",
+            "sha256": "7155fd987c7cc1b196d5b027895b8228b8cd4a052a22e6737a4e135c60bb88aa"
+          },
+          {
+            "view": "right",
+            "path": "art/full-ai-city/inputs/harbor/tower_1/ea2797b39a766a04/view01_azim090.png",
+            "sha256": "8e133dcec8e6e952020bb292d8a8d2b0395b93c3eb777e9284a33a43c915f0f2"
+          },
+          {
+            "view": "back",
+            "path": "art/full-ai-city/inputs/harbor/tower_1/ea2797b39a766a04/view02_azim180.png",
+            "sha256": "5d8ee5a0614bd25a77d222e838a8487f3907619f8de98c42e85da922e5b6b22c"
+          }
+        ],
+        "normalisationScale": 0.9636965712265818,
+        "placementReview": {
+          "independentParcelScale": 0.9636965712265818,
+          "scale": 0.9636965712265818,
+          "reason": "independent_uniform_parcel_fit",
+          "relativeToIndependentFit": 1.0,
+          "sharedCameraReviewRequired": true
+        },
+        "reviewStatus": "approved",
+        "triangleBudget": 30000
       }
     },
     {
       "name": "harbor_tower_2",
+      "size": [
+        0.9899999999999999,
+        1.1097224792471272,
+        0.9723407109076142
+      ],
       "bounds": {
         "min": [
-          -0.4555000066757202,
-          -0.4945000112056732,
-          0.0
+          -0.49499999999999994,
+          0.0,
+          -0.4861703554538071
         ],
         "max": [
-          0.4555000066757202,
-          0.4945000112056732,
-          1.3250000476837158
+          0.49499999999999994,
+          1.1097224792471272,
+          0.4861703554538071
         ]
       },
-      "size": [
-        0.9110000133514404,
-        0.9890000224113464,
-        1.3250000476837158
-      ],
-      "triangles": 14508,
+      "triangles": 44858,
       "source": {
-        "kind": "blender_three_view",
-        "reference": "art\\regions\\references\\harbor-core-three-views.png"
+        "sourceType": "pixal_native_multiview",
+        "family": "tower",
+        "level": 2,
+        "sourceFile": "assets/models/regions-ai/full/harbor/tower_2/9d2c16272fa7e934.glb",
+        "sourceSha256": "9d2c16272fa7e93439b6460464655f53cc34a00fe07c6db638e645a0b39e521b",
+        "inferenceReport": "art/full-ai-city/reports/harbor--tower_2-a009/harbor--tower_2-a009-pixal-mv-1024-9247.json",
+        "reference": "art/full-ai-city/inputs/harbor/tower_2/1d7016d46b18c0ac/reference.json",
+        "rawSourceSha256": "ad83a606becd1958cfb9ea457f8451b4151c3c6a8660c9002dcf998d2fafefef",
+        "referenceViews": [
+          {
+            "view": "front",
+            "path": "art/full-ai-city/inputs/harbor/tower_2/1d7016d46b18c0ac/view00_azim000.png",
+            "sha256": "f50b2e5ad1d3a4927100793d2a9ff574b11e397949e7639b98424e0611d3a707"
+          },
+          {
+            "view": "right",
+            "path": "art/full-ai-city/inputs/harbor/tower_2/1d7016d46b18c0ac/view01_azim090.png",
+            "sha256": "4ab989df0e7141519fbb93fac68e6f46f861c25a10168028231012b3751fca53"
+          },
+          {
+            "view": "back",
+            "path": "art/full-ai-city/inputs/harbor/tower_2/1d7016d46b18c0ac/view02_azim180.png",
+            "sha256": "0d89a8a9abea3656203cf7ea5b7874576f4c3ed4b38a82ae34c0f81eefe2fbcc"
+          }
+        ],
+        "normalisationScale": 1.1097224792471272,
+        "placementReview": {
+          "independentParcelScale": 1.1097224792471272,
+          "scale": 1.1097224792471272,
+          "reason": "independent_uniform_parcel_fit",
+          "relativeToIndependentFit": 1.0,
+          "sharedCameraReviewRequired": true
+        },
+        "reviewStatus": "approved",
+        "triangleBudget": 45000,
+        "budgetReason": "Single same-source fine0015 comparison demonstrably removes the coarse30000triangle rear upper-left and door-side wedges while retaining the round turret, multi-plane blue roof and terrace structure;44858triangles are justified for this individually reviewed complex building."
       }
     },
     {
       "name": "harbor_tower_3",
+      "size": [
+        0.99,
+        1.4931489354013014,
+        0.9081498456143776
+      ],
       "bounds": {
         "min": [
-          -0.4555000066757202,
-          -0.4945000112056732,
-          0.0
+          -0.495,
+          0.0,
+          -0.4540749228071888
         ],
         "max": [
-          0.4555000066757202,
-          0.4945000112056732,
-          1.6799999475479126
+          0.495,
+          1.4931489354013014,
+          0.4540749228071888
         ]
       },
-      "size": [
-        0.9110000133514404,
-        0.9890000224113464,
-        1.6799999475479126
-      ],
-      "triangles": 19860,
+      "triangles": 29881,
       "source": {
-        "kind": "blender_three_view",
-        "reference": "art\\regions\\references\\harbor-core-three-views.png"
+        "sourceType": "pixal_native_multiview",
+        "family": "tower",
+        "level": 3,
+        "sourceFile": "assets/models/regions-ai/full/harbor/tower_3/555dd44bb84b842b.glb",
+        "sourceSha256": "555dd44bb84b842b96202fe92bcf0592a1322ea436129aafc4243bafcbe53b07",
+        "inferenceReport": "art/full-ai-city/reports/harbor--tower_3-a010/harbor--tower_3-a010-pixal-mv-1024-29501.json",
+        "reference": "art/full-ai-city/inputs/harbor/tower_3/64050547869e8867/reference.json",
+        "rawSourceSha256": "62822019449abefb4f1104c1f450628f8578b00d066507f29e53de84dd39bfb7",
+        "referenceViews": [
+          {
+            "view": "front",
+            "path": "art/full-ai-city/inputs/harbor/tower_3/64050547869e8867/view00_azim000.png",
+            "sha256": "ba5416895d16b0bec50a637bc05eda1148aa692caa05bb28bcc495e4d20eae3e"
+          },
+          {
+            "view": "right",
+            "path": "art/full-ai-city/inputs/harbor/tower_3/64050547869e8867/view01_azim090.png",
+            "sha256": "5d31b9333cdf26ea6398832992fce242f2bffd2141284c8f04ccdde3b897f590"
+          },
+          {
+            "view": "back",
+            "path": "art/full-ai-city/inputs/harbor/tower_3/64050547869e8867/view02_azim180.png",
+            "sha256": "0695aeb86041c1aa7f9fecb476e7197c7b673ac9b87a587435cc96e29ca16180"
+          }
+        ],
+        "normalisationScale": 1.4931489354013014,
+        "placementReview": {
+          "independentParcelScale": 1.4931489354013014,
+          "scale": 1.4931489354013014,
+          "reason": "independent_uniform_parcel_fit",
+          "relativeToIndependentFit": 1.0,
+          "sharedCameraReviewRequired": true
+        },
+        "reviewStatus": "approved",
+        "triangleBudget": 30000
       }
     },
     {
       "name": "harbor_skyscraper_1",
+      "size": [
+        2.08368299547369,
+        1.1,
+        0.719346349048531
+      ],
       "bounds": {
         "min": [
-          -1.2599999904632568,
-          -0.5479999780654907,
-          0.0
+          -1.041841497736845,
+          0.0,
+          -0.3596731745242655
         ],
         "max": [
-          1.2599999904632568,
-          0.5199999809265137,
-          1.159999966621399
+          1.041841497736845,
+          1.1,
+          0.3596731745242655
         ]
       },
-      "size": [
-        2.5199999809265137,
-        1.0679999589920044,
-        1.159999966621399
-      ],
-      "triangles": 17908,
+      "triangles": 44988,
       "source": {
-        "kind": "blender_three_view",
-        "reference": "art/regions/references/harbor-landmarks-three-views.png"
+        "sourceType": "pixal_native_multiview",
+        "family": "skyscraper",
+        "level": 1,
+        "sourceFile": "assets/models/regions-ai/full/harbor/skyscraper_1/b4476106e5184f9a.glb",
+        "sourceSha256": "b4476106e5184f9a9e924faa2de9a36420a278584c05555c975905da475470b6",
+        "inferenceReport": "art/full-ai-city/reports/harbor--skyscraper_1-a002/harbor--skyscraper_1-a002-pixal-mv-1024-29485.json",
+        "reference": "art/full-ai-city/inputs/harbor/skyscraper_1/a35617a3bd867130/reference.json",
+        "rawSourceSha256": "8b487919c0fc311a77c2c0bf652f88b67607d5c139c9f4606c03533882193e2a",
+        "referenceViews": [
+          {
+            "view": "front",
+            "path": "art/full-ai-city/inputs/harbor/skyscraper_1/a35617a3bd867130/view00_azim000.png",
+            "sha256": "7c6caa439c1dbecbd56a85a332c928183efde522f9f7aa0fc3d1c647f3592930"
+          },
+          {
+            "view": "right",
+            "path": "art/full-ai-city/inputs/harbor/skyscraper_1/a35617a3bd867130/view01_azim090.png",
+            "sha256": "b07d6fc55bd62f5f33b631993324b51f0dfba06d81328d4b3363bf2c5d18ecb0"
+          },
+          {
+            "view": "back",
+            "path": "art/full-ai-city/inputs/harbor/skyscraper_1/a35617a3bd867130/view02_azim180.png",
+            "sha256": "64369f7ea09ee26e8ed66d9251c456a54bd439509287510837197848bf1e755c"
+          }
+        ],
+        "normalisationScale": 2.0836831196708823,
+        "placementReview": {
+          "independentParcelScale": 2.0836831196708823,
+          "scale": 2.0836831196708823,
+          "reason": "independent_uniform_parcel_fit",
+          "relativeToIndependentFit": 1.0,
+          "sharedCameraReviewRequired": true
+        },
+        "reviewStatus": "approved",
+        "triangleBudget": 45000
       }
     },
     {
       "name": "harbor_skyscraper_2",
+      "size": [
+        2.2331050593687563,
+        1.6151880741119387,
+        0.8808452490948192
+      ],
       "bounds": {
         "min": [
-          -1.2599999904632568,
-          -0.5479999780654907,
-          0.0
+          -1.1165525296843781,
+          0.0,
+          -0.4404226245474096
         ],
         "max": [
-          1.2599999904632568,
-          0.559499979019165,
-          1.5449999570846558
+          1.1165525296843781,
+          1.6151880741119387,
+          0.4404226245474096
         ]
       },
-      "size": [
-        2.5199999809265137,
-        1.1074999570846558,
-        1.5449999570846558
-      ],
-      "triangles": 31516,
+      "triangles": 44969,
       "source": {
-        "kind": "blender_three_view",
-        "reference": "art/regions/references/harbor-landmarks-three-views.png"
+        "sourceType": "pixal_native_multiview",
+        "family": "skyscraper",
+        "level": 2,
+        "sourceFile": "assets/models/regions-ai/full/harbor/skyscraper_2/ae9bf426dd49e36d.glb",
+        "sourceSha256": "ae9bf426dd49e36d59380c0cdb76dc901f7b7fc9c9a1d5c88f27aa20c464892b",
+        "inferenceReport": "art/full-ai-city/reports/harbor--skyscraper_2-a001/harbor--skyscraper_2-a001-pixal-mv-1024-9247.json",
+        "reference": "art/full-ai-city/inputs/harbor/skyscraper_2/73f2f41f0f9bd18f/reference.json",
+        "rawSourceSha256": "543fae885f2b060580ff2b0d1e83473c01421c037cfd4d51771b671a4eeccedc",
+        "referenceViews": [
+          {
+            "view": "front",
+            "path": "art/full-ai-city/inputs/harbor/skyscraper_2/73f2f41f0f9bd18f/view00_azim000.png",
+            "sha256": "9c59fca84d1caf677b0ce37bec3753169b67b348fa0dbbc708e668563554a9b7"
+          },
+          {
+            "view": "right",
+            "path": "art/full-ai-city/inputs/harbor/skyscraper_2/73f2f41f0f9bd18f/view01_azim090.png",
+            "sha256": "4d9ace79f4bba0f6c781d14f016364913d60dc923a55fc94028aa87dbf2a603b"
+          },
+          {
+            "view": "back",
+            "path": "art/full-ai-city/inputs/harbor/skyscraper_2/73f2f41f0f9bd18f/view02_azim180.png",
+            "sha256": "a016e45276dcf76f5f709883873582589348adbe14a8b74630ab17d2e578b0b8"
+          }
+        ],
+        "normalisationScale": 2.2331050593687563,
+        "placementReview": {
+          "independentParcelScale": 2.281234864852704,
+          "scale": 2.2331050593687563,
+          "reason": "uniform_fit_below_next_upgrade",
+          "nextLevel": "skyscraper_3",
+          "nextLevelHeight": 1.8781256675720215,
+          "maximumHeight": 1.6151880741119384,
+          "heightRatio": 0.86,
+          "relativeToIndependentFit": 0.9789018630981446,
+          "sharedCameraReviewRequired": true
+        },
+        "reviewStatus": "approved",
+        "triangleBudget": 45000
       }
     },
     {
       "name": "harbor_skyscraper_3",
+      "size": [
+        2.5,
+        1.8781256675720215,
+        1.0052396357059479
+      ],
       "bounds": {
         "min": [
-          -1.2599999904632568,
-          -0.5479999780654907,
-          0.0
+          -1.25,
+          0.0,
+          -0.5026198178529739
         ],
         "max": [
-          1.2599999904632568,
-          0.5199999809265137,
-          1.9299999475479126
+          1.25,
+          1.8781256675720215,
+          0.5026198178529739
         ]
       },
-      "size": [
-        2.5199999809265137,
-        1.0679999589920044,
-        1.9299999475479126
-      ],
-      "triangles": 34244,
+      "triangles": 44992,
       "source": {
-        "kind": "blender_three_view",
-        "reference": "art/regions/references/harbor-landmarks-three-views.png"
+        "sourceType": "pixal_native_multiview",
+        "family": "skyscraper",
+        "level": 3,
+        "sourceFile": "assets/models/regions-ai/full/harbor/skyscraper_3/d9cc90ad5aa99970.glb",
+        "sourceSha256": "d9cc90ad5aa999700b4b0f1d1636010c8635646bddcd222cfb989fe0483453f1",
+        "inferenceReport": "art/full-ai-city/reports/harbor--skyscraper_3-a001/harbor--skyscraper_3-a001-pixal-mv-1024-9247.json",
+        "reference": "art/full-ai-city/inputs/harbor/skyscraper_3/c22ef9297bb2e9af/reference.json",
+        "rawSourceSha256": "783b6c0ed6bca57eb496a423de27a6944ba3074677c6f3af88ba49dff617e7aa",
+        "referenceViews": [
+          {
+            "view": "front",
+            "path": "art/full-ai-city/inputs/harbor/skyscraper_3/c22ef9297bb2e9af/view00_azim000.png",
+            "sha256": "9612c6bda62bf5e373a1b467ad445d6f5adc022e6d7019fae5b1f654dc50b7d1"
+          },
+          {
+            "view": "right",
+            "path": "art/full-ai-city/inputs/harbor/skyscraper_3/c22ef9297bb2e9af/view01_azim090.png",
+            "sha256": "f2c60ead53ce9fa1827970a90f2234f13b27f6123fbbac5d088103f86ae8054d"
+          },
+          {
+            "view": "back",
+            "path": "art/full-ai-city/inputs/harbor/skyscraper_3/c22ef9297bb2e9af/view02_azim180.png",
+            "sha256": "56f7770a1844bcfb3fcce1fc54de505948244eceec85d51602985fabe4abf099"
+          }
+        ],
+        "normalisationScale": 2.5,
+        "placementReview": {
+          "independentParcelScale": 2.5,
+          "scale": 2.5,
+          "reason": "independent_uniform_parcel_fit",
+          "relativeToIndependentFit": 1.0,
+          "sharedCameraReviewRequired": true
+        },
+        "reviewStatus": "approved",
+        "triangleBudget": 45000
       }
     },
     {
       "name": "harbor_finance_1",
+      "size": [
+        2.241032527504047,
+        1.1,
+        0.8608338017092986
+      ],
       "bounds": {
         "min": [
-          -1.2599999904632568,
-          -0.5199999809265137,
-          0.0
+          -1.1205162637520234,
+          0.0,
+          -0.4304169008546493
         ],
         "max": [
-          1.2599999904632568,
-          0.5199999809265137,
-          0.9700000286102295
+          1.1205162637520234,
+          1.1,
+          0.4304169008546493
         ]
       },
-      "size": [
-        2.5199999809265137,
-        1.0399999618530273,
-        0.9700000286102295
-      ],
-      "triangles": 14652,
+      "triangles": 44979,
       "source": {
-        "kind": "blender_three_view",
-        "reference": "art/regions/references/harbor-landmarks-three-views.png"
+        "sourceType": "pixal_native_multiview",
+        "family": "finance",
+        "level": 1,
+        "sourceFile": "assets/models/regions-ai/full/harbor/finance_1/a279d13a5d1316d3.glb",
+        "sourceSha256": "a279d13a5d1316d30ee29d1d084093ea15389d38cc2420b78d8d7c992323e200",
+        "inferenceReport": "art/full-ai-city/reports/harbor--finance_1-a001/harbor--finance_1-a001-pixal-mv-1024-9247.json",
+        "reference": "art/full-ai-city/inputs/harbor/finance_1/4dc2cc00227dcfe8/reference.json",
+        "rawSourceSha256": "92158e308413f92000897d0b099b5ed73f5cff8ec05f736cf07eca8a7650dc47",
+        "referenceViews": [
+          {
+            "view": "front",
+            "path": "art/full-ai-city/inputs/harbor/finance_1/4dc2cc00227dcfe8/view00_azim000.png",
+            "sha256": "360968eaae4d5c094337dfa13d81855434785db73b350caf9ec30242df42e4ea"
+          },
+          {
+            "view": "right",
+            "path": "art/full-ai-city/inputs/harbor/finance_1/4dc2cc00227dcfe8/view01_azim090.png",
+            "sha256": "7114a18671c77f03e1e0ce5ab59d3fe9685aa44cdb2791966ddd4093f8c54710"
+          },
+          {
+            "view": "back",
+            "path": "art/full-ai-city/inputs/harbor/finance_1/4dc2cc00227dcfe8/view02_azim180.png",
+            "sha256": "fb7f237834cd85b160575e630926fd1aa983641292b30251029b26e65385c468"
+          }
+        ],
+        "normalisationScale": 2.241032527504047,
+        "placementReview": {
+          "independentParcelScale": 2.241032527504047,
+          "scale": 2.241032527504047,
+          "reason": "independent_uniform_parcel_fit",
+          "relativeToIndependentFit": 1.0,
+          "sharedCameraReviewRequired": true
+        },
+        "reviewStatus": "approved",
+        "triangleBudget": 45000
       }
     },
     {
       "name": "harbor_finance_2",
+      "size": [
+        2.247391256145292,
+        1.3748406782651352,
+        0.7112945284093893
+      ],
       "bounds": {
         "min": [
-          -1.2599999904632568,
-          -0.5199999809265137,
-          0.0
+          -1.123695628072646,
+          0.0,
+          -0.35564726420469467
         ],
         "max": [
-          1.2599999904632568,
-          0.5199999809265137,
-          1.3550000190734863
+          1.123695628072646,
+          1.3748406782651352,
+          0.35564726420469467
         ]
       },
-      "size": [
-        2.5199999809265137,
-        1.0399999618530273,
-        1.3550000190734863
-      ],
-      "triangles": 22140,
+      "triangles": 44997,
       "source": {
-        "kind": "blender_three_view",
-        "reference": "art/regions/references/harbor-landmarks-three-views.png"
+        "sourceType": "pixal_native_multiview",
+        "family": "finance",
+        "level": 2,
+        "sourceFile": "assets/models/regions-ai/full/harbor/finance_2/8d79195acb459ede.glb",
+        "sourceSha256": "8d79195acb459ede08e01d39f9e54d5200b924ebb1055e499d33db1795153521",
+        "inferenceReport": "art/full-ai-city/reports/harbor--finance_2-a001/harbor--finance_2-a001-pixal-mv-1024-9247.json",
+        "reference": "art/full-ai-city/inputs/harbor/finance_2/34ea412789afb4a6/reference.json",
+        "rawSourceSha256": "a47dd592c2cb7d5b2e4630181c578c87672b1e96808e7f83d4e99dc0c549c733",
+        "referenceViews": [
+          {
+            "view": "front",
+            "path": "art/full-ai-city/inputs/harbor/finance_2/34ea412789afb4a6/view00_azim000.png",
+            "sha256": "d7dd500468e94d9884f3f7c553d71c4eaa25e72f5c0f22389a18f1091aa85137"
+          },
+          {
+            "view": "right",
+            "path": "art/full-ai-city/inputs/harbor/finance_2/34ea412789afb4a6/view01_azim090.png",
+            "sha256": "33d7de54892f23ca0eb7cd723887e8fc07aa0576c9305238f062b7bca24a3909"
+          },
+          {
+            "view": "back",
+            "path": "art/full-ai-city/inputs/harbor/finance_2/34ea412789afb4a6/view02_azim180.png",
+            "sha256": "ca4599d799e759e4202311e82ec0b1ed4295d8707d61ff39f49bdee2b2958612"
+          }
+        ],
+        "normalisationScale": 2.247391256145292,
+        "placementReview": {
+          "independentParcelScale": 2.5,
+          "scale": 2.247391256145292,
+          "reason": "uniform_fit_below_next_upgrade",
+          "nextLevel": "finance_3",
+          "nextLevelHeight": 1.5986519514710875,
+          "maximumHeight": 1.3748406782651352,
+          "heightRatio": 0.86,
+          "relativeToIndependentFit": 0.8989565024581168,
+          "sharedCameraReviewRequired": true
+        },
+        "reviewStatus": "approved",
+        "triangleBudget": 45000
       }
     },
     {
       "name": "harbor_finance_3",
+      "size": [
+        2.5,
+        1.5986519514710875,
+        0.8501029521288247
+      ],
       "bounds": {
         "min": [
-          -1.2599999904632568,
-          -0.5199999809265137,
-          0.0
+          -1.25,
+          0.0,
+          -0.42505147606441235
         ],
         "max": [
-          1.2599999904632568,
-          0.5199999809265137,
-          1.7400000095367432
+          1.25,
+          1.5986519514710875,
+          0.42505147606441235
         ]
       },
-      "size": [
-        2.5199999809265137,
-        1.0399999618530273,
-        1.7400000095367432
-      ],
-      "triangles": 29628,
+      "triangles": 44979,
       "source": {
-        "kind": "blender_three_view",
-        "reference": "art/regions/references/harbor-landmarks-three-views.png"
+        "sourceType": "pixal_native_multiview",
+        "family": "finance",
+        "level": 3,
+        "sourceFile": "assets/models/regions-ai/full/harbor/finance_3/32eda28fe825c63a.glb",
+        "sourceSha256": "32eda28fe825c63a11ec5d26d59caaf870b8692e90736fb0ed892885477bf71e",
+        "inferenceReport": "art/full-ai-city/reports/harbor--finance_3-a001/harbor--finance_3-a001-pixal-mv-1024-9247.json",
+        "reference": "art/full-ai-city/inputs/harbor/finance_3/628b65c05c11f44b/reference.json",
+        "rawSourceSha256": "f8d68983325b31c1aa07f66da25a40d2d3a626d2872cf0c3c8be0dea7e7ca72d",
+        "referenceViews": [
+          {
+            "view": "front",
+            "path": "art/full-ai-city/inputs/harbor/finance_3/628b65c05c11f44b/view00_azim000.png",
+            "sha256": "29b59dac2f29b16e19ccd748dd83c9d83b1313fe98e4e10ba04a5b7f4ec571a3"
+          },
+          {
+            "view": "right",
+            "path": "art/full-ai-city/inputs/harbor/finance_3/628b65c05c11f44b/view01_azim090.png",
+            "sha256": "01bf4926aef4a32b74050a4bfd71804ab213bf7f663b4f73a2cc3cf4e51c5480"
+          },
+          {
+            "view": "back",
+            "path": "art/full-ai-city/inputs/harbor/finance_3/628b65c05c11f44b/view02_azim180.png",
+            "sha256": "8c307d9c774f5d577aee681e36b2314e19104ddca2a02621bf4237fb1df46bfb"
+          }
+        ],
+        "normalisationScale": 2.500000149011621,
+        "placementReview": {
+          "independentParcelScale": 2.500000149011621,
+          "scale": 2.500000149011621,
+          "reason": "independent_uniform_parcel_fit",
+          "relativeToIndependentFit": 1.0,
+          "sharedCameraReviewRequired": true
+        },
+        "reviewStatus": "approved",
+        "triangleBudget": 45000
       }
     },
     {
       "name": "harbor_onsen_1",
+      "size": [
+        2.1511457747522775,
+        1.0152591367933426,
+        0.7510277392741143
+      ],
       "bounds": {
         "min": [
-          -1.2599999904632568,
-          -0.5699999928474426,
-          0.0
+          -1.0755728873761388,
+          0.0,
+          -0.37551386963705713
         ],
         "max": [
-          1.2599999904632568,
-          0.5199999809265137,
-          1.2393404245376587
+          1.0755728873761388,
+          1.0152591367933426,
+          0.37551386963705713
         ]
       },
-      "size": [
-        2.5199999809265137,
-        1.0899999737739563,
-        1.2393404245376587
-      ],
-      "triangles": 15456,
+      "triangles": 44978,
       "source": {
-        "kind": "blender_three_view",
-        "reference": "art/regions/references/harbor-landmarks-three-views.png"
+        "sourceType": "pixal_native_multiview",
+        "family": "onsen",
+        "level": 1,
+        "sourceFile": "assets/models/regions-ai/full/harbor/onsen_1/6c5291b85158daec.glb",
+        "sourceSha256": "6c5291b85158daec641417442aed091c5dde3994bf443e45e1d4ab4c247652d8",
+        "inferenceReport": "art/full-ai-city/reports/harbor--onsen_1-a001/harbor--onsen_1-a001-pixal-mv-1024-9247.json",
+        "reference": "art/full-ai-city/inputs/harbor/onsen_1/6e27c695c9038ae8/reference.json",
+        "rawSourceSha256": "044605f0335a98c35a5290efc4e75d38cdf4bbe0c6ba3b57a4fe1fd343bc7451",
+        "referenceViews": [
+          {
+            "view": "front",
+            "path": "art/full-ai-city/inputs/harbor/onsen_1/6e27c695c9038ae8/view00_azim000.png",
+            "sha256": "84edca73c6d6a6ee09e102ca1542e91539949d56719b5cbd992399c25c0f3340"
+          },
+          {
+            "view": "right",
+            "path": "art/full-ai-city/inputs/harbor/onsen_1/6e27c695c9038ae8/view01_azim090.png",
+            "sha256": "7daf4f44b827b5114191ed3f97a43922e96f49fdaf8a012c752b48622da33bbc"
+          },
+          {
+            "view": "back",
+            "path": "art/full-ai-city/inputs/harbor/onsen_1/6e27c695c9038ae8/view02_azim180.png",
+            "sha256": "b2eb7f5883f7a5522b7b878dfa0e932bfb9a73c4f7dea52e51e727252599117e"
+          }
+        ],
+        "normalisationScale": 2.1511457747522775,
+        "placementReview": {
+          "independentParcelScale": 2.330695943994406,
+          "scale": 2.1511457747522775,
+          "reason": "uniform_fit_below_next_upgrade",
+          "nextLevel": "onsen_2",
+          "nextLevelHeight": 1.180533879992259,
+          "maximumHeight": 1.0152591367933426,
+          "heightRatio": 0.86,
+          "relativeToIndependentFit": 0.9229628516303113,
+          "sharedCameraReviewRequired": true
+        },
+        "reviewStatus": "approved",
+        "triangleBudget": 45000
       }
     },
     {
       "name": "harbor_onsen_2",
+      "size": [
+        2.481741846650338,
+        1.180533879992259,
+        1.02
+      ],
       "bounds": {
         "min": [
-          -1.2599999904632568,
-          -0.5699999928474426,
-          0.0
+          -1.240870923325169,
+          0.0,
+          -0.51
         ],
         "max": [
-          1.2599999904632568,
-          0.5199999809265137,
-          1.6243404150009155
+          1.240870923325169,
+          1.180533879992259,
+          0.51
         ]
       },
-      "size": [
-        2.5199999809265137,
-        1.0899999737739563,
-        1.6243404150009155
-      ],
-      "triangles": 22632,
+      "triangles": 44989,
       "source": {
-        "kind": "blender_three_view",
-        "reference": "art/regions/references/harbor-landmarks-three-views.png"
+        "sourceType": "pixal_native_multiview",
+        "family": "onsen",
+        "level": 2,
+        "sourceFile": "assets/models/regions-ai/full/harbor/onsen_2/a00b81566d4ca245.glb",
+        "sourceSha256": "a00b81566d4ca245dc74ee171784d2231bfe819f58672980be863548990f8b29",
+        "inferenceReport": "art/full-ai-city/reports/harbor--onsen_2-a001/harbor--onsen_2-a001-pixal-mv-1024-9247.json",
+        "reference": "art/full-ai-city/inputs/harbor/onsen_2/3f3269d19f8611d0/reference.json",
+        "rawSourceSha256": "d4d57ce37dbad4379901f0d2637e7b50e877913e728bcf91540c3fe453c06eab",
+        "referenceViews": [
+          {
+            "view": "front",
+            "path": "art/full-ai-city/inputs/harbor/onsen_2/3f3269d19f8611d0/view00_azim000.png",
+            "sha256": "b6fe20d95fdeb1beaa216fe5d813b592333d2c662f30c5e1d57c27f7be294b06"
+          },
+          {
+            "view": "right",
+            "path": "art/full-ai-city/inputs/harbor/onsen_2/3f3269d19f8611d0/view01_azim090.png",
+            "sha256": "ba72c89500c4d102ac26ff2fd59bd57146586b713eaa2523f72df83b05cf5f4b"
+          },
+          {
+            "view": "back",
+            "path": "art/full-ai-city/inputs/harbor/onsen_2/3f3269d19f8611d0/view02_azim180.png",
+            "sha256": "c0ae7f5ab76425e0df8537ef6cba9652e97b662abcbe01983bb256c68846c81c"
+          }
+        ],
+        "normalisationScale": 2.481741846650338,
+        "placementReview": {
+          "independentParcelScale": 2.481741846650338,
+          "scale": 2.481741846650338,
+          "reason": "independent_uniform_parcel_fit",
+          "relativeToIndependentFit": 1.0,
+          "sharedCameraReviewRequired": true
+        },
+        "reviewStatus": "approved",
+        "triangleBudget": 45000
       }
     },
     {
       "name": "harbor_onsen_3",
+      "size": [
+        2.435152712889778,
+        1.437736987996889,
+        1.02
+      ],
       "bounds": {
         "min": [
-          -1.2599999904632568,
-          -0.5699999928474426,
-          0.0
+          -1.217576356444889,
+          0.0,
+          -0.51
         ],
         "max": [
-          1.2599999904632568,
-          0.5199999809265137,
-          2.009340524673462
+          1.217576356444889,
+          1.437736987996889,
+          0.51
         ]
       },
-      "size": [
-        2.5199999809265137,
-        1.0899999737739563,
-        2.009340524673462
-      ],
-      "triangles": 29808,
+      "triangles": 44997,
       "source": {
-        "kind": "blender_three_view",
-        "reference": "art/regions/references/harbor-landmarks-three-views.png"
+        "sourceType": "pixal_native_multiview",
+        "family": "onsen",
+        "level": 3,
+        "sourceFile": "assets/models/regions-ai/full/harbor/onsen_3/f026e366afeacd37.glb",
+        "sourceSha256": "f026e366afeacd37fecf22970e901e78641448d6bb5eb0dd26d7635dab759583",
+        "inferenceReport": "art/full-ai-city/reports/harbor--onsen_3-a001/harbor--onsen_3-a001-pixal-mv-1024-9247.json",
+        "reference": "art/full-ai-city/inputs/harbor/onsen_3/9612ff203d24764d/reference.json",
+        "rawSourceSha256": "625f56f66d147e2dba5a7d6a4ea549118b28fb8d3e656fb3e953e84806751a77",
+        "referenceViews": [
+          {
+            "view": "front",
+            "path": "art/full-ai-city/inputs/harbor/onsen_3/9612ff203d24764d/view00_azim000.png",
+            "sha256": "5895f4e3bdc6520e9b074134f4c7edf5c34c986939ed02b5d66acbe568115462"
+          },
+          {
+            "view": "right",
+            "path": "art/full-ai-city/inputs/harbor/onsen_3/9612ff203d24764d/view01_azim090.png",
+            "sha256": "81efe6180985fdc9f3b0dd1949efe79805579f4769a40a6671088ec195bcd5b0"
+          },
+          {
+            "view": "back",
+            "path": "art/full-ai-city/inputs/harbor/onsen_3/9612ff203d24764d/view02_azim180.png",
+            "sha256": "a70af4e9015144d69339d557ca29ae771e75f2da0e134bb7f5bfd5e0b052569a"
+          }
+        ],
+        "normalisationScale": 2.435152858036199,
+        "placementReview": {
+          "independentParcelScale": 2.435152858036199,
+          "scale": 2.435152858036199,
+          "reason": "independent_uniform_parcel_fit",
+          "relativeToIndependentFit": 1.0,
+          "sharedCameraReviewRequired": true
+        },
+        "reviewStatus": "approved",
+        "triangleBudget": 45000
       }
     },
     {
       "name": "harbor_civic_hall",
+      "size": [
+        1.04,
+        1.0088105659967999,
+        0.8686772435115125
+      ],
       "bounds": {
         "min": [
-          -0.48500001430511475,
-          -0.46799999475479126,
-          0.0
+          -0.52,
+          0.0,
+          -0.43433862175575627
         ],
         "max": [
-          0.48500001430511475,
-          0.4399999976158142,
-          1.321023941040039
+          0.52,
+          1.0088105659967999,
+          0.43433862175575627
         ]
       },
-      "size": [
-        0.9700000286102295,
-        0.9079999923706055,
-        1.321023941040039
-      ],
-      "triangles": 13744,
+      "triangles": 29975,
       "source": {
-        "kind": "blender_three_view",
-        "reference": "art/regions/references/harbor-public-three-views.png"
+        "sourceType": "pixal_native_multiview",
+        "family": "civic_hall",
+        "level": 0,
+        "sourceFile": "assets/models/regions-ai/full/harbor/civic_hall/ec61faa1f2a997f3.glb",
+        "sourceSha256": "ec61faa1f2a997f3b09f201303651b57fb0c8ab057473cbae1fa898a074bc95a",
+        "inferenceReport": "art/full-ai-city/reports/harbor--civic_hall-a002/harbor--civic_hall-a002-pixal-mv-1024-29483.json",
+        "reference": "art/full-ai-city/inputs/harbor/civic_hall/e1d86402f4d39eed/reference.json",
+        "rawSourceSha256": "4401c7c1c41a518fd2c031d45481e8c1774f4b0ae3e588a36b70c48cbdc1e0d2",
+        "referenceViews": [
+          {
+            "view": "front",
+            "path": "art/full-ai-city/inputs/harbor/civic_hall/e1d86402f4d39eed/view00_azim000.png",
+            "sha256": "b0a133495b593c4b6cbd75b8a0785fb7c3e229afa1e643a28d876ca892c9f2ad"
+          },
+          {
+            "view": "right",
+            "path": "art/full-ai-city/inputs/harbor/civic_hall/e1d86402f4d39eed/view01_azim090.png",
+            "sha256": "56280f50ac3036dc0e8bff281cf1a30bc3aac522a7fb88aeb3794ce759f6f384"
+          },
+          {
+            "view": "back",
+            "path": "art/full-ai-city/inputs/harbor/civic_hall/e1d86402f4d39eed/view02_azim180.png",
+            "sha256": "5b1297caa200d97bfb508c31285d919f61a91ea028451b32204ff88d143dea23"
+          }
+        ],
+        "normalisationScale": 1.0400000619888343,
+        "placementReview": {
+          "independentParcelScale": 1.0400000619888343,
+          "scale": 1.0400000619888343,
+          "reason": "independent_uniform_parcel_fit",
+          "relativeToIndependentFit": 1.0,
+          "sharedCameraReviewRequired": true
+        },
+        "reviewStatus": "approved",
+        "triangleBudget": 30000
       }
     },
     {
       "name": "harbor_vault_bank",
+      "size": [
+        1.04,
+        0.833008074760437,
+        0.9963257694244385
+      ],
       "bounds": {
         "min": [
-          -0.48500001430511475,
-          -0.46799999475479126,
-          0.0
+          -0.52,
+          0.0,
+          -0.49816288471221926
         ],
         "max": [
-          0.48500001430511475,
-          0.4399999976158142,
-          0.9851698875427246
+          0.52,
+          0.833008074760437,
+          0.49816288471221926
         ]
       },
-      "size": [
-        0.9700000286102295,
-        0.9079999923706055,
-        0.9851698875427246
-      ],
-      "triangles": 12440,
+      "triangles": 29987,
       "source": {
-        "kind": "blender_three_view",
-        "reference": "art/regions/references/harbor-public-three-views.png"
+        "sourceType": "pixal_native_multiview",
+        "family": "vault_bank",
+        "level": 0,
+        "sourceFile": "assets/models/regions-ai/full/harbor/vault_bank/f4d9dffff763fa74.glb",
+        "sourceSha256": "f4d9dffff763fa7479d186d49922960fbf474a5b6ee160ebc4e5037352f8b340",
+        "inferenceReport": "art/full-ai-city/reports/harbor--vault_bank-a002/harbor--vault_bank-a002-pixal-mv-1024-29484.json",
+        "reference": "art/full-ai-city/inputs/harbor/vault_bank/d66b3d7ad3b49a27/reference.json",
+        "rawSourceSha256": "1f5b49e3a3339ca7e41e82ce72415b1d6fc65ee11bfce22072d3824d8ff21bd9",
+        "referenceViews": [
+          {
+            "view": "front",
+            "path": "art/full-ai-city/inputs/harbor/vault_bank/d66b3d7ad3b49a27/view00_azim000.png",
+            "sha256": "0fe54f2fb1f168cbfa35d7fc29cfe1632f65d6808a60f4b7820a4b0507c5e161"
+          },
+          {
+            "view": "right",
+            "path": "art/full-ai-city/inputs/harbor/vault_bank/d66b3d7ad3b49a27/view01_azim090.png",
+            "sha256": "e43c591fae3538840155cf38add1e3faa33dbc1b606794fad6fe17bc80734eb9"
+          },
+          {
+            "view": "back",
+            "path": "art/full-ai-city/inputs/harbor/vault_bank/d66b3d7ad3b49a27/view02_azim180.png",
+            "sha256": "23acb8244f07d2ca08d6bf415f61f0a31402d1ed67cb7644d7455ef157db244f"
+          }
+        ],
+        "normalisationScale": 1.04,
+        "placementReview": {
+          "independentParcelScale": 1.04,
+          "scale": 1.04,
+          "reason": "independent_uniform_parcel_fit",
+          "relativeToIndependentFit": 1.0,
+          "sharedCameraReviewRequired": true
+        },
+        "reviewStatus": "approved",
+        "triangleBudget": 30000
       }
     },
     {
       "name": "harbor_builders_guild",
+      "size": [
+        1.04,
+        0.9113742707583233,
+        0.94179531032594
+      ],
       "bounds": {
         "min": [
-          -0.48500001430511475,
-          -0.46799999475479126,
-          0.0
+          -0.52,
+          0.0,
+          -0.47089765516297
         ],
         "max": [
-          0.5299999713897705,
-          0.4399999976158142,
-          1.132900357246399
+          0.5200000000000001,
+          0.9113742707583233,
+          0.47089765516297
         ]
       },
-      "size": [
-        1.0149999856948853,
-        0.9079999923706055,
-        1.132900357246399
-      ],
-      "triangles": 11784,
+      "triangles": 29986,
       "source": {
-        "kind": "blender_three_view",
-        "reference": "art/regions/references/harbor-public-three-views.png"
+        "sourceType": "pixal_native_multiview",
+        "family": "builders_guild",
+        "level": 0,
+        "sourceFile": "assets/models/regions-ai/full/harbor/builders_guild/7b2116b37da76442.glb",
+        "sourceSha256": "7b2116b37da76442cb1b95eed9f60203d96be6cae85b393d117e5af9a7d9d63a",
+        "inferenceReport": "art/full-ai-city/reports/harbor--builders_guild-a001/harbor--builders_guild-a001-pixal-mv-1024-9247.json",
+        "reference": "art/full-ai-city/inputs/harbor/builders_guild/4952ccd1aa0b7f4f/reference.json",
+        "rawSourceSha256": "fd204274f5324a17cbbddcdd944e4200b96219e760f3da4f29e730c0838225f1",
+        "referenceViews": [
+          {
+            "view": "front",
+            "path": "art/full-ai-city/inputs/harbor/builders_guild/4952ccd1aa0b7f4f/view00_azim000.png",
+            "sha256": "4898fb2658b2ed758c533dbebc35d9aaea79ef4f480fa1444cf64eca2edd749a"
+          },
+          {
+            "view": "right",
+            "path": "art/full-ai-city/inputs/harbor/builders_guild/4952ccd1aa0b7f4f/view01_azim090.png",
+            "sha256": "e5e88eae3ae40abcc21ef5127b424f5ae6e8a7eb2d754af6c5ac8320f386eb12"
+          },
+          {
+            "view": "back",
+            "path": "art/full-ai-city/inputs/harbor/builders_guild/4952ccd1aa0b7f4f/view02_azim180.png",
+            "sha256": "3a6e22d342ce1a376a23b8d207f122791b6cae02fc7e0c85a666d35a313ff392"
+          }
+        ],
+        "normalisationScale": 1.0420067198583012,
+        "placementReview": {
+          "independentParcelScale": 1.0420067198583012,
+          "scale": 1.0420067198583012,
+          "reason": "independent_uniform_parcel_fit",
+          "relativeToIndependentFit": 1.0,
+          "sharedCameraReviewRequired": true
+        },
+        "reviewStatus": "approved",
+        "triangleBudget": 30000
       }
     },
     {
       "name": "harbor_card_pavilion",
+      "size": [
+        1.04,
+        0.9864428901672364,
+        0.8898202800750733
+      ],
       "bounds": {
         "min": [
-          -0.48500001430511475,
-          -0.49900001287460327,
-          0.0
+          -0.52,
+          0.0,
+          -0.44491014003753665
         ],
         "max": [
-          0.48500001430511475,
-          0.484499990940094,
-          0.9851698875427246
+          0.52,
+          0.9864428901672364,
+          0.44491014003753665
         ]
       },
-      "size": [
-        0.9700000286102295,
-        0.9835000038146973,
-        0.9851698875427246
-      ],
-      "triangles": 15112,
+      "triangles": 29960,
       "source": {
-        "kind": "blender_three_view",
-        "reference": "art/regions/references/harbor-public-three-views.png"
+        "sourceType": "pixal_native_multiview",
+        "family": "card_pavilion",
+        "level": 0,
+        "sourceFile": "assets/models/regions-ai/full/harbor/card_pavilion/348b61b62022bb9b.glb",
+        "sourceSha256": "348b61b62022bb9b6eeff89eba6ec55f504e590cda9f5c0b66868fce63b5b2a4",
+        "inferenceReport": "art/full-ai-city/reports/harbor--card_pavilion-a002/harbor--card_pavilion-a002-pixal-mv-1024-29482.json",
+        "reference": "art/full-ai-city/inputs/harbor/card_pavilion/9d366651d3d06e4a/reference.json",
+        "rawSourceSha256": "a060beb2ed9083af2116c47c7cd48c3b2d4da38fdd6ae32ffa591475cddd0d2f",
+        "referenceViews": [
+          {
+            "view": "front",
+            "path": "art/full-ai-city/inputs/harbor/card_pavilion/9d366651d3d06e4a/view00_azim000.png",
+            "sha256": "cfea3dcd08a9c787ac62bea02458448edd7bfb2c44af08fe820d360a4845d828"
+          },
+          {
+            "view": "right",
+            "path": "art/full-ai-city/inputs/harbor/card_pavilion/9d366651d3d06e4a/view01_azim090.png",
+            "sha256": "7838aa5fc94920e67027f7daa288db9283b1a33edf7ff4240184d880d4091a7e"
+          },
+          {
+            "view": "back",
+            "path": "art/full-ai-city/inputs/harbor/card_pavilion/9d366651d3d06e4a/view02_azim180.png",
+            "sha256": "a949f5cd5723cfb62a7a266ecbc5023043d937a414bc1aed38caa0fec39f6391"
+          }
+        ],
+        "normalisationScale": 1.04,
+        "placementReview": {
+          "independentParcelScale": 1.04,
+          "scale": 1.04,
+          "reason": "independent_uniform_parcel_fit",
+          "relativeToIndependentFit": 1.0,
+          "sharedCameraReviewRequired": true
+        },
+        "reviewStatus": "approved",
+        "triangleBudget": 30000
       }
     },
     {
       "name": "harbor_chance_wheel",
+      "size": [
+        1.04,
+        0.9757040321990355,
+        0.9046719156212797
+      ],
       "bounds": {
         "min": [
-          -0.48500001430511475,
-          -0.4399999976158142,
-          0.0
+          -0.5200000000000001,
+          0.0,
+          -0.45233595781063984
         ],
         "max": [
-          0.5249999761581421,
-          0.4399999976158142,
-          0.9750000238418579
+          0.52,
+          0.9757040321990353,
+          0.4523359578106399
         ]
       },
-      "size": [
-        1.0099999904632568,
-        0.8799999952316284,
-        0.9750000238418579
-      ],
-      "triangles": 2896,
+      "triangles": 31551,
       "source": {
-        "kind": "blender_three_view",
-        "reference": "art/regions/references/harbor-public-three-views.png"
+        "sourceType": "pixal_native_multiview",
+        "family": "chance_wheel",
+        "level": 0,
+        "sourceFile": "assets/models/regions-ai/full/harbor/chance_wheel/a9148dbfec37e641.glb",
+        "sourceSha256": "a9148dbfec37e641d2c6d0818253aaa6976f1fb2821e1965b0545c5abf7d8b8d",
+        "inferenceReport": "art/full-ai-city/reports/harbor--chance_wheel-a001/harbor--chance_wheel-a001-pixal-mv-1024-9247.json",
+        "reference": "art/full-ai-city/inputs/harbor/chance_wheel/252c59093679417c/reference.json",
+        "rawSourceSha256": "fafa4b96f6b71b4800ba9b961b6054e7378582aaccd6a9ad62681f8888a96242",
+        "referenceViews": [
+          {
+            "view": "front",
+            "path": "art/full-ai-city/inputs/harbor/chance_wheel/252c59093679417c/view00_azim000.png",
+            "sha256": "f0f90ad191dc41f2598d30f6f8ca71c998af4afcb87959f6e0ef9578b4badf37"
+          },
+          {
+            "view": "right",
+            "path": "art/full-ai-city/inputs/harbor/chance_wheel/252c59093679417c/view01_azim090.png",
+            "sha256": "0eaa963f43c752424b83180407984cd21986d26f35bab8043fe94538a7d072e2"
+          },
+          {
+            "view": "back",
+            "path": "art/full-ai-city/inputs/harbor/chance_wheel/252c59093679417c/view02_azim180.png",
+            "sha256": "327c518c19fb5837e001549b6c741bc8a681e6d9056fde6d82e7aa6e6f8af157"
+          }
+        ],
+        "normalisationScale": 1.0256847420588937,
+        "placementReview": {
+          "independentParcelScale": 1.0256847420588937,
+          "scale": 1.0256847420588937,
+          "reason": "independent_uniform_parcel_fit",
+          "relativeToIndependentFit": 1.0,
+          "sharedCameraReviewRequired": true
+        },
+        "reviewStatus": "approved",
+        "triangleBudget": 30000
       }
     },
     {
       "name": "harbor_teleport_gate",
+      "size": [
+        1.04,
+        0.859559440612793,
+        0.5827716255187988
+      ],
       "bounds": {
         "min": [
-          -0.515500009059906,
-          -0.4399999976158142,
-          0.0
+          -0.52,
+          0.0,
+          -0.2913858127593994
         ],
         "max": [
-          0.515500009059906,
-          0.4399999976158142,
-          1.4171820878982544
+          0.52,
+          0.859559440612793,
+          0.2913858127593994
         ]
       },
-      "size": [
-        1.031000018119812,
-        0.8799999952316284,
-        1.4171820878982544
-      ],
-      "triangles": 14132,
+      "triangles": 29992,
       "source": {
-        "kind": "blender_three_view",
-        "reference": "art/regions/references/harbor-public-three-views.png"
+        "sourceType": "pixal_native_multiview",
+        "family": "teleport_gate",
+        "level": 0,
+        "sourceFile": "assets/models/regions-ai/full/harbor/teleport_gate/890c2142a4a773b7.glb",
+        "sourceSha256": "890c2142a4a773b71e90c20c9956318e28dbde4fcea03f1dfb3e65b2772b4164",
+        "inferenceReport": "art/full-ai-city/reports/harbor--teleport_gate-a001/harbor--teleport_gate-a001-pixal-mv-1024-9247.json",
+        "reference": "art/full-ai-city/inputs/harbor/teleport_gate/76fa7953e40d231e/reference.json",
+        "rawSourceSha256": "7ea1baabda679db3ea164cf6dabb3701d68a088158e1ed815648ccd6231aedcf",
+        "referenceViews": [
+          {
+            "view": "front",
+            "path": "art/full-ai-city/inputs/harbor/teleport_gate/76fa7953e40d231e/view00_azim000.png",
+            "sha256": "21bd50e1185533c682f2f41546af8fc4ac9ed2ea80a994093cdb90cfb3647e6a"
+          },
+          {
+            "view": "right",
+            "path": "art/full-ai-city/inputs/harbor/teleport_gate/76fa7953e40d231e/view01_azim090.png",
+            "sha256": "f334bbc29494003d1a074befd07cfd2d231d01a5cd63d94c57c5e5486f3a1f4e"
+          },
+          {
+            "view": "back",
+            "path": "art/full-ai-city/inputs/harbor/teleport_gate/76fa7953e40d231e/view02_azim180.png",
+            "sha256": "7a0e5254c4ed3f2d9ebd9c8a87c155fbe69ecc9beb5a1dd52f8534c493927701"
+          }
+        ],
+        "normalisationScale": 1.04,
+        "placementReview": {
+          "independentParcelScale": 1.04,
+          "scale": 1.04,
+          "reason": "independent_uniform_parcel_fit",
+          "relativeToIndependentFit": 1.0,
+          "sharedCameraReviewRequired": true
+        },
+        "reviewStatus": "approved",
+        "triangleBudget": 30000
       }
     },
     {
       "name": "harbor_rush_station",
+      "size": [
+        1.04,
+        0.6586700057983399,
+        0.8599882173538208
+      ],
       "bounds": {
         "min": [
-          -0.48500001430511475,
-          -0.49000000953674316,
-          0.0
+          -0.52,
+          0.0,
+          -0.4299941086769104
         ],
         "max": [
-          0.48500001430511475,
-          0.4399999976158142,
-          0.8349278569221497
+          0.52,
+          0.6586700057983399,
+          0.4299941086769104
         ]
       },
-      "size": [
-        0.9700000286102295,
-        0.9300000071525574,
-        0.8349278569221497
-      ],
-      "triangles": 6536,
+      "triangles": 29989,
       "source": {
-        "kind": "blender_three_view",
-        "reference": "art/regions/references/harbor-public-three-views.png"
+        "sourceType": "pixal_native_multiview",
+        "family": "rush_station",
+        "level": 0,
+        "sourceFile": "assets/models/regions-ai/full/harbor/rush_station/e8100aa9901849e3.glb",
+        "sourceSha256": "e8100aa9901849e33f1742e01e52ef965fa3797cce62ca15241b34af77348aef",
+        "inferenceReport": "art/full-ai-city/reports/harbor--rush_station-a001/harbor--rush_station-a001-pixal-mv-1024-9247.json",
+        "reference": "art/full-ai-city/inputs/harbor/rush_station/1c0f26792893da95/reference.json",
+        "rawSourceSha256": "3b29d61550160caf5816c7fefd8f939fc9a33fff905f30839b044224753f8fd3",
+        "referenceViews": [
+          {
+            "view": "front",
+            "path": "art/full-ai-city/inputs/harbor/rush_station/1c0f26792893da95/view00_azim000.png",
+            "sha256": "0010530a6a89da5971a34fdc1c40976aff58d9e316178d62702fb35e6374f2ac"
+          },
+          {
+            "view": "right",
+            "path": "art/full-ai-city/inputs/harbor/rush_station/1c0f26792893da95/view01_azim090.png",
+            "sha256": "ab9809e0e020866359ab6683d2cf7f1db693a8b5c5ee6c676580adc1f1b78d5d"
+          },
+          {
+            "view": "back",
+            "path": "art/full-ai-city/inputs/harbor/rush_station/1c0f26792893da95/view02_azim180.png",
+            "sha256": "f3943198c1316afec767a932b0db969c1b7aa9ace76c8bd87d36b5e52507487c"
+          }
+        ],
+        "normalisationScale": 1.04,
+        "placementReview": {
+          "independentParcelScale": 1.04,
+          "scale": 1.04,
+          "reason": "independent_uniform_parcel_fit",
+          "relativeToIndependentFit": 1.0,
+          "sharedCameraReviewRequired": true
+        },
+        "reviewStatus": "approved",
+        "triangleBudget": 30000
       }
     },
     {
       "name": "harbor_junction_hub",
+      "size": [
+        1.04,
+        0.9338082297926087,
+        0.7385114776200937
+      ],
       "bounds": {
         "min": [
-          -0.48500001430511475,
-          -0.4429999887943268,
-          0.0
+          -0.52,
+          0.0,
+          -0.36925573881004686
         ],
         "max": [
-          0.49672308564186096,
-          0.4399999976158142,
-          0.8349278569221497
+          0.52,
+          0.9338082297926087,
+          0.36925573881004686
         ]
       },
-      "size": [
-        0.9817230999469757,
-        0.882999986410141,
-        0.8349278569221497
-      ],
-      "triangles": 5936,
+      "triangles": 29977,
       "source": {
-        "kind": "blender_three_view",
-        "reference": "art/regions/references/harbor-public-three-views.png"
+        "sourceType": "pixal_native_multiview",
+        "family": "junction_hub",
+        "level": 0,
+        "sourceFile": "assets/models/regions-ai/full/harbor/junction_hub/069eeae1de8ef1a4.glb",
+        "sourceSha256": "069eeae1de8ef1a4dcf23073d8e2fb351fb74a1ad2496ec4fcd905d1f3321566",
+        "inferenceReport": "art/full-ai-city/reports/harbor--junction_hub-a001/harbor--junction_hub-a001-pixal-mv-1024-9247.json",
+        "reference": "art/full-ai-city/inputs/harbor/junction_hub/020fde2a65fc2f1e/reference.json",
+        "rawSourceSha256": "a02d1b17c80d86ede4dc17363cfc37b45f568a9db3abf20f5233f834cbe29312",
+        "referenceViews": [
+          {
+            "view": "front",
+            "path": "art/full-ai-city/inputs/harbor/junction_hub/020fde2a65fc2f1e/view00_azim000.png",
+            "sha256": "6498a160d1f13db52fc27d6938026df62669e397938aaab806761230598f0977"
+          },
+          {
+            "view": "right",
+            "path": "art/full-ai-city/inputs/harbor/junction_hub/020fde2a65fc2f1e/view01_azim090.png",
+            "sha256": "58d496cc9ac1dde3f1fd66b495ca41ade59b53dd08e4b7ca725bdcffc7c441d0"
+          },
+          {
+            "view": "back",
+            "path": "art/full-ai-city/inputs/harbor/junction_hub/020fde2a65fc2f1e/view02_azim180.png",
+            "sha256": "00217667a53c8b104949338b94f0183b577a15f0e0b67e767e1c876446bc1030"
+          }
+        ],
+        "normalisationScale": 1.0400000619888343,
+        "placementReview": {
+          "independentParcelScale": 1.0400000619888343,
+          "scale": 1.0400000619888343,
+          "reason": "independent_uniform_parcel_fit",
+          "relativeToIndependentFit": 1.0,
+          "sharedCameraReviewRequired": true
+        },
+        "reviewStatus": "approved",
+        "triangleBudget": 30000
       }
     }
-  ]
+  ],
+  "packedAtUtc": "2026-10-24T08:15:47.036437+00:00",
+  "sha256": "695c441e86e71ef1467070dd43a0f9fe5035e52f871436793ded3951c48a3dbb",
+  "bytes": 40794364
 }

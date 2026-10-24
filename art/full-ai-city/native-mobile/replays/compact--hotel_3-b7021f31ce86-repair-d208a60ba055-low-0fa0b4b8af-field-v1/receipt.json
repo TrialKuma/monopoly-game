@@ -1,0 +1,568 @@
+{
+  "status": "exported_pending_visual_review",
+  "newNeuralInference": false,
+  "sameNativeRun": true,
+  "separateExportInvocation": true,
+  "gpuLockJobId": "harbor--civic_hall-a001",
+  "adapter": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\compact--hotel_3-b7021f31ce86-repair-d208a60ba055-low-0fa0b4b8af-field-v1\\replay-export-source.py",
+    "sha256": "be41cd189ea4451835f5d3cb1a80e83721c4ab9927a4c95c23383c2b3fa11e03",
+    "bytes": 13436
+  },
+  "nativeExporterSnapshot": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\compact--hotel_3-b7021f31ce86-repair-d208a60ba055-low-0fa0b4b8af-field-v1\\native-exporter-source.py",
+    "sha256": "9d60e5ba3e01e7fcc5fcf49665c273503427b8cf93b38195d05088801c5c51c4",
+    "bytes": 7334
+  },
+  "request": {
+    "status": "completed_pending_visual_review",
+    "sourceReceipt": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\compact--hotel_3-a003\\receipt.json",
+    "triangles": 45000,
+    "textureSize": 1024,
+    "surfaceNPZ": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\compact--hotel_3-b7021f31ce86-repair-d208a60ba055-low-0fa0b4b8af-field-v1\\surface.npz",
+    "purpose": "Explicitly recorded bounded repair applied before source-derived low surface; original inference/field remain distinct and unchanged. Native UV/material replay adds no geometry. Requires independent review.",
+    "gpuLockJobId": "harbor--civic_hall-a001"
+  },
+  "jobId": "compact--hotel_3-a003",
+  "sourceExportReceipt": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\compact--hotel_3-a003\\receipt.json",
+    "sha256": "b33db37a560f70be9002ca44ac01d560cdd2e4fc19f74d0ec7eb28c7b5ee90f6",
+    "bytes": 3696
+  },
+  "rawGLB": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\compact--hotel_3-a003-pixal-mv-1024-29453.glb",
+    "sha256": "b7021f31ce86fbdb779f1e9b3b28e7664115978d3a0ccbd1d02ea4337778c0ac",
+    "bytes": 46965524
+  },
+  "tensorArchive": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\compact--hotel_3-a003\\neural-export-inputs.pt",
+    "sha256": "6e112adfcdefd3a40f2d5c80d0590a0d1c5318488cf6d87ae82494e9d9b0b0be",
+    "bytes": 752250653
+  },
+  "originalParameters": {
+    "attr_layout": {
+      "base_color": {
+        "slice": [
+          0,
+          3,
+          null
+        ]
+      },
+      "metallic": {
+        "slice": [
+          3,
+          4,
+          null
+        ]
+      },
+      "roughness": {
+        "slice": [
+          4,
+          5,
+          null
+        ]
+      },
+      "alpha": {
+        "slice": [
+          5,
+          6,
+          null
+        ]
+      }
+    },
+    "grid_size": 1024,
+    "aabb": [
+      [
+        -0.5,
+        -0.5,
+        -0.5
+      ],
+      [
+        0.5,
+        0.5,
+        0.5
+      ]
+    ],
+    "decimation_target": 1000000,
+    "texture_size": 4096,
+    "remesh": true,
+    "remesh_band": 1,
+    "remesh_project": 0,
+    "use_tqdm": true
+  },
+  "geometrySurfaceInput": {
+    "receipt": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\compact--hotel_3-b7021f31ce86-repair-d208a60ba055-low-0fa0b4b8af-field-v1\\geometry-source-proof.json",
+      "sha256": "b81f2228dca12d4eb69fe37ba1066641d17968bffee73106151dbcdbf9b8157d",
+      "bytes": 11350
+    },
+    "method": "Coordinate inversion of the recorded neural-derived low surface including explicitly bounded local source repairs. This preparation only welds exact positions and changes coordinates; it adds no faces. Original raw inference and repair input remain distinct.",
+    "sourceRaw": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\compact--hotel_3-a003-pixal-mv-1024-29453.glb",
+      "sha256": "b7021f31ce86fbdb779f1e9b3b28e7664115978d3a0ccbd1d02ea4337778c0ac",
+      "bytes": 46965524
+    },
+    "candidate": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\compact--hotel_3-b7021f31ce86-repair-d208a60ba055-low-0fa0b4b8af-field-v1\\geometry-candidate.glb",
+      "sha256": "0fa0b4b8af1c56b2ee0fe3b2801ec38b3b7406d42905c4cd758218961420489f",
+      "bytes": 2384916
+    },
+    "candidateReport": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\compact--hotel_3-b7021f31ce86-repair-d208a60ba055-low-0fa0b4b8af-field-v1\\geometry-candidate-processing.json",
+      "sha256": "f111c2e6cb194573be3cbefc455b1b94ee2385df5502bfaf946e39a2bc6ba717",
+      "bytes": 18307
+    },
+    "originalCandidate": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-compact-hotel3-d208a60ba055dd98\\candidates\\compact\\hotel_3.glb",
+      "sha256": "0fa0b4b8af1c56b2ee0fe3b2801ec38b3b7406d42905c4cd758218961420489f",
+      "bytes": 2384916
+    },
+    "fieldReceipt": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\compact--hotel_3-a003\\receipt.json",
+      "sha256": "b33db37a560f70be9002ca44ac01d560cdd2e4fc19f74d0ec7eb28c7b5ee90f6",
+      "bytes": 3696
+    },
+    "output": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\compact--hotel_3-b7021f31ce86-repair-d208a60ba055-low-0fa0b4b8af-field-v1\\geometry-surface.npz",
+      "sha256": "4fe7e9f91c5e7460a002c7889515a77b649ac070981935c8f0b90b8e8dd66a99",
+      "bytes": 775052
+    },
+    "triangles": 44913,
+    "vertices": 19632,
+    "originalSplitVertices": 76392,
+    "exactCoincidentVerticesMerged": 56760,
+    "maximumPositionChangeFromWelding": 0,
+    "normalization": {
+      "enabled": true,
+      "candidate_degrees": 1.1941773611586297,
+      "applied_degrees": 1.1941773611586297,
+      "underside_area": 0.15773699188456994,
+      "normal_agreement": 0.9608968278910592,
+      "yaw_degrees": 180,
+      "pitch_degrees": 0,
+      "roll_degrees": 0,
+      "uniform_scale": 1.145303775678722
+    },
+    "rawBlenderToNormalizedBlender": [
+      [
+        -1.1453009416868114,
+        2.6207082208219075e-05,
+        0.0025391696162587116,
+        -0.0004666457871043784
+      ],
+      [
+        2.6415871218723846e-05,
+        -1.1450577601247311,
+        0.023736496788500316,
+        -0.004698367953924754
+      ],
+      [
+        0.0025391647540024685,
+        0.023736492331251635,
+        1.145054943163648,
+        0.4546946412195412
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "inverse": [
+      [
+        -0.8731286667756298,
+        2.0143816582499173e-05,
+        0.001935753084476013,
+        -0.00128752372512405
+      ],
+      [
+        1.9984610021587288e-05,
+        -0.8729432749771289,
+        0.018095694553725603,
+        -0.012329414725737262
+      ],
+      [
+        0.0019357526772639264,
+        0.018095690802744212,
+        0.8729411304293518,
+        -0.39683573058175137
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "sampledNormalizationReconstructionMaxError": 1.261415402829244e-07,
+    "nativeBounds": {
+      "min": [
+        -0.4370965784699687,
+        -0.39153416106270966,
+        -0.31120261626660484
+      ],
+      "max": [
+        0.43743559827188677,
+        0.4671642909863707,
+        0.30815419688071116
+      ]
+    },
+    "tool": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\compact--hotel_3-b7021f31ce86-repair-d208a60ba055-low-0fa0b4b8af-field-v1\\geometry-preparation-source.py",
+      "sha256": "c4eec55644a998f870bd170aae5f8c5f060ba6af7ddbbe7025a44c5141846d8d",
+      "bytes": 8809
+    },
+    "toolSnapshot": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\compact--hotel_3-b7021f31ce86-repair-d208a60ba055-low-0fa0b4b8af-field-v1\\geometry-preparation-source.py",
+      "sha256": "c4eec55644a998f870bd170aae5f8c5f060ba6af7ddbbe7025a44c5141846d8d",
+      "bytes": 8809
+    },
+    "normalizationInput": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-compact-hotel3-local-support-v2-rear\\repaired-native.glb",
+      "sha256": "d208a60ba055dd982192a23db2b63cb647b638151d1a043351f050e9ca1b8ffa",
+      "bytes": 47661024
+    },
+    "localSurfaceRepair": {
+      "source": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-compact-hotel3-local-support-v2-rear\\repaired-native.glb",
+        "sha256": "d208a60ba055dd982192a23db2b63cb647b638151d1a043351f050e9ca1b8ffa",
+        "bytes": 47661024
+      },
+      "receipt": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\compact\\hotel_3\\d208a60ba055dd98\\repair.json",
+        "sha256": "b8fdb6ca0a54c129e90ff67d0f91a1c94e449451c1fd60797344fa0714bd85d3",
+        "bytes": 11774
+      },
+      "method": "Only explicitly measured and visually reviewed local gaps are closed from adjoining original surface and UV samples with0.006 inward closure. Original vertices, faces and image pixels are preserved. No replacement building or generated texture. See configuration and frozen prior review evidence for exact allowed regions.",
+      "newTriangles": 6012,
+      "newVertices": 3014,
+      "originalVerticesMoved": 0,
+      "originalTrianglesDeleted": 0,
+      "regions": [
+        {
+          "name": "Local inward support for intact thin upper left plaster",
+          "specification": {
+            "u": [
+              0,
+              -1,
+              0
+            ],
+            "v": [
+              0,
+              0,
+              1
+            ],
+            "n": [
+              -1,
+              0,
+              0
+            ],
+            "color": "plaster",
+            "donorNormal": 0.65,
+            "name": "Local inward support for intact thin upper left plaster",
+            "roi": [
+              -0.255,
+              -0.025,
+              0.65,
+              0.779
+            ],
+            "forceRoi": [
+              -0.255,
+              -0.025,
+              0.65,
+              0.779
+            ],
+            "defectDepth": 0.2,
+            "donorDepth": 0.325,
+            "donorMaxDepth": 0.334,
+            "gridStep": 0.006,
+            "donorMargin": 0.03
+          },
+          "missingSamples": 858,
+          "boundarySamples": 586,
+          "sampledDepthRange": [
+            0.3286815881729126,
+            0.44875526428222656
+          ],
+          "inwardClosureThickness": 0.006,
+          "outerSurfaceUnchanged": true,
+          "newVertices": 1968,
+          "newTriangles": 3932
+        },
+        {
+          "name": "Small existing left gable infill gap",
+          "specification": {
+            "u": [
+              0,
+              -1,
+              0
+            ],
+            "v": [
+              0,
+              0,
+              1
+            ],
+            "n": [
+              -1,
+              0,
+              0
+            ],
+            "color": "plaster",
+            "donorNormal": 0.65,
+            "name": "Small existing left gable infill gap",
+            "roi": [
+              -0.115,
+              -0.075,
+              0.84,
+              0.885
+            ],
+            "defectDepth": 0.2,
+            "donorDepth": 0.282,
+            "donorMaxDepth": 0.295
+          },
+          "missingSamples": 79,
+          "boundarySamples": 235,
+          "sampledDepthRange": [
+            -2.0,
+            0.3191542625427246
+          ],
+          "inwardClosureThickness": 0.006,
+          "outerSurfaceUnchanged": true,
+          "newVertices": 254,
+          "newTriangles": 504
+        },
+        {
+          "name": "Intact upper rear-right thin plaster behind proven low triangular loss",
+          "specification": {
+            "name": "Intact upper rear-right thin plaster behind proven low triangular loss",
+            "u": [
+              -1,
+              0,
+              0
+            ],
+            "v": [
+              0,
+              0,
+              1
+            ],
+            "n": [
+              0,
+              1,
+              0
+            ],
+            "roi": [
+              0.238,
+              0.31,
+              0.635,
+              0.73
+            ],
+            "forceRoi": [
+              0.238,
+              0.31,
+              0.635,
+              0.73
+            ],
+            "defectDepth": 0.1,
+            "donorDepth": 0.238,
+            "donorMaxDepth": 0.248,
+            "donorNormal": 0.65,
+            "color": "plaster",
+            "gridStep": 0.006,
+            "donorMargin": 0.032,
+            "flatPatchUV": true,
+            "donorMinRGB": 0.35,
+            "donorMaxColorRatio": 1.5
+          },
+          "missingSamples": 192,
+          "boundarySamples": 378,
+          "sampledDepthRange": [
+            -0.12478947639465332,
+            0.2701985836029053
+          ],
+          "inwardClosureThickness": 0.006,
+          "outerSurfaceUnchanged": true,
+          "newVertices": 504,
+          "newTriangles": 1004
+        },
+        {
+          "name": "Intact middle rear thin plaster adjacent post behind proven low loss",
+          "specification": {
+            "name": "Intact middle rear thin plaster adjacent post behind proven low loss",
+            "u": [
+              -1,
+              0,
+              0
+            ],
+            "v": [
+              0,
+              0,
+              1
+            ],
+            "n": [
+              0,
+              1,
+              0
+            ],
+            "roi": [
+              -0.034,
+              0.026,
+              0.34,
+              0.4
+            ],
+            "forceRoi": [
+              -0.034,
+              0.026,
+              0.34,
+              0.4
+            ],
+            "defectDepth": 0.1,
+            "donorDepth": 0.235,
+            "donorMaxDepth": 0.244,
+            "donorNormal": 0.65,
+            "color": "plaster",
+            "gridStep": 0.006,
+            "donorMargin": 0.032,
+            "flatPatchUV": true,
+            "donorMinRGB": 0.35,
+            "donorMaxColorRatio": 1.5
+          },
+          "missingSamples": 100,
+          "boundarySamples": 204,
+          "sampledDepthRange": [
+            -0.1580643653869629,
+            0.24810457229614258
+          ],
+          "inwardClosureThickness": 0.006,
+          "outerSurfaceUnchanged": true,
+          "newVertices": 288,
+          "newTriangles": 572
+        }
+      ]
+    },
+    "localRepairTool": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\f21173ee639bce54c9c7094ef6121aa6aea7401fc45edfff9d221c65a107ae79-repair_bounded_source_surface.py",
+      "sha256": "f21173ee639bce54c9c7094ef6121aa6aea7401fc45edfff9d221c65a107ae79",
+      "bytes": 13325
+    },
+    "repairAppliedBeforeReduction": true,
+    "originalReceipt": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\compact--hotel_3-b7021f31ce86-repair-d208a60ba055-low-0fa0b4b8af-field-v1\\geometry-source-original-receipt.json",
+      "sha256": "b80c8b38a8a8f8c7cde089061b41767f587f31ba173c55d1a1e6740e808fb27e",
+      "bytes": 10965
+    }
+  },
+  "nativePostprocessOverride": {
+    "original": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\compact--hotel_3-b7021f31ce86-repair-d208a60ba055-low-0fa0b4b8af-field-v1\\original-native-exporter-source.py",
+      "sha256": "b6b79da5dfe13c22047a6257c6b2301c7ea31259dd9c82344db7e5c4cc707917",
+      "bytes": 8126
+    },
+    "scope": "Keep original neural geometry BVH for PBR lookup. Replace only the intermediate surface with this recorded existing source-derived low mesh; bypass further remeshing/simplification/cleanup, then use native unwrap/normals/field sampling.",
+    "sharedCodeModified": false,
+    "noNewGeometryAuthored": true,
+    "noNewGeometryAuthoredAppliesTo": "native_uv_material_replay_only",
+    "counts": {
+      "facesBeforeUnwrap": 44913
+    }
+  },
+  "mobileParameters": {
+    "attr_layout": {
+      "base_color": {
+        "slice": [
+          0,
+          3,
+          null
+        ]
+      },
+      "metallic": {
+        "slice": [
+          3,
+          4,
+          null
+        ]
+      },
+      "roughness": {
+        "slice": [
+          4,
+          5,
+          null
+        ]
+      },
+      "alpha": {
+        "slice": [
+          5,
+          6,
+          null
+        ]
+      }
+    },
+    "grid_size": 1024,
+    "aabb": [
+      [
+        -0.5,
+        -0.5,
+        -0.5
+      ],
+      [
+        0.5,
+        0.5,
+        0.5
+      ]
+    ],
+    "decimation_target": 0,
+    "texture_size": 1024,
+    "remesh": false,
+    "remesh_band": 1,
+    "remesh_project": 0,
+    "use_tqdm": true
+  },
+  "nativeFieldLookup": {
+    "quantiles50_95_99_100": [
+      0.0010240896372124553,
+      0.0024060900323092937,
+      0.003515159245580435,
+      0.01720680668950081
+    ],
+    "fractionOverTwoPercent": 0.0,
+    "sampleCount": 562265,
+    "meaning": "Distance to original neural BVH before direct field sampling, not ray hit coverage"
+  },
+  "output": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\compact--hotel_3-b7021f31ce86-repair-d208a60ba055-low-0fa0b4b8af-field-v1\\mobile-45000-1024.glb",
+    "sha256": "f43b6e13b742af1b1a4365dac7508a89ac1419fbc9a2af7376f5a703b2e1b2f6",
+    "bytes": 2969936
+  },
+  "actualTriangles": 44913,
+  "actualVertices": 63860,
+  "officialOutputRotation": [
+    [
+      -1.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      0.0,
+      0.0,
+      -1.0,
+      0.0
+    ],
+    [
+      0.0,
+      -1.0,
+      0.0,
+      0.0
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "rawUnchanged": true,
+  "textureOrigin": "Original neural attribute field sampled by the native UV/material operations with the recorded surface-stage override; no new neural inference or raw-UV rebake.",
+  "geometryOrigin": "Actual neural building with the explicitly recorded bounded local surface repair, followed by source-derived CPU mobile geometry and native UV/material sampling. The original inference, repair and low-surface sources are distinct; the UV/material replay adds no geometry.",
+  "seconds": 48.81
+}

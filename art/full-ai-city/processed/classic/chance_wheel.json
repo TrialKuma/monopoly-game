@@ -1,0 +1,347 @@
+{
+  "status": "exported_pending_visual_review",
+  "createdAt": "2026-10-23T05:35:00.185132+00:00",
+  "region": "classic",
+  "asset": "chance_wheel",
+  "source": {
+    "rawGLB": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\classic--chance_wheel-a001-pixal-mv-1024-9247.glb",
+      "sha256": "91fc8cc60e033de16ef10373de13de81883e41600db98e1ee327dba58a8477ef",
+      "bytes": 37578716
+    }
+  },
+  "inferenceReport": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\classic--chance_wheel-a001\\classic--chance_wheel-a001-pixal-mv-1024-9247.json",
+    "sha256": "341b3cd3db60370c4699592d8308e3e218db9dffa0778162eb338968598d037e",
+    "bytes": 8157
+  },
+  "reference": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\references\\classic\\chance_wheel\\reference.json",
+    "sha256": "aed83279e000fdc7c85d28fe009135828290d6cdf2731f43ea88198668196bc1",
+    "bytes": 4037
+  },
+  "processingTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\8d5f841acccfde9739388a5442ef41608a925f896f9f987a4bac643dba8062bc-process_lod.py",
+    "sha256": "8d5f841acccfde9739388a5442ef41608a925f896f9f987a4bac643dba8062bc",
+    "bytes": 17792
+  },
+  "assumedCameras": true,
+  "cameraCalibration": "assumed_standard_orbit_not_measured",
+  "nativePipeline": "Pixal3DMVImageTo3DPipeline.run_mv",
+  "nativeResolution": 1024,
+  "seed": 9247,
+  "geometryOrigin": "Only the actual neural source reduced and rebaked; no authored substitute geometry or manually constructed surfaces",
+  "orientation": {
+    "up": "Y",
+    "front": "+Z",
+    "groundY": 0,
+    "maxEdge": 1
+  },
+  "requestedTriangles": 30000,
+  "limitations": [
+    "Assumed camera reference reconstruction, not exact measured architecture",
+    "Final candidate requires actual rendered visual approval"
+  ],
+  "animation": {
+    "driver": "scene-life",
+    "autoplayClip": false,
+    "node": "classic__chance_wheel__neural_wheel",
+    "lifePart": "wheel",
+    "localRotationAxis": "Z",
+    "geometryOrigin": "Only original neural-derived faces, no added geometry",
+    "poseReview": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\classic\\chance_wheel\\motion\\review.json",
+      "sha256": "954500ee821f0d13ed40fce764c152f38961e098eb10ed6b13d8928e02017c51",
+      "bytes": 4188
+    },
+    "frames": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\classic\\chance_wheel\\motion\\pose-0-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\classic\\chance_wheel\\motion\\pose-0-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\classic\\chance_wheel\\motion\\pose-0-iso.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\classic\\chance_wheel\\motion\\pose-45-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\classic\\chance_wheel\\motion\\pose-45-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\classic\\chance_wheel\\motion\\pose-45-iso.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\classic\\chance_wheel\\motion\\pose-90-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\classic\\chance_wheel\\motion\\pose-90-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\classic\\chance_wheel\\motion\\pose-90-iso.png"
+    ]
+  },
+  "processingComplete": true,
+  "lod": "near",
+  "processingRevision": 0,
+  "derivation": {
+    "rawTriangles": 937991,
+    "weldedTriangles": 934766,
+    "remeshedTriangles": 2177868,
+    "voxelSize": 0.003,
+    "finalTriangles": 29988,
+    "atlasArea": 0.40959226104967167,
+    "singleReductionPass": true,
+    "inheritedUVRemovedBeforeReduction": true,
+    "sourceMaterialsUntouched": true
+  },
+  "bake": {
+    "hitCoverageAreaWeighted": 0.9996252685706171,
+    "cageExtrusion": 0.02,
+    "maxRayDistance": 0.06,
+    "maps": [
+      {
+        "role": "base",
+        "size": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "role": "orm",
+        "size": [
+          512,
+          512
+        ]
+      },
+      {
+        "role": "normal",
+        "size": [
+          1024,
+          1024
+        ]
+      }
+    ],
+    "method": "Selected-to-active CPU bake from original neural source onto a source-derived voxel surface reduced without inherited UV constraints; no authored substitute building"
+  },
+  "quantization": {
+    "source": "H:\\代码项目\\monopoly\\art\\full-ai-city\\candidates\\classic\\chance_wheel.glb",
+    "output": "H:\\代码项目\\monopoly\\art\\full-ai-city\\candidates\\classic\\chance_wheel.glb",
+    "sourceBytes": 1797780,
+    "outputBytes": 1377668,
+    "sourceSha256": "5451abacb27b9468bac93fbbe5b6c39cd080847b94aa117270f7cf369061c224",
+    "outputSha256": "f36cf5b34d2b69b535fc873c82be9617bdad019a319bc5b3c4689b0fe610528c",
+    "positionFaceAndTextureBytesUnchanged": true,
+    "attributes": [
+      {
+        "accessor": 1,
+        "semantic": "NORMAL",
+        "count": 35022,
+        "maximumAngularErrorDegrees": 0.38075142551835617
+      },
+      {
+        "accessor": 2,
+        "semantic": "TEXCOORD_0",
+        "count": 35022,
+        "maximumUVError": 7.629446373252913e-06,
+        "maximumTexelErrorAt1024": 0.007812553086210983
+      }
+    ]
+  },
+  "processedCandidate": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\candidates\\classic\\chance_wheel.glb",
+    "sha256": "58998dcb9fd7645266ed498837db3a153754e141c675b2d040064f011d620a39",
+    "bytes": 1562952
+  },
+  "glbValidation": {
+    "version": 2,
+    "triangles": 29988,
+    "meshes": 2,
+    "materials": 1,
+    "images": 3,
+    "all_primitives_have_uv": true,
+    "animations": [],
+    "all_images_embedded": true,
+    "external_buffers": []
+  },
+  "triangles": 29988,
+  "renderedCandidate": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\classic\\chance_wheel\\lod-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\classic\\chance_wheel\\lod-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\classic\\chance_wheel\\lod-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\classic\\chance_wheel\\lod-left.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\classic\\chance_wheel\\lod-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.5005122423171997,
+        -0.46015819907188416,
+        -6.23114246991463e-05
+      ],
+      "max": [
+        0.49933087825775146,
+        0.45941969752311707,
+        0.9904513955116272
+      ]
+    },
+    "triangles": 29988,
+    "textureSizes": [
+      {
+        "name": "classic__chance_wheel__base",
+        "size": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "name": "classic__chance_wheel__normal",
+        "size": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "name": "classic__chance_wheel__orm",
+        "size": [
+          512,
+          512
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "renderedSource": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\classic\\chance_wheel\\raw-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\classic\\chance_wheel\\raw-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.5,
+        -0.46010658144950867,
+        0.0
+      ],
+      "max": [
+        0.5,
+        0.46010658144950867,
+        0.9902204871177673
+      ]
+    },
+    "triangles": 937991,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "bounds": {
+    "min": [
+      -0.5005122423171997,
+      -6.23114246991463e-05,
+      -0.45941969752311707
+    ],
+    "max": [
+      0.49933087825775146,
+      0.9904513955116272,
+      0.46015819907188416
+    ],
+    "coordinateSystem": "GLTF Y-up; +Z front"
+  },
+  "textureSizes": [
+    {
+      "name": "classic__chance_wheel__base",
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "name": "classic__chance_wheel__normal",
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "name": "classic__chance_wheel__orm",
+      "size": [
+        512,
+        512
+      ]
+    }
+  ],
+  "rawSourceUnchanged": true,
+  "completedAt": "2026-10-23T05:48:58.274350+00:00",
+  "reviewSheet": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\classic\\chance_wheel\\review-sheet.jpg",
+    "sha256": "ed31e4a618695fcd4b676c089f74f1f795a02866c3cf2133eca152914178df51",
+    "bytes": 325973,
+    "content": "Unmodified CPU render images composed with labels for visual comparison only"
+  },
+  "derivedFromStaticCandidate": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\candidate-history\\classic\\chance_wheel\\f36cf5b34d2b69b535fc873c82be9617bdad019a319bc5b3c4689b0fe610528c\\chance_wheel.glb",
+    "sha256": "f36cf5b34d2b69b535fc873c82be9617bdad019a319bc5b3c4689b0fe610528c",
+    "bytes": 1377668
+  },
+  "componentSeparation": {
+    "source": {
+      "path": "art\\full-ai-city\\candidates\\classic\\chance_wheel.glb",
+      "sha256": "f36cf5b34d2b69b535fc873c82be9617bdad019a319bc5b3c4689b0fe610528c"
+    },
+    "output": {
+      "path": "art\\full-ai-city\\component-candidates\\classic\\chance_wheel.glb",
+      "sha256": "58998dcb9fd7645266ed498837db3a153754e141c675b2d040064f011d620a39",
+      "bytes": 1562952
+    },
+    "staticTriangles": 28900,
+    "movingTriangles": 1088,
+    "triangleTotalPreserved": 29988,
+    "poseZeroMaxPositionError": 7.373909399754908e-09,
+    "embeddedImageHashesUnchanged": true,
+    "selection": {
+      "name": "classic__chance_wheel__neural_wheel",
+      "lifePart": "wheel",
+      "center": [
+        0.363,
+        0.267,
+        0.144
+      ],
+      "axis": [
+        0.682788074,
+        0.029186027,
+        0.730033278
+      ],
+      "radius": 0.185,
+      "depth": [
+        -0.035,
+        0.035
+      ],
+      "measurement": "PCA of original near-mesh wheel color samples plus rendered front/right/iso inspection. Selection is only existing neural-derived triangles. Pivot refined against the actual hub cap vertices and front/iso CPU projections; selection volume unchanged.",
+      "selectionCenter": [
+        0.35,
+        0.265,
+        0.153
+      ]
+    },
+    "driver": "scene-life; no autoplay GLTF clip",
+    "newFacesAdded": 0
+  },
+  "componentVisualReview": {
+    "status": "passed_by_processing_agent_pending_external_approval",
+    "notes": "Inspected actual 0, 45 and 90 degree front/right/isometric exports. Colored neural wheel turns around measured diagonal axle; pointer, support, facade and roof remain static. No new triangles or image changes."
+  },
+  "componentTools": [
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\333d56b36782e578d1258d90a9dddcf32246da9c48203ee8f72f70c581da69a1-neural_component.py",
+      "sha256": "333d56b36782e578d1258d90a9dddcf32246da9c48203ee8f72f70c581da69a1",
+      "bytes": 9639
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\92328d50082a4cc9f952d6232e3f562f7ed991c18ab0a43d3888f405a13699a7-finalize_component.py",
+      "sha256": "92328d50082a4cc9f952d6232e3f562f7ed991c18ab0a43d3888f405a13699a7",
+      "bytes": 3275
+    }
+  ]
+}

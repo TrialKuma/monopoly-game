@@ -1,0 +1,57 @@
+{
+  "status": "rejected_native_export_source",
+  "region": "harbor",
+  "asset": "shop_2",
+  "reviewer": "asset_production",
+  "recordedAtUtc": "2026-10-24T06:03:37.828976+00:00",
+  "source": {
+    "path": "art/full-ai-city/source/harbor--shop_2-a009-pixal-mv-1024-9247.glb",
+    "sha256": "f0290260ecf3f93baa38085bfecfee0ea1f0d549330e78151cac9cc3e66925ab",
+    "bytes": 44697556
+  },
+  "sourceLevel": "Native 1M export; no untouched decoder attribution is made.",
+  "inferenceReport": {
+    "path": "art/full-ai-city/reports/source-rejections/harbor/shop_2/f0290260ecf3f93b/harbor--shop_2-a009-pixal-mv-1024-9247.json",
+    "sha256": "a8ecb0f96b827888eb197575e187e5229a1e5464f368b5db5abb1d095a94446b",
+    "bytes": 10113
+  },
+  "inputReference": {
+    "path": "art/full-ai-city/reports/source-rejections/harbor/shop_2/f0290260ecf3f93b/input-reference.json",
+    "sha256": "dd47d818539999b10f2014f268c9d1d5e9a011f6f0870429581352eeda29106f",
+    "bytes": 4414
+  },
+  "diagnostic": null,
+  "diagnosticTool": null,
+  "sourceComparisonReport": {
+    "path": "art/full-ai-city/reports/source-rejections/harbor/shop_2/f0290260ecf3f93b/source-comparison-processing.json",
+    "sha256": "fb826430422933e79e88d8d055a1d746c296887755fbb0d8202e2044c10890a4",
+    "bytes": 20685
+  },
+  "sourceViewEvidenceMode": "Explicitly selected existing renderedSource views; no additional or neutral render implied",
+  "evidence": [
+    {
+      "path": "art/full-ai-city/reports/source-rejections/harbor/shop_2/f0290260ecf3f93b/raw-front.png",
+      "sha256": "c5b6cb42e99f67fb812b02d0c8add7f56c3e08a8e51d1fb2147a04fef653c533",
+      "bytes": 277136
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/harbor/shop_2/f0290260ecf3f93b/raw-iso.png",
+      "sha256": "8ce842c55ee446cb62d929aa8a6abed3bf315813fd2edd5afce6aa803d1dad97",
+      "bytes": 330795
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/harbor/shop_2/f0290260ecf3f93b/raw-back.png",
+      "sha256": "ad935a31bd9747a57914a6af6cdaf27eb6bff34fe5d1833c4b1919542b680c99",
+      "bytes": 250455
+    }
+  ],
+  "finding": "Actually inspected the original three-view reference, existing native front/iso comparison and native back, final five material views and 256px preview. The two-storey shop mass, blue roof, balcony and awning are coherent, but the rear lower plaster wall has a conspicuous broad triangular missing patch immediately below the floor band. The exact native back shows this same defect, plus smaller rear door/corner chips; final phone view retains the broad tear. A separate small upper-front final notch alone would not justify regeneration. Reject for the major rear wall loss and register only the first independent same-reference retry. No decoder-stage attribution and no new reference request.",
+  "decision": "One independent same-reference seed. If repeated major defects remain, review three-view consistency before further inference; no automatic approval.",
+  "sourceUnchanged": true,
+  "notFinalCandidateReview": true,
+  "freezeTool": {
+    "path": "art/full-ai-city/reports/tool-snapshots/616860a00b28e670e1219d64c6cb5dad17f0946420568f786e80b6d789fb4a73-freeze_public_source_rejection.py",
+    "sha256": "616860a00b28e670e1219d64c6cb5dad17f0946420568f786e80b6d789fb4a73",
+    "bytes": 4304
+  }
+}

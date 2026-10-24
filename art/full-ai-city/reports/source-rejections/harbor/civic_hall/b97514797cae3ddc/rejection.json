@@ -1,0 +1,62 @@
+{
+  "status": "rejected_native_export_source",
+  "region": "harbor",
+  "asset": "civic_hall",
+  "reviewer": "asset_production",
+  "recordedAtUtc": "2026-10-24T01:25:05.887487+00:00",
+  "source": {
+    "path": "art/full-ai-city/source/harbor--civic_hall-a001-pixal-mv-1024-9247.glb",
+    "sha256": "b97514797cae3ddc6d7d53bfa30c6bf2b5041a12f511ee7683e0e5e69fb4703f",
+    "bytes": 44471916
+  },
+  "sourceLevel": "Native 1M export; no untouched decoder attribution is made.",
+  "inferenceReport": {
+    "path": "art/full-ai-city/reports/source-rejections/harbor/civic_hall/b97514797cae3ddc/harbor--civic_hall-a001-pixal-mv-1024-9247.json",
+    "sha256": "158b5acf7786787660485539c945f6d2a6378737280eec721c1f48fde56e7103",
+    "bytes": 10719
+  },
+  "inputReference": {
+    "path": "art/full-ai-city/reports/source-rejections/harbor/civic_hall/b97514797cae3ddc/input-reference.json",
+    "sha256": "5afab25a49e77d8db3be0e7d53bf7d7ff5abdb3782577266ba9e34db75de26ff",
+    "bytes": 4435
+  },
+  "diagnostic": null,
+  "diagnosticTool": null,
+  "sourceComparisonReport": {
+    "path": "art/full-ai-city/reports/source-rejections/harbor/civic_hall/b97514797cae3ddc/source-comparison-processing.json",
+    "sha256": "87bebee5577ed6b07e8b9de6ccc3019da09a90fc732f00ebf419f8d4b9455280",
+    "bytes": 19580
+  },
+  "sourceViewEvidenceMode": "Explicitly selected existing renderedSource views; no additional or neutral render implied",
+  "evidence": [
+    {
+      "path": "art/full-ai-city/reports/source-rejections/harbor/civic_hall/b97514797cae3ddc/raw-front.png",
+      "sha256": "30a1fa77d51e16c84cf92c811c01aed66f971325f5060d7acef0d7ab87a2646d",
+      "bytes": 245533
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/harbor/civic_hall/b97514797cae3ddc/raw-iso.png",
+      "sha256": "7e0a284b9dc353fc578c8c4170d80a078dde76c02d9b71ddc36609f866d90df8",
+      "bytes": 286779
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/harbor/civic_hall/b97514797cae3ddc/raw-back.png",
+      "sha256": "d8f1a4298627212357d5171a922fb13830cc8795a8fdc7ebd55b8fde3184f561",
+      "bytes": 243067
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/harbor/civic_hall/b97514797cae3ddc/raw-left.png",
+      "sha256": "858d536c02a24d9d5a55927f8599967bcd30003f16bf17c63590506066453b3e",
+      "bytes": 227008
+    }
+  ],
+  "finding": "Actually reviewed exact triptych, all five final material views and256px phone sheet, plus native front/iso/back/left. The generated rear secondary bell platform sits over a broad open roof gap, and multiple intersecting blue roof valleys separate into conspicuous broken strips visible from both sides and iso at phone scale. These are already present in native source; reference roof surfaces are continuous. Rear plaster hairline seams are secondary and not the rejection criterion. First independent same-reference retry only; no export parameter matrix.",
+  "decision": "One first independent same-reference retry seed29483. If major roof failure repeats, stop blind seeds and assess a single consistent reference simplification preserving coastal civic-hall design.",
+  "sourceUnchanged": true,
+  "notFinalCandidateReview": true,
+  "freezeTool": {
+    "path": "art/full-ai-city/reports/tool-snapshots/616860a00b28e670e1219d64c6cb5dad17f0946420568f786e80b6d789fb4a73-freeze_public_source_rejection.py",
+    "sha256": "616860a00b28e670e1219d64c6cb5dad17f0946420568f786e80b6d789fb4a73",
+    "bytes": 4304
+  }
+}

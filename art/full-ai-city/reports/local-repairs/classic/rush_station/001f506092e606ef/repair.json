@@ -1,0 +1,211 @@
+{
+  "status": "local_repair_candidate_pending_visual_review",
+  "source": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\classic--rush_station-a001-pixal-mv-1024-9247.glb",
+    "sha256": "3d689762796f475c1cfa2b4a2f73e07128a53ef90b0560f075722297c9cb290e",
+    "bytes": 38728020
+  },
+  "orientation": {
+    "enabled": true,
+    "candidate_degrees": 0.9013479415331426,
+    "applied_degrees": 0.9013479415331426,
+    "underside_area": 0.12181033451316503,
+    "normal_agreement": 0.9236199006038003,
+    "yaw_degrees": 180,
+    "pitch_degrees": 0,
+    "roll_degrees": 0,
+    "uniform_scale": 1.0485644657908764
+  },
+  "method": "Only two small measured front plinth/sill openings are closed from intact neighboring stone depth and UV samples. Original neural vertices, faces and image pixels remain untouched. Patches close 0.006 inward for derivative stability. Left wall original dark material is a distinct pending UV correction and is not changed by this geometry repair. No replacement building or new texture.",
+  "repairs": [
+    {
+      "name": "Small front right plinth opening",
+      "specification": {
+        "name": "Small front right plinth opening",
+        "u": [
+          1,
+          0,
+          0
+        ],
+        "v": [
+          0,
+          0,
+          1
+        ],
+        "n": [
+          0,
+          -1,
+          0
+        ],
+        "roi": [
+          0.312,
+          0.344,
+          0.026,
+          0.05
+        ],
+        "defectDepth": 0.08,
+        "donorDepth": 0.105,
+        "donorMaxDepth": 0.126,
+        "donorNormal": 0.65,
+        "color": "stone"
+      },
+      "missingSamples": 88,
+      "boundarySamples": 580,
+      "sampledDepthRange": [
+        -0.27228665351867676,
+        0.11542773246765137
+      ],
+      "inwardClosureThickness": 0.006,
+      "outerSurfaceUnchanged": true,
+      "newVertices": 292,
+      "newTriangles": 580
+    },
+    {
+      "name": "Small front left window sill opening",
+      "specification": {
+        "name": "Small front left window sill opening",
+        "u": [
+          1,
+          0,
+          0
+        ],
+        "v": [
+          0,
+          0,
+          1
+        ],
+        "n": [
+          0,
+          -1,
+          0
+        ],
+        "roi": [
+          -0.22,
+          -0.196,
+          0.062,
+          0.092
+        ],
+        "defectDepth": 0.08,
+        "donorDepth": 0.105,
+        "donorMaxDepth": 0.14,
+        "donorNormal": 0.65,
+        "color": "stone"
+      },
+      "missingSamples": 90,
+      "boundarySamples": 509,
+      "sampledDepthRange": [
+        -0.3993721008300781,
+        0.15933573246002197
+      ],
+      "inwardClosureThickness": 0.006,
+      "outerSurfaceUnchanged": true,
+      "newVertices": 284,
+      "newTriangles": 564
+    }
+  ],
+  "originalTriangles": 945862,
+  "originalVerticesMoved": 0,
+  "originalTrianglesDeleted": 0,
+  "artifactCleanup": {
+    "method": "No original faces deleted; only the two small measured front plinth/sill openings are filled. Left wall dark original material is a separate pending texture issue, not a geometric hole.",
+    "deletedTriangles": 0
+  },
+  "newTriangles": 1144,
+  "newVertices": 576,
+  "inverseSimilarityError": 8.258117284443145e-08,
+  "normalizedOutput": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-rush\\repaired-normalized.glb",
+    "sha256": "7131d114772a26620a091c1728748835dcfd34b1a614334120b9c1168a7808b6",
+    "bytes": 38916136
+  },
+  "nativeOutput": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-rush\\repaired-native.glb",
+    "sha256": "001f506092e606ef5ccf7556a248af84bdd31731f9b51f31101962b0eaa587d3",
+    "bytes": 38911740
+  },
+  "renders": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-rush\\repaired-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-rush\\repaired-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-rush\\repaired-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-rush\\repaired-left.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-rush\\repaired-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.4999999701976776,
+        -0.4136921763420105,
+        0.0
+      ],
+      "max": [
+        0.4999999701976776,
+        0.4136921763420105,
+        0.7829580903053284
+      ]
+    },
+    "triangles": 947006,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "reviewImages": [
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-rush\\repaired-front.png",
+      "sha256": "c07ab54f0cb6ab20413b353436d4a068793cbf63e98f24dd4f07b347a008ea40",
+      "bytes": 223363
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-rush\\repaired-right.png",
+      "sha256": "77a506e7028f42db3081b3dd156c21d56e451a760d8aeaee6b9bc2371f5ab6fe",
+      "bytes": 185093
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-rush\\repaired-back.png",
+      "sha256": "ebc5bbf080c2f26cc0c7cd535233bcc1443baec797a109082f4c4aeebc4586e1",
+      "bytes": 205698
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-rush\\repaired-left.png",
+      "sha256": "1f712be370d5129afbbcc27e0980e5d685460a3ecf2cd985c977bcb06c94e939",
+      "bytes": 181861
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-rush\\repaired-iso.png",
+      "sha256": "3c58a834d3d10182c65f81e1f7a76f4f1b5af4beff5a337bc05e8eaffcc6640e",
+      "bytes": 257515
+    }
+  ],
+  "processingTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\e22b1bd53fff212703c4660962a5c5a67daf39a2ab0bd12428c44e7235b8c1e9-repair_rush_surface.py",
+    "sha256": "e22b1bd53fff212703c4660962a5c5a67daf39a2ab0bd12428c44e7235b8c1e9",
+    "bytes": 11105
+  },
+  "completedAt": "2026-10-23T08:15:41.399907+00:00",
+  "sourceVisualReview": {
+    "status": "reviewed_for_derivative_processing",
+    "views": [
+      "front",
+      "right",
+      "back",
+      "left",
+      "iso"
+    ],
+    "note": "All five repaired source views individually inspected. Two targeted small front plinth/sill holes are closed and stone, windows, canopy and roof intact. The original left dark recessed wall material remains deliberately untouched here; it requires a separate source-sampled UV correction after final native field replay. Final derivative not yet approved."
+  }
+}

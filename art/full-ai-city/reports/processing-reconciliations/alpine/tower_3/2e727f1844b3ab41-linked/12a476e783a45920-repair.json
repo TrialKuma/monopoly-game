@@ -1,0 +1,475 @@
+{
+  "status": "local_repair_candidate_pending_visual_review",
+  "source": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\alpine--tower_3-a014-pixal-mv-1024-34423.glb",
+    "sha256": "1f87b54f397a5d7bf0023484b3714542057891aa11fd3a8902ea9c18a44ce7bf",
+    "bytes": 40739116
+  },
+  "orientation": {
+    "enabled": true,
+    "candidate_degrees": 0.16785874238244658,
+    "applied_degrees": 0.16785874238244658,
+    "underside_area": 0.20937906086465247,
+    "normal_agreement": 0.9492753006018213,
+    "yaw_degrees": 180,
+    "pitch_degrees": 0,
+    "roll_degrees": 0,
+    "uniform_scale": 1.1252674043466273
+  },
+  "configuration": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\source-repairs-planned\\alpine\\tower_3\\1f87b54f397a5d7b\\repair-config-material-v4-rear-slit.json",
+    "sha256": "a881f5786217418eb7203f95c797abd08d0a176772d3a3ef082217741ac8cb31",
+    "bytes": 5662
+  },
+  "reviewEvidence": [
+    {
+      "path": "reports/source-repairs-planned/alpine/tower_3/1f87b54f397a5d7b/review.json",
+      "sha256": "42a66432a21cfb0508a743a48c5fbb8ca1fdb64b600edf4c8f42189d2d9aa216",
+      "bytes": 1674
+    },
+    {
+      "path": "reports/source-repairs-planned/alpine/tower_3/1f87b54f397a5d7b/review-material-correction.json",
+      "sha256": "b94f28b837c5e1f1d327d50805108718747b370b26b4bc9bc00a67853237d27c",
+      "bytes": 1273
+    },
+    {
+      "path": "reviews-rejected/alpine/tower_3/d3a0c742230eef01/rejection.json",
+      "sha256": "c7d9d736c3d39f6d00a08fa60a7578d66d74fa1d1e6aa580ff1c71188fc87dc8"
+    }
+  ],
+  "measurement": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\source-repairs-planned\\alpine\\tower_3\\1f87b54f397a5d7b\\measurement.json",
+    "sha256": "6695904e7325165598fc0b1cf4f640719a4d8abe1d55590297875ea956e282d2",
+    "bytes": 31004
+  },
+  "method": "Only explicitly measured and visually reviewed local gaps are closed from adjoining original surface and UV samples with0.006 inward closure. Original vertices, faces and image pixels are preserved. No replacement building or generated texture. See configuration and frozen prior review evidence for exact allowed regions.",
+  "repairs": [
+    {
+      "name": "front plaster behind balconies",
+      "specification": {
+        "name": "front plaster behind balconies",
+        "u": [
+          1,
+          0,
+          0
+        ],
+        "v": [
+          0,
+          0,
+          1
+        ],
+        "n": [
+          0,
+          -1,
+          0
+        ],
+        "roi": [
+          -0.236,
+          0.236,
+          0.224,
+          0.802
+        ],
+        "defectDepth": 0.1,
+        "donorDepth": 0.19,
+        "donorMaxDepth": 0.212,
+        "donorNormal": 0.65,
+        "color": "plaster",
+        "gridStep": 0.01,
+        "donorMargin": 0.045,
+        "flatPatchUV": true,
+        "donorMinRGB": 0.4,
+        "donorMaxColorRatio": 1.25
+      },
+      "missingSamples": 894,
+      "boundarySamples": 1049,
+      "sampledDepthRange": [
+        -2.0,
+        0.3665086030960083
+      ],
+      "inwardClosureThickness": 0.006,
+      "outerSurfaceUnchanged": true,
+      "newVertices": 3110,
+      "newTriangles": 6184
+    },
+    {
+      "name": "upper rear plaster",
+      "specification": {
+        "name": "upper rear plaster",
+        "u": [
+          -1,
+          0,
+          0
+        ],
+        "v": [
+          0,
+          0,
+          1
+        ],
+        "n": [
+          0,
+          1,
+          0
+        ],
+        "roi": [
+          -0.198,
+          0.16,
+          0.616,
+          0.8
+        ],
+        "defectDepth": 0.2,
+        "donorDepth": 0.296,
+        "donorMaxDepth": 0.312,
+        "donorNormal": 0.65,
+        "color": "plaster",
+        "gridStep": 0.01,
+        "donorMargin": 0.05,
+        "flatPatchUV": true,
+        "donorMinRGB": 0.4,
+        "donorMaxColorRatio": 1.25
+      },
+      "missingSamples": 216,
+      "boundarySamples": 372,
+      "sampledDepthRange": [
+        -2.0,
+        0.3685009479522705
+      ],
+      "inwardClosureThickness": 0.006,
+      "outerSurfaceUnchanged": true,
+      "newVertices": 688,
+      "newTriangles": 1372
+    },
+    {
+      "name": "front gable plaster infill",
+      "specification": {
+        "name": "front gable plaster infill",
+        "u": [
+          1,
+          0,
+          0
+        ],
+        "v": [
+          0,
+          0,
+          1
+        ],
+        "n": [
+          0,
+          -1,
+          0
+        ],
+        "roi": [
+          -0.148,
+          0.148,
+          0.814,
+          0.92
+        ],
+        "defectDepth": 0.1,
+        "donorDepth": 0.19,
+        "donorMaxDepth": 0.212,
+        "donorNormal": 0.65,
+        "color": "plaster",
+        "gridStep": 0.01,
+        "donorMargin": 0.12,
+        "polygon": [
+          [
+            -0.148,
+            0.814
+          ],
+          [
+            0.148,
+            0.814
+          ],
+          [
+            0,
+            0.92
+          ]
+        ],
+        "flatPatchUV": true,
+        "donorMinRGB": 0.4,
+        "donorMaxColorRatio": 1.25
+      },
+      "missingSamples": 50,
+      "boundarySamples": 96,
+      "sampledDepthRange": [
+        -2.0,
+        0.3189438581466675
+      ],
+      "inwardClosureThickness": 0.006,
+      "outerSurfaceUnchanged": true,
+      "newVertices": 286,
+      "newTriangles": 576
+    },
+    {
+      "name": "back gable plaster infill",
+      "specification": {
+        "name": "back gable plaster infill",
+        "u": [
+          -1,
+          0,
+          0
+        ],
+        "v": [
+          0,
+          0,
+          1
+        ],
+        "n": [
+          0,
+          1,
+          0
+        ],
+        "roi": [
+          -0.155,
+          0.155,
+          0.8,
+          0.916
+        ],
+        "defectDepth": 0.2,
+        "donorDepth": 0.296,
+        "donorMaxDepth": 0.312,
+        "donorNormal": 0.65,
+        "color": "plaster",
+        "gridStep": 0.01,
+        "donorMargin": 0.12,
+        "polygon": [
+          [
+            -0.155,
+            0.8
+          ],
+          [
+            0.155,
+            0.8
+          ],
+          [
+            0,
+            0.916
+          ]
+        ],
+        "flatPatchUV": true,
+        "donorMinRGB": 0.4,
+        "donorMaxColorRatio": 1.25
+      },
+      "missingSamples": 99,
+      "boundarySamples": 180,
+      "sampledDepthRange": [
+        -2.0,
+        0.33315587043762207
+      ],
+      "inwardClosureThickness": 0.006,
+      "outerSurfaceUnchanged": true,
+      "newVertices": 438,
+      "newTriangles": 892
+    },
+    {
+      "name": "Measured left plaster gap below upper window",
+      "specification": {
+        "name": "Measured left plaster gap below upper window",
+        "u": [
+          0,
+          -1,
+          0
+        ],
+        "v": [
+          0,
+          0,
+          1
+        ],
+        "n": [
+          -1,
+          0,
+          0
+        ],
+        "roi": [
+          -0.112,
+          0,
+          0.486,
+          0.55
+        ],
+        "defectDepth": 0.25,
+        "donorDepth": 0.312,
+        "donorMaxDepth": 0.322,
+        "donorNormal": 0.65,
+        "color": "plaster",
+        "gridStep": 0.008,
+        "donorMargin": 0.032,
+        "flatPatchUV": true,
+        "donorMinRGB": 0.4,
+        "donorMaxColorRatio": 1.25
+      },
+      "missingSamples": 26,
+      "boundarySamples": 135,
+      "sampledDepthRange": [
+        -2.0,
+        0.34310173988342285
+      ],
+      "inwardClosureThickness": 0.006,
+      "outerSurfaceUnchanged": true,
+      "newVertices": 148,
+      "newTriangles": 288
+    },
+    {
+      "name": "Measured omitted lower rear plaster slit beside existing rear door",
+      "specification": {
+        "name": "Measured omitted lower rear plaster slit beside existing rear door",
+        "u": [
+          -1,
+          0,
+          0
+        ],
+        "v": [
+          0,
+          0,
+          1
+        ],
+        "n": [
+          0,
+          1,
+          0
+        ],
+        "roi": [
+          0.002,
+          0.038,
+          0.15,
+          0.256
+        ],
+        "defectDepth": 0.2,
+        "donorDepth": 0.296,
+        "donorMaxDepth": 0.312,
+        "donorNormal": 0.65,
+        "color": "plaster",
+        "gridStep": 0.01,
+        "donorMargin": 0.05,
+        "flatPatchUV": true,
+        "donorMinRGB": 0.4,
+        "donorMaxColorRatio": 1.25
+      },
+      "missingSamples": 29,
+      "boundarySamples": 149,
+      "sampledDepthRange": [
+        -0.22470974922180176,
+        0.3204042911529541
+      ],
+      "inwardClosureThickness": 0.006,
+      "outerSurfaceUnchanged": true,
+      "newVertices": 118,
+      "newTriangles": 232
+    }
+  ],
+  "originalTriangles": 934727,
+  "originalVerticesMoved": 0,
+  "originalTrianglesDeleted": 0,
+  "artifactCleanup": {
+    "method": "No original faces deleted. Only the explicitly reviewed bounded source-surface regions in the configuration may receive additional triangles.",
+    "deletedTriangles": 0
+  },
+  "newTriangles": 9544,
+  "newVertices": 4788,
+  "inverseSimilarityError": 1.1270879490821173e-07,
+  "normalizedOutput": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-alpine-tower3-1f87-plaster-v4-rear-slit\\repaired-normalized.glb",
+    "sha256": "af570719d25faed04e2c7ce8ca5a60b164e4f3499a4ab0c12dad9c5e4acacffa",
+    "bytes": 41929948
+  },
+  "nativeOutput": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-alpine-tower3-1f87-plaster-v4-rear-slit\\repaired-native.glb",
+    "sha256": "2e727f1844b3ab4184c815a40b7375e0ba6c98a077f230e401881a825b500a04",
+    "bytes": 41937184
+  },
+  "renders": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-alpine-tower3-1f87-plaster-v4-rear-slit\\repaired-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-alpine-tower3-1f87-plaster-v4-rear-slit\\repaired-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-alpine-tower3-1f87-plaster-v4-rear-slit\\repaired-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-alpine-tower3-1f87-plaster-v4-rear-slit\\repaired-left.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-alpine-tower3-1f87-plaster-v4-rear-slit\\repaired-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.4227975010871887,
+        -0.36877697706222534,
+        0.0
+      ],
+      "max": [
+        0.4227975010871887,
+        0.36877697706222534,
+        1.0
+      ]
+    },
+    "triangles": 944271,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "reviewImages": [
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-alpine-tower3-1f87-plaster-v4-rear-slit\\repaired-front.png",
+      "sha256": "ea54f06cde52f46c7d83f0244e2d5c0119f7c6cd050223e0d97011ac0c468a8d",
+      "bytes": 244771
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-alpine-tower3-1f87-plaster-v4-rear-slit\\repaired-right.png",
+      "sha256": "501877f46a98c139e55488b28b59920e500b7ceb4c2fa6522b18742012185683",
+      "bytes": 230363
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-alpine-tower3-1f87-plaster-v4-rear-slit\\repaired-back.png",
+      "sha256": "4348db6d5f100c0c19720eb0670cc23377070a573fa2caba4049c0e30dd33c63",
+      "bytes": 236321
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-alpine-tower3-1f87-plaster-v4-rear-slit\\repaired-left.png",
+      "sha256": "14a7698e08b850b3e49b0933318de34d9a679887764092e241507281e39fd865",
+      "bytes": 231618
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-alpine-tower3-1f87-plaster-v4-rear-slit\\repaired-iso.png",
+      "sha256": "61d53357f6625179ce25d0adcc76afc7605448f2ca2cfec5711e07a670d5897e",
+      "bytes": 289246
+    }
+  ],
+  "processingTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\b2e65d5ab2fd874c18e0d7597c82a409e4c2a245bcd5a0ad2e5d4a9d79ed34f4-repair_bounded_source_surface.py",
+    "sha256": "b2e65d5ab2fd874c18e0d7597c82a409e4c2a245bcd5a0ad2e5d4a9d79ed34f4",
+    "bytes": 13239
+  },
+  "completedAt": "2026-10-23T23:49:20.854061+00:00",
+  "sourceVisualReview": {
+    "status": "reviewed_for_derivative_processing",
+    "note": "Actually viewed all five material sides. The omitted lower rear slit is now filled and original red roof, wood balconies, stone corners and teal shutters are retained. Existing minor foundation/window seams are not additional targets. New triangles9544 stay below10000 cap; original triangle positions/UV/image bytes verified exact. Final native-field and phone review remain required.",
+    "views": [
+      "front",
+      "right",
+      "back",
+      "left",
+      "iso"
+    ],
+    "reviewedAt": "2026-10-23T23:52:18.485584+00:00",
+    "existingFrozenReview": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\alpine\\tower_3\\2e727f1844b3ab41\\visual-review.json",
+      "sha256": "dd9ed67b47caba3425ceaedd2bdd6b7973e64820b23c70bce7489a57d45a3487",
+      "bytes": 2450
+    },
+    "originalUnlinkedReceipt": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\alpine\\tower_3\\2e727f1844b3ab41\\repair.json",
+      "sha256": "12a476e783a45920b73a331028e6a450368a7f57fdbcc191aa8f2ea68a8caf22",
+      "bytes": 13123
+    },
+    "linkCorrectionOnly": true
+  }
+}

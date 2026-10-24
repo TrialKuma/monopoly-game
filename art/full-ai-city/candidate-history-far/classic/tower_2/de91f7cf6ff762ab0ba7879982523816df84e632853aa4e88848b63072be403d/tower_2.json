@@ -1,0 +1,419 @@
+{
+  "status": "exported_pending_visual_review",
+  "createdAt": "2026-10-23T10:10:19.866446+00:00",
+  "region": "classic",
+  "asset": "tower_2",
+  "source": {
+    "rawGLB": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\classic--tower_2-a002-pixal-mv-1024-19422.glb",
+      "sha256": "3de188d90d3e7bbe396203f2e4716c2f00bb63edd44f8636682c7f6b5b3c9050",
+      "bytes": 45475416
+    }
+  },
+  "inferenceReport": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\classic--tower_2-a002\\classic--tower_2-a002-pixal-mv-1024-19422.json",
+    "sha256": "91c9a289d609122f41389e42745758cf9ef6098418f1ed89602a5a2b792b23c9",
+    "bytes": 9551
+  },
+  "reference": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\inputs\\classic\\tower_2\\84d2654e049cf576\\transforms.json",
+    "sha256": "708ccf71aa5a5478dcdb7bd803cff14f47b7ad482acef634535b0c2509da5b43",
+    "bytes": 5411
+  },
+  "processingTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\b766a4f58879667a49343ebf7047b8344497e5a63edee313a7ba8164388eff04-bake_native_uv_candidate.py",
+    "sha256": "b766a4f58879667a49343ebf7047b8344497e5a63edee313a7ba8164388eff04",
+    "bytes": 10667
+  },
+  "assumedCameras": true,
+  "cameraCalibration": "assumed_standard_orbit_not_measured",
+  "nativePipeline": "Pixal3DMVImageTo3DPipeline.run_mv",
+  "nativeResolution": 1024,
+  "seed": 19422,
+  "geometryOrigin": "Exact approved neural-derived near geometry, including any explicitly disclosed bounded local repairs, simplified for far use. No substitute building or newly authored geometry in this far stage.",
+  "orientation": {
+    "up": "Y",
+    "front": "+Z",
+    "groundY": 0,
+    "maxEdge": 1
+  },
+  "requestedTriangles": 12000,
+  "limitations": [
+    "Assumed camera reference reconstruction, not exact measured architecture",
+    "Final candidate requires actual rendered visual approval"
+  ],
+  "animation": null,
+  "processingComplete": true,
+  "lod": "far",
+  "processingRevision": 0,
+  "derivedFromNear": {
+    "path": "H:\\代码项目\\monopoly\\assets\\models\\regions-ai\\full\\classic\\tower_2\\ebd60ae393f94de0.glb",
+    "sha256": "ebd60ae393f94de0b0691c70cba862118ad9071f7e386c7478a2e87fd4721d0a",
+    "bytes": 1131900
+  },
+  "derivedFromNearReport": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\processed\\classic\\tower_2\\ebd60ae393f94de0-448cb8305ac25da2.json",
+    "sha256": "448cb8305ac25da24a259fabab46df9ef75cbb77dbde57d8220cadd7e7beb113",
+    "bytes": 19008
+  },
+  "farSimplification": {
+    "source": {
+      "path": "H:\\代码项目\\monopoly\\assets\\models\\regions-ai\\full\\classic\\tower_2\\ebd60ae393f94de0.glb",
+      "sha256": "ebd60ae393f94de0b0691c70cba862118ad9071f7e386c7478a2e87fd4721d0a"
+    },
+    "output": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\far-preserved\\classic\\tower_2.npz",
+    "outputSha256": "0e455444c8a0a7c4819e46f848cba273f46b8003f583757ffe8fe4b6d0647d06",
+    "tool": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\e1cebc38c56c536fc09ec03ec4c1cad0060e4f6c21693fa5284e689cf37b9f7b-simplify_far_surface.py",
+      "sha256": "e1cebc38c56c536fc09ec03ec4c1cad0060e4f6c21693fa5284e689cf37b9f7b",
+      "pymeshlabVersion": "2025.7.post1"
+    },
+    "sourceTriangles": 29963,
+    "actualTriangles": 11999,
+    "actualVertices": 5784,
+    "method": "PyMeshLab quadric collapse preserving boundary, normal and topology with planar quadrics",
+    "settings": {
+      "targetfacenum": 12000,
+      "qualitythr": 0.3,
+      "preserveboundary": true,
+      "boundaryweight": 20.0,
+      "preservenormal": true,
+      "preservetopology": true,
+      "optimalplacement": true,
+      "planarquadric": true,
+      "planarweight": 0.01,
+      "autoclean": true
+    },
+    "geometryOrigin": "Only existing approved neural-derived surface simplified; no authored geometry",
+    "sourceCleanup": []
+  },
+  "derivation": {
+    "rawTriangles": 999581,
+    "weldedTriangles": 11999,
+    "remeshedTriangles": 11999,
+    "voxelSize": 0,
+    "finalTriangles": 11999,
+    "atlasArea": 0.6193131876410685,
+    "singleReductionPass": true,
+    "inheritedUVRemovedBeforeReduction": true,
+    "sourceMaterialsUntouched": true,
+    "uvUnwrap": {
+      "method": "native CuMesh UV-only",
+      "parameters": {
+        "threshold_cone_half_angle_rad": 1.5707963267948966,
+        "refine_iterations": 0,
+        "global_iterations": 1,
+        "smooth_strength": 1
+      },
+      "receipt": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\uv-replays\\far-nativeUV-classic--tower_2-c17fc37edeeb996d\\receipt.json",
+        "sha256": "da0d2238b8c3bf8357e5be5f0636c4bd715aad9bc662b3fad55b8d4afa017297",
+        "bytes": 3997
+      }
+    },
+    "nearTriangles": 29963,
+    "rawTriangleCountEvidence": "Actual unchanged original raw GLB index count; native-field near report does not repeat a rawTriangles field."
+  },
+  "bake": {
+    "method": "CPU closest-original-triangle projection with float64 barycentric original UV and bilinear original texture sampling; geometric normals retained, no directional normal-map rebake or invented color",
+    "coveredAtlasPixels": 162325,
+    "nearestLookupSuccessFraction": 1.0,
+    "notRayCoverage": true,
+    "sourceDistanceQuantiles": [
+      0.0004784225020557642,
+      0.002970352163538335,
+      0.004980733431875716,
+      0.013505329377949238
+    ],
+    "sourceDistanceQuantileLevels": [
+      0.5,
+      0.95,
+      0.99,
+      1
+    ],
+    "overTwoPercentMaxEdge": 0.0,
+    "distanceReviewRequired": false,
+    "visualGeometryReviewRequired": true,
+    "barycentricOriginalRange": [
+      -4.373071660462019e-05,
+      1.0
+    ],
+    "degenerateOrInvalidBarycentricCount": 0,
+    "closestSourceVertexFallbackFraction": 0.0,
+    "barycentricPointReconstructionErrorQuantiles": [
+      6.42905770692538e-09,
+      4.254881943421029e-08,
+      8.664935420569499e-07
+    ],
+    "atlasOverlapPixelsWithDifferentSurface": 64,
+    "seconds": 2.612814799998887,
+    "maps": [
+      {
+        "role": "base",
+        "size": [
+          512,
+          512
+        ]
+      },
+      {
+        "role": "orm",
+        "size": [
+          256,
+          256
+        ]
+      }
+    ],
+    "sourceNote": "Native CuMesh UV charts applied to the exact existing far mesh loops. Closest-surface color/ORM samples come from the exact approved near neural derivative and its existing textures, not a new bake from raw. Near geometry, far geometry and their original archives are unchanged."
+  },
+  "farShading": {
+    "normals": "actual_geometry_only",
+    "baseColorSize": 512,
+    "ormSize": 256,
+    "reason": "UV-only repair retains the existing far corner normals and samples the exact approved near color/ORM; no tangent-space normal rebake."
+  },
+  "nearSourceGeometryOrigin": "Recorded low surface derived from the identical native raw, restored to original field coordinates, with native UV/material generation using the original neural high-surface BVH and attribute field. No authored replacement geometry.",
+  "quantization": {
+    "source": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\far-native-uv\\classic--tower_2-c17fc37edeeb996d\\final\\classic\\tower_2.glb",
+    "output": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\far-native-uv\\classic--tower_2-c17fc37edeeb996d\\final\\classic\\tower_2.glb",
+    "sourceBytes": 637552,
+    "outputBytes": 458244,
+    "sourceSha256": "7d973c1be10c3ee97766cf1a7f7163794afd2eb0d0993d0c7076abda761837a5",
+    "outputSha256": "de91f7cf6ff762ab0ba7879982523816df84e632853aa4e88848b63072be403d",
+    "positionFaceAndTextureBytesUnchanged": true,
+    "attributes": [
+      {
+        "accessor": 1,
+        "semantic": "NORMAL",
+        "count": 14955,
+        "maximumAngularErrorDegrees": 0.3647472493769986
+      },
+      {
+        "accessor": 2,
+        "semantic": "TEXCOORD_0",
+        "count": 14955,
+        "maximumUVError": 7.629510948348184e-06,
+        "maximumTexelErrorAt1024": 0.00781261921110854
+      }
+    ]
+  },
+  "processedCandidate": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\candidates-far\\classic\\tower_2.glb",
+    "sha256": "de91f7cf6ff762ab0ba7879982523816df84e632853aa4e88848b63072be403d",
+    "bytes": 458244
+  },
+  "glbValidation": {
+    "version": 2,
+    "triangles": 11999,
+    "meshes": 1,
+    "materials": 1,
+    "images": 2,
+    "all_primitives_have_uv": true,
+    "animations": [],
+    "all_images_embedded": true,
+    "external_buffers": []
+  },
+  "triangles": 11999,
+  "renderedCandidate": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\far-native-uv\\classic--tower_2-c17fc37edeeb996d\\final\\renders\\classic\\tower_2\\lod-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\far-native-uv\\classic--tower_2-c17fc37edeeb996d\\final\\renders\\classic\\tower_2\\lod-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\far-native-uv\\classic--tower_2-c17fc37edeeb996d\\final\\renders\\classic\\tower_2\\lod-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\far-native-uv\\classic--tower_2-c17fc37edeeb996d\\final\\renders\\classic\\tower_2\\lod-left.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\far-native-uv\\classic--tower_2-c17fc37edeeb996d\\final\\renders\\classic\\tower_2\\lod-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.44505956768989563,
+        -0.30070462822914124,
+        0.002105879597365856
+      ],
+      "max": [
+        0.44507119059562683,
+        0.3132641017436981,
+        0.9876336455345154
+      ]
+    },
+    "triangles": 11999,
+    "textureSizes": [
+      {
+        "name": "classic__tower_2__nearest_base",
+        "size": [
+          512,
+          512
+        ]
+      },
+      {
+        "name": "classic__tower_2__nearest_orm",
+        "size": [
+          256,
+          256
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "renderedSource": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders-far\\classic\\tower_2\\raw-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders-far\\classic\\tower_2\\raw-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.44818103313446045,
+        -0.3128328323364258,
+        0.0
+      ],
+      "max": [
+        0.44818103313446045,
+        0.3128328323364258,
+        1.0
+      ]
+    },
+    "triangles": 999581,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "bounds": {
+    "min": [
+      -0.44505956768989563,
+      0.002105879597365856,
+      -0.3132641017436981
+    ],
+    "max": [
+      0.44507119059562683,
+      0.9876336455345154,
+      0.30070462822914124
+    ],
+    "coordinateSystem": "GLTF Y-up; +Z front"
+  },
+  "textureSizes": [
+    {
+      "name": "classic__tower_2__nearest_base",
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "name": "classic__tower_2__nearest_orm",
+      "size": [
+        256,
+        256
+      ]
+    }
+  ],
+  "rawSourceUnchanged": true,
+  "completedAt": "2026-10-23T10:14:03.073138+00:00",
+  "textureOnlyReprocessing": {
+    "sourceCandidate": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\far-native-uv\\classic--tower_2-c17fc37edeeb996d\\source-far.glb",
+      "sha256": "c17fc37edeeb996dedcb8c0115cfa6501a21cb7c92b5d5bad0a4c3ee72fdfe28",
+      "bytes": 478196
+    },
+    "sourceProcessingReport": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\uv-replays\\far-nativeUV-classic--tower_2-c17fc37edeeb996d\\input-processing.json",
+      "sha256": "dd2b1e907e2cc1eba0ed9b98f46076650358a747462d8039b2491d8dbabd7d85",
+      "bytes": 9897
+    },
+    "sourceBlend": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\blender-far\\classic\\tower_2.blend",
+      "sha256": "438c711a5d13eaf677093423f214384f6b55a9950e721f512790cc9d614a4054",
+      "bytes": 2678135
+    },
+    "nativeUVReceipt": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\uv-replays\\far-nativeUV-classic--tower_2-c17fc37edeeb996d\\receipt.json",
+      "sha256": "da0d2238b8c3bf8357e5be5f0636c4bd715aad9bc662b3fad55b8d4afa017297",
+      "bytes": 3997
+    },
+    "sourceTriangleCountVerified": 29963,
+    "positionsUnchanged": true,
+    "faceIndicesUnchanged": true,
+    "cornerNormalsUnchanged": true,
+    "additionalRemeshOrSimplification": false,
+    "uvAssignment": "Native cyclic triangle position matches transfer UVs to original loops; original triangle order and winding retained.",
+    "sourceTextureMesh": {
+      "path": "H:\\代码项目\\monopoly\\assets\\models\\regions-ai\\full\\classic\\tower_2\\ebd60ae393f94de0.glb",
+      "sha256": "ebd60ae393f94de0b0691c70cba862118ad9071f7e386c7478a2e87fd4721d0a",
+      "bytes": 1131900
+    },
+    "sourceTextureMeshReport": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\processed\\classic\\tower_2\\ebd60ae393f94de0-448cb8305ac25da2.json",
+      "sha256": "448cb8305ac25da24a259fabab46df9ef75cbb77dbde57d8220cadd7e7beb113",
+      "bytes": 19008
+    },
+    "exportedTriangleCornerPositionsExactlyUnchanged": true
+  },
+  "textureTransferTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\a2cb99c96fb8df396f16580a88a7c6151104ee3c927fe76cd161ee2d27bdfa42-bake_nearest_surface.py",
+    "sha256": "a2cb99c96fb8df396f16580a88a7c6151104ee3c927fe76cd161ee2d27bdfa42",
+    "bytes": 7317
+  },
+  "promotedFrom": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\far-native-uv\\classic--tower_2-c17fc37edeeb996d\\final\\classic\\tower_2.json",
+    "sha256": "d090554ea5f03fed4caf312574fc4ae1ecddc05874569eb8ea1181e7c51f9b30",
+    "bytes": 14537
+  },
+  "reviewSheet": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\far-native-uv\\classic--tower_2-c17fc37edeeb996d\\final\\renders\\classic\\tower_2\\review-sheet.jpg",
+    "sha256": "b01c9fcbb2f00bb155a85e5d00d7311e64d13247963a3a3f361f5e1a433332be",
+    "bytes": 313198,
+    "candidateSha256": "de91f7cf6ff762ab0ba7879982523816df84e632853aa4e88848b63072be403d",
+    "sourceImages": [
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders-far\\classic\\tower_2\\raw-front.png",
+        "sha256": "0e5f4ca4658ec429629deaa75aa3eb3dac6b124ec9083138f469306de17f391a",
+        "label": "AI raw front"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders-far\\classic\\tower_2\\raw-iso.png",
+        "sha256": "23083d8f01967d2f8ec0aba83884106667f60ec51150dc15dff467886917f65d",
+        "label": "AI raw iso"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\far-native-uv\\classic--tower_2-c17fc37edeeb996d\\final\\renders\\classic\\tower_2\\lod-front.png",
+        "sha256": "2d8a45164ecba3c5b8d76b59bf84b2362380c9005335052efb75039f77d85639",
+        "label": "LOD front"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\far-native-uv\\classic--tower_2-c17fc37edeeb996d\\final\\renders\\classic\\tower_2\\lod-right.png",
+        "sha256": "7093c5ecfad80655ee9cb776750df87ca9d52048188b23601d7f1b91f900c54f",
+        "label": "LOD right"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\far-native-uv\\classic--tower_2-c17fc37edeeb996d\\final\\renders\\classic\\tower_2\\lod-back.png",
+        "sha256": "59f310cd1106324d67c9b2a729ab053515a40c517308e05e8cb2ebb3212fa2fa",
+        "label": "LOD back"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\far-native-uv\\classic--tower_2-c17fc37edeeb996d\\final\\renders\\classic\\tower_2\\lod-left.png",
+        "sha256": "b3b8867682121d7f075ae4d3876af9832701aa1972c876314e91cb0ccea9f951",
+        "label": "LOD left"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\far-native-uv\\classic--tower_2-c17fc37edeeb996d\\final\\renders\\classic\\tower_2\\lod-iso.png",
+        "sha256": "8d01c2812d55f08364d996ecc11ef55b1af05ea6131e5c03403b7b342a3e7e45",
+        "label": "LOD iso"
+      }
+    ],
+    "content": "Unmodified CPU render images composed with labels for visual comparison only"
+  }
+}

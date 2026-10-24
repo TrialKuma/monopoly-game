@@ -1,0 +1,332 @@
+{
+  "status": "exported_pending_visual_review",
+  "createdAt": "2026-10-23T06:48:13.999282+00:00",
+  "region": "harbor",
+  "asset": "villa_2",
+  "source": {
+    "rawGLB": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\harbor--villa_2-a002-pixal-mv-1024-18343.glb",
+      "sha256": "9ed0c0d68175a174285c477f5c6f69b1ad75b0e019f7e7ff15c1ec7abdfd14d9",
+      "bytes": 40291252
+    }
+  },
+  "inferenceReport": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\harbor--villa_2-a002\\harbor--villa_2-a002-pixal-mv-1024-18343.json",
+    "sha256": "748aae088e8d7371c089a44d873b19fc9dab7de0f9e57246b957a6dae5da5de0",
+    "bytes": 8130
+  },
+  "reference": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\inputs\\harbor\\villa_2\\bb88929a0860827d\\reference.json",
+    "sha256": "f685887f4cd492a30587b6973fe086a53ae7e70a9c49e47852941416847d43e0",
+    "bytes": 4415
+  },
+  "processingTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\b83bcbf07723fd0d31ca5f6d00ee820305c0367edf54daa6a7e6dd7f1d42d0e9-bake_native_uv_candidate.py",
+    "sha256": "b83bcbf07723fd0d31ca5f6d00ee820305c0367edf54daa6a7e6dd7f1d42d0e9",
+    "bytes": 8767
+  },
+  "assumedCameras": true,
+  "cameraCalibration": "assumed_standard_orbit_not_measured",
+  "nativePipeline": "Pixal3DMVImageTo3DPipeline.run_mv",
+  "nativeResolution": 1024,
+  "seed": 18343,
+  "geometryOrigin": "Only the actual neural source reduced and rebaked; no authored substitute geometry or manually constructed surfaces",
+  "orientation": {
+    "up": "Y",
+    "front": "+Z",
+    "groundY": 0,
+    "maxEdge": 1
+  },
+  "requestedTriangles": 45000,
+  "limitations": [
+    "Assumed camera reference reconstruction, not exact measured architecture",
+    "Final candidate requires actual rendered visual approval"
+  ],
+  "animation": null,
+  "processingComplete": true,
+  "lod": "near",
+  "processingRevision": 0,
+  "sourceArtifactCleanup": {
+    "method": "Delete source-derived triangles entirely below z=0.014 when original UV-centroid mean RGB is below 0.18 or their XY centroid is more than 0.012 from the actual foundation vertices at z=0.014..0.04. This removes detached colored floor remnants as well as the dark sheet; no new faces added",
+    "deletedTriangles": 13270,
+    "originalTriangles": 945730,
+    "foundationSampleVertices": 19370
+  },
+  "derivation": {
+    "rawTriangles": 945730,
+    "weldedTriangles": 922117,
+    "remeshedTriangles": 8977776,
+    "voxelSize": 0.0015,
+    "finalTriangles": 44985,
+    "atlasArea": 0.6195517544257865,
+    "singleReductionPass": true,
+    "inheritedUVRemovedBeforeReduction": true,
+    "sourceMaterialsUntouched": true,
+    "uvUnwrap": {
+      "method": "native CuMesh UV-only",
+      "parameters": {
+        "threshold_cone_half_angle_rad": 1.5707963267948966,
+        "refine_iterations": 0,
+        "global_iterations": 1,
+        "smooth_strength": 1
+      },
+      "receipt": {
+        "path": "art\\full-ai-city\\native-mobile\\uv-replays\\000-harbor-villa2-nativeUV-v01\\receipt.json",
+        "sha256": "0300e73b19024f94dd3cfa708d6e884ffe0d3b853335457ec71b20aa82955821",
+        "bytes": 3800
+      }
+    }
+  },
+  "bake": {
+    "method": "CPU closest-original-triangle projection with float64 barycentric original UV and bilinear original texture sampling; geometric normals retained, no directional normal-map rebake or invented color",
+    "coveredAtlasPixels": 649341,
+    "nearestLookupSuccessFraction": 1.0,
+    "notRayCoverage": true,
+    "sourceDistanceQuantiles": [
+      9.155867155641317e-05,
+      0.0006594228325411677,
+      0.0010601500049233434,
+      0.004835141357034445
+    ],
+    "sourceDistanceQuantileLevels": [
+      0.5,
+      0.95,
+      0.99,
+      1
+    ],
+    "overTwoPercentMaxEdge": 0.0,
+    "distanceReviewRequired": false,
+    "visualGeometryReviewRequired": true,
+    "barycentricOriginalRange": [
+      -0.0004702862020017811,
+      1.0
+    ],
+    "degenerateOrInvalidBarycentricCount": 0,
+    "closestSourceVertexFallbackFraction": 0.0,
+    "barycentricPointReconstructionErrorQuantiles": [
+      8.905605113947845e-09,
+      4.7650456423358164e-08,
+      1.1198174478447514e-06
+    ],
+    "atlasOverlapPixelsWithDifferentSurface": 21,
+    "seconds": 10.630985099996906,
+    "maps": [
+      {
+        "role": "base",
+        "size": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "role": "orm",
+        "size": [
+          512,
+          512
+        ]
+      }
+    ],
+    "sourceNote": "Native CuMesh UV charts applied to the exact existing low mesh loops. Original source textures transferred by closest original surface with float64 barycentric UV; no new geometry or painted colors."
+  },
+  "textureTransferTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\a2cb99c96fb8df396f16580a88a7c6151104ee3c927fe76cd161ee2d27bdfa42-bake_nearest_surface.py",
+    "sha256": "a2cb99c96fb8df396f16580a88a7c6151104ee3c927fe76cd161ee2d27bdfa42",
+    "bytes": 7317
+  },
+  "quantization": {
+    "source": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\harbor-villa2-nativeuv1024\\harbor\\villa_2.glb",
+    "output": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\harbor-villa2-nativeuv1024\\harbor\\villa_2.glb",
+    "sourceBytes": 2361624,
+    "outputBytes": 1709688,
+    "sourceSha256": "6d00dd0f6480ee53e3fec023d908eb08a9053d0e2906a7b311170878e0a2d462",
+    "outputSha256": "9edbb3489ce0c5aed37e0d27901191e860f3cc88dc5553848abc599e42d351b7",
+    "positionFaceAndTextureBytesUnchanged": true,
+    "attributes": [
+      {
+        "accessor": 1,
+        "semantic": "NORMAL",
+        "count": 54341,
+        "maximumAngularErrorDegrees": 0.3764651436773334
+      },
+      {
+        "accessor": 2,
+        "semantic": "TEXCOORD_0",
+        "count": 54341,
+        "maximumUVError": 7.629362698491349e-06,
+        "maximumTexelErrorAt1024": 0.007812467403255141
+      }
+    ]
+  },
+  "processedCandidate": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\harbor-villa2-nativeuv1024\\harbor\\villa_2.glb",
+    "sha256": "9edbb3489ce0c5aed37e0d27901191e860f3cc88dc5553848abc599e42d351b7",
+    "bytes": 1709688
+  },
+  "glbValidation": {
+    "version": 2,
+    "triangles": 44985,
+    "meshes": 1,
+    "materials": 1,
+    "images": 2,
+    "all_primitives_have_uv": true,
+    "animations": [],
+    "all_images_embedded": true,
+    "external_buffers": []
+  },
+  "triangles": 44985,
+  "renderedCandidate": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\harbor-villa2-nativeuv1024\\renders\\harbor\\villa_2\\lod-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\harbor-villa2-nativeuv1024\\renders\\harbor\\villa_2\\lod-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\harbor-villa2-nativeuv1024\\renders\\harbor\\villa_2\\lod-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\harbor-villa2-nativeuv1024\\renders\\harbor\\villa_2\\lod-left.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\harbor-villa2-nativeuv1024\\renders\\harbor\\villa_2\\lod-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.4344591200351715,
+        -0.296926349401474,
+        0.0003911773965228349
+      ],
+      "max": [
+        0.46082764863967896,
+        0.3068847358226776,
+        0.8738027215003967
+      ]
+    },
+    "triangles": 44985,
+    "textureSizes": [
+      {
+        "name": "harbor__villa_2__nearest_base",
+        "size": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "name": "harbor__villa_2__nearest_orm",
+        "size": [
+          512,
+          512
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "renderedSource": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\root-fine-voxel\\renders\\harbor\\villa_2\\raw-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\root-fine-voxel\\renders\\harbor\\villa_2\\raw-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.5,
+        -0.3381083905696869,
+        0.0
+      ],
+      "max": [
+        0.5,
+        0.3381083905696869,
+        0.8743711709976196
+      ]
+    },
+    "triangles": 945730,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "bounds": {
+    "min": [
+      -0.4344591200351715,
+      0.0003911773965228349,
+      -0.3068847358226776
+    ],
+    "max": [
+      0.46082764863967896,
+      0.8738027215003967,
+      0.296926349401474
+    ],
+    "coordinateSystem": "GLTF Y-up; +Z front"
+  },
+  "textureSizes": [
+    {
+      "name": "harbor__villa_2__nearest_base",
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "name": "harbor__villa_2__nearest_orm",
+      "size": [
+        512,
+        512
+      ]
+    }
+  ],
+  "rawSourceUnchanged": true,
+  "completedAt": "2026-10-23T08:06:29.088304+00:00",
+  "textureOnlyReprocessing": {
+    "sourceCandidate": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\root-fine-voxel\\harbor\\villa_2.glb",
+      "sha256": "f379a5708425f174ccc9ac57bab7fdbb4e1bdc476f26a409297dfca3ca60094d",
+      "bytes": 1818896
+    },
+    "sourceProcessingReport": {
+      "path": "art/full-ai-city/native-mobile/uv-replays/000-harbor-villa2-nativeUV-v01/input-processing.json",
+      "sha256": "2f542e83e754428fb32763fdb7101e1cc79be793849bec4bfc6a93608ac97da8",
+      "bytes": 8642
+    },
+    "sourceBlend": {
+      "path": "art\\full-ai-city\\work\\root-fine-voxel\\blender\\harbor\\villa_2.blend",
+      "sha256": "1a6666cf52e921c0b56ffe09b552b6b1cc53b5a7315525ad4bef9a2f0a82488a",
+      "bytes": 48695606
+    },
+    "nativeUVReceipt": {
+      "path": "art\\full-ai-city\\native-mobile\\uv-replays\\000-harbor-villa2-nativeUV-v01\\receipt.json",
+      "sha256": "0300e73b19024f94dd3cfa708d6e884ffe0d3b853335457ec71b20aa82955821",
+      "bytes": 3800
+    },
+    "sourceTriangleCountVerified": 932460,
+    "positionsUnchanged": true,
+    "faceIndicesUnchanged": true,
+    "cornerNormalsUnchanged": true,
+    "additionalRemeshOrSimplification": false,
+    "uvAssignment": "Native cyclic triangle position matches transfer UVs to original loops; original triangle order and winding retained.",
+    "exportedTriangleCornerPositionsExactlyUnchanged": true,
+    "qualityAudit": {
+      "path": "art/full-ai-city/reports/texture-transfers/harbor/villa_2/9edbb3489ce0c5aed/15ab79e2e720b96d8d5f24cc74054aa991eff98ea763a0863b5fa7024d6803b9-quality-audit.json",
+      "sha256": "15ab79e2e720b96d8d5f24cc74054aa991eff98ea763a0863b5fa7024d6803b9",
+      "bytes": 5907
+    }
+  },
+  "evidenceFinalization": {
+    "tool": {
+      "path": "art/full-ai-city/reports/tool-snapshots/a68012660e9fd921c9d45a485e863d43d98b04698d3faeeabb09416b96ac05fb-freeze_harbor_uv_review.py",
+      "sha256": "a68012660e9fd921c9d45a485e863d43d98b04698d3faeeabb09416b96ac05fb",
+      "bytes": 4124
+    },
+    "sourceReportSha256": "05ab3dc1c58836eab8729e4b6e60fd44c4b8e0c0ca1c399b082f36ae6071bae7",
+    "candidateBytesChanged": false,
+    "texturePixelsChanged": false,
+    "note": "Source-processing link uses the byte-identical GPU replay frozen report. CPU transfer tool retains the actual executed snapshot. Only evidence paths and QA receipts change in this new report."
+  }
+}

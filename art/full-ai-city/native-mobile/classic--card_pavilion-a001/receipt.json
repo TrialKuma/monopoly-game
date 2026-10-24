@@ -1,0 +1,205 @@
+{
+  "status": "exported_pending_visual_review",
+  "jobId": "classic--card_pavilion-a001",
+  "request": {
+    "status": "claimed",
+    "triangles": 45000,
+    "textureSize": 1024,
+    "purpose": "One same-run native CuMesh/direct-neural-field mobile export diagnostic; preserve the 1M-triangle 4096 raw output, no automatic approval or replacement.",
+    "jobId": "classic--card_pavilion-a001",
+    "claimedAt": "2026-10-23T07:03:12.128040+00:00"
+  },
+  "sameNativeRun": true,
+  "newNeuralInference": false,
+  "rawSourceReplaced": false,
+  "nativeExporter": {
+    "path": "C:\\Users\\A\\.codex\\worktrees\\0b69\\厂长\\grande-art-lab\\tools\\run_pixal_local.py",
+    "sha256": "ba8f1137c050980cc6ff252bce45ae5c1058edf565451212c074eb7134f5b505",
+    "bytes": 9327
+  },
+  "adapter": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\classic--card_pavilion-a001\\native-mobile-export-source.py",
+    "sha256": "d87784b1518e48894f5b009ba1c66d3e221984d719b2879f0e349918b16898e3",
+    "bytes": 5478
+  },
+  "tensorArchive": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\classic--card_pavilion-a001\\neural-export-inputs.pt",
+    "sha256": "0b31175c1ab38d2ed2dc9c592514a1e724035dd2394d4cbcdd425415ebdf3913",
+    "bytes": 443921885
+  },
+  "tensorShapes": {
+    "vertices": {
+      "shape": [
+        6139856,
+        3
+      ],
+      "dtype": "torch.float32"
+    },
+    "faces": {
+      "shape": [
+        12468944,
+        3
+      ],
+      "dtype": "torch.int32"
+    },
+    "attr_volume": {
+      "shape": [
+        6128169,
+        6
+      ],
+      "dtype": "torch.float32"
+    },
+    "coords": {
+      "shape": [
+        6128169,
+        3
+      ],
+      "dtype": "torch.int32"
+    }
+  },
+  "originalParameters": {
+    "attr_layout": {
+      "base_color": {
+        "slice": [
+          0,
+          3,
+          null
+        ]
+      },
+      "metallic": {
+        "slice": [
+          3,
+          4,
+          null
+        ]
+      },
+      "roughness": {
+        "slice": [
+          4,
+          5,
+          null
+        ]
+      },
+      "alpha": {
+        "slice": [
+          5,
+          6,
+          null
+        ]
+      }
+    },
+    "grid_size": 1024,
+    "aabb": [
+      [
+        -0.5,
+        -0.5,
+        -0.5
+      ],
+      [
+        0.5,
+        0.5,
+        0.5
+      ]
+    ],
+    "decimation_target": 1000000,
+    "texture_size": 4096,
+    "remesh": true,
+    "remesh_band": 1,
+    "remesh_project": 0,
+    "use_tqdm": true
+  },
+  "rawGLB": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\classic--card_pavilion-a001-pixal-mv-1024-9247.glb",
+    "sha256": "b5b981dc060abaaa4380c7425f61bd652b0d0293597c56f619d9ac6ce422a568",
+    "bytes": 38803096
+  },
+  "mobileParameters": {
+    "attr_layout": {
+      "base_color": {
+        "slice": [
+          0,
+          3,
+          null
+        ]
+      },
+      "metallic": {
+        "slice": [
+          3,
+          4,
+          null
+        ]
+      },
+      "roughness": {
+        "slice": [
+          4,
+          5,
+          null
+        ]
+      },
+      "alpha": {
+        "slice": [
+          5,
+          6,
+          null
+        ]
+      }
+    },
+    "grid_size": 1024,
+    "aabb": [
+      [
+        -0.5,
+        -0.5,
+        -0.5
+      ],
+      [
+        0.5,
+        0.5,
+        0.5
+      ]
+    ],
+    "decimation_target": 45000,
+    "texture_size": 1024,
+    "remesh": true,
+    "remesh_band": 1,
+    "remesh_project": 0,
+    "use_tqdm": true
+  },
+  "output": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\classic--card_pavilion-a001\\mobile-45000-1024.glb",
+    "sha256": "42472c9273a8ef3c07f5a8c867e595c18db236a36c241790b0bf36e65c3f1f68",
+    "bytes": 2300308
+  },
+  "actualTriangles": 42357,
+  "actualVertices": 42592,
+  "officialOutputRotation": [
+    [
+      -1.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      0.0,
+      0.0,
+      -1.0,
+      0.0
+    ],
+    [
+      0.0,
+      -1.0,
+      0.0,
+      0.0
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "textureOrigin": "Original neural attribute field sampled by the unchanged native to_glb exporter",
+  "geometryOrigin": "Same run_mv neural geometry passed to unchanged native CuMesh cleanup/remesh/simplification",
+  "rawUnchanged": true,
+  "seconds": 20.33,
+  "completedAt": "2026-10-23T07:07:47.326953+00:00"
+}

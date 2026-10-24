@@ -1,0 +1,292 @@
+{
+  "status": "exported_pending_visual_review",
+  "createdAt": "2026-10-23T21:09:02.674313+00:00",
+  "region": "alpine",
+  "asset": "junction_hub",
+  "source": {
+    "rawGLB": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\alpine--junction_hub-a002-pixal-mv-1024-29463.glb",
+      "sha256": "3729c37300cff2dc866f898cd0b51bb1aafbe6cd84a8fd9c0a2f81ea7ed804dc",
+      "bytes": 39348152
+    }
+  },
+  "inferenceReport": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\processing-reconciliations\\alpine\\tower_3\\2e727f1844b3ab41\\28a3166ecc5e2399-alpine--junction_hub-a002-pixal-mv-1024-29463.json",
+    "sha256": "3adf8519aa3885dbe8e24d4fe2d247731d94ef7746345f65cdf18c6df8db2b95",
+    "bytes": 10459
+  },
+  "reference": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\inputs\\alpine\\junction_hub\\9c41101a8470c6c0\\reference.json",
+    "sha256": "f6d913d786568f8a190fc94d7d24928de94f9159378ab046e14b374532e46f5e",
+    "bytes": 4451
+  },
+  "processingTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\4686f6f288c17202449c212d33193c98a2fdfe0f47fbbe1d47284f432c7ed327-process_lod.py",
+    "sha256": "4686f6f288c17202449c212d33193c98a2fdfe0f47fbbe1d47284f432c7ed327",
+    "bytes": 28561
+  },
+  "assumedCameras": true,
+  "cameraCalibration": "assumed_standard_orbit_not_measured",
+  "nativePipeline": "Pixal3DMVImageTo3DPipeline.run_mv",
+  "nativeResolution": 1024,
+  "seed": 29463,
+  "geometryOrigin": "Exact approved neural-derived near geometry, including any explicitly disclosed bounded local repairs, simplified for far use. No substitute building or newly authored geometry in this far stage.",
+  "orientation": {
+    "up": "Y",
+    "front": "+Z",
+    "groundY": 0,
+    "maxEdge": 1
+  },
+  "requestedTriangles": 12000,
+  "limitations": [
+    "Assumed camera reference reconstruction, not exact measured architecture",
+    "Final candidate requires actual rendered visual approval"
+  ],
+  "animation": null,
+  "processingComplete": true,
+  "lod": "far",
+  "processingRevision": 0,
+  "derivedFromNear": {
+    "path": "H:\\代码项目\\monopoly\\assets\\models\\regions-ai\\full\\alpine\\junction_hub\\f35264b76ca430bb.glb",
+    "sha256": "f35264b76ca430bb1c01ced5ec8e2a4782f8384eda30f213037aea081ba71ab9",
+    "bytes": 1066564
+  },
+  "derivedFromNearReport": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\processing-reconciliations\\alpine\\tower_3\\2e727f1844b3ab41\\c8d33cd405d0b302-f35264b76ca430bb-c8d33cd405d0b302.json",
+    "sha256": "db54cfc3f2d39897205e38bb6676a75edc85d776cd78e9c3e1f639ddd73537fc",
+    "bytes": 19838
+  },
+  "farSimplification": {
+    "source": {
+      "path": "H:\\代码项目\\monopoly\\assets\\models\\regions-ai\\full\\alpine\\junction_hub\\f35264b76ca430bb.glb",
+      "sha256": "f35264b76ca430bb1c01ced5ec8e2a4782f8384eda30f213037aea081ba71ab9"
+    },
+    "output": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\far-preserved\\alpine\\junction_hub.npz",
+    "outputSha256": "eaacbdfd2b7b890a4ccd0a698b5802f9dcea103aa81c403df0d26b193834773d",
+    "tool": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\e1cebc38c56c536fc09ec03ec4c1cad0060e4f6c21693fa5284e689cf37b9f7b-simplify_far_surface.py",
+      "sha256": "e1cebc38c56c536fc09ec03ec4c1cad0060e4f6c21693fa5284e689cf37b9f7b",
+      "pymeshlabVersion": "2025.7.post1"
+    },
+    "sourceTriangles": 29991,
+    "actualTriangles": 11999,
+    "actualVertices": 5664,
+    "method": "PyMeshLab quadric collapse preserving boundary, normal and topology with planar quadrics",
+    "settings": {
+      "targetfacenum": 12000,
+      "qualitythr": 0.3,
+      "preserveboundary": true,
+      "boundaryweight": 20.0,
+      "preservenormal": true,
+      "preservetopology": true,
+      "optimalplacement": true,
+      "planarquadric": true,
+      "planarweight": 0.01,
+      "autoclean": true
+    },
+    "geometryOrigin": "Only existing approved neural-derived surface simplified; no authored geometry",
+    "sourceCleanup": []
+  },
+  "derivation": {
+    "rawTriangles": 938914,
+    "weldedTriangles": 11999,
+    "remeshedTriangles": 11999,
+    "voxelSize": 0,
+    "finalTriangles": 11999,
+    "atlasArea": 0.5274693172604339,
+    "singleReductionPass": true,
+    "inheritedUVRemovedBeforeReduction": true,
+    "sourceMaterialsUntouched": true,
+    "uvUnwrap": {
+      "angleDegrees": 89,
+      "islandMargin": 2e-05,
+      "marginMethod": "SCALED",
+      "nominalMarginPixels": null
+    },
+    "nearTriangles": 29991,
+    "rawTriangleCountEvidence": "Actual unchanged original raw GLB index count; native-field near report does not repeat a rawTriangles field."
+  },
+  "bake": {
+    "hitCoverageAreaWeighted": 0.9993055762164468,
+    "cageExtrusion": 0.02,
+    "maxRayDistance": 0.06,
+    "maps": [
+      {
+        "role": "base",
+        "size": [
+          512,
+          512
+        ]
+      },
+      {
+        "role": "orm",
+        "size": [
+          256,
+          256
+        ]
+      }
+    ],
+    "method": "CPU selected-to-active PBR bake from the exact approved near mesh/materials onto its source-derived far surface. No further voxelization or authored geometry."
+  },
+  "farShading": {
+    "normals": "actual_geometry_only",
+    "baseColorSize": 512,
+    "ormSize": 256,
+    "reason": "Actual diagnostic isolated second-generation tangent-space normal rebake as the cause of black dormers/chimneys. Keep the verified geometric normals and original-near-derived color/ORM, omit normalTexture."
+  },
+  "nearSourceGeometryOrigin": "Recorded low surface derived from the identical native raw, restored to original field coordinates, with native UV/material generation using the original neural high-surface BVH and attribute field. No authored replacement geometry.",
+  "quantization": {
+    "source": "H:\\代码项目\\monopoly\\art\\full-ai-city\\candidates-far\\alpine\\junction_hub.glb",
+    "output": "H:\\代码项目\\monopoly\\art\\full-ai-city\\candidates-far\\alpine\\junction_hub.glb",
+    "sourceBytes": 667040,
+    "outputBytes": 471892,
+    "sourceSha256": "2cfa8f32c64b73d72c21c92bad6c8d84b985610906be2802e3d0d66b4632446a",
+    "outputSha256": "f3a45f1d7394bd35527da53324d5f47cf8dc4eedde6075b2d37f08549689f250",
+    "positionFaceAndTextureBytesUnchanged": true,
+    "attributes": [
+      {
+        "accessor": 1,
+        "semantic": "NORMAL",
+        "count": 16275,
+        "maximumAngularErrorDegrees": 0.3769731791770012
+      },
+      {
+        "accessor": 2,
+        "semantic": "TEXCOORD_0",
+        "count": 16275,
+        "maximumUVError": 7.628763332268029e-06,
+        "maximumTexelErrorAt1024": 0.007811853652242462
+      }
+    ]
+  },
+  "processedCandidate": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\far-native-uv\\alpine--junction_hub-f3a45f1d7394bd35\\source-far.glb",
+    "sha256": "f3a45f1d7394bd35527da53324d5f47cf8dc4eedde6075b2d37f08549689f250",
+    "bytes": 471892
+  },
+  "glbValidation": {
+    "version": 2,
+    "triangles": 11999,
+    "meshes": 1,
+    "materials": 1,
+    "images": 2,
+    "all_primitives_have_uv": true,
+    "animations": [],
+    "all_images_embedded": true,
+    "external_buffers": []
+  },
+  "triangles": 11999,
+  "renderedCandidate": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders-far\\alpine\\junction_hub\\lod-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders-far\\alpine\\junction_hub\\lod-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders-far\\alpine\\junction_hub\\lod-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders-far\\alpine\\junction_hub\\lod-left.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders-far\\alpine\\junction_hub\\lod-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.5006216168403625,
+        -0.34380629658699036,
+        -0.0004621446714736521
+      ],
+      "max": [
+        0.4985732436180115,
+        0.3446589708328247,
+        0.860029935836792
+      ]
+    },
+    "triangles": 11999,
+    "textureSizes": [
+      {
+        "name": "alpine__junction_hub__base",
+        "size": [
+          512,
+          512
+        ]
+      },
+      {
+        "name": "alpine__junction_hub__orm",
+        "size": [
+          256,
+          256
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "renderedSource": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders-far\\alpine\\junction_hub\\raw-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders-far\\alpine\\junction_hub\\raw-iso.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders-far\\alpine\\junction_hub\\raw-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders-far\\alpine\\junction_hub\\raw-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders-far\\alpine\\junction_hub\\raw-left.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.5,
+        -0.3450203537940979,
+        0.0
+      ],
+      "max": [
+        0.5,
+        0.3450203537940979,
+        0.8627618551254272
+      ]
+    },
+    "triangles": 938914,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "bounds": {
+    "min": [
+      -0.5006216168403625,
+      -0.0004621446714736521,
+      -0.3446589708328247
+    ],
+    "max": [
+      0.4985732436180115,
+      0.860029935836792,
+      0.34380629658699036
+    ],
+    "coordinateSystem": "GLTF Y-up; +Z front"
+  },
+  "textureSizes": [
+    {
+      "name": "alpine__junction_hub__base",
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "name": "alpine__junction_hub__orm",
+      "size": [
+        256,
+        256
+      ]
+    }
+  ],
+  "rawSourceUnchanged": true,
+  "completedAt": "2026-10-23T21:09:45.194782+00:00"
+}

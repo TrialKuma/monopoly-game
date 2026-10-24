@@ -1,0 +1,444 @@
+{
+  "status": "exported_pending_visual_review",
+  "createdAt": "2026-10-23T22:39:51.472584+00:00",
+  "region": "compact",
+  "asset": "tower_3",
+  "source": {
+    "rawGLB": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\compact--tower_3-a002-pixal-mv-1024-29466.glb",
+      "sha256": "473bec7b4daf1031124fd439acaa7398ff56a02b35de39b2b771475b38593101",
+      "bytes": 44949280
+    }
+  },
+  "inferenceReport": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\compact--tower_3-a002\\compact--tower_3-a002-pixal-mv-1024-29466.json",
+    "sha256": "d7f2611567e38c86411fb1227427651057636f9ec899e016021cc18c83fccbc7",
+    "bytes": 10440
+  },
+  "reference": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\inputs\\compact\\tower_3\\99b3b667a8244932\\reference.json",
+    "sha256": "cc6dabbe49061393d2434b6b8a879bebf6482f4270c0de42bcd9ac0103023729",
+    "bytes": 4421
+  },
+  "processingTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\4686f6f288c17202449c212d33193c98a2fdfe0f47fbbe1d47284f432c7ed327-process_lod.py",
+    "sha256": "4686f6f288c17202449c212d33193c98a2fdfe0f47fbbe1d47284f432c7ed327",
+    "bytes": 28561
+  },
+  "assumedCameras": true,
+  "cameraCalibration": "assumed_standard_orbit_not_measured",
+  "nativePipeline": "Pixal3DMVImageTo3DPipeline.run_mv",
+  "nativeResolution": 1024,
+  "seed": 29466,
+  "geometryOrigin": "Actual native three-view neural building with explicitly recorded bounded local repairs; localSurfaceRepair.method and face counts disclose whether these include boundary patches or a small mechanical connector. Followed by source-derived remeshing and texture transfer. No replacement building.",
+  "orientation": {
+    "up": "Y",
+    "front": "+Z",
+    "groundY": 0,
+    "maxEdge": 1
+  },
+  "requestedTriangles": 45000,
+  "limitations": [
+    "Assumed camera reference reconstruction, not exact measured architecture",
+    "Final candidate requires actual rendered visual approval"
+  ],
+  "animation": null,
+  "processingComplete": true,
+  "lod": "near",
+  "processingRevision": 0,
+  "memoryReservation": {
+    "pid": 10508,
+    "status": "reserved",
+    "reason": "native_or_other_fine_residency",
+    "voxelThreshold": 0.0015,
+    "noGpuCompute": true,
+    "startedAt": "2026-10-23T22:39:50.473665+00:00",
+    "waitSeconds": 0.002,
+    "reservation": {
+      "status": "held",
+      "pid": 10508,
+      "host": "NeoRic",
+      "label": "monopoly-fine-cpu-10508",
+      "acquired_utc": "2026-10-23T22:39:50.474204+00:00",
+      "lock_path": "C:\\Users\\A\\.codex\\shared-resource-locks\\pixal-gpu0.lock",
+      "token": "ebe3d959ea9e47d7aead922262313f59",
+      "metadata_is_advisory": true
+    },
+    "acquiredAt": "2026-10-23T22:39:50.474974+00:00",
+    "tool": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\705848501583a3e6e40072356e3423c4d9c9ad763e84e0f3fa5c1c9ba85b47a8-native_memory_reservation.py",
+      "sha256": "705848501583a3e6e40072356e3423c4d9c9ad763e84e0f3fa5c1c9ba85b47a8",
+      "bytes": 4247
+    }
+  },
+  "localSurfaceRepair": {
+    "source": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-compact-tower3-a002-two-walls-v1\\repaired-native.glb",
+      "sha256": "1992735395b3afac8b7b006d00d8f8c0653af668877de7dc12b4c43b0841a9df",
+      "bytes": 45249196
+    },
+    "receipt": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\compact\\tower_3\\1992735395b3afac\\repair.json",
+      "sha256": "457ac6ff29e0e4f76711014b172d9e83362985fb94882dfc79f9c9c8e84473ad",
+      "bytes": 9199
+    },
+    "method": "Only explicitly measured and visually reviewed local gaps are closed from adjoining original surface and UV samples with0.006 inward closure. Original vertices, faces and image pixels are preserved. No replacement building or generated texture. See configuration and frozen prior review evidence for exact allowed regions.",
+    "newTriangles": 2132,
+    "newVertices": 1070,
+    "originalVerticesMoved": 0,
+    "originalTrianglesDeleted": 0,
+    "regions": [
+      {
+        "name": "Small enclosed upper back plaster triangle",
+        "specification": {
+          "name": "Small enclosed upper back plaster triangle",
+          "u": [
+            -1,
+            0,
+            0
+          ],
+          "v": [
+            0,
+            0,
+            1
+          ],
+          "n": [
+            0,
+            1,
+            0
+          ],
+          "roi": [
+            -0.06,
+            -0.006,
+            0.498,
+            0.54
+          ],
+          "defectDepth": 0.18,
+          "donorDepth": 0.265,
+          "donorMaxDepth": 0.278,
+          "donorNormal": 0.65,
+          "color": "plaster"
+        },
+        "missingSamples": 81,
+        "boundarySamples": 525,
+        "sampledDepthRange": [
+          -0.23008346557617188,
+          0.27622127532958984
+        ],
+        "inwardClosureThickness": 0.006,
+        "outerSurfaceUnchanged": true,
+        "newVertices": 258,
+        "newTriangles": 512
+      },
+      {
+        "name": "Measured diagonal upper right plaster crack",
+        "specification": {
+          "name": "Measured diagonal upper right plaster crack",
+          "u": [
+            0,
+            1,
+            0
+          ],
+          "v": [
+            0,
+            0,
+            1
+          ],
+          "n": [
+            1,
+            0,
+            0
+          ],
+          "roi": [
+            -0.052,
+            0.07,
+            0.518,
+            0.636
+          ],
+          "defectDepth": 0.18,
+          "donorDepth": 0.221,
+          "donorMaxDepth": 0.232,
+          "donorNormal": 0.65,
+          "color": "plaster"
+        },
+        "missingSamples": 244,
+        "boundarySamples": 1330,
+        "sampledDepthRange": [
+          -0.3116297721862793,
+          0.2833700180053711
+        ],
+        "inwardClosureThickness": 0.006,
+        "outerSurfaceUnchanged": true,
+        "newVertices": 812,
+        "newTriangles": 1620
+      }
+    ]
+  },
+  "derivation": {
+    "rawTriangles": 962942,
+    "weldedTriangles": 961227,
+    "remeshedTriangles": 11274284,
+    "voxelSize": 0.0015,
+    "finalTriangles": 44938,
+    "atlasArea": 0.3296145982826487,
+    "singleReductionPass": true,
+    "inheritedUVRemovedBeforeReduction": true,
+    "sourceMaterialsUntouched": true,
+    "uvUnwrap": {
+      "angleDegrees": 66.0,
+      "islandMargin": 2e-05,
+      "marginMethod": "SCALED",
+      "nominalMarginPixels": null
+    },
+    "repairedSourceTriangles": 965074
+  },
+  "bake": {
+    "method": "CPU closest-original-triangle projection with float64 barycentric original UV and bilinear original texture sampling; geometric normals retained, no directional normal-map rebake or invented color",
+    "coveredAtlasPixels": 343063,
+    "nearestLookupSuccessFraction": 1.0,
+    "notRayCoverage": true,
+    "sourceDistanceQuantiles": [
+      0.00022770225768908858,
+      0.001117537403479218,
+      0.0018357678176835189,
+      0.007126132026314735
+    ],
+    "sourceDistanceQuantileLevels": [
+      0.5,
+      0.95,
+      0.99,
+      1
+    ],
+    "overTwoPercentMaxEdge": 0.0,
+    "distanceReviewRequired": false,
+    "visualGeometryReviewRequired": true,
+    "barycentricOriginalRange": [
+      -0.0001067782908765563,
+      1.0
+    ],
+    "degenerateOrInvalidBarycentricCount": 0,
+    "closestSourceVertexFallbackFraction": 0.0,
+    "barycentricPointReconstructionErrorQuantiles": [
+      7.175659050519503e-09,
+      4.416877557548749e-08,
+      2.0434556270150667e-07
+    ],
+    "atlasOverlapPixelsWithDifferentSurface": 2927,
+    "seconds": 7.8270759000006365,
+    "maps": [
+      {
+        "role": "base",
+        "size": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "role": "orm",
+        "size": [
+          512,
+          512
+        ]
+      }
+    ],
+    "repairSourceNote": "Texture transfer uses the explicitly repaired neural source, retaining original PBR and locally interpolated same-wall UV. Repair receipt and unchanged original inference source are preserved separately."
+  },
+  "textureTransferTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\a2cb99c96fb8df396f16580a88a7c6151104ee3c927fe76cd161ee2d27bdfa42-bake_nearest_surface.py",
+    "sha256": "a2cb99c96fb8df396f16580a88a7c6151104ee3c927fe76cd161ee2d27bdfa42",
+    "bytes": 7317
+  },
+  "quantization": {
+    "source": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-compact-tower3-1992735395b3afac-fine0015-45k\\candidates\\compact\\tower_3.glb",
+    "output": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-compact-tower3-1992735395b3afac-fine0015-45k\\candidates\\compact\\tower_3.glb",
+    "sourceBytes": 3088400,
+    "outputBytes": 2245112,
+    "sourceSha256": "eec8cd9a32e30c2c788522630381aa025da23075323caa12f5dbaa05c7c25ee6",
+    "outputSha256": "fdb375ad35a71ec0bc9632fa2b60365e45711d89b4beadbee25dac2b0d814a9f",
+    "positionFaceAndTextureBytesUnchanged": true,
+    "attributes": [
+      {
+        "accessor": 1,
+        "semantic": "NORMAL",
+        "count": 70287,
+        "maximumAngularErrorDegrees": 0.3758119129597286
+      },
+      {
+        "accessor": 2,
+        "semantic": "TEXCOORD_0",
+        "count": 70287,
+        "maximumUVError": 7.629503672279547e-06,
+        "maximumTexelErrorAt1024": 0.007812611760414256
+      }
+    ]
+  },
+  "processedCandidate": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-compact-tower3-1992735395b3afac-fine0015-45k\\candidates\\compact\\tower_3.glb",
+    "sha256": "fdb375ad35a71ec0bc9632fa2b60365e45711d89b4beadbee25dac2b0d814a9f",
+    "bytes": 2245112
+  },
+  "glbValidation": {
+    "version": 2,
+    "triangles": 44938,
+    "meshes": 1,
+    "materials": 1,
+    "images": 2,
+    "all_primitives_have_uv": true,
+    "animations": [],
+    "all_images_embedded": true,
+    "external_buffers": []
+  },
+  "triangles": 44938,
+  "renderedCandidate": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-compact-tower3-1992735395b3afac-fine0015-45k\\candidates\\renders\\compact\\tower_3\\lod-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-compact-tower3-1992735395b3afac-fine0015-45k\\candidates\\renders\\compact\\tower_3\\lod-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-compact-tower3-1992735395b3afac-fine0015-45k\\candidates\\renders\\compact\\tower_3\\lod-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-compact-tower3-1992735395b3afac-fine0015-45k\\candidates\\renders\\compact\\tower_3\\lod-left.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-compact-tower3-1992735395b3afac-fine0015-45k\\candidates\\renders\\compact\\tower_3\\lod-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.39990031719207764,
+        -0.3552999198436737,
+        0.00020182640582788736
+      ],
+      "max": [
+        0.3975386917591095,
+        0.3558863401412964,
+        1.0006438493728638
+      ]
+    },
+    "triangles": 44938,
+    "textureSizes": [
+      {
+        "name": "compact__tower_3__nearest_base",
+        "size": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "name": "compact__tower_3__nearest_orm",
+        "size": [
+          512,
+          512
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "renderedSource": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-compact-tower3-1992735395b3afac-fine0015-45k\\candidates\\renders\\compact\\tower_3\\raw-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-compact-tower3-1992735395b3afac-fine0015-45k\\candidates\\renders\\compact\\tower_3\\raw-iso.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-compact-tower3-1992735395b3afac-fine0015-45k\\candidates\\renders\\compact\\tower_3\\raw-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-compact-tower3-1992735395b3afac-fine0015-45k\\candidates\\renders\\compact\\tower_3\\raw-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-compact-tower3-1992735395b3afac-fine0015-45k\\candidates\\renders\\compact\\tower_3\\raw-left.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.3994159400463104,
+        -0.3558501899242401,
+        0.0
+      ],
+      "max": [
+        0.3994159400463104,
+        0.3558501899242401,
+        1.0
+      ]
+    },
+    "triangles": 962942,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "renderedRepairedSource": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-compact-tower3-1992735395b3afac-fine0015-45k\\candidates\\renders\\compact\\tower_3\\repaired-source-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-compact-tower3-1992735395b3afac-fine0015-45k\\candidates\\renders\\compact\\tower_3\\repaired-source-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-compact-tower3-1992735395b3afac-fine0015-45k\\candidates\\renders\\compact\\tower_3\\repaired-source-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.3994159400463104,
+        -0.3558501899242401,
+        0.0
+      ],
+      "max": [
+        0.3994159400463104,
+        0.3558501899242401,
+        1.0
+      ]
+    },
+    "triangles": 965074,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "bounds": {
+    "min": [
+      -0.39990031719207764,
+      0.00020182640582788736,
+      -0.3558863401412964
+    ],
+    "max": [
+      0.3975386917591095,
+      1.0006438493728638,
+      0.3552999198436737
+    ],
+    "coordinateSystem": "GLTF Y-up; +Z front"
+  },
+  "textureSizes": [
+    {
+      "name": "compact__tower_3__nearest_base",
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "name": "compact__tower_3__nearest_orm",
+      "size": [
+        512,
+        512
+      ]
+    }
+  ],
+  "rawSourceUnchanged": true,
+  "completedAt": "2026-10-23T22:43:53.453729+00:00"
+}

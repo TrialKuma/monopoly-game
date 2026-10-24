@@ -1,0 +1,64 @@
+{
+  "status": "exact_source_derived_low_mesh_for_uv_only",
+  "region": "alpine",
+  "asset": "builders_guild",
+  "candidate": {
+    "path": "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\work\\legacy-repair-alpine--builders_guild-0a6b150ef2c00bdc\\low\\alpine\\builders_guild.glb",
+    "sha256": "39f4af3bc0ed71c837ad33fd880a27a91bef482538cf3bf231892fea093401ea",
+    "bytes": 1361536
+  },
+  "candidateReport": {
+    "path": "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\work\\legacy-repair-alpine--builders_guild-0a6b150ef2c00bdc\\low\\alpine\\builders_guild.json",
+    "sha256": "d559e84475723dbf24281363e2e5bebae19aa3059ea39fbda5b7ba42de5a79e5",
+    "bytes": 13732
+  },
+  "sourceRaw": {
+    "path": "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\source\\alpine--builders_guild-a001-pixal-mv-1024-9247.glb",
+    "sha256": "d3aefa70e16ee1ca3700be2a52b83f426ddb66d9a38fbe54cc588aa8baa2f93f",
+    "bytes": 42679404
+  },
+  "sourceBlend": {
+    "path": "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\work\\legacy-repair-alpine--builders_guild-0a6b150ef2c00bdc\\low\\blender\\alpine\\builders_guild.blend",
+    "sha256": "bfe0fd4b55979e5370174fe88a9c23fcc3d4488a6a7ce80688a4f4e83adfd996",
+    "bytes": 52261710
+  },
+  "output": {
+    "path": "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\work\\legacy-repair-alpine--builders_guild-0a6b150ef2c00bdc\\native-uv-input.npz",
+    "sha256": "3de9384c607adeb47e9c9a6d28b9135d7bfb3ba4f872bcfce208fb01442e46e3",
+    "bytes": 771101
+  },
+  "processingTool": {
+    "path": "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\7c0bd19cc8af0ccd1d05c2285722e3059c9b4b5e70b3be5eafd06e6e0829a5f8-export_neural_uv_input.py",
+    "sha256": "7c0bd19cc8af0ccd1d05c2285722e3059c9b4b5e70b3be5eafd06e6e0829a5f8",
+    "bytes": 3809
+  },
+  "coordinateSystem": "Exact saved Blender mesh local coordinates: Z-up, front -Y; no normalization/rotation/simplification in this step. Blender (X,Y,Z) to GLTF (X,Z,-Y); the validation inverse converts GLTF (X,Y,Z) to Blender (X,-Z,Y).",
+  "arrays": {
+    "vertices": {
+      "shape": [
+        14490,
+        3
+      ],
+      "dtype": "float32"
+    },
+    "faces": {
+      "shape": [
+        29978,
+        3
+      ],
+      "dtype": "int32"
+    },
+    "corner_normals": {
+      "shape": [
+        29978,
+        3,
+        3
+      ],
+      "dtype": "float32",
+      "purpose": "Preserve original low-mesh shading when native UV returns vertex splitting; ignore for unwrap."
+    }
+  },
+  "candidateTriangleCornerPositionsExactlyEqual": true,
+  "geometryChanged": false,
+  "texturesChanged": false
+}

@@ -1,0 +1,64 @@
+{
+  "status": "exact_source_derived_low_mesh_for_uv_only",
+  "region": "alpine",
+  "asset": "hotel_2",
+  "candidate": {
+    "path": "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\work\\alpine-hotel2-far18-nativeuv-review\\candidates\\alpine\\hotel_2.glb",
+    "sha256": "dc1686813d63a414a76f634106e7fb4806cc0b3772af0d838a9c075da0e0a3a7",
+    "bytes": 647212
+  },
+  "candidateReport": {
+    "path": "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\work\\alpine-hotel2-far18-nativeuv-review\\candidates\\alpine\\hotel_2.json",
+    "sha256": "84fa98cacfeb322248d6a756ea8d45192032926d5bd7f3b061aad503d3fff996",
+    "bytes": 11989
+  },
+  "sourceRaw": {
+    "path": "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\source\\alpine--hotel_2-a003-pixal-mv-1024-29412.glb",
+    "sha256": "aa8055f7e92e8f8a6a4a1fcee3a5377252e44595d071ae3fe1d5357a728c9b50",
+    "bytes": 41915508
+  },
+  "sourceBlend": {
+    "path": "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\work\\alpine-hotel2-far18-nativeuv-review\\candidates\\blender\\alpine\\hotel_2.blend",
+    "sha256": "86d11463f03d0af52832774c0af579f4958bb5763116ce65e9376fc21a541856",
+    "bytes": 2796682
+  },
+  "output": {
+    "path": "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\work\\alpine-hotel2-far18-nativeuv-review\\native-uv-input.npz",
+    "sha256": "e290ab488f5583f1a1bcc2d36f74206f670480d65cf22bf376dbf9b813e5ec97",
+    "bytes": 456407
+  },
+  "processingTool": {
+    "path": "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\7c0bd19cc8af0ccd1d05c2285722e3059c9b4b5e70b3be5eafd06e6e0829a5f8-export_neural_uv_input.py",
+    "sha256": "7c0bd19cc8af0ccd1d05c2285722e3059c9b4b5e70b3be5eafd06e6e0829a5f8",
+    "bytes": 3809
+  },
+  "coordinateSystem": "Exact saved Blender mesh local coordinates: Z-up, front -Y; no normalization/rotation/simplification in this step. Blender (X,Y,Z) to GLTF (X,Z,-Y); the validation inverse converts GLTF (X,Y,Z) to Blender (X,-Z,Y).",
+  "arrays": {
+    "vertices": {
+      "shape": [
+        8736,
+        3
+      ],
+      "dtype": "float32"
+    },
+    "faces": {
+      "shape": [
+        17999,
+        3
+      ],
+      "dtype": "int32"
+    },
+    "corner_normals": {
+      "shape": [
+        17999,
+        3,
+        3
+      ],
+      "dtype": "float32",
+      "purpose": "Preserve original low-mesh shading when native UV returns vertex splitting; ignore for unwrap."
+    }
+  },
+  "candidateTriangleCornerPositionsExactlyEqual": true,
+  "geometryChanged": false,
+  "texturesChanged": false
+}

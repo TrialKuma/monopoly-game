@@ -1,0 +1,461 @@
+{
+  "status": "exported_pending_visual_review",
+  "createdAt": "2026-10-24T02:33:31.742284+00:00",
+  "region": "harbor",
+  "asset": "skyscraper_3",
+  "lod": "near",
+  "processingRevision": 0,
+  "source": {
+    "rawGLB": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\harbor--skyscraper_3-a001-pixal-mv-1024-9247.glb",
+      "sha256": "783b6c0ed6bca57eb496a423de27a6944ba3074677c6f3af88ba49dff617e7aa",
+      "bytes": 45359028
+    }
+  },
+  "inferenceReport": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\harbor--skyscraper_3-a001\\harbor--skyscraper_3-a001-pixal-mv-1024-9247.json",
+    "sha256": "91d282f9cd5ff210e80d2f3ef674ba926bf8719bdd16e31c3dc3a1a09e3a611d",
+    "bytes": 10167
+  },
+  "reference": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\inputs\\harbor\\skyscraper_3\\c22ef9297bb2e9af\\reference.json",
+    "sha256": "ce4d91c42db0e7afaee29159a88136c2fdec4baa0d183234026e47d8b176632f",
+    "bytes": 4458
+  },
+  "processingTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\d0fe99e75121175cccb420b5c503d9926459607b997b8582bbce75e6983b35bb-process_native_mobile.py",
+    "sha256": "d0fe99e75121175cccb420b5c503d9926459607b997b8582bbce75e6983b35bb",
+    "bytes": 9752
+  },
+  "nativeSurfaceExport": {
+    "receipt": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\harbor--skyscraper_3-783b6c0ed6bc-surface-field-v1\\receipt.json",
+      "sha256": "2e1c5beefc5fed5f39413345490d6dd3528dc97d24ab784fb75c3073f5423818",
+      "bytes": 11429
+    },
+    "source": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\harbor--skyscraper_3-783b6c0ed6bc-surface-field-v1\\mobile-45000-1024.glb",
+      "sha256": "e33a340dd8beea4fb010986adbbafdd70c1f8f777efb513169d2335c65142f33",
+      "bytes": 2905228
+    },
+    "tensorArchive": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\harbor--skyscraper_3-a001\\neural-export-inputs.pt",
+      "sha256": "7380e4328976c97cf64a7b70ef072a66004cdb64424b960cc934c092be4f1adc",
+      "bytes": 388993885
+    }
+  },
+  "nativePipeline": "Pixal3DMVImageTo3DPipeline.run_mv",
+  "nativeResolution": 1024,
+  "seed": 9247,
+  "assumedCameras": true,
+  "cameraCalibration": "assumed_standard_orbit_not_measured",
+  "geometryOrigin": "Recorded low surface derived from the identical native raw, restored to original field coordinates, with native UV/material generation using the original neural high-surface BVH and attribute field. No authored replacement geometry.",
+  "textureOrigin": "Original neural attribute field sampled by the native UV/material operations with the recorded surface-stage override; no new neural inference or raw-UV rebake.",
+  "normalization": {
+    "enabled": true,
+    "candidate_degrees": 0.9228015657161526,
+    "applied_degrees": 0.9228015657161526,
+    "underside_area": 0.07419459765441161,
+    "normal_agreement": 0.9208369352226925,
+    "yaw_degrees": 180,
+    "pitch_degrees": 0,
+    "roll_degrees": 0,
+    "uniform_scale": 1.0402001781405896
+  },
+  "orientation": {
+    "up": "Y",
+    "front": "+Z",
+    "groundY": 0,
+    "maxEdge": 1
+  },
+  "requestedTriangles": 45000,
+  "triangles": 44992,
+  "glbValidation": {
+    "version": 2,
+    "triangles": 44992,
+    "meshes": 1,
+    "materials": 1,
+    "images": 2,
+    "all_primitives_have_uv": true,
+    "animations": [],
+    "all_images_embedded": true,
+    "external_buffers": []
+  },
+  "quantization": {
+    "source": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\harbor--skyscraper_3-783b6c0ed6bc-surface-field-v1\\candidates\\harbor\\skyscraper_3.glb",
+    "output": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\harbor--skyscraper_3-783b6c0ed6bc-surface-field-v1\\candidates\\harbor\\skyscraper_3.glb",
+    "sourceBytes": 2350228,
+    "outputBytes": 1748040,
+    "sourceSha256": "68e504252341f8e6e18a5417432b5eff5d05dcf78ba30697312e4f67f8838bd3",
+    "outputSha256": "d9cc90ad5aa999700b4b0f1d1636010c8635646bddcd222cfb989fe0483453f1",
+    "positionFaceAndTextureBytesUnchanged": true,
+    "attributes": [
+      {
+        "accessor": 1,
+        "semantic": "NORMAL",
+        "count": 50195,
+        "maximumAngularErrorDegrees": 0.3682335767686506
+      },
+      {
+        "accessor": 2,
+        "semantic": "TEXCOORD_0",
+        "count": 50195,
+        "maximumUVError": 7.629359969923977e-06,
+        "maximumTexelErrorAt1024": 0.007812464609202152
+      }
+    ]
+  },
+  "processedCandidate": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\candidates\\harbor\\skyscraper_3.glb",
+    "sha256": "d9cc90ad5aa999700b4b0f1d1636010c8635646bddcd222cfb989fe0483453f1",
+    "bytes": 1748040
+  },
+  "derivation": {
+    "method": "Recorded CPU surface derived from the same neural raw, inverse-normalized to field coordinates; a local native-export variant bypasses further mesh simplification/remeshing and uses native UV generation plus original neural high-surface BVH and field texture sampling. Only normalization, JPEG encoding and attribute quantization afterward.",
+    "voxelizedAgain": false,
+    "rebakedFromRawUV": false,
+    "facadeUVPreserved": true,
+    "normalizedTrianglesPreserved": true,
+    "geometrySurfaceInput": {
+      "receipt": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\harbor--skyscraper_3-783b6c0ed6bc-surface-field-v1\\geometry-source-proof.json",
+        "sha256": "379cf02d84d469639fb27f8f63eeeafd0a3fc4fe4bd1975da688ddc5cfb82c05",
+        "bytes": 4749
+      },
+      "method": "Only coordinate inversion of an existing source-derived low mesh; all candidate vertex/triangle identities preserved. No remeshing, replacement or newly authored geometry.",
+      "sourceRaw": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\harbor--skyscraper_3-a001-pixal-mv-1024-9247.glb",
+        "sha256": "783b6c0ed6bca57eb496a423de27a6944ba3074677c6f3af88ba49dff617e7aa",
+        "bytes": 45359028
+      },
+      "candidate": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\harbor--skyscraper_3-783b6c0ed6bc-surface-field-v1\\geometry-candidate.glb",
+        "sha256": "90ca90feca2630abbbb664f3e9c930d6da672b7427c5a3522b87d8dde5a92239",
+        "bytes": 2125496
+      },
+      "candidateReport": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\harbor--skyscraper_3-783b6c0ed6bc-surface-field-v1\\geometry-candidate-processing.json",
+        "sha256": "f8b81d1b376f82d1a47462ad2cac63c7c8069e62a78325d5687aa87a7f516cf0",
+        "bytes": 9934
+      },
+      "originalCandidate": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\candidates\\harbor\\skyscraper_3.glb",
+        "sha256": "90ca90feca2630abbbb664f3e9c930d6da672b7427c5a3522b87d8dde5a92239",
+        "bytes": 2125496
+      },
+      "fieldReceipt": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\harbor--skyscraper_3-a001\\receipt.json",
+        "sha256": "64caf0a74f69fb289d9b257a99f9dc0cd5c99f9fcd85f3ea504a7a3572065528",
+        "bytes": 3716
+      },
+      "output": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\harbor--skyscraper_3-783b6c0ed6bc-surface-field-v1\\geometry-surface.npz",
+        "sha256": "1b2bebb61357c678e8e59d83fc81ccddad4e002d287ed609093e38ea00640986",
+        "bytes": 806144
+      },
+      "triangles": 44992,
+      "vertices": 22144,
+      "originalSplitVertices": 56046,
+      "exactCoincidentVerticesMerged": 33902,
+      "maximumPositionChangeFromWelding": 0,
+      "normalization": {
+        "enabled": true,
+        "candidate_degrees": 1.0370208982155718,
+        "applied_degrees": 1.0370208982155718,
+        "underside_area": 0.10487851468974839,
+        "normal_agreement": 0.9141607826535489,
+        "yaw_degrees": 180,
+        "pitch_degrees": 0,
+        "roll_degrees": 0,
+        "uniform_scale": 1.0384764273156946
+      },
+      "rawBlenderToNormalizedBlender": [
+        [
+          -1.0384460685972552,
+          -6.527790254680279e-05,
+          0.007938636436274845,
+          0.0037529547108371515
+        ],
+        [
+          -6.512249920262191e-05,
+          -1.0383362753654708,
+          -0.017060080972211636,
+          -0.00565667449806595
+        ],
+        [
+          0.007938634639866963,
+          -0.017060078944880985,
+          1.0383059263528285,
+          0.3530028964739498
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "inverse": [
+        [
+          -0.962921029679024,
+          -6.0410455516214334e-05,
+          0.007361269131006819,
+          0.0010149079672452357
+        ],
+        [
+          -6.0554519894178086e-05,
+          -0.962819214669246,
+          -0.01581931936114081,
+          0.0001381379152324295
+        ],
+        [
+          0.007361265098066228,
+          -0.015819318582786717,
+          0.962791078587206,
+          -0.33998515067109353
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "sampledNormalizationReconstructionMaxError": 9.413752727093e-08,
+      "nativeBounds": {
+        "min": [
+          -0.4828473657290419,
+          -0.34067151559212844,
+          -0.19697308615672277
+        ],
+        "max": [
+          0.4785426263105561,
+          0.3773270652616106,
+          0.1902733425140039
+        ]
+      },
+      "tool": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\harbor--skyscraper_3-783b6c0ed6bc-surface-field-v1\\geometry-preparation-source.py",
+        "sha256": "c4eec55644a998f870bd170aae5f8c5f060ba6af7ddbbe7025a44c5141846d8d",
+        "bytes": 8809
+      },
+      "toolSnapshot": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\harbor--skyscraper_3-783b6c0ed6bc-surface-field-v1\\geometry-preparation-source.py",
+        "sha256": "c4eec55644a998f870bd170aae5f8c5f060ba6af7ddbbe7025a44c5141846d8d",
+        "bytes": 8809
+      },
+      "normalizationInput": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\harbor--skyscraper_3-a001-pixal-mv-1024-9247.glb",
+        "sha256": "783b6c0ed6bca57eb496a423de27a6944ba3074677c6f3af88ba49dff617e7aa",
+        "bytes": 45359028
+      },
+      "originalReceipt": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\harbor--skyscraper_3-783b6c0ed6bc-surface-field-v1\\geometry-source-original-receipt.json",
+        "sha256": "822cf501ae8f8bbb5d76b4c676571d6870ea64794cfd33b1a46a35fa2e957420",
+        "bytes": 4388
+      }
+    },
+    "nativePostprocessOverride": {
+      "original": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\harbor--skyscraper_3-783b6c0ed6bc-surface-field-v1\\original-native-exporter-source.py",
+        "sha256": "b6b79da5dfe13c22047a6257c6b2301c7ea31259dd9c82344db7e5c4cc707917",
+        "bytes": 8126
+      },
+      "scope": "Keep original neural geometry BVH for PBR lookup. Replace only the intermediate surface with this recorded existing source-derived low mesh; bypass further remeshing/simplification/cleanup, then use native unwrap/normals/field sampling.",
+      "sharedCodeModified": false,
+      "noNewGeometryAuthored": true,
+      "noNewGeometryAuthoredAppliesTo": "native_uv_material_replay_only",
+      "counts": {
+        "facesBeforeUnwrap": 44992
+      }
+    },
+    "nativeFieldLookup": {
+      "quantiles50_95_99_100": [
+        0.0010025440715253353,
+        0.0017826997209340334,
+        0.002452138578519225,
+        0.00718614412471652
+      ],
+      "fractionOverTwoPercent": 0.0,
+      "sampleCount": 582285,
+      "meaning": "Distance to original neural BVH before direct field sampling, not ray hit coverage"
+    }
+  },
+  "bake": {
+    "method": "Direct original neural attribute field sampling inside native to_glb; no Blender bake or nearest raw-image transfer",
+    "notRayCoverage": true
+  },
+  "animation": null,
+  "processingComplete": true,
+  "limitations": [
+    "Same assumed three-view cameras as original native raw",
+    "Diagnostic pending external visual approval; not a formal asset replacement"
+  ],
+  "renderedCandidate": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\harbor--skyscraper_3-783b6c0ed6bc-surface-field-v1\\candidates\\renders\\harbor\\skyscraper_3\\lod-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\harbor--skyscraper_3-783b6c0ed6bc-surface-field-v1\\candidates\\renders\\harbor\\skyscraper_3\\lod-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\harbor--skyscraper_3-783b6c0ed6bc-surface-field-v1\\candidates\\renders\\harbor\\skyscraper_3\\lod-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\harbor--skyscraper_3-783b6c0ed6bc-surface-field-v1\\candidates\\renders\\harbor\\skyscraper_3\\lod-left.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\harbor--skyscraper_3-783b6c0ed6bc-surface-field-v1\\candidates\\renders\\harbor\\skyscraper_3\\lod-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.5,
+        -0.20104792714118958,
+        0.0
+      ],
+      "max": [
+        0.5,
+        0.20104792714118958,
+        0.7512502670288086
+      ]
+    },
+    "triangles": 44992,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          1024,
+          1024
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "sourceReviewReusedFrom": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\harbor--skyscraper_3-783b6c0ed6bc-surface-field-v1\\surface.candidate.json",
+    "sha256": "f8b81d1b376f82d1a47462ad2cac63c7c8069e62a78325d5687aa87a7f516cf0",
+    "bytes": 9934
+  },
+  "renderedSource": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\harbor--skyscraper_3-783b6c0ed6bc-surface-field-v1\\candidates\\renders\\harbor\\skyscraper_3\\raw-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\harbor--skyscraper_3-783b6c0ed6bc-surface-field-v1\\candidates\\renders\\harbor\\skyscraper_3\\raw-iso.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\harbor--skyscraper_3-783b6c0ed6bc-surface-field-v1\\candidates\\renders\\harbor\\skyscraper_3\\raw-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\harbor--skyscraper_3-783b6c0ed6bc-surface-field-v1\\candidates\\renders\\harbor\\skyscraper_3\\raw-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\harbor--skyscraper_3-783b6c0ed6bc-surface-field-v1\\candidates\\renders\\harbor\\skyscraper_3\\raw-left.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.5,
+        -0.20115289092063904,
+        0.0
+      ],
+      "max": [
+        0.5,
+        0.20115289092063904,
+        0.7472279071807861
+      ]
+    },
+    "triangles": 997614,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "bounds": {
+    "min": [
+      -0.5,
+      0.0,
+      -0.20104792714118958
+    ],
+    "max": [
+      0.5,
+      0.7512502670288086,
+      0.20104792714118958
+    ],
+    "coordinateSystem": "GLTF Y-up; +Z front"
+  },
+  "textureSizes": [
+    {
+      "name": "Image_0",
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "name": "Image_1",
+      "size": [
+        1024,
+        1024
+      ]
+    }
+  ],
+  "completedAt": "2026-10-24T02:33:42.759700+00:00",
+  "rawSourceUnchanged": true,
+  "promotedFrom": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\harbor--skyscraper_3-783b6c0ed6bc-surface-field-v1\\candidates\\harbor\\skyscraper_3.json",
+    "sha256": "475c9c916b52427ff084b6d204ebc9a36669600c03e4ffbefe1cbd6f68261ab5",
+    "bytes": 19483
+  },
+  "reviewSheet": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\harbor--skyscraper_3-783b6c0ed6bc-surface-field-v1\\candidates\\renders\\harbor\\skyscraper_3\\review-sheet.jpg",
+    "sha256": "8c8162f3a33881c4e44d42590d0250609ba7c1c70e208732f941e4b246866335",
+    "bytes": 302698,
+    "candidateSha256": "d9cc90ad5aa999700b4b0f1d1636010c8635646bddcd222cfb989fe0483453f1",
+    "sourceImages": [
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\harbor--skyscraper_3-783b6c0ed6bc-surface-field-v1\\candidates\\renders\\harbor\\skyscraper_3\\raw-front.png",
+        "sha256": "51d704a0d77c93843b48641e544e64dcbede73dbc4d9694438f8e9b24e06b912",
+        "label": "AI raw front"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\harbor--skyscraper_3-783b6c0ed6bc-surface-field-v1\\candidates\\renders\\harbor\\skyscraper_3\\raw-iso.png",
+        "sha256": "ac25949de18e75200f36877ae29daab17c111a36bce55f200bd5d34bf78e02d3",
+        "label": "AI raw iso"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\harbor--skyscraper_3-783b6c0ed6bc-surface-field-v1\\candidates\\renders\\harbor\\skyscraper_3\\lod-front.png",
+        "sha256": "2a47a6d3f0f8cac1f0e03a383d6164f31045afece02b7c6b7ed0d764fb33dc85",
+        "label": "LOD front"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\harbor--skyscraper_3-783b6c0ed6bc-surface-field-v1\\candidates\\renders\\harbor\\skyscraper_3\\lod-right.png",
+        "sha256": "6a7072e0db49c9d528504190b5df69ddba7d0b662b50722268d0fad2c9c24c1a",
+        "label": "LOD right"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\harbor--skyscraper_3-783b6c0ed6bc-surface-field-v1\\candidates\\renders\\harbor\\skyscraper_3\\lod-back.png",
+        "sha256": "98551a1166abaa6f6b891bd58d0cd0bb37fc8ffa47e9a6d53627eea59550a135",
+        "label": "LOD back"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\harbor--skyscraper_3-783b6c0ed6bc-surface-field-v1\\candidates\\renders\\harbor\\skyscraper_3\\lod-left.png",
+        "sha256": "6851130137955853ce35801d713c6843d414028ef572ff8f23e1ccff224e6147",
+        "label": "LOD left"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\harbor--skyscraper_3-783b6c0ed6bc-surface-field-v1\\candidates\\renders\\harbor\\skyscraper_3\\lod-iso.png",
+        "sha256": "a3f87e4ab9af59c2cdfd6d941900f4129d6d7ddef780edbf4f26f85937a5ea96",
+        "label": "LOD iso"
+      }
+    ],
+    "content": "Unmodified CPU render images composed with labels for visual comparison only"
+  }
+}

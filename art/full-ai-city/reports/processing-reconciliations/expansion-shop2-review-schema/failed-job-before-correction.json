@@ -1,0 +1,114 @@
+{
+  "status": "failed_needs_review",
+  "identity": "expansion--shop_2-51c40f4ad896-repair-81fc194f7005-low-392294b256-field-v1",
+  "key": "expansion/shop_2",
+  "createdAt": "2026-10-24T05:19:43.841265+00:00",
+  "statePath": "H:\\代码项目\\monopoly\\art\\full-ai-city\\queue\\expansion\\shop_2.json",
+  "candidateReportPath": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-expansion-shop2-81fc194f7005a1e1\\candidates\\expansion\\shop_2.json",
+  "originalCandidateSha256": "392294b256bf1178801a972a46aefc33a8d4b9a58469dace88132e0cc4562d8e",
+  "rawSha256": "51c40f4ad89666e347fd818e34b1d13397ff31e35fe2f3796df7f9901f17fb3f",
+  "fieldReceiptPath": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\expansion--shop_2-a014\\receipt.json",
+  "surfacePath": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\expansion--shop_2-51c40f4ad896-repair-81fc194f7005-low-392294b256-field-v1\\surface.npz",
+  "outputRoot": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\expansion--shop_2-51c40f4ad896-repair-81fc194f7005-low-392294b256-field-v1\\candidates",
+  "requestPath": "H:\\代码项目\\monopoly\\art\\full-ai-city\\queue\\native-export-replays\\expansion--shop_2-51c40f4ad896-repair-81fc194f7005-low-392294b256-field-v1.json",
+  "requestedTriangles": 30000,
+  "recordedRepair": {
+    "source": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-expansion-shop2-51c4-right-upper\\repaired-native.glb",
+      "sha256": "81fc194f7005a1e1f76ee459e725fc25063c6d89b3cb17e9329f776a2f400c77",
+      "bytes": 38814148
+    },
+    "receipt": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\expansion\\shop_2\\81fc194f7005a1e1\\repair.json",
+      "sha256": "c89eaab77d9eb98b2c2cffd1a626abf8ff122102bcb97945696f9ac7256f66d2",
+      "bytes": 9478
+    },
+    "method": "Only explicitly measured and visually reviewed local gaps are closed from adjoining original surface and UV samples with0.006 inward closure. Original vertices, faces and image pixels are preserved. No replacement building or generated texture. See configuration and frozen prior review evidence for exact allowed regions.",
+    "newTriangles": 3084,
+    "newVertices": 1550,
+    "originalVerticesMoved": 0,
+    "originalTrianglesDeleted": 0,
+    "regions": [
+      {
+        "name": "Right upper brick strip beside rear window",
+        "specification": {
+          "name": "Right upper brick strip beside rear window",
+          "u": [
+            0,
+            1,
+            0
+          ],
+          "v": [
+            0,
+            0,
+            1
+          ],
+          "n": [
+            1,
+            0,
+            0
+          ],
+          "roi": [
+            0.26,
+            0.335,
+            0.473,
+            0.753
+          ],
+          "defectDepth": 0.374,
+          "donorDepth": 0.377,
+          "donorMaxDepth": 0.383,
+          "donorNormal": 0.7,
+          "color": "brick",
+          "gridStep": 0.0035,
+          "donorMargin": 0.025,
+          "flatPatchUV": true,
+          "donorMinRGB": 0.1,
+          "donorMaxColorRatio": 5
+        },
+        "missingSamples": 374,
+        "boundarySamples": 1147,
+        "sampledDepthRange": [
+          -0.37648797035217285,
+          0.3920326232910156
+        ],
+        "inwardClosureThickness": 0.006,
+        "outerSurfaceUnchanged": true,
+        "newVertices": 1550,
+        "newTriangles": 3084
+      }
+    ]
+  },
+  "explicitRepairRegistration": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-expansion-shop2-81fc194f7005a1e1\\candidates\\expansion\\shop_2.json",
+    "sha256": "e5f1e23fa6ff66e40aaf4080baafcb49a3ad0c97a746b229a49e870758d47d32",
+    "bytes": 13215
+  },
+  "phase": "finalize",
+  "command": [
+    "C:\\Program Files\\Blender Foundation\\Blender 5.2\\blender.exe",
+    "--background",
+    "--threads",
+    "4",
+    "--python-exit-code",
+    "1",
+    "--python",
+    "H:\\代码项目\\monopoly\\art\\full-ai-city\\tools\\process_native_mobile.py",
+    "--",
+    "--state",
+    "H:\\代码项目\\monopoly\\art\\full-ai-city\\queue\\expansion\\shop_2.json",
+    "--receipt",
+    "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\expansion--shop_2-51c40f4ad896-repair-81fc194f7005-low-392294b256-field-v1\\receipt.json",
+    "--output-root",
+    "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\expansion--shop_2-51c40f4ad896-repair-81fc194f7005-low-392294b256-field-v1\\candidates",
+    "--reuse-source-review",
+    "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\expansion--shop_2-51c40f4ad896-repair-81fc194f7005-low-392294b256-field-v1\\surface.candidate.json"
+  ],
+  "log": "H:\\代码项目\\monopoly\\art\\full-ai-city\\logs\\hybrid-expansion--shop_2-51c40f4ad896-repair-81fc194f7005-low-392294b256-field-v1-finalize.log",
+  "updatedAt": "2026-10-24T05:23:30.590376+00:00",
+  "exitCode": 0,
+  "sourceVerification": {
+    "exitCode": 1,
+    "output": ""
+  },
+  "error": "node:internal/modules/run_main:107\n    triggerUncaughtException(\n    ^\n\nAssertionError [ERR_ASSERTION]: source repair review describes all five views\n    at verifyLocalSurfaceRepair (file:///H:/%E4%BB%A3%E7%A0%81%E9%A1%B9%E7%9B%AE/monopoly/tests/ai-city-fixture.mjs:140:5)\n    at verifyNativeSurfaceExport (file:///H:/%E4%BB%A3%E7%A0%81%E9%A1%B9%E7%9B%AE/monopoly/tests/ai-city-fixture.mjs:258:20)\n    at file:///H:/%E4%BB%A3%E7%A0%81%E9%A1%B9%E7%9B%AE/monopoly/[eval1]:1:152\n    at ModuleJob.run (node:internal/modules/esm/module_job:437:25)\n    at async node:internal/modules/esm/loader:246:26\n    at async ModuleLoader.executeModuleJob (node:internal/modules/esm/loader:243:20)\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {\n  generatedMessage: false,\n  code: 'ERR_ASSERTION',\n  actual: false,\n  expected: true,\n  operator: '==',\n  diff: 'simple'\n}\n\nNode.js v24.15.0\n"
+}

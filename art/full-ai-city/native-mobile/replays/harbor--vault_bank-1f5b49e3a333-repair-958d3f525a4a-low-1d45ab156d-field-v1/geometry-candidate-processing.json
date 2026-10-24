@@ -1,0 +1,388 @@
+{
+  "status": "exported_pending_visual_review",
+  "createdAt": "2026-10-24T02:26:20.435580+00:00",
+  "region": "harbor",
+  "asset": "vault_bank",
+  "source": {
+    "rawGLB": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\harbor--vault_bank-a002-pixal-mv-1024-29484.glb",
+      "sha256": "1f5b49e3a3339ca7e41e82ce72415b1d6fc65ee11bfce22072d3824d8ff21bd9",
+      "bytes": 44066364
+    }
+  },
+  "inferenceReport": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\harbor--vault_bank-a002\\harbor--vault_bank-a002-pixal-mv-1024-29484.json",
+    "sha256": "0b92641f73848f3120a5cd3890cb548d053acdcf3c64288f50e7ff48bd3983a1",
+    "bytes": 9373
+  },
+  "reference": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\inputs\\harbor\\vault_bank\\d66b3d7ad3b49a27\\reference.json",
+    "sha256": "50b67304aa082c5a952b24a20481955ead289ad6c1785422ede33f3af33b3991",
+    "bytes": 4410
+  },
+  "processingTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\01259185d3327c7a75b8df2e595381e45eccf13901ce96ea80844701e548295e-process_lod.py",
+    "sha256": "01259185d3327c7a75b8df2e595381e45eccf13901ce96ea80844701e548295e",
+    "bytes": 34836
+  },
+  "assumedCameras": true,
+  "cameraCalibration": "assumed_standard_orbit_not_measured",
+  "nativePipeline": "Pixal3DMVImageTo3DPipeline.run_mv",
+  "nativeResolution": 1024,
+  "seed": 29484,
+  "geometryOrigin": "Actual native three-view neural building with explicitly recorded bounded local repairs; localSurfaceRepair.method and face counts disclose whether these include boundary patches or a small mechanical connector. Followed by source-derived remeshing and texture transfer. No replacement building.",
+  "orientation": {
+    "up": "Y",
+    "front": "+Z",
+    "groundY": 0,
+    "maxEdge": 1
+  },
+  "requestedTriangles": 30000,
+  "limitations": [
+    "Assumed camera reference reconstruction, not exact measured architecture",
+    "Final candidate requires actual rendered visual approval"
+  ],
+  "animation": null,
+  "processingComplete": true,
+  "lod": "near",
+  "processingRevision": 0,
+  "localSurfaceRepair": {
+    "source": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-harbor-vault-1f5b-rear-header\\repaired-native.glb",
+      "sha256": "958d3f525a4af176a5e5d839ac68017aa45246bf93526c7c8605332a2b94e28c",
+      "bytes": 44437640
+    },
+    "receipt": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\harbor\\vault_bank\\958d3f525a4af176\\repair.json",
+      "sha256": "cc2daf860b947c9689718fb3285808e40936e7273bf000858407a57eeaf748fd",
+      "bytes": 8196
+    },
+    "method": "Only explicitly measured and visually reviewed local gaps are closed from adjoining original surface and UV samples with0.006 inward closure. Original vertices, faces and image pixels are preserved. No replacement building or generated texture. See configuration and frozen prior review evidence for exact allowed regions.",
+    "newTriangles": 2988,
+    "newVertices": 1496,
+    "originalVerticesMoved": 0,
+    "originalTrianglesDeleted": 0,
+    "regions": [
+      {
+        "name": "Rear door header plaster backing",
+        "specification": {
+          "name": "Rear door header plaster backing",
+          "u": [
+            -1,
+            0,
+            0
+          ],
+          "v": [
+            0,
+            0,
+            1
+          ],
+          "n": [
+            0,
+            1,
+            0
+          ],
+          "roi": [
+            -0.096,
+            0.101,
+            0.372,
+            0.397
+          ],
+          "forceRoi": [
+            -0.096,
+            0.101,
+            0.372,
+            0.397
+          ],
+          "defectDepth": 0.35,
+          "donorDepth": 0.382,
+          "donorMaxDepth": 0.39,
+          "donorNormal": 0.7,
+          "color": "plaster",
+          "gridStep": 0.003,
+          "donorMargin": 0.024,
+          "flatPatchUV": true,
+          "donorMinRGB": 0.5,
+          "donorMaxColorRatio": 1.5
+        },
+        "missingSamples": 594,
+        "boundarySamples": 818,
+        "sampledDepthRange": [
+          -2.0,
+          0.4187765121459961
+        ],
+        "inwardClosureThickness": 0.006,
+        "outerSurfaceUnchanged": true,
+        "newVertices": 1496,
+        "newTriangles": 2988
+      }
+    ]
+  },
+  "derivation": {
+    "rawTriangles": 940477,
+    "weldedTriangles": 936584,
+    "remeshedTriangles": 2439300,
+    "voxelSize": 0.003,
+    "finalTriangles": 29987,
+    "atlasArea": 0.40262894393104787,
+    "singleReductionPass": true,
+    "inheritedUVRemovedBeforeReduction": true,
+    "sourceMaterialsUntouched": true,
+    "uvUnwrap": {
+      "angleDegrees": 66.0,
+      "islandMargin": 2e-05,
+      "marginMethod": "SCALED",
+      "nominalMarginPixels": null
+    },
+    "repairedSourceTriangles": 943465
+  },
+  "bake": {
+    "method": "CPU closest-original-triangle projection with float64 barycentric original UV and bilinear original texture sampling; geometric normals retained, no directional normal-map rebake or invented color",
+    "coveredAtlasPixels": 420989,
+    "nearestLookupSuccessFraction": 1.0,
+    "notRayCoverage": true,
+    "sourceDistanceQuantiles": [
+      0.0002684926148504019,
+      0.00112559231929481,
+      0.0018841106444597243,
+      0.006374266929924488
+    ],
+    "sourceDistanceQuantileLevels": [
+      0.5,
+      0.95,
+      0.99,
+      1
+    ],
+    "overTwoPercentMaxEdge": 0.0,
+    "distanceReviewRequired": false,
+    "visualGeometryReviewRequired": true,
+    "barycentricOriginalRange": [
+      -6.012249236885594e-05,
+      1.0
+    ],
+    "degenerateOrInvalidBarycentricCount": 0,
+    "closestSourceVertexFallbackFraction": 0.0,
+    "barycentricPointReconstructionErrorQuantiles": [
+      7.623874747967243e-09,
+      4.019471218528923e-08,
+      2.3110261839413371e-07
+    ],
+    "atlasOverlapPixelsWithDifferentSurface": 998,
+    "seconds": 7.637287699999433,
+    "maps": [
+      {
+        "role": "base",
+        "size": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "role": "orm",
+        "size": [
+          512,
+          512
+        ]
+      }
+    ],
+    "repairSourceNote": "Texture transfer uses the explicitly repaired neural source, retaining original PBR and locally interpolated same-wall UV. Repair receipt and unchanged original inference source are preserved separately."
+  },
+  "textureTransferTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\a2cb99c96fb8df396f16580a88a7c6151104ee3c927fe76cd161ee2d27bdfa42-bake_nearest_surface.py",
+    "sha256": "a2cb99c96fb8df396f16580a88a7c6151104ee3c927fe76cd161ee2d27bdfa42",
+    "bytes": 7317
+  },
+  "quantization": {
+    "source": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-harbor-vault-bank-958d3f525a4af176\\candidates\\harbor\\vault_bank.glb",
+    "output": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-harbor-vault-bank-958d3f525a4af176\\candidates\\harbor\\vault_bank.glb",
+    "sourceBytes": 1905640,
+    "outputBytes": 1409088,
+    "sourceSha256": "e6bcf7e586ef14db64f6e6f927b22ea612be62d4c015e9e86a9e7fa2386266fc",
+    "outputSha256": "1d45ab156d8da88ee9cbcf2c9c0f140c3bc1c2b7b5c0b17288338ce88bfb133a",
+    "positionFaceAndTextureBytesUnchanged": true,
+    "attributes": [
+      {
+        "accessor": 1,
+        "semantic": "NORMAL",
+        "count": 41392,
+        "maximumAngularErrorDegrees": 0.38225863417527167
+      },
+      {
+        "accessor": 2,
+        "semantic": "TEXCOORD_0",
+        "count": 41392,
+        "maximumUVError": 7.629503672279547e-06,
+        "maximumTexelErrorAt1024": 0.007812611760414256
+      }
+    ]
+  },
+  "processedCandidate": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-harbor-vault-bank-958d3f525a4af176\\candidates\\harbor\\vault_bank.glb",
+    "sha256": "1d45ab156d8da88ee9cbcf2c9c0f140c3bc1c2b7b5c0b17288338ce88bfb133a",
+    "bytes": 1409088
+  },
+  "glbValidation": {
+    "version": 2,
+    "triangles": 29987,
+    "meshes": 1,
+    "materials": 1,
+    "images": 2,
+    "all_primitives_have_uv": true,
+    "animations": [],
+    "all_images_embedded": true,
+    "external_buffers": []
+  },
+  "triangles": 29987,
+  "renderedCandidate": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-harbor-vault-bank-958d3f525a4af176\\candidates\\renders\\harbor\\vault_bank\\lod-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-harbor-vault-bank-958d3f525a4af176\\candidates\\renders\\harbor\\vault_bank\\lod-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-harbor-vault-bank-958d3f525a4af176\\candidates\\renders\\harbor\\vault_bank\\lod-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-harbor-vault-bank-958d3f525a4af176\\candidates\\renders\\harbor\\vault_bank\\lod-left.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-harbor-vault-bank-958d3f525a4af176\\candidates\\renders\\harbor\\vault_bank\\lod-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.49860960245132446,
+        -0.479801207780838,
+        0.000553818594198674
+      ],
+      "max": [
+        0.4997512400150299,
+        0.4798316955566406,
+        0.7942250370979309
+      ]
+    },
+    "triangles": 29987,
+    "textureSizes": [
+      {
+        "name": "harbor__vault_bank__nearest_base",
+        "size": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "name": "harbor__vault_bank__nearest_orm",
+        "size": [
+          512,
+          512
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "renderedSource": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-harbor-vault-bank-958d3f525a4af176\\candidates\\renders\\harbor\\vault_bank\\raw-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-harbor-vault-bank-958d3f525a4af176\\candidates\\renders\\harbor\\vault_bank\\raw-iso.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-harbor-vault-bank-958d3f525a4af176\\candidates\\renders\\harbor\\vault_bank\\raw-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-harbor-vault-bank-958d3f525a4af176\\candidates\\renders\\harbor\\vault_bank\\raw-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-harbor-vault-bank-958d3f525a4af176\\candidates\\renders\\harbor\\vault_bank\\raw-left.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.5,
+        -0.47983184456825256,
+        0.0
+      ],
+      "max": [
+        0.5,
+        0.47983184456825256,
+        0.7937481999397278
+      ]
+    },
+    "triangles": 940477,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "renderedRepairedSource": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-harbor-vault-bank-958d3f525a4af176\\candidates\\renders\\harbor\\vault_bank\\repaired-source-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-harbor-vault-bank-958d3f525a4af176\\candidates\\renders\\harbor\\vault_bank\\repaired-source-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-harbor-vault-bank-958d3f525a4af176\\candidates\\renders\\harbor\\vault_bank\\repaired-source-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.5,
+        -0.47983184456825256,
+        0.0
+      ],
+      "max": [
+        0.5,
+        0.47983184456825256,
+        0.7937481999397278
+      ]
+    },
+    "triangles": 943465,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "bounds": {
+    "min": [
+      -0.49860960245132446,
+      0.000553818594198674,
+      -0.4798316955566406
+    ],
+    "max": [
+      0.4997512400150299,
+      0.7942250370979309,
+      0.479801207780838
+    ],
+    "coordinateSystem": "GLTF Y-up; +Z front"
+  },
+  "textureSizes": [
+    {
+      "name": "harbor__vault_bank__nearest_base",
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "name": "harbor__vault_bank__nearest_orm",
+      "size": [
+        512,
+        512
+      ]
+    }
+  ],
+  "rawSourceUnchanged": true,
+  "completedAt": "2026-10-24T02:28:23.406342+00:00"
+}

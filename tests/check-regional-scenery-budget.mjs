@@ -4,17 +4,21 @@ import vm from 'node:vm';
 import {spawnSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
 import * as THREE from '../assets/vendor/three/three.module.min.js';
-import {createCityOutskirts} from '../scene-outskirts.js';
-import {buildDestinationGarden,batchGardenBuilding} from '../scene-garden-kit.js';
+import {buildDestinationGarden,batchGardenBuilding,instanceGardenBuildings} from '../scene-garden-kit.js';
 import {loadGeometryGLB,regionalAssetURL} from './gltf-geometry-fixture.mjs';
-import {createModelAssetCache} from '../scene-model-cache.js';
+// Import the actual controllers under the same preview flag as the browser.
+const originalLocation=globalThis.location;
+if(process.argv.includes('--candidate'))globalThis.location={search:'?artStage=candidate'};
+const {createModelAssetCache,regionalSceneryDirectory}=await import('../scene-model-cache.js');
+const {createCityOutskirts}=await import('../scene-outskirts.js');
+if(originalLocation===undefined)delete globalThis.location;else globalThis.location=originalLocation;
 
 const maps=['classic','compact','expansion','harbor','alpine'];
 const mapId=process.argv.find(arg=>arg.startsWith('--map='))?.slice(6);
 if(!mapId){
-  assert(!process.argv.some(arg=>arg.startsWith('--region-file=')),'candidate asset requires --map');
+  assert(!process.argv.some(arg=>arg.startsWith('--region-file=')||arg.startsWith('--far-file=')),'candidate asset requires --map');
   for(const map of maps){
-    const worker=spawnSync(process.execPath,['--max-old-space-size=768',fileURLToPath(import.meta.url),`--map=${map}`],{encoding:'utf8',timeout:180000,maxBuffer:2*1024*1024});
+    const worker=spawnSync(process.execPath,['--max-old-space-size=768',fileURLToPath(import.meta.url),`--map=${map}`,...(process.argv.includes('--candidate')?['--candidate']:[])],{encoding:'utf8',timeout:180000,maxBuffer:2*1024*1024});
     if(worker.error)throw worker.error;
     assert.equal(worker.status,0,`${map} scenery failed:\n${worker.stdout}\n${worker.stderr}`);process.stdout.write(worker.stdout);
   }
@@ -32,7 +36,11 @@ class FixtureGLTFLoader{
   loadAsync(url){
     const file=url.replace(/^\.\/assets\/models\//,'').split('?')[0];
     downloads.push(file);
-    const asset=file===`regions/${mapId}.glb`?regionalAssetURL(mapId):new URL('../assets/models/'+file,import.meta.url);
+    const hero=/^harbor\/(harbor_lighthouse|alpine_windmill)\.glb$/.exec(file);
+    const asset=file===`regions/${mapId}.glb`?regionalAssetURL(mapId)
+      :file===`regions-far/${mapId}.glb`?regionalAssetURL(mapId,{far:true})
+      :hero&&process.argv.includes('--candidate')?new URL(`../art/full-ai-city/packed/${hero[1]}.glb`,import.meta.url)
+      :new URL('../assets/models/'+file,import.meta.url);
     const task=queue.then(async()=>{
       const gltf=await loadGeometryGLB(asset),find=gltf.scene.getObjectByName;
       gltf.scene.getObjectByName=function(name){resolvedNames.push(name);return find.call(this,name);};loaded.push(gltf);return gltf;
@@ -40,19 +48,20 @@ class FixtureGLTFLoader{
   }
 }
 const assetCache=createModelAssetCache({load:url=>new FixtureGLTFLoader().loadAsync(url)});
-// The board and scenery request the same actual regional source concurrently.
+// The board and perimeter load their separately reviewed near/far packages.
 const boardSource=assetCache.load(`regions/${mapId}.glb`);
 let api,disposeAssets=()=>{};
 if(['harbor','alpine'].includes(mapId)){
   // Run the production destination controller, substituting only file transport
   // so both its asynchronous hero and regional-village branches execute in Node.
   const code=fs.readFileSync(new URL('../scene-destinations.js',import.meta.url),'utf8').replace(/^import .*;\r?\n/gm,'').replace(/^export /gm,'');
-  const module=new Function('loadSharedModelAsset','disposeSharedModelAssets','buildDestinationGarden','batchGardenBuilding',code+';return {createDestinationScene,disposeDestinationAssets};')(assetCache.load,assetCache.dispose,buildDestinationGarden,batchGardenBuilding);
+  const module=new Function('loadSharedModelAsset','disposeSharedModelAssets','buildDestinationGarden','batchGardenBuilding','instanceGardenBuildings','regionalSceneryDirectory',code+';return {createDestinationScene,disposeDestinationAssets};')(assetCache.load,assetCache.dispose,buildDestinationGarden,batchGardenBuilding,instanceGardenBuildings,regionalSceneryDirectory);
   api=module.createDestinationScene({THREE,world,boardBounds,mapId});disposeAssets=module.disposeDestinationAssets;
 }else api=createCityOutskirts({THREE,world,boardBounds,mapId,loadSceneryBundle:assetCache.load});
 try{
   await api.loading;const sharedSource=await boardSource;
-  assert.equal(downloads.filter(file=>file===`regions/${mapId}.glb`).length,1,'board and scenery decode the region only once');
+  assert.equal(downloads.filter(file=>file===`regions/${mapId}.glb`).length,1,'board decodes its near architecture only once');
+  assert.equal(downloads.filter(file=>file===`regions-far/${mapId}.glb`).length,1,'scenery decodes the reviewed far derivatives only once');
   assert.equal(await assetCache.load(`regions/${mapId}.glb`),sharedSource,'later consumers receive the same GLTF resource tree');
   const state=api.getState();assert(state.ready&&!state.failed,`${mapId} finishes actual GLB loading`);
   assert(!resolvedNames.includes(`${mapId}_villa_2`),'detailed neural villa_2 is never expanded into distant scenery');
@@ -63,7 +72,7 @@ try{
   assert.equal(state.regionalBuildings??state.buildings,expectedBuildings);
   function measure(root){
     let triangles=0,bytes=0,draws=0;
-    root.traverse(node=>{if(!node.isMesh)return;draws++;triangles+=(node.geometry.index?.count||node.geometry.attributes.position.count)/3;
+    root.traverse(node=>{if(!node.isMesh)return;draws++;triangles+=(node.geometry.index?.count||node.geometry.attributes.position.count)/3*(node.isInstancedMesh?node.count:1);
       for(const attribute of Object.values(node.geometry.attributes))bytes+=attribute.array.byteLength;if(node.geometry.index)bytes+=node.geometry.index.array.byteLength;
     });return {triangles,geometryMiB:bytes/1048576,draws};
   }

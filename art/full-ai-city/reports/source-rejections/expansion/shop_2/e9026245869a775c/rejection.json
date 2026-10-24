@@ -1,0 +1,62 @@
+{
+  "status": "rejected_native_export_source",
+  "region": "expansion",
+  "asset": "shop_2",
+  "reviewer": "asset_production",
+  "recordedAtUtc": "2026-10-24T04:25:20.955205+00:00",
+  "source": {
+    "path": "art/full-ai-city/source/expansion--shop_2-a011-pixal-mv-1024-9247.glb",
+    "sha256": "e9026245869a775c2a3b368a16b67766eac3edcf75b6c72577053b0bf858ff98",
+    "bytes": 39718572
+  },
+  "sourceLevel": "Native 1M export; no untouched decoder attribution is made.",
+  "inferenceReport": {
+    "path": "art/full-ai-city/reports/source-rejections/expansion/shop_2/e9026245869a775c/expansion--shop_2-a011-pixal-mv-1024-9247.json",
+    "sha256": "8d54e23d2fceb4034d94b5fb635133fdc9885a54907a8d8d06271783e06aa06b",
+    "bytes": 10156
+  },
+  "inputReference": {
+    "path": "art/full-ai-city/reports/source-rejections/expansion/shop_2/e9026245869a775c/input-reference.json",
+    "sha256": "11fc5ccc5222d0fa728473d429a7f2cc7ba9054acfb534fb6a4434a1f0406e8b",
+    "bytes": 4430
+  },
+  "diagnostic": null,
+  "diagnosticTool": null,
+  "sourceComparisonReport": {
+    "path": "art/full-ai-city/reports/source-rejections/expansion/shop_2/e9026245869a775c/source-comparison-processing.json",
+    "sha256": "02ff17d4a29fc927434b76db8f1c3539435df0a65d99eb01be9b318080fb989e",
+    "bytes": 20923
+  },
+  "sourceViewEvidenceMode": "Explicitly selected existing renderedSource views; no additional or neutral render implied",
+  "evidence": [
+    {
+      "path": "art/full-ai-city/reports/source-rejections/expansion/shop_2/e9026245869a775c/raw-front.png",
+      "sha256": "c473b81c51187f4134d1625b7143eb3f8524bb11866151b04122c68e5b10072d",
+      "bytes": 254825
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/expansion/shop_2/e9026245869a775c/raw-iso.png",
+      "sha256": "b827659782b768a43bafb225a54e1a72203cedb58664bcb6773b2d9b495f9626",
+      "bytes": 335412
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/expansion/shop_2/e9026245869a775c/raw-left.png",
+      "sha256": "3e43bf6a4551d458909c01817672ef5cf21028bd58a426fff60971c2832c1c95",
+      "bytes": 236732
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/expansion/shop_2/e9026245869a775c/raw-back.png",
+      "sha256": "86972c0521476930e5aa472d23a3c89eca04c755016d0540082495d9b2036273",
+      "bytes": 252698
+    }
+  ],
+  "finding": "Actually inspected original triptych, native front/iso/left/back, all five exact final material views and256px. The front entrance panel has a large missing lower section especially obvious in iso, native left has an open vertical wall slot beside the ground-floor window, and native back has broken upper window lintel and pane surfaces. These failures persist in final mobile-size views; the continuous roof, striped awning and main mass do not offset the open wall/door regions. Register exactly one first independent same-reference retry with unchanged geometry-only and resource/triangle settings; source and all previous evidence preserved.",
+  "decision": "One first independent same-reference seed; no third blind seed.",
+  "sourceUnchanged": true,
+  "notFinalCandidateReview": true,
+  "freezeTool": {
+    "path": "art/full-ai-city/reports/tool-snapshots/616860a00b28e670e1219d64c6cb5dad17f0946420568f786e80b6d789fb4a73-freeze_public_source_rejection.py",
+    "sha256": "616860a00b28e670e1219d64c6cb5dad17f0946420568f786e80b6d789fb4a73",
+    "bytes": 4304
+  }
+}

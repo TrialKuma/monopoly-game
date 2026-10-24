@@ -1,0 +1,26 @@
+{
+  "checkedAt": "2026-10-24T06:52:20.005841+00:00",
+  "packReceipt": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\expansion-complete-candidate-pack.json",
+    "sha256": "751fef95d4d996bf518c009769e6ffcfc7142ef4f35d62ee8aa39b6bced1a3ab",
+    "bytes": 620
+  },
+  "checks": [
+    {
+      "command": "node tests/check-building-previews.mjs --candidate --map=expansion",
+      "status": "passed",
+      "modelBoundPreviews": 29
+    },
+    {
+      "command": "node --max-old-space-size=768 tests/check-regional-scenery-budget.mjs --candidate --map=expansion",
+      "status": "passed",
+      "actualLoadedBuildings": 11,
+      "neighbourhoodTriangles": 131989,
+      "neighbourhoodDraws": 2,
+      "completeTriangles": 247781,
+      "completeDraws": 19,
+      "pixelsRendered": false
+    }
+  ],
+  "actualRegionalRuntimeVisualQA": "pending user-restored browser access"
+}

@@ -1,4 +1,4 @@
-import { createGardenKit } from './scene-garden-kit.js?v=20261023-3';
+import { createGardenKit } from './scene-garden-kit.js?v=20261024-1';
 
 const PALETTES={
   classic:{stone:'#b9b4a1',stoneLight:'#ded4b9',stoneDark:'#8c9682',path:'#d6c9aa',mortar:'#a4a18c',soil:'#817b58',grass:'#9bb17e',timber:'#86704e',timberLight:'#b79a6c',metal:'#475e55',leaf:'#537450',leafLight:'#83a16b',flowers:'#cc879c',flowerLight:'#efcf9b',water:'#76aaa5'},
@@ -40,17 +40,18 @@ function regionalPieces({THREE,kit,root,own,mapId}){
     rod([x,y+.36,z],[x,y+1.0,z],.018,c.timber,parent);add(own(new THREE.ConeGeometry(.46,.15,10)),kit.material((mapId==='classic'?c.flowerLight:c.leafLight).color),[x,y+1.04,z],[1,1,1],0,parent);
   }
   function pavilion(x,y,z,size=.8,parent=root){
-    const bronze=kit.material('#5d8c83'),g=new THREE.Group();g.position.set(x,y,z);g.scale.setScalar(size);parent.add(g);
+    const g=new THREE.Group();g.name='regional_garden_pavilion';g.position.set(x,y,z);g.scale.setScalar(size);parent.add(g);
     for(let j=0;j<3;j++)disc(0,j*.055,0,.72-j*.06,.06,c.stoneLight,g);
-    for(let i=0;i<8;i++){const a=i*Math.PI/4,px=Math.cos(a)*.53,pz=Math.sin(a)*.53;disc(px,.17,pz,.065,.08,c.stone,g);rod([px,.2,pz],[px,.96,pz],.038,c.stoneLight,g);disc(px,.94,pz,.068,.06,c.stone,g);}
-    add(own(new THREE.CylinderGeometry(.66,.71,.1,8)),bronze,[0,1,0],[1,1,1],Math.PI/8,g);add(own(new THREE.CylinderGeometry(.29,.65,.28,8)),bronze,[0,1.18,0],[1,1,1],Math.PI/8,g);add(own(new THREE.CylinderGeometry(.15,.30,.16,8)),c.metal,[0,1.39,0],[1,1,1],Math.PI/8,g);disc(0,1.53,0,.035,.16,c.stoneLight,g);
+    // Only the paved garden plinth is procedural. Its actual pavilion borrows
+    // the same regional AI architecture used by the playable city.
+    const anchor=new THREE.Group();anchor.position.y=.14;anchor.userData.regionalScenicAsset='junction_hub';anchor.userData.scenicWidth=1.18;anchor.userData.scenicHeight=1.34;g.add(anchor);
   }
   return {disc,clippedTree,hedge,parterre,cherry,bamboo,stoneLantern,bench,cafe,pavilion};
 }
 
 // Resource ownership stays with scene.js. The water feature remains at (0,0),
 // so existing people, fountain spray and seasonal effects keep their anchor.
-export function createRegionalPark({THREE,world,boardBounds,mapId,own}){
+export function createRegionalPark({THREE,world,boardBounds,mapId,own,loadSceneryBundle=null,requestRender=()=>{}}){
   if(!PALETTES[mapId])return null;
   const w=boardBounds.w-4.7,d=boardBounds.d-4.65;if(w<1||d<1)return null;
   const root=new THREE.Group();root.name=`regional_park_${mapId}`;root.userData.cosmetic=true;root.userData.seasonalScenery=true;world.add(root);
@@ -91,7 +92,26 @@ export function createRegionalPark({THREE,world,boardBounds,mapId,own}){
   // Common fountain is deliberately compact so every regional garden retains
   // the same animation anchor without obscuring its paths and planting.
   disc(0,.19,0,.76,.09,c.stoneLight);disc(0,.25,0,.64,.035,c.water);disc(0,.39,0,.11,.29,c.stone);disc(0,.55,0,.27,.06,c.stoneLight);disc(0,.66,0,.055,.17,c.stone);
-  kit.finish();root.userData.regionalTheme=mapId;return root;
+  kit.finish();root.userData.regionalTheme=mapId;
+  if(mapId==='expansion'&&loadSceneryBundle){
+    root.architectureLoading=loadSceneryBundle(`regions/${mapId}.glb`).then(bundle=>{
+      if(!root.parent)return;fillRegionalScenicBuildings({THREE,root,bundle,mapId});requestRender();
+    }).catch(error=>{if(root.parent&&error?.name!=='AbortError')console.warn('Regional park architecture unavailable',error.message);});
+  }
+  return root;
+}
+
+export function fillRegionalScenicBuildings({THREE,root,bundle,mapId}){
+  const anchors=[];root.traverse(node=>{if(node.userData.regionalScenicAsset&&!node.userData.scenicModelReady)anchors.push(node);});
+  for(const anchor of anchors){
+    const source=bundle.scene.getObjectByName(`${mapId}_${anchor.userData.regionalScenicAsset}`);if(!source)continue;
+    const model=source.clone(true);model.position.set(0,0,0);model.name=`scenic_${source.name}`;model.userData.cosmetic=true;
+    let bounds=new THREE.Box3().setFromObject(model),size=bounds.getSize(new THREE.Vector3());
+    model.scale.setScalar(Math.min(anchor.userData.scenicWidth/Math.max(size.x,size.z,.001),anchor.userData.scenicHeight/Math.max(size.y,.001)));
+    bounds=new THREE.Box3().setFromObject(model);const center=bounds.getCenter(new THREE.Vector3());model.position.set(-center.x,-bounds.min.y,-center.z);
+    model.traverse(node=>{if(node.isMesh){node.castShadow=true;node.receiveShadow=true;node.raycast=()=>{};}});
+    anchor.add(model);anchor.userData.scenicModelReady=true;
+  }
 }
 
 // The surrounding district has a low inner promenade and real regional

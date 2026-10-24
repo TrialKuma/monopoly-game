@@ -1,0 +1,364 @@
+{
+  "status": "exported_pending_visual_review",
+  "newNeuralInference": false,
+  "sameNativeRun": true,
+  "separateExportInvocation": true,
+  "gpuLockJobId": "compact--rush_station-a009",
+  "adapter": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\compact-hotel3-b7021f31-direct45k-geometry-only-low-f8a9e7dbde0b\\replay-export-source.py",
+    "sha256": "be41cd189ea4451835f5d3cb1a80e83721c4ab9927a4c95c23383c2b3fa11e03",
+    "bytes": 13436
+  },
+  "nativeExporterSnapshot": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\compact-hotel3-b7021f31-direct45k-geometry-only-low-f8a9e7dbde0b\\native-exporter-source.py",
+    "sha256": "b163fa6b3453776a761090eb349f859e612c301bd347fd67c7bf44d3c3d0b8db",
+    "bytes": 7325
+  },
+  "request": {
+    "status": "completed_pending_visual_review",
+    "sourceReceipt": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\compact--hotel_3-a003\\receipt.json",
+    "triangles": 45000,
+    "textureSize": 1024,
+    "surfaceNPZ": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\compact-hotel3-b7021f31-direct45k-geometry-only\\surface.npz",
+    "purpose": "One direct source reduction using the captured original neural field; skip only redundant temporary UV/bake/renders. Previous direct attempts stopped at temporary atlas and never reached native UV. Compare complete five-view final against the rejected fine-voxel wall defects. No new image or inference, no automatic promotion.",
+    "gpuLockJobId": "compact--rush_station-a009"
+  },
+  "jobId": "compact--hotel_3-a003",
+  "sourceExportReceipt": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\compact--hotel_3-a003\\receipt.json",
+    "sha256": "b33db37a560f70be9002ca44ac01d560cdd2e4fc19f74d0ec7eb28c7b5ee90f6",
+    "bytes": 3696
+  },
+  "rawGLB": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\compact--hotel_3-a003-pixal-mv-1024-29453.glb",
+    "sha256": "b7021f31ce86fbdb779f1e9b3b28e7664115978d3a0ccbd1d02ea4337778c0ac",
+    "bytes": 46965524
+  },
+  "tensorArchive": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\compact--hotel_3-a003\\neural-export-inputs.pt",
+    "sha256": "6e112adfcdefd3a40f2d5c80d0590a0d1c5318488cf6d87ae82494e9d9b0b0be",
+    "bytes": 752250653
+  },
+  "originalParameters": {
+    "attr_layout": {
+      "base_color": {
+        "slice": [
+          0,
+          3,
+          null
+        ]
+      },
+      "metallic": {
+        "slice": [
+          3,
+          4,
+          null
+        ]
+      },
+      "roughness": {
+        "slice": [
+          4,
+          5,
+          null
+        ]
+      },
+      "alpha": {
+        "slice": [
+          5,
+          6,
+          null
+        ]
+      }
+    },
+    "grid_size": 1024,
+    "aabb": [
+      [
+        -0.5,
+        -0.5,
+        -0.5
+      ],
+      [
+        0.5,
+        0.5,
+        0.5
+      ]
+    ],
+    "decimation_target": 1000000,
+    "texture_size": 4096,
+    "remesh": true,
+    "remesh_band": 1,
+    "remesh_project": 0,
+    "use_tqdm": true
+  },
+  "geometrySurfaceInput": {
+    "receipt": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\compact-hotel3-b7021f31-direct45k-geometry-only-low-f8a9e7dbde0b\\geometry-source-proof.json",
+      "sha256": "fbdf7ac995c51b4d258a55cfca620792423c17d8877d3354569f870ef9b936bd",
+      "bytes": 5913
+    },
+    "method": "Only coordinate inversion of an existing source-derived low mesh; all candidate vertex/triangle identities preserved. No remeshing, replacement or newly authored geometry.",
+    "sourceRaw": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\compact--hotel_3-a003-pixal-mv-1024-29453.glb",
+      "sha256": "b7021f31ce86fbdb779f1e9b3b28e7664115978d3a0ccbd1d02ea4337778c0ac",
+      "bytes": 46965524
+    },
+    "candidate": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\compact-hotel3-b7021f31-direct45k-geometry-only-low-f8a9e7dbde0b\\geometry-candidate.glb",
+      "sha256": "f8a9e7dbde0b7ef7713f55dbb2f89721623f3738a144e66ceac23a2f3a4f396f",
+      "bytes": 2965424
+    },
+    "candidateReport": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\compact-hotel3-b7021f31-direct45k-geometry-only-low-f8a9e7dbde0b\\geometry-candidate-processing.json",
+      "sha256": "2408376fa1faaf3c210f8b4354b242d0a78df8d3d580f5a8d3e774af921d7081",
+      "bytes": 4536
+    },
+    "originalCandidate": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\compact-hotel3-b7021f31-direct45k-geometry-only\\low\\compact\\hotel_3.glb",
+      "sha256": "f8a9e7dbde0b7ef7713f55dbb2f89721623f3738a144e66ceac23a2f3a4f396f",
+      "bytes": 2965424
+    },
+    "fieldReceipt": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\compact--hotel_3-a003\\receipt.json",
+      "sha256": "b33db37a560f70be9002ca44ac01d560cdd2e4fc19f74d0ec7eb28c7b5ee90f6",
+      "bytes": 3696
+    },
+    "output": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\compact-hotel3-b7021f31-direct45k-geometry-only-low-f8a9e7dbde0b\\geometry-surface.npz",
+      "sha256": "7f65af2f2e43b035df77bf851f27cc365b9e2c66dc53fb0ce19e199889e3a71f",
+      "bytes": 1378340
+    },
+    "triangles": 82448,
+    "vertices": 32371,
+    "originalSplitVertices": 82297,
+    "exactCoincidentVerticesMerged": 49926,
+    "maximumPositionChangeFromWelding": 0,
+    "normalization": {
+      "enabled": true,
+      "candidate_degrees": 1.1941773611586297,
+      "applied_degrees": 1.1941773611586297,
+      "underside_area": 0.15773699188456994,
+      "normal_agreement": 0.9608968278910592,
+      "yaw_degrees": 180,
+      "pitch_degrees": 0,
+      "roll_degrees": 0,
+      "uniform_scale": 1.145303775678722
+    },
+    "rawBlenderToNormalizedBlender": [
+      [
+        -1.1453009430734125,
+        2.6207966223698614e-05,
+        0.002539168511327439,
+        -0.00046664514308050086
+      ],
+      [
+        2.641728990763234e-05,
+        -1.1450577570299136,
+        0.023736498357649405,
+        -0.004698368211401016
+      ],
+      [
+        0.0025391674589613153,
+        0.02373649810005518,
+        1.1450549462747168,
+        0.4546946419681226
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "inverse": [
+      [
+        -0.8731286657158167,
+        2.0143135003897134e-05,
+        0.0019357522484342172,
+        -0.0012875227868162486
+      ],
+      [
+        1.99835740168624e-05,
+        -0.8729432772205373,
+        0.018095695749637233,
+        -0.012329415518856822
+      ],
+      [
+        0.0019357547536181252,
+        0.018095695199448633,
+        0.8729411279389295,
+        -0.3968357300777984
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "sampledNormalizationReconstructionMaxError": 1.227722719460273e-07,
+    "nativeBounds": {
+      "min": [
+        -0.4360233332970233,
+        -0.3996368947502106,
+        -0.3118867386110591
+      ],
+      "max": [
+        0.41852991900718034,
+        0.4567723705382142,
+        0.30293050756599377
+      ]
+    },
+    "tool": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\compact-hotel3-b7021f31-direct45k-geometry-only-low-f8a9e7dbde0b\\geometry-preparation-source.py",
+      "sha256": "a0dc0c9eca903a6cbd3937e70209203355ad02803e8c9e8f22751c15a0f2d981",
+      "bytes": 8615
+    },
+    "toolSnapshot": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\compact-hotel3-b7021f31-direct45k-geometry-only-low-f8a9e7dbde0b\\geometry-preparation-source.py",
+      "sha256": "a0dc0c9eca903a6cbd3937e70209203355ad02803e8c9e8f22751c15a0f2d981",
+      "bytes": 8615
+    },
+    "normalizationInput": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\compact--hotel_3-a003-pixal-mv-1024-29453.glb",
+      "sha256": "b7021f31ce86fbdb779f1e9b3b28e7664115978d3a0ccbd1d02ea4337778c0ac",
+      "bytes": 46965524
+    },
+    "geometryOnly": true,
+    "geometryStageStatus": "geometry_ready_for_native_field",
+    "geometryPreExport": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\compact-hotel3-b7021f31-direct45k-geometry-only\\low\\compact\\hotel_3.geometry-before-export.npz",
+      "sha256": "f0b4605eaf8e142e164417aa775737cb7bbe7a2897f33fc64c7825116df65a9a",
+      "bytes": 1378400
+    },
+    "geometryExportPreservation": {
+      "preExport": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\compact-hotel3-b7021f31-direct45k-geometry-only\\low\\compact\\hotel_3.geometry-before-export.npz",
+        "sha256": "f0b4605eaf8e142e164417aa775737cb7bbe7a2897f33fc64c7825116df65a9a",
+        "bytes": 1378400
+      },
+      "allOrientedTrianglesExactlyPreserved": true,
+      "trianglesCompared": 82448,
+      "maximumPositionChange": 0,
+      "vertexSplitsOrFaceOrderPermitted": true,
+      "method": "Exact per-corner float32 positions and cyclic oriented triangle multiset, including multiplicity; no nearest-point tolerance"
+    },
+    "originalReceipt": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\compact-hotel3-b7021f31-direct45k-geometry-only-low-f8a9e7dbde0b\\geometry-source-original-receipt.json",
+      "sha256": "b917792f9a2d3d4b8bb25beee71e7397a2f0d032411d92c3c763d3b8334a2422",
+      "bytes": 5383
+    }
+  },
+  "nativePostprocessOverride": {
+    "original": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\compact-hotel3-b7021f31-direct45k-geometry-only-low-f8a9e7dbde0b\\original-native-exporter-source.py",
+      "sha256": "b6b79da5dfe13c22047a6257c6b2301c7ea31259dd9c82344db7e5c4cc707917",
+      "bytes": 8126
+    },
+    "scope": "Keep original neural geometry BVH for PBR lookup. Replace only the intermediate surface with this recorded existing source-derived low mesh; bypass further remeshing/simplification/cleanup, then use native unwrap/normals/field sampling.",
+    "sharedCodeModified": false,
+    "noNewGeometryAuthored": true,
+    "noNewGeometryAuthoredAppliesTo": "native_uv_material_replay_only",
+    "counts": {
+      "facesBeforeUnwrap": 82448
+    }
+  },
+  "mobileParameters": {
+    "attr_layout": {
+      "base_color": {
+        "slice": [
+          0,
+          3,
+          null
+        ]
+      },
+      "metallic": {
+        "slice": [
+          3,
+          4,
+          null
+        ]
+      },
+      "roughness": {
+        "slice": [
+          4,
+          5,
+          null
+        ]
+      },
+      "alpha": {
+        "slice": [
+          5,
+          6,
+          null
+        ]
+      }
+    },
+    "grid_size": 1024,
+    "aabb": [
+      [
+        -0.5,
+        -0.5,
+        -0.5
+      ],
+      [
+        0.5,
+        0.5,
+        0.5
+      ]
+    ],
+    "decimation_target": 0,
+    "texture_size": 1024,
+    "remesh": false,
+    "remesh_band": 1,
+    "remesh_project": 0,
+    "use_tqdm": true
+  },
+  "nativeFieldLookup": {
+    "quantiles50_95_99_100": [
+      0.0014937680680304766,
+      0.006673627067357302,
+      0.011487766169011593,
+      0.032599762082099915
+    ],
+    "fractionOverTwoPercent": 0.0006226890254765749,
+    "sampleCount": 493023,
+    "meaning": "Distance to original neural BVH before direct field sampling, not ray hit coverage"
+  },
+  "output": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\compact-hotel3-b7021f31-direct45k-geometry-only-low-f8a9e7dbde0b\\mobile-45000-1024.glb",
+    "sha256": "0af0a519b9f701bbb2bb46b70d6ecea21de06752c350eeb444659f624b60d7a6",
+    "bytes": 5976772
+  },
+  "actualTriangles": 82448,
+  "actualVertices": 142001,
+  "officialOutputRotation": [
+    [
+      -1.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      0.0,
+      0.0,
+      -1.0,
+      0.0
+    ],
+    [
+      0.0,
+      -1.0,
+      0.0,
+      0.0
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "rawUnchanged": true,
+  "textureOrigin": "Original neural attribute field sampled by the native UV/material operations with the recorded surface-stage override; no new neural inference or raw-UV rebake.",
+  "geometryOrigin": "Recorded low surface derived from the identical native raw, restored to original field coordinates, with native UV/material generation using the original neural high-surface BVH and attribute field. No authored replacement geometry.",
+  "seconds": 58.16
+}

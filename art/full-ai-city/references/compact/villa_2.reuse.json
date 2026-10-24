@@ -1,0 +1,43 @@
+{
+  "status": "reference_inputs_reused",
+  "asset": "compact_villa_2",
+  "map": "compact",
+  "reason": "Reuse the three existing independent ImageGen inputs for this regional villa_2. Current model acceptance is separately controlled by the root runtime approval registry.",
+  "sourceReview": "Historical previous-round provenance only; NOT current runtime approval. Re-inference or repaired candidates may replace it.",
+  "originalInputs": [
+    {
+      "view": "front",
+      "path": "art/themed-city-kit/inputs/compact-house-v01/view00_azim000.png",
+      "sha256": "6ee312de77a0c08a306cc95d03a154897175147e685c0554c3b4e815651027dc",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "view": "right",
+      "path": "art/themed-city-kit/inputs/compact-house-v01/view01_azim090.png",
+      "sha256": "c1253522b9637686a9aabd024610f3935cd3a6cc3a40e31828910addfc504c22",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "view": "back",
+      "path": "art/themed-city-kit/inputs/compact-house-v01/view02_azim180.png",
+      "sha256": "a909d588593a52b71871f6a188e460d2a216144f90ad09af1deefed4b4ee506a",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA"
+    }
+  ],
+  "inferenceAndVisualReviewManifest": "art/themed-city-kit/reports/approved-houses.json",
+  "inputPreparation": "Use the three existing independent transparent images directly; no triptych composition or image redraw.",
+  "historicalSourceGlb": "assets/models/regions-ai/compact_house.glb",
+  "historicalSourceSha256": "910d04124cf9487318c5492f15d691b3fc426d2acc2ca1c0585fb6bef86891e4"
+}

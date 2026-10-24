@@ -1,0 +1,151 @@
+{
+  "createdAt": "2026-10-24T07:04:04.089341+00:00",
+  "status": "all_individual_models_approved_pending_regional_runtime_QA",
+  "counts": {
+    "near": 147,
+    "far": 25
+  },
+  "approvedNear": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\approved-assets.json",
+    "sha256": "e2658e7d6bb0399ec6a4d71770d4756b262c8a2751a340544f8405fc70f973c3",
+    "bytes": 773371
+  },
+  "approvedFar": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\approved-far-assets.json",
+    "sha256": "c84f1e7fac3de651d5f9093dda71bc807f5037766f597f3edf0db056c3ccf6d7",
+    "bytes": 132864
+  },
+  "controllersBeforeNaturalStop": [
+    {
+      "pid": 2424,
+      "tool": "run_legacy_repair_queue.py",
+      "children": []
+    },
+    {
+      "pid": 3692,
+      "tool": "run_lod_queue.py",
+      "children": [
+        {
+          "pid": 38684,
+          "name": "conhost.exe"
+        },
+        {
+          "pid": 16124,
+          "name": "python.exe"
+        }
+      ]
+    },
+    {
+      "pid": 4492,
+      "tool": "run_far_uv_queue.py",
+      "children": [
+        {
+          "pid": 4276,
+          "name": "conhost.exe"
+        },
+        {
+          "pid": 8432,
+          "name": "python.exe"
+        }
+      ]
+    },
+    {
+      "pid": 6932,
+      "tool": "run_legacy_repair_queue.py",
+      "children": [
+        {
+          "pid": 23044,
+          "name": "conhost.exe"
+        },
+        {
+          "pid": 2424,
+          "name": "python.exe"
+        }
+      ]
+    },
+    {
+      "pid": 8432,
+      "tool": "run_far_uv_queue.py",
+      "children": []
+    },
+    {
+      "pid": 8940,
+      "tool": "run_repair_low_queue.py",
+      "children": [
+        {
+          "pid": 7416,
+          "name": "conhost.exe"
+        },
+        {
+          "pid": 23164,
+          "name": "python.exe"
+        }
+      ]
+    },
+    {
+      "pid": 16124,
+      "tool": "run_lod_queue.py",
+      "children": []
+    },
+    {
+      "pid": 23164,
+      "tool": "run_repair_low_queue.py",
+      "children": []
+    },
+    {
+      "pid": 31520,
+      "tool": "run_raw_queue.py",
+      "children": [
+        {
+          "pid": 9812,
+          "name": "conhost.exe"
+        },
+        {
+          "pid": 34200,
+          "name": "python.exe"
+        }
+      ]
+    },
+    {
+      "pid": 32064,
+      "tool": "run_hybrid_queue.py",
+      "children": []
+    },
+    {
+      "pid": 34200,
+      "tool": "run_raw_queue.py",
+      "children": []
+    },
+    {
+      "pid": 37984,
+      "tool": "run_hybrid_queue.py",
+      "children": [
+        {
+          "pid": 6040,
+          "name": "conhost.exe"
+        },
+        {
+          "pid": 32064,
+          "name": "python.exe"
+        }
+      ]
+    }
+  ],
+  "stopMarkers": [
+    "queue",
+    "lod-queue",
+    "hybrid-queue",
+    "repair-low-queue",
+    "legacy-repair-queue",
+    "far-uv-queue"
+  ],
+  "noActiveWorkerAtStopRequest": true,
+  "wrapperProcessNote": "Windows venv launcher child Python is the same controller, plus its conhost; no production worker/Blender child.",
+  "noProcessesKilled": true,
+  "noUserProcessesTouched": true,
+  "noReleaseOrGit": true,
+  "browserBlock": "Existing art-review URL security denial remains. Await user-restored access; no bypass.",
+  "naturalStopVerifiedAt": "2026-10-24T07:05:23.771380+00:00",
+  "remainingOwnedControllers": [],
+  "allOwnedControllersExitedNaturally": true
+}

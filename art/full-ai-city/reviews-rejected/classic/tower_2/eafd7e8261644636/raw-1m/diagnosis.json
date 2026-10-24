@@ -1,0 +1,87 @@
+{
+  "status": "source_evidence_rendered_pending_visual_review",
+  "region": "classic",
+  "asset": "tower_2",
+  "source": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\classic--tower_2-a001-pixal-mv-1024-9247.glb",
+    "sha256": "e6fd2523f120f3c45cbc8f056f3cda31ee4f403326070dd146ebf7f4f4cf7dd5",
+    "bytes": 44538792
+  },
+  "tool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\706f450ecc3bf4afaccf9bef2e3ccc2f5c56dd13cf1a04a34ea0ebaa9c92198e-render_raw_core_review.py",
+    "sha256": "706f450ecc3bf4afaccf9bef2e3ccc2f5c56dd13cf1a04a34ea0ebaa9c92198e",
+    "bytes": 3003
+  },
+  "sourceBytesChanged": false,
+  "actualSideViews": {
+    "views": [
+      {
+        "path": "art/full-ai-city/reviews-rejected/classic/tower_2/eafd7e8261644636/raw-1m/raw-right.png",
+        "sha256": "9fe5cd554e064e22b2439c76239092335db18595eb2008dcee89e9b27e911f4d",
+        "bytes": 208649
+      },
+      {
+        "path": "art/full-ai-city/reviews-rejected/classic/tower_2/eafd7e8261644636/raw-1m/raw-back.png",
+        "sha256": "0e7997af823a83948c2f9d547d8d1dc76eae31037c373105d08e68a6a4840a8e",
+        "bytes": 240578
+      },
+      {
+        "path": "art/full-ai-city/reviews-rejected/classic/tower_2/eafd7e8261644636/raw-1m/raw-left.png",
+        "sha256": "a23869cc07a570202b554873ae438eb33eba6c8e203198af18c21a3b376038c2",
+        "bytes": 205880
+      }
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.4480929672718048,
+        -0.3171008825302124,
+        0.0
+      ],
+      "max": [
+        0.4480929672718048,
+        0.3171008825302124,
+        0.9999999403953552
+      ]
+    },
+    "triangles": 957239,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "additionalViews": [
+    {
+      "path": "art/full-ai-city/reviews-rejected/classic/tower_2/eafd7e8261644636/raw-1m/raw-close-back-iso.png",
+      "sha256": "e36d2923493a7ed8b21f2e93ad59cb1a5cdfc215015d1223e2ff62bcf442d9cf",
+      "bytes": 994499
+    },
+    {
+      "path": "art/full-ai-city/reviews-rejected/classic/tower_2/eafd7e8261644636/raw-1m/raw-grey-back-iso.png",
+      "sha256": "861397163f9d93f9f16b2ca8e56390a7e739eec2a24011bafadc9da18a851fe7",
+      "bytes": 821641
+    }
+  ],
+  "neutralOverrideScope": "Diagnostic view layer only, no geometry or source material edits/export",
+  "createdAt": "2026-10-23T08:43:57.785136+00:00",
+  "visualDiagnosis": {
+    "reviewer": "progression_design",
+    "finding": "Actual native 1M GLB side/back/close and neutral-grey geometry show the same roof opening behind the dome and rear chimney wall hole. This is geometric in the 1M exported surface, not solely a dark texture.",
+    "decoderConclusion": "Undetermined; original pre-export decoder ROI review is being performed separately. No claim that the decoder output has the same holes.",
+    "sourceInspectionSha256": "f0bf5391e9197779b86e801f1af8d223ab3f26bd68d954b615c142883eaf5747"
+  }
+}

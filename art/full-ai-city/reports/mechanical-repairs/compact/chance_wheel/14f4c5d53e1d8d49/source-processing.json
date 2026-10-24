@@ -1,0 +1,472 @@
+{
+  "status": "exported_pending_visual_review",
+  "createdAt": "2026-10-23T09:17:23.250023+00:00",
+  "region": "compact",
+  "asset": "chance_wheel",
+  "source": {
+    "rawGLB": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\compact--chance_wheel-a001-pixal-mv-1024-9247.glb",
+      "sha256": "986eca4fbae7faff6040dd70ba674c7f0ab139981abdf664d3ee71dd2f5d234e",
+      "bytes": 40896860
+    }
+  },
+  "inferenceReport": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\compact--chance_wheel-a001\\compact--chance_wheel-a001-pixal-mv-1024-9247.json",
+    "sha256": "893ca00fd5b0e73ea4b16d75eba74e66e0ad93698038db90b254ae0c75e5bbe9",
+    "bytes": 8156
+  },
+  "reference": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\references\\compact\\chance_wheel\\reference.json",
+    "sha256": "b07ac284e92abe976ea11d6d0aaa77678830af61a546b6019b49eff7f6100a19",
+    "bytes": 4038
+  },
+  "processingTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\b766a4f58879667a49343ebf7047b8344497e5a63edee313a7ba8164388eff04-bake_native_uv_candidate.py",
+    "sha256": "b766a4f58879667a49343ebf7047b8344497e5a63edee313a7ba8164388eff04",
+    "bytes": 10667
+  },
+  "assumedCameras": true,
+  "cameraCalibration": "assumed_standard_orbit_not_measured",
+  "nativePipeline": "Pixal3DMVImageTo3DPipeline.run_mv",
+  "nativeResolution": 1024,
+  "seed": 9247,
+  "geometryOrigin": "Actual native three-view neural building with explicitly recorded localized same-wall surface repairs, followed by source-derived remeshing and texture baking. No replacement building.",
+  "orientation": {
+    "up": "Y",
+    "front": "+Z",
+    "groundY": 0,
+    "maxEdge": 1
+  },
+  "requestedTriangles": 30000,
+  "limitations": [
+    "Assumed camera reference reconstruction, not exact measured architecture",
+    "Final candidate requires actual rendered visual approval"
+  ],
+  "animation": null,
+  "processingComplete": true,
+  "lod": "near",
+  "processingRevision": 0,
+  "localSurfaceRepair": {
+    "source": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-compact-wheel\\repaired-native.glb",
+      "sha256": "266d3b5cc99caf225a760f3c1b6ce2961c12382568737aeb17d244c96688ee55",
+      "bytes": 41139236
+    },
+    "receipt": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\compact\\chance_wheel\\266d3b5cc99caf22\\repair.json",
+      "sha256": "6836dd41394d5fb4ec14a2af0378b115a1bea80b9046af37cb74d26105fbbef9",
+      "bytes": 6798
+    },
+    "method": "Only the measured small depressed spot inside the original red wheel sector is filled by interpolation from its intact boundary. Original neural vertices, faces and image pixels are untouched. The new patch reuses neighboring original red-sector UV samples and closes 0.006 inward so it survives derivative voxelization; no replacement wheel, building or new texture.",
+    "newTriangles": 780,
+    "newVertices": 392,
+    "originalVerticesMoved": 0,
+    "originalTrianglesDeleted": 0,
+    "regions": [
+      {
+        "name": "Small original collapsed spot in red wheel sector",
+        "specification": {
+          "name": "Small original collapsed spot in red wheel sector",
+          "u": [
+            1,
+            0,
+            0
+          ],
+          "v": [
+            0,
+            0,
+            1
+          ],
+          "n": [
+            0,
+            -1,
+            0
+          ],
+          "roi": [
+            0.432,
+            0.463,
+            0.193,
+            0.222
+          ],
+          "defectDepth": 0.178,
+          "donorDepth": 0.182,
+          "donorMaxDepth": 0.187,
+          "donorNormal": 0.98,
+          "color": "red"
+        },
+        "missingSamples": 134,
+        "boundarySamples": 775,
+        "sampledDepthRange": [
+          0.16305303573608398,
+          0.18884897232055664
+        ],
+        "inwardClosureThickness": 0.006,
+        "outerSurfaceUnchanged": true,
+        "newVertices": 392,
+        "newTriangles": 780
+      }
+    ]
+  },
+  "derivation": {
+    "rawTriangles": 985580,
+    "weldedTriangles": 984548,
+    "remeshedTriangles": 3077732,
+    "voxelSize": 0.003,
+    "finalTriangles": 29989,
+    "atlasArea": 0.607564026815506,
+    "singleReductionPass": true,
+    "inheritedUVRemovedBeforeReduction": true,
+    "sourceMaterialsUntouched": true,
+    "uvUnwrap": {
+      "method": "native CuMesh UV-only",
+      "parameters": {
+        "threshold_cone_half_angle_rad": 1.5707963267948966,
+        "refine_iterations": 0,
+        "global_iterations": 1,
+        "smooth_strength": 1
+      },
+      "receipt": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\uv-replays\\legacy-compact--chance_wheel-266d3b5cc99caf22\\receipt.json",
+        "sha256": "70c33ecf2e633f5c892d31787484bc5feb9e8701c85f3ab7804e3d256daccc44",
+        "bytes": 3990
+      }
+    },
+    "repairedSourceTriangles": 986360
+  },
+  "bake": {
+    "method": "CPU closest-original-triangle projection with float64 barycentric original UV and bilinear original texture sampling; geometric normals retained, no directional normal-map rebake or invented color",
+    "coveredAtlasPixels": 637342,
+    "nearestLookupSuccessFraction": 1.0,
+    "notRayCoverage": true,
+    "sourceDistanceQuantiles": [
+      0.0002429652158753015,
+      0.001118638552725315,
+      0.002158893472515043,
+      0.032549984753131866
+    ],
+    "sourceDistanceQuantileLevels": [
+      0.5,
+      0.95,
+      0.99,
+      1
+    ],
+    "overTwoPercentMaxEdge": 9.414097925446621e-06,
+    "distanceReviewRequired": false,
+    "visualGeometryReviewRequired": true,
+    "barycentricOriginalRange": [
+      -6.723028178488929e-05,
+      1.0
+    ],
+    "degenerateOrInvalidBarycentricCount": 0,
+    "closestSourceVertexFallbackFraction": 0.0,
+    "barycentricPointReconstructionErrorQuantiles": [
+      6.153428345764758e-09,
+      4.120775411795424e-08,
+      3.2776627418347227e-07
+    ],
+    "atlasOverlapPixelsWithDifferentSurface": 72,
+    "seconds": 8.792662100022426,
+    "maps": [
+      {
+        "role": "base",
+        "size": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "role": "orm",
+        "size": [
+          512,
+          512
+        ]
+      }
+    ],
+    "sourceNote": "Native CuMesh UV charts applied to the exact existing low mesh loops. Original source textures transferred by closest original surface with float64 barycentric UV; no new geometry or painted colors."
+  },
+  "textureTransferTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\a2cb99c96fb8df396f16580a88a7c6151104ee3c927fe76cd161ee2d27bdfa42-bake_nearest_surface.py",
+    "sha256": "a2cb99c96fb8df396f16580a88a7c6151104ee3c927fe76cd161ee2d27bdfa42",
+    "bytes": 7317
+  },
+  "quantization": {
+    "source": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\legacy-repair-compact--chance_wheel-266d3b5cc99caf22\\final\\compact\\chance_wheel.glb",
+    "output": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\legacy-repair-compact--chance_wheel-266d3b5cc99caf22\\final\\compact\\chance_wheel.glb",
+    "sourceBytes": 1705752,
+    "outputBytes": 1229672,
+    "sourceSha256": "6a9d691c620add90ec9acd6ffdec0e49c9863d3d3b49b696f3519abd44c0fe44",
+    "outputSha256": "3751c7dc4d397e9b74775fc5ff03f73aff4869f2d73a9b08095abca255f07715",
+    "positionFaceAndTextureBytesUnchanged": true,
+    "attributes": [
+      {
+        "accessor": 1,
+        "semantic": "NORMAL",
+        "count": 39686,
+        "maximumAngularErrorDegrees": 0.38067855642700915
+      },
+      {
+        "accessor": 2,
+        "semantic": "TEXCOORD_0",
+        "count": 39686,
+        "maximumUVError": 7.629510948348184e-06,
+        "maximumTexelErrorAt1024": 0.00781261921110854
+      }
+    ]
+  },
+  "processedCandidate": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\candidates\\compact\\chance_wheel.glb",
+    "sha256": "3751c7dc4d397e9b74775fc5ff03f73aff4869f2d73a9b08095abca255f07715",
+    "bytes": 1229672
+  },
+  "glbValidation": {
+    "version": 2,
+    "triangles": 29989,
+    "meshes": 1,
+    "materials": 1,
+    "images": 2,
+    "all_primitives_have_uv": true,
+    "animations": [],
+    "all_images_embedded": true,
+    "external_buffers": []
+  },
+  "triangles": 29989,
+  "renderedCandidate": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\legacy-repair-compact--chance_wheel-266d3b5cc99caf22\\final\\renders\\compact\\chance_wheel\\lod-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\legacy-repair-compact--chance_wheel-266d3b5cc99caf22\\final\\renders\\compact\\chance_wheel\\lod-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\legacy-repair-compact--chance_wheel-266d3b5cc99caf22\\final\\renders\\compact\\chance_wheel\\lod-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\legacy-repair-compact--chance_wheel-266d3b5cc99caf22\\final\\renders\\compact\\chance_wheel\\lod-left.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\legacy-repair-compact--chance_wheel-266d3b5cc99caf22\\final\\renders\\compact\\chance_wheel\\lod-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.4999178946018219,
+        -0.36301562190055847,
+        0.0008098084363155067
+      ],
+      "max": [
+        0.500166654586792,
+        0.36390647292137146,
+        0.9336177706718445
+      ]
+    },
+    "triangles": 29989,
+    "textureSizes": [
+      {
+        "name": "compact__chance_wheel__nearest_base",
+        "size": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "name": "compact__chance_wheel__nearest_orm",
+        "size": [
+          512,
+          512
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "renderedSource": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\legacy-repair-compact--chance_wheel-266d3b5cc99caf22\\low\\renders\\compact\\chance_wheel\\raw-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\legacy-repair-compact--chance_wheel-266d3b5cc99caf22\\low\\renders\\compact\\chance_wheel\\raw-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.5,
+        -0.3636574149131775,
+        0.0
+      ],
+      "max": [
+        0.5,
+        0.3636574149131775,
+        0.9327967166900635
+      ]
+    },
+    "triangles": 985580,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "renderedRepairedSource": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\legacy-repair-compact--chance_wheel-266d3b5cc99caf22\\low\\renders\\compact\\chance_wheel\\repaired-source-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\legacy-repair-compact--chance_wheel-266d3b5cc99caf22\\low\\renders\\compact\\chance_wheel\\repaired-source-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\legacy-repair-compact--chance_wheel-266d3b5cc99caf22\\low\\renders\\compact\\chance_wheel\\repaired-source-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.5,
+        -0.3636574149131775,
+        0.0
+      ],
+      "max": [
+        0.5,
+        0.3636574149131775,
+        0.9327967166900635
+      ]
+    },
+    "triangles": 986360,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "bounds": {
+    "min": [
+      -0.4999178946018219,
+      0.0008098084363155067,
+      -0.36390647292137146
+    ],
+    "max": [
+      0.500166654586792,
+      0.9336177706718445,
+      0.36301562190055847
+    ],
+    "coordinateSystem": "GLTF Y-up; +Z front"
+  },
+  "textureSizes": [
+    {
+      "name": "compact__chance_wheel__nearest_base",
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "name": "compact__chance_wheel__nearest_orm",
+      "size": [
+        512,
+        512
+      ]
+    }
+  ],
+  "rawSourceUnchanged": true,
+  "completedAt": "2026-10-23T09:25:31.083793+00:00",
+  "localSurfaceRepairEvidencePreservation": [
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\compact\\chance_wheel\\266d3b5cc99caf22\\evidence-preservation-1c805525342d64e2.json",
+      "sha256": "1c805525342d64e22f9c992f9786e722253a6038b28cbb5bcf4956c127eb767f",
+      "bytes": 5080
+    }
+  ],
+  "legacyOriginalTextureRoute": {
+    "capturedNeuralFieldAvailable": false,
+    "newNeuralInference": false,
+    "method": "Source-derived low geometry, native UV-only charts, then original repaired-source PBR transfer. Original field was not captured for this earlier inference."
+  },
+  "textureOnlyReprocessing": {
+    "sourceCandidate": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\legacy-repair-compact--chance_wheel-266d3b5cc99caf22\\low\\compact\\chance_wheel.glb",
+      "sha256": "5b60ecbf9aac17417f6a53bbb878b304760b783bc8e3a1269c79ecc5639395b8",
+      "bytes": 1317108
+    },
+    "sourceProcessingReport": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\uv-replays\\legacy-compact--chance_wheel-266d3b5cc99caf22\\input-processing.json",
+      "sha256": "1ac83c8e8c61de0ba0ed59e0418452c0df9535e85bf275ea2be917387c55a1a3",
+      "bytes": 13107
+    },
+    "sourceBlend": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\legacy-repair-compact--chance_wheel-266d3b5cc99caf22\\low\\blender\\compact\\chance_wheel.blend",
+      "sha256": "9f57a4cc077e27df28efdd2868ad87aa5222a7a6a4e7d5ab2dc2c2e82606c0e2",
+      "bytes": 50851004
+    },
+    "nativeUVReceipt": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\uv-replays\\legacy-compact--chance_wheel-266d3b5cc99caf22\\receipt.json",
+      "sha256": "70c33ecf2e633f5c892d31787484bc5feb9e8701c85f3ab7804e3d256daccc44",
+      "bytes": 3990
+    },
+    "sourceTriangleCountVerified": 986360,
+    "positionsUnchanged": true,
+    "faceIndicesUnchanged": true,
+    "cornerNormalsUnchanged": true,
+    "additionalRemeshOrSimplification": false,
+    "uvAssignment": "Native cyclic triangle position matches transfer UVs to original loops; original triangle order and winding retained.",
+    "exportedTriangleCornerPositionsExactlyUnchanged": true
+  },
+  "promotedFrom": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\legacy-repair-compact--chance_wheel-266d3b5cc99caf22\\final\\compact\\chance_wheel.json",
+    "sha256": "baaab526873dc27652d5f33e7c367375e2c76e4434b64483a08a107cf0a5b1e2",
+    "bytes": 15494
+  },
+  "reviewSheet": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\legacy-repair-compact--chance_wheel-266d3b5cc99caf22\\final\\renders\\compact\\chance_wheel\\review-sheet.jpg",
+    "sha256": "11dd8cfe99a8b02fcbffcb4b6836c4ae3723e15a6277e217755a2c02c97fa756",
+    "bytes": 296828,
+    "candidateSha256": "3751c7dc4d397e9b74775fc5ff03f73aff4869f2d73a9b08095abca255f07715",
+    "sourceImages": [
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\legacy-repair-compact--chance_wheel-266d3b5cc99caf22\\low\\renders\\compact\\chance_wheel\\raw-front.png",
+        "sha256": "0a85ddde808c632f342ca4c383f9161fa44ac0bcd7910549d48f3f428bede483",
+        "label": "AI raw front"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\legacy-repair-compact--chance_wheel-266d3b5cc99caf22\\low\\renders\\compact\\chance_wheel\\raw-iso.png",
+        "sha256": "45449adc786d7f5780e9a1dc6c553964b7ed79afabef269a04ea11ef4177d701",
+        "label": "AI raw iso"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\legacy-repair-compact--chance_wheel-266d3b5cc99caf22\\final\\renders\\compact\\chance_wheel\\lod-front.png",
+        "sha256": "a333283662c3656eb3ee894e7653e919f4a48f59282eae6ae1a90826048d20db",
+        "label": "LOD front"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\legacy-repair-compact--chance_wheel-266d3b5cc99caf22\\final\\renders\\compact\\chance_wheel\\lod-right.png",
+        "sha256": "e6ed07b73679958e345ca8313015b9a6a3a0ea7ab44c245d40d8b762a0d24048",
+        "label": "LOD right"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\legacy-repair-compact--chance_wheel-266d3b5cc99caf22\\final\\renders\\compact\\chance_wheel\\lod-back.png",
+        "sha256": "20ba76d3d1a657efebe9fcb5b45a13b4adebfa2101bc0f8fd387d5172e0502ae",
+        "label": "LOD back"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\legacy-repair-compact--chance_wheel-266d3b5cc99caf22\\final\\renders\\compact\\chance_wheel\\lod-left.png",
+        "sha256": "d4f3bb03c47988fdd14699dea422a21a466302a237559ca0cf363e029715f7da",
+        "label": "LOD left"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\legacy-repair-compact--chance_wheel-266d3b5cc99caf22\\final\\renders\\compact\\chance_wheel\\lod-iso.png",
+        "sha256": "8be129c9bb4387c3d09029bc5383c7420f884245e8ea809c98cb61338ab109b0",
+        "label": "LOD iso"
+      }
+    ],
+    "content": "Unmodified CPU render images composed with labels for visual comparison only"
+  }
+}

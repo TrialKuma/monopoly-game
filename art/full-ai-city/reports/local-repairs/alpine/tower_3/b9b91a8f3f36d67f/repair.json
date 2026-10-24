@@ -1,0 +1,213 @@
+{
+  "status": "source_repair_visually_reviewed_pending_near_lod",
+  "source": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\alpine--tower_3-a003-pixal-mv-1024-24423.glb",
+    "sha256": "288f119190e17cf84e89db53a6812525d06f132876ca3313b68994133d94d7cc",
+    "bytes": 40929388
+  },
+  "orientation": {
+    "enabled": true,
+    "candidate_degrees": 0.17245846124184028,
+    "applied_degrees": 0.17245846124184028,
+    "underside_area": 0.1487055850015237,
+    "normal_agreement": 0.9377222338284955,
+    "yaw_degrees": 180,
+    "pitch_degrees": 0,
+    "roll_degrees": 0,
+    "uniform_scale": 1.1400700410004057
+  },
+  "method": "Restricted missing original plaster window-surround sectors restored from actual neighboring source surface depths and UV samples. Original neural vertex positions, original face prefix and embedded texture pixels preserved. Each local patch closes 0.006 inward. This isolated derivative requires source and reduced candidate visual review; no runtime approval or replacement building.",
+  "repairs": [
+    {
+      "name": "Front enclosed plaster band above right ground-floor window beneath balcony",
+      "specification": {
+        "name": "Front enclosed plaster band above right ground-floor window beneath balcony",
+        "u": [
+          1,
+          0,
+          0
+        ],
+        "v": [
+          0,
+          0,
+          1
+        ],
+        "n": [
+          0,
+          -1,
+          0
+        ],
+        "roi": [
+          0.025,
+          0.168,
+          0.225,
+          0.285
+        ],
+        "defectDepth": 0.18,
+        "donorDepth": 0.205,
+        "donorMaxDepth": 0.222,
+        "donorNormal": 0.65,
+        "color": "plaster"
+      },
+      "missingSamples": 792,
+      "boundarySamples": 1534,
+      "sampledDepthRange": [
+        -2.0,
+        0.33331501483917236
+      ],
+      "inwardClosureThickness": 0.006,
+      "outerSurfaceUnchanged": true,
+      "newVertices": 1948,
+      "newTriangles": 3892
+    }
+  ],
+  "originalTriangles": 932293,
+  "originalVerticesMoved": 0,
+  "originalTrianglesDeleted": 0,
+  "artifactCleanup": {
+    "method": "No original faces deleted; only measured local source plaster wall gaps receive source-neighbor-derived closed patches. Pending visual review.",
+    "deletedTriangles": 0
+  },
+  "newTriangles": 3892,
+  "newVertices": 1948,
+  "inverseSimilarityError": 9.526839117590669e-08,
+  "normalizedOutput": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-alpine-tower3-window-v2-horizontal\\repaired-normalized.glb",
+    "sha256": "c1c266301aa7a3385a7f0d9572a54039d6dd413445d8183f58cbdce3903f127e",
+    "bytes": 41580504
+  },
+  "nativeOutput": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-alpine-tower3-window-v2-horizontal\\repaired-native.glb",
+    "sha256": "b9b91a8f3f36d67f90eed67e356b4f9bd3e92c812815b3aa5b7d7adf984fe239",
+    "bytes": 41579256
+  },
+  "renders": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\alpine\\tower_3\\b9b91a8f3f36d67f\\views\\repaired-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\alpine\\tower_3\\b9b91a8f3f36d67f\\views\\repaired-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\alpine\\tower_3\\b9b91a8f3f36d67f\\views\\repaired-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\alpine\\tower_3\\b9b91a8f3f36d67f\\views\\repaired-left.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\alpine\\tower_3\\b9b91a8f3f36d67f\\views\\repaired-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.42761364579200745,
+        -0.36870893836021423,
+        0.0
+      ],
+      "max": [
+        0.42761364579200745,
+        0.36870893836021423,
+        1.0
+      ]
+    },
+    "triangles": 936185,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "reviewImages": [
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\alpine\\tower_3\\b9b91a8f3f36d67f\\views\\repaired-front.png",
+      "sha256": "b46ca86e2feb48b6dadf5c227bb06c94cf7cc6989f101e38dbcf5725913e8998",
+      "bytes": 246463
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\alpine\\tower_3\\b9b91a8f3f36d67f\\views\\repaired-right.png",
+      "sha256": "0862fa6c4370340ce1081331638bdfb76e321b798db903c3ce392b1cc3470fd1",
+      "bytes": 247433
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\alpine\\tower_3\\b9b91a8f3f36d67f\\views\\repaired-back.png",
+      "sha256": "b6d20458f15b8ae6ccbc7ed82216c4a6c8b173ce34988f2f583cdf44cb52cad1",
+      "bytes": 237558
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\alpine\\tower_3\\b9b91a8f3f36d67f\\views\\repaired-left.png",
+      "sha256": "1a8c2e0633d8f5c006e0b86816eac7161b72739b883763dd1c01f2f851bb2064",
+      "bytes": 249280
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\alpine\\tower_3\\b9b91a8f3f36d67f\\views\\repaired-iso.png",
+      "sha256": "b7f42e69733557be46f51b718e792dcc98b7062007ebb4aec8c74123c7a6d6e3",
+      "bytes": 299942
+    }
+  ],
+  "neutralReviewImages": [
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\alpine\\tower_3\\b9b91a8f3f36d67f\\gray\\repaired-gray-front-iso.png",
+      "sha256": "215b50a7913193e13aa9c2bf925aac1936c5fca76df210eb8b094b6b8f868f7b",
+      "bytes": 808700
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\alpine\\tower_3\\b9b91a8f3f36d67f\\gray\\repaired-gray-back-iso.png",
+      "sha256": "38d9cf869b44167067c9e30a73834019ca5da65bd856a40c370e5c9b9d78c3eb",
+      "bytes": 781803
+    }
+  ],
+  "processingTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\309cbdbdada93824500415367e59e0f79a204f041f3c3025696792f2316f69d2-repair_alpine_tower3_window.py",
+    "sha256": "309cbdbdada93824500415367e59e0f79a204f041f3c3025696792f2316f69d2",
+    "bytes": 12538
+  },
+  "completedAt": "2026-10-23T20:21:47.415962+00:00",
+  "originalRepairReport": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\alpine\\tower_3\\b9b91a8f3f36d67f\\source-repair-report.json",
+    "sha256": "f19aecc90327744a155d8653b20f077ff919a299abac625f3167ff685568a3a1",
+    "bytes": 6676
+  },
+  "diagnosticImages": [
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\alpine\\tower_3\\b9b91a8f3f36d67f\\gray\\repaired-gray-front-iso.png",
+      "sha256": "215b50a7913193e13aa9c2bf925aac1936c5fca76df210eb8b094b6b8f868f7b",
+      "bytes": 808700
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\alpine\\tower_3\\b9b91a8f3f36d67f\\gray\\repaired-gray-back-iso.png",
+      "sha256": "38d9cf869b44167067c9e30a73834019ca5da65bd856a40c370e5c9b9d78c3eb",
+      "bytes": 781803
+    }
+  ],
+  "measuredDepthEvidence": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\alpine\\tower_3\\b9b91a8f3f36d67f\\measured-depths.json",
+    "sha256": "6abd235cae90da0c177a32fee130339046be811dbfff2170495fc533fe20bc91",
+    "bytes": 2702
+  },
+  "sourcePreservation": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\alpine\\tower_3\\b9b91a8f3f36d67f\\preservation.json",
+    "sha256": "2ac42a1120bf9a547379234f393982f9d2870cc14fb18627f867b4d4b561465d",
+    "bytes": 1486
+  },
+  "runtimeApproved": false,
+  "visualReview": {
+    "status": "source_repair_ready_for_derivation",
+    "reviewer": "root",
+    "recordedAtUtc": "2026-10-23T20:27:57.399028+00:00",
+    "views": [
+      "front",
+      "right",
+      "back",
+      "left",
+      "iso",
+      "neutral-front-iso",
+      "neutral-back-iso"
+    ],
+    "notes": "Root actually viewed all five repaired color views and both neutral obliques. The measured enclosed horizontal plaster hole above the front ground-floor right window is closed without changing original932293 triangle positions, UVs or embedded image bytes;3892 bounded triangles added. The proposed vertical strip was excluded because its probe crossed the silhouette. Original roof tile gaps, small glass fissures and that front/side corner opening remain explicitly visible and unchanged. This record authorizes only one finer mobile derivative comparison, not whole-source quality or runtime approval. The old .003/30k version visibly enlarged gaps; compare .0015/45k at actual phone size and reject if conspicuous missing roof/wall patches remain."
+  }
+}

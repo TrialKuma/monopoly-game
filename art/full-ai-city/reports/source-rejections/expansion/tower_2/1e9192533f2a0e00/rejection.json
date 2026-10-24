@@ -1,0 +1,57 @@
+{
+  "status": "rejected_native_export_source",
+  "region": "expansion",
+  "asset": "tower_2",
+  "reviewer": "asset_production",
+  "recordedAtUtc": "2026-10-24T04:54:28.452504+00:00",
+  "source": {
+    "path": "art/full-ai-city/source/expansion--tower_2-a010-pixal-mv-1024-9247.glb",
+    "sha256": "1e9192533f2a0e00174932ba1f16852843fa37fdc3ffbbf827c9e48111efca32",
+    "bytes": 40549640
+  },
+  "sourceLevel": "Native 1M export; no untouched decoder attribution is made.",
+  "inferenceReport": {
+    "path": "art/full-ai-city/reports/source-rejections/expansion/tower_2/1e9192533f2a0e00/expansion--tower_2-a010-pixal-mv-1024-9247.json",
+    "sha256": "a512b19dd0ed7b724b095497dd3d8e590be2117048d08acfee66836ff015e5dc",
+    "bytes": 10166
+  },
+  "inputReference": {
+    "path": "art/full-ai-city/reports/source-rejections/expansion/tower_2/1e9192533f2a0e00/input-reference.json",
+    "sha256": "48ed6551d7ab074c4e4779927dd3b382f49b0686161d645d745060266b62c2b0",
+    "bytes": 4441
+  },
+  "diagnostic": null,
+  "diagnosticTool": null,
+  "sourceComparisonReport": {
+    "path": "art/full-ai-city/reports/source-rejections/expansion/tower_2/1e9192533f2a0e00/source-comparison-processing.json",
+    "sha256": "db88848fc034482a828e8a3bf5c30e8594a8de9ece179e7e271a8133bb6390eb",
+    "bytes": 20937
+  },
+  "sourceViewEvidenceMode": "Explicitly selected existing renderedSource views; no additional or neutral render implied",
+  "evidence": [
+    {
+      "path": "art/full-ai-city/reports/source-rejections/expansion/tower_2/1e9192533f2a0e00/raw-front.png",
+      "sha256": "82143b62f137ba2b20fa1c1c0aa7879fbefd575cc65bbb85e34bb71498e6a54b",
+      "bytes": 226882
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/expansion/tower_2/1e9192533f2a0e00/raw-iso.png",
+      "sha256": "82199b66b3a28662babc301af2eb5abb11d9cc8f5829e84728b5444ccfdab654",
+      "bytes": 293213
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/expansion/tower_2/1e9192533f2a0e00/raw-back.png",
+      "sha256": "dc9a61aa5af1792091548b96a174fc9160f9a77263318c601f45d3ff2e842aee",
+      "bytes": 227414
+    }
+  ],
+  "finding": "Actually inspected the original three-view reference, existing native front/iso/back, all five final material views and256px downsample. The native rear wall has a conspicuous jagged missing vertical strip beside and below the fire escape platform, with another open lower left corner/pier. Upper and lower rear window panes also appear as broken floating curtain fragments rather than the reference closed glazing. These remain obvious in the exact final phone views. Front roof and principal mass remain coherent, but do not offset rear structural damage. Narrow native-export attribution only; no untouched decoder claim. Register one first independent same-reference retry, preserving geometry-only parameters, resource guards and evidence.",
+  "decision": "One independent same-reference seed. If repeated major defects remain, review three-view consistency before further inference; no automatic approval.",
+  "sourceUnchanged": true,
+  "notFinalCandidateReview": true,
+  "freezeTool": {
+    "path": "art/full-ai-city/reports/tool-snapshots/616860a00b28e670e1219d64c6cb5dad17f0946420568f786e80b6d789fb4a73-freeze_public_source_rejection.py",
+    "sha256": "616860a00b28e670e1219d64c6cb5dad17f0946420568f786e80b6d789fb4a73",
+    "bytes": 4304
+  }
+}

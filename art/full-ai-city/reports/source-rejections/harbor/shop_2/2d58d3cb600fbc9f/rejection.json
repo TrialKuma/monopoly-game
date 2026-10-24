@@ -1,0 +1,57 @@
+{
+  "status": "rejected_native_export_source",
+  "region": "harbor",
+  "asset": "shop_2",
+  "reviewer": "asset_production",
+  "recordedAtUtc": "2026-10-24T06:21:05.082817+00:00",
+  "source": {
+    "path": "art/full-ai-city/source/harbor--shop_2-a010-pixal-mv-1024-29500.glb",
+    "sha256": "2d58d3cb600fbc9f1c7261a67fac72a0b6ad40f0cf5c74a3fb2a536db2088bec",
+    "bytes": 45345592
+  },
+  "sourceLevel": "Native 1M export; no untouched decoder attribution is made.",
+  "inferenceReport": {
+    "path": "art/full-ai-city/reports/source-rejections/harbor/shop_2/2d58d3cb600fbc9f/harbor--shop_2-a010-pixal-mv-1024-29500.json",
+    "sha256": "9c6b2b26e5cfbd13209fe161dbbcf40d73a394a39e0346f2f0511817327e4cb2",
+    "bytes": 10115
+  },
+  "inputReference": {
+    "path": "art/full-ai-city/reports/source-rejections/harbor/shop_2/2d58d3cb600fbc9f/input-reference.json",
+    "sha256": "dd47d818539999b10f2014f268c9d1d5e9a011f6f0870429581352eeda29106f",
+    "bytes": 4414
+  },
+  "diagnostic": null,
+  "diagnosticTool": null,
+  "sourceComparisonReport": {
+    "path": "art/full-ai-city/reports/source-rejections/harbor/shop_2/2d58d3cb600fbc9f/source-comparison-processing.json",
+    "sha256": "a93444ba76078d8a6cbd4b1247e4dfa599b675c998b5cf0c9dfc9fd189f22722",
+    "bytes": 20705
+  },
+  "sourceViewEvidenceMode": "Explicitly selected existing renderedSource views; no additional or neutral render implied",
+  "evidence": [
+    {
+      "path": "art/full-ai-city/reports/source-rejections/harbor/shop_2/2d58d3cb600fbc9f/raw-front.png",
+      "sha256": "2e77b259cf2bdf34eabca5e6a1151a30d699c5e2776cd74cae7ff000467766bf",
+      "bytes": 272409
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/harbor/shop_2/2d58d3cb600fbc9f/raw-iso.png",
+      "sha256": "a72fb43236e5b37a33e3b1c6bbee21368e25dcd86b42a5475e14813950ef1781",
+      "bytes": 330325
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/harbor/shop_2/2d58d3cb600fbc9f/raw-back.png",
+      "sha256": "149e823b7aeff581bf40ecf5cb06df458996719c014e2b0967764be088c38c74",
+      "bytes": 252926
+    }
+  ],
+  "finding": "Actually inspected current source front/iso comparison, existing native back, all5final material views and256px against the unchanged reference. The second source closes the old lower rear tear but introduces multiple conspicuous gaps around front upper window arches and a broad rear wall strip beside the right upper shutter, also visible in native back. Glazing contains conspicuous broken bright fragments. Reject this exact outcome. The retained first source has a coherent roof/front and one dominant lower rear plaster tear; select that first source for one bounded local patch assessment, preserving both completed neural outcomes. No third seed and no reference revision requested.",
+  "decision": "Select first retained source f0290260 for bounded rear-plaster patch assessment; no new reference or seed.",
+  "sourceUnchanged": true,
+  "notFinalCandidateReview": true,
+  "freezeTool": {
+    "path": "art/full-ai-city/reports/tool-snapshots/616860a00b28e670e1219d64c6cb5dad17f0946420568f786e80b6d789fb4a73-freeze_public_source_rejection.py",
+    "sha256": "616860a00b28e670e1219d64c6cb5dad17f0946420568f786e80b6d789fb4a73",
+    "bytes": 4304
+  }
+}

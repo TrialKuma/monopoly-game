@@ -1,5 +1,5 @@
-import { loadSharedModelAsset, disposeSharedModelAssets } from './scene-model-cache.js?v=20261023-3';
-import { buildDestinationGarden, batchGardenBuilding } from './scene-garden-kit.js?v=20261023-3';
+import { loadSharedModelAsset, disposeSharedModelAssets, regionalSceneryDirectory } from './scene-model-cache.js?v=20261024-1';
+import { buildDestinationGarden, batchGardenBuilding, instanceGardenBuildings } from './scene-garden-kit.js?v=20261024-1';
 
 // Destination art is cosmetic. The generated meshes keep their UVs and rigid
 // part animation clips; they never enter the board's static mesh batching.
@@ -17,22 +17,24 @@ export function createDestinationScene({THREE, world, boardBounds, mapId, reques
   const owned=new Set(),mixers=[],waves=[],glows=[],boats=[],steam=[];
   const own=r=>{owned.add(r);return r;};
   const w=boardBounds.w,d=boardBounds.d,innerW=w-4.7,innerD=d-4.65;
-  let elapsed=0,disposed=false,visible=true,ready=false,failed=false;
+  let elapsed=0,disposed=false,visible=true,ready=false,failed=false,regionReady=false,heroReady=false;
   const {warm,plots}=buildDestinationGarden({THREE,own,root,perimeter,mapId,w,d,innerW,innerD,waves,boats,steam});
-  const regionLoading=loadModel(`regions/${mapId}.glb`).then(gltf=>{
+  const regionLoading=loadModel(`${regionalSceneryDirectory}/${mapId}.glb`).then(gltf=>{
     if(disposed)return;
-    const prepared=new Map(),village=new THREE.Group();root.userData.regionalBuildings=0;
+    for(const plot of plots)if(!gltf.scene.getObjectByName(`${mapId}_${plot.asset}`))throw new Error(`Missing regional building ${mapId}_${plot.asset}`);
+    const prepared=new Map(),village=new THREE.Group();let allNeural=true;root.userData.regionalBuildings=0;
     for(const plot of plots){
       const name=`${mapId}_${plot.asset}`,source=gltf.scene.getObjectByName(name);if(!source)continue;
-      if(!prepared.has(name))prepared.set(name,batchGardenBuilding({THREE,source,own}));
+      const neural=source.userData.sourceType==='pixal_native_multiview';allNeural=allNeural&&neural;
+      if(!prepared.has(name))prepared.set(name,neural?source:batchGardenBuilding({THREE,source,own}));
       const building=prepared.get(name).clone(true);building.name=`scenic_${name}`;building.rotation.y=plot.rotation;
       let bounds=new THREE.Box3().setFromObject(building),size=bounds.getSize(new THREE.Vector3());building.scale.setScalar(Math.min(plot.width/Math.max(size.x,size.z),plot.height/size.y));
       bounds=new THREE.Box3().setFromObject(building);const center=bounds.getCenter(new THREE.Vector3());building.position.set(plot.x-center.x,plot.y-bounds.min.y,plot.z-center.z);
       village.add(building);root.userData.regionalBuildings++;
     }
-    if(village.children.length){const batch=batchGardenBuilding({THREE,source:village,own});batch.name=`destination_${mapId}_village`;perimeter.add(batch);}
-    requestRender();
-  }).catch(error=>{if(!disposed)console.warn(`Regional scenery ${mapId} unavailable`,error.message);});
+    if(village.children.length){const batch=(allNeural?instanceGardenBuildings:batchGardenBuilding)({THREE,source:village,own});batch.name=`destination_${mapId}_village`;perimeter.add(batch);}
+    regionReady=true;ready=heroReady;requestRender();
+  }).catch(error=>{if(!disposed){failed=true;ready=false;console.warn(`Regional scenery ${mapId} unavailable`,error.message);}});
   const heroLoading=loadModel(theme.file).then(gltf=>{
     if(disposed)return;
     const model=gltf.scene.clone(true);model.name=theme.name;
@@ -43,8 +45,8 @@ export function createDestinationScene({THREE, world, boardBounds, mapId, reques
     model.traverse(n=>{if(n.isMesh){n.castShadow=true;n.receiveShadow=true;n.raycast=()=>{};}});
     root.add(model);
     const mixer=new THREE.AnimationMixer(model);gltf.animations.forEach(clip=>mixer.clipAction(clip).play());mixers.push(mixer);
-    ready=true;root.userData.modelReady=true;root.userData.animationClips=gltf.animations.length;requestRender();
-  }).catch(error=>{if(!disposed){failed=true;console.warn(`Destination model ${theme.file} unavailable`,error.message);}});
+    heroReady=true;ready=regionReady;root.userData.modelReady=true;root.userData.animationClips=gltf.animations.length;requestRender();
+  }).catch(error=>{if(!disposed){failed=true;ready=false;console.warn(`Destination model ${theme.file} unavailable`,error.message);}});
   const loading=Promise.all([heroLoading,regionLoading]);
   function tick(delta,{night=0,reduced=false,paused=false}={}){
     if(disposed)return false;

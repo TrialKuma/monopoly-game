@@ -1,0 +1,79 @@
+{
+  "status": "rejected_native_export_source",
+  "region": "alpine",
+  "asset": "finance_2",
+  "reviewer": "/root/asset_production",
+  "recordedAtUtc": "2026-10-23T21:17:43.721220+00:00",
+  "source": {
+    "path": "art/full-ai-city/source/alpine--finance_2-a002-pixal-mv-1024-9247.glb",
+    "sha256": "f781762fed7cb146c791559358f8e4d79080e91a28e5272f2adec192e59871f2",
+    "bytes": 46254816
+  },
+  "sourceLevel": "Native 1M export; no untouched decoder attribution is made.",
+  "inferenceReport": {
+    "path": "art/full-ai-city/reports/source-rejections/alpine/finance_2/f781762fed7cb146/alpine--finance_2-a002-pixal-mv-1024-9247.json",
+    "sha256": "ef6eb9d6d8730a1d297026557b030b920afc161bc54f238d0967f4c4f13e3583",
+    "bytes": 9364
+  },
+  "inputReference": {
+    "path": "art/full-ai-city/reports/source-rejections/alpine/finance_2/f781762fed7cb146/input-reference.json",
+    "sha256": "1c9cfedc4b3e88c66b3b342a70da567131366efbd1974cb1390d754ab4c21ff7",
+    "bytes": 4436
+  },
+  "diagnostic": {
+    "path": "art/full-ai-city/reports/source-rejections/alpine/finance_2/f781762fed7cb146/source-inspection.json",
+    "sha256": "4e4df34c37e57de88ef3f6691694f323bfcf375a5a0bc12b62ec8989b3b1a380",
+    "bytes": 2501
+  },
+  "diagnosticTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\128f0187158a035f4d7e1b8bb5fbec7c559413d80cd6336639df3afc760eb994-render_raw_core_review.py",
+    "sha256": "128f0187158a035f4d7e1b8bb5fbec7c559413d80cd6336639df3afc760eb994",
+    "bytes": 3616
+  },
+  "evidence": [
+    {
+      "path": "art/full-ai-city/reports/source-rejections/alpine/finance_2/f781762fed7cb146/raw-front.png",
+      "sha256": "6f77c3a48a037b26a4973a79110751ba68bc233c9af430b3b3dacf35b810accc",
+      "bytes": 198977
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/alpine/finance_2/f781762fed7cb146/raw-iso.png",
+      "sha256": "ea22c98bd06b00d6df9704970837744a085aef40e9931bda8acaeee8c27ac353",
+      "bytes": 210310
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/alpine/finance_2/f781762fed7cb146/raw-right.png",
+      "sha256": "59c67e961f04bea5f5fac2cd39fa94d095e98843955e0989d0835e99509166d6",
+      "bytes": 136828
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/alpine/finance_2/f781762fed7cb146/raw-back.png",
+      "sha256": "a3a20023157c55b77664710729fb8cb77347cdbc5512bd69b15af37fc7d531a3",
+      "bytes": 191369
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/alpine/finance_2/f781762fed7cb146/raw-left.png",
+      "sha256": "75df570d9b3af1ed0827b31c5c41eb8107ea3e96ba6f7aa8449bedeaf1d68e1a",
+      "bytes": 138439
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/alpine/finance_2/f781762fed7cb146/raw-close-back-iso.png",
+      "sha256": "cde2be466919ada0dee7d95c155f05dba0746f445a54425e4e52a116bd71fbab",
+      "bytes": 696286
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/alpine/finance_2/f781762fed7cb146/raw-grey-back-iso.png",
+      "sha256": "393be16606ce2646d9e5496b5abe1366e622b516ffaebac258d93714a0517f1e",
+      "bytes": 566708
+    }
+  ],
+  "finding": "Actually inspected the current three-view reference, original front/isometric comparison and targeted original right/back/left plus close and neutral rear-isometric views. The right upper-storey window has a broad open wall section underneath/beside it. Both outer rear ground-floor window bays have missing plaster strips beside their frames; the left outer bay opening remains conspicuous in the neutral view. These holes already exist in the native 1M export and remain visible in the small final colored five-view sheet, so this is not just enlarged micro-detail or a final field texture artifact. The clock tower, main roof and porch remain recognizable, but multiple functional facade regions are visibly broken. Reject the source for runtime use and preserve its original/field evidence. No untouched decoder attribution is made.",
+  "decision": "One independent same-reference seed. If repeated major defects remain, review three-view consistency before further inference; no automatic approval.",
+  "sourceUnchanged": true,
+  "notFinalCandidateReview": true,
+  "freezeTool": {
+    "path": "art/full-ai-city/reports/tool-snapshots/2089d6a4df905cc5eff41a53bbdb4efd95271671a2285389fa1ae28ba40e29cf-freeze_public_source_rejection.py",
+    "sha256": "2089d6a4df905cc5eff41a53bbdb4efd95271671a2285389fa1ae28ba40e29cf",
+    "bytes": 3317
+  }
+}

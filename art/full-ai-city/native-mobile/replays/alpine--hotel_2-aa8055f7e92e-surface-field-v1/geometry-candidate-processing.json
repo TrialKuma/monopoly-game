@@ -1,0 +1,304 @@
+{
+  "status": "exported_pending_visual_review",
+  "createdAt": "2026-10-23T09:54:37.782275+00:00",
+  "region": "alpine",
+  "asset": "hotel_2",
+  "source": {
+    "rawGLB": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\alpine--hotel_2-a003-pixal-mv-1024-29412.glb",
+      "sha256": "aa8055f7e92e8f8a6a4a1fcee3a5377252e44595d071ae3fe1d5357a728c9b50",
+      "bytes": 41915508
+    }
+  },
+  "inferenceReport": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\alpine--hotel_2-a003\\alpine--hotel_2-a003-pixal-mv-1024-29412.json",
+    "sha256": "bdf2097e086ed8b4c258e2ccb62ba05a0fa8631c674cea9d718c62852d36567d",
+    "bytes": 9581
+  },
+  "reference": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\inputs\\alpine\\hotel_2\\944d6b20c602f97d\\reference.json",
+    "sha256": "e93867870bd9b87f260f2a0061dccae3ba46a9cce98fd699ff45a29f45b701aa",
+    "bytes": 4423
+  },
+  "processingTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\d1befe53381b9186da4b840298fc1d6b373524437790091b7f6e296bfcbf771b-process_lod.py",
+    "sha256": "d1befe53381b9186da4b840298fc1d6b373524437790091b7f6e296bfcbf771b",
+    "bytes": 27109
+  },
+  "assumedCameras": true,
+  "cameraCalibration": "assumed_standard_orbit_not_measured",
+  "nativePipeline": "Pixal3DMVImageTo3DPipeline.run_mv",
+  "nativeResolution": 1024,
+  "seed": 29412,
+  "geometryOrigin": "Only the actual neural source reduced and rebaked; no authored substitute geometry or manually constructed surfaces",
+  "orientation": {
+    "up": "Y",
+    "front": "+Z",
+    "groundY": 0,
+    "maxEdge": 1
+  },
+  "requestedTriangles": 30000,
+  "limitations": [
+    "Assumed camera reference reconstruction, not exact measured architecture",
+    "Final candidate requires actual rendered visual approval"
+  ],
+  "animation": null,
+  "processingComplete": true,
+  "lod": "near",
+  "processingRevision": 0,
+  "derivation": {
+    "rawTriangles": 980404,
+    "weldedTriangles": 975078,
+    "remeshedTriangles": 2336176,
+    "voxelSize": 0.003,
+    "finalTriangles": 29995,
+    "atlasArea": 0.45431562180499435,
+    "singleReductionPass": true,
+    "inheritedUVRemovedBeforeReduction": true,
+    "sourceMaterialsUntouched": true,
+    "uvUnwrap": {
+      "angleDegrees": 89,
+      "islandMargin": 2e-05,
+      "marginMethod": "SCALED",
+      "nominalMarginPixels": null
+    }
+  },
+  "bake": {
+    "hitCoverageAreaWeighted": 0.9992005894010599,
+    "cageExtrusion": 0.02,
+    "maxRayDistance": 0.06,
+    "maps": [
+      {
+        "role": "base",
+        "size": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "role": "orm",
+        "size": [
+          512,
+          512
+        ]
+      },
+      {
+        "role": "normal",
+        "size": [
+          1024,
+          1024
+        ]
+      }
+    ],
+    "method": "Selected-to-active CPU bake from original neural source onto a source-derived voxel surface reduced without inherited UV constraints; no authored substitute building"
+  },
+  "quantization": {
+    "source": "H:\\代码项目\\monopoly\\art\\full-ai-city\\candidates\\alpine\\hotel_2.glb",
+    "output": "H:\\代码项目\\monopoly\\art\\full-ai-city\\candidates\\alpine\\hotel_2.glb",
+    "sourceBytes": 1900112,
+    "outputBytes": 1445516,
+    "sourceSha256": "38b9232e8d478ec3261978cb3c4ac60906321bfbc125411b0cfd4baa85e78da6",
+    "outputSha256": "61da95b9b2c185f12833c9f79c59f6372e133abbc5b5c659f8fcc9818d7f7223",
+    "positionFaceAndTextureBytesUnchanged": true,
+    "attributes": [
+      {
+        "accessor": 1,
+        "semantic": "NORMAL",
+        "count": 37896,
+        "maximumAngularErrorDegrees": 0.3728181909889765
+      },
+      {
+        "accessor": 2,
+        "semantic": "TEXCOORD_0",
+        "count": 37896,
+        "maximumUVError": 7.629503672279547e-06,
+        "maximumTexelErrorAt1024": 0.007812611760414256
+      }
+    ]
+  },
+  "processedCandidate": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\candidates\\alpine\\hotel_2.glb",
+    "sha256": "61da95b9b2c185f12833c9f79c59f6372e133abbc5b5c659f8fcc9818d7f7223",
+    "bytes": 1445516
+  },
+  "glbValidation": {
+    "version": 2,
+    "triangles": 29995,
+    "meshes": 1,
+    "materials": 1,
+    "images": 3,
+    "all_primitives_have_uv": true,
+    "animations": [],
+    "all_images_embedded": true,
+    "external_buffers": []
+  },
+  "triangles": 29995,
+  "renderedCandidate": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\alpine\\hotel_2\\lod-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\alpine\\hotel_2\\lod-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\alpine\\hotel_2\\lod-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\alpine\\hotel_2\\lod-left.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\alpine\\hotel_2\\lod-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.4998216927051544,
+        -0.38972917199134827,
+        -9.611199493519962e-05
+      ],
+      "max": [
+        0.4997507929801941,
+        0.3899284303188324,
+        0.7406991720199585
+      ]
+    },
+    "triangles": 29995,
+    "textureSizes": [
+      {
+        "name": "alpine__hotel_2__base",
+        "size": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "name": "alpine__hotel_2__normal",
+        "size": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "name": "alpine__hotel_2__orm",
+        "size": [
+          512,
+          512
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "renderedSource": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\alpine\\hotel_2\\raw-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\alpine\\hotel_2\\raw-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.5,
+        -0.38994160294532776,
+        0.0
+      ],
+      "max": [
+        0.5,
+        0.38994160294532776,
+        0.7404718995094299
+      ]
+    },
+    "triangles": 980404,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "bounds": {
+    "min": [
+      -0.4998216927051544,
+      -9.611199493519962e-05,
+      -0.3899284303188324
+    ],
+    "max": [
+      0.4997507929801941,
+      0.7406991720199585,
+      0.38972917199134827
+    ],
+    "coordinateSystem": "GLTF Y-up; +Z front"
+  },
+  "textureSizes": [
+    {
+      "name": "alpine__hotel_2__base",
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "name": "alpine__hotel_2__normal",
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "name": "alpine__hotel_2__orm",
+      "size": [
+        512,
+        512
+      ]
+    }
+  ],
+  "rawSourceUnchanged": true,
+  "completedAt": "2026-10-23T09:55:56.458081+00:00",
+  "reviewSheet": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\alpine\\hotel_2\\review-sheet.jpg",
+    "sha256": "b39d5d8d709db46eac31fa0e9f26ca751712429fa06e2d78d1401e54941974e1",
+    "bytes": 329946,
+    "candidateSha256": "61da95b9b2c185f12833c9f79c59f6372e133abbc5b5c659f8fcc9818d7f7223",
+    "sourceImages": [
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\alpine\\hotel_2\\raw-front.png",
+        "sha256": "b30eec6ac73ea9d1c0ce5f15f4e946d48d3675bbeda933c969b4fa6be204d1c2",
+        "label": "AI raw front"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\alpine\\hotel_2\\raw-iso.png",
+        "sha256": "1792d5c89cfba557948031a01a5b200f691fedc10842f9345eabb37067102a30",
+        "label": "AI raw iso"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\alpine\\hotel_2\\lod-front.png",
+        "sha256": "4aba21077641638a7aa93d0df694b606f5040df2b41617d82864e202edd07fd7",
+        "label": "LOD front"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\alpine\\hotel_2\\lod-right.png",
+        "sha256": "06ab975013869ccf4ee80c1fc79c55b7e1c866074458c0d539c7b6ad999779d3",
+        "label": "LOD right"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\alpine\\hotel_2\\lod-back.png",
+        "sha256": "f8244e0e8622eea24ededa63286e0168e8bb8f7591ddae48ea29991bec638921",
+        "label": "LOD back"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\alpine\\hotel_2\\lod-left.png",
+        "sha256": "ac732568276c118ae75ae64841e6c717168ece833ca0469dc7aeca11dce6d8bf",
+        "label": "LOD left"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\alpine\\hotel_2\\lod-iso.png",
+        "sha256": "f4626db4623c58222ea9fd00f3f247b513136c9775121a19bc3d2a6f8216efd1",
+        "label": "LOD iso"
+      }
+    ],
+    "content": "Unmodified CPU render images composed with labels for visual comparison only"
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "status": "reference_inputs_reused",
+  "asset": "alpine_villa_2",
+  "map": "alpine",
+  "reason": "Reuse the three existing independent ImageGen inputs for this regional villa_2. Current model acceptance is separately controlled by the root runtime approval registry.",
+  "sourceReview": "Historical previous-round provenance only; NOT current runtime approval. Re-inference or repaired candidates may replace it.",
+  "originalInputs": [
+    {
+      "view": "front",
+      "path": "art/themed-city-kit/inputs/alpine-house-v01/view00_azim000.png",
+      "sha256": "b8a6639685f03452bc68b91af39e9bdc5e1e3f4cef515dacdc2a6e01ef60c873",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "view": "right",
+      "path": "art/themed-city-kit/inputs/alpine-house-v01/view01_azim090.png",
+      "sha256": "d633539c79672a60e4f35d91f6b395f8e263d435149fc9f2c62c2a8c74d9c858",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "view": "back",
+      "path": "art/themed-city-kit/inputs/alpine-house-v01/view02_azim180.png",
+      "sha256": "8cb328fbda6e544bd6d2eba6409f808db5143c1429a412ac889828860e20621e",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA"
+    }
+  ],
+  "inferenceAndVisualReviewManifest": "art/themed-city-kit/reports/approved-houses.json",
+  "inputPreparation": "Use the three existing independent transparent images directly; no triptych composition or image redraw.",
+  "historicalSourceGlb": "assets/models/regions-ai/alpine_house.glb",
+  "historicalSourceSha256": "3534766503c4e01753841e8dfdaf95addd85acc942e973b4f90f3a558c9d9d92"
+}

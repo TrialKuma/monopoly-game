@@ -1,0 +1,693 @@
+{
+  "status": "exported_pending_visual_review",
+  "createdAt": "2026-10-24T04:18:41.969189+00:00",
+  "region": "expansion",
+  "asset": "hotel_1",
+  "lod": "near",
+  "processingRevision": 0,
+  "source": {
+    "rawGLB": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\expansion--hotel_1-a012-pixal-mv-1024-29488.glb",
+      "sha256": "5388dfae02d510bf5c4b137fde606a0504a33ad5fe6f1acf024efad69c128a86",
+      "bytes": 36079396
+    }
+  },
+  "inferenceReport": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\expansion--hotel_1-a012\\expansion--hotel_1-a012-pixal-mv-1024-29488.json",
+    "sha256": "b6cf4916bc771c20e857109fb43d87affe0040ffcaf746ad8182c6781af45a04",
+    "bytes": 10169
+  },
+  "reference": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\inputs\\expansion\\hotel_1\\8e12a1e9306baf2e\\reference.json",
+    "sha256": "7737e0367975da6c5cd9dff4d5292f945d2115fa59e21584e5f18159d7bc4500",
+    "bytes": 4414
+  },
+  "processingTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\d0fe99e75121175cccb420b5c503d9926459607b997b8582bbce75e6983b35bb-process_native_mobile.py",
+    "sha256": "d0fe99e75121175cccb420b5c503d9926459607b997b8582bbce75e6983b35bb",
+    "bytes": 9752
+  },
+  "nativeSurfaceExport": {
+    "receipt": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\expansion--hotel_1-5388dfae02d5-repair-7bcb2443479e-low-2385e33457-field-v1\\receipt.json",
+      "sha256": "83d46f3a5e493e4e62c573ec531b7aa72108606e002fb8a1b11fb8efeb66c644",
+      "bytes": 15940
+    },
+    "source": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\expansion--hotel_1-5388dfae02d5-repair-7bcb2443479e-low-2385e33457-field-v1\\mobile-30000-1024.glb",
+      "sha256": "7e897747475d1f7042a7f037f2a06e07a3a8a3c5456d0770f341605ee031540c",
+      "bytes": 1782024
+    },
+    "tensorArchive": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\expansion--hotel_1-a012\\neural-export-inputs.pt",
+      "sha256": "067658d5f6d6b1785b30fb1ca2649f3f18c0c5466b16ec49bbe247399c965804",
+      "bytes": 286064285
+    }
+  },
+  "nativePipeline": "Pixal3DMVImageTo3DPipeline.run_mv",
+  "nativeResolution": 1024,
+  "seed": 29488,
+  "assumedCameras": true,
+  "cameraCalibration": "assumed_standard_orbit_not_measured",
+  "geometryOrigin": "Actual neural building with the explicitly recorded bounded local surface repair, followed by source-derived CPU mobile geometry and native UV/material sampling. The original inference, repair and low-surface sources are distinct; the UV/material replay adds no geometry.",
+  "textureOrigin": "Original neural attribute field sampled by the native UV/material operations with the recorded surface-stage override; no new neural inference or raw-UV rebake.",
+  "normalization": {
+    "enabled": true,
+    "candidate_degrees": 0.2373881338022591,
+    "applied_degrees": 0.2373881338022591,
+    "underside_area": 0.1310454113850028,
+    "normal_agreement": 0.9477599798894526,
+    "yaw_degrees": 180,
+    "pitch_degrees": 0,
+    "roll_degrees": 0,
+    "uniform_scale": 1.100518405256077
+  },
+  "orientation": {
+    "up": "Y",
+    "front": "+Z",
+    "groundY": 0,
+    "maxEdge": 1
+  },
+  "requestedTriangles": 30000,
+  "triangles": 29991,
+  "glbValidation": {
+    "version": 2,
+    "triangles": 29991,
+    "meshes": 1,
+    "materials": 1,
+    "images": 2,
+    "all_primitives_have_uv": true,
+    "animations": [],
+    "all_images_embedded": true,
+    "external_buffers": []
+  },
+  "quantization": {
+    "source": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\expansion--hotel_1-5388dfae02d5-repair-7bcb2443479e-low-2385e33457-field-v1\\candidates\\expansion\\hotel_1.glb",
+    "output": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\expansion--hotel_1-5388dfae02d5-repair-7bcb2443479e-low-2385e33457-field-v1\\candidates\\expansion\\hotel_1.glb",
+    "sourceBytes": 1480016,
+    "outputBytes": 1095292,
+    "sourceSha256": "517af4fcef2df4a5c7a0c47a601ed3a1c97e50c93e5860b3c0d7a19409dfd677",
+    "outputSha256": "c1bf73830e6fb6a60ef4a3401afef02cebace88a18b348cd48eadf52eb414b31",
+    "positionFaceAndTextureBytesUnchanged": true,
+    "attributes": [
+      {
+        "accessor": 1,
+        "semantic": "NORMAL",
+        "count": 32073,
+        "maximumAngularErrorDegrees": 0.3850474843159148
+      },
+      {
+        "accessor": 2,
+        "semantic": "TEXCOORD_0",
+        "count": 32073,
+        "maximumUVError": 7.629510948348184e-06,
+        "maximumTexelErrorAt1024": 0.00781261921110854
+      }
+    ]
+  },
+  "processedCandidate": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\candidates\\expansion\\hotel_1.glb",
+    "sha256": "c1bf73830e6fb6a60ef4a3401afef02cebace88a18b348cd48eadf52eb414b31",
+    "bytes": 1095292
+  },
+  "derivation": {
+    "method": "Recorded CPU surface derived from the same neural raw, inverse-normalized to field coordinates; a local native-export variant bypasses further mesh simplification/remeshing and uses native UV generation plus original neural high-surface BVH and field texture sampling. Only normalization, JPEG encoding and attribute quantization afterward.",
+    "voxelizedAgain": false,
+    "rebakedFromRawUV": false,
+    "facadeUVPreserved": true,
+    "normalizedTrianglesPreserved": true,
+    "geometrySurfaceInput": {
+      "receipt": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\expansion--hotel_1-5388dfae02d5-repair-7bcb2443479e-low-2385e33457-field-v1\\geometry-source-proof.json",
+        "sha256": "d2c6a3249ba538e7eeda1b978627b2f7d282409252324e03505fbe672b2b1f17",
+        "bytes": 8775
+      },
+      "method": "Coordinate inversion of the recorded neural-derived low surface including explicitly bounded local source repairs. This preparation only welds exact positions and changes coordinates; it adds no faces. Original raw inference and repair input remain distinct.",
+      "sourceRaw": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\expansion--hotel_1-a012-pixal-mv-1024-29488.glb",
+        "sha256": "5388dfae02d510bf5c4b137fde606a0504a33ad5fe6f1acf024efad69c128a86",
+        "bytes": 36079396
+      },
+      "candidate": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\expansion--hotel_1-5388dfae02d5-repair-7bcb2443479e-low-2385e33457-field-v1\\geometry-candidate.glb",
+        "sha256": "2385e33457452b34f03281cf075ad58c2b24f86d07e71bb1599e68c8565a62a9",
+        "bytes": 1158096
+      },
+      "candidateReport": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\expansion--hotel_1-5388dfae02d5-repair-7bcb2443479e-low-2385e33457-field-v1\\geometry-candidate-processing.json",
+        "sha256": "d39c6225434aa484cddfbc2ccc2f375882f8fa0e64b0443cf7645d4013f4d2ec",
+        "bytes": 14340
+      },
+      "originalCandidate": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-expansion-hotel1-7bcb2443479e6076\\candidates\\expansion\\hotel_1.glb",
+        "sha256": "2385e33457452b34f03281cf075ad58c2b24f86d07e71bb1599e68c8565a62a9",
+        "bytes": 1158096
+      },
+      "fieldReceipt": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\expansion--hotel_1-a012\\receipt.json",
+        "sha256": "e4a383e8c2c58eec833f54aee39ac619524fdc18ca76ad6bb40e189b60bd4a87",
+        "bytes": 3704
+      },
+      "output": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\expansion--hotel_1-5388dfae02d5-repair-7bcb2443479e-low-2385e33457-field-v1\\geometry-surface.npz",
+        "sha256": "64dff96dee2441550c987b4b1f2173de222deb86493c36388f1194b8f517c170",
+        "bytes": 538628
+      },
+      "triangles": 29991,
+      "vertices": 14852,
+      "originalSplitVertices": 35145,
+      "exactCoincidentVerticesMerged": 20293,
+      "maximumPositionChangeFromWelding": 0,
+      "normalization": {
+        "enabled": true,
+        "candidate_degrees": 0.19782343594174043,
+        "applied_degrees": 0.19782343594174043,
+        "underside_area": 0.13353622979538274,
+        "normal_agreement": 0.958261441711035,
+        "yaw_degrees": 180,
+        "pitch_degrees": 0,
+        "roll_degrees": 0,
+        "uniform_scale": 1.1012044896691453
+      },
+      "rawBlenderToNormalizedBlender": [
+        [
+          -1.1012042629512282,
+          -1.323426207955946e-06,
+          -0.0007226660266302466,
+          0.0001463381464504932
+        ],
+        [
+          -1.128589693890583e-06,
+          -1.1011981903649644,
+          0.003723901320626999,
+          0.023314489477656908
+        ],
+        [
+          -0.000722662205588699,
+          0.0037238954344528397,
+          1.1011979654877124,
+          0.27521118966176467
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "inverse": [
+        [
+          -0.9080963477713788,
+          -9.239176428657714e-07,
+          -0.000595939113066381,
+          0.0002969197892724644
+        ],
+        [
+          -1.084579074185613e-06,
+          -0.9080913618718714,
+          0.0030708754864421477,
+          0.020326547363901274
+        ],
+        [
+          -0.0005959354187671416,
+          0.003070870737908293,
+          0.9080911562302381,
+          -0.2499883560028728
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "sampledNormalizationReconstructionMaxError": 9.596610019841687e-08,
+      "nativeBounds": {
+        "min": [
+          -0.4540558882846675,
+          -0.25016294956462026,
+          -0.3634001279999334
+        ],
+        "max": [
+          0.45367197098143897,
+          0.2931263140523731,
+          0.40656403772346095
+        ]
+      },
+      "tool": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\expansion--hotel_1-5388dfae02d5-repair-7bcb2443479e-low-2385e33457-field-v1\\geometry-preparation-source.py",
+        "sha256": "c4eec55644a998f870bd170aae5f8c5f060ba6af7ddbbe7025a44c5141846d8d",
+        "bytes": 8809
+      },
+      "toolSnapshot": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\expansion--hotel_1-5388dfae02d5-repair-7bcb2443479e-low-2385e33457-field-v1\\geometry-preparation-source.py",
+        "sha256": "c4eec55644a998f870bd170aae5f8c5f060ba6af7ddbbe7025a44c5141846d8d",
+        "bytes": 8809
+      },
+      "normalizationInput": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-expansion-hotel1-5388-two-regions-v2\\repaired-native.glb",
+        "sha256": "7bcb2443479e6076fc70bf7580ec6a702d2bf9caa8ffad10f10ab4d78f8c50e7",
+        "bytes": 37145788
+      },
+      "localSurfaceRepair": {
+        "source": {
+          "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-expansion-hotel1-5388-two-regions-v2\\repaired-native.glb",
+          "sha256": "7bcb2443479e6076fc70bf7580ec6a702d2bf9caa8ffad10f10ab4d78f8c50e7",
+          "bytes": 37145788
+        },
+        "receipt": {
+          "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\expansion\\hotel_1\\7bcb2443479e6076\\repair.json",
+          "sha256": "2670708f9a275c501411212ecb648590e3cda4f7e43d3c5adda9f6b534309c06",
+          "bytes": 9229
+        },
+        "method": "Only explicitly measured and visually reviewed local gaps are closed from adjoining original surface and UV samples with0.006 inward closure. Original vertices, faces and image pixels are preserved. No replacement building or generated texture. See configuration and frozen prior review evidence for exact allowed regions.",
+        "newTriangles": 2024,
+        "newVertices": 1016,
+        "originalVerticesMoved": 0,
+        "originalTrianglesDeleted": 0,
+        "regions": [
+          {
+            "name": "Front left pale cornice slot",
+            "specification": {
+              "name": "Front left pale cornice slot",
+              "u": [
+                1,
+                0,
+                0
+              ],
+              "v": [
+                0,
+                0,
+                1
+              ],
+              "n": [
+                0,
+                -1,
+                0
+              ],
+              "roi": [
+                -0.35,
+                -0.178,
+                0.441,
+                0.46
+              ],
+              "defectDepth": 0.17,
+              "donorDepth": 0.18,
+              "donorMaxDepth": 0.187,
+              "donorNormal": 0.7,
+              "color": "stone",
+              "gridStep": 0.0035,
+              "donorMargin": 0.024,
+              "flatPatchUV": true,
+              "donorMinRGB": 0.45,
+              "donorMaxColorRatio": 1.6
+            },
+            "missingSamples": 136,
+            "boundarySamples": 407,
+            "sampledDepthRange": [
+              0.13977372646331787,
+              0.1825505495071411
+            ],
+            "inwardClosureThickness": 0.006,
+            "outerSurfaceUnchanged": true,
+            "newVertices": 476,
+            "newTriangles": 948
+          },
+          {
+            "name": "Rear middle window lower brick triangle",
+            "specification": {
+              "name": "Rear middle window lower brick triangle",
+              "u": [
+                -1,
+                0,
+                0
+              ],
+              "v": [
+                0,
+                0,
+                1
+              ],
+              "n": [
+                0,
+                1,
+                0
+              ],
+              "roi": [
+                0,
+                0.095,
+                0.086,
+                0.122
+              ],
+              "defectDepth": 0.31,
+              "donorDepth": 0.319,
+              "donorMaxDepth": 0.329,
+              "donorNormal": 0.7,
+              "color": "brick",
+              "gridStep": 0.0035,
+              "donorMargin": 0.025,
+              "flatPatchUV": true,
+              "donorMinRGB": 0.1,
+              "donorMaxColorRatio": 5
+            },
+            "missingSamples": 198,
+            "boundarySamples": 566,
+            "sampledDepthRange": [
+              -2.0,
+              0.3339036703109741
+            ],
+            "inwardClosureThickness": 0.006,
+            "outerSurfaceUnchanged": true,
+            "newVertices": 540,
+            "newTriangles": 1076
+          }
+        ]
+      },
+      "localRepairTool": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\f21173ee639bce54c9c7094ef6121aa6aea7401fc45edfff9d221c65a107ae79-repair_bounded_source_surface.py",
+        "sha256": "f21173ee639bce54c9c7094ef6121aa6aea7401fc45edfff9d221c65a107ae79",
+        "bytes": 13325
+      },
+      "repairAppliedBeforeReduction": true,
+      "originalReceipt": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\expansion--hotel_1-5388dfae02d5-repair-7bcb2443479e-low-2385e33457-field-v1\\geometry-source-original-receipt.json",
+        "sha256": "2bfa9b1978861b010534e50d2219b1faa3121165b419ea8db8da2464e1cc73a1",
+        "bytes": 8389
+      }
+    },
+    "nativePostprocessOverride": {
+      "original": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\expansion--hotel_1-5388dfae02d5-repair-7bcb2443479e-low-2385e33457-field-v1\\original-native-exporter-source.py",
+        "sha256": "b6b79da5dfe13c22047a6257c6b2301c7ea31259dd9c82344db7e5c4cc707917",
+        "bytes": 8126
+      },
+      "scope": "Keep original neural geometry BVH for PBR lookup. Replace only the intermediate surface with this recorded existing source-derived low mesh; bypass further remeshing/simplification/cleanup, then use native unwrap/normals/field sampling.",
+      "sharedCodeModified": false,
+      "noNewGeometryAuthored": true,
+      "noNewGeometryAuthoredAppliesTo": "native_uv_material_replay_only",
+      "counts": {
+        "facesBeforeUnwrap": 29991
+      }
+    },
+    "nativeFieldLookup": {
+      "quantiles50_95_99_100": [
+        0.0009840080747380853,
+        0.0014062325935810804,
+        0.0019597511272877455,
+        0.01896364614367485
+      ],
+      "fractionOverTwoPercent": 0.0,
+      "sampleCount": 629879,
+      "meaning": "Distance to original neural BVH before direct field sampling, not ray hit coverage"
+    }
+  },
+  "bake": {
+    "method": "Direct original neural attribute field sampling inside native to_glb; no Blender bake or nearest raw-image transfer",
+    "notRayCoverage": true
+  },
+  "animation": null,
+  "processingComplete": true,
+  "limitations": [
+    "Same assumed three-view cameras as original native raw",
+    "Diagnostic pending external visual approval; not a formal asset replacement"
+  ],
+  "localSurfaceRepair": {
+    "source": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-expansion-hotel1-5388-two-regions-v2\\repaired-native.glb",
+      "sha256": "7bcb2443479e6076fc70bf7580ec6a702d2bf9caa8ffad10f10ab4d78f8c50e7",
+      "bytes": 37145788
+    },
+    "receipt": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\expansion\\hotel_1\\7bcb2443479e6076\\repair.json",
+      "sha256": "2670708f9a275c501411212ecb648590e3cda4f7e43d3c5adda9f6b534309c06",
+      "bytes": 9229
+    },
+    "method": "Only explicitly measured and visually reviewed local gaps are closed from adjoining original surface and UV samples with0.006 inward closure. Original vertices, faces and image pixels are preserved. No replacement building or generated texture. See configuration and frozen prior review evidence for exact allowed regions.",
+    "newTriangles": 2024,
+    "newVertices": 1016,
+    "originalVerticesMoved": 0,
+    "originalTrianglesDeleted": 0,
+    "regions": [
+      {
+        "name": "Front left pale cornice slot",
+        "specification": {
+          "name": "Front left pale cornice slot",
+          "u": [
+            1,
+            0,
+            0
+          ],
+          "v": [
+            0,
+            0,
+            1
+          ],
+          "n": [
+            0,
+            -1,
+            0
+          ],
+          "roi": [
+            -0.35,
+            -0.178,
+            0.441,
+            0.46
+          ],
+          "defectDepth": 0.17,
+          "donorDepth": 0.18,
+          "donorMaxDepth": 0.187,
+          "donorNormal": 0.7,
+          "color": "stone",
+          "gridStep": 0.0035,
+          "donorMargin": 0.024,
+          "flatPatchUV": true,
+          "donorMinRGB": 0.45,
+          "donorMaxColorRatio": 1.6
+        },
+        "missingSamples": 136,
+        "boundarySamples": 407,
+        "sampledDepthRange": [
+          0.13977372646331787,
+          0.1825505495071411
+        ],
+        "inwardClosureThickness": 0.006,
+        "outerSurfaceUnchanged": true,
+        "newVertices": 476,
+        "newTriangles": 948
+      },
+      {
+        "name": "Rear middle window lower brick triangle",
+        "specification": {
+          "name": "Rear middle window lower brick triangle",
+          "u": [
+            -1,
+            0,
+            0
+          ],
+          "v": [
+            0,
+            0,
+            1
+          ],
+          "n": [
+            0,
+            1,
+            0
+          ],
+          "roi": [
+            0,
+            0.095,
+            0.086,
+            0.122
+          ],
+          "defectDepth": 0.31,
+          "donorDepth": 0.319,
+          "donorMaxDepth": 0.329,
+          "donorNormal": 0.7,
+          "color": "brick",
+          "gridStep": 0.0035,
+          "donorMargin": 0.025,
+          "flatPatchUV": true,
+          "donorMinRGB": 0.1,
+          "donorMaxColorRatio": 5
+        },
+        "missingSamples": 198,
+        "boundarySamples": 566,
+        "sampledDepthRange": [
+          -2.0,
+          0.3339036703109741
+        ],
+        "inwardClosureThickness": 0.006,
+        "outerSurfaceUnchanged": true,
+        "newVertices": 540,
+        "newTriangles": 1076
+      }
+    ]
+  },
+  "renderedCandidate": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\expansion--hotel_1-5388dfae02d5-repair-7bcb2443479e-low-2385e33457-field-v1\\candidates\\renders\\expansion\\hotel_1\\lod-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\expansion--hotel_1-5388dfae02d5-repair-7bcb2443479e-low-2385e33457-field-v1\\candidates\\renders\\expansion\\hotel_1\\lod-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\expansion--hotel_1-5388dfae02d5-repair-7bcb2443479e-low-2385e33457-field-v1\\candidates\\renders\\expansion\\hotel_1\\lod-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\expansion--hotel_1-5388dfae02d5-repair-7bcb2443479e-low-2385e33457-field-v1\\candidates\\renders\\expansion\\hotel_1\\lod-left.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\expansion--hotel_1-5388dfae02d5-repair-7bcb2443479e-low-2385e33457-field-v1\\candidates\\renders\\expansion\\hotel_1\\lod-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.4999999701976776,
+        -0.4238243103027344,
+        0.0
+      ],
+      "max": [
+        0.4999999701976776,
+        0.4238243103027344,
+        0.6010576486587524
+      ]
+    },
+    "triangles": 29991,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          1024,
+          1024
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "sourceReviewReusedFrom": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\expansion--hotel_1-5388dfae02d5-repair-7bcb2443479e-low-2385e33457-field-v1\\surface.candidate.json",
+    "sha256": "d39c6225434aa484cddfbc2ccc2f375882f8fa0e64b0443cf7645d4013f4d2ec",
+    "bytes": 14340
+  },
+  "renderedSource": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\expansion--hotel_1-5388dfae02d5-repair-7bcb2443479e-low-2385e33457-field-v1\\candidates\\renders\\expansion\\hotel_1\\raw-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\expansion--hotel_1-5388dfae02d5-repair-7bcb2443479e-low-2385e33457-field-v1\\candidates\\renders\\expansion\\hotel_1\\raw-iso.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\expansion--hotel_1-5388dfae02d5-repair-7bcb2443479e-low-2385e33457-field-v1\\candidates\\renders\\expansion\\hotel_1\\raw-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\expansion--hotel_1-5388dfae02d5-repair-7bcb2443479e-low-2385e33457-field-v1\\candidates\\renders\\expansion\\hotel_1\\raw-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\expansion--hotel_1-5388dfae02d5-repair-7bcb2443479e-low-2385e33457-field-v1\\candidates\\renders\\expansion\\hotel_1\\raw-left.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.5,
+        -0.42463168501853943,
+        0.0
+      ],
+      "max": [
+        0.5,
+        0.42463168501853943,
+        0.5991480350494385
+      ]
+    },
+    "triangles": 924215,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "bounds": {
+    "min": [
+      -0.4999999701976776,
+      0.0,
+      -0.4238243103027344
+    ],
+    "max": [
+      0.4999999701976776,
+      0.6010576486587524,
+      0.4238243103027344
+    ],
+    "coordinateSystem": "GLTF Y-up; +Z front"
+  },
+  "textureSizes": [
+    {
+      "name": "Image_0",
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "name": "Image_1",
+      "size": [
+        1024,
+        1024
+      ]
+    }
+  ],
+  "completedAt": "2026-10-24T04:18:54.568717+00:00",
+  "rawSourceUnchanged": true,
+  "promotedFrom": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\expansion--hotel_1-5388dfae02d5-repair-7bcb2443479e-low-2385e33457-field-v1\\candidates\\expansion\\hotel_1.json",
+    "sha256": "719a85ad594fd949c531b119f376fcbd8148b316e4f1e1f17be440a07cc5710b",
+    "bytes": 28030
+  },
+  "reviewSheet": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\expansion--hotel_1-5388dfae02d5-repair-7bcb2443479e-low-2385e33457-field-v1\\candidates\\renders\\expansion\\hotel_1\\review-sheet.jpg",
+    "sha256": "d1b7e01fbb6894ec1c7b016e288147b5b6ec1b8254181772b4400559769bfe90",
+    "bytes": 260575,
+    "candidateSha256": "c1bf73830e6fb6a60ef4a3401afef02cebace88a18b348cd48eadf52eb414b31",
+    "sourceImages": [
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\expansion--hotel_1-5388dfae02d5-repair-7bcb2443479e-low-2385e33457-field-v1\\candidates\\renders\\expansion\\hotel_1\\raw-front.png",
+        "sha256": "85c2dade665a9a4c02272f60c46e57378f4cb8df49ad67830cb47d308d66f5d8",
+        "label": "AI raw front"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\expansion--hotel_1-5388dfae02d5-repair-7bcb2443479e-low-2385e33457-field-v1\\candidates\\renders\\expansion\\hotel_1\\raw-iso.png",
+        "sha256": "e6a2deae3ce18a73b9bf49d7ac901683f775a22004d13389ef5b4d3c2df214e8",
+        "label": "AI raw iso"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\expansion--hotel_1-5388dfae02d5-repair-7bcb2443479e-low-2385e33457-field-v1\\candidates\\renders\\expansion\\hotel_1\\lod-front.png",
+        "sha256": "7102a761ee898c649283005425371a954f27c9dfc05860a5f4fb6129db1aef16",
+        "label": "LOD front"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\expansion--hotel_1-5388dfae02d5-repair-7bcb2443479e-low-2385e33457-field-v1\\candidates\\renders\\expansion\\hotel_1\\lod-right.png",
+        "sha256": "f20ff2996f7f02c796cea87c4736b8a1bbc765325aba65592e5e8efc4e71947b",
+        "label": "LOD right"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\expansion--hotel_1-5388dfae02d5-repair-7bcb2443479e-low-2385e33457-field-v1\\candidates\\renders\\expansion\\hotel_1\\lod-back.png",
+        "sha256": "755924e38d228736ac507f458136b6e21dc5c0c44494cd36dd505591e9237477",
+        "label": "LOD back"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\expansion--hotel_1-5388dfae02d5-repair-7bcb2443479e-low-2385e33457-field-v1\\candidates\\renders\\expansion\\hotel_1\\lod-left.png",
+        "sha256": "bbca41683823698bef2e5ddca61dc94d35717866f100c21c063872c129f92000",
+        "label": "LOD left"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\expansion--hotel_1-5388dfae02d5-repair-7bcb2443479e-low-2385e33457-field-v1\\candidates\\renders\\expansion\\hotel_1\\lod-iso.png",
+        "sha256": "fc0c586f40a8f6d79157798d32fcbf342c871f0b0946298e7e352d763fb852c2",
+        "label": "LOD iso"
+      }
+    ],
+    "content": "Unmodified CPU render images composed with labels for visual comparison only"
+  }
+}

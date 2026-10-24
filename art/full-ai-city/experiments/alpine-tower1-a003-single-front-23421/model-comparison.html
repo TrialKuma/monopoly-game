@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>原始模型对照 · 单图与三视图</title>
+<style>
+body{margin:0;background:#19232b;color:#e7edee;font:15px/1.6 system-ui,sans-serif}header,footer,nav{max-width:1100px;margin:auto;padding:16px 20px}h1{font-size:23px;margin:0}p{color:#bacad0;margin:6px 0}nav{display:flex;flex-wrap:wrap;gap:8px;padding-top:0}button{font:inherit;border:1px solid #526773;border-radius:8px;padding:7px 16px;background:#263945;color:inherit;cursor:pointer}button[aria-pressed=true]{background:#ade2d5;color:#18332f}.labels{display:grid;grid-template-columns:1fr 1fr;text-align:center;font-size:18px;font-weight:600}.labels span{font-size:12px;font-weight:400;display:block;color:#b7c7cb}#stage{height:min(65vh,620px);min-height:260px;position:relative}canvas{width:100%;height:100%;display:block}#status{font-size:14px;color:#b7c7cb}footer{font-size:13px}a{color:#ade2d5}@media(max-width:600px){header,footer,nav{padding-left:12px;padding-right:12px}h1{font-size:20px}.labels{font-size:15px}#stage{height:340px}}
+</style>
+<header><h1>同一栋建筑的原始模型</h1><p>同一正面设计、相同分辨率与随机种子。模型尚未做手机端减面或修补。</p><div id="status" aria-live="polite">正在加载两份原始模型…</div></header>
+<nav aria-label="模型检查视角">
+<button data-angle="front" aria-pressed="false">正面</button><button data-angle="right" aria-pressed="false">右侧</button><button data-angle="back" aria-pressed="true">背面</button><button data-angle="left" aria-pressed="false">左侧</button><button data-angle="iso" aria-pressed="false">斜前方</button><button data-angle="rear-iso" aria-pressed="false">斜后方</button><button id="clay" aria-pressed="false">检查几何结构</button>
+</nav>
+<div class="labels"><div>三视图<span>正面、右侧、背面共同生成</span></div><div>单图<span>只输入同一张正面图</span></div></div>
+<div id="stage"><canvas id="view"></canvas></div>
+<footer>左为已退回的三视图样本，右为独立试验。两条流程的权重与内部预处理不同，一栋建筑不能代表所有建筑。<a href="./comparison.html">设计图与渲染对照</a></footer>
+<script type="importmap">{"imports":{"three":"/assets/vendor/three/three.module.min.js"}}</script>
+<script type="module" src="./view-models.js"></script>
+</html>

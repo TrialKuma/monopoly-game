@@ -1,0 +1,276 @@
+{
+  "status": "local_repair_candidate_pending_visual_review",
+  "source": {
+    "path": "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\source\\expansion--chance_wheel-a001-pixal-mv-1024-9247.glb",
+    "sha256": "f05d41993222025adb14f0e8fe59abe48fa2bf8eeaedcf8d409a054e47e1b0c0",
+    "bytes": 39047156
+  },
+  "orientation": {
+    "enabled": true,
+    "candidate_degrees": 1.7649747759927146,
+    "applied_degrees": 1.7649747759927146,
+    "underside_area": 0.09974260995015527,
+    "normal_agreement": 0.8803846857050345,
+    "yaw_degrees": 180,
+    "pitch_degrees": 0,
+    "roll_degrees": 0,
+    "uniform_scale": 1.0617014164738348
+  },
+  "method": "Only measured local hole boundaries are interpolated. The left lintel donor plane is restricted to intact outer brick depth .410-.438 instead of the recessed .387 window backing. The small copper edge ROI extends to height .682 to include its inspected upper crack, with depth-bounded copper donors. Existing neural vertices and source images remain untouched. Only explicitly identified extraneous dark backing faces and the small folded lintel fragment inside the measured wall hole are removed; wheel disk and support are retained. Newly triangulated wall/roof patches close 0.006 inward to survive source-derived voxelization while keeping their measured exterior unchanged and reuse intact neighboring original UV samples, with no replacement building or manufactured wheel.",
+  "repairs": [
+    {
+      "name": "Left wall void above side window",
+      "specification": {
+        "name": "Left wall void above side window",
+        "u": [
+          0,
+          -1,
+          0
+        ],
+        "v": [
+          0,
+          0,
+          1
+        ],
+        "n": [
+          -1,
+          0,
+          0
+        ],
+        "roi": [
+          -0.204,
+          -0.151,
+          0.448,
+          0.515
+        ],
+        "defectDepth": 0.1,
+        "donorDepth": 0.41,
+        "donorMaxDepth": 0.438,
+        "donorNormal": 0.8,
+        "color": "brick",
+        "forceRoi": [
+          -0.204,
+          -0.177,
+          0.466,
+          0.509
+        ]
+      },
+      "missingSamples": 586,
+      "boundarySamples": 35,
+      "sampledDepthRange": [
+        -2.0,
+        0.4459885358810425
+      ],
+      "inwardClosureThickness": 0.006,
+      "outerSurfaceUnchanged": true,
+      "newVertices": 1388,
+      "newTriangles": 2772
+    },
+    {
+      "name": "Upper left tier backing void",
+      "specification": {
+        "name": "Upper left tier backing void",
+        "u": [
+          0,
+          -1,
+          0
+        ],
+        "v": [
+          0,
+          0,
+          1
+        ],
+        "n": [
+          -1,
+          0,
+          0
+        ],
+        "roi": [
+          -0.146,
+          -0.127,
+          0.669,
+          0.695
+        ],
+        "defectDepth": 0.15,
+        "donorDepth": 0.225,
+        "donorNormal": 0.8,
+        "color": "brick"
+      },
+      "missingSamples": 55,
+      "boundarySamples": 170,
+      "sampledDepthRange": [
+        -0.05031609535217285,
+        0.31735968589782715
+      ],
+      "inwardClosureThickness": 0.006,
+      "outerSurfaceUnchanged": true,
+      "newVertices": 182,
+      "newTriangles": 360
+    },
+    {
+      "name": "Small lower copper tier split",
+      "specification": {
+        "name": "Small lower copper tier split",
+        "u": [
+          0,
+          -1,
+          0
+        ],
+        "v": [
+          0,
+          0,
+          1
+        ],
+        "n": [
+          -1,
+          0,
+          0
+        ],
+        "roi": [
+          -0.057,
+          -0.034,
+          0.658,
+          0.682
+        ],
+        "defectDepth": 0.285,
+        "donorDepth": 0.29,
+        "donorMaxDepth": 0.36,
+        "donorNormal": 0.15,
+        "color": "copper"
+      },
+      "missingSamples": 93,
+      "boundarySamples": 591,
+      "sampledDepthRange": [
+        -0.0937201976776123,
+        0.34611237049102783
+      ],
+      "inwardClosureThickness": 0.006,
+      "outerSurfaceUnchanged": true,
+      "newVertices": 286,
+      "newTriangles": 568
+    }
+  ],
+  "originalTriangles": 955686,
+  "originalVerticesMoved": 0,
+  "originalTrianglesDeleted": 2777,
+  "artifactCleanup": {
+    "method": "Delete only source triangles in the observed extraneous thin dark backing beyond the original circular wheel envelope; no authored replacement. Triangle-centroid ROI is x 0.28..0.51, y -0.174..-0.10, z 0.155..0.45 and radius above 0.164 around the measured original disk center x0.265/z0.298. Existing disk, axle and pedestal excluded. A separate 250-face folded lintel fragment is deleted only inside the documented wall repair ROI.",
+    "deletedTriangles": 2777,
+    "boundsMin": [
+      -0.44200387597084045,
+      -0.17064951360225677,
+      0.16099204123020172
+    ],
+    "boundsMax": [
+      0.49976494908332825,
+      0.20397041738033295,
+      0.5088682174682617
+    ],
+    "foldCleanup": {
+      "name": "Small pre-existing folded lintel fragment inside the reviewed left window-top void",
+      "bounds": {
+        "x": [
+          -0.45,
+          -0.34
+        ],
+        "y": [
+          0.177,
+          0.204
+        ],
+        "z": [
+          0.466,
+          0.509
+        ]
+      },
+      "deletedTriangles": 250
+    },
+    "backingDeletedTriangles": 2527
+  },
+  "newTriangles": 3700,
+  "newVertices": 1856,
+  "inverseSimilarityError": 8.501831100238277e-08,
+  "normalizedOutput": {
+    "path": "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\work\\repair-expansion-wheel-v2\\repaired-normalized.glb",
+    "sha256": "89c1bbbe433f2b5f7b01486a647a6241d579891e28f2fec059dff9f5bf6a913e",
+    "bytes": 39867012
+  },
+  "nativeOutput": {
+    "path": "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\work\\repair-expansion-wheel-v2\\repaired-native.glb",
+    "sha256": "5b62a9340c33b44a9c0fde68827bb5af831830e8cc651578bdfbc597705212b9",
+    "bytes": 39880204
+  },
+  "renders": {
+    "views": [
+      "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\work\\repair-expansion-wheel-v2\\repaired-front.png",
+      "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\work\\repair-expansion-wheel-v2\\repaired-right.png",
+      "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\work\\repair-expansion-wheel-v2\\repaired-back.png",
+      "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\work\\repair-expansion-wheel-v2\\repaired-left.png",
+      "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\work\\repair-expansion-wheel-v2\\repaired-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.5,
+        -0.4169521927833557,
+        0.0
+      ],
+      "max": [
+        0.4310799539089203,
+        0.4169521927833557,
+        0.882486879825592
+      ]
+    },
+    "triangles": 956609,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "reviewImages": [
+    {
+      "path": "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\work\\repair-expansion-wheel-v2\\repaired-front.png",
+      "sha256": "80301d60f6abbe4e2019f3292fdd261e18804bb8df8bc83de9e60e0a3a41186f",
+      "bytes": 223023
+    },
+    {
+      "path": "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\work\\repair-expansion-wheel-v2\\repaired-right.png",
+      "sha256": "6f66da11f3ebcdae612f65c83c493e9ced849702811d3417d4529a0b35e48960",
+      "bytes": 204207
+    },
+    {
+      "path": "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\work\\repair-expansion-wheel-v2\\repaired-back.png",
+      "sha256": "7894fcd813650047adf818255e0f975870ee4be3db1edbe34272ca21c7f70c19",
+      "bytes": 219526
+    },
+    {
+      "path": "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\work\\repair-expansion-wheel-v2\\repaired-left.png",
+      "sha256": "68e07e50179646ff8630367612ea22c8c5ebbb8cda5f481eaf50dc8e0065c27f",
+      "bytes": 199230
+    },
+    {
+      "path": "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\work\\repair-expansion-wheel-v2\\repaired-iso.png",
+      "sha256": "6a49777f68782b187fd97d8666bbb449415e1d84e4079b7c3c489c6615a33a37",
+      "bytes": 254475
+    }
+  ],
+  "processingTool": {
+    "path": "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\4972ef0089332c473933404b01c8f0dfb26feacf2ee8475a35154f3644650066-repair_expansion_wheel_surface_v2.py",
+    "sha256": "4972ef0089332c473933404b01c8f0dfb26feacf2ee8475a35154f3644650066",
+    "bytes": 12867
+  },
+  "completedAt": "2026-10-23T10:31:17.120162+00:00"
+}

@@ -1,4 +1,4 @@
-import { createRoofSnow } from './scene-snow.js?v=20261023-3';
+import { createRoofSnow } from './scene-snow.js?v=20261024-1';
 
 // The weather is cosmetic: its own deterministic clock and generator never
 // consume dice/card randomness, advance a turn, or schedule another frame.

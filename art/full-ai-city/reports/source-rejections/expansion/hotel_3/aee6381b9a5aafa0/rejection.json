@@ -1,0 +1,62 @@
+{
+  "status": "rejected_native_export_source",
+  "region": "expansion",
+  "asset": "hotel_3",
+  "reviewer": "asset_production",
+  "recordedAtUtc": "2026-10-24T04:35:50.035666+00:00",
+  "source": {
+    "path": "art/full-ai-city/source/expansion--hotel_3-a013-pixal-mv-1024-29490.glb",
+    "sha256": "aee6381b9a5aafa0bb96d5bf57c7bc2e91dec1502b02c5376df64bb999685426",
+    "bytes": 39015228
+  },
+  "sourceLevel": "Native 1M export; no untouched decoder attribution is made.",
+  "inferenceReport": {
+    "path": "art/full-ai-city/reports/source-rejections/expansion/hotel_3/aee6381b9a5aafa0/expansion--hotel_3-a013-pixal-mv-1024-29490.json",
+    "sha256": "95b6484281eb9b95138d2d60b0fb31723235d69ab869363c10e9598667f57cd9",
+    "bytes": 10167
+  },
+  "inputReference": {
+    "path": "art/full-ai-city/reports/source-rejections/expansion/hotel_3/aee6381b9a5aafa0/input-reference.json",
+    "sha256": "81cd91451e4196df2847c6c01895c4b2b563d4610fecf8e83d13afd6360637f8",
+    "bytes": 4438
+  },
+  "diagnostic": null,
+  "diagnosticTool": null,
+  "sourceComparisonReport": {
+    "path": "art/full-ai-city/reports/source-rejections/expansion/hotel_3/aee6381b9a5aafa0/source-comparison-processing.json",
+    "sha256": "63d58323442269814ef63a774500842852e0931deff4410d3ffbabc4f976c9b1",
+    "bytes": 20961
+  },
+  "sourceViewEvidenceMode": "Explicitly selected existing renderedSource views; no additional or neutral render implied",
+  "evidence": [
+    {
+      "path": "art/full-ai-city/reports/source-rejections/expansion/hotel_3/aee6381b9a5aafa0/raw-front.png",
+      "sha256": "8bcfac8a759307bfe639b2795f095911b30e91b26b4f931ca639c87e5b152458",
+      "bytes": 229147
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/expansion/hotel_3/aee6381b9a5aafa0/raw-iso.png",
+      "sha256": "bf1b9fc0d9aac2600c766146b310e15fcb5aa8df3c80df7912424d811dd755ef",
+      "bytes": 309259
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/expansion/hotel_3/aee6381b9a5aafa0/raw-back.png",
+      "sha256": "bb3f08215c7d8c8839122cb636fb8e0f748df0ed98e675002a411458367beea1",
+      "bytes": 230976
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/expansion/hotel_3/aee6381b9a5aafa0/raw-right.png",
+      "sha256": "ed57f39fb4c1fece255c25ef01717aa752179cd11aaf7dfb3628b1bfa0ad4659",
+      "bytes": 225722
+    }
+  ],
+  "finding": "First source from the single revised reference restores coherent opaque amber glazing and front spandrels, main walls, canopy and roof. Actually inspected revised reference, native front/iso/back/right, final five and256px. The one material remaining failure is a long missing brick strip immediately left of the rear closed service door, extending behind the utility fixture; native back confirms the gap. Restrict repair assessment to this one local strip. Small individual pane notches, short cornice joints, isolated tiny lintel gaps and softened roof ornament are consciously accepted at phone scale and excluded from repair. No new source seed and no watertight target.",
+  "decision": "Only one bounded rear-door-adjacent brick-strip closure assessment. Small mobile-acceptable pane/cornice seams remain.",
+  "sourceUnchanged": true,
+  "notFinalCandidateReview": true,
+  "freezeTool": {
+    "path": "art/full-ai-city/reports/tool-snapshots/616860a00b28e670e1219d64c6cb5dad17f0946420568f786e80b6d789fb4a73-freeze_public_source_rejection.py",
+    "sha256": "616860a00b28e670e1219d64c6cb5dad17f0946420568f786e80b6d789fb4a73",
+    "bytes": 4304
+  }
+}

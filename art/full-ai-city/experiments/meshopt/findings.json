@@ -1,0 +1,37 @@
+{
+  "decision": "Do not integrate Meshopt into formal runtime/packs in this round. Root accepted this decision after the experiment.",
+  "reason": "Raw transfer savings are meaningful, but incremental savings over existing gzip/Brotli are small and one Brotli case becomes larger. Avoid extra decoder and approval-audit complexity.",
+  "scope": "Four already-approved assets only. All outputs and copied dependencies remain under art/full-ai-city/experiments/meshopt. No approved source, formal runtime, packer, or approval registry was changed.",
+  "fidelity": {
+    "bufferViewBytes": "Every compressed serialized view was decoded and SHA-256 compared to original bytes; every image bufferView copied byte-identically.",
+    "structure": "All JSON fields other than buffers, bufferViews and compression extension declarations were deep-compared, including accessors, nodes, meshes, materials and animations.",
+    "browser": "The project's existing GLTFLoader loaded original and compressed variants. Geometry attributes, exact index arrays, transforms, selected material/sampler properties and all decoded texture RGBA pixels matched.",
+    "encoding": "ATTRIBUTES/INDICES with filter NONE. No quantization, vertex reorder, index reorder, triangle rotation, simplification or texture recompression.",
+    "limits": "The four approved candidate GLBs contained no embedded animation clips. Do not claim animation playback validation or runtime/scenic performance gains. No whole-region package or actual mobile device was tested."
+  },
+  "results": {
+    "rawFileSavingsPercent": "24.60–32.56%",
+    "incrementalGzipSavingsPercent": "2.55–6.10%",
+    "incrementalBrotli5SavingsPercent": "-1.21–2.11%; Alpine villa2 increased",
+    "desktopDecodeMedianMs": "0.9–1.4 per asset",
+    "cpu6xDecodeMedianMs": "5.8–8.9 per asset",
+    "cpu6xDecoderImportReadyMs": 72.1
+  },
+  "benchmarkLimitations": "Headless desktop Chrome at 390x844 with CPU throttle 1/4/6, GPU disabled and no renderer. CPU slowdown is a proxy, not ARM/iOS/mobile hardware. Decode times include destination allocation; 60 iterations. Three parse trials include texture decode, are noisy and do not establish a loading speed improvement. Local HTTP excludes real download latency. Decoded GPU memory is unchanged.",
+  "dependency": {
+    "officialRepository": "https://github.com/zeux/meshoptimizer",
+    "tag": "v0.25",
+    "commit": "6daea4695c48338363b08022d2fb15deaef6ac09",
+    "license": "MIT",
+    "proof": "vendor/tag-v0.25.json and SHA-256 entries in comparison.json",
+    "extensionSpecification": "https://github.com/KhronosGroup/glTF/blob/main/extensions/2.0/Vendor/EXT_meshopt_compression/README.md"
+  },
+  "futureMinimalOption": "Only if later delivery measurements justify it: vendor the pinned decoder with MIT notice; set it once on the existing cache's GLTFLoader; compress a validated final pack after approval without altering candidate files; record encoded pack hash plus original pack hash and round-trip evidence. Recheck audit readers and actual target devices. This option was not implemented.",
+  "evidence": [
+    "comparison.json",
+    "browser-benchmark.json",
+    "compare.cjs",
+    "benchmark.js",
+    "browser-benchmark.cjs"
+  ]
+}

@@ -1,0 +1,87 @@
+{
+  "status": "source_1m_visual_diagnosis_complete_decoder_attribution_pending",
+  "region": "alpine",
+  "asset": "tower_1",
+  "source": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\alpine--tower_1-a002-pixal-mv-1024-23421.glb",
+    "sha256": "767eee53eed9b6a20024f67a5f16d4f7112d0d7f528efe73a3e5404df466faca",
+    "bytes": 42830348
+  },
+  "tool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\128f0187158a035f4d7e1b8bb5fbec7c559413d80cd6336639df3afc760eb994-render_raw_core_review.py",
+    "sha256": "128f0187158a035f4d7e1b8bb5fbec7c559413d80cd6336639df3afc760eb994",
+    "bytes": 3616
+  },
+  "sourceBytesChanged": false,
+  "actualSideViews": {
+    "views": [
+      {
+        "path": "art/full-ai-city/reviews-rejected/alpine/tower_1/6e0a30b67f7b8d0f/raw-1m/raw-right.png",
+        "sha256": "2a8924b69b644364d7ed65408dfa25eb40b197f07ccf404f5948894464acd3e6",
+        "bytes": 191193
+      },
+      {
+        "path": "art/full-ai-city/reviews-rejected/alpine/tower_1/6e0a30b67f7b8d0f/raw-1m/raw-back.png",
+        "sha256": "4c4b6b66ca26ff971aa5a21bcacce5dbc4d63899a963feaa3c3619dd4c0d9cb5",
+        "bytes": 215353
+      },
+      {
+        "path": "art/full-ai-city/reviews-rejected/alpine/tower_1/6e0a30b67f7b8d0f/raw-1m/raw-left.png",
+        "sha256": "f91a2c1343163e38cf46a95a2c0061ca62d0c08c989abf8f19588ed9995b653e",
+        "bytes": 194895
+      }
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.4999999701976776,
+        -0.394744873046875,
+        0.0
+      ],
+      "max": [
+        0.4999999701976776,
+        0.394744873046875,
+        0.6974936723709106
+      ]
+    },
+    "triangles": 989158,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "additionalViews": [
+    {
+      "path": "art/full-ai-city/reviews-rejected/alpine/tower_1/6e0a30b67f7b8d0f/raw-1m/raw-close-back-iso.png",
+      "sha256": "008f8c1c69b69a715e6c8bd9eb2ea288445655eb350155603d8fe1ec327c8413",
+      "bytes": 967925
+    },
+    {
+      "path": "art/full-ai-city/reviews-rejected/alpine/tower_1/6e0a30b67f7b8d0f/raw-1m/raw-grey-back-iso.png",
+      "sha256": "4414165b9f20838750db81d034261d65bade2dcaebc6e570c2f49269e566c1b8",
+      "bytes": 733765
+    }
+  ],
+  "neutralOverrideScope": "Diagnostic view layer only, no geometry or source material edits/export",
+  "createdAt": "2026-10-23T11:03:39.975584+00:00",
+  "visualDiagnosis": {
+    "reviewer": "progression_design",
+    "finding": "Actual original-export right/back/left, 1024 back-iso and neutral back-iso were inspected. The original rear roof contains several open strips between displaced tile groups, and the rear plaster wall has holes above the center window and beside the door with a long split. These are present in the native 1M export under neutral material, not merely dark window color or a final-candidate bake effect. The already documented front stepped-gable gap and duplicate chimney remain independent defects. No untouched-decoder attribution is made. Revision2 reference has already been registered; this supplemental evidence does not overwrite the previous rejection.",
+    "decoderConclusion": "Undetermined; pre-export decoder ROI review is separate. A defect in the native 1M export does not by itself establish a decoder defect.",
+    "sourceInspectionSha256": "bc6f1ff2bed9b8c9f6e58709bdae14235e843cc0aa566dcd8fa233b758384cb4"
+  }
+}

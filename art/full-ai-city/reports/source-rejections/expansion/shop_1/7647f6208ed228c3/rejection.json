@@ -1,0 +1,57 @@
+{
+  "status": "rejected_native_export_source",
+  "region": "expansion",
+  "asset": "shop_1",
+  "reviewer": "asset_production",
+  "recordedAtUtc": "2026-10-24T04:21:17.258892+00:00",
+  "source": {
+    "path": "art/full-ai-city/source/expansion--shop_1-a012-pixal-mv-1024-29491.glb",
+    "sha256": "7647f6208ed228c36b0a7c2400da762ad59eb2101e6b8b0718cedd1a44eacedc",
+    "bytes": 38579948
+  },
+  "sourceLevel": "Native 1M export; no untouched decoder attribution is made.",
+  "inferenceReport": {
+    "path": "art/full-ai-city/reports/source-rejections/expansion/shop_1/7647f6208ed228c3/expansion--shop_1-a012-pixal-mv-1024-29491.json",
+    "sha256": "079b95b2125761b2965ae2bb688bc449ef9aba0ac0428cd984b19413770aef7f",
+    "bytes": 10154
+  },
+  "inputReference": {
+    "path": "art/full-ai-city/reports/source-rejections/expansion/shop_1/7647f6208ed228c3/input-reference.json",
+    "sha256": "ad3df3e3142855fc45d43023167ffe6244815a994c4abebda1e5e69053acae6d",
+    "bytes": 4433
+  },
+  "diagnostic": null,
+  "diagnosticTool": null,
+  "sourceComparisonReport": {
+    "path": "art/full-ai-city/reports/source-rejections/expansion/shop_1/7647f6208ed228c3/source-comparison-processing.json",
+    "sha256": "cdfd97b4f158f23df2c24163e99c7ba57a447bf92ffe31dab4327c14e893b9f3",
+    "bytes": 20847
+  },
+  "sourceViewEvidenceMode": "Explicitly selected existing renderedSource views; no additional or neutral render implied",
+  "evidence": [
+    {
+      "path": "art/full-ai-city/reports/source-rejections/expansion/shop_1/7647f6208ed228c3/raw-front.png",
+      "sha256": "dfdd7da13e5f0d6072879cf97049c38dbded0997f03322d2b5480c73446f02e0",
+      "bytes": 208391
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/expansion/shop_1/7647f6208ed228c3/raw-iso.png",
+      "sha256": "d9df17c4b152cf37ec86f5ea03da73f0ff89a7423f235b22d8093ae95c05f622",
+      "bytes": 287713
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/expansion/shop_1/7647f6208ed228c3/raw-back.png",
+      "sha256": "c839220ced394c82e9c4ef7c26f08f9bd477b2a799e24d40b7db7e2785532094",
+      "bytes": 213307
+    }
+  ],
+  "finding": "Actually inspected unchanged original triptych, second-source native front/iso/back, exact final five and256px. The first folded side strips are gone but the rear service-door corner now has a large triangular missing wall reaching from cornice to door, native back confirms it. Side wall/corner joins are also separated and storefront base/awning has obvious missing sections visible at phone scale. These broad distributed source failures are unsuitable for a small bounded patch. Preserve both old-reference outcomes and make one targeted consistent reference revision with continuous masonry and simple closed opaque glazed storefront panels, keeping the striped awning and Art Deco identity. No third old-reference seed.",
+  "decision": "One targeted reference revision; no third seed on this old reference.",
+  "sourceUnchanged": true,
+  "notFinalCandidateReview": true,
+  "freezeTool": {
+    "path": "art/full-ai-city/reports/tool-snapshots/616860a00b28e670e1219d64c6cb5dad17f0946420568f786e80b6d789fb4a73-freeze_public_source_rejection.py",
+    "sha256": "616860a00b28e670e1219d64c6cb5dad17f0946420568f786e80b6d789fb4a73",
+    "bytes": 4304
+  }
+}

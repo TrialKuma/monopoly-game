@@ -1,0 +1,52 @@
+{
+  "status": "rejected_native_export_source",
+  "region": "expansion",
+  "asset": "villa_3",
+  "reviewer": "asset_production",
+  "recordedAtUtc": "2026-10-24T06:00:25.051755+00:00",
+  "source": {
+    "path": "art/full-ai-city/source/expansion--villa_3-a012-pixal-mv-1024-29497.glb",
+    "sha256": "0db1bd9f789660706b592b29c27d273084d303e3535749031b313ec0d8168ad5",
+    "bytes": 40688168
+  },
+  "sourceLevel": "Native 1M export; no untouched decoder attribution is made.",
+  "inferenceReport": {
+    "path": "art/full-ai-city/reports/source-rejections/expansion/villa_3/0db1bd9f78966070/expansion--villa_3-a012-pixal-mv-1024-29497.json",
+    "sha256": "22ad9dcc7b5c1b825d08defdfb085b534c07eb97f5de15b1c05db6b404ffb38e",
+    "bytes": 10165
+  },
+  "inputReference": {
+    "path": "art/full-ai-city/reports/source-rejections/expansion/villa_3/0db1bd9f78966070/input-reference.json",
+    "sha256": "b354132c19754e2fc1ae7bfbf537f37e4fa3ee060cc85cee80c629dbee19dfdf",
+    "bytes": 4444
+  },
+  "diagnostic": null,
+  "diagnosticTool": null,
+  "sourceComparisonReport": {
+    "path": "art/full-ai-city/reports/source-rejections/expansion/villa_3/0db1bd9f78966070/source-comparison-processing.json",
+    "sha256": "6ef0de276bca0f7700acb3e9ea40f48c853e95f791f18eb9430964a30a0ba968",
+    "bytes": 20976
+  },
+  "sourceViewEvidenceMode": "Explicitly selected existing renderedSource views; no additional or neutral render implied",
+  "evidence": [
+    {
+      "path": "art/full-ai-city/reports/source-rejections/expansion/villa_3/0db1bd9f78966070/raw-front.png",
+      "sha256": "3d3f1a3fd82703ebdbdf7b83c152aae158f81b3028df73d402618b093e574929",
+      "bytes": 232451
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/expansion/villa_3/0db1bd9f78966070/raw-iso.png",
+      "sha256": "08713b27dbe149999e3d2ad3a81b986cf8f117387a59faf417d3d5d0b494ce3f",
+      "bytes": 288166
+    }
+  ],
+  "finding": "Actually inspected the revised three-view reference previously accepted, existing native front and iso in the exact comparison sheet, all five final material views and the 256px-per-view preview. Revised closed amber glazing and main roof are coherent, but broad dark vertical separations run beside both outer front window stacks; the right separation spans all three floors and the lower strip shows open background. These are present in the native front export and remain conspicuous in final phone views. The small rear sill chips alone would be acceptable. Reject this first source of the revised reference for the persistent long front wall gaps; register only the first independent same-new-reference retry. No decoder-stage claim and no additional reference generation.",
+  "decision": "One first independent seed for this revised reference; no further reference revision or third source of this same reference.",
+  "sourceUnchanged": true,
+  "notFinalCandidateReview": true,
+  "freezeTool": {
+    "path": "art/full-ai-city/reports/tool-snapshots/616860a00b28e670e1219d64c6cb5dad17f0946420568f786e80b6d789fb4a73-freeze_public_source_rejection.py",
+    "sha256": "616860a00b28e670e1219d64c6cb5dad17f0946420568f786e80b6d789fb4a73",
+    "bytes": 4304
+  }
+}

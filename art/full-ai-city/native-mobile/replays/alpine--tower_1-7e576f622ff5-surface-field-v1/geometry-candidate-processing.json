@@ -1,0 +1,307 @@
+{
+  "status": "exported_pending_visual_review",
+  "createdAt": "2026-10-23T19:47:20.326366+00:00",
+  "region": "alpine",
+  "asset": "tower_1",
+  "source": {
+    "rawGLB": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\alpine--tower_1-a004-pixal-mv-1024-33421.glb",
+      "sha256": "7e576f622ff5b75323dcd0271356fb74f66ded7599a1bce049c63d07e1624fb0",
+      "bytes": 43568304
+    }
+  },
+  "inferenceReport": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\alpine--tower_1-a004\\alpine--tower_1-a004-pixal-mv-1024-33421.json",
+    "sha256": "184c151a4baa6349490f1400aaa1ff7dce6828a13f1d39b7c0b40ef2f03f62aa",
+    "bytes": 9859
+  },
+  "reference": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\inputs\\alpine\\tower_1\\b80a19ec1ce6c82b\\reference.json",
+    "sha256": "7718da8c9412d6b0b3e5ecbc23745f6874e89953b6e1bd698b577ff336b3c13c",
+    "bytes": 4416
+  },
+  "processingTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\4686f6f288c17202449c212d33193c98a2fdfe0f47fbbe1d47284f432c7ed327-process_lod.py",
+    "sha256": "4686f6f288c17202449c212d33193c98a2fdfe0f47fbbe1d47284f432c7ed327",
+    "bytes": 28561
+  },
+  "assumedCameras": true,
+  "cameraCalibration": "assumed_standard_orbit_not_measured",
+  "nativePipeline": "Pixal3DMVImageTo3DPipeline.run_mv",
+  "nativeResolution": 1024,
+  "seed": 33421,
+  "geometryOrigin": "Only the actual neural source reduced and rebaked; no authored substitute geometry or manually constructed surfaces",
+  "orientation": {
+    "up": "Y",
+    "front": "+Z",
+    "groundY": 0,
+    "maxEdge": 1
+  },
+  "requestedTriangles": 30000,
+  "limitations": [
+    "Assumed camera reference reconstruction, not exact measured architecture",
+    "Final candidate requires actual rendered visual approval"
+  ],
+  "animation": null,
+  "processingComplete": true,
+  "lod": "near",
+  "processingRevision": 0,
+  "derivation": {
+    "rawTriangles": 987578,
+    "weldedTriangles": 978778,
+    "remeshedTriangles": 2010552,
+    "voxelSize": 0.003,
+    "finalTriangles": 29972,
+    "atlasArea": 0.45440540836594495,
+    "singleReductionPass": true,
+    "inheritedUVRemovedBeforeReduction": true,
+    "sourceMaterialsUntouched": true,
+    "uvUnwrap": {
+      "angleDegrees": 89,
+      "islandMargin": 2e-05,
+      "marginMethod": "SCALED",
+      "nominalMarginPixels": null
+    }
+  },
+  "bake": {
+    "hitCoverageAreaWeighted": 0.9994117933459459,
+    "cageExtrusion": 0.02,
+    "maxRayDistance": 0.06,
+    "maps": [
+      {
+        "role": "base",
+        "size": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "role": "orm",
+        "size": [
+          512,
+          512
+        ]
+      },
+      {
+        "role": "normal",
+        "size": [
+          1024,
+          1024
+        ]
+      }
+    ],
+    "method": "Selected-to-active CPU bake from original neural source onto a source-derived voxel surface reduced without inherited UV constraints; no authored substitute building"
+  },
+  "quantization": {
+    "source": "H:\\代码项目\\monopoly\\art\\full-ai-city\\candidates\\alpine\\tower_1.glb",
+    "output": "H:\\代码项目\\monopoly\\art\\full-ai-city\\candidates\\alpine\\tower_1.glb",
+    "sourceBytes": 2013844,
+    "outputBytes": 1530432,
+    "sourceSha256": "ebd0d0834374632ca630416e609c202e3009d5d5d3a9072e9df32ea72a9d19b4",
+    "outputSha256": "6408fa4d5eb725d325c268d27f2d6e89e76c0f9c93325e5076dd67eff0fbd6dd",
+    "positionFaceAndTextureBytesUnchanged": true,
+    "attributes": [
+      {
+        "accessor": 1,
+        "semantic": "NORMAL",
+        "count": 40297,
+        "maximumAngularErrorDegrees": 0.3719337127146391
+      },
+      {
+        "accessor": 2,
+        "semantic": "TEXCOORD_0",
+        "count": 40297,
+        "maximumUVError": 7.629443644741052e-06,
+        "maximumTexelErrorAt1024": 0.007812550292214837
+      }
+    ]
+  },
+  "processedCandidate": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\candidates\\alpine\\tower_1.glb",
+    "sha256": "6408fa4d5eb725d325c268d27f2d6e89e76c0f9c93325e5076dd67eff0fbd6dd",
+    "bytes": 1530432
+  },
+  "glbValidation": {
+    "version": 2,
+    "triangles": 29972,
+    "meshes": 1,
+    "materials": 1,
+    "images": 3,
+    "all_primitives_have_uv": true,
+    "animations": [],
+    "all_images_embedded": true,
+    "external_buffers": []
+  },
+  "triangles": 29972,
+  "renderedCandidate": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\alpine\\tower_1\\lod-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\alpine\\tower_1\\lod-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\alpine\\tower_1\\lod-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\alpine\\tower_1\\lod-left.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\alpine\\tower_1\\lod-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.5001634955406189,
+        -0.41400107741355896,
+        0.00041465042158961296
+      ],
+      "max": [
+        0.49897733330726624,
+        0.41322341561317444,
+        0.6368758678436279
+      ]
+    },
+    "triangles": 29972,
+    "textureSizes": [
+      {
+        "name": "alpine__tower_1__base",
+        "size": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "name": "alpine__tower_1__normal",
+        "size": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "name": "alpine__tower_1__orm",
+        "size": [
+          512,
+          512
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "renderedSource": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\alpine\\tower_1\\raw-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\alpine\\tower_1\\raw-iso.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\alpine\\tower_1\\raw-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\alpine\\tower_1\\raw-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\alpine\\tower_1\\raw-left.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.5,
+        -0.4139481782913208,
+        0.0
+      ],
+      "max": [
+        0.5,
+        0.4139481782913208,
+        0.6362906098365784
+      ]
+    },
+    "triangles": 987578,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "bounds": {
+    "min": [
+      -0.5001634955406189,
+      0.00041465042158961296,
+      -0.41322341561317444
+    ],
+    "max": [
+      0.49897733330726624,
+      0.6368758678436279,
+      0.41400107741355896
+    ],
+    "coordinateSystem": "GLTF Y-up; +Z front"
+  },
+  "textureSizes": [
+    {
+      "name": "alpine__tower_1__base",
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "name": "alpine__tower_1__normal",
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "name": "alpine__tower_1__orm",
+      "size": [
+        512,
+        512
+      ]
+    }
+  ],
+  "rawSourceUnchanged": true,
+  "completedAt": "2026-10-23T19:48:55.752732+00:00",
+  "reviewSheet": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\alpine\\tower_1\\review-sheet.jpg",
+    "sha256": "2a93aa303af2adf6443ce219aebc23646482e9fab5f7f6b28833d3266f3cb789",
+    "bytes": 292800,
+    "candidateSha256": "6408fa4d5eb725d325c268d27f2d6e89e76c0f9c93325e5076dd67eff0fbd6dd",
+    "sourceImages": [
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\alpine\\tower_1\\raw-front.png",
+        "sha256": "6052563675057b574efd29764dff91b30aa193d378df55c57dd43dc8b62bfefa",
+        "label": "AI raw front"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\alpine\\tower_1\\raw-iso.png",
+        "sha256": "12e75d0b0c8c199576e127bffa4ce0a26cb56bcd1628763e2a3590fefb2a48f0",
+        "label": "AI raw iso"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\alpine\\tower_1\\lod-front.png",
+        "sha256": "3670d48961cdde9a865e319f91c2e1bc4c96c57794c270d790a6d4b13e76b982",
+        "label": "LOD front"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\alpine\\tower_1\\lod-right.png",
+        "sha256": "7977fae289e41f23dd3ea9fa53368e74a9718a79642e4b4ff2ad8f9d92e2d875",
+        "label": "LOD right"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\alpine\\tower_1\\lod-back.png",
+        "sha256": "2131231a7dfec668f7681818434b3a0d623cd28f0d89dc73f25dc5fadde2a8fb",
+        "label": "LOD back"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\alpine\\tower_1\\lod-left.png",
+        "sha256": "6a7b5faf792875b5e8730a402458bf6be792f5f6114a191599cf80bd2e0c860e",
+        "label": "LOD left"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\alpine\\tower_1\\lod-iso.png",
+        "sha256": "bb640838332c9938b79cfb4adb3d4f747fa830864a4cfedd673d0e4bd403a3ee",
+        "label": "LOD iso"
+      }
+    ],
+    "content": "Unmodified CPU render images composed with labels for visual comparison only"
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "status": "rejected_native_export_source",
+  "region": "alpine",
+  "asset": "tower_1",
+  "reviewer": "progression_design",
+  "source": {
+    "path": "art/full-ai-city/source/alpine--tower_1-a001-pixal-mv-1024-9247.glb",
+    "sha256": "e79309a8257658f2f48c9f71b58a0dfae51ee173ecc317f15293a0a4088d201d",
+    "bytes": 42656756
+  },
+  "sourceLevel": "Native 1M export; no untouched decoder attribution is made.",
+  "inferenceReport": {
+    "path": "art/full-ai-city/reports/source-rejections/alpine/tower_1/e79309a8257658f2/alpine--tower_1-a001-pixal-mv-1024-9247.json",
+    "sha256": "304a1c52a3af1aa8a54848e3434b4b5d2a344808deb7b63110f50b1a584f3848",
+    "bytes": 10137
+  },
+  "inputReference": {
+    "path": "art/full-ai-city/reports/source-rejections/alpine/tower_1/e79309a8257658f2/input-reference.json",
+    "sha256": "7ab44cd6b17685e0002c2d177cd8623698c7d9bb1b9883187b8b87b375e92dab",
+    "bytes": 4421
+  },
+  "diagnostic": {
+    "path": "art/full-ai-city/reports/source-rejections/alpine/tower_1/e79309a8257658f2/diagnostic.json",
+    "sha256": "868b4a5697d607128d82991271a4b9bb9e123f204818d895f2992d89133f6dad",
+    "bytes": 2018
+  },
+  "evidence": [
+    {
+      "path": "art/full-ai-city/reports/source-rejections/alpine/tower_1/e79309a8257658f2/raw-front.png",
+      "sha256": "7e6cd3232d0f890fc0e694d53ab7b79d3720cf65053887bcf7b6c16585ac3bac",
+      "bytes": 202714
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/alpine/tower_1/e79309a8257658f2/raw-iso.png",
+      "sha256": "e808b2451b2afcea91c3777ab3c22479946e7039693fcfe2916c3cb68737d169",
+      "bytes": 242877
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/alpine/tower_1/e79309a8257658f2/raw-grey-front-iso.png",
+      "sha256": "66f3e837a621b4f6a7a902685e6a9d84a0573bed9c1e4905ac3525c78eb3ef26",
+      "bytes": 662546
+    }
+  ],
+  "finding": "Actual native 1M front/iso and neutral grey front-isometric diagnostic show open jagged gaps beneath and beside front flower boxes, along door edges and in one step. Final five-face and 256/1024 review confirms repeated wall tears visible at phone-frame scale. No untouched decoder attribution is made; this source export is rejected for front-surface integrity, not because its windows are dark.",
+  "decision": "One independent same-reference seed. If the second attempt repeats a major defect, revise the reference geometry consistency before further inference.",
+  "sourceUnchanged": true,
+  "notFinalCandidateReview": true
+}

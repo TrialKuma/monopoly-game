@@ -1,0 +1,208 @@
+{
+  "status": "local_repair_candidate_pending_visual_review",
+  "source": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\alpine--builders_guild-a001-pixal-mv-1024-9247.glb",
+    "sha256": "d3aefa70e16ee1ca3700be2a52b83f426ddb66d9a38fbe54cc588aa8baa2f93f",
+    "bytes": 42679404
+  },
+  "orientation": {
+    "enabled": true,
+    "candidate_degrees": 1.0063782149996616,
+    "applied_degrees": 1.0063782149996616,
+    "underside_area": 0.2282081229794343,
+    "normal_agreement": 0.9405887033525533,
+    "yaw_degrees": 180,
+    "pitch_degrees": 0,
+    "roll_degrees": 0,
+    "uniform_scale": 1.1201143427269415
+  },
+  "method": "Only the same two measured local hole boundaries are interpolated from the immutable neural source. Existing neural vertices, triangles and source images remain untouched. Added wall/roof patch fronts reuse original neighboring UV samples. Each patch additionally closes0.006 inward with back and side faces so the earlier zero-thickness repair is not removed during reduction. No replacement building or manufactured cargo.",
+  "repairs": [
+    {
+      "name": "Front plaster under beam",
+      "specification": {
+        "name": "Front plaster under beam",
+        "u": [
+          1,
+          0,
+          0
+        ],
+        "v": [
+          0,
+          0,
+          1
+        ],
+        "n": [
+          0,
+          -1,
+          0
+        ],
+        "roi": [
+          0.105,
+          0.25,
+          0.315,
+          0.365
+        ],
+        "defectDepth": 0.22,
+        "donorDepth": 0.23,
+        "color": "plaster"
+      },
+      "missingSamples": 1024,
+      "boundarySamples": 1146,
+      "sampledDepthRange": [
+        -0.15036344528198242,
+        0.25955867767333984
+      ],
+      "inwardClosureThickness": 0.006,
+      "frontPatchTriangles": 2244,
+      "newVertices": 2446,
+      "newTriangles": 4888
+    },
+    {
+      "name": "Small right roof opening beside ridge",
+      "specification": {
+        "name": "Small right roof opening beside ridge",
+        "u": [
+          0,
+          1,
+          0
+        ],
+        "v": [
+          0,
+          0,
+          1
+        ],
+        "n": [
+          1,
+          0,
+          0
+        ],
+        "roi": [
+          -0.174,
+          -0.132,
+          0.685,
+          0.714
+        ],
+        "defectDepth": 0.02,
+        "donorDepth": 0.025,
+        "donorNormal": 0.3,
+        "color": "tile"
+      },
+      "missingSamples": 83,
+      "boundarySamples": 1412,
+      "sampledDepthRange": [
+        -0.01641249656677246,
+        0.11432123184204102
+      ],
+      "inwardClosureThickness": 0.006,
+      "frontPatchTriangles": 210,
+      "newVertices": 258,
+      "newTriangles": 512
+    }
+  ],
+  "originalTriangles": 980416,
+  "originalVerticesMoved": 0,
+  "originalTrianglesDeleted": 0,
+  "newTriangles": 5400,
+  "newVertices": 2704,
+  "inverseSimilarityError": 8.445599392059577e-08,
+  "normalizedOutput": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-builders-closed\\repaired-normalized.glb",
+    "sha256": "096c7426028ef178258d0ea384edcb792c7b1745013b6fb35950f62424a798ca",
+    "bytes": 43368816
+  },
+  "nativeOutput": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-builders-closed\\repaired-native.glb",
+    "sha256": "7f8a525428b790a0cffc7e834dbb97fa1bd40db87db3a2c60b6302c28b012d56",
+    "bytes": 43366908
+  },
+  "renders": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-builders-closed\\repaired-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-builders-closed\\repaired-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-builders-closed\\repaired-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-builders-closed\\repaired-left.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-builders-closed\\repaired-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.5,
+        -0.40160244703292847,
+        0.0
+      ],
+      "max": [
+        0.5,
+        0.40160244703292847,
+        0.7653419375419617
+      ]
+    },
+    "triangles": 985816,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "reviewImages": [
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-builders-closed\\repaired-front.png",
+      "sha256": "bade54f151b2a511cba42920911e6abcb530a0243f06cc2c36c2092ddb6a1405",
+      "bytes": 200862
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-builders-closed\\repaired-right.png",
+      "sha256": "a3e6c594a57f7403f442225cb5f4fd04144915c012237aee025256aa8677dde1",
+      "bytes": 200050
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-builders-closed\\repaired-back.png",
+      "sha256": "ba25a522e6b2e8ff1a5f2b8e899c04efa6beb4f237540e51926bceb190be6793",
+      "bytes": 220629
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-builders-closed\\repaired-left.png",
+      "sha256": "5695a633e072456b26ad07e696e13dd69f9d5179c79b041d638ac6eec57848bc",
+      "bytes": 194342
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-builders-closed\\repaired-iso.png",
+      "sha256": "39bfb395e18591b407730606d0d0c120ce57144d9659378ddb1c3c902d9fb9a4",
+      "bytes": 236259
+    }
+  ],
+  "processingTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\cb7ede4c5c2bab95273e9346635198c499cc3347c53d52eaf2df9ad52d8a5345-repair_builders_closed_surface.py",
+    "sha256": "cb7ede4c5c2bab95273e9346635198c499cc3347c53d52eaf2df9ad52d8a5345",
+    "bytes": 10075
+  },
+  "completedAt": "2026-10-23T09:20:20.222593+00:00",
+  "sourceVisualReview": {
+    "status": "reviewed_for_derivative_processing",
+    "views": [
+      "front",
+      "right",
+      "back",
+      "left",
+      "iso"
+    ],
+    "note": "All five repaired source views were inspected individually. The two earlier visible patch surfaces are unchanged; 0.006 inward back and side closure now supports reduction. Front beam plaster is continuous and the right roof target has a reconstructed tile surface. A small original roof crease and tiny plinth seam remain and are disclosed. This is approval for derivative processing only, not approval of a final reduced or animated model."
+  },
+  "closureProof": {
+    "path": "art\\full-ai-city\\work\\repair-builders-closed\\closure-proof.json",
+    "sha256": "8a0d246a52a2f959af5be3bdfdd311b2a096cc9705ae802b4a1714856c9c9753"
+  }
+}

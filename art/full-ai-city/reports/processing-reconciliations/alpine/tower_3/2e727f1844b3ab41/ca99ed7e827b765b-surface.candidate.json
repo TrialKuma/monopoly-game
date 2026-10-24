@@ -1,0 +1,304 @@
+{
+  "status": "exported_pending_visual_review",
+  "createdAt": "2026-10-23T08:24:38.117340+00:00",
+  "region": "classic",
+  "asset": "villa_1",
+  "source": {
+    "rawGLB": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\classic--villa_1-a001-pixal-mv-1024-9247.glb",
+      "sha256": "6a23e92607401d57ab030e5d293bbad4c0b5eed81c418dca273bc2b4330fc2ef",
+      "bytes": 38971160
+    }
+  },
+  "inferenceReport": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\processing-reconciliations\\alpine\\tower_3\\2e727f1844b3ab41\\b12a791bac76cc15-classic--villa_1-a001-pixal-mv-1024-9247.json",
+    "sha256": "05b6c31301a2a7a7c6206614a59372d96076b62ccfda7834a05915540aee624c",
+    "bytes": 9100
+  },
+  "reference": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\references\\classic\\villa_1\\reference.json",
+    "sha256": "372682784a59c611dfce50af41b527dba001b2b317f3593af208791b65e3dfef",
+    "bytes": 4018
+  },
+  "processingTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\364e5afe80bef5786a38acff2c342b529d4b454559d2b48b5a0657771fdeb765-process_lod.py",
+    "sha256": "364e5afe80bef5786a38acff2c342b529d4b454559d2b48b5a0657771fdeb765",
+    "bytes": 25875
+  },
+  "assumedCameras": true,
+  "cameraCalibration": "assumed_standard_orbit_not_measured",
+  "nativePipeline": "Pixal3DMVImageTo3DPipeline.run_mv",
+  "nativeResolution": 1024,
+  "seed": 9247,
+  "geometryOrigin": "Only the actual neural source reduced and rebaked; no authored substitute geometry or manually constructed surfaces",
+  "orientation": {
+    "up": "Y",
+    "front": "+Z",
+    "groundY": 0,
+    "maxEdge": 1
+  },
+  "requestedTriangles": 30000,
+  "limitations": [
+    "Assumed camera reference reconstruction, not exact measured architecture",
+    "Final candidate requires actual rendered visual approval"
+  ],
+  "animation": null,
+  "processingComplete": true,
+  "lod": "near",
+  "processingRevision": 0,
+  "derivation": {
+    "rawTriangles": 982523,
+    "weldedTriangles": 978178,
+    "remeshedTriangles": 1598448,
+    "voxelSize": 0.003,
+    "finalTriangles": 29995,
+    "atlasArea": 0.3976288358375306,
+    "singleReductionPass": true,
+    "inheritedUVRemovedBeforeReduction": true,
+    "sourceMaterialsUntouched": true,
+    "uvUnwrap": {
+      "angleDegrees": 89,
+      "islandMargin": 2e-05,
+      "marginMethod": "SCALED",
+      "nominalMarginPixels": null
+    }
+  },
+  "bake": {
+    "hitCoverageAreaWeighted": 0.9993175636486887,
+    "cageExtrusion": 0.02,
+    "maxRayDistance": 0.06,
+    "maps": [
+      {
+        "role": "base",
+        "size": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "role": "orm",
+        "size": [
+          512,
+          512
+        ]
+      },
+      {
+        "role": "normal",
+        "size": [
+          1024,
+          1024
+        ]
+      }
+    ],
+    "method": "Selected-to-active CPU bake from original neural source onto a source-derived voxel surface reduced without inherited UV constraints; no authored substitute building"
+  },
+  "quantization": {
+    "source": "H:\\代码项目\\monopoly\\art\\full-ai-city\\candidates\\classic\\villa_1.glb",
+    "output": "H:\\代码项目\\monopoly\\art\\full-ai-city\\candidates\\classic\\villa_1.glb",
+    "sourceBytes": 1678364,
+    "outputBytes": 1276528,
+    "sourceSha256": "0b7ad51b1b18ee0fc5ceb1bc05e56ff70a36dcc9798519cc6d8cfa635e0ad0d3",
+    "outputSha256": "25b29e480c7bc471352b7299cd888aae9389b9d9f6e6481482009c5fe8c2bc5d",
+    "positionFaceAndTextureBytesUnchanged": true,
+    "attributes": [
+      {
+        "accessor": 1,
+        "semantic": "NORMAL",
+        "count": 33499,
+        "maximumAngularErrorDegrees": 0.3706614174205551
+      },
+      {
+        "accessor": 2,
+        "semantic": "TEXCOORD_0",
+        "count": 33499,
+        "maximumUVError": 7.629490029636976e-06,
+        "maximumTexelErrorAt1024": 0.007812597790348264
+      }
+    ]
+  },
+  "processedCandidate": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\candidates\\classic\\villa_1.glb",
+    "sha256": "25b29e480c7bc471352b7299cd888aae9389b9d9f6e6481482009c5fe8c2bc5d",
+    "bytes": 1276528
+  },
+  "glbValidation": {
+    "version": 2,
+    "triangles": 29995,
+    "meshes": 1,
+    "materials": 1,
+    "images": 3,
+    "all_primitives_have_uv": true,
+    "animations": [],
+    "all_images_embedded": true,
+    "external_buffers": []
+  },
+  "triangles": 29995,
+  "renderedCandidate": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\classic\\villa_1\\lod-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\classic\\villa_1\\lod-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\classic\\villa_1\\lod-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\classic\\villa_1\\lod-left.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\classic\\villa_1\\lod-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.4994136393070221,
+        -0.32539674639701843,
+        7.668117905268446e-05
+      ],
+      "max": [
+        0.4997776746749878,
+        0.3250468075275421,
+        0.8167850971221924
+      ]
+    },
+    "triangles": 29995,
+    "textureSizes": [
+      {
+        "name": "classic__villa_1__base",
+        "size": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "name": "classic__villa_1__normal",
+        "size": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "name": "classic__villa_1__orm",
+        "size": [
+          512,
+          512
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "renderedSource": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\classic\\villa_1\\raw-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\classic\\villa_1\\raw-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.5,
+        -0.325188547372818,
+        0.0
+      ],
+      "max": [
+        0.5,
+        0.325188547372818,
+        0.81675785779953
+      ]
+    },
+    "triangles": 982523,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "bounds": {
+    "min": [
+      -0.4994136393070221,
+      7.668117905268446e-05,
+      -0.3250468075275421
+    ],
+    "max": [
+      0.4997776746749878,
+      0.8167850971221924,
+      0.32539674639701843
+    ],
+    "coordinateSystem": "GLTF Y-up; +Z front"
+  },
+  "textureSizes": [
+    {
+      "name": "classic__villa_1__base",
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "name": "classic__villa_1__normal",
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "name": "classic__villa_1__orm",
+      "size": [
+        512,
+        512
+      ]
+    }
+  ],
+  "rawSourceUnchanged": true,
+  "completedAt": "2026-10-23T08:25:46.746103+00:00",
+  "reviewSheet": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\classic\\villa_1\\review-sheet.jpg",
+    "sha256": "06c229e036018a34250327ca810dd05ec81b75ea9ef5a7bbe6631f504314d0f9",
+    "bytes": 281593,
+    "candidateSha256": "25b29e480c7bc471352b7299cd888aae9389b9d9f6e6481482009c5fe8c2bc5d",
+    "sourceImages": [
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\classic\\villa_1\\raw-front.png",
+        "sha256": "d1d1f28eaa1eebfd61cad87ef12ba8f7b385afef715a004c7445e7d124c749df",
+        "label": "AI raw front"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\classic\\villa_1\\raw-iso.png",
+        "sha256": "e9b2c6f050760ffa484b7006c73cb39435504b520d738b389f7622fe5d65aadf",
+        "label": "AI raw iso"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\classic\\villa_1\\lod-front.png",
+        "sha256": "edcbf510473708268a54c5fcc4f14caf536118cb2d9bed3479ec60180732d7f5",
+        "label": "LOD front"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\classic\\villa_1\\lod-right.png",
+        "sha256": "927efcdb0d360f9dbbf8260b7c2b7e549896119e92d3ebbc277c1ed0f92913f6",
+        "label": "LOD right"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\classic\\villa_1\\lod-back.png",
+        "sha256": "621c16d49a1f6dea111978ae089fe26cc60dd173e0e240279434219d4ebae2a9",
+        "label": "LOD back"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\classic\\villa_1\\lod-left.png",
+        "sha256": "ecbcfd4e649c1e3c2563100625fec9ba702fb020e5b28ef0082ad772ea62b05f",
+        "label": "LOD left"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\classic\\villa_1\\lod-iso.png",
+        "sha256": "27a0aab2f9620d74beefa402d9d997847c589daa5995c819c0784d61eb9e1145",
+        "label": "LOD iso"
+      }
+    ],
+    "content": "Unmodified CPU render images composed with labels for visual comparison only"
+  }
+}

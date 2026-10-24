@@ -1,0 +1,52 @@
+{
+  "status": "rejected_native_export_source",
+  "region": "expansion",
+  "asset": "hotel_3",
+  "reviewer": "asset_production",
+  "recordedAtUtc": "2026-10-24T04:16:09.493943+00:00",
+  "source": {
+    "path": "art/full-ai-city/source/expansion--hotel_3-a012-pixal-mv-1024-29490.glb",
+    "sha256": "b94c2e276ae728ee8fda835698dbdce70a565076cdff80e17108cba44f546911",
+    "bytes": 40202384
+  },
+  "sourceLevel": "Native 1M export; no untouched decoder attribution is made.",
+  "inferenceReport": {
+    "path": "art/full-ai-city/reports/source-rejections/expansion/hotel_3/b94c2e276ae728ee/expansion--hotel_3-a012-pixal-mv-1024-29490.json",
+    "sha256": "fddf32186461c48fe6be6a7e45625334b5665cf18a690ff25ca4f8e561ebc67d",
+    "bytes": 10168
+  },
+  "inputReference": {
+    "path": "art/full-ai-city/reports/source-rejections/expansion/hotel_3/b94c2e276ae728ee/input-reference.json",
+    "sha256": "1e95f56b5016829aaddf3026c2599b44d57987bb3b3c45b972c761c4a9f4be74",
+    "bytes": 4441
+  },
+  "diagnostic": null,
+  "diagnosticTool": null,
+  "sourceComparisonReport": {
+    "path": "art/full-ai-city/reports/source-rejections/expansion/hotel_3/b94c2e276ae728ee/source-comparison-processing.json",
+    "sha256": "b0b35f35be20a680611706d90fcb59b3253f59cb6df2ed3cc3f026ac70747f4d",
+    "bytes": 20966
+  },
+  "sourceViewEvidenceMode": "Explicitly selected existing renderedSource views; no additional or neutral render implied",
+  "evidence": [
+    {
+      "path": "art/full-ai-city/reports/source-rejections/expansion/hotel_3/b94c2e276ae728ee/raw-front.png",
+      "sha256": "b07f00f6a5435b8cf34164a6e3716f9369122143461fb70638c70a1c5c5f2416",
+      "bytes": 234541
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/expansion/hotel_3/b94c2e276ae728ee/raw-iso.png",
+      "sha256": "a676e9261bf1bcdffa6206bf6ae2fda714fde89ac934c3ec5c85292a4338c2b9",
+      "bytes": 306752
+    }
+  ],
+  "finding": "Actually inspected unchanged original triptych, independent-retry native front/iso, all final five and256px. Multiple window panels and the broad horizontal spandrel below the upper front middle window are open; further distributed window and sill gaps appear in final sides/back. Native front/iso already shows the broken central facade and windows. The tall brick mass remains but these conspicuous focal gaps fail phone continuity and exceed a small local patch. Preserve both completed old-reference sources and make one targeted reference revision with continuous thick opaque wall/spandrel planes, closed simplified amber window panels and a coherent flat roof/crown. No third old-reference seed.",
+  "decision": "One targeted reference revision; no third seed on this old reference.",
+  "sourceUnchanged": true,
+  "notFinalCandidateReview": true,
+  "freezeTool": {
+    "path": "art/full-ai-city/reports/tool-snapshots/616860a00b28e670e1219d64c6cb5dad17f0946420568f786e80b6d789fb4a73-freeze_public_source_rejection.py",
+    "sha256": "616860a00b28e670e1219d64c6cb5dad17f0946420568f786e80b6d789fb4a73",
+    "bytes": 4304
+  }
+}

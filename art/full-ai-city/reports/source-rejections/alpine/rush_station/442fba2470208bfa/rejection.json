@@ -1,0 +1,79 @@
+{
+  "status": "rejected_native_export_source",
+  "region": "alpine",
+  "asset": "rush_station",
+  "reviewer": "/root (actual visual inspection); /root/asset_production (evidence freeze)",
+  "recordedAtUtc": "2026-10-23T19:45:53.543242+00:00",
+  "source": {
+    "path": "art/full-ai-city/source/alpine--rush_station-a001-pixal-mv-1024-9247.glb",
+    "sha256": "442fba2470208bfa486882a2ba3438bd3207f0f7a2e61a8f9f7478e4ffc83518",
+    "bytes": 43498912
+  },
+  "sourceLevel": "Native 1M export; no untouched decoder attribution is made.",
+  "inferenceReport": {
+    "path": "art/full-ai-city/reports/source-rejections/alpine/rush_station/442fba2470208bfa/alpine--rush_station-a001-pixal-mv-1024-9247.json",
+    "sha256": "431813bdf170a45a01cf438f79be5135730c7e6b6adb65746ad4026a4761170c",
+    "bytes": 10181
+  },
+  "inputReference": {
+    "path": "art/full-ai-city/reports/source-rejections/alpine/rush_station/442fba2470208bfa/input-reference.json",
+    "sha256": "cdf1b4014439e898a893d25fb696cb232abe1b29818807834f62e63c8bf19f3d",
+    "bytes": 4453
+  },
+  "diagnostic": {
+    "path": "art/full-ai-city/reports/source-rejections/alpine/rush_station/442fba2470208bfa/source-inspection.json",
+    "sha256": "5505af6401aab960a16157f36d15009e362ac19fba8835b74d5a7fc05dc5125c",
+    "bytes": 2813
+  },
+  "diagnosticTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\128f0187158a035f4d7e1b8bb5fbec7c559413d80cd6336639df3afc760eb994-render_raw_core_review.py",
+    "sha256": "128f0187158a035f4d7e1b8bb5fbec7c559413d80cd6336639df3afc760eb994",
+    "bytes": 3616
+  },
+  "evidence": [
+    {
+      "path": "art/full-ai-city/reports/source-rejections/alpine/rush_station/442fba2470208bfa/raw-front.png",
+      "sha256": "8fc624be4f29a1c8af501a67779930fea654bdf5745e4dbde1646a727031e185",
+      "bytes": 201943
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/alpine/rush_station/442fba2470208bfa/raw-iso.png",
+      "sha256": "29ad82bc38cbe61b1a255e2738d263d7df69007b94c4c3d009b9978fb6739f13",
+      "bytes": 234371
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/alpine/rush_station/442fba2470208bfa/raw-right.png",
+      "sha256": "941c33deacda25372f1a0a40692ca5c4bb9545f69f476466003cc178fc79b4a9",
+      "bytes": 182699
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/alpine/rush_station/442fba2470208bfa/raw-back.png",
+      "sha256": "2b65b3d66fab2801f43cee35cfdae9ce91317dca55ff0b6623b9b0aab0481ab2",
+      "bytes": 193355
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/alpine/rush_station/442fba2470208bfa/raw-left.png",
+      "sha256": "d27e97949115468e2afb1028b85a2ccbfa65b81dfa360af8ff6b2ce1542aca11",
+      "bytes": 182686
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/alpine/rush_station/442fba2470208bfa/raw-close-back-iso.png",
+      "sha256": "340ef8e1bd0626cb9eb2e30007bbe82dd0e57f29219f276558db41ac35415a74",
+      "bytes": 798342
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/alpine/rush_station/442fba2470208bfa/raw-grey-back-iso.png",
+      "sha256": "953884736312f2d574568e0fa7bd10befa22f8a5d7a384959ef20e4b0dce41f2",
+      "bytes": 649412
+    }
+  ],
+  "finding": "Root visually inspected the native original right/back/left, close rear isometric and neutral rear isometric views. The rear window protrudes outward as a tilted board, accompanied by a roof split and an unwanted platform. These structural defects already occur in the original1M native export and are not caused by mobile processing. Freeze the original source rejection based on that actual root review; preserve all source and diagnostic pixels. Register one same-reference distinct-seed retry only. No authored whole-building repair and no automatic approval.",
+  "decision": "One independent same-reference seed. If repeated major defects remain, review three-view consistency before further inference; no automatic approval.",
+  "sourceUnchanged": true,
+  "notFinalCandidateReview": true,
+  "freezeTool": {
+    "path": "art/full-ai-city/reports/tool-snapshots/42165b6f5ad970e2c1203361856d55ef56a7a13179fb3c43029a26a1681d074e-freeze_public_source_rejection.py",
+    "sha256": "42165b6f5ad970e2c1203361856d55ef56a7a13179fb3c43029a26a1681d074e",
+    "bytes": 3260
+  }
+}

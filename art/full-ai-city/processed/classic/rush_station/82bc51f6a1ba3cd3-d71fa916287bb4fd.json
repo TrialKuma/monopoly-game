@@ -1,0 +1,794 @@
+{
+  "status": "exported_pending_visual_review",
+  "createdAt": "2026-10-23T08:30:14.254494+00:00",
+  "region": "classic",
+  "asset": "rush_station",
+  "lod": "near",
+  "source": {
+    "rawGLB": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\classic--rush_station-a001-pixal-mv-1024-9247.glb",
+      "sha256": "3d689762796f475c1cfa2b4a2f73e07128a53ef90b0560f075722297c9cb290e",
+      "bytes": 38728020
+    }
+  },
+  "inferenceReport": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\classic--rush_station-a001\\classic--rush_station-a001-pixal-mv-1024-9247.json",
+    "sha256": "73c37baedbc132bb8d06f2a4db5c82b11d193adfdc626123e1dab0891ff0568d",
+    "bytes": 8852
+  },
+  "reference": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\references\\classic\\rush_station\\reference.json",
+    "sha256": "2eaab29080c6d580a592836a7145b66788ffb05289a10759dd41c66b6c6f2add",
+    "bytes": 4043
+  },
+  "processingTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\31702507b9ea258f1eff2e045b6b53f83a10457edb1dcd04151a425413268392-process_native_mobile.py",
+    "sha256": "31702507b9ea258f1eff2e045b6b53f83a10457edb1dcd04151a425413268392",
+    "bytes": 8960
+  },
+  "nativeSurfaceExport": {
+    "receipt": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\classic--rush_station-3d689762796f-repair-001f506092e6-field-v1\\receipt.json",
+      "sha256": "2760de82947afd2c905260fa299d6afa2308548578bc754a0de5ada26095a4cd",
+      "bytes": 15459
+    },
+    "source": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\classic--rush_station-3d689762796f-repair-001f506092e6-field-v1\\mobile-30000-1024.glb",
+      "sha256": "3d720516a4d3a532a518577ea5f738b2a547e24bd693ca7615d24ef71b370e2c",
+      "bytes": 1904148
+    },
+    "tensorArchive": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\classic--rush_station-a001\\neural-export-inputs.pt",
+      "sha256": "7d39cd46cd72113b685b8d91c255c2520dc915841031174978911b6bf53ce8d5",
+      "bytes": 376153565
+    }
+  },
+  "nativePipeline": "Pixal3DMVImageTo3DPipeline.run_mv",
+  "nativeResolution": 1024,
+  "seed": 9247,
+  "assumedCameras": true,
+  "cameraCalibration": "assumed_standard_orbit_not_measured",
+  "geometryOrigin": "Actual neural building with the explicitly recorded bounded local surface repair, followed by source-derived CPU mobile geometry and native UV/material sampling. The original inference, repair and low-surface sources are distinct; the UV/material replay adds no geometry.",
+  "textureOrigin": "Original neural attribute field sampled by the native UV/material operations with the recorded surface-stage override; no new neural inference or raw-UV rebake. After native sampling, the explicitly recorded 64-triangle local stone region reuses intact same-atlas stone UVs; embedded images remain byte-identical.",
+  "normalization": {
+    "enabled": true,
+    "candidate_degrees": 1.1696752314499728,
+    "applied_degrees": 1.1696752314499728,
+    "underside_area": 0.1003868138110704,
+    "normal_agreement": 0.9269474515948956,
+    "yaw_degrees": 180,
+    "pitch_degrees": 0,
+    "roll_degrees": 0,
+    "uniform_scale": 1.047626850073833
+  },
+  "orientation": {
+    "up": "Y",
+    "front": "+Z",
+    "groundY": 0,
+    "maxEdge": 1
+  },
+  "requestedTriangles": 30000,
+  "triangles": 29977,
+  "glbValidation": {
+    "version": 2,
+    "triangles": 29977,
+    "meshes": 1,
+    "materials": 1,
+    "images": 2,
+    "all_primitives_have_uv": true,
+    "animations": [],
+    "all_images_embedded": true,
+    "external_buffers": []
+  },
+  "quantization": {
+    "source": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\classic--rush_station-3d689762796f-repair-001f506092e6-field-v1\\candidates\\classic\\rush_station.glb",
+    "output": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\classic--rush_station-3d689762796f-repair-001f506092e6-field-v1\\candidates\\classic\\rush_station.glb",
+    "sourceBytes": 1596628,
+    "outputBytes": 1179516,
+    "sourceSha256": "f80676c8c5ee214e07a915ea6aca6dacc650880067c19ccae7cbef0b9eaadb15",
+    "outputSha256": "adae415cbb7ce3b5e03cc98910b753aa3e04f34e51502d6d5d5a74abc2f9a58e",
+    "positionFaceAndTextureBytesUnchanged": true,
+    "attributes": [
+      {
+        "accessor": 1,
+        "semantic": "NORMAL",
+        "count": 34772,
+        "maximumAngularErrorDegrees": 0.3713198365334232
+      },
+      {
+        "accessor": 2,
+        "semantic": "TEXCOORD_0",
+        "count": 34772,
+        "maximumUVError": 7.629510948348184e-06,
+        "maximumTexelErrorAt1024": 0.00781261921110854
+      }
+    ]
+  },
+  "processedCandidate": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\candidates\\classic\\rush_station.glb",
+    "sha256": "82bc51f6a1ba3cd36f671f1011b024a8c792214aefd4aeadff6b2d535863a724",
+    "bytes": 1363264
+  },
+  "derivation": {
+    "method": "Recorded CPU surface derived from the same neural raw, inverse-normalized to field coordinates; a local native-export variant bypasses further mesh simplification/remeshing and uses native UV generation plus original neural high-surface BVH and field texture sampling. Only normalization, JPEG encoding and attribute quantization afterward.",
+    "voxelizedAgain": false,
+    "rebakedFromRawUV": false,
+    "facadeUVPreserved": true,
+    "normalizedTrianglesPreserved": true,
+    "geometrySurfaceInput": {
+      "receipt": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\classic--rush_station-3d689762796f-repair-001f506092e6-field-v1\\geometry-source-proof.json",
+        "sha256": "3b083fa97af2611bcd910351a0d84c47df9511174e6eb02bbed38abbf3d236b8",
+        "bytes": 8379
+      },
+      "method": "Coordinate inversion of the recorded neural-derived low surface including explicitly bounded local source repairs. This preparation only welds exact positions and changes coordinates; it adds no faces. Original raw inference and repair input remain distinct.",
+      "sourceRaw": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\classic--rush_station-a001-pixal-mv-1024-9247.glb",
+        "sha256": "3d689762796f475c1cfa2b4a2f73e07128a53ef90b0560f075722297c9cb290e",
+        "bytes": 38728020
+      },
+      "candidate": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\classic--rush_station-3d689762796f-repair-001f506092e6-field-v1\\geometry-candidate.glb",
+        "sha256": "8038fa9114f3d5e4824c789dc95da0133ea9d5704ed82dcec70df6f504c602c1",
+        "bytes": 1311564
+      },
+      "candidateReport": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\classic--rush_station-3d689762796f-repair-001f506092e6-field-v1\\geometry-candidate-processing.json",
+        "sha256": "03e216bd3db3c9e8496cffe42e7624e8e3aaa5dde1f098fdd52684a866975a57",
+        "bytes": 13422
+      },
+      "originalCandidate": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-rush_station-001f506092e6\\candidates\\classic\\rush_station.glb",
+        "sha256": "8038fa9114f3d5e4824c789dc95da0133ea9d5704ed82dcec70df6f504c602c1",
+        "bytes": 1311564
+      },
+      "fieldReceipt": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\classic--rush_station-a001\\receipt.json",
+        "sha256": "6abeae4b69be85d4fe42cf39252a93923f7f4430aa09a4003abb06f865b0ce98",
+        "bytes": 3722
+      },
+      "output": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\classic--rush_station-3d689762796f-repair-001f506092e6-field-v1\\geometry-surface.npz",
+        "sha256": "3d400278c9c8511d2d505275cec1dded9656021fc0f0c8434ed78ea0aa57563b",
+        "bytes": 537668
+      },
+      "triangles": 29977,
+      "vertices": 14786,
+      "originalSplitVertices": 39612,
+      "exactCoincidentVerticesMerged": 24826,
+      "maximumPositionChangeFromWelding": 0,
+      "normalization": {
+        "enabled": true,
+        "candidate_degrees": 0.9261879521623038,
+        "applied_degrees": 0.9261879521623038,
+        "underside_area": 0.12286138727791618,
+        "normal_agreement": 0.9238112359908286,
+        "yaw_degrees": 180,
+        "pitch_degrees": 0,
+        "roll_degrees": 0,
+        "uniform_scale": 1.0485337965146904
+      },
+      "rawBlenderToNormalizedBlender": [
+        [
+          -1.0484880342211915,
+          6.450717160307647e-05,
+          -0.009794710489966649,
+          0.005157043326826402
+        ],
+        [
+          6.469433923721071e-05,
+          -1.0484425722069246,
+          -0.013830231903957046,
+          0.007042607449686322
+        ],
+        [
+          -0.009794707884015503,
+          -0.013830230812337217,
+          1.0483968155279253,
+          0.3461950967346544
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "inverse": [
+        [
+          -0.9536710987251872,
+          5.884371714216502e-05,
+          -0.00890895351270614,
+          0.008001944785603057
+        ],
+        [
+          5.867347571291935e-05,
+          -0.9536297407499439,
+          -0.012579536278668547,
+          0.011070711113662354
+        ],
+        [
+          -0.00890895338806078,
+          -0.012579533695378264,
+          0.9535881325708923,
+          -0.3299929992240629
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "sampledNormalizationReconstructionMaxError": 9.168672613377769e-08,
+      "nativeBounds": {
+        "min": [
+          -0.4820781246445415,
+          -0.32697059185834104,
+          -0.38791348536200376
+        ],
+        "max": [
+          0.4698643432237092,
+          0.4061581604055462,
+          0.40188231191512985
+        ]
+      },
+      "tool": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\classic--rush_station-3d689762796f-repair-001f506092e6-field-v1\\geometry-preparation-source.py",
+        "sha256": "956e46377da8eae51f4e9af858f698532b81fccbbf16f219a2f2adbb9ab1481a",
+        "bytes": 7005
+      },
+      "toolSnapshot": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\classic--rush_station-3d689762796f-repair-001f506092e6-field-v1\\geometry-preparation-source.py",
+        "sha256": "956e46377da8eae51f4e9af858f698532b81fccbbf16f219a2f2adbb9ab1481a",
+        "bytes": 7005
+      },
+      "normalizationInput": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-rush\\repaired-native.glb",
+        "sha256": "001f506092e606ef5ccf7556a248af84bdd31731f9b51f31101962b0eaa587d3",
+        "bytes": 38911740
+      },
+      "localSurfaceRepair": {
+        "source": {
+          "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-rush\\repaired-native.glb",
+          "sha256": "001f506092e606ef5ccf7556a248af84bdd31731f9b51f31101962b0eaa587d3",
+          "bytes": 38911740
+        },
+        "receipt": {
+          "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\classic\\rush_station\\001f506092e606ef\\repair.json",
+          "sha256": "fb8f01ce922dc0abe4bdf55c61cb982a69fe893e90950aaef7996c66120a13df",
+          "bytes": 6794
+        },
+        "method": "Only two small measured front plinth/sill openings are closed from intact neighboring stone depth and UV samples. Original neural vertices, faces and image pixels remain untouched. Patches close 0.006 inward for derivative stability. Left wall original dark material is a distinct pending UV correction and is not changed by this geometry repair. No replacement building or new texture.",
+        "newTriangles": 1144,
+        "newVertices": 576,
+        "originalVerticesMoved": 0,
+        "originalTrianglesDeleted": 0,
+        "regions": [
+          {
+            "name": "Small front right plinth opening",
+            "specification": {
+              "name": "Small front right plinth opening",
+              "u": [
+                1,
+                0,
+                0
+              ],
+              "v": [
+                0,
+                0,
+                1
+              ],
+              "n": [
+                0,
+                -1,
+                0
+              ],
+              "roi": [
+                0.312,
+                0.344,
+                0.026,
+                0.05
+              ],
+              "defectDepth": 0.08,
+              "donorDepth": 0.105,
+              "donorMaxDepth": 0.126,
+              "donorNormal": 0.65,
+              "color": "stone"
+            },
+            "missingSamples": 88,
+            "boundarySamples": 580,
+            "sampledDepthRange": [
+              -0.27228665351867676,
+              0.11542773246765137
+            ],
+            "inwardClosureThickness": 0.006,
+            "outerSurfaceUnchanged": true,
+            "newVertices": 292,
+            "newTriangles": 580
+          },
+          {
+            "name": "Small front left window sill opening",
+            "specification": {
+              "name": "Small front left window sill opening",
+              "u": [
+                1,
+                0,
+                0
+              ],
+              "v": [
+                0,
+                0,
+                1
+              ],
+              "n": [
+                0,
+                -1,
+                0
+              ],
+              "roi": [
+                -0.22,
+                -0.196,
+                0.062,
+                0.092
+              ],
+              "defectDepth": 0.08,
+              "donorDepth": 0.105,
+              "donorMaxDepth": 0.14,
+              "donorNormal": 0.65,
+              "color": "stone"
+            },
+            "missingSamples": 90,
+            "boundarySamples": 509,
+            "sampledDepthRange": [
+              -0.3993721008300781,
+              0.15933573246002197
+            ],
+            "inwardClosureThickness": 0.006,
+            "outerSurfaceUnchanged": true,
+            "newVertices": 284,
+            "newTriangles": 564
+          }
+        ]
+      },
+      "localRepairTool": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\e22b1bd53fff212703c4660962a5c5a67daf39a2ab0bd12428c44e7235b8c1e9-repair_rush_surface.py",
+        "sha256": "e22b1bd53fff212703c4660962a5c5a67daf39a2ab0bd12428c44e7235b8c1e9",
+        "bytes": 11105
+      },
+      "repairAppliedBeforeReduction": true,
+      "originalReceipt": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\classic--rush_station-3d689762796f-repair-001f506092e6-field-v1\\geometry-source-original-receipt.json",
+        "sha256": "dea8fba628a4f77648d6623f1944f65cf98fa848a6a809f2d41c983af111b995",
+        "bytes": 8005
+      }
+    },
+    "nativePostprocessOverride": {
+      "original": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\classic--rush_station-3d689762796f-repair-001f506092e6-field-v1\\original-native-exporter-source.py",
+        "sha256": "b6b79da5dfe13c22047a6257c6b2301c7ea31259dd9c82344db7e5c4cc707917",
+        "bytes": 8126
+      },
+      "scope": "Keep original neural geometry BVH for PBR lookup. Replace only the intermediate surface with this recorded existing source-derived low mesh; bypass further remeshing/simplification/cleanup, then use native unwrap/normals/field sampling.",
+      "sharedCodeModified": false,
+      "noNewGeometryAuthored": true,
+      "noNewGeometryAuthoredAppliesTo": "native_uv_material_replay_only",
+      "counts": {
+        "facesBeforeUnwrap": 29977
+      }
+    },
+    "nativeFieldLookup": {
+      "quantiles50_95_99_100": [
+        0.000991553533822298,
+        0.0016109987627714872,
+        0.002354852855205536,
+        0.009721026755869389
+      ],
+      "fractionOverTwoPercent": 0.0,
+      "sampleCount": 563583,
+      "meaning": "Distance to original neural BVH before direct field sampling, not ray hit coverage"
+    }
+  },
+  "bake": {
+    "method": "Direct original neural attribute field sampling inside native to_glb; no Blender bake or nearest raw-image transfer",
+    "notRayCoverage": true
+  },
+  "animation": null,
+  "processingComplete": true,
+  "limitations": [
+    "Same assumed three-view cameras as original native raw",
+    "Diagnostic pending external visual approval; not a formal asset replacement",
+    "Original shallow left stone-recess faceting remains; local source dark-color contamination corrected by documented same-building UV donor mapping."
+  ],
+  "localSurfaceRepair": {
+    "source": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-rush\\repaired-native.glb",
+      "sha256": "001f506092e606ef5ccf7556a248af84bdd31731f9b51f31101962b0eaa587d3",
+      "bytes": 38911740
+    },
+    "receipt": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\classic\\rush_station\\001f506092e606ef\\repair.json",
+      "sha256": "fb8f01ce922dc0abe4bdf55c61cb982a69fe893e90950aaef7996c66120a13df",
+      "bytes": 6794
+    },
+    "method": "Only two small measured front plinth/sill openings are closed from intact neighboring stone depth and UV samples. Original neural vertices, faces and image pixels remain untouched. Patches close 0.006 inward for derivative stability. Left wall original dark material is a distinct pending UV correction and is not changed by this geometry repair. No replacement building or new texture.",
+    "newTriangles": 1144,
+    "newVertices": 576,
+    "originalVerticesMoved": 0,
+    "originalTrianglesDeleted": 0,
+    "regions": [
+      {
+        "name": "Small front right plinth opening",
+        "specification": {
+          "name": "Small front right plinth opening",
+          "u": [
+            1,
+            0,
+            0
+          ],
+          "v": [
+            0,
+            0,
+            1
+          ],
+          "n": [
+            0,
+            -1,
+            0
+          ],
+          "roi": [
+            0.312,
+            0.344,
+            0.026,
+            0.05
+          ],
+          "defectDepth": 0.08,
+          "donorDepth": 0.105,
+          "donorMaxDepth": 0.126,
+          "donorNormal": 0.65,
+          "color": "stone"
+        },
+        "missingSamples": 88,
+        "boundarySamples": 580,
+        "sampledDepthRange": [
+          -0.27228665351867676,
+          0.11542773246765137
+        ],
+        "inwardClosureThickness": 0.006,
+        "outerSurfaceUnchanged": true,
+        "newVertices": 292,
+        "newTriangles": 580
+      },
+      {
+        "name": "Small front left window sill opening",
+        "specification": {
+          "name": "Small front left window sill opening",
+          "u": [
+            1,
+            0,
+            0
+          ],
+          "v": [
+            0,
+            0,
+            1
+          ],
+          "n": [
+            0,
+            -1,
+            0
+          ],
+          "roi": [
+            -0.22,
+            -0.196,
+            0.062,
+            0.092
+          ],
+          "defectDepth": 0.08,
+          "donorDepth": 0.105,
+          "donorMaxDepth": 0.14,
+          "donorNormal": 0.65,
+          "color": "stone"
+        },
+        "missingSamples": 90,
+        "boundarySamples": 509,
+        "sampledDepthRange": [
+          -0.3993721008300781,
+          0.15933573246002197
+        ],
+        "inwardClosureThickness": 0.006,
+        "outerSurfaceUnchanged": true,
+        "newVertices": 284,
+        "newTriangles": 564
+      }
+    ]
+  },
+  "localSurfaceRepairEvidencePreservation": [
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\classic\\rush_station\\001f506092e606ef\\evidence-preservation-6cd50f4441779cf6.json",
+      "sha256": "6cd50f4441779cf65ad5a0b16257a26dd4291311184a10f11a6c4fa91a1432f5",
+      "bytes": 7151
+    }
+  ],
+  "renderedCandidate": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\uv-corrections\\classic\\rush_station\\82bc51f6a1ba3cd3\\lod-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\uv-corrections\\classic\\rush_station\\82bc51f6a1ba3cd3\\lod-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\uv-corrections\\classic\\rush_station\\82bc51f6a1ba3cd3\\lod-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\uv-corrections\\classic\\rush_station\\82bc51f6a1ba3cd3\\lod-left.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\uv-corrections\\classic\\rush_station\\82bc51f6a1ba3cd3\\lod-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.5,
+        -0.41322776675224304,
+        0.0
+      ],
+      "max": [
+        0.5,
+        0.41322776675224304,
+        0.7732862830162048
+      ]
+    },
+    "triangles": 29977,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          1024,
+          1024
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16,
+    "candidate": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\rush-wall-uv-final\\rush_station.glb",
+      "sha256": "82bc51f6a1ba3cd36f671f1011b024a8c792214aefd4aeadff6b2d535863a724",
+      "bytes": 1363264
+    },
+    "reviewImages": [
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\rush-wall-uv-final\\final-front.png",
+        "sha256": "e2d102cb02aedca962fcfc046d5868b64315e968e06085ac32703ed3da45a97e",
+        "bytes": 220729
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\rush-wall-uv-final\\final-right.png",
+        "sha256": "29e2aeacfa8d7e51a33c3ef7b6f24e7051f73244e4562dbf9883f28d98118f40",
+        "bytes": 181717
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\rush-wall-uv-final\\final-back.png",
+        "sha256": "f53ddc98b9b4514dca9d8df31c98feabf2a4adef43f33e930e78f3279477836b",
+        "bytes": 205113
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\rush-wall-uv-final\\final-left.png",
+        "sha256": "3b9bb08249570109890949d1d0b05fa436d612d7c17d45775edf20eb4c2ea741",
+        "bytes": 180788
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\rush-wall-uv-final\\final-iso.png",
+        "sha256": "8e34e94e1dc26a15e3f8b2e6a1792188a0f6b28030fdb8b2f0a6866a1f215116",
+        "bytes": 254397
+      }
+    ]
+  },
+  "sourceReviewReusedFrom": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\classic--rush_station-3d689762796f-repair-001f506092e6-field-v1\\surface.candidate.json",
+    "sha256": "03e216bd3db3c9e8496cffe42e7624e8e3aaa5dde1f098fdd52684a866975a57",
+    "bytes": 13422
+  },
+  "renderedSource": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\classic--rush_station-3d689762796f-repair-001f506092e6-field-v1\\candidates\\renders\\classic\\rush_station\\raw-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\classic--rush_station-3d689762796f-repair-001f506092e6-field-v1\\candidates\\renders\\classic\\rush_station\\raw-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.4999999701976776,
+        -0.4136921763420105,
+        0.0
+      ],
+      "max": [
+        0.4999999701976776,
+        0.4136921763420105,
+        0.7829580903053284
+      ]
+    },
+    "triangles": 945862,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "bounds": {
+    "min": [
+      -0.5,
+      0.0,
+      -0.41322776675224304
+    ],
+    "max": [
+      0.5,
+      0.7732862830162048,
+      0.41322776675224304
+    ],
+    "coordinateSystem": "GLTF Y-up; +Z front"
+  },
+  "textureSizes": [
+    {
+      "name": "Image_0",
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "name": "Image_1",
+      "size": [
+        1024,
+        1024
+      ]
+    }
+  ],
+  "completedAt": "2026-10-23T08:30:24.142837+00:00",
+  "rawSourceUnchanged": true,
+  "processingRevision": 0,
+  "postNativeUVCorrection": {
+    "status": "verified_post_native_uv_correction_pending_final_approval",
+    "sourceCandidate": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\uv-corrections\\classic\\rush_station\\82bc51f6a1ba3cd3\\input-native-candidate.glb",
+      "sha256": "adae415cbb7ce3b5e03cc98910b753aa3e04f34e51502d6d5d5a74abc2f9a58e",
+      "bytes": 1179516
+    },
+    "sourceProcessingReport": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\uv-corrections\\classic\\rush_station\\82bc51f6a1ba3cd3\\input-native-processing.json",
+      "sha256": "cd650168b4f772baf72e4ffc61a1a1a4bc1888af8233e24d3118145f68c854d8",
+      "bytes": 27025
+    },
+    "receipt": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\uv-corrections\\classic\\rush_station\\82bc51f6a1ba3cd3\\uv-correction-original.json",
+      "sha256": "b81121ce1b21034261313b24fbb72c54b61f4960572f5a145244487b35942194",
+      "bytes": 6275
+    },
+    "tool": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\uv-corrections\\classic\\rush_station\\82bc51f6a1ba3cd3\\correct_rush_wall_uv.py",
+      "sha256": "93b4e6115e80f0585486be5cb26f77ff6b38db839cbb67e5c96c3ca412ea7c15",
+      "bytes": 5655
+    },
+    "verificationTool": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\uv-corrections\\classic\\rush_station\\82bc51f6a1ba3cd3\\freeze_rush_uv_correction.py",
+      "sha256": "2e85d99bf2f8ff11bc1a1ff127639387625b62788cfb571d94650e19fa75e5d1",
+      "bytes": 4911
+    },
+    "output": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\uv-corrections\\classic\\rush_station\\82bc51f6a1ba3cd3\\rush_station.glb",
+      "sha256": "82bc51f6a1ba3cd36f671f1011b024a8c792214aefd4aeadff6b2d535863a724",
+      "bytes": 1363264
+    },
+    "evidence": [
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\uv-corrections\\classic\\rush_station\\82bc51f6a1ba3cd3\\lod-front.png",
+        "sha256": "e2d102cb02aedca962fcfc046d5868b64315e968e06085ac32703ed3da45a97e",
+        "bytes": 220729
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\uv-corrections\\classic\\rush_station\\82bc51f6a1ba3cd3\\lod-right.png",
+        "sha256": "29e2aeacfa8d7e51a33c3ef7b6f24e7051f73244e4562dbf9883f28d98118f40",
+        "bytes": 181717
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\uv-corrections\\classic\\rush_station\\82bc51f6a1ba3cd3\\lod-back.png",
+        "sha256": "f53ddc98b9b4514dca9d8df31c98feabf2a4adef43f33e930e78f3279477836b",
+        "bytes": 205113
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\uv-corrections\\classic\\rush_station\\82bc51f6a1ba3cd3\\lod-left.png",
+        "sha256": "3b9bb08249570109890949d1d0b05fa436d612d7c17d45775edf20eb4c2ea741",
+        "bytes": 180788
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\uv-corrections\\classic\\rush_station\\82bc51f6a1ba3cd3\\lod-iso.png",
+        "sha256": "8e34e94e1dc26a15e3f8b2e6a1792188a0f6b28030fdb8b2f0a6866a1f215116",
+        "bytes": 254397
+      }
+    ],
+    "verification": {
+      "perTrianglePositionsExactlyPreserved": true,
+      "perTriangleNormalsExactlyPreserved": true,
+      "embeddedImagesExactlyPreserved": true,
+      "materialsExactlyPreserved": true,
+      "changedTriangleIdsExactlyMatchReceipt": true,
+      "allReplacementUVsExactlyMatchRecordedOriginalDonor": true,
+      "changedTriangles": 64,
+      "changedUVLoops": 192,
+      "triangles": 29977,
+      "newTriangles": 0,
+      "originalRawUnchanged": true
+    },
+    "method": "Only measured original dark left stone-recess UV loops remapped to nearest-height intact original stone triangle UVs from the same final neural texture. Applied after field replay. No painted texture or authored building geometry.",
+    "visualReview": {
+      "status": "reviewed_for_derivative_processing",
+      "reviewer": "outskirts",
+      "notes": "Actual five final views reviewed; dark left stone-recess strip removed using adjacent intact original stone UVs. Original shallow side-wall faceting remains disclosed."
+    },
+    "proof": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\uv-corrections\\classic\\rush_station\\82bc51f6a1ba3cd3\\post-native-uv-correction.json",
+      "sha256": "30945f5c98e1e50b60075b4b19b1b6364096e7becf0284a8461a0240c7892cdc",
+      "bytes": 4152
+    }
+  },
+  "promotedFrom": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\uv-corrections\\classic\\rush_station\\82bc51f6a1ba3cd3\\rush_station.json",
+    "sha256": "210a68484d13c8fd4428fc8e7bd0c9e992029b185ea8dbfbda9573a38bab9510",
+    "bytes": 29875
+  },
+  "reviewSheet": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\uv-corrections\\classic\\rush_station\\82bc51f6a1ba3cd3\\review-sheet.jpg",
+    "sha256": "8f4402f0f0a0828e21e5621f3d78d95b9d404825de5114e671729d0e349d7e91",
+    "bytes": 301269,
+    "candidateSha256": "82bc51f6a1ba3cd36f671f1011b024a8c792214aefd4aeadff6b2d535863a724",
+    "sourceImages": [
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\classic--rush_station-3d689762796f-repair-001f506092e6-field-v1\\candidates\\renders\\classic\\rush_station\\raw-front.png",
+        "sha256": "efe6432a1ac785239cb813f721c7133f8c0a02933f8677f8a920d85fee45b032",
+        "label": "AI raw front"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\classic--rush_station-3d689762796f-repair-001f506092e6-field-v1\\candidates\\renders\\classic\\rush_station\\raw-iso.png",
+        "sha256": "41a4e6719d7e1f02450317afd432d3d6ae6853b614de147e6ec9887a40260351",
+        "label": "AI raw iso"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\uv-corrections\\classic\\rush_station\\82bc51f6a1ba3cd3\\lod-front.png",
+        "sha256": "e2d102cb02aedca962fcfc046d5868b64315e968e06085ac32703ed3da45a97e",
+        "label": "LOD front"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\uv-corrections\\classic\\rush_station\\82bc51f6a1ba3cd3\\lod-right.png",
+        "sha256": "29e2aeacfa8d7e51a33c3ef7b6f24e7051f73244e4562dbf9883f28d98118f40",
+        "label": "LOD right"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\uv-corrections\\classic\\rush_station\\82bc51f6a1ba3cd3\\lod-back.png",
+        "sha256": "f53ddc98b9b4514dca9d8df31c98feabf2a4adef43f33e930e78f3279477836b",
+        "label": "LOD back"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\uv-corrections\\classic\\rush_station\\82bc51f6a1ba3cd3\\lod-left.png",
+        "sha256": "3b9bb08249570109890949d1d0b05fa436d612d7c17d45775edf20eb4c2ea741",
+        "label": "LOD left"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\uv-corrections\\classic\\rush_station\\82bc51f6a1ba3cd3\\lod-iso.png",
+        "sha256": "8e34e94e1dc26a15e3f8b2e6a1792188a0f6b28030fdb8b2f0a6866a1f215116",
+        "label": "LOD iso"
+      }
+    ],
+    "content": "Unmodified CPU render images composed with labels for visual comparison only"
+  }
+}

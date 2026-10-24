@@ -1,0 +1,47 @@
+{
+  "status": "rejected_native_export_source",
+  "region": "compact",
+  "asset": "civic_hall",
+  "reviewer": "asset_production",
+  "recordedAtUtc": "2026-10-23T23:49:07.489597+00:00",
+  "source": {
+    "path": "art/full-ai-city/source/compact--civic_hall-a009-pixal-mv-1024-9247.glb",
+    "sha256": "a0f8a2efef41e4f02cddf0130c9407d4cf4514746666edd9fbbd8f1754f664f4",
+    "bytes": 39418360
+  },
+  "sourceLevel": "Native 1M export; no untouched decoder attribution is made.",
+  "inferenceReport": {
+    "path": "art/full-ai-city/reports/source-rejections/compact/civic_hall/a0f8a2efef41e4f0/compact--civic_hall-a009-pixal-mv-1024-9247.json",
+    "sha256": "93fcf6c3aa6655f6852bac726fbc3de17673b66ba21751fa168c5e37cfc9cb42",
+    "bytes": 10689
+  },
+  "inputReference": {
+    "path": "art/full-ai-city/reports/source-rejections/compact/civic_hall/a0f8a2efef41e4f0/input-reference.json",
+    "sha256": "f721e0166dbad9c692ff4b6cfc87d5e8c7bb5eaf9e597f85b4ff753737d02ce6",
+    "bytes": 4025
+  },
+  "diagnostic": null,
+  "diagnosticTool": null,
+  "sourceComparisonReport": {
+    "path": "art/full-ai-city/reports/source-rejections/compact/civic_hall/a0f8a2efef41e4f0/source-comparison-processing.json",
+    "sha256": "9672e0d60d2637a1f5257d8385e81043ccd0d2f9dbd70a8483a03a780082015e",
+    "bytes": 19634
+  },
+  "sourceViewEvidenceMode": "Explicitly selected existing renderedSource views; no additional or neutral render implied",
+  "evidence": [
+    {
+      "path": "art/full-ai-city/reports/source-rejections/compact/civic_hall/a0f8a2efef41e4f0/raw-back.png",
+      "sha256": "47d64fad7befae464d21dfd52ea7e0702d7e3d2093dd4c32d7dcde29b6304c47",
+      "bytes": 229708
+    }
+  ],
+  "finding": "Actually inspected the original reference, SHA-linked five-view final/source sheet, all five256px previews, and existing native raw-back. Upper rear plaster is missing beside the right window and in broad horizontal sections below the rear clock gable. These large openings already exist in native source, so finer voxel and field replay cannot restore the intended complete rear facade.",
+  "decision": "One independent same-reference seed. If repeated major defects remain, review three-view consistency before further inference; no automatic approval.",
+  "sourceUnchanged": true,
+  "notFinalCandidateReview": true,
+  "freezeTool": {
+    "path": "art/full-ai-city/reports/tool-snapshots/616860a00b28e670e1219d64c6cb5dad17f0946420568f786e80b6d789fb4a73-freeze_public_source_rejection.py",
+    "sha256": "616860a00b28e670e1219d64c6cb5dad17f0946420568f786e80b6d789fb4a73",
+    "bytes": 4304
+  }
+}

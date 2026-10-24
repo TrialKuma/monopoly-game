@@ -1,0 +1,79 @@
+{
+  "status": "static_mapping_review_complete_no_new_procedural_building_bypass_found",
+  "reviewer": "/root/outskirts",
+  "recordedAtUtc": "2026-10-23T12:02:03.435313+00:00",
+  "files": [
+    {
+      "path": "scene-outskirts.js",
+      "sha256": "f3d9f8af8f3a4a38554ade9a740d06e580de17fc745287042eeb1c6f7e0c668a",
+      "bytes": 4621
+    },
+    {
+      "path": "scene-destinations.js",
+      "sha256": "5015f18073d962612509d6d03a8fcc38ed4834d2c3a4f8e96ff6aad6ac7b4096",
+      "bytes": 5816
+    },
+    {
+      "path": "scene-regional-parks.js",
+      "sha256": "f12a27fd9b507f4b18b5be2a1caeb30ae4f1d597505d3ad6b111fb6395022dda",
+      "bytes": 15391
+    },
+    {
+      "path": "scene-garden-kit.js",
+      "sha256": "6ccf3fcc29779108d36c68931bf2c7a4b76d5f0ce37a06733952311f93d2426c",
+      "bytes": 31487
+    },
+    {
+      "path": "scene-model-cache.js",
+      "sha256": "dbc3cb2c904fcef6f6870124e3d1ab1d9a91fdc0cd20b766ee24f802821cfa78",
+      "bytes": 6344
+    }
+  ],
+  "scope": "Read-only source audit of recognizable scenic architecture selection. Not a fresh browser/render review or loaded triangle/material budget test.",
+  "mapping": {
+    "classic": {
+      "perimeter": {
+        "villa_3": 8,
+        "shop_2": 4
+      }
+    },
+    "compact": {
+      "perimeter": {
+        "villa_3": 8,
+        "shop_2": 4
+      }
+    },
+    "expansion": {
+      "perimeter": {
+        "hotel_2": 8,
+        "tower_2": 3,
+        "junction_hub": 1
+      },
+      "internalPark": {
+        "junction_hub": 1
+      }
+    },
+    "harbor": {
+      "perimeter": {
+        "shop_2": 1,
+        "villa_3": 1
+      },
+      "centerpiece": "harbor_lighthouse"
+    },
+    "alpine": {
+      "perimeter": {
+        "hotel_2": 2,
+        "villa_3": 2
+      },
+      "centerpiece": "alpine_windmill"
+    }
+  },
+  "findings": [
+    "The legacy plot label villa_2 is mapped to villa_3 before fetching regional scene roots. No villa2 near mesh is expanded into distant geometry.",
+    "The pavilion helper creates only a paved plinth and a model anchor; its visible architecture comes from the regional junction_hub GLB. It does not build a roof, columns or house body.",
+    "Missing plot models produce a load failure, while missing pavilion models remain empty; neither path constructs a procedural replacement building.",
+    "Landscape helpers construct terrain, walls, bridges, vegetation, streetlights, furniture, boats and cable-car vehicles; no second recognizable house/station shell was found."
+  ],
+  "releaseAction": "Preview already routes outer architecture through regions-far; production still points at regions intentionally until all exact approved near/far packs are published. Parent owns the final unconditional far switch.",
+  "budgetLimit": "Whole-street200000 triangle ceiling remains unchanged. Static counts here are not a substitute for actual final loaded instance and complete scenery counting."
+}

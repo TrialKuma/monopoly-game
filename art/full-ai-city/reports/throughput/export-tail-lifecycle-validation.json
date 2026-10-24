@@ -1,0 +1,23 @@
+{
+  "createdAt": "2026-10-23T10:15:06.847790+00:00",
+  "status": "passed",
+  "testTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\9fec764c9e2db8b29a8b03cf27f2618395ada883f03173cc01d2490566ff9e3f-check_export_tail_lifecycle.py",
+    "sha256": "9fec764c9e2db8b29a8b03cf27f2618395ada883f03173cc01d2490566ff9e3f",
+    "bytes": 1893
+  },
+  "controller": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\806f50ec5e6e483a8a3e23c9d623daa3c0a3b395c4257b38f80b41847ce1e774-run_raw_queue.py",
+    "sha256": "806f50ec5e6e483a8a3e23c9d623daa3c0a3b395c4257b38f80b41847ce1e774",
+    "bytes": 13028
+  },
+  "tailWorker": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\72f2625c5bc87755b8e64f7b9417d5708ecef3695f657b5c48f7ebc098a00b9c-run_export_tail.py",
+    "sha256": "72f2625c5bc87755b8e64f7b9417d5708ecef3695f657b5c48f7ebc098a00b9c",
+    "bytes": 2868
+  },
+  "exitCode": 0,
+  "output": "QUEUE_STATUS {\"raw_ready\": 1}\nQUEUE_STOP_REQUESTED\nPASS final raw does not exit watch; late request drained exactly once; no extra inference; graceful stop honored\n",
+  "scope": "Actual watch-loop control flow with isolated temporary queue and stubbed subprocess/memory; no GPU or neural inference in this lifecycle regression. Native export itself retains the existing separately validated bootstrap, GPU lock and serve_one implementation.",
+  "qualitySettingsChanged": false
+}

@@ -1,4 +1,4 @@
-"""Regional architecture kit, authored from the archived three-view boards.
+"""Archived authored architecture experiment; never writes the live game kit.
 
 Blender 5.2 --background --factory-startup --python art/build_regional_city.py --
   --map alpine --scope core --preview
@@ -8,7 +8,9 @@ Preview staging is never exported. Architecture levels add storeys and features;
 they are not scaled copies. Components are joined per root; materials are shared per kit.
 The approved-ai-houses.json exact-hash registry replaces only villa_2 with reviewed
 Pixal multiview sources, preserving their UVs and embedded textures. --manual-house
-writes a separate comparison bundle and never replaces the formal mixed kit.
+writes a separate comparison bundle. All outputs now stay under
+art/regions/legacy-builds. The full-AI runtime is published only by
+art/full-ai-city/tools/pack_runtime.py.
 """
 from __future__ import annotations
 import argparse
@@ -23,7 +25,7 @@ import bpy
 from mathutils import Matrix, Vector
 
 ROOT = Path(__file__).resolve().parents[1]
-OUT = ROOT / 'assets/models/regions'
+OUT = ROOT / 'art/regions/legacy-builds'
 ART = ROOT / 'art/regions'
 FAMILIES = ('villa', 'shop', 'hotel', 'tower')
 LARGE = ('skyscraper', 'finance', 'onsen')

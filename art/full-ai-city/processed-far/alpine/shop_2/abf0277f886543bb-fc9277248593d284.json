@@ -1,0 +1,424 @@
+{
+  "status": "exported_pending_visual_review",
+  "createdAt": "2026-10-23T11:28:37.804337+00:00",
+  "region": "alpine",
+  "asset": "shop_2",
+  "source": {
+    "rawGLB": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\alpine--shop_2-a001-pixal-mv-1024-9247.glb",
+      "sha256": "16f931b6751abdfb26c25a46ea1250ba08b6718e4bb064d1d0b61a5e9c29896b",
+      "bytes": 42151940
+    }
+  },
+  "inferenceReport": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\alpine--shop_2-a001\\alpine--shop_2-a001-pixal-mv-1024-9247.json",
+    "sha256": "1560f9424bf1f46c7ae2aed5feb462a9337d0496f173211e5bf534f050aa486e",
+    "bytes": 10095
+  },
+  "reference": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\inputs\\alpine\\shop_2\\8c5ab46b998d2478\\reference.json",
+    "sha256": "2fef1fa13e2cf25a06c9b1d08963027a0b198ef98f74cf5bc85d4bdab7a86732",
+    "bytes": 4406
+  },
+  "processingTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\b766a4f58879667a49343ebf7047b8344497e5a63edee313a7ba8164388eff04-bake_native_uv_candidate.py",
+    "sha256": "b766a4f58879667a49343ebf7047b8344497e5a63edee313a7ba8164388eff04",
+    "bytes": 10667
+  },
+  "assumedCameras": true,
+  "cameraCalibration": "assumed_standard_orbit_not_measured",
+  "nativePipeline": "Pixal3DMVImageTo3DPipeline.run_mv",
+  "nativeResolution": 1024,
+  "seed": 9247,
+  "geometryOrigin": "Exact approved neural-derived near geometry, including its disclosed bounded local repairs where present, simplified with topology and boundary preservation for far use. No substitute building; original inference remains separate and unchanged.",
+  "orientation": {
+    "up": "Y",
+    "front": "+Z",
+    "groundY": 0,
+    "maxEdge": 1
+  },
+  "requestedTriangles": 12000,
+  "limitations": [
+    "Assumed camera reference reconstruction, not exact measured architecture",
+    "Final candidate requires actual rendered visual approval"
+  ],
+  "animation": null,
+  "processingComplete": true,
+  "lod": "far",
+  "processingRevision": 0,
+  "derivedFromNear": {
+    "path": "H:\\代码项目\\monopoly\\assets\\models\\regions-ai\\full\\alpine\\shop_2\\07c331b80aaa10bd.glb",
+    "sha256": "07c331b80aaa10bd6cc8a1f2a49a8be4bd834e765706070ae9389a3b614c4e25",
+    "bytes": 1146416
+  },
+  "derivedFromNearReport": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\processed\\alpine\\shop_2\\07c331b80aaa10bd-e06cab9bf14040f7.json",
+    "sha256": "e06cab9bf14040f7671030db52b613d1f0c4ae14d9e2cee469162dafa902e00c",
+    "bytes": 18801
+  },
+  "farSimplification": {
+    "source": {
+      "path": "H:\\代码项目\\monopoly\\assets\\models\\regions-ai\\full\\alpine\\shop_2\\07c331b80aaa10bd.glb",
+      "sha256": "07c331b80aaa10bd6cc8a1f2a49a8be4bd834e765706070ae9389a3b614c4e25"
+    },
+    "output": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\alpine-shop2-far12-nativeuv-review\\far-surface.npz",
+    "outputSha256": "92383c16f4b6c5422641a2f48cdad6b7a7d3c091b52073b55c35def76261c712",
+    "tool": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\e1cebc38c56c536fc09ec03ec4c1cad0060e4f6c21693fa5284e689cf37b9f7b-simplify_far_surface.py",
+      "sha256": "e1cebc38c56c536fc09ec03ec4c1cad0060e4f6c21693fa5284e689cf37b9f7b",
+      "pymeshlabVersion": "2025.7.post1"
+    },
+    "sourceTriangles": 29979,
+    "actualTriangles": 11999,
+    "actualVertices": 5478,
+    "method": "PyMeshLab quadric collapse preserving boundary, normal and topology with planar quadrics",
+    "settings": {
+      "targetfacenum": 12000,
+      "qualitythr": 0.3,
+      "preserveboundary": true,
+      "boundaryweight": 20.0,
+      "preservenormal": true,
+      "preservetopology": true,
+      "optimalplacement": true,
+      "planarquadric": true,
+      "planarweight": 0.01,
+      "autoclean": true
+    },
+    "geometryOrigin": "Only existing approved neural-derived surface simplified; no authored geometry",
+    "sourceCleanup": []
+  },
+  "derivation": {
+    "rawTriangles": 992894,
+    "weldedTriangles": 11999,
+    "remeshedTriangles": 11999,
+    "voxelSize": 0,
+    "finalTriangles": 11999,
+    "atlasArea": 0.6400722755652802,
+    "singleReductionPass": true,
+    "inheritedUVRemovedBeforeReduction": true,
+    "sourceMaterialsUntouched": true,
+    "uvUnwrap": {
+      "method": "native CuMesh UV-only",
+      "parameters": {
+        "threshold_cone_half_angle_rad": 1.5707963267948966,
+        "refine_iterations": 0,
+        "global_iterations": 1,
+        "smooth_strength": 1
+      },
+      "receipt": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\uv-replays\\alpine-shop2-far12-nativeuv-review\\receipt.json",
+        "sha256": "87d1cb58a91c0a1e39badf1c241284b587fb7d8e1716951a2ca20375addd19f3",
+        "bytes": 3854
+      }
+    },
+    "nearTriangles": 29979,
+    "rawTriangleCountEvidence": "Actual unchanged original raw GLB index count; native-field near report does not repeat a rawTriangles field."
+  },
+  "bake": {
+    "method": "CPU closest-original-triangle projection with float64 barycentric original UV and bilinear original texture sampling; geometric normals retained, no directional normal-map rebake or invented color",
+    "coveredAtlasPixels": 167130,
+    "nearestLookupSuccessFraction": 1.0,
+    "notRayCoverage": true,
+    "sourceDistanceQuantiles": [
+      0.0004608188755810261,
+      0.003806638624519108,
+      0.005956142204813658,
+      0.015614552423357964
+    ],
+    "sourceDistanceQuantileLevels": [
+      0.5,
+      0.95,
+      0.99,
+      1
+    ],
+    "overTwoPercentMaxEdge": 0.0,
+    "distanceReviewRequired": false,
+    "visualGeometryReviewRequired": true,
+    "barycentricOriginalRange": [
+      -3.7664279249912335e-05,
+      1.0
+    ],
+    "degenerateOrInvalidBarycentricCount": 0,
+    "closestSourceVertexFallbackFraction": 0.0,
+    "barycentricPointReconstructionErrorQuantiles": [
+      9.376338857305802e-09,
+      4.4334390993193045e-08,
+      1.0843996530180224e-06
+    ],
+    "atlasOverlapPixelsWithDifferentSurface": 408,
+    "seconds": 1.8839011999953073,
+    "maps": [
+      {
+        "role": "base",
+        "size": [
+          512,
+          512
+        ]
+      },
+      {
+        "role": "orm",
+        "size": [
+          256,
+          256
+        ]
+      }
+    ],
+    "sourceNote": "Native CuMesh UV charts applied to the exact existing far mesh loops. Closest-surface color/ORM samples come from the exact approved near neural derivative and its existing textures, not a new bake from raw. Near geometry, far geometry and their original archives are unchanged."
+  },
+  "textureTransferTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\a2cb99c96fb8df396f16580a88a7c6151104ee3c927fe76cd161ee2d27bdfa42-bake_nearest_surface.py",
+    "sha256": "a2cb99c96fb8df396f16580a88a7c6151104ee3c927fe76cd161ee2d27bdfa42",
+    "bytes": 7317
+  },
+  "farShading": {
+    "normals": "actual_geometry_only",
+    "baseColorSize": 512,
+    "ormSize": 256,
+    "reason": "UV-only repair retains the existing far corner normals and samples the exact approved near color/ORM; no tangent-space normal rebake."
+  },
+  "nearSourceGeometryOrigin": "Recorded low surface derived from the identical native raw, restored to original field coordinates, with native UV/material generation using the original neural high-surface BVH and attribute field. No authored replacement geometry.",
+  "quantization": {
+    "source": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\alpine-shop2-far12-nativeuv-review\\final\\alpine\\shop_2.glb",
+    "output": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\alpine-shop2-far12-nativeuv-review\\final\\alpine\\shop_2.glb",
+    "sourceBytes": 662988,
+    "outputBytes": 471972,
+    "sourceSha256": "fd4d234f5a030f11b3e29ef634ccfc1788741f781249df0fa8b96932308140f2",
+    "outputSha256": "abf0277f886543bb30f5e296127cd58e838ba187d22b88f66232e3398dad0380",
+    "positionFaceAndTextureBytesUnchanged": true,
+    "attributes": [
+      {
+        "accessor": 1,
+        "semantic": "NORMAL",
+        "count": 15931,
+        "maximumAngularErrorDegrees": 0.3826569692005588
+      },
+      {
+        "accessor": 2,
+        "semantic": "TEXCOORD_0",
+        "count": 15931,
+        "maximumUVError": 7.629510948348184e-06,
+        "maximumTexelErrorAt1024": 0.00781261921110854
+      }
+    ]
+  },
+  "processedCandidate": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\candidates-far\\alpine\\shop_2.glb",
+    "sha256": "abf0277f886543bb30f5e296127cd58e838ba187d22b88f66232e3398dad0380",
+    "bytes": 471972
+  },
+  "glbValidation": {
+    "version": 2,
+    "triangles": 11999,
+    "meshes": 1,
+    "materials": 1,
+    "images": 2,
+    "all_primitives_have_uv": true,
+    "animations": [],
+    "all_images_embedded": true,
+    "external_buffers": []
+  },
+  "triangles": 11999,
+  "renderedCandidate": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\alpine-shop2-far12-nativeuv-review\\final\\renders\\alpine\\shop_2\\lod-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\alpine-shop2-far12-nativeuv-review\\final\\renders\\alpine\\shop_2\\lod-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\alpine-shop2-far12-nativeuv-review\\final\\renders\\alpine\\shop_2\\lod-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\alpine-shop2-far12-nativeuv-review\\final\\renders\\alpine\\shop_2\\lod-left.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\alpine-shop2-far12-nativeuv-review\\final\\renders\\alpine\\shop_2\\lod-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.4752916991710663,
+        -0.46500563621520996,
+        0.0006354652578011155
+      ],
+      "max": [
+        0.5000196695327759,
+        0.46785908937454224,
+        0.9258920550346375
+      ]
+    },
+    "triangles": 11999,
+    "textureSizes": [
+      {
+        "name": "alpine__shop_2__nearest_base",
+        "size": [
+          512,
+          512
+        ]
+      },
+      {
+        "name": "alpine__shop_2__nearest_orm",
+        "size": [
+          256,
+          256
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "renderedSource": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\alpine-shop2-far12-nativeuv-review\\candidates\\renders\\alpine\\shop_2\\raw-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\alpine-shop2-far12-nativeuv-review\\candidates\\renders\\alpine\\shop_2\\raw-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.5,
+        -0.4650975465774536,
+        0.0
+      ],
+      "max": [
+        0.5,
+        0.4650975465774536,
+        0.9282012581825256
+      ]
+    },
+    "triangles": 992894,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "bounds": {
+    "min": [
+      -0.4752916991710663,
+      0.0006354652578011155,
+      -0.46785908937454224
+    ],
+    "max": [
+      0.5000196695327759,
+      0.9258920550346375,
+      0.46500563621520996
+    ],
+    "coordinateSystem": "GLTF Y-up; +Z front"
+  },
+  "textureSizes": [
+    {
+      "name": "alpine__shop_2__nearest_base",
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "name": "alpine__shop_2__nearest_orm",
+      "size": [
+        256,
+        256
+      ]
+    }
+  ],
+  "rawSourceUnchanged": true,
+  "completedAt": "2026-10-23T11:36:23.626297+00:00",
+  "farBudgetTrial": {
+    "requestedTriangles": 12000,
+    "automaticApproval": false,
+    "reason": "Use the exact approved Alpine shop level two as distant scenery; preserve crossed red gables, striped storefront awning and stone base at the default twelve-thousand triangle mobile far budget."
+  },
+  "textureOnlyReprocessing": {
+    "sourceCandidate": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\alpine-shop2-far12-nativeuv-review\\candidates\\alpine\\shop_2.glb",
+      "sha256": "01c00d2c98f83296cb4292795f9d5a4aa218194a0d01cd35983294445dee4f65",
+      "bytes": 514748
+    },
+    "sourceProcessingReport": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\uv-replays\\alpine-shop2-far12-nativeuv-review\\input-processing.json",
+      "sha256": "90d941c35de99ff9e529ef93978bf5f98d19acf47f02cbc8748d89fb32c3ff1a",
+      "bytes": 11792
+    },
+    "sourceBlend": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\alpine-shop2-far12-nativeuv-review\\candidates\\blender\\alpine\\shop_2.blend",
+      "sha256": "02cc52b1ad6a57a83bbbfd36564291f1f95fdaf9fe4475b7e12d52e13035c665",
+      "bytes": 2655222
+    },
+    "nativeUVReceipt": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\uv-replays\\alpine-shop2-far12-nativeuv-review\\receipt.json",
+      "sha256": "87d1cb58a91c0a1e39badf1c241284b587fb7d8e1716951a2ca20375addd19f3",
+      "bytes": 3854
+    },
+    "sourceTriangleCountVerified": 29979,
+    "positionsUnchanged": true,
+    "faceIndicesUnchanged": true,
+    "cornerNormalsUnchanged": true,
+    "additionalRemeshOrSimplification": false,
+    "uvAssignment": "Native cyclic triangle position matches transfer UVs to original loops; original triangle order and winding retained.",
+    "sourceTextureMesh": {
+      "path": "H:\\代码项目\\monopoly\\assets\\models\\regions-ai\\full\\alpine\\shop_2\\07c331b80aaa10bd.glb",
+      "sha256": "07c331b80aaa10bd6cc8a1f2a49a8be4bd834e765706070ae9389a3b614c4e25",
+      "bytes": 1146416
+    },
+    "sourceTextureMeshReport": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\processed\\alpine\\shop_2\\07c331b80aaa10bd-e06cab9bf14040f7.json",
+      "sha256": "e06cab9bf14040f7671030db52b613d1f0c4ae14d9e2cee469162dafa902e00c",
+      "bytes": 18801
+    },
+    "exportedTriangleCornerPositionsExactlyUnchanged": true
+  },
+  "promotedFrom": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\alpine-shop2-far12-nativeuv-review\\final\\alpine\\shop_2.json",
+    "sha256": "5791f347891994fff01baa15fecc15a948cff23f350b76c9bf8ffed519b7f0ad",
+    "bytes": 17069
+  },
+  "reviewSheet": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\alpine-shop2-far12-nativeuv-review\\final\\renders\\alpine\\shop_2\\review-sheet.jpg",
+    "sha256": "77c91a6357137bfc8ad12f722f51bd97cf1af7e873b95277c4ba68e83ef743e7",
+    "bytes": 356161,
+    "candidateSha256": "abf0277f886543bb30f5e296127cd58e838ba187d22b88f66232e3398dad0380",
+    "sourceImages": [
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\alpine-shop2-far12-nativeuv-review\\candidates\\renders\\alpine\\shop_2\\raw-front.png",
+        "sha256": "a6bdc28557dd564851363f6b56c470ae46da0d54e8d0342e3e188c2c65fb41d2",
+        "label": "AI raw front"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\alpine-shop2-far12-nativeuv-review\\candidates\\renders\\alpine\\shop_2\\raw-iso.png",
+        "sha256": "40017228f904cba4c480ca54c7efb845a887501728742c6b940731b1b6d89f00",
+        "label": "AI raw iso"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\alpine-shop2-far12-nativeuv-review\\final\\renders\\alpine\\shop_2\\lod-front.png",
+        "sha256": "79702fb7999f08518519279cb549b2f4ff8d1bb08ce2468f6cfd26716422c2d9",
+        "label": "LOD front"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\alpine-shop2-far12-nativeuv-review\\final\\renders\\alpine\\shop_2\\lod-right.png",
+        "sha256": "ae1a1c04f224dcf49d4871b8c98388fe68b2edf1ba892d04e46f778abd6602ea",
+        "label": "LOD right"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\alpine-shop2-far12-nativeuv-review\\final\\renders\\alpine\\shop_2\\lod-back.png",
+        "sha256": "5d9ddd665ab4b4b2f09cd09ff26ab518b668a2262ab2ed935cfe5d5809e46abb",
+        "label": "LOD back"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\alpine-shop2-far12-nativeuv-review\\final\\renders\\alpine\\shop_2\\lod-left.png",
+        "sha256": "33d8c205fee001ba9eb66663a6f5aa60ec1b368185784713431391533d8bfe24",
+        "label": "LOD left"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\alpine-shop2-far12-nativeuv-review\\final\\renders\\alpine\\shop_2\\lod-iso.png",
+        "sha256": "e405e2e43827c25f814fc5673200bbc99f0a604bc94e41ea727067f636959859",
+        "label": "LOD iso"
+      }
+    ],
+    "content": "Unmodified CPU render images composed with labels for visual comparison only"
+  }
+}

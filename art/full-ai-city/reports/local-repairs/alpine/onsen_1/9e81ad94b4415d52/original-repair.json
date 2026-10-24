@@ -1,0 +1,248 @@
+{
+  "status": "local_repair_candidate_pending_visual_review",
+  "source": {
+    "path": "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\source\\alpine--onsen_1-a003-pixal-mv-1024-29473.glb",
+    "sha256": "db62742a4d41cf3d3e25cc733132aaa3adf10aa4969a472a5ca2337bc8abcba8",
+    "bytes": 41085524
+  },
+  "orientation": {
+    "enabled": true,
+    "candidate_degrees": 0.29341961733888516,
+    "applied_degrees": 0.29341961733888516,
+    "underside_area": 0.05599988123845101,
+    "normal_agreement": 0.9451598266763768,
+    "yaw_degrees": 180,
+    "pitch_degrees": 0,
+    "roll_degrees": 0,
+    "uniform_scale": 1.0465456360569472
+  },
+  "measurement": {
+    "path": "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\work\\onsen1-local-patch-assessment\\measurement.json",
+    "sha256": "c60759a68f791cc2c9d8151cd2aae1f1ce566936353d37d9254ec8909c9619a6",
+    "bytes": 1763
+  },
+  "method": "Two small existing front-slope tile holes and the front gable right plaster holes measured from existing original front-camera rays receive bounded neighboring-source surface samples and original UV donors. The plaster mask is restricted to actual observed through-hole pixels; no whole gable or roof replacement. All original vertices/faces/UV and embedded image bytes remain unchanged. No neutral render or decoder origin is claimed.",
+  "repairs": [
+    {
+      "name": "Two source-measured missing tile patches on the front left slope; left patch",
+      "specification": {
+        "name": "Two source-measured missing tile patches on the front left slope; left patch",
+        "u": [
+          1,
+          0,
+          0
+        ],
+        "v": [
+          0,
+          0.78575371,
+          0.6185395
+        ],
+        "n": [
+          0,
+          -0.6185395,
+          0.78575371
+        ],
+        "roi": [
+          -0.254,
+          -0.219,
+          0.169,
+          0.195
+        ],
+        "defectDepth": 0.25,
+        "donorDepth": 0.273,
+        "donorMaxDepth": 0.307,
+        "donorNormal": 0.25,
+        "color": "tile"
+      },
+      "missingSamples": 51,
+      "boundarySamples": 689,
+      "sampledDepthRange": [
+        0.1539604365825653,
+        0.28617867827415466
+      ],
+      "inwardClosureThickness": 0.006,
+      "outerSurfaceUnchanged": true,
+      "newVertices": 174,
+      "newTriangles": 344
+    },
+    {
+      "name": "Second small missing tile patch beside the first",
+      "specification": {
+        "name": "Second small missing tile patch beside the first",
+        "u": [
+          1,
+          0,
+          0
+        ],
+        "v": [
+          0,
+          0.78575371,
+          0.6185395
+        ],
+        "n": [
+          0,
+          -0.6185395,
+          0.78575371
+        ],
+        "roi": [
+          -0.197,
+          -0.178,
+          0.171,
+          0.189
+        ],
+        "defectDepth": 0.25,
+        "donorDepth": 0.273,
+        "donorMaxDepth": 0.307,
+        "donorNormal": 0.25,
+        "color": "tile"
+      },
+      "missingSamples": 4,
+      "boundarySamples": 496,
+      "sampledDepthRange": [
+        0.2354615330696106,
+        0.2842700779438019
+      ],
+      "inwardClosureThickness": 0.006,
+      "outerSurfaceUnchanged": true,
+      "newVertices": 36,
+      "newTriangles": 68
+    },
+    {
+      "name": "Front gable missing right plaster only where observed camera rays pass through",
+      "specification": {
+        "name": "Front gable missing right plaster only where observed camera rays pass through",
+        "u": [
+          1,
+          0,
+          0
+        ],
+        "v": [
+          0,
+          0,
+          1
+        ],
+        "n": [
+          0,
+          -1,
+          0
+        ],
+        "roi": [
+          0.032,
+          0.113,
+          0.27,
+          0.357
+        ],
+        "defectDepth": 0.085,
+        "donorDepth": 0.11,
+        "donorMaxDepth": 0.145,
+        "donorNormal": 0.65,
+        "color": "plaster",
+        "cameraObservedHoleMask": true
+      },
+      "missingSamples": 318,
+      "boundarySamples": 53,
+      "sampledDepthRange": [
+        -0.12902307510375977,
+        0.20448291301727295
+      ],
+      "inwardClosureThickness": 0.006,
+      "outerSurfaceUnchanged": true,
+      "newVertices": 860,
+      "newTriangles": 1716
+    }
+  ],
+  "originalTriangles": 940611,
+  "originalVerticesMoved": 0,
+  "originalTrianglesDeleted": 0,
+  "artifactCleanup": {
+    "method": "No original faces deleted. Two measured tile holes and observed front-gable plaster holes only. Porch, pool, windows and architectural frame remain unchanged.",
+    "deletedTriangles": 0
+  },
+  "newTriangles": 2128,
+  "newVertices": 1070,
+  "inverseSimilarityError": 6.773161914663817e-08,
+  "normalizedOutput": {
+    "path": "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\work\\repair-alpine-onsen1-front-v1\\repaired-normalized.glb",
+    "sha256": "19c9bef4b870198ac0e40427d22d10d37fe5b4c7b7087862da8f40f66af04243",
+    "bytes": 41704728
+  },
+  "nativeOutput": {
+    "path": "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\work\\repair-alpine-onsen1-front-v1\\repaired-native.glb",
+    "sha256": "9e81ad94b4415d529c7ecf1fa6bb024c9c87435bec9c4652168f23dfb7fa5e8b",
+    "bytes": 41698728
+  },
+  "renders": {
+    "views": [
+      "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\work\\repair-alpine-onsen1-front-v1\\repaired-front.png",
+      "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\work\\repair-alpine-onsen1-front-v1\\repaired-right.png",
+      "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\work\\repair-alpine-onsen1-front-v1\\repaired-back.png",
+      "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\work\\repair-alpine-onsen1-front-v1\\repaired-left.png",
+      "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\work\\repair-alpine-onsen1-front-v1\\repaired-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.5,
+        -0.22873754799365997,
+        0.0
+      ],
+      "max": [
+        0.5,
+        0.22873754799365997,
+        0.4726412296295166
+      ]
+    },
+    "triangles": 942739,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "reviewImages": [
+    {
+      "path": "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\work\\repair-alpine-onsen1-front-v1\\repaired-front.png",
+      "sha256": "f2cdf61337198ae40b0fc5dd584fa6253648cd5a0f7634a5756aaf45b3fd85f7",
+      "bytes": 178937
+    },
+    {
+      "path": "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\work\\repair-alpine-onsen1-front-v1\\repaired-right.png",
+      "sha256": "ab3d5011927b2fbbf42842bff01f44247a3d926a215adc0b5fe96c98476e2cc8",
+      "bytes": 135007
+    },
+    {
+      "path": "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\work\\repair-alpine-onsen1-front-v1\\repaired-back.png",
+      "sha256": "ec909ca2d2b37b9c20c2b9b8038b631ab5129d24cec141b1a3c2cc4f7e9e71a7",
+      "bytes": 174069
+    },
+    {
+      "path": "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\work\\repair-alpine-onsen1-front-v1\\repaired-left.png",
+      "sha256": "64502c75de1543eb05312419d907508798c1fb0e036d7444025d9d1756461fae",
+      "bytes": 129539
+    },
+    {
+      "path": "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\work\\repair-alpine-onsen1-front-v1\\repaired-iso.png",
+      "sha256": "b4eba96958760714c9ec8fa444827ef2244f8fb41e639727c366c8d6be294af8",
+      "bytes": 200868
+    }
+  ],
+  "processingTool": {
+    "path": "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\0acc2c36e8d3ee75e7dbbf75b371a458d686620245998fe005e1ff7a01f43b0b-repair_alpine_onsen1_front_surface.py",
+    "sha256": "0acc2c36e8d3ee75e7dbbf75b371a458d686620245998fe005e1ff7a01f43b0b",
+    "bytes": 12821
+  },
+  "completedAt": "2026-10-23T22:09:18.838624+00:00"
+}

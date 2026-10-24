@@ -1,0 +1,120 @@
+{
+  "status": "geometry_ready_for_native_field",
+  "createdAt": "2026-10-24T04:08:58.848677+00:00",
+  "region": "expansion",
+  "asset": "hotel_3",
+  "source": {
+    "rawGLB": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\expansion--hotel_3-a012-pixal-mv-1024-29490.glb",
+      "sha256": "b94c2e276ae728ee8fda835698dbdce70a565076cdff80e17108cba44f546911",
+      "bytes": 40202384
+    }
+  },
+  "inferenceReport": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\expansion--hotel_3-a012\\expansion--hotel_3-a012-pixal-mv-1024-29490.json",
+    "sha256": "fddf32186461c48fe6be6a7e45625334b5665cf18a690ff25ca4f8e561ebc67d",
+    "bytes": 10168
+  },
+  "reference": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\inputs\\expansion\\hotel_3\\395d9d16e3dfb0fd\\reference.json",
+    "sha256": "1e95f56b5016829aaddf3026c2599b44d57987bb3b3c45b972c761c4a9f4be74",
+    "bytes": 4441
+  },
+  "processingTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\01259185d3327c7a75b8df2e595381e45eccf13901ce96ea80844701e548295e-process_lod.py",
+    "sha256": "01259185d3327c7a75b8df2e595381e45eccf13901ce96ea80844701e548295e",
+    "bytes": 34836
+  },
+  "assumedCameras": true,
+  "cameraCalibration": "assumed_standard_orbit_not_measured",
+  "nativePipeline": "Pixal3DMVImageTo3DPipeline.run_mv",
+  "nativeResolution": 1024,
+  "seed": 29490,
+  "geometryOrigin": "Actual native three-view source normalized and reduced with the recorded geometry settings; no intermediate UV, material transfer or renders. Requires native field finalization and independent visual approval.",
+  "orientation": {
+    "up": "Y",
+    "front": "+Z",
+    "groundY": 0,
+    "maxEdge": 1
+  },
+  "requestedTriangles": 30000,
+  "limitations": [
+    "Assumed camera reference reconstruction, not exact measured architecture",
+    "Final candidate requires actual rendered visual approval"
+  ],
+  "animation": null,
+  "processingComplete": false,
+  "lod": "near",
+  "processingRevision": 0,
+  "geometryOnlyFieldReceipt": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\expansion--hotel_3-a012\\receipt.json",
+    "sha256": "5eadfaf773a7643263490a3060c1a42a40f085b28ae724d527382e40eb06cf4e",
+    "bytes": 3705
+  },
+  "geometryOnly": true,
+  "geometryReady": true,
+  "processedCandidate": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\geometry-only-low\\expansion--hotel_3-b94c2e276ae728ee-r0\\expansion\\hotel_3.glb",
+    "sha256": "498cf460f2ebfe5e3419c5dff6629755b280c251263232ab1f28d3d294644829",
+    "bytes": 557456
+  },
+  "triangles": 29996,
+  "geometryPreExport": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\geometry-only-low\\expansion--hotel_3-b94c2e276ae728ee-r0\\expansion\\hotel_3.geometry-before-export.npz",
+    "sha256": "a543c269b51cda924d93377246efd5967248dd07c5bf8d71c8ce98ce7463be06",
+    "bytes": 536312
+  },
+  "geometryExportPreservation": {
+    "preExport": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\geometry-only-low\\expansion--hotel_3-b94c2e276ae728ee-r0\\expansion\\hotel_3.geometry-before-export.npz",
+      "sha256": "a543c269b51cda924d93377246efd5967248dd07c5bf8d71c8ce98ce7463be06",
+      "bytes": 536312
+    },
+    "allOrientedTrianglesExactlyPreserved": true,
+    "trianglesCompared": 29996,
+    "maximumPositionChange": 0,
+    "vertexSplitsOrFaceOrderPermitted": true,
+    "method": "Exact per-corner float32 positions and cyclic oriented triangle multiset, including multiplicity; no nearest-point tolerance"
+  },
+  "geometryValidation": {
+    "version": 2,
+    "triangles": 29996,
+    "meshes": 1,
+    "materials": 0,
+    "images": 0,
+    "hasUV": false,
+    "bakedNodeTransforms": true
+  },
+  "derivation": {
+    "rawTriangles": 966953,
+    "weldedTriangles": 965202,
+    "remeshedTriangles": 2279072,
+    "voxelSize": 0.003,
+    "finalTriangles": 29996,
+    "singleReductionPass": true,
+    "inheritedUVRemovedBeforeReduction": true,
+    "sourceMaterialsUntouched": true,
+    "temporaryUVBakeAndRenderSkipped": true
+  },
+  "bounds": {
+    "min": [
+      -0.36929649114608765,
+      0.0005470009054988623,
+      -0.4058130085468292
+    ],
+    "max": [
+      0.36929160356521606,
+      0.9998843669891357,
+      0.4063272476196289
+    ],
+    "coordinateSystem": "GLTF Y-up; +Z front"
+  },
+  "rawSourceUnchanged": true,
+  "completedAt": "2026-10-24T04:09:46.384934+00:00",
+  "geometryTriangleBudget": {
+    "requested": 30000,
+    "existingApprovalCeiling": 32000,
+    "actual": 29996,
+    "withinCeiling": true
+  }
+}

@@ -1,0 +1,380 @@
+{
+  "status": "exported_pending_visual_review",
+  "createdAt": "2026-10-23T09:29:23.907715+00:00",
+  "region": "harbor",
+  "asset": "lighthouse",
+  "source": {
+    "rawGLB": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\harbor--lighthouse-a001-pixal-mv-1024-9247.glb",
+      "sha256": "bf9f9b920e10169aae450c25136638e91a0b4cbef57165752954ae26adc6c289",
+      "bytes": 45130516
+    }
+  },
+  "inferenceReport": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\harbor--lighthouse-a001\\harbor--lighthouse-a001-pixal-mv-1024-9247.json",
+    "sha256": "3486209d962e9094356c4cdb1a1803c8f4ea90714ba56d12cde011cf60e1b567",
+    "bytes": 8124
+  },
+  "reference": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\references\\harbor\\lighthouse\\reference.json",
+    "sha256": "18688e470a540a20cc0b2324d2ed9b3eeb5a557d03bd14b19ae804f32f6973fb",
+    "bytes": 4020
+  },
+  "processingTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\d1befe53381b9186da4b840298fc1d6b373524437790091b7f6e296bfcbf771b-process_lod.py",
+    "sha256": "d1befe53381b9186da4b840298fc1d6b373524437790091b7f6e296bfcbf771b",
+    "bytes": 27109
+  },
+  "assumedCameras": true,
+  "cameraCalibration": "assumed_standard_orbit_not_measured",
+  "nativePipeline": "Pixal3DMVImageTo3DPipeline.run_mv",
+  "nativeResolution": 1024,
+  "seed": 9247,
+  "geometryOrigin": "Actual native three-view neural building with explicitly recorded bounded local repairs; localSurfaceRepair.method and face counts disclose whether these include boundary patches or a small mechanical connector. Followed by source-derived remeshing and texture transfer. No replacement building.",
+  "orientation": {
+    "up": "Y",
+    "front": "+Z",
+    "groundY": 0,
+    "maxEdge": 1
+  },
+  "requestedTriangles": 45000,
+  "limitations": [
+    "Assumed camera reference reconstruction, not exact measured architecture",
+    "Final candidate requires actual rendered visual approval"
+  ],
+  "animation": null,
+  "processingComplete": true,
+  "lod": "near",
+  "processingRevision": 0,
+  "localSurfaceRepair": {
+    "source": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-lighthouse-bracket\\repaired-native.glb",
+      "sha256": "26e1302c29ec83d002836c0ec9dffe41814b3d94bc46e743335a80154e9c563f",
+      "bytes": 45222764
+    },
+    "receipt": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\harbor\\lighthouse\\26e1302c29ec83d0\\repair.json",
+      "sha256": "cd3a988c2bd979a6c875475b926c654baf33b209422cb7d34788e9e4c5c07d84",
+      "bytes": 6033
+    },
+    "method": "The original AI lamp and existing wall mounting had a measured spatial gap. Restore only a small closed curved brass connector between their measured endpoints, using unchanged original mounting texture UV. This is explicitly added local mechanical repair geometry, not a native-generated connector or a replacement building. Original neural building and lantern vertices, faces and image pixels remain unchanged.",
+    "newTriangles": 272,
+    "newVertices": 138,
+    "originalVerticesMoved": 0,
+    "originalTrianglesDeleted": 0,
+    "regions": [
+      {
+        "name": "Missing short connector between original mounting and lantern",
+        "mountingPointBlender": [
+          -0.06728436797857285,
+          -0.18579328060150146,
+          0.2782975733280182
+        ],
+        "lanternTipBlender": [
+          -0.0793565884232521,
+          -0.2901178002357483,
+          0.29627588391304016
+        ],
+        "distance": 0.10654840618371964,
+        "radius": 0.0055,
+        "newTriangles": 272,
+        "donorOriginalFace": 322561,
+        "donorOriginalUV": [
+          [
+            0.3116759955883026,
+            0.10464775562286377
+          ],
+          [
+            0.3104008138179779,
+            0.10620099306106567
+          ],
+          [
+            0.30906665325164795,
+            0.10501646995544434
+          ]
+        ],
+        "lampPivotGLTF": [
+          -0.0793565884232521,
+          0.29627588391304016,
+          0.2901178002357483
+        ]
+      }
+    ]
+  },
+  "derivation": {
+    "rawTriangles": 940329,
+    "weldedTriangles": 931206,
+    "remeshedTriangles": 2213640,
+    "voxelSize": 0.003,
+    "finalTriangles": 44986,
+    "atlasArea": 0.3826484087103873,
+    "singleReductionPass": true,
+    "inheritedUVRemovedBeforeReduction": true,
+    "sourceMaterialsUntouched": true,
+    "uvUnwrap": {
+      "angleDegrees": 66.0,
+      "islandMargin": 2e-05,
+      "marginMethod": "SCALED",
+      "nominalMarginPixels": null
+    },
+    "repairedSourceTriangles": 940601
+  },
+  "bake": {
+    "method": "CPU closest-original-triangle projection with float64 barycentric original UV and bilinear original texture sampling; geometric normals retained, no directional normal-map rebake or invented color",
+    "coveredAtlasPixels": 400902,
+    "nearestLookupSuccessFraction": 1.0,
+    "notRayCoverage": true,
+    "sourceDistanceQuantiles": [
+      0.00015964605699991807,
+      0.0008731450914638114,
+      0.0014740548701956866,
+      0.0048233261331915855
+    ],
+    "sourceDistanceQuantileLevels": [
+      0.5,
+      0.95,
+      0.99,
+      1
+    ],
+    "overTwoPercentMaxEdge": 0.0,
+    "distanceReviewRequired": false,
+    "visualGeometryReviewRequired": true,
+    "barycentricOriginalRange": [
+      -7.0605638325487e-05,
+      1.0
+    ],
+    "degenerateOrInvalidBarycentricCount": 0,
+    "closestSourceVertexFallbackFraction": 0.0,
+    "barycentricPointReconstructionErrorQuantiles": [
+      4.741784304713033e-09,
+      3.692614692345573e-08,
+      2.439169263847045e-07
+    ],
+    "atlasOverlapPixelsWithDifferentSurface": 330,
+    "seconds": 8.03863310001907,
+    "maps": [
+      {
+        "role": "base",
+        "size": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "role": "orm",
+        "size": [
+          512,
+          512
+        ]
+      }
+    ],
+    "repairSourceNote": "Texture transfer uses the explicitly repaired neural source, retaining original PBR and locally interpolated same-wall UV. Repair receipt and unchanged original inference source are preserved separately."
+  },
+  "textureTransferTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\a2cb99c96fb8df396f16580a88a7c6151104ee3c927fe76cd161ee2d27bdfa42-bake_nearest_surface.py",
+    "sha256": "a2cb99c96fb8df396f16580a88a7c6151104ee3c927fe76cd161ee2d27bdfa42",
+    "bytes": 7317
+  },
+  "quantization": {
+    "source": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\legacy-repair-harbor--lighthouse-26e1302c29ec83d0\\low\\harbor\\lighthouse.glb",
+    "output": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\legacy-repair-harbor--lighthouse-26e1302c29ec83d0\\low\\harbor\\lighthouse.glb",
+    "sourceBytes": 2581248,
+    "outputBytes": 1865432,
+    "sourceSha256": "394e8aae4849c93e9cef1cc877944bf90cea30a6a833a2077b96895e74895b92",
+    "outputSha256": "a0e81d3bc4ca15990f46c10a16bf317edc2d51576248e67117beac04c3757275",
+    "positionFaceAndTextureBytesUnchanged": true,
+    "attributes": [
+      {
+        "accessor": 1,
+        "semantic": "NORMAL",
+        "count": 59664,
+        "maximumAngularErrorDegrees": 0.3715433030356625
+      },
+      {
+        "accessor": 2,
+        "semantic": "TEXCOORD_0",
+        "count": 59664,
+        "maximumUVError": 7.629410902376677e-06,
+        "maximumTexelErrorAt1024": 0.007812516764033717
+      }
+    ]
+  },
+  "processedCandidate": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\legacy-repair-harbor--lighthouse-26e1302c29ec83d0\\low\\harbor\\lighthouse.glb",
+    "sha256": "a0e81d3bc4ca15990f46c10a16bf317edc2d51576248e67117beac04c3757275",
+    "bytes": 1865432
+  },
+  "glbValidation": {
+    "version": 2,
+    "triangles": 44986,
+    "meshes": 1,
+    "materials": 1,
+    "images": 2,
+    "all_primitives_have_uv": true,
+    "animations": [],
+    "all_images_embedded": true,
+    "external_buffers": []
+  },
+  "triangles": 44986,
+  "renderedCandidate": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\legacy-repair-harbor--lighthouse-26e1302c29ec83d0\\low\\renders\\harbor\\lighthouse\\lod-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\legacy-repair-harbor--lighthouse-26e1302c29ec83d0\\low\\renders\\harbor\\lighthouse\\lod-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\legacy-repair-harbor--lighthouse-26e1302c29ec83d0\\low\\renders\\harbor\\lighthouse\\lod-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\legacy-repair-harbor--lighthouse-26e1302c29ec83d0\\low\\renders\\harbor\\lighthouse\\lod-left.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\legacy-repair-harbor--lighthouse-26e1302c29ec83d0\\low\\renders\\harbor\\lighthouse\\lod-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.4608020782470703,
+        -0.3989940881729126,
+        1.1561728570086416e-05
+      ],
+      "max": [
+        0.4609364867210388,
+        0.398711621761322,
+        0.9999242424964905
+      ]
+    },
+    "triangles": 44986,
+    "textureSizes": [
+      {
+        "name": "harbor__lighthouse__nearest_base",
+        "size": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "name": "harbor__lighthouse__nearest_orm",
+        "size": [
+          512,
+          512
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "renderedSource": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\legacy-repair-harbor--lighthouse-26e1302c29ec83d0\\low\\renders\\harbor\\lighthouse\\raw-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\legacy-repair-harbor--lighthouse-26e1302c29ec83d0\\low\\renders\\harbor\\lighthouse\\raw-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.46145913004875183,
+        -0.39897632598876953,
+        0.0
+      ],
+      "max": [
+        0.46145913004875183,
+        0.39897632598876953,
+        1.0
+      ]
+    },
+    "triangles": 940329,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "renderedRepairedSource": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\legacy-repair-harbor--lighthouse-26e1302c29ec83d0\\low\\renders\\harbor\\lighthouse\\repaired-source-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\legacy-repair-harbor--lighthouse-26e1302c29ec83d0\\low\\renders\\harbor\\lighthouse\\repaired-source-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\legacy-repair-harbor--lighthouse-26e1302c29ec83d0\\low\\renders\\harbor\\lighthouse\\repaired-source-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.46145913004875183,
+        -0.39897632598876953,
+        0.0
+      ],
+      "max": [
+        0.46145913004875183,
+        0.39897632598876953,
+        1.0
+      ]
+    },
+    "triangles": 940601,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "bounds": {
+    "min": [
+      -0.4608020782470703,
+      1.1561728570086416e-05,
+      -0.398711621761322
+    ],
+    "max": [
+      0.4609364867210388,
+      0.9999242424964905,
+      0.3989940881729126
+    ],
+    "coordinateSystem": "GLTF Y-up; +Z front"
+  },
+  "textureSizes": [
+    {
+      "name": "harbor__lighthouse__nearest_base",
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "name": "harbor__lighthouse__nearest_orm",
+      "size": [
+        512,
+        512
+      ]
+    }
+  ],
+  "rawSourceUnchanged": true,
+  "completedAt": "2026-10-23T09:31:01.154743+00:00",
+  "localSurfaceRepairEvidencePreservation": [
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\harbor\\lighthouse\\26e1302c29ec83d0\\evidence-preservation-8036da38ee1f8380.json",
+      "sha256": "8036da38ee1f8380e344774dffe4c3402656efa9792553a1bae3c7bc0b28ab63",
+      "bytes": 7673
+    }
+  ],
+  "legacyOriginalTextureRoute": {
+    "capturedNeuralFieldAvailable": false,
+    "newNeuralInference": false,
+    "method": "Source-derived low geometry, native UV-only charts, then original repaired-source PBR transfer. Original field was not captured for this earlier inference."
+  }
+}

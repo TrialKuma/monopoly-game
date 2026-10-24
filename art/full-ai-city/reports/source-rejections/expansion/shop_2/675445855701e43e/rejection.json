@@ -1,0 +1,52 @@
+{
+  "status": "rejected_native_export_source",
+  "region": "expansion",
+  "asset": "shop_2",
+  "reviewer": "asset_production",
+  "recordedAtUtc": "2026-10-24T04:44:59.371897+00:00",
+  "source": {
+    "path": "art/full-ai-city/source/expansion--shop_2-a012-pixal-mv-1024-29492.glb",
+    "sha256": "675445855701e43eb898016acd9705f834ad107c6a58f796c17e8e86500b272c",
+    "bytes": 38561076
+  },
+  "sourceLevel": "Native 1M export; no untouched decoder attribution is made.",
+  "inferenceReport": {
+    "path": "art/full-ai-city/reports/source-rejections/expansion/shop_2/675445855701e43e/expansion--shop_2-a012-pixal-mv-1024-29492.json",
+    "sha256": "4f5ec92e9511daf9c76adc96484b13d08aeb416c5df08fe1a147eeb5d353473a",
+    "bytes": 10158
+  },
+  "inputReference": {
+    "path": "art/full-ai-city/reports/source-rejections/expansion/shop_2/675445855701e43e/input-reference.json",
+    "sha256": "11fc5ccc5222d0fa728473d429a7f2cc7ba9054acfb534fb6a4434a1f0406e8b",
+    "bytes": 4430
+  },
+  "diagnostic": null,
+  "diagnosticTool": null,
+  "sourceComparisonReport": {
+    "path": "art/full-ai-city/reports/source-rejections/expansion/shop_2/675445855701e43e/source-comparison-processing.json",
+    "sha256": "e78dc4454d50a420e76b3d020605426f70456cc779017e7f5f83b82f04e5fd3d",
+    "bytes": 20883
+  },
+  "sourceViewEvidenceMode": "Explicitly selected existing renderedSource views; no additional or neutral render implied",
+  "evidence": [
+    {
+      "path": "art/full-ai-city/reports/source-rejections/expansion/shop_2/675445855701e43e/raw-front.png",
+      "sha256": "0c8679481131c49a8e5b1f89dce059e6cc28e64d61eb99d4a96a1227256f6369",
+      "bytes": 257672
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/expansion/shop_2/675445855701e43e/raw-iso.png",
+      "sha256": "2fb4b31863feacfc0b5b3c4fdf16c0e107815b5b6cf9f20b5a960813af84d0ef",
+      "bytes": 342428
+    }
+  ],
+  "finding": "Actually inspected original triptych, second-source native front/iso, exact final five and256px. Retry restores the large door/side/lintel losses, but front display windows contain conspicuous fragmented overlapping amber/interior sheets, also visible in native front/iso. Final left lower window similarly appears as broken leaflike slabs. The broken focal glazing remains obvious at phone scale; source main walls and roof are otherwise largely coherent. Preserve both old-reference outcomes and make one targeted reference revision simplifying glazing to continuous closed opaque panels while retaining two-storey rounded Art Deco shop and striped awning. No third old-reference seed, no full facade handcrafted replacement.",
+  "decision": "One targeted glazing/solid-surface reference revision; no third old-reference seed.",
+  "sourceUnchanged": true,
+  "notFinalCandidateReview": true,
+  "freezeTool": {
+    "path": "art/full-ai-city/reports/tool-snapshots/616860a00b28e670e1219d64c6cb5dad17f0946420568f786e80b6d789fb4a73-freeze_public_source_rejection.py",
+    "sha256": "616860a00b28e670e1219d64c6cb5dad17f0946420568f786e80b6d789fb4a73",
+    "bytes": 4304
+  }
+}

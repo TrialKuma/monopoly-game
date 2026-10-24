@@ -1,0 +1,58 @@
+{
+  "createdAt": "2026-10-23T23:33:25.050887+00:00",
+  "executionOwner": "asset_production",
+  "reason": "Consolidate remaining routine production and QA into one smaller context; avoid duplicate root/agent polling and long-context coordination.",
+  "authorizedScope": "Finish all 147 near and 25 far buildings across five maps, actual AI references/source/final QA, final runtime integration and portrait/regional checks; commit/push only after complete.",
+  "approvedCounts": {
+    "near": 76,
+    "far": 13
+  },
+  "pending": [
+    {
+      "asset": "alpine/tower_3",
+      "repairSource": "ebfc83b041dfe9efb052795d4d5b1d9abc921eae103f8ff9ef4acf68060789c2",
+      "job": "hybrid-queue/jobs/alpine--tower_3-1f87b54f397a-repair-ebfc83b041df-low-2da92f2681-field-v1.json",
+      "note": "Final material + phone QA remains; this is last Alpine near. Source v3 fills plaster/gables and avoids donor-UV island interpolation; no more raw/ref rerolls."
+    },
+    {
+      "asset": "compact/villa_3",
+      "work": "work/compact-villa3-closed74-45k",
+      "execSession": 30815,
+      "note": "74 tiny triangular low-boundary closures, all old faces/vertices/binary exact. Field replay completed; helper waits CPU, finalizes, verifies fixture and creates sheets. Actual final review still required. New lowSurfaceRepair receipt must be portable before final release; preserve immutable originals. If remaining voxel wall loss is visible, do not keep patching blindly; one direct geometry-only test from original source is preferable."
+    },
+    {
+      "asset": "compact/shop_2",
+      "work": "work/compact-shop2-38a23134-fine0015-45k",
+      "execSession": 39730,
+      "note": "One finer 45k/.0015 trial; current coarse bbcd616c has phone-visible lower-side wall gaps. New reference6d30c66b and source38a23134 remain fixed."
+    },
+    {
+      "asset": "compact/hotel_3",
+      "work": "work/compact-hotel3-b7021f31-direct45k-geometry-only",
+      "execSession": 87683,
+      "config": "reports/derivative-reviews/compact/hotel_3/direct45k-geometry-only.json",
+      "note": "First actual direct45k original-source native-field trial. Two old direct attempts never got past redundant temporary UV atlas. Source-support final cf66ba9b rejected and frozen: left panel fixed but new rear upper triangle visible against intact native raw-back. No matrix of further settings; judge this final first."
+    },
+    {
+      "asset": "compact/villa_1",
+      "raw": "783d10287c56",
+      "note": "Current source field replay awaits final; no approval yet."
+    },
+    {
+      "asset": "expansion/villa_1",
+      "raw": "321f5b5ffa98",
+      "note": "First independent retry after source fb66c82 rejected; field replay awaits final."
+    },
+    {
+      "asset": "compact/shop_3",
+      "note": "Same-reference seed29477 retry in progress or recently complete. Old source8ed4906b has genuine large rear gaps and is held. Do not repair old derivative."
+    }
+  ],
+  "recentApproved": {
+    "expansion/tower_1": "92df2d548627d7bfdf360057bc51adc2d105893b6cd9a9d15453041691fb64bc"
+  },
+  "newPipeline": "Opt-in geometry-only near intermediate implemented by agent. Root added config.geometryOnly support in run_isolated_surface_trial; old defaults unchanged. It skips only temporary UV/bake/renders, then real native UV/field final and all five-view review. No global activation before representative final succeeds.",
+  "browserBlock": "CUA explicitly denied acquiring existing art-review error tab under URL security policy. Do not bypass using alternate browser/CDP/CLI. User has async request to manually reopen http://127.0.0.1:8876/art-review.html. Local server listening on loopback; continue independent asset work while waiting. Final in-page QA remains required.",
+  "finalIntegration": "Keep Classic approved regional QA. When all maps approved/reviewed, remove artStage-only sprite fallback, coherent runtime versions, full near/far/hero packaging, meaningful checks, then authorized git commit and push. No partial release claim.",
+  "coordination": "One execution agent; batch completed reviews and blockers, avoid repeated status chatter. No user-process termination or weaker memory guards."
+}

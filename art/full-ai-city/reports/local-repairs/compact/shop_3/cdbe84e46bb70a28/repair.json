@@ -1,0 +1,208 @@
+{
+  "status": "local_repair_candidate_pending_visual_review",
+  "source": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\compact--shop_3-a003-pixal-mv-1024-29477.glb",
+    "sha256": "c30c28978b46b124855961a6fc005a0df62412136640f0d34fba06e5dba11240",
+    "bytes": 43743024
+  },
+  "orientation": {
+    "enabled": true,
+    "candidate_degrees": 0.19782343594174043,
+    "applied_degrees": 0.19782343594174043,
+    "underside_area": 0.16246816436735445,
+    "normal_agreement": 0.9674782839731959,
+    "yaw_degrees": 180,
+    "pitch_degrees": 0,
+    "roll_degrees": 0,
+    "uniform_scale": 1.1014970831417048
+  },
+  "configuration": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\source-repairs-planned\\compact\\shop_3\\c30c28978b46b124\\curtain-support.json",
+    "sha256": "fd4aad93dd5760acd4740910d0ff8fb4c3820c86c73da6002e0966873f4c6a56",
+    "bytes": 1318
+  },
+  "reviewEvidence": [
+    {
+      "path": "reports/source-repairs-planned/compact/shop_3/c30c28978b46b124/review.json",
+      "sha256": "a5df18ca4592031fe854a2d1bd7ba06ff5afb732c3ef00c08edda63e199d8554",
+      "bytes": 1501
+    }
+  ],
+  "measurement": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\facade-gaps\\compact\\shop_3\\c30c28978b46-front\\inspection.json",
+    "sha256": "2c57366896df51e53ae60c64fbe8cfff4bd4564926921e52a53ed7a0c14a57ca",
+    "bytes": 11119
+  },
+  "method": "Only explicitly measured and visually reviewed local gaps are closed from adjoining original surface and UV samples with0.006 inward closure. Original vertices, faces and image pixels are preserved. No replacement building or generated texture. See configuration and frozen prior review evidence for exact allowed regions.",
+  "repairs": [
+    {
+      "name": "Existing green storefront cloth panels only, bounded thin-surface support",
+      "specification": {
+        "name": "Existing green storefront cloth panels only, bounded thin-surface support",
+        "u": [
+          1,
+          0,
+          0
+        ],
+        "v": [
+          0,
+          0,
+          1
+        ],
+        "n": [
+          0,
+          -1,
+          0
+        ],
+        "roi": [
+          -0.315,
+          0.325,
+          0.202,
+          0.276
+        ],
+        "forceRoi": [
+          -0.315,
+          0.325,
+          0.202,
+          0.276
+        ],
+        "defectDepth": 0.02,
+        "donorDepth": 0.244,
+        "donorMaxDepth": 0.257,
+        "donorNormal": 0.65,
+        "color": "cloth",
+        "gridStep": 0.008,
+        "donorMargin": 0.032,
+        "flatPatchUV": true,
+        "donorMinRGB": 0.02,
+        "donorMaxColorRatio": 4
+      },
+      "missingSamples": 800,
+      "boundarySamples": 848,
+      "sampledDepthRange": [
+        -0.22320151329040527,
+        0.2527780532836914
+      ],
+      "inwardClosureThickness": 0.006,
+      "outerSurfaceUnchanged": true,
+      "newVertices": 1968,
+      "newTriangles": 3932
+    }
+  ],
+  "originalTriangles": 962229,
+  "originalVerticesMoved": 0,
+  "originalTrianglesDeleted": 0,
+  "artifactCleanup": {
+    "method": "No original faces deleted. Only the explicitly reviewed bounded source-surface regions in the configuration may receive additional triangles.",
+    "deletedTriangles": 0
+  },
+  "newTriangles": 3932,
+  "newVertices": 1968,
+  "inverseSimilarityError": 8.715035404449623e-08,
+  "normalizedOutput": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-compact-shop3-c30c-curtain-support\\repaired-normalized.glb",
+    "sha256": "886563df0ad6ff931dab0f6821835121da4540b3f525caf14423fab2deb92339",
+    "bytes": 44265588
+  },
+  "nativeOutput": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-compact-shop3-c30c-curtain-support\\repaired-native.glb",
+    "sha256": "cdbe84e46bb70a28e3c584a569a8c2a51662855b44e912f583f96c3c7e1090a2",
+    "bytes": 44259224
+  },
+  "renders": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-compact-shop3-c30c-curtain-support\\repaired-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-compact-shop3-c30c-curtain-support\\repaired-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-compact-shop3-c30c-curtain-support\\repaired-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-compact-shop3-c30c-curtain-support\\repaired-left.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-compact-shop3-c30c-curtain-support\\repaired-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.48191455006599426,
+        -0.3023681044578552,
+        0.0
+      ],
+      "max": [
+        0.48191455006599426,
+        0.3023681044578552,
+        1.0
+      ]
+    },
+    "triangles": 966161,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "reviewImages": [
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\compact\\shop_3\\cdbe84e46bb70a28\\repaired-front.png",
+      "sha256": "398be9056270e3db9c1f0c9f7a266577919d7e61b957e1eb1a7057c8b55a016f",
+      "bytes": 255162
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\compact\\shop_3\\cdbe84e46bb70a28\\repaired-right.png",
+      "sha256": "a2241e6d761733fe0cfeebf8e5d276b2fadd2a60a7d3126dd0db35758725d2d8",
+      "bytes": 193944
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\compact\\shop_3\\cdbe84e46bb70a28\\repaired-back.png",
+      "sha256": "b26b68439a77e8eb8909ed5a9beddb4dcc5715964bc1323371501abe189533fa",
+      "bytes": 244544
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\compact\\shop_3\\cdbe84e46bb70a28\\repaired-left.png",
+      "sha256": "0aca85b2bfaf1dfa855d923b84c98fbef96e3f0188e1c148842efdbb51820ae1",
+      "bytes": 194015
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\compact\\shop_3\\cdbe84e46bb70a28\\repaired-iso.png",
+      "sha256": "0d4efcec2088b01ea6f62b9c539b0308f7cd8104b10033da09ef6f26bf521612",
+      "bytes": 290742
+    }
+  ],
+  "processingTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\f21173ee639bce54c9c7094ef6121aa6aea7401fc45edfff9d221c65a107ae79-repair_bounded_source_surface.py",
+    "sha256": "f21173ee639bce54c9c7094ef6121aa6aea7401fc45edfff9d221c65a107ae79",
+    "bytes": 13325
+  },
+  "completedAt": "2026-10-24T00:33:14.460365+00:00",
+  "sourceVisualReview": {
+    "status": "reviewed_for_derivative_processing",
+    "views": [
+      "front",
+      "right",
+      "back",
+      "left",
+      "iso"
+    ],
+    "note": "Actually inspected all five repaired source views. Only the existing front green cloth band receives0.006 inward thickness support; main roof, three storeys, walls, storefront contents and windows remain original. Cloth panel seams become softer and a small lighter left-edge patch is visible, to be judged in the one final native-field/phone comparison. This is a source support trial for already demonstrated remesh loss, not a new building or approval. Original triangle positions, UV and image bytes verified exact;3932 added faces.",
+    "reviewer": "asset_production"
+  },
+  "originalRepairReceipt": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-compact-shop3-c30c-curtain-support\\repair.json",
+    "sha256": "f26026a255b554c5562455874ff9d170a28013df77794facce7e3555718bc43e",
+    "bytes": 7108
+  },
+  "sourcePreservation": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\compact\\shop_3\\cdbe84e46bb70a28\\preservation.json",
+    "sha256": "40b390cf6a95ce9b87de0f6498468c444b3fddc0dcc65083fcc687c1a099df14",
+    "bytes": 1100
+  }
+}

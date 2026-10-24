@@ -1,0 +1,121 @@
+{
+  "asset_id": "alpine-tower1-single-front",
+  "input": "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\alpine-tower1-a003-single-front-23421\\inputs\\front.png",
+  "input_sha256": "5c68bf9ee4c66c58543b17400d9b6a7d8e2b77413c4655aafd25c3fd46ad7287",
+  "input_size": [
+    799,
+    799
+  ],
+  "alpha_bbox": [
+    29,
+    60,
+    774,
+    650
+  ],
+  "alpha_extrema": [
+    0,
+    255
+  ],
+  "output": "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\alpine-tower1-a003-single-front-23421\\attempt-011\\source\\alpine-tower1-single-front-pixal-1024-23421.glb",
+  "report": "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\alpine-tower1-a003-single-front-23421\\attempt-011\\reports\\alpine-tower1-single-front-pixal-1024-23421.json",
+  "status": "generated_unrigged_part_candidate",
+  "started_utc": "2026-10-23T12:27:43.678946+00:00",
+  "generation_started": true,
+  "local_inference_only": true,
+  "resolution": 1024,
+  "seed": 23421,
+  "low_vram": true,
+  "strict_naf": true,
+  "texture_size": 4096,
+  "sampler_steps": {
+    "ss": 12,
+    "shape": 12,
+    "tex": 12
+  },
+  "native_checkpoint_dtypes_preserved": true,
+  "camera_fov_radians": 0.3490658503988659,
+  "input_method": "one isolated-part RGBA image; no exact multiview reconstruction claimed",
+  "source_adapter": "C:\\Users\\A\\.codex\\worktrees\\0b69\\厂长\\grande-art-lab\\tools\\run_pixal_local.py",
+  "source_adapter_sha256": "ba8f1137c050980cc6ff252bce45ae5c1058edf565451212c074eb7134f5b505",
+  "cache_directory": "H:\\代码项目\\monopoly\\art\\full-ai-city\\cache",
+  "shared_files_write_protected": true,
+  "rig_or_animation_added": false,
+  "stage_log": "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\alpine-tower1-a003-single-front-23421\\attempt-011\\reports\\alpine-tower1-single-front-pixal-1024-23421.stages.jsonl",
+  "stage_telemetry_scope": "Boundary timing and tensor metadata only; no extra CUDA synchronization or numeric changes.",
+  "gpu_lock": {
+    "status": "released",
+    "pid": 7236,
+    "host": "NeoRic",
+    "label": "monopoly-harbor-pixal-20261023",
+    "acquired_utc": "2026-10-23T12:27:43.949988+00:00",
+    "lock_path": "C:\\Users\\A\\.codex\\shared-resource-locks\\pixal-gpu0.lock",
+    "token": "4cd6e99d4833448bae029fdbbc7d75e1",
+    "metadata_is_advisory": true,
+    "context_finished_utc": "2026-10-23T12:33:12.755113+00:00"
+  },
+  "resources_before": {
+    "gpu": "NVIDIA GeForce RTX 5070 Ti",
+    "total_physical_vram_gib": 15.9208984375,
+    "free_physical_vram_gib": 14.3544921875,
+    "gpu_utilization_percent": 7,
+    "total_ram_gib": 31.152122497558594,
+    "available_ram_gib": 16.968502044677734
+  },
+  "torch": "2.10.0+cu130",
+  "cuda": "13.0",
+  "natten": "0.21.6",
+  "cuda_free_gib": 14.6845703125,
+  "cuda_total_gib": 15.89398193359375,
+  "output_bytes": 46663060,
+  "output_sha256": "e63dbba4d1af7088fabb668d88505805967f9d05c07933e1498bcc14c997e2cb",
+  "input_unchanged": true,
+  "seconds": 328.81,
+  "finished_utc": "2026-10-23T12:33:12.755113+00:00",
+  "peak_allocated_gib": 14.229,
+  "experimentOnly": true,
+  "view_count": 1,
+  "pipeline_config": "pipeline.json",
+  "native_entrypoint": "inference.py:run_inference / Pixal3DImageTo3DPipeline.run",
+  "comparisonManifest": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\alpine-tower1-a003-single-front-23421\\manifest.json",
+    "sha256": "25a31a1ffcf997c12d631faf40704d373e482ee9f91a3fad82ee22e483b0b785",
+    "bytes": 5515
+  },
+  "resourceTelemetry": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\alpine-tower1-a003-single-front-23421\\attempt-011\\resource-samples.jsonl",
+    "sha256": "8630f268e0c1dd06799b2a0e2d54e8738b1df1d5bdd32d6bbcf0de730679521c",
+    "bytes": 9256
+  },
+  "toolSnapshots": [
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\alpine-tower1-a003-single-front-23421\\attempt-011\\tools\\native_memory_reservation.py",
+      "sha256": "705848501583a3e6e40072356e3423c4d9c9ad763e84e0f3fa5c1c9ba85b47a8",
+      "bytes": 4247
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\alpine-tower1-a003-single-front-23421\\attempt-011\\tools\\pixal_single_use_lifetime.py",
+      "sha256": "dd2989847cc9e133323666cbabc5ab036243bf635e427230fff178cd4f8748e0",
+      "bytes": 6392
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\alpine-tower1-a003-single-front-23421\\attempt-011\\tools\\pixal_streaming_loader.py",
+      "sha256": "68122f14e021451b3673bb57368c5119c6f07ffe3748ab7e8dae911aa096f1ed",
+      "bytes": 7933
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\alpine-tower1-a003-single-front-23421\\attempt-011\\tools\\run_pixal_parts.py",
+      "sha256": "2d0925260eda73a3474990f3847051e1548a8de8eb92769595b01cc8f4562e73",
+      "bytes": 21474
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\alpine-tower1-a003-single-front-23421\\attempt-011\\tools\\run_single_front_experiment.py",
+      "sha256": "cc781d6d6808145f3089c79271de67b9431871ae7266e8956aae69dc91a1117a",
+      "bytes": 8611
+    }
+  ],
+  "nativeFieldCapture": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\alpine-tower1-a003-single-front-23421\\attempt-011\\native-mobile\\single-front\\receipt.json",
+    "sha256": "ab0f16deb7740c43c01b1fab025a52a4575b13a94fac8c4a38be7d02879cdd4d",
+    "bytes": 3627
+  }
+}

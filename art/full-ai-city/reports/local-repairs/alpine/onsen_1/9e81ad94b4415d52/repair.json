@@ -1,0 +1,287 @@
+{
+  "status": "local_repair_candidate_pending_visual_review",
+  "source": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\alpine--onsen_1-a003-pixal-mv-1024-29473.glb",
+    "sha256": "db62742a4d41cf3d3e25cc733132aaa3adf10aa4969a472a5ca2337bc8abcba8",
+    "bytes": 41085524
+  },
+  "orientation": {
+    "enabled": true,
+    "candidate_degrees": 0.29341961733888516,
+    "applied_degrees": 0.29341961733888516,
+    "underside_area": 0.05599988123845101,
+    "normal_agreement": 0.9451598266763768,
+    "yaw_degrees": 180,
+    "pitch_degrees": 0,
+    "roll_degrees": 0,
+    "uniform_scale": 1.0465456360569472
+  },
+  "measurement": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\alpine\\onsen_1\\9e81ad94b4415d52\\measurement.json",
+    "sha256": "c60759a68f791cc2c9d8151cd2aae1f1ce566936353d37d9254ec8909c9619a6",
+    "bytes": 1763
+  },
+  "method": "Two small existing front-slope tile holes and the front gable right plaster holes measured from existing original front-camera rays receive bounded neighboring-source surface samples and original UV donors. The plaster mask is restricted to actual observed through-hole pixels; no whole gable or roof replacement. All original vertices/faces/UV and embedded image bytes remain unchanged. No neutral render or decoder origin is claimed.",
+  "repairs": [
+    {
+      "name": "Two source-measured missing tile patches on the front left slope; left patch",
+      "specification": {
+        "name": "Two source-measured missing tile patches on the front left slope; left patch",
+        "u": [
+          1,
+          0,
+          0
+        ],
+        "v": [
+          0,
+          0.78575371,
+          0.6185395
+        ],
+        "n": [
+          0,
+          -0.6185395,
+          0.78575371
+        ],
+        "roi": [
+          -0.254,
+          -0.219,
+          0.169,
+          0.195
+        ],
+        "defectDepth": 0.25,
+        "donorDepth": 0.273,
+        "donorMaxDepth": 0.307,
+        "donorNormal": 0.25,
+        "color": "tile"
+      },
+      "missingSamples": 51,
+      "boundarySamples": 689,
+      "sampledDepthRange": [
+        0.1539604365825653,
+        0.28617867827415466
+      ],
+      "inwardClosureThickness": 0.006,
+      "outerSurfaceUnchanged": true,
+      "newVertices": 174,
+      "newTriangles": 344
+    },
+    {
+      "name": "Second small missing tile patch beside the first",
+      "specification": {
+        "name": "Second small missing tile patch beside the first",
+        "u": [
+          1,
+          0,
+          0
+        ],
+        "v": [
+          0,
+          0.78575371,
+          0.6185395
+        ],
+        "n": [
+          0,
+          -0.6185395,
+          0.78575371
+        ],
+        "roi": [
+          -0.197,
+          -0.178,
+          0.171,
+          0.189
+        ],
+        "defectDepth": 0.25,
+        "donorDepth": 0.273,
+        "donorMaxDepth": 0.307,
+        "donorNormal": 0.25,
+        "color": "tile"
+      },
+      "missingSamples": 4,
+      "boundarySamples": 496,
+      "sampledDepthRange": [
+        0.2354615330696106,
+        0.2842700779438019
+      ],
+      "inwardClosureThickness": 0.006,
+      "outerSurfaceUnchanged": true,
+      "newVertices": 36,
+      "newTriangles": 68
+    },
+    {
+      "name": "Front gable missing right plaster only where observed camera rays pass through",
+      "specification": {
+        "name": "Front gable missing right plaster only where observed camera rays pass through",
+        "u": [
+          1,
+          0,
+          0
+        ],
+        "v": [
+          0,
+          0,
+          1
+        ],
+        "n": [
+          0,
+          -1,
+          0
+        ],
+        "roi": [
+          0.032,
+          0.113,
+          0.27,
+          0.357
+        ],
+        "defectDepth": 0.085,
+        "donorDepth": 0.11,
+        "donorMaxDepth": 0.145,
+        "donorNormal": 0.65,
+        "color": "plaster",
+        "cameraObservedHoleMask": true
+      },
+      "missingSamples": 318,
+      "boundarySamples": 53,
+      "sampledDepthRange": [
+        -0.12902307510375977,
+        0.20448291301727295
+      ],
+      "inwardClosureThickness": 0.006,
+      "outerSurfaceUnchanged": true,
+      "newVertices": 860,
+      "newTriangles": 1716
+    }
+  ],
+  "originalTriangles": 940611,
+  "originalVerticesMoved": 0,
+  "originalTrianglesDeleted": 0,
+  "artifactCleanup": {
+    "method": "No original faces deleted. Two measured tile holes and observed front-gable plaster holes only. Porch, pool, windows and architectural frame remain unchanged.",
+    "deletedTriangles": 0
+  },
+  "newTriangles": 2128,
+  "newVertices": 1070,
+  "inverseSimilarityError": 6.773161914663817e-08,
+  "normalizedOutput": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-alpine-onsen1-front-v1\\repaired-normalized.glb",
+    "sha256": "19c9bef4b870198ac0e40427d22d10d37fe5b4c7b7087862da8f40f66af04243",
+    "bytes": 41704728
+  },
+  "nativeOutput": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-alpine-onsen1-front-v1\\repaired-native.glb",
+    "sha256": "9e81ad94b4415d529c7ecf1fa6bb024c9c87435bec9c4652168f23dfb7fa5e8b",
+    "bytes": 41698728
+  },
+  "renders": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\alpine\\onsen_1\\9e81ad94b4415d52\\repaired-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\alpine\\onsen_1\\9e81ad94b4415d52\\repaired-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\alpine\\onsen_1\\9e81ad94b4415d52\\repaired-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\alpine\\onsen_1\\9e81ad94b4415d52\\repaired-left.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\alpine\\onsen_1\\9e81ad94b4415d52\\repaired-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.5,
+        -0.22873754799365997,
+        0.0
+      ],
+      "max": [
+        0.5,
+        0.22873754799365997,
+        0.4726412296295166
+      ]
+    },
+    "triangles": 942739,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "reviewImages": [
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\alpine\\onsen_1\\9e81ad94b4415d52\\repaired-front.png",
+      "sha256": "f2cdf61337198ae40b0fc5dd584fa6253648cd5a0f7634a5756aaf45b3fd85f7",
+      "bytes": 178937
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\alpine\\onsen_1\\9e81ad94b4415d52\\repaired-right.png",
+      "sha256": "ab3d5011927b2fbbf42842bff01f44247a3d926a215adc0b5fe96c98476e2cc8",
+      "bytes": 135007
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\alpine\\onsen_1\\9e81ad94b4415d52\\repaired-back.png",
+      "sha256": "ec909ca2d2b37b9c20c2b9b8038b631ab5129d24cec141b1a3c2cc4f7e9e71a7",
+      "bytes": 174069
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\alpine\\onsen_1\\9e81ad94b4415d52\\repaired-left.png",
+      "sha256": "64502c75de1543eb05312419d907508798c1fb0e036d7444025d9d1756461fae",
+      "bytes": 129539
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\alpine\\onsen_1\\9e81ad94b4415d52\\repaired-iso.png",
+      "sha256": "b4eba96958760714c9ec8fa444827ef2244f8fb41e639727c366c8d6be294af8",
+      "bytes": 200868
+    }
+  ],
+  "processingTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\alpine\\onsen_1\\9e81ad94b4415d52\\repair-tool.py",
+    "sha256": "0acc2c36e8d3ee75e7dbbf75b371a458d686620245998fe005e1ff7a01f43b0b",
+    "bytes": 12821
+  },
+  "completedAt": "2026-10-23T22:09:18.838624+00:00",
+  "originalRepairReport": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\alpine\\onsen_1\\9e81ad94b4415d52\\original-repair.json",
+    "sha256": "77f300d6d6563c4863f3007e451aed2529ac0d2f6e83f078efc32a932c63db3a",
+    "bytes": 8311
+  },
+  "measurementRayData": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\alpine\\onsen_1\\9e81ad94b4415d52\\front-camera-rays.npz",
+    "sha256": "b727a9aa800aff6de1bc32946a61299b4c37587faa4b562aa845ab02d6e1cdc2",
+    "bytes": 221484
+  },
+  "measurementTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\alpine\\onsen_1\\9e81ad94b4415d52\\measure-alpine-onsen1-front.py",
+    "sha256": "4ed5ae02d9e8324ffe2a5b403dad7076501134bd9956a9b36e0970a3b1b93715",
+    "bytes": 2686
+  },
+  "sourcePreservation": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\alpine\\onsen_1\\9e81ad94b4415d52\\preservation.json",
+    "sha256": "1d076e6ce4514b1e3aff71ad12b24de8888c76e42af31e2b781a1a811c9925b4",
+    "bytes": 1088
+  },
+  "sourcePreservationTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\alpine\\onsen_1\\9e81ad94b4415d52\\preservation-tool.py",
+    "sha256": "981a047bf7b3ac093a35dfee9347859a2b19c49d155fdaf79b667c53518f183c",
+    "bytes": 3099
+  },
+  "runtimeApproved": false,
+  "visualReview": {
+    "status": "source_repair_ready_for_derivation",
+    "reviewer": "/root/asset_production",
+    "recordedAtUtc": "2026-10-23T22:10:53.466818+00:00",
+    "views": [
+      "front",
+      "right",
+      "back",
+      "left",
+      "iso"
+    ],
+    "notes": "Actually inspected all five repaired source material views. The conspicuous front gable right plaster gap is closed by the measured observed-hole mask. Two small tile regions received neighboring-source patches; tiny roof specks/shallow dark pits remain in the enlarged repaired material view and require final same-field phone-scale evaluation, not source-stage approval. Original 940611 triangles preserve exact per-corner POSITION/UV and embedded image bytes, with only2128 added triangles and none removed. Pool, porch, windows, timber and all other roof/wall areas remain unchanged. Permit one45k/.003 final native-field trial. No neutral render or whole-mesh watertightness is claimed and no further broad repair is authorized."
+  }
+}

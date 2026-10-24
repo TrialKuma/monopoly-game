@@ -1,0 +1,57 @@
+{
+  "status": "rejected_native_export_source",
+  "region": "expansion",
+  "asset": "tower_2",
+  "reviewer": "asset_production",
+  "recordedAtUtc": "2026-10-24T05:18:07.969857+00:00",
+  "source": {
+    "path": "art/full-ai-city/source/expansion--tower_2-a011-pixal-mv-1024-29494.glb",
+    "sha256": "9099910bc41cc5e6d45997f28208b0e004eed00b85248c05aac64960e167de96",
+    "bytes": 40700772
+  },
+  "sourceLevel": "Native 1M export; no untouched decoder attribution is made.",
+  "inferenceReport": {
+    "path": "art/full-ai-city/reports/source-rejections/expansion/tower_2/9099910bc41cc5e6/expansion--tower_2-a011-pixal-mv-1024-29494.json",
+    "sha256": "8e20e45e39271f607a7083cb33e18bd855038592d329c854cd4c8f93706e2f24",
+    "bytes": 10167
+  },
+  "inputReference": {
+    "path": "art/full-ai-city/reports/source-rejections/expansion/tower_2/9099910bc41cc5e6/input-reference.json",
+    "sha256": "48ed6551d7ab074c4e4779927dd3b382f49b0686161d645d745060266b62c2b0",
+    "bytes": 4441
+  },
+  "diagnostic": null,
+  "diagnosticTool": null,
+  "sourceComparisonReport": {
+    "path": "art/full-ai-city/reports/source-rejections/expansion/tower_2/9099910bc41cc5e6/source-comparison-processing.json",
+    "sha256": "c43db989b2c523e2c578ef3d026dcb1cd34031d7fc4b99bbac302cb4631f4ea9",
+    "bytes": 20965
+  },
+  "sourceViewEvidenceMode": "Explicitly selected existing renderedSource views; no additional or neutral render implied",
+  "evidence": [
+    {
+      "path": "art/full-ai-city/reports/source-rejections/expansion/tower_2/9099910bc41cc5e6/raw-front.png",
+      "sha256": "b12af1e4cda23b42611a8b45b9a14e0c303a4b2c8f756a9771a3d5e5f344ff48",
+      "bytes": 236778
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/expansion/tower_2/9099910bc41cc5e6/raw-iso.png",
+      "sha256": "c6eb47fdb18a8dfcfdfae9ebbf6cee6371ab07e229cdb6dc3f59b3a9d69357db",
+      "bytes": 311056
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/expansion/tower_2/9099910bc41cc5e6/raw-back.png",
+      "sha256": "651b6dc777bfb6ea6bc8a1232a1e36df25b361bc76a80cfe7acb742d02f56ff5",
+      "bytes": 237211
+    }
+  ],
+  "finding": "Actually inspected the original reference, current native front/iso/back, all five final material views and256px. Second old-reference native export has broad rear brick-wall losses: under the upper right window, beneath the stair platform and beside lower windows, plus open front entrance glass. The rear holes occupy large continuous panels and remain immediately visible at phone scale. This is broader than a small local repair; previous first source also had rear missing wall. Preserve both completed sources and make one targeted reference revision with continuous opaque brick backing, closed opaque amber panes and closed door panels, shallow firmly attached trim, same two-storey Art Deco mass/teal roof/cream piers and rear stair identity. No third old-reference seed or further blind conversion settings.",
+  "decision": "One targeted consistent reference revision after two completed old-reference native failures. No third old-reference seed.",
+  "sourceUnchanged": true,
+  "notFinalCandidateReview": true,
+  "freezeTool": {
+    "path": "art/full-ai-city/reports/tool-snapshots/616860a00b28e670e1219d64c6cb5dad17f0946420568f786e80b6d789fb4a73-freeze_public_source_rejection.py",
+    "sha256": "616860a00b28e670e1219d64c6cb5dad17f0946420568f786e80b6d789fb4a73",
+    "bytes": 4304
+  }
+}

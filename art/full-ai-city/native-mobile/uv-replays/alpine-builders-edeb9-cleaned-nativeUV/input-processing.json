@@ -1,0 +1,483 @@
+{
+  "status": "exported_pending_visual_review",
+  "createdAt": "2026-10-23T10:18:27.218311+00:00",
+  "region": "alpine",
+  "asset": "builders_guild",
+  "source": {
+    "rawGLB": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\alpine--builders_guild-a001-pixal-mv-1024-9247.glb",
+      "sha256": "d3aefa70e16ee1ca3700be2a52b83f426ddb66d9a38fbe54cc588aa8baa2f93f",
+      "bytes": 42679404
+    }
+  },
+  "inferenceReport": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\alpine--builders_guild-a001\\alpine--builders_guild-a001-pixal-mv-1024-9247.json",
+    "sha256": "050899ee43cc92214185e656faa325844c6ea4ac77e57bc3d5ebd7cf97adffbc",
+    "bytes": 8199
+  },
+  "reference": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\inputs\\alpine\\builders_guild\\ba3118c5148a8cee\\reference.json",
+    "sha256": "a6b72c0084db8e22b9176867ff31697849f47eb2b94626c480558f61f3b3963e",
+    "bytes": 4469
+  },
+  "processingTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\d1befe53381b9186da4b840298fc1d6b373524437790091b7f6e296bfcbf771b-process_lod.py",
+    "sha256": "d1befe53381b9186da4b840298fc1d6b373524437790091b7f6e296bfcbf771b",
+    "bytes": 27109
+  },
+  "assumedCameras": true,
+  "cameraCalibration": "assumed_standard_orbit_not_measured",
+  "nativePipeline": "Pixal3DMVImageTo3DPipeline.run_mv",
+  "nativeResolution": 1024,
+  "seed": 9247,
+  "geometryOrigin": "Actual native three-view neural building with explicitly recorded bounded local repairs; localSurfaceRepair.method and face counts disclose whether these include boundary patches or a small mechanical connector. Followed by source-derived remeshing and texture transfer. No replacement building.",
+  "orientation": {
+    "up": "Y",
+    "front": "+Z",
+    "groundY": 0,
+    "maxEdge": 1
+  },
+  "requestedTriangles": 30000,
+  "limitations": [
+    "Assumed camera reference reconstruction, not exact measured architecture",
+    "Final candidate requires actual rendered visual approval"
+  ],
+  "animation": null,
+  "processingComplete": true,
+  "lod": "near",
+  "processingRevision": 0,
+  "localSurfaceRepair": {
+    "source": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\alpine-workshop-roof-v2\\repair\\repaired-native.glb",
+      "sha256": "edeb9fecf18db92dcd5e2be77f6e707d786ac9180bf6af656fe7bc4dfaef9d07",
+      "bytes": 43435996
+    },
+    "receipt": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\alpine\\builders_guild\\edeb9fecf18db92dc\\repair.json",
+      "sha256": "46dee144e8c04104eed84ea86b9f3cfae60942b231e93f69de5bf03a870459ec",
+      "bytes": 11291
+    },
+    "method": "Original successful front-wall boundary patch is recomputed with unchanged parameters. Two measured small right-roof gaps use a plane fitted only from adjacent real roof surfaces, original neighboring UV samples and 0.006 inward closure. Only inward-folded faces within the two exact roof ROIs and within 0.065 depth of that roof envelope are removed. Existing neural vertices and original image pixels are preserved. No replacement roof, building or manufactured cargo.",
+    "newTriangles": 6336,
+    "newVertices": 3176,
+    "originalVerticesMoved": 0,
+    "originalTrianglesDeleted": 800,
+    "regions": [
+      {
+        "name": "Front plaster under beam",
+        "specification": {
+          "name": "Front plaster under beam",
+          "u": [
+            1,
+            0,
+            0
+          ],
+          "v": [
+            0,
+            0,
+            1
+          ],
+          "n": [
+            0,
+            -1,
+            0
+          ],
+          "roi": [
+            0.105,
+            0.25,
+            0.315,
+            0.365
+          ],
+          "defectDepth": 0.22,
+          "donorDepth": 0.23,
+          "color": "plaster"
+        },
+        "missingSamples": 1024,
+        "boundarySamples": 1146,
+        "sampledDepthRange": [
+          -0.15036344528198242,
+          0.25955867767333984
+        ],
+        "inwardClosureThickness": 0.006,
+        "frontPatchTriangles": 2244,
+        "newVertices": 2446,
+        "newTriangles": 4888
+      },
+      {
+        "name": "Right roof upper measured inward fold",
+        "specification": {
+          "name": "Right roof upper measured inward fold",
+          "u": [
+            0,
+            1,
+            0
+          ],
+          "v": [
+            0,
+            0,
+            1
+          ],
+          "n": [
+            1,
+            0,
+            0
+          ],
+          "roi": [
+            -0.172,
+            -0.132,
+            0.68,
+            0.712
+          ],
+          "defectDepth": 0.02,
+          "donorDepth": 0.025,
+          "donorNormal": 0.25,
+          "color": "tile",
+          "planeRepair": true
+        },
+        "missingSamples": 235,
+        "boundarySamples": 1080,
+        "sampledDepthRange": [
+          -0.01635885238647461,
+          0.12476694583892822
+        ],
+        "measuredRoofPlane": [
+          0.08525633558566015,
+          -1.2114734864900585,
+          0.9476447998282276
+        ],
+        "depthDeficitThreshold": 0.007,
+        "localFoldFacesToDelete": 427,
+        "planeFitResidualMax": 0.011991635158128178,
+        "inwardClosureThickness": 0.006,
+        "frontPatchTriangles": 536,
+        "newVertices": 606,
+        "newTriangles": 1208
+      },
+      {
+        "name": "Right roof eave measured inward fold",
+        "specification": {
+          "name": "Right roof eave measured inward fold",
+          "u": [
+            0,
+            1,
+            0
+          ],
+          "v": [
+            0,
+            0,
+            1
+          ],
+          "n": [
+            1,
+            0,
+            0
+          ],
+          "roi": [
+            0.148,
+            0.179,
+            0.482,
+            0.505
+          ],
+          "defectDepth": 0.3,
+          "donorDepth": 0.3,
+          "donorNormal": 0.25,
+          "color": "tile",
+          "planeRepair": true
+        },
+        "missingSamples": 26,
+        "boundarySamples": 916,
+        "sampledDepthRange": [
+          0.3224588632583618,
+          0.3847160339355469
+        ],
+        "measuredRoofPlane": [
+          -0.20249274887743243,
+          -0.9907311662560309,
+          0.8750090445861518
+        ],
+        "depthDeficitThreshold": 0.007,
+        "localFoldFacesToDelete": 373,
+        "planeFitResidualMax": 0.011995172529383757,
+        "inwardClosureThickness": 0.006,
+        "frontPatchTriangles": 84,
+        "newVertices": 124,
+        "newTriangles": 240
+      }
+    ]
+  },
+  "derivation": {
+    "rawTriangles": 980416,
+    "weldedTriangles": 980951,
+    "remeshedTriangles": 2939756,
+    "voxelSize": 0.003,
+    "finalTriangles": 29974,
+    "atlasArea": 0.441119514590168,
+    "singleReductionPass": true,
+    "inheritedUVRemovedBeforeReduction": true,
+    "sourceMaterialsUntouched": true,
+    "uvUnwrap": {
+      "angleDegrees": 66.0,
+      "islandMargin": 2e-05,
+      "marginMethod": "SCALED",
+      "nominalMarginPixels": null
+    },
+    "repairedSourceTriangles": 985952
+  },
+  "bake": {
+    "method": "CPU closest-original-triangle projection with float64 barycentric original UV and bilinear original texture sampling; geometric normals retained, no directional normal-map rebake or invented color",
+    "coveredAtlasPixels": 460646,
+    "nearestLookupSuccessFraction": 1.0,
+    "notRayCoverage": true,
+    "sourceDistanceQuantiles": [
+      0.00025073565484490246,
+      0.0012052447127643973,
+      0.0021628408110700536,
+      0.007975587621331215
+    ],
+    "sourceDistanceQuantileLevels": [
+      0.5,
+      0.95,
+      0.99,
+      1
+    ],
+    "overTwoPercentMaxEdge": 0.0,
+    "distanceReviewRequired": false,
+    "visualGeometryReviewRequired": true,
+    "barycentricOriginalRange": [
+      -3.76589860809602e-05,
+      1.0
+    ],
+    "degenerateOrInvalidBarycentricCount": 0,
+    "closestSourceVertexFallbackFraction": 0.0,
+    "barycentricPointReconstructionErrorQuantiles": [
+      5.862399881419118e-09,
+      3.8685549124888396e-08,
+      1.2736251345396017e-07
+    ],
+    "atlasOverlapPixelsWithDifferentSurface": 1799,
+    "seconds": 7.754856299987296,
+    "maps": [
+      {
+        "role": "base",
+        "size": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "role": "orm",
+        "size": [
+          512,
+          512
+        ]
+      }
+    ],
+    "repairSourceNote": "Texture transfer uses the explicitly repaired neural source, retaining original PBR and locally interpolated same-wall UV. Repair receipt and unchanged original inference source are preserved separately."
+  },
+  "textureTransferTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\a2cb99c96fb8df396f16580a88a7c6151104ee3c927fe76cd161ee2d27bdfa42-bake_nearest_surface.py",
+    "sha256": "a2cb99c96fb8df396f16580a88a7c6151104ee3c927fe76cd161ee2d27bdfa42",
+    "bytes": 7317
+  },
+  "quantization": {
+    "source": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\legacy-repair-alpine--builders_guild-edeb9fecf18db92dc\\low\\alpine\\builders_guild.glb",
+    "output": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\legacy-repair-alpine--builders_guild-edeb9fecf18db92dc\\low\\alpine\\builders_guild.glb",
+    "sourceBytes": 1926460,
+    "outputBytes": 1395360,
+    "sourceSha256": "2e1dfb17e6594c8fdeb7167573057e04d02b3c56b11cd44c8b894b83ebabf431",
+    "outputSha256": "97f4769025634a596ed0d5f2a89fe1766fa82f34495fb325c55294bb268d06a2",
+    "positionFaceAndTextureBytesUnchanged": true,
+    "attributes": [
+      {
+        "accessor": 1,
+        "semantic": "NORMAL",
+        "count": 44271,
+        "maximumAngularErrorDegrees": 0.37385472055641017
+      },
+      {
+        "accessor": 2,
+        "semantic": "TEXCOORD_0",
+        "count": 44271,
+        "maximumUVError": 7.629373612538792e-06,
+        "maximumTexelErrorAt1024": 0.007812478579239723
+      }
+    ]
+  },
+  "processedCandidate": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\alpine-builders-edeb9-spike-cleaned\\low\\alpine\\builders_guild.glb",
+    "sha256": "c7ff3e728e0c56b3c29aaa402fb95bbb7f32cc96f4349128d4f1a1a11a7070c4",
+    "bytes": 1575184
+  },
+  "glbValidation": {
+    "version": 2,
+    "triangles": 29974,
+    "meshes": 1,
+    "materials": 1,
+    "images": 2,
+    "all_primitives_have_uv": true,
+    "animations": [],
+    "all_images_embedded": true,
+    "external_buffers": []
+  },
+  "triangles": 29974,
+  "renderedCandidate": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\alpine-builders-edeb9-spike-cleaned\\low\\renders\\alpine\\builders_guild\\lod-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\alpine-builders-edeb9-spike-cleaned\\low\\renders\\alpine\\builders_guild\\lod-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\alpine-builders-edeb9-spike-cleaned\\low\\renders\\alpine\\builders_guild\\lod-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\alpine-builders-edeb9-spike-cleaned\\low\\renders\\alpine\\builders_guild\\lod-left.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\alpine-builders-edeb9-spike-cleaned\\low\\renders\\alpine\\builders_guild\\lod-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.5001952052116394,
+        -0.4025607705116272,
+        0.000638988334685564
+      ],
+      "max": [
+        0.5001648664474487,
+        0.40184834599494934,
+        0.7669095993041992
+      ]
+    },
+    "triangles": 29974,
+    "textureSizes": [
+      {
+        "name": "alpine__builders_guild__nearest_base",
+        "size": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "name": "alpine__builders_guild__nearest_orm",
+        "size": [
+          512,
+          512
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "renderedSource": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\legacy-repair-alpine--builders_guild-edeb9fecf18db92dc\\low\\renders\\alpine\\builders_guild\\raw-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\legacy-repair-alpine--builders_guild-edeb9fecf18db92dc\\low\\renders\\alpine\\builders_guild\\raw-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.5,
+        -0.40160244703292847,
+        0.0
+      ],
+      "max": [
+        0.5,
+        0.40160244703292847,
+        0.7653419375419617
+      ]
+    },
+    "triangles": 980416,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "renderedRepairedSource": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\legacy-repair-alpine--builders_guild-edeb9fecf18db92dc\\low\\renders\\alpine\\builders_guild\\repaired-source-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\legacy-repair-alpine--builders_guild-edeb9fecf18db92dc\\low\\renders\\alpine\\builders_guild\\repaired-source-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\legacy-repair-alpine--builders_guild-edeb9fecf18db92dc\\low\\renders\\alpine\\builders_guild\\repaired-source-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.5,
+        -0.40160244703292847,
+        0.0
+      ],
+      "max": [
+        0.5,
+        0.40160244703292847,
+        0.7653419375419617
+      ]
+    },
+    "triangles": 985952,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "bounds": {
+    "min": [
+      -0.5001952052116394,
+      0.000638988334685564,
+      -0.40184834599494934
+    ],
+    "max": [
+      0.5001648664474487,
+      0.7669095993041992,
+      0.4025607705116272
+    ],
+    "coordinateSystem": "GLTF Y-up; +Z front"
+  },
+  "textureSizes": [
+    {
+      "name": "alpine__builders_guild__nearest_base",
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "name": "alpine__builders_guild__nearest_orm",
+      "size": [
+        512,
+        512
+      ]
+    }
+  ],
+  "rawSourceUnchanged": true,
+  "completedAt": "2026-10-23T10:37:31.601059+00:00",
+  "localSurfaceRepairEvidencePreservation": [],
+  "legacyOriginalTextureRoute": {
+    "capturedNeuralFieldAvailable": false,
+    "newNeuralInference": false,
+    "method": "Source-derived low geometry, native UV-only charts, then original repaired-source PBR transfer. Original field was not captured for this earlier inference."
+  },
+  "derivativeArtifactCleanup": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\derivative-cleanups\\alpine\\builders_guild\\c7ff3e728e0c56b3\\cleanup.json",
+    "sha256": "b705d2117b1d83b94bbd6cdbc41795c6e4593bec268e6a059670fbfb8520833c",
+    "bytes": 2534
+  }
+}

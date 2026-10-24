@@ -1,0 +1,44 @@
+{
+  "status": "visual_comparison_completed_experiment_only",
+  "multi": {
+    "caption": "原始模型 · 956,693 面 · 尚未减面",
+    "sourceSha256": "2a8658414e5e379410bf4871708d975466678f4c2db756eb0701d9f529365f30",
+    "views": {
+      "back": "../../reviews-rejected/alpine/tower_1/0bc46d6465a78e52/raw-1m/raw-back.png",
+      "right": "../../reviews-rejected/alpine/tower_1/0bc46d6465a78e52/raw-1m/raw-right.png",
+      "left": "../../reviews-rejected/alpine/tower_1/0bc46d6465a78e52/raw-1m/raw-left.png",
+      "gray-back": "../../reviews-rejected/alpine/tower_1/0bc46d6465a78e52/raw-1m/raw-grey-back-iso.png"
+    }
+  },
+  "single": {
+    "caption": "原始模型 · 971,589 面 · 尚未减面",
+    "sourceSha256": "e63dbba4d1af7088fabb668d88505805967f9d05c07933e1498bcc14c997e2cb",
+    "views": {
+      "back": "./single-raw-review/raw-back.png",
+      "right": "./single-raw-review/raw-right.png",
+      "left": "./single-raw-review/raw-left.png",
+      "gray-back": "./single-raw-review/gray-1024-back-iso.png"
+    }
+  },
+  "conclusion": "这一栋里：正面单图保住了正面和背墙，但进深偏长，背面门窗被省略；斜视单图的可见正面和屋瓦还原较好，却缺失了整片背墙及一段侧墙。三视图保留了背面布局，但这一轮原始模型也存在较大的背墙缺口。\n实测：正面单图约5.5分钟，斜视单图约4.0分钟，三视图约4.1分钟。运行条件不完全相同，不能据此认定单图必然更快或更准确。三件都是未入游戏的试验模型；生产继续沿用三视图，并逐栋验收。",
+  "evidence": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\alpine-tower1-a003-single-front-23421\\visual-review.json",
+    "sha256": "b5d89f334f52cd85a139c13f726fd96464a587238131b1f61faeb04cf9e2dfb2",
+    "bytes": 6932
+  },
+  "quarter": {
+    "caption": "原始模型 · 1,008,683 面 · 背墙缺失，拒绝用于游戏",
+    "sourceSha256": "44fbef99e025296213c7b960df883f72604120ec3e0f73518b5292f8d0709f90",
+    "views": {
+      "back": "../alpine-tower1-single-three-quarter-23421/single-raw-review/raw-back.png",
+      "right": "../alpine-tower1-single-three-quarter-23421/single-raw-review/raw-right.png",
+      "left": "../alpine-tower1-single-three-quarter-23421/single-raw-review/raw-left.png",
+      "gray-back": "../alpine-tower1-single-three-quarter-23421/single-raw-review/gray-1024-back-iso.png"
+    }
+  },
+  "quarterEvidence": {
+    "path": "art/full-ai-city/experiments/alpine-tower1-single-three-quarter-23421/visual-review.json",
+    "sha256": "7f0eb048fb4bf8a33f40bb2bceee0c08fd22653c69f7e4d2a4693d3658cd842f",
+    "bytes": 4226
+  }
+}

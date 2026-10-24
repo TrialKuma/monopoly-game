@@ -1,0 +1,57 @@
+{
+  "status": "rejected_native_export_source",
+  "region": "expansion",
+  "asset": "hotel_1",
+  "reviewer": "asset_production",
+  "recordedAtUtc": "2026-10-24T04:07:19.459156+00:00",
+  "source": {
+    "path": "art/full-ai-city/source/expansion--hotel_1-a012-pixal-mv-1024-29488.glb",
+    "sha256": "5388dfae02d510bf5c4b137fde606a0504a33ad5fe6f1acf024efad69c128a86",
+    "bytes": 36079396
+  },
+  "sourceLevel": "Native 1M export; no untouched decoder attribution is made.",
+  "inferenceReport": {
+    "path": "art/full-ai-city/reports/source-rejections/expansion/hotel_1/5388dfae02d510bf/expansion--hotel_1-a012-pixal-mv-1024-29488.json",
+    "sha256": "b6cf4916bc771c20e857109fb43d87affe0040ffcaf746ad8182c6781af45a04",
+    "bytes": 10169
+  },
+  "inputReference": {
+    "path": "art/full-ai-city/reports/source-rejections/expansion/hotel_1/5388dfae02d510bf/input-reference.json",
+    "sha256": "7737e0367975da6c5cd9dff4d5292f945d2115fa59e21584e5f18159d7bc4500",
+    "bytes": 4414
+  },
+  "diagnostic": null,
+  "diagnosticTool": null,
+  "sourceComparisonReport": {
+    "path": "art/full-ai-city/reports/source-rejections/expansion/hotel_1/5388dfae02d510bf/source-comparison-processing.json",
+    "sha256": "45aeeeb4fb68bb39e9ac1a5af99610030d22fd97f1e4f3bdcbbae2d76391dc06",
+    "bytes": 20922
+  },
+  "sourceViewEvidenceMode": "Explicitly selected existing renderedSource views; no additional or neutral render implied",
+  "evidence": [
+    {
+      "path": "art/full-ai-city/reports/source-rejections/expansion/hotel_1/5388dfae02d510bf/raw-front.png",
+      "sha256": "95e2e2a7bd3fbe52b1f5992a7f87d7aa5ec0bbcb1de1f63777e5910e70ba41d5",
+      "bytes": 183414
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/expansion/hotel_1/5388dfae02d510bf/raw-iso.png",
+      "sha256": "205793c20e026ffd6150123274c08ab75323991e30cc980f2523f59d9e4a5d2d",
+      "bytes": 236279
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/expansion/hotel_1/5388dfae02d510bf/raw-back.png",
+      "sha256": "0e1549e799ea4bec4146845c25ea5b1e146d612eb65514fae9977cf634ea0bd7",
+      "bytes": 185949
+    }
+  ],
+  "finding": "The one independent retry restores the previously broken rear upper corners and preserves the complete main roof, four walls and front canopy. Actually viewed unchanged reference, native front/iso/back, final five and256px: one triangular opening directly below the rear middle window sill and one long narrow front-left cornice slot remain visible. These two precisely bounded existing-source regions are suitable for measured local closure assessment. No third same-reference seed or whole-building reconstruction; original triangles, UVs and image bytes must remain exact.",
+  "decision": "Hold for one strictly bounded two-region local surface repair assessment; no more source seeds.",
+  "sourceUnchanged": true,
+  "notFinalCandidateReview": true,
+  "freezeTool": {
+    "path": "art/full-ai-city/reports/tool-snapshots/616860a00b28e670e1219d64c6cb5dad17f0946420568f786e80b6d789fb4a73-freeze_public_source_rejection.py",
+    "sha256": "616860a00b28e670e1219d64c6cb5dad17f0946420568f786e80b6d789fb4a73",
+    "bytes": 4304
+  }
+}

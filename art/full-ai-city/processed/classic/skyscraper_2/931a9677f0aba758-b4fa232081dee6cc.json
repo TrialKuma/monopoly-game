@@ -1,0 +1,670 @@
+{
+  "status": "exported_pending_visual_review",
+  "createdAt": "2026-10-23T09:44:47.344185+00:00",
+  "region": "classic",
+  "asset": "skyscraper_2",
+  "lod": "near",
+  "source": {
+    "rawGLB": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\classic--skyscraper_2-a002-pixal-mv-1024-18341.glb",
+      "sha256": "a6a72aae9f26bc509c38d2aab61f524751e4693b047a7ffb72db5b6dcb560034",
+      "bytes": 40284400
+    }
+  },
+  "inferenceReport": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\classic--skyscraper_2-a002\\classic--skyscraper_2-a002-pixal-mv-1024-18341.json",
+    "sha256": "dc099ebf91d443a7d8ffaa1618689cf4d06a75fb4850d8f9364d95d751cf55de",
+    "bytes": 9147
+  },
+  "reference": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\inputs\\classic\\skyscraper_2\\4588ceb76ac6a128\\transforms.json",
+    "sha256": "42cf27e1acc0d6402da2ebd01e5f83cc06358c1e1870ffa3405ae4e108734aa3",
+    "bytes": 5439
+  },
+  "processingTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\31702507b9ea258f1eff2e045b6b53f83a10457edb1dcd04151a425413268392-process_native_mobile.py",
+    "sha256": "31702507b9ea258f1eff2e045b6b53f83a10457edb1dcd04151a425413268392",
+    "bytes": 8960
+  },
+  "nativeSurfaceExport": {
+    "receipt": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\classic--skyscraper_2-a6a72aae9f26-repair-f032b01dccb2-low-071020d95a-field-v1\\receipt.json",
+      "sha256": "10bcd6c2790fd5d435cf27243245a8f8f627658e21360ca9d011d3651c4e88d2",
+      "bytes": 15612
+    },
+    "source": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\classic--skyscraper_2-a6a72aae9f26-repair-f032b01dccb2-low-071020d95a-field-v1\\mobile-45000-1024.glb",
+      "sha256": "a82421f4b86640826363929c8e77865cabe67b4e47040e64488f32fd0ff45b4e",
+      "bytes": 2767224
+    },
+    "tensorArchive": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\classic--skyscraper_2-a002\\neural-export-inputs.pt",
+      "sha256": "280e4341e090baed851ab46fe36aaf3401703ef5b8b25cfbe71342615cf15173",
+      "bytes": 337410269
+    }
+  },
+  "nativePipeline": "Pixal3DMVImageTo3DPipeline.run_mv",
+  "nativeResolution": 1024,
+  "seed": 18341,
+  "assumedCameras": true,
+  "cameraCalibration": "assumed_standard_orbit_not_measured",
+  "geometryOrigin": "Actual neural building with the explicitly recorded bounded local surface repair, followed by source-derived CPU mobile geometry and native UV/material sampling. The original inference, repair and low-surface sources are distinct; the UV/material replay adds no geometry.",
+  "textureOrigin": "Original neural attribute field sampled by the native UV/material operations with the recorded surface-stage override; no new neural inference or raw-UV rebake.",
+  "normalization": {
+    "enabled": true,
+    "candidate_degrees": 0.4664610458985566,
+    "applied_degrees": 0.4664610458985566,
+    "underside_area": 0.08796115745542465,
+    "normal_agreement": 0.9564733486624071,
+    "yaw_degrees": 180,
+    "pitch_degrees": 0,
+    "roll_degrees": 0,
+    "uniform_scale": 0.9969018422332976
+  },
+  "orientation": {
+    "up": "Y",
+    "front": "+Z",
+    "groundY": 0,
+    "maxEdge": 1
+  },
+  "requestedTriangles": 45000,
+  "triangles": 44987,
+  "glbValidation": {
+    "version": 2,
+    "triangles": 44987,
+    "meshes": 1,
+    "materials": 1,
+    "images": 2,
+    "all_primitives_have_uv": true,
+    "animations": [],
+    "all_images_embedded": true,
+    "external_buffers": []
+  },
+  "quantization": {
+    "source": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\classic--skyscraper_2-a6a72aae9f26-repair-f032b01dccb2-low-071020d95a-field-v1\\candidates\\classic\\skyscraper_2.glb",
+    "output": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\classic--skyscraper_2-a6a72aae9f26-repair-f032b01dccb2-low-071020d95a-field-v1\\candidates\\classic\\skyscraper_2.glb",
+    "sourceBytes": 2267156,
+    "outputBytes": 1606652,
+    "sourceSha256": "461770d892152c16f3ae4640d59ccd98f6ca704f74a84d5b597c47fdf2f203c6",
+    "outputSha256": "931a9677f0aba7583330a401f71b853c0570b1690824f2bc2b991123395e4c30",
+    "positionFaceAndTextureBytesUnchanged": true,
+    "attributes": [
+      {
+        "accessor": 1,
+        "semantic": "NORMAL",
+        "count": 55055,
+        "maximumAngularErrorDegrees": 0.3798543129172126
+      },
+      {
+        "accessor": 2,
+        "semantic": "TEXCOORD_0",
+        "count": 55055,
+        "maximumUVError": 7.629510948348184e-06,
+        "maximumTexelErrorAt1024": 0.00781261921110854
+      }
+    ]
+  },
+  "processedCandidate": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\candidates\\classic\\skyscraper_2.glb",
+    "sha256": "931a9677f0aba7583330a401f71b853c0570b1690824f2bc2b991123395e4c30",
+    "bytes": 1606652
+  },
+  "derivation": {
+    "method": "Recorded CPU surface derived from the same neural raw, inverse-normalized to field coordinates; a local native-export variant bypasses further mesh simplification/remeshing and uses native UV generation plus original neural high-surface BVH and field texture sampling. Only normalization, JPEG encoding and attribute quantization afterward.",
+    "voxelizedAgain": false,
+    "rebakedFromRawUV": false,
+    "facadeUVPreserved": true,
+    "normalizedTrianglesPreserved": true,
+    "geometrySurfaceInput": {
+      "receipt": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\classic--skyscraper_2-a6a72aae9f26-repair-f032b01dccb2-low-071020d95a-field-v1\\geometry-source-proof.json",
+        "sha256": "892f81972500ebb587e54623379c7223c6711a05e151c705a1d33d07d42cc23a",
+        "bytes": 8420
+      },
+      "method": "Coordinate inversion of the recorded neural-derived low surface including explicitly bounded local source repairs. This preparation only welds exact positions and changes coordinates; it adds no faces. Original raw inference and repair input remain distinct.",
+      "sourceRaw": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\classic--skyscraper_2-a002-pixal-mv-1024-18341.glb",
+        "sha256": "a6a72aae9f26bc509c38d2aab61f524751e4693b047a7ffb72db5b6dcb560034",
+        "bytes": 40284400
+      },
+      "candidate": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\classic--skyscraper_2-a6a72aae9f26-repair-f032b01dccb2-low-071020d95a-field-v1\\geometry-candidate.glb",
+        "sha256": "071020d95af65a46ece5357c8fd4e2484f7e107527eca2bb5b8c7e6651218497",
+        "bytes": 1912888
+      },
+      "candidateReport": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\classic--skyscraper_2-a6a72aae9f26-repair-f032b01dccb2-low-071020d95a-field-v1\\geometry-candidate-processing.json",
+        "sha256": "2402056009d3f79970fcb690a365a84e5299fdadbea034f0b712e9722c364dfb",
+        "bytes": 13559
+      },
+      "originalCandidate": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-skyscraper_2-f032b01dccb2-fine0015\\candidates\\classic\\skyscraper_2.glb",
+        "sha256": "071020d95af65a46ece5357c8fd4e2484f7e107527eca2bb5b8c7e6651218497",
+        "bytes": 1912888
+      },
+      "fieldReceipt": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\classic--skyscraper_2-a002\\receipt.json",
+        "sha256": "a86a5d007c2f8d24f2ef001c98b13a0f66dda4bc65c634da6deb2d8072e6bab3",
+        "bytes": 3722
+      },
+      "output": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\classic--skyscraper_2-a6a72aae9f26-repair-f032b01dccb2-low-071020d95a-field-v1\\geometry-surface.npz",
+        "sha256": "0b706e26c6168bcc07b5817d27ca08960df11620d0d967c8ae7a0f16cdd0bc03",
+        "bytes": 803708
+      },
+      "triangles": 44987,
+      "vertices": 21946,
+      "originalSplitVertices": 62590,
+      "exactCoincidentVerticesMerged": 40644,
+      "maximumPositionChangeFromWelding": 0,
+      "normalization": {
+        "enabled": true,
+        "candidate_degrees": 0.14265250287968312,
+        "applied_degrees": 0.14265250287968312,
+        "underside_area": 0.09617164960646245,
+        "normal_agreement": 0.9478562038913754,
+        "yaw_degrees": 180,
+        "pitch_degrees": 0,
+        "roll_degrees": 0,
+        "uniform_scale": 0.9972566729801072
+      },
+      "rawBlenderToNormalizedBlender": [
+        [
+          -0.9972546380989241,
+          -1.5329831507043194e-06,
+          0.002036063710887746,
+          0.00024311411315408924
+        ],
+        [
+          -1.3915724688336393e-06,
+          -0.9972556605950005,
+          -0.0014479197798765997,
+          0.01080027512207149
+        ],
+        [
+          0.00203606247939656,
+          -0.0014479149872926554,
+          0.9972535819364154,
+          0.35238149962252363
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "inverse": [
+        [
+          -1.0027487397926855,
+          -1.4310190321444104e-06,
+          0.00204728093757774,
+          -0.0004776261009419188
+        ],
+        [
+          -1.5732163728660394e-06,
+          -1.002749777711504,
+          -0.001455896534788437,
+          0.01134300486457536
+        ],
+        [
+          0.0020472794928508785,
+          -0.0014558920061129234,
+          1.0027476879571087,
+          -0.35333450771366853
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "sampledNormalizationReconstructionMaxError": 9.496744515400764e-08,
+      "nativeBounds": {
+        "min": [
+          -0.5009088316843139,
+          -0.3523529406491834,
+          -0.1972186950096082
+        ],
+        "max": [
+          0.5004124218972759,
+          0.3817844928374092,
+          0.2187169470347125
+        ]
+      },
+      "tool": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\classic--skyscraper_2-a6a72aae9f26-repair-f032b01dccb2-low-071020d95a-field-v1\\geometry-preparation-source.py",
+        "sha256": "956e46377da8eae51f4e9af858f698532b81fccbbf16f219a2f2adbb9ab1481a",
+        "bytes": 7005
+      },
+      "toolSnapshot": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\classic--skyscraper_2-a6a72aae9f26-repair-f032b01dccb2-low-071020d95a-field-v1\\geometry-preparation-source.py",
+        "sha256": "956e46377da8eae51f4e9af858f698532b81fccbbf16f219a2f2adbb9ab1481a",
+        "bytes": 7005
+      },
+      "normalizationInput": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-skyscraper2\\repaired-native.glb",
+        "sha256": "f032b01dccb277e79c4bc17039f7662ced5562db9ff757536f1328dbb48703ad",
+        "bytes": 40789960
+      },
+      "localSurfaceRepair": {
+        "source": {
+          "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-skyscraper2\\repaired-native.glb",
+          "sha256": "f032b01dccb277e79c4bc17039f7662ced5562db9ff757536f1328dbb48703ad",
+          "bytes": 40789960
+        },
+        "receipt": {
+          "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\classic\\skyscraper_2\\f032b01dccb277e7\\repair.json",
+          "sha256": "93f7cbe4961a321bcb3819290d0b29088d61f269177b6b0d9a402efbbfb0ce64",
+          "bytes": 7909
+        },
+        "method": "Only two individually measured rear dome-under-cornice bands are closed from intact adjacent original stone samples. Original neural vertices, faces and image pixels remain unchanged. The interpolated local surfaces reuse original stone UV samples with 0.006 inward closure; no replacement building or new texture.",
+        "newTriangles": 4504,
+        "newVertices": 2256,
+        "originalVerticesMoved": 0,
+        "originalTrianglesDeleted": 0,
+        "regions": [
+          {
+            "name": "Rear left dome missing masonry band",
+            "specification": {
+              "name": "Rear left dome missing masonry band",
+              "u": [
+                -1,
+                0,
+                0
+              ],
+              "v": [
+                0,
+                0,
+                1
+              ],
+              "n": [
+                0,
+                1,
+                0
+              ],
+              "roi": [
+                -0.475,
+                -0.278,
+                0.443,
+                0.477
+              ],
+              "defectDepth": 0.07,
+              "donorDepth": 0.085,
+              "donorMaxDepth": 0.22,
+              "donorNormal": 0.4,
+              "color": "stone"
+            },
+            "missingSamples": 536,
+            "boundarySamples": 1241,
+            "sampledDepthRange": [
+              -2.0,
+              0.20727908611297607
+            ],
+            "inwardClosureThickness": 0.006,
+            "outerSurfaceUnchanged": true,
+            "newVertices": 1404,
+            "newTriangles": 2804
+          },
+          {
+            "name": "Rear right dome missing masonry band",
+            "specification": {
+              "name": "Rear right dome missing masonry band",
+              "u": [
+                -1,
+                0,
+                0
+              ],
+              "v": [
+                0,
+                0,
+                1
+              ],
+              "n": [
+                0,
+                1,
+                0
+              ],
+              "roi": [
+                0.278,
+                0.475,
+                0.458,
+                0.481
+              ],
+              "defectDepth": 0.07,
+              "donorDepth": 0.085,
+              "donorMaxDepth": 0.22,
+              "donorNormal": 0.4,
+              "color": "stone"
+            },
+            "missingSamples": 278,
+            "boundarySamples": 1138,
+            "sampledDepthRange": [
+              -2.0,
+              0.18588745594024658
+            ],
+            "inwardClosureThickness": 0.006,
+            "outerSurfaceUnchanged": true,
+            "newVertices": 852,
+            "newTriangles": 1700
+          }
+        ]
+      },
+      "localRepairTool": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\e23a637cc4f33fd15d9d93a5519c586cac3a96ec5905959ebc1e64f82b2afdf6-repair_skyscraper2_surface.py",
+        "sha256": "e23a637cc4f33fd15d9d93a5519c586cac3a96ec5905959ebc1e64f82b2afdf6",
+        "bytes": 11083
+      },
+      "repairAppliedBeforeReduction": true,
+      "originalReceipt": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\classic--skyscraper_2-a6a72aae9f26-repair-f032b01dccb2-low-071020d95a-field-v1\\geometry-source-original-receipt.json",
+        "sha256": "e839173b86e8454eb0b3abc903a39b67a0cfa600275d4283fbdc8b7e7346b15c",
+        "bytes": 8031
+      }
+    },
+    "nativePostprocessOverride": {
+      "original": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\classic--skyscraper_2-a6a72aae9f26-repair-f032b01dccb2-low-071020d95a-field-v1\\original-native-exporter-source.py",
+        "sha256": "b6b79da5dfe13c22047a6257c6b2301c7ea31259dd9c82344db7e5c4cc707917",
+        "bytes": 8126
+      },
+      "scope": "Keep original neural geometry BVH for PBR lookup. Replace only the intermediate surface with this recorded existing source-derived low mesh; bypass further remeshing/simplification/cleanup, then use native unwrap/normals/field sampling.",
+      "sharedCodeModified": false,
+      "noNewGeometryAuthored": true,
+      "noNewGeometryAuthoredAppliesTo": "native_uv_material_replay_only",
+      "counts": {
+        "facesBeforeUnwrap": 44987
+      }
+    },
+    "nativeFieldLookup": {
+      "quantiles50_95_99_100": [
+        0.0009914609836414456,
+        0.0015489504439756274,
+        0.0024997321888804436,
+        0.022126754745841026
+      ],
+      "fractionOverTwoPercent": 0.00020543677965179086,
+      "sampleCount": 588989,
+      "meaning": "Distance to original neural BVH before direct field sampling, not ray hit coverage"
+    }
+  },
+  "bake": {
+    "method": "Direct original neural attribute field sampling inside native to_glb; no Blender bake or nearest raw-image transfer",
+    "notRayCoverage": true
+  },
+  "animation": null,
+  "processingComplete": true,
+  "limitations": [
+    "Same assumed three-view cameras as original native raw",
+    "Diagnostic pending external visual approval; not a formal asset replacement"
+  ],
+  "localSurfaceRepair": {
+    "source": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-skyscraper2\\repaired-native.glb",
+      "sha256": "f032b01dccb277e79c4bc17039f7662ced5562db9ff757536f1328dbb48703ad",
+      "bytes": 40789960
+    },
+    "receipt": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\classic\\skyscraper_2\\f032b01dccb277e7\\repair.json",
+      "sha256": "93f7cbe4961a321bcb3819290d0b29088d61f269177b6b0d9a402efbbfb0ce64",
+      "bytes": 7909
+    },
+    "method": "Only two individually measured rear dome-under-cornice bands are closed from intact adjacent original stone samples. Original neural vertices, faces and image pixels remain unchanged. The interpolated local surfaces reuse original stone UV samples with 0.006 inward closure; no replacement building or new texture.",
+    "newTriangles": 4504,
+    "newVertices": 2256,
+    "originalVerticesMoved": 0,
+    "originalTrianglesDeleted": 0,
+    "regions": [
+      {
+        "name": "Rear left dome missing masonry band",
+        "specification": {
+          "name": "Rear left dome missing masonry band",
+          "u": [
+            -1,
+            0,
+            0
+          ],
+          "v": [
+            0,
+            0,
+            1
+          ],
+          "n": [
+            0,
+            1,
+            0
+          ],
+          "roi": [
+            -0.475,
+            -0.278,
+            0.443,
+            0.477
+          ],
+          "defectDepth": 0.07,
+          "donorDepth": 0.085,
+          "donorMaxDepth": 0.22,
+          "donorNormal": 0.4,
+          "color": "stone"
+        },
+        "missingSamples": 536,
+        "boundarySamples": 1241,
+        "sampledDepthRange": [
+          -2.0,
+          0.20727908611297607
+        ],
+        "inwardClosureThickness": 0.006,
+        "outerSurfaceUnchanged": true,
+        "newVertices": 1404,
+        "newTriangles": 2804
+      },
+      {
+        "name": "Rear right dome missing masonry band",
+        "specification": {
+          "name": "Rear right dome missing masonry band",
+          "u": [
+            -1,
+            0,
+            0
+          ],
+          "v": [
+            0,
+            0,
+            1
+          ],
+          "n": [
+            0,
+            1,
+            0
+          ],
+          "roi": [
+            0.278,
+            0.475,
+            0.458,
+            0.481
+          ],
+          "defectDepth": 0.07,
+          "donorDepth": 0.085,
+          "donorMaxDepth": 0.22,
+          "donorNormal": 0.4,
+          "color": "stone"
+        },
+        "missingSamples": 278,
+        "boundarySamples": 1138,
+        "sampledDepthRange": [
+          -2.0,
+          0.18588745594024658
+        ],
+        "inwardClosureThickness": 0.006,
+        "outerSurfaceUnchanged": true,
+        "newVertices": 852,
+        "newTriangles": 1700
+      }
+    ]
+  },
+  "renderedCandidate": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\classic--skyscraper_2-a6a72aae9f26-repair-f032b01dccb2-low-071020d95a-field-v1\\candidates\\renders\\classic\\skyscraper_2\\lod-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\classic--skyscraper_2-a6a72aae9f26-repair-f032b01dccb2-low-071020d95a-field-v1\\candidates\\renders\\classic\\skyscraper_2\\lod-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\classic--skyscraper_2-a6a72aae9f26-repair-f032b01dccb2-low-071020d95a-field-v1\\candidates\\renders\\classic\\skyscraper_2\\lod-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\classic--skyscraper_2-a6a72aae9f26-repair-f032b01dccb2-low-071020d95a-field-v1\\candidates\\renders\\classic\\skyscraper_2\\lod-left.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\classic--skyscraper_2-a6a72aae9f26-repair-f032b01dccb2-low-071020d95a-field-v1\\candidates\\renders\\classic\\skyscraper_2\\lod-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.5,
+        -0.2063954621553421,
+        0.0
+      ],
+      "max": [
+        0.5,
+        0.2063954621553421,
+        0.7343924045562744
+      ]
+    },
+    "triangles": 44987,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          1024,
+          1024
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "sourceReviewReusedFrom": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\classic--skyscraper_2-a6a72aae9f26-repair-f032b01dccb2-low-071020d95a-field-v1\\surface.candidate.json",
+    "sha256": "2402056009d3f79970fcb690a365a84e5299fdadbea034f0b712e9722c364dfb",
+    "bytes": 13559
+  },
+  "renderedSource": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\classic--skyscraper_2-a6a72aae9f26-repair-f032b01dccb2-low-071020d95a-field-v1\\candidates\\renders\\classic\\skyscraper_2\\raw-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\classic--skyscraper_2-a6a72aae9f26-repair-f032b01dccb2-low-071020d95a-field-v1\\candidates\\renders\\classic\\skyscraper_2\\raw-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.5,
+        -0.20730993151664734,
+        0.0
+      ],
+      "max": [
+        0.5,
+        0.20730993151664734,
+        0.7337250113487244
+      ]
+    },
+    "triangles": 936048,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "bounds": {
+    "min": [
+      -0.5,
+      0.0,
+      -0.2063954621553421
+    ],
+    "max": [
+      0.5,
+      0.7343924045562744,
+      0.2063954621553421
+    ],
+    "coordinateSystem": "GLTF Y-up; +Z front"
+  },
+  "textureSizes": [
+    {
+      "name": "Image_0",
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "name": "Image_1",
+      "size": [
+        1024,
+        1024
+      ]
+    }
+  ],
+  "completedAt": "2026-10-23T09:44:56.529305+00:00",
+  "rawSourceUnchanged": true,
+  "promotedFrom": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\classic--skyscraper_2-a6a72aae9f26-repair-f032b01dccb2-low-071020d95a-field-v1\\candidates\\classic\\skyscraper_2.json",
+    "sha256": "989957194563023c26c4668b7c23c2a22717b5a0502f17c0288b60f11bb1ea78",
+    "bytes": 26730
+  },
+  "processingRevision": 0,
+  "reviewSheet": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\classic--skyscraper_2-a6a72aae9f26-repair-f032b01dccb2-low-071020d95a-field-v1\\candidates\\renders\\classic\\skyscraper_2\\review-sheet.jpg",
+    "sha256": "28b102cc2dc94a51f09b647125d352cd80a1d9498928be43e5b5d93f183b341b",
+    "bytes": 280347,
+    "candidateSha256": "931a9677f0aba7583330a401f71b853c0570b1690824f2bc2b991123395e4c30",
+    "sourceImages": [
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\classic--skyscraper_2-a6a72aae9f26-repair-f032b01dccb2-low-071020d95a-field-v1\\candidates\\renders\\classic\\skyscraper_2\\raw-front.png",
+        "sha256": "8a8e812ebf3d35092bcd96455a0c33ab36c76c21e862144d7996b0da56665b9f",
+        "label": "AI raw front"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\classic--skyscraper_2-a6a72aae9f26-repair-f032b01dccb2-low-071020d95a-field-v1\\candidates\\renders\\classic\\skyscraper_2\\raw-iso.png",
+        "sha256": "4b3b01aad303f41ab8ccde4e9002ab5b07c0b1ad51e4bd0c57b147e14e5ee2dd",
+        "label": "AI raw iso"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\classic--skyscraper_2-a6a72aae9f26-repair-f032b01dccb2-low-071020d95a-field-v1\\candidates\\renders\\classic\\skyscraper_2\\lod-front.png",
+        "sha256": "2967536c059b7333c6fa842cca5df23b76e5f4d1920913e2543a83a731531787",
+        "label": "LOD front"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\classic--skyscraper_2-a6a72aae9f26-repair-f032b01dccb2-low-071020d95a-field-v1\\candidates\\renders\\classic\\skyscraper_2\\lod-right.png",
+        "sha256": "896f685dea99e01ee03404e848cd7c934722871d9bcc76093c1f1e298bcb12e0",
+        "label": "LOD right"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\classic--skyscraper_2-a6a72aae9f26-repair-f032b01dccb2-low-071020d95a-field-v1\\candidates\\renders\\classic\\skyscraper_2\\lod-back.png",
+        "sha256": "1148c4c324219c3e30917a8ec0eebde7c5a28885a57673170df03027c575d6b1",
+        "label": "LOD back"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\classic--skyscraper_2-a6a72aae9f26-repair-f032b01dccb2-low-071020d95a-field-v1\\candidates\\renders\\classic\\skyscraper_2\\lod-left.png",
+        "sha256": "d82454e7020123d26538889cea4397abed3b59f464467095fac4de5067b3262b",
+        "label": "LOD left"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\classic--skyscraper_2-a6a72aae9f26-repair-f032b01dccb2-low-071020d95a-field-v1\\candidates\\renders\\classic\\skyscraper_2\\lod-iso.png",
+        "sha256": "6089360955a0920b65d5e873b2f03578027ab409257f8fb518336b52427f24b5",
+        "label": "LOD iso"
+      }
+    ],
+    "content": "Unmodified CPU render images composed with labels for visual comparison only"
+  }
+}

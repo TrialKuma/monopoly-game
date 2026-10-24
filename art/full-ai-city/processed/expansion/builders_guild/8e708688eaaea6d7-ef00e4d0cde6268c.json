@@ -1,0 +1,433 @@
+{
+  "status": "exported_pending_visual_review",
+  "createdAt": "2026-10-23T06:43:34.098958+00:00",
+  "region": "expansion",
+  "asset": "builders_guild",
+  "source": {
+    "rawGLB": {
+      "path": "art/full-ai-city/source/expansion--builders_guild-a001-pixal-mv-1024-9247.glb",
+      "sha256": "f237bcc0a928abbbc82bfa1d197f64c6bcd975ebab3f983acff20bfa31de6626",
+      "bytes": 40259016
+    }
+  },
+  "inferenceReport": {
+    "path": "art/full-ai-city/reports/retexture/expansion/builders_guild/a70799dd592a0a7d-provenance/a073b8e719b2e4442feeaaef4e4ba12bd079a721bbec784ab8bf3b6659ea1c56-expansion--builders_guild-a001-pixal-mv-1024-9247.json",
+    "sha256": "a073b8e719b2e4442feeaaef4e4ba12bd079a721bbec784ab8bf3b6659ea1c56",
+    "bytes": 7811
+  },
+  "reference": {
+    "path": "art/full-ai-city/reports/retexture/expansion/builders_guild/a70799dd592a0a7d-provenance/291a8561038acbbfae622cb65ce6feee56ad15ee9b8301bdbf1ef7f98eaa3b14-reference.json",
+    "sha256": "291a8561038acbbfae622cb65ce6feee56ad15ee9b8301bdbf1ef7f98eaa3b14",
+    "bytes": 4189
+  },
+  "processingTool": {
+    "path": "art/full-ai-city/reports/tool-snapshots/87d7e56ebee18c1b6f25239c296264a2ec598a9c9a5df37273d9cf9b539f09d2-reuv_expansion_builders.py",
+    "sha256": "87d7e56ebee18c1b6f25239c296264a2ec598a9c9a5df37273d9cf9b539f09d2",
+    "bytes": 5468
+  },
+  "assumedCameras": true,
+  "cameraCalibration": "assumed_standard_orbit_not_measured",
+  "nativePipeline": "Pixal3DMVImageTo3DPipeline.run_mv",
+  "nativeResolution": 1024,
+  "seed": 9247,
+  "geometryOrigin": "Only the actual neural source reduced and rebaked; no authored substitute geometry or manually constructed surfaces",
+  "orientation": {
+    "up": "Y",
+    "front": "+Z",
+    "groundY": 0,
+    "maxEdge": 1
+  },
+  "requestedTriangles": 30000,
+  "limitations": [
+    "Assumed camera reference reconstruction, not exact measured architecture",
+    "Final candidate requires actual rendered visual approval"
+  ],
+  "animation": {
+    "driver": "scene-life",
+    "autoplayClip": false,
+    "node": "expansion__builders_guild__neural_pendulum",
+    "lifePart": "pendulum",
+    "localRotationAxis": "Z",
+    "geometryOrigin": "Only original neural-derived faces, no added geometry",
+    "poseReview": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\expansion\\builders_guild\\motion\\review.json",
+      "sha256": "5ee86f9354df6d72e43002cd3f3d43865aaa1a733123823d1095afd47621a25f",
+      "bytes": 3954
+    },
+    "frames": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\expansion\\builders_guild\\motion\\pose-0-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\expansion\\builders_guild\\motion\\pose-0-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\expansion\\builders_guild\\motion\\pose-0-iso.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\expansion\\builders_guild\\motion\\pose--7-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\expansion\\builders_guild\\motion\\pose--7-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\expansion\\builders_guild\\motion\\pose--7-iso.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\expansion\\builders_guild\\motion\\pose-7-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\expansion\\builders_guild\\motion\\pose-7-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\expansion\\builders_guild\\motion\\pose-7-iso.png"
+    ]
+  },
+  "processingComplete": true,
+  "lod": "near",
+  "processingRevision": 0,
+  "derivation": {
+    "rawTriangles": 988116,
+    "weldedTriangles": 986427,
+    "remeshedTriangles": 3026824,
+    "voxelSize": 0.003,
+    "finalTriangles": 29989,
+    "atlasArea": 0.3044384790953611,
+    "singleReductionPass": true,
+    "inheritedUVRemovedBeforeReduction": true,
+    "sourceMaterialsUntouched": true,
+    "uvUnwrap": {
+      "angleDegrees": 66.0,
+      "islandMargin": 0.0004,
+      "marginMethod": "FRACTION",
+      "nominalMarginPixels": 0.4096
+    }
+  },
+  "bake": {
+    "method": "CPU closest-original-triangle projection with float64 barycentric original UV and bilinear original texture sampling; geometric normals retained, no directional normal-map rebake or invented color",
+    "coveredAtlasPixels": 319505,
+    "nearestLookupSuccessFraction": 1.0,
+    "notRayCoverage": true,
+    "sourceDistanceQuantiles": [
+      0.00016942180809564888,
+      0.0008976397570222611,
+      0.001521016783080997,
+      0.0062698498368263245
+    ],
+    "sourceDistanceQuantileLevels": [
+      0.5,
+      0.95,
+      0.99,
+      1
+    ],
+    "overTwoPercentMaxEdge": 0.0,
+    "distanceReviewRequired": false,
+    "visualGeometryReviewRequired": true,
+    "barycentricOriginalRange": [
+      -5.735931491639007e-05,
+      1.0
+    ],
+    "degenerateOrInvalidBarycentricCount": 0,
+    "closestSourceVertexFallbackFraction": 0.0,
+    "barycentricPointReconstructionErrorQuantiles": [
+      5.208990107549088e-09,
+      4.145832830061431e-08,
+      5.444212914450964e-07
+    ],
+    "atlasOverlapPixelsWithDifferentSurface": 242,
+    "seconds": 6.556236300006276,
+    "maps": [
+      {
+        "role": "base",
+        "size": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "role": "orm",
+        "size": [
+          512,
+          512
+        ]
+      }
+    ],
+    "repairSourceNote": "Original unmodified neural source and exact current mobile geometry preserved. Only UV layout and source-derived texture transfer changed in this pass."
+  },
+  "quantization": {
+    "source": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\expansion-builders-reuv66\\narrow-margin-candidates\\expansion\\builders_guild.glb",
+    "output": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\expansion-builders-reuv66\\narrow-margin-candidates\\expansion\\builders_guild.glb",
+    "sourceBytes": 1846172,
+    "outputBytes": 1347232,
+    "sourceSha256": "19665330a7254aef7e9ea74dcea8a68c01d85567069bd944532bd14120827764",
+    "outputSha256": "a70799dd592a0a7d59fa8744ba50684cccb469ca56cc1d183c9c44b91b8f948d",
+    "positionFaceAndTextureBytesUnchanged": true,
+    "attributes": [
+      {
+        "accessor": 1,
+        "semantic": "NORMAL",
+        "count": 41591,
+        "maximumAngularErrorDegrees": 0.37234277515904757
+      },
+      {
+        "accessor": 2,
+        "semantic": "TEXCOORD_0",
+        "count": 41591,
+        "maximumUVError": 7.629404535802742e-06,
+        "maximumTexelErrorAt1024": 0.007812510244662008
+      }
+    ]
+  },
+  "processedCandidate": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\candidates\\expansion\\builders_guild.glb",
+    "sha256": "8e708688eaaea6d71c5e0214c70458aafd60ece66f0b5c00d0f557283b062e50",
+    "bytes": 1529500
+  },
+  "glbValidation": {
+    "version": 2,
+    "triangles": 29989,
+    "meshes": 2,
+    "materials": 1,
+    "images": 2,
+    "all_primitives_have_uv": true,
+    "animations": [],
+    "all_images_embedded": true,
+    "external_buffers": []
+  },
+  "triangles": 29989,
+  "renderedCandidate": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\expansion\\builders_guild\\lod-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\expansion\\builders_guild\\lod-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\expansion\\builders_guild\\lod-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\expansion\\builders_guild\\lod-left.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\expansion\\builders_guild\\lod-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.5013723373413086,
+        -0.3970875144004822,
+        0.0004546786949504167
+      ],
+      "max": [
+        0.5004016160964966,
+        0.3959640562534332,
+        0.9039900898933411
+      ]
+    },
+    "triangles": 29989,
+    "textureSizes": [
+      {
+        "name": "expansion__builders_guild__nearest_base",
+        "size": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "name": "expansion__builders_guild__nearest_orm",
+        "size": [
+          512,
+          512
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "renderedSource": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\expansion\\builders_guild\\raw-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\expansion\\builders_guild\\raw-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.5,
+        -0.395719051361084,
+        0.0
+      ],
+      "max": [
+        0.5,
+        0.395719051361084,
+        0.9041546583175659
+      ]
+    },
+    "triangles": 988116,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "bounds": {
+    "min": [
+      -0.5013723373413086,
+      0.0004546786949504167,
+      -0.3959640562534332
+    ],
+    "max": [
+      0.5004016160964966,
+      0.9039900898933411,
+      0.3970875144004822
+    ],
+    "coordinateSystem": "GLTF Y-up; +Z front"
+  },
+  "textureSizes": [
+    {
+      "name": "expansion__builders_guild__nearest_base",
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "name": "expansion__builders_guild__nearest_orm",
+      "size": [
+        512,
+        512
+      ]
+    }
+  ],
+  "rawSourceUnchanged": true,
+  "completedAt": "2026-10-23T08:03:39.914978+00:00",
+  "textureOnlyReprocessing": {
+    "sourceCandidate": {
+      "path": "art/full-ai-city/work/expansion-builders-reuv66/prior-static-source/94d00f6a25a76018-builders_guild.glb",
+      "sha256": "94d00f6a25a760186e644e1b18b561841c91d9319c42bd2a1e29aec56f95e87c",
+      "bytes": 1517764
+    },
+    "sourceProcessingReport": {
+      "path": "art/full-ai-city/reports/retexture/expansion/builders_guild/a70799dd592a0a7d-provenance/d0e2a3cecdaad240f9956e2e0fc528e9d5f28ef2ac47b8121945ff1a086fa8a9-builders_guild.json",
+      "sha256": "d0e2a3cecdaad240f9956e2e0fc528e9d5f28ef2ac47b8121945ff1a086fa8a9",
+      "bytes": 7508
+    },
+    "sourceBlend": {
+      "path": "art/full-ai-city/blender/expansion/builders_guild.blend",
+      "sha256": "4be55b7be2d1d2e5211df1fae61b860bab9c291158e777ee9330e2fbfe8ae208",
+      "bytes": 52668935
+    },
+    "positionsUnchanged": true,
+    "faceIndicesUnchanged": true,
+    "additionalRemeshOrSimplification": false,
+    "exportedTriangleCornerPositionsExactlyUnchanged": true
+  },
+  "textureTransferTool": {
+    "path": "art/full-ai-city/reports/tool-snapshots/a2cb99c96fb8df396f16580a88a7c6151104ee3c927fe76cd161ee2d27bdfa42-bake_nearest_surface.py",
+    "sha256": "a2cb99c96fb8df396f16580a88a7c6151104ee3c927fe76cd161ee2d27bdfa42",
+    "bytes": 7317
+  },
+  "promotedFrom": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\retexture\\expansion\\builders_guild\\a70799dd592a0a7d-provenance\\9ffe386cd34d818ed60c8c5d179233a9aba9100220dec90dbe2882a9572215bf-builders_guild.json",
+    "sha256": "9ffe386cd34d818ed60c8c5d179233a9aba9100220dec90dbe2882a9572215bf",
+    "bytes": 9699
+  },
+  "reviewSheet": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\expansion\\builders_guild\\review-sheet.jpg",
+    "sha256": "d06cc8009c58888661484a065de8a6a69ebe4dfd4ce1c186b1f28ff233bfbd35",
+    "bytes": 312942,
+    "candidateSha256": "8e708688eaaea6d71c5e0214c70458aafd60ece66f0b5c00d0f557283b062e50",
+    "sourceImages": [
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\expansion\\builders_guild\\raw-front.png",
+        "sha256": "47776250a96c2e2331b140cccf0e0b6e2bfbb3009dfc04764f242ceb14bab958",
+        "label": "AI raw front"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\expansion\\builders_guild\\raw-iso.png",
+        "sha256": "33be897f4cd6392a32fab0bab681ae52b3d1c2f8b156c551412db36fd164b12b",
+        "label": "AI raw iso"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\expansion\\builders_guild\\lod-front.png",
+        "sha256": "1bfadaeff279fdc1283f6654a58e8efc3c6f371e12e5c91fe4fa1086d27d382c",
+        "label": "LOD front"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\expansion\\builders_guild\\lod-right.png",
+        "sha256": "a19e6bf8bf89fbbc784658f07ec5987199b959c70a4c918dda68b8478bdf461d",
+        "label": "LOD right"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\expansion\\builders_guild\\lod-back.png",
+        "sha256": "203afd79a479f9914a14f10ed84699daea9c52130e7b208c4da7ab9db10d4172",
+        "label": "LOD back"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\expansion\\builders_guild\\lod-left.png",
+        "sha256": "f74b63c8d32fdc34ca60577e2dcadc896e98e52e6b0bb2f587f00cce501dfe85",
+        "label": "LOD left"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\expansion\\builders_guild\\lod-iso.png",
+        "sha256": "ccc1d5f4a80f24683643fcd99c5513bf74c89e349421dbca05a0485d0d68bb95",
+        "label": "LOD iso"
+      }
+    ],
+    "content": "Unmodified CPU render images composed with labels for visual comparison only"
+  },
+  "derivedFromStaticCandidate": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\candidate-history\\expansion\\builders_guild\\a70799dd592a0a7d59fa8744ba50684cccb469ca56cc1d183c9c44b91b8f948d\\builders_guild.glb",
+    "sha256": "a70799dd592a0a7d59fa8744ba50684cccb469ca56cc1d183c9c44b91b8f948d",
+    "bytes": 1347232
+  },
+  "componentSeparation": {
+    "source": {
+      "path": "art\\full-ai-city\\work\\expansion-builders-reuv66\\narrow-margin-candidates\\expansion\\builders_guild.glb",
+      "sha256": "a70799dd592a0a7d59fa8744ba50684cccb469ca56cc1d183c9c44b91b8f948d"
+    },
+    "output": {
+      "path": "art\\full-ai-city\\work\\expansion-cargo-separation\\cargo.glb",
+      "sha256": "8e708688eaaea6d71c5e0214c70458aafd60ece66f0b5c00d0f557283b062e50",
+      "bytes": 1529500
+    },
+    "staticTriangles": 29777,
+    "movingTriangles": 212,
+    "triangleTotalPreserved": 29989,
+    "poseZeroMaxPositionError": 5.364418020903372e-09,
+    "embeddedImageHashesUnchanged": true,
+    "selection": {
+      "name": "expansion__builders_guild__neural_pendulum",
+      "lifePart": "pendulum",
+      "shape": "box",
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "center": [
+        0.427,
+        0.49,
+        0.34
+      ],
+      "min": [
+        0.373,
+        0.27,
+        0.285
+      ],
+      "max": [
+        0.51,
+        0.49,
+        0.43
+      ],
+      "keepLargestConnected": true,
+      "measurement": "Initial selection from actual front/right/oblique neural workshop views and existing vertex region; cargo and hanging chain only. Pending actual pose check; no added surfaces.",
+      "reviewNotes": "Public reviewer inspected all nine actual 0/-7/+7 degree front/right/isometric poses. The original neural cargo box and lower chain move together; crane beam, facade and roof stay fixed. No wall fragment moves and no residual cargo fragment remains stationary. Original mesh faces and texture pixels are retained."
+    },
+    "driver": "scene-life; no autoplay GLTF clip",
+    "newFacesAdded": 0
+  },
+  "componentVisualReview": {
+    "status": "passed_by_processing_agent_pending_external_approval",
+    "notes": "Public reviewer inspected all nine actual 0/-7/+7 degree front/right/isometric poses. The original neural cargo box and lower chain move together; crane beam, facade and roof stay fixed. No wall fragment moves and no residual cargo fragment remains stationary. Original mesh faces and texture pixels are retained."
+  },
+  "componentTools": [
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\5ef865750c005ad1c449653f1e25b1e6d3a77dad5a7cbd41ecb5273b83364789-neural_component.py",
+      "sha256": "5ef865750c005ad1c449653f1e25b1e6d3a77dad5a7cbd41ecb5273b83364789",
+      "bytes": 11603
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\a05381f29dd4d1c10b92b6eade3b5130223422118f258cb980dcb645de3b93b3-finalize_component.py",
+      "sha256": "a05381f29dd4d1c10b92b6eade3b5130223422118f258cb980dcb645de3b93b3",
+      "bytes": 4855
+    }
+  ]
+}

@@ -1,0 +1,202 @@
+{
+  "status": "local_repair_candidate_pending_visual_review",
+  "source": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\compact--skyscraper_2-a002-pixal-mv-1024-29481.glb",
+    "sha256": "4743c04ce7a2b04f7a21ffe6fe75cdb1a961681819042a8e222b8b73cb510df7",
+    "bytes": 41946700
+  },
+  "orientation": {
+    "enabled": true,
+    "candidate_degrees": 1.054979493255945,
+    "applied_degrees": 1.054979493255945,
+    "underside_area": 0.04368851354740604,
+    "normal_agreement": 0.9328708009897627,
+    "yaw_degrees": 180,
+    "pitch_degrees": 0,
+    "roll_degrees": 0,
+    "uniform_scale": 1.0152479479874423
+  },
+  "configuration": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\source-repairs-planned\\compact\\skyscraper_2\\4743c04ce7a2b04f\\front-plinth-config.json",
+    "sha256": "f8caa217e03fce8aad56ee643e6d9194989a265fbaf4b488c2194027b3f7ceb9",
+    "bytes": 1234
+  },
+  "reviewEvidence": [
+    {
+      "path": "reports/source-repairs-planned/compact/skyscraper_2/4743c04ce7a2b04f/plinth-review.json",
+      "sha256": "ed2f099b4987d579c389f92761e2c8f9d74bd12caf76c63b480dc66149a29c94",
+      "bytes": 1072
+    }
+  ],
+  "measurement": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\core-surface-measurements\\compact\\skyscraper_2\\4743-plinth\\surface-measurements.json",
+    "sha256": "a6fafc7dd5481d3294bc6f96ceae0c5a180e457d7eb1a155107372a88b9ec74f",
+    "bytes": 124103
+  },
+  "method": "Only explicitly measured and visually reviewed local gaps are closed from adjoining original surface and UV samples with0.006 inward closure. Original vertices, faces and image pixels are preserved. No replacement building or generated texture. See configuration and frozen prior review evidence for exact allowed regions.",
+  "repairs": [
+    {
+      "name": "Front left missing timber plinth band",
+      "specification": {
+        "name": "Front left missing timber plinth band",
+        "u": [
+          1,
+          0,
+          0
+        ],
+        "v": [
+          0,
+          0,
+          1
+        ],
+        "n": [
+          0,
+          -1,
+          0
+        ],
+        "roi": [
+          -0.435,
+          -0.35,
+          0.019,
+          0.051
+        ],
+        "defectDepth": 0.11,
+        "donorDepth": 0.119,
+        "donorMaxDepth": 0.127,
+        "donorNormal": 0.7,
+        "color": "wood",
+        "gridStep": 0.004,
+        "donorMargin": 0.028,
+        "flatPatchUV": true,
+        "donorMinRGB": 0.08,
+        "donorMaxColorRatio": 3.6
+      },
+      "missingSamples": 148,
+      "boundarySamples": 240,
+      "sampledDepthRange": [
+        -0.11961841583251953,
+        0.13746511936187744
+      ],
+      "inwardClosureThickness": 0.006,
+      "outerSurfaceUnchanged": true,
+      "newVertices": 420,
+      "newTriangles": 836
+    }
+  ],
+  "originalTriangles": 969746,
+  "originalVerticesMoved": 0,
+  "originalTrianglesDeleted": 0,
+  "artifactCleanup": {
+    "method": "No original faces deleted. Only the explicitly reviewed bounded source-surface regions in the configuration may receive additional triangles.",
+    "deletedTriangles": 0
+  },
+  "newTriangles": 836,
+  "newVertices": 420,
+  "inverseSimilarityError": 6.598297636051242e-08,
+  "normalizedOutput": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-compact-skyscraper2-4743-front-plinth\\repaired-normalized.glb",
+    "sha256": "3b688b275c184cd892d799317237b57d9f5c228cc2dd43fef8e0eb3eff7b2c16",
+    "bytes": 42130600
+  },
+  "nativeOutput": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-compact-skyscraper2-4743-front-plinth\\repaired-native.glb",
+    "sha256": "2d80b6c2a28421cd034e4e8c8d5197bf53b3d8384cebfea1f8b0347982ea254d",
+    "bytes": 42126360
+  },
+  "renders": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-compact-skyscraper2-4743-front-plinth\\repaired-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-compact-skyscraper2-4743-front-plinth\\repaired-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-compact-skyscraper2-4743-front-plinth\\repaired-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-compact-skyscraper2-4743-front-plinth\\repaired-left.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-compact-skyscraper2-4743-front-plinth\\repaired-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.5,
+        -0.18389730155467987,
+        0.0
+      ],
+      "max": [
+        0.5,
+        0.18389730155467987,
+        0.6172982454299927
+      ]
+    },
+    "triangles": 970582,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "reviewImages": [
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\compact\\skyscraper_2\\2d80b6c2a28421cd\\repaired-front.png",
+      "sha256": "d07c0c13b7865e9d9477f5946c51b18d44914109807e08eddfb5031099839b6d",
+      "bytes": 199985
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\compact\\skyscraper_2\\2d80b6c2a28421cd\\repaired-right.png",
+      "sha256": "1170a412fb75e7895ee295252e4c00935051a9e95630d601cfc395d048fc0390",
+      "bytes": 124958
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\compact\\skyscraper_2\\2d80b6c2a28421cd\\repaired-back.png",
+      "sha256": "83cfc49b4220b2715a4545f536a6c7fcbc9d7290da64bfd7abd0cfe47338b8ae",
+      "bytes": 196144
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\compact\\skyscraper_2\\2d80b6c2a28421cd\\repaired-left.png",
+      "sha256": "0c81d9bde7ba03521a3220258157928359ad122f1f334574a69c7b1f00a9b988",
+      "bytes": 132794
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\compact\\skyscraper_2\\2d80b6c2a28421cd\\repaired-iso.png",
+      "sha256": "97be90088f138003cb8ab1ffcf8c9f777081c65733e04e34db8d17f41ee41c83",
+      "bytes": 211511
+    }
+  ],
+  "processingTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\f21173ee639bce54c9c7094ef6121aa6aea7401fc45edfff9d221c65a107ae79-repair_bounded_source_surface.py",
+    "sha256": "f21173ee639bce54c9c7094ef6121aa6aea7401fc45edfff9d221c65a107ae79",
+    "bytes": 13325
+  },
+  "completedAt": "2026-10-24T01:35:45.410832+00:00",
+  "sourcePreservation": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\compact\\skyscraper_2\\2d80b6c2a28421cd\\preservation.json",
+    "sha256": "5399584e54363b792abfa3e2215d6b0a987192cb72c13abaed4c3271cd950930",
+    "bytes": 1108
+  },
+  "originalRepairReceipt": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-compact-skyscraper2-4743-front-plinth\\repair.json",
+    "sha256": "4c8e8ee6513e2059bd01ca0e05d8e42df7a92b13e4f45f377c85146f14fc55e6",
+    "bytes": 6996
+  },
+  "sourceVisualReview": {
+    "status": "reviewed_for_derivative_processing",
+    "views": [
+      "front",
+      "right",
+      "back",
+      "left",
+      "iso"
+    ],
+    "note": "Actually inspected all five repaired source material views. One missing timber plinth band under the front-left ground-floor window is filled using measured neighboring timber depth and real local donor UV, with836 additional faces. The opening closes without changing the roof, repaired loft source, balconies, windows, doorway or other sides. Minor original base notches remain unchanged. Original triangle positions/UV/image bytes verified exact. Accept for one unchanged45k/.003 native-field derivative only; final five-view and phone approval remain required.",
+    "reviewer": "asset_production"
+  }
+}

@@ -1,0 +1,211 @@
+{
+  "status": "local_repair_candidate_pending_visual_review",
+  "source": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\harbor--builders_guild-a001-pixal-mv-1024-9247.glb",
+    "sha256": "fd204274f5324a17cbbddcdd944e4200b96219e760f3da4f29e730c0838225f1",
+    "bytes": 40218668
+  },
+  "orientation": {
+    "enabled": true,
+    "candidate_degrees": 0.3115327187288036,
+    "applied_degrees": 0.3115327187288036,
+    "underside_area": 0.27113196186773425,
+    "normal_agreement": 0.9640470358341102,
+    "yaw_degrees": 180,
+    "pitch_degrees": 0,
+    "roll_degrees": 0,
+    "uniform_scale": 1.1179901199386644
+  },
+  "method": "Only the measured front-left missing plaster wall sector and small left pilaster backing gap are closed from intact neighboring original stone surface depth and UV samples. Original neural vertices, faces and image pixels are untouched. Workshop entrance, original windows, timber crane, cargo and architectural volumes remain unchanged. Patches close 0.006 inward for derivative stability, with no replacement building or newly painted texture.",
+  "repairs": [
+    {
+      "name": "Front upper-left wall missing beside quoin column",
+      "specification": {
+        "name": "Front upper-left wall missing beside quoin column",
+        "u": [
+          1,
+          0,
+          0
+        ],
+        "v": [
+          0,
+          0,
+          1
+        ],
+        "n": [
+          0,
+          -1,
+          0
+        ],
+        "roi": [
+          -0.184,
+          -0.143,
+          0.375,
+          0.605
+        ],
+        "defectDepth": 0.2,
+        "donorDepth": 0.23,
+        "donorMaxDepth": 0.252,
+        "donorNormal": 0.75,
+        "color": "stone"
+      },
+      "missingSamples": 978,
+      "boundarySamples": 3558,
+      "sampledDepthRange": [
+        -2.0,
+        0.28067684173583984
+      ],
+      "inwardClosureThickness": 0.006,
+      "outerSurfaceUnchanged": true,
+      "newVertices": 2604,
+      "newTriangles": 5204
+    },
+    {
+      "name": "Front left pilaster small backing opening under timber lintel",
+      "specification": {
+        "name": "Front left pilaster small backing opening under timber lintel",
+        "u": [
+          1,
+          0,
+          0
+        ],
+        "v": [
+          0,
+          0,
+          1
+        ],
+        "n": [
+          0,
+          -1,
+          0
+        ],
+        "roi": [
+          -0.185,
+          -0.143,
+          0.24,
+          0.29
+        ],
+        "defectDepth": 0.2,
+        "donorDepth": 0.23,
+        "donorMaxDepth": 0.26,
+        "donorNormal": 0.65,
+        "color": "stone"
+      },
+      "missingSamples": 146,
+      "boundarySamples": 629,
+      "sampledDepthRange": [
+        -0.2912473678588867,
+        0.2530585527420044
+      ],
+      "inwardClosureThickness": 0.006,
+      "outerSurfaceUnchanged": true,
+      "newVertices": 424,
+      "newTriangles": 844
+    }
+  ],
+  "originalTriangles": 948094,
+  "originalVerticesMoved": 0,
+  "originalTrianglesDeleted": 0,
+  "artifactCleanup": {
+    "method": "No original faces deleted. Only the measured front-left plaster wall break and the small left pilaster backing gap receive boundary-derived closed patches. Timber crane, existing cargo, windows and workshop passage remain unchanged.",
+    "deletedTriangles": 0
+  },
+  "newTriangles": 6048,
+  "newVertices": 3028,
+  "inverseSimilarityError": 8.578345589427272e-08,
+  "normalizedOutput": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-harbor-builders\\repaired-normalized.glb",
+    "sha256": "ff89d7ebbaed936d06add8392943b34551a976a0fdb8aa2a78de3f85396eaa59",
+    "bytes": 41080820
+  },
+  "nativeOutput": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-harbor-builders\\repaired-native.glb",
+    "sha256": "ed96e21d84133b0186dc672ec3824358631465d0bb1259bbf5516a681bd6fd90",
+    "bytes": 41073924
+  },
+  "renders": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-harbor-builders\\repaired-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-harbor-builders\\repaired-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-harbor-builders\\repaired-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-harbor-builders\\repaired-left.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-harbor-builders\\repaired-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.5,
+        -0.45119184255599976,
+        0.0
+      ],
+      "max": [
+        0.5,
+        0.45119184255599976,
+        0.8761177659034729
+      ]
+    },
+    "triangles": 954142,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "reviewImages": [
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-harbor-builders\\repaired-front.png",
+      "sha256": "6bd22c1c248fa2b4ba8b5382670ea87a22930686b8e711ed97c538a00ae2dbe2",
+      "bytes": 232835
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-harbor-builders\\repaired-right.png",
+      "sha256": "3202eb88c45800d9f90c3df6db7d375796c4a74230e2f14cc39c6431a75f2988",
+      "bytes": 236668
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-harbor-builders\\repaired-back.png",
+      "sha256": "35c621355f5dccd66889fca28086d3f03c8d224081eaa9356ff6c09e486bd540",
+      "bytes": 238657
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-harbor-builders\\repaired-left.png",
+      "sha256": "179e62bb6340fedf755ebfa58130a165ea713c5d83101a6c442c8cdd009e40cc",
+      "bytes": 240465
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-harbor-builders\\repaired-iso.png",
+      "sha256": "a7b3b38d987692c7c66ef58619da24d3319910538d2296f594e13be2f7eb25f0",
+      "bytes": 286079
+    }
+  ],
+  "processingTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\f166d313855c77b8937d264f138b4d7e5cf2aecf04375398574aefc0c2235949-repair_harbor_builders_surface.py",
+    "sha256": "f166d313855c77b8937d264f138b4d7e5cf2aecf04375398574aefc0c2235949",
+    "bytes": 11416
+  },
+  "completedAt": "2026-10-23T08:58:50.124191+00:00",
+  "sourceVisualReview": {
+    "status": "reviewed_for_derivative_processing",
+    "views": [
+      "front",
+      "right",
+      "back",
+      "left",
+      "iso"
+    ],
+    "note": "All five actual repaired source views individually inspected against original color and four neutral-gray diagnostics. The long front-left plaster wall opening and small left pilaster gap are closed while quoin blocks, original timber lintel, crane, chain/cargo, entrance and roof remain intact. Original slight relief irregularity and recessed arch edge shadows remain. Final reduced field-textured building and actual cargo poses require separate approval."
+  }
+}

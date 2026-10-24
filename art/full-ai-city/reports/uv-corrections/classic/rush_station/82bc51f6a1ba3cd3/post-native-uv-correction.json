@@ -1,0 +1,79 @@
+{
+  "status": "verified_post_native_uv_correction_pending_final_approval",
+  "sourceCandidate": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\uv-corrections\\classic\\rush_station\\82bc51f6a1ba3cd3\\input-native-candidate.glb",
+    "sha256": "adae415cbb7ce3b5e03cc98910b753aa3e04f34e51502d6d5d5a74abc2f9a58e",
+    "bytes": 1179516
+  },
+  "sourceProcessingReport": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\uv-corrections\\classic\\rush_station\\82bc51f6a1ba3cd3\\input-native-processing.json",
+    "sha256": "cd650168b4f772baf72e4ffc61a1a1a4bc1888af8233e24d3118145f68c854d8",
+    "bytes": 27025
+  },
+  "receipt": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\uv-corrections\\classic\\rush_station\\82bc51f6a1ba3cd3\\uv-correction-original.json",
+    "sha256": "b81121ce1b21034261313b24fbb72c54b61f4960572f5a145244487b35942194",
+    "bytes": 6275
+  },
+  "tool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\uv-corrections\\classic\\rush_station\\82bc51f6a1ba3cd3\\correct_rush_wall_uv.py",
+    "sha256": "93b4e6115e80f0585486be5cb26f77ff6b38db839cbb67e5c96c3ca412ea7c15",
+    "bytes": 5655
+  },
+  "verificationTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\uv-corrections\\classic\\rush_station\\82bc51f6a1ba3cd3\\freeze_rush_uv_correction.py",
+    "sha256": "2e85d99bf2f8ff11bc1a1ff127639387625b62788cfb571d94650e19fa75e5d1",
+    "bytes": 4911
+  },
+  "output": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\uv-corrections\\classic\\rush_station\\82bc51f6a1ba3cd3\\rush_station.glb",
+    "sha256": "82bc51f6a1ba3cd36f671f1011b024a8c792214aefd4aeadff6b2d535863a724",
+    "bytes": 1363264
+  },
+  "evidence": [
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\uv-corrections\\classic\\rush_station\\82bc51f6a1ba3cd3\\lod-front.png",
+      "sha256": "e2d102cb02aedca962fcfc046d5868b64315e968e06085ac32703ed3da45a97e",
+      "bytes": 220729
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\uv-corrections\\classic\\rush_station\\82bc51f6a1ba3cd3\\lod-right.png",
+      "sha256": "29e2aeacfa8d7e51a33c3ef7b6f24e7051f73244e4562dbf9883f28d98118f40",
+      "bytes": 181717
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\uv-corrections\\classic\\rush_station\\82bc51f6a1ba3cd3\\lod-back.png",
+      "sha256": "f53ddc98b9b4514dca9d8df31c98feabf2a4adef43f33e930e78f3279477836b",
+      "bytes": 205113
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\uv-corrections\\classic\\rush_station\\82bc51f6a1ba3cd3\\lod-left.png",
+      "sha256": "3b9bb08249570109890949d1d0b05fa436d612d7c17d45775edf20eb4c2ea741",
+      "bytes": 180788
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\uv-corrections\\classic\\rush_station\\82bc51f6a1ba3cd3\\lod-iso.png",
+      "sha256": "8e34e94e1dc26a15e3f8b2e6a1792188a0f6b28030fdb8b2f0a6866a1f215116",
+      "bytes": 254397
+    }
+  ],
+  "verification": {
+    "perTrianglePositionsExactlyPreserved": true,
+    "perTriangleNormalsExactlyPreserved": true,
+    "embeddedImagesExactlyPreserved": true,
+    "materialsExactlyPreserved": true,
+    "changedTriangleIdsExactlyMatchReceipt": true,
+    "allReplacementUVsExactlyMatchRecordedOriginalDonor": true,
+    "changedTriangles": 64,
+    "changedUVLoops": 192,
+    "triangles": 29977,
+    "newTriangles": 0,
+    "originalRawUnchanged": true
+  },
+  "method": "Only measured original dark left stone-recess UV loops remapped to nearest-height intact original stone triangle UVs from the same final neural texture. Applied after field replay. No painted texture or authored building geometry.",
+  "visualReview": {
+    "status": "reviewed_for_derivative_processing",
+    "reviewer": "outskirts",
+    "notes": "Actual five final views reviewed; dark left stone-recess strip removed using adjacent intact original stone UVs. Original shallow side-wall faceting remains disclosed."
+  }
+}

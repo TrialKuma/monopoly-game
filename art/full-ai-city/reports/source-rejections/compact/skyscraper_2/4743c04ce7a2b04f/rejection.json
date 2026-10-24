@@ -1,0 +1,57 @@
+{
+  "status": "rejected_native_export_source",
+  "region": "compact",
+  "asset": "skyscraper_2",
+  "reviewer": "asset_production",
+  "recordedAtUtc": "2026-10-24T01:31:03.756901+00:00",
+  "source": {
+    "path": "art/full-ai-city/source/compact--skyscraper_2-a002-pixal-mv-1024-29481.glb",
+    "sha256": "4743c04ce7a2b04f7a21ffe6fe75cdb1a961681819042a8e222b8b73cb510df7",
+    "bytes": 41946700
+  },
+  "sourceLevel": "Native 1M export; no untouched decoder attribution is made.",
+  "inferenceReport": {
+    "path": "art/full-ai-city/reports/source-rejections/compact/skyscraper_2/4743c04ce7a2b04f/compact--skyscraper_2-a002-pixal-mv-1024-29481.json",
+    "sha256": "2df0af5df81f28be08bbaa8698c81fc93e151435732f23fe82e4547044b32b6f",
+    "bytes": 10801
+  },
+  "inputReference": {
+    "path": "art/full-ai-city/reports/source-rejections/compact/skyscraper_2/4743c04ce7a2b04f/input-reference.json",
+    "sha256": "bd20ab139ad4b5f4a8e07e9d62f3a0153b435fce33dde7824089bd45b25f19f3",
+    "bytes": 4462
+  },
+  "diagnostic": null,
+  "diagnosticTool": null,
+  "sourceComparisonReport": {
+    "path": "art/full-ai-city/reports/source-rejections/compact/skyscraper_2/4743c04ce7a2b04f/source-comparison-processing.json",
+    "sha256": "034039191a0380a78f7975ea4ee1d8604fdc724571f1c4b81f0880b0b0c5abf5",
+    "bytes": 19784
+  },
+  "sourceViewEvidenceMode": "Explicitly selected existing renderedSource views; no additional or neutral render implied",
+  "evidence": [
+    {
+      "path": "art/full-ai-city/reports/source-rejections/compact/skyscraper_2/4743c04ce7a2b04f/raw-front.png",
+      "sha256": "2385640cbbfb5b5dd1ef89d075743bad729520c679164613cd08215c2de5d4e8",
+      "bytes": 200050
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/compact/skyscraper_2/4743c04ce7a2b04f/raw-iso.png",
+      "sha256": "da628f9e431069dc56cb93af98f8312cd058a27099b7d05e84a74373b9dc7bac",
+      "bytes": 211558
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/compact/skyscraper_2/4743c04ce7a2b04f/raw-back.png",
+      "sha256": "dbe618ebd369e7e9f34e4d02287972fff1198e8e3fb5f0eee38d72d2af3cd41d",
+      "bytes": 196159
+    }
+  ],
+  "finding": "Actual reference/native front/iso/back and all five final plus256px views show the repeated loft panel losses are resolved, but a new open horizontal timber plinth band under the front-left ground-floor window remains plainly visible. It is already present in native raw-front, not a field export error. No third same-reference seed: preserve this otherwise coherent source and assess one strictly bounded existing plinth patch. The tiny rear/base notches are secondary and do not justify broad rebuilding.",
+  "decision": "Hold current source for one strictly local timber plinth patch assessment. No third same-reference seed, no new reference or whole-building reconstruction.",
+  "sourceUnchanged": true,
+  "notFinalCandidateReview": true,
+  "freezeTool": {
+    "path": "art/full-ai-city/reports/tool-snapshots/616860a00b28e670e1219d64c6cb5dad17f0946420568f786e80b6d789fb4a73-freeze_public_source_rejection.py",
+    "sha256": "616860a00b28e670e1219d64c6cb5dad17f0946420568f786e80b6d789fb4a73",
+    "bytes": 4304
+  }
+}

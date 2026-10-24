@@ -1,0 +1,57 @@
+{
+  "status": "rejected_native_export_source",
+  "region": "expansion",
+  "asset": "shop_3",
+  "reviewer": "asset_production",
+  "recordedAtUtc": "2026-10-24T04:53:55.208240+00:00",
+  "source": {
+    "path": "art/full-ai-city/source/expansion--shop_3-a011-pixal-mv-1024-9247.glb",
+    "sha256": "81190da14ab6caecc05ae30219761f9e7abfb672dd574583e3a19ac64136ee3d",
+    "bytes": 43463412
+  },
+  "sourceLevel": "Native 1M export; no untouched decoder attribution is made.",
+  "inferenceReport": {
+    "path": "art/full-ai-city/reports/source-rejections/expansion/shop_3/81190da14ab6caec/expansion--shop_3-a011-pixal-mv-1024-9247.json",
+    "sha256": "9d49bbde3cc694d418a656c6543177f8e16431bc21c2a571fff4481fd4728e8f",
+    "bytes": 10470
+  },
+  "inputReference": {
+    "path": "art/full-ai-city/reports/source-rejections/expansion/shop_3/81190da14ab6caec/input-reference.json",
+    "sha256": "499c63f3133800ad4c4db21062786a8adea3a452e1f5f5e969d9bd0bceb97481",
+    "bytes": 4402
+  },
+  "diagnostic": null,
+  "diagnosticTool": null,
+  "sourceComparisonReport": {
+    "path": "art/full-ai-city/reports/source-rejections/expansion/shop_3/81190da14ab6caec/source-comparison-processing.json",
+    "sha256": "10ade907a6744d1da2dbe03f59a95bf4f1fb7840306640b9646a0279b2c11015",
+    "bytes": 20916
+  },
+  "sourceViewEvidenceMode": "Explicitly selected existing renderedSource views; no additional or neutral render implied",
+  "evidence": [
+    {
+      "path": "art/full-ai-city/reports/source-rejections/expansion/shop_3/81190da14ab6caec/raw-front.png",
+      "sha256": "3233e5f6a98f521c3db59d8b03f433b056742a1293bcf316ed4d007fe69f5b70",
+      "bytes": 243390
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/expansion/shop_3/81190da14ab6caec/raw-iso.png",
+      "sha256": "18c893e042b7c0e6d1b9271aeabe1404b600f82b1c17c2579217ee18cf3b336a",
+      "bytes": 323684
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/expansion/shop_3/81190da14ab6caec/raw-back.png",
+      "sha256": "de8253f509a9ce121372f121e12ca969d7c91d14143d0dca5a4354acd4730180",
+      "bytes": 235502
+    }
+  ],
+  "finding": "Actually inspected the original three-view reference, existing native front/iso/back, all five final material views and256px downsample. The native front has a broad open horizontal strip across the upper-floor separation under three front windows; several upper window panes are fragmented. Native back also has an open strip above the service door, with adjacent missing door-side wall. These remain conspicuous in the exact mobile final and256px views. The main brick sides and striped shop canopy are otherwise coherent. Attribute this narrowly to the retained native export, not uninspected decoder geometry. One first independent same-reference source retry is eligible; preserve geometry-only settings, thresholds and all previous outcomes.",
+  "decision": "One independent same-reference seed. If repeated major defects remain, review three-view consistency before further inference; no automatic approval.",
+  "sourceUnchanged": true,
+  "notFinalCandidateReview": true,
+  "freezeTool": {
+    "path": "art/full-ai-city/reports/tool-snapshots/616860a00b28e670e1219d64c6cb5dad17f0946420568f786e80b6d789fb4a73-freeze_public_source_rejection.py",
+    "sha256": "616860a00b28e670e1219d64c6cb5dad17f0946420568f786e80b6d789fb4a73",
+    "bytes": 4304
+  }
+}

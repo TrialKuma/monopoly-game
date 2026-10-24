@@ -1,0 +1,79 @@
+{
+  "status": "rejected_native_export_source",
+  "region": "alpine",
+  "asset": "civic_hall",
+  "reviewer": "/root/asset_production",
+  "recordedAtUtc": "2026-10-23T20:04:44.860362+00:00",
+  "source": {
+    "path": "art/full-ai-city/source/alpine--civic_hall-a002-pixal-mv-1024-29431.glb",
+    "sha256": "254d2368b8ca471f14ed82c82da00892c9389c09af175628d938e50c78e8a4f9",
+    "bytes": 44283476
+  },
+  "sourceLevel": "Native 1M export; no untouched decoder attribution is made.",
+  "inferenceReport": {
+    "path": "art/full-ai-city/reports/source-rejections/alpine/civic_hall/254d2368b8ca471f/alpine--civic_hall-a002-pixal-mv-1024-29431.json",
+    "sha256": "904409187265e1e074b315d0d91afc1374bb1efee7ab6a190015d4e49467c6f0",
+    "bytes": 10414
+  },
+  "inputReference": {
+    "path": "art/full-ai-city/reports/source-rejections/alpine/civic_hall/254d2368b8ca471f/input-reference.json",
+    "sha256": "1c5abc6b0170de3cb90b4526759333e2c41cb77ed5c35053f98dd5043d9ceed8",
+    "bytes": 4434
+  },
+  "diagnostic": {
+    "path": "art/full-ai-city/reports/source-rejections/alpine/civic_hall/254d2368b8ca471f/source-inspection.json",
+    "sha256": "7bef955213d5a59bb4196e531fff7b0d8df81e1658e476877d9ed374b3c17934",
+    "bytes": 2509
+  },
+  "diagnosticTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\128f0187158a035f4d7e1b8bb5fbec7c559413d80cd6336639df3afc760eb994-render_raw_core_review.py",
+    "sha256": "128f0187158a035f4d7e1b8bb5fbec7c559413d80cd6336639df3afc760eb994",
+    "bytes": 3616
+  },
+  "evidence": [
+    {
+      "path": "art/full-ai-city/reports/source-rejections/alpine/civic_hall/254d2368b8ca471f/raw-front.png",
+      "sha256": "f38b11db9ba050befa899915987ac34020773dafaff7ef4d6097dabf382eb28d",
+      "bytes": 242752
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/alpine/civic_hall/254d2368b8ca471f/raw-iso.png",
+      "sha256": "2538b1f639f0dae34fd89e145c27e4ec9dff94985824ef619e7def78a0d0a5a5",
+      "bytes": 287239
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/alpine/civic_hall/254d2368b8ca471f/raw-right.png",
+      "sha256": "aa1773a50816213b5795b12cf55ec708ac342de0875207ad920602ba794732c6",
+      "bytes": 214424
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/alpine/civic_hall/254d2368b8ca471f/raw-back.png",
+      "sha256": "e863d3a3839d3bdb88aff7e5cd4b77d0428ef72f5c8cff7f212142f86eb6c94f",
+      "bytes": 239342
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/alpine/civic_hall/254d2368b8ca471f/raw-left.png",
+      "sha256": "a1f96d24135bcffdf391b02db6a6d61b7b29330319f84aadb0aa4a7f506911e5",
+      "bytes": 217472
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/alpine/civic_hall/254d2368b8ca471f/raw-close-back-iso.png",
+      "sha256": "6db02678ca12cd238b91b1610d97478368263ccc7498a00d96124488b3cae709",
+      "bytes": 956339
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/alpine/civic_hall/254d2368b8ca471f/raw-grey-back-iso.png",
+      "sha256": "4c66117dbac97a2651db2f5b01904a4297d20fcc7936952f44f256203b1e8faf",
+      "bytes": 764571
+    }
+  ],
+  "finding": "Actually inspected the three-view reference, final native-field five-view sheet, current raw front/iso, and targeted original right/back/left plus close and neutral rear-left views. The second native source still has multiple structural defects: open sections beneath the rear roof valley next to the two chimneys, a missing upper infill area in the left dormer, broken/incomplete side windows, and a lower rear window missing glazing/body. These persist with neutral material; front material and roof color alone conceal them. Final9639180e repeats these native1M source defects. This is broader than one small local seam and remains visible in phone-facing roof/facade silhouettes. Source254d2368 is the already requested second seed, so do not consume another seed automatically.",
+  "decision": "Second same-reference source rejected. Hold this exact reference/source for consistency review and an explicit reviewed reference revision before further inference; no third same-reference seed, no authored whole-building replacement, no automatic approval.",
+  "sourceUnchanged": true,
+  "notFinalCandidateReview": true,
+  "freezeTool": {
+    "path": "art/full-ai-city/reports/tool-snapshots/2089d6a4df905cc5eff41a53bbdb4efd95271671a2285389fa1ae28ba40e29cf-freeze_public_source_rejection.py",
+    "sha256": "2089d6a4df905cc5eff41a53bbdb4efd95271671a2285389fa1ae28ba40e29cf",
+    "bytes": 3317
+  }
+}

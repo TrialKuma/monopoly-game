@@ -1,0 +1,73 @@
+{
+  "status": "uv_ready_for_original_texture_transfer",
+  "operation": "native_uv_only",
+  "newNeuralInference": false,
+  "gpuLockJobId": "classic--vault_bank-a001",
+  "request": {
+    "status": "completed_pending_texture_transfer",
+    "operation": "native_uv_only",
+    "surfaceNPZ": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\villa3-far-native-uv\\input.npz",
+    "purpose": "Exact existing 12000-triangle far geometry derived from approved 44970-triangle near; native UV charts only, followed by original approved-near texture transfer at 512 color/256 ORM. No inference or replacement geometry.",
+    "gpuLockJobId": "classic--vault_bank-a001"
+  },
+  "geometryOperations": [],
+  "sourceTexturePixelsChanged": false,
+  "note": "This service generates UV coordinates only. Original-image texture transfer and visual review happen separately.",
+  "inputProof": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\uv-replays\\001-classic-villa3-far-nativeUV-v01\\input-proof.json",
+    "sha256": "66d9941ccd86c7a7de0dd8d852e5e6a6213b1ebac0c76c5f3493b2e48c8edd34",
+    "bytes": 2790
+  },
+  "input": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\uv-replays\\001-classic-villa3-far-nativeUV-v01\\input-surface.npz",
+    "sha256": "91486054a0bc2afbe74dea1aeb8d2ae5e9b6e41856b905fdd7c99bca5ef0c6a9",
+    "bytes": 364993
+  },
+  "candidate": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\uv-replays\\001-classic-villa3-far-nativeUV-v01\\input-candidate.glb",
+    "sha256": "016d43625f50565082b9cfeb95115ed873891862843f0330959b0f31b301d2eb",
+    "bytes": 517964
+  },
+  "sourceRaw": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\classic--villa_3-a003-pixal-mv-1024-18342.glb",
+    "sha256": "a966874938b9d85215b844d0ddf643791a9ca37081b904ffbe95b7d2262f640a",
+    "bytes": 40411388
+  },
+  "sourceProcessingReport": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\uv-replays\\001-classic-villa3-far-nativeUV-v01\\input-processing.json",
+    "sha256": "ad0cd06484ad4d6f0935dbd36f9240b5ce88364f18f0cf86196adfc1b1ad9245",
+    "bytes": 9722
+  },
+  "adapter": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\uv-replays\\001-classic-villa3-far-nativeUV-v01\\native-uv-source.py",
+    "sha256": "273381a34d97cbc120a423ee025b820d075f7a0a0bd7c7626946698466fec6a1",
+    "bytes": 5905
+  },
+  "nativeExporterReference": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\uv-replays\\001-classic-villa3-far-nativeUV-v01\\reference-native-exporter.py",
+    "sha256": "b6b79da5dfe13c22047a6257c6b2301c7ea31259dd9c82344db7e5c4cc707917",
+    "bytes": 8126
+  },
+  "parameters": {
+    "threshold_cone_half_angle_rad": 1.5707963267948966,
+    "refine_iterations": 0,
+    "global_iterations": 1,
+    "smooth_strength": 1
+  },
+  "coordinateSystem": "Exact saved Blender mesh local coordinates: Z-up, front -Y; no normalization/rotation/simplification in this step. Blender (X,Y,Z) to GLTF (X,Z,-Y); the validation inverse converts GLTF (X,Y,Z) to Blender (X,-Z,Y).",
+  "output": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\uv-replays\\001-classic-villa3-far-nativeUV-v01\\native-uv.npz",
+    "sha256": "8514cf17917d448bea543b452306f5c9e59fa118df339d9d5885117db6b4bc7c",
+    "bytes": 525608
+  },
+  "triangles": 12000,
+  "inputVertices": 5251,
+  "outputVertices": 15859,
+  "sameTriangleCornerPositionMultiset": true,
+  "windingPreserved": true,
+  "inputTriangleSignature": "38da07110342c43faf66615e372aa5765ca45163704c58765ede9041d3b63bb0",
+  "outputTriangleSignature": "38da07110342c43faf66615e372aa5765ca45163704c58765ede9041d3b63bb0",
+  "maximumPositionChange": 0,
+  "additionalRemeshOrSimplification": false,
+  "seconds": 2.59
+}

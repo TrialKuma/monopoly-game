@@ -1,0 +1,57 @@
+{
+  "status": "rejected_native_export_source",
+  "region": "harbor",
+  "asset": "card_pavilion",
+  "reviewer": "asset_production",
+  "recordedAtUtc": "2026-10-24T01:43:58.454313+00:00",
+  "source": {
+    "path": "art/full-ai-city/source/harbor--card_pavilion-a002-pixal-mv-1024-29482.glb",
+    "sha256": "a060beb2ed9083af2116c47c7cd48c3b2d4da38fdd6ae32ffa591475cddd0d2f",
+    "bytes": 41800912
+  },
+  "sourceLevel": "Native 1M export; no untouched decoder attribution is made.",
+  "inferenceReport": {
+    "path": "art/full-ai-city/reports/source-rejections/harbor/card_pavilion/a060beb2ed9083af/harbor--card_pavilion-a002-pixal-mv-1024-29482.json",
+    "sha256": "87fbfa3f76cabecdaa87f1c25d648bd2b873ff50f839dc52af74259ffe64bc33",
+    "bytes": 10452
+  },
+  "inputReference": {
+    "path": "art/full-ai-city/reports/source-rejections/harbor/card_pavilion/a060beb2ed9083af/input-reference.json",
+    "sha256": "1416887a4d389d6cabf4454288fadde007223e7d148f3f7626d8935a088289b5",
+    "bytes": 4451
+  },
+  "diagnostic": null,
+  "diagnosticTool": null,
+  "sourceComparisonReport": {
+    "path": "art/full-ai-city/reports/source-rejections/harbor/card_pavilion/a060beb2ed9083af/source-comparison-processing.json",
+    "sha256": "cc16d8ed24214cf6bba3e14b9425c7a2ed5dabe362c1349cf8d1ecf5e54073f2",
+    "bytes": 19788
+  },
+  "sourceViewEvidenceMode": "Explicitly selected existing renderedSource views; no additional or neutral render implied",
+  "evidence": [
+    {
+      "path": "art/full-ai-city/reports/source-rejections/harbor/card_pavilion/a060beb2ed9083af/raw-front.png",
+      "sha256": "5f7fff73bfac97f5cb45bb45b7006ab5b3c4dc466c2f5b760e7f60beda4aaa64",
+      "bytes": 261572
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/harbor/card_pavilion/a060beb2ed9083af/raw-iso.png",
+      "sha256": "a702207335a701475f8fc40dae5008b292cba9c89cd43266d2e8657629035ef3",
+      "bytes": 305410
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/harbor/card_pavilion/a060beb2ed9083af/raw-back.png",
+      "sha256": "badaf1202e727342b4f8c04907eaafcacaa223f24d90d2bff6eaf846805dd418",
+      "bytes": 246643
+    }
+  ],
+  "finding": "Actually reviewed unchanged reference, new retry native front/iso/back, all five final material views and256px preview. The previous corner-stone and chimney losses are resolved, but one small native opening above the rear-right window arch enlarges into a sharp visible plaster triangle in the final. Hold only for a bounded local plaster support; main walls, blue roof and card-sign structure are otherwise coherent. No third same-reference seed or broad reference rewrite. Tiny window/stone edge chips elsewhere remain phone-scale tolerances.",
+  "decision": "One strictly local rear-right arch-adjacent plaster support assessment; no third same-reference seed.",
+  "sourceUnchanged": true,
+  "notFinalCandidateReview": true,
+  "freezeTool": {
+    "path": "art/full-ai-city/reports/tool-snapshots/616860a00b28e670e1219d64c6cb5dad17f0946420568f786e80b6d789fb4a73-freeze_public_source_rejection.py",
+    "sha256": "616860a00b28e670e1219d64c6cb5dad17f0946420568f786e80b6d789fb4a73",
+    "bytes": 4304
+  }
+}

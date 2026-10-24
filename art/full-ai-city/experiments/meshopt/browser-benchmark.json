@@ -1,0 +1,336 @@
+{
+  "testedAt": "2026-10-23T06:13:10.302Z",
+  "method": "Headless desktop Chrome, 390x844 mobile viewport, CPU throttle 1/4/6; no WebGL renderer. This is a CPU slowdown proxy, not real ARM/iOS/mobile hardware. 60 decode runs include output allocation; 3 GLTF parses include image decode. Files fetched from local server and are not a network benchmark.",
+  "results": [
+    {
+      "cpuThrottleRate": 1,
+      "decoderImportAndReadyMs": 15.299999982118607,
+      "decoderSupported": true,
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36",
+      "hardwareConcurrency": 16,
+      "noRendererCreated": true,
+      "rows": [
+        {
+          "asset": "classic/shop_1",
+          "decodeWithAllocation": {
+            "medianMs": 0.9000000059604645,
+            "p95Ms": 1.199999988079071,
+            "maxMs": 1.2999999821186066,
+            "samples": 60
+          },
+          "parseIncludingTextureDecode": {
+            "original": {
+              "medianMs": 10.200000017881393,
+              "p95Ms": 13.300000011920929,
+              "maxMs": 13.300000011920929,
+              "samples": 3
+            },
+            "meshopt": {
+              "medianMs": 11.699999988079071,
+              "p95Ms": 13.5,
+              "maxMs": 13.5,
+              "samples": 3
+            }
+          },
+          "threeGeometryTransformsMaterialsTexturePixelsExact": true,
+          "decodedGeometryBytes": 875042
+        },
+        {
+          "asset": "alpine/villa_2",
+          "decodeWithAllocation": {
+            "medianMs": 1,
+            "p95Ms": 1.300000011920929,
+            "maxMs": 2.9000000059604645,
+            "samples": 60
+          },
+          "parseIncludingTextureDecode": {
+            "original": {
+              "medianMs": 9.900000005960464,
+              "p95Ms": 10.900000005960464,
+              "maxMs": 10.900000005960464,
+              "samples": 3
+            },
+            "meshopt": {
+              "medianMs": 9,
+              "p95Ms": 9.299999982118607,
+              "maxMs": 9.299999982118607,
+              "samples": 3
+            }
+          },
+          "threeGeometryTransformsMaterialsTexturePixelsExact": true,
+          "decodedGeometryBytes": 1026848
+        },
+        {
+          "asset": "classic/skyscraper_1",
+          "decodeWithAllocation": {
+            "medianMs": 1.399999976158142,
+            "p95Ms": 1.9000000059604645,
+            "maxMs": 2.699999988079071,
+            "samples": 60
+          },
+          "parseIncludingTextureDecode": {
+            "original": {
+              "medianMs": 10.300000011920929,
+              "p95Ms": 16.200000017881393,
+              "maxMs": 16.200000017881393,
+              "samples": 3
+            },
+            "meshopt": {
+              "medianMs": 10.599999994039536,
+              "p95Ms": 10.899999976158142,
+              "maxMs": 10.899999976158142,
+              "samples": 3
+            }
+          },
+          "threeGeometryTransformsMaterialsTexturePixelsExact": true,
+          "decodedGeometryBytes": 1457124
+        },
+        {
+          "asset": "classic/chance_wheel",
+          "decodeWithAllocation": {
+            "medianMs": 0.9000000059604645,
+            "p95Ms": 1.4000000059604645,
+            "maxMs": 2.7000000178813934,
+            "samples": 60
+          },
+          "parseIncludingTextureDecode": {
+            "original": {
+              "medianMs": 9.900000005960464,
+              "p95Ms": 16.599999994039536,
+              "maxMs": 16.599999994039536,
+              "samples": 3
+            },
+            "meshopt": {
+              "medianMs": 9.5,
+              "p95Ms": 10,
+              "maxMs": 10,
+              "samples": 3
+            }
+          },
+          "threeGeometryTransformsMaterialsTexturePixelsExact": true,
+          "decodedGeometryBytes": 1063896
+        }
+      ]
+    },
+    {
+      "cpuThrottleRate": 4,
+      "decoderImportAndReadyMs": 36.79999998211861,
+      "decoderSupported": true,
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36",
+      "hardwareConcurrency": 16,
+      "noRendererCreated": true,
+      "rows": [
+        {
+          "asset": "classic/shop_1",
+          "decodeWithAllocation": {
+            "medianMs": 3.800000011920929,
+            "p95Ms": 4.700000017881393,
+            "maxMs": 5.0999999940395355,
+            "samples": 60
+          },
+          "parseIncludingTextureDecode": {
+            "original": {
+              "medianMs": 25.099999994039536,
+              "p95Ms": 47.099999994039536,
+              "maxMs": 47.099999994039536,
+              "samples": 3
+            },
+            "meshopt": {
+              "medianMs": 25.5,
+              "p95Ms": 36.69999998807907,
+              "maxMs": 36.69999998807907,
+              "samples": 3
+            }
+          },
+          "threeGeometryTransformsMaterialsTexturePixelsExact": true,
+          "decodedGeometryBytes": 875042
+        },
+        {
+          "asset": "alpine/villa_2",
+          "decodeWithAllocation": {
+            "medianMs": 4.200000017881393,
+            "p95Ms": 4.9000000059604645,
+            "maxMs": 7.300000011920929,
+            "samples": 60
+          },
+          "parseIncludingTextureDecode": {
+            "original": {
+              "medianMs": 23,
+              "p95Ms": 23.19999998807907,
+              "maxMs": 23.19999998807907,
+              "samples": 3
+            },
+            "meshopt": {
+              "medianMs": 22,
+              "p95Ms": 24.69999998807907,
+              "maxMs": 24.69999998807907,
+              "samples": 3
+            }
+          },
+          "threeGeometryTransformsMaterialsTexturePixelsExact": true,
+          "decodedGeometryBytes": 1026848
+        },
+        {
+          "asset": "classic/skyscraper_1",
+          "decodeWithAllocation": {
+            "medianMs": 5.700000017881393,
+            "p95Ms": 6.300000011920929,
+            "maxMs": 6.9000000059604645,
+            "samples": 60
+          },
+          "parseIncludingTextureDecode": {
+            "original": {
+              "medianMs": 22.899999976158142,
+              "p95Ms": 32.30000001192093,
+              "maxMs": 32.30000001192093,
+              "samples": 3
+            },
+            "meshopt": {
+              "medianMs": 24.5,
+              "p95Ms": 30.30000001192093,
+              "maxMs": 30.30000001192093,
+              "samples": 3
+            }
+          },
+          "threeGeometryTransformsMaterialsTexturePixelsExact": true,
+          "decodedGeometryBytes": 1457124
+        },
+        {
+          "asset": "classic/chance_wheel",
+          "decodeWithAllocation": {
+            "medianMs": 3.7000000178813934,
+            "p95Ms": 4.699999988079071,
+            "maxMs": 5.9000000059604645,
+            "samples": 60
+          },
+          "parseIncludingTextureDecode": {
+            "original": {
+              "medianMs": 27.599999994039536,
+              "p95Ms": 40.60000002384186,
+              "maxMs": 40.60000002384186,
+              "samples": 3
+            },
+            "meshopt": {
+              "medianMs": 22.799999982118607,
+              "p95Ms": 25.19999998807907,
+              "maxMs": 25.19999998807907,
+              "samples": 3
+            }
+          },
+          "threeGeometryTransformsMaterialsTexturePixelsExact": true,
+          "decodedGeometryBytes": 1063896
+        }
+      ]
+    },
+    {
+      "cpuThrottleRate": 6,
+      "decoderImportAndReadyMs": 72.09999999403954,
+      "decoderSupported": true,
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36",
+      "hardwareConcurrency": 16,
+      "noRendererCreated": true,
+      "rows": [
+        {
+          "asset": "classic/shop_1",
+          "decodeWithAllocation": {
+            "medianMs": 5.800000011920929,
+            "p95Ms": 6.9000000059604645,
+            "maxMs": 7.700000017881393,
+            "samples": 60
+          },
+          "parseIncludingTextureDecode": {
+            "original": {
+              "medianMs": 37.30000001192093,
+              "p95Ms": 69.30000001192093,
+              "maxMs": 69.30000001192093,
+              "samples": 3
+            },
+            "meshopt": {
+              "medianMs": 39.599999994039536,
+              "p95Ms": 54.69999998807907,
+              "maxMs": 54.69999998807907,
+              "samples": 3
+            }
+          },
+          "threeGeometryTransformsMaterialsTexturePixelsExact": true,
+          "decodedGeometryBytes": 875042
+        },
+        {
+          "asset": "alpine/villa_2",
+          "decodeWithAllocation": {
+            "medianMs": 6.5999999940395355,
+            "p95Ms": 7.700000017881393,
+            "maxMs": 14.199999988079071,
+            "samples": 60
+          },
+          "parseIncludingTextureDecode": {
+            "original": {
+              "medianMs": 35,
+              "p95Ms": 35.79999998211861,
+              "maxMs": 35.79999998211861,
+              "samples": 3
+            },
+            "meshopt": {
+              "medianMs": 32.70000001788139,
+              "p95Ms": 36.80000001192093,
+              "maxMs": 36.80000001192093,
+              "samples": 3
+            }
+          },
+          "threeGeometryTransformsMaterialsTexturePixelsExact": true,
+          "decodedGeometryBytes": 1026848
+        },
+        {
+          "asset": "classic/skyscraper_1",
+          "decodeWithAllocation": {
+            "medianMs": 8.900000005960464,
+            "p95Ms": 9.699999988079071,
+            "maxMs": 10.5,
+            "samples": 60
+          },
+          "parseIncludingTextureDecode": {
+            "original": {
+              "medianMs": 33.599999994039536,
+              "p95Ms": 46.400000005960464,
+              "maxMs": 46.400000005960464,
+              "samples": 3
+            },
+            "meshopt": {
+              "medianMs": 39.599999994039536,
+              "p95Ms": 47.900000005960464,
+              "maxMs": 47.900000005960464,
+              "samples": 3
+            }
+          },
+          "threeGeometryTransformsMaterialsTexturePixelsExact": true,
+          "decodedGeometryBytes": 1457124
+        },
+        {
+          "asset": "classic/chance_wheel",
+          "decodeWithAllocation": {
+            "medianMs": 6.0999999940395355,
+            "p95Ms": 8.099999994039536,
+            "maxMs": 9.699999988079071,
+            "samples": 60
+          },
+          "parseIncludingTextureDecode": {
+            "original": {
+              "medianMs": 47.5,
+              "p95Ms": 59.79999998211861,
+              "maxMs": 59.79999998211861,
+              "samples": 3
+            },
+            "meshopt": {
+              "medianMs": 36.69999998807907,
+              "p95Ms": 41.900000005960464,
+              "maxMs": 41.900000005960464,
+              "samples": 3
+            }
+          },
+          "threeGeometryTransformsMaterialsTexturePixelsExact": true,
+          "decodedGeometryBytes": 1063896
+        }
+      ]
+    }
+  ]
+}

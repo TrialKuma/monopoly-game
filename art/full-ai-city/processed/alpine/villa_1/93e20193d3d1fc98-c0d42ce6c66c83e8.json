@@ -1,0 +1,838 @@
+{
+  "status": "exported_pending_visual_review",
+  "createdAt": "2026-10-23T20:45:48.026195+00:00",
+  "region": "alpine",
+  "asset": "villa_1",
+  "lod": "near",
+  "processingRevision": 0,
+  "source": {
+    "rawGLB": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\alpine--villa_1-a001-pixal-mv-1024-9247.glb",
+      "sha256": "ecebc4fc5592305f6457e331b916139ccc822e31bf59b0de87229046da29d95d",
+      "bytes": 39390720
+    }
+  },
+  "inferenceReport": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\alpine--villa_1-a001\\alpine--villa_1-a001-pixal-mv-1024-9247.json",
+    "sha256": "495e085abf6a1fd774f2f284b866792a5f4b7c64a61997d7855cc9e1d9925b8c",
+    "bytes": 9576
+  },
+  "reference": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\inputs\\alpine\\villa_1\\10f0220b5ffc2661\\reference.json",
+    "sha256": "0fbba3ddceef9a14b2387dd865efbedaf95eb162ce1497bcfd3917d1b6cad029",
+    "bytes": 4419
+  },
+  "processingTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\7a797107ab696da8746a713168b2ea8c3170945ae2f4647dcc26652f1e093900-process_native_mobile.py",
+    "sha256": "7a797107ab696da8746a713168b2ea8c3170945ae2f4647dcc26652f1e093900",
+    "bytes": 9168
+  },
+  "nativeSurfaceExport": {
+    "receipt": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\alpine--villa_1-ecebc4fc5592-repair-927ed180c384-low-428868884c-field-v1\\receipt.json",
+      "sha256": "ccde7c793268a8a736374b927b3313426c57c850eeae33746f425a5c56cbd2ba",
+      "bytes": 17840
+    },
+    "source": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\alpine--villa_1-ecebc4fc5592-repair-927ed180c384-low-428868884c-field-v1\\mobile-30000-1024.glb",
+      "sha256": "ab87cad72f73ce6ee335fc2b21de01ca092aab26f6b7462bb2472052f2862136",
+      "bytes": 2024080
+    },
+    "tensorArchive": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\alpine--villa_1-a001\\neural-export-inputs.pt",
+      "sha256": "509647e5e83aeec6698f176bbac3c995eec8ecc031de252cd116988449963efa",
+      "bytes": 319382749
+    }
+  },
+  "nativePipeline": "Pixal3DMVImageTo3DPipeline.run_mv",
+  "nativeResolution": 1024,
+  "seed": 9247,
+  "assumedCameras": true,
+  "cameraCalibration": "assumed_standard_orbit_not_measured",
+  "geometryOrigin": "Actual neural building with the explicitly recorded bounded local surface repair, followed by source-derived CPU mobile geometry and native UV/material sampling. The original inference, repair and low-surface sources are distinct; the UV/material replay adds no geometry.",
+  "textureOrigin": "Original neural attribute field sampled by the native UV/material operations with the recorded surface-stage override; no new neural inference or raw-UV rebake.",
+  "normalization": {
+    "enabled": true,
+    "candidate_degrees": 0.6760825397340098,
+    "applied_degrees": 0.6760825397340098,
+    "underside_area": 0.09067044359380816,
+    "normal_agreement": 0.9016375883164975,
+    "yaw_degrees": 180,
+    "pitch_degrees": 0,
+    "roll_degrees": 0,
+    "uniform_scale": 1.1512336644193986
+  },
+  "orientation": {
+    "up": "Y",
+    "front": "+Z",
+    "groundY": 0,
+    "maxEdge": 1
+  },
+  "requestedTriangles": 30000,
+  "triangles": 29986,
+  "glbValidation": {
+    "version": 2,
+    "triangles": 29986,
+    "meshes": 1,
+    "materials": 1,
+    "images": 2,
+    "all_primitives_have_uv": true,
+    "animations": [],
+    "all_images_embedded": true,
+    "external_buffers": []
+  },
+  "quantization": {
+    "source": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--villa_1-ecebc4fc5592-repair-927ed180c384-low-428868884c-field-v1\\candidates\\alpine\\villa_1.glb",
+    "output": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--villa_1-ecebc4fc5592-repair-927ed180c384-low-428868884c-field-v1\\candidates\\alpine\\villa_1.glb",
+    "sourceBytes": 1694944,
+    "outputBytes": 1227832,
+    "sourceSha256": "531ab8b17d86820fd3aadf6d9f88fefdbcda090b2d91ea5594f9c4667afde226",
+    "outputSha256": "93e20193d3d1fc984305e2a134742c748418daf915d8d44438b44060328383d9",
+    "positionFaceAndTextureBytesUnchanged": true,
+    "attributes": [
+      {
+        "accessor": 1,
+        "semantic": "NORMAL",
+        "count": 38939,
+        "maximumAngularErrorDegrees": 0.3767754767269913
+      },
+      {
+        "accessor": 2,
+        "semantic": "TEXCOORD_0",
+        "count": 38939,
+        "maximumUVError": 7.629510948348184e-06,
+        "maximumTexelErrorAt1024": 0.00781261921110854
+      }
+    ]
+  },
+  "processedCandidate": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\candidates\\alpine\\villa_1.glb",
+    "sha256": "93e20193d3d1fc984305e2a134742c748418daf915d8d44438b44060328383d9",
+    "bytes": 1227832
+  },
+  "derivation": {
+    "method": "Recorded CPU surface derived from the same neural raw, inverse-normalized to field coordinates; a local native-export variant bypasses further mesh simplification/remeshing and uses native UV generation plus original neural high-surface BVH and field texture sampling. Only normalization, JPEG encoding and attribute quantization afterward.",
+    "voxelizedAgain": false,
+    "rebakedFromRawUV": false,
+    "facadeUVPreserved": true,
+    "normalizedTrianglesPreserved": true,
+    "geometrySurfaceInput": {
+      "receipt": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\alpine--villa_1-ecebc4fc5592-repair-927ed180c384-low-428868884c-field-v1\\geometry-source-proof.json",
+        "sha256": "5a5b71b30db54ffc84ef774affefe1645b5940d253bc4299d7a446c1487a2af2",
+        "bytes": 10564
+      },
+      "method": "Coordinate inversion of the recorded neural-derived low surface including explicitly bounded local source repairs. This preparation only welds exact positions and changes coordinates; it adds no faces. Original raw inference and repair input remain distinct.",
+      "sourceRaw": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\alpine--villa_1-a001-pixal-mv-1024-9247.glb",
+        "sha256": "ecebc4fc5592305f6457e331b916139ccc822e31bf59b0de87229046da29d95d",
+        "bytes": 39390720
+      },
+      "candidate": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\alpine--villa_1-ecebc4fc5592-repair-927ed180c384-low-428868884c-field-v1\\geometry-candidate.glb",
+        "sha256": "428868884c50e1728132313dd14fcdb205a22b131722f4d6ae81674a4fa51f38",
+        "bytes": 1427472
+      },
+      "candidateReport": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\alpine--villa_1-ecebc4fc5592-repair-927ed180c384-low-428868884c-field-v1\\geometry-candidate-processing.json",
+        "sha256": "ad373eebbeb492d37475dbd585627db5daea09f5783e0fde9697f0b68de43970",
+        "bytes": 17075
+      },
+      "originalCandidate": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-alpine-villa1-927ed180c384535b-fine0015\\candidates\\alpine\\villa_1.glb",
+        "sha256": "428868884c50e1728132313dd14fcdb205a22b131722f4d6ae81674a4fa51f38",
+        "bytes": 1427472
+      },
+      "fieldReceipt": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\alpine--villa_1-a001\\receipt.json",
+        "sha256": "4a4b01cc74ad7b780c6e1d38739d84cafa5281f21676193291f1235ec93a8b65",
+        "bytes": 3685
+      },
+      "output": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\alpine--villa_1-ecebc4fc5592-repair-927ed180c384-low-428868884c-field-v1\\geometry-surface.npz",
+        "sha256": "79dd94cca771256d3f713946570b6e5a936a3fc8fa575c8c89328063c16a05c3",
+        "bytes": 533288
+      },
+      "triangles": 29986,
+      "vertices": 14412,
+      "originalSplitVertices": 44432,
+      "exactCoincidentVerticesMerged": 30020,
+      "maximumPositionChangeFromWelding": 0,
+      "normalization": {
+        "enabled": true,
+        "candidate_degrees": 0.596102732100453,
+        "applied_degrees": 0.596102732100453,
+        "underside_area": 0.0914481212389719,
+        "normal_agreement": 0.8907895255411752,
+        "yaw_degrees": 180,
+        "pitch_degrees": 0,
+        "roll_degrees": 0,
+        "uniform_scale": 1.1520976635523967
+      },
+      "rawBlenderToNormalizedBlender": [
+        [
+          -1.1520954954558495,
+          -1.1547952745084584e-05,
+          0.002239188002009287,
+          9.256747065148745e-05
+        ],
+        [
+          -1.1334974382102713e-05,
+          -1.152037554639723,
+          -0.011769235268650785,
+          0.0025300745278726833
+        ],
+        [
+          0.0022391897477154073,
+          -0.01176923526669249,
+          1.1520353784454,
+          0.30140896812551143
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "inverse": [
+        [
+          -0.8679803248599154,
+          -8.533724772706865e-06,
+          0.0016869887247859263,
+          -0.00042810519656988425
+        ],
+        [
+          -8.694185877425346e-06,
+          -0.8679366742533096,
+          -0.008866855689315051,
+          0.004868495099967895
+        ],
+        [
+          0.0016869884007803294,
+          -0.008866855999711773,
+          0.8679350349038336,
+          -0.2615811256240863
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "sampledNormalizationReconstructionMaxError": 9.124761529104088e-08,
+      "nativeBounds": {
+        "min": [
+          -0.4350125695215121,
+          -0.26016201039812603,
+          -0.35850709347062276
+        ],
+        "max": [
+          0.43363179873569757,
+          0.296439889789342,
+          0.35957096593235083
+        ]
+      },
+      "tool": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\alpine--villa_1-ecebc4fc5592-repair-927ed180c384-low-428868884c-field-v1\\geometry-preparation-source.py",
+        "sha256": "956e46377da8eae51f4e9af858f698532b81fccbbf16f219a2f2adbb9ab1481a",
+        "bytes": 7005
+      },
+      "toolSnapshot": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\alpine--villa_1-ecebc4fc5592-repair-927ed180c384-low-428868884c-field-v1\\geometry-preparation-source.py",
+        "sha256": "956e46377da8eae51f4e9af858f698532b81fccbbf16f219a2f2adbb9ab1481a",
+        "bytes": 7005
+      },
+      "normalizationInput": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-alpine-villa1-v2\\repaired-native.glb",
+        "sha256": "927ed180c384535bb0d199091408914a635a321df26e9e1570fa982064aa295b",
+        "bytes": 40398760
+      },
+      "localSurfaceRepair": {
+        "source": {
+          "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-alpine-villa1-v2\\repaired-native.glb",
+          "sha256": "927ed180c384535bb0d199091408914a635a321df26e9e1570fa982064aa295b",
+          "bytes": 40398760
+        },
+        "receipt": {
+          "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\alpine\\villa_1\\927ed180c384535b\\repair.json",
+          "sha256": "122a7b61ec030f1366bd8475225e9bd3eac9f972bbd7308e826b54905aec6ced",
+          "bytes": 13551
+        },
+        "method": "Restricted missing original plaster and terracotta roof sectors restored from actual neighboring source surface depths and UV samples. Original neural vertex positions, original face prefix and embedded texture pixels preserved. Each local patch closes 0.006 inward. This isolated derivative requires source and reduced candidate visual review; no runtime approval or replacement building.",
+        "newTriangles": 7540,
+        "newVertices": 3786,
+        "originalVerticesMoved": 0,
+        "originalTrianglesDeleted": 0,
+        "regions": [
+          {
+            "name": "Front narrow plaster strip between doorway and right window",
+            "specification": {
+              "name": "Front narrow plaster strip between doorway and right window",
+              "u": [
+                1,
+                0,
+                0
+              ],
+              "v": [
+                0,
+                0,
+                1
+              ],
+              "n": [
+                0,
+                -1,
+                0
+              ],
+              "roi": [
+                0.075,
+                0.125,
+                0.08,
+                0.285
+              ],
+              "defectDepth": 0.24,
+              "donorDepth": 0.27,
+              "donorMaxDepth": 0.299,
+              "donorNormal": 0.6,
+              "color": "plaster"
+            },
+            "missingSamples": 995,
+            "boundarySamples": 1816,
+            "sampledDepthRange": [
+              -0.3093123435974121,
+              0.31049585342407227
+            ],
+            "inwardClosureThickness": 0.006,
+            "outerSurfaceUnchanged": true,
+            "newVertices": 2520,
+            "newTriangles": 5032
+          },
+          {
+            "name": "Front small opening above door arch below timber",
+            "specification": {
+              "name": "Front small opening above door arch below timber",
+              "u": [
+                1,
+                0,
+                0
+              ],
+              "v": [
+                0,
+                0,
+                1
+              ],
+              "n": [
+                0,
+                -1,
+                0
+              ],
+              "roi": [
+                -0.035,
+                0.035,
+                0.278,
+                0.35
+              ],
+              "defectDepth": 0.24,
+              "donorDepth": 0.27,
+              "donorMaxDepth": 0.299,
+              "donorNormal": 0.6,
+              "color": "plaster"
+            },
+            "missingSamples": 257,
+            "boundarySamples": 610,
+            "sampledDepthRange": [
+              -0.2900121212005615,
+              0.3171374797821045
+            ],
+            "inwardClosureThickness": 0.006,
+            "outerSurfaceUnchanged": true,
+            "newVertices": 742,
+            "newTriangles": 1480
+          },
+          {
+            "name": "Left roof isolated missing tile sector",
+            "specification": {
+              "name": "Left roof isolated missing tile sector",
+              "u": [
+                0,
+                -1,
+                0
+              ],
+              "v": [
+                0,
+                0,
+                1
+              ],
+              "n": [
+                -1,
+                0,
+                0
+              ],
+              "roi": [
+                -0.085,
+                -0.02,
+                0.35,
+                0.46
+              ],
+              "defectDepth": 0.15,
+              "donorDepth": 0.2,
+              "donorMaxDepth": 0.47,
+              "donorNormal": 0.2,
+              "color": "roof"
+            },
+            "missingSamples": 69,
+            "boundarySamples": 3503,
+            "sampledDepthRange": [
+              -0.36257481575012207,
+              0.47305119037628174
+            ],
+            "inwardClosureThickness": 0.006,
+            "outerSurfaceUnchanged": true,
+            "newVertices": 250,
+            "newTriangles": 496
+          },
+          {
+            "name": "Original ridge narrow open gaps between existing tiles",
+            "specification": {
+              "name": "Original ridge narrow open gaps between existing tiles",
+              "u": [
+                1,
+                0,
+                0
+              ],
+              "v": [
+                0,
+                1,
+                0
+              ],
+              "n": [
+                0,
+                0,
+                1
+              ],
+              "roi": [
+                -0.029,
+                0.029,
+                -0.34,
+                0.34
+              ],
+              "defectDepth": 0.52,
+              "donorDepth": 0.535,
+              "donorMaxDepth": 0.585,
+              "donorNormal": 0.3,
+              "color": "roof"
+            },
+            "missingSamples": 55,
+            "boundarySamples": 18090,
+            "sampledDepthRange": [
+              -2.0,
+              0.5696027278900146
+            ],
+            "inwardClosureThickness": 0.006,
+            "outerSurfaceUnchanged": true,
+            "newVertices": 274,
+            "newTriangles": 532
+          }
+        ]
+      },
+      "localRepairTool": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\bfdd6d569cd38245af59d05b0dad6dd9ebbfd9fec1222cd2f127e636a7fc26b6-repair_alpine_villa1_surface_v2.py",
+        "sha256": "bfdd6d569cd38245af59d05b0dad6dd9ebbfd9fec1222cd2f127e636a7fc26b6",
+        "bytes": 12962
+      },
+      "repairAppliedBeforeReduction": true,
+      "originalReceipt": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\alpine--villa_1-ecebc4fc5592-repair-927ed180c384-low-428868884c-field-v1\\geometry-source-original-receipt.json",
+        "sha256": "60bc749d33dd6ae1b1ddaad8ce72aaa8c43350f8300241c7a348bab5b402eb96",
+        "bytes": 10180
+      }
+    },
+    "nativePostprocessOverride": {
+      "original": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\alpine--villa_1-ecebc4fc5592-repair-927ed180c384-low-428868884c-field-v1\\original-native-exporter-source.py",
+        "sha256": "b6b79da5dfe13c22047a6257c6b2301c7ea31259dd9c82344db7e5c4cc707917",
+        "bytes": 8126
+      },
+      "scope": "Keep original neural geometry BVH for PBR lookup. Replace only the intermediate surface with this recorded existing source-derived low mesh; bypass further remeshing/simplification/cleanup, then use native unwrap/normals/field sampling.",
+      "sharedCodeModified": false,
+      "noNewGeometryAuthored": true,
+      "noNewGeometryAuthoredAppliesTo": "native_uv_material_replay_only",
+      "counts": {
+        "facesBeforeUnwrap": 29986
+      }
+    },
+    "nativeFieldLookup": {
+      "quantiles50_95_99_100": [
+        0.0009887672495096922,
+        0.0018741702660918236,
+        0.002671301830559969,
+        0.016199151054024696
+      ],
+      "fractionOverTwoPercent": 0.0,
+      "sampleCount": 618724,
+      "meaning": "Distance to original neural BVH before direct field sampling, not ray hit coverage"
+    }
+  },
+  "bake": {
+    "method": "Direct original neural attribute field sampling inside native to_glb; no Blender bake or nearest raw-image transfer",
+    "notRayCoverage": true
+  },
+  "animation": null,
+  "processingComplete": true,
+  "limitations": [
+    "Same assumed three-view cameras as original native raw",
+    "Diagnostic pending external visual approval; not a formal asset replacement"
+  ],
+  "localSurfaceRepair": {
+    "source": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-alpine-villa1-v2\\repaired-native.glb",
+      "sha256": "927ed180c384535bb0d199091408914a635a321df26e9e1570fa982064aa295b",
+      "bytes": 40398760
+    },
+    "receipt": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\alpine\\villa_1\\927ed180c384535b\\repair.json",
+      "sha256": "122a7b61ec030f1366bd8475225e9bd3eac9f972bbd7308e826b54905aec6ced",
+      "bytes": 13551
+    },
+    "method": "Restricted missing original plaster and terracotta roof sectors restored from actual neighboring source surface depths and UV samples. Original neural vertex positions, original face prefix and embedded texture pixels preserved. Each local patch closes 0.006 inward. This isolated derivative requires source and reduced candidate visual review; no runtime approval or replacement building.",
+    "newTriangles": 7540,
+    "newVertices": 3786,
+    "originalVerticesMoved": 0,
+    "originalTrianglesDeleted": 0,
+    "regions": [
+      {
+        "name": "Front narrow plaster strip between doorway and right window",
+        "specification": {
+          "name": "Front narrow plaster strip between doorway and right window",
+          "u": [
+            1,
+            0,
+            0
+          ],
+          "v": [
+            0,
+            0,
+            1
+          ],
+          "n": [
+            0,
+            -1,
+            0
+          ],
+          "roi": [
+            0.075,
+            0.125,
+            0.08,
+            0.285
+          ],
+          "defectDepth": 0.24,
+          "donorDepth": 0.27,
+          "donorMaxDepth": 0.299,
+          "donorNormal": 0.6,
+          "color": "plaster"
+        },
+        "missingSamples": 995,
+        "boundarySamples": 1816,
+        "sampledDepthRange": [
+          -0.3093123435974121,
+          0.31049585342407227
+        ],
+        "inwardClosureThickness": 0.006,
+        "outerSurfaceUnchanged": true,
+        "newVertices": 2520,
+        "newTriangles": 5032
+      },
+      {
+        "name": "Front small opening above door arch below timber",
+        "specification": {
+          "name": "Front small opening above door arch below timber",
+          "u": [
+            1,
+            0,
+            0
+          ],
+          "v": [
+            0,
+            0,
+            1
+          ],
+          "n": [
+            0,
+            -1,
+            0
+          ],
+          "roi": [
+            -0.035,
+            0.035,
+            0.278,
+            0.35
+          ],
+          "defectDepth": 0.24,
+          "donorDepth": 0.27,
+          "donorMaxDepth": 0.299,
+          "donorNormal": 0.6,
+          "color": "plaster"
+        },
+        "missingSamples": 257,
+        "boundarySamples": 610,
+        "sampledDepthRange": [
+          -0.2900121212005615,
+          0.3171374797821045
+        ],
+        "inwardClosureThickness": 0.006,
+        "outerSurfaceUnchanged": true,
+        "newVertices": 742,
+        "newTriangles": 1480
+      },
+      {
+        "name": "Left roof isolated missing tile sector",
+        "specification": {
+          "name": "Left roof isolated missing tile sector",
+          "u": [
+            0,
+            -1,
+            0
+          ],
+          "v": [
+            0,
+            0,
+            1
+          ],
+          "n": [
+            -1,
+            0,
+            0
+          ],
+          "roi": [
+            -0.085,
+            -0.02,
+            0.35,
+            0.46
+          ],
+          "defectDepth": 0.15,
+          "donorDepth": 0.2,
+          "donorMaxDepth": 0.47,
+          "donorNormal": 0.2,
+          "color": "roof"
+        },
+        "missingSamples": 69,
+        "boundarySamples": 3503,
+        "sampledDepthRange": [
+          -0.36257481575012207,
+          0.47305119037628174
+        ],
+        "inwardClosureThickness": 0.006,
+        "outerSurfaceUnchanged": true,
+        "newVertices": 250,
+        "newTriangles": 496
+      },
+      {
+        "name": "Original ridge narrow open gaps between existing tiles",
+        "specification": {
+          "name": "Original ridge narrow open gaps between existing tiles",
+          "u": [
+            1,
+            0,
+            0
+          ],
+          "v": [
+            0,
+            1,
+            0
+          ],
+          "n": [
+            0,
+            0,
+            1
+          ],
+          "roi": [
+            -0.029,
+            0.029,
+            -0.34,
+            0.34
+          ],
+          "defectDepth": 0.52,
+          "donorDepth": 0.535,
+          "donorMaxDepth": 0.585,
+          "donorNormal": 0.3,
+          "color": "roof"
+        },
+        "missingSamples": 55,
+        "boundarySamples": 18090,
+        "sampledDepthRange": [
+          -2.0,
+          0.5696027278900146
+        ],
+        "inwardClosureThickness": 0.006,
+        "outerSurfaceUnchanged": true,
+        "newVertices": 274,
+        "newTriangles": 532
+      }
+    ]
+  },
+  "renderedCandidate": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--villa_1-ecebc4fc5592-repair-927ed180c384-low-428868884c-field-v1\\candidates\\renders\\alpine\\villa_1\\lod-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--villa_1-ecebc4fc5592-repair-927ed180c384-low-428868884c-field-v1\\candidates\\renders\\alpine\\villa_1\\lod-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--villa_1-ecebc4fc5592-repair-927ed180c384-low-428868884c-field-v1\\candidates\\renders\\alpine\\villa_1\\lod-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--villa_1-ecebc4fc5592-repair-927ed180c384-low-428868884c-field-v1\\candidates\\renders\\alpine\\villa_1\\lod-left.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--villa_1-ecebc4fc5592-repair-927ed180c384-low-428868884c-field-v1\\candidates\\renders\\alpine\\villa_1\\lod-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.5,
+        -0.4143683910369873,
+        0.0
+      ],
+      "max": [
+        0.5,
+        0.4143683910369873,
+        0.6422247886657715
+      ]
+    },
+    "triangles": 29986,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          1024,
+          1024
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "sourceReviewReusedFrom": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--villa_1-ecebc4fc5592-repair-927ed180c384-low-428868884c-field-v1\\surface.candidate.json",
+    "sha256": "ad373eebbeb492d37475dbd585627db5daea09f5783e0fde9697f0b68de43970",
+    "bytes": 17075
+  },
+  "renderedSource": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--villa_1-ecebc4fc5592-repair-927ed180c384-low-428868884c-field-v1\\candidates\\renders\\alpine\\villa_1\\raw-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--villa_1-ecebc4fc5592-repair-927ed180c384-low-428868884c-field-v1\\candidates\\renders\\alpine\\villa_1\\raw-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.5,
+        -0.4141901731491089,
+        0.0
+      ],
+      "max": [
+        0.5,
+        0.4141901731491089,
+        0.6400337815284729
+      ]
+    },
+    "triangles": 932424,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "bounds": {
+    "min": [
+      -0.5,
+      0.0,
+      -0.4143683910369873
+    ],
+    "max": [
+      0.5,
+      0.6422247886657715,
+      0.4143683910369873
+    ],
+    "coordinateSystem": "GLTF Y-up; +Z front"
+  },
+  "textureSizes": [
+    {
+      "name": "Image_0",
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "name": "Image_1",
+      "size": [
+        1024,
+        1024
+      ]
+    }
+  ],
+  "completedAt": "2026-10-23T20:46:00.135707+00:00",
+  "rawSourceUnchanged": true,
+  "promotedFrom": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--villa_1-ecebc4fc5592-repair-927ed180c384-low-428868884c-field-v1\\candidates\\alpine\\villa_1.json",
+    "sha256": "7d31a61d1fb32ea86f35e9c401ae3a6f1aaf18d39855925cd72899617200c046",
+    "bytes": 31119
+  },
+  "reviewSheet": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--villa_1-ecebc4fc5592-repair-927ed180c384-low-428868884c-field-v1\\candidates\\renders\\alpine\\villa_1\\review-sheet.jpg",
+    "sha256": "cfa349e918bc178afcb5dc466be00be2547b9ff4bc5a5ab32e6cb5f662ffb746",
+    "bytes": 284603,
+    "candidateSha256": "93e20193d3d1fc984305e2a134742c748418daf915d8d44438b44060328383d9",
+    "sourceImages": [
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--villa_1-ecebc4fc5592-repair-927ed180c384-low-428868884c-field-v1\\candidates\\renders\\alpine\\villa_1\\raw-front.png",
+        "sha256": "8ff1317c74dc898284caf53301b43dba3383ef9b827ef99327827635839d86c1",
+        "label": "AI raw front"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--villa_1-ecebc4fc5592-repair-927ed180c384-low-428868884c-field-v1\\candidates\\renders\\alpine\\villa_1\\raw-iso.png",
+        "sha256": "c6df3aa130624f52de8d9d66d21fa7dda08699e2c7861ba65ef1e490fb0a6278",
+        "label": "AI raw iso"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--villa_1-ecebc4fc5592-repair-927ed180c384-low-428868884c-field-v1\\candidates\\renders\\alpine\\villa_1\\lod-front.png",
+        "sha256": "00bd8854681d1c21a4e535eafa0eb30c0b91ecea9d3280efb20fec3916f1b576",
+        "label": "LOD front"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--villa_1-ecebc4fc5592-repair-927ed180c384-low-428868884c-field-v1\\candidates\\renders\\alpine\\villa_1\\lod-right.png",
+        "sha256": "db1a2f6355f3f6fad32cb29e1e97df5ae95a007d294deff7c1c1bdb8618d3527",
+        "label": "LOD right"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--villa_1-ecebc4fc5592-repair-927ed180c384-low-428868884c-field-v1\\candidates\\renders\\alpine\\villa_1\\lod-back.png",
+        "sha256": "01cc0731268530ceebd2dd94e2a8744a5cfd7697e2eb73d70b217ceb640fece7",
+        "label": "LOD back"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--villa_1-ecebc4fc5592-repair-927ed180c384-low-428868884c-field-v1\\candidates\\renders\\alpine\\villa_1\\lod-left.png",
+        "sha256": "108320cc115e4d5a4ead2235ade1bda1bcbb04826bb74558d328a729890984aa",
+        "label": "LOD left"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--villa_1-ecebc4fc5592-repair-927ed180c384-low-428868884c-field-v1\\candidates\\renders\\alpine\\villa_1\\lod-iso.png",
+        "sha256": "4cbfb8282a6e0c8912efcc87ad0a87d2a531c160f6b764f5adeb7fca986b8baa",
+        "label": "LOD iso"
+      }
+    ],
+    "content": "Unmodified CPU render images composed with labels for visual comparison only"
+  }
+}

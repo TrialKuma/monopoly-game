@@ -1,0 +1,48 @@
+{
+  "status": "rejected_native_export_source",
+  "region": "alpine",
+  "asset": "tower_1",
+  "reviewer": "progression_design",
+  "source": {
+    "path": "art/full-ai-city/source/alpine--tower_1-a002-pixal-mv-1024-23421.glb",
+    "sha256": "767eee53eed9b6a20024f67a5f16d4f7112d0d7f528efe73a3e5404df466faca",
+    "bytes": 42830348
+  },
+  "sourceLevel": "Native 1M export; no untouched decoder attribution is made.",
+  "inferenceReport": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\processing-reconciliations\\alpine\\tower_3\\2e727f1844b3ab41\\459b1a3130c2284c-alpine--tower_1-a002-pixal-mv-1024-23421.json",
+    "sha256": "3e97b39ed7598047a2d3dbd46156eaa408f2d35cf5185ae3d25a03ba9dbfe0b4",
+    "bytes": 9895
+  },
+  "inputReference": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\source-rejections\\alpine\\tower_1\\767eee53eed9b6a2\\input-reference.json",
+    "sha256": "7ab44cd6b17685e0002c2d177cd8623698c7d9bb1b9883187b8b87b375e92dab",
+    "bytes": 4421
+  },
+  "diagnostic": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\source-rejections\\alpine\\tower_1\\767eee53eed9b6a2\\diagnostic.json",
+    "sha256": "b5d5513a3250de75200d73dd327395ee21ffdbb026d36640c80b874ed906d1b0",
+    "bytes": 2048
+  },
+  "evidence": [
+    {
+      "path": "art/full-ai-city/reports/source-rejections/alpine/tower_1/767eee53eed9b6a2/raw-front.png",
+      "sha256": "d739f7398ee242d11bcea2dfb1a8fa4421c24b29b49343048c95135e3350e712",
+      "bytes": 200380
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/alpine/tower_1/767eee53eed9b6a2/raw-iso.png",
+      "sha256": "848ce5c628b7cb276cbd208b00ed945f3c888f9186488d722f4c1ff75b7e76e7",
+      "bytes": 239226
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/alpine/tower_1/767eee53eed9b6a2/raw-grey-front-iso.png",
+      "sha256": "e64f563aa5b784913d162eda7f0802f3d8a4b20e43f54987adc1bb3eb42ad20a",
+      "bytes": 666354
+    }
+  ],
+  "finding": "Actually inspected original native-export front/iso and neutral grey front-iso. The stepped front gable becomes a floating plaster panel with a long open band under it and additional small holes in its blind ornament; two separate chimneys replace the single reference chimney. These are geometry and silhouette errors on the source, not dark glass. Source-front diagnosis is sufficient to reject the second attempt; final back/roof discontinuities are separately visible but not assigned to source until back diagnosis completes. No untouched decoder attribution is made.",
+  "decision": "Second same-reference seed rejected. Use the reviewed revision2 with a single continuous roof, no chimney, horizontal side roof ridge/eave and a solid underlying front gable with shallow raised stepped ornament. Do not retry the old input again.",
+  "sourceUnchanged": true,
+  "notFinalCandidateReview": true
+}

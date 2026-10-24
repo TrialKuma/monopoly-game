@@ -1,0 +1,412 @@
+{
+  "status": "exported_pending_visual_review",
+  "createdAt": "2026-10-23T20:33:15.236859+00:00",
+  "region": "alpine",
+  "asset": "tower_3",
+  "source": {
+    "rawGLB": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\alpine--tower_3-a003-pixal-mv-1024-24423.glb",
+      "sha256": "288f119190e17cf84e89db53a6812525d06f132876ca3313b68994133d94d7cc",
+      "bytes": 40929388
+    }
+  },
+  "inferenceReport": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\alpine--tower_3-a003\\alpine--tower_3-a003-pixal-mv-1024-24423.json",
+    "sha256": "9c1ff71c5a1afbeec312b765ed56ef7d141b912c853341885e84a5d06aac234f",
+    "bytes": 10103
+  },
+  "reference": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\inputs\\alpine\\tower_3\\ec4ab63a08403b65\\reference.json",
+    "sha256": "b23ff09dd0572eca21e9faffcb016db68bf636d68d4458cb2411d1d37a5a9a76",
+    "bytes": 4421
+  },
+  "processingTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\4686f6f288c17202449c212d33193c98a2fdfe0f47fbbe1d47284f432c7ed327-process_lod.py",
+    "sha256": "4686f6f288c17202449c212d33193c98a2fdfe0f47fbbe1d47284f432c7ed327",
+    "bytes": 28561
+  },
+  "assumedCameras": true,
+  "cameraCalibration": "assumed_standard_orbit_not_measured",
+  "nativePipeline": "Pixal3DMVImageTo3DPipeline.run_mv",
+  "nativeResolution": 1024,
+  "seed": 24423,
+  "geometryOrigin": "Actual native three-view neural building with explicitly recorded bounded local repairs; localSurfaceRepair.method and face counts disclose whether these include boundary patches or a small mechanical connector. Followed by source-derived remeshing and texture transfer. No replacement building.",
+  "orientation": {
+    "up": "Y",
+    "front": "+Z",
+    "groundY": 0,
+    "maxEdge": 1
+  },
+  "requestedTriangles": 45000,
+  "limitations": [
+    "Assumed camera reference reconstruction, not exact measured architecture",
+    "Final candidate requires actual rendered visual approval"
+  ],
+  "animation": null,
+  "processingComplete": true,
+  "lod": "near",
+  "processingRevision": 0,
+  "memoryReservation": {
+    "pid": 5268,
+    "status": "reserved",
+    "reason": "native_or_other_fine_residency",
+    "voxelThreshold": 0.0015,
+    "noGpuCompute": true,
+    "startedAt": "2026-10-23T20:31:08.140433+00:00",
+    "waitSeconds": 126.067,
+    "owner": {
+      "status": "held",
+      "pid": 25836,
+      "host": "NeoRic",
+      "label": "monopoly-native-multiview-compact--tower_3-a002",
+      "acquired_utc": "2026-10-23T20:27:09.458835+00:00",
+      "lock_path": "C:\\Users\\A\\.codex\\shared-resource-locks\\pixal-gpu0.lock",
+      "token": "b66d998713034bfe8c81ebcb1531c9a9",
+      "metadata_is_advisory": true
+    },
+    "reservation": {
+      "status": "held",
+      "pid": 5268,
+      "host": "NeoRic",
+      "label": "monopoly-fine-cpu-5268",
+      "acquired_utc": "2026-10-23T20:33:14.205247+00:00",
+      "lock_path": "C:\\Users\\A\\.codex\\shared-resource-locks\\pixal-gpu0.lock",
+      "token": "f264a2b480dd4c0b9fca0d9a4d9af365",
+      "metadata_is_advisory": true
+    },
+    "acquiredAt": "2026-10-23T20:33:14.206740+00:00",
+    "tool": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\705848501583a3e6e40072356e3423c4d9c9ad763e84e0f3fa5c1c9ba85b47a8-native_memory_reservation.py",
+      "sha256": "705848501583a3e6e40072356e3423c4d9c9ad763e84e0f3fa5c1c9ba85b47a8",
+      "bytes": 4247
+    }
+  },
+  "localSurfaceRepair": {
+    "source": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-alpine-tower3-window-v2-horizontal\\repaired-native.glb",
+      "sha256": "b9b91a8f3f36d67f90eed67e356b4f9bd3e92c812815b3aa5b7d7adf984fe239",
+      "bytes": 41579256
+    },
+    "receipt": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\alpine\\tower_3\\b9b91a8f3f36d67f\\repair.json",
+      "sha256": "6afb114c019abd3f05ba97333af862dd359d3e6176fb7e21446936b0d688c190",
+      "bytes": 9236
+    },
+    "method": "Restricted missing original plaster window-surround sectors restored from actual neighboring source surface depths and UV samples. Original neural vertex positions, original face prefix and embedded texture pixels preserved. Each local patch closes 0.006 inward. This isolated derivative requires source and reduced candidate visual review; no runtime approval or replacement building.",
+    "newTriangles": 3892,
+    "newVertices": 1948,
+    "originalVerticesMoved": 0,
+    "originalTrianglesDeleted": 0,
+    "regions": [
+      {
+        "name": "Front enclosed plaster band above right ground-floor window beneath balcony",
+        "specification": {
+          "name": "Front enclosed plaster band above right ground-floor window beneath balcony",
+          "u": [
+            1,
+            0,
+            0
+          ],
+          "v": [
+            0,
+            0,
+            1
+          ],
+          "n": [
+            0,
+            -1,
+            0
+          ],
+          "roi": [
+            0.025,
+            0.168,
+            0.225,
+            0.285
+          ],
+          "defectDepth": 0.18,
+          "donorDepth": 0.205,
+          "donorMaxDepth": 0.222,
+          "donorNormal": 0.65,
+          "color": "plaster"
+        },
+        "missingSamples": 792,
+        "boundarySamples": 1534,
+        "sampledDepthRange": [
+          -2.0,
+          0.33331501483917236
+        ],
+        "inwardClosureThickness": 0.006,
+        "outerSurfaceUnchanged": true,
+        "newVertices": 1948,
+        "newTriangles": 3892
+      }
+    ]
+  },
+  "derivation": {
+    "rawTriangles": 932293,
+    "weldedTriangles": 932049,
+    "remeshedTriangles": 12083312,
+    "voxelSize": 0.0015,
+    "finalTriangles": 44955,
+    "atlasArea": 0.3703972363347511,
+    "singleReductionPass": true,
+    "inheritedUVRemovedBeforeReduction": true,
+    "sourceMaterialsUntouched": true,
+    "uvUnwrap": {
+      "angleDegrees": 66.0,
+      "islandMargin": 2e-05,
+      "marginMethod": "SCALED",
+      "nominalMarginPixels": null
+    },
+    "repairedSourceTriangles": 936185
+  },
+  "bake": {
+    "method": "CPU closest-original-triangle projection with float64 barycentric original UV and bilinear original texture sampling; geometric normals retained, no directional normal-map rebake or invented color",
+    "coveredAtlasPixels": 387919,
+    "nearestLookupSuccessFraction": 1.0,
+    "notRayCoverage": true,
+    "sourceDistanceQuantiles": [
+      0.00020331301493570209,
+      0.0009978090063668787,
+      0.0015331689384765932,
+      0.007719587069004774
+    ],
+    "sourceDistanceQuantileLevels": [
+      0.5,
+      0.95,
+      0.99,
+      1
+    ],
+    "overTwoPercentMaxEdge": 0.0,
+    "distanceReviewRequired": false,
+    "visualGeometryReviewRequired": true,
+    "barycentricOriginalRange": [
+      -9.80861895427676e-05,
+      1.0
+    ],
+    "degenerateOrInvalidBarycentricCount": 0,
+    "closestSourceVertexFallbackFraction": 0.0,
+    "barycentricPointReconstructionErrorQuantiles": [
+      7.637323355631914e-09,
+      4.331166339296181e-08,
+      4.2834597629248954e-07
+    ],
+    "atlasOverlapPixelsWithDifferentSurface": 2320,
+    "seconds": 8.263064500002656,
+    "maps": [
+      {
+        "role": "base",
+        "size": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "role": "orm",
+        "size": [
+          512,
+          512
+        ]
+      }
+    ],
+    "repairSourceNote": "Texture transfer uses the explicitly repaired neural source, retaining original PBR and locally interpolated same-wall UV. Repair receipt and unchanged original inference source are preserved separately."
+  },
+  "textureTransferTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\a2cb99c96fb8df396f16580a88a7c6151104ee3c927fe76cd161ee2d27bdfa42-bake_nearest_surface.py",
+    "sha256": "a2cb99c96fb8df396f16580a88a7c6151104ee3c927fe76cd161ee2d27bdfa42",
+    "bytes": 7317
+  },
+  "quantization": {
+    "source": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-alpine-tower3-b9b91a8f3f36d67f-fine0015-45k\\candidates\\alpine\\tower_3.glb",
+    "output": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-alpine-tower3-b9b91a8f3f36d67f-fine0015-45k\\candidates\\alpine\\tower_3.glb",
+    "sourceBytes": 3055092,
+    "outputBytes": 2249052,
+    "sourceSha256": "2085f21a2103173bb1d5ee0469750948ae0ce5d2d45170b21d7acb435fe47d5f",
+    "outputSha256": "e748a21553f1f8612ac7f468705c5831ca46ae007be8a9a4fe52d25be3727c1b",
+    "positionFaceAndTextureBytesUnchanged": true,
+    "attributes": [
+      {
+        "accessor": 1,
+        "semantic": "NORMAL",
+        "count": 67183,
+        "maximumAngularErrorDegrees": 0.38348841233090625
+      },
+      {
+        "accessor": 2,
+        "semantic": "TEXCOORD_0",
+        "count": 67183,
+        "maximumUVError": 7.62946911098128e-06,
+        "maximumTexelErrorAt1024": 0.00781257636964483
+      }
+    ]
+  },
+  "processedCandidate": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-alpine-tower3-b9b91a8f3f36d67f-fine0015-45k\\candidates\\alpine\\tower_3.glb",
+    "sha256": "e748a21553f1f8612ac7f468705c5831ca46ae007be8a9a4fe52d25be3727c1b",
+    "bytes": 2249052
+  },
+  "glbValidation": {
+    "version": 2,
+    "triangles": 44955,
+    "meshes": 1,
+    "materials": 1,
+    "images": 2,
+    "all_primitives_have_uv": true,
+    "animations": [],
+    "all_images_embedded": true,
+    "external_buffers": []
+  },
+  "triangles": 44955,
+  "renderedCandidate": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-alpine-tower3-b9b91a8f3f36d67f-fine0015-45k\\candidates\\renders\\alpine\\tower_3\\lod-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-alpine-tower3-b9b91a8f3f36d67f-fine0015-45k\\candidates\\renders\\alpine\\tower_3\\lod-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-alpine-tower3-b9b91a8f3f36d67f-fine0015-45k\\candidates\\renders\\alpine\\tower_3\\lod-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-alpine-tower3-b9b91a8f3f36d67f-fine0015-45k\\candidates\\renders\\alpine\\tower_3\\lod-left.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-alpine-tower3-b9b91a8f3f36d67f-fine0015-45k\\candidates\\renders\\alpine\\tower_3\\lod-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.4278047978878021,
+        -0.36804085969924927,
+        0.0005118674016557634
+      ],
+      "max": [
+        0.4273366332054138,
+        0.3683450520038605,
+        1.0000847578048706
+      ]
+    },
+    "triangles": 44955,
+    "textureSizes": [
+      {
+        "name": "alpine__tower_3__nearest_base",
+        "size": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "name": "alpine__tower_3__nearest_orm",
+        "size": [
+          512,
+          512
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "renderedSource": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-alpine-tower3-b9b91a8f3f36d67f-fine0015-45k\\candidates\\renders\\alpine\\tower_3\\raw-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-alpine-tower3-b9b91a8f3f36d67f-fine0015-45k\\candidates\\renders\\alpine\\tower_3\\raw-iso.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-alpine-tower3-b9b91a8f3f36d67f-fine0015-45k\\candidates\\renders\\alpine\\tower_3\\raw-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-alpine-tower3-b9b91a8f3f36d67f-fine0015-45k\\candidates\\renders\\alpine\\tower_3\\raw-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-alpine-tower3-b9b91a8f3f36d67f-fine0015-45k\\candidates\\renders\\alpine\\tower_3\\raw-left.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.42761364579200745,
+        -0.36870893836021423,
+        0.0
+      ],
+      "max": [
+        0.42761364579200745,
+        0.36870893836021423,
+        1.0
+      ]
+    },
+    "triangles": 932293,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "renderedRepairedSource": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-alpine-tower3-b9b91a8f3f36d67f-fine0015-45k\\candidates\\renders\\alpine\\tower_3\\repaired-source-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-alpine-tower3-b9b91a8f3f36d67f-fine0015-45k\\candidates\\renders\\alpine\\tower_3\\repaired-source-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-alpine-tower3-b9b91a8f3f36d67f-fine0015-45k\\candidates\\renders\\alpine\\tower_3\\repaired-source-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.42761364579200745,
+        -0.36870893836021423,
+        0.0
+      ],
+      "max": [
+        0.42761364579200745,
+        0.36870893836021423,
+        1.0
+      ]
+    },
+    "triangles": 936185,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "bounds": {
+    "min": [
+      -0.4278047978878021,
+      0.0005118674016557634,
+      -0.3683450520038605
+    ],
+    "max": [
+      0.4273366332054138,
+      1.0000847578048706,
+      0.36804085969924927
+    ],
+    "coordinateSystem": "GLTF Y-up; +Z front"
+  },
+  "textureSizes": [
+    {
+      "name": "alpine__tower_3__nearest_base",
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "name": "alpine__tower_3__nearest_orm",
+      "size": [
+        512,
+        512
+      ]
+    }
+  ],
+  "rawSourceUnchanged": true,
+  "completedAt": "2026-10-23T20:37:31.954923+00:00"
+}

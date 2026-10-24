@@ -1,0 +1,358 @@
+{
+  "status": "local_repair_candidate_pending_visual_review",
+  "source": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\compact--hotel_3-a003-pixal-mv-1024-29453.glb",
+    "sha256": "b7021f31ce86fbdb779f1e9b3b28e7664115978d3a0ccbd1d02ea4337778c0ac",
+    "bytes": 46965524
+  },
+  "orientation": {
+    "enabled": true,
+    "candidate_degrees": 1.1941773611586297,
+    "applied_degrees": 1.1941773611586297,
+    "underside_area": 0.15773699188456994,
+    "normal_agreement": 0.9608968278910592,
+    "yaw_degrees": 180,
+    "pitch_degrees": 0,
+    "roll_degrees": 0,
+    "uniform_scale": 1.145303775678722
+  },
+  "configuration": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\source-repairs-planned\\compact\\hotel_3\\b7021f31ce86fbdb\\repair-config-v2-rear.json",
+    "sha256": "3c6d8282fe81f01bc3cfb710fbb60d577426c307d59e3b398613a5a9b52141eb",
+    "bytes": 3438
+  },
+  "reviewEvidence": [
+    {
+      "path": "reports/source-repairs-planned/compact/hotel_3/b7021f31ce86fbdb/review.json",
+      "sha256": "3eccf7dbc346efa0d8cd8267fdf98cf62e4145fecbaabd1362c7d449b8215815",
+      "bytes": 1771
+    },
+    {
+      "path": "reports/source-repairs-planned/compact/hotel_3/b7021f31ce86fbdb/rear-support-review.json",
+      "sha256": "b8c76ed87681a33629f0f7b01e85f21ae1fd6dd538600c08df2969b841da6398",
+      "bytes": 1134
+    }
+  ],
+  "measurement": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\core-surface-measurements\\compact\\hotel_3\\b702-rear-support\\surface-measurements.json",
+    "sha256": "b0e6b5a71cd50d9578bc589054323ba565841d99b3eca529b09b17504bd394dc",
+    "bytes": 116990
+  },
+  "method": "Only explicitly measured and visually reviewed local gaps are closed from adjoining original surface and UV samples with0.006 inward closure. Original vertices, faces and image pixels are preserved. No replacement building or generated texture. See configuration and frozen prior review evidence for exact allowed regions.",
+  "repairs": [
+    {
+      "name": "Local inward support for intact thin upper left plaster",
+      "specification": {
+        "u": [
+          0,
+          -1,
+          0
+        ],
+        "v": [
+          0,
+          0,
+          1
+        ],
+        "n": [
+          -1,
+          0,
+          0
+        ],
+        "color": "plaster",
+        "donorNormal": 0.65,
+        "name": "Local inward support for intact thin upper left plaster",
+        "roi": [
+          -0.255,
+          -0.025,
+          0.65,
+          0.779
+        ],
+        "forceRoi": [
+          -0.255,
+          -0.025,
+          0.65,
+          0.779
+        ],
+        "defectDepth": 0.2,
+        "donorDepth": 0.325,
+        "donorMaxDepth": 0.334,
+        "gridStep": 0.006,
+        "donorMargin": 0.03
+      },
+      "missingSamples": 858,
+      "boundarySamples": 586,
+      "sampledDepthRange": [
+        0.3286815881729126,
+        0.44875526428222656
+      ],
+      "inwardClosureThickness": 0.006,
+      "outerSurfaceUnchanged": true,
+      "newVertices": 1968,
+      "newTriangles": 3932
+    },
+    {
+      "name": "Small existing left gable infill gap",
+      "specification": {
+        "u": [
+          0,
+          -1,
+          0
+        ],
+        "v": [
+          0,
+          0,
+          1
+        ],
+        "n": [
+          -1,
+          0,
+          0
+        ],
+        "color": "plaster",
+        "donorNormal": 0.65,
+        "name": "Small existing left gable infill gap",
+        "roi": [
+          -0.115,
+          -0.075,
+          0.84,
+          0.885
+        ],
+        "defectDepth": 0.2,
+        "donorDepth": 0.282,
+        "donorMaxDepth": 0.295
+      },
+      "missingSamples": 79,
+      "boundarySamples": 235,
+      "sampledDepthRange": [
+        -2.0,
+        0.3191542625427246
+      ],
+      "inwardClosureThickness": 0.006,
+      "outerSurfaceUnchanged": true,
+      "newVertices": 254,
+      "newTriangles": 504
+    },
+    {
+      "name": "Intact upper rear-right thin plaster behind proven low triangular loss",
+      "specification": {
+        "name": "Intact upper rear-right thin plaster behind proven low triangular loss",
+        "u": [
+          -1,
+          0,
+          0
+        ],
+        "v": [
+          0,
+          0,
+          1
+        ],
+        "n": [
+          0,
+          1,
+          0
+        ],
+        "roi": [
+          0.238,
+          0.31,
+          0.635,
+          0.73
+        ],
+        "forceRoi": [
+          0.238,
+          0.31,
+          0.635,
+          0.73
+        ],
+        "defectDepth": 0.1,
+        "donorDepth": 0.238,
+        "donorMaxDepth": 0.248,
+        "donorNormal": 0.65,
+        "color": "plaster",
+        "gridStep": 0.006,
+        "donorMargin": 0.032,
+        "flatPatchUV": true,
+        "donorMinRGB": 0.35,
+        "donorMaxColorRatio": 1.5
+      },
+      "missingSamples": 192,
+      "boundarySamples": 378,
+      "sampledDepthRange": [
+        -0.12478947639465332,
+        0.2701985836029053
+      ],
+      "inwardClosureThickness": 0.006,
+      "outerSurfaceUnchanged": true,
+      "newVertices": 504,
+      "newTriangles": 1004
+    },
+    {
+      "name": "Intact middle rear thin plaster adjacent post behind proven low loss",
+      "specification": {
+        "name": "Intact middle rear thin plaster adjacent post behind proven low loss",
+        "u": [
+          -1,
+          0,
+          0
+        ],
+        "v": [
+          0,
+          0,
+          1
+        ],
+        "n": [
+          0,
+          1,
+          0
+        ],
+        "roi": [
+          -0.034,
+          0.026,
+          0.34,
+          0.4
+        ],
+        "forceRoi": [
+          -0.034,
+          0.026,
+          0.34,
+          0.4
+        ],
+        "defectDepth": 0.1,
+        "donorDepth": 0.235,
+        "donorMaxDepth": 0.244,
+        "donorNormal": 0.65,
+        "color": "plaster",
+        "gridStep": 0.006,
+        "donorMargin": 0.032,
+        "flatPatchUV": true,
+        "donorMinRGB": 0.35,
+        "donorMaxColorRatio": 1.5
+      },
+      "missingSamples": 100,
+      "boundarySamples": 204,
+      "sampledDepthRange": [
+        -0.1580643653869629,
+        0.24810457229614258
+      ],
+      "inwardClosureThickness": 0.006,
+      "outerSurfaceUnchanged": true,
+      "newVertices": 288,
+      "newTriangles": 572
+    }
+  ],
+  "originalTriangles": 983549,
+  "originalVerticesMoved": 0,
+  "originalTrianglesDeleted": 0,
+  "artifactCleanup": {
+    "method": "No original faces deleted. Only the explicitly reviewed bounded source-surface regions in the configuration may receive additional triangles.",
+    "deletedTriangles": 0
+  },
+  "newTriangles": 6012,
+  "newVertices": 3014,
+  "inverseSimilarityError": 9.682183133019606e-08,
+  "normalizedOutput": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-compact-hotel3-local-support-v2-rear\\repaired-normalized.glb",
+    "sha256": "ccee36927b51e6a6e637c1106538ecb15da3dc44eccc55d40912e37a050e19d3",
+    "bytes": 47668040
+  },
+  "nativeOutput": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-compact-hotel3-local-support-v2-rear\\repaired-native.glb",
+    "sha256": "d208a60ba055dd982192a23db2b63cb647b638151d1a043351f050e9ca1b8ffa",
+    "bytes": 47661024
+  },
+  "renders": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-compact-hotel3-local-support-v2-rear\\repaired-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-compact-hotel3-local-support-v2-rear\\repaired-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-compact-hotel3-local-support-v2-rear\\repaired-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-compact-hotel3-local-support-v2-rear\\repaired-left.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-compact-hotel3-local-support-v2-rear\\repaired-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.4999999701976776,
+        -0.3608993589878082,
+        0.0
+      ],
+      "max": [
+        0.4999999701976776,
+        0.3608993589878082,
+        0.9868234395980835
+      ]
+    },
+    "triangles": 989561,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "reviewImages": [
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\compact\\hotel_3\\d208a60ba055dd98\\repaired-front.png",
+      "sha256": "2ed697108dfb50008ac085fbfc66a882439a2938b23f49e6bdfc4653d33490e1",
+      "bytes": 257883
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\compact\\hotel_3\\d208a60ba055dd98\\repaired-right.png",
+      "sha256": "c955d27fc6930b37e30fa40d1c05bc4dd7df793bcee32e3a71cfc2bb43c2a4e5",
+      "bytes": 212514
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\compact\\hotel_3\\d208a60ba055dd98\\repaired-back.png",
+      "sha256": "fcf6f4674db28116283b675f6c7210453258be4a4e7c7db618d54d65d0f2e22a",
+      "bytes": 255412
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\compact\\hotel_3\\d208a60ba055dd98\\repaired-left.png",
+      "sha256": "ea89dec14279881925092144986fbf2d42e5870a2d5229a062826a9caa166744",
+      "bytes": 214884
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\compact\\hotel_3\\d208a60ba055dd98\\repaired-iso.png",
+      "sha256": "9e1a9ce5541467d7a97ec4b4e671bcf26076d9332a7e4276cde2a5507360115a",
+      "bytes": 310673
+    }
+  ],
+  "processingTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\f21173ee639bce54c9c7094ef6121aa6aea7401fc45edfff9d221c65a107ae79-repair_bounded_source_surface.py",
+    "sha256": "f21173ee639bce54c9c7094ef6121aa6aea7401fc45edfff9d221c65a107ae79",
+    "bytes": 13325
+  },
+  "completedAt": "2026-10-24T00:51:32.295530+00:00",
+  "sourcePreservation": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\compact\\hotel_3\\d208a60ba055dd98\\preservation.json",
+    "sha256": "f422028eabe4c74ac19776a2f12c5e63b1f3976dc76841f394e015834d6de50a",
+    "bytes": 1103
+  },
+  "originalRepairReceipt": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-compact-hotel3-local-support-v2-rear\\repair.json",
+    "sha256": "77aa12917f8208895f319ee462545ce7d2e2d3b026139a5fa655957760aac436",
+    "bytes": 10648
+  },
+  "sourceVisualReview": {
+    "status": "reviewed_for_derivative_processing",
+    "views": [
+      "front",
+      "right",
+      "back",
+      "left",
+      "iso"
+    ],
+    "note": "Actually inspected all five repaired source views. The original two left plaster supports are retained and two small rear plaster regions receive inward thickness support against demonstrated remesh triangle loss. Main roof, balconies, windows and doors remain original; the rear and side white panels are continuous in source material views. Small decorative gable openings and timber joints remain unchanged. This permits one existing fine mobile derivation only, not visual final approval.",
+    "reviewer": "asset_production"
+  }
+}

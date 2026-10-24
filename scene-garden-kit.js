@@ -342,3 +342,26 @@ export function batchGardenBuilding({THREE,source,own}) {
     const mesh=new THREE.Mesh(own(merged),material);mesh.castShadow=!material.transparent;mesh.receiveShadow=true;mesh.raycast=()=>{};result.add(mesh);
   }return result;
 }
+
+// Neural buildings already have compact indexed meshes and baked materials.
+// Keep repeated scenic copies instanced instead of expanding every triangle
+// into a second non-indexed district mesh. Only instance buffers are owned here.
+export function instanceGardenBuildings({THREE,source,own}){
+  source.updateMatrixWorld(true);
+  const inverse=new THREE.Matrix4().copy(source.matrixWorld).invert(),batches=new Map(),result=new THREE.Group();
+  result.name=source.name;
+  source.traverse(node=>{
+    if(!node.isMesh)return;
+    const materialKey=(Array.isArray(node.material)?node.material:[node.material]).map(material=>material.uuid).join(',');
+    const key=`${node.geometry.uuid}|${materialKey}`;
+    if(!batches.has(key))batches.set(key,{geometry:node.geometry,material:node.material,matrices:[]});
+    batches.get(key).matrices.push(new THREE.Matrix4().multiplyMatrices(inverse,node.matrixWorld));
+  });
+  for(const {geometry,material,matrices} of batches.values()){
+    const mesh=own(new THREE.InstancedMesh(geometry,material,matrices.length));
+    matrices.forEach((matrix,index)=>mesh.setMatrixAt(index,matrix));mesh.instanceMatrix.needsUpdate=true;
+    mesh.computeBoundingBox();mesh.computeBoundingSphere();mesh.castShadow=true;mesh.receiveShadow=true;mesh.raycast=()=>{};
+    result.add(mesh);
+  }
+  return result;
+}

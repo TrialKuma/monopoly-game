@@ -16,6 +16,7 @@ function context(source, seed=1) {
   c.Math.random=mulberry32(seed);c.window=c;c.globalThis=c;vm.createContext(c);
   const quiet=source.replace(/warmSoundCache\(\);\s*ensureBgmEngine\(\);\s*ensureFallbackBgmAudio\(\);\s*showStartScreen\(\);\s*$/,'');
   vm.runInContext(quiet,c,{filename:'game.js'});c.run=code=>vm.runInContext(code,c);
+  c.realShowModal = c.showModal; // Tests can opt back into the real asynchronous choice lifecycle.
   c.run(`render=()=>{};playSound=()=>{};applyMapLayout=()=>{};renderStartMapOptions=()=>{};updateModeEyebrow=()=>{};updateSoundToggleButton=()=>{};updateMusicToggleButton=()=>{};sleep=()=>Promise.resolve();startAiTurnWithDelay=async()=>{};showModal=async cfg=>{throw Error('Unexpected human modal: '+cfg.title)};showContinueModal=async()=>{};`);
   return c;
 }

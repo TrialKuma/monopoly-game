@@ -1,0 +1,228 @@
+{
+  "status": "source_repair_visually_reviewed_pending_near_lod",
+  "source": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\classic--skyscraper_2-a002-pixal-mv-1024-18341.glb",
+    "sha256": "a6a72aae9f26bc509c38d2aab61f524751e4693b047a7ffb72db5b6dcb560034",
+    "bytes": 40284400
+  },
+  "orientation": {
+    "enabled": true,
+    "candidate_degrees": 0.14265250287968312,
+    "applied_degrees": 0.14265250287968312,
+    "underside_area": 0.09617164960646245,
+    "normal_agreement": 0.9478562038913754,
+    "yaw_degrees": 180,
+    "pitch_degrees": 0,
+    "roll_degrees": 0,
+    "uniform_scale": 0.9972566729801072
+  },
+  "method": "Only two individually measured rear dome-under-cornice bands are closed from intact adjacent original stone samples. Original neural vertices, faces and image pixels remain unchanged. The interpolated local surfaces reuse original stone UV samples with 0.006 inward closure; no replacement building or new texture.",
+  "repairs": [
+    {
+      "name": "Rear left dome missing masonry band",
+      "specification": {
+        "name": "Rear left dome missing masonry band",
+        "u": [
+          -1,
+          0,
+          0
+        ],
+        "v": [
+          0,
+          0,
+          1
+        ],
+        "n": [
+          0,
+          1,
+          0
+        ],
+        "roi": [
+          -0.475,
+          -0.278,
+          0.443,
+          0.477
+        ],
+        "defectDepth": 0.07,
+        "donorDepth": 0.085,
+        "donorMaxDepth": 0.22,
+        "donorNormal": 0.4,
+        "color": "stone"
+      },
+      "missingSamples": 536,
+      "boundarySamples": 1241,
+      "sampledDepthRange": [
+        -2.0,
+        0.20727908611297607
+      ],
+      "inwardClosureThickness": 0.006,
+      "outerSurfaceUnchanged": true,
+      "newVertices": 1404,
+      "newTriangles": 2804
+    },
+    {
+      "name": "Rear right dome missing masonry band",
+      "specification": {
+        "name": "Rear right dome missing masonry band",
+        "u": [
+          -1,
+          0,
+          0
+        ],
+        "v": [
+          0,
+          0,
+          1
+        ],
+        "n": [
+          0,
+          1,
+          0
+        ],
+        "roi": [
+          0.278,
+          0.475,
+          0.458,
+          0.481
+        ],
+        "defectDepth": 0.07,
+        "donorDepth": 0.085,
+        "donorMaxDepth": 0.22,
+        "donorNormal": 0.4,
+        "color": "stone"
+      },
+      "missingSamples": 278,
+      "boundarySamples": 1138,
+      "sampledDepthRange": [
+        -2.0,
+        0.18588745594024658
+      ],
+      "inwardClosureThickness": 0.006,
+      "outerSurfaceUnchanged": true,
+      "newVertices": 852,
+      "newTriangles": 1700
+    }
+  ],
+  "originalTriangles": 936048,
+  "originalVerticesMoved": 0,
+  "originalTrianglesDeleted": 0,
+  "artifactCleanup": {
+    "method": "No original faces deleted. Only two individually measured rear dome cornice gaps are closed using intact adjoining original curved cornice samples; all framed windows and door openings remain unchanged.",
+    "deletedTriangles": 0
+  },
+  "newTriangles": 4504,
+  "newVertices": 2256,
+  "inverseSimilarityError": 1.0171574982287268e-07,
+  "normalizedOutput": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-skyscraper2\\repaired-normalized.glb",
+    "sha256": "7facff6a547e936cbd2c7bce633b3ddb38a33e51764cf9d8d602f0d202dbec9f",
+    "bytes": 40791288
+  },
+  "nativeOutput": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-skyscraper2\\repaired-native.glb",
+    "sha256": "f032b01dccb277e79c4bc17039f7662ced5562db9ff757536f1328dbb48703ad",
+    "bytes": 40789960
+  },
+  "renders": {
+    "views": [
+      "art/full-ai-city/reports/local-repairs/classic/skyscraper_2/f032b01dccb277e7/repaired-front.png",
+      "art/full-ai-city/reports/local-repairs/classic/skyscraper_2/f032b01dccb277e7/repaired-right.png",
+      "art/full-ai-city/reports/local-repairs/classic/skyscraper_2/f032b01dccb277e7/repaired-back.png",
+      "art/full-ai-city/reports/local-repairs/classic/skyscraper_2/f032b01dccb277e7/repaired-left.png",
+      "art/full-ai-city/reports/local-repairs/classic/skyscraper_2/f032b01dccb277e7/repaired-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.5,
+        -0.20730993151664734,
+        0.0
+      ],
+      "max": [
+        0.5,
+        0.2073976695537567,
+        0.7337250113487244
+      ]
+    },
+    "triangles": 940552,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "reviewImages": [
+    {
+      "path": "art/full-ai-city/reports/local-repairs/classic/skyscraper_2/f032b01dccb277e7/repaired-front.png",
+      "sha256": "9b49b9c6d6b3dcc6cb863f47a3db2a849995464298c3bacc51e62d67493f8843",
+      "bytes": 234290
+    },
+    {
+      "path": "art/full-ai-city/reports/local-repairs/classic/skyscraper_2/f032b01dccb277e7/repaired-right.png",
+      "sha256": "e0930f0d26885561f798f2b28f748c0a3ac8d94e99a18a2db721b339d91da875",
+      "bytes": 147720
+    },
+    {
+      "path": "art/full-ai-city/reports/local-repairs/classic/skyscraper_2/f032b01dccb277e7/repaired-back.png",
+      "sha256": "395f5109fbc59b5513922fb65d9470be665dca190544399ab2b6b90a0de4b9e5",
+      "bytes": 217388
+    },
+    {
+      "path": "art/full-ai-city/reports/local-repairs/classic/skyscraper_2/f032b01dccb277e7/repaired-left.png",
+      "sha256": "02c4740bdb7f3917fd2a0e6f8c3dd54e88cf34d246834094bca7dd666be171aa",
+      "bytes": 145376
+    },
+    {
+      "path": "art/full-ai-city/reports/local-repairs/classic/skyscraper_2/f032b01dccb277e7/repaired-iso.png",
+      "sha256": "fcd8bc24d0ed0acb083897888d91bc87a36db110d244065079b52968cfd84f64",
+      "bytes": 238794
+    }
+  ],
+  "processingTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\e23a637cc4f33fd15d9d93a5519c586cac3a96ec5905959ebc1e64f82b2afdf6-repair_skyscraper2_surface.py",
+    "sha256": "e23a637cc4f33fd15d9d93a5519c586cac3a96ec5905959ebc1e64f82b2afdf6",
+    "bytes": 11083
+  },
+  "completedAt": "2026-10-23T08:31:38.090012+00:00",
+  "visualReview": {
+    "reviewer": "root",
+    "views": [
+      "front",
+      "back",
+      "left",
+      "right",
+      "iso"
+    ],
+    "note": "Individually inspected all five repaired source views. Both broad rear dome-under-cornice gaps are closed with original neighboring pale-stone samples. Front balconies, roof dormers, shopfront canopy and both side walls remain intact. Tiny original rear window-sill pinholes and blind blue rear dome dormers remain native variations; no replacement architecture was authored. This approves only the bounded source repair for reduction; final mobile surface and original-field textures require independent visual review."
+  },
+  "geometryDiagnosis": [
+    {
+      "path": "art/full-ai-city/reports/local-repairs/classic/skyscraper_2/f032b01dccb277e7/raw-grey-back.png",
+      "sha256": "c179825a2e95cfd00d3fb302d52ab4b043110ec49ea4a9eca73676c3d61625b9",
+      "bytes": 176455
+    },
+    {
+      "path": "art/full-ai-city/reports/local-repairs/classic/skyscraper_2/f032b01dccb277e7/raw-grey-right.png",
+      "sha256": "d3f3a3e4e0dcb060f109035ec68e976a5c1c808e11139d135f64b543f08f46fe",
+      "bytes": 133108
+    },
+    {
+      "path": "art/full-ai-city/reports/local-repairs/classic/skyscraper_2/f032b01dccb277e7/inspection.json",
+      "sha256": "7168417c2a12b6ff8f9538561b741362830189e6018a29262a40e870898e5076",
+      "bytes": 22957
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "status": "rejected_native_export_source",
+  "region": "expansion",
+  "asset": "tower_2",
+  "reviewer": "asset_production",
+  "recordedAtUtc": "2026-10-24T05:47:19.916323+00:00",
+  "source": {
+    "path": "art/full-ai-city/source/expansion--tower_2-a013-pixal-mv-1024-29498.glb",
+    "sha256": "0e0a3c5e7f4f0c849b9922b446d768b292e2ffcba3fe80388362d9bc17bcd345",
+    "bytes": 36965208
+  },
+  "sourceLevel": "Native 1M export; no untouched decoder attribution is made.",
+  "inferenceReport": {
+    "path": "art/full-ai-city/reports/source-rejections/expansion/tower_2/0e0a3c5e7f4f0c84/expansion--tower_2-a013-pixal-mv-1024-29498.json",
+    "sha256": "62167988f6225fba9dab010ffa3e68b1d7117642ae1d8ee4e258f4328008ed9e",
+    "bytes": 10171
+  },
+  "inputReference": {
+    "path": "art/full-ai-city/reports/source-rejections/expansion/tower_2/0e0a3c5e7f4f0c84/input-reference.json",
+    "sha256": "d790e98b23b49ab2ed72acaf17be9b39f80e0c0c26bf8cfb87a78a310a0bb4b5",
+    "bytes": 4442
+  },
+  "diagnostic": null,
+  "diagnosticTool": null,
+  "sourceComparisonReport": {
+    "path": "art/full-ai-city/reports/source-rejections/expansion/tower_2/0e0a3c5e7f4f0c84/source-comparison-processing.json",
+    "sha256": "2306aea78d79814bfb7633604caec6951a8b89523a7aee43c6ceea175f1bb682",
+    "bytes": 20963
+  },
+  "sourceViewEvidenceMode": "Explicitly selected existing renderedSource views; no additional or neutral render implied",
+  "evidence": [
+    {
+      "path": "art/full-ai-city/reports/source-rejections/expansion/tower_2/0e0a3c5e7f4f0c84/raw-front.png",
+      "sha256": "0795c522a3361551fa05a1857c5c513f1067d9d7d7778747001cb02c30eb6696",
+      "bytes": 226699
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/expansion/tower_2/0e0a3c5e7f4f0c84/raw-iso.png",
+      "sha256": "29ceef3e57851554296bf76527b1a7ba69b48e2b1f30ca6ccd8afa6d6b6a57c6",
+      "bytes": 291226
+    }
+  ],
+  "finding": "Actually inspected reviewed referencea1c0a721, native front/iso comparison, all final five material views and256px. Second new-reference source removes the erroneous front stair fragments, but has a large nearly black rectangular vertical band across both right wall storeys and extensive mismatched pale material across the other side, unlike the continuous warm brick reference. Native iso already shows the black band, so this is not merely a final field conversion artifact. The front door panel also has visible gaps. This source is rejected on material/appearance grounds without claiming uninspected geometry or decoder attribution. Both permitted old-reference outcomes and both new-reference outcomes remain frozen. Hold for a bounded existing-source selection/cleanup decision; no additional reference generation, raw seed or broad repaint/remesh.",
+  "decision": "Hold after four reviewed sources across original and one revised reference. No further seed/reference; assess bounded cleanup of an existing source separately.",
+  "sourceUnchanged": true,
+  "notFinalCandidateReview": true,
+  "freezeTool": {
+    "path": "art/full-ai-city/reports/tool-snapshots/616860a00b28e670e1219d64c6cb5dad17f0946420568f786e80b6d789fb4a73-freeze_public_source_rejection.py",
+    "sha256": "616860a00b28e670e1219d64c6cb5dad17f0946420568f786e80b6d789fb4a73",
+    "bytes": 4304
+  }
+}

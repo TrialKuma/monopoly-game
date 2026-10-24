@@ -1,0 +1,57 @@
+{
+  "status": "rejected_native_export_source",
+  "region": "harbor",
+  "asset": "shop_3",
+  "reviewer": "asset_production",
+  "recordedAtUtc": "2026-10-24T06:09:52.481807+00:00",
+  "source": {
+    "path": "art/full-ai-city/source/harbor--shop_3-a009-pixal-mv-1024-9247.glb",
+    "sha256": "549ef43620ada5d4f70f09cd059a32f38779fb77b1acb6dd475b0a76bd1d0bc2",
+    "bytes": 47939808
+  },
+  "sourceLevel": "Native 1M export; no untouched decoder attribution is made.",
+  "inferenceReport": {
+    "path": "art/full-ai-city/reports/source-rejections/harbor/shop_3/549ef43620ada5d4/harbor--shop_3-a009-pixal-mv-1024-9247.json",
+    "sha256": "fc052a7421a60363164a8b6561966985adcafa347245f78d747af836166278ab",
+    "bytes": 10120
+  },
+  "inputReference": {
+    "path": "art/full-ai-city/reports/source-rejections/harbor/shop_3/549ef43620ada5d4/input-reference.json",
+    "sha256": "0a02b261d78d9ee5e9dc74841c22065f448b39fd4c787eda189e9481de883723",
+    "bytes": 4414
+  },
+  "diagnostic": null,
+  "diagnosticTool": null,
+  "sourceComparisonReport": {
+    "path": "art/full-ai-city/reports/source-rejections/harbor/shop_3/549ef43620ada5d4/source-comparison-processing.json",
+    "sha256": "04bae9cdd325312b47d787ee4fbad837a37da715b27f39d65b591feaefe5ad4a",
+    "bytes": 20670
+  },
+  "sourceViewEvidenceMode": "Explicitly selected existing renderedSource views; no additional or neutral render implied",
+  "evidence": [
+    {
+      "path": "art/full-ai-city/reports/source-rejections/harbor/shop_3/549ef43620ada5d4/raw-front.png",
+      "sha256": "40fded5770fbdb00d38dad09bff0152d1d5c759cbfbc39a3da1a5a5a4073cefe",
+      "bytes": 252171
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/harbor/shop_3/549ef43620ada5d4/raw-iso.png",
+      "sha256": "fec3706f0e1a93e3b9c772fb997bc731ab8e92fa6c9a116aefe52fbb7d408552",
+      "bytes": 310894
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/harbor/shop_3/549ef43620ada5d4/raw-back.png",
+      "sha256": "e0d7b0a80f666e711249339f41223990763d495f74cdb7a9a86893d3b771b9a2",
+      "bytes": 240437
+    }
+  ],
+  "finding": "Actually inspected the original reference, native front/iso comparison and native back, final five material views and 256px preview. Main blue roof, four flower balconies, upper dormer and striped storefront awning are coherent. A narrow but tall torn opening beside the rear ground-floor lamp remains conspicuous in the native back and final phone view. Other small cornice/window/base notches and coarse foliage are acceptable at phone scale. Hold this unmodified final and assess one strictly local rear-wall patch, preserving all original faces/UV/images, rather than additional inference. No decoder attribution, new reference or seed requested.",
+  "decision": "One strictly bounded local rear-lamp wall repair assessment; no raw retry requested. Final five and phone inspection remains mandatory.",
+  "sourceUnchanged": true,
+  "notFinalCandidateReview": true,
+  "freezeTool": {
+    "path": "art/full-ai-city/reports/tool-snapshots/616860a00b28e670e1219d64c6cb5dad17f0946420568f786e80b6d789fb4a73-freeze_public_source_rejection.py",
+    "sha256": "616860a00b28e670e1219d64c6cb5dad17f0946420568f786e80b6d789fb4a73",
+    "bytes": 4304
+  }
+}

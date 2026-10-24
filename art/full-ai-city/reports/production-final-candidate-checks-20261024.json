@@ -1,0 +1,61 @@
+{
+  "createdAt": "2026-10-24T07:04:49.389723+00:00",
+  "scope": "All147near25far individually approved; candidate package validation only, not runtime pixel approval or publication.",
+  "approvedNear": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\approved-assets.json",
+    "sha256": "e2658e7d6bb0399ec6a4d71770d4756b262c8a2751a340544f8405fc70f973c3",
+    "bytes": 773371
+  },
+  "approvedFar": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\approved-far-assets.json",
+    "sha256": "c84f1e7fac3de651d5f9093dda71bc807f5037766f597f3edf0db056c3ccf6d7",
+    "bytes": 132864
+  },
+  "harborPack": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\harbor-complete-candidate-pack.json",
+    "sha256": "3e1f658715fc96ea9373301e6ce5c4ba9e9f303f4c22e74c6daefdfa593f3bb4",
+    "bytes": 787
+  },
+  "expansionChecks": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\expansion-complete-candidate-checks.json",
+    "sha256": "a0e5db417bd295deeacabbc2aa09bccf813bd9130f280926f8bfffc47a3a9f6f",
+    "bytes": 916
+  },
+  "checks": [
+    {
+      "command": "node tests/check-native-surface-provenance.mjs",
+      "status": "passed",
+      "directFieldSources": 119,
+      "nativeUVTransfers": 6,
+      "disclosedLocalRepairs": 42,
+      "postExportUVCorrections": 1,
+      "mismatchedProvenanceRejections": 152
+    },
+    {
+      "command": "node tests/check-approval-portability.mjs",
+      "status": "passed",
+      "approvedModels": 172,
+      "ignoredScratchArchiveFilesExcluded": 16715
+    },
+    {
+      "command": "node tests/check-provenance-git-bytes.mjs",
+      "status": "passed",
+      "actualProvenanceFiles": 7,
+      "futureNearFarHeroManifestsProtected": true
+    },
+    {
+      "command": "node tests/check-building-previews.mjs --candidate --map=harbor",
+      "status": "passed",
+      "modelBoundPreviews": 29
+    },
+    {
+      "command": "node --max-old-space-size=768 tests/check-regional-scenery-budget.mjs --candidate --map=harbor",
+      "status": "passed",
+      "actualLoadedBuildings": 2,
+      "neighbourhoodTriangles": 23999,
+      "completeTriangles": 248753,
+      "pixelsRendered": false
+    }
+  ],
+  "remaining": "User-restored browser access for Alpine/Compact/Harbor/Expansion actual group and portrait game review. Existing Classic frozen QA retained. Then full publication/integration checks and authorized Git only after complete."
+}

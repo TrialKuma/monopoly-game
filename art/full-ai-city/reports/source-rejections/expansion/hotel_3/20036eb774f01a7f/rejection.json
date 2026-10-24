@@ -1,0 +1,62 @@
+{
+  "status": "rejected_native_export_source",
+  "region": "expansion",
+  "asset": "hotel_3",
+  "reviewer": "asset_production",
+  "recordedAtUtc": "2026-10-24T03:58:12.276502+00:00",
+  "source": {
+    "path": "art/full-ai-city/source/expansion--hotel_3-a011-pixal-mv-1024-9247.glb",
+    "sha256": "20036eb774f01a7ffd53cf01cf3131ff1afab9b5da324332ea77a6363d925f6a",
+    "bytes": 39296492
+  },
+  "sourceLevel": "Native 1M export; no untouched decoder attribution is made.",
+  "inferenceReport": {
+    "path": "art/full-ai-city/reports/source-rejections/expansion/hotel_3/20036eb774f01a7f/expansion--hotel_3-a011-pixal-mv-1024-9247.json",
+    "sha256": "705ae5a8ab2ded17ad7016812abdc54cdefd0ef1a83d5adce64e074614af8405",
+    "bytes": 10168
+  },
+  "inputReference": {
+    "path": "art/full-ai-city/reports/source-rejections/expansion/hotel_3/20036eb774f01a7f/input-reference.json",
+    "sha256": "1e95f56b5016829aaddf3026c2599b44d57987bb3b3c45b972c761c4a9f4be74",
+    "bytes": 4441
+  },
+  "diagnostic": null,
+  "diagnosticTool": null,
+  "sourceComparisonReport": {
+    "path": "art/full-ai-city/reports/source-rejections/expansion/hotel_3/20036eb774f01a7f/source-comparison-processing.json",
+    "sha256": "6aa5f33c6dc03ac9122daffa37715a49df7d79c34069a7f06ad3daa275785ed4",
+    "bytes": 21004
+  },
+  "sourceViewEvidenceMode": "Explicitly selected existing renderedSource views; no additional or neutral render implied",
+  "evidence": [
+    {
+      "path": "art/full-ai-city/reports/source-rejections/expansion/hotel_3/20036eb774f01a7f/raw-front.png",
+      "sha256": "b73d8c1d395e8c9c5cbb62e06781e622f927adbc6fad9efc21adf3a99e80bf68",
+      "bytes": 234878
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/expansion/hotel_3/20036eb774f01a7f/raw-iso.png",
+      "sha256": "44e152363ea71a68999947bbaeeb6071c98ec9db85f803d0e592adb1228836d5",
+      "bytes": 309012
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/expansion/hotel_3/20036eb774f01a7f/raw-back.png",
+      "sha256": "806328b1adf97486ec11ffb899676f44a1701b79afae6f5f50f41473a9057b51",
+      "bytes": 232517
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/expansion/hotel_3/20036eb774f01a7f/raw-right.png",
+      "sha256": "e0f811ce4a4ea158cef923ca2dd09cda0214922f3ef8d0f68a8a72916d5bcfb2",
+      "bytes": 229988
+    }
+  ],
+  "finding": "Actually inspected original triptych, native front/iso/back/right, all five exact final material views and 256px preview. Broad dark gaps interrupt the ground-floor front left window and adjacent entrance pier; the rear door is missing its lower section and long open corner strips persist beside the rear piers. The right side also has triangular wall/trim openings above windows, already present in the native export. The roof crown has fragmented internal bands. These combined main-facade continuity failures remain visible at phone size, rather than only enlarged neutral micro-gaps. One first independent same-reference retry without increasing face counts or altering existing geometry-only settings.",
+  "decision": "One first independent same-reference seed; no third blind seed.",
+  "sourceUnchanged": true,
+  "notFinalCandidateReview": true,
+  "freezeTool": {
+    "path": "art/full-ai-city/reports/tool-snapshots/616860a00b28e670e1219d64c6cb5dad17f0946420568f786e80b6d789fb4a73-freeze_public_source_rejection.py",
+    "sha256": "616860a00b28e670e1219d64c6cb5dad17f0946420568f786e80b6d789fb4a73",
+    "bytes": 4304
+  }
+}

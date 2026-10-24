@@ -1,0 +1,73 @@
+{
+  "status": "uv_ready_for_original_texture_transfer",
+  "operation": "native_uv_only",
+  "newNeuralInference": false,
+  "gpuLockJobId": "compact--tower_3-a001",
+  "request": {
+    "status": "completed_pending_texture_transfer",
+    "operation": "native_uv_only",
+    "surfaceNPZ": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\alpine-builders-edeb9-spike-cleaned\\native-uv-input.npz",
+    "purpose": "Exact one-face post-collapse outlier removal from recorded repaired neural low mesh. Source and all remaining geometry/UV/normals/images unchanged; native charts only, no new inference.",
+    "gpuLockJobId": "compact--tower_3-a001"
+  },
+  "geometryOperations": [],
+  "sourceTexturePixelsChanged": false,
+  "note": "This service generates UV coordinates only. Original-image texture transfer and visual review happen separately.",
+  "inputProof": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\processing-reconciliations\\alpine\\tower_3\\2e727f1844b3ab41\\4cc999b9ba8698c8-input-proof.json",
+    "sha256": "8183a9288e4fabef5726df0eea02dfbc2784a91a167de9a94085f8892f9acf40",
+    "bytes": 2917
+  },
+  "input": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\uv-replays\\alpine-builders-edeb9-cleaned-nativeUV\\input-surface.npz",
+    "sha256": "a9fa84aebe4b84cdd9a66866515f9c4ce6436522c1107933ee831e8170a8853b",
+    "bytes": 771005
+  },
+  "candidate": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\uv-replays\\alpine-builders-edeb9-cleaned-nativeUV\\input-candidate.glb",
+    "sha256": "c7ff3e728e0c56b3c29aaa402fb95bbb7f32cc96f4349128d4f1a1a11a7070c4",
+    "bytes": 1575184
+  },
+  "sourceRaw": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\alpine--builders_guild-a001-pixal-mv-1024-9247.glb",
+    "sha256": "d3aefa70e16ee1ca3700be2a52b83f426ddb66d9a38fbe54cc588aa8baa2f93f",
+    "bytes": 42679404
+  },
+  "sourceProcessingReport": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\processing-reconciliations\\alpine\\tower_3\\2e727f1844b3ab41\\cfa32205c2223142-input-processing.json",
+    "sha256": "71fc6c5061fe0ffd8673d3360acd3a28de65f03b9ef5535f98abdcc7bbe0a95c",
+    "bytes": 15732
+  },
+  "adapter": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\uv-replays\\alpine-builders-edeb9-cleaned-nativeUV\\native-uv-source.py",
+    "sha256": "273381a34d97cbc120a423ee025b820d075f7a0a0bd7c7626946698466fec6a1",
+    "bytes": 5905
+  },
+  "nativeExporterReference": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\uv-replays\\alpine-builders-edeb9-cleaned-nativeUV\\reference-native-exporter.py",
+    "sha256": "b6b79da5dfe13c22047a6257c6b2301c7ea31259dd9c82344db7e5c4cc707917",
+    "bytes": 8126
+  },
+  "parameters": {
+    "threshold_cone_half_angle_rad": 1.5707963267948966,
+    "refine_iterations": 0,
+    "global_iterations": 1,
+    "smooth_strength": 1
+  },
+  "coordinateSystem": "Exact saved Blender mesh local coordinates: Z-up, front -Y; no normalization/rotation/simplification in this step. Blender (X,Y,Z) to GLTF (X,Z,-Y); the validation inverse converts GLTF (X,Y,Z) to Blender (X,-Z,Y).",
+  "output": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\uv-replays\\alpine-builders-edeb9-cleaned-nativeUV\\native-uv.npz",
+    "sha256": "bd5a1fa1800ad567c2c19162fd55a9a7b5fb9ca34ff8d72f5112a15509b17c75",
+    "bytes": 1261736
+  },
+  "triangles": 29974,
+  "inputVertices": 14491,
+  "outputVertices": 37544,
+  "sameTriangleCornerPositionMultiset": true,
+  "windingPreserved": true,
+  "inputTriangleSignature": "dcc7dda1349a4d57dc988c77d10ccf34d45b348c91573586c1809ea9bc1b62e8",
+  "outputTriangleSignature": "dcc7dda1349a4d57dc988c77d10ccf34d45b348c91573586c1809ea9bc1b62e8",
+  "maximumPositionChange": 0,
+  "additionalRemeshOrSimplification": false,
+  "seconds": 3.47
+}

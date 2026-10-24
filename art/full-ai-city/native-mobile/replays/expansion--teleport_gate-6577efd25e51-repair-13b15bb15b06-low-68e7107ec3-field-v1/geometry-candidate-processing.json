@@ -1,0 +1,570 @@
+{
+  "status": "exported_pending_visual_review",
+  "createdAt": "2026-10-24T03:19:03.710090+00:00",
+  "region": "expansion",
+  "asset": "teleport_gate",
+  "source": {
+    "rawGLB": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\expansion--teleport_gate-a008-pixal-mv-1024-29486.glb",
+      "sha256": "6577efd25e512de85320d7cdbd3b769a0cc497e601d4832454e1afc315b8b024",
+      "bytes": 37694360
+    }
+  },
+  "inferenceReport": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\expansion--teleport_gate-a008\\expansion--teleport_gate-a008-pixal-mv-1024-29486.json",
+    "sha256": "3dbd26e39b4520e5f4516c6f6e91f620d42d236f633fd8b24c1b1a023536341c",
+    "bytes": 10231
+  },
+  "reference": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\inputs\\expansion\\teleport_gate\\b51b2a8056d316c8\\reference.json",
+    "sha256": "a5288f3698c72425dd3ab3120c3a1ca5194ceeb0f49aeda38b0611b4c8210ed5",
+    "bytes": 4484
+  },
+  "processingTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\01259185d3327c7a75b8df2e595381e45eccf13901ce96ea80844701e548295e-process_lod.py",
+    "sha256": "01259185d3327c7a75b8df2e595381e45eccf13901ce96ea80844701e548295e",
+    "bytes": 34836
+  },
+  "assumedCameras": true,
+  "cameraCalibration": "assumed_standard_orbit_not_measured",
+  "nativePipeline": "Pixal3DMVImageTo3DPipeline.run_mv",
+  "nativeResolution": 1024,
+  "seed": 29486,
+  "geometryOrigin": "Actual native three-view neural building with explicitly recorded bounded local repairs; localSurfaceRepair.method and face counts disclose whether these include boundary patches or a small mechanical connector. Followed by source-derived remeshing and texture transfer. No replacement building.",
+  "orientation": {
+    "up": "Y",
+    "front": "+Z",
+    "groundY": 0,
+    "maxEdge": 1
+  },
+  "requestedTriangles": 30000,
+  "limitations": [
+    "Assumed camera reference reconstruction, not exact measured architecture",
+    "Final candidate requires actual rendered visual approval"
+  ],
+  "animation": null,
+  "processingComplete": true,
+  "lod": "near",
+  "processingRevision": 0,
+  "localSurfaceRepair": {
+    "source": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-expansion-teleport-6577-window-edges\\repaired-native.glb",
+      "sha256": "13b15bb15b0642b58608a7d64b635d027083310d437af368b2143deaa9eb416c",
+      "bytes": 38361256
+    },
+    "receipt": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\expansion\\teleport_gate\\13b15bb15b0642b5\\repair.json",
+      "sha256": "c2886dec84ba885ffa6ff8859df049980b5a186301017e4d73d5f429317d1602",
+      "bytes": 12341
+    },
+    "method": "Only explicitly measured and visually reviewed local gaps are closed from adjoining original surface and UV samples with0.006 inward closure. Original vertices, faces and image pixels are preserved. No replacement building or generated texture. See configuration and frozen prior review evidence for exact allowed regions.",
+    "newTriangles": 5484,
+    "newVertices": 2758,
+    "originalVerticesMoved": 0,
+    "originalTrianglesDeleted": 0,
+    "regions": [
+      {
+        "name": "Front left inner window edge",
+        "specification": {
+          "name": "Front left inner window edge",
+          "u": [
+            1,
+            0,
+            0
+          ],
+          "v": [
+            0,
+            0,
+            1
+          ],
+          "n": [
+            0,
+            -1,
+            0
+          ],
+          "roi": [
+            -0.295,
+            -0.274,
+            0.17,
+            0.52
+          ],
+          "defectDepth": 0.105,
+          "donorDepth": 0.112,
+          "donorMaxDepth": 0.126,
+          "donorNormal": 0.7,
+          "color": "stone",
+          "gridStep": 0.005,
+          "donorMargin": 0.03,
+          "flatPatchUV": true,
+          "donorMinRGB": 0.22,
+          "donorMaxColorRatio": 1.65
+        },
+        "missingSamples": 161,
+        "boundarySamples": 291,
+        "sampledDepthRange": [
+          -2.0,
+          0.12205898761749268
+        ],
+        "inwardClosureThickness": 0.006,
+        "outerSurfaceUnchanged": true,
+        "newVertices": 624,
+        "newTriangles": 1240
+      },
+      {
+        "name": "Front right inner window edge",
+        "specification": {
+          "name": "Front right inner window edge",
+          "u": [
+            1,
+            0,
+            0
+          ],
+          "v": [
+            0,
+            0,
+            1
+          ],
+          "n": [
+            0,
+            -1,
+            0
+          ],
+          "roi": [
+            0.304,
+            0.323,
+            0.16,
+            0.52
+          ],
+          "defectDepth": 0.105,
+          "donorDepth": 0.112,
+          "donorMaxDepth": 0.126,
+          "donorNormal": 0.7,
+          "color": "stone",
+          "gridStep": 0.005,
+          "donorMargin": 0.03,
+          "flatPatchUV": true,
+          "donorMinRGB": 0.22,
+          "donorMaxColorRatio": 1.65
+        },
+        "missingSamples": 155,
+        "boundarySamples": 327,
+        "sampledDepthRange": [
+          -2.0,
+          0.12347662448883057
+        ],
+        "inwardClosureThickness": 0.006,
+        "outerSurfaceUnchanged": true,
+        "newVertices": 596,
+        "newTriangles": 1184
+      },
+      {
+        "name": "Rear left inner window edge",
+        "specification": {
+          "name": "Rear left inner window edge",
+          "u": [
+            -1,
+            0,
+            0
+          ],
+          "v": [
+            0,
+            0,
+            1
+          ],
+          "n": [
+            0,
+            1,
+            0
+          ],
+          "roi": [
+            -0.322,
+            -0.299,
+            0.16,
+            0.52
+          ],
+          "defectDepth": 0.105,
+          "donorDepth": 0.112,
+          "donorMaxDepth": 0.126,
+          "donorNormal": 0.7,
+          "color": "stone",
+          "gridStep": 0.005,
+          "donorMargin": 0.03,
+          "flatPatchUV": true,
+          "donorMinRGB": 0.22,
+          "donorMaxColorRatio": 1.65
+        },
+        "missingSamples": 165,
+        "boundarySamples": 322,
+        "sampledDepthRange": [
+          -2.0,
+          0.12240850925445557
+        ],
+        "inwardClosureThickness": 0.006,
+        "outerSurfaceUnchanged": true,
+        "newVertices": 640,
+        "newTriangles": 1276
+      },
+      {
+        "name": "Rear right inner window edge",
+        "specification": {
+          "name": "Rear right inner window edge",
+          "u": [
+            -1,
+            0,
+            0
+          ],
+          "v": [
+            0,
+            0,
+            1
+          ],
+          "n": [
+            0,
+            1,
+            0
+          ],
+          "roi": [
+            0.274,
+            0.3,
+            0.16,
+            0.52
+          ],
+          "defectDepth": 0.105,
+          "donorDepth": 0.112,
+          "donorMaxDepth": 0.126,
+          "donorNormal": 0.7,
+          "color": "stone",
+          "gridStep": 0.005,
+          "donorMargin": 0.03,
+          "flatPatchUV": true,
+          "donorMinRGB": 0.22,
+          "donorMaxColorRatio": 1.65
+        },
+        "missingSamples": 173,
+        "boundarySamples": 268,
+        "sampledDepthRange": [
+          -2.0,
+          0.14299452304840088
+        ],
+        "inwardClosureThickness": 0.006,
+        "outerSurfaceUnchanged": true,
+        "newVertices": 668,
+        "newTriangles": 1328
+      },
+      {
+        "name": "Rear right adjoining narrow brick strip",
+        "specification": {
+          "name": "Rear right adjoining narrow brick strip",
+          "u": [
+            -1,
+            0,
+            0
+          ],
+          "v": [
+            0,
+            0,
+            1
+          ],
+          "n": [
+            0,
+            1,
+            0
+          ],
+          "roi": [
+            0.246,
+            0.268,
+            0.35,
+            0.45
+          ],
+          "defectDepth": 0.105,
+          "donorDepth": 0.112,
+          "donorMaxDepth": 0.124,
+          "donorNormal": 0.7,
+          "color": "brick",
+          "gridStep": 0.005,
+          "donorMargin": 0.03,
+          "flatPatchUV": true,
+          "donorMinRGB": 0.1,
+          "donorMaxColorRatio": 5
+        },
+        "missingSamples": 59,
+        "boundarySamples": 122,
+        "sampledDepthRange": [
+          -2.0,
+          0.1332244873046875
+        ],
+        "inwardClosureThickness": 0.006,
+        "outerSurfaceUnchanged": true,
+        "newVertices": 230,
+        "newTriangles": 456
+      }
+    ]
+  },
+  "derivation": {
+    "rawTriangles": 971765,
+    "weldedTriangles": 975509,
+    "remeshedTriangles": 1280876,
+    "voxelSize": 0.003,
+    "finalTriangles": 29988,
+    "atlasArea": 0.43941159455335027,
+    "singleReductionPass": true,
+    "inheritedUVRemovedBeforeReduction": true,
+    "sourceMaterialsUntouched": true,
+    "uvUnwrap": {
+      "angleDegrees": 66.0,
+      "islandMargin": 2e-05,
+      "marginMethod": "SCALED",
+      "nominalMarginPixels": null
+    },
+    "repairedSourceTriangles": 977249
+  },
+  "bake": {
+    "method": "CPU closest-original-triangle projection with float64 barycentric original UV and bilinear original texture sampling; geometric normals retained, no directional normal-map rebake or invented color",
+    "coveredAtlasPixels": 460236,
+    "nearestLookupSuccessFraction": 1.0,
+    "notRayCoverage": true,
+    "sourceDistanceQuantiles": [
+      0.00011118861948489211,
+      0.0006146269879536703,
+      0.001099414064083249,
+      0.005982768256217241
+    ],
+    "sourceDistanceQuantileLevels": [
+      0.5,
+      0.95,
+      0.99,
+      1
+    ],
+    "overTwoPercentMaxEdge": 0.0,
+    "distanceReviewRequired": false,
+    "visualGeometryReviewRequired": true,
+    "barycentricOriginalRange": [
+      -8.983964140352208e-05,
+      1.0
+    ],
+    "degenerateOrInvalidBarycentricCount": 0,
+    "closestSourceVertexFallbackFraction": 0.0,
+    "barycentricPointReconstructionErrorQuantiles": [
+      4.4244495971475486e-09,
+      3.8997740312995045e-08,
+      1.9762088713114183e-07
+    ],
+    "atlasOverlapPixelsWithDifferentSurface": 111,
+    "seconds": 10.009565399999701,
+    "maps": [
+      {
+        "role": "base",
+        "size": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "role": "orm",
+        "size": [
+          512,
+          512
+        ]
+      }
+    ],
+    "repairSourceNote": "Texture transfer uses the explicitly repaired neural source, retaining original PBR and locally interpolated same-wall UV. Repair receipt and unchanged original inference source are preserved separately."
+  },
+  "textureTransferTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\a2cb99c96fb8df396f16580a88a7c6151104ee3c927fe76cd161ee2d27bdfa42-bake_nearest_surface.py",
+    "sha256": "a2cb99c96fb8df396f16580a88a7c6151104ee3c927fe76cd161ee2d27bdfa42",
+    "bytes": 7317
+  },
+  "quantization": {
+    "source": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-expansion-teleport-gate-13b15bb15b0642b5\\candidates\\expansion\\teleport_gate.glb",
+    "output": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-expansion-teleport-gate-13b15bb15b0642b5\\candidates\\expansion\\teleport_gate.glb",
+    "sourceBytes": 1742508,
+    "outputBytes": 1284768,
+    "sourceSha256": "74a87f05997441958860cc0e5119bae29eb315eefa6fce4d4d2ada2e58db6922",
+    "outputSha256": "68e7107ec314ef9043e4fa7e6e65184138053db3bc6554cea657a59470286506",
+    "positionFaceAndTextureBytesUnchanged": true,
+    "attributes": [
+      {
+        "accessor": 1,
+        "semantic": "NORMAL",
+        "count": 38158,
+        "maximumAngularErrorDegrees": 0.37852226110476883
+      },
+      {
+        "accessor": 2,
+        "semantic": "TEXCOORD_0",
+        "count": 38158,
+        "maximumUVError": 7.629201715375622e-06,
+        "maximumTexelErrorAt1024": 0.007812302556544637
+      }
+    ]
+  },
+  "processedCandidate": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-expansion-teleport-gate-13b15bb15b0642b5\\candidates\\expansion\\teleport_gate.glb",
+    "sha256": "68e7107ec314ef9043e4fa7e6e65184138053db3bc6554cea657a59470286506",
+    "bytes": 1284768
+  },
+  "glbValidation": {
+    "version": 2,
+    "triangles": 29988,
+    "meshes": 1,
+    "materials": 1,
+    "images": 2,
+    "all_primitives_have_uv": true,
+    "animations": [],
+    "all_images_embedded": true,
+    "external_buffers": []
+  },
+  "triangles": 29988,
+  "renderedCandidate": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-expansion-teleport-gate-13b15bb15b0642b5\\candidates\\renders\\expansion\\teleport_gate\\lod-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-expansion-teleport-gate-13b15bb15b0642b5\\candidates\\renders\\expansion\\teleport_gate\\lod-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-expansion-teleport-gate-13b15bb15b0642b5\\candidates\\renders\\expansion\\teleport_gate\\lod-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-expansion-teleport-gate-13b15bb15b0642b5\\candidates\\renders\\expansion\\teleport_gate\\lod-left.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-expansion-teleport-gate-13b15bb15b0642b5\\candidates\\renders\\expansion\\teleport_gate\\lod-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.5000322461128235,
+        -0.1595992147922516,
+        0.0003343894495628774
+      ],
+      "max": [
+        0.4998151957988739,
+        0.15950877964496613,
+        0.8005782961845398
+      ]
+    },
+    "triangles": 29988,
+    "textureSizes": [
+      {
+        "name": "expansion__teleport_gate__nearest_base",
+        "size": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "name": "expansion__teleport_gate__nearest_orm",
+        "size": [
+          512,
+          512
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "renderedSource": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-expansion-teleport-gate-13b15bb15b0642b5\\candidates\\renders\\expansion\\teleport_gate\\raw-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-expansion-teleport-gate-13b15bb15b0642b5\\candidates\\renders\\expansion\\teleport_gate\\raw-iso.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-expansion-teleport-gate-13b15bb15b0642b5\\candidates\\renders\\expansion\\teleport_gate\\raw-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-expansion-teleport-gate-13b15bb15b0642b5\\candidates\\renders\\expansion\\teleport_gate\\raw-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-expansion-teleport-gate-13b15bb15b0642b5\\candidates\\renders\\expansion\\teleport_gate\\raw-left.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.5,
+        -0.1596205234527588,
+        0.0
+      ],
+      "max": [
+        0.5,
+        0.1596205234527588,
+        0.8003684878349304
+      ]
+    },
+    "triangles": 971765,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "renderedRepairedSource": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-expansion-teleport-gate-13b15bb15b0642b5\\candidates\\renders\\expansion\\teleport_gate\\repaired-source-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-expansion-teleport-gate-13b15bb15b0642b5\\candidates\\renders\\expansion\\teleport_gate\\repaired-source-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-expansion-teleport-gate-13b15bb15b0642b5\\candidates\\renders\\expansion\\teleport_gate\\repaired-source-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.5,
+        -0.1596205234527588,
+        0.0
+      ],
+      "max": [
+        0.5,
+        0.1596205234527588,
+        0.8003684878349304
+      ]
+    },
+    "triangles": 977249,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "bounds": {
+    "min": [
+      -0.5000322461128235,
+      0.0003343894495628774,
+      -0.15950877964496613
+    ],
+    "max": [
+      0.4998151957988739,
+      0.8005782961845398,
+      0.1595992147922516
+    ],
+    "coordinateSystem": "GLTF Y-up; +Z front"
+  },
+  "textureSizes": [
+    {
+      "name": "expansion__teleport_gate__nearest_base",
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "name": "expansion__teleport_gate__nearest_orm",
+      "size": [
+        512,
+        512
+      ]
+    }
+  ],
+  "rawSourceUnchanged": true,
+  "completedAt": "2026-10-24T03:20:44.092633+00:00"
+}

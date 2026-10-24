@@ -1,0 +1,52 @@
+{
+  "status": "rejected_native_export_source",
+  "region": "expansion",
+  "asset": "hotel_2",
+  "reviewer": "asset_production",
+  "recordedAtUtc": "2026-10-24T03:53:50.507626+00:00",
+  "source": {
+    "path": "art/full-ai-city/source/expansion--hotel_2-a011-pixal-mv-1024-9247.glb",
+    "sha256": "a3f48db6e0d46f93f0e0f9220799e8af44e1539457c1373640c516ed685637e9",
+    "bytes": 38353600
+  },
+  "sourceLevel": "Native 1M export; no untouched decoder attribution is made.",
+  "inferenceReport": {
+    "path": "art/full-ai-city/reports/source-rejections/expansion/hotel_2/a3f48db6e0d46f93/expansion--hotel_2-a011-pixal-mv-1024-9247.json",
+    "sha256": "37f09ac5855a055dc12e868be386a8cd62b70a8c6644a422e3e7075089f2b3ff",
+    "bytes": 10149
+  },
+  "inputReference": {
+    "path": "art/full-ai-city/reports/source-rejections/expansion/hotel_2/a3f48db6e0d46f93/input-reference.json",
+    "sha256": "a6b0c95cc6281df461160b01933284119e7c5c7402a8a7f84cd82a4fa5a756e7",
+    "bytes": 4408
+  },
+  "diagnostic": null,
+  "diagnosticTool": null,
+  "sourceComparisonReport": {
+    "path": "art/full-ai-city/reports/source-rejections/expansion/hotel_2/a3f48db6e0d46f93/source-comparison-processing.json",
+    "sha256": "57397b5263554b21879536a8c9665e4b934d8539e9ed60cdd6a08e6b0da992fc",
+    "bytes": 20940
+  },
+  "sourceViewEvidenceMode": "Explicitly selected existing renderedSource views; no additional or neutral render implied",
+  "evidence": [
+    {
+      "path": "art/full-ai-city/reports/source-rejections/expansion/hotel_2/a3f48db6e0d46f93/raw-front.png",
+      "sha256": "ed67fd8863f88b0970929140a31047b607cb5b880cfb2c5b3bf43f066aa18e17",
+      "bytes": 235374
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/expansion/hotel_2/a3f48db6e0d46f93/raw-iso.png",
+      "sha256": "49c1c758bf36df4efa0681ab46c1dfc74c5bf0599eadbd1648dbc443eeacddb3",
+      "bytes": 288413
+    }
+  ],
+  "finding": "Actually inspected original triptych, native front/iso, all five exact final material views and 256px preview. The front upper window panels have conspicuous jagged missing lower sections and the roof parapet has long open slots; a large irregular dark ground sheet also projects beyond the building footprint and folds downward. These defects already appear in native front/iso and remain visible at phone size. Side/rear masonry is largely intact but does not offset the broken focal facade and unwanted silhouette. One first independent same-reference retry, preserving all previous source evidence and the selected geometry-only settings.",
+  "decision": "One first independent same-reference seed; no third blind seed.",
+  "sourceUnchanged": true,
+  "notFinalCandidateReview": true,
+  "freezeTool": {
+    "path": "art/full-ai-city/reports/tool-snapshots/616860a00b28e670e1219d64c6cb5dad17f0946420568f786e80b6d789fb4a73-freeze_public_source_rejection.py",
+    "sha256": "616860a00b28e670e1219d64c6cb5dad17f0946420568f786e80b6d789fb4a73",
+    "bytes": 4304
+  }
+}

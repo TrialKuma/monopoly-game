@@ -1,0 +1,57 @@
+{
+  "status": "rejected_native_export_source",
+  "region": "alpine",
+  "asset": "skyscraper_3",
+  "reviewer": "/root/asset_production",
+  "recordedAtUtc": "2026-10-23T22:02:42.949126+00:00",
+  "source": {
+    "path": "art/full-ai-city/source/alpine--skyscraper_3-a002-pixal-mv-1024-9247.glb",
+    "sha256": "2f561ba1ba0a32c7543a6d88a56d24b52f37f2b1562577418db37d1a3fa7c3b4",
+    "bytes": 45724784
+  },
+  "sourceLevel": "Native 1M export; no untouched decoder attribution is made.",
+  "inferenceReport": {
+    "path": "art/full-ai-city/reports/source-rejections/alpine/skyscraper_3/2f561ba1ba0a32c7/alpine--skyscraper_3-a002-pixal-mv-1024-9247.json",
+    "sha256": "35b218d9481eeaf9d57b4aafa9a3cb8b360528a1c1234271bdb987e14eaa5a1a",
+    "bytes": 10701
+  },
+  "inputReference": {
+    "path": "art/full-ai-city/reports/source-rejections/alpine/skyscraper_3/2f561ba1ba0a32c7/input-reference.json",
+    "sha256": "e0f3b69012e4758ca69864aea653102b5be060b7e974c69dfaf5d62a0c936ed8",
+    "bytes": 4457
+  },
+  "diagnostic": null,
+  "diagnosticTool": null,
+  "sourceComparisonReport": {
+    "path": "art/full-ai-city/reports/source-rejections/alpine/skyscraper_3/2f561ba1ba0a32c7/source-comparison-processing.json",
+    "sha256": "f5337dcd4a2a90acb7b5162da5b2a7a4b8b9933d456e8335cc6b478921d57f98",
+    "bytes": 19783
+  },
+  "sourceViewEvidenceMode": "Explicitly selected existing renderedSource views; no additional or neutral render implied",
+  "evidence": [
+    {
+      "path": "art/full-ai-city/reports/source-rejections/alpine/skyscraper_3/2f561ba1ba0a32c7/raw-front.png",
+      "sha256": "b81de1ecd0ba3fc8de6c721dceabc3bcef892ead3b31810bec518a6729cb4a68",
+      "bytes": 213054
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/alpine/skyscraper_3/2f561ba1ba0a32c7/raw-iso.png",
+      "sha256": "38bb82711902b8f5577c407e04abc7a9cede6cd6e28cc27dddc3a694e57297a7",
+      "bytes": 223129
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/alpine/skyscraper_3/2f561ba1ba0a32c7/raw-right.png",
+      "sha256": "1ac7bfecb791057e998fa57bd38410b674f769308b82154205c306ab67e192a5",
+      "bytes": 139926
+    }
+  ],
+  "finding": "Actually inspected the three-view reference, exact final five-side color sheet, and existing native source front/isometric plus the full existing raw-isometric and raw-right. Long high-contrast open vertical facade strips flank the central white stepped-gable section, most visibly to its right over the middle storeys in the front-isometric view. They interrupt the wall between the stone corner frame and adjoining timber wing at small colored review scale; these are not just enlarged window-grid hairlines. The same long discontinuity is already visible in the native 1M front/isometric source. Keep the current source/field and allow only its first independently seeded same-reference attempt. No untouched-decoder attribution, global export diagnosis or extra render is implied.",
+  "decision": "One first independent same-reference seed. If repeated major facade gaps remain, hold for bounded local assessment; no blind third seed.",
+  "sourceUnchanged": true,
+  "notFinalCandidateReview": true,
+  "freezeTool": {
+    "path": "art/full-ai-city/reports/tool-snapshots/616860a00b28e670e1219d64c6cb5dad17f0946420568f786e80b6d789fb4a73-freeze_public_source_rejection.py",
+    "sha256": "616860a00b28e670e1219d64c6cb5dad17f0946420568f786e80b6d789fb4a73",
+    "bytes": 4304
+  }
+}

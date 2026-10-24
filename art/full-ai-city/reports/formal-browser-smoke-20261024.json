@@ -1,0 +1,44 @@
+{
+  "status": "passed",
+  "reviewer": "/root",
+  "recordedAtUtc": "2026-10-24T08:19:17.431Z",
+  "runtimeRelease": {
+    "path": "art/regions/runtime-release.json",
+    "sha256": "b5ee2edf1ea7b1334ce9bef363d03ada65c5d8999e5f29ab10f4d8773305e791",
+    "bytes": 7677
+  },
+  "normalURLs": [
+    "http://127.0.0.1:8876/",
+    "http://127.0.0.1:8876/art-board.html?map=harbor"
+  ],
+  "observations": [
+    "Normal game without artStage at390x844 loads approved Harbor near,far and lighthouse assets in a full-board showcase.",
+    "Building upgrade changes Harbor finance from level1 to level2, with explicit event acknowledgement and right-aligned continuation.",
+    "Formal Harbor gallery at1280x950 shows29/29 reviewed AI buildings with no candidate badge; visible model shapes match reviewed candidate gallery.",
+    "No console warnings or errors in the inspected normal game or formal gallery.",
+    "New in-game exit dialog was separately exercised in candidate game using identical runtime code: cancel preserves turn, confirm returns to map choice."
+  ],
+  "evidence": [
+    {
+      "path": "art/full-ai-city/reviews/regions/final-browser-20261024/formal-harbor-portrait-390-showcase.jpg",
+      "sha256": "e157672e5db27759528f7e46acb2910b544f3313f6251b7419bed39dd0fd760e",
+      "bytes": 53419
+    },
+    {
+      "path": "art/full-ai-city/reviews/regions/final-browser-20261024/formal-harbor-upgrade.jpg",
+      "sha256": "8a019152194adba7c8b35db2967b04360fcca660ee7e4653a6a92dc12ba059c4",
+      "bytes": 51120
+    },
+    {
+      "path": "art/full-ai-city/reviews/regions/final-browser-20261024/formal-harbor-gallery.jpg",
+      "sha256": "0853933795976b021eda58d336b0112e1335b49521a7c20263de750f619b41e3",
+      "bytes": 153721
+    },
+    {
+      "path": "art/full-ai-city/reviews/regions/final-browser-20261024/harbor-portrait-390-exit-confirm.jpg",
+      "sha256": "83186df54de98ec7a70be684bf45516258282f9efde96107e04a6a2763d41505",
+      "bytes": 41871
+    }
+  ],
+  "phonePerformanceMeasured": false
+}

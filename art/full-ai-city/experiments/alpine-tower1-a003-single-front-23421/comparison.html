@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>同一栋建筑：三种输入方式</title>
+<style>
+  :root{color-scheme:dark;font-family:system-ui,sans-serif;background:#13191e;color:#edf2f3}
+  body{max-width:1180px;margin:auto;padding:24px}h1{font-size:26px;margin:0 0 10px}p{color:#b9c9cc;line-height:1.7}
+  .toolbar{display:flex;flex-wrap:wrap;gap:8px;margin:24px 0 16px}button{font:inherit;border:1px solid #41555e;background:#202c33;color:inherit;padding:9px 18px;border-radius:9px;cursor:pointer}
+  button[aria-pressed=true]{background:#9de0cf;color:#152b28;border-color:#9de0cf}.pair{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  article{border:1px solid #33434b;border-radius:16px;overflow:hidden;background:#1c272d}h2{font-size:18px;margin:18px 18px 4px}.caption{margin:0 18px 14px;font-size:13px}
+  .canvas{aspect-ratio:1;background:radial-gradient(ellipse at center,#63747b,#27353d);display:grid;place-items:center}.canvas img{display:block;width:100%;height:100%;object-fit:contain}.pending{padding:26px;color:#d0dddd;text-align:center}
+  #result{padding:16px 20px;border-left:3px solid #9de0cf;background:#1c292c;border-radius:4px;margin-top:20px;white-space:pre-line;line-height:1.7}
+  details{margin-top:24px}summary{cursor:pointer;color:#b9c9cc}#reference{width:100%;display:block;margin-top:14px;background:#33434b;border-radius:10px}
+  footer{font-size:13px;color:#a5b5bc;margin-top:24px;line-height:1.7}@media(max-width:760px){body{padding:16px}.pair{grid-template-columns:1fr;gap:16px}h1{font-size:22px}h2{font-size:15px;margin:12px 10px 4px}.caption{margin:0 10px 10px;font-size:12px}button{padding:8px 13px}}
+</style>
+<h1>同一栋建筑：三种输入方式</h1>
+<p>三视图与单张正面图共用同一份正面设计；斜视单图使用另行生成的同款设计。三次使用相同种子与分辨率，下方均为原始模型的实际渲染。</p>
+<div class="toolbar" role="group" aria-label="检查视角">
+  <button data-view="back" aria-pressed="true">背面</button>
+  <button data-view="right" aria-pressed="false">右侧</button>
+  <button data-view="left" aria-pressed="false">左侧</button>
+  <button data-view="gray-back" aria-pressed="false">背面结构</button>
+</div>
+<div class="pair">
+  <article><h2>三视图生成</h2><p class="caption" id="multi-caption">原始模型 · 尚未减面</p><div class="canvas" id="multi"></div></article>
+  <article><h2>单张正面图生成</h2><p class="caption" id="single-caption">对照试验</p><div class="canvas" id="single"></div></article>
+  <article><h2>单张斜视图生成</h2><p class="caption" id="quarter-caption">对照试验</p><div class="canvas" id="quarter"></div></article>
+</div>
+<div id="result" aria-live="polite">对照结果尚未完成，不能据此判断哪条流程更好。</div>
+<details><summary>查看这栋建筑的原始设计图</summary><img id="reference" src="./inputs/reference-triptych.png" alt="同一栋山地建筑的正面、侧面和背面设计"></details>
+<details><summary>查看斜视单图输入</summary><img style="width:100%;max-width:700px" src="../alpine-tower1-single-three-quarter-23421/reference.png" alt="正面和右侧同时可见的山地建筑设计"></details>
+<footer>这是一栋建筑的三次试验，不能代表所有建筑。单图与多视图模式使用不同权重和内部预处理，同一种子不代表相同随机过程。斜视模型自身朝向不同，环看截图并非严格相同立面。耗时包括导出，运行负载也不同。该试验不进入正式地图。</footer>
+<script type="module">
+  let selected='back',data;
+  const labels={back:'背面',right:'右侧',left:'左侧','gray-back':'背面结构'};
+  function draw(){
+    for(const key of ['multi','single','quarter']){
+      const holder=document.getElementById(key),path=data?.[key]?.views?.[selected];holder.replaceChildren();
+      if(path){const img=document.createElement('img');img.src=path;img.alt=`${key==='multi'?'三视图':key==='single'?'正面单图':'斜视单图'}生成模型的${labels[selected]}实际渲染`;holder.append(img);}
+      else{const text=document.createElement('span');text.className='pending';text.textContent=data?.[key]?.pendingText||'该视角尚在制作';holder.append(text);}
+      if(data?.[key]?.caption)document.getElementById(key+'-caption').textContent=data[key].caption;
+    }
+    if(data?.conclusion)document.getElementById('result').textContent=data.conclusion;
+    for(const button of document.querySelectorAll('[data-view]'))button.setAttribute('aria-pressed',String(button.dataset.view===selected));
+  }
+  for(const button of document.querySelectorAll('[data-view]'))button.addEventListener('click',()=>{selected=button.dataset.view;draw();});
+  try{const response=await fetch('./comparison-view.json',{cache:'no-store'});if(!response.ok)throw Error('not ready');data=await response.json();}catch{data={};}
+  draw();
+</script>
+</html>

@@ -1,0 +1,22 @@
+{
+  "status": "passed",
+  "actualTest": "Two real Python child processes and a real Windows byte-range file lock; synthetic available memory only; no Blender or GPU launched",
+  "cases": [
+    "12GiB: older9GiB worker entered before later4.5GiB worker",
+    "5GiB: eligible4.5GiB worker bypassed older9GiB worker; raising to12GiB then admitted older worker",
+    "wait metadata removed and locks released after both children exited0"
+  ],
+  "tools": [
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\e8a54472be406c6a479db61102e54b1f41bc541ea49adbbe1f221dc6d9a5410b-check_cpu_lease_fairness.py",
+      "sha256": "e8a54472be406c6a479db61102e54b1f41bc541ea49adbbe1f221dc6d9a5410b",
+      "bytes": 2730
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\051091446c56cbdfdfd964164402f420cbd58ba305f746b1d560695357871f49-cpu_blender_lease.py",
+      "sha256": "051091446c56cbdfdfd964164402f420cbd58ba305f746b1d560695357871f49",
+      "bytes": 4304
+    }
+  ],
+  "liveRollout": "Controllers reload after their current naturally completed stage; original GPU inference not restarted or interrupted."
+}

@@ -1,0 +1,69 @@
+{
+  "status": "exact_source_derived_low_mesh_for_uv_only",
+  "region": "alpine",
+  "asset": "builders_guild",
+  "candidate": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\uv-replays\\alpine-builders-edeb9-cleaned-nativeUV\\input-candidate.glb",
+    "sha256": "c7ff3e728e0c56b3c29aaa402fb95bbb7f32cc96f4349128d4f1a1a11a7070c4",
+    "bytes": 1575184
+  },
+  "candidateReport": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\uv-replays\\alpine-builders-edeb9-cleaned-nativeUV\\input-processing.json",
+    "sha256": "cfa32205c2223142d9c23ab8b6dbd464be180291117a8fa18718623a413c4e1a",
+    "bytes": 15693
+  },
+  "sourceRaw": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\alpine--builders_guild-a001-pixal-mv-1024-9247.glb",
+    "sha256": "d3aefa70e16ee1ca3700be2a52b83f426ddb66d9a38fbe54cc588aa8baa2f93f",
+    "bytes": 42679404
+  },
+  "sourceBlend": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\alpine-builders-edeb9-spike-cleaned\\low\\blender\\alpine\\builders_guild.blend",
+    "sha256": "f5327263dfb955cfeaa87ce2cea3ec810916ef64ee319070917f71701cdbfed9",
+    "bytes": 52516197
+  },
+  "output": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\uv-replays\\alpine-builders-edeb9-cleaned-nativeUV\\input-surface.npz",
+    "sha256": "a9fa84aebe4b84cdd9a66866515f9c4ce6436522c1107933ee831e8170a8853b",
+    "bytes": 771005
+  },
+  "processingTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\7c0bd19cc8af0ccd1d05c2285722e3059c9b4b5e70b3be5eafd06e6e0829a5f8-export_neural_uv_input.py",
+    "sha256": "7c0bd19cc8af0ccd1d05c2285722e3059c9b4b5e70b3be5eafd06e6e0829a5f8",
+    "bytes": 3809
+  },
+  "coordinateSystem": "Exact saved Blender mesh local coordinates: Z-up, front -Y; no normalization/rotation/simplification in this step. Blender (X,Y,Z) to GLTF (X,Z,-Y); the validation inverse converts GLTF (X,Y,Z) to Blender (X,-Z,Y).",
+  "arrays": {
+    "vertices": {
+      "shape": [
+        14491,
+        3
+      ],
+      "dtype": "float32"
+    },
+    "faces": {
+      "shape": [
+        29974,
+        3
+      ],
+      "dtype": "int32"
+    },
+    "corner_normals": {
+      "shape": [
+        29974,
+        3,
+        3
+      ],
+      "dtype": "float32",
+      "purpose": "Preserve original low-mesh shading when native UV returns vertex splitting; ignore for unwrap."
+    }
+  },
+  "candidateTriangleCornerPositionsExactlyEqual": true,
+  "geometryChanged": false,
+  "texturesChanged": false,
+  "tool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\uv-replays\\alpine-builders-edeb9-cleaned-nativeUV\\input-preparation.py",
+    "sha256": "7c0bd19cc8af0ccd1d05c2285722e3059c9b4b5e70b3be5eafd06e6e0829a5f8",
+    "bytes": 3809
+  }
+}

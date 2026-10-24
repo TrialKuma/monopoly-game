@@ -1,0 +1,48 @@
+{
+  "status": "rejected_native_export_source",
+  "region": "alpine",
+  "asset": "tower_3",
+  "reviewer": "progression_design",
+  "source": {
+    "path": "art/full-ai-city/source/alpine--tower_3-a001-pixal-mv-1024-9247.glb",
+    "sha256": "0c988e0a6d58939c21bc86e8b602c35d6e88296973a6b2f813df8e6f611c9884",
+    "bytes": 42466468
+  },
+  "sourceLevel": "Native 1M export; no untouched decoder attribution is made.",
+  "inferenceReport": {
+    "path": "art/full-ai-city/reports/source-rejections/alpine/tower_3/0c988e0a6d58939c/alpine--tower_3-a001-pixal-mv-1024-9247.json",
+    "sha256": "792d90d151ae983c8e28164968841cfbda81ea6450cd5245a196d5e828899598",
+    "bytes": 9574
+  },
+  "inputReference": {
+    "path": "art/full-ai-city/reports/source-rejections/alpine/tower_3/0c988e0a6d58939c/input-reference.json",
+    "sha256": "046790b27b0a097283cdbb2b8fb86f1080be9a3f008eb311d8dc2001273149f9",
+    "bytes": 4420
+  },
+  "diagnostic": {
+    "path": "art/full-ai-city/reports/source-rejections/alpine/tower_3/0c988e0a6d58939c/diagnostic.json",
+    "sha256": "ca277b95ff602c438757f9450fd77611c2688e7f339c87fd60e77e83edb896c9",
+    "bytes": 2036
+  },
+  "evidence": [
+    {
+      "path": "art/full-ai-city/reports/source-rejections/alpine/tower_3/0c988e0a6d58939c/raw-front.png",
+      "sha256": "a9353d4193d5327e7bad6033284da12a2d34154399958103da61216e1183ad9a",
+      "bytes": 236855
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/alpine/tower_3/0c988e0a6d58939c/raw-iso.png",
+      "sha256": "ae4a74a37f1da05a6bdaf58822fdcb99daa24716073a539aedc576ea1256b089",
+      "bytes": 277482
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/alpine/tower_3/0c988e0a6d58939c/raw-grey-front-iso.png",
+      "sha256": "cc8bddece74e856a0ba945c453f991dea4a920d9d7f2565dedc80b953a75d49f",
+      "bytes": 782871
+    }
+  ],
+  "finding": "Actually inspected original native-export color front/iso and neutral grey front-iso. Large diagonal openings cross the solid plaster to the left of the middle balcony; additional deep missing patches occur beside the top balcony and below the upper eave. These are not windows or material shadows and remain on neutral geometry. This is a native 1M export diagnosis only, with no attribution to the untouched decoder. The extensive solid-wall loss is not accepted as localized trim simplification.",
+  "decision": "One independent same-reference seed. If the second attempt repeats a major defect, revise the reference geometry consistency before further inference.",
+  "sourceUnchanged": true,
+  "notFinalCandidateReview": true
+}

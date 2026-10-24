@@ -1,0 +1,57 @@
+{
+  "status": "rejected_native_export_source",
+  "region": "expansion",
+  "asset": "hotel_1",
+  "reviewer": "asset_production",
+  "recordedAtUtc": "2026-10-24T03:52:23.158689+00:00",
+  "source": {
+    "path": "art/full-ai-city/source/expansion--hotel_1-a011-pixal-mv-1024-9247.glb",
+    "sha256": "511d6a46ea58cf1a495e9539abdeac690ea01935f7070b67f6b7efc715174ca6",
+    "bytes": 39796588
+  },
+  "sourceLevel": "Native 1M export; no untouched decoder attribution is made.",
+  "inferenceReport": {
+    "path": "art/full-ai-city/reports/source-rejections/expansion/hotel_1/511d6a46ea58cf1a/expansion--hotel_1-a011-pixal-mv-1024-9247.json",
+    "sha256": "ad171e1786a06fbc0fc49907f12eb08bf49aaf9e0c081ce9f2c1d2fe13609f04",
+    "bytes": 10149
+  },
+  "inputReference": {
+    "path": "art/full-ai-city/reports/source-rejections/expansion/hotel_1/511d6a46ea58cf1a/input-reference.json",
+    "sha256": "7737e0367975da6c5cd9dff4d5292f945d2115fa59e21584e5f18159d7bc4500",
+    "bytes": 4414
+  },
+  "diagnostic": null,
+  "diagnosticTool": null,
+  "sourceComparisonReport": {
+    "path": "art/full-ai-city/reports/source-rejections/expansion/hotel_1/511d6a46ea58cf1a/source-comparison-processing.json",
+    "sha256": "1db105c888e6ea104a42406854cd28264d9c80f7c5c32465ba1a090e6983ff7a",
+    "bytes": 20907
+  },
+  "sourceViewEvidenceMode": "Explicitly selected existing renderedSource views; no additional or neutral render implied",
+  "evidence": [
+    {
+      "path": "art/full-ai-city/reports/source-rejections/expansion/hotel_1/511d6a46ea58cf1a/raw-front.png",
+      "sha256": "fadd8eedb0bae22282495186ce9d75fa2259607e3ca25accede14550c3cc9618",
+      "bytes": 188521
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/expansion/hotel_1/511d6a46ea58cf1a/raw-iso.png",
+      "sha256": "aed7d87f290bf16155bb68bc9b0fa5a99ae2b8848406c5504c417bdd8553d8cb",
+      "bytes": 238007
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/expansion/hotel_1/511d6a46ea58cf1a/raw-back.png",
+      "sha256": "388aa7fab05a71c99b1ae5bdc414dd239d4588ef3b122d00776babb034038437",
+      "bytes": 185639
+    }
+  ],
+  "finding": "Actually inspected original three-view reference, native front/iso/back, all five exact final material views and the 256px preview. The rear brick panel has two jagged triangular openings beneath the cornice at its left and right corners, extending beside the corner piers; both remain visible at phone scale and also exist in the native export. Front, roof and side elevations otherwise preserve the design. This is a bounded main-wall continuity failure, not a neutral-view micro-seam. Register one first independent same-reference retry, with geometry-only and all existing budgets unchanged.",
+  "decision": "One first independent same-reference seed; no third blind seed.",
+  "sourceUnchanged": true,
+  "notFinalCandidateReview": true,
+  "freezeTool": {
+    "path": "art/full-ai-city/reports/tool-snapshots/616860a00b28e670e1219d64c6cb5dad17f0946420568f786e80b6d789fb4a73-freeze_public_source_rejection.py",
+    "sha256": "616860a00b28e670e1219d64c6cb5dad17f0946420568f786e80b6d789fb4a73",
+    "bytes": 4304
+  }
+}

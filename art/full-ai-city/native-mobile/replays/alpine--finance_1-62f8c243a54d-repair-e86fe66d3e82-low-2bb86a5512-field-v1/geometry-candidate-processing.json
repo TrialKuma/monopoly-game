@@ -1,0 +1,377 @@
+{
+  "status": "exported_pending_visual_review",
+  "createdAt": "2026-10-23T21:51:10.462948+00:00",
+  "region": "alpine",
+  "asset": "finance_1",
+  "source": {
+    "rawGLB": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\alpine--finance_1-a004-pixal-mv-1024-29471.glb",
+      "sha256": "62f8c243a54d03f4a1a5ceefc8e6547e260c11b112a918cd89c0823e5206555a",
+      "bytes": 40418136
+    }
+  },
+  "inferenceReport": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\alpine--finance_1-a004\\alpine--finance_1-a004-pixal-mv-1024-29471.json",
+    "sha256": "3b2cd9b22e0f1e7e98d68b206b7256a20cdd644a9ff7715f2f5988d1e8b4de4a",
+    "bytes": 10125
+  },
+  "reference": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\inputs\\alpine\\finance_1\\e306995e833a1a0b\\reference.json",
+    "sha256": "b8dea6f62ec6477629594966296fafaf17715d0406a1001972f86f59e330545c",
+    "bytes": 4441
+  },
+  "processingTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\4686f6f288c17202449c212d33193c98a2fdfe0f47fbbe1d47284f432c7ed327-process_lod.py",
+    "sha256": "4686f6f288c17202449c212d33193c98a2fdfe0f47fbbe1d47284f432c7ed327",
+    "bytes": 28561
+  },
+  "assumedCameras": true,
+  "cameraCalibration": "assumed_standard_orbit_not_measured",
+  "nativePipeline": "Pixal3DMVImageTo3DPipeline.run_mv",
+  "nativeResolution": 1024,
+  "seed": 29471,
+  "geometryOrigin": "Actual native three-view neural building with explicitly recorded bounded local repairs; localSurfaceRepair.method and face counts disclose whether these include boundary patches or a small mechanical connector. Followed by source-derived remeshing and texture transfer. No replacement building.",
+  "orientation": {
+    "up": "Y",
+    "front": "+Z",
+    "groundY": 0,
+    "maxEdge": 1
+  },
+  "requestedTriangles": 45000,
+  "limitations": [
+    "Assumed camera reference reconstruction, not exact measured architecture",
+    "Final candidate requires actual rendered visual approval"
+  ],
+  "animation": null,
+  "processingComplete": true,
+  "lod": "near",
+  "processingRevision": 0,
+  "localSurfaceRepair": {
+    "source": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-alpine-finance1-rear-v1\\repaired-native.glb",
+      "sha256": "e86fe66d3e828f741f8b8a11695335a3e7383797ca13abbcc87201df41f3742d",
+      "bytes": 40641772
+    },
+    "receipt": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\alpine\\finance_1\\e86fe66d3e828f74\\repair.json",
+      "sha256": "35a3bb1ed762218c62651a1c47f678faf4b94d0cb6bd4ee28eea883c49c6164f",
+      "bytes": 8598
+    },
+    "method": "Only one bounded rear plaster region confirmed in existing original raw-back, final five-side material views and exact-source ray measurements is closed from adjoining original plaster samples. No neutral-source inspection is implied. All open balconies, doors, windows, source vertices, source faces and image pixels remain unchanged. Local surfaces reuse original stone/plaster UV samples with 0.006 inward closure; no replacement building or new texture.",
+    "newTriangles": 1536,
+    "newVertices": 770,
+    "originalVerticesMoved": 0,
+    "originalTrianglesDeleted": 0,
+    "regions": [
+      {
+        "name": "Single enclosed rear upper plaster gap measured x=.068...108,z=.186...264",
+        "specification": {
+          "name": "Single enclosed rear upper plaster gap measured x=.068...108,z=.186...264",
+          "u": [
+            -1,
+            0,
+            0
+          ],
+          "v": [
+            0,
+            0,
+            1
+          ],
+          "n": [
+            0,
+            1,
+            0
+          ],
+          "roi": [
+            -0.115,
+            -0.06,
+            0.18,
+            0.27
+          ],
+          "defectDepth": 0.02,
+          "donorDepth": 0.096,
+          "donorMaxDepth": 0.119,
+          "donorNormal": 0.65,
+          "color": "plaster"
+        },
+        "missingSamples": 299,
+        "boundarySamples": 118,
+        "sampledDepthRange": [
+          -2.0,
+          0.14592397212982178
+        ],
+        "inwardClosureThickness": 0.006,
+        "outerSurfaceUnchanged": true,
+        "newVertices": 770,
+        "newTriangles": 1536
+      }
+    ]
+  },
+  "derivation": {
+    "rawTriangles": 977830,
+    "weldedTriangles": 975550,
+    "remeshedTriangles": 1151272,
+    "voxelSize": 0.003,
+    "finalTriangles": 44993,
+    "atlasArea": 0.45199480515194324,
+    "singleReductionPass": true,
+    "inheritedUVRemovedBeforeReduction": true,
+    "sourceMaterialsUntouched": true,
+    "uvUnwrap": {
+      "angleDegrees": 66.0,
+      "islandMargin": 2e-05,
+      "marginMethod": "SCALED",
+      "nominalMarginPixels": null
+    },
+    "repairedSourceTriangles": 979366
+  },
+  "bake": {
+    "method": "CPU closest-original-triangle projection with float64 barycentric original UV and bilinear original texture sampling; geometric normals retained, no directional normal-map rebake or invented color",
+    "coveredAtlasPixels": 471772,
+    "nearestLookupSuccessFraction": 1.0,
+    "notRayCoverage": true,
+    "sourceDistanceQuantiles": [
+      0.00010853300045710057,
+      0.0007159695582231501,
+      0.0017390467831864935,
+      0.006597441621124744
+    ],
+    "sourceDistanceQuantileLevels": [
+      0.5,
+      0.95,
+      0.99,
+      1
+    ],
+    "overTwoPercentMaxEdge": 0.0,
+    "distanceReviewRequired": false,
+    "visualGeometryReviewRequired": true,
+    "barycentricOriginalRange": [
+      -5.376437379883947e-05,
+      1.0
+    ],
+    "degenerateOrInvalidBarycentricCount": 0,
+    "closestSourceVertexFallbackFraction": 0.0,
+    "barycentricPointReconstructionErrorQuantiles": [
+      4.2709920241338585e-09,
+      2.321104084806298e-08,
+      2.387652394339408e-07
+    ],
+    "atlasOverlapPixelsWithDifferentSurface": 642,
+    "seconds": 11.134015999999974,
+    "maps": [
+      {
+        "role": "base",
+        "size": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "role": "orm",
+        "size": [
+          512,
+          512
+        ]
+      }
+    ],
+    "repairSourceNote": "Texture transfer uses the explicitly repaired neural source, retaining original PBR and locally interpolated same-wall UV. Repair receipt and unchanged original inference source are preserved separately."
+  },
+  "textureTransferTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\a2cb99c96fb8df396f16580a88a7c6151104ee3c927fe76cd161ee2d27bdfa42-bake_nearest_surface.py",
+    "sha256": "a2cb99c96fb8df396f16580a88a7c6151104ee3c927fe76cd161ee2d27bdfa42",
+    "bytes": 7317
+  },
+  "quantization": {
+    "source": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-alpine-finance1-e86fe66d3e828f74-45k\\candidates\\alpine\\finance_1.glb",
+    "output": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-alpine-finance1-e86fe66d3e828f74-45k\\candidates\\alpine\\finance_1.glb",
+    "sourceBytes": 2480240,
+    "outputBytes": 1774652,
+    "sourceSha256": "25b66b5bc5b154a33130458376f16fad5b38b5b4582c76166c162ea75ff878e4",
+    "outputSha256": "2bb86a551262be940c5199d246111d1bcdd7fdb5541714af0cced684e6144645",
+    "positionFaceAndTextureBytesUnchanged": true,
+    "attributes": [
+      {
+        "accessor": 1,
+        "semantic": "NORMAL",
+        "count": 58812,
+        "maximumAngularErrorDegrees": 0.37736389865143194
+      },
+      {
+        "accessor": 2,
+        "semantic": "TEXCOORD_0",
+        "count": 58812,
+        "maximumUVError": 7.629489120142274e-06,
+        "maximumTexelErrorAt1024": 0.007812596859025689
+      }
+    ]
+  },
+  "processedCandidate": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-alpine-finance1-e86fe66d3e828f74-45k\\candidates\\alpine\\finance_1.glb",
+    "sha256": "2bb86a551262be940c5199d246111d1bcdd7fdb5541714af0cced684e6144645",
+    "bytes": 1774652
+  },
+  "glbValidation": {
+    "version": 2,
+    "triangles": 44993,
+    "meshes": 1,
+    "materials": 1,
+    "images": 2,
+    "all_primitives_have_uv": true,
+    "animations": [],
+    "all_images_embedded": true,
+    "external_buffers": []
+  },
+  "triangles": 44993,
+  "renderedCandidate": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-alpine-finance1-e86fe66d3e828f74-45k\\candidates\\renders\\alpine\\finance_1\\lod-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-alpine-finance1-e86fe66d3e828f74-45k\\candidates\\renders\\alpine\\finance_1\\lod-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-alpine-finance1-e86fe66d3e828f74-45k\\candidates\\renders\\alpine\\finance_1\\lod-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-alpine-finance1-e86fe66d3e828f74-45k\\candidates\\renders\\alpine\\finance_1\\lod-left.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-alpine-finance1-e86fe66d3e828f74-45k\\candidates\\renders\\alpine\\finance_1\\lod-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.5001348853111267,
+        -0.1686350703239441,
+        0.0002443284320179373
+      ],
+      "max": [
+        0.49975231289863586,
+        0.169037327170372,
+        0.48892995715141296
+      ]
+    },
+    "triangles": 44993,
+    "textureSizes": [
+      {
+        "name": "alpine__finance_1__nearest_base",
+        "size": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "name": "alpine__finance_1__nearest_orm",
+        "size": [
+          512,
+          512
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "renderedSource": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-alpine-finance1-e86fe66d3e828f74-45k\\candidates\\renders\\alpine\\finance_1\\raw-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-alpine-finance1-e86fe66d3e828f74-45k\\candidates\\renders\\alpine\\finance_1\\raw-iso.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-alpine-finance1-e86fe66d3e828f74-45k\\candidates\\renders\\alpine\\finance_1\\raw-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-alpine-finance1-e86fe66d3e828f74-45k\\candidates\\renders\\alpine\\finance_1\\raw-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-alpine-finance1-e86fe66d3e828f74-45k\\candidates\\renders\\alpine\\finance_1\\raw-left.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.4999999701976776,
+        -0.1687280386686325,
+        0.0
+      ],
+      "max": [
+        0.4999999701976776,
+        0.1687280386686325,
+        0.4891694188117981
+      ]
+    },
+    "triangles": 977830,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "renderedRepairedSource": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-alpine-finance1-e86fe66d3e828f74-45k\\candidates\\renders\\alpine\\finance_1\\repaired-source-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-alpine-finance1-e86fe66d3e828f74-45k\\candidates\\renders\\alpine\\finance_1\\repaired-source-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-alpine-finance1-e86fe66d3e828f74-45k\\candidates\\renders\\alpine\\finance_1\\repaired-source-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.4999999701976776,
+        -0.1687280386686325,
+        0.0
+      ],
+      "max": [
+        0.4999999701976776,
+        0.1687280386686325,
+        0.4891694188117981
+      ]
+    },
+    "triangles": 979366,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "bounds": {
+    "min": [
+      -0.5001348853111267,
+      0.0002443284320179373,
+      -0.169037327170372
+    ],
+    "max": [
+      0.49975231289863586,
+      0.48892995715141296,
+      0.1686350703239441
+    ],
+    "coordinateSystem": "GLTF Y-up; +Z front"
+  },
+  "textureSizes": [
+    {
+      "name": "alpine__finance_1__nearest_base",
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "name": "alpine__finance_1__nearest_orm",
+      "size": [
+        512,
+        512
+      ]
+    }
+  ],
+  "rawSourceUnchanged": true,
+  "completedAt": "2026-10-23T21:52:50.801454+00:00"
+}

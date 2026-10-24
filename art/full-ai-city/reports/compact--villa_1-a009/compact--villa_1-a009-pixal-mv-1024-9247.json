@@ -1,0 +1,242 @@
+{
+  "status": "gpu_busy",
+  "started_utc": "2026-10-23T22:05:59.261732+00:00",
+  "generation_started": false,
+  "local_inference_only": true,
+  "asset_id": "compact--villa_1-a009",
+  "weights": {
+    "ready": true,
+    "models": [
+      {
+        "name": "sparse_structure_decoder",
+        "checkpoint": "C:\\Users\\A\\.codex\\worktrees\\0b69\\厂长\\grande-art-lab\\source\\experimental\\models\\Pixal3D\\ckpts\\ss_dec_conv3d_16l8_fp16.safetensors",
+        "bytes": 147591972,
+        "ready": true
+      },
+      {
+        "name": "sparse_structure_flow_model",
+        "checkpoint": "C:\\Users\\A\\.codex\\worktrees\\0b69\\厂长\\grande-art-lab\\source\\experimental\\models\\Pixal3D\\ckpts\\ss_flow_img_dit_1_3B_64_bf16_mv.safetensors",
+        "bytes": 5359822584,
+        "ready": true
+      },
+      {
+        "name": "shape_slat_decoder",
+        "checkpoint": "C:\\Users\\A\\.codex\\worktrees\\0b69\\厂长\\grande-art-lab\\source\\experimental\\models\\Pixal3D\\ckpts\\shape_dec_next_dc_f16c32_fp16.safetensors",
+        "bytes": 948490494,
+        "ready": true
+      },
+      {
+        "name": "shape_slat_flow_model_512",
+        "checkpoint": "C:\\Users\\A\\.codex\\worktrees\\0b69\\厂长\\grande-art-lab\\source\\experimental\\models\\Pixal3D\\ckpts\\slat_flow_img2shape_dit_1_3B_512_bf16_mv.safetensors",
+        "bytes": 5546764048,
+        "ready": true
+      },
+      {
+        "name": "shape_slat_flow_model_1024",
+        "checkpoint": "C:\\Users\\A\\.codex\\worktrees\\0b69\\厂长\\grande-art-lab\\source\\experimental\\models\\Pixal3D\\ckpts\\slat_flow_img2shape_dit_1_3B_1024_bf16_mv.safetensors",
+        "bytes": 5546764048,
+        "ready": true
+      },
+      {
+        "name": "tex_slat_decoder",
+        "checkpoint": "C:\\Users\\A\\.codex\\worktrees\\0b69\\厂长\\grande-art-lab\\source\\experimental\\models\\Pixal3D\\ckpts\\tex_dec_next_dc_f16c32_fp16.safetensors",
+        "bytes": 948458812,
+        "ready": true
+      },
+      {
+        "name": "tex_slat_flow_model_1024",
+        "checkpoint": "C:\\Users\\A\\.codex\\worktrees\\0b69\\厂长\\grande-art-lab\\source\\experimental\\models\\Pixal3D\\ckpts\\slat_flow_imgshape2tex_dit_1_3B_1024_bf16_mv.safetensors",
+        "bytes": 5546960656,
+        "ready": true
+      }
+    ],
+    "config": "C:\\Users\\A\\.codex\\worktrees\\0b69\\厂长\\grande-art-lab\\source\\experimental\\models\\Pixal3D\\pipeline_mv.json",
+    "config_sha256": "3bd8f005301423604aafbfab126639c675d7dc6968b8113271433f6593901715"
+  },
+  "resources_before": {
+    "gpu": "NVIDIA GeForce RTX 5070 Ti",
+    "total_physical_vram_gib": 15.9208984375,
+    "free_physical_vram_gib": 14.8583984375,
+    "gpu_utilization_percent": 2,
+    "total_ram_gib": 31.152122497558594,
+    "available_ram_gib": 20.18445587158203
+  },
+  "output": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\compact--villa_1-a009-pixal-mv-1024-9247.glb",
+  "input": "H:\\代码项目\\monopoly\\art\\full-ai-city\\inputs\\compact\\villa_1\\dd13e96f5a876d0f\\transforms.json",
+  "input_sha256": "8774e3ca5b3de7ca3f636263e485cc610809c9273326e8585e10fecae4893b72",
+  "input_views": [
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\inputs\\compact\\villa_1\\dd13e96f5a876d0f\\view00_azim000.png",
+      "sha256": "839c3541614a22a64fd04fc92129a9a981c4375de80361051448b84de1ccb1cd",
+      "size": [
+        810,
+        810
+      ],
+      "alpha_bbox": [
+        24,
+        57,
+        805,
+        749
+      ],
+      "camera_to_world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          -1.0,
+          -3.1192049980163574
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\inputs\\compact\\villa_1\\dd13e96f5a876d0f\\view01_azim090.png",
+      "sha256": "bf5721750766eb59905016e222056444653f65b7db39165a9e210658ca884ead",
+      "size": [
+        810,
+        810
+      ],
+      "alpha_bbox": [
+        121,
+        68,
+        690,
+        751
+      ],
+      "camera_to_world": [
+        [
+          0.0,
+          0.0,
+          1.0,
+          3.1192049980163574
+        ],
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\inputs\\compact\\villa_1\\dd13e96f5a876d0f\\view02_azim180.png",
+      "sha256": "0bd62b0b062b11f77134bebe06a60b0479a8f0694983457a5a25a5ca6295133b",
+      "size": [
+        810,
+        810
+      ],
+      "alpha_bbox": [
+        12,
+        50,
+        783,
+        749
+      ],
+      "camera_to_world": [
+        [
+          -1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          3.1192049980163574
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    }
+  ],
+  "assumed_cameras": true,
+  "camera_calibration": "assumed_standard_orbit_not_measured",
+  "source_board": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\references\\compact\\villa_1.png",
+    "sha256": "dd13e96f5a876d0f6324b20b6903eae60fd80e732e84a687f449bb1e90316ee0",
+    "bytes": 1461253
+  },
+  "view_count": 3,
+  "camera_angle_x": 0.3490658503988659,
+  "mesh_scale": 1.0,
+  "native_entrypoint": "inference_mv.py:run_inference / Pixal3DMVImageTo3DPipeline.run_mv",
+  "resolution": 1024,
+  "seed": 9247,
+  "low_vram": true,
+  "strict_naf": true,
+  "texture_size": 4096,
+  "sampler_steps": {
+    "ss": 12,
+    "shape": 12,
+    "tex": 12
+  },
+  "native_checkpoint_dtypes_preserved": true,
+  "pipeline_config": "pipeline_mv.json",
+  "multiview_fusion": "average",
+  "shared_files_write_protected": true,
+  "cache_directory": "H:\\代码项目\\monopoly\\art\\full-ai-city\\cache",
+  "runner_sha256": "fc67056fffefc4d1cba774689d29317ae5f57bfea27ab342791bf1be58444f7e",
+  "runner_source_snapshot": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\compact--villa_1-a009\\runner-source.py",
+  "post_projection_allocator_cleanup": "Release only unused CUDA cached blocks after complete native conditioner return",
+  "projection_cache_adapter_sha256": "aabecb5acc98a013068a5891226fe1034f764585383290c6917cce230c203bcb",
+  "lifetime_adapter_sha256": "a815f73fbb24f0e7e4eb171ffa0f40472ef30346a109410399a2f7e404db47d7",
+  "error": "LocalGpuBusyError('GPU lock is held by another participating process: C:\\\\Users\\\\A\\\\.codex\\\\shared-resource-locks\\\\pixal-gpu0.lock; advisory owner metadata (may be stale): {\"status\": \"held\", \"pid\": 34652, \"host\": \"NeoRic\", \"label\": \"monopoly-fine-cpu-34652\", \"acquired_utc\": \"2026-10-23T22:02:15.228838+00:00\", \"lock_path\": \"C:\\\\\\\\Users\\\\\\\\A\\\\\\\\.codex\\\\\\\\shared-resource-locks\\\\\\\\pixal-gpu0.lock\", \"token\": \"36ee699857084444946ffded4627bf2b\", \"metadata_is_advisory\": true}')",
+  "resource_wait": {
+    "generation_started": false,
+    "owner": {
+      "status": "held",
+      "pid": 34652,
+      "host": "NeoRic",
+      "label": "monopoly-fine-cpu-34652",
+      "acquired_utc": "2026-10-23T22:02:15.228838+00:00",
+      "lock_path": "C:\\Users\\A\\.codex\\shared-resource-locks\\pixal-gpu0.lock",
+      "token": "36ee699857084444946ffded4627bf2b",
+      "metadata_is_advisory": true
+    },
+    "chargedAsInferenceFailure": false
+  },
+  "seconds": 0.0,
+  "finished_utc": "2026-10-23T22:05:59.322677+00:00",
+  "batch_wrapper": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\compact--villa_1-a009\\batch-wrapper-source.py",
+    "sha256": "1424c229b4f5ef8d265c00484bee92acb8340a12a79f499ca13f33d4091b7837"
+  },
+  "pipeline_boundary": "Original native 1024_cascade; no unsupported 512 branch, no persistent model lifetime changes"
+}

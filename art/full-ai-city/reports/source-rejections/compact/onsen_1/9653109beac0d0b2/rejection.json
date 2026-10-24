@@ -1,0 +1,47 @@
+{
+  "status": "rejected_native_export_source",
+  "region": "compact",
+  "asset": "onsen_1",
+  "reviewer": "asset_production",
+  "recordedAtUtc": "2026-10-24T00:51:40.873098+00:00",
+  "source": {
+    "path": "art/full-ai-city/source/compact--onsen_1-a001-pixal-mv-1024-9247.glb",
+    "sha256": "9653109beac0d0b205b8e40867af2081002c2ca6c5bf3734fe79b784c7023539",
+    "bytes": 38892628
+  },
+  "sourceLevel": "Native 1M export; no untouched decoder attribution is made.",
+  "inferenceReport": {
+    "path": "art/full-ai-city/reports/source-rejections/compact/onsen_1/9653109beac0d0b2/compact--onsen_1-a001-pixal-mv-1024-9247.json",
+    "sha256": "b5c32340192e414958b629d3cee253046a23498be64891111aed72aee04a4234",
+    "bytes": 10119
+  },
+  "inputReference": {
+    "path": "art/full-ai-city/reports/source-rejections/compact/onsen_1/9653109beac0d0b2/input-reference.json",
+    "sha256": "9ce2c4a9b3c539ff4d787e78ad931c5b4958bc6636e08ffd8c37e3a0677ef2b5",
+    "bytes": 4435
+  },
+  "diagnostic": null,
+  "diagnosticTool": null,
+  "sourceComparisonReport": {
+    "path": "art/full-ai-city/reports/source-rejections/compact/onsen_1/9653109beac0d0b2/source-comparison-processing.json",
+    "sha256": "3d7aebb064890c267a9977a67eac96093cbf86b4d81ca46e098a43ce1d850b91",
+    "bytes": 19462
+  },
+  "sourceViewEvidenceMode": "Explicitly selected existing renderedSource views; no additional or neutral render implied",
+  "evidence": [
+    {
+      "path": "art/full-ai-city/reports/source-rejections/compact/onsen_1/9653109beac0d0b2/raw-back.png",
+      "sha256": "dee966d4f9081dc96427fd841b152361fa66873ae332d298b565839e7ababbdd",
+      "bytes": 134995
+    }
+  ],
+  "finding": "Actual reference, final five material sides,256px phone preview and existing native raw-back were inspected. The native rear lower wall/base is ragged and absent over a broad span; blue front-pool material appears across a rear lower panel. The expected reference has complete red timber panels and a continuous base. This is a visible source-level rear-envelope problem, not an inference about untouched decoder geometry.",
+  "decision": "One first independent same-reference seed if the existing completed-source budget permits. No lower quality thresholds or broad handmade rear facade.",
+  "sourceUnchanged": true,
+  "notFinalCandidateReview": true,
+  "freezeTool": {
+    "path": "art/full-ai-city/reports/tool-snapshots/616860a00b28e670e1219d64c6cb5dad17f0946420568f786e80b6d789fb4a73-freeze_public_source_rejection.py",
+    "sha256": "616860a00b28e670e1219d64c6cb5dad17f0946420568f786e80b6d789fb4a73",
+    "bytes": 4304
+  }
+}

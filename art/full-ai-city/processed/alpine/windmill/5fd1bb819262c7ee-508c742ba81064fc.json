@@ -1,0 +1,473 @@
+{
+  "status": "exported_pending_visual_review",
+  "createdAt": "2026-10-23T06:12:50.702379+00:00",
+  "region": "alpine",
+  "asset": "windmill",
+  "source": {
+    "rawGLB": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\alpine--windmill-a001-pixal-mv-1024-9247.glb",
+      "sha256": "43a03b5a6f5fdba6a43966c6c7c9fc5262cae672f2fb9f9328cb44242a8c89bb",
+      "bytes": 41929168
+    }
+  },
+  "inferenceReport": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\alpine--windmill-a001\\alpine--windmill-a001-pixal-mv-1024-9247.json",
+    "sha256": "8f91f8e9a0ba7c615bc984a27c0adc772da8bf657066e3dc370a2b3b9cbb207a",
+    "bytes": 8105
+  },
+  "reference": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\references\\alpine\\windmill\\reference.json",
+    "sha256": "68e91418162c9caa80aff6d3f828c7e6799093dbe3f04d7af1b4e6a8ba6a2075",
+    "bytes": 4005
+  },
+  "processingTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\715f7c85ba34d10623c70a9b8376636c466671aa96bbb2bbe17326e6041e6410-process_lod.py",
+    "sha256": "715f7c85ba34d10623c70a9b8376636c466671aa96bbb2bbe17326e6041e6410",
+    "bytes": 21445
+  },
+  "assumedCameras": true,
+  "cameraCalibration": "assumed_standard_orbit_not_measured",
+  "nativePipeline": "Pixal3DMVImageTo3DPipeline.run_mv",
+  "nativeResolution": 1024,
+  "seed": 9247,
+  "geometryOrigin": "Only the actual neural source reduced and rebaked; no authored substitute geometry or manually constructed surfaces",
+  "orientation": {
+    "up": "Y",
+    "front": "+Z",
+    "groundY": 0,
+    "maxEdge": 1
+  },
+  "requestedTriangles": 45000,
+  "limitations": [
+    "Assumed camera reference reconstruction, not exact measured architecture",
+    "Final candidate requires actual rendered visual approval"
+  ],
+  "animation": {
+    "driver": "gltf",
+    "autoplayClip": true,
+    "node": "alpine__windmill__neural_rotor",
+    "lifePart": "wheel",
+    "localRotationAxis": "Z",
+    "geometryOrigin": "Only original neural-derived faces, no added geometry",
+    "poseReview": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\alpine\\windmill\\motion\\review.json",
+      "sha256": "a115b928815b60136f6d0754b981811ab54dda87c0cd77aa688f394ff3cb0ffc",
+      "bytes": 4217
+    },
+    "frames": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\alpine\\windmill\\motion\\pose-0-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\alpine\\windmill\\motion\\pose-0-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\alpine\\windmill\\motion\\pose-0-iso.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\alpine\\windmill\\motion\\pose-45-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\alpine\\windmill\\motion\\pose-45-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\alpine\\windmill\\motion\\pose-45-iso.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\alpine\\windmill\\motion\\pose-90-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\alpine\\windmill\\motion\\pose-90-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\alpine\\windmill\\motion\\pose-90-iso.png"
+    ],
+    "clip": "alpine_windmill_rotor_spin",
+    "durationSeconds": 18.0,
+    "clipReceipt": {
+      "source": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\windmill-separation\\rotor-bands.glb",
+        "sha256": "e1fe0722b5379d0d05f60a99b4052c05efa90cec3b12c804886350e023eaa7ce"
+      },
+      "output": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\component-candidates\\alpine\\windmill.glb",
+        "sha256": "5fd1bb819262c7eebdf6db8ce82a158d398606f4710153a9d0e5e600bafaea86",
+        "bytes": 2309492
+      },
+      "clip": "alpine_windmill_rotor_spin",
+      "driver": "gltf",
+      "node": "alpine__windmill__neural_rotor",
+      "durationSeconds": 18.0,
+      "localRotationAxis": "Z",
+      "keyTimes": [
+        0.0,
+        2.25,
+        4.5,
+        6.75,
+        9.0,
+        11.25,
+        13.5,
+        15.75,
+        18.0
+      ],
+      "localAnglesDegrees": [
+        0.0,
+        45.0,
+        90.0,
+        135.0,
+        180.0,
+        225.0,
+        270.0,
+        315.0,
+        360.0
+      ],
+      "staticGeometryAndImagesUnchanged": true,
+      "geometryOrigin": "Existing inspected neural component; animation data only, no geometry or texture changes"
+    }
+  },
+  "processingComplete": true,
+  "lod": "near",
+  "processingRevision": 0,
+  "derivation": {
+    "rawTriangles": 940025,
+    "weldedTriangles": 936287,
+    "remeshedTriangles": 3162000,
+    "voxelSize": 0.003,
+    "finalTriangles": 44987,
+    "atlasArea": 0.3989404148868739,
+    "singleReductionPass": true,
+    "inheritedUVRemovedBeforeReduction": true,
+    "sourceMaterialsUntouched": true
+  },
+  "bake": {
+    "hitCoverageAreaWeighted": 0.9995609728287657,
+    "cageExtrusion": 0.02,
+    "maxRayDistance": 0.06,
+    "maps": [
+      {
+        "role": "base",
+        "size": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "role": "orm",
+        "size": [
+          512,
+          512
+        ]
+      },
+      {
+        "role": "normal",
+        "size": [
+          1024,
+          1024
+        ]
+      }
+    ],
+    "method": "Selected-to-active CPU bake from original neural source onto a source-derived voxel surface reduced without inherited UV constraints; no authored substitute building"
+  },
+  "quantization": {
+    "source": "H:\\代码项目\\monopoly\\art\\full-ai-city\\candidates\\alpine\\windmill.glb",
+    "output": "H:\\代码项目\\monopoly\\art\\full-ai-city\\candidates\\alpine\\windmill.glb",
+    "sourceBytes": 2747032,
+    "outputBytes": 2036068,
+    "sourceSha256": "dc84eb55020f908e7170a9915b8aae5ca68569246d98a6fc4ffdbaeb1d5e451d",
+    "outputSha256": "8a23d3ffb25fea11bc9df085acbe41776b484e6eb51e99753c7976a8050d2900",
+    "positionFaceAndTextureBytesUnchanged": true,
+    "attributes": [
+      {
+        "accessor": 1,
+        "semantic": "NORMAL",
+        "count": 59260,
+        "maximumAngularErrorDegrees": 0.3761737406891485
+      },
+      {
+        "accessor": 2,
+        "semantic": "TEXCOORD_0",
+        "count": 59260,
+        "maximumUVError": 7.629382707596832e-06,
+        "maximumTexelErrorAt1024": 0.007812487892579156
+      }
+    ]
+  },
+  "processedCandidate": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\candidates\\alpine\\windmill.glb",
+    "sha256": "5fd1bb819262c7eebdf6db8ce82a158d398606f4710153a9d0e5e600bafaea86",
+    "bytes": 2309492
+  },
+  "glbValidation": {
+    "version": 2,
+    "triangles": 44987,
+    "meshes": 2,
+    "materials": 1,
+    "images": 3,
+    "all_primitives_have_uv": true,
+    "animations": [
+      {
+        "name": "alpine_windmill_rotor_spin",
+        "targets": [
+          {
+            "node": "alpine__windmill__neural_rotor",
+            "path": "rotation"
+          }
+        ]
+      }
+    ],
+    "all_images_embedded": true,
+    "external_buffers": []
+  },
+  "triangles": 44987,
+  "renderedCandidate": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\alpine\\windmill\\lod-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\alpine\\windmill\\lod-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\alpine\\windmill\\lod-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\alpine\\windmill\\lod-left.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\alpine\\windmill\\lod-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.5016992688179016,
+        -0.43033090233802795,
+        0.0012485715560615063
+      ],
+      "max": [
+        0.5000255703926086,
+        0.4301019012928009,
+        0.9782994985580444
+      ]
+    },
+    "triangles": 44987,
+    "textureSizes": [
+      {
+        "name": "alpine__windmill__base",
+        "size": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "name": "alpine__windmill__normal",
+        "size": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "name": "alpine__windmill__orm",
+        "size": [
+          512,
+          512
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "renderedSource": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\alpine\\windmill\\raw-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\alpine\\windmill\\raw-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.5,
+        -0.43092042207717896,
+        0.0
+      ],
+      "max": [
+        0.5,
+        0.43092042207717896,
+        0.9776119589805603
+      ]
+    },
+    "triangles": 940025,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "bounds": {
+    "min": [
+      -0.5016992688179016,
+      0.0012485715560615063,
+      -0.4301019012928009
+    ],
+    "max": [
+      0.5000255703926086,
+      0.9782994985580444,
+      0.43033090233802795
+    ],
+    "coordinateSystem": "GLTF Y-up; +Z front"
+  },
+  "textureSizes": [
+    {
+      "name": "alpine__windmill__base",
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "name": "alpine__windmill__normal",
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "name": "alpine__windmill__orm",
+      "size": [
+        512,
+        512
+      ]
+    }
+  ],
+  "rawSourceUnchanged": true,
+  "completedAt": "2026-10-23T07:00:35.909116+00:00",
+  "reviewSheet": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\alpine\\windmill\\review-sheet.jpg",
+    "sha256": "66b9a45f357ca8de07bd4898689ec2f6ec93c1be6e4aa6e18b8f054fc79b471c",
+    "bytes": 346128,
+    "content": "Unmodified CPU render images composed with labels for visual comparison only"
+  },
+  "derivedFromStaticCandidate": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\candidate-history\\alpine\\windmill\\8a23d3ffb25fea11bc9df085acbe41776b484e6eb51e99753c7976a8050d2900\\windmill.glb",
+    "sha256": "8a23d3ffb25fea11bc9df085acbe41776b484e6eb51e99753c7976a8050d2900",
+    "bytes": 2036068
+  },
+  "componentSeparation": {
+    "source": {
+      "path": "art\\full-ai-city\\candidates\\alpine\\windmill.glb",
+      "sha256": "8a23d3ffb25fea11bc9df085acbe41776b484e6eb51e99753c7976a8050d2900"
+    },
+    "output": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\component-candidates\\alpine\\windmill.glb",
+      "sha256": "5fd1bb819262c7eebdf6db8ce82a158d398606f4710153a9d0e5e600bafaea86",
+      "bytes": 2309492
+    },
+    "staticTriangles": 43123,
+    "movingTriangles": 1864,
+    "triangleTotalPreserved": 44987,
+    "poseZeroMaxPositionError": 1.4891831323637916e-08,
+    "embeddedImageHashesUnchanged": true,
+    "selection": {
+      "name": "alpine__windmill__neural_rotor",
+      "lifePart": "wheel",
+      "center": [
+        -0.201,
+        0.657,
+        0.378
+      ],
+      "axis": [
+        0.04238647,
+        0.00293001,
+        0.99909699
+      ],
+      "radius": 0.44,
+      "depth": [
+        -0.025,
+        0.035
+      ],
+      "crossBladeHalfWidth": 0.015,
+      "crossBladeWidthSlope": 0.3,
+      "hubRadius": 0.055,
+      "innerAxleCut": {
+        "radius": 0.065,
+        "minDepth": -0.02
+      },
+      "keepLargestConnected": true,
+      "measurement": "Measured outer sail depth extends behind the narrow plane; allow that depth only beyond radius 0.24, leaving the tower/window inner region stationary. Pending asymmetric poses.",
+      "clip": {
+        "name": "alpine_windmill_rotor_spin",
+        "durationSeconds": 18,
+        "kind": "spin"
+      },
+      "radialDepthBands": [
+        {
+          "minRadius": 0.24,
+          "maxRadius": 0.44,
+          "depth": [
+            -0.06,
+            0.035
+          ]
+        }
+      ],
+      "reviewNotes": "Inspected the actual neural four-blade rotor at 0, 45 and 90 degrees. Radial depth bands keep tower window and roof skirt fixed, include outer blade frames, and preserve zero-pose geometry. Final GLTF spin evaluated at explicit clip times."
+    },
+    "driver": "gltf",
+    "newFacesAdded": 0,
+    "preClipOutput": {
+      "path": "art\\full-ai-city\\work\\windmill-separation\\rotor-bands.glb",
+      "sha256": "e1fe0722b5379d0d05f60a99b4052c05efa90cec3b12c804886350e023eaa7ce",
+      "bytes": 2308824
+    },
+    "clipReceipt": {
+      "source": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\windmill-separation\\rotor-bands.glb",
+        "sha256": "e1fe0722b5379d0d05f60a99b4052c05efa90cec3b12c804886350e023eaa7ce"
+      },
+      "output": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\component-candidates\\alpine\\windmill.glb",
+        "sha256": "5fd1bb819262c7eebdf6db8ce82a158d398606f4710153a9d0e5e600bafaea86",
+        "bytes": 2309492
+      },
+      "clip": "alpine_windmill_rotor_spin",
+      "driver": "gltf",
+      "node": "alpine__windmill__neural_rotor",
+      "durationSeconds": 18.0,
+      "localRotationAxis": "Z",
+      "keyTimes": [
+        0.0,
+        2.25,
+        4.5,
+        6.75,
+        9.0,
+        11.25,
+        13.5,
+        15.75,
+        18.0
+      ],
+      "localAnglesDegrees": [
+        0.0,
+        45.0,
+        90.0,
+        135.0,
+        180.0,
+        225.0,
+        270.0,
+        315.0,
+        360.0
+      ],
+      "staticGeometryAndImagesUnchanged": true,
+      "geometryOrigin": "Existing inspected neural component; animation data only, no geometry or texture changes"
+    },
+    "tools": [
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\f92cacf00cb51e25ea5251422d4ed57433382b52b067c8cfcd42ac64531fc4a3-neural_component_bands.py",
+        "sha256": "f92cacf00cb51e25ea5251422d4ed57433382b52b067c8cfcd42ac64531fc4a3"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\51e087d1e49a04dbd65c0f456d3a4b9c0ccb693491a54a689d86845bf0965295-add_component_clip.py",
+        "sha256": "51e087d1e49a04dbd65c0f456d3a4b9c0ccb693491a54a689d86845bf0965295"
+      }
+    ]
+  },
+  "componentVisualReview": {
+    "status": "passed_by_processing_agent_pending_external_approval",
+    "notes": "Inspected the actual neural four-blade rotor at 0, 45 and 90 degrees. Radial depth bands keep tower window and roof skirt fixed, include outer blade frames, and preserve zero-pose geometry. Final GLTF spin evaluated at explicit clip times."
+  },
+  "componentTools": [
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\5ef865750c005ad1c449653f1e25b1e6d3a77dad5a7cbd41ecb5273b83364789-neural_component.py",
+      "sha256": "5ef865750c005ad1c449653f1e25b1e6d3a77dad5a7cbd41ecb5273b83364789",
+      "bytes": 11603
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\50d0bb4d46460178e33e51a14e1ef31c02408ac8e7b7a2e2b053d0d0647ff3b9-finalize_component.py",
+      "sha256": "50d0bb4d46460178e33e51a14e1ef31c02408ac8e7b7a2e2b053d0d0647ff3b9",
+      "bytes": 3550
+    }
+  ]
+}

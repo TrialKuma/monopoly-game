@@ -1,0 +1,327 @@
+{
+  "status": "exported_pending_visual_review",
+  "createdAt": "2026-10-23T10:23:36.959068+00:00",
+  "region": "classic",
+  "asset": "tower_2",
+  "source": {
+    "rawGLB": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\classic--tower_2-a002-pixal-mv-1024-19422.glb",
+      "sha256": "3de188d90d3e7bbe396203f2e4716c2f00bb63edd44f8636682c7f6b5b3c9050",
+      "bytes": 45475416
+    }
+  },
+  "inferenceReport": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\classic--tower_2-a002\\classic--tower_2-a002-pixal-mv-1024-19422.json",
+    "sha256": "91c9a289d609122f41389e42745758cf9ef6098418f1ed89602a5a2b792b23c9",
+    "bytes": 9551
+  },
+  "reference": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\inputs\\classic\\tower_2\\84d2654e049cf576\\transforms.json",
+    "sha256": "708ccf71aa5a5478dcdb7bd803cff14f47b7ad482acef634535b0c2509da5b43",
+    "bytes": 5411
+  },
+  "processingTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\d1befe53381b9186da4b840298fc1d6b373524437790091b7f6e296bfcbf771b-process_lod.py",
+    "sha256": "d1befe53381b9186da4b840298fc1d6b373524437790091b7f6e296bfcbf771b",
+    "bytes": 27109
+  },
+  "assumedCameras": true,
+  "cameraCalibration": "assumed_standard_orbit_not_measured",
+  "nativePipeline": "Pixal3DMVImageTo3DPipeline.run_mv",
+  "nativeResolution": 1024,
+  "seed": 19422,
+  "geometryOrigin": "Exact approved neural-derived near geometry, including its disclosed bounded local repairs where present, simplified with topology and boundary preservation for far use. No substitute building; original inference remains separate and unchanged.",
+  "orientation": {
+    "up": "Y",
+    "front": "+Z",
+    "groundY": 0,
+    "maxEdge": 1
+  },
+  "requestedTriangles": 18000,
+  "limitations": [
+    "Assumed camera reference reconstruction, not exact measured architecture",
+    "Final candidate requires actual rendered visual approval"
+  ],
+  "animation": null,
+  "processingComplete": true,
+  "lod": "far",
+  "processingRevision": 0,
+  "derivedFromNear": {
+    "path": "H:\\代码项目\\monopoly\\assets\\models\\regions-ai\\full\\classic\\tower_2\\ebd60ae393f94de0.glb",
+    "sha256": "ebd60ae393f94de0b0691c70cba862118ad9071f7e386c7478a2e87fd4721d0a",
+    "bytes": 1131900
+  },
+  "derivedFromNearReport": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\processed\\classic\\tower_2\\ebd60ae393f94de0-448cb8305ac25da2.json",
+    "sha256": "448cb8305ac25da24a259fabab46df9ef75cbb77dbde57d8220cadd7e7beb113",
+    "bytes": 19008
+  },
+  "farSimplification": {
+    "source": {
+      "path": "H:\\代码项目\\monopoly\\assets\\models\\regions-ai\\full\\classic\\tower_2\\ebd60ae393f94de0.glb",
+      "sha256": "ebd60ae393f94de0b0691c70cba862118ad9071f7e386c7478a2e87fd4721d0a"
+    },
+    "output": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\classic-tower2-far18-nativeuv-trial\\far-surface.npz",
+    "outputSha256": "772d9d971f967610b20d7c3531bd0e68d1dda948dd1ef7c65a95abb91fb291a1",
+    "tool": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\e1cebc38c56c536fc09ec03ec4c1cad0060e4f6c21693fa5284e689cf37b9f7b-simplify_far_surface.py",
+      "sha256": "e1cebc38c56c536fc09ec03ec4c1cad0060e4f6c21693fa5284e689cf37b9f7b",
+      "pymeshlabVersion": "2025.7.post1"
+    },
+    "sourceTriangles": 29963,
+    "actualTriangles": 17999,
+    "actualVertices": 8784,
+    "method": "PyMeshLab quadric collapse preserving boundary, normal and topology with planar quadrics",
+    "settings": {
+      "targetfacenum": 18000,
+      "qualitythr": 0.3,
+      "preserveboundary": true,
+      "boundaryweight": 20.0,
+      "preservenormal": true,
+      "preservetopology": true,
+      "optimalplacement": true,
+      "planarquadric": true,
+      "planarweight": 0.01,
+      "autoclean": true
+    },
+    "geometryOrigin": "Only existing approved neural-derived surface simplified; no authored geometry",
+    "sourceCleanup": []
+  },
+  "derivation": {
+    "rawTriangles": 999581,
+    "weldedTriangles": 17999,
+    "remeshedTriangles": 17999,
+    "voxelSize": 0,
+    "finalTriangles": 17999,
+    "atlasArea": 0.41914611681203906,
+    "singleReductionPass": true,
+    "inheritedUVRemovedBeforeReduction": true,
+    "sourceMaterialsUntouched": true,
+    "uvUnwrap": {
+      "angleDegrees": 66.0,
+      "islandMargin": 2e-05,
+      "marginMethod": "SCALED",
+      "nominalMarginPixels": null
+    },
+    "nearTriangles": 29963,
+    "rawTriangleCountEvidence": "Actual unchanged original raw GLB index count; native-field near report does not repeat a rawTriangles field."
+  },
+  "bake": {
+    "method": "CPU closest-original-surface float64 PBR transfer from the exact approved near mesh/materials onto its source-derived far surface. No further voxelization or authored geometry.",
+    "coveredAtlasPixels": 110031,
+    "nearestLookupSuccessFraction": 1.0,
+    "notRayCoverage": true,
+    "sourceDistanceQuantiles": [
+      0.00012728369620162994,
+      0.0017781070782803,
+      0.0031650879886001328,
+      0.009593077935278416
+    ],
+    "sourceDistanceQuantileLevels": [
+      0.5,
+      0.95,
+      0.99,
+      1
+    ],
+    "overTwoPercentMaxEdge": 0.0,
+    "distanceReviewRequired": false,
+    "visualGeometryReviewRequired": true,
+    "barycentricOriginalRange": [
+      -1.6520632606042973e-05,
+      0.9997872679742749
+    ],
+    "degenerateOrInvalidBarycentricCount": 0,
+    "closestSourceVertexFallbackFraction": 0.0,
+    "barycentricPointReconstructionErrorQuantiles": [
+      6.1816551897762e-09,
+      4.2274025425631796e-08,
+      3.7813608345034275e-07
+    ],
+    "atlasOverlapPixelsWithDifferentSurface": 261,
+    "seconds": 1.9517724000033922,
+    "maps": [
+      {
+        "role": "base",
+        "size": [
+          512,
+          512
+        ]
+      },
+      {
+        "role": "orm",
+        "size": [
+          256,
+          256
+        ]
+      }
+    ]
+  },
+  "textureTransferTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\a2cb99c96fb8df396f16580a88a7c6151104ee3c927fe76cd161ee2d27bdfa42-bake_nearest_surface.py",
+    "sha256": "a2cb99c96fb8df396f16580a88a7c6151104ee3c927fe76cd161ee2d27bdfa42",
+    "bytes": 7317
+  },
+  "farShading": {
+    "normals": "actual_geometry_only",
+    "baseColorSize": 512,
+    "ormSize": 256,
+    "reason": "Actual diagnostic isolated second-generation tangent-space normal rebake as the cause of black dormers/chimneys. Keep the verified geometric normals and original-near-derived color/ORM, omit normalTexture."
+  },
+  "nearSourceGeometryOrigin": "Recorded low surface derived from the identical native raw, restored to original field coordinates, with native UV/material generation using the original neural high-surface BVH and attribute field. No authored replacement geometry.",
+  "quantization": {
+    "source": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\classic-tower2-far18-nativeuv-trial\\candidates\\classic\\tower_2.glb",
+    "output": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\classic-tower2-far18-nativeuv-trial\\candidates\\classic\\tower_2.glb",
+    "sourceBytes": 973064,
+    "outputBytes": 685972,
+    "sourceSha256": "e7feba434a601fcab8bef9f43f87603c79d1892ef1a9615f2ef6603f9eea81d0",
+    "outputSha256": "ac59bbb3bff87313b50339b3e4f512e63acbf7f519e444f364ad12f34b66f94e",
+    "positionFaceAndTextureBytesUnchanged": true,
+    "attributes": [
+      {
+        "accessor": 1,
+        "semantic": "NORMAL",
+        "count": 23937,
+        "maximumAngularErrorDegrees": 0.37019431677083564
+      },
+      {
+        "accessor": 2,
+        "semantic": "TEXCOORD_0",
+        "count": 23937,
+        "maximumUVError": 7.629375431528196e-06,
+        "maximumTexelErrorAt1024": 0.0078124804418848726
+      }
+    ]
+  },
+  "processedCandidate": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\classic-tower2-far18-nativeuv-trial\\candidates\\classic\\tower_2.glb",
+    "sha256": "ac59bbb3bff87313b50339b3e4f512e63acbf7f519e444f364ad12f34b66f94e",
+    "bytes": 685972
+  },
+  "glbValidation": {
+    "version": 2,
+    "triangles": 17999,
+    "meshes": 1,
+    "materials": 1,
+    "images": 2,
+    "all_primitives_have_uv": true,
+    "animations": [],
+    "all_images_embedded": true,
+    "external_buffers": []
+  },
+  "triangles": 17999,
+  "renderedCandidate": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\classic-tower2-far18-nativeuv-trial\\candidates\\renders\\classic\\tower_2\\lod-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\classic-tower2-far18-nativeuv-trial\\candidates\\renders\\classic\\tower_2\\lod-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\classic-tower2-far18-nativeuv-trial\\candidates\\renders\\classic\\tower_2\\lod-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\classic-tower2-far18-nativeuv-trial\\candidates\\renders\\classic\\tower_2\\lod-left.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\classic-tower2-far18-nativeuv-trial\\candidates\\renders\\classic\\tower_2\\lod-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.4502394497394562,
+        -0.3132641017436981,
+        0.0016246824525296688
+      ],
+      "max": [
+        0.4482128620147705,
+        0.3132641017436981,
+        0.9876336455345154
+      ]
+    },
+    "triangles": 17999,
+    "textureSizes": [
+      {
+        "name": "classic__tower_2__nearest_base",
+        "size": [
+          512,
+          512
+        ]
+      },
+      {
+        "name": "classic__tower_2__nearest_orm",
+        "size": [
+          256,
+          256
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "renderedSource": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\classic-tower2-far18-nativeuv-trial\\candidates\\renders\\classic\\tower_2\\raw-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\classic-tower2-far18-nativeuv-trial\\candidates\\renders\\classic\\tower_2\\raw-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.44818103313446045,
+        -0.3128328323364258,
+        0.0
+      ],
+      "max": [
+        0.44818103313446045,
+        0.3128328323364258,
+        1.0
+      ]
+    },
+    "triangles": 999581,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "bounds": {
+    "min": [
+      -0.4502394497394562,
+      0.0016246824525296688,
+      -0.3132641017436981
+    ],
+    "max": [
+      0.4482128620147705,
+      0.9876336455345154,
+      0.3132641017436981
+    ],
+    "coordinateSystem": "GLTF Y-up; +Z front"
+  },
+  "textureSizes": [
+    {
+      "name": "classic__tower_2__nearest_base",
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "name": "classic__tower_2__nearest_orm",
+      "size": [
+        256,
+        256
+      ]
+    }
+  ],
+  "rawSourceUnchanged": true,
+  "completedAt": "2026-10-23T10:24:06.144833+00:00",
+  "farBudgetTrial": {
+    "requestedTriangles": 18000,
+    "automaticApproval": false,
+    "reason": "Outskirts reviewed the exact approved-near-derived12k native-UV candidate and rejected enlarged dome/window gaps. An isolated18k comparison is authorized; it is not a budget approval or a global default change. No second voxelization."
+  }
+}

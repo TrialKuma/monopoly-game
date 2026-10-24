@@ -1,0 +1,57 @@
+{
+  "status": "rejected_native_export_source",
+  "region": "expansion",
+  "asset": "shop_2",
+  "reviewer": "asset_production",
+  "recordedAtUtc": "2026-10-24T04:58:07.456742+00:00",
+  "source": {
+    "path": "art/full-ai-city/source/expansion--shop_2-a013-pixal-mv-1024-29492.glb",
+    "sha256": "14fa7f6e49347a48891a8cfd9992ce73775a256ea91fb4a40271d1c6b3a35702",
+    "bytes": 37606236
+  },
+  "sourceLevel": "Native 1M export; no untouched decoder attribution is made.",
+  "inferenceReport": {
+    "path": "art/full-ai-city/reports/source-rejections/expansion/shop_2/14fa7f6e49347a48/expansion--shop_2-a013-pixal-mv-1024-29492.json",
+    "sha256": "97f5c3581bdeec9c373514b2a224f46b256b472eb42b5f21c08afb1131a29644",
+    "bytes": 10721
+  },
+  "inputReference": {
+    "path": "art/full-ai-city/reports/source-rejections/expansion/shop_2/14fa7f6e49347a48/input-reference.json",
+    "sha256": "7ce3e987436c1449e1cafd1e99b4d680933993f9bfbca5b41758a2a722490165",
+    "bytes": 4430
+  },
+  "diagnostic": null,
+  "diagnosticTool": null,
+  "sourceComparisonReport": {
+    "path": "art/full-ai-city/reports/source-rejections/expansion/shop_2/14fa7f6e49347a48/source-comparison-processing.json",
+    "sha256": "df16b95e10a2f1af6ce0dea5d35f017b5196f9a0b0080626b5d5c68aec74c487",
+    "bytes": 20891
+  },
+  "sourceViewEvidenceMode": "Explicitly selected existing renderedSource views; no additional or neutral render implied",
+  "evidence": [
+    {
+      "path": "art/full-ai-city/reports/source-rejections/expansion/shop_2/14fa7f6e49347a48/raw-front.png",
+      "sha256": "4c8bb8e5b2b30dfdd463a74b03fdacfa8911ba7ec02576e9d40ce2f830cf3fc9",
+      "bytes": 247025
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/expansion/shop_2/14fa7f6e49347a48/raw-iso.png",
+      "sha256": "a70b66e491b700613635ec9958e193f7d621d9fd86cb9e7e7499a3fb6f854496",
+      "bytes": 337392
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/expansion/shop_2/14fa7f6e49347a48/raw-right.png",
+      "sha256": "126dfc2e92385641909c09325c82bd3425b506ffa29b6dbae44a90d8fc59aafe",
+      "bytes": 229461
+    }
+  ],
+  "finding": "Actually inspected the reviewed revision025558a2 reference previously, current native front/iso/right, all five exact final material views and256px. The new reference resolves the broad fragmented shop display, but the first current-reference native source still has a large broken upper-left front window pane and an open vertical brick strip beside that window. Native right also shows triangular wall losses above and below the ground-floor window at the rear corner. These remain visible at phone scale; small roof/cornice seams alone would be accepted. First independent retry of this NEW reference only, preserving all previous old-reference outcomes and current geometry-only settings; no further reference change or global budget adjustment.",
+  "decision": "One first independent retry for the reviewed revision025558a2 reference. No third old-reference seed, no further reference change; preserve all evidence.",
+  "sourceUnchanged": true,
+  "notFinalCandidateReview": true,
+  "freezeTool": {
+    "path": "art/full-ai-city/reports/tool-snapshots/616860a00b28e670e1219d64c6cb5dad17f0946420568f786e80b6d789fb4a73-freeze_public_source_rejection.py",
+    "sha256": "616860a00b28e670e1219d64c6cb5dad17f0946420568f786e80b6d789fb4a73",
+    "bytes": 4304
+  }
+}

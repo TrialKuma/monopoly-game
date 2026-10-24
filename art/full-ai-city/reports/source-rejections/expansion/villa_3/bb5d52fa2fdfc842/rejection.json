@@ -1,0 +1,52 @@
+{
+  "status": "rejected_native_export_source",
+  "region": "expansion",
+  "asset": "villa_3",
+  "reviewer": "asset_production",
+  "recordedAtUtc": "2026-10-24T05:43:05.751521+00:00",
+  "source": {
+    "path": "art/full-ai-city/source/expansion--villa_3-a011-pixal-mv-1024-29497.glb",
+    "sha256": "bb5d52fa2fdfc842b934b89842d09628159f368d157edc220766daee73804791",
+    "bytes": 40351200
+  },
+  "sourceLevel": "Native 1M export; no untouched decoder attribution is made.",
+  "inferenceReport": {
+    "path": "art/full-ai-city/reports/source-rejections/expansion/villa_3/bb5d52fa2fdfc842/expansion--villa_3-a011-pixal-mv-1024-29497.json",
+    "sha256": "f2d351040aea8da04e34f073554b333a3e3ce05a5358fa718a6741fdadbd0558",
+    "bytes": 10172
+  },
+  "inputReference": {
+    "path": "art/full-ai-city/reports/source-rejections/expansion/villa_3/bb5d52fa2fdfc842/input-reference.json",
+    "sha256": "7615b55f20bf900904d546166e3d32a466a7deee280306bd4b4e5f60093ac1f1",
+    "bytes": 4442
+  },
+  "diagnostic": null,
+  "diagnosticTool": null,
+  "sourceComparisonReport": {
+    "path": "art/full-ai-city/reports/source-rejections/expansion/villa_3/bb5d52fa2fdfc842/source-comparison-processing.json",
+    "sha256": "fbbd54d85dc6f907f986e07257e2462e2aa70cf4da723425253672ac4cdc7235",
+    "bytes": 20960
+  },
+  "sourceViewEvidenceMode": "Explicitly selected existing renderedSource views; no additional or neutral render implied",
+  "evidence": [
+    {
+      "path": "art/full-ai-city/reports/source-rejections/expansion/villa_3/bb5d52fa2fdfc842/raw-front.png",
+      "sha256": "2ae3a88f5d0f5427fa343bd577cd1f09f6864215ed9f97f9aa4e53667e0c1cd5",
+      "bytes": 232293
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/expansion/villa_3/bb5d52fa2fdfc842/raw-iso.png",
+      "sha256": "de3357ce9f740c50f35dc2d3df215ee016beab613cbedcf275cc1f7f4b3f9b38",
+      "bytes": 302691
+    }
+  ],
+  "finding": "Actually inspected original reference, current native front/iso, all five exact final material views and256px. The second old-reference source improves the rear lintel but creates a broad open vertical front brick strip beside the top-right window, fragmented panes across multiple front windows, an open strip at the central front roof crest and lower entrance-side missing wall. These are directly visible in native front/iso and remain prominent at phone size; cannot be treated as tiny trim seams. Preserve both completed sources. One targeted reference revision with complete closed opaque amber panes, continuous brick backing and shallow firmly attached stone trim/roof crest, retaining three-storey residential Art Deco villa, balcony, entrance steps, teal parapet and cream columns. No third old-reference seed.",
+  "decision": "One targeted consistent reference revision after two completed old-reference failures; no third old-reference seed.",
+  "sourceUnchanged": true,
+  "notFinalCandidateReview": true,
+  "freezeTool": {
+    "path": "art/full-ai-city/reports/tool-snapshots/616860a00b28e670e1219d64c6cb5dad17f0946420568f786e80b6d789fb4a73-freeze_public_source_rejection.py",
+    "sha256": "616860a00b28e670e1219d64c6cb5dad17f0946420568f786e80b6d789fb4a73",
+    "bytes": 4304
+  }
+}

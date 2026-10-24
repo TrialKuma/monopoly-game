@@ -17,9 +17,9 @@ const names = {
   'expansion-specials.glb': ['expansion_chance_wheel', 'expansion_vault_bank'],
 };
 const mapIds=['classic','compact','expansion','harbor','alpine'];
-const commonFiles=['city-kit.glb','landmarks.glb','specials.glb','life-specials.glb'];
+const commonFiles=['city-kit.glb'];
 for(const mapId of mapIds)names[`regions/${mapId}.glb`]=['civic_hall','vault_bank','chance_wheel','villa_1','skyscraper_3'].map(name=>`${mapId}_${name}`);
-const filesFor=mapId=>[...commonFiles,...(['compact','expansion'].includes(mapId)?[`${mapId}-specials.glb`]:[]),`regions/${mapId}.glb`];
+const filesFor=mapId=>[...commonFiles,`regions/${mapId}.glb`];
 const drain = () => new Promise(resolve => setImmediate(resolve));
 
 function fixture(mapId = 'classic') {
@@ -35,7 +35,7 @@ function fixture(mapId = 'classic') {
   const cache=createModelAssetCache({load:url=>new FakeLoader().loadAsync(url)});
   const context = vm.createContext({
     THREE, GLTFLoader: FakeLoader, stats, performance, console: { info: (...args) => logs.push(args) },
-    loadSharedModelAsset:cache.load,forgetSharedModelAsset:cache.forget,ownsSharedModelResource:cache.owns,disposeSharedModelAssets:cache.dispose,
+    loadSharedModelAsset:cache.load,forgetSharedModelAsset:cache.forget,releaseSharedModelAsset:cache.releaseFile,releaseSupersededModelAssets:cache.releaseSuperseded,ownsSharedModelResource:cache.owns,disposeSharedModelAssets:cache.dispose,
     document: { body: { classList: { remove() {} } } },
     window: {
       matchMedia: () => ({ matches: false }),
@@ -66,7 +66,7 @@ function fixture(mapId = 'classic') {
   `);
   const setMap = id => {
     context.nextSnapshot = { sessionId: 'test', mapId: id, board: [{ index: 0 }, { index: 1, isLargeSecondary: true }] };
-    run('snapshot = nextSnapshot');
+    run('if(snapshot&&snapshot.mapId!==nextSnapshot.mapId)clearMap(); snapshot = nextSnapshot; retireInactiveModels(snapshot.mapId);');
   };
   setMap(mapId);
   const load = (force = false, retry = false) => run(`loadModelKit(${force}, ${retry})`);
@@ -98,62 +98,68 @@ function fixture(mapId = 'classic') {
  assert.equal(f.downloads.filter(item=>item.file==='regions/classic.glb').length,1);
  await f.finish('regions/classic.glb');const gltf=await scenery;assert.equal(await f.cache.load('regions/classic.glb'),gltf);
  assert(f.model('classic_villa_1'));for(const file of commonFiles)await f.finish(file);await board;
- assert.equal(f.downloads.length,5,'one request and parse per source file across consumers');
+ assert.equal(f.downloads.length,2,'one request and parse per source file across consumers');
  f.listeners.get('pagehide')();assert.equal(f.cache.getState().disposed,true);
 }
-// Base models display progressively, while the selected region downloads once.
+// Shared props arrive progressively, while buildings wait for their real region.
 {
  const f=fixture();let complete=false;const batch=f.load().then(()=>complete=true);void f.load();await drain();
  assert.deepEqual(f.downloads.map(x=>x.file).sort(),filesFor('classic').sort());
- assert.equal(f.downloads.find(x=>x.file==='regions/classic.glb').url,'./assets/models/regions/classic.glb?v=20261023-3');
+ assert.equal(f.downloads.find(x=>x.file==='regions/classic.glb').url,'./assets/models/regions/classic.glb?v=20261024-1');
  assert(f.downloads.filter(x=>commonFiles.includes(x.file)).every(x=>x.url.endsWith('?v=20260911-12')));
- await f.finish('city-kit.glb');assert(f.model('city_hall'));assert.equal(complete,false);await f.flushFrames();assert.equal(f.stats.builds,1);assert.equal(f.stats.updates,1);
- await f.finish('specials.glb');await f.finish('life-specials.glb');assert.equal(f.frames.size,1);await f.flushFrames();assert.equal(f.stats.lots,1);
+ await f.finish('city-kit.glb');assert(f.model('tree'));assert(!f.model('city_hall'));assert(!f.model('villa_1'));assert.equal(complete,false);await f.flushFrames();assert.equal(f.stats.builds,1);assert.equal(f.stats.updates,1);
+ assert.equal(f.run('resolveAsset({special:{type:"bank"}},{mapId:"classic"}).source'),undefined,'no old architecture substitutes for a pending neural model');
  assert.equal(f.run('pawnViews.get("human").active'),true);assert.equal(f.run('cameraView.zoom'),1.4);assert.equal(f.run('cameraView.yaw'),.7);
- await f.finish('landmarks.glb');assert.equal(complete,false,'regional download does not gate already visible fallback models');
- await f.finish('regions/classic.glb');await batch;await f.flushFrames();assert.equal(f.stats.builds,1);assert.equal(f.downloads.length,5);
+ await f.finish('regions/classic.glb');await batch;await f.flushFrames();assert.equal(f.stats.builds,1);assert.equal(f.downloads.length,2);assert.equal(f.stats.lots,1);
  assert.equal(f.run('resolveAsset({special:{type:"bank"}},{mapId:"classic"}).key'),'classic_vault_bank');
- assert.equal(f.run('authoredModels.has("classic_vault_bank")'),true);assert.equal(f.events.filter(e=>e.type==='city:models-ready').length,3);
+ assert.equal(f.run('authoredModels.has("classic_vault_bank")'),true);assert.equal(f.events.filter(e=>e.type==='city:models-ready').length,2);
 }
 
-// Regional architecture wins over the older map-specific file even when the
-// regional file arrives first; the animated shared replacement keeps priority.
+// Only the regional model is requested. A forced refresh replaces that exact
+// source once; it cannot resurrect the superseded shared/manual buildings.
 {
  const f=fixture('compact'),batch=f.load();await drain();
  await f.finish('regions/compact.glb');const regionalWheel=f.model('compact_chance_wheel');
- await f.finish('compact-specials.glb');assert.equal(f.model('compact_chance_wheel'),regionalWheel);
- await f.finish('life-specials.glb');const sharedWheel=f.model('chance_wheel');await f.finish('specials.glb');assert.equal(f.model('chance_wheel'),sharedWheel);
- await f.finish('city-kit.glb');await f.finish('landmarks.glb');await batch;
- const forced=f.load(true);void f.load(true);await drain();assert.equal(f.downloads.length,12,'forced downloads dedupe');assert(f.downloads.slice(6).every(x=>x.url.includes('&refresh=')));
- await f.finish('compact-specials.glb',{origin:'new legacy'});assert.equal(f.model('compact_chance_wheel'),regionalWheel);
- await f.finish('specials.glb',{origin:'new static'});assert.equal(f.model('chance_wheel'),sharedWheel);
+ await f.finish('city-kit.glb');await batch;assert.equal(f.model('chance_wheel'),undefined);assert.deepEqual(f.downloads.map(x=>x.file).sort(),filesFor('compact').sort());
+ await f.flushFrames();const initialSceneryBuilds=f.stats.builds;
+ const forced=f.load(true);void f.load(true);await drain();assert.equal(f.downloads.length,4,'forced downloads dedupe');assert(f.downloads.slice(2).every(x=>x.url.includes('&refresh=')));
+ await f.finish('city-kit.glb');await f.flushFrames();assert.equal(f.stats.builds,initialSceneryBuilds+1);
  await f.finish('regions/compact.glb',{origin:'new regional'});assert.notEqual(f.model('compact_chance_wheel'),regionalWheel);assert.equal(f.model('compact_chance_wheel').userData.origin,'new regional');
- await f.finish('life-specials.glb',{origin:'new animated'});assert.notEqual(f.model('chance_wheel'),sharedWheel);assert.equal(f.model('chance_wheel').userData.origin,'new animated');
- await f.finish('city-kit.glb');await f.finish('landmarks.glb');await forced;
+ assert.equal(f.cache.getState().sources,3,'previous regional source remains valid until scenic borrowers rebuild');
+ await forced;await f.flushFrames();assert.equal(f.stats.builds,initialSceneryBuilds+2,'late forced regional arrival also replaces scenic borrowers');
+ assert.equal(f.cache.getState().sources,2,'completed refresh retains only current props and current region');
 }
 
-// Regional failure leaves shared architecture visible; only an explicit retry
+// Regional failure never substitutes old architecture; only an explicit retry
 // restarts missing packages, and successful arrivals refresh an open preview.
 {
- const f=fixture('harbor'),batch=f.load();await drain();assert.equal(f.downloads.length,5);
- await f.finish('landmarks.glb',{fail:true});await f.finish('regions/harbor.glb',{fail:true});
- for(const file of ['city-kit.glb','specials.glb','life-specials.glb'])await f.finish(file);await batch;await f.flushFrames();await f.load();
- assert.equal(f.downloads.length,5);assert.equal(f.logs.length,2);assert.equal(f.run('failedBundles.size'),2);
- assert.equal(f.run('resolveAsset({special:{type:"bank"}},{mapId:"harbor"}).key'),'vault_bank');
- f.run('inspection={mapId:"harbor"}');const retry=f.load(false,true);await drain();assert.deepEqual(f.downloads.slice(5).map(x=>x.file).sort(),['landmarks.glb','regions/harbor.glb']);
- await f.finish('landmarks.glb');await f.finish('regions/harbor.glb');await retry;await f.flushFrames();assert.equal(f.run('failedBundles.size'),0);assert.equal(f.stats.inspections,1);assert.equal(f.run('resolveAsset({special:{type:"bank"}},{mapId:"harbor"}).key'),'harbor_vault_bank');
+ const f=fixture('harbor'),batch=f.load();await drain();assert.equal(f.downloads.length,2);
+ await f.finish('regions/harbor.glb',{fail:true});await f.finish('city-kit.glb');await batch;await f.flushFrames();await f.load();
+ assert.equal(f.downloads.length,2);assert.equal(f.logs.length,1);assert.equal(f.run('failedBundles.size'),1);
+ assert.equal(f.run('resolveAsset({special:{type:"bank"}},{mapId:"harbor"}).key'),'harbor_vault_bank');assert.equal(f.run('resolveAsset({special:{type:"bank"}},{mapId:"harbor"}).source'),undefined);
+ f.run('inspection={mapId:"harbor"}');const retry=f.load(false,true);await drain();assert.deepEqual(f.downloads.slice(2).map(x=>x.file),['regions/harbor.glb']);
+ await f.finish('regions/harbor.glb');await retry;await f.flushFrames();assert.equal(f.run('failedBundles.size'),0);assert.equal(f.stats.inspections,1);assert(f.run('resolveAsset({special:{type:"bank"}},{mapId:"harbor"}).source'));
 }
 
-// Five regional bundles are scoped by map; obsolete results cache silently and
-// revisiting a map reuses exactly its prior region rather than downloading all.
+// Five regional bundles are scoped by map. Obsolete regional textures release;
+// revisiting downloads only that region and retains the shared prop cache.
 {
  const f=fixture('compact'),compact=f.load();await drain();for(const file of commonFiles)await f.finish(file);await f.flushFrames();const updates=f.stats.updates;
- f.setMap('expansion');const expansion=f.load();await drain();assert.deepEqual(f.downloads.slice(6).map(x=>x.file),['expansion-specials.glb','regions/expansion.glb']);
- await f.finish('compact-specials.glb');await f.finish('regions/compact.glb');await compact;assert.equal(f.frames.size,0);assert.equal(f.stats.updates,updates);
- await f.finish('expansion-specials.glb');await f.finish('regions/expansion.glb');await expansion;await f.flushFrames();assert.equal(f.stats.builds,1);
+ f.setMap('expansion');const expansion=f.load();await drain();assert.deepEqual(f.downloads.slice(2).map(x=>x.file),['regions/expansion.glb']);
+ await f.finish('regions/compact.glb');await compact;assert.equal(f.frames.size,0);assert.equal(f.stats.updates,updates);
+ await f.finish('regions/expansion.glb');await expansion;await f.flushFrames();assert.equal(f.stats.builds,1);
  for(const mapId of ['harbor','alpine','classic']){f.setMap(mapId);const before=f.downloads.length,loading=f.load();await drain();assert.equal(f.downloads.length,before+1);assert.equal(f.downloads.at(-1).file,`regions/${mapId}.glb`);await f.finish(`regions/${mapId}.glb`);await loading;await f.flushFrames();}
- assert.equal(f.downloads.length,11,'four shared, two old map files, five selected regions');
- for(const mapId of mapIds){f.setMap(mapId);await f.load();assert.equal(f.downloads.length,11);assert.equal(f.run(`resolveAsset({special:{type:'bank'}},{mapId:'${mapId}'}).key`),`${mapId}_vault_bank`);assert.equal(f.downloads.filter(x=>x.file===`regions/${mapId}.glb`).length,1);}
+ assert.equal(f.downloads.length,6,'one prop kit and five selected regions, no obsolete buildings');
+ for(const mapId of mapIds){
+   const changed=f.run('snapshot.mapId')!==mapId,before=f.downloads.length;
+   f.setMap(mapId);const loading=f.load();await drain();
+   const expected=changed?filesFor(mapId).filter(file=>!commonFiles.includes(file)):[];
+   assert.deepEqual(f.downloads.slice(before).map(x=>x.file),expected);
+   for(const file of expected)await f.finish(file);await loading;
+   assert.equal(f.run(`resolveAsset({special:{type:'bank'}},{mapId:'${mapId}'}).key`),`${mapId}_vault_bank`);
+   for(const other of mapIds.filter(id=>id!==mapId))assert.equal(f.model(`${other}_villa_1`),undefined,'inactive regional model references are removed');
+   assert(f.cache.getState().sources<=2,'only common props and one selected regional kit remain decoded');
+ }
 }
 
 // A regional file with no compatible roots is retryable, not a successful
@@ -163,16 +169,16 @@ function fixture(mapId = 'classic') {
  for(const file of commonFiles)await f.finish(file);await batch;const retry=f.load(false,true);await drain();assert.equal(f.downloads.at(-1).file,'regions/alpine.glb');await f.finish('regions/alpine.glb');await retry;assert(f.model('alpine_villa_1'));
 }
 
-// Reset cancels queued refresh; all late regional results can cache without
-// recreating an abandoned game, and the next session reuses the cache.
+// Reset cancels queued refresh and releases regional resources. Late arrivals
+// cannot recreate an abandoned game; a new game reloads only its region.
 {
  const f=fixture(),batch=f.load();await drain();await f.finish('city-kit.glb');assert.equal(f.frames.size,1);f.run('reset()');assert.equal(f.frames.size,0);
  for(const file of filesFor('classic').filter(x=>x!=='city-kit.glb'))await f.finish(file);await batch;await f.flushFrames();assert.equal(f.stats.updates,0);assert.equal(f.stats.builds,0);assert.equal(f.run('snapshot'),null);assert.equal(f.frames.size,0);
- f.setMap('classic');await f.load();assert.equal(f.downloads.length,5);assert(f.model('classic_villa_1'));
+ f.setMap('classic');const next=f.load();await drain();assert.equal(f.downloads.length,3);await f.finish('regions/classic.glb');await next;assert(f.model('classic_villa_1'));
 }
 
 // Page disposal ignores both shared and regional arrivals completely.
 {
  const f=fixture('alpine'),batch=f.load();await drain();f.listeners.get('pagehide')();for(const file of filesFor('alpine'))await f.finish(file);await batch;await f.flushFrames();assert.equal(f.run('modelLibrary.size'),0);assert.equal(f.stats.updates,0);assert.equal(f.run('bundleRequests.size'),0);
 }
-console.log('PASS: 8 model-loading scenarios covering shared scenery/board requests, all 5 regional bundles, progressive arrival, priority, scoped downloads, retry, cache, reset and disposal.');
+console.log('PASS: 8 model-loading scenarios covering selected-region architecture, absence of old substitutes, progressive props, retries, scoped memory, reset and disposal.');

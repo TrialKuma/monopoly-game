@@ -1,0 +1,693 @@
+{
+  "status": "exported_pending_visual_review",
+  "createdAt": "2026-10-24T00:48:29.078169+00:00",
+  "region": "compact",
+  "asset": "civic_hall",
+  "lod": "near",
+  "processingRevision": 0,
+  "source": {
+    "rawGLB": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\compact--civic_hall-a010-pixal-mv-1024-29479.glb",
+      "sha256": "a576dd849d25a2710224d78b33bed2fc064fc10e6769ae4211961101bac540ce",
+      "bytes": 39904596
+    }
+  },
+  "inferenceReport": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\compact--civic_hall-a010\\compact--civic_hall-a010-pixal-mv-1024-29479.json",
+    "sha256": "779407e758fcb781d5a948c32e13b34d0609132613803700fb6a3db3a6b1e959",
+    "bytes": 10408
+  },
+  "reference": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\references\\compact\\civic_hall\\reference.json",
+    "sha256": "f721e0166dbad9c692ff4b6cfc87d5e8c7bb5eaf9e597f85b4ff753737d02ce6",
+    "bytes": 4025
+  },
+  "processingTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\d0fe99e75121175cccb420b5c503d9926459607b997b8582bbce75e6983b35bb-process_native_mobile.py",
+    "sha256": "d0fe99e75121175cccb420b5c503d9926459607b997b8582bbce75e6983b35bb",
+    "bytes": 9752
+  },
+  "nativeSurfaceExport": {
+    "receipt": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\compact--civic_hall-a576dd849d25-repair-b37d5fedb55f-low-a2a02197ef-field-v1\\receipt.json",
+      "sha256": "575952893f0951f154f8368d7856ab0ce4d146dd779f4ec169717233f8afdef5",
+      "bytes": 15996
+    },
+    "source": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\compact--civic_hall-a576dd849d25-repair-b37d5fedb55f-low-a2a02197ef-field-v1\\mobile-30000-1024.glb",
+      "sha256": "8a1295009e5424a69d1048686b5b1c120892e0855c9eadf7ae5850c49ba5dfda",
+      "bytes": 1863844
+    },
+    "tensorArchive": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\compact--civic_hall-a010\\neural-export-inputs.pt",
+      "sha256": "9b1b75cb2c32f9a79b848f94afb4ff345eb38e043ce547ffa0b57ed20a4fec54",
+      "bytes": 705455453
+    }
+  },
+  "nativePipeline": "Pixal3DMVImageTo3DPipeline.run_mv",
+  "nativeResolution": 1024,
+  "seed": 29479,
+  "assumedCameras": true,
+  "cameraCalibration": "assumed_standard_orbit_not_measured",
+  "geometryOrigin": "Actual neural building with the explicitly recorded bounded local surface repair, followed by source-derived CPU mobile geometry and native UV/material sampling. The original inference, repair and low-surface sources are distinct; the UV/material replay adds no geometry.",
+  "textureOrigin": "Original neural attribute field sampled by the native UV/material operations with the recorded surface-stage override; no new neural inference or raw-UV rebake.",
+  "normalization": {
+    "enabled": true,
+    "candidate_degrees": 0.7972078338145465,
+    "applied_degrees": 0.7972078338145465,
+    "underside_area": 0.16474688192761278,
+    "normal_agreement": 0.9721368287980388,
+    "yaw_degrees": 180,
+    "pitch_degrees": 0,
+    "roll_degrees": 0,
+    "uniform_scale": 1.04799652342233
+  },
+  "orientation": {
+    "up": "Y",
+    "front": "+Z",
+    "groundY": 0,
+    "maxEdge": 1
+  },
+  "requestedTriangles": 30000,
+  "triangles": 29960,
+  "glbValidation": {
+    "version": 2,
+    "triangles": 29960,
+    "meshes": 1,
+    "materials": 1,
+    "images": 2,
+    "all_primitives_have_uv": true,
+    "animations": [],
+    "all_images_embedded": true,
+    "external_buffers": []
+  },
+  "quantization": {
+    "source": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\compact--civic_hall-a576dd849d25-repair-b37d5fedb55f-low-a2a02197ef-field-v1\\candidates\\compact\\civic_hall.glb",
+    "output": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\compact--civic_hall-a576dd849d25-repair-b37d5fedb55f-low-a2a02197ef-field-v1\\candidates\\compact\\civic_hall.glb",
+    "sourceBytes": 1574680,
+    "outputBytes": 1119784,
+    "sourceSha256": "40c2c33cba73c68bad63037edffd0eb5e408328ed7541a8c95002cec5469f01d",
+    "outputSha256": "90974747091f048c0e3f295b205790234d17b67297a8ecb93893eeedd3d7cc4e",
+    "positionFaceAndTextureBytesUnchanged": true,
+    "attributes": [
+      {
+        "accessor": 1,
+        "semantic": "NORMAL",
+        "count": 37921,
+        "maximumAngularErrorDegrees": 0.3723704558024059
+      },
+      {
+        "accessor": 2,
+        "semantic": "TEXCOORD_0",
+        "count": 37921,
+        "maximumUVError": 7.629510948348184e-06,
+        "maximumTexelErrorAt1024": 0.00781261921110854
+      }
+    ]
+  },
+  "processedCandidate": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\candidates\\compact\\civic_hall.glb",
+    "sha256": "90974747091f048c0e3f295b205790234d17b67297a8ecb93893eeedd3d7cc4e",
+    "bytes": 1119784
+  },
+  "derivation": {
+    "method": "Recorded CPU surface derived from the same neural raw, inverse-normalized to field coordinates; a local native-export variant bypasses further mesh simplification/remeshing and uses native UV generation plus original neural high-surface BVH and field texture sampling. Only normalization, JPEG encoding and attribute quantization afterward.",
+    "voxelizedAgain": false,
+    "rebakedFromRawUV": false,
+    "facadeUVPreserved": true,
+    "normalizedTrianglesPreserved": true,
+    "geometrySurfaceInput": {
+      "receipt": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\compact--civic_hall-a576dd849d25-repair-b37d5fedb55f-low-a2a02197ef-field-v1\\geometry-source-proof.json",
+        "sha256": "32fd97f488059dc482aa9facd55a3d571ec0e80dd692a86784cd3dd8ae23450d",
+        "bytes": 8797
+      },
+      "method": "Coordinate inversion of the recorded neural-derived low surface including explicitly bounded local source repairs. This preparation only welds exact positions and changes coordinates; it adds no faces. Original raw inference and repair input remain distinct.",
+      "sourceRaw": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\compact--civic_hall-a010-pixal-mv-1024-29479.glb",
+        "sha256": "a576dd849d25a2710224d78b33bed2fc064fc10e6769ae4211961101bac540ce",
+        "bytes": 39904596
+      },
+      "candidate": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\compact--civic_hall-a576dd849d25-repair-b37d5fedb55f-low-a2a02197ef-field-v1\\geometry-candidate.glb",
+        "sha256": "a2a02197efff63e4c1d94e6b3d77c41620f3eb6aa55939c30820df7d26640b0c",
+        "bytes": 1356240
+      },
+      "candidateReport": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\compact--civic_hall-a576dd849d25-repair-b37d5fedb55f-low-a2a02197ef-field-v1\\geometry-candidate-processing.json",
+        "sha256": "37babd9ec0a30ffed0d84f9eab8d820385e63cafc070609995493f2efdc2fcaf",
+        "bytes": 14403
+      },
+      "originalCandidate": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-compact-civic-hall-b37d5fedb55fba35\\candidates\\compact\\civic_hall.glb",
+        "sha256": "a2a02197efff63e4c1d94e6b3d77c41620f3eb6aa55939c30820df7d26640b0c",
+        "bytes": 1356240
+      },
+      "fieldReceipt": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\compact--civic_hall-a010\\receipt.json",
+        "sha256": "a0f7092a13cbbd0679c028ad0fb13db85cd33cd1f107906044f26d16ceebab84",
+        "bytes": 3711
+      },
+      "output": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\compact--civic_hall-a576dd849d25-repair-b37d5fedb55f-low-a2a02197ef-field-v1\\geometry-surface.npz",
+        "sha256": "7a8572b602e40557120a3a8dd58b10cd9cdf71de99242f9287f5139a12994405",
+        "bytes": 534080
+      },
+      "triangles": 29960,
+      "vertices": 14504,
+      "originalSplitVertices": 43553,
+      "exactCoincidentVerticesMerged": 29049,
+      "maximumPositionChangeFromWelding": 0,
+      "normalization": {
+        "enabled": true,
+        "candidate_degrees": 0.70108903622419,
+        "applied_degrees": 0.70108903622419,
+        "underside_area": 0.19250959730829034,
+        "normal_agreement": 0.9536564966466238,
+        "yaw_degrees": 180,
+        "pitch_degrees": 0,
+        "roll_degrees": 0,
+        "uniform_scale": 1.0454508859392062
+      },
+      "rawBlenderToNormalizedBlender": [
+        [
+          -1.0454082981764787,
+          3.8863886619995396e-05,
+          0.009438806402906466,
+          -0.0007580772181859635
+        ],
+        [
+          3.905078995671681e-05,
+          -1.0454152857852097,
+          0.008630168045086761,
+          0.0011938061758334229
+        ],
+        [
+          0.009438807682890396,
+          0.008630168430750706,
+          1.0453726750772991,
+          0.4465058622327247
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "inverse": [
+        [
+          -0.9564860804588727,
+          3.573400371459852e-05,
+          0.008635942726742486,
+          -0.0045811320199787625
+        ],
+        [
+          3.556301761596127e-05,
+          -0.9564924749435321,
+          0.007896088463929746,
+          -0.002383756204613573
+        ],
+        [
+          0.00863594530946913,
+          0.00789608727290401,
+          0.9564534890393237,
+          -0.4270649694933559
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "sampledNormalizationReconstructionMaxError": 1.0480360280338731e-07,
+      "nativeBounds": {
+        "min": [
+          -0.4783712014665091,
+          -0.4263684706559544,
+          -0.37553711023685077
+        ],
+        "max": [
+          0.4758991964292637,
+          0.5008709670422977,
+          0.3740937556745837
+        ]
+      },
+      "tool": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\compact--civic_hall-a576dd849d25-repair-b37d5fedb55f-low-a2a02197ef-field-v1\\geometry-preparation-source.py",
+        "sha256": "c4eec55644a998f870bd170aae5f8c5f060ba6af7ddbbe7025a44c5141846d8d",
+        "bytes": 8809
+      },
+      "toolSnapshot": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\compact--civic_hall-a576dd849d25-repair-b37d5fedb55f-low-a2a02197ef-field-v1\\geometry-preparation-source.py",
+        "sha256": "c4eec55644a998f870bd170aae5f8c5f060ba6af7ddbbe7025a44c5141846d8d",
+        "bytes": 8809
+      },
+      "normalizationInput": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-compact-civic-hall-a576-two-side-panels\\repaired-native.glb",
+        "sha256": "b37d5fedb55fba35960d949b65db22067d2a2a459951284ff56bd5267dd0f281",
+        "bytes": 40392336
+      },
+      "localSurfaceRepair": {
+        "source": {
+          "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-compact-civic-hall-a576-two-side-panels\\repaired-native.glb",
+          "sha256": "b37d5fedb55fba35960d949b65db22067d2a2a459951284ff56bd5267dd0f281",
+          "bytes": 40392336
+        },
+        "receipt": {
+          "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\compact\\civic_hall\\b37d5fedb55fba35\\repair.json",
+          "sha256": "f396cb6e112e6d77f559bdcde9b2d07d15ecc82b3bf22f98575f63eef07be8ad",
+          "bytes": 9090
+        },
+        "method": "Only explicitly measured and visually reviewed local gaps are closed from adjoining original surface and UV samples with0.006 inward closure. Original vertices, faces and image pixels are preserved. No replacement building or generated texture. See configuration and frozen prior review evidence for exact allowed regions.",
+        "newTriangles": 2752,
+        "newVertices": 1380,
+        "originalVerticesMoved": 0,
+        "originalTrianglesDeleted": 0,
+        "regions": [
+          {
+            "name": "Right lower window-adjacent white plaster",
+            "specification": {
+              "name": "Right lower window-adjacent white plaster",
+              "u": [
+                0,
+                1,
+                0
+              ],
+              "v": [
+                0,
+                0,
+                1
+              ],
+              "n": [
+                1,
+                0,
+                0
+              ],
+              "roi": [
+                -0.062,
+                0.022,
+                0.096,
+                0.23
+              ],
+              "defectDepth": 0.1,
+              "donorDepth": 0.365,
+              "donorMaxDepth": 0.399,
+              "donorNormal": 0.65,
+              "color": "plaster",
+              "gridStep": 0.006,
+              "donorMargin": 0.07,
+              "flatPatchUV": true,
+              "donorMinRGB": 0.3,
+              "donorMaxColorRatio": 1.3
+            },
+            "missingSamples": 250,
+            "boundarySamples": 229,
+            "sampledDepthRange": [
+              -2.0,
+              0.387927770614624
+            ],
+            "inwardClosureThickness": 0.006,
+            "outerSurfaceUnchanged": true,
+            "newVertices": 648,
+            "newTriangles": 1292
+          },
+          {
+            "name": "Left lower window-adjacent white plaster",
+            "specification": {
+              "name": "Left lower window-adjacent white plaster",
+              "u": [
+                0,
+                -1,
+                0
+              ],
+              "v": [
+                0,
+                0,
+                1
+              ],
+              "n": [
+                -1,
+                0,
+                0
+              ],
+              "roi": [
+                -0.036,
+                0.058,
+                0.104,
+                0.236
+              ],
+              "defectDepth": 0.1,
+              "donorDepth": 0.365,
+              "donorMaxDepth": 0.399,
+              "donorNormal": 0.65,
+              "color": "plaster",
+              "gridStep": 0.006,
+              "donorMargin": 0.07,
+              "flatPatchUV": true,
+              "donorMinRGB": 0.3,
+              "donorMaxColorRatio": 1.3
+            },
+            "missingSamples": 290,
+            "boundarySamples": 235,
+            "sampledDepthRange": [
+              -2.0,
+              0.3940006494522095
+            ],
+            "inwardClosureThickness": 0.006,
+            "outerSurfaceUnchanged": true,
+            "newVertices": 732,
+            "newTriangles": 1460
+          }
+        ]
+      },
+      "localRepairTool": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\f21173ee639bce54c9c7094ef6121aa6aea7401fc45edfff9d221c65a107ae79-repair_bounded_source_surface.py",
+        "sha256": "f21173ee639bce54c9c7094ef6121aa6aea7401fc45edfff9d221c65a107ae79",
+        "bytes": 13325
+      },
+      "repairAppliedBeforeReduction": true,
+      "originalReceipt": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\compact--civic_hall-a576dd849d25-repair-b37d5fedb55f-low-a2a02197ef-field-v1\\geometry-source-original-receipt.json",
+        "sha256": "3e6313b09c1496bd20fede61a9464f785a8a0d30ba3c90e31df4052a7f41c030",
+        "bytes": 8410
+      }
+    },
+    "nativePostprocessOverride": {
+      "original": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\compact--civic_hall-a576dd849d25-repair-b37d5fedb55f-low-a2a02197ef-field-v1\\original-native-exporter-source.py",
+        "sha256": "b6b79da5dfe13c22047a6257c6b2301c7ea31259dd9c82344db7e5c4cc707917",
+        "bytes": 8126
+      },
+      "scope": "Keep original neural geometry BVH for PBR lookup. Replace only the intermediate surface with this recorded existing source-derived low mesh; bypass further remeshing/simplification/cleanup, then use native unwrap/normals/field sampling.",
+      "sharedCodeModified": false,
+      "noNewGeometryAuthored": true,
+      "noNewGeometryAuthoredAppliesTo": "native_uv_material_replay_only",
+      "counts": {
+        "facesBeforeUnwrap": 29960
+      }
+    },
+    "nativeFieldLookup": {
+      "quantiles50_95_99_100": [
+        0.0010424373904243112,
+        0.0021065273322165012,
+        0.003255164250731468,
+        0.040778741240501404
+      ],
+      "fractionOverTwoPercent": 0.001070676138624549,
+      "sampleCount": 609895,
+      "meaning": "Distance to original neural BVH before direct field sampling, not ray hit coverage"
+    }
+  },
+  "bake": {
+    "method": "Direct original neural attribute field sampling inside native to_glb; no Blender bake or nearest raw-image transfer",
+    "notRayCoverage": true
+  },
+  "animation": null,
+  "processingComplete": true,
+  "limitations": [
+    "Same assumed three-view cameras as original native raw",
+    "Diagnostic pending external visual approval; not a formal asset replacement"
+  ],
+  "localSurfaceRepair": {
+    "source": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-compact-civic-hall-a576-two-side-panels\\repaired-native.glb",
+      "sha256": "b37d5fedb55fba35960d949b65db22067d2a2a459951284ff56bd5267dd0f281",
+      "bytes": 40392336
+    },
+    "receipt": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\compact\\civic_hall\\b37d5fedb55fba35\\repair.json",
+      "sha256": "f396cb6e112e6d77f559bdcde9b2d07d15ecc82b3bf22f98575f63eef07be8ad",
+      "bytes": 9090
+    },
+    "method": "Only explicitly measured and visually reviewed local gaps are closed from adjoining original surface and UV samples with0.006 inward closure. Original vertices, faces and image pixels are preserved. No replacement building or generated texture. See configuration and frozen prior review evidence for exact allowed regions.",
+    "newTriangles": 2752,
+    "newVertices": 1380,
+    "originalVerticesMoved": 0,
+    "originalTrianglesDeleted": 0,
+    "regions": [
+      {
+        "name": "Right lower window-adjacent white plaster",
+        "specification": {
+          "name": "Right lower window-adjacent white plaster",
+          "u": [
+            0,
+            1,
+            0
+          ],
+          "v": [
+            0,
+            0,
+            1
+          ],
+          "n": [
+            1,
+            0,
+            0
+          ],
+          "roi": [
+            -0.062,
+            0.022,
+            0.096,
+            0.23
+          ],
+          "defectDepth": 0.1,
+          "donorDepth": 0.365,
+          "donorMaxDepth": 0.399,
+          "donorNormal": 0.65,
+          "color": "plaster",
+          "gridStep": 0.006,
+          "donorMargin": 0.07,
+          "flatPatchUV": true,
+          "donorMinRGB": 0.3,
+          "donorMaxColorRatio": 1.3
+        },
+        "missingSamples": 250,
+        "boundarySamples": 229,
+        "sampledDepthRange": [
+          -2.0,
+          0.387927770614624
+        ],
+        "inwardClosureThickness": 0.006,
+        "outerSurfaceUnchanged": true,
+        "newVertices": 648,
+        "newTriangles": 1292
+      },
+      {
+        "name": "Left lower window-adjacent white plaster",
+        "specification": {
+          "name": "Left lower window-adjacent white plaster",
+          "u": [
+            0,
+            -1,
+            0
+          ],
+          "v": [
+            0,
+            0,
+            1
+          ],
+          "n": [
+            -1,
+            0,
+            0
+          ],
+          "roi": [
+            -0.036,
+            0.058,
+            0.104,
+            0.236
+          ],
+          "defectDepth": 0.1,
+          "donorDepth": 0.365,
+          "donorMaxDepth": 0.399,
+          "donorNormal": 0.65,
+          "color": "plaster",
+          "gridStep": 0.006,
+          "donorMargin": 0.07,
+          "flatPatchUV": true,
+          "donorMinRGB": 0.3,
+          "donorMaxColorRatio": 1.3
+        },
+        "missingSamples": 290,
+        "boundarySamples": 235,
+        "sampledDepthRange": [
+          -2.0,
+          0.3940006494522095
+        ],
+        "inwardClosureThickness": 0.006,
+        "outerSurfaceUnchanged": true,
+        "newVertices": 732,
+        "newTriangles": 1460
+      }
+    ]
+  },
+  "renderedCandidate": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\compact--civic_hall-a576dd849d25-repair-b37d5fedb55f-low-a2a02197ef-field-v1\\candidates\\renders\\compact\\civic_hall\\lod-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\compact--civic_hall-a576dd849d25-repair-b37d5fedb55f-low-a2a02197ef-field-v1\\candidates\\renders\\compact\\civic_hall\\lod-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\compact--civic_hall-a576dd849d25-repair-b37d5fedb55f-low-a2a02197ef-field-v1\\candidates\\renders\\compact\\civic_hall\\lod-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\compact--civic_hall-a576dd849d25-repair-b37d5fedb55f-low-a2a02197ef-field-v1\\candidates\\renders\\compact\\civic_hall\\lod-left.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\compact--civic_hall-a576dd849d25-repair-b37d5fedb55f-low-a2a02197ef-field-v1\\candidates\\renders\\compact\\civic_hall\\lod-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.5,
+        -0.3950671851634979,
+        0.0
+      ],
+      "max": [
+        0.5,
+        0.3950671851634979,
+        0.9726905226707458
+      ]
+    },
+    "triangles": 29960,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          1024,
+          1024
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "sourceReviewReusedFrom": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\compact--civic_hall-a576dd849d25-repair-b37d5fedb55f-low-a2a02197ef-field-v1\\surface.candidate.json",
+    "sha256": "37babd9ec0a30ffed0d84f9eab8d820385e63cafc070609995493f2efdc2fcaf",
+    "bytes": 14403
+  },
+  "renderedSource": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\compact--civic_hall-a576dd849d25-repair-b37d5fedb55f-low-a2a02197ef-field-v1\\candidates\\renders\\compact\\civic_hall\\raw-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\compact--civic_hall-a576dd849d25-repair-b37d5fedb55f-low-a2a02197ef-field-v1\\candidates\\renders\\compact\\civic_hall\\raw-iso.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\compact--civic_hall-a576dd849d25-repair-b37d5fedb55f-low-a2a02197ef-field-v1\\candidates\\renders\\compact\\civic_hall\\raw-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\compact--civic_hall-a576dd849d25-repair-b37d5fedb55f-low-a2a02197ef-field-v1\\candidates\\renders\\compact\\civic_hall\\raw-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\compact--civic_hall-a576dd849d25-repair-b37d5fedb55f-low-a2a02197ef-field-v1\\candidates\\renders\\compact\\civic_hall\\raw-left.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.5,
+        -0.3938945233821869,
+        0.0
+      ],
+      "max": [
+        0.5,
+        0.3938945233821869,
+        0.9701161980628967
+      ]
+    },
+    "triangles": 946499,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "bounds": {
+    "min": [
+      -0.5,
+      0.0,
+      -0.3950671851634979
+    ],
+    "max": [
+      0.5,
+      0.9726905226707458,
+      0.3950671851634979
+    ],
+    "coordinateSystem": "GLTF Y-up; +Z front"
+  },
+  "textureSizes": [
+    {
+      "name": "Image_0",
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "name": "Image_1",
+      "size": [
+        1024,
+        1024
+      ]
+    }
+  ],
+  "completedAt": "2026-10-24T00:48:41.292724+00:00",
+  "rawSourceUnchanged": true,
+  "promotedFrom": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\compact--civic_hall-a576dd849d25-repair-b37d5fedb55f-low-a2a02197ef-field-v1\\candidates\\compact\\civic_hall.json",
+    "sha256": "e2d8a2e8a2f120620ba68903b6a8eca9dab9659855e75af885597a5bb871a8d2",
+    "bytes": 28070
+  },
+  "reviewSheet": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\compact--civic_hall-a576dd849d25-repair-b37d5fedb55f-low-a2a02197ef-field-v1\\candidates\\renders\\compact\\civic_hall\\review-sheet.jpg",
+    "sha256": "533bf6d7540702111ef2caae8b579ec9fbd8b1c744dd86377c2b55f43cfdffba",
+    "bytes": 302329,
+    "candidateSha256": "90974747091f048c0e3f295b205790234d17b67297a8ecb93893eeedd3d7cc4e",
+    "sourceImages": [
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\compact--civic_hall-a576dd849d25-repair-b37d5fedb55f-low-a2a02197ef-field-v1\\candidates\\renders\\compact\\civic_hall\\raw-front.png",
+        "sha256": "fac766a9a6e9fe6e012a84b270a9af8a313759a523e62fe65e66a0c1412b7890",
+        "label": "AI raw front"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\compact--civic_hall-a576dd849d25-repair-b37d5fedb55f-low-a2a02197ef-field-v1\\candidates\\renders\\compact\\civic_hall\\raw-iso.png",
+        "sha256": "bb8fe1faa01fd7dfcfde9d401d0e473fea741a7896d3c0d0fc7364ddd305965a",
+        "label": "AI raw iso"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\compact--civic_hall-a576dd849d25-repair-b37d5fedb55f-low-a2a02197ef-field-v1\\candidates\\renders\\compact\\civic_hall\\lod-front.png",
+        "sha256": "86f23c39f842ce2b3bb6f5088d7d8944a185c0081c3b04d7759ac3b08353d176",
+        "label": "LOD front"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\compact--civic_hall-a576dd849d25-repair-b37d5fedb55f-low-a2a02197ef-field-v1\\candidates\\renders\\compact\\civic_hall\\lod-right.png",
+        "sha256": "1c08927e0f672cbfa17129f3c2125a000105b5c32a14391d10b715bc669265d4",
+        "label": "LOD right"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\compact--civic_hall-a576dd849d25-repair-b37d5fedb55f-low-a2a02197ef-field-v1\\candidates\\renders\\compact\\civic_hall\\lod-back.png",
+        "sha256": "76fac03323926539240fea87ace4b23ae5c0dc68759a7818ecd8ab02080c5a5e",
+        "label": "LOD back"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\compact--civic_hall-a576dd849d25-repair-b37d5fedb55f-low-a2a02197ef-field-v1\\candidates\\renders\\compact\\civic_hall\\lod-left.png",
+        "sha256": "2a7681bee4c0b6ade1a3cdad5b0244847d95be3a77e2844bd7afcb3a1e3593b8",
+        "label": "LOD left"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\compact--civic_hall-a576dd849d25-repair-b37d5fedb55f-low-a2a02197ef-field-v1\\candidates\\renders\\compact\\civic_hall\\lod-iso.png",
+        "sha256": "49cf0b4d9ee06577f1db229987086b711bed50ecf147873aeb2336988c862e4d",
+        "label": "LOD iso"
+      }
+    ],
+    "content": "Unmodified CPU render images composed with labels for visual comparison only"
+  }
+}

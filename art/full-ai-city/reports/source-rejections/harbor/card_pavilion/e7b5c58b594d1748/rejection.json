@@ -1,0 +1,62 @@
+{
+  "status": "rejected_native_export_source",
+  "region": "harbor",
+  "asset": "card_pavilion",
+  "reviewer": "asset_production",
+  "recordedAtUtc": "2026-10-24T01:24:01.293404+00:00",
+  "source": {
+    "path": "art/full-ai-city/source/harbor--card_pavilion-a001-pixal-mv-1024-9247.glb",
+    "sha256": "e7b5c58b594d17489778318482286764e218163dace18a1b1e07312a2ce7e779",
+    "bytes": 40478108
+  },
+  "sourceLevel": "Native 1M export; no untouched decoder attribution is made.",
+  "inferenceReport": {
+    "path": "art/full-ai-city/reports/source-rejections/harbor/card_pavilion/e7b5c58b594d1748/harbor--card_pavilion-a001-pixal-mv-1024-9247.json",
+    "sha256": "17ade570363ae2a4dd6f75f3d5f255cf23382c0b299342646ecf3f11dbf0e759",
+    "bytes": 9407
+  },
+  "inputReference": {
+    "path": "art/full-ai-city/reports/source-rejections/harbor/card_pavilion/e7b5c58b594d1748/input-reference.json",
+    "sha256": "1416887a4d389d6cabf4454288fadde007223e7d148f3f7626d8935a088289b5",
+    "bytes": 4451
+  },
+  "diagnostic": null,
+  "diagnosticTool": null,
+  "sourceComparisonReport": {
+    "path": "art/full-ai-city/reports/source-rejections/harbor/card_pavilion/e7b5c58b594d1748/source-comparison-processing.json",
+    "sha256": "2206881f10159355b5b4c4969c67ce3958d41733ac4890f713208755e3c71544",
+    "bytes": 19785
+  },
+  "sourceViewEvidenceMode": "Explicitly selected existing renderedSource views; no additional or neutral render implied",
+  "evidence": [
+    {
+      "path": "art/full-ai-city/reports/source-rejections/harbor/card_pavilion/e7b5c58b594d1748/raw-front.png",
+      "sha256": "6607af30379c57cad7bb15d334555387b97f711b72f2a72ae38b15738fb57071",
+      "bytes": 258397
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/harbor/card_pavilion/e7b5c58b594d1748/raw-iso.png",
+      "sha256": "33ffcadd01cb672984d4f1723a29e6ddcc4695cc12c4b6873c7e17455b35f090",
+      "bytes": 301270
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/harbor/card_pavilion/e7b5c58b594d1748/raw-back.png",
+      "sha256": "b7e6bce03f9a10629a5a81474819d067137cdb224072a2a9fcd46193018c7990",
+      "bytes": 244808
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/harbor/card_pavilion/e7b5c58b594d1748/raw-left.png",
+      "sha256": "93a1f449540a677c4179b4196dcf9b4decb06cc1a247251aab877d3b7d1a4e1b",
+      "bytes": 234798
+    }
+  ],
+  "finding": "Actually reviewed current triptych, all five final views and256px phone sheet, plus existing native front/iso/back/left. The rear right stone corner has two conspicuous missing chunks, and the chimney base has an arched void with irregular adjacent roof gaps. These defects are already visible in the native source and remain black broken patches at phone scale. Preserve the otherwise coherent card kiosk and all evidence; use only the first independent same-reference source retry.",
+  "decision": "One first independent same-reference retry seed29482; no further automatic seeds if repeated. No decoder-level attribution or exporter rewrite.",
+  "sourceUnchanged": true,
+  "notFinalCandidateReview": true,
+  "freezeTool": {
+    "path": "art/full-ai-city/reports/tool-snapshots/616860a00b28e670e1219d64c6cb5dad17f0946420568f786e80b6d789fb4a73-freeze_public_source_rejection.py",
+    "sha256": "616860a00b28e670e1219d64c6cb5dad17f0946420568f786e80b6d789fb4a73",
+    "bytes": 4304
+  }
+}

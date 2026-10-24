@@ -1,0 +1,47 @@
+{
+  "status": "rejected_native_export_source",
+  "region": "compact",
+  "asset": "vault_bank",
+  "reviewer": "asset_production",
+  "recordedAtUtc": "2026-10-24T00:23:07.538601+00:00",
+  "source": {
+    "path": "art/full-ai-city/source/compact--vault_bank-a009-pixal-mv-1024-9247.glb",
+    "sha256": "f9d08238d8f7cb8deadd40a5019270e77b7680d1bdc772e8482e2661f4ae821a",
+    "bytes": 39134464
+  },
+  "sourceLevel": "Native 1M export; no untouched decoder attribution is made.",
+  "inferenceReport": {
+    "path": "art/full-ai-city/reports/source-rejections/compact/vault_bank/f9d08238d8f7cb8d/compact--vault_bank-a009-pixal-mv-1024-9247.json",
+    "sha256": "0d78a1e019efc83ba3b791a05ee607e0054974026771a5c81c7fdeb4050fdb4a",
+    "bytes": 9353
+  },
+  "inputReference": {
+    "path": "art/full-ai-city/reports/source-rejections/compact/vault_bank/f9d08238d8f7cb8d/input-reference.json",
+    "sha256": "1f63287d1978cc9b59d3088be4ccab5ceebe49cb7b4def2b8e1638b03bcb3d72",
+    "bytes": 4033
+  },
+  "diagnostic": null,
+  "diagnosticTool": null,
+  "sourceComparisonReport": {
+    "path": "art/full-ai-city/reports/source-rejections/compact/vault_bank/f9d08238d8f7cb8d/source-comparison-processing.json",
+    "sha256": "ac71c6921c3a97797a7e075677e98f8651009a62f8c9ee4e66a30e7f508f4894",
+    "bytes": 19639
+  },
+  "sourceViewEvidenceMode": "Explicitly selected existing renderedSource views; no additional or neutral render implied",
+  "evidence": [
+    {
+      "path": "art/full-ai-city/reports/source-rejections/compact/vault_bank/f9d08238d8f7cb8d/raw-left.png",
+      "sha256": "565f7a8feffd403b3aa586ed2d323e6e221aaaf6a0743771042d56601364c034",
+      "bytes": 210561
+    }
+  ],
+  "finding": "Actual native raw-left shows a single conspicuous polygonal hole inside the blue-gray tiled left roof slope, matching the defect in final five views and 256px preview. The reference roof is continuous at that location. The remainder of the principal walls, roof outline and coin medallion are coherent.",
+  "decision": "Only a measured bounded closure of this isolated left roof gap using adjoining original tile surface. No additional inference or broad roof reconstruction is authorized by this record.",
+  "sourceUnchanged": true,
+  "notFinalCandidateReview": true,
+  "freezeTool": {
+    "path": "art/full-ai-city/reports/tool-snapshots/616860a00b28e670e1219d64c6cb5dad17f0946420568f786e80b6d789fb4a73-freeze_public_source_rejection.py",
+    "sha256": "616860a00b28e670e1219d64c6cb5dad17f0946420568f786e80b6d789fb4a73",
+    "bytes": 4304
+  }
+}

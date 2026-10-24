@@ -1,0 +1,170 @@
+{
+  "status": "source_repair_visually_reviewed_pending_near_lod_and_motion",
+  "source": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\compact--chance_wheel-a001-pixal-mv-1024-9247.glb",
+    "sha256": "986eca4fbae7faff6040dd70ba674c7f0ab139981abdf664d3ee71dd2f5d234e",
+    "bytes": 40896860
+  },
+  "orientation": {
+    "enabled": true,
+    "candidate_degrees": 0.8686248253847287,
+    "applied_degrees": 0.8686248253847287,
+    "underside_area": 0.16921639857953608,
+    "normal_agreement": 0.9520529632873951,
+    "yaw_degrees": 180,
+    "pitch_degrees": 0,
+    "roll_degrees": 0,
+    "uniform_scale": 1.0477240693660967
+  },
+  "method": "Only the measured small depressed spot inside the original red wheel sector is filled by interpolation from its intact boundary. Original neural vertices, faces and image pixels are untouched. The new patch reuses neighboring original red-sector UV samples and closes 0.006 inward so it survives derivative voxelization; no replacement wheel, building or new texture.",
+  "repairs": [
+    {
+      "name": "Small original collapsed spot in red wheel sector",
+      "specification": {
+        "name": "Small original collapsed spot in red wheel sector",
+        "u": [
+          1,
+          0,
+          0
+        ],
+        "v": [
+          0,
+          0,
+          1
+        ],
+        "n": [
+          0,
+          -1,
+          0
+        ],
+        "roi": [
+          0.432,
+          0.463,
+          0.193,
+          0.222
+        ],
+        "defectDepth": 0.178,
+        "donorDepth": 0.182,
+        "donorMaxDepth": 0.187,
+        "donorNormal": 0.98,
+        "color": "red"
+      },
+      "missingSamples": 134,
+      "boundarySamples": 775,
+      "sampledDepthRange": [
+        0.16305303573608398,
+        0.18884897232055664
+      ],
+      "inwardClosureThickness": 0.006,
+      "outerSurfaceUnchanged": true,
+      "newVertices": 392,
+      "newTriangles": 780
+    }
+  ],
+  "originalTriangles": 985580,
+  "originalVerticesMoved": 0,
+  "originalTrianglesDeleted": 0,
+  "artifactCleanup": {
+    "method": "No original faces deleted; only the measured small depressed spot inside the original red wheel sector is filled.",
+    "deletedTriangles": 0
+  },
+  "newTriangles": 780,
+  "newVertices": 392,
+  "inverseSimilarityError": 8.638533244287316e-08,
+  "normalizedOutput": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-compact-wheel\\repaired-normalized.glb",
+    "sha256": "930640e752bee83726563153d8eee427c693d37c750a67849e3a4a0b75a5a213",
+    "bytes": 41140304
+  },
+  "nativeOutput": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-compact-wheel\\repaired-native.glb",
+    "sha256": "266d3b5cc99caf225a760f3c1b6ce2961c12382568737aeb17d244c96688ee55",
+    "bytes": 41139236
+  },
+  "renders": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\compact\\chance_wheel\\266d3b5cc99caf22\\repaired-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\compact\\chance_wheel\\266d3b5cc99caf22\\repaired-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\compact\\chance_wheel\\266d3b5cc99caf22\\repaired-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\compact\\chance_wheel\\266d3b5cc99caf22\\repaired-left.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\compact\\chance_wheel\\266d3b5cc99caf22\\repaired-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.5,
+        -0.3636574149131775,
+        0.0
+      ],
+      "max": [
+        0.5,
+        0.3636574149131775,
+        0.9327967166900635
+      ]
+    },
+    "triangles": 986360,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "reviewImages": [
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\compact\\chance_wheel\\266d3b5cc99caf22\\repaired-front.png",
+      "sha256": "ac32bba5a64c92fa28d4072d513b70a0a36c9da6d55ed33c494bcce248b4e2eb",
+      "bytes": 226334
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\compact\\chance_wheel\\266d3b5cc99caf22\\repaired-right.png",
+      "sha256": "a54ccf06c9c51afc011a3a2ad5d325bb8ddef93a931b33220e8337e669026074",
+      "bytes": 200058
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\compact\\chance_wheel\\266d3b5cc99caf22\\repaired-back.png",
+      "sha256": "5df708bbc2cd30f5644f4b30c8a42358aa62e93b9d9a2955c83c22eeaa0faa82",
+      "bytes": 228808
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\compact\\chance_wheel\\266d3b5cc99caf22\\repaired-left.png",
+      "sha256": "da742940de75759e87ab8ba1de69b10fc331b89cc6a2102085a76deee49877da",
+      "bytes": 200726
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\compact\\chance_wheel\\266d3b5cc99caf22\\repaired-iso.png",
+      "sha256": "94e66913190c024b52106da172ea8253b68f7a4965ee64085918a9b8d68cb0d7",
+      "bytes": 254670
+    }
+  ],
+  "processingTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\7dfacd900b7d12c14f4aba950ff1ad0a5b60f74cac0c7f0dbb0ce047a177cab5-repair_compact_wheel_surface.py",
+    "sha256": "7dfacd900b7d12c14f4aba950ff1ad0a5b60f74cac0c7f0dbb0ce047a177cab5",
+    "bytes": 10779
+  },
+  "completedAt": "2026-10-23T07:39:33.490698+00:00",
+  "visualReview": {
+    "reviewedAtUtc": "2026-10-23T07:40:29.592553+00:00",
+    "decision": "Source repair acceptable for derivative processing; no runtime asset approval",
+    "views": [
+      "front",
+      "right",
+      "back",
+      "left",
+      "iso"
+    ],
+    "note": "Raw color/neutral-grey comparison confirmed the small dark lower-right red-sector spot was a local collapse of the original neural surface. The boundary-derived patch restores the plane and adjacent source red colors; actual five repaired views preserve the full original wheel silhouette and Japanese timber/tile building. Existing raised wheel studs remain distinct. A minor original left-wall seam under the eave is unchanged. Final mobile reduction/texture transfer, original inner disk selection and actual 0/45/90 poses still require inspection."
+  }
+}

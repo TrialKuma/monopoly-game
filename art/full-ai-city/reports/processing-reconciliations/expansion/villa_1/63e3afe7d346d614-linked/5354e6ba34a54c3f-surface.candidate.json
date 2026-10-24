@@ -1,0 +1,429 @@
+{
+  "status": "exported_pending_visual_review",
+  "createdAt": "2026-10-24T00:06:43.791770+00:00",
+  "region": "expansion",
+  "asset": "villa_1",
+  "source": {
+    "rawGLB": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\expansion--villa_1-a003-pixal-mv-1024-29476.glb",
+      "sha256": "321f5b5ffa98032fea2c417a1490313d9d37ae5655f752c569ca9aacece59796",
+      "bytes": 39900052
+    }
+  },
+  "inferenceReport": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\expansion--villa_1-a003\\expansion--villa_1-a003-pixal-mv-1024-29476.json",
+    "sha256": "9d6ec6f5877c109b48689a9435420a00ae1af3a61f453a4773f10c3ecc0f86dd",
+    "bytes": 10735
+  },
+  "reference": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\inputs\\expansion\\villa_1\\51b6eb08dc09ba7b\\reference.json",
+    "sha256": "54661aabfda69801826c0c90ad0512f58a6ef2b85fed1bd1f348c98002124fca",
+    "bytes": 4440
+  },
+  "processingTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\01259185d3327c7a75b8df2e595381e45eccf13901ce96ea80844701e548295e-process_lod.py",
+    "sha256": "01259185d3327c7a75b8df2e595381e45eccf13901ce96ea80844701e548295e",
+    "bytes": 34836
+  },
+  "assumedCameras": true,
+  "cameraCalibration": "assumed_standard_orbit_not_measured",
+  "nativePipeline": "Pixal3DMVImageTo3DPipeline.run_mv",
+  "nativeResolution": 1024,
+  "seed": 29476,
+  "geometryOrigin": "Actual native three-view neural building with explicitly recorded bounded local repairs; localSurfaceRepair.method and face counts disclose whether these include boundary patches or a small mechanical connector. Followed by source-derived remeshing and texture transfer. No replacement building.",
+  "orientation": {
+    "up": "Y",
+    "front": "+Z",
+    "groundY": 0,
+    "maxEdge": 1
+  },
+  "requestedTriangles": 30000,
+  "limitations": [
+    "Assumed camera reference reconstruction, not exact measured architecture",
+    "Final candidate requires actual rendered visual approval"
+  ],
+  "animation": null,
+  "processingComplete": true,
+  "lod": "near",
+  "processingRevision": 0,
+  "localSurfaceRepair": {
+    "source": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-expansion-villa1-321f5b5f-front-v2-brick\\repaired-native.glb",
+      "sha256": "63e3afe7d346d6145576117451fe5a769fca029ddbd01728a42c124cb46c2fa1",
+      "bytes": 44099772
+    },
+    "receipt": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\processing-reconciliations\\expansion\\villa_1\\63e3afe7d346d614-linked\\c7cef98f9e42733a-repair.json",
+      "sha256": "32ac1937794447cd54b03b75368e9148a6597f52205fd4f9e9014976af35000f",
+      "bytes": 9374
+    },
+    "method": "Only explicitly measured and visually reviewed local gaps are closed from adjoining original surface and UV samples with0.006 inward closure. Original vertices, faces and image pixels are preserved. No replacement building or generated texture. See configuration and frozen prior review evidence for exact allowed regions.",
+    "newTriangles": 1988,
+    "newVertices": 998,
+    "originalVerticesMoved": 0,
+    "originalTrianglesDeleted": 0,
+    "regions": [
+      {
+        "name": "Front brick above left window",
+        "specification": {
+          "name": "Front brick above left window",
+          "u": [
+            1,
+            0,
+            0
+          ],
+          "v": [
+            0,
+            0,
+            1
+          ],
+          "n": [
+            0,
+            -1,
+            0
+          ],
+          "roi": [
+            -0.364,
+            -0.222,
+            0.4,
+            0.55
+          ],
+          "defectDepth": 0.12,
+          "donorDepth": 0.215,
+          "donorMaxDepth": 0.235,
+          "donorNormal": 0.6,
+          "color": "brick",
+          "gridStep": 0.006,
+          "donorMargin": 0.05,
+          "flatPatchUV": true,
+          "donorMinRGB": 0.06,
+          "donorMaxColorRatio": 4.0
+        },
+        "missingSamples": 214,
+        "boundarySamples": 520,
+        "sampledDepthRange": [
+          -0.419269323348999,
+          0.24097895622253418
+        ],
+        "inwardClosureThickness": 0.006,
+        "outerSurfaceUnchanged": true,
+        "newVertices": 676,
+        "newTriangles": 1348
+      },
+      {
+        "name": "Front brick below left window",
+        "specification": {
+          "name": "Front brick below left window",
+          "u": [
+            1,
+            0,
+            0
+          ],
+          "v": [
+            0,
+            0,
+            1
+          ],
+          "n": [
+            0,
+            -1,
+            0
+          ],
+          "roi": [
+            -0.27,
+            -0.148,
+            0.06,
+            0.12
+          ],
+          "defectDepth": 0.12,
+          "donorDepth": 0.225,
+          "donorMaxDepth": 0.25,
+          "donorNormal": 0.6,
+          "color": "brick",
+          "gridStep": 0.006,
+          "donorMargin": 0.05,
+          "flatPatchUV": true,
+          "donorMinRGB": 0.06,
+          "donorMaxColorRatio": 4.0
+        },
+        "missingSamples": 94,
+        "boundarySamples": 396,
+        "sampledDepthRange": [
+          -0.41814661026000977,
+          0.337982177734375
+        ],
+        "inwardClosureThickness": 0.006,
+        "outerSurfaceUnchanged": true,
+        "newVertices": 322,
+        "newTriangles": 640
+      }
+    ]
+  },
+  "derivation": {
+    "rawTriangles": 938306,
+    "weldedTriangles": 937872,
+    "remeshedTriangles": 2342152,
+    "voxelSize": 0.003,
+    "finalTriangles": 29999,
+    "atlasArea": 0.5587288035098523,
+    "singleReductionPass": true,
+    "inheritedUVRemovedBeforeReduction": true,
+    "sourceMaterialsUntouched": true,
+    "uvUnwrap": {
+      "angleDegrees": 66.0,
+      "islandMargin": 2e-05,
+      "marginMethod": "SCALED",
+      "nominalMarginPixels": null
+    },
+    "repairedSourceTriangles": 940294
+  },
+  "bake": {
+    "method": "CPU closest-original-triangle projection with float64 barycentric original UV and bilinear original texture sampling; geometric normals retained, no directional normal-map rebake or invented color",
+    "coveredAtlasPixels": 585568,
+    "nearestLookupSuccessFraction": 1.0,
+    "notRayCoverage": true,
+    "sourceDistanceQuantiles": [
+      5.413714097812772e-05,
+      0.0004578683394356635,
+      0.001155523896450156,
+      0.006481627933681011
+    ],
+    "sourceDistanceQuantileLevels": [
+      0.5,
+      0.95,
+      0.99,
+      1
+    ],
+    "overTwoPercentMaxEdge": 0.0,
+    "distanceReviewRequired": false,
+    "visualGeometryReviewRequired": true,
+    "barycentricOriginalRange": [
+      -9.52288092634368e-05,
+      1.0
+    ],
+    "degenerateOrInvalidBarycentricCount": 0,
+    "closestSourceVertexFallbackFraction": 0.0,
+    "barycentricPointReconstructionErrorQuantiles": [
+      8.034087383508051e-09,
+      4.8982819553368194e-08,
+      4.65565501965449e-07
+    ],
+    "atlasOverlapPixelsWithDifferentSurface": 193,
+    "seconds": 8.192307900000742,
+    "maps": [
+      {
+        "role": "base",
+        "size": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "role": "orm",
+        "size": [
+          512,
+          512
+        ]
+      }
+    ],
+    "repairSourceNote": "Texture transfer uses the explicitly repaired neural source, retaining original PBR and locally interpolated same-wall UV. Repair receipt and unchanged original inference source are preserved separately."
+  },
+  "textureTransferTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\a2cb99c96fb8df396f16580a88a7c6151104ee3c927fe76cd161ee2d27bdfa42-bake_nearest_surface.py",
+    "sha256": "a2cb99c96fb8df396f16580a88a7c6151104ee3c927fe76cd161ee2d27bdfa42",
+    "bytes": 7317
+  },
+  "quantization": {
+    "source": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-expansion-villa1-63e3afe7d346d614-default003-30k\\candidates\\expansion\\villa_1.glb",
+    "output": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-expansion-villa1-63e3afe7d346d614-default003-30k\\candidates\\expansion\\villa_1.glb",
+    "sourceBytes": 1615288,
+    "outputBytes": 1175796,
+    "sourceSha256": "61bb7d295c1a3e0c9cdb29871f54c60f0f0e7d17f66bc48f74204b37649124b4",
+    "outputSha256": "75b2a28839e049ef45957a90f18e9af3ad8093b44d428c89fad6efce9cb0c5f9",
+    "positionFaceAndTextureBytesUnchanged": true,
+    "attributes": [
+      {
+        "accessor": 1,
+        "semantic": "NORMAL",
+        "count": 36637,
+        "maximumAngularErrorDegrees": 0.37473509643162695
+      },
+      {
+        "accessor": 2,
+        "semantic": "TEXCOORD_0",
+        "count": 36637,
+        "maximumUVError": 7.629481844073638e-06,
+        "maximumTexelErrorAt1024": 0.007812589408331405
+      }
+    ]
+  },
+  "processedCandidate": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-expansion-villa1-63e3afe7d346d614-default003-30k\\candidates\\expansion\\villa_1.glb",
+    "sha256": "75b2a28839e049ef45957a90f18e9af3ad8093b44d428c89fad6efce9cb0c5f9",
+    "bytes": 1175796
+  },
+  "glbValidation": {
+    "version": 2,
+    "triangles": 29999,
+    "meshes": 1,
+    "materials": 1,
+    "images": 2,
+    "all_primitives_have_uv": true,
+    "animations": [],
+    "all_images_embedded": true,
+    "external_buffers": []
+  },
+  "triangles": 29999,
+  "renderedCandidate": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-expansion-villa1-63e3afe7d346d614-default003-30k\\candidates\\renders\\expansion\\villa_1\\lod-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-expansion-villa1-63e3afe7d346d614-default003-30k\\candidates\\renders\\expansion\\villa_1\\lod-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-expansion-villa1-63e3afe7d346d614-default003-30k\\candidates\\renders\\expansion\\villa_1\\lod-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-expansion-villa1-63e3afe7d346d614-default003-30k\\candidates\\renders\\expansion\\villa_1\\lod-left.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-expansion-villa1-63e3afe7d346d614-default003-30k\\candidates\\renders\\expansion\\villa_1\\lod-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.49993041157722473,
+        -0.49194443225860596,
+        0.00031465996289625764
+      ],
+      "max": [
+        0.49975430965423584,
+        0.491747111082077,
+        0.7561173439025879
+      ]
+    },
+    "triangles": 29999,
+    "textureSizes": [
+      {
+        "name": "expansion__villa_1__nearest_base",
+        "size": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "name": "expansion__villa_1__nearest_orm",
+        "size": [
+          512,
+          512
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "renderedSource": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-expansion-villa1-63e3afe7d346d614-default003-30k\\candidates\\renders\\expansion\\villa_1\\raw-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-expansion-villa1-63e3afe7d346d614-default003-30k\\candidates\\renders\\expansion\\villa_1\\raw-iso.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-expansion-villa1-63e3afe7d346d614-default003-30k\\candidates\\renders\\expansion\\villa_1\\raw-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-expansion-villa1-63e3afe7d346d614-default003-30k\\candidates\\renders\\expansion\\villa_1\\raw-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-expansion-villa1-63e3afe7d346d614-default003-30k\\candidates\\renders\\expansion\\villa_1\\raw-left.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.5,
+        -0.49193310737609863,
+        0.0
+      ],
+      "max": [
+        0.5,
+        0.49193310737609863,
+        0.7570607662200928
+      ]
+    },
+    "triangles": 938306,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "renderedRepairedSource": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-expansion-villa1-63e3afe7d346d614-default003-30k\\candidates\\renders\\expansion\\villa_1\\repaired-source-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-expansion-villa1-63e3afe7d346d614-default003-30k\\candidates\\renders\\expansion\\villa_1\\repaired-source-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-expansion-villa1-63e3afe7d346d614-default003-30k\\candidates\\renders\\expansion\\villa_1\\repaired-source-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.5,
+        -0.4919469654560089,
+        0.0
+      ],
+      "max": [
+        0.5,
+        0.4919469654560089,
+        0.7563457489013672
+      ]
+    },
+    "triangles": 940294,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "bounds": {
+    "min": [
+      -0.49993041157722473,
+      0.00031465996289625764,
+      -0.491747111082077
+    ],
+    "max": [
+      0.49975430965423584,
+      0.7561173439025879,
+      0.49194443225860596
+    ],
+    "coordinateSystem": "GLTF Y-up; +Z front"
+  },
+  "textureSizes": [
+    {
+      "name": "expansion__villa_1__nearest_base",
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "name": "expansion__villa_1__nearest_orm",
+      "size": [
+        512,
+        512
+      ]
+    }
+  ],
+  "rawSourceUnchanged": true,
+  "completedAt": "2026-10-24T00:08:36.028696+00:00"
+}

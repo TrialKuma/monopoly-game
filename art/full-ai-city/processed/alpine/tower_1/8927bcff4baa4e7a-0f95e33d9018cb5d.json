@@ -1,0 +1,841 @@
+{
+  "status": "exported_pending_visual_review",
+  "createdAt": "2026-10-23T22:14:19.761943+00:00",
+  "region": "alpine",
+  "asset": "tower_1",
+  "lod": "near",
+  "processingRevision": 0,
+  "source": {
+    "rawGLB": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\alpine--tower_1-a005-pixal-mv-1024-33421.glb",
+      "sha256": "8130298c9a2bfebb7adf8ea953190ebbc24418742843e4bf849a1c9987defdf8",
+      "bytes": 42360748
+    }
+  },
+  "inferenceReport": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\alpine--tower_1-a005\\alpine--tower_1-a005-pixal-mv-1024-33421.json",
+    "sha256": "95340007229ee5ce279bc0a5db87292fb6c421b88266a78c146682e9e81f7dcf",
+    "bytes": 10107
+  },
+  "reference": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\inputs\\alpine\\tower_1\\acfc49b3af6f53c1\\reference.json",
+    "sha256": "25855b2a932f290cd53a5e44d82db8318616dd551d47fc857b689e1b333de6a7",
+    "bytes": 4416
+  },
+  "processingTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\7a797107ab696da8746a713168b2ea8c3170945ae2f4647dcc26652f1e093900-process_native_mobile.py",
+    "sha256": "7a797107ab696da8746a713168b2ea8c3170945ae2f4647dcc26652f1e093900",
+    "bytes": 9168
+  },
+  "nativeSurfaceExport": {
+    "receipt": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\alpine--tower_1-8130298c9a2b-repair-fd8d7b66ac19-low-ac89582356-field-v1\\receipt.json",
+      "sha256": "ca321aa36ba4b4e2c0439b990511b5bc08accb307df59297618eaa08eb90cdba",
+      "bytes": 18128
+    },
+    "source": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\alpine--tower_1-8130298c9a2b-repair-fd8d7b66ac19-low-ac89582356-field-v1\\mobile-45000-1024.glb",
+      "sha256": "7f2e3ab1c72e85edd37814d6851230761246d35f41d7780cff654c60253a4dd4",
+      "bytes": 2846228
+    },
+    "tensorArchive": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\alpine--tower_1-a005\\neural-export-inputs.pt",
+      "sha256": "778643709895257aa5af240af7d90e60bd140a7356b6560d7048b2dac6c7106e",
+      "bytes": 553402397
+    }
+  },
+  "nativePipeline": "Pixal3DMVImageTo3DPipeline.run_mv",
+  "nativeResolution": 1024,
+  "seed": 33421,
+  "assumedCameras": true,
+  "cameraCalibration": "assumed_standard_orbit_not_measured",
+  "geometryOrigin": "Actual neural building with the explicitly recorded bounded local surface repair, followed by source-derived CPU mobile geometry and native UV/material sampling. The original inference, repair and low-surface sources are distinct; the UV/material replay adds no geometry.",
+  "textureOrigin": "Original neural attribute field sampled by the native UV/material operations with the recorded surface-stage override; no new neural inference or raw-UV rebake.",
+  "normalization": {
+    "enabled": true,
+    "candidate_degrees": 1.9342463936977885,
+    "applied_degrees": 1.9342463936977885,
+    "underside_area": 0.15603721590275654,
+    "normal_agreement": 0.9347467870816014,
+    "yaw_degrees": 180,
+    "pitch_degrees": 0,
+    "roll_degrees": 0,
+    "uniform_scale": 1.0186254204272658
+  },
+  "orientation": {
+    "up": "Y",
+    "front": "+Z",
+    "groundY": 0,
+    "maxEdge": 1
+  },
+  "requestedTriangles": 45000,
+  "triangles": 44878,
+  "glbValidation": {
+    "version": 2,
+    "triangles": 44878,
+    "meshes": 1,
+    "materials": 1,
+    "images": 2,
+    "all_primitives_have_uv": true,
+    "animations": [],
+    "all_images_embedded": true,
+    "external_buffers": []
+  },
+  "quantization": {
+    "source": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--tower_1-8130298c9a2b-repair-fd8d7b66ac19-low-ac89582356-field-v1\\candidates\\alpine\\tower_1.glb",
+    "output": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--tower_1-8130298c9a2b-repair-fd8d7b66ac19-low-ac89582356-field-v1\\candidates\\alpine\\tower_1.glb",
+    "sourceBytes": 2437964,
+    "outputBytes": 1717208,
+    "sourceSha256": "95cc3a59ffd1bb0a854c2c12f4cbaaef710fc7e55329e231060fd312bfc5c698",
+    "outputSha256": "8927bcff4baa4e7ac6b04b3b75a3a637cc7d10eeb3e8342aee261670ac114bdd",
+    "positionFaceAndTextureBytesUnchanged": true,
+    "attributes": [
+      {
+        "accessor": 1,
+        "semantic": "NORMAL",
+        "count": 60076,
+        "maximumAngularErrorDegrees": 0.37781508255271695
+      },
+      {
+        "accessor": 2,
+        "semantic": "TEXCOORD_0",
+        "count": 60076,
+        "maximumUVError": 7.629510948348184e-06,
+        "maximumTexelErrorAt1024": 0.00781261921110854
+      }
+    ]
+  },
+  "processedCandidate": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\candidates\\alpine\\tower_1.glb",
+    "sha256": "8927bcff4baa4e7ac6b04b3b75a3a637cc7d10eeb3e8342aee261670ac114bdd",
+    "bytes": 1717208
+  },
+  "derivation": {
+    "method": "Recorded CPU surface derived from the same neural raw, inverse-normalized to field coordinates; a local native-export variant bypasses further mesh simplification/remeshing and uses native UV generation plus original neural high-surface BVH and field texture sampling. Only normalization, JPEG encoding and attribute quantization afterward.",
+    "voxelizedAgain": false,
+    "rebakedFromRawUV": false,
+    "facadeUVPreserved": true,
+    "normalizedTrianglesPreserved": true,
+    "geometrySurfaceInput": {
+      "receipt": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\alpine--tower_1-8130298c9a2b-repair-fd8d7b66ac19-low-ac89582356-field-v1\\geometry-source-proof.json",
+        "sha256": "00193257052261f5698c9b0e697bf25c8f9a7586d3c4aa19c1526b52accc7cea",
+        "bytes": 10827
+      },
+      "method": "Coordinate inversion of the recorded neural-derived low surface including explicitly bounded local source repairs. This preparation only welds exact positions and changes coordinates; it adds no faces. Original raw inference and repair input remain distinct.",
+      "sourceRaw": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\alpine--tower_1-a005-pixal-mv-1024-33421.glb",
+        "sha256": "8130298c9a2bfebb7adf8ea953190ebbc24418742843e4bf849a1c9987defdf8",
+        "bytes": 42360748
+      },
+      "candidate": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\alpine--tower_1-8130298c9a2b-repair-fd8d7b66ac19-low-ac89582356-field-v1\\geometry-candidate.glb",
+        "sha256": "ac895823567e991b02d65415c7f3975f9b7ffdb4af43a5561e31a4d6c4d2c564",
+        "bytes": 2298528
+      },
+      "candidateReport": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\alpine--tower_1-8130298c9a2b-repair-fd8d7b66ac19-low-ac89582356-field-v1\\geometry-candidate-processing.json",
+        "sha256": "9bee0f28ccc256fc590a2ee04e4598452074d1b7499184bad9f8453ff8c146aa",
+        "bytes": 17966
+      },
+      "originalCandidate": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-alpine-tower1-fd8d7b66ac1982af-fine0015-45k\\candidates\\alpine\\tower_1.glb",
+        "sha256": "ac895823567e991b02d65415c7f3975f9b7ffdb4af43a5561e31a4d6c4d2c564",
+        "bytes": 2298528
+      },
+      "fieldReceipt": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\alpine--tower_1-a005\\receipt.json",
+        "sha256": "595d44dd5c780f9be109c71547c1ce6578d7dc26e65d43c3cfe1d6138a21f2b5",
+        "bytes": 3687
+      },
+      "output": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\alpine--tower_1-8130298c9a2b-repair-fd8d7b66ac19-low-ac89582356-field-v1\\geometry-surface.npz",
+        "sha256": "3c59aa0da9986b7e2ecdd0629227dadee09cafa90f26801e1645a7ae70638e09",
+        "bytes": 784784
+      },
+      "triangles": 44878,
+      "vertices": 20478,
+      "originalSplitVertices": 70462,
+      "exactCoincidentVerticesMerged": 49984,
+      "maximumPositionChangeFromWelding": 0,
+      "normalization": {
+        "enabled": true,
+        "candidate_degrees": 1.4745578005264168,
+        "applied_degrees": 1.4745578005264168,
+        "underside_area": 0.18914576729651128,
+        "normal_agreement": 0.9195606736230919,
+        "yaw_degrees": 180,
+        "pitch_degrees": 0,
+        "roll_degrees": 0,
+        "uniform_scale": 1.018445790510638
+      },
+      "rawBlenderToNormalizedBlender": [
+        [
+          -1.0181088225760972,
+          8.974558500541088e-06,
+          0.026199164183418583,
+          -0.011241019064458709
+        ],
+        [
+          9.157563071101295e-06,
+          -1.0184456159656352,
+          0.0007048989253972716,
+          0.002621537038309363
+        ],
+        [
+          0.026199162851647542,
+          0.0007049031956682383,
+          1.0181085789836715,
+          0.30644800140255357
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "inverse": [
+        [
+          -0.9815632868833349,
+          8.832934664317327e-06,
+          0.025258731744326825,
+          -0.018774282637705895
+        ],
+        [
+          8.656450770071785e-06,
+          -0.981887992048605,
+          0.0006795984367121933,
+          0.0023658914632680127
+        ],
+        [
+          0.025258730582514384,
+          0.0006795980135834805,
+          0.9815630512809205,
+          -0.300515883034972
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "sampledNormalizationReconstructionMaxError": 9.684370338062657e-08,
+      "nativeBounds": {
+        "min": [
+          -0.4822581937409986,
+          -0.29765321453839594,
+          -0.4136476314349908
+        ],
+        "max": [
+          0.49997701714782167,
+          0.34347968707260335,
+          0.4190941082371072
+        ]
+      },
+      "tool": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\alpine--tower_1-8130298c9a2b-repair-fd8d7b66ac19-low-ac89582356-field-v1\\geometry-preparation-source.py",
+        "sha256": "956e46377da8eae51f4e9af858f698532b81fccbbf16f219a2f2adbb9ab1481a",
+        "bytes": 7005
+      },
+      "toolSnapshot": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\alpine--tower_1-8130298c9a2b-repair-fd8d7b66ac19-low-ac89582356-field-v1\\geometry-preparation-source.py",
+        "sha256": "956e46377da8eae51f4e9af858f698532b81fccbbf16f219a2f2adbb9ab1481a",
+        "bytes": 7005
+      },
+      "normalizationInput": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-alpine-tower1-a005-facades-v2\\repaired-native.glb",
+        "sha256": "fd8d7b66ac1982af5a3d7eb4a074be1d280772e46d18a2cf8b1e2e3738da9894",
+        "bytes": 43341460
+      },
+      "localSurfaceRepair": {
+        "source": {
+          "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-alpine-tower1-a005-facades-v2\\repaired-native.glb",
+          "sha256": "fd8d7b66ac1982af5a3d7eb4a074be1d280772e46d18a2cf8b1e2e3738da9894",
+          "bytes": 43341460
+        },
+        "receipt": {
+          "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\alpine\\tower_1\\fd8d7b66ac1982af\\repair.json",
+          "sha256": "072b277f8e210fb784d66f943b9f5c3379fb0bc313c874b303819a0776b154bd",
+          "bytes": 11713
+        },
+        "method": "Only four bounded front/rear regions confirmed in actual source and first-repair five-side material views, rear neutral view and original-source ray measurements are closed from adjoining original stone/plaster samples. All open balconies, doors, windows, source vertices, source faces and image pixels remain unchanged. Local surfaces reuse original stone/plaster UV samples with 0.006 inward closure; no replacement building or new texture.",
+        "newTriangles": 8044,
+        "newVertices": 4036,
+        "originalVerticesMoved": 0,
+        "originalTrianglesDeleted": 0,
+        "regions": [
+          {
+            "name": "Enclosed rear lower plaster gap measured x=-.302..-.060,z=.144..186",
+            "specification": {
+              "name": "Enclosed rear lower plaster gap measured x=-.302..-.060,z=.144..186",
+              "u": [
+                -1,
+                0,
+                0
+              ],
+              "v": [
+                0,
+                0,
+                1
+              ],
+              "n": [
+                0,
+                1,
+                0
+              ],
+              "roi": [
+                0.045,
+                0.315,
+                0.135,
+                0.2
+              ],
+              "defectDepth": 0.2,
+              "donorDepth": 0.315,
+              "donorMaxDepth": 0.334,
+              "donorNormal": 0.65,
+              "color": "plaster"
+            },
+            "missingSamples": 496,
+            "boundarySamples": 2987,
+            "sampledDepthRange": [
+              -2.0,
+              0.35946714878082275
+            ],
+            "inwardClosureThickness": 0.006,
+            "outerSurfaceUnchanged": true,
+            "newVertices": 1422,
+            "newTriangles": 2840
+          },
+          {
+            "name": "Front plaster gap above arched entrance measured x=-.120..-.020,z=.316...364",
+            "specification": {
+              "name": "Front plaster gap above arched entrance measured x=-.120..-.020,z=.316...364",
+              "u": [
+                1,
+                0,
+                0
+              ],
+              "v": [
+                0,
+                0,
+                1
+              ],
+              "n": [
+                0,
+                -1,
+                0
+              ],
+              "roi": [
+                -0.13,
+                -0.01,
+                0.308,
+                0.373
+              ],
+              "defectDepth": 0.2,
+              "donorDepth": 0.305,
+              "donorMaxDepth": 0.328,
+              "donorNormal": 0.65,
+              "color": "plaster"
+            },
+            "missingSamples": 324,
+            "boundarySamples": 565,
+            "sampledDepthRange": [
+              -0.315871000289917,
+              0.3475968837738037
+            ],
+            "inwardClosureThickness": 0.006,
+            "outerSurfaceUnchanged": true,
+            "newVertices": 856,
+            "newTriangles": 1708
+          },
+          {
+            "name": "Rear upper plaster gaps above left window and left of central window, two enclosed components",
+            "specification": {
+              "name": "Rear upper plaster gaps above left window and left of central window, two enclosed components",
+              "u": [
+                -1,
+                0,
+                0
+              ],
+              "v": [
+                0,
+                0,
+                1
+              ],
+              "n": [
+                0,
+                1,
+                0
+              ],
+              "roi": [
+                -0.308,
+                -0.06,
+                0.265,
+                0.322
+              ],
+              "defectDepth": 0.2,
+              "donorDepth": 0.315,
+              "donorMaxDepth": 0.334,
+              "donorNormal": 0.65,
+              "color": "plaster"
+            },
+            "missingSamples": 282,
+            "boundarySamples": 2439,
+            "sampledDepthRange": [
+              -2.0,
+              0.3407355546951294
+            ],
+            "inwardClosureThickness": 0.006,
+            "outerSurfaceUnchanged": true,
+            "newVertices": 976,
+            "newTriangles": 1944
+          },
+          {
+            "name": "Rear narrow stone plinth gaps under window sills, measured enclosed components z=.116...148",
+            "specification": {
+              "name": "Rear narrow stone plinth gaps under window sills, measured enclosed components z=.116...148",
+              "u": [
+                -1,
+                0,
+                0
+              ],
+              "v": [
+                0,
+                0,
+                1
+              ],
+              "n": [
+                0,
+                1,
+                0
+              ],
+              "roi": [
+                -0.308,
+                -0.055,
+                0.11,
+                0.155
+              ],
+              "defectDepth": 0.2,
+              "donorDepth": 0.315,
+              "donorMaxDepth": 0.367,
+              "donorNormal": 0.65,
+              "color": "stone"
+            },
+            "missingSamples": 220,
+            "boundarySamples": 2023,
+            "sampledDepthRange": [
+              -2.0,
+              0.352999210357666
+            ],
+            "inwardClosureThickness": 0.006,
+            "outerSurfaceUnchanged": true,
+            "newVertices": 782,
+            "newTriangles": 1552
+          }
+        ]
+      },
+      "localRepairTool": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\alpine\\tower_1\\fd8d7b66ac1982af\\repair-tool.py",
+        "sha256": "767e3be235788348d6d17388ef600ca34f71b8c1c6f10bdc6a0931632b2b9691",
+        "bytes": 12409
+      },
+      "repairAppliedBeforeReduction": true,
+      "originalReceipt": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\alpine--tower_1-8130298c9a2b-repair-fd8d7b66ac19-low-ac89582356-field-v1\\geometry-source-original-receipt.json",
+        "sha256": "6c6f0fb7fbcd9e7f5e9f8f43e6c0deb27f3ebeb48ba6a91722c158ea1d96c7f3",
+        "bytes": 10443
+      }
+    },
+    "nativePostprocessOverride": {
+      "original": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\alpine--tower_1-8130298c9a2b-repair-fd8d7b66ac19-low-ac89582356-field-v1\\original-native-exporter-source.py",
+        "sha256": "b6b79da5dfe13c22047a6257c6b2301c7ea31259dd9c82344db7e5c4cc707917",
+        "bytes": 8126
+      },
+      "scope": "Keep original neural geometry BVH for PBR lookup. Replace only the intermediate surface with this recorded existing source-derived low mesh; bypass further remeshing/simplification/cleanup, then use native unwrap/normals/field sampling.",
+      "sharedCodeModified": false,
+      "noNewGeometryAuthored": true,
+      "noNewGeometryAuthoredAppliesTo": "native_uv_material_replay_only",
+      "counts": {
+        "facesBeforeUnwrap": 44878
+      }
+    },
+    "nativeFieldLookup": {
+      "quantiles50_95_99_100": [
+        0.0009954425040632486,
+        0.002046183915808797,
+        0.002892059739679098,
+        0.0201720017939806
+      ],
+      "fractionOverTwoPercent": 1.7081782743844087e-06,
+      "sampleCount": 585419,
+      "meaning": "Distance to original neural BVH before direct field sampling, not ray hit coverage"
+    }
+  },
+  "bake": {
+    "method": "Direct original neural attribute field sampling inside native to_glb; no Blender bake or nearest raw-image transfer",
+    "notRayCoverage": true
+  },
+  "animation": null,
+  "processingComplete": true,
+  "limitations": [
+    "Same assumed three-view cameras as original native raw",
+    "Diagnostic pending external visual approval; not a formal asset replacement"
+  ],
+  "localSurfaceRepair": {
+    "source": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-alpine-tower1-a005-facades-v2\\repaired-native.glb",
+      "sha256": "fd8d7b66ac1982af5a3d7eb4a074be1d280772e46d18a2cf8b1e2e3738da9894",
+      "bytes": 43341460
+    },
+    "receipt": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\alpine\\tower_1\\fd8d7b66ac1982af\\repair.json",
+      "sha256": "072b277f8e210fb784d66f943b9f5c3379fb0bc313c874b303819a0776b154bd",
+      "bytes": 11713
+    },
+    "method": "Only four bounded front/rear regions confirmed in actual source and first-repair five-side material views, rear neutral view and original-source ray measurements are closed from adjoining original stone/plaster samples. All open balconies, doors, windows, source vertices, source faces and image pixels remain unchanged. Local surfaces reuse original stone/plaster UV samples with 0.006 inward closure; no replacement building or new texture.",
+    "newTriangles": 8044,
+    "newVertices": 4036,
+    "originalVerticesMoved": 0,
+    "originalTrianglesDeleted": 0,
+    "regions": [
+      {
+        "name": "Enclosed rear lower plaster gap measured x=-.302..-.060,z=.144..186",
+        "specification": {
+          "name": "Enclosed rear lower plaster gap measured x=-.302..-.060,z=.144..186",
+          "u": [
+            -1,
+            0,
+            0
+          ],
+          "v": [
+            0,
+            0,
+            1
+          ],
+          "n": [
+            0,
+            1,
+            0
+          ],
+          "roi": [
+            0.045,
+            0.315,
+            0.135,
+            0.2
+          ],
+          "defectDepth": 0.2,
+          "donorDepth": 0.315,
+          "donorMaxDepth": 0.334,
+          "donorNormal": 0.65,
+          "color": "plaster"
+        },
+        "missingSamples": 496,
+        "boundarySamples": 2987,
+        "sampledDepthRange": [
+          -2.0,
+          0.35946714878082275
+        ],
+        "inwardClosureThickness": 0.006,
+        "outerSurfaceUnchanged": true,
+        "newVertices": 1422,
+        "newTriangles": 2840
+      },
+      {
+        "name": "Front plaster gap above arched entrance measured x=-.120..-.020,z=.316...364",
+        "specification": {
+          "name": "Front plaster gap above arched entrance measured x=-.120..-.020,z=.316...364",
+          "u": [
+            1,
+            0,
+            0
+          ],
+          "v": [
+            0,
+            0,
+            1
+          ],
+          "n": [
+            0,
+            -1,
+            0
+          ],
+          "roi": [
+            -0.13,
+            -0.01,
+            0.308,
+            0.373
+          ],
+          "defectDepth": 0.2,
+          "donorDepth": 0.305,
+          "donorMaxDepth": 0.328,
+          "donorNormal": 0.65,
+          "color": "plaster"
+        },
+        "missingSamples": 324,
+        "boundarySamples": 565,
+        "sampledDepthRange": [
+          -0.315871000289917,
+          0.3475968837738037
+        ],
+        "inwardClosureThickness": 0.006,
+        "outerSurfaceUnchanged": true,
+        "newVertices": 856,
+        "newTriangles": 1708
+      },
+      {
+        "name": "Rear upper plaster gaps above left window and left of central window, two enclosed components",
+        "specification": {
+          "name": "Rear upper plaster gaps above left window and left of central window, two enclosed components",
+          "u": [
+            -1,
+            0,
+            0
+          ],
+          "v": [
+            0,
+            0,
+            1
+          ],
+          "n": [
+            0,
+            1,
+            0
+          ],
+          "roi": [
+            -0.308,
+            -0.06,
+            0.265,
+            0.322
+          ],
+          "defectDepth": 0.2,
+          "donorDepth": 0.315,
+          "donorMaxDepth": 0.334,
+          "donorNormal": 0.65,
+          "color": "plaster"
+        },
+        "missingSamples": 282,
+        "boundarySamples": 2439,
+        "sampledDepthRange": [
+          -2.0,
+          0.3407355546951294
+        ],
+        "inwardClosureThickness": 0.006,
+        "outerSurfaceUnchanged": true,
+        "newVertices": 976,
+        "newTriangles": 1944
+      },
+      {
+        "name": "Rear narrow stone plinth gaps under window sills, measured enclosed components z=.116...148",
+        "specification": {
+          "name": "Rear narrow stone plinth gaps under window sills, measured enclosed components z=.116...148",
+          "u": [
+            -1,
+            0,
+            0
+          ],
+          "v": [
+            0,
+            0,
+            1
+          ],
+          "n": [
+            0,
+            1,
+            0
+          ],
+          "roi": [
+            -0.308,
+            -0.055,
+            0.11,
+            0.155
+          ],
+          "defectDepth": 0.2,
+          "donorDepth": 0.315,
+          "donorMaxDepth": 0.367,
+          "donorNormal": 0.65,
+          "color": "stone"
+        },
+        "missingSamples": 220,
+        "boundarySamples": 2023,
+        "sampledDepthRange": [
+          -2.0,
+          0.352999210357666
+        ],
+        "inwardClosureThickness": 0.006,
+        "outerSurfaceUnchanged": true,
+        "newVertices": 782,
+        "newTriangles": 1552
+      }
+    ]
+  },
+  "renderedCandidate": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--tower_1-8130298c9a2b-repair-fd8d7b66ac19-low-ac89582356-field-v1\\candidates\\renders\\alpine\\tower_1\\lod-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--tower_1-8130298c9a2b-repair-fd8d7b66ac19-low-ac89582356-field-v1\\candidates\\renders\\alpine\\tower_1\\lod-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--tower_1-8130298c9a2b-repair-fd8d7b66ac19-low-ac89582356-field-v1\\candidates\\renders\\alpine\\tower_1\\lod-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--tower_1-8130298c9a2b-repair-fd8d7b66ac19-low-ac89582356-field-v1\\candidates\\renders\\alpine\\tower_1\\lod-left.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--tower_1-8130298c9a2b-repair-fd8d7b66ac19-low-ac89582356-field-v1\\candidates\\renders\\alpine\\tower_1\\lod-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.4999999701976776,
+        -0.42171168327331543,
+        0.0
+      ],
+      "max": [
+        0.4999999701976776,
+        0.42171168327331543,
+        0.6634089350700378
+      ]
+    },
+    "triangles": 44878,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          1024,
+          1024
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "sourceReviewReusedFrom": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--tower_1-8130298c9a2b-repair-fd8d7b66ac19-low-ac89582356-field-v1\\surface.candidate.json",
+    "sha256": "9bee0f28ccc256fc590a2ee04e4598452074d1b7499184bad9f8453ff8c146aa",
+    "bytes": 17966
+  },
+  "renderedSource": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--tower_1-8130298c9a2b-repair-fd8d7b66ac19-low-ac89582356-field-v1\\candidates\\renders\\alpine\\tower_1\\raw-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--tower_1-8130298c9a2b-repair-fd8d7b66ac19-low-ac89582356-field-v1\\candidates\\renders\\alpine\\tower_1\\raw-iso.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--tower_1-8130298c9a2b-repair-fd8d7b66ac19-low-ac89582356-field-v1\\candidates\\renders\\alpine\\tower_1\\raw-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--tower_1-8130298c9a2b-repair-fd8d7b66ac19-low-ac89582356-field-v1\\candidates\\renders\\alpine\\tower_1\\raw-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--tower_1-8130298c9a2b-repair-fd8d7b66ac19-low-ac89582356-field-v1\\candidates\\renders\\alpine\\tower_1\\raw-left.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.5,
+        -0.42473694682121277,
+        0.0
+      ],
+      "max": [
+        0.5,
+        0.42473694682121277,
+        0.6556198000907898
+      ]
+    },
+    "triangles": 949731,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "bounds": {
+    "min": [
+      -0.4999999701976776,
+      0.0,
+      -0.42171168327331543
+    ],
+    "max": [
+      0.4999999701976776,
+      0.6634089350700378,
+      0.42171168327331543
+    ],
+    "coordinateSystem": "GLTF Y-up; +Z front"
+  },
+  "textureSizes": [
+    {
+      "name": "Image_0",
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "name": "Image_1",
+      "size": [
+        1024,
+        1024
+      ]
+    }
+  ],
+  "completedAt": "2026-10-23T22:14:31.551226+00:00",
+  "rawSourceUnchanged": true,
+  "promotedFrom": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--tower_1-8130298c9a2b-repair-fd8d7b66ac19-low-ac89582356-field-v1\\candidates\\alpine\\tower_1.json",
+    "sha256": "c8ad186b07bb2d6418c759b0b80b2108dfc199e6623abb07ee682589ae631d99",
+    "bytes": 32378
+  },
+  "reviewSheet": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--tower_1-8130298c9a2b-repair-fd8d7b66ac19-low-ac89582356-field-v1\\candidates\\renders\\alpine\\tower_1\\review-sheet.jpg",
+    "sha256": "154ad6d8005a33eeb6a36960202d36f08387f3d0a3b691fd088f996fd6dca465",
+    "bytes": 306569,
+    "candidateSha256": "8927bcff4baa4e7ac6b04b3b75a3a637cc7d10eeb3e8342aee261670ac114bdd",
+    "sourceImages": [
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--tower_1-8130298c9a2b-repair-fd8d7b66ac19-low-ac89582356-field-v1\\candidates\\renders\\alpine\\tower_1\\raw-front.png",
+        "sha256": "3d8a13e2b4a580c6dea9a362e16d5d8955cf86a8cabde107ee8ce4f6be850d8f",
+        "label": "AI raw front"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--tower_1-8130298c9a2b-repair-fd8d7b66ac19-low-ac89582356-field-v1\\candidates\\renders\\alpine\\tower_1\\raw-iso.png",
+        "sha256": "b11dcf92883b407b8b0006d4576809eb6634340c572f1668bad36b94a2f73298",
+        "label": "AI raw iso"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--tower_1-8130298c9a2b-repair-fd8d7b66ac19-low-ac89582356-field-v1\\candidates\\renders\\alpine\\tower_1\\lod-front.png",
+        "sha256": "bff0a21f1d1ef11ba420e657bc38320b089525be0de0e2208f2bdb8ecedad605",
+        "label": "LOD front"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--tower_1-8130298c9a2b-repair-fd8d7b66ac19-low-ac89582356-field-v1\\candidates\\renders\\alpine\\tower_1\\lod-right.png",
+        "sha256": "1b7cb53f0dceb46e173ba3906f169fa0df465a92697a400017fab8a2f496e94b",
+        "label": "LOD right"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--tower_1-8130298c9a2b-repair-fd8d7b66ac19-low-ac89582356-field-v1\\candidates\\renders\\alpine\\tower_1\\lod-back.png",
+        "sha256": "ecaca0e5dffdc2642ad6c1bcefa9274175d65dddd7a4ca4763ce21cff274690c",
+        "label": "LOD back"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--tower_1-8130298c9a2b-repair-fd8d7b66ac19-low-ac89582356-field-v1\\candidates\\renders\\alpine\\tower_1\\lod-left.png",
+        "sha256": "626113811091dbecb3378aaf82995e2a0f6d007be266fbef36287808c452415c",
+        "label": "LOD left"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--tower_1-8130298c9a2b-repair-fd8d7b66ac19-low-ac89582356-field-v1\\candidates\\renders\\alpine\\tower_1\\lod-iso.png",
+        "sha256": "0a6753acb0997e6a6f07d0372c10513396975ea401e2778c6db5a73811739c12",
+        "label": "LOD iso"
+      }
+    ],
+    "content": "Unmodified CPU render images composed with labels for visual comparison only"
+  }
+}

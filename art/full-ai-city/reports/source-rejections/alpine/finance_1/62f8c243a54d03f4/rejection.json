@@ -1,0 +1,57 @@
+{
+  "status": "rejected_native_export_source",
+  "region": "alpine",
+  "asset": "finance_1",
+  "reviewer": "/root/asset_production",
+  "recordedAtUtc": "2026-10-23T21:31:50.905848+00:00",
+  "source": {
+    "path": "art/full-ai-city/source/alpine--finance_1-a004-pixal-mv-1024-29471.glb",
+    "sha256": "62f8c243a54d03f4a1a5ceefc8e6547e260c11b112a918cd89c0823e5206555a",
+    "bytes": 40418136
+  },
+  "sourceLevel": "Native 1M export; no untouched decoder attribution is made.",
+  "inferenceReport": {
+    "path": "art/full-ai-city/reports/source-rejections/alpine/finance_1/62f8c243a54d03f4/alpine--finance_1-a004-pixal-mv-1024-29471.json",
+    "sha256": "3b2cd9b22e0f1e7e98d68b206b7256a20cdd644a9ff7715f2f5988d1e8b4de4a",
+    "bytes": 10125
+  },
+  "inputReference": {
+    "path": "art/full-ai-city/reports/source-rejections/alpine/finance_1/62f8c243a54d03f4/input-reference.json",
+    "sha256": "b8dea6f62ec6477629594966296fafaf17715d0406a1001972f86f59e330545c",
+    "bytes": 4441
+  },
+  "diagnostic": null,
+  "diagnosticTool": null,
+  "sourceComparisonReport": {
+    "path": "art/full-ai-city/reports/source-rejections/alpine/finance_1/62f8c243a54d03f4/source-comparison-processing.json",
+    "sha256": "75e14579d83a9f7ed9b2abdcc143c0dd62d6d917186f3ffaedf2c4d5fdc512f1",
+    "bytes": 19610
+  },
+  "sourceViewEvidenceMode": "Explicitly selected existing renderedSource views; no additional or neutral render implied",
+  "evidence": [
+    {
+      "path": "art/full-ai-city/reports/source-rejections/alpine/finance_1/62f8c243a54d03f4/raw-front.png",
+      "sha256": "097e416ddd468c26855edb702961de7f192b7669ecc4c7cea92490fe66ada503",
+      "bytes": 175509
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/alpine/finance_1/62f8c243a54d03f4/raw-iso.png",
+      "sha256": "45a1793fb310490ab468329512b4890390babc6e641319f62946aba5b31c79b0",
+      "bytes": 186079
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/alpine/finance_1/62f8c243a54d03f4/raw-back.png",
+      "sha256": "dc65329d289d42b05a2f5bb44f9d0bae21d04caf0a836f699246ea041ae664f3",
+      "bytes": 169035
+    }
+  ],
+  "finding": "The first independent seed resolves the earlier front gap and most rear loss, but leaves one conspicuous rectangular missing plaster patch between the rear upper center window and its left timber post, beneath the eave. Actually inspected the current original front/isometric and existing exact raw-back, plus all final five views; this remaining gap already exists in the native 1M export and is visible in the small colored overview. Preserve this source and field. No third old-reference seed. One bounded local repair using its measured adjacent wall borders should be evaluated before a larger reference revision; no extra render or decoder diagnosis is claimed.",
+  "decision": "Hold source; bounded single-region repair review, no further old-reference seed.",
+  "sourceUnchanged": true,
+  "notFinalCandidateReview": true,
+  "freezeTool": {
+    "path": "art/full-ai-city/reports/tool-snapshots/616860a00b28e670e1219d64c6cb5dad17f0946420568f786e80b6d789fb4a73-freeze_public_source_rejection.py",
+    "sha256": "616860a00b28e670e1219d64c6cb5dad17f0946420568f786e80b6d789fb4a73",
+    "bytes": 4304
+  }
+}

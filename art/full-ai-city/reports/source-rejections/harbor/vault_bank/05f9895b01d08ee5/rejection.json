@@ -1,0 +1,62 @@
+{
+  "status": "rejected_native_export_source",
+  "region": "harbor",
+  "asset": "vault_bank",
+  "reviewer": "asset_production",
+  "recordedAtUtc": "2026-10-24T02:01:55.317877+00:00",
+  "source": {
+    "path": "art/full-ai-city/source/harbor--vault_bank-a001-pixal-mv-1024-9247.glb",
+    "sha256": "05f9895b01d08ee5b9a432a5f1f00c358ecb0aaaeb2017fceeeb383cfb5261d3",
+    "bytes": 43582092
+  },
+  "sourceLevel": "Native 1M export; no untouched decoder attribution is made.",
+  "inferenceReport": {
+    "path": "art/full-ai-city/reports/source-rejections/harbor/vault_bank/05f9895b01d08ee5/harbor--vault_bank-a001-pixal-mv-1024-9247.json",
+    "sha256": "fe02c8b01d6bd1981b3955c63a0b3cbb2cd81339957484217ae9a9c1468544c5",
+    "bytes": 10416
+  },
+  "inputReference": {
+    "path": "art/full-ai-city/reports/source-rejections/harbor/vault_bank/05f9895b01d08ee5/input-reference.json",
+    "sha256": "50b67304aa082c5a952b24a20481955ead289ad6c1785422ede33f3af33b3991",
+    "bytes": 4410
+  },
+  "diagnostic": null,
+  "diagnosticTool": null,
+  "sourceComparisonReport": {
+    "path": "art/full-ai-city/reports/source-rejections/harbor/vault_bank/05f9895b01d08ee5/source-comparison-processing.json",
+    "sha256": "b2344d86ea9bc6fcd0ffe9101eba2d5ca2dd829262679ceda9015b58dfec19ce",
+    "bytes": 19596
+  },
+  "sourceViewEvidenceMode": "Explicitly selected existing renderedSource views; no additional or neutral render implied",
+  "evidence": [
+    {
+      "path": "art/full-ai-city/reports/source-rejections/harbor/vault_bank/05f9895b01d08ee5/raw-front.png",
+      "sha256": "8adebb6dbe72aaeec7f0e503a5db54687b0e3c373793b5279c1791021f8d74fa",
+      "bytes": 250773
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/harbor/vault_bank/05f9895b01d08ee5/raw-iso.png",
+      "sha256": "3cb807dfc8fc7ad5f3e9c6160d176341845a9d925aa8822ff25fdb98e15a4453",
+      "bytes": 302855
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/harbor/vault_bank/05f9895b01d08ee5/raw-back.png",
+      "sha256": "984d21b9a3765ec6c1224626531e9d63f6b0b8891a51af97a05dbe46f5575c3c",
+      "bytes": 238865
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/harbor/vault_bank/05f9895b01d08ee5/raw-left.png",
+      "sha256": "da44745108f27d69598c8c21514e591922f1fef48bf8fa5c990b18ccdeb398e1",
+      "bytes": 223863
+    }
+  ],
+  "finding": "Actually inspected reference, native front/isometric/back/left, five final material views and256px downsample. Native back has a conspicuous dark rectangular loss of plaster immediately beside the right rear window reaching toward the downpipe, already exposing interior material; it remains visible in final/phone. Final also shows smaller roof-tile and arch chips; source-left only confirms small tile openings, not every final chip. Reject the main rear-wall defect, preserve this completed source and perform the first independent same-reference retry only. No exporter-wide attribution or automatic further seed.",
+  "decision": "First independent same-reference retry29484. If major source defects repeat, evaluate a bounded repair or targeted consistent reference revision; never a blind third same-reference seed.",
+  "sourceUnchanged": true,
+  "notFinalCandidateReview": true,
+  "freezeTool": {
+    "path": "art/full-ai-city/reports/tool-snapshots/616860a00b28e670e1219d64c6cb5dad17f0946420568f786e80b6d789fb4a73-freeze_public_source_rejection.py",
+    "sha256": "616860a00b28e670e1219d64c6cb5dad17f0946420568f786e80b6d789fb4a73",
+    "bytes": 4304
+  }
+}

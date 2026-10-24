@@ -1,0 +1,78 @@
+{
+  "status": "reviewed_rejected_experiment_only",
+  "reviewer": "root",
+  "createdAt": "2026-10-23T20:03:01.109541+00:00",
+  "manifest": {
+    "path": "art/full-ai-city/experiments/alpine-tower1-single-three-quarter-23421/manifest.json",
+    "sha256": "ddc6d1e2dbb92e31176bb747cf7bb75ce83543995469c1a74d5be5833ea75231",
+    "bytes": 6592
+  },
+  "inferenceReport": {
+    "path": "art/full-ai-city/experiments/alpine-tower1-single-three-quarter-23421/attempt-001/reports/alpine-tower1-single-three-quarter-pixal-1024-23421.json",
+    "sha256": "73d582c15f9de6a708a8af2ba9197a3725cb545b6f91e7a55640d5660103108a",
+    "bytes": 5700
+  },
+  "renderReceipt": {
+    "path": "art/full-ai-city/experiments/alpine-tower1-single-three-quarter-23421/single-raw-review/inspection.json",
+    "sha256": "6d612f384dac5df760028eedc183833f9454be5d219ae4e11c32171fffe6d178",
+    "bytes": 6966
+  },
+  "source": {
+    "path": "art/full-ai-city/experiments/alpine-tower1-single-three-quarter-23421/attempt-001/source/alpine-tower1-single-three-quarter-pixal-1024-23421.glb",
+    "sha256": "44fbef99e025296213c7b960df883f72604120ec3e0f73518b5292f8d0709f90",
+    "bytes": 44806128
+  },
+  "actuallyViewed": [
+    {
+      "path": "art/full-ai-city/experiments/alpine-tower1-single-three-quarter-23421/reference.png",
+      "sha256": "7db3804f4e5c8ff3f99b44acea0714b700cfd24df34119cd7948c742aa68660e",
+      "bytes": 1664190
+    },
+    {
+      "path": "art/full-ai-city/experiments/alpine-tower1-single-three-quarter-23421/single-raw-review/raw-front.png",
+      "sha256": "81ee76a73371c4306eeb8f51b3572f4855cfd172e8229697752a8ac71dbf14a0",
+      "bytes": 211262
+    },
+    {
+      "path": "art/full-ai-city/experiments/alpine-tower1-single-three-quarter-23421/single-raw-review/raw-right.png",
+      "sha256": "1ecde241da62c895b0d84ce48d685898d01e36251fb2f3f2f45e0727c177be28",
+      "bytes": 198219
+    },
+    {
+      "path": "art/full-ai-city/experiments/alpine-tower1-single-three-quarter-23421/single-raw-review/raw-back.png",
+      "sha256": "a748d232a4cd3af1b349a4f72c9b7620b613ac30c24e2982b0c973f6e1d3abce",
+      "bytes": 194290
+    },
+    {
+      "path": "art/full-ai-city/experiments/alpine-tower1-single-three-quarter-23421/single-raw-review/raw-left.png",
+      "sha256": "53b1e2efa6d7bf38079df9f68ffff83ae0fb14c9b8d3a931f8dd9b1fc5a0e132",
+      "bytes": 212261
+    },
+    {
+      "path": "art/full-ai-city/experiments/alpine-tower1-single-three-quarter-23421/single-raw-review/raw-iso.png",
+      "sha256": "8380072b09487a69f8c064746a779a01fc39fca300b13dd80db464fc0695c3c8",
+      "bytes": 207968
+    },
+    {
+      "path": "art/full-ai-city/experiments/alpine-tower1-single-three-quarter-23421/single-raw-review/gray-1024-front-iso.png",
+      "sha256": "807bd2564b5a0f270f30b2e7157a6368275e2089cd0e690cab7d6929de7903ac",
+      "bytes": 604796
+    },
+    {
+      "path": "art/full-ai-city/experiments/alpine-tower1-single-three-quarter-23421/single-raw-review/gray-1024-back-iso.png",
+      "sha256": "f7e87b776984b166bfe8d86e04ccac1640d67174ba2612b9acdf6b40fe0a8de6",
+      "bytes": 604850
+    }
+  ],
+  "seconds": 237.48,
+  "peakAllocatedGiB": 14.226,
+  "triangles": 1008683,
+  "runtimeApproved": false,
+  "findings": [
+    "Visible front facade, broad roof tiles, teal shutters, stone corners and window boxes closely follow the single three-quarter input.",
+    "The rear gable wall is almost entirely absent; a large adjacent side-wall strip is also absent. The five color rotations and both neutral obliques confirm open geometry, not merely dark texture.",
+    "The input-facing model is intrinsically rotated relative to the multiview and single-front baselines. Render camera labels name fixed camera positions, not perfectly matched facades.",
+    "One actual single-view inference completed. Its 237.48 seconds are close to the previous multiview 246.66 seconds; weights, preprocessing, export and system load differ, so this is not a causal speed benchmark.",
+    "Reject for gameplay. End this comparison batch; retain the existing multiview production route. No low-poly conversion or further single-view seed is authorized by this review."
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "region": "classic",
+  "asset": "villa_2",
+  "class": "core",
+  "status": "raw_ready",
+  "attempts": [
+    {
+      "id": "classic--villa_2-a001",
+      "startedAt": "2026-10-23T05:26:52.386493+00:00",
+      "report": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\classic--villa_2-a001\\classic--villa_2-a001-pixal-mv-1024-18341.json",
+      "log": "H:\\代码项目\\monopoly\\art\\full-ai-city\\logs\\classic--villa_2-a001.log",
+      "command": [
+        "C:\\Users\\A\\.codex\\worktrees\\0b69\\厂长\\grande-art-lab\\source\\experimental\\pixal-env\\Scripts\\python.exe",
+        "-B",
+        "-u",
+        "H:\\代码项目\\monopoly\\art\\full-ai-city\\tools\\run_raw_job.py",
+        "--job-id",
+        "classic--villa_2-a001",
+        "--views-dir",
+        "H:\\代码项目\\monopoly\\art\\themed-city-kit\\inputs\\classic-house-v01",
+        "--seed",
+        "18341"
+      ],
+      "inputSourceHash": "b73421a3f55bd22c92f546abaff15a3a3fe70b15012ef81a828a6ffb50a6056b",
+      "seed": 18341,
+      "pid": 38432,
+      "exitCode": 0,
+      "finishedAt": "2026-10-23T05:30:31.107149+00:00"
+    }
+  ],
+  "reference": {
+    "path": "H:\\代码项目\\monopoly\\art\\themed-city-kit\\inputs\\classic-house-v01\\transforms.json",
+    "sha256": "b73421a3f55bd22c92f546abaff15a3a3fe70b15012ef81a828a6ffb50a6056b",
+    "bytes": 4143
+  },
+  "inputSourceHash": "b73421a3f55bd22c92f546abaff15a3a3fe70b15012ef81a828a6ffb50a6056b",
+  "updatedAt": "2026-10-23T05:30:31.175831+00:00",
+  "revisions": [
+    {
+      "rawGLB": {
+        "path": "H:\\代码项目\\monopoly\\art\\themed-city-kit\\source\\classic-house-mv-v01-pixal-mv-1024-9247.glb",
+        "sha256": "2bcb272c41fabca430e0330fc124b549265b15288d745e790c661c5a87179a41",
+        "bytes": 40598792
+      },
+      "inferenceReport": {
+        "path": "H:\\代码项目\\monopoly\\art\\themed-city-kit\\reports\\classic-house-mv-v01\\classic-house-mv-v01-pixal-mv-1024-9247.json",
+        "sha256": "2c8e59d0d5c637483a57f8cbf95f89501e209f3efe78b7bd2def551b66cf8b45",
+        "bytes": 7721
+      },
+      "reference": {
+        "path": "H:\\代码项目\\monopoly\\art\\themed-city-kit\\inputs\\classic-house-v01\\transforms.json",
+        "sha256": "b73421a3f55bd22c92f546abaff15a3a3fe70b15012ef81a828a6ffb50a6056b",
+        "bytes": 4143
+      },
+      "reuse": "Only original completed three-view neural raw source reused. All mobile geometry/textures will be reprocessed with the common full-city LOD pipeline.",
+      "inputSourceHash": "b73421a3f55bd22c92f546abaff15a3a3fe70b15012ef81a828a6ffb50a6056b",
+      "reason": "Root inspected actual original and LOD: source has front-right foundation and wall-foot holes plus window-edge defects. Regenerate native MV from same independent three input views with a new seed; no manual fill geometry.",
+      "supersededAt": "2026-10-23T05:20:54.024340+00:00"
+    }
+  ],
+  "viewsDir": "H:\\代码项目\\monopoly\\art\\themed-city-kit\\inputs\\classic-house-v01",
+  "seed": 18341,
+  "sourceRevisionRequested": {
+    "reason": "Root inspected actual original and LOD: source has front-right foundation and wall-foot holes plus window-edge defects. Regenerate native MV from same independent three input views with a new seed; no manual fill geometry.",
+    "requestedSeed": 18341,
+    "previousRawSha256": "2bcb272c41fabca430e0330fc124b549265b15288d745e790c661c5a87179a41"
+  },
+  "rawGLB": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\classic--villa_2-a001-pixal-mv-1024-18341.glb",
+    "sha256": "2c4f88789bdf84f437ce1c954e7375b71dc65d95e56bce8957db5c0a82e5f32e",
+    "bytes": 41869212
+  },
+  "inferenceReport": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\classic--villa_2-a001\\classic--villa_2-a001-pixal-mv-1024-18341.json",
+    "sha256": "5b658e839359611163cb229ed406548aca6eabb3e0a0e121bffcf02226e1ce32",
+    "bytes": 8027
+  }
+}

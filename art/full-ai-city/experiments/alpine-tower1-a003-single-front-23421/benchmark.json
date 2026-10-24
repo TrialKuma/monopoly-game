@@ -1,0 +1,180 @@
+{
+  "status": "timing_recorded_visual_comparison_pending",
+  "experimentOnly": true,
+  "manifest": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\alpine-tower1-a003-single-front-23421\\manifest.json",
+    "sha256": "25a31a1ffcf997c12d631faf40704d373e482ee9f91a3fad82ee22e483b0b785",
+    "bytes": 5515
+  },
+  "actualSingleInferenceAttempts": 1,
+  "resourceWaitAttempts": 10,
+  "multiview": {
+    "inference": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\alpine--tower_1-a003\\alpine--tower_1-a003-pixal-mv-1024-23421.json",
+      "sha256": "a157620b57ef9831004539bcff1462499a1e45cc54e90c8b893588a860f698de",
+      "bytes": 8808
+    },
+    "raw": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\alpine--tower_1-a003-pixal-mv-1024-23421.glb",
+      "sha256": "2a8658414e5e379410bf4871708d975466678f4c2db756eb0701d9f529365f30",
+      "bytes": 41505644
+    },
+    "stageLog": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\alpine--tower_1-a003\\stages.jsonl",
+      "sha256": "a287c1f41465c55a2465723a5f5614197974d0e336c3fa4f150abab6d945f666",
+      "bytes": 13080
+    },
+    "totalRunSeconds": 246.66,
+    "peakAllocatedCUDAGiB": 16.365,
+    "priorSourceExportSeconds": 0,
+    "stageEnds": [
+      {
+        "stage": "pipeline_load",
+        "seconds": 19.109
+      },
+      {
+        "stage": "get_proj_cond_ss",
+        "seconds": 18.531
+      },
+      {
+        "stage": "Sampling sparse structure (proj)",
+        "seconds": 8.734
+      },
+      {
+        "stage": "get_proj_cond_shape",
+        "seconds": 1.859
+      },
+      {
+        "stage": "Sampling shape SLat (proj)",
+        "seconds": 6.797
+      },
+      {
+        "stage": "get_proj_cond_shape",
+        "seconds": 1.984
+      },
+      {
+        "stage": "Sampling HR shape SLat (proj, 1024)",
+        "seconds": 48.0
+      },
+      {
+        "stage": "get_proj_cond_shape",
+        "seconds": 27.297
+      },
+      {
+        "stage": "Sampling texture SLat (proj)",
+        "seconds": 27.109
+      },
+      {
+        "stage": "decode_latent",
+        "seconds": 4.516
+      },
+      {
+        "stage": "glb_material_and_mesh_export",
+        "seconds": 45.469
+      }
+    ],
+    "sparseTokens": [
+      {
+        "stage": "Sampling shape SLat (proj)",
+        "count": 3688
+      },
+      {
+        "stage": "Sampling HR shape SLat (proj, 1024)",
+        "count": 17210
+      },
+      {
+        "stage": "Sampling texture SLat (proj)",
+        "count": 17210
+      }
+    ],
+    "sampledMinimumAvailableRAMGiB": 2.760528564453125
+  },
+  "single": {
+    "inference": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\alpine-tower1-a003-single-front-23421\\attempt-011\\reports\\alpine-tower1-single-front-pixal-1024-23421.json",
+      "sha256": "d2af2a91f383fd9fb5678716dc87db769f9633af0297e86196d22674ceb4830e",
+      "bytes": 5604
+    },
+    "raw": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\alpine-tower1-a003-single-front-23421\\attempt-011\\source\\alpine-tower1-single-front-pixal-1024-23421.glb",
+      "sha256": "e63dbba4d1af7088fabb668d88505805967f9d05c07933e1498bcc14c997e2cb",
+      "bytes": 46663060
+    },
+    "stageLog": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\alpine-tower1-a003-single-front-23421\\attempt-011\\reports\\alpine-tower1-single-front-pixal-1024-23421.stages.jsonl",
+      "sha256": "8b67808db1401ea2b5196e7be50ef661516d9d56e92b98497e4ae9e0fee6483a",
+      "bytes": 13089
+    },
+    "fieldCapture": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\alpine-tower1-a003-single-front-23421\\attempt-011\\native-mobile\\single-front\\receipt.json",
+      "sha256": "ab0f16deb7740c43c01b1fab025a52a4575b13a94fac8c4a38be7d02879cdd4d",
+      "bytes": 3627
+    },
+    "totalRunSeconds": 328.81,
+    "peakAllocatedCUDAGiB": 14.229,
+    "priorSourceExportSeconds": 0,
+    "stageEnds": [
+      {
+        "stage": "pipeline_load",
+        "seconds": 20.219
+      },
+      {
+        "stage": "get_proj_cond_ss",
+        "seconds": 14.421
+      },
+      {
+        "stage": "Sampling sparse structure (proj)",
+        "seconds": 10.172
+      },
+      {
+        "stage": "get_proj_cond_shape",
+        "seconds": 1.219
+      },
+      {
+        "stage": "Sampling shape SLat (proj)",
+        "seconds": 8.672
+      },
+      {
+        "stage": "get_proj_cond_shape",
+        "seconds": 1.0
+      },
+      {
+        "stage": "Sampling HR shape SLat (proj, 1024)",
+        "seconds": 73.531
+      },
+      {
+        "stage": "get_proj_cond_shape",
+        "seconds": 7.828
+      },
+      {
+        "stage": "Sampling texture SLat (proj)",
+        "seconds": 41.718
+      },
+      {
+        "stage": "decode_latent",
+        "seconds": 11.282
+      },
+      {
+        "stage": "glb_material_and_mesh_export",
+        "seconds": 100.609
+      }
+    ],
+    "sparseTokens": [
+      {
+        "stage": "Sampling shape SLat (proj)",
+        "count": 4543
+      },
+      {
+        "stage": "Sampling HR shape SLat (proj, 1024)",
+        "count": 20924
+      },
+      {
+        "stage": "Sampling texture SLat (proj)",
+        "count": 20924
+      }
+    ],
+    "sampledMinimumAvailableRAMGiB": 1.4266471862792969
+  },
+  "interpretation": "This measured single sample took longer total wall time and lower allocated CUDA peak. Different model checkpoints, generated sparse token counts, native preprocessing and concurrent CPU/system memory conditions prevent attributing that difference solely to view count. Quality and downstream repair cost remain unreviewed.",
+  "formalQueueResumed": true
+}

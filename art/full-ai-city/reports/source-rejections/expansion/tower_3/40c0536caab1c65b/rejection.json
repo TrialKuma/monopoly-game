@@ -1,0 +1,52 @@
+{
+  "status": "rejected_native_export_source",
+  "region": "expansion",
+  "asset": "tower_3",
+  "reviewer": "asset_production",
+  "recordedAtUtc": "2026-10-24T05:02:57.172820+00:00",
+  "source": {
+    "path": "art/full-ai-city/source/expansion--tower_3-a010-pixal-mv-1024-9247.glb",
+    "sha256": "40c0536caab1c65bc9712de8076f1f57bb816ae85d4e644e64fb3cdd801294ae",
+    "bytes": 41478268
+  },
+  "sourceLevel": "Native 1M export; no untouched decoder attribution is made.",
+  "inferenceReport": {
+    "path": "art/full-ai-city/reports/source-rejections/expansion/tower_3/40c0536caab1c65b/expansion--tower_3-a010-pixal-mv-1024-9247.json",
+    "sha256": "6d90b8afa003db25d70486e9170541ee8ece8cb50bfae425d3ef1203ccbce63f",
+    "bytes": 10168
+  },
+  "inputReference": {
+    "path": "art/full-ai-city/reports/source-rejections/expansion/tower_3/40c0536caab1c65b/input-reference.json",
+    "sha256": "bd27a0bfdf5daf8b77f0fa9b523176cda3f2b9900c2dbbcf638c08378608e223",
+    "bytes": 4444
+  },
+  "diagnostic": null,
+  "diagnosticTool": null,
+  "sourceComparisonReport": {
+    "path": "art/full-ai-city/reports/source-rejections/expansion/tower_3/40c0536caab1c65b/source-comparison-processing.json",
+    "sha256": "889332bcd656c0521e9b2737fb15f22c7bc301a00bc448e7188cabb3720a90ff",
+    "bytes": 20947
+  },
+  "sourceViewEvidenceMode": "Explicitly selected existing renderedSource views; no additional or neutral render implied",
+  "evidence": [
+    {
+      "path": "art/full-ai-city/reports/source-rejections/expansion/tower_3/40c0536caab1c65b/raw-front.png",
+      "sha256": "fa3558c2b3326cbb719894477e6a963ddf5c73ea542fae656d7b31176df1a740",
+      "bytes": 203329
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/expansion/tower_3/40c0536caab1c65b/raw-iso.png",
+      "sha256": "bef03e58841eecfb94f2036300a1e02af8de4b4011390abeba7431e8b2f28241",
+      "bytes": 249678
+    }
+  ],
+  "finding": "Actually inspected original front/right/back reference, native front/iso comparison, all five final material views and256px. Main three-storey walls and roof are substantially coherent, and isolated small sill/pane notches alone would be accepted. However the native source includes a broad torn black ground sheet projecting well beyond the building on every side, with large holes and thin loose outline strips. This unwanted floating perimeter is prominent in all final phone views and incompatible with an intact standalone building parcel. Freeze this first completed native source; one independently reviewed same-reference retry is eligible. No new reference, geometry-only settings or resource guards changed; no unsupported claim about untouched decoder origin.",
+  "decision": "One independent same-reference seed. If repeated major defects remain, review three-view consistency before further inference; no automatic approval.",
+  "sourceUnchanged": true,
+  "notFinalCandidateReview": true,
+  "freezeTool": {
+    "path": "art/full-ai-city/reports/tool-snapshots/616860a00b28e670e1219d64c6cb5dad17f0946420568f786e80b6d789fb4a73-freeze_public_source_rejection.py",
+    "sha256": "616860a00b28e670e1219d64c6cb5dad17f0946420568f786e80b6d789fb4a73",
+    "bytes": 4304
+  }
+}

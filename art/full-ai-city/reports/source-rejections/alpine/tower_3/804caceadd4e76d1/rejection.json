@@ -1,0 +1,48 @@
+{
+  "status": "rejected_native_export_source",
+  "region": "alpine",
+  "asset": "tower_3",
+  "reviewer": "progression_design",
+  "source": {
+    "path": "art/full-ai-city/source/alpine--tower_3-a002-pixal-mv-1024-24423.glb",
+    "sha256": "804caceadd4e76d18799d51f7b62a299f50ac342f95102fda89f033c3d81c46a",
+    "bytes": 43274400
+  },
+  "sourceLevel": "Native 1M export; no untouched decoder attribution is made.",
+  "inferenceReport": {
+    "path": "art/full-ai-city/reports/source-rejections/alpine/tower_3/804caceadd4e76d1/alpine--tower_3-a002-pixal-mv-1024-24423.json",
+    "sha256": "3c561f6c72355f9a2e1d3109d61e938f68ca91f7f6e0f782cdc7e1b24674c105",
+    "bytes": 8814
+  },
+  "inputReference": {
+    "path": "art/full-ai-city/reports/source-rejections/alpine/tower_3/804caceadd4e76d1/input-reference.json",
+    "sha256": "046790b27b0a097283cdbb2b8fb86f1080be9a3f008eb311d8dc2001273149f9",
+    "bytes": 4420
+  },
+  "diagnostic": {
+    "path": "art/full-ai-city/reports/source-rejections/alpine/tower_3/804caceadd4e76d1/diagnostic.json",
+    "sha256": "bf4878ad704c6397054da2d655f9fc917a3720dc2053df7c8f2c5ec80116a043",
+    "bytes": 2035
+  },
+  "evidence": [
+    {
+      "path": "art/full-ai-city/reports/source-rejections/alpine/tower_3/804caceadd4e76d1/raw-front.png",
+      "sha256": "c9ca701cd8040361715177af9d5d228cc057fb3e975586534d0cc533e2d45ab0",
+      "bytes": 235913
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/alpine/tower_3/804caceadd4e76d1/raw-iso.png",
+      "sha256": "168d9d2ed83d2bc7c1eb38402b5a846b812dfd12ff758749259d13b060a6d669",
+      "bytes": 274672
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/alpine/tower_3/804caceadd4e76d1/raw-grey-front-iso.png",
+      "sha256": "6b33afe0c2ff85cf2080dfda4c68a3916848799082628f93c3a63435dff0f414",
+      "bytes": 788937
+    }
+  ],
+  "finding": "Second same-reference native export actually inspected in front/iso and 1024 neutral front-iso. The previous large diagonal side gap is improved, but the front still has major open patches above the upper arched window, below the upper balcony/window base, beside the lower window and along the stone-corner seam. Neutral material confirms missing or folded surface geometry, not dark glazing. The image-visible continuous plaster wall is absent in these bands. This is not a final low-poly or texture-only issue, and no untouched-decoder conclusion is made.",
+  "decision": "Hold this exact source. Second same-reference seed failed major geometry review; revise the reference to continuous wall bands, shallower attached balconies and consistent roof elevations before further inference. Do not silently approve or rerun the old reference again.",
+  "sourceUnchanged": true,
+  "notFinalCandidateReview": true
+}

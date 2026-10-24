@@ -1,0 +1,68 @@
+{
+  "status": "resumed_by_explicit_user_request",
+  "resumedAt": "2026-10-23T19:40:48.9922022Z",
+  "queues": [
+    {
+      "name": "raw",
+      "pid": 15596,
+      "tool": "H:\\代码项目\\monopoly\\art\\full-ai-city\\tools\\run_raw_queue.py",
+      "log": "H:\\代码项目\\monopoly\\art\\full-ai-city\\logs\\resume-20261024-034043-raw.log"
+    },
+    {
+      "name": "lod",
+      "pid": 2800,
+      "tool": "H:\\代码项目\\monopoly\\art\\full-ai-city\\tools\\run_lod_queue.py",
+      "log": "H:\\代码项目\\monopoly\\art\\full-ai-city\\logs\\resume-20261024-034043-lod.log"
+    },
+    {
+      "name": "hybrid",
+      "pid": 30216,
+      "tool": "H:\\代码项目\\monopoly\\art\\full-ai-city\\tools\\run_hybrid_queue.py",
+      "log": "H:\\代码项目\\monopoly\\art\\full-ai-city\\logs\\resume-20261024-034043-hybrid.log"
+    },
+    {
+      "name": "repair_low",
+      "pid": 49360,
+      "tool": "H:\\代码项目\\monopoly\\art\\full-ai-city\\tools\\run_repair_low_queue.py",
+      "log": "H:\\代码项目\\monopoly\\art\\full-ai-city\\logs\\resume-20261024-034043-repair_low.log"
+    },
+    {
+      "name": "legacy_repair",
+      "pid": 27448,
+      "tool": "H:\\代码项目\\monopoly\\art\\full-ai-city\\tools\\run_legacy_repair_queue.py",
+      "log": "H:\\代码项目\\monopoly\\art\\full-ai-city\\logs\\resume-20261024-034043-legacy_repair.log"
+    },
+    {
+      "name": "far_uv",
+      "pid": 54888,
+      "tool": "H:\\代码项目\\monopoly\\art\\full-ai-city\\tools\\run_far_uv_queue.py",
+      "log": "H:\\代码项目\\monopoly\\art\\full-ai-city\\logs\\resume-20261024-034043-far_uv.log"
+    }
+  ],
+  "isolatedHotelPid": 5776,
+  "preflight": {
+    "projectWorkersBeforeLaunch": 0,
+    "interruptedShop": {
+      "attempt": "compact--shop_2-a002",
+      "originalGLBPresent": false,
+      "tensorArchive": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\compact--shop_2-a002\\neural-export-inputs.pt",
+        "sha256": "ecf8b391eae90efd84317644dbeed72192fed2c1c242c29582b018a064af1ed7",
+        "bytes": 683650909
+      },
+      "action": "new immutable same-seed attempt permitted; interrupted artifacts preserved"
+    },
+    "isolatedHotel": {
+      "lowComplete": true,
+      "surfaceAndFieldHashesVerified": true,
+      "pendingRequest": "H:\\代码项目\\monopoly\\art\\full-ai-city\\queue\\native-export-replays\\compact-hotel2-fine0015-30k-low-863ff6bbf436.json",
+      "action": "resume pending field replay and final processing"
+    },
+    "snapshotDirectory": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\resume-20261024-034043-preserved"
+  },
+  "qualityThresholdsChanged": false,
+  "sharedGpuAndCpuLocksRetained": true,
+  "oldReloadAutomatorStarted": false,
+  "singleThreeQuarter": "will_schedule_one_isolated_inference_at_natural_gpu_boundary",
+  "automaticApproval": false
+}

@@ -1,0 +1,57 @@
+{
+  "status": "rejected_native_export_source",
+  "region": "harbor",
+  "asset": "civic_hall",
+  "reviewer": "asset_production",
+  "recordedAtUtc": "2026-10-24T01:53:19.021650+00:00",
+  "source": {
+    "path": "art/full-ai-city/source/harbor--civic_hall-a002-pixal-mv-1024-29483.glb",
+    "sha256": "4401c7c1c41a518fd2c031d45481e8c1774f4b0ae3e588a36b70c48cbdc1e0d2",
+    "bytes": 42890724
+  },
+  "sourceLevel": "Native 1M export; no untouched decoder attribution is made.",
+  "inferenceReport": {
+    "path": "art/full-ai-city/reports/source-rejections/harbor/civic_hall/4401c7c1c41a518f/harbor--civic_hall-a002-pixal-mv-1024-29483.json",
+    "sha256": "f7d98647993c094d2d57475e63a3fff86a66684af2903fb1de79720203cd041a",
+    "bytes": 10142
+  },
+  "inputReference": {
+    "path": "art/full-ai-city/reports/source-rejections/harbor/civic_hall/4401c7c1c41a518f/input-reference.json",
+    "sha256": "5afab25a49e77d8db3be0e7d53bf7d7ff5abdb3782577266ba9e34db75de26ff",
+    "bytes": 4435
+  },
+  "diagnostic": null,
+  "diagnosticTool": null,
+  "sourceComparisonReport": {
+    "path": "art/full-ai-city/reports/source-rejections/harbor/civic_hall/4401c7c1c41a518f/source-comparison-processing.json",
+    "sha256": "33f74b7ffb7ec4963efe6d2d03b136883650945004cb292aab6395e0428e660e",
+    "bytes": 19580
+  },
+  "sourceViewEvidenceMode": "Explicitly selected existing renderedSource views; no additional or neutral render implied",
+  "evidence": [
+    {
+      "path": "art/full-ai-city/reports/source-rejections/harbor/civic_hall/4401c7c1c41a518f/raw-front.png",
+      "sha256": "86c2c155f68c57fa138c466b7fa817979cc8f197df350d7f8d8081a6356e7bd6",
+      "bytes": 250932
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/harbor/civic_hall/4401c7c1c41a518f/raw-iso.png",
+      "sha256": "efdadf5a468ed7604bd6e89273d54f728d5d020f8ff7a8c44a35aa841348dd7b",
+      "bytes": 289729
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/harbor/civic_hall/4401c7c1c41a518f/raw-back.png",
+      "sha256": "be7e9632d8e7e633ea9869112da31c111739f4d52829dc11e3e862da4174ec9a",
+      "bytes": 246387
+    }
+  ],
+  "finding": "Actually viewed the new source front/isometric/back and five final material views plus256px. The first independent retry repairs the prior broad roof valleys, but rear wall has a long upper plaster wedge, an opening under the central lower window and a smaller opening under the right lower sill. These are visible in native back and persist in final, with the upper wedge obvious at phone scale. Main roof and other elevations are now coherent. Freeze rejection; evaluate one tightly bounded three-region rear plaster backing without changing windows or original geometry; no third same-reference seed.",
+  "decision": "One bounded rear-wall backing evaluation using measured local source surfaces. No third same-reference seed and no reference revision required if local repair remains within limits.",
+  "sourceUnchanged": true,
+  "notFinalCandidateReview": true,
+  "freezeTool": {
+    "path": "art/full-ai-city/reports/tool-snapshots/616860a00b28e670e1219d64c6cb5dad17f0946420568f786e80b6d789fb4a73-freeze_public_source_rejection.py",
+    "sha256": "616860a00b28e670e1219d64c6cb5dad17f0946420568f786e80b6d789fb4a73",
+    "bytes": 4304
+  }
+}

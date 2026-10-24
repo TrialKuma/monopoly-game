@@ -1,0 +1,311 @@
+{
+  "status": "local_repair_candidate_pending_visual_review",
+  "source": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\alpine--builders_guild-a001-pixal-mv-1024-9247.glb",
+    "sha256": "d3aefa70e16ee1ca3700be2a52b83f426ddb66d9a38fbe54cc588aa8baa2f93f",
+    "bytes": 42679404
+  },
+  "orientation": {
+    "enabled": true,
+    "candidate_degrees": 1.0063782149996616,
+    "applied_degrees": 1.0063782149996616,
+    "underside_area": 0.2282081229794343,
+    "normal_agreement": 0.9405887033525533,
+    "yaw_degrees": 180,
+    "pitch_degrees": 0,
+    "roll_degrees": 0,
+    "uniform_scale": 1.1201143427269415
+  },
+  "method": "Original successful front-wall boundary patch is recomputed with unchanged parameters. Two measured small right-roof gaps use a plane fitted only from adjacent real roof surfaces, original neighboring UV samples and 0.006 inward closure. Only inward-folded faces within the two exact roof ROIs and within 0.065 depth of that roof envelope are removed. Existing neural vertices and original image pixels are preserved. No replacement roof, building or manufactured cargo.",
+  "repairs": [
+    {
+      "name": "Front plaster under beam",
+      "specification": {
+        "name": "Front plaster under beam",
+        "u": [
+          1,
+          0,
+          0
+        ],
+        "v": [
+          0,
+          0,
+          1
+        ],
+        "n": [
+          0,
+          -1,
+          0
+        ],
+        "roi": [
+          0.105,
+          0.25,
+          0.315,
+          0.365
+        ],
+        "defectDepth": 0.22,
+        "donorDepth": 0.23,
+        "color": "plaster"
+      },
+      "missingSamples": 1024,
+      "boundarySamples": 1146,
+      "sampledDepthRange": [
+        -0.15036344528198242,
+        0.25955867767333984
+      ],
+      "inwardClosureThickness": 0.006,
+      "frontPatchTriangles": 2244,
+      "newVertices": 2446,
+      "newTriangles": 4888
+    },
+    {
+      "name": "Right roof upper measured inward fold",
+      "specification": {
+        "name": "Right roof upper measured inward fold",
+        "u": [
+          0,
+          1,
+          0
+        ],
+        "v": [
+          0,
+          0,
+          1
+        ],
+        "n": [
+          1,
+          0,
+          0
+        ],
+        "roi": [
+          -0.172,
+          -0.132,
+          0.68,
+          0.712
+        ],
+        "defectDepth": 0.02,
+        "donorDepth": 0.025,
+        "donorNormal": 0.25,
+        "color": "tile",
+        "planeRepair": true
+      },
+      "missingSamples": 235,
+      "boundarySamples": 1080,
+      "sampledDepthRange": [
+        -0.01635885238647461,
+        0.12476694583892822
+      ],
+      "measuredRoofPlane": [
+        0.08525633558566015,
+        -1.2114734864900585,
+        0.9476447998282276
+      ],
+      "depthDeficitThreshold": 0.007,
+      "localFoldFacesToDelete": 427,
+      "planeFitResidualMax": 0.011991635158128178,
+      "inwardClosureThickness": 0.006,
+      "frontPatchTriangles": 536,
+      "newVertices": 606,
+      "newTriangles": 1208
+    },
+    {
+      "name": "Right roof eave measured inward fold",
+      "specification": {
+        "name": "Right roof eave measured inward fold",
+        "u": [
+          0,
+          1,
+          0
+        ],
+        "v": [
+          0,
+          0,
+          1
+        ],
+        "n": [
+          1,
+          0,
+          0
+        ],
+        "roi": [
+          0.148,
+          0.179,
+          0.482,
+          0.505
+        ],
+        "defectDepth": 0.3,
+        "donorDepth": 0.3,
+        "donorNormal": 0.25,
+        "color": "tile",
+        "planeRepair": true
+      },
+      "missingSamples": 26,
+      "boundarySamples": 916,
+      "sampledDepthRange": [
+        0.3224588632583618,
+        0.3847160339355469
+      ],
+      "measuredRoofPlane": [
+        -0.20249274887743243,
+        -0.9907311662560309,
+        0.8750090445861518
+      ],
+      "depthDeficitThreshold": 0.007,
+      "localFoldFacesToDelete": 373,
+      "planeFitResidualMax": 0.011995172529383757,
+      "inwardClosureThickness": 0.006,
+      "frontPatchTriangles": 84,
+      "newVertices": 124,
+      "newTriangles": 240
+    }
+  ],
+  "originalTriangles": 980416,
+  "originalVerticesMoved": 0,
+  "originalTrianglesDeleted": 800,
+  "newTriangles": 6336,
+  "newVertices": 3176,
+  "inverseSimilarityError": 8.445599392059577e-08,
+  "normalizedOutput": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\alpine-workshop-roof-v2\\repair\\repaired-normalized.glb",
+    "sha256": "106a36424d86c46ae3b3a17b281e96f999c81ea00466c5b09327f0fa1075802c",
+    "bytes": 43436464
+  },
+  "nativeOutput": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\alpine-workshop-roof-v2\\repair\\repaired-native.glb",
+    "sha256": "edeb9fecf18db92dcd5e2be77f6e707d786ac9180bf6af656fe7bc4dfaef9d07",
+    "bytes": 43435996
+  },
+  "renders": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\alpine\\builders_guild\\edeb9fecf18db92dc\\views\\repaired-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\alpine\\builders_guild\\edeb9fecf18db92dc\\views\\repaired-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\alpine\\builders_guild\\edeb9fecf18db92dc\\views\\repaired-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\alpine\\builders_guild\\edeb9fecf18db92dc\\views\\repaired-left.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\alpine\\builders_guild\\edeb9fecf18db92dc\\views\\repaired-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.5,
+        -0.40160244703292847,
+        0.0
+      ],
+      "max": [
+        0.5,
+        0.40160244703292847,
+        0.7653419375419617
+      ]
+    },
+    "triangles": 985952,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "reviewImages": [
+    {
+      "path": "art/full-ai-city/reports/local-repairs/alpine/builders_guild/edeb9fecf18db92dc/views/repaired-front.png",
+      "sha256": "c638362da755d000f6cbba5884494f5ccf374f4a9ec7b85a0353224ab8c79481",
+      "bytes": 200911
+    },
+    {
+      "path": "art/full-ai-city/reports/local-repairs/alpine/builders_guild/edeb9fecf18db92dc/views/repaired-right.png",
+      "sha256": "95f3b1c108952a8c44229811c08dca03f207460b794d5540cc975d3d880d9299",
+      "bytes": 200150
+    },
+    {
+      "path": "art/full-ai-city/reports/local-repairs/alpine/builders_guild/edeb9fecf18db92dc/views/repaired-back.png",
+      "sha256": "9c1b29aef5a9f932099b18050f871fc5c952bac9dd6b510b6c0a9903485fb17f",
+      "bytes": 220391
+    },
+    {
+      "path": "art/full-ai-city/reports/local-repairs/alpine/builders_guild/edeb9fecf18db92dc/views/repaired-left.png",
+      "sha256": "7a1b917e70bf2c1801692947c0f9308278c001bbb29dd7ff5ecd714b87d730dd",
+      "bytes": 194356
+    },
+    {
+      "path": "art/full-ai-city/reports/local-repairs/alpine/builders_guild/edeb9fecf18db92dc/views/repaired-iso.png",
+      "sha256": "0b174b0df55010fe585469196e68945fb2272e323b44e3bfebb9dbffa2e1e5e0",
+      "bytes": 236561
+    }
+  ],
+  "processingTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\6391c15198f570335ef6d2d948916970052a1dccc2e64b8bd3d3728b3f80ddd3-repair_alpine_workshop_roof_v2.py",
+    "sha256": "6391c15198f570335ef6d2d948916970052a1dccc2e64b8bd3d3728b3f80ddd3",
+    "bytes": 12525
+  },
+  "completedAt": "2026-10-23T10:08:38.366652+00:00",
+  "diagnosticImages": [
+    {
+      "path": "art/full-ai-city/reports/local-repairs/alpine/builders_guild/edeb9fecf18db92dc/gray/gray-right.png",
+      "sha256": "fbba5d32580885d58dbcb325b5288824e869cb8b71fc2fb4da013a5fa0ce84c4",
+      "bytes": 601602
+    },
+    {
+      "path": "art/full-ai-city/reports/local-repairs/alpine/builders_guild/edeb9fecf18db92dc/gray/gray-iso.png",
+      "sha256": "e0798d1b26cc9c88e6cdca8e0838d0157658e1d2666eaf5ce97ab95d03f96056",
+      "bytes": 692409
+    }
+  ],
+  "diagnosticTool": {
+    "path": "art/full-ai-city/reports/tool-snapshots/a8322f10a7cddded461785dcd0dc86f7eca812c2cbc487f53fd8cf121747f4c9-render_alpine_workshop_roof_v2_gray.py",
+    "sha256": "a8322f10a7cddded461785dcd0dc86f7eca812c2cbc487f53fd8cf121747f4c9",
+    "bytes": 1584
+  },
+  "diagnosticReceipt": {
+    "path": "art/full-ai-city/reports/local-repairs/alpine/builders_guild/edeb9fecf18db92dc/gray/inspection.json",
+    "sha256": "2b0ec53dfbb52f377ed98f68bdeaf2604b1081a267377a1cfcfcd0bb972a44d5",
+    "bytes": 1129
+  },
+  "sourceBeforeRepairGray": {
+    "path": "art/full-ai-city/reports/local-repairs/alpine/builders_guild/edeb9fecf18db92dc/before/source-grey-right.png",
+    "sha256": "4b0eea0ab990a63a7b7c8ca3a1f7410c3bc45627394276d3a024cc6ccbf99bd8",
+    "bytes": 173092
+  },
+  "pixelRayDiagnostic": {
+    "path": "art/full-ai-city/reports/local-repairs/alpine/builders_guild/edeb9fecf18db92dc/before/diagnostic.json",
+    "sha256": "383191f1c3f8014bb965c0f47756fa70aea7e7c45df1f543d9948308c17fa83d",
+    "bytes": 19714
+  },
+  "pixelRayDiagnosticTool": {
+    "path": "art/full-ai-city/reports/tool-snapshots/1069e4e64f40f7f087985848b532ed137784e57ace08cd05abf3d9feb754f6da-diagnose_alpine_workshop_roof_v2.py",
+    "sha256": "1069e4e64f40f7f087985848b532ed137784e57ace08cd05abf3d9feb754f6da",
+    "bytes": 2544
+  },
+  "sourcePreservation": {
+    "path": "art/full-ai-city/reports/local-repairs/alpine/builders_guild/edeb9fecf18db92dc/preservation.json",
+    "sha256": "78b476b79ac170991d7cbf47cee562314adfcdd7e830a271b37f506c3d7fb8ac",
+    "bytes": 90426
+  },
+  "originalRepairReport": {
+    "path": "art/full-ai-city/reports/local-repairs/alpine/builders_guild/edeb9fecf18db92dc/source-repair-report.json",
+    "sha256": "d7cb80dc3e9e8180e3b9c43fb4da6d58cc2f67efb3c7e99be7e4b9eaa6f1467d",
+    "bytes": 8001
+  },
+  "visualReview": {
+    "status": "source_repair_ready_for_derivation",
+    "reviewer": "/root/outskirts",
+    "recordedAtUtc": "2026-10-23T10:15:29.814367+00:00",
+    "notes": "Independently inspected all five source color views and neutral right/iso. Upper-center and lower-eave openings are restored. A small top-patch lower crease remains as a short thin seam and irregular tile in the 512px color view. Do not enlarge the repair now. Proceed to low-poly derivation, whose actual final images still require separate approval; a reopened or enlarged crack in the 30k derivative must be rejected."
+  },
+  "runtimeApproved": false,
+  "freezeTool": {
+    "path": "art/full-ai-city/reports/tool-snapshots/ec03baa0be11a451daa9b3f3775f54ddf832fe3387465d16e6a57e9e6559cd48-freeze_workshop_roof_v2.py",
+    "sha256": "ec03baa0be11a451daa9b3f3775f54ddf832fe3387465d16e6a57e9e6559cd48",
+    "bytes": 3591
+  }
+}

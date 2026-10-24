@@ -1,0 +1,272 @@
+{
+  "status": "exported_pending_visual_review",
+  "createdAt": "2026-10-23T06:48:13.999282+00:00",
+  "region": "harbor",
+  "asset": "villa_2",
+  "source": {
+    "rawGLB": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\harbor--villa_2-a002-pixal-mv-1024-18343.glb",
+      "sha256": "9ed0c0d68175a174285c477f5c6f69b1ad75b0e019f7e7ff15c1ec7abdfd14d9",
+      "bytes": 40291252
+    }
+  },
+  "inferenceReport": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\harbor--villa_2-a002\\harbor--villa_2-a002-pixal-mv-1024-18343.json",
+    "sha256": "748aae088e8d7371c089a44d873b19fc9dab7de0f9e57246b957a6dae5da5de0",
+    "bytes": 8130
+  },
+  "reference": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\inputs\\harbor\\villa_2\\bb88929a0860827d\\reference.json",
+    "sha256": "f685887f4cd492a30587b6973fe086a53ae7e70a9c49e47852941416847d43e0",
+    "bytes": 4415
+  },
+  "processingTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\5b30a9b3cf6036533b4c705e91db74b3ab8f199d8a8ee6b75229299dfa725641-process_lod.py",
+    "sha256": "5b30a9b3cf6036533b4c705e91db74b3ab8f199d8a8ee6b75229299dfa725641",
+    "bytes": 25277
+  },
+  "assumedCameras": true,
+  "cameraCalibration": "assumed_standard_orbit_not_measured",
+  "nativePipeline": "Pixal3DMVImageTo3DPipeline.run_mv",
+  "nativeResolution": 1024,
+  "seed": 18343,
+  "geometryOrigin": "Only the actual neural source reduced and rebaked; no authored substitute geometry or manually constructed surfaces",
+  "orientation": {
+    "up": "Y",
+    "front": "+Z",
+    "groundY": 0,
+    "maxEdge": 1
+  },
+  "requestedTriangles": 45000,
+  "limitations": [
+    "Assumed camera reference reconstruction, not exact measured architecture",
+    "Final candidate requires actual rendered visual approval"
+  ],
+  "animation": null,
+  "processingComplete": true,
+  "lod": "near",
+  "processingRevision": 0,
+  "sourceArtifactCleanup": {
+    "method": "Delete source-derived triangles entirely below z=0.014 when original UV-centroid mean RGB is below 0.18 or their XY centroid is more than 0.012 from the actual foundation vertices at z=0.014..0.04. This removes detached colored floor remnants as well as the dark sheet; no new faces added",
+    "deletedTriangles": 13270,
+    "originalTriangles": 945730,
+    "foundationSampleVertices": 19370
+  },
+  "derivation": {
+    "rawTriangles": 945730,
+    "weldedTriangles": 922117,
+    "remeshedTriangles": 8977776,
+    "voxelSize": 0.0015,
+    "finalTriangles": 44985,
+    "atlasArea": 0.45000383423509643,
+    "singleReductionPass": true,
+    "inheritedUVRemovedBeforeReduction": true,
+    "sourceMaterialsUntouched": true
+  },
+  "bake": {
+    "method": "CPU closest-original-triangle projection with float64 barycentric original UV and bilinear original texture sampling; geometric normals retained, no directional normal-map rebake or invented color",
+    "coveredAtlasPixels": 470276,
+    "nearestLookupSuccessFraction": 1.0,
+    "notRayCoverage": true,
+    "sourceDistanceQuantiles": [
+      8.19166743895039e-05,
+      0.0006352133641485125,
+      0.0010321196459699422,
+      0.006069110706448555
+    ],
+    "sourceDistanceQuantileLevels": [
+      0.5,
+      0.95,
+      0.99,
+      1
+    ],
+    "overTwoPercentMaxEdge": 0.0,
+    "distanceReviewRequired": false,
+    "visualGeometryReviewRequired": true,
+    "barycentricOriginalRange": [
+      -0.0002562842176362379,
+      1.0
+    ],
+    "degenerateOrInvalidBarycentricCount": 0,
+    "closestSourceVertexFallbackFraction": 0.0,
+    "barycentricPointReconstructionErrorQuantiles": [
+      9.317799747703875e-09,
+      4.861734683436021e-08,
+      3.1058121033221534e-07
+    ],
+    "atlasOverlapPixelsWithDifferentSurface": 2061,
+    "seconds": 8.722965900000418,
+    "maps": [
+      {
+        "role": "base",
+        "size": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "role": "orm",
+        "size": [
+          512,
+          512
+        ]
+      }
+    ]
+  },
+  "textureTransferTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\a2cb99c96fb8df396f16580a88a7c6151104ee3c927fe76cd161ee2d27bdfa42-bake_nearest_surface.py",
+    "sha256": "a2cb99c96fb8df396f16580a88a7c6151104ee3c927fe76cd161ee2d27bdfa42",
+    "bytes": 7317
+  },
+  "quantization": {
+    "source": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\root-fine-voxel\\harbor\\villa_2.glb",
+    "output": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\root-fine-voxel\\harbor\\villa_2.glb",
+    "sourceBytes": 2542316,
+    "outputBytes": 1818896,
+    "sourceSha256": "66daebd79cc476f06b413d49859d0b9eac103330c3e72ae2be912452c3946a7d",
+    "outputSha256": "f379a5708425f174ccc9ac57bab7fdbb4e1bdc476f26a409297dfca3ca60094d",
+    "positionFaceAndTextureBytesUnchanged": true,
+    "attributes": [
+      {
+        "accessor": 1,
+        "semantic": "NORMAL",
+        "count": 60298,
+        "maximumAngularErrorDegrees": 0.3764651436773334
+      },
+      {
+        "accessor": 2,
+        "semantic": "TEXCOORD_0",
+        "count": 60298,
+        "maximumUVError": 7.629494577221507e-06,
+        "maximumTexelErrorAt1024": 0.007812602447074823
+      }
+    ]
+  },
+  "processedCandidate": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\root-fine-voxel\\harbor\\villa_2.glb",
+    "sha256": "f379a5708425f174ccc9ac57bab7fdbb4e1bdc476f26a409297dfca3ca60094d",
+    "bytes": 1818896
+  },
+  "glbValidation": {
+    "version": 2,
+    "triangles": 44985,
+    "meshes": 1,
+    "materials": 1,
+    "images": 2,
+    "all_primitives_have_uv": true,
+    "animations": [],
+    "all_images_embedded": true,
+    "external_buffers": []
+  },
+  "triangles": 44985,
+  "renderedCandidate": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\root-fine-voxel\\renders\\harbor\\villa_2\\lod-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\root-fine-voxel\\renders\\harbor\\villa_2\\lod-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\root-fine-voxel\\renders\\harbor\\villa_2\\lod-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\root-fine-voxel\\renders\\harbor\\villa_2\\lod-left.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\root-fine-voxel\\renders\\harbor\\villa_2\\lod-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.4344591200351715,
+        -0.296926349401474,
+        0.0003911773965228349
+      ],
+      "max": [
+        0.46082764863967896,
+        0.3068847358226776,
+        0.8738027215003967
+      ]
+    },
+    "triangles": 44985,
+    "textureSizes": [
+      {
+        "name": "harbor__villa_2__nearest_base",
+        "size": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "name": "harbor__villa_2__nearest_orm",
+        "size": [
+          512,
+          512
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "renderedSource": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\root-fine-voxel\\renders\\harbor\\villa_2\\raw-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\root-fine-voxel\\renders\\harbor\\villa_2\\raw-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.5,
+        -0.3381083905696869,
+        0.0
+      ],
+      "max": [
+        0.5,
+        0.3381083905696869,
+        0.8743711709976196
+      ]
+    },
+    "triangles": 945730,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "bounds": {
+    "min": [
+      -0.4344591200351715,
+      0.0003911773965228349,
+      -0.3068847358226776
+    ],
+    "max": [
+      0.46082764863967896,
+      0.8738027215003967,
+      0.296926349401474
+    ],
+    "coordinateSystem": "GLTF Y-up; +Z front"
+  },
+  "textureSizes": [
+    {
+      "name": "harbor__villa_2__nearest_base",
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "name": "harbor__villa_2__nearest_orm",
+      "size": [
+        512,
+        512
+      ]
+    }
+  ],
+  "rawSourceUnchanged": true,
+  "completedAt": "2026-10-23T06:51:33.606118+00:00"
+}

@@ -1,0 +1,43 @@
+{
+  "status": "reference_inputs_reused",
+  "asset": "expansion_villa_2",
+  "map": "expansion",
+  "reason": "Reuse the three existing independent ImageGen inputs for this regional villa_2. Current model acceptance is separately controlled by the root runtime approval registry.",
+  "sourceReview": "Historical previous-round provenance only; NOT current runtime approval. Re-inference or repaired candidates may replace it.",
+  "originalInputs": [
+    {
+      "view": "front",
+      "path": "art/themed-city-kit/inputs/expansion-house-v01/view00_azim000.png",
+      "sha256": "9b44bd56018fa62c694dfc762c40bb732bc0a6af37fd1442b64dcbfbfad60d25",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "view": "right",
+      "path": "art/themed-city-kit/inputs/expansion-house-v01/view01_azim090.png",
+      "sha256": "d4428caa4b47798f1bece13328340f968fd7289b967e87fd5f56b9154f36fba6",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "view": "back",
+      "path": "art/themed-city-kit/inputs/expansion-house-v01/view02_azim180.png",
+      "sha256": "74be5b7e20bb544819e3276197d397894e75f6974dfba3745ff3cf83784379b5",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA"
+    }
+  ],
+  "inferenceAndVisualReviewManifest": "art/themed-city-kit/reports/approved-houses.json",
+  "inputPreparation": "Use the three existing independent transparent images directly; no triptych composition or image redraw.",
+  "historicalSourceGlb": "assets/models/regions-ai/expansion_house.glb",
+  "historicalSourceSha256": "182f4eb522f183f2a2dea13a7e0133dddf0bafcc4026409310feceb361b9c561"
+}

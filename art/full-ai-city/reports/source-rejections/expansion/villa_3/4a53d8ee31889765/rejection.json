@@ -1,0 +1,62 @@
+{
+  "status": "rejected_native_export_source",
+  "region": "expansion",
+  "asset": "villa_3",
+  "reviewer": "asset_production",
+  "recordedAtUtc": "2026-10-24T06:12:30.455711+00:00",
+  "source": {
+    "path": "art/full-ai-city/source/expansion--villa_3-a013-pixal-mv-1024-29499.glb",
+    "sha256": "4a53d8ee31889765d686e88d8a9176aacc165739d943c71b360548e4e0aae270",
+    "bytes": 40273352
+  },
+  "sourceLevel": "Native 1M export; no untouched decoder attribution is made.",
+  "inferenceReport": {
+    "path": "art/full-ai-city/reports/source-rejections/expansion/villa_3/4a53d8ee31889765/expansion--villa_3-a013-pixal-mv-1024-29499.json",
+    "sha256": "6dad4b578ed003ada27452c6006e453e77c5f9a2cdf385cde668395fcdfc7327",
+    "bytes": 10163
+  },
+  "inputReference": {
+    "path": "art/full-ai-city/reports/source-rejections/expansion/villa_3/4a53d8ee31889765/input-reference.json",
+    "sha256": "b354132c19754e2fc1ae7bfbf537f37e4fa3ee060cc85cee80c629dbee19dfdf",
+    "bytes": 4444
+  },
+  "diagnostic": null,
+  "diagnosticTool": null,
+  "sourceComparisonReport": {
+    "path": "art/full-ai-city/reports/source-rejections/expansion/villa_3/4a53d8ee31889765/source-comparison-processing.json",
+    "sha256": "716d08424c3befe7aa23b5a2291a7a231650bf1c64a80b176df0eb5d04fa9d1d",
+    "bytes": 20966
+  },
+  "sourceViewEvidenceMode": "Explicitly selected existing renderedSource views; no additional or neutral render implied",
+  "evidence": [
+    {
+      "path": "art/full-ai-city/reports/source-rejections/expansion/villa_3/4a53d8ee31889765/raw-front.png",
+      "sha256": "dc386ff4eb53b41ba88c1f714d3bd366874a36d0d1405804fc2be19045740e67",
+      "bytes": 232059
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/expansion/villa_3/4a53d8ee31889765/raw-iso.png",
+      "sha256": "85c11ec3268b97475d641ff3e8934c89e451d14341326ae95302b88a02b78b6c",
+      "bytes": 294933
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/expansion/villa_3/4a53d8ee31889765/raw-right.png",
+      "sha256": "64d4131b8402fa3b529b9f92566db2ce141cb615c4dc2e70f77c38a4a9144232",
+      "bytes": 202498
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/expansion/villa_3/4a53d8ee31889765/raw-back.png",
+      "sha256": "ee8ef1935bd5a2463c5175f423c377177e7c27fbfad77b8abad77fbb86d6977b",
+      "bytes": 223780
+    }
+  ],
+  "finding": "Actually inspected revised reference cf4c87cc, native front/iso comparison plus native right and back, all five final material views and256px. Main closed glazing, roof, left front and entry are improved. However a rear middle-floor brick strip beside the right window is torn, a right upper-window lintel strip is absent, and the front outer-right edge retains open wall strips beside the downpipe. These are native source features retained in final phone views. Hold this second completed source of the revised reference; no third seed or further reference revision. Assess one bounded set of measured surface additions preserving every original face/UV/image. Minor isolated sill/base chips are not targets.",
+  "decision": "Strictly bounded local repair assessment only. Same-reference retry budget exhausted; no further seed or reference.",
+  "sourceUnchanged": true,
+  "notFinalCandidateReview": true,
+  "freezeTool": {
+    "path": "art/full-ai-city/reports/tool-snapshots/616860a00b28e670e1219d64c6cb5dad17f0946420568f786e80b6d789fb4a73-freeze_public_source_rejection.py",
+    "sha256": "616860a00b28e670e1219d64c6cb5dad17f0946420568f786e80b6d789fb4a73",
+    "bytes": 4304
+  }
+}

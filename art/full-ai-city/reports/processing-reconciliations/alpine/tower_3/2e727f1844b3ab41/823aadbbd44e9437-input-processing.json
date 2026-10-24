@@ -1,0 +1,325 @@
+{
+  "status": "exported_pending_visual_review",
+  "createdAt": "2026-10-23T08:35:50.450828+00:00",
+  "region": "classic",
+  "asset": "villa_3",
+  "source": {
+    "rawGLB": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\classic--villa_3-a003-pixal-mv-1024-18342.glb",
+      "sha256": "a966874938b9d85215b844d0ddf643791a9ca37081b904ffbe95b7d2262f640a",
+      "bytes": 40411388
+    }
+  },
+  "inferenceReport": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\classic--villa_3-a003\\classic--villa_3-a003-pixal-mv-1024-18342.json",
+    "sha256": "0c6bd3f2e6fa24815883e2152ff132b8e9ca07e9385829dca6aa8c9ced843df2",
+    "bytes": 8142
+  },
+  "reference": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\inputs\\classic\\villa_3\\5cc4ff00890f7a1f\\reference.json",
+    "sha256": "cec2d7fcfe99880e3e05cdef16ae9896366719e45d9f0836fb258ad6815b27da",
+    "bytes": 4434
+  },
+  "processingTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\364e5afe80bef5786a38acff2c342b529d4b454559d2b48b5a0657771fdeb765-process_lod.py",
+    "sha256": "364e5afe80bef5786a38acff2c342b529d4b454559d2b48b5a0657771fdeb765",
+    "bytes": 25875
+  },
+  "assumedCameras": true,
+  "cameraCalibration": "assumed_standard_orbit_not_measured",
+  "nativePipeline": "Pixal3DMVImageTo3DPipeline.run_mv",
+  "nativeResolution": 1024,
+  "seed": 18342,
+  "geometryOrigin": "Exact approved neural-derived near geometry, including its disclosed bounded local repairs where present, simplified with topology and boundary preservation for far use. No substitute building; original inference remains separate and unchanged.",
+  "orientation": {
+    "up": "Y",
+    "front": "+Z",
+    "groundY": 0,
+    "maxEdge": 1
+  },
+  "requestedTriangles": 20000,
+  "limitations": [
+    "Assumed camera reference reconstruction, not exact measured architecture",
+    "Final candidate requires actual rendered visual approval"
+  ],
+  "animation": null,
+  "processingComplete": true,
+  "lod": "far",
+  "processingRevision": 1,
+  "derivedFromNear": {
+    "path": "H:\\代码项目\\monopoly\\assets\\models\\regions-ai\\full\\classic\\villa_3\\9cd6e3f4d9c66ae8.glb",
+    "sha256": "9cd6e3f4d9c66ae805161dbfc7831cf71f06b81cbadb5ea8cdc2c10592aa694e",
+    "bytes": 1862516
+  },
+  "derivedFromNearReport": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\processing-reconciliations\\alpine\\tower_3\\2e727f1844b3ab41\\03d115a79419b103-9cd6e3f4d9c66ae8-03d115a79419b103.json",
+    "sha256": "b7e401995f2ebc55c4b81c98df03656ee87aac202c77ca559eea851900669ac6",
+    "bytes": 31683
+  },
+  "farSimplification": {
+    "source": {
+      "path": "H:\\代码项目\\monopoly\\assets\\models\\regions-ai\\full\\classic\\villa_3\\9cd6e3f4d9c66ae8.glb",
+      "sha256": "9cd6e3f4d9c66ae805161dbfc7831cf71f06b81cbadb5ea8cdc2c10592aa694e"
+    },
+    "output": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\002-classic-villa3-far20k-nativeUV-v01\\far-surface.npz",
+    "outputSha256": "97984ff75e4b37b30b81577de881fb9c73fdfd45260e6dabea43d3d78f8c0832",
+    "tool": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\e1cebc38c56c536fc09ec03ec4c1cad0060e4f6c21693fa5284e689cf37b9f7b-simplify_far_surface.py",
+      "sha256": "e1cebc38c56c536fc09ec03ec4c1cad0060e4f6c21693fa5284e689cf37b9f7b",
+      "pymeshlabVersion": "2025.7.post1"
+    },
+    "sourceTriangles": 44970,
+    "actualTriangles": 20000,
+    "actualVertices": 9251,
+    "method": "PyMeshLab quadric collapse preserving boundary, normal and topology with planar quadrics",
+    "settings": {
+      "targetfacenum": 20000,
+      "qualitythr": 0.3,
+      "preserveboundary": true,
+      "boundaryweight": 20.0,
+      "preservenormal": true,
+      "preservetopology": true,
+      "optimalplacement": true,
+      "planarquadric": true,
+      "planarweight": 0.01,
+      "autoclean": true
+    },
+    "geometryOrigin": "Only existing approved neural-derived surface simplified; no authored geometry",
+    "sourceCleanup": []
+  },
+  "derivation": {
+    "rawTriangles": 972614,
+    "weldedTriangles": 20000,
+    "remeshedTriangles": 20000,
+    "voxelSize": 0,
+    "finalTriangles": 20000,
+    "atlasArea": 0.4228581930609502,
+    "singleReductionPass": true,
+    "inheritedUVRemovedBeforeReduction": true,
+    "sourceMaterialsUntouched": true,
+    "uvUnwrap": {
+      "angleDegrees": 66.0,
+      "islandMargin": 2e-05,
+      "marginMethod": "SCALED",
+      "nominalMarginPixels": null
+    },
+    "nearTriangles": 44970
+  },
+  "bake": {
+    "method": "CPU selected-to-active bake from the exact approved neural-derived near mesh/materials onto its welded, UV-free, single-pass reduced far surface. No further voxelization or authored geometry.",
+    "coveredAtlasPixels": 111193,
+    "nearestLookupSuccessFraction": 1.0,
+    "notRayCoverage": true,
+    "sourceDistanceQuantiles": [
+      0.0003377324901521206,
+      0.0020254027098417283,
+      0.0033163842372596272,
+      0.008117739111185074
+    ],
+    "sourceDistanceQuantileLevels": [
+      0.5,
+      0.95,
+      0.99,
+      1
+    ],
+    "overTwoPercentMaxEdge": 0.0,
+    "distanceReviewRequired": false,
+    "visualGeometryReviewRequired": true,
+    "barycentricOriginalRange": [
+      -4.6104022066666e-05,
+      1.0
+    ],
+    "degenerateOrInvalidBarycentricCount": 0,
+    "closestSourceVertexFallbackFraction": 0.0,
+    "barycentricPointReconstructionErrorQuantiles": [
+      5.058472042387361e-09,
+      3.995189193055528e-08,
+      4.331279786511964e-07
+    ],
+    "atlasOverlapPixelsWithDifferentSurface": 495,
+    "seconds": 2.2685874000017066,
+    "maps": [
+      {
+        "role": "base",
+        "size": [
+          512,
+          512
+        ]
+      },
+      {
+        "role": "orm",
+        "size": [
+          256,
+          256
+        ]
+      }
+    ]
+  },
+  "textureTransferTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\a2cb99c96fb8df396f16580a88a7c6151104ee3c927fe76cd161ee2d27bdfa42-bake_nearest_surface.py",
+    "sha256": "a2cb99c96fb8df396f16580a88a7c6151104ee3c927fe76cd161ee2d27bdfa42",
+    "bytes": 7317
+  },
+  "farShading": {
+    "normals": "actual_geometry_only",
+    "baseColorSize": 512,
+    "ormSize": 256,
+    "reason": "Actual diagnostic isolated second-generation tangent-space normal rebake as the cause of black dormers/chimneys. Keep the verified geometric normals and original-near-derived color/ORM, omit normalTexture."
+  },
+  "quantization": {
+    "source": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\002-classic-villa3-far20k-nativeUV-v01\\candidates\\classic\\villa_3.glb",
+    "output": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\002-classic-villa3-far20k-nativeUV-v01\\candidates\\classic\\villa_3.glb",
+    "sourceBytes": 1102136,
+    "outputBytes": 774172,
+    "sourceSha256": "803e3f6d5fb3f105d4a8e16aa8abd421c5aec346db9712766a0cc1a85e41d3de",
+    "outputSha256": "10ad682e39c81678840466fdb9f3efd51bed879121fa9b4558e290455ee28941",
+    "positionFaceAndTextureBytesUnchanged": true,
+    "attributes": [
+      {
+        "accessor": 1,
+        "semantic": "NORMAL",
+        "count": 27343,
+        "maximumAngularErrorDegrees": 0.37579303005565057
+      },
+      {
+        "accessor": 2,
+        "semantic": "TEXCOORD_0",
+        "count": 27343,
+        "maximumUVError": 7.629378160095568e-06,
+        "maximumTexelErrorAt1024": 0.0078124832359378615
+      }
+    ]
+  },
+  "processedCandidate": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\002-classic-villa3-far20k-nativeUV-v01\\candidates\\classic\\villa_3.glb",
+    "sha256": "10ad682e39c81678840466fdb9f3efd51bed879121fa9b4558e290455ee28941",
+    "bytes": 774172
+  },
+  "glbValidation": {
+    "version": 2,
+    "triangles": 20000,
+    "meshes": 1,
+    "materials": 1,
+    "images": 2,
+    "all_primitives_have_uv": true,
+    "animations": [],
+    "all_images_embedded": true,
+    "external_buffers": []
+  },
+  "triangles": 20000,
+  "renderedCandidate": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\002-classic-villa3-far20k-nativeUV-v01\\candidates\\renders\\classic\\villa_3\\lod-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\002-classic-villa3-far20k-nativeUV-v01\\candidates\\renders\\classic\\villa_3\\lod-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\002-classic-villa3-far20k-nativeUV-v01\\candidates\\renders\\classic\\villa_3\\lod-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\002-classic-villa3-far20k-nativeUV-v01\\candidates\\renders\\classic\\villa_3\\lod-left.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\002-classic-villa3-far20k-nativeUV-v01\\candidates\\renders\\classic\\villa_3\\lod-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.3575412631034851,
+        -0.2050004005432129,
+        -4.9026850319933146e-05
+      ],
+      "max": [
+        0.3260112404823303,
+        0.2279515415430069,
+        0.8869774341583252
+      ]
+    },
+    "triangles": 20000,
+    "textureSizes": [
+      {
+        "name": "classic__villa_3__nearest_base",
+        "size": [
+          512,
+          512
+        ]
+      },
+      {
+        "name": "classic__villa_3__nearest_orm",
+        "size": [
+          256,
+          256
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "renderedSource": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\002-classic-villa3-far20k-nativeUV-v01\\candidates\\renders\\classic\\villa_3\\raw-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\002-classic-villa3-far20k-nativeUV-v01\\candidates\\renders\\classic\\villa_3\\raw-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.5,
+        -0.3543401062488556,
+        0.0
+      ],
+      "max": [
+        0.5,
+        0.3543401062488556,
+        0.8877438306808472
+      ]
+    },
+    "triangles": 972614,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "bounds": {
+    "min": [
+      -0.3575412631034851,
+      -4.9026850319933146e-05,
+      -0.2279515415430069
+    ],
+    "max": [
+      0.3260112404823303,
+      0.8869774341583252,
+      0.2050004005432129
+    ],
+    "coordinateSystem": "GLTF Y-up; +Z front"
+  },
+  "textureSizes": [
+    {
+      "name": "classic__villa_3__nearest_base",
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "name": "classic__villa_3__nearest_orm",
+      "size": [
+        256,
+        256
+      ]
+    }
+  ],
+  "rawSourceUnchanged": true,
+  "completedAt": "2026-10-23T08:36:17.853310+00:00",
+  "farBudgetTrial": {
+    "requestedTriangles": 20000,
+    "automaticApproval": false,
+    "reason": "12k trial had visible dormer and cornice damage. Root authorized a single 18-20k trial; total scene scenic budget is unchanged."
+  }
+}

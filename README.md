@@ -39,7 +39,7 @@ python -m http.server 8876
 
 首次仓库有 ¥1,200。入场支付门票：经典/紧凑 ¥100，都市 ¥200，港湾 ¥250，温泉 ¥350；点击出发前会显示扣款。完成正式对局时，玩家剩余现金原数存回仓库；提前退出不退门票、不发结算收益。每局按完成、胜利、满级双格地产获得 1–3 件对应收藏品，金币加收藏品用于三级小城建设。本机榜按地图和模式分别记录结束现金，局外消费不改变成绩。仓库不足 ¥100 时，每个本机日期可领取一次 ¥300 救急补给。存档保存在当前浏览器。
 
-竖屏主操作固定在屏幕下方，地块详情、快报、规则从底部打开；事件需要点右侧“继续”或确认按钮，不会倒计时自动跳过。默认局部镜头带死区和平滑延迟跟随玩家；拖动或缩放会暂停跟随，点“跟随”恢复，“全图”查看整张地图。
+竖屏主操作固定在屏幕下方，地块详情、快报、规则从底部打开；事件需要点右侧“继续”或确认按钮，不会倒计时自动跳过。返回首页也使用游戏内确认面板，右侧确认退出，左侧“继续本局”恢复当前回合及尚未完成的选择；移动和演出期间需等当前步骤完成。默认局部镜头带死区和平滑延迟跟随玩家；拖动或缩放会暂停跟随，点“跟随”恢复，“全图”查看整张地图。
 
 后手补给在硬币确定先后手时一次性发放，玩家和 AI 遵循同一规则。回合推进以回到本局先手为一轮，修复 AI 先手时玩家少一个基础轮次的问题；休整、护盾与额外行动仍各按原规则结算。补偿用于缓解抢地优势，不保证真人对局胜率恰好各半。
 
@@ -77,9 +77,9 @@ python -m http.server 8876
 
 棋盘外围有连续的岸线、绿植、路灯与社区。新地图的灯塔和风车由 ImageGen 参考图经过本机 Pixal3D 生成带纹理模型，保留真实网格并整理可动部件；中央庭院和外围景观单独组织，数字落点不被装饰占用。气候条内可关闭“周边小景”，选择会在本机保留。
 
-五张地图现在使用各自的完整建筑家族：法式街区、京都町屋、纽约装饰艺术、地中海岸、阿尔卑斯山城。住宅、商铺、旅馆、公馆、双格地标及公共建筑均重新设计，合计 145 个游戏模型。制作先生成每个地区的三组正/侧/背设计板，再按图重建升级家族；小住宅另走本机 Pixal3D 原生多视图流程，完成网格整理、四面检查后接入二级住宅。外围采用同地区轻量建筑，避免大量复制高面数网格。
+五张地图采用法式街区、京都町屋、纽约装饰艺术、地中海岸、阿尔卑斯山城五种建筑语言。本轮 145 个可玩建筑及灯塔、风车已分别完成三视图、Pixal3D 多视图生成、手机模型处理和五面检查，147 件近景与 25 件同源远景均已逐件批准。五图的成组建筑与手机视口游戏画面均已实际验收通过，退出确认已完成实测。147 件近景及 25 件远景已于 2026-10-24 全量接入正式游戏，模型、贴图、来源、预算和 145 个界面预览的发布检查通过；正式入口的港湾 390 像素视口加载、升级与确认事件烟测通过，控制台无警告或错误。当前状态、发布后的最小检查清单和实际限制见 [本轮交付记录](art/full-ai-city/reports/runtime-integration-preparation-20261024.json)。
 
-打开 [建筑与三视图对照](http://localhost:8876/art-review.html)，可以查看游戏实际模型、旋转四面、切换地区和等级。页面逐件标明神经生成或按三视图重建，详细来源、提示词和验证方法见 [五城建筑记录](art/regions/README.md)。这些图和模型均已保存到项目中。
+打开 [建筑与三视图对照](http://localhost:8876/art-review.html)，可以切换正式资源和全量重制候选，查看单栋实际模型及该次推理使用的三个输入视图。当前精确审核数量来自 `art/full-ai-city/approved-assets.json`。本轮流程与验收约束见 [全量 AI 建筑重做](art/full-ai-city/README.md)，上一版记录见 [历史五城建筑记录](art/regions/README.md)。
 
 中央喷泉的水流与涟漪、散步的小人、热气球和点状微光让城市保持生气；机会广场转盘、城建局吊索摆锤使用独立部件围绕真实轴心运动。
 
@@ -95,7 +95,9 @@ python -m http.server 8876
 - `scene-garden-kit.js` / `scene-regional-parks.js`：各地区外围与中央庭院。
 - `scene-streets.js`：地区铺装、倒角路缘和石砌沙盘基础。
 - `art-review.html`：实际建筑与生成三视图的对照验收页。
-- `art/build_regional_city.py` / `art/regions/`：地区模型制作、参考图与来源清单。
+- `art-board.html`：每图 29 件建筑的统一尺度对照。
+- `art/full-ai-city/`：本轮逐件三视图、生成证据、冻结审核图和发布流程。
+- `art/build_regional_city.py` / `art/regions/`：上一版制作脚本与历史来源；旧脚本不会覆盖正式地区模型。
 - `scene-destinations.js`：港湾/温泉场景、真实生成 GLB 与部件动画、景观批处理。
 - `progression.js`、`progression.css`：仓库、门票、收藏品、局外升级、本机榜与结算。
 - `mobile.css`：竖屏视口、底部操作与信息抽屉。
@@ -103,11 +105,11 @@ python -m http.server 8876
 - `drama.js`：收租、征用、护盾等事件的画面、节奏与音效反馈。
 - `index.html`、`presentation.css`：页面结构和新版界面样式；`styles.css` 保留原棋盘回退样式，`scene.css` 与 `drama.css` 分别配合城市和演出。
 
-城市资产由真实 Blender 建模生成。基础库保留 20 个模型；第二轮增加 9 个分级地标与 8 个特殊地块模型。摩天楼使用真实增长的细长塔身和金色冠顶；金融中心是错落双塔；温泉庄园由多栋楼阁、汤池、瀑布、拱桥与庭院组成。特殊地块通过穹顶、圆形金库门、塔吊、巨牌、转盘和门架等不同轮廓识别。
+以下是早期 Blender 资产库的历史制作入口，部分公共景观仍复用；它们不是本轮 147 件三视图神经建筑的来源。早期基础库保留 20 个模型，第二轮增加 9 个分级地标与 8 个特殊地块模型。摩天楼使用真实增长的细长塔身和金色冠顶；金融中心是错落双塔；温泉庄园由多栋楼阁、汤池、瀑布、拱桥与庭院组成。特殊地块通过穹顶、圆形金库门、塔吊、巨牌、转盘和门架等不同轮廓识别。
 
 模型包下载完成后分别显示，不必等全套到齐；新特殊建筑仅加载所选地图的一套，切图时再补另一套。已下载的公共模型复用缓存，网络失败时仍可操作棋盘，并可在近看时重试缺失建筑。
 
-- `assets/models/city-kit.glb`：游戏加载的模型库，约 2.9 MB。
+- `assets/models/city-kit.glb`：早期基础模型库，约 2.9 MB；本轮地区建筑按地区包加载。
 - `assets/models/city-kit.blend`：可编辑的 Blender 模型库，含预览相机与灯光。
 - `art/build_city_kit.py`：完整建模与导出脚本。
 - `assets/models/landmarks.glb`、`landmarks.blend`：摩天楼、金融中心、温泉庄园的三级模型与可编辑源文件。
@@ -117,12 +119,22 @@ python -m http.server 8876
 - `art/BUILDING_DIRECTION.md`：用户选择的卡通方向、概念图来源和建模取舍。
 - `art/README.md`：重新生成方法和模型坐标说明。
 - `art/map-specials/`：海湾小镇与都会交通城的两张 ImageGen 概念板、完整提示词及实际 Blender 渲染。
-- `art/build_map_specials.py`、`assets/models/compact-specials.glb`、`expansion-specials.glb`：按照概念板建立的两套独立特殊建筑，每套七种轮廓；对应 `.blend` 保留可编辑模型。经典地图继续使用原有特殊建筑。
-- `art/harbor/`：本轮灯塔和风车的 ImageGen 参考、Pixal3D 推理证据、整理脚本与实际模型预览；`assets/models/harbor/` 为游戏用 GLB。原始高面数输出与运行缓存仅保存在本机。
+- `art/build_map_specials.py`、`assets/models/compact-specials.glb`、`expansion-specials.glb`：按照概念板建立的两套独立特殊建筑，每套七种轮廓；对应 `.blend` 保留可编辑模型。这是当时的经典地图特殊建筑接入方案，本轮地区模型不再沿用这套来源。
+- `art/harbor/`：上一版灯塔和风车的 ImageGen 参考、推理证据及整理记录；本轮来源位于 `art/full-ai-city/`。`assets/models/harbor/` 为正式主景包的安装位置，实际版本以 `art/regions/runtime-release.json` 为准。原始高面数输出与运行缓存仅保存在本机。
 
 ## 验证
 
-下列检查只需要 Node.js，无需安装其他依赖：
+本轮全量发布完成后，必须对正式资源运行以下最小检查；它们不会替代五图的实际画面验收。2026-10-24 全量发布后已通过这五项检查，其中第一项包含全部 145 个正式预览及地图、等级、公共建筑路由检查。
+
+```powershell
+node tests/check-full-ai-city.mjs
+node tests/check-ai-far-assets.mjs
+node tests/check-ai-landmarks.mjs
+node tests/check-regional-scenery-budget.mjs
+node tests/check-provenance-git-bytes.mjs
+```
+
+下列是按改动范围使用的游戏与场景回归入口，只需要 Node.js，无需安装其他依赖：
 
 ```powershell
 node tools/economy-check.cjs
@@ -161,4 +173,4 @@ node tests/check-ai-landmarks.mjs
 
 天气影响移动和进一步重玩性的评估见 [重玩性设计备选](reports/replay-design-options.md)，这些是待讨论的方案，尚未加入游戏规则。
 
-本轮设计与待接入的 IAA 奖励点见 [竖屏小城设计](reports/portrait-city-v2-design.md)，检查范围与实际限制见 [验收记录](reports/portrait-city-v2-validation.md)。没有广告 SDK；不模拟广告播放或自动发放广告奖励。
+本轮设计与待接入的 IAA 奖励点见 [竖屏小城设计](reports/portrait-city-v2-design.md)，2026-10-23 的游戏行为检查与旧美术参数见 [历史竖屏验收记录](reports/portrait-city-v2-validation.md)；本轮模型与发布状态见上方交付记录。没有广告 SDK；不模拟广告播放或自动发放广告奖励。

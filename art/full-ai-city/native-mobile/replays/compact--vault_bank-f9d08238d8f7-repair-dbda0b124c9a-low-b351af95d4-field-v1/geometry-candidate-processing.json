@@ -1,0 +1,382 @@
+{
+  "status": "exported_pending_visual_review",
+  "createdAt": "2026-10-24T00:35:13.512523+00:00",
+  "region": "compact",
+  "asset": "vault_bank",
+  "source": {
+    "rawGLB": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\compact--vault_bank-a009-pixal-mv-1024-9247.glb",
+      "sha256": "f9d08238d8f7cb8deadd40a5019270e77b7680d1bdc772e8482e2661f4ae821a",
+      "bytes": 39134464
+    }
+  },
+  "inferenceReport": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\compact--vault_bank-a009\\compact--vault_bank-a009-pixal-mv-1024-9247.json",
+    "sha256": "0d78a1e019efc83ba3b791a05ee607e0054974026771a5c81c7fdeb4050fdb4a",
+    "bytes": 9353
+  },
+  "reference": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\references\\compact\\vault_bank\\reference.json",
+    "sha256": "1f63287d1978cc9b59d3088be4ccab5ceebe49cb7b4def2b8e1638b03bcb3d72",
+    "bytes": 4033
+  },
+  "processingTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\01259185d3327c7a75b8df2e595381e45eccf13901ce96ea80844701e548295e-process_lod.py",
+    "sha256": "01259185d3327c7a75b8df2e595381e45eccf13901ce96ea80844701e548295e",
+    "bytes": 34836
+  },
+  "assumedCameras": true,
+  "cameraCalibration": "assumed_standard_orbit_not_measured",
+  "nativePipeline": "Pixal3DMVImageTo3DPipeline.run_mv",
+  "nativeResolution": 1024,
+  "seed": 9247,
+  "geometryOrigin": "Actual native three-view neural building with explicitly recorded bounded local repairs; localSurfaceRepair.method and face counts disclose whether these include boundary patches or a small mechanical connector. Followed by source-derived remeshing and texture transfer. No replacement building.",
+  "orientation": {
+    "up": "Y",
+    "front": "+Z",
+    "groundY": 0,
+    "maxEdge": 1
+  },
+  "requestedTriangles": 30000,
+  "limitations": [
+    "Assumed camera reference reconstruction, not exact measured architecture",
+    "Final candidate requires actual rendered visual approval"
+  ],
+  "animation": null,
+  "processingComplete": true,
+  "lod": "near",
+  "processingRevision": 0,
+  "localSurfaceRepair": {
+    "source": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-compact-vault-bank-f9d0-left-roof\\repaired-native.glb",
+      "sha256": "dbda0b124c9ae59b0993e7d69d01a6821b3db0e9a452c7b78127fa4907fa7724",
+      "bytes": 39630924
+    },
+    "receipt": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\compact\\vault_bank\\dbda0b124c9ae59b\\repair.json",
+      "sha256": "5f437d97ef9844a377d7193eae7f922f32b47742b085e8f3d554fea12f8281b1",
+      "bytes": 8060
+    },
+    "method": "Only explicitly measured and visually reviewed local gaps are closed from adjoining original surface and UV samples with0.006 inward closure. Original vertices, faces and image pixels are preserved. No replacement building or generated texture. See configuration and frozen prior review evidence for exact allowed regions.",
+    "newTriangles": 1356,
+    "newVertices": 680,
+    "originalVerticesMoved": 0,
+    "originalTrianglesDeleted": 0,
+    "regions": [
+      {
+        "name": "Single measured left tiled slope polygonal gap",
+        "specification": {
+          "name": "Single measured left tiled slope polygonal gap",
+          "u": [
+            0,
+            -1,
+            0
+          ],
+          "v": [
+            0,
+            0,
+            1
+          ],
+          "n": [
+            -1,
+            0,
+            0
+          ],
+          "roi": [
+            -0.046,
+            0.014,
+            0.5,
+            0.606
+          ],
+          "defectDepth": 0.1,
+          "donorDepth": 0.27,
+          "donorMaxDepth": 0.45,
+          "donorNormal": 0.3,
+          "color": "stone",
+          "gridStep": 0.004,
+          "donorMargin": 0.04,
+          "flatPatchUV": true,
+          "donorMinRGB": 0.025,
+          "donorMaxColorRatio": 2.5
+        },
+        "missingSamples": 258,
+        "boundarySamples": 773,
+        "sampledDepthRange": [
+          -0.41172218322753906,
+          0.45924878120422363
+        ],
+        "inwardClosureThickness": 0.006,
+        "outerSurfaceUnchanged": true,
+        "newVertices": 680,
+        "newTriangles": 1356
+      }
+    ]
+  },
+  "derivation": {
+    "rawTriangles": 972323,
+    "weldedTriangles": 971910,
+    "remeshedTriangles": 3204092,
+    "voxelSize": 0.003,
+    "finalTriangles": 29985,
+    "atlasArea": 0.4111092330923125,
+    "singleReductionPass": true,
+    "inheritedUVRemovedBeforeReduction": true,
+    "sourceMaterialsUntouched": true,
+    "uvUnwrap": {
+      "angleDegrees": 66.0,
+      "islandMargin": 2e-05,
+      "marginMethod": "SCALED",
+      "nominalMarginPixels": null
+    },
+    "repairedSourceTriangles": 973679
+  },
+  "bake": {
+    "method": "CPU closest-original-triangle projection with float64 barycentric original UV and bilinear original texture sampling; geometric normals retained, no directional normal-map rebake or invented color",
+    "coveredAtlasPixels": 430655,
+    "nearestLookupSuccessFraction": 1.0,
+    "notRayCoverage": true,
+    "sourceDistanceQuantiles": [
+      0.00016628469165880233,
+      0.0008771473309025163,
+      0.001552526669111104,
+      0.006045903544872999
+    ],
+    "sourceDistanceQuantileLevels": [
+      0.5,
+      0.95,
+      0.99,
+      1
+    ],
+    "overTwoPercentMaxEdge": 0.0,
+    "distanceReviewRequired": false,
+    "visualGeometryReviewRequired": true,
+    "barycentricOriginalRange": [
+      -2.960098273459803e-05,
+      1.0
+    ],
+    "degenerateOrInvalidBarycentricCount": 0,
+    "closestSourceVertexFallbackFraction": 0.0,
+    "barycentricPointReconstructionErrorQuantiles": [
+      7.62492833500561e-09,
+      3.691667037417889e-08,
+      2.3017514288211855e-07
+    ],
+    "atlasOverlapPixelsWithDifferentSurface": 228,
+    "seconds": 8.917156000001341,
+    "maps": [
+      {
+        "role": "base",
+        "size": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "role": "orm",
+        "size": [
+          512,
+          512
+        ]
+      }
+    ],
+    "repairSourceNote": "Texture transfer uses the explicitly repaired neural source, retaining original PBR and locally interpolated same-wall UV. Repair receipt and unchanged original inference source are preserved separately."
+  },
+  "textureTransferTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\a2cb99c96fb8df396f16580a88a7c6151104ee3c927fe76cd161ee2d27bdfa42-bake_nearest_surface.py",
+    "sha256": "a2cb99c96fb8df396f16580a88a7c6151104ee3c927fe76cd161ee2d27bdfa42",
+    "bytes": 7317
+  },
+  "quantization": {
+    "source": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-compact-vault-bank-dbda0b124c9ae59b\\candidates\\compact\\vault_bank.glb",
+    "output": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-compact-vault-bank-dbda0b124c9ae59b\\candidates\\compact\\vault_bank.glb",
+    "sourceBytes": 1784356,
+    "outputBytes": 1289692,
+    "sourceSha256": "ea85264b1c46570dd024ed383f6bf5f8371bebf401f893eb9c8b5677c9328f74",
+    "outputSha256": "b351af95d4682d7e1ef28db0c683a26878cf2a8aa2926068ee5c79cbfd22d56c",
+    "positionFaceAndTextureBytesUnchanged": true,
+    "attributes": [
+      {
+        "accessor": 1,
+        "semantic": "NORMAL",
+        "count": 41235,
+        "maximumAngularErrorDegrees": 0.37575472129207915
+      },
+      {
+        "accessor": 2,
+        "semantic": "TEXCOORD_0",
+        "count": 41235,
+        "maximumUVError": 7.629504581774249e-06,
+        "maximumTexelErrorAt1024": 0.007812612691736831
+      }
+    ]
+  },
+  "processedCandidate": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-compact-vault-bank-dbda0b124c9ae59b\\candidates\\compact\\vault_bank.glb",
+    "sha256": "b351af95d4682d7e1ef28db0c683a26878cf2a8aa2926068ee5c79cbfd22d56c",
+    "bytes": 1289692
+  },
+  "glbValidation": {
+    "version": 2,
+    "triangles": 29985,
+    "meshes": 1,
+    "materials": 1,
+    "images": 2,
+    "all_primitives_have_uv": true,
+    "animations": [],
+    "all_images_embedded": true,
+    "external_buffers": []
+  },
+  "triangles": 29985,
+  "renderedCandidate": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-compact-vault-bank-dbda0b124c9ae59b\\candidates\\renders\\compact\\vault_bank\\lod-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-compact-vault-bank-dbda0b124c9ae59b\\candidates\\renders\\compact\\vault_bank\\lod-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-compact-vault-bank-dbda0b124c9ae59b\\candidates\\renders\\compact\\vault_bank\\lod-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-compact-vault-bank-dbda0b124c9ae59b\\candidates\\renders\\compact\\vault_bank\\lod-left.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-compact-vault-bank-dbda0b124c9ae59b\\candidates\\renders\\compact\\vault_bank\\lod-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.49799391627311707,
+        -0.49995657801628113,
+        0.0006868373020552099
+      ],
+      "max": [
+        0.49760308861732483,
+        0.500217854976654,
+        0.7985249161720276
+      ]
+    },
+    "triangles": 29985,
+    "textureSizes": [
+      {
+        "name": "compact__vault_bank__nearest_base",
+        "size": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "name": "compact__vault_bank__nearest_orm",
+        "size": [
+          512,
+          512
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "renderedSource": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-compact-vault-bank-dbda0b124c9ae59b\\candidates\\renders\\compact\\vault_bank\\raw-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-compact-vault-bank-dbda0b124c9ae59b\\candidates\\renders\\compact\\vault_bank\\raw-iso.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-compact-vault-bank-dbda0b124c9ae59b\\candidates\\renders\\compact\\vault_bank\\raw-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-compact-vault-bank-dbda0b124c9ae59b\\candidates\\renders\\compact\\vault_bank\\raw-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-compact-vault-bank-dbda0b124c9ae59b\\candidates\\renders\\compact\\vault_bank\\raw-left.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.4976148009300232,
+        -0.5,
+        0.0
+      ],
+      "max": [
+        0.4976148009300232,
+        0.5,
+        0.798602819442749
+      ]
+    },
+    "triangles": 972323,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "renderedRepairedSource": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-compact-vault-bank-dbda0b124c9ae59b\\candidates\\renders\\compact\\vault_bank\\repaired-source-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-compact-vault-bank-dbda0b124c9ae59b\\candidates\\renders\\compact\\vault_bank\\repaired-source-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-compact-vault-bank-dbda0b124c9ae59b\\candidates\\renders\\compact\\vault_bank\\repaired-source-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.4976148009300232,
+        -0.5,
+        0.0
+      ],
+      "max": [
+        0.4976148009300232,
+        0.5,
+        0.798602819442749
+      ]
+    },
+    "triangles": 973679,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "bounds": {
+    "min": [
+      -0.49799391627311707,
+      0.0006868373020552099,
+      -0.500217854976654
+    ],
+    "max": [
+      0.49760308861732483,
+      0.7985249161720276,
+      0.49995657801628113
+    ],
+    "coordinateSystem": "GLTF Y-up; +Z front"
+  },
+  "textureSizes": [
+    {
+      "name": "compact__vault_bank__nearest_base",
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "name": "compact__vault_bank__nearest_orm",
+      "size": [
+        512,
+        512
+      ]
+    }
+  ],
+  "rawSourceUnchanged": true,
+  "completedAt": "2026-10-24T00:37:26.023924+00:00"
+}

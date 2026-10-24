@@ -1,0 +1,64 @@
+{
+  "status": "exact_source_derived_low_mesh_for_uv_only",
+  "region": "harbor",
+  "asset": "tower_2",
+  "candidate": {
+    "path": "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\work\\far-native-uv\\harbor--tower_2-9a4962d5c13658f7\\source-far.glb",
+    "sha256": "9a4962d5c13658f7791ffac1352b27a892660cc721fe5bd96966572d4f1d0815",
+    "bytes": 662768
+  },
+  "candidateReport": {
+    "path": "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\work\\far-native-uv\\harbor--tower_2-9a4962d5c13658f7\\source-far.json",
+    "sha256": "ff4b3014b1bf29b5db95afb0f32028cc6d3c1abc78462e9ad6dcd9919a5ce739",
+    "bytes": 10136
+  },
+  "sourceRaw": {
+    "path": "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\source\\harbor--tower_2-a009-pixal-mv-1024-9247.glb",
+    "sha256": "ad83a606becd1958cfb9ea457f8451b4151c3c6a8660c9002dcf998d2fafefef",
+    "bytes": 45920048
+  },
+  "sourceBlend": {
+    "path": "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\blender-far\\harbor\\tower_2.blend",
+    "sha256": "e5313dac75cd7aaf2350a4b25249a4cb9b76edfa77d965cf9cfa3656d9bf8520",
+    "bytes": 3790033
+  },
+  "output": {
+    "path": "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\work\\far-native-uv\\harbor--tower_2-9a4962d5c13658f7\\native-uv-input.npz",
+    "sha256": "753271cd8c9783ee9896760e190d5a9a073b483b2941683adac01a5b635c8323",
+    "bytes": 316599
+  },
+  "processingTool": {
+    "path": "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\7c0bd19cc8af0ccd1d05c2285722e3059c9b4b5e70b3be5eafd06e6e0829a5f8-export_neural_uv_input.py",
+    "sha256": "7c0bd19cc8af0ccd1d05c2285722e3059c9b4b5e70b3be5eafd06e6e0829a5f8",
+    "bytes": 3809
+  },
+  "coordinateSystem": "Exact saved Blender mesh local coordinates: Z-up, front -Y; no normalization/rotation/simplification in this step. Blender (X,Y,Z) to GLTF (X,Z,-Y); the validation inverse converts GLTF (X,Y,Z) to Blender (X,-Z,Y).",
+  "arrays": {
+    "vertices": {
+      "shape": [
+        4465,
+        3
+      ],
+      "dtype": "float32"
+    },
+    "faces": {
+      "shape": [
+        12000,
+        3
+      ],
+      "dtype": "int32"
+    },
+    "corner_normals": {
+      "shape": [
+        12000,
+        3,
+        3
+      ],
+      "dtype": "float32",
+      "purpose": "Preserve original low-mesh shading when native UV returns vertex splitting; ignore for unwrap."
+    }
+  },
+  "candidateTriangleCornerPositionsExactlyEqual": true,
+  "geometryChanged": false,
+  "texturesChanged": false
+}

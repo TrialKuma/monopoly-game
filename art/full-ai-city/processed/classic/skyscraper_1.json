@@ -1,0 +1,266 @@
+{
+  "status": "exported_pending_visual_review",
+  "createdAt": "2026-10-23T05:49:52.780364+00:00",
+  "region": "classic",
+  "asset": "skyscraper_1",
+  "source": {
+    "rawGLB": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\classic--skyscraper_1-a001-pixal-mv-1024-9247.glb",
+      "sha256": "91f43f9484165cb40acfb254f8d591893dca1f04fa06605d674b4139a2a70c8a",
+      "bytes": 43045128
+    }
+  },
+  "inferenceReport": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\classic--skyscraper_1-a001\\classic--skyscraper_1-a001-pixal-mv-1024-9247.json",
+    "sha256": "68fd45a4277ecbfdd60510e3bd68edd3b44792d96020fafb101fe8f6e64247ba",
+    "bytes": 8155
+  },
+  "reference": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\references\\classic\\skyscraper_1\\reference.json",
+    "sha256": "2604652dfe3cf79ec028421faff9484b8418ee50a50c9eb91e71a9701f7fb737",
+    "bytes": 4051
+  },
+  "processingTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\c415530a24b2edde76f9d4118d6305b743ad35ec5e869dc08c7c5e06f14c6a30-process_lod.py",
+    "sha256": "c415530a24b2edde76f9d4118d6305b743ad35ec5e869dc08c7c5e06f14c6a30",
+    "bytes": 19909
+  },
+  "assumedCameras": true,
+  "cameraCalibration": "assumed_standard_orbit_not_measured",
+  "nativePipeline": "Pixal3DMVImageTo3DPipeline.run_mv",
+  "nativeResolution": 1024,
+  "seed": 9247,
+  "geometryOrigin": "Only the actual neural source reduced and rebaked; no authored substitute geometry or manually constructed surfaces",
+  "orientation": {
+    "up": "Y",
+    "front": "+Z",
+    "groundY": 0,
+    "maxEdge": 1
+  },
+  "requestedTriangles": 45000,
+  "limitations": [
+    "Assumed camera reference reconstruction, not exact measured architecture",
+    "Final candidate requires actual rendered visual approval"
+  ],
+  "animation": null,
+  "processingComplete": true,
+  "lod": "near",
+  "processingRevision": 1,
+  "sourceArtifactCleanup": {
+    "method": "Delete source-derived triangles entirely below z=0.014 when original UV-centroid mean RGB is below 0.18 or their XY centroid is more than 0.012 from the actual foundation vertices at z=0.014..0.04. This removes detached colored floor remnants as well as the dark sheet; no new faces added",
+    "deletedTriangles": 25182,
+    "originalTriangles": 968467,
+    "foundationSampleVertices": 25860
+  },
+  "derivation": {
+    "rawTriangles": 968467,
+    "weldedTriangles": 938920,
+    "remeshedTriangles": 1223376,
+    "voxelSize": 0.003,
+    "finalTriangles": 44954,
+    "atlasArea": 0.3753099427559644,
+    "singleReductionPass": true,
+    "inheritedUVRemovedBeforeReduction": true,
+    "sourceMaterialsUntouched": true
+  },
+  "bake": {
+    "hitCoverageAreaWeighted": 0.9990746052517004,
+    "cageExtrusion": 0.02,
+    "maxRayDistance": 0.06,
+    "maps": [
+      {
+        "role": "base",
+        "size": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "role": "orm",
+        "size": [
+          512,
+          512
+        ]
+      },
+      {
+        "role": "normal",
+        "size": [
+          1024,
+          1024
+        ]
+      }
+    ],
+    "method": "Selected-to-active CPU bake from original neural source onto a source-derived voxel surface reduced without inherited UV constraints; no authored substitute building"
+  },
+  "quantization": {
+    "source": "H:\\代码项目\\monopoly\\art\\full-ai-city\\candidates\\classic\\skyscraper_1.glb",
+    "output": "H:\\代码项目\\monopoly\\art\\full-ai-city\\candidates\\classic\\skyscraper_1.glb",
+    "sourceBytes": 2861376,
+    "outputBytes": 2149088,
+    "sourceSha256": "347202578bd4f83398009612393f1035077b5b0cd38e9f127ed2cef64186948e",
+    "outputSha256": "347132c29e0b65c172756cbb3753dc53683f4ef9f4f6362b46e759c757078168",
+    "positionFaceAndTextureBytesUnchanged": true,
+    "attributes": [
+      {
+        "accessor": 1,
+        "semantic": "NORMAL",
+        "count": 59370,
+        "maximumAngularErrorDegrees": 0.37506898250614407
+      },
+      {
+        "accessor": 2,
+        "semantic": "TEXCOORD_0",
+        "count": 59370,
+        "maximumUVError": 7.629413630971804e-06,
+        "maximumTexelErrorAt1024": 0.007812519558115127
+      }
+    ]
+  },
+  "processedCandidate": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\candidates\\classic\\skyscraper_1.glb",
+    "sha256": "347132c29e0b65c172756cbb3753dc53683f4ef9f4f6362b46e759c757078168",
+    "bytes": 2149088
+  },
+  "glbValidation": {
+    "version": 2,
+    "triangles": 44954,
+    "meshes": 1,
+    "materials": 1,
+    "images": 3,
+    "all_primitives_have_uv": true,
+    "animations": [],
+    "all_images_embedded": true,
+    "external_buffers": []
+  },
+  "triangles": 44954,
+  "renderedCandidate": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\classic\\skyscraper_1\\lod-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\classic\\skyscraper_1\\lod-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\classic\\skyscraper_1\\lod-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\classic\\skyscraper_1\\lod-left.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\classic\\skyscraper_1\\lod-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.4948142468929291,
+        -0.19884683191776276,
+        -7.558449578937143e-05
+      ],
+      "max": [
+        0.49335306882858276,
+        0.18072544038295746,
+        0.6405558586120605
+      ]
+    },
+    "triangles": 44954,
+    "textureSizes": [
+      {
+        "name": "classic__skyscraper_1__base",
+        "size": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "name": "classic__skyscraper_1__normal",
+        "size": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "name": "classic__skyscraper_1__orm",
+        "size": [
+          512,
+          512
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "renderedSource": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\classic\\skyscraper_1\\raw-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\classic\\skyscraper_1\\raw-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.5,
+        -0.1989346146583557,
+        0.0
+      ],
+      "max": [
+        0.5,
+        0.1989346146583557,
+        0.6400551795959473
+      ]
+    },
+    "triangles": 968467,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "bounds": {
+    "min": [
+      -0.4948142468929291,
+      -7.558449578937143e-05,
+      -0.18072544038295746
+    ],
+    "max": [
+      0.49335306882858276,
+      0.6405558586120605,
+      0.19884683191776276
+    ],
+    "coordinateSystem": "GLTF Y-up; +Z front"
+  },
+  "textureSizes": [
+    {
+      "name": "classic__skyscraper_1__base",
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "name": "classic__skyscraper_1__normal",
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "name": "classic__skyscraper_1__orm",
+      "size": [
+        512,
+        512
+      ]
+    }
+  ],
+  "rawSourceUnchanged": true,
+  "completedAt": "2026-10-23T05:50:56.215188+00:00",
+  "reviewSheet": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\classic\\skyscraper_1\\review-sheet.jpg",
+    "sha256": "7415309c841ae3a14bfdb1b26820bb163e4855b7c115aae9ee165c85aa2fee80",
+    "bytes": 278860,
+    "content": "Unmodified CPU render images composed with labels for visual comparison only"
+  }
+}

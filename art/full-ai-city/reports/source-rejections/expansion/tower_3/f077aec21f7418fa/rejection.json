@@ -1,0 +1,57 @@
+{
+  "status": "rejected_native_export_source",
+  "region": "expansion",
+  "asset": "tower_3",
+  "reviewer": "asset_production",
+  "recordedAtUtc": "2026-10-24T05:25:44.803275+00:00",
+  "source": {
+    "path": "art/full-ai-city/source/expansion--tower_3-a011-pixal-mv-1024-29496.glb",
+    "sha256": "f077aec21f7418fa59991564351a19a126f1befe009462d1cb04d6de632de522",
+    "bytes": 38482584
+  },
+  "sourceLevel": "Native 1M export; no untouched decoder attribution is made.",
+  "inferenceReport": {
+    "path": "art/full-ai-city/reports/source-rejections/expansion/tower_3/f077aec21f7418fa/expansion--tower_3-a011-pixal-mv-1024-29496.json",
+    "sha256": "f4886a95b25f77ac62dc1657c36a0cf0807a4d4ac2f03566c696d9c9402cbfc9",
+    "bytes": 10169
+  },
+  "inputReference": {
+    "path": "art/full-ai-city/reports/source-rejections/expansion/tower_3/f077aec21f7418fa/input-reference.json",
+    "sha256": "bd27a0bfdf5daf8b77f0fa9b523176cda3f2b9900c2dbbcf638c08378608e223",
+    "bytes": 4444
+  },
+  "diagnostic": null,
+  "diagnosticTool": null,
+  "sourceComparisonReport": {
+    "path": "art/full-ai-city/reports/source-rejections/expansion/tower_3/f077aec21f7418fa/source-comparison-processing.json",
+    "sha256": "4107fa2ab5c61d3202db339bc6080e1831dce5c7cc11c07ca3020ce97cd140af",
+    "bytes": 20976
+  },
+  "sourceViewEvidenceMode": "Explicitly selected existing renderedSource views; no additional or neutral render implied",
+  "evidence": [
+    {
+      "path": "art/full-ai-city/reports/source-rejections/expansion/tower_3/f077aec21f7418fa/raw-front.png",
+      "sha256": "4d2c1b90e12637039c30eb0d99733c7f36ae046fc00ae697bec1d63bdbdfa341",
+      "bytes": 201295
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/expansion/tower_3/f077aec21f7418fa/raw-iso.png",
+      "sha256": "dbdc75d77b1ee4d71baa94eafa8fbe58ee035e79e8189f437453ec5a8c42df6f",
+      "bytes": 237303
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/expansion/tower_3/f077aec21f7418fa/raw-back.png",
+      "sha256": "7e46d0c731879eb575d1eb0a3bb239580c184325f97dce39fdb1cbeca9826510",
+      "bytes": 200112
+    }
+  ],
+  "finding": "Actually inspected original triptych, native front/iso/back, all five final views and256px. The second old-reference source removes the torn ground sheet and keeps coherent brick walls and roof. However both narrow central front windows and matching rear windows have broad missing/see-through panes showing the background across the building; several larger upper panes and rear door glazing remain fragmented. The white rectangular through-openings are obvious at phone scale and inconsistent with the reference amber glazing. Preserve both sources; one targeted reference revision to simple closed opaque amber panes and fully closed doors is appropriate, retaining three-storey brick/cream/gold Art Deco silhouette and stepped teal crown. No third old-reference seed or new conversion parameter trial.",
+  "decision": "One targeted reference revision after two completed old-reference outcomes. Closed opaque glazing, same architecture; no third old-reference seed.",
+  "sourceUnchanged": true,
+  "notFinalCandidateReview": true,
+  "freezeTool": {
+    "path": "art/full-ai-city/reports/tool-snapshots/616860a00b28e670e1219d64c6cb5dad17f0946420568f786e80b6d789fb4a73-freeze_public_source_rejection.py",
+    "sha256": "616860a00b28e670e1219d64c6cb5dad17f0946420568f786e80b6d789fb4a73",
+    "bytes": 4304
+  }
+}

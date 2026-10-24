@@ -53,5 +53,60 @@ async function test(name, fn) { await fn(); checks++; console.log('PASS ' + name
     const f = setup(); f.c.run('initializeGame("harbor");state.players[0].cash=10000;finishGame("rounds");');
     assert.equal(f.store.read().profile.wallet, 1200); assert.equal(f.store.read().profile.receipts.length, 0); assert.equal(f.c.run('state.citySettlement.skipped'), true);
   });
+  await test('home cancellation preserves the paid run and puts the primary action on the right', async () => {
+    const f = setup(); await f.c.run('startNewGame()');
+    f.c.run('showModal=realShowModal;render=()=>{updateControls();renderModal();};');
+    const before = f.c.run('state'), wallet = f.store.read().profile.wallet;
+    const pending = f.c.run('returnToStartScreen()');
+    assert.equal(f.c.run('restartBtn.disabled'), true);
+    assert.equal(f.c.run('rollBtn.disabled'), true);
+    const buttons = f.c.run('state.modal.buttons');
+    assert.deepEqual(Array.from(buttons, b => b.id), ['cancel', 'home']); assert.equal(buttons[1].variant, 'primary');
+    assert.match(f.c.run('eventActionsEl.innerHTML'), /data-action="cancel".*data-action="home"/);
+    await f.c.run('returnToStartScreen()'); // A second click must not replace or resolve the first prompt.
+    f.c.run('hideModal(true,"cancel")'); await pending;
+    assert.equal(f.c.run('state'), before); assert.equal(f.c.run('state.phase'), 'await_roll');
+    assert.equal(f.c.run('state.modal.visible'), false); assert.equal(f.c.run('rollBtn.disabled'), false);
+    assert.equal(f.c.run('restartBtn.disabled'), false); assert.equal(f.store.read().profile.wallet, wallet);
+  });
+  await test('home cancellation resumes an unresolved gameplay choice', async () => {
+    const f = setup(); await f.c.run('startNewGame()'); f.c.run('showModal=realShowModal;');
+    let resolved = false;
+    const choice = f.c.run('showModal({label:"购买地块",title:"购买？",message:"当前地块",buttons:[{id:"buy",label:"购买",variant:"primary"}]})');
+    choice.then(() => { resolved = true; }); const modal = f.c.run('state.modal');
+    const pending = f.c.run('returnToStartScreen()');
+    f.c.run('hideModal(true,"cancel")'); await pending;
+    assert.equal(resolved, false); assert.equal(f.c.run('state.modal'), modal); assert.equal(f.c.run('state.phase'), 'await_modal');
+    f.c.run('hideModal(true,"buy")'); assert.equal(await choice, 'buy');
+  });
+  await test('confirmed home cancels the suspended choice without refund or settlement', async () => {
+    const f = setup(); await f.c.run('startNewGame()'); f.c.run('showModal=realShowModal;');
+    const sid = f.c.run('state.sessionId');
+    const choice = f.c.run('showModal({title:"购买？",message:"当前地块",buttons:[{id:"buy",label:"购买"}]})');
+    const pending = f.c.run('returnToStartScreen()'); f.c.run('hideModal(true,"home")'); await pending;
+    assert.equal(await choice, 'cancel'); assert.notEqual(f.c.run('state.sessionId'), sid); assert.equal(f.c.run('state.isFormalRun'), false);
+    assert.equal(f.store.read().profile.wallet, 1100); assert.equal(f.store.read().profile.receipts.length, 0);
+  });
+  await test('home waits for movement or a presentation boundary but preview can still exit', async () => {
+    const f = setup(); await f.c.run('startNewGame()'); f.c.run('showModal=realShowModal;state.busy=true;state.phase="presenting";updateControls();');
+    const sid = f.c.run('state.sessionId'); assert.equal(f.c.run('restartBtn.disabled'), true);
+    await f.c.run('returnToStartScreen()'); assert.equal(f.c.run('state.sessionId'), sid); assert.equal(f.c.run('state.modal.visible'), false);
+    f.c.run('initializeGame();state.busy=true;state.phase="locked";updateControls();');
+    assert.equal(f.c.run('restartBtn.disabled'), false);
+    const preview = f.c.run('state.sessionId'); await f.c.run('returnToStartScreen()'); assert.notEqual(f.c.run('state.sessionId'), preview);
+  });
+  await test('an independent reset cannot restore a stale home or gameplay choice', async () => {
+    const f = setup(); await f.c.run('startNewGame()'); f.c.run('showModal=realShowModal;');
+    const choice = f.c.run('showModal({title:"购买？",message:"当前地块",buttons:[{id:"buy",label:"购买"}]})');
+    const pending = f.c.run('returnToStartScreen()'); f.c.run('initializeGame("harbor")'); const fresh = f.c.run('state');
+    await pending; assert.equal(await choice, 'cancel'); assert.equal(f.c.run('state'), fresh);
+    assert.equal(f.c.run('state.currentMapId'), 'harbor'); assert.equal(f.c.run('state.modal.visible'), false); assert.equal(f.c.run('restartBtn.disabled'), false);
+  });
+  await test('a finished game returns home without another confirmation or duplicated reward', async () => {
+    const f = setup(); await f.c.run('startNewGame()'); f.c.run('state.round=31;finishGame("rounds");showModal=realShowModal;');
+    const wallet = f.store.read().profile.wallet, sid = f.c.run('state.sessionId');
+    await f.c.run('returnToStartScreen()'); assert.notEqual(f.c.run('state.sessionId'), sid);
+    assert.equal(f.store.read().profile.wallet, wallet); assert.equal(f.store.read().profile.receipts.length, 1);
+  });
   console.log(`${checks} actual admission and finish-game integration checks passed.`);
 })().catch(error => { console.error(error); process.exitCode = 1; });

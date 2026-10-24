@@ -1,0 +1,27 @@
+{
+  "status": "passed",
+  "at": "2026-10-23T12:26:37.410920+00:00",
+  "test": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\tools\\check_native_memory_reservation.py",
+    "sha256": "a41b93b9666bf16700a20d43caf1c875dc44bc34bba4b3319c6a41f47fd03caf",
+    "bytes": 3471
+  },
+  "guard": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\tools\\native_memory_reservation.py",
+    "sha256": "705848501583a3e6e40072356e3423c4d9c9ad763e84e0f3fa5c1c9ba85b47a8",
+    "bytes": 4247
+  },
+  "checks": [
+    "real Windows locks in both directions",
+    "normal CPU bypass",
+    "transition scan before native loading",
+    "gpu_busy with generation_started false retries without inference failure",
+    "cleanup"
+  ],
+  "modelsLoaded": false,
+  "BlenderBundledPythonProbe": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\throughput\\blender-memory-reservation-probe.json",
+    "sha256": "391afdd790c1ea17fa007663051cd8b692b5f8d91f90a69a95aa3a02636a8eff",
+    "bytes": 716
+  }
+}

@@ -1,0 +1,414 @@
+{
+  "status": "exported_pending_visual_review",
+  "createdAt": "2026-10-23T07:36:51.501403+00:00",
+  "region": "classic",
+  "asset": "card_pavilion",
+  "lod": "near",
+  "source": {
+    "rawGLB": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\classic--card_pavilion-a001-pixal-mv-1024-9247.glb",
+      "sha256": "b5b981dc060abaaa4380c7425f61bd652b0d0293597c56f619d9ac6ce422a568",
+      "bytes": 38803096
+    }
+  },
+  "inferenceReport": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\classic--card_pavilion-a001\\classic--card_pavilion-a001-pixal-mv-1024-9247.json",
+    "sha256": "77065f60e9da7ca92f048b8420937fe32b432272f32ef3ff18a54b33b0dfe2dd",
+    "bytes": 8816
+  },
+  "reference": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\references\\classic\\card_pavilion\\reference.json",
+    "sha256": "653cf138fb7d24fe6311cc0f66f11a45279ae277e1b419bd7f87f2600bb6615d",
+    "bytes": 4043
+  },
+  "processingTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\b3e1daba4f6e4bb24fa54406e553b69777395f8fc7457f1f272664fa3be40f57-process_native_mobile.py",
+    "sha256": "b3e1daba4f6e4bb24fa54406e553b69777395f8fc7457f1f272664fa3be40f57",
+    "bytes": 7552
+  },
+  "nativeSurfaceExport": {
+    "receipt": {
+      "path": "art\\full-ai-city\\native-mobile\\replays\\classic-card-pavilion-hybrid30k-frozen\\receipt.json",
+      "sha256": "49d11b7b00e6016acf32bb93a1a58101af3011c6a0e9c7f4bffb1b734d599987",
+      "bytes": 10865
+    },
+    "source": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\classic-card-pavilion-hybrid30k-frozen\\mobile-30000-1024.glb",
+      "sha256": "47b57321a280067a8095612df38520ad207b1d15f692fb7286fd96f3e0636bb7",
+      "bytes": 1871808
+    },
+    "tensorArchive": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\classic--card_pavilion-a001\\neural-export-inputs.pt",
+      "sha256": "0b31175c1ab38d2ed2dc9c592514a1e724035dd2394d4cbcdd425415ebdf3913",
+      "bytes": 443921885
+    }
+  },
+  "nativePipeline": "Pixal3DMVImageTo3DPipeline.run_mv",
+  "nativeResolution": 1024,
+  "seed": 9247,
+  "assumedCameras": true,
+  "cameraCalibration": "assumed_standard_orbit_not_measured",
+  "geometryOrigin": "Recorded low surface derived from the identical native raw, restored to original field coordinates, with native UV/material generation using the original neural high-surface BVH and attribute field. No authored replacement geometry.",
+  "textureOrigin": "Frozen original neural attribute field sampled by unchanged native exporter; no new inference or raw-UV bake",
+  "normalization": {
+    "enabled": true,
+    "candidate_degrees": 1.770288449723573,
+    "applied_degrees": 1.770288449723573,
+    "underside_area": 0.0824547268432454,
+    "normal_agreement": 0.8985937214149726,
+    "yaw_degrees": 180,
+    "pitch_degrees": 0,
+    "roll_degrees": 0,
+    "uniform_scale": 1.0674369436461375
+  },
+  "orientation": {
+    "up": "Y",
+    "front": "+Z",
+    "groundY": 0,
+    "maxEdge": 1
+  },
+  "requestedTriangles": 30000,
+  "triangles": 29982,
+  "glbValidation": {
+    "version": 2,
+    "triangles": 29982,
+    "meshes": 1,
+    "materials": 1,
+    "images": 2,
+    "all_primitives_have_uv": true,
+    "animations": [],
+    "all_images_embedded": true,
+    "external_buffers": []
+  },
+  "quantization": {
+    "source": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\native-export-hybrid30k-frozen\\candidates\\classic\\card_pavilion.glb",
+    "output": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\native-export-hybrid30k-frozen\\candidates\\classic\\card_pavilion.glb",
+    "sourceBytes": 1560080,
+    "outputBytes": 1148764,
+    "sourceSha256": "2e97947c18d0cf085bd9ee250a0a1f39e6cb58c02d0579546a3615596a395f29",
+    "outputSha256": "a0b7f4b89e43ea28fcdea5ff9e312bebd1f31fdedc1d2a8d593946e11183598e",
+    "positionFaceAndTextureBytesUnchanged": true,
+    "attributes": [
+      {
+        "accessor": 1,
+        "semantic": "NORMAL",
+        "count": 34289,
+        "maximumAngularErrorDegrees": 0.3808848358732794
+      },
+      {
+        "accessor": 2,
+        "semantic": "TEXCOORD_0",
+        "count": 34289,
+        "maximumUVError": 7.629510948348184e-06,
+        "maximumTexelErrorAt1024": 0.00781261921110854
+      }
+    ]
+  },
+  "processedCandidate": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\candidates\\classic\\card_pavilion.glb",
+    "sha256": "a0b7f4b89e43ea28fcdea5ff9e312bebd1f31fdedc1d2a8d593946e11183598e",
+    "bytes": 1148764
+  },
+  "derivation": {
+    "method": "Recorded CPU surface derived from the same neural raw, inverse-normalized to field coordinates; a local native-export variant bypasses further mesh simplification/remeshing and uses native UV generation plus original neural high-surface BVH and field texture sampling. Only normalization, JPEG encoding and attribute quantization afterward.",
+    "voxelizedAgain": false,
+    "rebakedFromRawUV": false,
+    "facadeUVPreserved": true,
+    "normalizedTrianglesPreserved": true,
+    "geometrySurfaceInput": {
+      "receipt": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\classic-card-pavilion-hybrid30k-frozen\\geometry-source-proof.json",
+        "sha256": "7aa509770350349184cec21a31fcac8018a97fa4597b8e80d4722bffd18c75df",
+        "bytes": 4396
+      },
+      "method": "Only coordinate inversion of an existing source-derived low mesh; all candidate vertex/triangle identities preserved. No remeshing, replacement or newly authored geometry.",
+      "sourceRaw": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\classic--card_pavilion-a001-pixal-mv-1024-9247.glb",
+        "sha256": "b5b981dc060abaaa4380c7425f61bd652b0d0293597c56f619d9ac6ce422a568",
+        "bytes": 38803096
+      },
+      "candidate": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\classic-card-pavilion-hybrid30k-frozen\\geometry-candidate.glb",
+        "sha256": "ab231fcb5a6843de4d40f071e5c7e1fa45b4584180a8443dd453b84759b38f69",
+        "bytes": 1459468
+      },
+      "candidateReport": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\classic-card-pavilion-hybrid30k-frozen\\geometry-candidate-processing.json",
+        "sha256": "8ff91b33cbaae1e7755eeca3cd5368869644906b05d7095b4ea5b7152d886638",
+        "bytes": 7804
+      },
+      "originalCandidate": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\candidates\\classic\\card_pavilion.glb",
+        "sha256": "ab231fcb5a6843de4d40f071e5c7e1fa45b4584180a8443dd453b84759b38f69",
+        "bytes": 1459468
+      },
+      "fieldReceipt": {
+        "path": "art\\full-ai-city\\native-mobile\\classic--card_pavilion-a001\\receipt.json",
+        "sha256": "84736745af7ee075a20b465956c5807319a309f38011ab0d2104121ce4e0e80a",
+        "bytes": 4581
+      },
+      "output": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\classic-card-pavilion-hybrid30k-frozen\\geometry-surface.npz",
+        "sha256": "bf9158e1fef808cf0329e6d699beadcf2d201d1987719db1c9a306c2a14c83b9",
+        "bytes": 538640
+      },
+      "triangles": 29982,
+      "vertices": 14862,
+      "originalSplitVertices": 37925,
+      "exactCoincidentVerticesMerged": 23063,
+      "maximumPositionChangeFromWelding": 0,
+      "normalization": {
+        "enabled": true,
+        "candidate_degrees": 1.831996754275405,
+        "applied_degrees": 1.831996754275405,
+        "underside_area": 0.0877156390195565,
+        "normal_agreement": 0.8997954447661686,
+        "yaw_degrees": 180,
+        "pitch_degrees": 0,
+        "roll_degrees": 0,
+        "uniform_scale": 1.0674715813289999
+      },
+      "rawBlenderToNormalizedBlender": [
+        [
+          -1.067408806384043,
+          -0.00017431121991700764,
+          0.011582634411760256,
+          -0.001918220114081573
+        ],
+        [
+          -0.00017411648201845134,
+          -1.0669888170107955,
+          -0.032102640592224035,
+          -0.003940995702050865
+        ],
+        [
+          0.011582638846198175,
+          -0.03210263825344584,
+          1.0669259632960357,
+          0.43679247714867764
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "inverse": [
+        [
+          -0.9367378583684015,
+          -0.00015279439423803378,
+          0.010164704415019097,
+          -0.006237337984515245
+        ],
+        [
+          -0.00015296534448869524,
+          -0.9363692855255735,
+          -0.028172671700952966,
+          0.008615090309166414
+        ],
+        [
+          0.010164703164987821,
+          -0.028172671503579036,
+          0.9363141241079266,
+          -0.40906649589764177
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "sampledNormalizationReconstructionMaxError": 1.1546618003953929e-07,
+      "nativeBounds": {
+        "min": [
+          -0.46707475076807,
+          -0.400602535014091,
+          -0.3992794571757655
+        ],
+        "max": [
+          0.4698203937714205,
+          0.442308449091118,
+          0.3914091662569473
+        ]
+      },
+      "tool": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\classic-card-pavilion-hybrid30k-frozen\\geometry-preparation-source.py",
+        "sha256": "a3d8ac7d1f13c94c96c42454145b5365d1bd39d756fbc566eea3ca34d80d64dd",
+        "bytes": 4944
+      },
+      "toolSnapshot": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\classic-card-pavilion-hybrid30k-frozen\\geometry-preparation-source.py",
+        "sha256": "a3d8ac7d1f13c94c96c42454145b5365d1bd39d756fbc566eea3ca34d80d64dd",
+        "bytes": 4944
+      },
+      "originalReceipt": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\classic-card-pavilion-hybrid30k-frozen\\geometry-source-original-receipt.json",
+        "sha256": "a542abf59fd3dc5d9deafd7b2c69aff3c408d8e115236e7895717cd0c60bac37",
+        "bytes": 3986
+      }
+    },
+    "nativePostprocessOverride": {
+      "original": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\classic-card-pavilion-hybrid30k-frozen\\original-native-exporter-source.py",
+        "sha256": "b6b79da5dfe13c22047a6257c6b2301c7ea31259dd9c82344db7e5c4cc707917",
+        "bytes": 8126
+      },
+      "scope": "Keep original neural geometry BVH for PBR lookup. Replace only the intermediate surface with this recorded existing source-derived low mesh; bypass further remeshing/simplification/cleanup, then use native unwrap/normals/field sampling.",
+      "sharedCodeModified": false,
+      "noNewGeometryAuthored": true,
+      "counts": {
+        "facesBeforeUnwrap": 29982
+      }
+    },
+    "nativeFieldLookup": {
+      "quantiles50_95_99_100": [
+        0.0009951856918632984,
+        0.0016092773294076324,
+        0.0022856052964925766,
+        0.005990595556795597
+      ],
+      "fractionOverTwoPercent": 0.0,
+      "sampleCount": 614777,
+      "meaning": "Distance to original neural BVH before direct field sampling, not ray hit coverage"
+    }
+  },
+  "bake": {
+    "method": "Direct original neural attribute field sampling inside native to_glb; no Blender bake or nearest raw-image transfer",
+    "notRayCoverage": true
+  },
+  "animation": null,
+  "processingComplete": true,
+  "limitations": [
+    "Same assumed three-view cameras as original native raw",
+    "Diagnostic pending external visual approval; not a formal asset replacement"
+  ],
+  "renderedCandidate": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\native-export-hybrid30k-frozen\\candidates\\renders\\classic\\card_pavilion\\lod-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\native-export-hybrid30k-frozen\\candidates\\renders\\classic\\card_pavilion\\lod-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\native-export-hybrid30k-frozen\\candidates\\renders\\classic\\card_pavilion\\lod-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\native-export-hybrid30k-frozen\\candidates\\renders\\classic\\card_pavilion\\lod-left.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\native-export-hybrid30k-frozen\\candidates\\renders\\classic\\card_pavilion\\lod-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.5,
+        -0.4192053973674774,
+        0.0
+      ],
+      "max": [
+        0.5,
+        0.4192053973674774,
+        0.9102070331573486
+      ]
+    },
+    "triangles": 29982,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          1024,
+          1024
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "sourceReviewReusedFrom": {
+    "path": "art\\full-ai-city\\work\\native-export-trial\\candidates\\classic\\card_pavilion.json",
+    "sha256": "ccaa69a0373ff6e706b4bd2383e1d3f5031e5633ecb0e2ec39a77bd0beff38f5",
+    "bytes": 9048
+  },
+  "renderedSource": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\native-export-hybrid30k-frozen\\candidates\\renders\\classic\\card_pavilion\\raw-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\native-export-hybrid30k-frozen\\candidates\\renders\\classic\\card_pavilion\\raw-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.5,
+        -0.41943949460983276,
+        0.0
+      ],
+      "max": [
+        0.5,
+        0.41943949460983276,
+        0.909058690071106
+      ]
+    },
+    "triangles": 968504,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "bounds": {
+    "min": [
+      -0.5,
+      0.0,
+      -0.4192053973674774
+    ],
+    "max": [
+      0.5,
+      0.9102070331573486,
+      0.4192053973674774
+    ],
+    "coordinateSystem": "GLTF Y-up; +Z front"
+  },
+  "textureSizes": [
+    {
+      "name": "Image_0",
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "name": "Image_1",
+      "size": [
+        1024,
+        1024
+      ]
+    }
+  ],
+  "completedAt": "2026-10-23T07:37:02.120518+00:00",
+  "rawSourceUnchanged": true,
+  "reviewSheet": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\native-export-hybrid30k-frozen\\candidates\\renders\\classic\\card_pavilion\\review-sheet.jpg",
+    "sha256": "7c3a7c29c250601b82cdcfaf74705ba4b7069665d2d83a699909ec4e410b5e23",
+    "bytes": 344441,
+    "content": "Unmodified CPU render images composed with labels for visual comparison only"
+  },
+  "promotedFrom": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\native-export-hybrid30k-frozen\\candidates\\classic\\card_pavilion.json",
+    "sha256": "a226fe470ae69a93e8c07754532464e1a36eb760a7582aababda8c5c8f760144",
+    "bytes": 15465
+  },
+  "processingRevision": 0
+}

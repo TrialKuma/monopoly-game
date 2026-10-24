@@ -1,0 +1,130 @@
+{
+  "status": "frozen_field_ready_for_optional_export",
+  "jobId": "single-front",
+  "request": {
+    "captureOnly": true,
+    "minDiskGiB": 12,
+    "experimentOnly": true,
+    "viewCount": 1
+  },
+  "sameNativeRun": true,
+  "newNeuralInference": false,
+  "rawSourceReplaced": false,
+  "nativeExporter": {
+    "path": "C:\\Users\\A\\.codex\\worktrees\\0b69\\厂长\\grande-art-lab\\source\\experimental\\Pixal3D-Windows\\pixal3d_comfy\\postprocess.py",
+    "sha256": "b6b79da5dfe13c22047a6257c6b2301c7ea31259dd9c82344db7e5c4cc707917",
+    "bytes": 8126
+  },
+  "nativeExporterSnapshot": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\alpine-tower1-a003-single-front-23421\\attempt-011\\native-mobile\\single-front\\native-exporter-source.py",
+    "sha256": "b6b79da5dfe13c22047a6257c6b2301c7ea31259dd9c82344db7e5c4cc707917",
+    "bytes": 8126
+  },
+  "nativeEntrypointWrapper": {
+    "path": "C:\\Users\\A\\.codex\\worktrees\\0b69\\厂长\\grande-art-lab\\tools\\run_pixal_local.py",
+    "sha256": "ba8f1137c050980cc6ff252bce45ae5c1058edf565451212c074eb7134f5b505",
+    "bytes": 9327
+  },
+  "adapter": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\alpine-tower1-a003-single-front-23421\\attempt-011\\native-mobile\\single-front\\native-mobile-export-source.py",
+    "sha256": "af3a0f39998fc83bb0a80e7dda1b6ecc74ecacef61cad90f0177f5e9cd69e621",
+    "bytes": 6782
+  },
+  "diskFreeBytesBeforeCapture": 183193653248,
+  "estimatedTensorBytes": 669666672,
+  "minimumDiskReserveBytes": 12884901888,
+  "tensorArchive": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\alpine-tower1-a003-single-front-23421\\attempt-011\\native-mobile\\single-front\\neural-export-inputs.pt",
+    "sha256": "36311ce24ecfe4ee127df4868480c1308d4e1dc1dd672fedce6a8d8ea600a9b5",
+    "bytes": 669668893
+  },
+  "tensorShapes": {
+    "vertices": {
+      "shape": [
+        9230688,
+        3
+      ],
+      "dtype": "torch.float32"
+    },
+    "faces": {
+      "shape": [
+        18966606,
+        3
+      ],
+      "dtype": "torch.int32"
+    },
+    "attr_volume": {
+      "shape": [
+        9202754,
+        6
+      ],
+      "dtype": "torch.float32"
+    },
+    "coords": {
+      "shape": [
+        9202754,
+        3
+      ],
+      "dtype": "torch.int32"
+    }
+  },
+  "originalParameters": {
+    "attr_layout": {
+      "base_color": {
+        "slice": [
+          0,
+          3,
+          null
+        ]
+      },
+      "metallic": {
+        "slice": [
+          3,
+          4,
+          null
+        ]
+      },
+      "roughness": {
+        "slice": [
+          4,
+          5,
+          null
+        ]
+      },
+      "alpha": {
+        "slice": [
+          5,
+          6,
+          null
+        ]
+      }
+    },
+    "grid_size": 1024,
+    "aabb": [
+      [
+        -0.5,
+        -0.5,
+        -0.5
+      ],
+      [
+        0.5,
+        0.5,
+        0.5
+      ]
+    ],
+    "decimation_target": 1000000,
+    "texture_size": 4096,
+    "remesh": true,
+    "remesh_band": 1,
+    "remesh_project": 0,
+    "use_tqdm": true
+  },
+  "rawGLB": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\experiments\\alpine-tower1-a003-single-front-23421\\attempt-011\\source\\alpine-tower1-single-front-pixal-1024-23421.glb",
+    "sha256": "e63dbba4d1af7088fabb668d88505805967f9d05c07933e1498bcc14c997e2cb",
+    "bytes": 46663060
+  },
+  "rawUnchanged": true,
+  "completedAt": "2026-10-23T12:33:12.831501+00:00",
+  "diskFreeBytesAfterCapture": 182472347648
+}

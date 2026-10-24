@@ -1,0 +1,759 @@
+{
+  "status": "exported_pending_visual_review",
+  "createdAt": "2026-10-23T22:20:48.278670+00:00",
+  "region": "alpine",
+  "asset": "onsen_1",
+  "lod": "near",
+  "processingRevision": 0,
+  "source": {
+    "rawGLB": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\alpine--onsen_1-a003-pixal-mv-1024-29473.glb",
+      "sha256": "db62742a4d41cf3d3e25cc733132aaa3adf10aa4969a472a5ca2337bc8abcba8",
+      "bytes": 41085524
+    }
+  },
+  "inferenceReport": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\alpine--onsen_1-a003\\alpine--onsen_1-a003-pixal-mv-1024-29473.json",
+    "sha256": "02f4657f5a40f73e56ad860538b7d9f227b57689c26e8d4c3f92411e4377b09c",
+    "bytes": 10656
+  },
+  "reference": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\inputs\\alpine\\onsen_1\\fb1dd12d028c1c59\\reference.json",
+    "sha256": "6bdb2e11c72c8e90408a191667da3fb0ecee382aac9b95627a5f9247219d8d62",
+    "bytes": 4422
+  },
+  "processingTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\7a797107ab696da8746a713168b2ea8c3170945ae2f4647dcc26652f1e093900-process_native_mobile.py",
+    "sha256": "7a797107ab696da8746a713168b2ea8c3170945ae2f4647dcc26652f1e093900",
+    "bytes": 9168
+  },
+  "nativeSurfaceExport": {
+    "receipt": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\alpine--onsen_1-db62742a4d41-repair-9e81ad94b441-low-0299473a32-field-v1\\receipt.json",
+      "sha256": "85aa2bbab5fa15eb52c2ae8d60a4443f96e138502ebe51e481db9f491a25fd2a",
+      "bytes": 16994
+    },
+    "source": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\alpine--onsen_1-db62742a4d41-repair-9e81ad94b441-low-0299473a32-field-v1\\mobile-45000-1024.glb",
+      "sha256": "1b73d4c7acd381f69a44a30624a37a6f8d18407b3bf253cfedeb507e27766ef7",
+      "bytes": 2559316
+    },
+    "tensorArchive": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\alpine--onsen_1-a003\\neural-export-inputs.pt",
+      "sha256": "23c0cba0c6728260eb30bb448b38a1aad92869d0188fb25ded42298ea786a179",
+      "bytes": 309238685
+    }
+  },
+  "nativePipeline": "Pixal3DMVImageTo3DPipeline.run_mv",
+  "nativeResolution": 1024,
+  "seed": 29473,
+  "assumedCameras": true,
+  "cameraCalibration": "assumed_standard_orbit_not_measured",
+  "geometryOrigin": "Actual neural building with the explicitly recorded bounded local surface repair, followed by source-derived CPU mobile geometry and native UV/material sampling. The original inference, repair and low-surface sources are distinct; the UV/material replay adds no geometry.",
+  "textureOrigin": "Original neural attribute field sampled by the native UV/material operations with the recorded surface-stage override; no new neural inference or raw-UV rebake.",
+  "normalization": {
+    "enabled": true,
+    "candidate_degrees": 0.2564085030934521,
+    "applied_degrees": 0.2564085030934521,
+    "underside_area": 0.05897446742005741,
+    "normal_agreement": 0.9409775509722715,
+    "yaw_degrees": 180,
+    "pitch_degrees": 0,
+    "roll_degrees": 0,
+    "uniform_scale": 1.0471876909187645
+  },
+  "orientation": {
+    "up": "Y",
+    "front": "+Z",
+    "groundY": 0,
+    "maxEdge": 1
+  },
+  "requestedTriangles": 45000,
+  "triangles": 44983,
+  "glbValidation": {
+    "version": 2,
+    "triangles": 44983,
+    "meshes": 1,
+    "materials": 1,
+    "images": 2,
+    "all_primitives_have_uv": true,
+    "animations": [],
+    "all_images_embedded": true,
+    "external_buffers": []
+  },
+  "quantization": {
+    "source": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--onsen_1-db62742a4d41-repair-9e81ad94b441-low-0299473a32-field-v1\\candidates\\alpine\\onsen_1.glb",
+    "output": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--onsen_1-db62742a4d41-repair-9e81ad94b441-low-0299473a32-field-v1\\candidates\\alpine\\onsen_1.glb",
+    "sourceBytes": 2117384,
+    "outputBytes": 1510456,
+    "sourceSha256": "f856461dcae8601d69f4c5491e5cd14499b70b2e1a414d79afc6cf51261d870f",
+    "outputSha256": "5dd92eaa37c6916818cfd6785f7193e0c71eebd48ee6dc9db4a8d502b0f19d66",
+    "positionFaceAndTextureBytesUnchanged": true,
+    "attributes": [
+      {
+        "accessor": 1,
+        "semantic": "NORMAL",
+        "count": 50590,
+        "maximumAngularErrorDegrees": 0.3757757275697705
+      },
+      {
+        "accessor": 2,
+        "semantic": "TEXCOORD_0",
+        "count": 50590,
+        "maximumUVError": 7.629510948348184e-06,
+        "maximumTexelErrorAt1024": 0.00781261921110854
+      }
+    ]
+  },
+  "processedCandidate": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\candidates\\alpine\\onsen_1.glb",
+    "sha256": "5dd92eaa37c6916818cfd6785f7193e0c71eebd48ee6dc9db4a8d502b0f19d66",
+    "bytes": 1510456
+  },
+  "derivation": {
+    "method": "Recorded CPU surface derived from the same neural raw, inverse-normalized to field coordinates; a local native-export variant bypasses further mesh simplification/remeshing and uses native UV generation plus original neural high-surface BVH and field texture sampling. Only normalization, JPEG encoding and attribute quantization afterward.",
+    "voxelizedAgain": false,
+    "rebakedFromRawUV": false,
+    "facadeUVPreserved": true,
+    "normalizedTrianglesPreserved": true,
+    "geometrySurfaceInput": {
+      "receipt": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\alpine--onsen_1-db62742a4d41-repair-9e81ad94b441-low-0299473a32-field-v1\\geometry-source-proof.json",
+        "sha256": "2e286429bbc6ccbaeaf4a2bdb7c162eafcfd325a64754ef3ade8a63333a59660",
+        "bytes": 9773
+      },
+      "method": "Coordinate inversion of the recorded neural-derived low surface including explicitly bounded local source repairs. This preparation only welds exact positions and changes coordinates; it adds no faces. Original raw inference and repair input remain distinct.",
+      "sourceRaw": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\alpine--onsen_1-a003-pixal-mv-1024-29473.glb",
+        "sha256": "db62742a4d41cf3d3e25cc733132aaa3adf10aa4969a472a5ca2337bc8abcba8",
+        "bytes": 41085524
+      },
+      "candidate": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\alpine--onsen_1-db62742a4d41-repair-9e81ad94b441-low-0299473a32-field-v1\\geometry-candidate.glb",
+        "sha256": "0299473a3259194cdcc1660b09831ae64b40fabdcfd642623f184dd57e4d1b88",
+        "bytes": 1848816
+      },
+      "candidateReport": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\alpine--onsen_1-db62742a4d41-repair-9e81ad94b441-low-0299473a32-field-v1\\geometry-candidate-processing.json",
+        "sha256": "69fa9fa4945cab700e5dd1c0dca95ae63dd74e053f9b623cd02a0997ca14af91",
+        "bytes": 15379
+      },
+      "originalCandidate": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-alpine-onsen1-9e81ad94b4415d52-45k\\candidates\\alpine\\onsen_1.glb",
+        "sha256": "0299473a3259194cdcc1660b09831ae64b40fabdcfd642623f184dd57e4d1b88",
+        "bytes": 1848816
+      },
+      "fieldReceipt": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\alpine--onsen_1-a003\\receipt.json",
+        "sha256": "59be41bf541612c7849c9986d48e985fe7d0690559e6f999b43520a2dad273ae",
+        "bytes": 3686
+      },
+      "output": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\alpine--onsen_1-db62742a4d41-repair-9e81ad94b441-low-0299473a32-field-v1\\geometry-surface.npz",
+        "sha256": "ed7b9d73246f029d6b3de32a85d4f78f3deaf9fb2e7a294d2163146cf08ca612",
+        "bytes": 806924
+      },
+      "triangles": 44983,
+      "vertices": 22218,
+      "originalSplitVertices": 60422,
+      "exactCoincidentVerticesMerged": 38204,
+      "maximumPositionChangeFromWelding": 0,
+      "normalization": {
+        "enabled": true,
+        "candidate_degrees": 0.29341961733888516,
+        "applied_degrees": 0.29341961733888516,
+        "underside_area": 0.05599988123845101,
+        "normal_agreement": 0.9451598266763768,
+        "yaw_degrees": 180,
+        "pitch_degrees": 0,
+        "roll_degrees": 0,
+        "uniform_scale": 1.0465456360569472
+      },
+      "rawBlenderToNormalizedBlender": [
+        [
+          -1.0465331038478747,
+          4.512512367648228e-06,
+          0.005116280797891322,
+          -0.008072307513620165
+        ],
+        [
+          4.677830049359771e-06,
+          -1.0465439212571066,
+          0.0018759735537681732,
+          -0.0006103704339905924
+        ],
+        [
+          0.005116284120410698,
+          0.001875973968921113,
+          1.046531415391381,
+          0.2132205707440993
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "inverse": [
+        [
+          -0.9555131095134791,
+          4.253503471959412e-06,
+          0.004671303052139106,
+          -0.008709210959971219
+        ],
+        [
+          4.102569574413778e-06,
+          -0.9555229995350933,
+          0.001712815172946122,
+          -0.0009483972994657522
+        ],
+        [
+          0.004671306356251212,
+          0.0017128148140976955,
+          0.9555115808116718,
+          -0.2036959709403418
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "sampledNormalizationReconstructionMaxError": 8.606007982941028e-08,
+      "nativeBounds": {
+        "min": [
+          -0.4698916103742577,
+          -0.20291977518841747,
+          -0.21962093245711833
+        ],
+        "max": [
+          0.48507512569108846,
+          0.2461672754591035,
+          0.21800854091471716
+        ]
+      },
+      "tool": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\alpine--onsen_1-db62742a4d41-repair-9e81ad94b441-low-0299473a32-field-v1\\geometry-preparation-source.py",
+        "sha256": "956e46377da8eae51f4e9af858f698532b81fccbbf16f219a2f2adbb9ab1481a",
+        "bytes": 7005
+      },
+      "toolSnapshot": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\alpine--onsen_1-db62742a4d41-repair-9e81ad94b441-low-0299473a32-field-v1\\geometry-preparation-source.py",
+        "sha256": "956e46377da8eae51f4e9af858f698532b81fccbbf16f219a2f2adbb9ab1481a",
+        "bytes": 7005
+      },
+      "normalizationInput": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-alpine-onsen1-front-v1\\repaired-native.glb",
+        "sha256": "9e81ad94b4415d529c7ecf1fa6bb024c9c87435bec9c4652168f23dfb7fa5e8b",
+        "bytes": 41698728
+      },
+      "localSurfaceRepair": {
+        "source": {
+          "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-alpine-onsen1-front-v1\\repaired-native.glb",
+          "sha256": "9e81ad94b4415d529c7ecf1fa6bb024c9c87435bec9c4652168f23dfb7fa5e8b",
+          "bytes": 41698728
+        },
+        "receipt": {
+          "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\alpine\\onsen_1\\9e81ad94b4415d52\\repair.json",
+          "sha256": "3c624899f6578060d0482ac2cca34c7645aeb03c96be667aa41f829f416b40f1",
+          "bytes": 10781
+        },
+        "method": "Two small existing front-slope tile holes and the front gable right plaster holes measured from existing original front-camera rays receive bounded neighboring-source surface samples and original UV donors. The plaster mask is restricted to actual observed through-hole pixels; no whole gable or roof replacement. All original vertices/faces/UV and embedded image bytes remain unchanged. No neutral render or decoder origin is claimed.",
+        "newTriangles": 2128,
+        "newVertices": 1070,
+        "originalVerticesMoved": 0,
+        "originalTrianglesDeleted": 0,
+        "regions": [
+          {
+            "name": "Two source-measured missing tile patches on the front left slope; left patch",
+            "specification": {
+              "name": "Two source-measured missing tile patches on the front left slope; left patch",
+              "u": [
+                1,
+                0,
+                0
+              ],
+              "v": [
+                0,
+                0.78575371,
+                0.6185395
+              ],
+              "n": [
+                0,
+                -0.6185395,
+                0.78575371
+              ],
+              "roi": [
+                -0.254,
+                -0.219,
+                0.169,
+                0.195
+              ],
+              "defectDepth": 0.25,
+              "donorDepth": 0.273,
+              "donorMaxDepth": 0.307,
+              "donorNormal": 0.25,
+              "color": "tile"
+            },
+            "missingSamples": 51,
+            "boundarySamples": 689,
+            "sampledDepthRange": [
+              0.1539604365825653,
+              0.28617867827415466
+            ],
+            "inwardClosureThickness": 0.006,
+            "outerSurfaceUnchanged": true,
+            "newVertices": 174,
+            "newTriangles": 344
+          },
+          {
+            "name": "Second small missing tile patch beside the first",
+            "specification": {
+              "name": "Second small missing tile patch beside the first",
+              "u": [
+                1,
+                0,
+                0
+              ],
+              "v": [
+                0,
+                0.78575371,
+                0.6185395
+              ],
+              "n": [
+                0,
+                -0.6185395,
+                0.78575371
+              ],
+              "roi": [
+                -0.197,
+                -0.178,
+                0.171,
+                0.189
+              ],
+              "defectDepth": 0.25,
+              "donorDepth": 0.273,
+              "donorMaxDepth": 0.307,
+              "donorNormal": 0.25,
+              "color": "tile"
+            },
+            "missingSamples": 4,
+            "boundarySamples": 496,
+            "sampledDepthRange": [
+              0.2354615330696106,
+              0.2842700779438019
+            ],
+            "inwardClosureThickness": 0.006,
+            "outerSurfaceUnchanged": true,
+            "newVertices": 36,
+            "newTriangles": 68
+          },
+          {
+            "name": "Front gable missing right plaster only where observed camera rays pass through",
+            "specification": {
+              "name": "Front gable missing right plaster only where observed camera rays pass through",
+              "u": [
+                1,
+                0,
+                0
+              ],
+              "v": [
+                0,
+                0,
+                1
+              ],
+              "n": [
+                0,
+                -1,
+                0
+              ],
+              "roi": [
+                0.032,
+                0.113,
+                0.27,
+                0.357
+              ],
+              "defectDepth": 0.085,
+              "donorDepth": 0.11,
+              "donorMaxDepth": 0.145,
+              "donorNormal": 0.65,
+              "color": "plaster",
+              "cameraObservedHoleMask": true
+            },
+            "missingSamples": 318,
+            "boundarySamples": 53,
+            "sampledDepthRange": [
+              -0.12902307510375977,
+              0.20448291301727295
+            ],
+            "inwardClosureThickness": 0.006,
+            "outerSurfaceUnchanged": true,
+            "newVertices": 860,
+            "newTriangles": 1716
+          }
+        ]
+      },
+      "localRepairTool": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\alpine\\onsen_1\\9e81ad94b4415d52\\repair-tool.py",
+        "sha256": "0acc2c36e8d3ee75e7dbbf75b371a458d686620245998fe005e1ff7a01f43b0b",
+        "bytes": 12821
+      },
+      "repairAppliedBeforeReduction": true,
+      "originalReceipt": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\alpine--onsen_1-db62742a4d41-repair-9e81ad94b441-low-0299473a32-field-v1\\geometry-source-original-receipt.json",
+        "sha256": "e269852e3133b4b73d23559292a58715cbaae9ec70bb4d08ed33cf6cb1eae5c1",
+        "bytes": 9390
+      }
+    },
+    "nativePostprocessOverride": {
+      "original": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\alpine--onsen_1-db62742a4d41-repair-9e81ad94b441-low-0299473a32-field-v1\\original-native-exporter-source.py",
+        "sha256": "b6b79da5dfe13c22047a6257c6b2301c7ea31259dd9c82344db7e5c4cc707917",
+        "bytes": 8126
+      },
+      "scope": "Keep original neural geometry BVH for PBR lookup. Replace only the intermediate surface with this recorded existing source-derived low mesh; bypass further remeshing/simplification/cleanup, then use native unwrap/normals/field sampling.",
+      "sharedCodeModified": false,
+      "noNewGeometryAuthored": true,
+      "noNewGeometryAuthoredAppliesTo": "native_uv_material_replay_only",
+      "counts": {
+        "facesBeforeUnwrap": 44983
+      }
+    },
+    "nativeFieldLookup": {
+      "quantiles50_95_99_100": [
+        0.0009991140104830265,
+        0.0016685668379068375,
+        0.002571759046986699,
+        0.026319224387407303
+      ],
+      "fractionOverTwoPercent": 0.00012532490654848516,
+      "sampleCount": 614403,
+      "meaning": "Distance to original neural BVH before direct field sampling, not ray hit coverage"
+    }
+  },
+  "bake": {
+    "method": "Direct original neural attribute field sampling inside native to_glb; no Blender bake or nearest raw-image transfer",
+    "notRayCoverage": true
+  },
+  "animation": null,
+  "processingComplete": true,
+  "limitations": [
+    "Same assumed three-view cameras as original native raw",
+    "Diagnostic pending external visual approval; not a formal asset replacement"
+  ],
+  "localSurfaceRepair": {
+    "source": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-alpine-onsen1-front-v1\\repaired-native.glb",
+      "sha256": "9e81ad94b4415d529c7ecf1fa6bb024c9c87435bec9c4652168f23dfb7fa5e8b",
+      "bytes": 41698728
+    },
+    "receipt": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\alpine\\onsen_1\\9e81ad94b4415d52\\repair.json",
+      "sha256": "3c624899f6578060d0482ac2cca34c7645aeb03c96be667aa41f829f416b40f1",
+      "bytes": 10781
+    },
+    "method": "Two small existing front-slope tile holes and the front gable right plaster holes measured from existing original front-camera rays receive bounded neighboring-source surface samples and original UV donors. The plaster mask is restricted to actual observed through-hole pixels; no whole gable or roof replacement. All original vertices/faces/UV and embedded image bytes remain unchanged. No neutral render or decoder origin is claimed.",
+    "newTriangles": 2128,
+    "newVertices": 1070,
+    "originalVerticesMoved": 0,
+    "originalTrianglesDeleted": 0,
+    "regions": [
+      {
+        "name": "Two source-measured missing tile patches on the front left slope; left patch",
+        "specification": {
+          "name": "Two source-measured missing tile patches on the front left slope; left patch",
+          "u": [
+            1,
+            0,
+            0
+          ],
+          "v": [
+            0,
+            0.78575371,
+            0.6185395
+          ],
+          "n": [
+            0,
+            -0.6185395,
+            0.78575371
+          ],
+          "roi": [
+            -0.254,
+            -0.219,
+            0.169,
+            0.195
+          ],
+          "defectDepth": 0.25,
+          "donorDepth": 0.273,
+          "donorMaxDepth": 0.307,
+          "donorNormal": 0.25,
+          "color": "tile"
+        },
+        "missingSamples": 51,
+        "boundarySamples": 689,
+        "sampledDepthRange": [
+          0.1539604365825653,
+          0.28617867827415466
+        ],
+        "inwardClosureThickness": 0.006,
+        "outerSurfaceUnchanged": true,
+        "newVertices": 174,
+        "newTriangles": 344
+      },
+      {
+        "name": "Second small missing tile patch beside the first",
+        "specification": {
+          "name": "Second small missing tile patch beside the first",
+          "u": [
+            1,
+            0,
+            0
+          ],
+          "v": [
+            0,
+            0.78575371,
+            0.6185395
+          ],
+          "n": [
+            0,
+            -0.6185395,
+            0.78575371
+          ],
+          "roi": [
+            -0.197,
+            -0.178,
+            0.171,
+            0.189
+          ],
+          "defectDepth": 0.25,
+          "donorDepth": 0.273,
+          "donorMaxDepth": 0.307,
+          "donorNormal": 0.25,
+          "color": "tile"
+        },
+        "missingSamples": 4,
+        "boundarySamples": 496,
+        "sampledDepthRange": [
+          0.2354615330696106,
+          0.2842700779438019
+        ],
+        "inwardClosureThickness": 0.006,
+        "outerSurfaceUnchanged": true,
+        "newVertices": 36,
+        "newTriangles": 68
+      },
+      {
+        "name": "Front gable missing right plaster only where observed camera rays pass through",
+        "specification": {
+          "name": "Front gable missing right plaster only where observed camera rays pass through",
+          "u": [
+            1,
+            0,
+            0
+          ],
+          "v": [
+            0,
+            0,
+            1
+          ],
+          "n": [
+            0,
+            -1,
+            0
+          ],
+          "roi": [
+            0.032,
+            0.113,
+            0.27,
+            0.357
+          ],
+          "defectDepth": 0.085,
+          "donorDepth": 0.11,
+          "donorMaxDepth": 0.145,
+          "donorNormal": 0.65,
+          "color": "plaster",
+          "cameraObservedHoleMask": true
+        },
+        "missingSamples": 318,
+        "boundarySamples": 53,
+        "sampledDepthRange": [
+          -0.12902307510375977,
+          0.20448291301727295
+        ],
+        "inwardClosureThickness": 0.006,
+        "outerSurfaceUnchanged": true,
+        "newVertices": 860,
+        "newTriangles": 1716
+      }
+    ]
+  },
+  "renderedCandidate": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--onsen_1-db62742a4d41-repair-9e81ad94b441-low-0299473a32-field-v1\\candidates\\renders\\alpine\\onsen_1\\lod-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--onsen_1-db62742a4d41-repair-9e81ad94b441-low-0299473a32-field-v1\\candidates\\renders\\alpine\\onsen_1\\lod-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--onsen_1-db62742a4d41-repair-9e81ad94b441-low-0299473a32-field-v1\\candidates\\renders\\alpine\\onsen_1\\lod-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--onsen_1-db62742a4d41-repair-9e81ad94b441-low-0299473a32-field-v1\\candidates\\renders\\alpine\\onsen_1\\lod-left.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--onsen_1-db62742a4d41-repair-9e81ad94b441-low-0299473a32-field-v1\\candidates\\renders\\alpine\\onsen_1\\lod-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.5,
+        -0.22909662127494812,
+        0.0
+      ],
+      "max": [
+        0.5,
+        0.22909662127494812,
+        0.47287702560424805
+      ]
+    },
+    "triangles": 44983,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          1024,
+          1024
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "sourceReviewReusedFrom": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--onsen_1-db62742a4d41-repair-9e81ad94b441-low-0299473a32-field-v1\\surface.candidate.json",
+    "sha256": "69fa9fa4945cab700e5dd1c0dca95ae63dd74e053f9b623cd02a0997ca14af91",
+    "bytes": 15379
+  },
+  "renderedSource": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--onsen_1-db62742a4d41-repair-9e81ad94b441-low-0299473a32-field-v1\\candidates\\renders\\alpine\\onsen_1\\raw-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--onsen_1-db62742a4d41-repair-9e81ad94b441-low-0299473a32-field-v1\\candidates\\renders\\alpine\\onsen_1\\raw-iso.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--onsen_1-db62742a4d41-repair-9e81ad94b441-low-0299473a32-field-v1\\candidates\\renders\\alpine\\onsen_1\\raw-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--onsen_1-db62742a4d41-repair-9e81ad94b441-low-0299473a32-field-v1\\candidates\\renders\\alpine\\onsen_1\\raw-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--onsen_1-db62742a4d41-repair-9e81ad94b441-low-0299473a32-field-v1\\candidates\\renders\\alpine\\onsen_1\\raw-left.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.5,
+        -0.22873754799365997,
+        0.0
+      ],
+      "max": [
+        0.5,
+        0.22873754799365997,
+        0.4726412296295166
+      ]
+    },
+    "triangles": 940611,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "bounds": {
+    "min": [
+      -0.5,
+      0.0,
+      -0.22909662127494812
+    ],
+    "max": [
+      0.5,
+      0.47287702560424805,
+      0.22909662127494812
+    ],
+    "coordinateSystem": "GLTF Y-up; +Z front"
+  },
+  "textureSizes": [
+    {
+      "name": "Image_0",
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "name": "Image_1",
+      "size": [
+        1024,
+        1024
+      ]
+    }
+  ],
+  "completedAt": "2026-10-23T22:20:58.559793+00:00",
+  "rawSourceUnchanged": true,
+  "promotedFrom": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--onsen_1-db62742a4d41-repair-9e81ad94b441-low-0299473a32-field-v1\\candidates\\alpine\\onsen_1.json",
+    "sha256": "dee3f5f4f05613eb4b438915f395628d3e768d164f66c6c4b2a26e347f42b5fd",
+    "bytes": 30061
+  },
+  "reviewSheet": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--onsen_1-db62742a4d41-repair-9e81ad94b441-low-0299473a32-field-v1\\candidates\\renders\\alpine\\onsen_1\\review-sheet.jpg",
+    "sha256": "26cc344fe86e0e15fecf5c605258d8dca3ec707c570cd1a913b43d381b9e35a0",
+    "bytes": 233697,
+    "candidateSha256": "5dd92eaa37c6916818cfd6785f7193e0c71eebd48ee6dc9db4a8d502b0f19d66",
+    "sourceImages": [
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--onsen_1-db62742a4d41-repair-9e81ad94b441-low-0299473a32-field-v1\\candidates\\renders\\alpine\\onsen_1\\raw-front.png",
+        "sha256": "89f446492cba61c5a4aa044620eb77bb3ab334b96e74fb3b02b5d1098680aa8c",
+        "label": "AI raw front"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--onsen_1-db62742a4d41-repair-9e81ad94b441-low-0299473a32-field-v1\\candidates\\renders\\alpine\\onsen_1\\raw-iso.png",
+        "sha256": "ab01ee4064fc64ea7080ce68c610776d9ccb621936d8fc9b361f0e46f2f0f2c9",
+        "label": "AI raw iso"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--onsen_1-db62742a4d41-repair-9e81ad94b441-low-0299473a32-field-v1\\candidates\\renders\\alpine\\onsen_1\\lod-front.png",
+        "sha256": "b432698d13974830f6b002fd9a6414c539623225845d8c179f2b345d4d77a8f2",
+        "label": "LOD front"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--onsen_1-db62742a4d41-repair-9e81ad94b441-low-0299473a32-field-v1\\candidates\\renders\\alpine\\onsen_1\\lod-right.png",
+        "sha256": "68c7680073b010e1d07f8d1ddff50fe4583f9373530f0ef1475f7f9bd401ccc5",
+        "label": "LOD right"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--onsen_1-db62742a4d41-repair-9e81ad94b441-low-0299473a32-field-v1\\candidates\\renders\\alpine\\onsen_1\\lod-back.png",
+        "sha256": "e3b532694062b031c91e52c50486b24b65bb1ca3b8a445a125cff46dd5d5f750",
+        "label": "LOD back"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--onsen_1-db62742a4d41-repair-9e81ad94b441-low-0299473a32-field-v1\\candidates\\renders\\alpine\\onsen_1\\lod-left.png",
+        "sha256": "265434ffb37b2508b2369a2ed5033b4670bf484731296a829336230d6f94c653",
+        "label": "LOD left"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--onsen_1-db62742a4d41-repair-9e81ad94b441-low-0299473a32-field-v1\\candidates\\renders\\alpine\\onsen_1\\lod-iso.png",
+        "sha256": "73d2a8f58b7cee51d380ca5d795a914c19046f1a2633838b6bd2b8d10a2a64e3",
+        "label": "LOD iso"
+      }
+    ],
+    "content": "Unmodified CPU render images composed with labels for visual comparison only"
+  }
+}

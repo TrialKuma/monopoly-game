@@ -1,0 +1,57 @@
+{
+  "status": "rejected_native_export_source",
+  "region": "expansion",
+  "asset": "shop_1",
+  "reviewer": "asset_production",
+  "recordedAtUtc": "2026-10-24T04:01:34.829385+00:00",
+  "source": {
+    "path": "art/full-ai-city/source/expansion--shop_1-a011-pixal-mv-1024-9247.glb",
+    "sha256": "2e0601498c700d717ac3bec857b2ebf62da2001123858382fa084d93655ec042",
+    "bytes": 40808776
+  },
+  "sourceLevel": "Native 1M export; no untouched decoder attribution is made.",
+  "inferenceReport": {
+    "path": "art/full-ai-city/reports/source-rejections/expansion/shop_1/2e0601498c700d71/expansion--shop_1-a011-pixal-mv-1024-9247.json",
+    "sha256": "61ae4aa300c1afe6956c4d979da5451a2203c8f8dcb5836c21b4dcf98cc46a8f",
+    "bytes": 10155
+  },
+  "inputReference": {
+    "path": "art/full-ai-city/reports/source-rejections/expansion/shop_1/2e0601498c700d71/input-reference.json",
+    "sha256": "ad3df3e3142855fc45d43023167ffe6244815a994c4abebda1e5e69053acae6d",
+    "bytes": 4433
+  },
+  "diagnostic": null,
+  "diagnosticTool": null,
+  "sourceComparisonReport": {
+    "path": "art/full-ai-city/reports/source-rejections/expansion/shop_1/2e0601498c700d71/source-comparison-processing.json",
+    "sha256": "597fb164524f5cedce33e29a36cacae2c422c7b8a30f80d2b346fc95717737bd",
+    "bytes": 20846
+  },
+  "sourceViewEvidenceMode": "Explicitly selected existing renderedSource views; no additional or neutral render implied",
+  "evidence": [
+    {
+      "path": "art/full-ai-city/reports/source-rejections/expansion/shop_1/2e0601498c700d71/raw-front.png",
+      "sha256": "3c45991cb3d91c518124a05d6f602e668349cd1e7cbc34f9ba0422e7d9141cae",
+      "bytes": 214354
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/expansion/shop_1/2e0601498c700d71/raw-iso.png",
+      "sha256": "7b7fa130d53d3fac7ca8bbea6137b935d9e49d7398508435ae07aec1e2f15b5d",
+      "bytes": 306145
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/expansion/shop_1/2e0601498c700d71/raw-left.png",
+      "sha256": "3aec25a41d82dfa478f1053e088057b48dd43c28b7f1a04f4f391e3bdcfd280e",
+      "bytes": 210866
+    }
+  ],
+  "finding": "Actually inspected original triptych, native front/iso/left, all five exact final material views and 256px preview. Both side-window walls contain a conspicuous full-height jagged pale folded strip, visible in original native iso and left as well as the final phone preview; it breaks the continuous brick-panel design. The front display panes have also become nearly blank opaque panels, but the main rejection is the broad torn/folded side wall surface. Roof and striped awning otherwise remain recognizable. One first independent same-reference retry, preserving the same reference and geometry-only settings; no speculative export or higher-face trial.",
+  "decision": "One first independent same-reference seed; no third blind seed.",
+  "sourceUnchanged": true,
+  "notFinalCandidateReview": true,
+  "freezeTool": {
+    "path": "art/full-ai-city/reports/tool-snapshots/616860a00b28e670e1219d64c6cb5dad17f0946420568f786e80b6d789fb4a73-freeze_public_source_rejection.py",
+    "sha256": "616860a00b28e670e1219d64c6cb5dad17f0946420568f786e80b6d789fb4a73",
+    "bytes": 4304
+  }
+}

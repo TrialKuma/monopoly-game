@@ -1,0 +1,248 @@
+{
+  "status": "local_repair_candidate_pending_visual_review",
+  "source": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\expansion--hotel_2-a013-pixal-mv-1024-29489.glb",
+    "sha256": "079dc544934552407862f8cabd990c7dee8598576e21a1048c1fa9f322db988f",
+    "bytes": 40049116
+  },
+  "orientation": {
+    "enabled": true,
+    "candidate_degrees": 0.4092604794359477,
+    "applied_degrees": 0.4092604794359477,
+    "underside_area": 0.12708030847660012,
+    "normal_agreement": 0.9651435435486546,
+    "yaw_degrees": 180,
+    "pitch_degrees": 0,
+    "roll_degrees": 0,
+    "uniform_scale": 1.1192281141252414
+  },
+  "configuration": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\source-repairs-planned\\expansion\\hotel_2\\079dc54493455240\\two-regions-config.json",
+    "sha256": "60d3b63b545269510ad125301f9fc22e0cd4cafd8ebeda0ed6a61f87b6c9cab6",
+    "bytes": 1814
+  },
+  "reviewEvidence": [
+    {
+      "path": "reports/source-rejections/expansion/hotel_2/079dc54493455240/rejection.json",
+      "sha256": "0307914ef2f7c68af54e413e0b36229c32535b6e496e4b2f09d7cedbb6b6b868"
+    }
+  ],
+  "measurement": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\core-surface-measurements\\expansion\\hotel_2\\079d-two-regions\\surface-measurements.json",
+    "sha256": "e13c7a4268c96c44fd94a125082865ba96d3b2381de53f2d22ba1310181ada86",
+    "bytes": 83589
+  },
+  "method": "Only explicitly measured and visually reviewed local gaps are closed from adjoining original surface and UV samples with0.006 inward closure. Original vertices, faces and image pixels are preserved. No replacement building or generated texture. See configuration and frozen prior review evidence for exact allowed regions.",
+  "repairs": [
+    {
+      "name": "Front upper right pale cornice opening",
+      "specification": {
+        "name": "Front upper right pale cornice opening",
+        "u": [
+          1,
+          0,
+          0
+        ],
+        "v": [
+          0,
+          0,
+          1
+        ],
+        "n": [
+          0,
+          -1,
+          0
+        ],
+        "roi": [
+          0.135,
+          0.212,
+          0.704,
+          0.735
+        ],
+        "defectDepth": 0.17,
+        "donorDepth": 0.18,
+        "donorMaxDepth": 0.202,
+        "donorNormal": 0.7,
+        "color": "stone",
+        "gridStep": 0.0035,
+        "donorMargin": 0.028,
+        "flatPatchUV": true,
+        "donorMinRGB": 0.46,
+        "donorMaxColorRatio": 1.8
+      },
+      "missingSamples": 156,
+      "boundarySamples": 120,
+      "sampledDepthRange": [
+        -0.33278536796569824,
+        0.23070335388183594
+      ],
+      "inwardClosureThickness": 0.006,
+      "outerSurfaceUnchanged": true,
+      "newVertices": 458,
+      "newTriangles": 912
+    },
+    {
+      "name": "Left lower narrow brick wall crack",
+      "specification": {
+        "name": "Left lower narrow brick wall crack",
+        "u": [
+          0,
+          -1,
+          0
+        ],
+        "v": [
+          0,
+          0,
+          1
+        ],
+        "n": [
+          -1,
+          0,
+          0
+        ],
+        "roi": [
+          -0.342,
+          -0.308,
+          0.137,
+          0.335
+        ],
+        "defectDepth": 0.398,
+        "donorDepth": 0.4,
+        "donorMaxDepth": 0.413,
+        "donorNormal": 0.7,
+        "color": "brick",
+        "gridStep": 0.0035,
+        "donorMargin": 0.025,
+        "flatPatchUV": true,
+        "donorMinRGB": 0.1,
+        "donorMaxColorRatio": 5
+      },
+      "missingSamples": 147,
+      "boundarySamples": 1220,
+      "sampledDepthRange": [
+        0.3286973237991333,
+        0.4087890386581421
+      ],
+      "inwardClosureThickness": 0.006,
+      "outerSurfaceUnchanged": true,
+      "newVertices": 562,
+      "newTriangles": 1120
+    }
+  ],
+  "originalTriangles": 961451,
+  "originalVerticesMoved": 0,
+  "originalTrianglesDeleted": 0,
+  "artifactCleanup": {
+    "method": "No original faces deleted. Only the explicitly reviewed bounded source-surface regions in the configuration may receive additional triangles.",
+    "deletedTriangles": 0
+  },
+  "newTriangles": 2032,
+  "newVertices": 1020,
+  "inverseSimilarityError": 9.774406906082334e-08,
+  "normalizedOutput": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-expansion-hotel2-079d-two-regions\\repaired-normalized.glb",
+    "sha256": "f6e1449e2636fd818fb6d3d0534d7462014656863a3bfb5ad33a53074746ce6a",
+    "bytes": 41301652
+  },
+  "nativeOutput": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-expansion-hotel2-079d-two-regions\\repaired-native.glb",
+    "sha256": "a7f636985791d793fbac4e97b3bb8c3077b633acc43be903cb39b7fe9996468b",
+    "bytes": 41295348
+  },
+  "renders": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-expansion-hotel2-079d-two-regions\\repaired-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-expansion-hotel2-079d-two-regions\\repaired-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-expansion-hotel2-079d-two-regions\\repaired-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-expansion-hotel2-079d-two-regions\\repaired-left.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-expansion-hotel2-079d-two-regions\\repaired-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.46695348620414734,
+        -0.39147883653640747,
+        0.0
+      ],
+      "max": [
+        0.46695348620414734,
+        0.39147883653640747,
+        1.0
+      ]
+    },
+    "triangles": 963483,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "reviewImages": [
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\expansion\\hotel_2\\a7f636985791d793\\repaired-front.png",
+      "sha256": "e42a46e660e7d16f55fd08940758f79397c3d9715cba8c2884c0c3feab185ed7",
+      "bytes": 255200
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\expansion\\hotel_2\\a7f636985791d793\\repaired-right.png",
+      "sha256": "d644281aa758e5ccd0636d609e1392421c226c4186cd3da1e3d054f6eb4074f0",
+      "bytes": 213809
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\expansion\\hotel_2\\a7f636985791d793\\repaired-back.png",
+      "sha256": "1edb25272f91f4c521c13813d5ace7b954d045b438cf434fe472d151a7adfc28",
+      "bytes": 246214
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\expansion\\hotel_2\\a7f636985791d793\\repaired-left.png",
+      "sha256": "07cf89b4489b85a567a068a126ca4597001f65be869d4b8c1150e24f5a56c3b7",
+      "bytes": 218725
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\expansion\\hotel_2\\a7f636985791d793\\repaired-iso.png",
+      "sha256": "78c0e94bc9f6fae1eee8d39a559d95f1f6b7f1f29ca557a5fb76577d953d1b16",
+      "bytes": 311530
+    }
+  ],
+  "processingTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\f21173ee639bce54c9c7094ef6121aa6aea7401fc45edfff9d221c65a107ae79-repair_bounded_source_surface.py",
+    "sha256": "f21173ee639bce54c9c7094ef6121aa6aea7401fc45edfff9d221c65a107ae79",
+    "bytes": 13325
+  },
+  "completedAt": "2026-10-24T04:33:30.477847+00:00",
+  "sourcePreservation": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\expansion\\hotel_2\\a7f636985791d793\\preservation.json",
+    "sha256": "75bb60656f69569a774815e2c46dc05abb201cbfbb1bb3f3400fcab6a7d62096",
+    "bytes": 1102
+  },
+  "originalRepairReceipt": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-expansion-hotel2-079d-two-regions\\repair.json",
+    "sha256": "9068cf9cc69f428e4d01e135ce95a799ae0c8bdd83e8bb99fd86b24776abe5cd",
+    "bytes": 7994
+  },
+  "sourceVisualReview": {
+    "status": "reviewed_for_derivative_processing",
+    "views": [
+      "front",
+      "right",
+      "back",
+      "left",
+      "iso"
+    ],
+    "note": "Actually inspected all five repaired-source views, original revised reference and native/final failure evidence. Front upper-right pale cornice opening is closed with matching stone and the long lower-left wall crack is closed with matching warm brick. Original main enclosure, roof, canopy, windows/doors, planters and rear stairs remain coherent. Small dark cornice joints, minor bottom edge wedge, window/base seams and simplified glazing remain accepted mobile detail outside the two repair ROIs.2032newfaces; this approves only one mobile derivation, not final acceptance.",
+    "reviewer": "asset_production"
+  }
+}

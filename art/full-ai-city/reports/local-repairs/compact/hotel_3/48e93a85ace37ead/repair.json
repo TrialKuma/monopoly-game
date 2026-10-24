@@ -1,0 +1,242 @@
+{
+  "status": "local_repair_candidate_pending_visual_review",
+  "source": {
+    "path": "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\source\\compact--hotel_3-a003-pixal-mv-1024-29453.glb",
+    "sha256": "b7021f31ce86fbdb779f1e9b3b28e7664115978d3a0ccbd1d02ea4337778c0ac",
+    "bytes": 46965524
+  },
+  "orientation": {
+    "enabled": true,
+    "candidate_degrees": 1.1941773611586297,
+    "applied_degrees": 1.1941773611586297,
+    "underside_area": 0.15773699188456994,
+    "normal_agreement": 0.9608968278910592,
+    "yaw_degrees": 180,
+    "pitch_degrees": 0,
+    "roll_degrees": 0,
+    "uniform_scale": 1.145303775678722
+  },
+  "configuration": {
+    "path": "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\reports\\source-repairs-planned\\compact\\hotel_3\\b7021f31ce86fbdb\\repair-config.json",
+    "sha256": "0a7b78513b5024b30ef2ad288415f805edd388668f5d53ba36c43bb225fdbe38",
+    "bytes": 1705
+  },
+  "reviewEvidence": [
+    {
+      "path": "reports/source-repairs-planned/compact/hotel_3/b7021f31ce86fbdb/review.json",
+      "sha256": "3eccf7dbc346efa0d8cd8267fdf98cf62e4145fecbaabd1362c7d449b8215815",
+      "bytes": 1771
+    }
+  ],
+  "measurement": {
+    "path": "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\reports\\source-repairs-planned\\compact\\hotel_3\\b7021f31ce86fbdb\\measurement.json",
+    "sha256": "71ec125c25dd5212b328668fd2f7701b5f46763be56e37f41befcfc822dd189f",
+    "bytes": 41585
+  },
+  "method": "Only explicitly measured and visually reviewed local gaps are closed from adjoining original surface and UV samples with0.006 inward closure. Original vertices, faces and image pixels are preserved. No replacement building or generated texture. See configuration and frozen prior review evidence for exact allowed regions.",
+  "repairs": [
+    {
+      "name": "Local inward support for intact thin upper left plaster",
+      "specification": {
+        "u": [
+          0,
+          -1,
+          0
+        ],
+        "v": [
+          0,
+          0,
+          1
+        ],
+        "n": [
+          -1,
+          0,
+          0
+        ],
+        "color": "plaster",
+        "donorNormal": 0.65,
+        "name": "Local inward support for intact thin upper left plaster",
+        "roi": [
+          -0.255,
+          -0.025,
+          0.65,
+          0.779
+        ],
+        "forceRoi": [
+          -0.255,
+          -0.025,
+          0.65,
+          0.779
+        ],
+        "defectDepth": 0.2,
+        "donorDepth": 0.325,
+        "donorMaxDepth": 0.334,
+        "gridStep": 0.006,
+        "donorMargin": 0.03
+      },
+      "missingSamples": 858,
+      "boundarySamples": 586,
+      "sampledDepthRange": [
+        0.3286815881729126,
+        0.44875526428222656
+      ],
+      "inwardClosureThickness": 0.006,
+      "outerSurfaceUnchanged": true,
+      "newVertices": 1968,
+      "newTriangles": 3932
+    },
+    {
+      "name": "Small existing left gable infill gap",
+      "specification": {
+        "u": [
+          0,
+          -1,
+          0
+        ],
+        "v": [
+          0,
+          0,
+          1
+        ],
+        "n": [
+          -1,
+          0,
+          0
+        ],
+        "color": "plaster",
+        "donorNormal": 0.65,
+        "name": "Small existing left gable infill gap",
+        "roi": [
+          -0.115,
+          -0.075,
+          0.84,
+          0.885
+        ],
+        "defectDepth": 0.2,
+        "donorDepth": 0.282,
+        "donorMaxDepth": 0.295
+      },
+      "missingSamples": 79,
+      "boundarySamples": 235,
+      "sampledDepthRange": [
+        -2.0,
+        0.3191542625427246
+      ],
+      "inwardClosureThickness": 0.006,
+      "outerSurfaceUnchanged": true,
+      "newVertices": 254,
+      "newTriangles": 504
+    }
+  ],
+  "originalTriangles": 983549,
+  "originalVerticesMoved": 0,
+  "originalTrianglesDeleted": 0,
+  "artifactCleanup": {
+    "method": "No original faces deleted. Only the explicitly reviewed bounded source-surface regions in the configuration may receive additional triangles.",
+    "deletedTriangles": 0
+  },
+  "newTriangles": 4436,
+  "newVertices": 2222,
+  "inverseSimilarityError": 9.682183133019606e-08,
+  "normalizedOutput": {
+    "path": "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\work\\repair-compact-hotel3-local-support-v1\\repaired-normalized.glb",
+    "sha256": "0ec376f3d25d2d654ed25ff5b052a4704850fe8afc0a1af77444e27c0492c3cd",
+    "bytes": 47506984
+  },
+  "nativeOutput": {
+    "path": "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\work\\repair-compact-hotel3-local-support-v1\\repaired-native.glb",
+    "sha256": "48e93a85ace37eadd637afc0137d2e2842bf62a09a8a8e8b0eb6c1240efff62e",
+    "bytes": 47500480
+  },
+  "renders": {
+    "views": [
+      "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\compact\\hotel_3\\48e93a85ace37ead\\repaired-front.png",
+      "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\compact\\hotel_3\\48e93a85ace37ead\\repaired-right.png",
+      "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\compact\\hotel_3\\48e93a85ace37ead\\repaired-back.png",
+      "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\compact\\hotel_3\\48e93a85ace37ead\\repaired-left.png",
+      "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\compact\\hotel_3\\48e93a85ace37ead\\repaired-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.4999999701976776,
+        -0.3608993589878082,
+        0.0
+      ],
+      "max": [
+        0.4999999701976776,
+        0.3608993589878082,
+        0.9868234395980835
+      ]
+    },
+    "triangles": 987985,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "reviewImages": [
+    {
+      "path": "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\compact\\hotel_3\\48e93a85ace37ead\\repaired-front.png",
+      "sha256": "bfdb628fd74e54aae95873b43ba9d811eafd93b9dba9febedc79c0f6136b5cea",
+      "bytes": 257810
+    },
+    {
+      "path": "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\compact\\hotel_3\\48e93a85ace37ead\\repaired-right.png",
+      "sha256": "33453cc098f26e71f63cd1a352c3d98843d7ab7deee02a66bb1474b051ed85be",
+      "bytes": 212434
+    },
+    {
+      "path": "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\compact\\hotel_3\\48e93a85ace37ead\\repaired-back.png",
+      "sha256": "096c7bb8ca5ad72733871d0734b5e35c6eaff33ebb182836a46743f40f3924db",
+      "bytes": 255711
+    },
+    {
+      "path": "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\compact\\hotel_3\\48e93a85ace37ead\\repaired-left.png",
+      "sha256": "6a0250eb8fe9e454f3dbf99e7affe4c186ec443b1ec1669be27888830bb62b5b",
+      "bytes": 214997
+    },
+    {
+      "path": "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\compact\\hotel_3\\48e93a85ace37ead\\repaired-iso.png",
+      "sha256": "4d330e332c245fef4cd5ce4d0fdc8260b549755d201bcb80a6f2087331a42685",
+      "bytes": 310698
+    }
+  ],
+  "processingTool": {
+    "path": "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\25526fa28f5910bfb3dc632389a2b2140ed59ec4862fb514908c0e6f88e72ff9-repair_bounded_source_surface.py",
+    "sha256": "25526fa28f5910bfb3dc632389a2b2140ed59ec4862fb514908c0e6f88e72ff9",
+    "bytes": 12676
+  },
+  "completedAt": "2026-10-23T22:52:39.607439+00:00",
+  "originalRepairReceipt": {
+    "path": "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\compact\\hotel_3\\48e93a85ace37ead\\original-repair.json",
+    "sha256": "bc049f63e9b6591023df3d500201a221d800a5fee59c698f8764855f92399084",
+    "bytes": 7866
+  },
+  "originalSourcePreservationProof": {
+    "path": "H:\\\u4ee3\u7801\u9879\u76ee\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\compact\\hotel_3\\48e93a85ace37ead\\preservation.json",
+    "sha256": "f153ccfc4aac4cd441f65fddd1c2634f286f4c9edb80ce799cb885b0fc7aa0ed",
+    "bytes": 1098
+  },
+  "visualReview": {
+    "status": "source_repair_ready_for_derivation",
+    "reviewer": "root",
+    "reviewedAt": "2026-10-23T22:53:52.108351+00:00",
+    "note": "Root actually reviewed all five repaired-source material views. Upper-left plaster remains continuous after adding a measured local inward support surface; timber/window/balcony/roof/curtain silhouettes are retained. Small dark gable details remain visible and final phone-scale appearance must still be judged. The original983549 triangles retain exact POSITION/UV and embedded image bytes, with4436 local support/patch triangles added. This supports the intact AI source during mobile conversion; no replacement model, new texture or new neural inference. This source review does not approve the final runtime asset."
+  },
+  "runtimeApproved": false
+}

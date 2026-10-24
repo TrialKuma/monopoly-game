@@ -1,0 +1,43 @@
+{
+  "status": "reference_inputs_reused",
+  "asset": "classic_villa_2",
+  "map": "classic",
+  "reason": "Reuse the three existing independent ImageGen inputs for this regional villa_2. Current model acceptance is separately controlled by the root runtime approval registry.",
+  "sourceReview": "Historical previous-round provenance only; NOT current runtime approval. Re-inference or repaired candidates may replace it.",
+  "originalInputs": [
+    {
+      "view": "front",
+      "path": "art/themed-city-kit/inputs/classic-house-v01/view00_azim000.png",
+      "sha256": "cf00901dec85fad439ff8a9cfd61e350f7862a2e3122b7e8c9fc56c53df509ee",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "view": "right",
+      "path": "art/themed-city-kit/inputs/classic-house-v01/view01_azim090.png",
+      "sha256": "52b447b8dafb0bcd112df9487d7cdddf92d81ca0cc0c7bb2a3ac3ebf04815bd4",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "view": "back",
+      "path": "art/themed-city-kit/inputs/classic-house-v01/view02_azim180.png",
+      "sha256": "1edaf9e0e097c19bb6512eb24293e965a26e83c526c0bace4ac5ae7b5bdde793",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA"
+    }
+  ],
+  "inferenceAndVisualReviewManifest": "art/themed-city-kit/reports/approved-houses.json",
+  "inputPreparation": "Use the three existing independent transparent images directly; no triptych composition or image redraw.",
+  "historicalSourceGlb": "assets/models/regions-ai/classic_house.glb",
+  "historicalSourceSha256": "327102fea0bf328a3d0f9c5eae6333c0e1706eb2708b90d90a3af4c4e44698a3"
+}

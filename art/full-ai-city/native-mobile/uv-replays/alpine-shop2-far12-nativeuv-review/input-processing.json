@@ -1,0 +1,327 @@
+{
+  "status": "exported_pending_visual_review",
+  "createdAt": "2026-10-23T11:28:37.804337+00:00",
+  "region": "alpine",
+  "asset": "shop_2",
+  "source": {
+    "rawGLB": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\alpine--shop_2-a001-pixal-mv-1024-9247.glb",
+      "sha256": "16f931b6751abdfb26c25a46ea1250ba08b6718e4bb064d1d0b61a5e9c29896b",
+      "bytes": 42151940
+    }
+  },
+  "inferenceReport": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\alpine--shop_2-a001\\alpine--shop_2-a001-pixal-mv-1024-9247.json",
+    "sha256": "1560f9424bf1f46c7ae2aed5feb462a9337d0496f173211e5bf534f050aa486e",
+    "bytes": 10095
+  },
+  "reference": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\inputs\\alpine\\shop_2\\8c5ab46b998d2478\\reference.json",
+    "sha256": "2fef1fa13e2cf25a06c9b1d08963027a0b198ef98f74cf5bc85d4bdab7a86732",
+    "bytes": 4406
+  },
+  "processingTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\d1befe53381b9186da4b840298fc1d6b373524437790091b7f6e296bfcbf771b-process_lod.py",
+    "sha256": "d1befe53381b9186da4b840298fc1d6b373524437790091b7f6e296bfcbf771b",
+    "bytes": 27109
+  },
+  "assumedCameras": true,
+  "cameraCalibration": "assumed_standard_orbit_not_measured",
+  "nativePipeline": "Pixal3DMVImageTo3DPipeline.run_mv",
+  "nativeResolution": 1024,
+  "seed": 9247,
+  "geometryOrigin": "Exact approved neural-derived near geometry, including its disclosed bounded local repairs where present, simplified with topology and boundary preservation for far use. No substitute building; original inference remains separate and unchanged.",
+  "orientation": {
+    "up": "Y",
+    "front": "+Z",
+    "groundY": 0,
+    "maxEdge": 1
+  },
+  "requestedTriangles": 12000,
+  "limitations": [
+    "Assumed camera reference reconstruction, not exact measured architecture",
+    "Final candidate requires actual rendered visual approval"
+  ],
+  "animation": null,
+  "processingComplete": true,
+  "lod": "far",
+  "processingRevision": 0,
+  "derivedFromNear": {
+    "path": "H:\\代码项目\\monopoly\\assets\\models\\regions-ai\\full\\alpine\\shop_2\\07c331b80aaa10bd.glb",
+    "sha256": "07c331b80aaa10bd6cc8a1f2a49a8be4bd834e765706070ae9389a3b614c4e25",
+    "bytes": 1146416
+  },
+  "derivedFromNearReport": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\processed\\alpine\\shop_2\\07c331b80aaa10bd-e06cab9bf14040f7.json",
+    "sha256": "e06cab9bf14040f7671030db52b613d1f0c4ae14d9e2cee469162dafa902e00c",
+    "bytes": 18801
+  },
+  "farSimplification": {
+    "source": {
+      "path": "H:\\代码项目\\monopoly\\assets\\models\\regions-ai\\full\\alpine\\shop_2\\07c331b80aaa10bd.glb",
+      "sha256": "07c331b80aaa10bd6cc8a1f2a49a8be4bd834e765706070ae9389a3b614c4e25"
+    },
+    "output": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\alpine-shop2-far12-nativeuv-review\\far-surface.npz",
+    "outputSha256": "92383c16f4b6c5422641a2f48cdad6b7a7d3c091b52073b55c35def76261c712",
+    "tool": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\e1cebc38c56c536fc09ec03ec4c1cad0060e4f6c21693fa5284e689cf37b9f7b-simplify_far_surface.py",
+      "sha256": "e1cebc38c56c536fc09ec03ec4c1cad0060e4f6c21693fa5284e689cf37b9f7b",
+      "pymeshlabVersion": "2025.7.post1"
+    },
+    "sourceTriangles": 29979,
+    "actualTriangles": 11999,
+    "actualVertices": 5478,
+    "method": "PyMeshLab quadric collapse preserving boundary, normal and topology with planar quadrics",
+    "settings": {
+      "targetfacenum": 12000,
+      "qualitythr": 0.3,
+      "preserveboundary": true,
+      "boundaryweight": 20.0,
+      "preservenormal": true,
+      "preservetopology": true,
+      "optimalplacement": true,
+      "planarquadric": true,
+      "planarweight": 0.01,
+      "autoclean": true
+    },
+    "geometryOrigin": "Only existing approved neural-derived surface simplified; no authored geometry",
+    "sourceCleanup": []
+  },
+  "derivation": {
+    "rawTriangles": 992894,
+    "weldedTriangles": 11999,
+    "remeshedTriangles": 11999,
+    "voxelSize": 0,
+    "finalTriangles": 11999,
+    "atlasArea": 0.539456004890548,
+    "singleReductionPass": true,
+    "inheritedUVRemovedBeforeReduction": true,
+    "sourceMaterialsUntouched": true,
+    "uvUnwrap": {
+      "angleDegrees": 66.0,
+      "islandMargin": 2e-05,
+      "marginMethod": "SCALED",
+      "nominalMarginPixels": null
+    },
+    "nearTriangles": 29979,
+    "rawTriangleCountEvidence": "Actual unchanged original raw GLB index count; native-field near report does not repeat a rawTriangles field."
+  },
+  "bake": {
+    "method": "CPU closest-original-surface float64 PBR transfer from the exact approved near mesh/materials onto its source-derived far surface. No further voxelization or authored geometry.",
+    "coveredAtlasPixels": 134152,
+    "nearestLookupSuccessFraction": 1.0,
+    "notRayCoverage": true,
+    "sourceDistanceQuantiles": [
+      0.00045320947538129985,
+      0.0037978886859491453,
+      0.0059131254069507075,
+      0.013049803674221039
+    ],
+    "sourceDistanceQuantileLevels": [
+      0.5,
+      0.95,
+      0.99,
+      1
+    ],
+    "overTwoPercentMaxEdge": 0.0,
+    "distanceReviewRequired": false,
+    "visualGeometryReviewRequired": true,
+    "barycentricOriginalRange": [
+      -4.39122063005942e-05,
+      1.0
+    ],
+    "degenerateOrInvalidBarycentricCount": 0,
+    "closestSourceVertexFallbackFraction": 0.0,
+    "barycentricPointReconstructionErrorQuantiles": [
+      9.252650002701216e-09,
+      4.4140457633516145e-08,
+      1.5753057632243278e-06
+    ],
+    "atlasOverlapPixelsWithDifferentSurface": 7441,
+    "seconds": 1.7745313000050373,
+    "maps": [
+      {
+        "role": "base",
+        "size": [
+          512,
+          512
+        ]
+      },
+      {
+        "role": "orm",
+        "size": [
+          256,
+          256
+        ]
+      }
+    ]
+  },
+  "textureTransferTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\a2cb99c96fb8df396f16580a88a7c6151104ee3c927fe76cd161ee2d27bdfa42-bake_nearest_surface.py",
+    "sha256": "a2cb99c96fb8df396f16580a88a7c6151104ee3c927fe76cd161ee2d27bdfa42",
+    "bytes": 7317
+  },
+  "farShading": {
+    "normals": "actual_geometry_only",
+    "baseColorSize": 512,
+    "ormSize": 256,
+    "reason": "Actual diagnostic isolated second-generation tangent-space normal rebake as the cause of black dormers/chimneys. Keep the verified geometric normals and original-near-derived color/ORM, omit normalTexture."
+  },
+  "nearSourceGeometryOrigin": "Recorded low surface derived from the identical native raw, restored to original field coordinates, with native UV/material generation using the original neural high-surface BVH and attribute field. No authored replacement geometry.",
+  "quantization": {
+    "source": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\alpine-shop2-far12-nativeuv-review\\candidates\\alpine\\shop_2.glb",
+    "output": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\alpine-shop2-far12-nativeuv-review\\candidates\\alpine\\shop_2.glb",
+    "sourceBytes": 725940,
+    "outputBytes": 514748,
+    "sourceSha256": "1a110e81ffef430214fe26263a0f22fa550468edd5c831a95fc4eaa4688d0e22",
+    "outputSha256": "01c00d2c98f83296cb4292795f9d5a4aa218194a0d01cd35983294445dee4f65",
+    "positionFaceAndTextureBytesUnchanged": true,
+    "attributes": [
+      {
+        "accessor": 1,
+        "semantic": "NORMAL",
+        "count": 17612,
+        "maximumAngularErrorDegrees": 0.3826569692005588
+      },
+      {
+        "accessor": 2,
+        "semantic": "TEXCOORD_0",
+        "count": 17612,
+        "maximumUVError": 7.629365426975454e-06,
+        "maximumTexelErrorAt1024": 0.007812470197222865
+      }
+    ]
+  },
+  "processedCandidate": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\alpine-shop2-far12-nativeuv-review\\candidates\\alpine\\shop_2.glb",
+    "sha256": "01c00d2c98f83296cb4292795f9d5a4aa218194a0d01cd35983294445dee4f65",
+    "bytes": 514748
+  },
+  "glbValidation": {
+    "version": 2,
+    "triangles": 11999,
+    "meshes": 1,
+    "materials": 1,
+    "images": 2,
+    "all_primitives_have_uv": true,
+    "animations": [],
+    "all_images_embedded": true,
+    "external_buffers": []
+  },
+  "triangles": 11999,
+  "renderedCandidate": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\alpine-shop2-far12-nativeuv-review\\candidates\\renders\\alpine\\shop_2\\lod-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\alpine-shop2-far12-nativeuv-review\\candidates\\renders\\alpine\\shop_2\\lod-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\alpine-shop2-far12-nativeuv-review\\candidates\\renders\\alpine\\shop_2\\lod-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\alpine-shop2-far12-nativeuv-review\\candidates\\renders\\alpine\\shop_2\\lod-left.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\alpine-shop2-far12-nativeuv-review\\candidates\\renders\\alpine\\shop_2\\lod-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.4752916991710663,
+        -0.46500563621520996,
+        0.0006354652578011155
+      ],
+      "max": [
+        0.5000196695327759,
+        0.46785908937454224,
+        0.9258920550346375
+      ]
+    },
+    "triangles": 11999,
+    "textureSizes": [
+      {
+        "name": "alpine__shop_2__nearest_base",
+        "size": [
+          512,
+          512
+        ]
+      },
+      {
+        "name": "alpine__shop_2__nearest_orm",
+        "size": [
+          256,
+          256
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "renderedSource": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\alpine-shop2-far12-nativeuv-review\\candidates\\renders\\alpine\\shop_2\\raw-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\alpine-shop2-far12-nativeuv-review\\candidates\\renders\\alpine\\shop_2\\raw-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.5,
+        -0.4650975465774536,
+        0.0
+      ],
+      "max": [
+        0.5,
+        0.4650975465774536,
+        0.9282012581825256
+      ]
+    },
+    "triangles": 992894,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "bounds": {
+    "min": [
+      -0.4752916991710663,
+      0.0006354652578011155,
+      -0.46785908937454224
+    ],
+    "max": [
+      0.5000196695327759,
+      0.9258920550346375,
+      0.46500563621520996
+    ],
+    "coordinateSystem": "GLTF Y-up; +Z front"
+  },
+  "textureSizes": [
+    {
+      "name": "alpine__shop_2__nearest_base",
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "name": "alpine__shop_2__nearest_orm",
+      "size": [
+        256,
+        256
+      ]
+    }
+  ],
+  "rawSourceUnchanged": true,
+  "completedAt": "2026-10-23T11:29:07.015045+00:00",
+  "farBudgetTrial": {
+    "requestedTriangles": 12000,
+    "automaticApproval": false,
+    "reason": "Use the exact approved Alpine shop level two as distant scenery; preserve crossed red gables, striped storefront awning and stone base at the default twelve-thousand triangle mobile far budget."
+  }
+}

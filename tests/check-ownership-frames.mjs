@@ -39,7 +39,7 @@ try{
  const specialTypes={vault_bank:'bank',builders_guild:'construction',card_pavilion:'card_draw',chance_wheel:'chance',teleport_gate:'teleport',rush_station:'rush',junction_hub:'junction'};
  routes.push({legacy:'civic_hall',tile:{index:999,isStart:true}});for(const [legacy,type] of Object.entries(specialTypes))routes.push({legacy,tile:{index:999,special:{type}}});
  for(const {legacy,tile} of routes){context.routingTile=tile;context.legacy=legacy;run('modelLibrary.set(legacy,new THREE.Group())');const resolved=run('resolveAsset(routingTile,data)');assert.equal(resolved.key,`${mapId}_${legacy}`);assert.equal(resolved.authored,true);assert(resolved.source);regionalRoutes++;}
- context.regionalBank=`${mapId}_vault_bank`;run('var retainedBank=modelLibrary.get(regionalBank);modelLibrary.delete(regionalBank)');assert.equal(run('resolveAsset({index:999,special:{type:"bank"}},data).key'),'vault_bank','missing regional model retains shared fallback');run('modelLibrary.set(regionalBank,retainedBank)');
+ context.regionalBank=`${mapId}_vault_bank`;run('var retainedBank=modelLibrary.get(regionalBank);modelLibrary.delete(regionalBank)');assert.equal(run('resolveAsset({index:999,special:{type:"bank"}},data).source'),undefined,'missing regional model never substitutes old shared architecture');run('modelLibrary.set(regionalBank,retainedBank)');
  assert.equal(regionalRoutes,29);console.log(`PASS ${mapId}: ${ownedParcels} ownership frames, ${specialFrames} public frames and all 29 regional routes`);
  console.log(JSON.stringify({mapId,ownedParcels,largeParcels,specialFrames,rayChecks,regionalRoutes,failures:0}));
 }finally{fixture.dispose();}

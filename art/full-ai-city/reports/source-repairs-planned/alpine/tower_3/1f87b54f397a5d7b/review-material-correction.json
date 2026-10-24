@@ -1,0 +1,18 @@
+{
+  "status": "bounded_source_material_correction_planned",
+  "reviewer": "root",
+  "at": "2026-10-23T23:03:52.814016+00:00",
+  "note": "All five v2 source views actually reviewed. Its broad source gaps are filled, but per-vertex donor UV interpolation crosses unrelated atlas islands and visibly paints brick/teal streaks into plaster. Restrict donor samples to neutral light plaster and set one original donor UV per new triangle. Preserve all original UVs/images. Additional actual left view shows a localized hole directly below its upper window; left ray measurements locate worldY0.008..0.104,Z0.492..0.544 with adjoining plaster depth0.318. Add one bounded local patch there, retaining the unchanged10000-new-face cap. Final derivation remains separately reviewed.",
+  "evidence": [
+    {
+      "path": "reports/source-repairs-planned/alpine/tower_3/1f87b54f397a5d7b/left-measurement.json",
+      "sha256": "ad95a5c1295d3b8817b6da916a3b4b5325348b89e67e2a220532d260e67b9045",
+      "bytes": 10055
+    },
+    {
+      "path": "reports/source-repairs-planned/alpine/tower_3/1f87b54f397a5d7b/grid010-rejected-uv-interpolation/review.json",
+      "sha256": "cd0d777bfd1da7c65946e22b0f94c8b6aa5e3005290c5edb06aeb6f94cbf7851",
+      "bytes": 766
+    }
+  ]
+}

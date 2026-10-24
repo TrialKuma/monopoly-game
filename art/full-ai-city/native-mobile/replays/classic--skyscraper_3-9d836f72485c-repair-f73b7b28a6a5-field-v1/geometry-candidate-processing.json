@@ -1,0 +1,542 @@
+{
+  "status": "exported_pending_visual_review",
+  "createdAt": "2026-10-23T08:24:26.115165+00:00",
+  "region": "classic",
+  "asset": "skyscraper_3",
+  "source": {
+    "rawGLB": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\classic--skyscraper_3-a001-pixal-mv-1024-9247.glb",
+      "sha256": "9d836f72485c2821dbc34e230cdde58faae8fab57e9ea9385629ce2ccb0404ec",
+      "bytes": 43313160
+    }
+  },
+  "inferenceReport": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\classic--skyscraper_3-a001\\classic--skyscraper_3-a001-pixal-mv-1024-9247.json",
+    "sha256": "04f5c4fbda39d843cd7fa95f2ae6d583407af76732ca28387d460b6f2662a6bd",
+    "bytes": 9145
+  },
+  "reference": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\references\\classic\\skyscraper_3\\reference.json",
+    "sha256": "0fe9de9538c2051459a8ec6973359352f313d73fdf2d0e93a9fed0bbbc432045",
+    "bytes": 4051
+  },
+  "processingTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\364e5afe80bef5786a38acff2c342b529d4b454559d2b48b5a0657771fdeb765-process_lod.py",
+    "sha256": "364e5afe80bef5786a38acff2c342b529d4b454559d2b48b5a0657771fdeb765",
+    "bytes": 25875
+  },
+  "assumedCameras": true,
+  "cameraCalibration": "assumed_standard_orbit_not_measured",
+  "nativePipeline": "Pixal3DMVImageTo3DPipeline.run_mv",
+  "nativeResolution": 1024,
+  "seed": 9247,
+  "geometryOrigin": "Actual native three-view neural building with explicitly recorded localized same-wall surface repairs, followed by source-derived remeshing and texture baking. No replacement building.",
+  "orientation": {
+    "up": "Y",
+    "front": "+Z",
+    "groundY": 0,
+    "maxEdge": 1
+  },
+  "requestedTriangles": 45000,
+  "limitations": [
+    "Assumed camera reference reconstruction, not exact measured architecture",
+    "Final candidate requires actual rendered visual approval"
+  ],
+  "animation": null,
+  "processingComplete": true,
+  "lod": "near",
+  "processingRevision": 0,
+  "localSurfaceRepair": {
+    "source": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-skyscraper3\\repaired-native.glb",
+      "sha256": "f73b7b28a6a50e0a223c55bcfc82f54d5a53a1242f0d7c8adb5f19354ee55d34",
+      "bytes": 44087344
+    },
+    "receipt": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\classic\\skyscraper_3\\f73b7b28a6a50e0a\\repair.json",
+      "sha256": "5cef574548c596365f71dc6300dcd59aae7f8e03f0bede999890537daa5deb21",
+      "bytes": 10951
+    },
+    "method": "Only five individually measured facade gaps are closed from intact adjacent original stone samples: two narrow pilaster splits, one short cornice slit and two rear dome-under-cornice bands. Original neural vertices, faces and image pixels remain unchanged. The interpolated local surfaces reuse original stone UV samples with 0.006 inward closure; no replacement building or new texture.",
+    "newTriangles": 7404,
+    "newVertices": 3716,
+    "originalVerticesMoved": 0,
+    "originalTrianglesDeleted": 0,
+    "regions": [
+      {
+        "name": "Lower narrow through-gap beside the central pilaster",
+        "specification": {
+          "name": "Lower narrow through-gap beside the central pilaster",
+          "u": [
+            1,
+            0,
+            0
+          ],
+          "v": [
+            0,
+            0,
+            1
+          ],
+          "n": [
+            0,
+            -1,
+            0
+          ],
+          "roi": [
+            -0.136,
+            -0.116,
+            0.174,
+            0.214
+          ],
+          "defectDepth": -1,
+          "donorDepth": 0.024,
+          "donorMaxDepth": 0.07,
+          "donorNormal": 0.6,
+          "color": "stone"
+        },
+        "missingSamples": 40,
+        "boundarySamples": 410,
+        "sampledDepthRange": [
+          -2.0,
+          0.15349674224853516
+        ],
+        "inwardClosureThickness": 0.006,
+        "outerSurfaceUnchanged": true,
+        "newVertices": 148,
+        "newTriangles": 292
+      },
+      {
+        "name": "Upper narrow through-gap beside the central pilaster",
+        "specification": {
+          "name": "Upper narrow through-gap beside the central pilaster",
+          "u": [
+            1,
+            0,
+            0
+          ],
+          "v": [
+            0,
+            0,
+            1
+          ],
+          "n": [
+            0,
+            -1,
+            0
+          ],
+          "roi": [
+            -0.136,
+            -0.116,
+            0.316,
+            0.36
+          ],
+          "defectDepth": -1,
+          "donorDepth": 0.024,
+          "donorMaxDepth": 0.07,
+          "donorNormal": 0.6,
+          "color": "stone"
+        },
+        "missingSamples": 48,
+        "boundarySamples": 550,
+        "sampledDepthRange": [
+          -2.0,
+          0.06842291355133057
+        ],
+        "inwardClosureThickness": 0.006,
+        "outerSurfaceUnchanged": true,
+        "newVertices": 172,
+        "newTriangles": 340
+      },
+      {
+        "name": "Short horizontal through-gap below left cornice",
+        "specification": {
+          "name": "Short horizontal through-gap below left cornice",
+          "u": [
+            1,
+            0,
+            0
+          ],
+          "v": [
+            0,
+            0,
+            1
+          ],
+          "n": [
+            0,
+            -1,
+            0
+          ],
+          "roi": [
+            -0.266,
+            -0.146,
+            0.412,
+            0.434
+          ],
+          "defectDepth": -1,
+          "donorDepth": 0.024,
+          "donorMaxDepth": 0.07,
+          "donorNormal": 0.6,
+          "color": "stone"
+        },
+        "missingSamples": 110,
+        "boundarySamples": 978,
+        "sampledDepthRange": [
+          -2.0,
+          0.04863452911376953
+        ],
+        "inwardClosureThickness": 0.006,
+        "outerSurfaceUnchanged": true,
+        "newVertices": 426,
+        "newTriangles": 844
+      },
+      {
+        "name": "Rear right dome facade band missing below cornice",
+        "specification": {
+          "name": "Rear right dome facade band missing below cornice",
+          "u": [
+            -1,
+            0,
+            0
+          ],
+          "v": [
+            0,
+            0,
+            1
+          ],
+          "n": [
+            0,
+            1,
+            0
+          ],
+          "roi": [
+            -0.46,
+            -0.33,
+            0.423,
+            0.485
+          ],
+          "defectDepth": 0.08,
+          "donorDepth": 0.09,
+          "donorMaxDepth": 0.18,
+          "donorNormal": 0.4,
+          "color": "stone"
+        },
+        "missingSamples": 542,
+        "boundarySamples": 706,
+        "sampledDepthRange": [
+          -2.0,
+          0.16538536548614502
+        ],
+        "inwardClosureThickness": 0.006,
+        "outerSurfaceUnchanged": true,
+        "newVertices": 1328,
+        "newTriangles": 2652
+      },
+      {
+        "name": "Rear left dome facade band missing below cornice",
+        "specification": {
+          "name": "Rear left dome facade band missing below cornice",
+          "u": [
+            -1,
+            0,
+            0
+          ],
+          "v": [
+            0,
+            0,
+            1
+          ],
+          "n": [
+            0,
+            1,
+            0
+          ],
+          "roi": [
+            0.33,
+            0.46,
+            0.423,
+            0.485
+          ],
+          "defectDepth": 0.08,
+          "donorDepth": 0.09,
+          "donorMaxDepth": 0.18,
+          "donorNormal": 0.4,
+          "color": "stone"
+        },
+        "missingSamples": 655,
+        "boundarySamples": 568,
+        "sampledDepthRange": [
+          -0.0779886245727539,
+          0.15324270725250244
+        ],
+        "inwardClosureThickness": 0.006,
+        "outerSurfaceUnchanged": true,
+        "newVertices": 1642,
+        "newTriangles": 3276
+      }
+    ]
+  },
+  "derivation": {
+    "rawTriangles": 949142,
+    "weldedTriangles": 953463,
+    "remeshedTriangles": 967052,
+    "voxelSize": 0.003,
+    "finalTriangles": 44995,
+    "atlasArea": 0.39693151945737914,
+    "singleReductionPass": true,
+    "inheritedUVRemovedBeforeReduction": true,
+    "sourceMaterialsUntouched": true,
+    "uvUnwrap": {
+      "angleDegrees": 66.0,
+      "islandMargin": 2e-05,
+      "marginMethod": "SCALED",
+      "nominalMarginPixels": null
+    },
+    "repairedSourceTriangles": 956546
+  },
+  "bake": {
+    "method": "CPU closest-original-triangle projection with float64 barycentric original UV and bilinear original texture sampling; geometric normals retained, no directional normal-map rebake or invented color",
+    "coveredAtlasPixels": 414970,
+    "nearestLookupSuccessFraction": 1.0,
+    "notRayCoverage": true,
+    "sourceDistanceQuantiles": [
+      0.0001591723703313619,
+      0.0008431940688751635,
+      0.001506268177181482,
+      0.006323240697383881
+    ],
+    "sourceDistanceQuantileLevels": [
+      0.5,
+      0.95,
+      0.99,
+      1
+    ],
+    "overTwoPercentMaxEdge": 0.0,
+    "distanceReviewRequired": false,
+    "visualGeometryReviewRequired": true,
+    "barycentricOriginalRange": [
+      -0.0001865469472246539,
+      1.0
+    ],
+    "degenerateOrInvalidBarycentricCount": 0,
+    "closestSourceVertexFallbackFraction": 0.0,
+    "barycentricPointReconstructionErrorQuantiles": [
+      3.785231337869655e-09,
+      3.453286951559308e-08,
+      2.230586130603875e-07
+    ],
+    "atlasOverlapPixelsWithDifferentSurface": 534,
+    "seconds": 8.957134600001154,
+    "maps": [
+      {
+        "role": "base",
+        "size": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "role": "orm",
+        "size": [
+          512,
+          512
+        ]
+      }
+    ],
+    "repairSourceNote": "Texture transfer uses the explicitly repaired neural source, retaining original PBR and locally interpolated same-wall UV. Repair receipt and unchanged original inference source are preserved separately."
+  },
+  "textureTransferTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\a2cb99c96fb8df396f16580a88a7c6151104ee3c927fe76cd161ee2d27bdfa42-bake_nearest_surface.py",
+    "sha256": "a2cb99c96fb8df396f16580a88a7c6151104ee3c927fe76cd161ee2d27bdfa42",
+    "bytes": 7317
+  },
+  "quantization": {
+    "source": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-skyscraper_3-f73b7b28a6a5\\candidates\\classic\\skyscraper_3.glb",
+    "output": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-skyscraper_3-f73b7b28a6a5\\candidates\\classic\\skyscraper_3.glb",
+    "sourceBytes": 2646484,
+    "outputBytes": 1916620,
+    "sourceSha256": "669643349aad4ceb7e808afa060be0d6ee548d55d53930da7f87cc4b852e8290",
+    "outputSha256": "5f9ced3bbd0ed300358244ba6df482de49275ba45984107116c0c01473ef60dd",
+    "positionFaceAndTextureBytesUnchanged": true,
+    "attributes": [
+      {
+        "accessor": 1,
+        "semantic": "NORMAL",
+        "count": 60835,
+        "maximumAngularErrorDegrees": 0.37863249274435395
+      },
+      {
+        "accessor": 2,
+        "semantic": "TEXCOORD_0",
+        "count": 60835,
+        "maximumUVError": 7.629331775171888e-06,
+        "maximumTexelErrorAt1024": 0.007812435737776013
+      }
+    ]
+  },
+  "processedCandidate": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-skyscraper_3-f73b7b28a6a5\\candidates\\classic\\skyscraper_3.glb",
+    "sha256": "5f9ced3bbd0ed300358244ba6df482de49275ba45984107116c0c01473ef60dd",
+    "bytes": 1916620
+  },
+  "glbValidation": {
+    "version": 2,
+    "triangles": 44995,
+    "meshes": 1,
+    "materials": 1,
+    "images": 2,
+    "all_primitives_have_uv": true,
+    "animations": [],
+    "all_images_embedded": true,
+    "external_buffers": []
+  },
+  "triangles": 44995,
+  "renderedCandidate": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-skyscraper_3-f73b7b28a6a5\\candidates\\renders\\classic\\skyscraper_3\\lod-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-skyscraper_3-f73b7b28a6a5\\candidates\\renders\\classic\\skyscraper_3\\lod-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-skyscraper_3-f73b7b28a6a5\\candidates\\renders\\classic\\skyscraper_3\\lod-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-skyscraper_3-f73b7b28a6a5\\candidates\\renders\\classic\\skyscraper_3\\lod-left.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-skyscraper_3-f73b7b28a6a5\\candidates\\renders\\classic\\skyscraper_3\\lod-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.4999650716781616,
+        -0.166153684258461,
+        0.0003738021187018603
+      ],
+      "max": [
+        0.5002865195274353,
+        0.1654137820005417,
+        0.7240927219390869
+      ]
+    },
+    "triangles": 44995,
+    "textureSizes": [
+      {
+        "name": "classic__skyscraper_3__nearest_base",
+        "size": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "name": "classic__skyscraper_3__nearest_orm",
+        "size": [
+          512,
+          512
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "renderedSource": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-skyscraper_3-f73b7b28a6a5\\candidates\\renders\\classic\\skyscraper_3\\raw-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-skyscraper_3-f73b7b28a6a5\\candidates\\renders\\classic\\skyscraper_3\\raw-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.5,
+        -0.1656237542629242,
+        0.0
+      ],
+      "max": [
+        0.5,
+        0.1656237542629242,
+        0.7242558598518372
+      ]
+    },
+    "triangles": 949142,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "renderedRepairedSource": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-skyscraper_3-f73b7b28a6a5\\candidates\\renders\\classic\\skyscraper_3\\repaired-source-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-skyscraper_3-f73b7b28a6a5\\candidates\\renders\\classic\\skyscraper_3\\repaired-source-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-skyscraper_3-f73b7b28a6a5\\candidates\\renders\\classic\\skyscraper_3\\repaired-source-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.5,
+        -0.1656237542629242,
+        0.0
+      ],
+      "max": [
+        0.5,
+        0.1656237542629242,
+        0.7242558598518372
+      ]
+    },
+    "triangles": 956546,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "bounds": {
+    "min": [
+      -0.4999650716781616,
+      0.0003738021187018603,
+      -0.1654137820005417
+    ],
+    "max": [
+      0.5002865195274353,
+      0.7240927219390869,
+      0.166153684258461
+    ],
+    "coordinateSystem": "GLTF Y-up; +Z front"
+  },
+  "textureSizes": [
+    {
+      "name": "classic__skyscraper_3__nearest_base",
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "name": "classic__skyscraper_3__nearest_orm",
+      "size": [
+        512,
+        512
+      ]
+    }
+  ],
+  "rawSourceUnchanged": true,
+  "completedAt": "2026-10-23T08:25:47.548061+00:00"
+}

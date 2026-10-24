@@ -1,0 +1,132 @@
+{
+  "status": "frozen_field_ready_for_optional_export",
+  "jobId": "harbor--civic_hall-a001",
+  "request": {
+    "status": "capture_enabled",
+    "captureOnly": true,
+    "minDiskGiB": 12,
+    "purpose": "Freeze original per-inference neural geometry and material field for later mobile export without another neural inference. No automatic approval or publication.",
+    "jobId": "harbor--civic_hall-a001",
+    "policySha256": "7e58ddb0dbc94f1787443ccde94f97403b61417c87e9e697656e019222483934"
+  },
+  "sameNativeRun": true,
+  "newNeuralInference": false,
+  "rawSourceReplaced": false,
+  "nativeExporter": {
+    "path": "C:\\Users\\A\\.codex\\worktrees\\0b69\\厂长\\grande-art-lab\\source\\experimental\\Pixal3D-Windows\\pixal3d_comfy\\postprocess.py",
+    "sha256": "b6b79da5dfe13c22047a6257c6b2301c7ea31259dd9c82344db7e5c4cc707917",
+    "bytes": 8126
+  },
+  "nativeExporterSnapshot": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\harbor--civic_hall-a001\\native-exporter-source.py",
+    "sha256": "b6b79da5dfe13c22047a6257c6b2301c7ea31259dd9c82344db7e5c4cc707917",
+    "bytes": 8126
+  },
+  "nativeEntrypointWrapper": {
+    "path": "C:\\Users\\A\\.codex\\worktrees\\0b69\\厂长\\grande-art-lab\\tools\\run_pixal_local.py",
+    "sha256": "ba8f1137c050980cc6ff252bce45ae5c1058edf565451212c074eb7134f5b505",
+    "bytes": 9327
+  },
+  "adapter": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\harbor--civic_hall-a001\\native-mobile-export-source.py",
+    "sha256": "af3a0f39998fc83bb0a80e7dda1b6ecc74ecacef61cad90f0177f5e9cd69e621",
+    "bytes": 6782
+  },
+  "diskFreeBytesBeforeCapture": 145731543040,
+  "estimatedTensorBytes": 455296872,
+  "minimumDiskReserveBytes": 12884901888,
+  "tensorArchive": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\harbor--civic_hall-a001\\neural-export-inputs.pt",
+    "sha256": "5353d633ac13838ac2319fad3977bd1af5925031f3aa7b2f662a6995ee26cc9b",
+    "bytes": 455299101
+  },
+  "tensorShapes": {
+    "vertices": {
+      "shape": [
+        6269657,
+        3
+      ],
+      "dtype": "torch.float32"
+    },
+    "faces": {
+      "shape": [
+        12910040,
+        3
+      ],
+      "dtype": "torch.int32"
+    },
+    "attr_volume": {
+      "shape": [
+        6253903,
+        6
+      ],
+      "dtype": "torch.float32"
+    },
+    "coords": {
+      "shape": [
+        6253903,
+        3
+      ],
+      "dtype": "torch.int32"
+    }
+  },
+  "originalParameters": {
+    "attr_layout": {
+      "base_color": {
+        "slice": [
+          0,
+          3,
+          null
+        ]
+      },
+      "metallic": {
+        "slice": [
+          3,
+          4,
+          null
+        ]
+      },
+      "roughness": {
+        "slice": [
+          4,
+          5,
+          null
+        ]
+      },
+      "alpha": {
+        "slice": [
+          5,
+          6,
+          null
+        ]
+      }
+    },
+    "grid_size": 1024,
+    "aabb": [
+      [
+        -0.5,
+        -0.5,
+        -0.5
+      ],
+      [
+        0.5,
+        0.5,
+        0.5
+      ]
+    ],
+    "decimation_target": 1000000,
+    "texture_size": 4096,
+    "remesh": true,
+    "remesh_band": 1,
+    "remesh_project": 0,
+    "use_tqdm": true
+  },
+  "rawGLB": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\harbor--civic_hall-a001-pixal-mv-1024-9247.glb",
+    "sha256": "b97514797cae3ddc6d7d53bfa30c6bf2b5041a12f511ee7683e0e5e69fb4703f",
+    "bytes": 44471916
+  },
+  "rawUnchanged": true,
+  "completedAt": "2026-10-24T01:15:05.658936+00:00",
+  "diskFreeBytesAfterCapture": 145228386304
+}

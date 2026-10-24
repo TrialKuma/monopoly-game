@@ -1,0 +1,52 @@
+{
+  "status": "rejected_native_export_source",
+  "region": "harbor",
+  "asset": "tower_3",
+  "reviewer": "asset_production",
+  "recordedAtUtc": "2026-10-24T06:41:14.756777+00:00",
+  "source": {
+    "path": "art/full-ai-city/source/harbor--tower_3-a009-pixal-mv-1024-9247.glb",
+    "sha256": "43a84422f7e8579e971c49ecf12fe605aff282bd138e87de30ab9c68721a6a71",
+    "bytes": 43961724
+  },
+  "sourceLevel": "Native 1M export; no untouched decoder attribution is made.",
+  "inferenceReport": {
+    "path": "art/full-ai-city/reports/source-rejections/harbor/tower_3/43a84422f7e8579e/harbor--tower_3-a009-pixal-mv-1024-9247.json",
+    "sha256": "8dfb64048e80b194dd93c6721c59a2b1fa69c46bb9afe07b8882677d2a75b560",
+    "bytes": 10394
+  },
+  "inputReference": {
+    "path": "art/full-ai-city/reports/source-rejections/harbor/tower_3/43a84422f7e8579e/input-reference.json",
+    "sha256": "7bb53a23533d7c5e950f6f5d63c4d088068225e3ba057c23191afcb0df829e16",
+    "bytes": 4423
+  },
+  "diagnostic": null,
+  "diagnosticTool": null,
+  "sourceComparisonReport": {
+    "path": "art/full-ai-city/reports/source-rejections/harbor/tower_3/43a84422f7e8579e/source-comparison-processing.json",
+    "sha256": "704e0718dcff8592b9b8e7df2e90c86a0e7e2dea41e43a4c36c0887bd416e46e",
+    "bytes": 20750
+  },
+  "sourceViewEvidenceMode": "Explicitly selected existing renderedSource views; no additional or neutral render implied",
+  "evidence": [
+    {
+      "path": "art/full-ai-city/reports/source-rejections/harbor/tower_3/43a84422f7e8579e/raw-front.png",
+      "sha256": "a1e045599d6dd9dfc232ea845b7c725924daf84e2d911a25d9771b049ef57737",
+      "bytes": 226874
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/harbor/tower_3/43a84422f7e8579e/raw-iso.png",
+      "sha256": "966ec62ae6fe4517144ee3b416481c830a68d8ff9bb1c8764bba8f14f6076cfe",
+      "bytes": 258035
+    }
+  ],
+  "finding": "Actually inspected original three-view reference, exact native front/iso, final five material views and256px preview. The source front has long open plaster strips along the outer right window stack on two upper floors, an additional upper-left wall opening below its window and a central gap beneath the terrace floor. The final phone view retains these multiple conspicuous facade separations. Main tower silhouette and back/side walls otherwise remain coherent; small pane or roof detail alone is not the rejection reason. Register only the first independent same-reference retry under existing settings and guards. No decoder attribution, reference revision or broad manual rebuilding.",
+  "decision": "One independent same-reference seed. If repeated major defects remain, review three-view consistency before further inference; no automatic approval.",
+  "sourceUnchanged": true,
+  "notFinalCandidateReview": true,
+  "freezeTool": {
+    "path": "art/full-ai-city/reports/tool-snapshots/616860a00b28e670e1219d64c6cb5dad17f0946420568f786e80b6d789fb4a73-freeze_public_source_rejection.py",
+    "sha256": "616860a00b28e670e1219d64c6cb5dad17f0946420568f786e80b6d789fb4a73",
+    "bytes": 4304
+  }
+}

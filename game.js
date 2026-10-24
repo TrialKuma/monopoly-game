@@ -65,12 +65,12 @@ const CLASSIC_LOT_CONFIGS = {
   1:  { price: 80,  buildCosts: [0, 40, 70, 110],  tolls: [20, 60, 130, 220],  themeIdx: 0 },
   2:  { price: 90,  buildCosts: [0, 42, 75, 115],  tolls: [22, 65, 140, 235],  themeIdx: 0 },
   3:  { price: 95,  buildCosts: [0, 44, 78, 120],  tolls: [24, 68, 148, 246],  themeIdx: 0 },
-  5:  { price: 240, buildCosts: [0, 80, 130, 185], tolls: [55, 140, 280, 460], themeIdx: 3, effectId: "finance_bonus" },
-  7:  { price: 210, buildCosts: [0, 72, 118, 172], tolls: [48, 125, 250, 415], themeIdx: 3, effectId: "tower_bonus" },
+  5:  { price: 240, buildCosts: [0, 80, 130, 185], tolls: [55, 140, 280, 460], themeIdx: 3, effectId: "finance_bonus", landmarkKey: "finance" },
+  7:  { price: 210, buildCosts: [0, 72, 118, 172], tolls: [48, 125, 250, 415], themeIdx: 3, effectId: "tower_bonus", landmarkKey: "skyscraper" },
   10: { price: 140, buildCosts: [0, 55, 95, 140],  tolls: [34, 90, 180, 300],  themeIdx: 1 },
   11: { price: 150, buildCosts: [0, 58, 100, 145], tolls: [36, 95, 190, 315],  themeIdx: 1 },
   12: { price: 170, buildCosts: [0, 62, 105, 155], tolls: [40, 105, 210, 345], themeIdx: 1 },
-  14: { price: 280, buildCosts: [0, 90, 145, 210], tolls: [65, 160, 320, 530], themeIdx: 2, effectId: "hot_spring_rest" },
+  14: { price: 280, buildCosts: [0, 90, 145, 210], tolls: [65, 160, 320, 530], themeIdx: 2, effectId: "hot_spring_rest", landmarkKey: "onsen" },
   16: { price: 180, buildCosts: [0, 65, 110, 160], tolls: [42, 110, 220, 360], themeIdx: 2 },
   18: { price: 70,  buildCosts: [0, 35, 65, 100],  tolls: [18, 55, 120, 200],  themeIdx: 0 },
   19: { price: 80,  buildCosts: [0, 40, 70, 110],  tolls: [20, 60, 130, 220],  themeIdx: 0 },
@@ -538,6 +538,7 @@ const BGM_SPARKLE = [
 let state = {};
 let sessionCounter = 0;
 let modalResolver = null;
+let homeConfirmationPending = false;
 const soundState = { enabled: loadSoundPreference(), pools: {} };
 const bgmState = {
   enabled: loadMusicPreference(),
@@ -1395,7 +1396,7 @@ function renderLotTile(tile) {
   const ownerStyle = owner ? `style="color:${owner.color};"` : "";
   const tag = lot.level > 0 ? `<span class="building-tag">Lv.${lot.level}</span>` : "";
   const sprite = lot.level > 0
-    ? createBuildingSvg(lot.theme.key, lot.level, owner?.color ?? lot.theme.color)
+    ? createBuildingSvg(lot.landmarkKey || lot.theme.key, lot.level, owner?.color ?? lot.theme.color)
     : createLotBaseSprite(!!lot.ownerId);
   const distColor = getDistrictColors()[lot.district] || "#e2e8f0";
   const forSaleBadge = !owner ? `<span class="for-sale-badge">待售 <b>¥${lot.price}</b></span>` : "";
@@ -1415,7 +1416,7 @@ function renderLargeLotMerged(tile, secTile) {
   const ownerStyle = owner ? `style="color:${owner.color};"` : "";
   const tag = lot.level > 0 ? `<span class="building-tag">Lv.${lot.level}</span>` : "";
   const sprite = lot.level > 0
-    ? createBuildingSvg(lot.theme.key, lot.level, owner?.color ?? lot.theme.color, true)
+    ? createBuildingSvg(lot.landmarkKey || lot.theme.key, lot.level, owner?.color ?? lot.theme.color, true)
     : createLotBaseSprite(!!lot.ownerId);
   const distColor = getDistrictColors()[lot.district] || "#e2e8f0";
   const isVertical = secTile && tile.x === secTile.x;
@@ -1603,6 +1604,7 @@ function renderModal() {
 
 function updateControls() {
   rollBtn.disabled = state.gameOver || state.busy || currentPlayer().isAi || state.phase !== "await_roll";
+  restartBtn.disabled = homeConfirmationPending || Boolean(state.ticketPaid && !state.gameOver && state.busy && !state.modal.visible);
 }
 
 function getPhaseLabel() {
@@ -2876,6 +2878,39 @@ function showModal({ label = "行动提示", title, message, buttons, cardDraw =
   return new Promise((r) => { modalResolver = r; });
 }
 
+async function returnToStartScreen() {
+  if (homeConfirmationPending) return;
+  if (state.ticketPaid && !state.gameOver) {
+    // Movement and presentations must finish before an asynchronous choice can pause the turn.
+    if (state.busy && !state.modal.visible) return;
+    const previous = { state, modal: state.modal, phase: state.phase, busy: state.busy, resolver: modalResolver };
+    homeConfirmationPending = true;
+    // Suspend the existing choice without resolving it; cancel must resume that same choice.
+    modalResolver = null;
+    const action = await showModal({
+      label: "返回首页", title: "结束本局并返回首页？",
+      message: "返回首页会结束本局，门票不退，未结算的金币和收藏品不会带回。",
+      buttons: [
+        { id: "cancel", label: "继续本局", variant: "ghost" },
+        { id: "home", label: "返回首页", variant: "primary" },
+      ],
+    });
+    homeConfirmationPending = false;
+    if (state !== previous.state) {
+      previous.resolver?.("cancel");
+      updateControls();
+      return;
+    }
+    modalResolver = previous.resolver;
+    if (action !== "home") {
+      state.modal = previous.modal; state.phase = previous.phase; state.busy = previous.busy;
+      render();
+      return;
+    }
+  }
+  initializeGame(); showStartScreen();
+}
+
 async function showContinueModal(cfg) {
   if (window.GamePresentation) return window.GamePresentation.present(cfg);
   await showModal({ ...cfg, buttons: [{ id: "continue", label: "确定", variant: "primary" }] });
@@ -2898,69 +2933,21 @@ function renderDiceFaceSvg(v) {
   return `<svg viewBox="0 0 50 50" width="100%" height="100%">${dots}</svg>`;
 }
 
+function createRegionalBuildingSprite(asset, label) {
+  const candidate = new URLSearchParams(location.search).get('artStage') === 'candidate';
+  const directory = candidate ? 'art/full-ai-city/packed/previews' : 'assets/buildings/regions';
+  const mapId = state?.currentMapId ?? selectedMapId;
+  return `<img class="building-sprite" src="${directory}/${mapId}/${asset}.png?v=20261024-1" alt="${label}" loading="lazy" decoding="async" draggable="false">`;
+}
+
 function createStartSvg() {
-  return `<svg class="building-sprite" viewBox="0 0 90 70" aria-hidden="true">
-    <ellipse cx="45" cy="58" rx="28" ry="8" fill="#dbeafe"/>
-    <path d="M26 18 L45 8 L64 18 V50 H26 Z" fill="#2563eb"/>
-    <rect x="37" y="28" width="16" height="22" rx="3" fill="#eff6ff"/>
-    <path d="M45 8 V56" stroke="#fef08a" stroke-width="3"/>
-    <path d="M45 8 L54 16" stroke="#f59e0b" stroke-width="4" stroke-linecap="round"/>
-  </svg>`;
+  return createRegionalBuildingSprite('civic_hall', '市政府');
 }
 
 function createSpecialSvg(type) {
-  if (type === "bank") return `<svg class="building-sprite" viewBox="0 0 90 70" aria-hidden="true">
-    <ellipse cx="45" cy="58" rx="28" ry="8" fill="#dbeafe"/>
-    <path d="M18 24 L45 10 L72 24" fill="#60a5fa"/>
-    <rect x="22" y="24" width="46" height="24" rx="5" fill="#eff6ff"/>
-    <rect x="28" y="30" width="6" height="18" rx="2" fill="#2563eb"/>
-    <rect x="42" y="30" width="6" height="18" rx="2" fill="#2563eb"/>
-    <rect x="56" y="30" width="6" height="18" rx="2" fill="#2563eb"/>
-  </svg>`;
-  if (type === "chance") return `<svg class="building-sprite" viewBox="0 0 90 70" aria-hidden="true">
-    <ellipse cx="45" cy="58" rx="28" ry="8" fill="#f5d0fe"/>
-    <circle cx="45" cy="34" r="18" fill="#f472b6"/>
-    <path d="M41 22 C50 21 56 28 53 35 C51 39 48 41 47 46" stroke="#fff" stroke-width="5" fill="none" stroke-linecap="round"/>
-    <circle cx="46" cy="52" r="3.4" fill="#fff"/>
-  </svg>`;
-  if (type === "teleport") return `<svg class="building-sprite" viewBox="0 0 90 70" aria-hidden="true">
-    <ellipse cx="45" cy="58" rx="28" ry="8" fill="#a7f3d0"/>
-    <circle cx="45" cy="34" r="18" fill="none" stroke="#10b981" stroke-width="4" stroke-dasharray="8 4"/>
-    <circle cx="45" cy="34" r="10" fill="#34d399"/>
-    <path d="M40 34 L45 26 L50 34" fill="#fff"/>
-    <path d="M40 34 L45 42 L50 34" fill="#fff" opacity="0.5"/>
-  </svg>`;
-  if (type === "construction") return `<svg class="building-sprite" viewBox="0 0 90 70" aria-hidden="true">
-    <ellipse cx="45" cy="58" rx="28" ry="8" fill="#fef3c7"/>
-    <rect x="30" y="28" width="30" height="24" rx="4" fill="#f59e0b"/>
-    <rect x="34" y="22" width="22" height="10" rx="3" fill="#fbbf24"/>
-    <path d="M45 12 L48 22 H42 Z" fill="#dc2626"/>
-    <rect x="38" y="36" width="6" height="16" rx="2" fill="#fff"/>
-    <rect x="48" y="36" width="6" height="16" rx="2" fill="#fff"/>
-    <path d="M28 52 H62" stroke="#92400e" stroke-width="3" stroke-linecap="round"/>
-  </svg>`;
-  if (type === "card_draw") return `<svg class="building-sprite" viewBox="0 0 90 70" aria-hidden="true">
-    <ellipse cx="45" cy="58" rx="28" ry="8" fill="#ede9fe"/>
-    <rect x="28" y="16" width="20" height="30" rx="4" fill="#c4b5fd" transform="rotate(-8 38 31)"/>
-    <rect x="35" y="14" width="20" height="30" rx="4" fill="#a78bfa"/>
-    <rect x="42" y="12" width="20" height="30" rx="4" fill="#8b5cf6" transform="rotate(8 52 27)"/>
-    <text x="52" y="31" font-size="14" fill="#fff" text-anchor="middle" font-weight="bold">?</text>
-  </svg>`;
-  if (type === "rush") return `<svg class="building-sprite" viewBox="0 0 90 70" aria-hidden="true">
-    <ellipse cx="45" cy="58" rx="28" ry="8" fill="#fed7aa"/>
-    <rect x="22" y="28" width="44" height="18" rx="9" fill="#f97316"/>
-    <path d="M30 37 H56" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
-    <path d="M48 29 L60 37 L48 45" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-  </svg>`;
-  if (type === "junction") return `<svg class="building-sprite" viewBox="0 0 90 70" aria-hidden="true">
-    <ellipse cx="45" cy="58" rx="28" ry="8" fill="#dbeafe"/>
-    <circle cx="45" cy="34" r="18" fill="#e0f2fe" stroke="#38bdf8" stroke-width="3"/>
-    <path d="M45 18 V49 M29 24 L45 34 L61 24 M29 44 L45 34 L61 44" stroke="#0f172a" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-  </svg>`;
-  return `<svg class="building-sprite" viewBox="0 0 90 70" aria-hidden="true">
-    <ellipse cx="45" cy="58" rx="28" ry="8" fill="#e2e8f0"/>
-    <rect x="28" y="22" width="34" height="28" rx="8" fill="#94a3b8"/>
-  </svg>`;
+  const asset = { bank:'vault_bank', construction:'builders_guild', card_draw:'card_pavilion', chance:'chance_wheel', teleport:'teleport_gate', rush:'rush_station', junction:'junction_hub' }[type];
+  const label = { bank:'金库', construction:'城建局', card_draw:'翻牌驿站', chance:'机会广场', teleport:'传送港', rush:'冲刺站', junction:'交汇广场' }[type];
+  return asset ? createRegionalBuildingSprite(asset, label) : '';
 }
 
 function createLotBaseSprite(isOwned) {
@@ -2972,13 +2959,7 @@ function createLotBaseSprite(isOwned) {
 }
 
 function createBuildingSvg(type, level, color, isLarge = false) {
-  let filename;
-  if (type === "hotel") {
-    filename = isLarge ? `hotel-large-lv${level}` : `hotel-small-lv${level}`;
-  } else {
-    filename = `${type}-lv${level}`;
-  }
-  return `<img class="building-sprite" src="assets/buildings/${filename}.png" alt="${type} Lv.${level}" draggable="false">`;
+  return createRegionalBuildingSprite(`${type}_${level}`, `等级 ${level} 建筑`);
 }
 
 
@@ -3025,7 +3006,7 @@ function buildTooltipContent(idx) {
 
   // 建筑预览：已建则显示对应等级建筑图，未建则显示地基
   const spriteHtml = lot.level > 0
-    ? createBuildingSvg(lot.theme.key, lot.level, owner?.color ?? "#64748b", lot.isLarge)
+    ? createBuildingSvg(lot.landmarkKey || lot.theme.key, lot.level, owner?.color ?? "#64748b", lot.isLarge)
     : createLotBaseSprite(!!lot.ownerId);
   // 背景色用主题色淡化，与格子保持一致感
   const previewBg = lot.level > 0
@@ -3131,10 +3112,7 @@ document.addEventListener("pointerdown", unlockBgmPlayback, { once: true });
 document.addEventListener("keydown", unlockBgmPlayback, { once: true });
 document.addEventListener("visibilitychange", syncBgmPlayback);
 rollBtn.addEventListener("click", () => void playHumanTurn());
-restartBtn.addEventListener("click", () => {
-  if (state.ticketPaid && !state.gameOver && !window.confirm("返回首页会结束本局，门票不退，未结算的金币和收藏品不会带回。确定返回？")) return;
-  initializeGame(); showStartScreen();
-});
+restartBtn.addEventListener("click", () => void returnToStartScreen());
 scoreboardEl.addEventListener("click", (e) => {
   if (e.target.closest(".play-again-btn")) void startNewGame();
   if (e.target.closest(".view-history-btn")) showHistoryOverlay();

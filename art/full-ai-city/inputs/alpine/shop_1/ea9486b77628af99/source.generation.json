@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "map": "alpine",
+  "asset": "shop_1",
+  "mode": "built-in image_gen edit",
+  "status": "reference_ready_for_native_multiview",
+  "transparent_background": true,
+  "generatedOutput": "C:\\Users\\A\\.codex\\generated_images\\01a1649f-3316-7d81-9fc8-fd58ee739f23\\exec-94999b53-cfb9-4027-9463-a2cedb02d2c8.png",
+  "promptPath": "shop_1.prompt.txt",
+  "referencedImage": {
+    "path": "art/full-ai-city/references/revisions/alpine/shop_1/dfe2427777185dd8/shop_1.png",
+    "sha256": "dfe2427777185dd888f3def2ffd3f4288ee41a460b6a21c9bd3968866fe16506"
+  },
+  "reason": "Two independent native seeds did not yield an acceptable model: the first had a large rear awning texture ghost, while the second removed it but introduced a staggered roof ridge and deep V-shaped junction beside the chimney. The original right view had a sloping longitudinal ridge inconsistent with the equal-height front/back gables. Correct the reference before another inference.",
+  "visualReview": {
+    "reviewer": "/root/progression_design",
+    "status": "passed_reference_semantics",
+    "notes": "Actually inspected generated front/right/back. One story, cream plaster, stone base, warm timber, teal shutters, amber shop windows, arched front door and orange/cream front awning are preserved. Front and back show matching single gables; right shows a continuous rectangular tile plane with horizontal ridge/eave, with the awning visible only as a thin front projection. No chimney or rear shed remains in any view. All three complete views are separated by transparent gaps at the same baseline. This approves reference semantics only; resulting neural geometry requires independent actual-view QA.",
+    "recordedAt": "2026-10-23T10:28:16.743615+00:00",
+    "sourceSha256": "ea9486b77628af9969378b6e20a32495f5c8ff21cc26b29bd9061804c9e84878",
+    "inputPreprocessStillRequired": true
+  },
+  "panels": [
+    "front",
+    "right",
+    "back"
+  ],
+  "sha256": "ea9486b77628af9969378b6e20a32495f5c8ff21cc26b29bd9061804c9e84878",
+  "dimensions": [
+    2172,
+    724
+  ],
+  "registeredAtUtc": "2026-10-23T10:28:16.743615+00:00",
+  "revision": 2,
+  "previousCanonical": {
+    "image": "art/full-ai-city/references/revisions/alpine/shop_1/dfe2427777185dd8/shop_1.png",
+    "metadata": "art/full-ai-city/references/revisions/alpine/shop_1/dfe2427777185dd8/shop_1.generation.json",
+    "prompt": "art/full-ai-city/references/revisions/alpine/shop_1/dfe2427777185dd8/shop_1.prompt.txt",
+    "sha256": "dfe2427777185dd888f3def2ffd3f4288ee41a460b6a21c9bd3968866fe16506"
+  }
+}

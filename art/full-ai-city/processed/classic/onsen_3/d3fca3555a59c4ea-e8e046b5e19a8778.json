@@ -1,0 +1,593 @@
+{
+  "status": "exported_pending_visual_review",
+  "createdAt": "2026-10-23T08:46:42.968840+00:00",
+  "region": "classic",
+  "asset": "onsen_3",
+  "lod": "near",
+  "source": {
+    "rawGLB": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\classic--onsen_3-a001-pixal-mv-1024-9247.glb",
+      "sha256": "91edafc803301744d24814f56a5d4d1aa39c65d12fabcd948686da645deb3242",
+      "bytes": 41167892
+    }
+  },
+  "inferenceReport": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\classic--onsen_3-a001\\classic--onsen_3-a001-pixal-mv-1024-9247.json",
+    "sha256": "6e4e9e993fbe24d7d6d7ecbaef8372e24f1df20cdb046b0b0cf90b42559299ec",
+    "bytes": 9077
+  },
+  "reference": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\references\\classic\\onsen_3\\reference.json",
+    "sha256": "c38fb564efd181337113007a1d0582ba775b8e547f3a53b723be5a0508cff741",
+    "bytes": 4018
+  },
+  "processingTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\31702507b9ea258f1eff2e045b6b53f83a10457edb1dcd04151a425413268392-process_native_mobile.py",
+    "sha256": "31702507b9ea258f1eff2e045b6b53f83a10457edb1dcd04151a425413268392",
+    "bytes": 8960
+  },
+  "nativeSurfaceExport": {
+    "receipt": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\classic-onsen3-repaired-hybrid45k-v01\\receipt.json",
+      "sha256": "fae5c4c878ad1a39180e94cf08993a3cdd5c9a2c5c59a7cfc1363b611f2fa60b",
+      "bytes": 13940
+    },
+    "source": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\classic-onsen3-repaired-hybrid45k-v01\\mobile-45000-1024.glb",
+      "sha256": "997c69de0a1a64c4b81844573f01bd288a2ceeb3000356e21877010a08b2314c",
+      "bytes": 2717304
+    },
+    "tensorArchive": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\classic--onsen_3-a001\\neural-export-inputs.pt",
+      "sha256": "4d5151312af1baccda22d553afd47b514b89b3e2b064b910ffabe1551e2da4ca",
+      "bytes": 337870301
+    }
+  },
+  "nativePipeline": "Pixal3DMVImageTo3DPipeline.run_mv",
+  "nativeResolution": 1024,
+  "seed": 9247,
+  "assumedCameras": true,
+  "cameraCalibration": "assumed_standard_orbit_not_measured",
+  "geometryOrigin": "Actual neural building with the explicitly recorded bounded local surface repair, followed by source-derived CPU mobile geometry and native UV/material sampling. The original inference, repair and low-surface sources are distinct; the UV/material replay adds no geometry.",
+  "textureOrigin": "Original neural attribute field sampled by the native UV/material operations with the recorded surface-stage override; no new neural inference or raw-UV rebake.",
+  "normalization": {
+    "enabled": true,
+    "candidate_degrees": 0.4925767010769235,
+    "applied_degrees": 0.4925767010769235,
+    "underside_area": 0.17684992150782364,
+    "normal_agreement": 0.9605632757381221,
+    "yaw_degrees": 180,
+    "pitch_degrees": 0,
+    "roll_degrees": 0,
+    "uniform_scale": 0.9987679421109005
+  },
+  "orientation": {
+    "up": "Y",
+    "front": "+Z",
+    "groundY": 0,
+    "maxEdge": 1
+  },
+  "requestedTriangles": 45000,
+  "triangles": 44986,
+  "glbValidation": {
+    "version": 2,
+    "triangles": 44986,
+    "meshes": 1,
+    "materials": 1,
+    "images": 2,
+    "all_primitives_have_uv": true,
+    "animations": [],
+    "all_images_embedded": true,
+    "external_buffers": []
+  },
+  "quantization": {
+    "source": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\classic--onsen_3-91edafc80330-repair-50ece06de10f-field-v1\\candidates\\classic\\onsen_3.glb",
+    "output": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\classic--onsen_3-91edafc80330-repair-50ece06de10f-field-v1\\candidates\\classic\\onsen_3.glb",
+    "sourceBytes": 2219040,
+    "outputBytes": 1623924,
+    "sourceSha256": "2fbfc1d9227a786746532aecedf54312b2798b34c780aa4c135f02ed3055a506",
+    "outputSha256": "d3fca3555a59c4eaa1d1b7d6c3f4b5ef5fb855a01a14b7c1304b87ea80ebc8e3",
+    "positionFaceAndTextureBytesUnchanged": true,
+    "attributes": [
+      {
+        "accessor": 1,
+        "semantic": "NORMAL",
+        "count": 49606,
+        "maximumAngularErrorDegrees": 0.3788703886263941
+      },
+      {
+        "accessor": 2,
+        "semantic": "TEXCOORD_0",
+        "count": 49606,
+        "maximumUVError": 7.629510948348184e-06,
+        "maximumTexelErrorAt1024": 0.00781261921110854
+      }
+    ]
+  },
+  "processedCandidate": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\candidates\\classic\\onsen_3.glb",
+    "sha256": "d3fca3555a59c4eaa1d1b7d6c3f4b5ef5fb855a01a14b7c1304b87ea80ebc8e3",
+    "bytes": 1623924
+  },
+  "derivation": {
+    "method": "Recorded CPU surface derived from the same neural raw, inverse-normalized to field coordinates; a local native-export variant bypasses further mesh simplification/remeshing and uses native UV generation plus original neural high-surface BVH and field texture sampling. Only normalization, JPEG encoding and attribute quantization afterward.",
+    "voxelizedAgain": false,
+    "rebakedFromRawUV": false,
+    "facadeUVPreserved": true,
+    "normalizedTrianglesPreserved": true,
+    "geometrySurfaceInput": {
+      "receipt": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\classic-onsen3-repaired-hybrid45k-v01\\geometry-source-proof.json",
+        "sha256": "9d863f4e4ac9fc9e801086263ad8d3d444659026aebf57381580d0c22ae3113e",
+        "bytes": 7154
+      },
+      "method": "Coordinate inversion of the recorded neural-derived low surface including explicitly bounded local source repairs. This preparation only welds exact positions and changes coordinates; it adds no faces. Original raw inference and repair input remain distinct.",
+      "sourceRaw": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\classic--onsen_3-a001-pixal-mv-1024-9247.glb",
+        "sha256": "91edafc803301744d24814f56a5d4d1aa39c65d12fabcd948686da645deb3242",
+        "bytes": 41167892
+      },
+      "candidate": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\classic-onsen3-repaired-hybrid45k-v01\\geometry-candidate.glb",
+        "sha256": "7ea5d8251a032e5ae8772ea46b5244e7bc23634b002c912ee43b9dd740b6508d",
+        "bytes": 1902528
+      },
+      "candidateReport": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\classic-onsen3-repaired-hybrid45k-v01\\geometry-candidate-processing.json",
+        "sha256": "201e635846172c92f66451aec38ebec54576067f111c0edb13885eff483fbda9",
+        "bytes": 12024
+      },
+      "originalCandidate": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\onsen3-repaired-surface\\candidates\\classic\\onsen_3.glb",
+        "sha256": "7ea5d8251a032e5ae8772ea46b5244e7bc23634b002c912ee43b9dd740b6508d",
+        "bytes": 1902528
+      },
+      "fieldReceipt": {
+        "path": "art\\full-ai-city\\native-mobile\\classic--onsen_3-a001\\receipt.json",
+        "sha256": "7dcfb2c0f76198cbe02bb4b8815b2f414dc26563f2d9e03abc0675dc30494164",
+        "bytes": 3692
+      },
+      "output": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\classic-onsen3-repaired-hybrid45k-v01\\geometry-surface.npz",
+        "sha256": "5b3bf05acbd260bf0d20561159b89c230c6e7673bf99cfc7f5161619ecea1a2a",
+        "bytes": 808376
+      },
+      "triangles": 44986,
+      "vertices": 22336,
+      "originalSplitVertices": 59299,
+      "exactCoincidentVerticesMerged": 36963,
+      "maximumPositionChangeFromWelding": 0,
+      "normalization": {
+        "enabled": true,
+        "candidate_degrees": 0.32864903938672335,
+        "applied_degrees": 0.32864903938672335,
+        "underside_area": 0.22491573562282766,
+        "normal_agreement": 0.9629148258465559,
+        "yaw_degrees": 180,
+        "pitch_degrees": 0,
+        "roll_degrees": 0,
+        "uniform_scale": 0.9984135801065873
+      },
+      "rawBlenderToNormalizedBlender": [
+        [
+          -0.9984121852912545,
+          -4.621592579736279e-06,
+          0.0016362311619102655,
+          0.00015401208605644352
+        ],
+        [
+          -4.469390764446412e-06,
+          -0.9983980401137499,
+          -0.0055612114982387245,
+          -0.0014145993905249066
+        ],
+        [
+          0.0016362341925677043,
+          -0.0055612129963796,
+          0.998396694429267,
+          0.2633887231942826
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "inverse": [
+        [
+          -1.001587649809295,
+          -4.506662346205165e-06,
+          0.0016414355843163103,
+          -0.0002780853945650422
+        ],
+        [
+          -4.659360139191034e-06,
+          -1.001573455031657,
+          -0.00557889887029979,
+          5.259456882235555e-05
+        ],
+        [
+          0.0016414377741045688,
+          -0.005578900623443978,
+          1.0015721149334327,
+          -0.26381094524999155
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "sampledNormalizationReconstructionMaxError": 7.371647954643399e-08,
+      "nativeBounds": {
+        "min": [
+          -0.5004810692196953,
+          -0.26223207212466704,
+          -0.22198667650481055
+        ],
+        "max": [
+          0.5007527083534393,
+          0.32190340117455013,
+          0.2199790837213266
+        ]
+      },
+      "tool": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\classic-onsen3-repaired-hybrid45k-v01\\geometry-preparation-source.py",
+        "sha256": "956e46377da8eae51f4e9af858f698532b81fccbbf16f219a2f2adbb9ab1481a",
+        "bytes": 7005
+      },
+      "toolSnapshot": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\classic-onsen3-repaired-hybrid45k-v01\\geometry-preparation-source.py",
+        "sha256": "956e46377da8eae51f4e9af858f698532b81fccbbf16f219a2f2adbb9ab1481a",
+        "bytes": 7005
+      },
+      "normalizationInput": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-onsen3\\repaired-native.glb",
+        "sha256": "50ece06de10fffa9fdfc02c35b84a3e387fb626efef0888bb72071b412906065",
+        "bytes": 41268120
+      },
+      "localSurfaceRepair": {
+        "source": {
+          "path": "art\\full-ai-city\\work\\repair-onsen3\\repaired-native.glb",
+          "sha256": "50ece06de10fffa9fdfc02c35b84a3e387fb626efef0888bb72071b412906065",
+          "bytes": 41268120
+        },
+        "receipt": {
+          "path": "art\\full-ai-city\\reports\\local-repairs\\classic\\onsen_3\\50ece06de10fffa9\\repair.json",
+          "sha256": "acb0636e4306db83d71ef0c1e1886cfb2f821e9ecf4b1e06e9aed2cefddf6af3",
+          "bytes": 6711
+        },
+        "method": "Only the measured small unframed wall opening below the rear dome cornice is filled from its intact boundary. Original neural vertices, faces and image pixels are untouched. The separate upper framed arch window remains unchanged. The patch reuses neighboring original stone UV samples and closes 0.006 inward so it survives derivative voxelization; no replacement building or new texture.",
+        "newTriangles": 420,
+        "newVertices": 212,
+        "originalVerticesMoved": 0,
+        "originalTrianglesDeleted": 0,
+        "regions": [
+          {
+            "name": "Small unframed oval hole below rear dome cornice",
+            "specification": {
+              "name": "Small unframed oval hole below rear dome cornice",
+              "u": [
+                -1,
+                0,
+                0
+              ],
+              "v": [
+                0,
+                0,
+                1
+              ],
+              "n": [
+                0,
+                1,
+                0
+              ],
+              "roi": [
+                0.043,
+                0.065,
+                0.201,
+                0.229
+              ],
+              "defectDepth": 0.1,
+              "donorDepth": 0.19,
+              "donorMaxDepth": 0.21,
+              "donorNormal": 0.65,
+              "color": "stone"
+            },
+            "missingSamples": 64,
+            "boundarySamples": 900,
+            "sampledDepthRange": [
+              -0.06864714622497559,
+              0.20117151737213135
+            ],
+            "inwardClosureThickness": 0.006,
+            "outerSurfaceUnchanged": true,
+            "newVertices": 212,
+            "newTriangles": 420
+          }
+        ]
+      },
+      "localRepairTool": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\8396cb965bd70d51abd0c5f396df00d7b5323d51307d29641aa7f9db04680850-repair_onsen3_surface.py",
+        "sha256": "8396cb965bd70d51abd0c5f396df00d7b5323d51307d29641aa7f9db04680850",
+        "bytes": 10826
+      },
+      "repairAppliedBeforeReduction": true,
+      "originalReceipt": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\classic-onsen3-repaired-hybrid45k-v01\\geometry-source-original-receipt.json",
+        "sha256": "ade1c1f0edbd0db185a6572f012b071dcc46a80988b45ae9ea4cf58d56363ed8",
+        "bytes": 6796
+      }
+    },
+    "nativePostprocessOverride": {
+      "original": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\classic-onsen3-repaired-hybrid45k-v01\\original-native-exporter-source.py",
+        "sha256": "b6b79da5dfe13c22047a6257c6b2301c7ea31259dd9c82344db7e5c4cc707917",
+        "bytes": 8126
+      },
+      "scope": "Keep original neural geometry BVH for PBR lookup. Replace only the intermediate surface with this recorded existing source-derived low mesh; bypass further remeshing/simplification/cleanup, then use native unwrap/normals/field sampling.",
+      "sharedCodeModified": false,
+      "noNewGeometryAuthored": true,
+      "noNewGeometryAuthoredAppliesTo": "native_uv_material_replay_only",
+      "counts": {
+        "facesBeforeUnwrap": 44986
+      }
+    },
+    "nativeFieldLookup": {
+      "quantiles50_95_99_100": [
+        0.0010085910325869918,
+        0.0017129809129983187,
+        0.0023485547862946987,
+        0.008737443946301937
+      ],
+      "fractionOverTwoPercent": 0.0,
+      "sampleCount": 586591,
+      "meaning": "Distance to original neural BVH before direct field sampling, not ray hit coverage"
+    }
+  },
+  "bake": {
+    "method": "Direct original neural attribute field sampling inside native to_glb; no Blender bake or nearest raw-image transfer",
+    "notRayCoverage": true
+  },
+  "animation": null,
+  "processingComplete": true,
+  "limitations": [
+    "Same assumed three-view cameras as original native raw",
+    "Diagnostic pending external visual approval; not a formal asset replacement"
+  ],
+  "localSurfaceRepair": {
+    "source": {
+      "path": "art\\full-ai-city\\work\\repair-onsen3\\repaired-native.glb",
+      "sha256": "50ece06de10fffa9fdfc02c35b84a3e387fb626efef0888bb72071b412906065",
+      "bytes": 41268120
+    },
+    "receipt": {
+      "path": "art\\full-ai-city\\reports\\local-repairs\\classic\\onsen_3\\50ece06de10fffa9\\repair.json",
+      "sha256": "acb0636e4306db83d71ef0c1e1886cfb2f821e9ecf4b1e06e9aed2cefddf6af3",
+      "bytes": 6711
+    },
+    "method": "Only the measured small unframed wall opening below the rear dome cornice is filled from its intact boundary. Original neural vertices, faces and image pixels are untouched. The separate upper framed arch window remains unchanged. The patch reuses neighboring original stone UV samples and closes 0.006 inward so it survives derivative voxelization; no replacement building or new texture.",
+    "newTriangles": 420,
+    "newVertices": 212,
+    "originalVerticesMoved": 0,
+    "originalTrianglesDeleted": 0,
+    "regions": [
+      {
+        "name": "Small unframed oval hole below rear dome cornice",
+        "specification": {
+          "name": "Small unframed oval hole below rear dome cornice",
+          "u": [
+            -1,
+            0,
+            0
+          ],
+          "v": [
+            0,
+            0,
+            1
+          ],
+          "n": [
+            0,
+            1,
+            0
+          ],
+          "roi": [
+            0.043,
+            0.065,
+            0.201,
+            0.229
+          ],
+          "defectDepth": 0.1,
+          "donorDepth": 0.19,
+          "donorMaxDepth": 0.21,
+          "donorNormal": 0.65,
+          "color": "stone"
+        },
+        "missingSamples": 64,
+        "boundarySamples": 900,
+        "sampledDepthRange": [
+          -0.06864714622497559,
+          0.20117151737213135
+        ],
+        "inwardClosureThickness": 0.006,
+        "outerSurfaceUnchanged": true,
+        "newVertices": 212,
+        "newTriangles": 420
+      }
+    ]
+  },
+  "localSurfaceRepairEvidencePreservation": [
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\classic\\onsen_3\\50ece06de10fffa9\\evidence-preservation-45617bb657892233.json",
+      "sha256": "45617bb657892233bb8e4b4e87e2baa2b884c57d49d1039fe5b6a90261d0c5a2",
+      "bytes": 4994
+    }
+  ],
+  "renderedCandidate": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\classic--onsen_3-91edafc80330-repair-50ece06de10f-field-v1\\candidates\\renders\\classic\\onsen_3\\lod-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\classic--onsen_3-91edafc80330-repair-50ece06de10f-field-v1\\candidates\\renders\\classic\\onsen_3\\lod-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\classic--onsen_3-91edafc80330-repair-50ece06de10f-field-v1\\candidates\\renders\\classic\\onsen_3\\lod-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\classic--onsen_3-91edafc80330-repair-50ece06de10f-field-v1\\candidates\\renders\\classic\\onsen_3\\lod-left.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\classic--onsen_3-91edafc80330-repair-50ece06de10f-field-v1\\candidates\\renders\\classic\\onsen_3\\lod-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.5,
+        -0.21924640238285065,
+        0.0
+      ],
+      "max": [
+        0.5,
+        0.21924640238285065,
+        0.585802435874939
+      ]
+    },
+    "triangles": 44986,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          1024,
+          1024
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "sourceReviewReusedFrom": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\native-field-surface\\classic-onsen3-repaired-v01\\surface.candidate.json",
+    "sha256": "201e635846172c92f66451aec38ebec54576067f111c0edb13885eff483fbda9",
+    "bytes": 12024
+  },
+  "renderedSource": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\classic--onsen_3-91edafc80330-repair-50ece06de10f-field-v1\\candidates\\renders\\classic\\onsen_3\\raw-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\classic--onsen_3-91edafc80330-repair-50ece06de10f-field-v1\\candidates\\renders\\classic\\onsen_3\\raw-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.5,
+        -0.2197418212890625,
+        0.0
+      ],
+      "max": [
+        0.5,
+        0.2197418212890625,
+        0.5858836770057678
+      ]
+    },
+    "triangles": 942881,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "bounds": {
+    "min": [
+      -0.5,
+      0.0,
+      -0.21924640238285065
+    ],
+    "max": [
+      0.5,
+      0.585802435874939,
+      0.21924640238285065
+    ],
+    "coordinateSystem": "GLTF Y-up; +Z front"
+  },
+  "textureSizes": [
+    {
+      "name": "Image_0",
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "name": "Image_1",
+      "size": [
+        1024,
+        1024
+      ]
+    }
+  ],
+  "completedAt": "2026-10-23T08:46:51.471372+00:00",
+  "rawSourceUnchanged": true,
+  "promotedFrom": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\classic--onsen_3-91edafc80330-repair-50ece06de10f-field-v1\\candidates\\classic\\onsen_3.json",
+    "sha256": "ef75bf80ca0e78b5f782e60a0d00c5b390fee5e6aa7b606b17c6ed1e08f57bb1",
+    "bytes": 23974
+  },
+  "processingRevision": 0,
+  "reviewSheet": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\classic--onsen_3-91edafc80330-repair-50ece06de10f-field-v1\\candidates\\renders\\classic\\onsen_3\\review-sheet.jpg",
+    "sha256": "b51197810874797af2a2b2c820b9e68900133dea8b906c884300ba2667b26531",
+    "bytes": 233659,
+    "candidateSha256": "d3fca3555a59c4eaa1d1b7d6c3f4b5ef5fb855a01a14b7c1304b87ea80ebc8e3",
+    "sourceImages": [
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\classic--onsen_3-91edafc80330-repair-50ece06de10f-field-v1\\candidates\\renders\\classic\\onsen_3\\raw-front.png",
+        "sha256": "a68ac88280dd7c0b19592e467ddecca00d93f23f4c6cc4b3a7a8fa253e85341e",
+        "label": "AI raw front"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\classic--onsen_3-91edafc80330-repair-50ece06de10f-field-v1\\candidates\\renders\\classic\\onsen_3\\raw-iso.png",
+        "sha256": "2e9e4154505009a2390539e6e4ebd3f09cbd2e09a6a811713f3e331f4a4b0517",
+        "label": "AI raw iso"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\classic--onsen_3-91edafc80330-repair-50ece06de10f-field-v1\\candidates\\renders\\classic\\onsen_3\\lod-front.png",
+        "sha256": "e976dc5fedae809503560018b2a60c21dca0c723a4bef964b2e25012c9e32dee",
+        "label": "LOD front"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\classic--onsen_3-91edafc80330-repair-50ece06de10f-field-v1\\candidates\\renders\\classic\\onsen_3\\lod-right.png",
+        "sha256": "57901f3bd4b916549e2efd9ba5136433b4d00985ad8f99a342304d5d249161bf",
+        "label": "LOD right"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\classic--onsen_3-91edafc80330-repair-50ece06de10f-field-v1\\candidates\\renders\\classic\\onsen_3\\lod-back.png",
+        "sha256": "31abb72494a09553b21fb5eb233dd6ea9af53646118d7edecaa0b0c4496185ac",
+        "label": "LOD back"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\classic--onsen_3-91edafc80330-repair-50ece06de10f-field-v1\\candidates\\renders\\classic\\onsen_3\\lod-left.png",
+        "sha256": "14948ca2e97c56e72acbcf64963846dab1983fa3b1054083ca90609f7c43854a",
+        "label": "LOD left"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\classic--onsen_3-91edafc80330-repair-50ece06de10f-field-v1\\candidates\\renders\\classic\\onsen_3\\lod-iso.png",
+        "sha256": "bfafd0de84e80879eda1c4b24b34f141b50c8877d7af9f5f245dfaabcc06d939",
+        "label": "LOD iso"
+      }
+    ],
+    "content": "Unmodified CPU render images composed with labels for visual comparison only"
+  }
+}

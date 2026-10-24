@@ -1,0 +1,205 @@
+{
+  "status": "local_repair_candidate_pending_visual_review",
+  "source": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\harbor--shop_2-a009-pixal-mv-1024-9247.glb",
+    "sha256": "f0290260ecf3f93baa38085bfecfee0ea1f0d549330e78151cac9cc3e66925ab",
+    "bytes": 44697556
+  },
+  "orientation": {
+    "enabled": true,
+    "candidate_degrees": 0.24389311525432933,
+    "applied_degrees": 0.24389311525432933,
+    "underside_area": 0.2373752886736221,
+    "normal_agreement": 0.9761265562646656,
+    "yaw_degrees": 180,
+    "pitch_degrees": 0,
+    "roll_degrees": 0,
+    "uniform_scale": 1.2684461579625708
+  },
+  "configuration": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\source-recovery-assessment\\harbor\\shop_2\\f0290260ecf3f93b\\repair-config.json",
+    "sha256": "adf4fd7b1c2ba5784ed54507677f46a413a7d492996596b356487a809e19f968",
+    "bytes": 1370
+  },
+  "reviewEvidence": [
+    {
+      "path": "reports/source-rejections/harbor/shop_2/f0290260ecf3f93b/rejection.json",
+      "sha256": "c93fc71034b9f98bfd4f7ddb7561e0999f3a9fddc3910e03db31763673c69904"
+    },
+    {
+      "path": "reports/source-recovery-assessment/harbor/shop_2/f0290260ecf3f93b/selection.json",
+      "sha256": "769b07fce46b4fd265fc094e5ed57c07b60540278f35d4a7a6d0e8cd9285d924"
+    }
+  ],
+  "measurement": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\core-surface-measurements\\harbor\\shop_2\\f029-rear-tear\\surface-measurements.json",
+    "sha256": "4f74eab0161a56ad017bca0e4947a815252924c34b80a8515aa2053b47306a73",
+    "bytes": 185681
+  },
+  "method": "Only explicitly measured and visually reviewed local gaps are closed from adjoining original surface and UV samples with0.006 inward closure. Original vertices, faces and image pixels are preserved. No replacement building or generated texture. See configuration and frozen prior review evidence for exact allowed regions.",
+  "repairs": [
+    {
+      "name": "Rear plaster tear below floor band",
+      "specification": {
+        "name": "Rear plaster tear below floor band",
+        "u": [
+          -1,
+          0,
+          0
+        ],
+        "v": [
+          0,
+          0,
+          1
+        ],
+        "n": [
+          0,
+          1,
+          0
+        ],
+        "roi": [
+          -0.092,
+          0.125,
+          0.345,
+          0.399
+        ],
+        "defectDepth": 0.305,
+        "donorDepth": 0.31,
+        "donorMaxDepth": 0.318,
+        "donorNormal": 0.7,
+        "color": "plaster",
+        "donorMinRGB": 0.6,
+        "donorMaxColorRatio": 1.5,
+        "gridStep": 0.0035,
+        "donorMargin": 0.03,
+        "flatPatchUV": true
+      },
+      "missingSamples": 400,
+      "boundarySamples": 1808,
+      "sampledDepthRange": [
+        -0.19487929344177246,
+        0.3217355012893677
+      ],
+      "inwardClosureThickness": 0.006,
+      "outerSurfaceUnchanged": true,
+      "newVertices": 1132,
+      "newTriangles": 2260
+    }
+  ],
+  "originalTriangles": 939835,
+  "originalVerticesMoved": 0,
+  "originalTrianglesDeleted": 0,
+  "artifactCleanup": {
+    "method": "No original faces deleted. Only the explicitly reviewed bounded source-surface regions in the configuration may receive additional triangles.",
+    "deletedTriangles": 0
+  },
+  "newTriangles": 2260,
+  "newVertices": 1132,
+  "inverseSimilarityError": 1.0283075541073217e-07,
+  "normalizedOutput": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-harbor-shop2-f029-rear-tear\\repaired-normalized.glb",
+    "sha256": "6bce111246a1154f73f03a09d82dd43a75834950095d678b37b79e7cd486edd0",
+    "bytes": 45315548
+  },
+  "nativeOutput": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-harbor-shop2-f029-rear-tear\\repaired-native.glb",
+    "sha256": "5eab2a460f42cc1dc5bdc729265d60e4b61e2d4fa3d6d86c194bbd3c273f1aa4",
+    "bytes": 45307264
+  },
+  "renders": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-harbor-shop2-f029-rear-tear\\repaired-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-harbor-shop2-f029-rear-tear\\repaired-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-harbor-shop2-f029-rear-tear\\repaired-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-harbor-shop2-f029-rear-tear\\repaired-left.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-harbor-shop2-f029-rear-tear\\repaired-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.46861571073532104,
+        -0.37019628286361694,
+        0.0
+      ],
+      "max": [
+        0.46861571073532104,
+        0.37019628286361694,
+        1.0
+      ]
+    },
+    "triangles": 942095,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "reviewImages": [
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\harbor\\shop_2\\5eab2a460f42cc1d\\repaired-front.png",
+      "sha256": "3f6fb85f9c5a46585556e450b57e898f9cf53027393b54ad3562437a514a35aa",
+      "bytes": 277100
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\harbor\\shop_2\\5eab2a460f42cc1d\\repaired-right.png",
+      "sha256": "265626244a399ad3e857fcb3d86087310b2c5edcfba6e92ba6bfdbd89308e103",
+      "bytes": 227594
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\harbor\\shop_2\\5eab2a460f42cc1d\\repaired-back.png",
+      "sha256": "8f7d56f008b82cf2f114a2e4fe33c4c68cff412acacc8bfeb5a0443d9e638e99",
+      "bytes": 249400
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\harbor\\shop_2\\5eab2a460f42cc1d\\repaired-left.png",
+      "sha256": "a389727f804e9f2af4626fb7d2f1a7949f0b202de916b7bcbd8d4ca550bd4136",
+      "bytes": 215895
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\harbor\\shop_2\\5eab2a460f42cc1d\\repaired-iso.png",
+      "sha256": "e4dc0d3fa9747d10d740e1b2b60d803e971aeabbd3b5a6b2058ad1e295c86fda",
+      "bytes": 330789
+    }
+  ],
+  "processingTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\f21173ee639bce54c9c7094ef6121aa6aea7401fc45edfff9d221c65a107ae79-repair_bounded_source_surface.py",
+    "sha256": "f21173ee639bce54c9c7094ef6121aa6aea7401fc45edfff9d221c65a107ae79",
+    "bytes": 13325
+  },
+  "completedAt": "2026-10-24T06:24:23.798058+00:00",
+  "sourcePreservation": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\harbor\\shop_2\\5eab2a460f42cc1d\\preservation.json",
+    "sha256": "e4dfd765e6f741297876480d9a6c4c05743350730f96e6d30c0df3096e1cc78e",
+    "bytes": 1091
+  },
+  "originalRepairReceipt": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-harbor-shop2-f029-rear-tear\\repair.json",
+    "sha256": "a9aaea08d9076ed072d3926d398b0f86c816b11201fba366d965515037c38a84",
+    "bytes": 7036
+  },
+  "sourceVisualReview": {
+    "status": "reviewed_for_derivative_processing",
+    "views": [
+      "front",
+      "right",
+      "back",
+      "left",
+      "iso"
+    ],
+    "note": "Actually inspected all five repaired source material views against the original reference and retained first-source review. The single broad rear plaster tear below the floor band is now closed with neighboring cream material. Front windows, blue hipped roof, balcony, awning, shop details and all original geometry remain intact.2260added faces preserve939835original triangles exactly. Tiny rear door/roof/sill/corner chips, coarse plants and simplified interior details remain for phone-scale final judgment. This accepts only one mobile derivation; no new inference, gray inspection or watertight claim.",
+    "reviewer": "asset_production"
+  }
+}

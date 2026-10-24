@@ -1,0 +1,604 @@
+{
+  "status": "exported_pending_visual_review",
+  "createdAt": "2026-10-23T09:27:16.602562+00:00",
+  "region": "harbor",
+  "asset": "builders_guild",
+  "source": {
+    "rawGLB": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\harbor--builders_guild-a001-pixal-mv-1024-9247.glb",
+      "sha256": "fd204274f5324a17cbbddcdd944e4200b96219e760f3da4f29e730c0838225f1",
+      "bytes": 40218668
+    }
+  },
+  "inferenceReport": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\harbor--builders_guild-a001\\harbor--builders_guild-a001-pixal-mv-1024-9247.json",
+    "sha256": "2c02e1ba850ba46dc53c099a42c4423ab2214313e9a4afeb4904f3f3a2da0134",
+    "bytes": 8199
+  },
+  "reference": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\inputs\\harbor\\builders_guild\\4952ccd1aa0b7f4f\\reference.json",
+    "sha256": "192c281c560bdc3bb9572508c35c411bb65bbf716d4d6fb2f03ff61835a0db5e",
+    "bytes": 4458
+  },
+  "processingTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\b766a4f58879667a49343ebf7047b8344497e5a63edee313a7ba8164388eff04-bake_native_uv_candidate.py",
+    "sha256": "b766a4f58879667a49343ebf7047b8344497e5a63edee313a7ba8164388eff04",
+    "bytes": 10667
+  },
+  "assumedCameras": true,
+  "cameraCalibration": "assumed_standard_orbit_not_measured",
+  "nativePipeline": "Pixal3DMVImageTo3DPipeline.run_mv",
+  "nativeResolution": 1024,
+  "seed": 9247,
+  "geometryOrigin": "Actual native three-view neural building with explicitly recorded bounded local repairs; localSurfaceRepair.method and face counts disclose whether these include boundary patches or a small mechanical connector. Followed by source-derived remeshing and texture transfer. No replacement building.",
+  "orientation": {
+    "up": "Y",
+    "front": "+Z",
+    "groundY": 0,
+    "maxEdge": 1
+  },
+  "requestedTriangles": 30000,
+  "limitations": [
+    "Assumed camera reference reconstruction, not exact measured architecture",
+    "Final candidate requires actual rendered visual approval"
+  ],
+  "animation": {
+    "driver": "scene-life",
+    "autoplayClip": false,
+    "node": "harbor__builders_guild__neural_pendulum",
+    "lifePart": "pendulum",
+    "localRotationAxis": "Z",
+    "geometryOrigin": "Only original neural-derived faces, no added geometry",
+    "poseReview": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\harbor\\builders_guild\\motion\\review.json",
+      "sha256": "127fe58e02a1d3adaf6d1e9ba7e73c1284f5e2cd5e5368bbd27532a59a32dfd6",
+      "bytes": 4834
+    },
+    "frames": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\harbor\\builders_guild\\motion\\pose-0-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\harbor\\builders_guild\\motion\\pose-0-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\harbor\\builders_guild\\motion\\pose-0-iso.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\harbor\\builders_guild\\motion\\pose--7-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\harbor\\builders_guild\\motion\\pose--7-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\harbor\\builders_guild\\motion\\pose--7-iso.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\harbor\\builders_guild\\motion\\pose-7-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\harbor\\builders_guild\\motion\\pose-7-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\harbor\\builders_guild\\motion\\pose-7-iso.png"
+    ]
+  },
+  "processingComplete": true,
+  "lod": "near",
+  "processingRevision": 0,
+  "localSurfaceRepair": {
+    "source": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-harbor-builders\\repaired-native.glb",
+      "sha256": "ed96e21d84133b0186dc672ec3824358631465d0bb1259bbf5516a681bd6fd90",
+      "bytes": 41073924
+    },
+    "receipt": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\harbor\\builders_guild\\ed96e21d84133b01\\repair.json",
+      "sha256": "817e9ba918f6deb24a78c39a2b57d8a9f4999737ec831fc867e212b65256958b",
+      "bytes": 7190
+    },
+    "method": "Only the measured front-left missing plaster wall sector and small left pilaster backing gap are closed from intact neighboring original stone surface depth and UV samples. Original neural vertices, faces and image pixels are untouched. Workshop entrance, original windows, timber crane, cargo and architectural volumes remain unchanged. Patches close 0.006 inward for derivative stability, with no replacement building or newly painted texture.",
+    "newTriangles": 6048,
+    "newVertices": 3028,
+    "originalVerticesMoved": 0,
+    "originalTrianglesDeleted": 0,
+    "regions": [
+      {
+        "name": "Front upper-left wall missing beside quoin column",
+        "specification": {
+          "name": "Front upper-left wall missing beside quoin column",
+          "u": [
+            1,
+            0,
+            0
+          ],
+          "v": [
+            0,
+            0,
+            1
+          ],
+          "n": [
+            0,
+            -1,
+            0
+          ],
+          "roi": [
+            -0.184,
+            -0.143,
+            0.375,
+            0.605
+          ],
+          "defectDepth": 0.2,
+          "donorDepth": 0.23,
+          "donorMaxDepth": 0.252,
+          "donorNormal": 0.75,
+          "color": "stone"
+        },
+        "missingSamples": 978,
+        "boundarySamples": 3558,
+        "sampledDepthRange": [
+          -2.0,
+          0.28067684173583984
+        ],
+        "inwardClosureThickness": 0.006,
+        "outerSurfaceUnchanged": true,
+        "newVertices": 2604,
+        "newTriangles": 5204
+      },
+      {
+        "name": "Front left pilaster small backing opening under timber lintel",
+        "specification": {
+          "name": "Front left pilaster small backing opening under timber lintel",
+          "u": [
+            1,
+            0,
+            0
+          ],
+          "v": [
+            0,
+            0,
+            1
+          ],
+          "n": [
+            0,
+            -1,
+            0
+          ],
+          "roi": [
+            -0.185,
+            -0.143,
+            0.24,
+            0.29
+          ],
+          "defectDepth": 0.2,
+          "donorDepth": 0.23,
+          "donorMaxDepth": 0.26,
+          "donorNormal": 0.65,
+          "color": "stone"
+        },
+        "missingSamples": 146,
+        "boundarySamples": 629,
+        "sampledDepthRange": [
+          -0.2912473678588867,
+          0.2530585527420044
+        ],
+        "inwardClosureThickness": 0.006,
+        "outerSurfaceUnchanged": true,
+        "newVertices": 424,
+        "newTriangles": 844
+      }
+    ]
+  },
+  "derivation": {
+    "rawTriangles": 948094,
+    "weldedTriangles": 950734,
+    "remeshedTriangles": 2799844,
+    "voxelSize": 0.003,
+    "finalTriangles": 29986,
+    "atlasArea": 0.6032628968100571,
+    "singleReductionPass": true,
+    "inheritedUVRemovedBeforeReduction": true,
+    "sourceMaterialsUntouched": true,
+    "uvUnwrap": {
+      "method": "native CuMesh UV-only",
+      "parameters": {
+        "threshold_cone_half_angle_rad": 1.5707963267948966,
+        "refine_iterations": 0,
+        "global_iterations": 1,
+        "smooth_strength": 1
+      },
+      "receipt": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\uv-replays\\legacy-harbor--builders_guild-ed96e21d84133b01\\receipt.json",
+        "sha256": "cd6c639c2a69a8955fbb6daffef443faae687cd7d2650170ba8914b5500bfc71",
+        "bytes": 3995
+      }
+    },
+    "repairedSourceTriangles": 954142
+  },
+  "bake": {
+    "method": "CPU closest-original-triangle projection with float64 barycentric original UV and bilinear original texture sampling; geometric normals retained, no directional normal-map rebake or invented color",
+    "coveredAtlasPixels": 633400,
+    "nearestLookupSuccessFraction": 1.0,
+    "notRayCoverage": true,
+    "sourceDistanceQuantiles": [
+      0.0002873766206903383,
+      0.0011504957336001083,
+      0.002075548095162958,
+      0.012110370211303234
+    ],
+    "sourceDistanceQuantileLevels": [
+      0.5,
+      0.95,
+      0.99,
+      1
+    ],
+    "overTwoPercentMaxEdge": 0.0,
+    "distanceReviewRequired": false,
+    "visualGeometryReviewRequired": true,
+    "barycentricOriginalRange": [
+      -5.25398855742326e-05,
+      1.0
+    ],
+    "degenerateOrInvalidBarycentricCount": 0,
+    "closestSourceVertexFallbackFraction": 0.0,
+    "barycentricPointReconstructionErrorQuantiles": [
+      6.251734343395504e-09,
+      4.0206620784824844e-08,
+      1.9639898782561002e-07
+    ],
+    "atlasOverlapPixelsWithDifferentSurface": 70,
+    "seconds": 10.8201389000169,
+    "maps": [
+      {
+        "role": "base",
+        "size": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "role": "orm",
+        "size": [
+          512,
+          512
+        ]
+      }
+    ],
+    "sourceNote": "Native CuMesh UV charts applied to the exact existing low mesh loops. Original source textures transferred by closest original surface with float64 barycentric UV; no new geometry or painted colors."
+  },
+  "textureTransferTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\a2cb99c96fb8df396f16580a88a7c6151104ee3c927fe76cd161ee2d27bdfa42-bake_nearest_surface.py",
+    "sha256": "a2cb99c96fb8df396f16580a88a7c6151104ee3c927fe76cd161ee2d27bdfa42",
+    "bytes": 7317
+  },
+  "quantization": {
+    "source": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\legacy-repair-harbor--builders_guild-ed96e21d84133b01\\final\\harbor\\builders_guild.glb",
+    "output": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\legacy-repair-harbor--builders_guild-ed96e21d84133b01\\final\\harbor\\builders_guild.glb",
+    "sourceBytes": 1820600,
+    "outputBytes": 1340476,
+    "sourceSha256": "630b40a4df7362c806034ede5fa4d3d30a1c69fb32f87d476b69451c1f6e34d7",
+    "outputSha256": "4530eaecd980ab91be5aa2a84a903d3515334e94e1502f884f82d61f22503d1b",
+    "positionFaceAndTextureBytesUnchanged": true,
+    "attributes": [
+      {
+        "accessor": 1,
+        "semantic": "NORMAL",
+        "count": 40023,
+        "maximumAngularErrorDegrees": 0.37810924576233135
+      },
+      {
+        "accessor": 2,
+        "semantic": "TEXCOORD_0",
+        "count": 40023,
+        "maximumUVError": 7.629510948348184e-06,
+        "maximumTexelErrorAt1024": 0.00781261921110854
+      }
+    ]
+  },
+  "processedCandidate": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\candidates\\harbor\\builders_guild.glb",
+    "sha256": "7b2116b37da76442cb1b95eed9f60203d96be6cae85b393d117e5af9a7d9d63a",
+    "bytes": 1522844
+  },
+  "glbValidation": {
+    "version": 2,
+    "triangles": 29986,
+    "meshes": 2,
+    "materials": 1,
+    "images": 2,
+    "all_primitives_have_uv": true,
+    "animations": [],
+    "all_images_embedded": true,
+    "external_buffers": []
+  },
+  "triangles": 29986,
+  "renderedCandidate": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\harbor\\builders_guild\\lod-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\harbor\\builders_guild\\lod-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\harbor\\builders_guild\\lod-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\harbor\\builders_guild\\lod-left.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\harbor\\builders_guild\\lod-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.49952489137649536,
+        -0.4519672393798828,
+        0.00044931407319381833
+      ],
+      "max": [
+        0.49854928255081177,
+        0.4518612027168274,
+        0.8750830888748169
+      ]
+    },
+    "triangles": 29986,
+    "textureSizes": [
+      {
+        "name": "harbor__builders_guild__nearest_base",
+        "size": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "name": "harbor__builders_guild__nearest_orm",
+        "size": [
+          512,
+          512
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "renderedSource": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\legacy-repair-harbor--builders_guild-ed96e21d84133b01\\low\\renders\\harbor\\builders_guild\\raw-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\legacy-repair-harbor--builders_guild-ed96e21d84133b01\\low\\renders\\harbor\\builders_guild\\raw-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.5,
+        -0.45119184255599976,
+        0.0
+      ],
+      "max": [
+        0.5,
+        0.45119184255599976,
+        0.8761177659034729
+      ]
+    },
+    "triangles": 948094,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "renderedRepairedSource": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\legacy-repair-harbor--builders_guild-ed96e21d84133b01\\low\\renders\\harbor\\builders_guild\\repaired-source-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\legacy-repair-harbor--builders_guild-ed96e21d84133b01\\low\\renders\\harbor\\builders_guild\\repaired-source-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\legacy-repair-harbor--builders_guild-ed96e21d84133b01\\low\\renders\\harbor\\builders_guild\\repaired-source-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.5,
+        -0.45119184255599976,
+        0.0
+      ],
+      "max": [
+        0.5,
+        0.45119184255599976,
+        0.8761177659034729
+      ]
+    },
+    "triangles": 954142,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "bounds": {
+    "min": [
+      -0.49952489137649536,
+      0.00044931407319381833,
+      -0.4518612027168274
+    ],
+    "max": [
+      0.49854928255081177,
+      0.8750830888748169,
+      0.4519672393798828
+    ],
+    "coordinateSystem": "GLTF Y-up; +Z front"
+  },
+  "textureSizes": [
+    {
+      "name": "harbor__builders_guild__nearest_base",
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "name": "harbor__builders_guild__nearest_orm",
+      "size": [
+        512,
+        512
+      ]
+    }
+  ],
+  "rawSourceUnchanged": true,
+  "completedAt": "2026-10-23T10:01:11.036155+00:00",
+  "localSurfaceRepairEvidencePreservation": [
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\harbor\\builders_guild\\ed96e21d84133b01\\evidence-preservation-7923d1381d24f5f2.json",
+      "sha256": "7923d1381d24f5f25f29d83b225485b93aa0ac2cf80fd2b47dc21d858a4f5ccb",
+      "bytes": 7854
+    }
+  ],
+  "legacyOriginalTextureRoute": {
+    "capturedNeuralFieldAvailable": false,
+    "newNeuralInference": false,
+    "method": "Source-derived low geometry, native UV-only charts, then original repaired-source PBR transfer. Original field was not captured for this earlier inference."
+  },
+  "textureOnlyReprocessing": {
+    "sourceCandidate": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\legacy-repair-harbor--builders_guild-ed96e21d84133b01\\low\\harbor\\builders_guild.glb",
+      "sha256": "2f44108798a6ee0162c6c76e4dff3c56d294fd824bcde946f5e68977e1c1026a",
+      "bytes": 1430808
+    },
+    "sourceProcessingReport": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\uv-replays\\legacy-harbor--builders_guild-ed96e21d84133b01\\input-processing.json",
+      "sha256": "02e3371c9bcdda496fecfd1514d8ea8b125a1bd3dc31174d67aee9d1965c0ae1",
+      "bytes": 14388
+    },
+    "sourceBlend": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\legacy-repair-harbor--builders_guild-ed96e21d84133b01\\low\\blender\\harbor\\builders_guild.blend",
+      "sha256": "529497736c534cb8b9c15f31947bf40b91bb5f9bbc26fe22d53bde2991cb5d97",
+      "bytes": 50115863
+    },
+    "nativeUVReceipt": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\uv-replays\\legacy-harbor--builders_guild-ed96e21d84133b01\\receipt.json",
+      "sha256": "cd6c639c2a69a8955fbb6daffef443faae687cd7d2650170ba8914b5500bfc71",
+      "bytes": 3995
+    },
+    "sourceTriangleCountVerified": 954142,
+    "positionsUnchanged": true,
+    "faceIndicesUnchanged": true,
+    "cornerNormalsUnchanged": true,
+    "additionalRemeshOrSimplification": false,
+    "uvAssignment": "Native cyclic triangle position matches transfer UVs to original loops; original triangle order and winding retained.",
+    "exportedTriangleCornerPositionsExactlyUnchanged": true
+  },
+  "promotedFrom": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\legacy-repair-harbor--builders_guild-ed96e21d84133b01\\final\\harbor\\builders_guild.json",
+    "sha256": "fb73e610c06efe81d7566f2ae5704b1e9b792d3baab18854ffdded4c94dd2310",
+    "bytes": 16768
+  },
+  "reviewSheet": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\harbor\\builders_guild\\review-sheet.jpg",
+    "sha256": "1fb08e0a1f024406d1691c7e06451bcf4a3cccd8a35294762f72d9d011b9ee64",
+    "bytes": 342603,
+    "candidateSha256": "7b2116b37da76442cb1b95eed9f60203d96be6cae85b393d117e5af9a7d9d63a",
+    "sourceImages": [
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\legacy-repair-harbor--builders_guild-ed96e21d84133b01\\low\\renders\\harbor\\builders_guild\\raw-front.png",
+        "sha256": "da2fce40140b688c35335b951801f4905dd782d3d525a06756273583004c29a8",
+        "label": "AI raw front"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\legacy-repair-harbor--builders_guild-ed96e21d84133b01\\low\\renders\\harbor\\builders_guild\\raw-iso.png",
+        "sha256": "ef1e9f3f643336d842179c088a1571bcb00eece8fdfeac2ce4ad95e2def03fba",
+        "label": "AI raw iso"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\harbor\\builders_guild\\lod-front.png",
+        "sha256": "fe2bdda7379c30d41c1fca3d6a78604d6f4c18e6ffa6b621d5f1e8b8562168cc",
+        "label": "LOD front"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\harbor\\builders_guild\\lod-right.png",
+        "sha256": "a3b2548b8497924a405d2c493ff6f87538afcdcf0c2f5fdf2547b2e2dd01aefb",
+        "label": "LOD right"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\harbor\\builders_guild\\lod-back.png",
+        "sha256": "0e791e04b738bad72c4c12f47828e22dd21bbea45a4f6898db0952ab08f439b3",
+        "label": "LOD back"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\harbor\\builders_guild\\lod-left.png",
+        "sha256": "8f9ae581ab08c62867f0c40bc14f5716dacd8a4d607fd846a5207f7b1adce37e",
+        "label": "LOD left"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\harbor\\builders_guild\\lod-iso.png",
+        "sha256": "afa08ff99c661b36ce70ed58717a5fdda58078dc05310de62cd9e45dde422bd9",
+        "label": "LOD iso"
+      }
+    ],
+    "content": "Unmodified CPU render images composed with labels for visual comparison only"
+  },
+  "derivedFromStaticCandidate": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\candidate-history\\harbor\\builders_guild\\4530eaecd980ab91be5aa2a84a903d3515334e94e1502f884f82d61f22503d1b\\builders_guild.glb",
+    "sha256": "4530eaecd980ab91be5aa2a84a903d3515334e94e1502f884f82d61f22503d1b",
+    "bytes": 1340476
+  },
+  "componentSeparation": {
+    "source": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\candidates\\harbor\\builders_guild.glb",
+      "sha256": "4530eaecd980ab91be5aa2a84a903d3515334e94e1502f884f82d61f22503d1b"
+    },
+    "output": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\component-candidates\\harbor\\builders_guild.glb",
+      "sha256": "7b2116b37da76442cb1b95eed9f60203d96be6cae85b393d117e5af9a7d9d63a",
+      "bytes": 1522844
+    },
+    "staticTriangles": 29417,
+    "movingTriangles": 569,
+    "triangleTotalPreserved": 29986,
+    "poseZeroMaxPositionError": 8.344650304081824e-09,
+    "embeddedImageHashesUnchanged": true,
+    "selection": {
+      "name": "harbor__builders_guild__neural_pendulum",
+      "lifePart": "pendulum",
+      "shape": "box",
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "center": [
+        0.432,
+        0.54,
+        0.386
+      ],
+      "min": [
+        0.36,
+        0.245,
+        0.318
+      ],
+      "max": [
+        0.511,
+        0.54,
+        0.46
+      ],
+      "keepLargestConnected": true,
+      "measurement": "Final front/right images and actual triangle bounding box isolate barrel cargo and hanging lower chain in front of fixed crane post. Connected-region filter excludes separate crane/house surfaces. Actual poses pending. Actual neutral and both seven-degree extremum poses have now been inspected.",
+      "reviewNotes": "Inspected actual front, right and isometric poses at 0, -7 and +7 degrees. Original cargo barrel and lower hanging chain move intact; pulley, upper crane beam, brace, wall and roof remain fixed. No residual cargo fragments or wall faces move."
+    },
+    "driver": "scene-life; no autoplay GLTF clip",
+    "newFacesAdded": 0
+  },
+  "componentVisualReview": {
+    "status": "passed_by_processing_agent_pending_external_approval",
+    "notes": "Inspected actual front, right and isometric poses at 0, -7 and +7 degrees. Original cargo barrel and lower hanging chain move intact; pulley, upper crane beam, brace, wall and roof remain fixed. No residual cargo fragments or wall faces move."
+  },
+  "componentTools": [
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\5ef865750c005ad1c449653f1e25b1e6d3a77dad5a7cbd41ecb5273b83364789-neural_component.py",
+      "sha256": "5ef865750c005ad1c449653f1e25b1e6d3a77dad5a7cbd41ecb5273b83364789",
+      "bytes": 11603
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\a05381f29dd4d1c10b92b6eade3b5130223422118f258cb980dcb645de3b93b3-finalize_component.py",
+      "sha256": "a05381f29dd4d1c10b92b6eade3b5130223422118f258cb980dcb645de3b93b3",
+      "bytes": 4855
+    }
+  ]
+}

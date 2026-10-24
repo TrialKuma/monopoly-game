@@ -1,0 +1,57 @@
+{
+  "status": "rejected_native_export_source",
+  "region": "expansion",
+  "asset": "teleport_gate",
+  "reviewer": "asset_production",
+  "recordedAtUtc": "2026-10-24T03:12:49.161903+00:00",
+  "source": {
+    "path": "art/full-ai-city/source/expansion--teleport_gate-a008-pixal-mv-1024-29486.glb",
+    "sha256": "6577efd25e512de85320d7cdbd3b769a0cc497e601d4832454e1afc315b8b024",
+    "bytes": 37694360
+  },
+  "sourceLevel": "Native 1M export; no untouched decoder attribution is made.",
+  "inferenceReport": {
+    "path": "art/full-ai-city/reports/source-rejections/expansion/teleport_gate/6577efd25e512de8/expansion--teleport_gate-a008-pixal-mv-1024-29486.json",
+    "sha256": "3dbd26e39b4520e5f4516c6f6e91f620d42d236f633fd8b24c1b1a023536341c",
+    "bytes": 10231
+  },
+  "inputReference": {
+    "path": "art/full-ai-city/reports/source-rejections/expansion/teleport_gate/6577efd25e512de8/input-reference.json",
+    "sha256": "a5288f3698c72425dd3ab3120c3a1ca5194ceeb0f49aeda38b0611b4c8210ed5",
+    "bytes": 4484
+  },
+  "diagnostic": null,
+  "diagnosticTool": null,
+  "sourceComparisonReport": {
+    "path": "art/full-ai-city/reports/source-rejections/expansion/teleport_gate/6577efd25e512de8/source-comparison-processing.json",
+    "sha256": "bfd5a0b041b31fcc6107a50319bd53a994e13083d189430cad1d9d1385879eba",
+    "bytes": 19967
+  },
+  "sourceViewEvidenceMode": "Explicitly selected existing renderedSource views; no additional or neutral render implied",
+  "evidence": [
+    {
+      "path": "art/full-ai-city/reports/source-rejections/expansion/teleport_gate/6577efd25e512de8/raw-front.png",
+      "sha256": "312f469090cf46c87c077855b3619dc34414907a211ee2032eebab701c36ecd2",
+      "bytes": 201957
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/expansion/teleport_gate/6577efd25e512de8/raw-iso.png",
+      "sha256": "14ca352f462a52e8d35bfbe4a40531b01cb51e0e85be18ba3b7186c6039ea22e",
+      "bytes": 213135
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/expansion/teleport_gate/6577efd25e512de8/raw-back.png",
+      "sha256": "2f7596b67d35e69c79426d52f541590605c4568b5a477a5e984276fc2120aad7",
+      "bytes": 201849
+    }
+  ],
+  "finding": "Actual reference and existing native front/iso/back compared with exact final five and256px. First independent retry successfully closes the earlier roof wedge and central crystal-frame loss. Four tall front/rear window edges still contain narrow through openings and rear-right adjoining panel has a short extra break, visible in native and final phone previews. The main arch, roofs, solid pillars and overall shape are sound. Evaluate only these bounded strips with original surfaces, UVs and images preserved; do not generate another seed.",
+  "decision": "Hold current source for one bounded local surface assessment/repair, at most6smallROIs and10000addedfaces; no whole-building remodeling and no third same-reference seed.",
+  "sourceUnchanged": true,
+  "notFinalCandidateReview": true,
+  "freezeTool": {
+    "path": "art/full-ai-city/reports/tool-snapshots/616860a00b28e670e1219d64c6cb5dad17f0946420568f786e80b6d789fb4a73-freeze_public_source_rejection.py",
+    "sha256": "616860a00b28e670e1219d64c6cb5dad17f0946420568f786e80b6d789fb4a73",
+    "bytes": 4304
+  }
+}

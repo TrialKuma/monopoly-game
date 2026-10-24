@@ -1,0 +1,752 @@
+{
+  "status": "exported_pending_visual_review",
+  "createdAt": "2026-10-23T09:41:43.319514+00:00",
+  "region": "classic",
+  "asset": "teleport_gate",
+  "source": {
+    "rawGLB": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\classic--teleport_gate-a001-pixal-mv-1024-9247.glb",
+      "sha256": "612800f4cbf0312ba1df8983b8f39b0e7d1f8f66e900b6775a80d336b6f9cefa",
+      "bytes": 42095508
+    }
+  },
+  "inferenceReport": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\classic--teleport_gate-a001\\classic--teleport_gate-a001-pixal-mv-1024-9247.json",
+    "sha256": "f168657a379d6b1cfe1e3c9e2f83e2c5f2bbea0eafb41090bcdc0c2d37962608",
+    "bytes": 9158
+  },
+  "reference": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\references\\classic\\teleport_gate\\reference.json",
+    "sha256": "b0c6fb0ed6171636b0821190a44b037a47377f0f3395567e45f8b3f8f31b2fdc",
+    "bytes": 4048
+  },
+  "processingTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\d1befe53381b9186da4b840298fc1d6b373524437790091b7f6e296bfcbf771b-process_lod.py",
+    "sha256": "d1befe53381b9186da4b840298fc1d6b373524437790091b7f6e296bfcbf771b",
+    "bytes": 27109
+  },
+  "assumedCameras": true,
+  "cameraCalibration": "assumed_standard_orbit_not_measured",
+  "nativePipeline": "Pixal3DMVImageTo3DPipeline.run_mv",
+  "nativeResolution": 1024,
+  "seed": 9247,
+  "geometryOrigin": "Actual native three-view neural building with explicitly recorded bounded local repairs; localSurfaceRepair.method and face counts disclose whether these include boundary patches or a small mechanical connector. Followed by source-derived remeshing and texture transfer. No replacement building.",
+  "orientation": {
+    "up": "Y",
+    "front": "+Z",
+    "groundY": 0,
+    "maxEdge": 1
+  },
+  "requestedTriangles": 30000,
+  "limitations": [
+    "Assumed camera reference reconstruction, not exact measured architecture",
+    "Final candidate requires actual rendered visual approval"
+  ],
+  "animation": null,
+  "processingComplete": true,
+  "lod": "near",
+  "processingRevision": 0,
+  "localSurfaceRepair": {
+    "source": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-teleport-v4\\repaired-native.glb",
+      "sha256": "748e3c3c5721e5a04b9fe99583590c52179335a15017a3de97da6666e26712d0",
+      "bytes": 43719952
+    },
+    "receipt": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\processing-reconciliations\\alpine\\tower_3\\2e727f1844b3ab41\\01e2974c0f2a06d5-repair.json",
+      "sha256": "c26fe43093c1310b795a0dbb011176ec545d39d697e02d03185aeca2fc80afec",
+      "bytes": 15132
+    },
+    "method": "Only measured missing side-roof sectors and short arch-shoulder backing gaps and two measured rear molding/plinth openings are closed from intact neighboring original surface depth and UV samples. Original neural vertices, faces and image pixels are untouched. The central passage, original windows and architectural volumes remain unchanged. Roof patches use original neighboring slate roof UV and stone patches use original stone. Patches close 0.006 inward for derivative stability, with no replacement building or newly painted texture.",
+    "newTriangles": 15272,
+    "newVertices": 7658,
+    "originalVerticesMoved": 0,
+    "originalTrianglesDeleted": 0,
+    "regions": [
+      {
+        "name": "left side dormer neighboring roof opening 1",
+        "specification": {
+          "name": "left side dormer neighboring roof opening 1",
+          "u": [
+            0,
+            -1,
+            0
+          ],
+          "v": [
+            0,
+            0,
+            1
+          ],
+          "n": [
+            -1,
+            0,
+            0
+          ],
+          "roi": [
+            -0.085,
+            -0.036,
+            0.62,
+            0.72
+          ],
+          "defectDepth": 0.35,
+          "donorDepth": 0.425,
+          "donorMaxDepth": 0.471,
+          "donorNormal": 0.55,
+          "color": "roof"
+        },
+        "missingSamples": 347,
+        "boundarySamples": 1548,
+        "sampledDepthRange": [
+          -0.22472262382507324,
+          0.47149646282196045
+        ],
+        "inwardClosureThickness": 0.006,
+        "outerSurfaceUnchanged": true,
+        "newVertices": 978,
+        "newTriangles": 1948
+      },
+      {
+        "name": "left side dormer neighboring roof opening 2",
+        "specification": {
+          "name": "left side dormer neighboring roof opening 2",
+          "u": [
+            0,
+            -1,
+            0
+          ],
+          "v": [
+            0,
+            0,
+            1
+          ],
+          "n": [
+            -1,
+            0,
+            0
+          ],
+          "roi": [
+            0.036,
+            0.087,
+            0.62,
+            0.72
+          ],
+          "defectDepth": 0.35,
+          "donorDepth": 0.425,
+          "donorMaxDepth": 0.471,
+          "donorNormal": 0.55,
+          "color": "roof"
+        },
+        "missingSamples": 313,
+        "boundarySamples": 1757,
+        "sampledDepthRange": [
+          0.22541511058807373,
+          0.47686612606048584
+        ],
+        "inwardClosureThickness": 0.006,
+        "outerSurfaceUnchanged": true,
+        "newVertices": 826,
+        "newTriangles": 1648
+      },
+      {
+        "name": "right side dormer neighboring roof opening 1",
+        "specification": {
+          "name": "right side dormer neighboring roof opening 1",
+          "u": [
+            0,
+            1,
+            0
+          ],
+          "v": [
+            0,
+            0,
+            1
+          ],
+          "n": [
+            1,
+            0,
+            0
+          ],
+          "roi": [
+            -0.045,
+            -0.01,
+            0.62,
+            0.735
+          ],
+          "defectDepth": 0.35,
+          "donorDepth": 0.425,
+          "donorMaxDepth": 0.471,
+          "donorNormal": 0.55,
+          "color": "roof"
+        },
+        "missingSamples": 430,
+        "boundarySamples": 1284,
+        "sampledDepthRange": [
+          0.21773874759674072,
+          0.46986234188079834
+        ],
+        "inwardClosureThickness": 0.006,
+        "outerSurfaceUnchanged": true,
+        "newVertices": 1148,
+        "newTriangles": 2292
+      },
+      {
+        "name": "right side dormer neighboring roof opening 2",
+        "specification": {
+          "name": "right side dormer neighboring roof opening 2",
+          "u": [
+            0,
+            1,
+            0
+          ],
+          "v": [
+            0,
+            0,
+            1
+          ],
+          "n": [
+            1,
+            0,
+            0
+          ],
+          "roi": [
+            0.07,
+            0.094,
+            0.62,
+            0.715
+          ],
+          "defectDepth": 0.35,
+          "donorDepth": 0.425,
+          "donorMaxDepth": 0.471,
+          "donorNormal": 0.55,
+          "color": "roof"
+        },
+        "missingSamples": 188,
+        "boundarySamples": 1328,
+        "sampledDepthRange": [
+          0.21511971950531006,
+          0.4636958837509155
+        ],
+        "inwardClosureThickness": 0.006,
+        "outerSurfaceUnchanged": true,
+        "newVertices": 588,
+        "newTriangles": 1172
+      },
+      {
+        "name": "front arch shoulder backing opening 1",
+        "specification": {
+          "name": "front arch shoulder backing opening 1",
+          "u": [
+            1,
+            0,
+            0
+          ],
+          "v": [
+            0,
+            0,
+            1
+          ],
+          "n": [
+            0,
+            -1,
+            0
+          ],
+          "roi": [
+            -0.228,
+            -0.174,
+            0.505,
+            0.572
+          ],
+          "defectDepth": 0.03,
+          "donorDepth": 0.055,
+          "donorMaxDepth": 0.121,
+          "donorNormal": 0.55,
+          "color": "stone"
+        },
+        "missingSamples": 430,
+        "boundarySamples": 1506,
+        "sampledDepthRange": [
+          -2.0,
+          0.15117323398590088
+        ],
+        "inwardClosureThickness": 0.006,
+        "outerSurfaceUnchanged": true,
+        "newVertices": 1094,
+        "newTriangles": 2184
+      },
+      {
+        "name": "front arch shoulder backing opening 2",
+        "specification": {
+          "name": "front arch shoulder backing opening 2",
+          "u": [
+            1,
+            0,
+            0
+          ],
+          "v": [
+            0,
+            0,
+            1
+          ],
+          "n": [
+            0,
+            -1,
+            0
+          ],
+          "roi": [
+            0.163,
+            0.222,
+            0.505,
+            0.572
+          ],
+          "defectDepth": 0.03,
+          "donorDepth": 0.055,
+          "donorMaxDepth": 0.121,
+          "donorNormal": 0.55,
+          "color": "stone"
+        },
+        "missingSamples": 454,
+        "boundarySamples": 1703,
+        "sampledDepthRange": [
+          -2.0,
+          0.12206006050109863
+        ],
+        "inwardClosureThickness": 0.006,
+        "outerSurfaceUnchanged": true,
+        "newVertices": 1188,
+        "newTriangles": 2372
+      },
+      {
+        "name": "back arch shoulder backing opening 1",
+        "specification": {
+          "name": "back arch shoulder backing opening 1",
+          "u": [
+            -1,
+            0,
+            0
+          ],
+          "v": [
+            0,
+            0,
+            1
+          ],
+          "n": [
+            0,
+            1,
+            0
+          ],
+          "roi": [
+            -0.228,
+            -0.174,
+            0.505,
+            0.572
+          ],
+          "defectDepth": 0.03,
+          "donorDepth": 0.055,
+          "donorMaxDepth": 0.121,
+          "donorNormal": 0.55,
+          "color": "stone"
+        },
+        "missingSamples": 198,
+        "boundarySamples": 1284,
+        "sampledDepthRange": [
+          -2.0,
+          0.173384428024292
+        ],
+        "inwardClosureThickness": 0.006,
+        "outerSurfaceUnchanged": true,
+        "newVertices": 560,
+        "newTriangles": 1116
+      },
+      {
+        "name": "back arch shoulder backing opening 2",
+        "specification": {
+          "name": "back arch shoulder backing opening 2",
+          "u": [
+            -1,
+            0,
+            0
+          ],
+          "v": [
+            0,
+            0,
+            1
+          ],
+          "n": [
+            0,
+            1,
+            0
+          ],
+          "roi": [
+            0.163,
+            0.222,
+            0.505,
+            0.572
+          ],
+          "defectDepth": 0.03,
+          "donorDepth": 0.055,
+          "donorMaxDepth": 0.121,
+          "donorNormal": 0.55,
+          "color": "stone"
+        },
+        "missingSamples": 273,
+        "boundarySamples": 1359,
+        "sampledDepthRange": [
+          -2.0,
+          0.1512669324874878
+        ],
+        "inwardClosureThickness": 0.006,
+        "outerSurfaceUnchanged": true,
+        "newVertices": 770,
+        "newTriangles": 1536
+      },
+      {
+        "name": "Rear left tower thin horizontal slit below middle molding",
+        "specification": {
+          "name": "Rear left tower thin horizontal slit below middle molding",
+          "u": [
+            -1,
+            0,
+            0
+          ],
+          "v": [
+            0,
+            0,
+            1
+          ],
+          "n": [
+            0,
+            1,
+            0
+          ],
+          "roi": [
+            -0.34,
+            -0.295,
+            0.296,
+            0.328
+          ],
+          "defectDepth": 0.06,
+          "donorDepth": 0.095,
+          "donorMaxDepth": 0.17,
+          "donorNormal": 0.55,
+          "color": "stone"
+        },
+        "missingSamples": 57,
+        "boundarySamples": 1649,
+        "sampledDepthRange": [
+          -0.12760567665100098,
+          0.13330137729644775
+        ],
+        "inwardClosureThickness": 0.006,
+        "outerSurfaceUnchanged": true,
+        "newVertices": 226,
+        "newTriangles": 448
+      },
+      {
+        "name": "Rear left outer plinth corner opening",
+        "specification": {
+          "name": "Rear left outer plinth corner opening",
+          "u": [
+            -1,
+            0,
+            0
+          ],
+          "v": [
+            0,
+            0,
+            1
+          ],
+          "n": [
+            0,
+            1,
+            0
+          ],
+          "roi": [
+            -0.47,
+            -0.438,
+            0.041,
+            0.065
+          ],
+          "defectDepth": 0.06,
+          "donorDepth": 0.095,
+          "donorMaxDepth": 0.17,
+          "donorNormal": 0.55,
+          "color": "stone"
+        },
+        "missingSamples": 96,
+        "boundarySamples": 411,
+        "sampledDepthRange": [
+          -0.06741881370544434,
+          0.14516115188598633
+        ],
+        "inwardClosureThickness": 0.006,
+        "outerSurfaceUnchanged": true,
+        "newVertices": 280,
+        "newTriangles": 556
+      }
+    ]
+  },
+  "derivation": {
+    "rawTriangles": 997896,
+    "weldedTriangles": 1009671,
+    "remeshedTriangles": 1624348,
+    "voxelSize": 0.003,
+    "finalTriangles": 29973,
+    "atlasArea": 0.3642646624750205,
+    "singleReductionPass": true,
+    "inheritedUVRemovedBeforeReduction": true,
+    "sourceMaterialsUntouched": true,
+    "uvUnwrap": {
+      "angleDegrees": 66.0,
+      "islandMargin": 2e-05,
+      "marginMethod": "SCALED",
+      "nominalMarginPixels": null
+    },
+    "repairedSourceTriangles": 1013168
+  },
+  "bake": {
+    "method": "CPU closest-original-triangle projection with float64 barycentric original UV and bilinear original texture sampling; geometric normals retained, no directional normal-map rebake or invented color",
+    "coveredAtlasPixels": 381853,
+    "nearestLookupSuccessFraction": 1.0,
+    "notRayCoverage": true,
+    "sourceDistanceQuantiles": [
+      0.00019095023162662983,
+      0.0009392043459229165,
+      0.001574469655752181,
+      0.006627798080444336
+    ],
+    "sourceDistanceQuantileLevels": [
+      0.5,
+      0.95,
+      0.99,
+      1
+    ],
+    "overTwoPercentMaxEdge": 0.0,
+    "distanceReviewRequired": false,
+    "visualGeometryReviewRequired": true,
+    "barycentricOriginalRange": [
+      -7.729280057583443e-05,
+      1.0
+    ],
+    "degenerateOrInvalidBarycentricCount": 0,
+    "closestSourceVertexFallbackFraction": 0.0,
+    "barycentricPointReconstructionErrorQuantiles": [
+      4.946239951697823e-09,
+      3.948747880533232e-08,
+      4.6175664122368967e-07
+    ],
+    "atlasOverlapPixelsWithDifferentSurface": 178,
+    "seconds": 7.8510011000034865,
+    "maps": [
+      {
+        "role": "base",
+        "size": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "role": "orm",
+        "size": [
+          512,
+          512
+        ]
+      }
+    ],
+    "repairSourceNote": "Texture transfer uses the explicitly repaired neural source, retaining original PBR and locally interpolated same-wall UV. Repair receipt and unchanged original inference source are preserved separately."
+  },
+  "textureTransferTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\a2cb99c96fb8df396f16580a88a7c6151104ee3c927fe76cd161ee2d27bdfa42-bake_nearest_surface.py",
+    "sha256": "a2cb99c96fb8df396f16580a88a7c6151104ee3c927fe76cd161ee2d27bdfa42",
+    "bytes": 7317
+  },
+  "quantization": {
+    "source": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-teleport_gate-748e3c3c5721\\candidates\\classic\\teleport_gate.glb",
+    "output": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-teleport_gate-748e3c3c5721\\candidates\\classic\\teleport_gate.glb",
+    "sourceBytes": 1932796,
+    "outputBytes": 1424820,
+    "sourceSha256": "81697968015c546ecdc07b6ad008e71a2e0b51cab080d0398f2ed8379c548fb3",
+    "outputSha256": "9562a7f30f468c59cf9775043175eefd6e7452626e18f55f80bb672ae23c89a9",
+    "positionFaceAndTextureBytesUnchanged": true,
+    "attributes": [
+      {
+        "accessor": 1,
+        "semantic": "NORMAL",
+        "count": 42344,
+        "maximumAngularErrorDegrees": 0.3761326934011926
+      },
+      {
+        "accessor": 2,
+        "semantic": "TEXCOORD_0",
+        "count": 42344,
+        "maximumUVError": 7.629494122418645e-06,
+        "maximumTexelErrorAt1024": 0.007812601981356693
+      }
+    ]
+  },
+  "processedCandidate": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-teleport_gate-748e3c3c5721\\candidates\\classic\\teleport_gate.glb",
+    "sha256": "9562a7f30f468c59cf9775043175eefd6e7452626e18f55f80bb672ae23c89a9",
+    "bytes": 1424820
+  },
+  "glbValidation": {
+    "version": 2,
+    "triangles": 29973,
+    "meshes": 1,
+    "materials": 1,
+    "images": 2,
+    "all_primitives_have_uv": true,
+    "animations": [],
+    "all_images_embedded": true,
+    "external_buffers": []
+  },
+  "triangles": 29973,
+  "renderedCandidate": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-teleport_gate-748e3c3c5721\\candidates\\renders\\classic\\teleport_gate\\lod-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-teleport_gate-748e3c3c5721\\candidates\\renders\\classic\\teleport_gate\\lod-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-teleport_gate-748e3c3c5721\\candidates\\renders\\classic\\teleport_gate\\lod-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-teleport_gate-748e3c3c5721\\candidates\\renders\\classic\\teleport_gate\\lod-left.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-teleport_gate-748e3c3c5721\\candidates\\renders\\classic\\teleport_gate\\lod-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.5006186962127686,
+        -0.18636195361614227,
+        0.00013840975589118898
+      ],
+      "max": [
+        0.4991116523742676,
+        0.18665693700313568,
+        0.9245365262031555
+      ]
+    },
+    "triangles": 29973,
+    "textureSizes": [
+      {
+        "name": "classic__teleport_gate__nearest_base",
+        "size": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "name": "classic__teleport_gate__nearest_orm",
+        "size": [
+          512,
+          512
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "renderedSource": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-teleport_gate-748e3c3c5721\\candidates\\renders\\classic\\teleport_gate\\raw-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-teleport_gate-748e3c3c5721\\candidates\\renders\\classic\\teleport_gate\\raw-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.5,
+        -0.18632672727108002,
+        0.0
+      ],
+      "max": [
+        0.5,
+        0.18632672727108002,
+        0.9240379929542542
+      ]
+    },
+    "triangles": 997896,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "renderedRepairedSource": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-teleport_gate-748e3c3c5721\\candidates\\renders\\classic\\teleport_gate\\repaired-source-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-teleport_gate-748e3c3c5721\\candidates\\renders\\classic\\teleport_gate\\repaired-source-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\recorded-repair-teleport_gate-748e3c3c5721\\candidates\\renders\\classic\\teleport_gate\\repaired-source-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.4999999701976776,
+        -0.1862902045249939,
+        0.0
+      ],
+      "max": [
+        0.4999999701976776,
+        0.1862902045249939,
+        0.9238429069519043
+      ]
+    },
+    "triangles": 1013168,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "bounds": {
+    "min": [
+      -0.5006186962127686,
+      0.00013840975589118898,
+      -0.18665693700313568
+    ],
+    "max": [
+      0.4991116523742676,
+      0.9245365262031555,
+      0.18636195361614227
+    ],
+    "coordinateSystem": "GLTF Y-up; +Z front"
+  },
+  "textureSizes": [
+    {
+      "name": "classic__teleport_gate__nearest_base",
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "name": "classic__teleport_gate__nearest_orm",
+      "size": [
+        512,
+        512
+      ]
+    }
+  ],
+  "rawSourceUnchanged": true,
+  "completedAt": "2026-10-23T09:43:11.614748+00:00"
+}

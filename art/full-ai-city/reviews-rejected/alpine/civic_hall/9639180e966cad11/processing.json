@@ -1,0 +1,461 @@
+{
+  "status": "exported_pending_visual_review",
+  "createdAt": "2026-10-23T19:55:56.171809+00:00",
+  "region": "alpine",
+  "asset": "civic_hall",
+  "lod": "near",
+  "processingRevision": 0,
+  "source": {
+    "rawGLB": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\alpine--civic_hall-a002-pixal-mv-1024-29431.glb",
+      "sha256": "254d2368b8ca471f14ed82c82da00892c9389c09af175628d938e50c78e8a4f9",
+      "bytes": 44283476
+    }
+  },
+  "inferenceReport": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\alpine--civic_hall-a002\\alpine--civic_hall-a002-pixal-mv-1024-29431.json",
+    "sha256": "904409187265e1e074b315d0d91afc1374bb1efee7ab6a190015d4e49467c6f0",
+    "bytes": 10414
+  },
+  "reference": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\inputs\\alpine\\civic_hall\\c2171aeea43a824f\\reference.json",
+    "sha256": "1c5abc6b0170de3cb90b4526759333e2c41cb77ed5c35053f98dd5043d9ceed8",
+    "bytes": 4434
+  },
+  "processingTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\7a797107ab696da8746a713168b2ea8c3170945ae2f4647dcc26652f1e093900-process_native_mobile.py",
+    "sha256": "7a797107ab696da8746a713168b2ea8c3170945ae2f4647dcc26652f1e093900",
+    "bytes": 9168
+  },
+  "nativeSurfaceExport": {
+    "receipt": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\alpine--civic_hall-254d2368b8ca-surface-field-v1\\receipt.json",
+      "sha256": "53511db09bf266fb4e2c0763f876c4d03069124ce85430c06cc26431201d22f0",
+      "bytes": 11386
+    },
+    "source": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\alpine--civic_hall-254d2368b8ca-surface-field-v1\\mobile-30000-1024.glb",
+      "sha256": "0b4316e0bf398ce07679082889a63fad8066bb094378d236a5212f8672c41f95",
+      "bytes": 1950180
+    },
+    "tensorArchive": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\alpine--civic_hall-a002\\neural-export-inputs.pt",
+      "sha256": "10f94b641f451fb9ac99556e2bf08221e1c9d4c3e37ab73cff58ea1eb153381f",
+      "bytes": 690860829
+    }
+  },
+  "nativePipeline": "Pixal3DMVImageTo3DPipeline.run_mv",
+  "nativeResolution": 1024,
+  "seed": 29431,
+  "assumedCameras": true,
+  "cameraCalibration": "assumed_standard_orbit_not_measured",
+  "geometryOrigin": "Recorded low surface derived from the identical native raw, restored to original field coordinates, with native UV/material generation using the original neural high-surface BVH and attribute field. No authored replacement geometry.",
+  "textureOrigin": "Original neural attribute field sampled by the native UV/material operations with the recorded surface-stage override; no new neural inference or raw-UV rebake.",
+  "normalization": {
+    "enabled": true,
+    "candidate_degrees": 0.5143413123105807,
+    "applied_degrees": 0.5143413123105807,
+    "underside_area": 0.10446776211756514,
+    "normal_agreement": 0.9754388290794472,
+    "yaw_degrees": 180,
+    "pitch_degrees": 0,
+    "roll_degrees": 0,
+    "uniform_scale": 1.110097976778693
+  },
+  "orientation": {
+    "up": "Y",
+    "front": "+Z",
+    "groundY": 0,
+    "maxEdge": 1
+  },
+  "requestedTriangles": 30000,
+  "triangles": 29953,
+  "glbValidation": {
+    "version": 2,
+    "triangles": 29953,
+    "meshes": 1,
+    "materials": 1,
+    "images": 2,
+    "all_primitives_have_uv": true,
+    "animations": [],
+    "all_images_embedded": true,
+    "external_buffers": []
+  },
+  "quantization": {
+    "source": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--civic_hall-254d2368b8ca-surface-field-v1\\candidates\\alpine\\civic_hall.glb",
+    "output": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--civic_hall-254d2368b8ca-surface-field-v1\\candidates\\alpine\\civic_hall.glb",
+    "sourceBytes": 1624560,
+    "outputBytes": 1174232,
+    "sourceSha256": "9152230e0287bcc7849b532625d06a55e0c73bcc20c63cdd8438764708dd9f0f",
+    "outputSha256": "9639180e966cad11881febe3e8b852f6b4e09c6a7a79fac4767dd94b5f6c4556",
+    "positionFaceAndTextureBytesUnchanged": true,
+    "attributes": [
+      {
+        "accessor": 1,
+        "semantic": "NORMAL",
+        "count": 37540,
+        "maximumAngularErrorDegrees": 0.3650656877265186
+      },
+      {
+        "accessor": 2,
+        "semantic": "TEXCOORD_0",
+        "count": 37540,
+        "maximumUVError": 7.629510948348184e-06,
+        "maximumTexelErrorAt1024": 0.00781261921110854
+      }
+    ]
+  },
+  "processedCandidate": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\candidates\\alpine\\civic_hall.glb",
+    "sha256": "9639180e966cad11881febe3e8b852f6b4e09c6a7a79fac4767dd94b5f6c4556",
+    "bytes": 1174232
+  },
+  "derivation": {
+    "method": "Recorded CPU surface derived from the same neural raw, inverse-normalized to field coordinates; a local native-export variant bypasses further mesh simplification/remeshing and uses native UV generation plus original neural high-surface BVH and field texture sampling. Only normalization, JPEG encoding and attribute quantization afterward.",
+    "voxelizedAgain": false,
+    "rebakedFromRawUV": false,
+    "facadeUVPreserved": true,
+    "normalizedTrianglesPreserved": true,
+    "geometrySurfaceInput": {
+      "receipt": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\alpine--civic_hall-254d2368b8ca-surface-field-v1\\geometry-source-proof.json",
+        "sha256": "bb4278a0652d7fda3966e2c08ff2fecd077f2d29255f7f09d90f0ae3f837a4f2",
+        "bytes": 4733
+      },
+      "method": "Only coordinate inversion of an existing source-derived low mesh; all candidate vertex/triangle identities preserved. No remeshing, replacement or newly authored geometry.",
+      "sourceRaw": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\alpine--civic_hall-a002-pixal-mv-1024-29431.glb",
+        "sha256": "254d2368b8ca471f14ed82c82da00892c9389c09af175628d938e50c78e8a4f9",
+        "bytes": 44283476
+      },
+      "candidate": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\alpine--civic_hall-254d2368b8ca-surface-field-v1\\geometry-candidate.glb",
+        "sha256": "8ebadb11657845ed6e0b7736b1cff767dbf24e9ccbdc28ebcf16da0a5939287b",
+        "bytes": 1696008
+      },
+      "candidateReport": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\alpine--civic_hall-254d2368b8ca-surface-field-v1\\geometry-candidate-processing.json",
+        "sha256": "8a01d82dbea1ed702040897bd52a1cc8eeb9fe05d5a0332818169eb6dcb279c5",
+        "bytes": 9872
+      },
+      "originalCandidate": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\candidates\\alpine\\civic_hall.glb",
+        "sha256": "8ebadb11657845ed6e0b7736b1cff767dbf24e9ccbdc28ebcf16da0a5939287b",
+        "bytes": 1696008
+      },
+      "fieldReceipt": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\alpine--civic_hall-a002\\receipt.json",
+        "sha256": "ba82cc8b2e44bfc21b70e14862cdfd2486a6cd7cc46d5b1e74d5346e488246c8",
+        "bytes": 3705
+      },
+      "output": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\alpine--civic_hall-254d2368b8ca-surface-field-v1\\geometry-surface.npz",
+        "sha256": "c5595c5ad7bbf59551c20f06cf0d6df6071ee7337d316da0400d7a7a51bb355a",
+        "bytes": 530588
+      },
+      "triangles": 29953,
+      "vertices": 14220,
+      "originalSplitVertices": 43961,
+      "exactCoincidentVerticesMerged": 29741,
+      "maximumPositionChangeFromWelding": 0,
+      "normalization": {
+        "enabled": true,
+        "candidate_degrees": 0.8156485441607876,
+        "applied_degrees": 0.8156485441607876,
+        "underside_area": 0.1800492266559233,
+        "normal_agreement": 0.9464482528082153,
+        "yaw_degrees": 180,
+        "pitch_degrees": 0,
+        "roll_degrees": 0,
+        "uniform_scale": 1.1021194422744374
+      },
+      "rawBlenderToNormalizedBlender": [
+        [
+          -1.1021190479482894,
+          6.5469165813568896e-06,
+          0.0009352759482029676,
+          -0.002553114632768462
+        ],
+        [
+          6.74094136575344e-06,
+          -1.1020081712564502,
+          0.015660520155127367,
+          0.003983200141240983
+        ],
+        [
+          0.0009352745731442779,
+          0.015660519690526398,
+          1.1020077713868837,
+          0.4170508646799963
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "inverse": [
+        [
+          -0.907342343531376,
+          5.551735111623569e-06,
+          0.000769984159515972,
+          -0.002637693687388502
+        ],
+        [
+          5.392000609931119e-06,
+          -0.9072510688609645,
+          0.012892847923176274,
+          -0.0017631970225246761
+        ],
+        [
+          0.0007699852973291044,
+          0.012892847405123732,
+          0.9072507446080664,
+          -0.37841909645124006
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "sampledNormalizationReconstructionMaxError": 1.0604346846959959e-07,
+      "nativeBounds": {
+        "min": [
+          -0.45075512950836966,
+          -0.37572858113720353,
+          -0.3691896233487977
+        ],
+        "max": [
+          0.4500846342236772,
+          0.48431539172392934,
+          0.37403791234169653
+        ]
+      },
+      "tool": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\alpine--civic_hall-254d2368b8ca-surface-field-v1\\geometry-preparation-source.py",
+        "sha256": "956e46377da8eae51f4e9af858f698532b81fccbbf16f219a2f2adbb9ab1481a",
+        "bytes": 7005
+      },
+      "toolSnapshot": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\alpine--civic_hall-254d2368b8ca-surface-field-v1\\geometry-preparation-source.py",
+        "sha256": "956e46377da8eae51f4e9af858f698532b81fccbbf16f219a2f2adbb9ab1481a",
+        "bytes": 7005
+      },
+      "normalizationInput": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\alpine--civic_hall-a002-pixal-mv-1024-29431.glb",
+        "sha256": "254d2368b8ca471f14ed82c82da00892c9389c09af175628d938e50c78e8a4f9",
+        "bytes": 44283476
+      },
+      "originalReceipt": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\alpine--civic_hall-254d2368b8ca-surface-field-v1\\geometry-source-original-receipt.json",
+        "sha256": "91353c3a6bef2e0fe9aab881e5fc70050eae69cda353b6a6e5caeb188007480b",
+        "bytes": 4374
+      }
+    },
+    "nativePostprocessOverride": {
+      "original": {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\native-mobile\\replays\\alpine--civic_hall-254d2368b8ca-surface-field-v1\\original-native-exporter-source.py",
+        "sha256": "b6b79da5dfe13c22047a6257c6b2301c7ea31259dd9c82344db7e5c4cc707917",
+        "bytes": 8126
+      },
+      "scope": "Keep original neural geometry BVH for PBR lookup. Replace only the intermediate surface with this recorded existing source-derived low mesh; bypass further remeshing/simplification/cleanup, then use native unwrap/normals/field sampling.",
+      "sharedCodeModified": false,
+      "noNewGeometryAuthored": true,
+      "noNewGeometryAuthoredAppliesTo": "native_uv_material_replay_only",
+      "counts": {
+        "facesBeforeUnwrap": 29953
+      }
+    },
+    "nativeFieldLookup": {
+      "quantiles50_95_99_100": [
+        0.0010676970705389977,
+        0.0026912048924714327,
+        0.003816013690084219,
+        0.008645657449960709
+      ],
+      "fractionOverTwoPercent": 0.0,
+      "sampleCount": 604334,
+      "meaning": "Distance to original neural BVH before direct field sampling, not ray hit coverage"
+    }
+  },
+  "bake": {
+    "method": "Direct original neural attribute field sampling inside native to_glb; no Blender bake or nearest raw-image transfer",
+    "notRayCoverage": true
+  },
+  "animation": null,
+  "processingComplete": true,
+  "limitations": [
+    "Same assumed three-view cameras as original native raw",
+    "Diagnostic pending external visual approval; not a formal asset replacement"
+  ],
+  "renderedCandidate": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--civic_hall-254d2368b8ca-surface-field-v1\\candidates\\renders\\alpine\\civic_hall\\lod-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--civic_hall-254d2368b8ca-surface-field-v1\\candidates\\renders\\alpine\\civic_hall\\lod-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--civic_hall-254d2368b8ca-surface-field-v1\\candidates\\renders\\alpine\\civic_hall\\lod-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--civic_hall-254d2368b8ca-surface-field-v1\\candidates\\renders\\alpine\\civic_hall\\lod-left.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--civic_hall-254d2368b8ca-surface-field-v1\\candidates\\renders\\alpine\\civic_hall\\lod-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.5,
+        -0.4141634404659271,
+        0.0
+      ],
+      "max": [
+        0.5,
+        0.4141634404659271,
+        0.9564886689186096
+      ]
+    },
+    "triangles": 29953,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          1024,
+          1024
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "sourceReviewReusedFrom": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--civic_hall-254d2368b8ca-surface-field-v1\\surface.candidate.json",
+    "sha256": "8a01d82dbea1ed702040897bd52a1cc8eeb9fe05d5a0332818169eb6dcb279c5",
+    "bytes": 9872
+  },
+  "renderedSource": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--civic_hall-254d2368b8ca-surface-field-v1\\candidates\\renders\\alpine\\civic_hall\\raw-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--civic_hall-254d2368b8ca-surface-field-v1\\candidates\\renders\\alpine\\civic_hall\\raw-iso.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--civic_hall-254d2368b8ca-surface-field-v1\\candidates\\renders\\alpine\\civic_hall\\raw-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--civic_hall-254d2368b8ca-surface-field-v1\\candidates\\renders\\alpine\\civic_hall\\raw-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--civic_hall-254d2368b8ca-surface-field-v1\\candidates\\renders\\alpine\\civic_hall\\raw-left.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.5,
+        -0.41575533151626587,
+        0.0
+      ],
+      "max": [
+        0.5,
+        0.41575533151626587,
+        0.9518862962722778
+      ]
+    },
+    "triangles": 979491,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "bounds": {
+    "min": [
+      -0.5,
+      0.0,
+      -0.4141634404659271
+    ],
+    "max": [
+      0.5,
+      0.9564886689186096,
+      0.4141634404659271
+    ],
+    "coordinateSystem": "GLTF Y-up; +Z front"
+  },
+  "textureSizes": [
+    {
+      "name": "Image_0",
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "name": "Image_1",
+      "size": [
+        1024,
+        1024
+      ]
+    }
+  ],
+  "completedAt": "2026-10-23T19:56:08.104732+00:00",
+  "rawSourceUnchanged": true,
+  "promotedFrom": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--civic_hall-254d2368b8ca-surface-field-v1\\candidates\\alpine\\civic_hall.json",
+    "sha256": "31ad684f5cd95824c1d426cd8bd30a1155b56129cf23a20894446ae9c0d5d0ed",
+    "bytes": 19359
+  },
+  "reviewSheet": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--civic_hall-254d2368b8ca-surface-field-v1\\candidates\\renders\\alpine\\civic_hall\\review-sheet.jpg",
+    "sha256": "b8c0e25b5f539f657502a67ae245d0a88ffb92aa7308ce000e3ed52231d1cff7",
+    "bytes": 333292,
+    "candidateSha256": "9639180e966cad11881febe3e8b852f6b4e09c6a7a79fac4767dd94b5f6c4556",
+    "sourceImages": [
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--civic_hall-254d2368b8ca-surface-field-v1\\candidates\\renders\\alpine\\civic_hall\\raw-front.png",
+        "sha256": "f38b11db9ba050befa899915987ac34020773dafaff7ef4d6097dabf382eb28d",
+        "label": "AI raw front"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--civic_hall-254d2368b8ca-surface-field-v1\\candidates\\renders\\alpine\\civic_hall\\raw-iso.png",
+        "sha256": "2538b1f639f0dae34fd89e145c27e4ec9dff94985824ef619e7def78a0d0a5a5",
+        "label": "AI raw iso"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--civic_hall-254d2368b8ca-surface-field-v1\\candidates\\renders\\alpine\\civic_hall\\lod-front.png",
+        "sha256": "0b2904e231296f77d16481cf93f5207bb330a31047c1541c8701107f76bc1a45",
+        "label": "LOD front"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--civic_hall-254d2368b8ca-surface-field-v1\\candidates\\renders\\alpine\\civic_hall\\lod-right.png",
+        "sha256": "4c6399700473aaedb8f99c9c6b0a56d211fa7f3cd57a34a0ea33af9d8248be1e",
+        "label": "LOD right"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--civic_hall-254d2368b8ca-surface-field-v1\\candidates\\renders\\alpine\\civic_hall\\lod-back.png",
+        "sha256": "b5218a1ec00794667045c5a583869b16455060a325beb22ecb7877893862b0e2",
+        "label": "LOD back"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--civic_hall-254d2368b8ca-surface-field-v1\\candidates\\renders\\alpine\\civic_hall\\lod-left.png",
+        "sha256": "238d5f697dc91b082102bb989fd84c26c35af204ba3444e0722e6b77319024b3",
+        "label": "LOD left"
+      },
+      {
+        "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\hybrid-batch\\alpine--civic_hall-254d2368b8ca-surface-field-v1\\candidates\\renders\\alpine\\civic_hall\\lod-iso.png",
+        "sha256": "2b82602e6b2ff94b421b59a28fd6962c6afd1d86db2d73b44c1a75ac09c128f3",
+        "label": "LOD iso"
+      }
+    ],
+    "content": "Unmodified CPU render images composed with labels for visual comparison only"
+  }
+}

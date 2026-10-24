@@ -1,0 +1,212 @@
+{
+  "status": "local_repair_candidate_pending_visual_review",
+  "source": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\expansion--shop_2-a014-pixal-mv-1024-29495.glb",
+    "sha256": "51c40f4ad89666e347fd818e34b1d13397ff31e35fe2f3796df7f9901f17fb3f",
+    "bytes": 37701368
+  },
+  "orientation": {
+    "enabled": true,
+    "candidate_degrees": 0.35165871940087984,
+    "applied_degrees": 0.35165871940087984,
+    "underside_area": 0.5305036098359504,
+    "normal_agreement": 0.989106704467109,
+    "yaw_degrees": 180,
+    "pitch_degrees": 0,
+    "roll_degrees": 0,
+    "uniform_scale": 1.1606179192201789
+  },
+  "configuration": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\source-repairs-planned\\expansion\\shop_2\\51c40f4ad89666e3\\right-upper-config.json",
+    "sha256": "e33b9d87308d6205d4e9b57e828a8feea994116e43ca9098f331a81ed0d36e52",
+    "bytes": 1191
+  },
+  "reviewEvidence": [
+    {
+      "path": "reports/source-rejections/expansion/shop_2/51c40f4ad89666e3/rejection.json",
+      "sha256": "85951be629333b4cda85324525ff57ac1e6c92a1c00da767570c2709f88e83fb"
+    }
+  ],
+  "measurement": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\core-surface-measurements\\expansion\\shop_2\\51c4-right-upper\\surface-measurements.json",
+    "sha256": "1c4f5e489003dc0fc8b7e4b7509ccb047e2f908f572e391620a639190cc8bbf7",
+    "bytes": 154735
+  },
+  "method": "Only explicitly measured and visually reviewed local gaps are closed from adjoining original surface and UV samples with0.006 inward closure. Original vertices, faces and image pixels are preserved. No replacement building or generated texture. See configuration and frozen prior review evidence for exact allowed regions.",
+  "repairs": [
+    {
+      "name": "Right upper brick strip beside rear window",
+      "specification": {
+        "name": "Right upper brick strip beside rear window",
+        "u": [
+          0,
+          1,
+          0
+        ],
+        "v": [
+          0,
+          0,
+          1
+        ],
+        "n": [
+          1,
+          0,
+          0
+        ],
+        "roi": [
+          0.26,
+          0.335,
+          0.473,
+          0.753
+        ],
+        "defectDepth": 0.374,
+        "donorDepth": 0.377,
+        "donorMaxDepth": 0.383,
+        "donorNormal": 0.7,
+        "color": "brick",
+        "gridStep": 0.0035,
+        "donorMargin": 0.025,
+        "flatPatchUV": true,
+        "donorMinRGB": 0.1,
+        "donorMaxColorRatio": 5
+      },
+      "missingSamples": 374,
+      "boundarySamples": 1147,
+      "sampledDepthRange": [
+        -0.37648797035217285,
+        0.3920326232910156
+      ],
+      "inwardClosureThickness": 0.006,
+      "outerSurfaceUnchanged": true,
+      "newVertices": 1550,
+      "newTriangles": 3084
+    }
+  ],
+  "originalTriangles": 944289,
+  "originalVerticesMoved": 0,
+  "originalTrianglesDeleted": 0,
+  "artifactCleanup": {
+    "method": "No original faces deleted. Only the explicitly reviewed bounded source-surface regions in the configuration may receive additional triangles.",
+    "deletedTriangles": 0
+  },
+  "newTriangles": 3084,
+  "newVertices": 1550,
+  "inverseSimilarityError": 9.139946888225836e-08,
+  "normalizedOutput": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-expansion-shop2-51c4-right-upper\\repaired-normalized.glb",
+    "sha256": "61c753c85c0bfd6ebb2223a26e8a61a53c7038a16af254af9a1a0d680c218d74",
+    "bytes": 38806400
+  },
+  "nativeOutput": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-expansion-shop2-51c4-right-upper\\repaired-native.glb",
+    "sha256": "81fc194f7005a1e1f76ee459e725fc25063c6d89b3cb17e9329f776a2f400c77",
+    "bytes": 38814148
+  },
+  "renders": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-expansion-shop2-51c4-right-upper\\repaired-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-expansion-shop2-51c4-right-upper\\repaired-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-expansion-shop2-51c4-right-upper\\repaired-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-expansion-shop2-51c4-right-upper\\repaired-left.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-expansion-shop2-51c4-right-upper\\repaired-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.46416762471199036,
+        -0.4221758544445038,
+        0.0
+      ],
+      "max": [
+        0.46416762471199036,
+        0.4221758544445038,
+        1.0
+      ]
+    },
+    "triangles": 947373,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "reviewImages": [
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\expansion\\shop_2\\81fc194f7005a1e1\\repaired-front.png",
+      "sha256": "5cf0aa1b35783acbcc1d28154734489248f9cb228fab26a2f0c6782a62549fe7",
+      "bytes": 247290
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\expansion\\shop_2\\81fc194f7005a1e1\\repaired-right.png",
+      "sha256": "771a494ecaa152ae98a208963bae921a6aad4f568bf635493f3a719610c25756",
+      "bytes": 233715
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\expansion\\shop_2\\81fc194f7005a1e1\\repaired-back.png",
+      "sha256": "32d4b01a9c11ba2a73251f99ef122ca09b9dd2ef5da5d42a6b58fc1aaf3a86ef",
+      "bytes": 254069
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\expansion\\shop_2\\81fc194f7005a1e1\\repaired-left.png",
+      "sha256": "030f12b6403362d032dd8109af821bca440b6eba919a6617117103ab93fe0f52",
+      "bytes": 235458
+    },
+    {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\expansion\\shop_2\\81fc194f7005a1e1\\repaired-iso.png",
+      "sha256": "590c12612d937e048f33acdc87ba05d569f86455113578f95c534184918cc505",
+      "bytes": 340116
+    }
+  ],
+  "processingTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\f21173ee639bce54c9c7094ef6121aa6aea7401fc45edfff9d221c65a107ae79-repair_bounded_source_surface.py",
+    "sha256": "f21173ee639bce54c9c7094ef6121aa6aea7401fc45edfff9d221c65a107ae79",
+    "bytes": 13325
+  },
+  "completedAt": "2026-10-24T05:16:30.218949+00:00",
+  "sourcePreservation": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\expansion\\shop_2\\81fc194f7005a1e1\\preservation.json",
+    "sha256": "34f73e2386f0f1445d407a1d4b8846d6efd02bfdfbef6249883fcafd535a7f3f",
+    "bytes": 1100
+  },
+  "originalRepairReceipt": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-expansion-shop2-51c4-right-upper\\repair.json",
+    "sha256": "e5810a62a1c973cf60118a28cd788630a02dcc1ee1a3035d0180adc1bdec3694",
+    "bytes": 6921
+  },
+  "sourceVisualReview": {
+    "status": "reviewed_for_derivative_processing",
+    "note": "Actually inspected all five repaired-source material views against the reviewed reference and retained raw/final evidence. The tall right upper brick gap beside the rear window is closed with warm-brick donor color and continuous wall silhouette. Only3084faces added in one measured region; original944289triangles retain exact positions,UVs and embedded images. Minor isolated sill/cornice/base and rooftop trim notches, narrow window seams and simplified opaque shop glazing remain phone-scale acceptable imperfections. One mobile derivation only; final five and256px approval still required.",
+    "views": [
+      "front",
+      "right",
+      "back",
+      "left",
+      "iso"
+    ],
+    "reviewedAt": "2026-10-24T05:17:28.244548+00:00",
+    "existingFrozenReview": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\expansion\\shop_2\\81fc194f7005a1e1\\visual-review.json",
+      "sha256": "1ba0bddfe5570f03b692ba81eed86c6a077976995936330d471c8d83d035a985",
+      "bytes": 2672
+    },
+    "originalMalformedViewListReceipt": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\expansion\\shop_2\\81fc194f7005a1e1\\repair.json",
+      "sha256": "c89eaab77d9eb98b2c2cffd1a626abf8ff122102bcb97945696f9ac7256f66d2",
+      "bytes": 9478
+    },
+    "reviewViewNameNormalizationOnly": true
+  }
+}

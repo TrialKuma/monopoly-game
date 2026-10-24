@@ -1,0 +1,62 @@
+{
+  "status": "regional_priority_applied_after_completed_job",
+  "updatedAt": "2026-10-23T22:55:35.6074067Z",
+  "previousControllerPids": [
+    32020,
+    38152
+  ],
+  "forcedTermination": false,
+  "completedBoundaryJob": "compact--villa_1-a011",
+  "completedBoundarySource": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\compact--villa_1-a011-pixal-mv-1024-9247.glb",
+    "sha256": "783d10287c56b19d023fa035c6cd92092004a65f45be69ff484501f1354e9e7c",
+    "bytes": 43830328
+  },
+  "priorControllerFinalLines": [
+    "QUEUE_STATUS {\"raw_ready\": 80, \"ready\": 34, \"retry_pending\": 31, \"source_revision_needed\": 2}",
+    "RAW_JOB_START compact villa_1 compact--villa_1-a011",
+    "RAW_JOB_END compact villa_1 raw_ready",
+    "QUEUE_STOP_REQUESTED"
+  ],
+  "newControllerPid": 5016,
+  "executable": "C:\\Users\\A\\.codex\\worktrees\\0b69\\厂长\\grande-art-lab\\source\\experimental\\pixal-env\\Scripts\\python.exe",
+  "arguments": [
+    "-B",
+    "-u",
+    "H:\\代码项目\\monopoly\\art\\full-ai-city\\tools\\run_raw_queue.py",
+    "--watch"
+  ],
+  "log": "H:\\代码项目\\monopoly\\art\\full-ai-city\\logs\\resume-regional-20261024-065535-raw.log",
+  "stderr": "H:\\代码项目\\monopoly\\art\\full-ai-city\\logs\\resume-regional-20261024-065535-raw.err.log",
+  "toolSha256": "ac2cdf5ffd8084ab4bb3d0dbfd9578cd2db19b9db4b55559da7daf39c4a92c8c",
+  "controllerDuplicationCheck": "no existing Python run_raw_queue process; existing OS controller lock remains authoritative",
+  "parametersResourceGuardsRetryBudgetChanged": false,
+  "verifiedControllerProcesses": [
+    {
+      "pid": 5016,
+      "role": "venv launcher"
+    },
+    {
+      "pid": 16268,
+      "role": "Python interpreter child",
+      "parentPid": 5016
+    }
+  ],
+  "verifiedNextJob": {
+    "region": "compact",
+    "asset": "card_pavilion",
+    "class": "public"
+  },
+  "currentResourceWait": {
+    "reason": "fine_voxel_cpu_residency",
+    "workers": [
+      {
+        "pid": 31908,
+        "script": "H:\\代码项目\\monopoly\\art\\full-ai-city\\tools\\process_lod.py",
+        "reason": "fine_voxel_cpu_residency"
+      }
+    ],
+    "generationStarted": false,
+    "inferenceAttemptCreated": false
+  }
+}

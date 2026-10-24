@@ -1,0 +1,34 @@
+# Raw neural meshes, temporary simplification/bake data and diagnostic logs.
+raw/
+source/
+cache/
+pixal-cache/
+work/
+experiments/**/*.glb
+experiments/**/*.pt
+experiments/**/*.npz
+experiments/**/*.blend
+blender/
+blender-far/
+# Frozen reviewed pixels live under reviews/ and reviews-far/.
+renders/
+renders-far/
+packed/
+candidates/
+candidates-far/
+candidate-history/
+component-candidates/
+native-mobile/**/*.pt
+native-mobile/**/*.glb
+native-mobile/**/*.npz
+lod-queue/
+hybrid-queue/
+repair-low-queue/
+legacy-repair-queue/
+resource-locks/
+queue/controller.lock
+*.approval.lock
+**/__pycache__/
+**/*.log
+**/*.jsonl
+references/**/*-v[0-9][0-9].png

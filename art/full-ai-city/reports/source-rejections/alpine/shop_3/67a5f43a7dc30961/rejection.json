@@ -1,0 +1,48 @@
+{
+  "status": "rejected_native_export_source",
+  "region": "alpine",
+  "asset": "shop_3",
+  "reviewer": "progression_design",
+  "source": {
+    "path": "art/full-ai-city/source/alpine--shop_3-a002-pixal-mv-1024-22423.glb",
+    "sha256": "67a5f43a7dc30961aae5c01fa0bfe1103e6b071daf143a129dc1adf9149989e5",
+    "bytes": 43087092
+  },
+  "sourceLevel": "Native 1M export; no untouched decoder attribution is made.",
+  "inferenceReport": {
+    "path": "art/full-ai-city/reports/source-rejections/alpine/shop_3/67a5f43a7dc30961/alpine--shop_3-a002-pixal-mv-1024-22423.json",
+    "sha256": "c639e43d7241a557a17a4ed95b523f2844e3bb796848527866cb1169f0a9cd9f",
+    "bytes": 9571
+  },
+  "inputReference": {
+    "path": "art/full-ai-city/reports/source-rejections/alpine/shop_3/67a5f43a7dc30961/input-reference.json",
+    "sha256": "b5415d5b1160f875b2707c51712acb82057c9ca52d7f56c1f8bd7f809318399c",
+    "bytes": 4417
+  },
+  "diagnostic": {
+    "path": "art/full-ai-city/reports/source-rejections/alpine/shop_3/67a5f43a7dc30961/diagnostic.json",
+    "sha256": "1930fc2f5f9ce2de059871bcd74fe97221f2c1cb6197cf4db4481d4373ee6b67",
+    "bytes": 2017
+  },
+  "evidence": [
+    {
+      "path": "art/full-ai-city/reports/source-rejections/alpine/shop_3/67a5f43a7dc30961/raw-front.png",
+      "sha256": "9886bc146e199b807a5a02f91c28a9d735067268d66340dbe9275cebff88bc04",
+      "bytes": 224173
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/alpine/shop_3/67a5f43a7dc30961/raw-iso.png",
+      "sha256": "09374d7c3ada3a36ec30d8d29df13da16187f98f04e105ff713d48b40ee80022",
+      "bytes": 269226
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/alpine/shop_3/67a5f43a7dc30961/raw-grey-front-iso.png",
+      "sha256": "3742d56b3ab71867c1e5947353bdf43e79313428193efe4105ed3267b2be749f",
+      "bytes": 742994
+    }
+  ],
+  "finding": "Actually inspected original native-export front/iso and neutral grey front-iso at 1024px. Repeated open solid-wall bands run above/below second-floor side windows, between third-floor windows, and below upper balcony supports; these remain in grey geometry. The source also has a stepped roof plane inconsistent with a single continuous gable and a broad torn ground sheet. This is the second same-reference source failure and is not accepted as trim simplification. No untouched decoder attribution is made.",
+  "decision": "Second same-reference seed rejected. Hold the key and use the reviewed revision2 reference with one continuous roof, no chimney, and explicit continuous solid plaster bands around windows. Do not retry the old input again.",
+  "sourceUnchanged": true,
+  "notFinalCandidateReview": true
+}

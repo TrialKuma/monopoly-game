@@ -1,0 +1,294 @@
+{
+  "status": "exported_pending_visual_review",
+  "createdAt": "2026-10-23T06:43:34.098958+00:00",
+  "region": "expansion",
+  "asset": "builders_guild",
+  "source": {
+    "rawGLB": {
+      "path": "art/full-ai-city/source/expansion--builders_guild-a001-pixal-mv-1024-9247.glb",
+      "sha256": "f237bcc0a928abbbc82bfa1d197f64c6bcd975ebab3f983acff20bfa31de6626",
+      "bytes": 40259016
+    }
+  },
+  "inferenceReport": {
+    "path": "art/full-ai-city/reports/retexture/expansion/builders_guild/a70799dd592a0a7d-provenance/a073b8e719b2e4442feeaaef4e4ba12bd079a721bbec784ab8bf3b6659ea1c56-expansion--builders_guild-a001-pixal-mv-1024-9247.json",
+    "sha256": "a073b8e719b2e4442feeaaef4e4ba12bd079a721bbec784ab8bf3b6659ea1c56",
+    "bytes": 7811
+  },
+  "reference": {
+    "path": "art/full-ai-city/reports/retexture/expansion/builders_guild/a70799dd592a0a7d-provenance/291a8561038acbbfae622cb65ce6feee56ad15ee9b8301bdbf1ef7f98eaa3b14-reference.json",
+    "sha256": "291a8561038acbbfae622cb65ce6feee56ad15ee9b8301bdbf1ef7f98eaa3b14",
+    "bytes": 4189
+  },
+  "processingTool": {
+    "path": "art/full-ai-city/reports/tool-snapshots/87d7e56ebee18c1b6f25239c296264a2ec598a9c9a5df37273d9cf9b539f09d2-reuv_expansion_builders.py",
+    "sha256": "87d7e56ebee18c1b6f25239c296264a2ec598a9c9a5df37273d9cf9b539f09d2",
+    "bytes": 5468
+  },
+  "assumedCameras": true,
+  "cameraCalibration": "assumed_standard_orbit_not_measured",
+  "nativePipeline": "Pixal3DMVImageTo3DPipeline.run_mv",
+  "nativeResolution": 1024,
+  "seed": 9247,
+  "geometryOrigin": "Only the actual neural source reduced and rebaked; no authored substitute geometry or manually constructed surfaces",
+  "orientation": {
+    "up": "Y",
+    "front": "+Z",
+    "groundY": 0,
+    "maxEdge": 1
+  },
+  "requestedTriangles": 30000,
+  "limitations": [
+    "Assumed camera reference reconstruction, not exact measured architecture",
+    "Final candidate requires actual rendered visual approval"
+  ],
+  "animation": null,
+  "processingComplete": true,
+  "lod": "near",
+  "processingRevision": 0,
+  "derivation": {
+    "rawTriangles": 988116,
+    "weldedTriangles": 986427,
+    "remeshedTriangles": 3026824,
+    "voxelSize": 0.003,
+    "finalTriangles": 29989,
+    "atlasArea": 0.3044384790953611,
+    "singleReductionPass": true,
+    "inheritedUVRemovedBeforeReduction": true,
+    "sourceMaterialsUntouched": true,
+    "uvUnwrap": {
+      "angleDegrees": 66.0,
+      "islandMargin": 0.0004,
+      "marginMethod": "FRACTION",
+      "nominalMarginPixels": 0.4096
+    }
+  },
+  "bake": {
+    "method": "CPU closest-original-triangle projection with float64 barycentric original UV and bilinear original texture sampling; geometric normals retained, no directional normal-map rebake or invented color",
+    "coveredAtlasPixels": 319505,
+    "nearestLookupSuccessFraction": 1.0,
+    "notRayCoverage": true,
+    "sourceDistanceQuantiles": [
+      0.00016942180809564888,
+      0.0008976397570222611,
+      0.001521016783080997,
+      0.0062698498368263245
+    ],
+    "sourceDistanceQuantileLevels": [
+      0.5,
+      0.95,
+      0.99,
+      1
+    ],
+    "overTwoPercentMaxEdge": 0.0,
+    "distanceReviewRequired": false,
+    "visualGeometryReviewRequired": true,
+    "barycentricOriginalRange": [
+      -5.735931491639007e-05,
+      1.0
+    ],
+    "degenerateOrInvalidBarycentricCount": 0,
+    "closestSourceVertexFallbackFraction": 0.0,
+    "barycentricPointReconstructionErrorQuantiles": [
+      5.208990107549088e-09,
+      4.145832830061431e-08,
+      5.444212914450964e-07
+    ],
+    "atlasOverlapPixelsWithDifferentSurface": 242,
+    "seconds": 6.556236300006276,
+    "maps": [
+      {
+        "role": "base",
+        "size": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "role": "orm",
+        "size": [
+          512,
+          512
+        ]
+      }
+    ],
+    "repairSourceNote": "Original unmodified neural source and exact current mobile geometry preserved. Only UV layout and source-derived texture transfer changed in this pass."
+  },
+  "quantization": {
+    "source": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\expansion-builders-reuv66\\narrow-margin-candidates\\expansion\\builders_guild.glb",
+    "output": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\expansion-builders-reuv66\\narrow-margin-candidates\\expansion\\builders_guild.glb",
+    "sourceBytes": 1846172,
+    "outputBytes": 1347232,
+    "sourceSha256": "19665330a7254aef7e9ea74dcea8a68c01d85567069bd944532bd14120827764",
+    "outputSha256": "a70799dd592a0a7d59fa8744ba50684cccb469ca56cc1d183c9c44b91b8f948d",
+    "positionFaceAndTextureBytesUnchanged": true,
+    "attributes": [
+      {
+        "accessor": 1,
+        "semantic": "NORMAL",
+        "count": 41591,
+        "maximumAngularErrorDegrees": 0.37234277515904757
+      },
+      {
+        "accessor": 2,
+        "semantic": "TEXCOORD_0",
+        "count": 41591,
+        "maximumUVError": 7.629404535802742e-06,
+        "maximumTexelErrorAt1024": 0.007812510244662008
+      }
+    ]
+  },
+  "processedCandidate": {
+    "path": "art/full-ai-city/work/expansion-builders-reuv66/narrow-margin-candidates/expansion/builders_guild.glb",
+    "sha256": "a70799dd592a0a7d59fa8744ba50684cccb469ca56cc1d183c9c44b91b8f948d",
+    "bytes": 1347232
+  },
+  "glbValidation": {
+    "version": 2,
+    "triangles": 29989,
+    "meshes": 1,
+    "materials": 1,
+    "images": 2,
+    "all_primitives_have_uv": true,
+    "animations": [],
+    "all_images_embedded": true,
+    "external_buffers": []
+  },
+  "triangles": 29989,
+  "renderedCandidate": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\expansion-builders-reuv66\\narrow-margin-candidates\\renders\\expansion\\builders_guild\\lod-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\expansion-builders-reuv66\\narrow-margin-candidates\\renders\\expansion\\builders_guild\\lod-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\expansion-builders-reuv66\\narrow-margin-candidates\\renders\\expansion\\builders_guild\\lod-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\expansion-builders-reuv66\\narrow-margin-candidates\\renders\\expansion\\builders_guild\\lod-left.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\expansion-builders-reuv66\\narrow-margin-candidates\\renders\\expansion\\builders_guild\\lod-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.5013723373413086,
+        -0.3970875144004822,
+        0.0004546786949504167
+      ],
+      "max": [
+        0.5004016160964966,
+        0.3959640562534332,
+        0.9039900898933411
+      ]
+    },
+    "triangles": 29989,
+    "textureSizes": [
+      {
+        "name": "expansion__builders_guild__nearest_base",
+        "size": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "name": "expansion__builders_guild__nearest_orm",
+        "size": [
+          512,
+          512
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "renderedSource": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\expansion\\builders_guild\\raw-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\renders\\expansion\\builders_guild\\raw-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.5,
+        -0.395719051361084,
+        0.0
+      ],
+      "max": [
+        0.5,
+        0.395719051361084,
+        0.9041546583175659
+      ]
+    },
+    "triangles": 988116,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "bounds": {
+    "min": [
+      -0.5013723373413086,
+      0.0004546786949504167,
+      -0.3959640562534332
+    ],
+    "max": [
+      0.5004016160964966,
+      0.9039900898933411,
+      0.3970875144004822
+    ],
+    "coordinateSystem": "GLTF Y-up; +Z front"
+  },
+  "textureSizes": [
+    {
+      "name": "expansion__builders_guild__nearest_base",
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "name": "expansion__builders_guild__nearest_orm",
+      "size": [
+        512,
+        512
+      ]
+    }
+  ],
+  "rawSourceUnchanged": true,
+  "completedAt": "2026-10-23T07:46:38.420073+00:00",
+  "textureOnlyReprocessing": {
+    "sourceCandidate": {
+      "path": "art/full-ai-city/work/expansion-builders-reuv66/prior-static-source/94d00f6a25a76018-builders_guild.glb",
+      "sha256": "94d00f6a25a760186e644e1b18b561841c91d9319c42bd2a1e29aec56f95e87c",
+      "bytes": 1517764
+    },
+    "sourceProcessingReport": {
+      "path": "art/full-ai-city/reports/retexture/expansion/builders_guild/a70799dd592a0a7d-provenance/d0e2a3cecdaad240f9956e2e0fc528e9d5f28ef2ac47b8121945ff1a086fa8a9-builders_guild.json",
+      "sha256": "d0e2a3cecdaad240f9956e2e0fc528e9d5f28ef2ac47b8121945ff1a086fa8a9",
+      "bytes": 7508
+    },
+    "sourceBlend": {
+      "path": "art/full-ai-city/blender/expansion/builders_guild.blend",
+      "sha256": "4be55b7be2d1d2e5211df1fae61b860bab9c291158e777ee9330e2fbfe8ae208",
+      "bytes": 52668935
+    },
+    "positionsUnchanged": true,
+    "faceIndicesUnchanged": true,
+    "additionalRemeshOrSimplification": false,
+    "exportedTriangleCornerPositionsExactlyUnchanged": true
+  },
+  "textureTransferTool": {
+    "path": "art/full-ai-city/reports/tool-snapshots/a2cb99c96fb8df396f16580a88a7c6151104ee3c927fe76cd161ee2d27bdfa42-bake_nearest_surface.py",
+    "sha256": "a2cb99c96fb8df396f16580a88a7c6151104ee3c927fe76cd161ee2d27bdfa42",
+    "bytes": 7317
+  }
+}

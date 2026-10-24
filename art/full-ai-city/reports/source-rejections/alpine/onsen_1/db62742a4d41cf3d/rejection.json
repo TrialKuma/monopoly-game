@@ -1,0 +1,52 @@
+{
+  "status": "rejected_native_export_source",
+  "region": "alpine",
+  "asset": "onsen_1",
+  "reviewer": "/root/asset_production",
+  "recordedAtUtc": "2026-10-23T21:51:07.135754+00:00",
+  "source": {
+    "path": "art/full-ai-city/source/alpine--onsen_1-a003-pixal-mv-1024-29473.glb",
+    "sha256": "db62742a4d41cf3d3e25cc733132aaa3adf10aa4969a472a5ca2337bc8abcba8",
+    "bytes": 41085524
+  },
+  "sourceLevel": "Native 1M export; no untouched decoder attribution is made.",
+  "inferenceReport": {
+    "path": "art/full-ai-city/reports/source-rejections/alpine/onsen_1/db62742a4d41cf3d/alpine--onsen_1-a003-pixal-mv-1024-29473.json",
+    "sha256": "02f4657f5a40f73e56ad860538b7d9f227b57689c26e8d4c3f92411e4377b09c",
+    "bytes": 10656
+  },
+  "inputReference": {
+    "path": "art/full-ai-city/reports/source-rejections/alpine/onsen_1/db62742a4d41cf3d/input-reference.json",
+    "sha256": "6bdb2e11c72c8e90408a191667da3fb0ecee382aac9b95627a5f9247219d8d62",
+    "bytes": 4422
+  },
+  "diagnostic": null,
+  "diagnosticTool": null,
+  "sourceComparisonReport": {
+    "path": "art/full-ai-city/reports/source-rejections/alpine/onsen_1/db62742a4d41cf3d/source-comparison-processing.json",
+    "sha256": "5c98968521f38916b82d291700b6d680b8db99a5ccaa5b37609e4a75f16987a0",
+    "bytes": 19401
+  },
+  "sourceViewEvidenceMode": "Explicitly selected existing renderedSource views; no additional or neutral render implied",
+  "evidence": [
+    {
+      "path": "art/full-ai-city/reports/source-rejections/alpine/onsen_1/db62742a4d41cf3d/raw-front.png",
+      "sha256": "c4875bbe06d04a02fd528c17af0dd8b768277160e5077032f212e1f80a0acf67",
+      "bytes": 178892
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/alpine/onsen_1/db62742a4d41cf3d/raw-iso.png",
+      "sha256": "e3e04ecd5cfc5b97b6c9fc691f088080c60f01bee128799be7528403ea4eb223",
+      "bytes": 200936
+    }
+  ],
+  "finding": "Actually inspected the original triptych and exact final five-side material sheet, including existing source front/isometric. The second source still has several high-contrast missing roof-tile patches immediately left of the front dormer and a broad black missing infill beside its window; those interruptions remain clearly visible in the small colored overview. Rear main wall and pool are coherent, but the front roof/gable is not ready for mobile approval. Preserve source/field and wait for the ongoing original decoder versus native-export diagnosis before deciding a bounded repair or reference change. No third same-reference seed and no extra source render.",
+  "decision": "Hold exact source; wait for original-decoder versus native-export diagnosis. No third old-reference seed.",
+  "sourceUnchanged": true,
+  "notFinalCandidateReview": true,
+  "freezeTool": {
+    "path": "art/full-ai-city/reports/tool-snapshots/616860a00b28e670e1219d64c6cb5dad17f0946420568f786e80b6d789fb4a73-freeze_public_source_rejection.py",
+    "sha256": "616860a00b28e670e1219d64c6cb5dad17f0946420568f786e80b6d789fb4a73",
+    "bytes": 4304
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "status": "rejected_native_export_source",
+  "region": "alpine",
+  "asset": "shop_3",
+  "reviewer": "progression_design",
+  "source": {
+    "path": "art/full-ai-city/source/alpine--shop_3-a001-pixal-mv-1024-9247.glb",
+    "sha256": "95c24c77ec558f48b56d609342ac43732389c6f425af1d176dc6d305170bde2d",
+    "bytes": 42476560
+  },
+  "sourceLevel": "Native 1M export; no untouched decoder attribution is made.",
+  "inferenceReport": {
+    "path": "art/full-ai-city/reports/source-rejections/alpine/shop_3/95c24c77ec558f48/alpine--shop_3-a001-pixal-mv-1024-9247.json",
+    "sha256": "a853e750ca772d7f7cffb3a736917fc8ff23e0dd7f85c248e0464fb40fe44df9",
+    "bytes": 9548
+  },
+  "inputReference": {
+    "path": "art/full-ai-city/reports/source-rejections/alpine/shop_3/95c24c77ec558f48/input-reference.json",
+    "sha256": "b5415d5b1160f875b2707c51712acb82057c9ca52d7f56c1f8bd7f809318399c",
+    "bytes": 4417
+  },
+  "diagnostic": {
+    "path": "art/full-ai-city/reports/source-rejections/alpine/shop_3/95c24c77ec558f48/diagnostic.json",
+    "sha256": "cd53425224dd87c38996a3c58859f487df7c43a1c047f6bcf08894ec0a6f100b",
+    "bytes": 2015
+  },
+  "evidence": [
+    {
+      "path": "art/full-ai-city/reports/source-rejections/alpine/shop_3/95c24c77ec558f48/raw-front.png",
+      "sha256": "d075bb6bc31eeb2ebf1d215a518236c011a47327a897fb2dcd13ae3470a8b60b",
+      "bytes": 209429
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/alpine/shop_3/95c24c77ec558f48/raw-iso.png",
+      "sha256": "68a1d482518377027da6b309ee3e7ce2824193a46eada8792d8fe62d6be6efa1",
+      "bytes": 250873
+    },
+    {
+      "path": "art/full-ai-city/reports/source-rejections/alpine/shop_3/95c24c77ec558f48/raw-grey-front-iso.png",
+      "sha256": "13145d61dc3a628d360c8ac0aa77a8a4b2bb6fec70bf1de5c8fea0a15623de58",
+      "bytes": 704647
+    }
+  ],
+  "finding": "Actual source front and isometric images plus neutral grey front-isometric diagnostic show broad missing wall strips beside the third-floor balcony and above and below second-floor windows, with a smaller vertical door-side opening. These are geometrical discontinuities visible at normal building scale, not dark glass or only a final low-poly texture defect. The native 1M export is unusable; untouched decoder was not audited for this asset.",
+  "decision": "One independent same-reference seed. If the second attempt repeats a major defect, revise the reference geometry consistency before further inference.",
+  "sourceUnchanged": true,
+  "notFinalCandidateReview": true
+}

@@ -1,0 +1,626 @@
+{
+  "status": "exported_pending_visual_review",
+  "createdAt": "2026-10-23T11:20:14.955519+00:00",
+  "region": "alpine",
+  "asset": "hotel_3",
+  "source": {
+    "rawGLB": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\source\\alpine--hotel_3-a003-pixal-mv-1024-30413.glb",
+      "sha256": "5655b93de6f940071ba5bb9c72c4fd889cf4d935acf1afb033431f9f6c9ddb1c",
+      "bytes": 43933120
+    }
+  },
+  "inferenceReport": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\alpine--hotel_3-a003\\alpine--hotel_3-a003-pixal-mv-1024-30413.json",
+    "sha256": "0d5cd7153c138b3d03f4b636f7ba3447338408d8369e17e3058bf26519509c74",
+    "bytes": 9915
+  },
+  "reference": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\inputs\\alpine\\hotel_3\\d1380e42237fa135\\reference.json",
+    "sha256": "e52738092006b1977da406add6ed2a39a480c4d99fafdb9e06a683f6083bad1c",
+    "bytes": 4413
+  },
+  "processingTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\d1befe53381b9186da4b840298fc1d6b373524437790091b7f6e296bfcbf771b-process_lod.py",
+    "sha256": "d1befe53381b9186da4b840298fc1d6b373524437790091b7f6e296bfcbf771b",
+    "bytes": 27109
+  },
+  "assumedCameras": true,
+  "cameraCalibration": "assumed_standard_orbit_not_measured",
+  "nativePipeline": "Pixal3DMVImageTo3DPipeline.run_mv",
+  "nativeResolution": 1024,
+  "seed": 30413,
+  "geometryOrigin": "Actual native three-view neural building with explicitly recorded bounded local repairs; localSurfaceRepair.method and face counts disclose whether these include boundary patches or a small mechanical connector. Followed by source-derived remeshing and texture transfer. No replacement building.",
+  "orientation": {
+    "up": "Y",
+    "front": "+Z",
+    "groundY": 0,
+    "maxEdge": 1
+  },
+  "requestedTriangles": 45000,
+  "limitations": [
+    "Assumed camera reference reconstruction, not exact measured architecture",
+    "Final candidate requires actual rendered visual approval"
+  ],
+  "animation": null,
+  "processingComplete": true,
+  "lod": "near",
+  "processingRevision": 0,
+  "localSurfaceRepair": {
+    "source": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\repair-alpine-hotel3-a003-v2\\repaired-native.glb",
+      "sha256": "ab8842a43a0d54b8d8a8acc266994e280fbc7589d9561efd709cc98a47f9e7e2",
+      "bytes": 46882232
+    },
+    "receipt": {
+      "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\local-repairs\\alpine\\hotel_3\\ab8842a43a0d54b8\\repair.json",
+      "sha256": "900ac53ddfa2bf43d5085b22507bd5a34bed8c84638bc49f94dafad9915d1f08",
+      "bytes": 14532
+    },
+    "method": "Only seven bounded facade gaps confirmed in original gray renders and ray measurements are closed from adjoining original plaster samples. All open balconies, doors, windows, source vertices, source faces and image pixels remain unchanged. Local surfaces reuse original plaster UV samples with 0.006 inward closure; no replacement building or new texture.",
+    "newTriangles": 22928,
+    "newVertices": 11490,
+    "originalVerticesMoved": 0,
+    "originalTrianglesDeleted": 0,
+    "regions": [
+      {
+        "name": "Front attic left closed plaster infill",
+        "specification": {
+          "name": "Front attic left closed plaster infill",
+          "u": [
+            1,
+            0,
+            0
+          ],
+          "v": [
+            0,
+            0,
+            1
+          ],
+          "n": [
+            0,
+            -1,
+            0
+          ],
+          "roi": [
+            -0.29,
+            -0.16,
+            0.675,
+            0.774
+          ],
+          "defectDepth": 0.1,
+          "donorDepth": 0.21,
+          "donorMaxDepth": 0.25,
+          "donorNormal": 0.65,
+          "color": "plaster"
+        },
+        "missingSamples": 595,
+        "boundarySamples": 140,
+        "sampledDepthRange": [
+          -2.0,
+          0.342157244682312
+        ],
+        "inwardClosureThickness": 0.006,
+        "outerSurfaceUnchanged": true,
+        "newVertices": 1478,
+        "newTriangles": 2948
+      },
+      {
+        "name": "Front upper floor left window header strip",
+        "specification": {
+          "name": "Front upper floor left window header strip",
+          "u": [
+            1,
+            0,
+            0
+          ],
+          "v": [
+            0,
+            0,
+            1
+          ],
+          "n": [
+            0,
+            -1,
+            0
+          ],
+          "roi": [
+            -0.33,
+            -0.125,
+            0.589,
+            0.653
+          ],
+          "defectDepth": 0.1,
+          "donorDepth": 0.21,
+          "donorMaxDepth": 0.25,
+          "donorNormal": 0.65,
+          "color": "plaster"
+        },
+        "missingSamples": 493,
+        "boundarySamples": 160,
+        "sampledDepthRange": [
+          -0.2964365482330322,
+          0.3108586072921753
+        ],
+        "inwardClosureThickness": 0.006,
+        "outerSurfaceUnchanged": true,
+        "newVertices": 1396,
+        "newTriangles": 2784
+      },
+      {
+        "name": "Front upper floor central window header strips",
+        "specification": {
+          "name": "Front upper floor central window header strips",
+          "u": [
+            1,
+            0,
+            0
+          ],
+          "v": [
+            0,
+            0,
+            1
+          ],
+          "n": [
+            0,
+            -1,
+            0
+          ],
+          "roi": [
+            -0.109,
+            0.109,
+            0.6,
+            0.653
+          ],
+          "defectDepth": 0.1,
+          "donorDepth": 0.21,
+          "donorMaxDepth": 0.25,
+          "donorNormal": 0.65,
+          "color": "plaster"
+        },
+        "missingSamples": 622,
+        "boundarySamples": 107,
+        "sampledDepthRange": [
+          -0.2969489097595215,
+          0.3023477792739868
+        ],
+        "inwardClosureThickness": 0.006,
+        "outerSurfaceUnchanged": true,
+        "newVertices": 1672,
+        "newTriangles": 3328
+      },
+      {
+        "name": "Front upper floor right window header strip",
+        "specification": {
+          "name": "Front upper floor right window header strip",
+          "u": [
+            1,
+            0,
+            0
+          ],
+          "v": [
+            0,
+            0,
+            1
+          ],
+          "n": [
+            0,
+            -1,
+            0
+          ],
+          "roi": [
+            0.128,
+            0.33,
+            0.595,
+            0.653
+          ],
+          "defectDepth": 0.1,
+          "donorDepth": 0.21,
+          "donorMaxDepth": 0.25,
+          "donorNormal": 0.65,
+          "color": "plaster"
+        },
+        "missingSamples": 604,
+        "boundarySamples": 149,
+        "sampledDepthRange": [
+          -0.3126077651977539,
+          0.3124222755432129
+        ],
+        "inwardClosureThickness": 0.006,
+        "outerSurfaceUnchanged": true,
+        "newVertices": 1606,
+        "newTriangles": 3208
+      },
+      {
+        "name": "Front attic apex solid plaster",
+        "specification": {
+          "name": "Front attic apex solid plaster",
+          "u": [
+            1,
+            0,
+            0
+          ],
+          "v": [
+            0,
+            0,
+            1
+          ],
+          "n": [
+            0,
+            -1,
+            0
+          ],
+          "roi": [
+            -0.103,
+            0.111,
+            0.8,
+            0.855
+          ],
+          "defectDepth": 0.1,
+          "donorDepth": 0.22,
+          "donorMaxDepth": 0.25,
+          "donorNormal": 0.65,
+          "color": "plaster"
+        },
+        "missingSamples": 394,
+        "boundarySamples": 267,
+        "sampledDepthRange": [
+          -2.0,
+          0.34557855129241943
+        ],
+        "inwardClosureThickness": 0.006,
+        "outerSurfaceUnchanged": true,
+        "newVertices": 1204,
+        "newTriangles": 2400
+      },
+      {
+        "name": "Rear horizontal plaster seam under beam",
+        "specification": {
+          "name": "Rear horizontal plaster seam under beam",
+          "u": [
+            -1,
+            0,
+            0
+          ],
+          "v": [
+            0,
+            0,
+            1
+          ],
+          "n": [
+            0,
+            1,
+            0
+          ],
+          "roi": [
+            -0.36,
+            0.36,
+            0.413,
+            0.435
+          ],
+          "defectDepth": 0.1,
+          "donorDepth": 0.275,
+          "donorMaxDepth": 0.301,
+          "donorNormal": 0.65,
+          "color": "plaster"
+        },
+        "missingSamples": 1202,
+        "boundarySamples": 142,
+        "sampledDepthRange": [
+          -0.23207831382751465,
+          0.3135300874710083
+        ],
+        "inwardClosureThickness": 0.006,
+        "outerSurfaceUnchanged": true,
+        "newVertices": 3396,
+        "newTriangles": 6788
+      },
+      {
+        "name": "Rear attic apex solid plaster",
+        "specification": {
+          "name": "Rear attic apex solid plaster",
+          "u": [
+            -1,
+            0,
+            0
+          ],
+          "v": [
+            0,
+            0,
+            1
+          ],
+          "n": [
+            0,
+            1,
+            0
+          ],
+          "roi": [
+            -0.057,
+            0.044,
+            0.78,
+            0.83
+          ],
+          "defectDepth": 0.1,
+          "donorDepth": 0.275,
+          "donorMaxDepth": 0.315,
+          "donorNormal": 0.65,
+          "color": "plaster"
+        },
+        "missingSamples": 255,
+        "boundarySamples": 215,
+        "sampledDepthRange": [
+          -2.0,
+          0.3939051628112793
+        ],
+        "inwardClosureThickness": 0.006,
+        "outerSurfaceUnchanged": true,
+        "newVertices": 738,
+        "newTriangles": 1472
+      }
+    ]
+  },
+  "derivation": {
+    "rawTriangles": 995722,
+    "weldedTriangles": 1000980,
+    "remeshedTriangles": 15763560,
+    "voxelSize": 0.0015,
+    "finalTriangles": 44969,
+    "atlasArea": 0.43641087098552367,
+    "singleReductionPass": true,
+    "inheritedUVRemovedBeforeReduction": true,
+    "sourceMaterialsUntouched": true,
+    "uvUnwrap": {
+      "angleDegrees": 66.0,
+      "islandMargin": 2e-05,
+      "marginMethod": "SCALED",
+      "nominalMarginPixels": null
+    },
+    "repairedSourceTriangles": 1018650
+  },
+  "bake": {
+    "method": "CPU closest-original-triangle projection with float64 barycentric original UV and bilinear original texture sampling; geometric normals retained, no directional normal-map rebake or invented color",
+    "coveredAtlasPixels": 451921,
+    "nearestLookupSuccessFraction": 1.0,
+    "notRayCoverage": true,
+    "sourceDistanceQuantiles": [
+      0.00011733927385648713,
+      0.0007117100758478045,
+      0.0011463972507044671,
+      0.0042024715803563595
+    ],
+    "sourceDistanceQuantileLevels": [
+      0.5,
+      0.95,
+      0.99,
+      1
+    ],
+    "overTwoPercentMaxEdge": 0.0,
+    "distanceReviewRequired": false,
+    "visualGeometryReviewRequired": true,
+    "barycentricOriginalRange": [
+      -0.00021493815138997057,
+      1.0
+    ],
+    "degenerateOrInvalidBarycentricCount": 0,
+    "closestSourceVertexFallbackFraction": 0.0,
+    "barycentricPointReconstructionErrorQuantiles": [
+      8.461301231833595e-09,
+      4.50211071753034e-08,
+      3.644368278546423e-06
+    ],
+    "atlasOverlapPixelsWithDifferentSurface": 5637,
+    "seconds": 8.277849299978698,
+    "maps": [
+      {
+        "role": "base",
+        "size": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "role": "orm",
+        "size": [
+          512,
+          512
+        ]
+      }
+    ],
+    "repairSourceNote": "Texture transfer uses the explicitly repaired neural source, retaining original PBR and locally interpolated same-wall UV. Repair receipt and unchanged original inference source are preserved separately."
+  },
+  "textureTransferTool": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\reports\\tool-snapshots\\a2cb99c96fb8df396f16580a88a7c6151104ee3c927fe76cd161ee2d27bdfa42-bake_nearest_surface.py",
+    "sha256": "a2cb99c96fb8df396f16580a88a7c6151104ee3c927fe76cd161ee2d27bdfa42",
+    "bytes": 7317
+  },
+  "quantization": {
+    "source": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\alpine-hotel3-repaired-fine45k\\low\\alpine\\hotel_3.glb",
+    "output": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\alpine-hotel3-repaired-fine45k\\low\\alpine\\hotel_3.glb",
+    "sourceBytes": 2381792,
+    "outputBytes": 1695836,
+    "sourceSha256": "d912fd21d5e0c04797ab1cb8664457b734d8de33b1aefca8fb5e9a6b078f409f",
+    "outputSha256": "c8f0ef0fcc477d854cf1e4344c1c7706923905764e5cba23a070d4a9d2ba52dd",
+    "positionFaceAndTextureBytesUnchanged": true,
+    "attributes": [
+      {
+        "accessor": 1,
+        "semantic": "NORMAL",
+        "count": 57176,
+        "maximumAngularErrorDegrees": 0.3772228701526362
+      },
+      {
+        "accessor": 2,
+        "semantic": "TEXCOORD_0",
+        "count": 57176,
+        "maximumUVError": 7.629497305705613e-06,
+        "maximumTexelErrorAt1024": 0.007812605241042547
+      }
+    ]
+  },
+  "processedCandidate": {
+    "path": "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\alpine-hotel3-repaired-fine45k\\low\\alpine\\hotel_3.glb",
+    "sha256": "c8f0ef0fcc477d854cf1e4344c1c7706923905764e5cba23a070d4a9d2ba52dd",
+    "bytes": 1695836
+  },
+  "glbValidation": {
+    "version": 2,
+    "triangles": 44969,
+    "meshes": 1,
+    "materials": 1,
+    "images": 2,
+    "all_primitives_have_uv": true,
+    "animations": [],
+    "all_images_embedded": true,
+    "external_buffers": []
+  },
+  "triangles": 44969,
+  "renderedCandidate": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\alpine-hotel3-repaired-fine45k\\low\\renders\\alpine\\hotel_3\\lod-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\alpine-hotel3-repaired-fine45k\\low\\renders\\alpine\\hotel_3\\lod-right.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\alpine-hotel3-repaired-fine45k\\low\\renders\\alpine\\hotel_3\\lod-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\alpine-hotel3-repaired-fine45k\\low\\renders\\alpine\\hotel_3\\lod-left.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\alpine-hotel3-repaired-fine45k\\low\\renders\\alpine\\hotel_3\\lod-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.5006193518638611,
+        -0.4239251911640167,
+        0.00031716859666630626
+      ],
+      "max": [
+        0.4990369975566864,
+        0.42297059297561646,
+        0.9261874556541443
+      ]
+    },
+    "triangles": 44969,
+    "textureSizes": [
+      {
+        "name": "alpine__hotel_3__nearest_base",
+        "size": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "name": "alpine__hotel_3__nearest_orm",
+        "size": [
+          512,
+          512
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "renderedSource": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\alpine-hotel3-repaired-fine45k\\low\\renders\\alpine\\hotel_3\\raw-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\alpine-hotel3-repaired-fine45k\\low\\renders\\alpine\\hotel_3\\raw-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.5,
+        -0.4234306812286377,
+        0.0
+      ],
+      "max": [
+        0.5,
+        0.4234306812286377,
+        0.9265909790992737
+      ]
+    },
+    "triangles": 995722,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "renderedRepairedSource": {
+    "views": [
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\alpine-hotel3-repaired-fine45k\\low\\renders\\alpine\\hotel_3\\repaired-source-front.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\alpine-hotel3-repaired-fine45k\\low\\renders\\alpine\\hotel_3\\repaired-source-back.png",
+      "H:\\代码项目\\monopoly\\art\\full-ai-city\\work\\alpine-hotel3-repaired-fine45k\\low\\renders\\alpine\\hotel_3\\repaired-source-iso.png"
+    ],
+    "boundsBlender": {
+      "min": [
+        -0.5,
+        -0.4234306812286377,
+        0.0
+      ],
+      "max": [
+        0.5,
+        0.4234306812286377,
+        0.9265909790992737
+      ]
+    },
+    "triangles": 1018650,
+    "textureSizes": [
+      {
+        "name": "Image_0",
+        "size": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "name": "Image_1",
+        "size": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "renderer": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "bounds": {
+    "min": [
+      -0.5006193518638611,
+      0.00031716859666630626,
+      -0.42297059297561646
+    ],
+    "max": [
+      0.4990369975566864,
+      0.9261874556541443,
+      0.4239251911640167
+    ],
+    "coordinateSystem": "GLTF Y-up; +Z front"
+  },
+  "textureSizes": [
+    {
+      "name": "alpine__hotel_3__nearest_base",
+      "size": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "name": "alpine__hotel_3__nearest_orm",
+      "size": [
+        512,
+        512
+      ]
+    }
+  ],
+  "rawSourceUnchanged": true,
+  "completedAt": "2026-10-23T11:25:47.673805+00:00"
+}

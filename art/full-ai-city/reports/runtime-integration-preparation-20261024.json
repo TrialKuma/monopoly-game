@@ -1,0 +1,545 @@
+{
+  "createdAt": "2026-10-24T07:43:48.157171+00:00",
+  "status": "release_complete_and_index_verified_commit_push_authorized",
+  "runtimeVersion": "20261024-1",
+  "changes": [
+    "Game thumbnails route every real building to exact approved model iso renders; remove old SVG/legacy regional substitutes. Empty lot/foundation sprites retained.",
+    "Normal and candidate scenery route through regions-far; artStage candidate URL redirection stays available.",
+    "Same architecture version for shared cache imports, regional downloads, hero default, scene import graph and review pages; city-kit historical version unchanged.",
+    "Replace native home confirmation with the existing event panel; cancel restores the current run and unresolved gameplay choice. Defer paid-run exit while movement or presentation is busy."
+  ],
+  "modifiedFiles": [
+    {
+      "path": "game.js",
+      "sha256": "f9d85fb5eca280dfd5519591887837b4d68d6d876b215c7c53099e2a8d9e6b18"
+    },
+    {
+      "path": "scene-model-cache.js",
+      "sha256": "56f4ff5eebe1211a1d2b0ec73c128a3c29398c041989c62fa7cf6dc77fb329f2"
+    },
+    {
+      "path": "scene.js",
+      "sha256": "a946b1cad6797c83928985279bc4c9724246365ba316fbe9144072672b87de42"
+    },
+    {
+      "path": "scene-life.js",
+      "sha256": "2e74c32878ee46a82aba994cb833990bed3631ee7b1dfa734fd8b7fa379d86f2"
+    },
+    {
+      "path": "scene-outskirts.js",
+      "sha256": "5e675ccd6368df50064205aebeb5d16407bc44a3708b5e245b714f264d29a5c5"
+    },
+    {
+      "path": "scene-destinations.js",
+      "sha256": "aa072f8cd986309b0d61ca0613d8aa79f3c691fbafe63bdb1eec1e342be3fb70"
+    },
+    {
+      "path": "scene-regional-parks.js",
+      "sha256": "abb8db0ef4e6429374a931b8723aa0abe23ca7260d5fe10e8b87a971be816be7"
+    },
+    {
+      "path": "scene-weather.js",
+      "sha256": "8cf7a628d24dacea41e6a54c8eae6649eca5480e8a12b4432502f7b5e2a82313"
+    },
+    {
+      "path": "index.html",
+      "sha256": "366b05ae4028c42a09829dc046b4eebaa14e8158cfc49a94978bf5c20c7205e0"
+    },
+    {
+      "path": "art-review.html",
+      "sha256": "c0af691a9546da3c77eee7a84567ca9aefab942cd6fbab4f3e024233709f642f"
+    },
+    {
+      "path": "art-review.js",
+      "sha256": "8657452ae63021ad21c8c3839dcd5c89ae8b46b17eebe4ff93f6288d9d5a9a37"
+    },
+    {
+      "path": "art-board.html",
+      "sha256": "5233168a49aa48d60a28d0cbfa6e19979a91303e16996dec97a2bd785aa2d65d"
+    },
+    {
+      "path": "art-board.js",
+      "sha256": "9a060babfce72f47dd7afe58274d224afd8fa9205b35a37cbaa94db052e7ee43"
+    },
+    {
+      "path": "tests/check-model-loading.mjs",
+      "sha256": "ea32f7fa4308d8a0e15137335d2e6df19e9349f0df0b3cf2b449c4cda96891be"
+    },
+    {
+      "path": "tests/progression-game.test.cjs",
+      "sha256": "4216467fb12c70dcff653ed91cc8eebfd4e221bdff710ff935eb0514aeee9fd1"
+    },
+    {
+      "path": "tools/simulation-context.cjs",
+      "sha256": "70235ebd67aa489f79af199bb3d919a0173f809df747774d5c3b6ad25846b76e"
+    }
+  ],
+  "passedCommands": [
+    "node --check game.js",
+    "node --check scene-model-cache.js",
+    "node --check scene.js",
+    "node tests/check-building-previews.mjs --candidate",
+    "node tests/check-model-cache.mjs",
+    "node tests/check-model-loading.mjs",
+    "node tests/check-atmosphere-lifecycle.mjs",
+    "node tests/check-regional-scenery-budget.mjs --candidate",
+    "node tests/check-ai-board-budget.mjs --candidate",
+    "node tests/check-landing-clearance.mjs --candidate"
+  ],
+  "additionalSmoke": "Initial routing checks and subsequent actual normal-mode390 smoke passed; formal packages are now installed. See finalRegionalBrowserQA for actual scope and limitations.",
+  "results": {
+    "candidatePreviews": 145,
+    "cacheScenarios": 11,
+    "loadingScenarios": 8,
+    "atmosphereScenarios": 7,
+    "regionalSceneryMaps": 5,
+    "boardBudgetMaps": 5,
+    "landingChecks": 9234,
+    "landingFailures": 0
+  },
+  "regionalReviewFile": "art/full-ai-city/regional-review.json",
+  "regionRecordFields": [
+    "status=approved",
+    "reviewer",
+    "recordedAtUtc",
+    "note with actual limitations",
+    "approvedAssets mapping exact29 + applicablehero SHA",
+    "approvedFarAssets mapping exact5 SHA",
+    "packedBundles exact near/far/applicablehero path/sha256/bytes",
+    "groupView actual screenshot path/sha256/bytes",
+    "portraitGameView actual screenshot path/sha256/bytes",
+    "optional additionalViews exact screenshot proofs"
+  ],
+  "readOnlyRegionValidator": "Import tools/pack_runtime.py; verified_map_style(nearRegistry, region, farRegistry).",
+  "publishAfterRootConfirmsFourRegions": "python art/full-ai-city/tools/pack_runtime.py --map all --include-far --include-scenic --publish",
+  "postPublishRequiredCommands": [
+    "node tests/check-full-ai-city.mjs",
+    "node tests/check-ai-far-assets.mjs",
+    "node tests/check-ai-landmarks.mjs",
+    "node tests/check-regional-scenery-budget.mjs",
+    "node tests/check-provenance-git-bytes.mjs"
+  ],
+  "unchangedEvidenceChecksAlreadyPassed": "Final172-model portability and native repair proofs passed before these runtime-only edits; no media/model/reference changes afterward.",
+  "rootOwns": "Actual four-region group/portrait QA, regional decision notes and screenshots.",
+  "remaining": "Execute the authorized ordinary commit and push; no asset, visual review, runtime or check work remains.",
+  "updatedAt": "2026-10-24T08:33:31.338847+00:00",
+  "homeConfirmationFix": {
+    "recordedAtUtc": "2026-10-24T07:58:13.205616+00:00",
+    "files": [
+      "game.js",
+      "tests/progression-game.test.cjs",
+      "tools/simulation-context.cjs"
+    ],
+    "behavior": [
+      "Existing event panel with continue on left and primary return-home on right; no native window.confirm.",
+      "Cancel retains the same paid run, wallet, phase and still-unresolved purchase/event choice.",
+      "Confirm resolves the suspended choice as canceled, resets the run and shows home; no ticket refund or unfinished settlement.",
+      "Duplicate requests are ignored. Paid-run exit waits for ongoing movement/presentation to finish; preview and finished-run exits remain direct.",
+      "An independent reset cannot restore old run state or leave the suspended choice unresolved."
+    ],
+    "validation": {
+      "node tests/progression-game.test.cjs": "passed 12 cases: six existing admission/settlement plus six real modal lifecycle cases",
+      "node --check game.js": "passed",
+      "git diff --check -- game.js tests/progression-game.test.cjs tools/simulation-context.cjs": "passed"
+    },
+    "browserValidation": "Root actually tested the updated panel in Harbor 390px: cancel resumed the same round; confirm returned to home. Header home button is covered by the purchase overlay, so nested purchase-modal home cancellation is logic-tested only, not claimed as browser-tested.",
+    "assetsChanged": false
+  },
+  "gitAudit": {
+    "mode": "Read-only; no add, commit, push or ignore-rule changes during this audit.",
+    "snapshotScope": "All modified tracked plus eligible untracked candidate files before final package publication; root was still adding final browser QA screenshots. Counts are the completed audit snapshot, not a repeated rescan.",
+    "initialSnapshot": {
+      "modifiedTrackedFiles": 25,
+      "eligibleUntrackedFiles": 13947,
+      "rawWorkingBytes": 2296644009,
+      "ignoredFiles": 16720
+    },
+    "completedExactContentSnapshot": {
+      "eligibleFiles": 13975,
+      "rawWorkingBytes": 2296769807,
+      "uniqueExactContents": 9726,
+      "uniqueExactContentBytes": 1765904355,
+      "duplicatePathBytes": 530865452
+    },
+    "sizeMeaning": "About 2.14 GiB of working files, 1.64 GiB unique exact content before Git compression; not a prediction of compressed Git or network transfer size. Final published bundles/previews are not included yet.",
+    "largestEligibleFile": {
+      "path": "art/full-ai-city/reviews-rejected/compact/hotel_3/b3e48feceea922dd/candidate.glb",
+      "approxMiB": 3.89
+    },
+    "eligibleFileOver100MiB": false,
+    "newApprovedModels": {
+      "directory": "assets/models/regions-ai",
+      "count": 172,
+      "approxMiB": 211.05
+    },
+    "eligibleContentByExtensionApprox": {
+      "pngMiB": 1732.29,
+      "pngCount": 4687,
+      "glbMiB": 333.44,
+      "glbCount": 285,
+      "jpgMiB": 58.17,
+      "jpgCount": 216,
+      "jsonMiB": 39.44,
+      "jsonCount": 4982,
+      "pyMiB": 24.38,
+      "pyCount": 3523
+    },
+    "pythonNote": "Most eligible Python copies are retained native exporter snapshots/replays required by portable provenance, not bundled environments or package caches.",
+    "diffReviewed": "Runtime approved-model previews/routing/cache versions and procedural fallback retirement; old regional builder output redirected to legacy-builds; related fixture/test/docs updates. The exit-confirm fix subsequently adds two tracked test/harness modifications (27 modified tracked files total at handoff).",
+    "stagedFiles": 0,
+    "exclusionsVerified": [
+      "art/full-ai-city/raw/",
+      "art/full-ai-city/source/",
+      "art/full-ai-city/cache/",
+      "art/full-ai-city/pixal-cache/",
+      "art/full-ai-city/work/",
+      "art/full-ai-city/packed/",
+      "art/full-ai-city/native-mobile/**/*.pt",
+      "art/full-ai-city/native-mobile/**/*.glb",
+      "art/full-ai-city/native-mobile/**/*.npz",
+      "work/",
+      "art/full-ai-city/reports/usage-audit-*.json"
+    ],
+    "privateUsageAudit": "reports/usage-audit-20261024.json matches the root ignore rule; no eligible or tracked usage-audit file, raw/source/cache/work file found.",
+    "preservedEligibleProofs": "Small native-mobile JSON receipts and Python source snapshots stay eligible; reviewed evidence/images and approved models are intentional deliverables.",
+    "gitByteAttributes": "art/** and assets/models/** are -text; PNG/GLB are binary. Frozen provenance is protected from automatic line-ending conversion.",
+    "nextIndexAudit": "After publication and allowed staging only: inspect staged file list/sizes and absence of raw/cache/private usage paths; git diff --cached --check. No force-add of ignored production data."
+  },
+  "progressionPortraitIAA": {
+    "filesPresentAndTracked": [
+      "progression.js",
+      "progression.css",
+      "mobile.css",
+      "presentation.js",
+      "presentation.css",
+      "drama.js",
+      "drama.css",
+      "index.html",
+      "reports/portrait-city-v2-design.md",
+      "reports/portrait-city-v2-validation.md",
+      "tests/progression.test.cjs",
+      "tests/progression-game.test.cjs",
+      "tests/progression-browser.cjs",
+      "tools/portrait-smoke.cjs"
+    ],
+    "IAA": "Design only, deliberately no SDK, fake ad or time-based grant. Existing design specifies optional settlement collectible, failed-run ticket return and separate casual-mode supply; completion callback with runId/placement dedup; cancel/no-fill/failure does not remove ordinary rewards.",
+    "historicalValidationNote": "reports/portrait-city-v2-validation.md is dated 2026-10-23 and contains old art triangle/animation figures. Preserve it as historical and link the final release validation after publication; do not present it as evidence for the new 147 models.",
+    "noDuplicateChecks": "Existing passed progression/portrait checks were not rerun for this audit; only the exit-confirm affected real-game integration test was rerun."
+  },
+  "regionalQAAtHandoff": {
+    "source": "Root actual browser review messages; regional-review.json is authoritative.",
+    "approvedAndReadOnlyVerifiedByRoot": [
+      "classic",
+      "alpine",
+      "compact",
+      "harbor",
+      "expansion"
+    ],
+    "galleryViewedAndSavedByRoot": [
+      "alpine",
+      "compact",
+      "harbor",
+      "expansion"
+    ],
+    "portraitStillRequired": [],
+    "screenshotDirectory": "art/full-ai-city/reviews/regions/final-browser-20261024/",
+    "blocker": null,
+    "releaseAuthorizedNow": true
+  },
+  "postPublishMinimumChecklist": [
+    {
+      "step": 1,
+      "condition": "Only after root records and confirms Harbor plus Expansion portrait QA and validates all five regional records.",
+      "command": "python art/full-ai-city/tools/pack_runtime.py --map all --include-far --include-scenic --publish",
+      "purpose": "Verify exact frozen regional packs, publish all approved near/far/hero/previews and write art/regions/runtime-release.json."
+    },
+    {
+      "step": 2,
+      "commands": [
+        "node tests/check-full-ai-city.mjs",
+        "node tests/check-ai-far-assets.mjs",
+        "node tests/check-ai-landmarks.mjs",
+        "node tests/check-regional-scenery-budget.mjs",
+        "node tests/check-provenance-git-bytes.mjs"
+      ],
+      "purpose": "Check actual formal145 ordinary sources+previews,25far,2heroes,normal5-region scenery routing/budgets and exact provenance byte attributes."
+    },
+    {
+      "step": 3,
+      "owner": "root",
+      "action": "Brief fresh-version NORMAL-mode browser smoke: loaded region assets, home confirm continue/confirm, no missing assets or page errors. No candidate-only smoke substituted."
+    },
+    {
+      "step": 4,
+      "action": "Update final README/status/release validation, explicitly distinguish historical portrait validation. Refresh final integration result hashes."
+    },
+    {
+      "step": 5,
+      "condition": "Only after staging is authorized; still no commit/push before final smoke approval.",
+      "commands": [
+        "git -c core.whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol diff --cached --check -- . :(exclude)art/full-ai-city/reports/diagnostics/native-mv-contract/01cffd279ea9a98e-README.md"
+      ],
+      "action": "Read staged names and individual file sizes; exclude raw/cache/work and private usage-audit. No repeat of successful unchanged media/provenance audits."
+    }
+  ],
+  "resumeSequence": [
+    "Full five-region publication and five formal checks complete.",
+    "Root normal-mode Harbor390 smoke passed; ordinary commit/push authorized.",
+    "Stage only eligible project deliverables; audit index and commit/push without force. Record actual Git result."
+  ],
+  "pythonExecutable": "C:/Users/A/.codex/worktrees/0b69/厂长/grande-art-lab/source/experimental/pixal-env/Scripts/python.exe",
+  "publishPowerShellCommand": "& 'C:/Users/A/.codex/worktrees/0b69/厂长/grande-art-lab/source/experimental/pixal-env/Scripts/python.exe' -B art/full-ai-city/tools/pack_runtime.py --map all --include-far --include-scenic --publish",
+  "releaseDocumentation": {
+    "preparedAtUtc": "2026-10-24T08:10:51.410726+00:00",
+    "files": [
+      "README.md",
+      "art/full-ai-city/README.md",
+      "reports/portrait-city-v2-validation.md"
+    ],
+    "status": "Formal147+25 publication, five required checks and root normal-mode390 smoke completed. Old model parameters remain explicitly historical.",
+    "next": "Safe staging/index privacy and size audit, ordinary commit and push already authorized after successful formal checks; no force."
+  },
+  "finalRegionalBrowserQA": {
+    "source": "Root actual visual QA and exact regional-review.json evidence",
+    "harbor": "390px local view/overview, paid admission, event panel; no warn/error. In-page exit cancel and confirm actually exercised.",
+    "expansion": "430px local view/overview, rolled to Garden Lane, purchase choice, level-three inspection rotation and close returned to the same purchase choice; no warn/error.",
+    "limitations": "Desktop browser viewport simulation, not actual phone GPU performance. Header exit during purchase overlay was not reachable and is not claimed as browser-tested.",
+    "formalModeSmoke": {
+      "status": "passed_by_root",
+      "url": "http://127.0.0.1:8876/",
+      "candidateFlag": false,
+      "viewport": [
+        390,
+        844
+      ],
+      "region": "harbor",
+      "observed": [
+        "Complete near/far/lighthouse loaded",
+        "Showcase L1-to-L2 upgrade updated the actual model",
+        "Confirmation event works",
+        "No console warnings or errors"
+      ],
+      "evidence": [
+        {
+          "path": "art/full-ai-city/reviews/regions/final-browser-20261024/formal-harbor-portrait-390-showcase.jpg",
+          "sha256": "e157672e5db27759528f7e46acb2910b544f3313f6251b7419bed39dd0fd760e",
+          "bytes": 53419
+        },
+        {
+          "path": "art/full-ai-city/reviews/regions/final-browser-20261024/formal-harbor-upgrade.jpg",
+          "sha256": "8a019152194adba7c8b35db2967b04360fcca660ee7e4653a6a92dc12ba059c4",
+          "bytes": 51120
+        }
+      ]
+    }
+  },
+  "publication": {
+    "path": "art/regions/runtime-release.json",
+    "sha256": "b5ee2edf1ea7b1334ce9bef363d03ada65c5d8999e5f29ab10f4d8773305e791",
+    "bytes": 7677,
+    "publishedAtUtc": "2026-10-24T08:15:59.269044+00:00",
+    "packages": 12,
+    "nearBuildings": 147,
+    "farDerivatives": 25,
+    "modelBoundPreviews": 145,
+    "totalPackageBytes": 221536192,
+    "packageDetails": [
+      {
+        "map": "classic",
+        "role": "playable",
+        "path": "assets/models/regions/classic.glb",
+        "sha256": "89d5d898bfb095153396b58386462fbb4bba912cf26ab55c134f36204196583f",
+        "bytes": 43942628,
+        "assets": 29,
+        "triangles": 1034584,
+        "manifestPath": "assets/models/regions/classic-manifest.json",
+        "manifestSha256": "5533e0b20bd58fbb53a4e5ed930db5a604857c959033b68f8149106963dc9b6c"
+      },
+      {
+        "map": "compact",
+        "role": "playable",
+        "path": "assets/models/regions/compact.glb",
+        "sha256": "4b4275213e82650bda4e91e19b00659e100356b95f7d9efde235d30667b3d6c2",
+        "bytes": 41053244,
+        "assets": 29,
+        "triangles": 1080990,
+        "manifestPath": "assets/models/regions/compact-manifest.json",
+        "manifestSha256": "13c05db7a0140c607849c6352624ff9055bb1a7292b258c6bd16c4e6dc8e42e7"
+      },
+      {
+        "map": "expansion",
+        "role": "playable",
+        "path": "assets/models/regions/expansion.glb",
+        "sha256": "b5a5b9bd0928bbd7e57a897a88f3913beb1dd8b6acac9b56d60bebdd910fc53a",
+        "bytes": 37333768,
+        "assets": 29,
+        "triangles": 1006550,
+        "manifestPath": "assets/models/regions/expansion-manifest.json",
+        "manifestSha256": "f23694ce520d4f826515503dff81f5be0b01e5d7a6e1dcf1608a74c9cd45143b"
+      },
+      {
+        "map": "harbor",
+        "role": "playable",
+        "path": "assets/models/regions/harbor.glb",
+        "sha256": "695c441e86e71ef1467070dd43a0f9fe5035e52f871436793ded3951c48a3dbb",
+        "bytes": 40794364,
+        "assets": 29,
+        "triangles": 1035673,
+        "manifestPath": "assets/models/regions/harbor-manifest.json",
+        "manifestSha256": "6559516d634bbe48761150950b559316d4828aae76b37d6d1db72d38244b3ab0"
+      },
+      {
+        "map": "alpine",
+        "role": "playable",
+        "path": "assets/models/regions/alpine.glb",
+        "sha256": "703ed26288bade50d4e039bef6c1daec0f02de65bc2ac3a6e44871e341215d3f",
+        "bytes": 41413684,
+        "assets": 29,
+        "triangles": 1080733,
+        "manifestPath": "assets/models/regions/alpine-manifest.json",
+        "manifestSha256": "26852f2b7447efe475aad74fdbd28ddde2fdd5907f36675286824c1b8db03b1e"
+      },
+      {
+        "map": "harbor",
+        "role": "centerpiece",
+        "path": "assets/models/harbor/harbor_lighthouse.glb",
+        "sha256": "487a9d8b5f769676b4c4659dbf11c33bb75d77c9576f360b367dc97dd6e7323f",
+        "bytes": 1978920,
+        "assets": 1,
+        "triangles": 44986,
+        "manifestPath": "assets/models/harbor/harbor_lighthouse-manifest.json",
+        "manifestSha256": "cb2df2c7732988e64a8c1feb8a8154d19e16f5df7b979fbf489240d8f3d49a63"
+      },
+      {
+        "map": "alpine",
+        "role": "centerpiece",
+        "path": "assets/models/harbor/alpine_windmill.glb",
+        "sha256": "8fac8fc04afc50395eb0550bde4a4362901d5e2a39a5fc41014b3ecd9d8e4782",
+        "bytes": 2311108,
+        "assets": 1,
+        "triangles": 44987,
+        "manifestPath": "assets/models/harbor/alpine_windmill-manifest.json",
+        "manifestSha256": "3e5ba5616cf79225cbcc754ed65b0f26d90e2b2ef2071c5404165944ea1c8326"
+      },
+      {
+        "map": "classic",
+        "role": "far_derivative",
+        "path": "assets/models/regions-far/classic.glb",
+        "sha256": "760505293e7f2de24bdc0cba0d2bc0b4618ce3ea11a54ef8f1f7f207233f2ecc",
+        "bytes": 2652872,
+        "assets": 5,
+        "triangles": 71998,
+        "manifestPath": "assets/models/regions-far/classic-manifest.json",
+        "manifestSha256": "ad47434cc291796df487c491a3a7b90e50a02e2fb31484f0acbc607ff7a43f28"
+      },
+      {
+        "map": "compact",
+        "role": "far_derivative",
+        "path": "assets/models/regions-far/compact.glb",
+        "sha256": "ed35b90bc43eda5d331fb5fdd22467180d2aea4a918e2c7e9715b9b204dd6768",
+        "bytes": 2475392,
+        "assets": 5,
+        "triangles": 59999,
+        "manifestPath": "assets/models/regions-far/compact-manifest.json",
+        "manifestSha256": "f5f20867e3758389f0b0aac2be1a75a540d7e500e7b6e57924c2adb707e7d83f"
+      },
+      {
+        "map": "expansion",
+        "role": "far_derivative",
+        "path": "assets/models/regions-far/expansion.glb",
+        "sha256": "2705c6b392cf8ecacf49590872d2040fcd12981cfdbac0a1a51e9f79787cf07a",
+        "bytes": 2298696,
+        "assets": 5,
+        "triangles": 59997,
+        "manifestPath": "assets/models/regions-far/expansion-manifest.json",
+        "manifestSha256": "349f4be334670dc65a2cff07a4dabb7e9893b3bb5c5cc8df050362d132c8480a"
+      },
+      {
+        "map": "harbor",
+        "role": "far_derivative",
+        "path": "assets/models/regions-far/harbor.glb",
+        "sha256": "7bf2aa4f9b763f934ad5fd8af8be15856b6c21bb3d1cf7a3eefe38d2c6bef316",
+        "bytes": 2690024,
+        "assets": 5,
+        "triangles": 65998,
+        "manifestPath": "assets/models/regions-far/harbor-manifest.json",
+        "manifestSha256": "351222f7895f2920ef935f0a9e62a37b6507af5094a6ed6a05cb6a93ee38c3aa"
+      },
+      {
+        "map": "alpine",
+        "role": "far_derivative",
+        "path": "assets/models/regions-far/alpine.glb",
+        "sha256": "1412ab3a479e525a7b764b49dbdcda6715dcd4571b1af38b121f10cf67bc3c18",
+        "bytes": 2591492,
+        "assets": 5,
+        "triangles": 65997,
+        "manifestPath": "assets/models/regions-far/alpine-manifest.json",
+        "manifestSha256": "25369c3b6155ec0a88c87f7b1282f13346795279a49d1349259fb914650eb4eb"
+      }
+    ]
+  },
+  "formalChecks": {
+    "path": "art/full-ai-city/reports/formal-release-checks-20261024.json",
+    "sha256": "7d9c2697097f1a006b09cd686ec2c869cd0b3941acd37daac982b935c38de74e",
+    "bytes": 4631
+  },
+  "checkClarification": {
+    "asset": "alpine/chance_wheel",
+    "candidateSha256": "7b02e48fcfab206058d07adb79960975b92527a75d1cabf0cb292d5b1ec8d23c",
+    "disclosedColoredRepairFaces": 500,
+    "change": "check-full-ai-city now verifies this exact previously-approved vertex-colored cap exception, including matching binary values and rejection of unauthorized source, missing colors or altered material. Every other primitive still requires its texture.",
+    "modelOrReceiptModified": false,
+    "fullFormalRerun": "passed 145 models and145 previews"
+  },
+  "finalGitIndexAudit": {
+    "stagedFiles": 14175,
+    "stagedBlobBytes": 2556446883,
+    "uniqueStagedBlobBytes": 1988828444,
+    "largestStagedFile": {
+      "path": "assets/models/regions/classic.glb",
+      "bytes": 43942628
+    },
+    "forbiddenPaths": [],
+    "over100MiB": [],
+    "rootFormalEvidenceIncluded": [
+      "art/full-ai-city/reports/final-browser-handoff-20261024.json",
+      "art/full-ai-city/reports/formal-browser-smoke-20261024.json",
+      "art/full-ai-city/reviews/regions/final-browser-20261024/formal-harbor-gallery.jpg",
+      "art/full-ai-city/reviews/regions/final-browser-20261024/formal-harbor-portrait-390-showcase.jpg",
+      "art/full-ai-city/reviews/regions/final-browser-20261024/formal-harbor-upgrade.jpg"
+    ],
+    "whitespaceCheckExitCode": 0,
+    "whitespaceCommand": [
+      "git",
+      "-c",
+      "core.whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol",
+      "diff",
+      "--cached",
+      "--check",
+      "--",
+      ".",
+      ":(exclude)art/full-ai-city/reports/diagnostics/native-mv-contract/01cffd279ea9a98e-README.md"
+    ],
+    "preservedImportedSnapshotWhitespace": {
+      "path": "art/full-ai-city/reports/diagnostics/native-mv-contract/01cffd279ea9a98e-README.md",
+      "sha256": "01cffd279ea9a98ed760961291904a93713dbf938ccc17e0b3ee5afa10b9e602",
+      "issues": [
+        "existing source README line164 trailing space",
+        "existing source README terminal blank line"
+      ],
+      "reason": "Imported upstream diagnostic snapshot bound by its hash; retained exactly, excluded only from whitespace lint. All other staged paths passed with CRLF accepted."
+    }
+  },
+  "formalBrowserSmokeReport": {
+    "path": "art/full-ai-city/reports/formal-browser-smoke-20261024.json",
+    "sha256": "cded09c4bf5e2f3c9ecb993d59541110feaef87916168b36c4ef8ad1ca0eb9e9"
+  },
+  "gitDelivery": {
+    "branch": "main",
+    "remote": "origin",
+    "url": "https://github.com/TrialKuma/monopoly-game.git",
+    "authorization": "User authorized final Git delivery; root confirmed all QA, checks and smoke passed.",
+    "recordPhase": "Index verified; ordinary commit and push immediately follow this record. Actual resulting SHA and push outcome are returned outside this commit to avoid self-reference.",
+    "forcePush": false
+  }
+}
