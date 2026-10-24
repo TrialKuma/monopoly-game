@@ -115,7 +115,8 @@
   function update() {
     if(!state.players)return;
     const inMenu=!document.getElementById('start-screen').classList.contains('hidden');
-    if(inMenu||state.modal.visible||state.phase==='presenting')closeMobilePanel();
+    if(inMenu||state.modal.visible||state.phase==='presenting'){closeMobilePanel();window.GameCardBag?.close();}
+    window.GameCardBag?.refresh();
     document.body.classList.toggle('mode-start',inMenu);
     document.body.classList.toggle('mode-showcase',preview&&!inMenu);
     document.body.classList.toggle('ai-turn',!inMenu&&!state.gameOver&&document.body.dataset.turn==='ai');
@@ -149,7 +150,7 @@
       const remaining=currentPlayer().cash-(owner?(next||0):tile.lot.price);
       propertyPreview.innerHTML=`<div class="event-property-grid"><div><small>${owner?'当前街区租金':'基础过路费'}</small><b>${money(owner?rent.total:tile.lot.tolls[tile.lot.level])}</b></div><div><small>操作后现金</small><b>${money(Math.max(0,remaining))}</b></div></div>${window.CityScene?.inspectTile?`<button class="inspect-building-btn" type="button" data-inspect-building="${tile.index}" data-inspect-level="3">查看满级建筑 <span aria-hidden="true">↗</span></button>`:''}`;
     } else propertyPreview.innerHTML='';
-    if(preview) {rollBtn.disabled=true;document.querySelectorAll('[data-showcase]').forEach(b=>b.disabled=previewBusy);}
+    if(preview) {rollBtn.disabled=true;document.querySelectorAll('[data-showcase]').forEach(b=>b.disabled=previewBusy||state.cardUsePending);}
   }
   function inferEvent(cfg) {
     const text=`${cfg.title||''} ${cfg.message||''}`,tile=state.board[currentPlayer().position];
@@ -214,7 +215,7 @@
     if(!isSessionActive(sid)||serial!==eventSerial)return;
     state.phase='locked';state.busy=true;render();
   }
-  function onReset() {eventSerial++;selected=null;inspectorKey='';previewBusy=false;if(!preparingPreview)preview=false;document.body.classList.remove('selecting-target');closeMobilePanel();}
+  function onReset() {eventSerial++;selected=null;inspectorKey='';previewBusy=false;if(!preparingPreview)preview=false;document.body.classList.remove('selecting-target');closeMobilePanel();window.GameCardBag?.close();}
   async function celebrate(winner,tied) {
     if(preview)return;
     const sid=state.sessionId;
@@ -242,13 +243,22 @@
     state.logs=[];pushLog('演示不消耗门票，不计入战绩或收益。');render();
   }
   async function runShowcase(type) {
-    if(previewBusy)return;
+    if(previewBusy||state.cardUsePending)return;
     setupShowcase();previewBusy=true;render();const sid=state.sessionId;
     const human=state.players[0];
+    if(type==='cards'){
+      state.currentPlayerIndex=0;state.busy=false;state.phase='await_roll';previewBusy=false;
+      ['shield','launch','reverse','doubleRent'].forEach(id=>window.GameCards?.grant('human',id,{type:'showcase'}));
+      state.statusTitle='卡牌演示';state.statusDescription='从背包选择一张卡牌使用。';
+      render();window.GameCardBag?.open();return;
+    }
     if(type==='shield')human.effects.shield=true;
     if(type==='relief'){human.cash=150;human.displayedCash=150;}
     try {
-      if(type==='seize'){
+      if(type==='draw'){
+        const station=state.board.find(t=>t.special?.type==='card_draw');
+        if(station){human.position=station.index;selected=station.index;state.currentPlayerIndex=0;render();await resolveCardDraw(human,sid);}
+      } else if(type==='seize'){
         human.position=0;state.currentPlayerIndex=0;selected=0;
         state.statusTitle='选择征用地产';state.statusDescription='选择对手地产后，可接手房产或免费征用。';render();
         await resolveStartTakeover(human,sid);
@@ -274,7 +284,7 @@
         if(station){human.position=station.index;selected=station.index;render();await resolveLanding(human,station,sid);}
       } else {render();await resolveLanding(human,state.board[showcaseTargets.rent],sid);}
     } finally {
-      if(isSessionActive(sid)){previewBusy=false;state.busy=true;state.phase='locked';state.statusTitle='演示结束';state.statusDescription='选择其他事件，或开始正式对局。';render();}
+      if(isSessionActive(sid)){previewBusy=false;state.busy=type!=='draw';state.phase=type==='draw'?'await_roll':'locked';state.statusTitle=type==='draw'?'卡牌已入包':'演示结束';state.statusDescription=type==='draw'?'可从背包选择使用，也可继续保留。':'选择其他事件，或开始正式对局。';render();if(type==='draw')window.GameCardBag?.open();}
     }
   }
   window.GamePresentation={update,updateCash,present,onReset,celebrate,rentFor,syncCityScene,selectCurrentTile:()=>{if(state.players)selectTile(currentPlayer().position);}};

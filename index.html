@@ -8,9 +8,10 @@
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="presentation.css?v=20261023-1">
   <link rel="stylesheet" href="progression.css?v=20261023-1">
-  <link rel="stylesheet" href="scene.css?v=20261023-1">
+  <link rel="stylesheet" href="scene.css?v=20261025-items1">
   <link rel="stylesheet" href="drama.css?v=20261023-1">
   <link rel="stylesheet" href="mobile.css?v=20261023-1">
+  <link rel="stylesheet" href="card-bag.css?v=20261025-items1">
 </head>
 <body class="mode-start">
   <div id="start-screen" class="start-screen">
@@ -64,15 +65,16 @@
         </div>
         <section id="center-console" class="board-center" aria-label="回合操作">
           <div class="console-dice-row"><div id="center-dice" class="center-dice"><span id="center-dice-value">—</span></div><div class="console-copy"><p id="center-player-badge" class="center-badge">当前：玩家</p><h3 id="center-title">准备开始</h3><p id="center-description">掷骰移动，落地后结算。</p></div></div>
-          <div class="center-actions"><span id="center-phase-badge" class="center-badge">等待掷骰</span><button id="roll-btn" class="primary-btn center-roll-btn">掷骰子 <span>↗</span></button></div>
+          <div class="center-actions"><span id="center-phase-badge" class="center-badge">等待掷骰</span><button type="button" class="card-bag-trigger" data-open-card-bag aria-haspopup="dialog" aria-expanded="false" aria-controls="card-bag-dialog">背包 <span data-card-count>0</span></button><button id="roll-btn" class="primary-btn center-roll-btn">掷骰子 <span>↗</span></button></div>
           <div class="round-progress" id="round-progress"><div class="round-progress-bar" id="round-progress-bar"></div></div>
         </section>
         <nav class="mobile-tools" aria-label="对局信息">
+          <button type="button" class="card-bag-trigger" data-open-card-bag aria-haspopup="dialog" aria-expanded="false" aria-controls="card-bag-dialog">背包 <span data-card-count>0</span></button>
           <button type="button" data-mobile-panel="property" aria-expanded="false">地块</button>
           <button type="button" data-mobile-panel="log" aria-expanded="false">快报</button>
           <button type="button" data-mobile-panel="rules" aria-expanded="false">规则</button>
         </nav>
-        <div id="showcase-controls" class="showcase-controls hidden"><div><b>玩法演示</b><span>不消耗门票 · 不计入战绩</span></div><div class="showcase-buttons"><button data-showcase="rent">连锁收租</button><button data-showcase="seize">地标征用</button><button data-showcase="shield">护盾免租</button><button data-showcase="relief">破产救助</button><button data-showcase="buy">购买地产</button><button data-showcase="build">建筑升级</button><button data-showcase="chance">机会事件</button><button data-showcase="route" id="showcase-route-btn" hidden>快线移动</button><button id="showcase-exit-btn">开始正式对局 ↗</button></div></div>
+        <div id="showcase-controls" class="showcase-controls hidden"><div><b>玩法演示</b><span>不消耗门票 · 不计入战绩</span></div><div class="showcase-buttons"><button data-showcase="rent">连锁收租</button><button data-showcase="seize">地标征用</button><button data-showcase="shield">护盾免租</button><button data-showcase="relief">破产救助</button><button data-showcase="buy">购买地产</button><button data-showcase="build">建筑升级</button><button data-showcase="draw">翻牌存包</button><button data-showcase="cards">卡牌背包</button><button data-showcase="chance">机会事件</button><button data-showcase="route" id="showcase-route-btn" hidden>快线移动</button><button id="showcase-exit-btn">开始正式对局 ↗</button></div></div>
       </section>
       <aside class="sidebar">
         <div class="mobile-sheet-header"><strong id="mobile-sheet-title">地块信息</strong><button id="mobile-sheet-close" type="button" aria-label="关闭信息面板">关闭</button></div>
@@ -87,7 +89,8 @@
               <li>掷出 6 点可获得额外一个完整回合（每次最多触发一次）。</li>
               <li>部分大型地产拥有专属效果，例如额外收益或让对手下回合休息。</li>
               <li>每局抛硬币决定先手；后手获得额外开局金。双方的基础轮次数相同。</li>
-              <li>翻牌格：随机抽 3 张卡牌选 1 张发动，许多卡牌可选择对自己或对手使用。</li>
+              <li>翻牌格：随机抽 3 张卡牌，选 1 张放入背包。每回合掷骰前可用 1 张，也可留到以后；选择目标时取消不会消耗卡牌。</li>
+              <li>己方建筑为青绿屋顶，对手为砖红屋顶；无主建筑保留原色。卡牌仅在本局内持有，结束后清空。</li>
               <li>城建局：选择免费升级自己或拆除对手一层建筑！</li>
               <li>银行金库：强制掷骰存钱，存满后下个人全部提走！</li>
               <li>机会格：随机触发建筑升级、位置互换、传送、免租等事件。</li>
@@ -108,11 +111,17 @@
   </div>
   <button id="mobile-sheet-backdrop" class="mobile-sheet-backdrop" type="button" aria-label="关闭信息面板" hidden></button>
   <div id="event-overlay" class="event-overlay" aria-live="polite"><div id="event-card" class="event-card"><div id="event-icon-wrap"></div><p id="event-label" class="panel-label">轮到你了</p><h3 id="event-title"></h3><p id="event-message" class="event-message"></p><div id="event-property-preview"></div><div id="event-actions" class="event-actions"></div></div></div>
+  <dialog id="card-bag-dialog" class="card-bag-dialog" aria-labelledby="card-bag-title" aria-describedby="card-bag-status">
+    <header class="card-bag-header"><div><h2 id="card-bag-title">卡牌背包</h2><p id="card-bag-summary"></p></div><button id="card-bag-close" type="button">关闭</button></header>
+    <div id="card-bag-list" class="card-bag-list"></div>
+    <footer class="card-bag-footer"><p id="card-bag-status"></p></footer>
+  </dialog>
 
   <script src="drama.js?v=20261025-landscape3"></script>
   <script src="progression.js?v=20261025-landscape3"></script>
-  <script src="game.js?v=20261025-landscape3"></script>
-  <script src="presentation.js?v=20261025-landscape3"></script>
-  <script type="module" src="scene.js?v=20261025-terrain3"></script>
+  <script src="game.js?v=20261025-items1"></script>
+  <script src="card-bag.js?v=20261025-items1"></script>
+  <script src="presentation.js?v=20261025-items1"></script>
+  <script type="module" src="scene.js?v=20261025-items1"></script>
 </body>
 </html>

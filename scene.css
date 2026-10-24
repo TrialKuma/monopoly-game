@@ -39,6 +39,7 @@ body.mode-start .city-camera-controls,body:not(.scene-ready) .city-camera-contro
 body.scene-ready #board { visibility:hidden; pointer-events:none; }
 .scene-tile { position:absolute; inset:0 auto auto 0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:0; min-width:0; width:max-content; max-width:122px; padding:2px 4px 3px; margin:0; border:0; border-bottom:2px solid var(--owner-color,#b8ab90); border-radius:3px; background:rgba(250,247,236,.72); color:#314d43; box-shadow:0 1px 3px #425b5014; pointer-events:auto; cursor:pointer; font-family:inherit; line-height:1; white-space:nowrap; transition:background .18s,box-shadow .18s; }
 .scene-tile-name { font-size:10px; font-weight:750; letter-spacing:0; }
+.scene-tile-name[data-service]::before { content:attr(data-service); display:inline-block; margin-right:4px; padding:2px 3px; border-radius:3px; background:var(--owner-color,#6e9daa); color:#fffdf4; font-size:9px; line-height:1; text-shadow:0 1px 1px #244c4055; }
 .scene-tile-meta { display:none; font-size:8px; font-weight:600; color:#889184; letter-spacing:.015em; }
 .scene-tile[data-owner="human"] .scene-tile-meta { color:#367f79; }
 .scene-tile[data-owner="ai"] .scene-tile-meta { color:#b97350; }

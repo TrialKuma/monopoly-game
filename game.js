@@ -55,10 +55,10 @@ const CLASSIC_DISTRICT_COLORS = {
 
 const CLASSIC_SPECIAL_TILES = {
   4:  { type: "bank", label: "金库", color: "#bfdbfe", description: "存钱或提款！" },
-  9:  { type: "card_draw", label: "翻牌格", color: "#e9d5ff", description: "翻牌选卡发动！" },
+  9:  { type: "card_draw", label: "翻牌格", color: "#e9d5ff", description: "三选一存入背包，掷骰前可选用" },
   13: { type: "chance", label: "机会格", color: "#fbcfe8", description: "街区翻新、换位、专车等城市奇遇。" },
   17: { type: "construction", label: "城建局", color: "#fef08a", description: "建造或拆除！" },
-  20: { type: "card_draw", label: "翻牌格", color: "#e9d5ff", description: "翻牌选卡发动！" },
+  20: { type: "card_draw", label: "翻牌格", color: "#e9d5ff", description: "三选一存入背包，掷骰前可选用" },
 };
 
 const CLASSIC_LOT_CONFIGS = {
@@ -102,12 +102,12 @@ const COMPACT_DISTRICT_COLORS = {
 };
 const COMPACT_SPECIAL_TILES = {
   5:  { type: "construction", label: "城建局", color: "#fef08a", description: "建造或拆除！" },
-  6:  { type: "card_draw", label: "翻牌格", color: "#e9d5ff", description: "翻牌选卡发动！" },
+  6:  { type: "card_draw", label: "翻牌格", color: "#e9d5ff", description: "三选一存入背包，掷骰前可选用" },
   7:  { type: "chance", label: "机会格", color: "#fbcfe8", description: "街区翻新、换位、专车等城市奇遇。" },
   8:  { type: "rush", label: "冲刺站", color: "#fdba74", rushMin: 2, rushMax: 8, description: "随机冲刺 2–8 格，到达后立即结算。" },
   9:  { type: "bank", label: "金库", color: "#bfdbfe", description: "存钱或提款！" },
   13: { type: "teleport", label: "传送港", color: "#a7f3d0", settleArrival: true, description: "随机传送到一块地产，到达后立即结算。" },
-  15: { type: "card_draw", label: "命运轮盘", color: "#e9d5ff", description: "翻牌选卡发动！" },
+  15: { type: "card_draw", label: "命运轮盘", color: "#e9d5ff", description: "三选一存入背包，掷骰前可选用" },
 };
 const COMPACT_LOT_CONFIGS = {
   1:  { price: 100, buildCosts: [0, 44, 76, 118], tolls: [24, 68, 146, 238], themeIdx: 0 },
@@ -157,11 +157,11 @@ const EXPANSION_DISTRICT_COLORS = {
 const EXPANSION_SPECIAL_TILES = {
   4:  { type: "bank", label: "金库", color: "#bfdbfe", description: "存钱或提款！" },
   5:  { type: "construction", label: "开发局", color: "#fef08a", description: "强化建设节奏。" },
-  10: { type: "card_draw", label: "翻牌格", color: "#e9d5ff", description: "翻牌选卡发动！" },
+  10: { type: "card_draw", label: "翻牌格", color: "#e9d5ff", description: "三选一存入背包，掷骰前可选用" },
   12: { type: "rush", label: "城市快线", color: "#fdba74", rushMin: 3, rushMax: 5, description: "随机冲刺 3–5 格，到达后立即结算。" },
   14: { type: "chance", label: "机会格", color: "#fbcfe8", description: "街区翻新、换位、专车等城市奇遇。" },
   16: { type: "teleport", label: "传送港", color: "#a7f3d0", settleArrival: true, description: "随机传送到一块地产，到达后立即结算。" },
-  19: { type: "card_draw", label: "命运转盘", color: "#e9d5ff", description: "翻牌选卡发动！" },
+  19: { type: "card_draw", label: "命运转盘", color: "#e9d5ff", description: "三选一存入背包，掷骰前可选用" },
   22: { type: "chance", label: "机会格", color: "#fbcfe8", description: "街区翻新、换位、专车等城市奇遇。" },
 };
 const EXPANSION_LOT_CONFIGS = {
@@ -260,11 +260,11 @@ const ALPINE_DISTRICT_COLORS = {
   "温泉街区": "#e5b7c2", "山麓街区": "#c3bfdc", "归林街区": "#d0d3a4",
 };
 const ALPINE_SPECIAL_TILES = {
-  2: { type: "card_draw", label: "山间邮局", color: "#e9d5ff", description: "翻牌选卡发动！" },
+  2: { type: "card_draw", label: "山间邮局", color: "#e9d5ff", description: "三选一存入背包，掷骰前可选用" },
   5: { type: "construction", label: "匠人山房", color: "#fef08a", description: "免费升级自己或拆除对手一层建筑。" },
   9: { type: "bank", label: "山城金库", color: "#bfdbfe", description: "存钱或提款！" },
   13: { type: "chance", label: "山泉广场", color: "#fbcfe8", description: "街区翻新、换位、专车等城市奇遇。" },
-  20: { type: "card_draw", label: "旅人驿站", color: "#e9d5ff", description: "翻牌选卡发动！" },
+  20: { type: "card_draw", label: "旅人驿站", color: "#e9d5ff", description: "三选一存入背包，掷骰前可选用" },
   23: { type: "rush", label: "山间缆车", color: "#c5dbc9", rushMin: 2, rushMax: 4, description: "乘缆车随机前进 2–4 格，抵达后立即结算。" },
 };
 const ALPINE_LOT_CONFIGS = {
@@ -396,12 +396,12 @@ const MAP_PRESETS = {
 let selectedMapId = DEFAULT_MAP_ID;
 
 const CARD_POOL = [
-  { id: "teleport", name: "传送术", icon: "🌀", description: "传送自己或对手到随机地产格" },
+  { id: "teleport", name: "传送术", icon: "🌀", description: "传送自己或对手到随机地产格，不结算落点" },
   { id: "boost", name: "加速引擎", icon: "⚡", description: "选择一方，下次掷骰结果翻倍" },
   { id: "slow", name: "减速陷阱", icon: "🐌", description: "选择一方，下次掷骰结果减半" },
-  { id: "launch", name: "命定骰", icon: "🎯", description: "选择前进1~6步" },
-  { id: "rewind", name: "时光回溯", icon: "⏪", description: "选择一方后退3步" },
-  { id: "swap", name: "换位魔法", icon: "🔄", description: "和对手交换位置" },
+  { id: "launch", name: "命定骰", icon: "🎯", description: "额外前进1~6步并结算地块，之后仍可掷骰" },
+  { id: "rewind", name: "时光回溯", icon: "⏪", description: "选择一方后退3步，不结算落点" },
+  { id: "swap", name: "换位魔法", icon: "🔄", description: "和对手交换位置，不结算落点" },
   { id: "freeze", name: "绊脚术", icon: "🪤", description: "对手下回合停步并结算地块；温泉休息期间不追加结算" },
   { id: "combo", name: "连击鼓", icon: "🥁", description: "获得额外一回合" },
   { id: "shield", name: "护盾术", icon: "🛡️", description: "免疫下一次过路费" },
@@ -447,6 +447,8 @@ const EVENT_ICON_MAP = {
   "市政府征用": { emoji: "📜", cls: "event-start" },
   "AI 行动": { emoji: "🤖", cls: "event-info" },
   "翻牌事件": { emoji: "🎴", cls: "event-card" },
+  "翻牌奖励": { emoji: "🎴", cls: "event-card" },
+  "使用卡牌": { emoji: "🃏", cls: "event-card" },
   "传送门": { emoji: "🌀", cls: "event-special" },
   "城建局": { emoji: "🏗️", cls: "event-build" },
   "骰6再动": { emoji: "🎲", cls: "event-special" },
@@ -895,14 +897,17 @@ function initializeGame(mapId = selectedMapId) {
       position: 0,
       nextJunctionChoice: null,
       effects: defaultEffects(),
+      cards: [], cardUsedThisTurn: false,
     })),
     lastDice: null, logs: [], gameOver: false, busy: false,
+    cardSequence: 0, cardUsePending: false,
     passedStartThisTurn: false, bankPool: 0,
     gameMode: "rounds",
     statusTitle: "", statusDescription: "",
     animation: { currentTile: null, landedTile: null, diceRolling: false, diceResult: false, boardBurst: false },
     modal: defaultModal(),
   };
+  setTargetHighlight(false);
   state.openingLots = prepareOpeningLots(state.board, mapCfg);
   pushLog(`游戏开始，双方初始资金均为 ${formatMoney(economy.startCash)}。`);
   if (state.openingLots.length) {
@@ -1597,16 +1602,23 @@ async function playHumanTurn() {
 }
 
 async function playAiTurn() {
-  if (state.gameOver || !currentPlayer().isAi) return;
+  if (state.gameOver || !currentPlayer().isAi || state.cardUsePending) return;
+  const sid = state.sessionId;
+  await useAiInventoryCard(currentPlayer());
+  if (!isSessionActive(sid) || state.gameOver) return;
   await processTurn(currentPlayer());
 }
 
 async function processTurn(player, isExtraTurn = false) {
   const sid = state.sessionId;
+  // A pre-roll movement card may schedule a rest. It keeps this promised dice
+  // action; the rest begins on the following action, including a bonus action.
+  const deferredRest = player.cardDeferredRest || {};
+  player.cardDeferredRest = null;
   state.busy = true; state.phase = "locked"; state.passedStartThisTurn = false;
   hideModal(false); render();
 
-  if (player.effects.bankruptcyRelief) {
+  if (player.effects.bankruptcyRelief && !deferredRest.bankruptcyRelief) {
     player.effects.bankruptcyRelief = false;
     player.effects.frozen = false;
     player.effects.hotSpringRest = false;
@@ -1625,7 +1637,7 @@ async function processTurn(player, isExtraTurn = false) {
     }
   }
 
-  if (player.effects.hotSpringRest) {
+  if (player.effects.hotSpringRest && !deferredRest.hotSpringRest) {
     player.effects.hotSpringRest = false;
     // A rest already consumes this action. A trap laid during the same rest
     // expires with it: settling the stationary lot again would collect rent
@@ -2390,6 +2402,179 @@ async function resolveConstruction(player, sid) {
   }
 }
 
+// One physical entry per reward, with provenance retained for later loadouts or shops.
+// No discard limit: a reward never disappears simply because it cannot be used now.
+function grantInventoryCard(playerId, cardId, source = {}) {
+  const player = state.players?.find(p => p.id === playerId);
+  if (!player || state.gameOver || !CARD_POOL.some(c => c.id === cardId)) return null;
+  player.cards ||= [];
+  const item = {
+    instanceId: `${state.sessionId}:card:${++state.cardSequence}`,
+    cardId,
+    source: {
+      type: String(source.type || "reward"),
+      mapId: state.currentMapId, round: state.round,
+      tileIndex: Number.isInteger(source.tileIndex) ? source.tileIndex : null,
+      ...(typeof source.reference === "string" ? { reference: source.reference } : {}),
+    },
+  };
+  player.cards.push(item);
+  return { ...item, source: { ...item.source } };
+}
+
+function cardTurnBlock(player, ai = false) {
+  if (!player || !state.players?.length) return "请先开始对局";
+  if (state.gameOver) return "本局已结束";
+  if (startScreenEl && !startScreenEl.classList.contains("hidden")) return "请先开始对局";
+  if (currentPlayer() !== player || (!ai && player.isAi)) return "等待你的回合";
+  if (state.cardUsePending || homeConfirmationPending) return "正在处理行动";
+  if (!ai && (state.busy || state.phase !== "await_roll" || state.modal.visible)) return "请先完成当前行动";
+  if (player.cardUsedThisTurn) return "本回合已使用卡牌";
+  if (player.effects.hotSpringRest || player.effects.frozen ||
+      (player.effects.bankruptcyRelief && getMapConfig().reliefRest !== false)) return "本回合休整，暂不能使用";
+  return "";
+}
+
+function cardEffectBlock(player, card) {
+  const opp = getOpponent(player);
+  const owned = pid => state.board.some(t => t.lot?.ownerId === pid && !t.isLargeSecondary);
+  switch (card.id) {
+    case "shield": return player.effects.shield ? "护盾已生效" : "";
+    case "combo": return player.effects.extraTurn ? "已获得额外回合" : "";
+    case "doubleRent": return !owned(player.id) ? "需要先拥有地产" : player.effects.doubleRent ? "翻倍效果已生效" : "";
+    case "freeze": return opp.effects.bankruptcyRelief || opp.effects.hotSpringRest || opp.effects.frozen ? "对手正在休整或已被绊住" : "";
+    case "swap": return player.position === opp.position ? "双方已在同一地块" : "";
+    case "propertySwap": return !owned(player.id) ? "你还没有可交换的地产" : !owned(opp.id) ? "对手还没有可交换的地产" : "";
+    case "teleport": return state.board.some(t => t.lot) ? "" : "没有可传送的地产";
+    case "boost": return player.effects.speedBoost && opp.effects.speedBoost ? "双方已有加速效果" : "";
+    case "slow": return player.effects.speedSlow && opp.effects.speedSlow ? "双方已有减速效果" : "";
+    default: return "";
+  }
+}
+
+function getCardInventory() {
+  const player = state.players?.find(p => !p.isAi) || state.players?.find(p => p.id === "human");
+  const reason = cardTurnBlock(player);
+  const cards = (player?.cards || []).map(item => {
+    const card = CARD_POOL.find(c => c.id === item.cardId);
+    if (!card) return null;
+    const blocked = reason || cardEffectBlock(player, card);
+    return { ...card, instanceId: item.instanceId, source: { ...item.source }, usable: !blocked, canUse: !blocked, reason: blocked };
+  }).filter(Boolean);
+  return {
+    sessionId: state.sessionId, count: cards.length,
+    canBrowse: Boolean(player) && startScreenEl.classList.contains("hidden") && !state.modal?.visible && state.phase !== "presenting" && !homeConfirmationPending,
+    opponentCount: state.players?.find(p => p !== player)?.cards?.length || 0,
+    canUse: !reason, reason, usedThisTurn: Boolean(player?.cardUsedThisTurn), cards,
+  };
+}
+
+async function prepareInventoryCard(player, card, sid) {
+  if (["teleport", "boost", "slow", "rewind", "reverse"].includes(card.id)) {
+    let target = await chooseCardTarget(player, card, sid);
+    if (!isSessionActive(sid) || !target) return null;
+    if (card.id === "boost" || card.id === "slow") {
+      const effect = card.id === "boost" ? "speedBoost" : "speedSlow";
+      if (player.isAi && (target === "self" ? player : getOpponent(player)).effects[effect]) {
+        target = target === "self" ? "opponent" : "self";
+      }
+      if ((target === "self" ? player : getOpponent(player)).effects[effect]) return null;
+    }
+    return { target };
+  }
+  if (card.id === "launch" && !player.isAi) {
+    const buttons = Array.from({ length: 6 }, (_, i) => {
+      const steps = i + 1, tile = state.board[previewMovement(player, steps).index];
+      return { id: String(steps), label: `${steps} 步 → ${tile.name}`, variant: "primary" };
+    });
+    buttons.unshift({ id: "cancel", label: "暂不使用", variant: "ghost" });
+    const choice = await showModal({ label: "使用卡牌", title: "🎯 命定骰 · 选择步数", message: card.description, buttons });
+    if (!isSessionActive(sid) || !/^[1-6]$/.test(choice)) return null;
+    return { steps: Number(choice) };
+  }
+  if (card.id === "propertySwap" && !player.isAi) {
+    const lots = state.board.filter(t => t.lot?.ownerId === player.id && !t.isLargeSecondary);
+    const choice = await showModal({
+      label: "使用卡牌", title: "🔀 地产互换 · 选择交出的地产",
+      message: "随机获得对手的一块地产，双方建筑等级保留。",
+      buttons: [{ id: "cancel", label: "暂不使用", variant: "ghost" }, ...lots.map(t => ({ id: String(t.index), label: `${t.name}（Lv.${t.lot.level}）`, variant: "primary" }))],
+    });
+    if (!isSessionActive(sid) || !lots.some(t => String(t.index) === choice)) return null;
+    return { giveIdx: Number(choice) };
+  }
+  return {};
+}
+
+async function useInventoryCard(player, instanceId, ai = false) {
+  const blocked = cardTurnBlock(player, ai);
+  if (blocked) return { ok: false, reason: blocked };
+  const item = player.cards?.find(c => c.instanceId === instanceId || c.cardId === instanceId);
+  const card = CARD_POOL.find(c => c.id === item?.cardId);
+  if (!item || !card) return { ok: false, reason: "背包中没有这张卡牌" };
+  const invalid = cardEffectBlock(player, card);
+  if (invalid) return { ok: false, reason: invalid };
+  const sid = state.sessionId;
+  state.cardUsePending = true; state.busy = true; state.phase = "locked";
+  hideModal(false); render();
+  try {
+    const prepared = await prepareInventoryCard(player, card, sid);
+    if (!isSessionActive(sid)) return { ok: false, reason: "对局已切换" };
+    if (!prepared) return { ok: false, cancelled: true, reason: "已保留卡牌" };
+    const changed = cardEffectBlock(player, card);
+    if (changed) return { ok: false, reason: changed };
+    // Consume only after a valid choice, but before any awaited effect can be clicked twice.
+    player.cards.splice(player.cards.indexOf(item), 1);
+    player.cardUsedThisTurn = true;
+    state.busy = true; state.phase = "locked";
+    hideModal(false);
+    pushLog(`${player.name} 使用了 ${card.icon} ${card.name}。`);
+    await executeCardEffect(player, card, sid, prepared);
+    if (isSessionActive(sid) && card.id === "launch") {
+      player.cardDeferredRest = {
+        hotSpringRest: player.effects.hotSpringRest,
+        bankruptcyRelief: player.effects.bankruptcyRelief,
+      };
+    }
+    return { ok: true, cardId: card.id };
+  } finally {
+    if (isSessionActive(sid)) {
+      state.cardUsePending = false;
+      setTargetHighlight(false);
+      if (!state.gameOver) {
+        if (player.isAi) setAiTurnStatus();
+        else setHumanTurnStatus();
+      }
+      render();
+    }
+  }
+}
+
+async function useAiInventoryCard(player) {
+  if (cardTurnBlock(player, true)) return;
+  const enemyOwns = state.board.some(t => t.lot?.ownerId === getOpponent(player).id);
+  const candidates = (player.cards || []).map(item => ({ item, card: CARD_POOL.find(c => c.id === item.cardId) }))
+    .filter(({ card }) => card && !cardEffectBlock(player, card) && (card.id !== "shield" || enemyOwns));
+  if (!candidates.length) return;
+  const selected = aiChooseCard(candidates.map(c => c.card), player);
+  await useInventoryCard(player, candidates.find(c => c.card.id === selected.id).item.instanceId, true);
+}
+
+window.GameCards = {
+  getSnapshot: getCardInventory,
+  getInventory: getCardInventory,
+  use: instanceId => useInventoryCard(state.players?.find(p => p.id === "human"), instanceId),
+  grant: grantInventoryCard,
+  // A future entry flow can apply an already-authorized loadout once, before initiative.
+  // This hook does not spend warehouse money or create a second currency.
+  applyLoadout(playerId, cardIds, reference = "") {
+    const player = state.players?.find(p => p.id === playerId);
+    if (!player || state.initiativeResolved || state.gameOver || player.cardLoadoutApplied || !Array.isArray(cardIds) ||
+        cardIds.some(id => !CARD_POOL.some(card => card.id === id))) return [];
+    player.cardLoadoutApplied = true;
+    return cardIds.map(id => grantInventoryCard(playerId, id, { type: "loadout", reference }));
+  },
+};
+
 async function resolveCardDraw(player, sid) {
   playSound("card", { rate: 1.02 });
   const shuffled = [...CARD_POOL].sort(() => Math.random() - 0.5);
@@ -2401,12 +2586,12 @@ async function resolveCardDraw(player, sid) {
     pushLog(`${player.name} 翻牌选择了 ${selected.icon} ${selected.name}。`);
     await showContinueModal({
       label: "翻牌事件", title: `AI 选择了 ${selected.icon} ${selected.name}`,
-      message: `效果：${selected.description}`,
+      message: `存入背包，之后可在掷骰前使用。\n${selected.description}`,
     });
     if (!isSessionActive(sid)) return;
   } else {
     const dec = await showModal({
-      label: "翻牌事件", title: "选择一张卡牌发动！", message: "",
+      label: "翻牌奖励", title: "选择一张卡牌存入背包", message: "每回合掷骰前可用 1 张。",
       cardDraw: true,
       buttons: drawn.map((c) => ({
         id: c.id,
@@ -2415,11 +2600,14 @@ async function resolveCardDraw(player, sid) {
       })),
     });
     if (!isSessionActive(sid)) return;
-    selected = drawn.find((c) => c.id === dec) || drawn[0];
+    selected = drawn.find((c) => c.id === dec);
+    if (!selected) return;
     pushLog(`${player.name} 选择了 ${selected.icon} ${selected.name}。`);
   }
 
-  await executeCardEffect(player, selected, sid);
+  grantInventoryCard(player.id, selected.id, { type: "tile", tileIndex: player.position });
+  pushLog(`${selected.icon} ${selected.name} 已存入 ${player.name} 的背包。`);
+  render();
 }
 
 function setTargetHighlight(enabled) {
@@ -2460,27 +2648,32 @@ async function chooseCardTarget(player, card, sid) {
   }
   setTargetHighlight(true);
   render();
+  const blockedEffect = card.id === "boost" ? "speedBoost" : card.id === "slow" ? "speedSlow" : null;
+  const targets = [
+    { id: "self", label: "对自己使用", variant: "primary" },
+    { id: "opponent", label: "对对手使用", variant: "danger" },
+  ].filter(target => !blockedEffect || !(target.id === "self" ? player : getOpponent(player)).effects[blockedEffect]);
   const choice = await showModal({
     label: "卡牌效果",
     title: `${card.icon} ${card.name} — 选择目标`,
     message: card.description,
     buttons: [
-      { id: "self", label: `对自己使用`, variant: "primary" },
-      { id: "opponent", label: `对对手使用`, variant: "danger" },
+      { id: "cancel", label: "暂不使用", variant: "ghost" },
+      ...targets,
     ],
   });
-  setTargetHighlight(false);
   if (!isSessionActive(sid)) return null;
-  return choice === "self" ? "self" : "opponent";
+  setTargetHighlight(false);
+  return ["self", "opponent"].includes(choice) ? choice : null;
 }
 
-async function executeCardEffect(player, card, sid) {
+async function executeCardEffect(player, card, sid, prepared = {}) {
   const opp = getOpponent(player);
 
   switch (card.id) {
     case "teleport": {
-      const target_who = await chooseCardTarget(player, card, sid);
-      if (!isSessionActive(sid)) return;
+      const target_who = prepared.target || await chooseCardTarget(player, card, sid);
+      if (!isSessionActive(sid) || !target_who) return;
       const target_player = target_who === "self" ? player : opp;
       playSound("special", { rate: 1.1 });
       const lots = state.board.filter((t) => t.lot !== null);
@@ -2490,13 +2683,14 @@ async function executeCardEffect(player, card, sid) {
       state.animation.landedTile = dest.index;
       pushLog(`传送术！${target_player.name} 被传送到 ${dest.name}！`);
       render();
-      await showContinueModal({ label: "卡牌效果", title: `${target_player.name} 传送到 ${dest.name}！`, message: `${target_player.name} 下回合将从 ${dest.name} 出发。` });
+      await showContinueModal({ label: "卡牌效果", title: `${target_player.name} 传送到 ${dest.name}！`, message: "本次传送不结算落点，正常掷骰次数保留。" });
       break;
     }
     case "launch": {
       playSound("special", { rate: 1.06 });
       let steps;
-      if (player.isAi) {
+      if (prepared.steps) steps = prepared.steps;
+      else if (player.isAi) {
         let bestStep = 1, bestScore = -9999;
         for (let s = 1; s <= 6; s++) {
           const idx = previewMovement(player, s).index;
@@ -2535,8 +2729,8 @@ async function executeCardEffect(player, card, sid) {
       break;
     }
     case "rewind": {
-      const target_who = await chooseCardTarget(player, card, sid);
-      if (!isSessionActive(sid)) return;
+      const target_who = prepared.target || await chooseCardTarget(player, card, sid);
+      if (!isSessionActive(sid) || !target_who) return;
       const target_player = target_who === "self" ? player : opp;
       playSound("special", { rate: 0.94 });
       pushLog(`时光回溯！${target_player.name} 被迫后退 3 步！`);
@@ -2551,7 +2745,7 @@ async function executeCardEffect(player, card, sid) {
       state.animation.currentTile = null;
       state.animation.landedTile = target_player.position;
       render();
-      await showContinueModal({ label: "卡牌效果", title: `${target_player.name} 到达 ${state.board[target_player.position].name}`, message: `${target_player.name} 下回合将从此处出发。` });
+      await showContinueModal({ label: "卡牌效果", title: `${target_player.name} 到达 ${state.board[target_player.position].name}`, message: "本次后退不结算落点，正常掷骰次数保留。" });
       break;
     }
     case "swap": {
@@ -2569,8 +2763,8 @@ async function executeCardEffect(player, card, sid) {
       break;
     }
     case "boost": {
-      const target_who = await chooseCardTarget(player, card, sid);
-      if (!isSessionActive(sid)) return;
+      const target_who = prepared.target || await chooseCardTarget(player, card, sid);
+      if (!isSessionActive(sid) || !target_who) return;
       const target_player = target_who === "self" ? player : opp;
       target_player.effects.speedBoost = true;
       pushLog(`加速引擎！${target_player.name} 下次掷骰翻倍！`);
@@ -2578,8 +2772,8 @@ async function executeCardEffect(player, card, sid) {
       break;
     }
     case "slow": {
-      const target_who = await chooseCardTarget(player, card, sid);
-      if (!isSessionActive(sid)) return;
+      const target_who = prepared.target || await chooseCardTarget(player, card, sid);
+      if (!isSessionActive(sid) || !target_who) return;
       const target_player = target_who === "self" ? player : opp;
       target_player.effects.speedSlow = true;
       pushLog(`减速陷阱！${target_player.name} 下次掷骰减半！`);
@@ -2625,7 +2819,8 @@ async function executeCardEffect(player, card, sid) {
         break;
       }
       let giveIdx;
-      if (player.isAi) {
+      if (Number.isInteger(prepared.giveIdx)) giveIdx = prepared.giveIdx;
+      else if (player.isAi) {
         const sorted = [...myLots].sort((a, b) => (a.lot.level + a.lot.price / 100) - (b.lot.level + b.lot.price / 100));
         giveIdx = sorted[0].index;
       } else {
@@ -2664,8 +2859,8 @@ async function executeCardEffect(player, card, sid) {
       break;
     }
     case "reverse": {
-      const target_who = await chooseCardTarget(player, card, sid);
-      if (!isSessionActive(sid)) return;
+      const target_who = prepared.target || await chooseCardTarget(player, card, sid);
+      if (!isSessionActive(sid) || !target_who) return;
       const target_player = target_who === "self" ? player : opp;
       target_player.effects.reversed = !target_player.effects.reversed;
       const dirText = target_player.effects.reversed ? "逆时针" : "顺时针";
@@ -2775,9 +2970,8 @@ function aiChooseCard(cards, player) {
   const opp = getOpponent(player);
   const myLots = state.board.filter((t) => t.lot?.ownerId === player.id && !t.isLargeSecondary).length;
   const oppLots = state.board.filter((t) => t.lot?.ownerId === opp.id && !t.isLargeSecondary).length;
-  // These effects already consume the opponent's next action; a second trap
-  // adds nothing. Card draws still require a selection, so rank it last rather
-  // than returning no card and changing the mandatory-draw flow.
+  // A stored card can wait for a useful turn. Avoid choosing another trap
+  // while one is already pending, but still accept it if it is the only reward.
   const redundantFreeze = opp.effects.hotSpringRest || opp.effects.frozen || opp.effects.bankruptcyRelief;
   const prio = {
     rewind: oppLots > 0 ? 9 : 2, freeze: redundantFreeze ? -1 : oppLots > 0 ? 7 : 3,
@@ -2787,13 +2981,14 @@ function aiChooseCard(cards, player) {
     propertySwap: (myLots > 0 && oppLots > 0) ? 6 : 1,
     reverse: 5,
   };
-  return cards.sort((a, b) => (prio[b.id] || 3) - (prio[a.id] || 3))[0];
+  return [...cards].sort((a, b) => (prio[b.id] ?? 3) - (prio[a.id] ?? 3))[0];
 }
 
 function endTurn() {
   if (state.gameOver) return;
   hideModal(false); clearHighlights(); state.busy = false;
   state.currentPlayerIndex = (state.currentPlayerIndex + 1) % state.players.length;
+  currentPlayer().cardUsedThisTurn = false;
   if (state.currentPlayerIndex === state.firstPlayerIndex) state.round += 1;
   if (state.gameMode === "rounds" && state.round > getMaxRounds()) { finishGame("rounds"); return; }
   if (currentPlayer().isAi) { setAiTurnStatus(); render(); void startAiTurnWithDelay(state.sessionId); }

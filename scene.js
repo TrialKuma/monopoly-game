@@ -1,9 +1,11 @@
 import * as THREE from './assets/vendor/three/three.module.min.js';
 import { makeStudioEnvironment } from './scene-environment.js?v=20261024-blender-release2';
 import { mergeGeometries } from './assets/vendor/three/addons/utils/BufferGeometryUtils.js';
-import { createSceneLife } from './scene-life.js?v=20261025-terrain3';
+import { createSceneLife } from './scene-life.js?v=20261025-items1';
 import { createStreetFoundation } from './scene-streets.js?v=20261024-1';
 import { createRegionalPark } from './scene-regional-parks.js?v=20261025-terrain3';
+import { createOwnershipRoofs } from './scene-ownership-roofs.js?v=20261025-items1';
+import { createFunctionalLandmark } from './scene-functional-landmarks.js?v=20261025-items1';
 import { loadSharedModelAsset, forgetSharedModelAsset, releaseSharedModelAsset, releaseSupersededModelAssets, ownsSharedModelResource, disposeSharedModelAssets } from './scene-model-cache.js?v=20261024-blender-release2';
 
 // All route positions, ownership and prices come from the game. This view never
@@ -30,6 +32,8 @@ const stepViews = new Map();
 const resources = new Set();
 const materials = new Map();
 const pulses = [];
+let ownershipRoofs = null;
+const roofController = () => ownershipRoofs ||= createOwnershipRoofs({THREE});
 let scene, camera, renderer, world, labels, wrap, observer, frame = 0;
 let snapshot = null, mapKey = '', lastTime = 0, width = 1, height = 1;
 let rendererWidth = 0, rendererHeight = 0;
@@ -387,6 +391,7 @@ function mountCameraControls(){
 function clearMap() {
   sceneLife?.dispose();sceneLife=null;
   streetFoundation?.dispose();streetFoundation=null;
+  ownershipRoofs?.clear();
   world?.clear(); labels?.replaceChildren(); lotViews.clear(); pawnViews.clear(); stepViews.clear();
   travelArrow = null;
   resources.forEach((resource) => resource.dispose?.()); resources.clear(); materials.clear(); pulses.length = 0;
@@ -560,6 +565,7 @@ function makeLot(tile, data) {
   button.dataset.side=boundary.side;
   button.innerHTML='<span class="scene-tile-name"></span><span class="scene-tile-meta"></span>';
   button.querySelector('.scene-tile-name').textContent=tile.name;
+  if(!tile.lot)button.querySelector('.scene-tile-name').dataset.service=({start:'市政',bank:'金库',construction:'城建',card_draw:'抽卡',chance:'事件',teleport:'传送',rush:'快线',junction:'分岔'})[tile.isStart?'start':tile.special?.type]||'';
   labels.appendChild(button);
   const view={tile, mapId:data.mapId, boundary, group, building, ownerMaterial, ownerFrame, flag, flagCloth, outline, label:button, anchor, w, d, signature:'', modelName:'', born:0};
   lotViews.set(tile.index,view); updateLot(view,tile,data,true);
@@ -598,7 +604,7 @@ function resolveAsset(tile,data,level=tile.lot?.level||0){
   return {family,desired,key,source:modelLibrary.get(key),authored:authoredModels.has(key),level};
 }
 function lotModelRotation(view){return view.mapId==='classic'?(view.d>view.w?Math.PI/2:0):(view.readableRotation??view.boundary.rotation);}
-function createLotModel(tile,data,level,view=null){
+function createLotModel(tile,data,level,view=null,ownResource=own){
   const asset=resolveAsset(tile,data,level);let model;
   if(asset.source){
     if(asset.authored)model=cloneAuthoredModel(asset.source);
@@ -607,6 +613,13 @@ function createLotModel(tile,data,level,view=null){
     model=new THREE.Group();
     if(tile.lot&&level===0)saleSign(model);
     else model.userData.pendingModel=asset.desired;
+  }
+  if(asset.source){
+    if(tile.lot)roofController().set(model,tile.lot.ownerId);
+    else {
+      const service=createFunctionalLandmark({THREE,mapId:data.mapId,type:tile.isStart?'start':tile.special?.type,model,own:ownResource});
+      if(service){model.userData.functionalBounds=new THREE.Box3().setFromObject(service);model.add(service);}
+    }
   }
   if(view){
     model.userData.cityBaseRotationY=model.rotation.y;
@@ -683,11 +696,13 @@ function updateLot(view,tile,data,initial=false) {
   const modelName=asset.desired;
   const signature=`${modelName}:${asset.key}:${asset.source?.uuid||'fallback'}`;
   if(view.signature!==signature){
+    view.building.children.forEach(model=>ownershipRoofs?.release(model));
     view.building.clear(); view.signature=signature;view.modelName=modelName;
     view.building.add(createLotModel(tile,data,level,view).model);
     view.label.dataset.modelKey=asset.desired;view.label.dataset.loadedModel=asset.source?asset.key:'';
     if(!initial){view.born=performance.now();view.building.scale.y=reducedMotion.matches?1:.78;effect({type:'upgrade',tiles:[tile.index]});}
   }
+  if(tile.lot&&view.building.children[0])roofController().set(view.building.children[0],owner?.id);
   if(tile.lot&&level===0&&owner)view.building.visible=false;else view.building.visible=true;
   const meta=view.label.querySelector('.scene-tile-meta');
   if(tile.lot){
@@ -866,7 +881,8 @@ function framingForLot(view){
     asset.family==='onsen'?[new THREE.Box3(new THREE.Vector3(-1.35,0,-.50),new THREE.Vector3(1.35,1.40,.50))]:
     [new THREE.Box3(new THREE.Vector3(-.61,0,-.53),new THREE.Vector3(.61,view.tile.lot?(view.tile.lot.theme?.key==='tower'?1.95:1.52):1.75,.53))]
   );
-  return boxes.map((box)=>box.clone().applyMatrix4(rotation).translate(offset));
+  const serviceBounds=!view.tile.lot&&view.building?.children[0]?.userData.functionalBounds;
+  return [...boxes,...(serviceBounds?[serviceBounds]:[])].map((box)=>box.clone().applyMatrix4(rotation).translate(offset));
 }
 function followCamera(delta){
   if(!camera||!cameraFocusReady||!isLocalCamera()||!cameraView.following||inspection||cameraGesture.pointers.size)return false;
@@ -1028,11 +1044,15 @@ function inspectTile(index,level){
 }
 function renderInspectionModel(){
   const state=inspection;if(!state?.renderer||!state.pivot)return;
+  state.pivot.children.forEach(model=>ownershipRoofs?.release(model));
+  state.modelResources?.forEach(resource=>resource.dispose?.());state.modelResources=[];
+  const ownPreview=resource=>{state.modelResources.push(resource);return resource;};
   state.pivot.clear();
-  const data={mapId:state.mapId};const current=createLotModel(state.tile,data,state.level);
+  const data={mapId:state.mapId};const current=createLotModel(state.tile,data,state.level,null,ownPreview);
   state.pivot.add(current.model);
-  const highest=createLotModel(state.tile,data,state.tile.lot?3:0).model;highest.updateMatrixWorld(true);
+  const highest=createLotModel(state.tile,data,state.tile.lot?3:0,null,ownPreview).model;highest.updateMatrixWorld(true);
   state.bounds=new THREE.Box3().setFromObject(highest);
+  ownershipRoofs?.release(highest);
   if(state.bounds.isEmpty())state.bounds.set(new THREE.Vector3(-.5,0,-.5),new THREE.Vector3(.5,1,.5));
   state.dialog.querySelector('.city-model-hint').textContent=current.asset.source?'拖动转一转 · 看看每一面':failedBundles.has(`regions/${state.mapId}.glb`)?'建筑未载入，关闭后重开可重试':'建筑加载中…';
   state.elevation=state.bounds.max.y>2.5?.57:.78;
@@ -1061,6 +1081,8 @@ function renderInspection(){
 }
 function closeInspection(){
   const state=inspection;if(!state)return;inspection=null;
+  state.pivot?.children.forEach(model=>ownershipRoofs?.release(model));
+  state.modelResources?.forEach(resource=>resource.dispose?.());
   state.observer?.disconnect();state.environment?.dispose();state.resources.forEach((resource)=>resource.dispose?.());state.renderer?.dispose();state.renderer?.forceContextLoss();
   if(state.dialog.open)state.dialog.close();state.dialog.remove();document.body.classList.remove('city-inspection-open');
   syncCameraControls();

@@ -35,9 +35,10 @@ export function createRoofSnow({ THREE, world, requestRender = () => {} }) {
     // Model roots only rotate around the vertical axis. The caps inherit all
     // instance transforms, including the short building-upgrade animation.
     const unit = Math.max(.1, Math.abs(model.scale.x)), heightUnit = Math.max(.1, Math.abs(model.scale.y));
-    const key = `${model.name}|${unit.toFixed(5)}|${heightUnit.toFixed(5)}|` + parts.map(part =>
+    const ownedRoof = Boolean(model.userData.roofOwner);
+    const key = `${model.name}|${unit.toFixed(5)}|${heightUnit.toFixed(5)}|${ownedRoof ? 'owned' : 'neutral'}|` + parts.map(part =>
       `${part.geometry.uuid}:${part.forbidden ? 1 : 0}:${part.materials.map(mat => mat?.name || mat?.color?.getHexString() || '').join(',')}:${part.matrix.elements.map(v => v.toFixed(5)).join(',')}`).join(';');
-    return { parts, bounds, unit, heightUnit, key };
+    return { parts, bounds, unit, heightUnit, key, ownedRoof };
   }
   function eligible(material, forbidden) {
     if (!material || forbidden || material.visible === false || material.opacity < .85) return false;
@@ -97,6 +98,24 @@ export function createRoofSnow({ THREE, world, requestRender = () => {} }) {
     trianglesProcessed += work;
     yield;
     const topTriangles = [], maxRise = step * 1.72 + .009 / heightUnit;
+    // Leave a narrow painted eave visible on owned buildings. Snow stays white,
+    // but a winter roof can still identify its owner on a phone. Erosion only
+    // removes cap cells inside the existing silhouette; no new surface appears.
+    let exposedEdgeSamples = 0;
+    if (entry.ownedRoof) {
+      const surface = suitable.slice(), band = Math.max(1, Math.ceil(.045 / (step * unit)));
+      for (let iz = 0; iz < nz; iz++) for (let ix = 0; ix < nx; ix++) {
+        const index = iz * nx + ix; if (!surface[index]) continue;
+        let edge = false;
+        for (let dz = -band; dz <= band && !edge; dz++) for (let dx = -band; dx <= band && !edge; dx++) {
+          if (dx * dx + dz * dz > band * band) continue;
+          const x = ix + dx, z = iz + dz, neighbor = z * nx + x;
+          edge = x < 0 || z < 0 || x >= nx || z >= nz || !surface[neighbor]
+            || Math.abs(heights[index] - heights[neighbor]) > maxRise * Math.max(1, Math.hypot(dx, dz));
+        }
+        if (edge) { suitable[index] = 0; exposedEdgeSamples++; }
+      }
+    }
     const addTop = (x, y, z) => {
       if (!suitable[x] || !suitable[y] || !suitable[z]) return;
       if (Math.max(heights[x], heights[y], heights[z]) - Math.min(heights[x], heights[y], heights[z]) > maxRise) return;
@@ -153,7 +172,8 @@ export function createRoofSnow({ THREE, world, requestRender = () => {} }) {
     geometry.computeBoundingBox(); geometry.computeBoundingSphere();
     geometry.userData.roofSnow = { topIndexCount, capTriangles: retained.length, borderEdges: edges.size,
       minSourceNormal: Math.min(...Array.from(vertexMap.keys(), index => sourceNormals[index])),
-      stepWorld: step * unit, maxDepthWorld: .048, model: entry.name };
+      stepWorld: step * unit, maxDepthWorld: .048, model: entry.name,
+      ownedRoof: entry.ownedRoof, exposedEdgeSamples };
     return geometry;
   }
   function install(record) {
@@ -171,7 +191,7 @@ export function createRoofSnow({ THREE, world, requestRender = () => {} }) {
   }
   function refresh() {
     if (disposed) return;
-    for (const [model, record] of records) if (!belongs(model)) { release(record); records.delete(model); }
+    for (const [model, record] of records) if (!belongs(model) || record.entry.ownedRoof !== Boolean(model.userData.roofOwner)) { release(record); records.delete(model); }
     const targets = [];
     world.traverse(node => {
       if (!node.userData.snowTarget || cosmetic(node)) return;

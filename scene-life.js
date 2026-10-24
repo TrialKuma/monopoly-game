@@ -1,7 +1,7 @@
 // Cosmetic city life. No game state writes, global RNG, timers, or animation loop.
 // Articulated Blender parts are kept by scene.js before its static mesh batching.
 import { createCityLighting } from './scene-lighting.js?v=20261024-1';
-import { createCityWeather } from './scene-weather.js?v=20261025-terrain3';
+import { createCityWeather } from './scene-weather.js?v=20261025-items1';
 import { createCityOutskirts } from './scene-outskirts.js?v=20261025-terrain3';
 import { createDestinationScene } from './scene-destinations.js?v=20261025-terrain3';
 export function shouldPreserveLifeNode(node) {
@@ -182,7 +182,7 @@ export function createSceneLife({ THREE, scene, world, light, snapshot, lotViews
   function update(next) {
     if (disposed) return;
     currentSnapshot = next || currentSnapshot;
-    const signature = [...(lotViews?.values?.() || [])].map(v => (v.building?.children || []).map(c=>c.uuid).join(',') || v.group?.uuid || '').join('|');
+    const signature = [...(lotViews?.values?.() || [])].map(v => (v.building?.children || []).map(c=>`${c.uuid}:${Boolean(c.userData.roofOwner)}`).join(',') || v.group?.uuid || '').join('|');
     if (signature !== observedBuildings || !observedBuildings) { observedBuildings = signature; bindBuildings(); }
     forced = true; requestRender();
   }

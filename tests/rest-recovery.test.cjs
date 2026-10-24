@@ -129,6 +129,10 @@ function setup(map = 'classic', secondary = false) {
       const before = value(c, 'state.players[0].effects');
       await c.run('resolveCardDraw(state.players[1],state.sessionId)');
       assert.match(events.find(e=>e.label==='翻牌事件').title, /加速引擎/);
+      assert.equal(c.run('state.players[1].effects.speedBoost'), false);
+      assert.equal(c.run('state.players[1].cards[0].cardId'), 'boost');
+      c.run('startScreenEl.classList.contains=()=>true;state.currentPlayerIndex=1;setAiTurnStatus()');
+      await c.run('useAiInventoryCard(state.players[1])');
       assert.equal(c.run('state.players[1].effects.speedBoost'), true);
       assert.deepEqual(value(c, 'state.players[0].effects'), before);
     });
@@ -140,17 +144,25 @@ function setup(map = 'classic', secondary = false) {
       CARD_POOL.splice(0,CARD_POOL.length,...offered);`);
     await c.run('resolveCardDraw(state.players[1],state.sessionId)');
     assert.match(events.find(e=>e.label==='翻牌事件').title, /绊脚术/);
+    assert.equal(c.run('state.players[0].effects.frozen'), false);
+    assert.equal(c.run('state.players[1].cards[0].cardId'), 'freeze');
+    c.run('startScreenEl.classList.contains=()=>true;state.currentPlayerIndex=1;setAiTurnStatus()');
+    await c.run('useAiInventoryCard(state.players[1])');
     assert.equal(c.run('state.players[0].effects.frozen'), true);
     assert.equal(c.run('state.players[1].effects.speedBoost'), false);
   });
-  await test('mandatory AI draw with only freeze still returns a usable card', async () => {
+  await test('AI draw with only freeze stores it until a useful turn', async () => {
     const {c, events} = setup();
     c.run(`state.players[0].effects.hotSpringRest=true;
       var onlyFreeze=CARD_POOL.find(card=>card.id==='freeze');
       CARD_POOL.splice(0,CARD_POOL.length,onlyFreeze);`);
     await c.run('resolveCardDraw(state.players[1],state.sessionId)');
     assert.match(events.find(e=>e.label==='翻牌事件').title, /绊脚术/);
-    assert.match(events.at(-1).message, /不重复收租或追加休息/);
+    assert.equal(c.run('state.players[1].cards[0].cardId'), 'freeze');
+    c.run('startScreenEl.classList.contains=()=>true;state.currentPlayerIndex=1;setAiTurnStatus()');
+    await c.run('useAiInventoryCard(state.players[1])');
+    assert.equal(c.run('state.players[1].cards.length'), 1);
+    assert.equal(c.run('state.players[0].effects.frozen'), false);
   });
   console.log('PASS', checks.length, 'rest / trap / rent / recovery checks');
 })().catch(error => { console.error(error); process.exitCode = 1; });

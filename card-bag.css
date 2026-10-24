@@ -1,0 +1,40 @@
+.card-bag-trigger{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:44px;padding:10px 14px;background:#e8ede2;color:#315c4d;border:1px solid #cbd8c5;border-radius:12px;font-size:13px;font-weight:700;white-space:nowrap}
+.card-bag-trigger [data-card-count]{display:inline-grid;place-items:center;min-width:21px;height:21px;padding:0 5px;border-radius:7px;background:#d8dfd2;color:#4d6656;font-variant-numeric:tabular-nums}
+.card-bag-trigger.has-cards{background:#f0e4c5;border-color:#d8c89a;color:#634c27}
+.card-bag-trigger.has-cards [data-card-count]{background:#315f50;color:#fffdf4}
+.card-bag-trigger:focus-visible,.card-bag-dialog button:focus-visible{outline:3px solid #a77934;outline-offset:3px}
+.card-bag-dialog{width:min(660px,calc(100vw - 32px));max-height:82dvh;margin:auto;padding:0;border:1px solid #d5dccb;border-radius:24px;background:#faf9f0;color:#244c40;box-shadow:0 28px 90px #173d3a55;overflow:hidden}
+.card-bag-dialog::backdrop{background:#122f2b66;backdrop-filter:blur(3px)}
+.card-bag-dialog[open]{display:flex;flex-direction:column}
+.card-bag-header{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:22px 24px 16px;border-bottom:1px solid #dce1d0}
+.card-bag-header h2{margin:0;font-size:24px;letter-spacing:-.5px}
+.card-bag-header p{margin:7px 0 0;font-size:12px;color:#6d7c68}
+.card-bag-header button{min-width:64px;min-height:44px;border:1px solid #d6decc;border-radius:12px;background:#edf0e6;color:#3a5d4c;font-size:13px}
+.card-bag-list{padding:16px 20px;display:grid;gap:10px;overflow-y:auto;overscroll-behavior:contain;min-height:140px}
+.bag-card{--card-accent:#397e79;--card-tint:#e1eeea;display:grid;grid-template-columns:64px minmax(0,1fr) auto;gap:14px;align-items:center;padding:12px;border:1px solid #d9e1d2;border-radius:16px;background:#fffef8}
+.bag-card[data-kind="control"]{--card-accent:#83609f;--card-tint:#eee5f3}
+.bag-card[data-kind="estate"]{--card-accent:#a17c35;--card-tint:#f1e8cf}
+.bag-card-art{display:grid;place-items:center;height:82px;position:relative;border:1px solid color-mix(in srgb,var(--card-accent) 38%,white);border-radius:11px;background:linear-gradient(145deg,#ffffff88,var(--card-tint));box-shadow:inset 0 0 0 4px #fff9;transform:rotate(-3deg)}
+.bag-card-art:before,.bag-card-art:after{content:'◆';position:absolute;font-size:8px;color:var(--card-accent);opacity:.65}.bag-card-art:before{top:7px;left:8px}.bag-card-art:after{right:8px;bottom:7px}
+.bag-card-art span{font-size:28px;filter:drop-shadow(0 2px 1px #234d2e12)}
+.bag-card-copy small{font-size:10px;color:var(--card-accent);letter-spacing:1px;font-weight:800}
+.bag-card-copy h3{margin:3px 0 5px;font-size:16px;font-weight:800}
+.bag-card-copy p{margin:0;font-size:12px;line-height:1.6;color:#6c7867;overflow-wrap:anywhere}
+.bag-card-copy p.bag-card-reason{color:#9a7044;margin-top:5px}
+.bag-card button{min-width:64px;min-height:46px;padding:10px 12px;background:#285c4e;color:#fffdf2;border-radius:11px;font-size:13px;font-weight:700}
+.bag-card button:disabled{background:#e8ebe1;color:#929b89;cursor:default}
+.card-bag-footer{padding:14px 24px 17px;border-top:1px solid #dce1d0;background:#f0f2e8;font-size:12px;line-height:1.6;color:#65745f}
+.card-bag-footer p{margin:0}
+.bag-empty{padding:32px 16px;text-align:center;color:#74816a}.bag-empty>span{font-size:48px;color:#a0af91}.bag-empty h3{font-size:17px;margin:10px 0}.bag-empty p{font-size:13px;margin:0;line-height:1.7}
+@media(max-width:820px) and (orientation:portrait),(max-width:600px){
+  .center-actions>.card-bag-trigger{display:none}
+  .mobile-tools>.card-bag-trigger{gap:6px;border:0;border-right:1px solid #e3e8dc;padding:6px;background:transparent}
+  .mobile-tools>.card-bag-trigger.has-cards{background:#f2ead5;color:#735b32}
+  .mobile-tools>.card-bag-trigger [data-card-count]{height:20px;min-width:20px;font-size:11px}
+  .card-bag-dialog{width:calc(100vw - 20px);max-height:calc(100dvh - 32px - env(safe-area-inset-top) - env(safe-area-inset-bottom));margin:auto 10px max(10px,env(safe-area-inset-bottom));border-radius:22px}
+  .card-bag-header{padding:18px 16px 14px}.card-bag-header h2{font-size:22px}
+  .card-bag-list{padding:12px;gap:9px;max-height:62dvh}
+  .bag-card{grid-template-columns:48px minmax(0,1fr) 54px;gap:10px;padding:10px}.bag-card-art{height:67px}.bag-card-art span{font-size:24px}
+  .bag-card-copy h3{font-size:14px}.bag-card-copy p{font-size:11px;line-height:1.65}.bag-card button{min-width:54px;padding:9px 6px;font-size:12px}
+  .card-bag-footer{padding:12px 16px 14px}
+}

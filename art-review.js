@@ -1,9 +1,18 @@
 import * as THREE from './assets/vendor/three/three.module.min.js';
 import { makeStudioEnvironment } from './scene-environment.js?v=20261024-blender-release2';
 import { GLTFLoader } from './assets/vendor/three/addons/loaders/GLTFLoader.js';
+import { createOwnershipRoofs } from './scene-ownership-roofs.js?v=20261025-items1';
+import { createFunctionalLandmark } from './scene-functional-landmarks.js?v=20261025-items1';
 
 const $=id=>document.getElementById(id),region=$('region'),family=$('family'),level=$('level'),stage=$('stage');
 const params=new URLSearchParams(location.search),candidateMode=params.get('stage')==='candidate';
+const reviewRoofs=createOwnershipRoofs({THREE}), reviewResources=new Set();
+const ownerLabel=document.createElement('label'),ownerChoice=document.createElement('select');
+ownerLabel.append('产权',ownerChoice);ownerChoice.add(new Option('原色 / 无主','none'));ownerChoice.add(new Option('你的建筑 · 青绿屋顶','human'));ownerChoice.add(new Option('对手建筑 · 砖红屋顶','ai'));
+ownerChoice.value=['human','ai'].includes(params.get('owner'))?params.get('owner'):'none';
+ownerLabel.hidden=candidateMode;document.querySelector('nav').append(ownerLabel);
+ownerChoice.addEventListener('change',()=>{const query=new URLSearchParams(location.search);query.set('owner',ownerChoice.value);history.replaceState(null,'',`${location.pathname}?${query}`);pivot.children.forEach(model=>reviewRoofs.set(model,ownerChoice.value));render();});
+function clearReviewAdditions(){reviewRoofs.clear();reviewResources.forEach(resource=>resource.dispose());reviewResources.clear();}
 const versionLabel=document.createElement('label'),versionChoice=document.createElement('select');
 versionLabel.append('版本',versionChoice);
 versionChoice.add(new Option('正式 Blender 建筑','published'));versionChoice.add(new Option('历史 AI 候选','candidate'));
@@ -124,7 +133,7 @@ async function update(){
  const currentQuery=new URLSearchParams(location.search);currentQuery.set('map',map);currentQuery.set('family',family.value);currentQuery.set('level',level.value);
  history.replaceState(null,'',`${location.pathname}?${currentQuery}`);
  const asset=hero?scenic[map][0]:family.value+(publicBuilding?'':`_${level.value}`),key=`${map}_${asset}`;
- stopMotion();pivot.clear();bounds.makeEmpty();renderer.clear();
+ stopMotion();clearReviewAdditions();pivot.clear();bounds.makeEmpty();renderer.clear();
  const ref=`./art/regions/references/${map}-${selected[2]}-three-views.png`;setReferenceViews([]);$('reference').hidden=candidateMode;$('reference-link').hidden=candidateMode;
  if(candidateMode)referenceCaption.textContent='实际三视图载入中…';else{$('reference').src=ref;$('reference-link').href=ref;}
  $('title').textContent=hero?scenic[map][1]:selected[1]+(publicBuilding?'':` · Lv.${level.value}`);$('status').textContent='加载中';$('error').hidden=true;
@@ -138,6 +147,15 @@ async function update(){
    const source=candidateMode?bundle.scene.getObjectByName(`${map}__${asset}`):bundle.scene.getObjectByName(key);
    if(!source)throw Error(candidateMode?'这栋建筑尚未完成候选导出。':'这栋建筑尚未成功加载，请刷新后重试。');
    pivot.clear();const object=source.clone(true);object.position.set(0,0,0);let triangles=0;
+   ownerChoice.disabled=publicBuilding||hero;
+   if(!candidateMode){
+     if(!publicBuilding&&!hero)reviewRoofs.set(object,ownerChoice.value);
+     else if(publicBuilding){
+       const type={civic_hall:'start',vault_bank:'bank',builders_guild:'construction',card_pavilion:'card_draw',chance_wheel:'chance',teleport_gate:'teleport',rush_station:'rush',junction_hub:'junction'}[family.value];
+       const service=createFunctionalLandmark({THREE,mapId:map,type,model:object,own:resource=>{reviewResources.add(resource);return resource;}});
+       if(service)object.add(service);
+     }
+   }
    object.traverse(n=>{if(n.isMesh){n.castShadow=true;n.receiveShadow=true;triangles+=(n.geometry.index?.count||n.geometry.attributes.position.count)/3;}});
    pivot.add(object);bounds.setFromObject(object);setupMotion(object);$('status').textContent=`${candidateMode?'待审核 · ':''}${Math.round(triangles).toLocaleString()} 面`;$('status').dataset.model=key;
    const neural=candidateMode||['reviewed_pixal_multiview','pixal_native_multiview'].includes(source.userData.sourceType);
@@ -156,4 +174,4 @@ async function update(){
 for(const el of [region,family,level])el.addEventListener('change',update);
 document.querySelector('.views').addEventListener('click',e=>{const button=e.target.closest('[data-view]');if(!button)return;const view=button.dataset.view;yaw={iso:.6,front:0,side:Math.PI/2,back:Math.PI,left:-Math.PI/2}[view];elevation=view==='iso'?.45:0;zoom=1;selectReference({front:'front',side:'right',back:'back'}[view]);document.querySelectorAll('[data-view]').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));render();});
 let drag=null;stage.addEventListener('pointerdown',e=>{drag={id:e.pointerId,x:e.clientX,y:e.clientY,yaw,elevation};stage.setPointerCapture(e.pointerId);});stage.addEventListener('pointermove',e=>{if(!drag||drag.id!==e.pointerId)return;yaw=drag.yaw+(e.clientX-drag.x)*.008;elevation=Math.max(-.1,Math.min(1.2,drag.elevation+(e.clientY-drag.y)*.006));render();});for(const event of ['pointerup','pointercancel'])stage.addEventListener(event,()=>drag=null);stage.addEventListener('wheel',e=>{e.preventDefault();zoom=Math.max(.7,Math.min(2.3,zoom*Math.exp(-e.deltaY*.001)));render();},{passive:false});
-const observer=new ResizeObserver(render);observer.observe(stage);window.addEventListener('pagehide',()=>{disposed=true;request++;stopMotion();observer.disconnect();disposeBundle(bundle);floor.geometry.dispose();floor.material.dispose();environment.dispose();renderer.dispose();},{once:true});update();
+const observer=new ResizeObserver(render);observer.observe(stage);window.addEventListener('pagehide',()=>{disposed=true;request++;stopMotion();observer.disconnect();clearReviewAdditions();disposeBundle(bundle);floor.geometry.dispose();floor.material.dispose();environment.dispose();renderer.dispose();},{once:true});update();
