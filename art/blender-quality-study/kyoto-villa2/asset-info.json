@@ -1,0 +1,36 @@
+{
+  "asset": "Kyoto villa 2 authored quality study",
+  "approved": false,
+  "generatedWithAI": false,
+  "triangles": 41116,
+  "materials": 15,
+  "bytes": 3198964,
+  "sha256": "ec736dd088a8dba56e07fc811f46550263d17d4e9379274b275f5cffd19e1467",
+  "front": "glTF +Z",
+  "up": "glTF +Y",
+  "origin": "ground centre",
+  "source": "Custom Blender geometry matching front/right/back references; reusable Mesh primitive API from art/build_regional_city.py",
+  "referenceFiles": [
+    "art/themed-city-kit/inputs/compact-house-v01/view00_azim000.png",
+    "art/themed-city-kit/inputs/compact-house-v01/view01_azim090.png",
+    "art/themed-city-kit/inputs/compact-house-v01/view02_azim180.png"
+  ],
+  "targets": {
+    "triangles": 30000,
+    "bytes": 3145728,
+    "materials": 15
+  },
+  "triangleBudgetException": "41.1k triangles retained for this isolated comparison sample to preserve real curved roof tiles and physical bevels. It is not a published runtime replacement.",
+  "occlusion": {
+    "size": 2048,
+    "distance": 0.18,
+    "samples": 16,
+    "method": "CPU Cycles local AO to glTF occlusionTexture; baseColor contains no light/shadow"
+  },
+  "reviewRenders": "All renders use freshly reimported kyoto-villa2.glb, not the source Blender mesh.",
+  "byteBudgetException": "3.05 MiB, about 52 KiB above the preferred 3 MiB sample target after adding solid ceramic gable caps. No runtime approval.",
+  "knownLimitations": [
+    "Fine grazing-angle stippling is still visible in the right orthographic studio render above the ceramic gable cap; no further geometry iteration in this isolated comparison study.",
+    "This is clean stylized architecture, not a pixel-identical reconstruction of the shaded three-view illustration."
+  ]
+}
