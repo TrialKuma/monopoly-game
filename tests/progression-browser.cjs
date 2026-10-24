@@ -67,7 +67,6 @@ const server = http.createServer((req, res) => {
     // Enter through the actual game flow, then finish a controlled late-game state.
     await page.setViewportSize({ width: 320, height: 568 });
     await page.locator('#start-play-btn').click();
-    await page.locator('[data-action="rounds"]').click();
     await page.locator('[data-action="enter"]').click();
     assert.equal(await page.evaluate(() => GameProgression.getProfile().profile.wallet), 11000);
     await page.locator('[data-action="flip"]').click();

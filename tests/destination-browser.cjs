@@ -13,7 +13,7 @@ const out=path.resolve(__dirname,'../work/destination-qa');fs.mkdirSync(out,{rec
   for(const map of ['harbor','alpine']){
    await page.goto(process.env.CITY_PREVIEW_URL||'http://127.0.0.1:8876');await page.waitForFunction(()=>window.CityScene?.ready);
    await page.locator(`[data-map-id="${map}"]`).click();
-   await page.locator('#start-play-btn').click();await page.locator('[data-action="rounds"]').click();await page.locator('[data-action="enter"]').click();
+   await page.locator('#start-play-btn').click();await page.locator('[data-action="enter"]').click();
    await page.evaluate(()=>{window.qaRandom=Math.random;Math.random=()=>.1;});
    await page.locator('[data-action="flip"]').click();await page.locator('.drama-skip').click();
    await page.waitForFunction(()=>state.isFormalRun===true);await page.evaluate(()=>{Math.random=window.qaRandom;CityScene.setTimeMode('day');CityScene.setSeason('spring');CityScene.setWeather('clear');});

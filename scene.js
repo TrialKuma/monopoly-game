@@ -1,9 +1,9 @@
 import * as THREE from './assets/vendor/three/three.module.min.js';
 import { makeStudioEnvironment } from './scene-environment.js?v=20261024-blender-release2';
 import { mergeGeometries } from './assets/vendor/three/addons/utils/BufferGeometryUtils.js';
-import { createSceneLife } from './scene-life.js?v=20261024-blender-release2';
+import { createSceneLife } from './scene-life.js?v=20261025-landscape3';
 import { createStreetFoundation } from './scene-streets.js?v=20261024-1';
-import { createRegionalPark } from './scene-regional-parks.js?v=20261024-1';
+import { createRegionalPark } from './scene-regional-parks.js?v=20261025-landscape3';
 import { loadSharedModelAsset, forgetSharedModelAsset, releaseSharedModelAsset, releaseSupersededModelAssets, ownsSharedModelResource, disposeSharedModelAssets } from './scene-model-cache.js?v=20261024-blender-release2';
 
 // All route positions, ownership and prices come from the game. This view never
@@ -214,6 +214,11 @@ function isLocalCamera(){
   // Board-wide card and city-hall choices must keep every legal target visible.
   return cameraView.mode==='local'&&!snapshot?.targetSelection&&!document.body?.classList.contains('mode-start')&&!document.body?.classList.contains('mode-showcase')&&snapshot?.phase!=='preview';
 }
+function cameraSubject(){
+  // Turn changes only change the destination, never the existing focus, angle
+  // or zoom. The same easing carries the view between both players.
+  return pawnViews.get(snapshot?.currentPlayerId)||pawnViews.get(snapshot?.players?.[0]?.id)||pawnViews.values().next().value;
+}
 function resetCameraView(apply=false){
   cancelCameraGesture();cameraView={yaw:null,elevation:null,zoom:1,modified:false,facingYaw:cameraView.facingYaw,mode:apply?cameraView.mode:'local',following:true};
   // A new board starts at its pawn. Returning from an inspection eases back
@@ -287,7 +292,7 @@ function syncCameraControls(){
   cameraControls.querySelector('output').textContent=`${Math.round(cameraView.zoom*100)}%`;
   const local=isLocalCamera(),modeButton=cameraControls.querySelector('[data-camera="mode"]'),resetButton=cameraControls.querySelector('[data-camera="reset"]');
   if(modeButton){modeButton.hidden=document.body.classList.contains('mode-showcase')||document.body.classList.contains('mode-start')||snapshot?.phase==='preview';modeButton.style.display=modeButton.hidden?'none':'';modeButton.textContent=local?'全图':'局部';modeButton.setAttribute('aria-label',local?'查看整张地图':'切换局部跟随镜头');modeButton.setAttribute('aria-pressed',String(!local));}
-  if(resetButton){resetButton.textContent=local?'跟随':'回正';resetButton.setAttribute('aria-label',local?'恢复跟随你的棋子':'恢复默认棋盘视角');resetButton.setAttribute('aria-pressed',String(local&&cameraView.following));}
+  if(resetButton){resetButton.textContent=local?'跟随':'回正';resetButton.setAttribute('aria-label',local?'恢复跟随当前行动的棋子':'恢复默认棋盘视角');resetButton.setAttribute('aria-pressed',String(local&&cameraView.following));}
   wrap.dataset.cameraMode=local?'local':'overview';wrap.dataset.cameraFollowing=String(local&&cameraView.following);
   cameraControls.querySelectorAll('select').forEach(select=>{
     select.disabled=!allowed;select.value=select.dataset.atmosphere==='time'?timeMode:select.dataset.atmosphere==='season'?seasonMode:weatherMode;
@@ -865,9 +870,9 @@ function framingForLot(view){
 }
 function followCamera(delta){
   if(!camera||!cameraFocusReady||!isLocalCamera()||!cameraView.following||inspection||cameraGesture.pointers.size)return false;
-  const pawn=pawnViews.get('human');if(!pawn)return false;
-  // Track the ground position only: stepping hops, dice and the opponent's
-  // turn must not make the camera bob, turn or switch subjects.
+  const pawn=cameraSubject();if(!pawn)return false;
+  // Track the acting pawn's ground position only. Hops and dice do not make
+  // the camera bob or turn; a new turn uses the same delayed translation.
   const dx=pawn.group.position.x-cameraFocus.x,dz=pawn.group.position.z-cameraFocus.z;
   const followScale=Math.max(1,cameraView.zoom);
   const distance=Math.hypot(dx,dz),deadZone=.36/followScale;
@@ -930,7 +935,7 @@ function resize(){
     });
     if(local){
       if(!cameraFocusReady){
-        const pawn=pawnViews.get('human');
+        const pawn=cameraSubject();
         cameraFocus.set(pawn?.group.position.x||0,.2,pawn?.group.position.z||0);cameraFocusReady=true;
       }
       camera.position.add(cameraFocus);camera.lookAt(cameraFocus);camera.updateMatrixWorld(true);

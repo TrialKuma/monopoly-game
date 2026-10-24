@@ -15,7 +15,7 @@ function fixture(width=390,height=620){
   run(`
     camera=new THREE.OrthographicCamera(-10,10,7,-7,.1,100);
     renderer={setSize(){}};wrap={dataset:{},getBoundingClientRect:()=>size};labels={classList:{toggle(){}}};
-    boardBounds={w:14.4,d:12.6};snapshot={phase:'idle',mapId:'classic',players:[{id:'human',position:0}],animation:{currentTile:null}};
+    boardBounds={w:14.4,d:12.6};snapshot={phase:'idle',mapId:'classic',currentPlayerId:'human',players:[{id:'human',position:0},{id:'ai',position:0}],animation:{currentTile:null}};
     pawnViews.set('human',{group:new THREE.Group(),active:false,anchor:{style:{}}});
     pawnViews.set('ai',{group:new THREE.Group(),active:false,anchor:{style:{}}});
     resize();
@@ -24,6 +24,15 @@ function fixture(width=390,height=620){
   const move=(x,z,y=.265)=>{context.destination={x,y,z};run('pawnViews.get("human").group.position.set(destination.x,destination.y,destination.z)');};
   const step=(seconds=1/60)=>run(`followCamera(${seconds})`);
   return {run,position,move,step,classes,media,context};
+}
+
+// Local framing begins with whichever pawn acts first, including an AI opening.
+{
+  const f=fixture();
+  f.run('snapshot.currentPlayerId="ai";pawnViews.get("ai").group.position.set(8,.265,-4);cameraFocusReady=false;resize()');
+  assert.deepEqual(f.position(),new THREE.Vector3(8,.2,-4));
+  f.move(-9,7);assert.equal(f.step(),false,'an inactive human pawn is not followed');
+  f.run('snapshot.currentPlayerId="missing"');assert.equal(f.step(),true,'an incomplete snapshot still has a safe pawn fallback');
 }
 
 // Default gameplay focuses locally; menu/showcase retain their established map view.
@@ -95,6 +104,28 @@ function fixture(width=390,height=620){
   f.run('snapshot.animation.currentTile=null;pawnViews.get("human").active=true');assert.equal(f.step(),false);
   f.run('pawnViews.get("human").active=false');assert.equal(f.step(),true);
   assert.deepEqual(f.position(),new THREE.Vector3(8,.2,-4));assert.equal(f.step(),false);
+  f.run('snapshot.currentPlayerId="ai";pawnViews.get("ai").group.position.set(-7,.265,3);snapshot.animation.currentTile=7');
+  assert.equal(f.step(),false,'AI travel also waits until the full move finishes');
+  f.run('snapshot.animation.currentTile=null');assert.equal(f.step(),true);
+  assert.deepEqual(f.position(),new THREE.Vector3(-7,.2,3));
+  f.run('snapshot.currentPlayerId="human"');assert.equal(f.step(),true);
+  assert.deepEqual(f.position(),new THREE.Vector3(8,.2,-4),'reduced motion reframes to the returning player');
+}
+
+// A turn may change during a held gesture or overview; neither overrides user control.
+{
+  const f=fixture();f.run('changeCameraView(.3,.1,1.4);cameraGesture.pointers.set(1,{x:0,y:0})');
+  const held=f.position(),angle=f.run('cameraView.yaw'),zoom=f.run('cameraView.zoom');
+  f.run('snapshot.currentPlayerId="ai";pawnViews.get("ai").group.position.set(9,.265,-4)');
+  assert.equal(f.step(),false);assert.deepEqual(f.position(),held);
+  f.run('cameraPointerUp({pointerId:1})');assert.equal(f.step(),true);
+  assert.ok(f.position().distanceTo(held)<=18/60+.001,'release eases toward the active opponent');
+  assert.equal(f.run('cameraView.yaw'),angle);assert.equal(f.run('cameraView.zoom'),zoom);
+  f.run('setCameraMode("overview")');const overview=f.run('camera.position.clone()');
+  f.run('snapshot.currentPlayerId="human"');f.move(-8,5);
+  assert.equal(f.step(),false);assert.deepEqual(f.run('camera.position.clone()'),overview);
+  f.run('snapshot.currentPlayerId="ai"');assert.equal(f.step(),false);
+  assert.deepEqual(f.run('camera.position.clone()'),overview);
 }
 
 // The fastest ordinary route stays inside the local viewport on each aspect and map.
@@ -149,8 +180,31 @@ for(const {map,board} of maps){
   const humanFocus=f.position();
   vm.runInContext('state.currentPlayerIndex=1;state.players[1].position=10;state.animation.currentTile=10;',gameplay);
   f.context.snapshotData=data();f.run('update(snapshotData)');
-  for(let frame=0;frame<30;frame++){now+=32;f.run(`tick(${now})`);}
-  assert.ok(f.position().distanceTo(humanFocus)<.02,'an opponent turn does not steal the camera');
+  assert.deepEqual(f.position(),humanFocus,'switching to the opponent never snaps the focus in update');
+  now+=32;f.run(`tick(${now})`);
+  assert.ok(f.position().distanceTo(humanFocus)<=18*.032+.001,'the first opponent frame has bounded translation');
+  for(let frame=0;frame<90;frame++){now+=32;f.run(`tick(${now})`);}
+  assert.ok(f.position().distanceTo(humanFocus)>1,`${map.id}: the opponent turn is followed`);
+  assert.ok(f.run('Math.hypot(cameraFocus.x-pawnViews.get("ai").group.position.x,cameraFocus.z-pawnViews.get("ai").group.position.z)')<.37);
+  const aiFocus=f.position();
+  for(let step=0;step<3;step++){
+    vm.runInContext('{const p=currentPlayer();p.position=getMapConfig().navigation.next[p.position];state.animation.currentTile=p.position;}',gameplay);
+    f.context.snapshotData=data();f.run('update(snapshotData)');
+    for(let frame=0;frame<6;frame++){now+=32;f.run(`tick(${now})`);}
+  }
+  vm.runInContext('state.animation.currentTile=null;',gameplay);f.context.snapshotData=data();f.run('update(snapshotData)');
+  for(let frame=0;frame<45;frame++){now+=32;f.run(`tick(${now})`);}
+  assert.ok(f.position().distanceTo(aiFocus)>1,`${map.id}: walking during the opponent turn moves the camera`);
+  assert.ok(f.run('Math.hypot(cameraFocus.x-pawnViews.get("ai").group.position.x,cameraFocus.z-pawnViews.get("ai").group.position.z)')<.37);
+  const beforeReturn=f.position();
+  vm.runInContext('state.currentPlayerIndex=0;',gameplay);f.context.snapshotData=data();f.run('update(snapshotData)');
+  assert.deepEqual(f.position(),beforeReturn,'returning to the player does not snap the focus');
+  now+=32;f.run(`tick(${now})`);
+  assert.ok(f.position().distanceTo(beforeReturn)<=18*.032+.001,'the first returning frame also eases');
+  for(let frame=0;frame<90;frame++){now+=32;f.run(`tick(${now})`);}
+  assert.ok(f.run('Math.hypot(cameraFocus.x-pawnViews.get("human").group.position.x,cameraFocus.z-pawnViews.get("human").group.position.z)')<.37);
+  assert.equal(f.run('cameraView.yaw'),yaw,'all turn transitions preserve manual orientation');
+  assert.equal(f.run('cameraView.zoom'),1.15,'all turn transitions preserve manual zoom');
 }
 
 let checkedFrames=0;
@@ -171,4 +225,4 @@ for(const [width,height] of [[390,620],[360,560],[740,380]])for(const {map,board
     from=to;
   }
 }
-console.log(`PASS local camera defaults, delayed follow, gesture release, overview, reduced motion, five real snapshot/update/tick paths and ${checkedFrames} route frames at normal/maximum zoom`);
+console.log(`PASS acting-player camera, smooth round-trip turn changes, gesture release, overview, reduced motion, ${maps.length} real snapshot/update/tick paths and ${checkedFrames} route frames at normal/maximum zoom`);

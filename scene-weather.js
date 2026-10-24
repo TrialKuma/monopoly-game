@@ -24,6 +24,7 @@ export function createCityWeather({ THREE, world, boardBounds, renderer, request
   const seasonalColors = Object.fromEntries(Object.entries({
     leaf: ['#c895a7', '#679561', '#c67e3d', '#839a91'],
     crown: ['#f1bdd0', '#a1c07b', '#edbd65', '#e0e9e0'],
+    blossom: ['#fff1f6', '#b8cfad', '#e5b99b', '#edf2ed'],
     evergreen: ['#629a76', '#4c8b67', '#718663', '#9ab7ab'],
     grass: ['#b3c99f', '#a3bc88', '#bdaf82', '#d8e0d7'],
   }).map(([key, values]) => [key, values.map(value => new THREE.Color(value))]));
@@ -148,6 +149,9 @@ export function createCityWeather({ THREE, world, boardBounds, renderer, request
     const kind = classify(original); if (!kind) return original;
     if (!materialCopies.has(original)) {
       const copy = own(original.clone()); copy.name = original.name;
+      // Keep authored surface shading when adding the seasonal colour layer.
+      copy.onBeforeCompile = original.onBeforeCompile;
+      copy.customProgramCacheKey = original.customProgramCacheKey;
       materialCopies.set(original, { copy, kind, color: original.color.clone(), roughness: original.roughness });
     }
     return materialCopies.get(original).copy;

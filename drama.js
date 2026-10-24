@@ -7,8 +7,7 @@
  * from/to: { id: 'human'|'ai', name, color }. Amounts are positive magnitudes.
  * reset() cancels every animation, pending event and sound; all promises resolve.
  * setMuted(boolean) follows the game's sound preference.
- * Auto-advance allows reading time (3–10 seconds). The visible pause button holds
- * the current event indefinitely; Continue always resolves immediately.
+ * Events wait for Continue; there is no automatic countdown or advance.
  * Scene highlights are delegated to the optional CityScene.effect(event).
  */
 (() => {
@@ -27,8 +26,8 @@
     win: '<svg viewBox="0 0 100 100" fill="none" aria-hidden="true"><path d="M30 16h40v27c0 14-9 23-20 23s-20-9-20-23V16ZM30 25H15v14c0 13 10 17 19 17m36-31h15v14c0 13-10 17-19 17M50 66v17m-18 3h36" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="m50 29 4 8 9 1-7 7 2 9-8-4-8 4 2-9-7-7 9-1 4-8Z" fill="currentColor"/></svg>',
     notice: '<svg viewBox="0 0 100 100" fill="none" aria-hidden="true"><path d="m50 11 10 27 29 12-29 11-10 28-11-28L11 50l28-12 11-27Z" stroke="currentColor" stroke-width="4" stroke-linejoin="round"/><path d="m81 13 3 8 8 3-8 3-3 8-3-8-8-3 8-3 3-8Z" fill="currentColor"/></svg>'
   };
-  const LABELS = {rent:'地产收益', seize:'产权风暴', shield:'绝境脱身', relief:'命运转机', build:'城市生长', buy:'版图扩张', bank:'金库时刻', card:'命运揭晓', income:'现金入账', win:'全城见证', notice:'城市快讯'};
-  const TITLES = {rent:'租金到账', seize:'地盘易主', shield:'护盾救场', relief:'绝处逢生', build:'新楼落成', buy:'这块地，归你了', bank:'金库开启', card:'好戏开场', income:'意外之财', win:'本局赢家', notice:'命运转动'};
+  const LABELS = {rent:'租金结算', seize:'产权变更', shield:'护盾免租', relief:'破产救助', build:'建筑升级', buy:'购买地产', bank:'金库结算', card:'卡牌效果', income:'现金入账', win:'对局结束', notice:'行动提示'};
+  const TITLES = {rent:'租金到账', seize:'产权已变更', shield:'本次免租', relief:'救助金到账', build:'升级完成', buy:'购买成功', bank:'金库结算', card:'卡牌已生效', income:'获得金币', win:'本局结算', notice:'行动结果'};
   let layer, boardStage, transferLayer, audioContext, active, eventNumber = 0, muted = false;
   const queue = [];
   const motionPreference = window.matchMedia?.('(prefers-reduced-motion: reduce)');
@@ -46,106 +45,30 @@
   const lastReactionByKind = new Map();
   const CHANCE_KINDS = new Set(['renovation','district','shield','express','swap','bank','bonus']);
   const EXCHANGES = {
-    chance_renovation:[
-      ['白盖一层？还有这种好事？！','别光高兴，先看看地是谁的。'],
-      ['工人都来了，钱谁付啊？！','城市请客，房东偷着乐吧。'],
-    ],
-    chance_district:[
-      ['整条街都给升？这么大方？！','等收租的时候你再说大方。'],
-      ['我靠，这条街怎么一夜长高了？！','账单也跟着长高了。'],
-    ],
-    chance_shield:[
-      ['免单券！我先揣兜里了啊。','怎么还没收你钱，你先防上了？！'],
-      ['这玩意儿，可比打折狠多了。','你别冲着我家笑行不行。'],
-    ],
-    chance_express:[
-      ['我靠，怎么直接给我送这儿了？！','欢迎乘坐命运盲盒号。'],
-      ['这车没刹车是吧？！','目的地到了，账单另算。'],
-    ],
-    chance_swap:[
-      ['哎？！谁把我搬这儿了？！','你的位置挺好，现在我站了。'],
-      ['不是，我这路白走了？！','谢谢啊，替我踩这么远。'],
-    ],
-    chance_bank:[
-      ['钱进金库了？现在过去来得及吗？！','来得及看我取走。'],
-      ['金库加钱了！骰子你争点气啊！','你喊小声点，我骰子也听见了。'],
-    ],
-    chance_bonus:[
-      ['哎哟，终于轮到城市给我打钱了！','别激动，我也领了。'],
-      ['今晚这钱，我就笑纳了啊。','巧了，我也没打算客气。'],
-    ],
-    rent:[
-      ['怎么又是你家啊？','缘分，付一下。'],
-      ['行，算我请你喝奶茶。','少糖，谢谢老板。'],
-      ['我还没站稳就扣钱？！','不耽误，边走边扣。'],
-      ['这笔账我可记下了啊。','记吧，钱我先收了。'],
-    ],
-    huge:[
-      ['卧槽，一脚踩掉这么多？！','你要不坐会儿？都花这钱了。'],
-      ['你这地是金子做的？！','快了，靠你呢。'],
-      ['这是地块还是地雷啊？！','你一来就爆金币。'],
-      ['我靠你抢钱啊？！','过奖了，主要是你骰子好。'],
-    ],
-    hugeLead:[
-      ['我靠你抢钱啊？！','这不比抢省事多了。'],
-      ['钱给你，第一也给你是吧？！','哎呀，太客气了。'],
-      ['我怎么还把你喂起来了？！','谢谢老板，老板糊涂！'],
-      ['不是！我这就给你打工了？！','这班上的，我很满意。'],
-    ],
-    lead:[
-      ['不是，怎么就你第一了？！','谢了啊，主要靠你。'],
-      ['我就领先了这么一会儿？！','坐够了吧，该我了。'],
-      ['我刚攒的啊！刚攒的！！','没事，我替你存着。'],
-    ],
-    empty:[
-      ['没钱了呀！真没了！','你倒是给我喊心虚了。'],
-      ['你看看我还剩啥？！','还剩一颗骰子。'],
-      ['给我留两块行不行？！','你早说啊，都收完了。'],
-      ['裤兜都翻给你了！','别翻了，留条裤子。'],
-    ],
-    emptyZero:[
-      ['没钱了呀！真没了！','……你是真一点都没剩。'],
-      ['你看我像还有钱的样子吗？！','不像，像来气我的。'],
-      ['要钱没有，骰子一颗。','……行，你掷吧。'],
-    ],
-    thin:[
-      ['我就剩这点了，你还收？！','收完了才听见，不好意思啊。'],
-      ['再踩你一次我人就没了！','那你走路小心点。'],
-    ],
-    zero:[
-      ['零块钱，也要站这儿结账？','你别说，还挺有仪式感。'],
-      ['这账单，主打一个陪伴。','忙活半天，收了个寂寞。'],
-    ],
-    shield:[
-      ['收啊，你倒是收啊！','卧槽，我都数上了！'],
-      ['不好意思，这把有盾。','你怎么还自带免单啊？！'],
-      ['这钱你是一分也别想拿。','我笑到一半，你给我来这个？'],
-      ['哎，白走！气不气？','你等下次没盾的。'],
-    ],
-    buy:[
-      ['买了！下回给我踩这儿！','你想得倒挺美。'],
-      ['这地我先占了啊。','占吧，骰子不归你管。'],
-      ['来，叫声房东听听。','楼都没盖，你急什么。'],
-    ],
-    buyDistrict:[
-      ['连起来了，专等你了！','你搁这儿设卡收费呢？！'],
-      ['这回可不止一家收钱了。','一条街合伙坑我是吧。'],
-      ['来，看看我这收费站。','你是真没打算让我富啊。'],
-    ],
-    buyLarge:[
-      ['这么大一块，总能踩中了吧？！','你这是买地还是撒网啊？'],
-      ['买了！这下看你往哪儿躲！','你问骰子去，别问我。'],
-      ['这位置，不当房东可惜了。','你先别给我安排上。'],
-    ],
-    buyOpening:[
-      ['卧槽，买地还带楼？！','怎么便宜都让你捡了？'],
-      ['这楼也归我？那我不客气了。','行，你小子是真会捡啊。'],
-      ['钥匙一拿，直接当房东？','坏了，还真让你赶上了。'],
-    ],
+    chance_renovation:[['免费升级！','看看哪栋楼升了。'],['这次不用花钱。','记得看新的租金。']],
+    chance_district:[['整条街都升级了！','这条路得小心了。'],['这次升级不少。','租金也提高了。']],
+    chance_shield:[['免租券到手。','这次算你走运。'],['下次租金省了。','我的租金要等一等了。']],
+    chance_express:[['直接到站了？','先看看落在哪块地。'],['这次走得真远。','落地还要结算。']],
+    chance_swap:[['位置换了！','这条路现在归我走。'],['得重新规划了。','我也一样。']],
+    chance_bank:[['金库又加钱了。','看谁先到。'],['得去一趟金库。','我也盯着呢。']],
+    chance_bonus:[['补贴到账。','我也收到了。'],['又多了一笔。','这次都有份。']],
+    rent:[['又踩到你的地。','租金收到了。'],['这笔租金先付了。','下次见。']],
+    huge:[['这笔租金真不少。','升级的投入回来了。'],['得留点现金了。','这条街可不便宜。']],
+    hugeLead:[['这下被反超了。','我暂时领先。'],['这笔租金影响真大。','接下来轮到我了。']],
+    lead:[['领先没保住。','还有机会追。'],['又得追赶了。','看接下来的骰子。']],
+    empty:[['现金用完了。','这笔开销不小。'],['这笔只能付这些。','知道了。']],
+    emptyZero:[['已经没有现金了。','这回收不到租金了。']],
+    thin:[['只剩一点现金了。','接下来得谨慎些。'],['暂时不能再买地了。','先攒现金吧。']],
+    zero:[['这次不用付钱。','继续走吧。']],
+    shield:[['护盾挡住了。','这次免租。'],['省下一笔租金。','下次可就不一定了。']],
+    buy:[['这块地我买了。','那我得注意了。'],['买好了。','看谁先踩到。']],
+    buyDistrict:[['街区连起来了。','租金可要涨了。'],['又添一处地产。','这条街不好走了。']],
+    buyLarge:[['大地块到手。','两个落点都得注意。'],['这块地值得买。','后面还要升级呢。']],
+    buyOpening:[['连建筑一起买下。','马上就能收租了。'],['这栋楼也归我了。','省下了建造费。']],
   };
   const LINES = {
-    relief:['扶我起来，我还能送！','复活！刚才谁在笑？！','别催，我缓口气再挨打。','有钱了！虽然就这么点。'],
-    seize:['我地呢？我那么大块地呢？！','这地方刚才还归我呢？！','我不同意！……不同意有用吗？'],
+    relief:['拿到救助了。','先把现金攒回来。','还有机会。'],
+    seize:['这块地不归我了。','得重新买地了。','地没了，补偿收到了。'],
   };
 
   function line(key) {
@@ -211,7 +134,7 @@
     if (CHANCE_KINDS.has(event.chanceKind)) {
       const [first, reply] = line('chance_' + event.chanceKind);
       const actor = event.actor || event.to;
-      const lines = [say(actor,'奇遇当事人','surprised','😲',first)];
+      const lines = [say(actor,'行动方','surprised','😲',first)];
       if (event.rival?.name && event.rival.id !== actor?.id) lines.push(say(event.rival,'对手','proud','😏',reply));
       return lines;
     }
@@ -504,7 +427,7 @@
     card.setAttribute('aria-atomic', 'true');
     const content = element('div', 'drama-content');
     const meta = element('div', 'drama-meta');
-    const kicker = element('span', 'drama-kicker', chance ? '城市奇遇 · 已揭晓' : LABELS[type]);
+    const kicker = element('span', 'drama-kicker', chance ? '机会事件 · 已结算' : LABELS[type]);
     kicker.prepend(element('i', 'drama-live-dot'));
     meta.append(kicker, element('span', 'drama-sequence', String(++eventNumber).padStart(2, '0')));
     content.appendChild(meta);
@@ -516,9 +439,9 @@
     symbol.appendChild(element('i', 'drama-symbol-orbit'));
     const copy = element('div', 'drama-copy');
     let title = event.title || TITLES[type];
-    if (type === 'rent' && amount >= 300) title = event.tiles?.length > 1 ? '连锁收租' : '重磅账单';
-    if (leadChanged) title = '这一笔，局势反转！';
-    if (type === 'buy') title = facts.chain ? '街区连锁，拿下了！' : facts.built ? '连楼一起，拿下了！' : facts.large ? '大地块，拿下了！' : '拿下了！';
+    if (type === 'rent' && amount >= 300) title = event.tiles?.length > 1 ? '连锁收租' : '租金结算';
+    if (leadChanged) title = '现金排名反超';
+    if (type === 'buy') title = facts.chain ? '购买成功 · 街区连锁' : facts.built ? '房产购买成功' : facts.large ? '大型地产购买成功' : '地产购买成功';
     const heading = element('h3', 'drama-title', title);
     copy.appendChild(heading);
     if (chance && event.outcomeLabel) copy.appendChild(element('span', 'drama-chance-outcome', event.outcomeLabel));
@@ -561,7 +484,7 @@
     }
     if (type === 'buy') {
       const ribbon = element('div', 'drama-purchase-ribbon');
-      ribbon.appendChild(element('span', 'drama-purchase-tag', '地产到手'));
+      ribbon.appendChild(element('span', 'drama-purchase-tag', '购买成功'));
       if (facts.chain) ribbon.appendChild(element('span', 'drama-purchase-tag', `街区已拥有 ${Math.floor(facts.districtCount)} 处`));
       if (facts.large) ribbon.appendChild(element('span', 'drama-purchase-tag', '大型地产'));
       if (facts.built) ribbon.appendChild(element('span', 'drama-purchase-tag', `${facts.opening ? '开业楼 · ' : ''}Lv.${Math.floor(facts.buildingLevel)} 建筑保留`));

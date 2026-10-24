@@ -1,6 +1,6 @@
 import { loadSharedModelAsset, disposeSharedModelAssets, regionalSceneryDirectory } from './scene-model-cache.js?v=20261024-blender-release2';
-import { createRegionalSurroundings, fillRegionalScenicBuildings } from './scene-regional-parks.js?v=20261024-1';
-import { batchGardenBuilding, instanceGardenBuildings } from './scene-garden-kit.js?v=20261024-1';
+import { createRegionalSurroundings, fillRegionalScenicBuildings } from './scene-regional-parks.js?v=20261025-landscape3';
+import { batchGardenBuilding, instanceGardenBuildings } from './scene-garden-kit.js?v=20261025-landscape3';
 
 // Regional architecture is shared by all scenic copies. The selected map owns
 // only its merged placement geometry, never the GLTF cache's materials/textures.

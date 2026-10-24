@@ -462,7 +462,6 @@ const EVENT_ICON_MAP = {
   "等待救援": { emoji: "🆘", cls: "event-info" },
   "破产淘汰": { emoji: "💸", cls: "event-toll" },
   "先手决定": { emoji: "🪙", cls: "event-special" },
-  "模式选择": { emoji: "⚙️", cls: "event-special" },
 };
 
 const SOUND_PREF_KEY = "monopoly-sfx-enabled";
@@ -899,7 +898,7 @@ function initializeGame(mapId = selectedMapId) {
     })),
     lastDice: null, logs: [], gameOver: false, busy: false,
     passedStartThisTurn: false, bankPool: 0,
-    gameMode: state?.gameMode ?? "rounds",
+    gameMode: "rounds",
     statusTitle: "", statusDescription: "",
     animation: { currentTile: null, landedTile: null, diceRolling: false, diceResult: false, boardBurst: false },
     modal: defaultModal(),
@@ -1018,22 +1017,6 @@ function renderHistoryList() {
   }).join("");
 }
 
-// ─── 模式选择 ──────────────────────────────────────────────
-async function selectGameMode(sid) {
-  const maxRounds = getMaxRounds();
-  const choice = await showModal({
-    label: "模式选择",
-    title: "选择游戏模式",
-    message: `${maxRounds} 回合制：满 ${maxRounds} 回合后现金最多者胜。\n破产淘汰制：无力偿还过路费即告破产，对手获胜。`,
-    buttons: [
-      { id: "rounds", label: `🕐 ${maxRounds} 回合制`, variant: "primary" },
-      { id: "bankruptcy", label: "💸 破产淘汰制", variant: "ghost" },
-    ],
-  });
-  if (!isSessionActive(sid)) return undefined;
-  return choice === "bankruptcy" ? "bankruptcy" : choice === "rounds" ? "rounds" : undefined;
-}
-
 function settleFirstPlayer(humanFirst, sid = state.sessionId) {
   if (!isSessionActive(sid) || state.initiativeResolved) return false;
   state.firstPlayerIndex = humanFirst ? 0 : 1;
@@ -1068,9 +1051,7 @@ async function coinFlipForFirstPlayer(sid) {
   await showContinueModal({
     label: "先手决定",
     title: humanFirst ? "🪙 正面！玩家先手！" : "🪙 反面！AI 先手！",
-    message: (humanFirst
-      ? "玩家获得先手权，祝你好运！"
-      : "AI 率先行动，准备好应对挑战！") + supplyMessage,
+    message: (humanFirst ? "由你先掷骰。" : "对手先掷骰。") + supplyMessage,
     drama: { type: "notice", amount: 0 },
   });
   if (!isSessionActive(sid)) return undefined;
@@ -1082,18 +1063,11 @@ async function startNewGame() {
   initializeGame(selectedMapId);
   const sid = state.sessionId;
 
-  // 模式选择
-  const mode = await selectGameMode(sid);
-  if (!isSessionActive(sid)) return;
-  if (mode === undefined) { showStartScreen(); return; }
-  state.gameMode = mode;
-  updateModeEyebrow();
-
   if (window.GameProgression?.enter) {
     const map = getMapConfig(), price = getMapTicket(map);
     const info = window.GameProgression.getEntryInfo({mapId:map.id,price});
     if (!info.ok || !info.canEnter) { showStartScreen();render();window.GameProgression.showEntryError(info);return; }
-    const accepted = await showModal({label:"出发",title:`前往${map.name}`,message:`仓库支付 ¥${price} 门票，余额 ¥${info.wallet - price}。\n完成对局后，剩余现金与${map.collectionName || "城市印章"}带回仓库。`,buttons:[{id:"cancel",label:"再想想",variant:"ghost"},{id:"enter",label:`支付 ¥${price} · 出发`,variant:"primary"}]});
+    const accepted = await showModal({label:"开始对局",title:map.name,message:`本局 ${getMaxRounds()} 回合，结束时现金最多者获胜。\n门票 ¥${price}，支付后仓库余额 ¥${info.wallet - price}。完成对局后，剩余现金与${map.collectionName || "城市印章"}存入仓库。`,buttons:[{id:"cancel",label:"取消",variant:"ghost"},{id:"enter",label:`支付 ¥${price} · 开始`,variant:"primary"}]});
     if (!isSessionActive(sid)) return;
     if (accepted !== "enter") {showStartScreen();render();return;}
     const entry=window.GameProgression.enter({runId:state.runId,mapId:map.id,mapName:map.name,price,collectionId:map.collectionId || "city_stamp"});
@@ -1609,7 +1583,7 @@ function updateControls() {
 
 function getPhaseLabel() {
   if (state.gameOver) return "已结束";
-  if (state.phase === "presenting") return "好戏进行中";
+  if (state.phase === "presenting") return "事件结算";
   if (state.animation.diceRolling) return "骰子滚动中";
   if (state.modal.visible) return "轮到你选择";
   if (state.animation.currentTile !== null) return "棋子移动中";
@@ -1889,7 +1863,7 @@ async function resolveStartTakeover(player, sid) {
     pushLog(`市政府接管令！${player.name} 花 ${formatMoney(purchasePrice)} 接手 ${target.name}（Lv.${target.lot.level}），${opp.name} 获补偿 ${formatMoney(refund)}，溢价 ${formatMoney(premium)} 进入公共金库。`);
     render();
     await showContinueModal({
-      label: "市政府征用", title: "连地带楼，接手了！",
+      label: "市政府征用", title: "房产接手成功",
       drama: { type: "seize", from: opp, to: player, amount: purchasePrice, acquisition: true, purchasePrice, refund, premium, tiles: [target.index], tileName: target.name },
       message: `${player.name} 接手了 ${target.name}，Lv.${target.lot.level} 建筑原样保留，之后租金归新业主。\n支付 ${formatMoney(purchasePrice)}：${opp.name} 收到 ${formatMoney(refund)} 补偿，${formatMoney(premium)} 进入公共金库（现有 ${formatMoney(state.bankPool)}）。`,
     });
@@ -1993,7 +1967,7 @@ async function resolveLanding(player, tile, sid) {
       ],
     });
     if (!isSessionActive(sid)) return;
-    if (dec === "buy" && buyLot(player, tile)) { render(); await showContinueModal({ label: "购买完成", title: `${tile.name}，归你了！`, message: `花费 ${formatMoney(lot.price)}，这座小城又多了一块你的地盘。${purchaseBuildingNote(lot)}`, drama: { type: "buy", amount: lot.price, to: player, tiles: [tile.index], tileName: tile.name } }); }
+    if (dec === "buy" && buyLot(player, tile)) { render(); await showContinueModal({ label: "购买完成", title: `已购买 ${tile.name}`, message: `支付 ${formatMoney(lot.price)}，剩余现金 ${formatMoney(player.cash)}。${purchaseBuildingNote(lot)}`, drama: { type: "buy", amount: lot.price, to: player, tiles: [tile.index], tileName: tile.name } }); }
     return;
   }
 
@@ -2031,7 +2005,7 @@ async function resolveLanding(player, tile, sid) {
       ],
     });
     if (!isSessionActive(sid)) return;
-    if (dec === "build") { buildLot(player, tile); render(); await showContinueModal({ label: "建筑升级", title: `${tile.name} 升至 Lv.${lot.level}`, message: `下一次经过，这里会是另一番风景。`, drama: { type: "build", amount: cost, to: player, tiles: [tile.index], tileName: tile.name } }); }
+    if (dec === "build") { buildLot(player, tile); render(); await showContinueModal({ label: "建筑升级", title: `${tile.name} 升至 Lv.${lot.level}`, message: `支付 ${formatMoney(cost)}，基础租金提高至 ${formatMoney(lot.tolls[lot.level])}。`, drama: { type: "build", amount: cost, to: player, tiles: [tile.index], tileName: tile.name } }); }
     return;
   }
 
@@ -2039,7 +2013,7 @@ async function resolveLanding(player, tile, sid) {
   if (player.effects.shield) {
     player.effects.shield = false;
     pushLog(`${player.name} 的护盾术生效，免交 ${tile.name} 的过路费！`);
-    await showContinueModal({ label: "过路费提示", title: "这笔账，护盾挡了！", message: `${player.name} 免交 ${tile.name} 的过路费。`, drama: { type: "shield", expectedAmount: window.GamePresentation?.rentFor(tile).total ?? lot.tolls[lot.level], to: player, tiles: [tile.index], tileName: tile.name } });
+    await showContinueModal({ label: "过路费提示", title: "护盾生效 · 本次免租", message: `${player.name} 免交 ${tile.name} 的过路费。`, drama: { type: "shield", expectedAmount: window.GamePresentation?.rentFor(tile).total ?? lot.tolls[lot.level], to: player, tiles: [tile.index], tileName: tile.name } });
     if (!isSessionActive(sid)) return;
     await resolveLargeLotEffect(player, tile, sid);
     return;
@@ -2048,7 +2022,7 @@ async function resolveLanding(player, tile, sid) {
   render();
   if (window.GamePresentation) {
     const leadChanged = owner.cash > player.cash && owner.cash - toll.actualPayment <= player.cash + toll.actualPayment;
-    await showContinueModal({ label: "过路费提示", title: toll.actualPayment >= 300 ? "整条街，向你收租！" : "租金到账", message: toll.message, drama: { type: "rent", amount: toll.actualPayment, expectedAmount: toll.toll, leadChanged, from: player, to: owner, tiles: getDistrictOwnerLots(lot.district, owner.id).map(t => t.index), tileName: tile.name } });
+    await showContinueModal({ label: "过路费提示", title: "街区租金结算", message: toll.message, drama: { type: "rent", amount: toll.actualPayment, expectedAmount: toll.toll, leadChanged, from: player, to: owner, tiles: getDistrictOwnerLots(lot.district, owner.id).map(t => t.index), tileName: tile.name } });
     if (!isSessionActive(sid)) return;
   }
   if (toll.actualPayment < toll.toll) {
@@ -2074,7 +2048,7 @@ async function resolveLanding(player, tile, sid) {
     pushLog(`${player.name} 现金耗尽，进入破产救助：${reliefMessage}`);
     await showContinueModal({
       label: "破产救助",
-      title: "还没结束，再来！",
+      title: "救助金已到账",
       drama: { type: "relief", amount: relief, to: player, tiles: [tile.index], tileName: tile.name },
       message: `${player.name} 仅支付了 ${formatMoney(toll.actualPayment)}，差 ${formatMoney(toll.toll - toll.actualPayment)} 无力偿还。\n${reliefMessage}`,
     });
@@ -2189,7 +2163,7 @@ async function resolveSpecialTile(player, tile, sid) {
       pushLog(`${player.name} 在银行提走了全部存款 ${formatMoney(payout)}！`);
       render();
       await showContinueModal({
-        label: "功能地块", title: "金库大丰收！",
+        label: "功能地块", title: "提取金库",
         drama: { type: "bank", amount: payout, from: { id: "bank", name: "银行金库" }, to: player, tiles: [tile.index], tileName: tile.name },
         message: `金库已满，${player.name} 提走了全部 ${formatMoney(payout)}！金库清零重新开始。`,
       });
@@ -2272,22 +2246,22 @@ async function resolveChance(player, tile, sid) {
     const target = pick(freeBuildable);
     target.lot.level++;
     const ownerName = target.lot.ownerId ? player.name : "无主地产";
-    title = "装修队找上门了！";
-    message = `市政装修队免费给 ${target.name} 加盖一层，升至 Lv.${target.lot.level}。\n${ownerName}，产权不变；没有扣除现金。`;
+    title = "免费升级";
+    message = `${target.name} 免费升至 Lv.${target.lot.level}。\n当前归属：${ownerName}，产权不变。`;
     Object.assign(drama, { type: "build", tiles: [target.index], tileName: target.name,
       outcomeLabel: `${target.name} → Lv.${target.lot.level}` });
   } else if (selected.kind === "district") {
     const district = pick(districts);
     const changed = lots.filter(t => t.lot.district === district && t.lot.level < 3);
     changed.forEach(t => t.lot.level++);
-    title = "整条街，翻新了！";
-    message = `${district} 获得城市改造：${changed.map(t => `${t.name} Lv.${t.lot.level}`).join("、")}。\n这些地产各免费升一级，产权不变，新的租金立即生效。`;
+    title = "街区升级";
+    message = `${district}：${changed.map(t => `${t.name} Lv.${t.lot.level}`).join("、")}。\n以上地产各免费升一级，产权不变，新租金立即生效。`;
     Object.assign(drama, { type: "build", tiles: changed.map(t => t.index), tileName: district,
       outcomeLabel: `${district} · ${changed.length} 处升级` });
   } else if (selected.kind === "shield") {
     player.effects.shield = true;
-    title = "免租通行证，到手！";
-    message = `${player.name} 领到一次过路护盾，下一笔租金免交；这次只是领取，还没有消耗。`;
+    title = "获得免租护盾";
+    message = `${player.name} 获得护盾，下次支付租金时自动免租一次。`;
     drama.outcomeLabel = "已获得一次过路护盾";
   } else if (selected.kind === "express") {
     // Choose physical destination tiles, retaining the larger lots' double footprint.
@@ -2295,31 +2269,31 @@ async function resolveChance(player, tile, sid) {
     player.position = arrival.index;
     state.animation.currentTile = null;
     state.animation.landedTile = arrival.index;
-    title = "搭错车，直接到站！";
-    message = `${player.name} 被送到 ${arrival.name}！\n跳跃不领经过市政府补给；现在按这块地产的实际情况结算。`;
+    title = "随机传送";
+    message = `${player.name} 到达 ${arrival.name}，立即结算该地块。\n传送不领取市政府补给。`;
     Object.assign(drama, { tiles: [arrival.index], tileName: arrival.name, outcomeLabel: `已抵达 ${arrival.name}` });
   } else if (selected.kind === "swap") {
     [player.position, opp.position] = [opp.position, player.position];
     state.animation.currentTile = null;
     state.animation.landedTile = player.position;
-    title = "走错片场，位置换了！";
-    message = `${player.name} 与 ${opp.name} 交换了位置。\n${player.name} 现在位于 ${state.board[player.position].name}，${opp.name} 位于 ${state.board[opp.position].name}；本次不结算落点，下次从新位置行动。`;
+    title = "双方位置互换";
+    message = `${player.name} → ${state.board[player.position].name}\n${opp.name} → ${state.board[opp.position].name}\n本次不结算落点，下次从新位置行动。`;
     Object.assign(drama, { tiles: [player.position, opp.position], outcomeLabel: "双方位置已交换" });
   } else if (selected.kind === "bank") {
     const amount = getMapEconomy().bankThreshold;
     state.bankPool += amount;
-    title = "赞助商给金库加码了！";
-    message = `城市赞助商向公共金库注入 ${formatMoney(amount)}，池中现在共有 ${formatMoney(state.bankPool)}。\n下一位踩中金库的人可以取走全部存款。`;
-    Object.assign(drama, { type: "bank", amount, from: { id: "city", name: "城市赞助商" },
+    title = "金库获得补贴";
+    message = `公共金库增加 ${formatMoney(amount)}，当前共 ${formatMoney(state.bankPool)}。\n下一位停留金库的玩家可提取全部存款。`;
+    Object.assign(drama, { type: "bank", amount, from: { id: "city", name: "市政补贴" },
       to: { id: "bank", name: "银行金库" }, tiles: state.board.filter(t => t.special?.type === "bank").map(t => t.index),
       tileName: "银行金库", outcomeLabel: `金库已增加 ${formatMoney(amount)}` });
   } else {
     const opened = lots.filter(t => t.lot.level > 0).length;
     const amount = 120 + Math.min(180, opened * 10);
     state.players.forEach(p => updatePlayerCash(p, amount, false));
-    title = "夜市开张，街坊分红！";
-    message = `全城已有 ${opened} 处建筑，夜市带来生意。\n${player.name} 与 ${opp.name} 各领 ${formatMoney(amount)}，双方现金均已到账。`;
-    Object.assign(drama, { type: "income", amount, from: { id: "city", name: "夜市分红" },
+    title = "经营分红";
+    message = `全城已有 ${opened} 处建筑，${player.name} 与 ${opp.name} 各获得 ${formatMoney(amount)}。`;
+    Object.assign(drama, { type: "income", amount, from: { id: "city", name: "经营分红" },
       to: player, beneficiaries: [...state.players], outcomeLabel: `双方各到账 ${formatMoney(amount)}` });
   }
   pushLog(`${player.name} 在 ${tile.name} 遇到「${title}」${message.replace(/\n/g, " ")}`);

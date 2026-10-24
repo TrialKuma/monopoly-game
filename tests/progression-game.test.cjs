@@ -8,7 +8,7 @@ function setup(map = 'classic') {
   const store = createStore({ getItem: key => data.get(key) ?? null, setItem(key, value) { if (failWrite) throw Error('Storage full'); data.set(key, value); } });
   const c = context(source, 7001);
   c.GameProgression = { ...store, getProfile: store.read, createRunId: () => 'actual-' + ++sequence, resetResult() {}, showEntryError: error => errors.push(error) };
-  c.answer = cfg => { prompts.push({ label: cfg.label, wallet: store.read().profile?.wallet }); if (cfg.buttons.some(b => b.id === 'rounds')) return 'rounds'; if (cfg.buttons.some(b => b.id === 'enter')) return cancelEntry ? 'cancel' : 'enter'; if (cfg.buttons.some(b => b.id === 'flip')) return 'flip'; throw Error('Unexpected modal: ' + cfg.title); };
+  c.answer = cfg => { prompts.push({ label: cfg.label, wallet: store.read().profile?.wallet, buttons: Array.from(cfg.buttons, b => b.id) }); if (cfg.buttons.some(b => b.id === 'enter')) return cancelEntry ? 'cancel' : 'enter'; if (cfg.buttons.some(b => b.id === 'flip')) return 'flip'; throw Error('Unexpected modal: ' + cfg.title); };
   c.Math.random = () => .1;
   c.run(`selectedMapId='${map}';showModal=async cfg=>answer(cfg);`);
   return { c, store, prompts, errors, fail: value => { failWrite = value; }, cancel: value => { cancelEntry = value; } };
@@ -16,6 +16,46 @@ function setup(map = 'classic') {
 let checks = 0;
 async function test(name, fn) { await fn(); checks++; console.log('PASS ' + name); }
 (async () => {
+  await test('all five maps start directly with fixed rounds, even after a legacy bankruptcy game', async () => {
+    for (const [map, limit] of [['classic', 30], ['compact', 26], ['expansion', 40], ['harbor', 30], ['alpine', 30]]) {
+      const f = setup(map); f.c.run('initializeGame();state.gameMode="bankruptcy";');
+      await f.c.run('startNewGame()');
+      assert.equal(f.c.run('state.gameMode'), 'rounds'); assert.equal(f.c.run('getMaxRounds()'), limit);
+      assert.deepEqual(f.prompts.map(p => p.label), ['开始对局', '先手决定']);
+      assert.deepEqual(f.prompts[0].buttons, ['cancel', 'enter']);
+      assert.equal(f.store.read().profile.entries.length, 1);
+    }
+  });
+  await test('overlapping start requests admit only the active session and charge one ticket', async () => {
+    const f = setup(); const answer = f.c.answer; let release, admissionCount = 0;
+    f.c.answer = cfg => {
+      if (cfg.buttons.some(b => b.id === 'enter') && ++admissionCount === 1) return new Promise(resolve => { release = resolve; });
+      return answer(cfg);
+    };
+    const staleStart = f.c.run('startNewGame()'); await f.c.run('startNewGame()');
+    release('enter'); await staleStart;
+    assert.equal(f.store.read().profile.wallet, 1100); assert.equal(f.store.read().profile.entries.length, 1);
+    assert.equal(f.store.read().profile.entries[0].runId, f.c.run('state.runId'));
+    assert.equal(f.c.run('state.isFormalRun'), true);
+  });
+  await test('each map ends after both seats finish its fixed normal-round limit', async () => {
+    for (const [map, limit] of [['classic', 30], ['compact', 26], ['expansion', 40], ['harbor', 30], ['alpine', 30]]) {
+      for (const first of [0, 1]) {
+        const f = setup(map); f.c.Math.random = () => first === 0 ? .1 : .9; await f.c.run('startNewGame()');
+        const turns = [0, 0];
+        for (let turn = 0; turn < limit * 2; turn++) {
+          assert.equal(f.c.run('state.gameOver'), false);
+          turns[f.c.run('state.currentPlayerIndex')]++;
+          f.c.run('endTurn()');
+        }
+        assert.deepEqual(turns, [limit, limit]); assert.equal(f.c.run('state.gameOver'), true);
+        const profile = f.store.read().profile, record = profile.receipts[0];
+        assert.equal(record.rounds, limit); assert.equal(record.mode, 'rounds'); assert.equal(record.reason, 'rounds');
+        f.c.run('endTurn()'); assert.equal(f.store.read().profile.wallet, profile.wallet);
+        assert.equal(f.store.read().profile.receipts.length, 1);
+      }
+    }
+  });
   await test('real startup pays before coin flip and only then becomes formal', async () => {
     const f = setup('harbor'); await f.c.run('startNewGame()');
     assert.equal(f.store.read().profile.wallet, 950); assert.equal(f.c.run('state.ticketPaid'), true); assert.equal(f.c.run('state.isFormalRun'), true);

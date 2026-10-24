@@ -32,7 +32,7 @@
     if (!mobileQuery.matches) return;
     sheetReturnFocus = trigger || document.activeElement;
     sidebar.dataset.panel = panel;
-    document.getElementById('mobile-sheet-title').textContent = {property:'地块信息',log:'小城快报',rules:'游戏规则'}[panel];
+    document.getElementById('mobile-sheet-title').textContent = {property:'地块信息',log:'对局记录',rules:'游戏规则'}[panel];
     if (panel === 'rules') sidebar.querySelector('.rules').open = true;
     document.body.classList.add('mobile-sheet-open');
     sidebar.setAttribute('role','dialog');sidebar.setAttribute('aria-modal','true');sidebar.setAttribute('aria-labelledby','mobile-sheet-title');
@@ -43,10 +43,10 @@
   }
   const mapGuide = document.getElementById('map-guide');
   const mapGuides = {
-    classic: {title:'经典环线 · 街坊间的财富拉锯',copy:'沿 22 格环线前进，同街区地产连锁收租。机会广场可能改造街区、互换位置或送上免单券，下一步随时变天。'},
-    compact: {title:'短环追逐 · 冲刺也可能冲进账单',copy:'沿 18 格短环线前进，三个街区更容易连锁收租。冲刺站随机再走 2–8 格；传送港落地后立即结算，护盾同样能挡租。回合制救助获得 ¥200 和一次免租，不再额外罚停。'},
-    expansion: {title:'大城开业 · 每圈经过全部六个街区',copy:'沿 28 格大环线依次前进。开局每街区随机一处无主地产预建 Lv.1，买下即用。城市快线随机再走 3–5 格，传送港落地后立即结算。回合制救助附带一次过路护盾，帮助脱困再起。'},
-    harbor: {title:'潮汐港湾 · 22 格滨水长街',copy:'30 回合，沿纵向港湾环线经营。较低的街铺地价与每圈 ¥320 补给，让早点成街更有回报。完成对局收集潮汐海螺。'},
+    classic: {title:'经典环线 · 22 格',copy:'30 回合，同街区地产连锁收租。机会格可能触发建筑升级、位置互换或免租护盾。'},
+    compact: {title:'紧凑冲突 · 18 格',copy:'26 回合，包含三个街区。冲刺站随机再走 2–8 格；传送港落地后立即结算，护盾可免租。无力付租时获得 ¥200 救助和一次免租，不额外休整。'},
+    expansion: {title:'都市大环线 · 28 格',copy:'40 回合，包含六个街区。开局每街区随机一处无主地产预建 Lv.1，购买后即可收租。城市快线随机再走 3–5 格，传送港落地后立即结算。无力付租时获得救助和一次免租。'},
+    harbor: {title:'潮汐港湾 · 22 格',copy:'30 回合，纵向环线，街铺价格较低。每圈领取 ¥320 补给，完成对局收集潮汐海螺。'},
     alpine: {title:'云岭温泉 · 24 格山城环线',copy:'30 回合，温泉、商会与观景酒店占据双格地段。缆车再前进 2–4 格，沿路结算；完成对局收集山泉晶石。'},
   };
   const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -105,9 +105,9 @@
     const key=JSON.stringify([tile.index,lot?.ownerId,lot?.level,rent.total,state.bankPool]);
     if(key===inspectorKey)return;inspectorKey=key;
     if(lot){
-      inspector.innerHTML=`<p class="panel-label">${esc(lot.district||'地产手册')}</p><h2>${esc(tile.name)}</h2><div class="property-meta"><span>${esc(owner?.name||'等待新主人')}</span><span>${lot.level===0?'空地':`Lv.${lot.level}`}</span>${lot.isLarge?'<span>占据 2 格</span>':''}</div><div class="property-price">${money(owner?rent.total:lot.price)} <small>${owner?'整条街 · 本次租金':'买下这片地'}</small></div>${owner?`<div class="property-breakdown">${rent.lots.map(t=>`${esc(t.name)} ${money(t.lot.tolls[t.lot.level])}`).join(' ＋ ')}<br>街区合计 ${money(rent.base)} × ${rent.multiplier}</div>`:''}<p class="property-note">${!owner&&lot.level>0?`开业地产：买下即得 Lv.${lot.level} 建筑。`:lot.level<3?`升级到 Lv.${lot.level+1}：${money(lot.buildCosts[lot.level+1])}`:'地标已建成，等对手的好骰子。'}${lot.effectId?'<br>'+({finance_bonus:'自己停留时获得金融收益。',tower_bonus:'自己停留时获得商务收益。',hot_spring_rest:'让来访的对手下回合休息。'}[lot.effectId]||''):''}</p>`;
+      inspector.innerHTML=`<p class="panel-label">${esc(lot.district||'地产手册')}</p><h2>${esc(tile.name)}</h2><div class="property-meta"><span>${esc(owner?.name||'无主地产')}</span><span>${lot.level===0?'空地':`Lv.${lot.level}`}</span>${lot.isLarge?'<span>占据 2 格</span>':''}</div><div class="property-price">${money(owner?rent.total:lot.price)} <small>${owner?'街区租金':'购买价格'}</small></div>${owner?`<div class="property-breakdown">${rent.lots.map(t=>`${esc(t.name)} ${money(t.lot.tolls[t.lot.level])}`).join(' ＋ ')}<br>街区合计 ${money(rent.base)} × ${rent.multiplier}</div>`:''}<p class="property-note">${!owner&&lot.level>0?`开业地产：买下即得 Lv.${lot.level} 建筑。`:lot.level<3?`升级到 Lv.${lot.level+1}：${money(lot.buildCosts[lot.level+1])}`:'已达最高等级。'}${lot.effectId?'<br>'+({finance_bonus:'自己停留时获得金融收益。',tower_bonus:'自己停留时获得商务收益。',hot_spring_rest:'让来访的对手下回合休息。'}[lot.effectId]||''):''}</p>`;
     } else {
-      inspector.innerHTML=`<p class="panel-label">城市特别地标</p><h2>${esc(tile.name)}</h2><div class="inspector-special">${tile.isStart?'⚑':({bank:'◈',card_draw:'▣',chance:'✦',construction:'⚒',teleport:'◎',rush:'↗',junction:'∞'}[tile.special?.type]||'✦')}</div><p class="property-note">${tile.isStart?`经过领取 ${money(economy.startBonus)}，并自动建造一处空地。停留时可按原地价的 125% 带楼接手对手的一处地产，也可只征用，让它变为无主。原主获原地价补偿，接手溢价进入公共金库。`:esc(tile.special?.description)}</p>${tile.special?.type==='bank'?`<div class="property-price">${money(state.bankPool)}<small>${state.bankPool>=economy.bankThreshold?'金库已满 · 下位来客全部提走':`金库积累中 · ${money(economy.bankThreshold)} 起可提`}</small></div>`:''}`;
+      inspector.innerHTML=`<p class="panel-label">城市特别地标</p><h2>${esc(tile.name)}</h2><div class="inspector-special">${tile.isStart?'⚑':({bank:'◈',card_draw:'▣',chance:'✦',construction:'⚒',teleport:'◎',rush:'↗',junction:'∞'}[tile.special?.type]||'✦')}</div><p class="property-note">${tile.isStart?`经过领取 ${money(economy.startBonus)}，并自动建造一处空地。停留时可按原地价的 125% 带楼接手对手的一处地产，也可只征用，让它变为无主。原主获原地价补偿，接手溢价进入公共金库。`:esc(tile.special?.description)}</p>${tile.special?.type==='bank'?`<div class="property-price">${money(state.bankPool)}<small>${state.bankPool>=economy.bankThreshold?'金库已满 · 停留可全部提取':`金库积累中 · ${money(economy.bankThreshold)} 起可提`}</small></div>`:''}`;
     }
     inspector.insertAdjacentHTML('beforeend',`<button class="inspect-building-btn" type="button" data-inspect-building="${tile.index}">近看建筑 <span aria-hidden="true">↗</span></button>`);
     inspector.querySelector('[data-inspect-building]').disabled=!window.CityScene?.inspectTile||(state.busy&&!preview);
@@ -132,7 +132,7 @@
     }
     const routeButton=document.getElementById('showcase-route-btn');
     routeButton.hidden=!preview||!state.board.some(t=>t.special?.type==='rush');
-    routeButton.textContent=map.id==='expansion'?'城市快线':map.id==='alpine'?'缆车穿城':'冲刺追租';
+    routeButton.textContent=map.id==='expansion'?'城市快线':map.id==='alpine'?'缆车穿城':'冲刺移动';
     document.querySelectorAll('#start-map-options [data-map-id]').forEach(button=>{
       const option=getMapConfig(button.dataset.mapId);
       button.querySelector('.map-option-meta').textContent=`${option.routePositions.length} 格 · ${getMaxRounds(option.id)} 回合`;
@@ -147,7 +147,7 @@
     if(m.visible&&tile?.lot&&['购买提示','升级提示'].includes(m.label)) {
       const owner=tile.lot.ownerId, rent=rentFor(tile), next=tile.lot.buildCosts[tile.lot.level+1];
       const remaining=currentPlayer().cash-(owner?(next||0):tile.lot.price);
-      propertyPreview.innerHTML=`<div class="event-property-grid"><div><small>${owner?'当前街区租金':'基础过路费'}</small><b>${money(owner?rent.total:tile.lot.tolls[tile.lot.level])}</b></div><div><small>操作后现金</small><b>${money(Math.max(0,remaining))}</b></div></div>${window.CityScene?.inspectTile?`<button class="inspect-building-btn" type="button" data-inspect-building="${tile.index}" data-inspect-level="3">看看满级建筑 <span aria-hidden="true">↗</span></button>`:''}`;
+      propertyPreview.innerHTML=`<div class="event-property-grid"><div><small>${owner?'当前街区租金':'基础过路费'}</small><b>${money(owner?rent.total:tile.lot.tolls[tile.lot.level])}</b></div><div><small>操作后现金</small><b>${money(Math.max(0,remaining))}</b></div></div>${window.CityScene?.inspectTile?`<button class="inspect-building-btn" type="button" data-inspect-building="${tile.index}" data-inspect-level="3">查看满级建筑 <span aria-hidden="true">↗</span></button>`:''}`;
     } else propertyPreview.innerHTML='';
     if(preview) {rollBtn.disabled=true;document.querySelectorAll('[data-showcase]').forEach(b=>b.disabled=previewBusy);}
   }
@@ -202,7 +202,7 @@
     const sid=state.sessionId,serial=++eventSerial,event=inferEvent(cfg);
     if(event.tiles?.length)selected=event.tiles[0];
     state.modal=defaultModal();state.phase='presenting';state.busy=true;
-    state.statusTitle=cfg.title||'好戏正在发生';state.statusDescription=cfg.message||'';
+    state.statusTitle=cfg.title||'事件结算';state.statusDescription=cfg.message||'';
     event.from=person(event.from);event.to=person(event.to);event.actor=person(event.actor);event.rival=person(event.rival);
     if(Array.isArray(event.beneficiaries))event.beneficiaries=event.beneficiaries.map(person).filter(Boolean);
     event.sessionId=sid;
@@ -218,7 +218,7 @@
   async function celebrate(winner,tied) {
     if(preview)return;
     const sid=state.sessionId;
-    await window.GameDrama?.play({type:'win',title:tied?'这局，平分秋色！':`${winner.name}，笑到最后！`,message:getWinnerText(),amount:winner.cash,to:person(winner),tiles:[],sessionId:sid});
+    await window.GameDrama?.play({type:'win',title:tied?'本局平局':`${winner.name} 获胜`,message:getWinnerText(),amount:winner.cash,to:person(winner),tiles:[],sessionId:sid});
     if(!isSessionActive(sid))return;
     window.GameProgression?.showResult(state.citySettlement,{onReplay:()=>void startNewGame(),onHome:()=>{showStartScreen();render();}});
   }
@@ -238,8 +238,8 @@
     state.players[0].cash=2600;state.players[0].displayedCash=2600;state.players[0].position=hero.index;
     state.players[1].cash=980;state.players[1].displayedCash=980;state.players[1].position=lots[lots.length-2].index;
     selected=hero.index;
-    state.statusTitle='看看，一笔租金能发生什么';state.statusDescription='选择下方的事件，观看这座小城的高光时刻。';
-    state.logs=[];pushLog('演出预览：这是示例局面，不计入对局战绩。');render();
+    state.statusTitle='玩法演示';state.statusDescription='选择事件查看效果，或开始正式对局。';
+    state.logs=[];pushLog('演示不消耗门票，不计入战绩或收益。');render();
   }
   async function runShowcase(type) {
     if(previewBusy)return;
@@ -250,7 +250,7 @@
     try {
       if(type==='seize'){
         human.position=0;state.currentPlayerIndex=0;selected=0;
-        state.statusTitle='这次，挑一栋对手的楼';state.statusDescription='在市政府选择地产，再决定带楼接手或只征用。';render();
+        state.statusTitle='选择征用地产';state.statusDescription='选择对手地产后，可接手房产或免费征用。';render();
         await resolveStartTakeover(human,sid);
       } else if(type==='buy'){
         const tile=state.board[showcaseTargets.build];
@@ -259,13 +259,13 @@
         await sleep(250);if(!isSessionActive(sid))return;
         if(buyLot(human,tile)) {
           render();
-          await present({label:'购买完成',title:`${tile.name}，归你了！`,message:`花费 ${money(tile.lot.price)}，这座小城又多了一块你的地盘。${purchaseBuildingNote(tile.lot)}`,drama:{type:'buy',amount:tile.lot.price,to:human,tiles:[tile.index],tileName:tile.name}});
+          await present({label:'购买完成',title:`已购买 ${tile.name}`,message:`支付 ${money(tile.lot.price)}，剩余现金 ${money(human.cash)}。${purchaseBuildingNote(tile.lot)}`,drama:{type:'buy',amount:tile.lot.price,to:human,tiles:[tile.index],tileName:tile.name}});
         }
       } else if(type==='build'){
         const tile=state.board[showcaseTargets.build];tile.lot.ownerId='human';tile.lot.level=1;human.position=tile.index;render();
         await sleep(250);if(!isSessionActive(sid))return;
         buildLot(human,tile);render();
-        await present({title:`${tile.name}，焕然一新`,message:'Lv.1 → Lv.2，下一笔租金更值得期待。',drama:{type:'build',amount:tile.lot.buildCosts[2],to:human,tiles:[tile.index],tileName:tile.name}});
+        await present({title:`${tile.name} 升至 Lv.2`,message:`支付 ${money(tile.lot.buildCosts[2])}，基础租金提高至 ${money(tile.lot.tolls[2])}。`,drama:{type:'build',amount:tile.lot.buildCosts[2],to:human,tiles:[tile.index],tileName:tile.name}});
       } else if(type==='chance'){
         const plaza=state.board.find(t=>t.special?.type==='chance');
         if(plaza){human.position=plaza.index;selected=plaza.index;render();await resolveLanding(human,plaza,sid);}
@@ -274,7 +274,7 @@
         if(station){human.position=station.index;selected=station.index;render();await resolveLanding(human,station,sid);}
       } else {render();await resolveLanding(human,state.board[showcaseTargets.rent],sid);}
     } finally {
-      if(isSessionActive(sid)){previewBusy=false;state.busy=true;state.phase='locked';state.statusTitle='这一幕，发生在你的下一局';state.statusDescription='可以继续看另一场好戏，或开始正式对局。';render();}
+      if(isSessionActive(sid)){previewBusy=false;state.busy=true;state.phase='locked';state.statusTitle='演示结束';state.statusDescription='选择其他事件，或开始正式对局。';render();}
     }
   }
   window.GamePresentation={update,updateCash,present,onReset,celebrate,rentFor,syncCityScene,selectCurrentTile:()=>{if(state.players)selectTile(currentPlayer().position);}};

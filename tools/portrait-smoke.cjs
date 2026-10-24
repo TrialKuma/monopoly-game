@@ -8,7 +8,7 @@ const out=path.resolve(__dirname,'../work/portrait-qa');fs.mkdirSync(out,{recurs
  const page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));
  await page.goto('http://127.0.0.1:8876');await page.waitForFunction(()=>window.CityScene?.ready);
  await page.screenshot({path:path.join(out,'01-menu.png')});
- await page.locator('#start-play-btn').click();await page.locator('[data-action="rounds"]').click();await page.locator('[data-action="enter"]').click();await page.locator('[data-action="flip"]').click();
+ await page.locator('#start-play-btn').click();await page.locator('[data-action="enter"]').click();await page.locator('[data-action="flip"]').click();
  await page.locator('.drama-skip').waitFor();await page.screenshot({path:path.join(out,'02-initiative.png')});
  await page.locator('.drama-skip').click();
  for(let i=0;i<30;i++){

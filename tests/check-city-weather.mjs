@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import {createHash} from 'node:crypto';
 import { pathToFileURL, fileURLToPath } from 'node:url';
 import {loadGeometryGLB,regionalAssetURL} from './gltf-geometry-fixture.mjs';
 const root = fileURLToPath(new URL('../', import.meta.url));
@@ -107,32 +108,61 @@ check('plant names match whole words across exported separators, not Alpine or p
   effect.dispose(); rows.forEach(({ mesh, material }) => { assert.equal(mesh.material, material); material.dispose(); });
 });
 
-// Use the actual exported material names and colors, including all the variants
-// that were accidentally caught by /pine/ inside the alpine regional prefix.
+// Use the actual exported material semantics. Blender's baked color surfaces
+// have solid/glass/foliage roles; legacy assets retain their stricter old-name
+// requirements, including the /pine/ regression in the alpine region prefix.
 {
   const gltf = await loadGeometryGLB(regionalAssetURL('alpine'));
+  const sourceTypes=new Set(gltf.scene.children.map(node=>node.userData.sourceType));
+  const authored=sourceTypes.has('authored_blender_reference_rebuild');
+  if(authored)assert.deepEqual([...sourceTypes],['authored_blender_reference_rebuild'],'the Blender material contract cannot hide mixed legacy roots');
   const testWorld = new THREE.Group(), outside = gltf.scene.clone(true); outside.userData.cosmetic = true;
   testWorld.add(gltf.scene, outside);
-  const originals = new Map(), sourceColors = new Map(), outsideMaterials = new Map();
+  const originals = new Map(), sourceColors = new Map(), outsideMaterials = new Map(),vertexColors=new Map();
+  const colorHash=attribute=>{const array=attribute?.data?.array||attribute?.array;assert(array,'authored vertex colors exist');return createHash('sha256').update(Buffer.from(array.buffer,array.byteOffset,array.byteLength)).digest('hex');};
   gltf.scene.traverse(node => {
     if (!node.isMesh) return;
     originals.set(node, node.material);
-    for (const material of Array.isArray(node.material) ? node.material : [node.material]) sourceColors.set(material, { color: material.color.clone(), roughness: material.roughness });
+    if(authored)vertexColors.set(node,{attribute:node.geometry.attributes.color,hash:colorHash(node.geometry.attributes.color)});
+    for (const material of Array.isArray(node.material) ? node.material : [node.material]) sourceColors.set(material, {
+      color:material.color.clone(),roughness:material.roughness,metalness:material.metalness,emissive:material.emissive.clone(),emissiveIntensity:material.emissiveIntensity,
+      map:material.map,roughnessMap:material.roughnessMap,metalnessMap:material.metalnessMap,vertexColors:material.vertexColors,
+    });
   });
   outside.traverse(node => { if (node.isMesh) outsideMaterials.set(node, node.material); });
   const effect = createCityWeather({ THREE, world: testWorld, boardBounds: bounds });
-  check('actual Alpine roofs, walls and timber retain their authored color in all seasons and weather', () => {
+  check(`actual Alpine ${authored?'Blender solid/glass surfaces':'legacy roofs, walls and timber'} retain their authored color in all seasons and weather`, () => {
     const names = new Set([...sourceColors.keys()].map(material => material.name));
-    for (const name of ['alpine/roof', 'alpine/roof_edge', 'alpine/wall', 'alpine/wood', 'alpine/wood_light', 'alpine/leaf']) assert(names.has(name), name + ' exists in actual asset');
+    if(authored){
+      const expected=gltf.scene.children.flatMap(node=>[
+        `${node.name} / solid`,`${node.name} / warm window glass`,
+        ...(node.name==='alpine_teleport_gate'?[]:[`${node.name} / water foliage`]),
+      ]);
+      assert.deepEqual([...names].sort(),expected.sort(),'the real Blender package has the complete reviewed solid/glass/foliage material set');
+      for(const material of sourceColors.keys()){
+        assert.equal(material.vertexColors,true,'Blender authored vertex colors are enabled: '+material.name);
+        assert(material.roughnessMap?.isTexture&&material.metalnessMap?.isTexture,'Blender authored surface maps remain bound: '+material.name);
+      }
+    }else{
+      for (const name of ['alpine/roof', 'alpine/roof_edge', 'alpine/wall', 'alpine/wood', 'alpine/wood_light', 'alpine/leaf']) assert(names.has(name), name + ' exists in actual asset');
+    }
     for (const season of ['spring', 'summer', 'autumn', 'winter']) for (const weather of ['clear', 'rain', 'snow']) {
       effect.setSeason(season); effect.setWeather(weather); effect.tick(0, { reduced: true });
       for (const [node, original] of originals) {
         const before = Array.isArray(original) ? original : [original], after = Array.isArray(node.material) ? node.material : [node.material];
         before.forEach((material, index) => {
-          const plant = material.name === 'alpine/leaf', source = sourceColors.get(material);
+          const plant = authored?material.name.endsWith(' / water foliage'):material.name === 'alpine/leaf', source = sourceColors.get(material);
           assert.equal(after[index] !== material, plant, `${season}/${weather}: ${material.name} only foliage is rebound`);
           if (plant) assert.equal(after[index].color.equals(source.color), false, material.name + ' changes with season');
-          else { assert(after[index].color.equals(source.color), material.name + ' retains color'); assert.equal(after[index].roughness, source.roughness); }
+          else {
+            assert(after[index].color.equals(source.color), material.name + ' retains color');
+            assert(after[index].emissive.equals(source.emissive),material.name+' retains emission');
+            for(const key of ['roughness','metalness','emissiveIntensity','map','roughnessMap','metalnessMap','vertexColors'])assert.equal(after[index][key],source[key],material.name+' retains '+key);
+            if(authored){
+              const vertices=vertexColors.get(node);assert.equal(node.geometry.attributes.color,vertices.attribute,material.name+' retains authored color attribute');
+              assert.equal(colorHash(node.geometry.attributes.color),vertices.hash,material.name+' retains exact authored vertex colors');
+            }
+          }
           assert(material.color.equals(source.color), material.name + ' shared source is unchanged');
         });
       }
@@ -146,6 +176,44 @@ check('plant names match whole words across exported separators, not Alpine or p
 
 const kits = ['city-kit', 'specials', 'landmarks', 'compact-specials', 'expansion-specials'];
 {
+  const {buildDestinationGarden}=await import(pathToFileURL(root+'scene-garden-kit.js'));
+  check('seasonal copies preserve the actual meadow shader and its program key through season changes',()=>{
+    const testWorld=new THREE.Group(),garden=new THREE.Group(),perimeter=new THREE.Group(),resources=new Set();
+    // Destination scenery is cosmetic but its marked plant surfaces opt in to
+    // the seasonal palette. Exercise the real batched grass, not a fake hook.
+    garden.userData.cosmetic=true;garden.userData.seasonalScenery=true;garden.add(perimeter);testWorld.add(garden);
+    const w=9,d=14.4;
+    buildDestinationGarden({THREE,own:r=>{resources.add(r);return r;},root:garden,perimeter,mapId:'harbor',w,d,innerW:w-4.7,innerD:d-4.65,waves:[],boats:[],steam:[]});
+    const meadow=[];garden.traverse(node=>{if(node.isMesh&&node.material?.userData.seasonalKind==='grass')meadow.push({node,original:node.material,color:node.material.color.clone()});});
+    assert(meadow.length>0,'destination garden has actual meadow surfaces');
+    const compile=material=>{
+      const shader={uniforms:{},vertexShader:THREE.ShaderLib.standard.vertexShader,fragmentShader:THREE.ShaderLib.standard.fragmentShader};
+      material.onBeforeCompile(shader);return shader;
+    };
+    const before=compile(meadow[0].original),programKey=meadow[0].original.customProgramCacheKey();
+    assert(before.vertexShader.includes('vMeadowPoint')&&before.fragmentShader.includes('meadowPatch'),'the authored meadow shader is installed');
+    const effect=createCityWeather({THREE,world:testWorld,boardBounds:{w,d}});
+    try{
+      let spring;
+      for(const season of ['spring','winter']){
+        effect.setSeason(season);effect.tick(0,{reduced:true});
+        for(const {node,original,color} of meadow){
+          assert.notEqual(node.material,original,'weather uses a local seasonal material');
+          const compiled=compile(node.material);
+          assert.equal(compiled.vertexShader,before.vertexShader,season+': meadow world coordinates survive cloning');
+          assert.equal(compiled.fragmentShader,before.fragmentShader,season+': meadow colour variation survives cloning');
+          assert.equal(node.material.customProgramCacheKey(),programKey,season+': authored shader keeps its cache identity');
+          assert(original.color.equals(color),'shared source colour is untouched');
+        }
+        if(season==='spring')spring=meadow[0].node.material.color.clone();
+        else assert(!meadow[0].node.material.color.equals(spring),'season changes still affect the shader-bearing grass');
+      }
+    }finally{effect.dispose();}
+    for(const {node,original} of meadow)assert.equal(node.material,original,'teardown restores the original shader-bearing material');
+    resources.forEach(resource=>resource.dispose());
+  });
+}
+{
   const {createRegionalPark}=await import(pathToFileURL(root+'scene-regional-parks.js'));
   check('actual regional garden plants change seasons while masonry and cafe canopies retain their colors',()=>{
     for(const mapId of ['classic','compact','expansion']){
@@ -156,12 +224,16 @@ const kits = ['city-kit', 'specials', 'landmarks', 'compact-specials', 'expansio
       effect.setSeason('spring');effect.tick(0,{reduced:true});
       const spring=new Map([...originals].map(([n])=>[n,n.material.color.clone()]));
       effect.setSeason('winter');effect.tick(0,{reduced:true});
-      let plantCount=0,structureCount=0;
+      let plantCount=0,structureCount=0;const plantKinds=new Set();
       for(const [node,material] of originals){
-        if(material.userData.seasonalKind){plantCount++;assert.notEqual(node.material,material,mapId+' plant gets local material');assert(!node.material.color.equals(spring.get(node)),mapId+' plant changes season');}
+        if(material.userData.seasonalKind){plantCount++;plantKinds.add(material.userData.seasonalKind);assert.notEqual(node.material,material,mapId+' plant gets local material');assert(!node.material.color.equals(spring.get(node)),mapId+' plant changes season');}
         else{structureCount++;assert.equal(node.material,material,mapId+' structure unchanged');}
       }
-      assert(plantCount>=3&&structureCount>=5,`${mapId}: ${plantCount} plant batches and ${structureCount} structural batches tested`);
+      // Static batching may merge many trees into one crown draw. Validate the
+      // real botanical roles instead of requiring an arbitrary number of draws.
+      const requiredKinds={classic:['grass','leaf','crown'],compact:['grass','blossom','crown','leaf','evergreen'],expansion:['grass','crown']};
+      assert.deepEqual([...plantKinds].sort(),requiredKinds[mapId].sort(),mapId+' exercises all authored seasonal plant roles');
+      assert(structureCount>=5,`${mapId}: ${plantCount} plant batches and ${structureCount} structural batches tested`);
       effect.dispose();for(const [node,material] of originals)assert.equal(node.material,material);
       resources.forEach(r=>r.dispose());
     }

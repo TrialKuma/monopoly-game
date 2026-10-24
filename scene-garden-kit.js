@@ -1,4 +1,5 @@
 import { mergeGeometries } from './assets/vendor/three/addons/utils/BufferGeometryUtils.js';
+import { enrichDestinationLandscape, applyMeadowSurface } from './scene-landscape-details.js?v=20261025-landscape3';
 
 // Authored landscape shapes shared by destination gardens. All random-looking
 // variation is a pure function of a local seed, independent of the dice RNG.
@@ -10,14 +11,15 @@ export function createGardenKit({ THREE, own, root, palette }) {
     stone: material(palette.stone), stoneLight: material(palette.stoneLight), stoneDark: material(palette.stoneDark),
     path: material(palette.path), mortar: material(palette.mortar), soil: material(palette.soil), grass: material(palette.grass),
     timber: material(palette.timber), timberLight: material(palette.timberLight), metal: material(palette.metal),
-    foliage: material('#ffffff', { vertexColors: true }), leaf: material(palette.leaf), leafLight: material(palette.leafLight),
+    foliage: material('#ffffff', { vertexColors: true }), canopy: material('#ffffff', { vertexColors: true }), blossom: material('#ffffff', { vertexColors: true }), leaf: material(palette.leaf), leafLight: material(palette.leafLight),
     flowers: material(palette.flowers), flowerLight: material(palette.flowerLight), foam: material('#e6f1e7'),
     water: material(palette.water, { roughness: .26, metalness: .18 }),
     warm: material('#ffd786', { emissive: '#ffb951', emissiveIntensity: .3 }),
   };
   // Explicit plant roles survive static batching. Decorative stone, fabric,
   // windows and warm lights must not be guessed from a color or map name.
-  for(const [key,kind] of Object.entries({grass:'grass',leaf:'leaf',leafLight:'crown',foliage:'evergreen',flowers:'crown',flowerLight:'crown'}))colors[key].userData.seasonalKind=kind;
+  for(const [key,kind] of Object.entries({grass:'grass',leaf:'leaf',leafLight:'crown',canopy:'crown',blossom:'blossom',foliage:'evergreen',flowers:'crown',flowerLight:'crown'}))colors[key].userData.seasonalKind=kind;
+  applyMeadowSurface(colors.grass);
   const cached = new Map();
   function geo(key, build) { if (!cached.has(key)) cached.set(key, own(build())); return cached.get(key); }
   const sphere = geo('pebble', () => new THREE.IcosahedronGeometry(1, 1));
@@ -57,6 +59,77 @@ export function createGardenKit({ THREE, own, root, palette }) {
     const start = new THREE.Vector3(...a), end = new THREE.Vector3(...b), direction = end.clone().sub(start);
     const mesh = add(cylinder, mat, start.clone().add(end).multiplyScalar(.5).toArray(), [radius,direction.length(),radius], 0, parent);
     mesh.quaternion.setFromUnitVectors(up, direction.normalize()); return mesh;
+  }
+  function taperedRod(a,b,radius,mat=colors.timber,parent=root){
+    const start=new THREE.Vector3(...a),end=new THREE.Vector3(...b),direction=end.clone().sub(start);
+    const geometry=geo('tapered-branch',()=>new THREE.CylinderGeometry(.52,1,1,7));
+    const mesh=add(geometry,mat,start.clone().add(end).multiplyScalar(.5).toArray(),[radius,direction.length(),radius],0,parent);
+    mesh.quaternion.setFromUnitVectors(up,direction.normalize());return mesh;
+  }
+  function rootFlare(x,y,z,size=1,seed=0,parent=root){
+    for(let i=0;i<5;i++){
+      const a=i*Math.PI*2/5+noise(seed)*.7,r=size*(.14+noise(seed+i)*.08);
+      taperedRod([x,y+.16*size,z],[x+Math.cos(a)*r,y+.012,z+Math.sin(a)*r],size*.032,colors.timber,parent);
+    }
+  }
+  function plantGeometry(kind,seed=0){
+    return geo(`plant-${kind}-${Math.abs(seed%4)}`,()=>{
+      const positions=[],rgb=[],uv=[];
+      const base=new THREE.Color(kind==='bloom'?palette.flowers:palette.leaf),light=new THREE.Color(kind==='bloom'?palette.flowerLight:palette.leafLight);
+      function tri(a,b,c,color){for(const p of [a,b,c]){positions.push(...p);rgb.push(color.r,color.g,color.b);uv.push(0,0);}}
+      function leaf(center,axis,wide,length,tone){
+        const c=new THREE.Vector3(...center),u=new THREE.Vector3(...axis).normalize(),v=new THREE.Vector3(-u.z,0,u.x).normalize();
+        if(v.lengthSq()<.1)v.set(1,0,0);
+        const points=[c.clone().addScaledVector(u,-length*.55),c.clone().addScaledVector(v,-wide),c.clone().addScaledVector(u,length*.55),c.clone().addScaledVector(v,wide),c.clone().add(new THREE.Vector3(0,wide*.48,0))].map(p=>p.toArray());
+        const color=base.clone().lerp(light,tone);
+        for(const [a,b,d] of [[0,1,4],[1,2,4],[2,3,4],[3,0,4]]){tri(points[a],points[b],points[d],color);tri(points[d],points[b],points[a],color.clone().multiplyScalar(.82));}
+      }
+      if(kind==='needle'){
+        // A spray of folded needle fans along a curved branch. Separate tips
+        // break the old stacked-cone silhouette without alpha-cutout textures.
+        for(let i=0;i<11;i++){
+          const t=i/10,side=i%2?-1:1;
+          leaf([t*.89-.40,.05+Math.sin(t*Math.PI)*.12,side*.12*(1-t*.5)],[.62,.20,side*.75],.10*(1-t*.46),.40*(1-t*.32),.20+noise(i+seed)*.38);
+        }
+      }else if(kind==='sprig'){
+        for(let i=0;i<10;i++){const a=i*2.399+seed,r=i<4?.22:.48,h=i<4?.22:0;leaf([Math.cos(a)*r,h,Math.sin(a)*r],[Math.cos(a),.25,Math.sin(a)],.19,.66,.18+noise(seed+i)*.60);}
+      }else if(kind==='grass'){
+        for(let i=0;i<9;i++){
+          const a=i*2.399+seed,h=.45+noise(i+seed)*.46,r=.16;
+          const p=[Math.cos(a)*r,0,Math.sin(a)*r],q=[Math.cos(a)*.44,h,Math.sin(a)*.44],m=[(p[0]+q[0])*.55,h*.55,(p[2]+q[2])*.55];
+          const v=[Math.cos(a+1.57)*.04,0,Math.sin(a+1.57)*.04];
+          const c=base.clone().lerp(light,.28+noise(i)*.4);
+          tri(p,[m[0]+v[0],m[1],m[2]+v[2]],q,c);tri(p,q,[m[0]-v[0],m[1],m[2]-v[2]],c);
+          tri(q,[m[0]+v[0],m[1],m[2]+v[2]],p,c);tri([m[0]-v[0],m[1],m[2]-v[2]],q,p,c);
+        }
+      }else{
+        // Low rounded volume beneath many individual folded leaves. This is a
+        // canopy assembled from leaf fans rather than overlapping low-poly balls.
+        const n=9,rings=5,points=[];
+        for(let j=0;j<=rings;j++)for(let i=0;i<n;i++){
+          const a=i*Math.PI*2/n,t=j*Math.PI/rings,r=Math.sin(t)*(1+Math.sin(a*3+seed)*.06);
+          points.push([Math.cos(a)*r*.72,Math.cos(t)*.57,Math.sin(a)*r*.67]);
+        }
+        for(let j=0;j<rings;j++)for(let i=0;i<n;i++){
+          const a=j*n+i,b=j*n+(i+1)%n,c=(j+1)*n+i,d=(j+1)*n+(i+1)%n,color=base.clone().lerp(light,.09+(1-j/rings)*.22);
+          tri(points[a],points[b],points[c],color);tri(points[b],points[d],points[c],color);
+        }
+        for(let i=0;i<24;i++){
+          const a=i*2.399+seed,t=(i+.5)/24,h=.88-t*1.45,r=Math.sqrt(Math.max(.07,1-h*h));
+          leaf([Math.cos(a)*r*.66,h*.57,Math.sin(a)*r*.63],[Math.cos(a),.15+noise(i)*.2,Math.sin(a)],kind==='bloom'?.14:.13,.24+noise(seed+i)*.08,.15+noise(i+seed)*.65);
+        }
+      }
+      const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(positions,3));g.setAttribute('uv',new THREE.Float32BufferAttribute(uv,2));g.setAttribute('color',new THREE.Float32BufferAttribute(rgb,3));g.computeVertexNormals();return g;
+    });
+  }
+  function leafCluster(x,y,z,sx=.3,sy=.3,sz=.3,seed=0,parent=root,kind='leaf'){
+    return add(plantGeometry(kind,seed),kind==='bloom'?colors.blossom:kind==='needle'?colors.foliage:colors.canopy,[x,y,z],[sx,sy,sz],noise(seed)*Math.PI*2,parent);
+  }
+  function groundCover(x,y,z,radius=.35,seed=0,parent=root,kind='grass'){
+    for(let i=0;i<5;i++){
+      const a=i*2.399+seed,r=Math.sqrt((i+.4)/5)*radius,s=.12+noise(seed+i)*.13;
+      add(plantGeometry('grass',seed+i),colors.canopy,[x+Math.cos(a)*r,y,z+Math.sin(a)*r],[s,s*(kind==='reeds'?2.3:1),s],a,parent);
+    }
   }
   function curve(points) { return new THREE.CatmullRomCurve3(points.map(p => new THREE.Vector3(...p)), false, 'centripetal'); }
   function ribbon(points, width, mat, parent = root, segments = 48, profile = () => 0) {
@@ -111,37 +184,78 @@ export function createGardenKit({ THREE, own, root, palette }) {
     }); return add(geometry,seed%3===0?colors.stoneDark:colors.stone,[x,y,z],[sx,sy,sz],noise(seed)*6.2,parent);
   }
   function bush(x,y,z,size=.35,seed=0,parent=root,bloom=false) {
-    for(let i=0;i<5;i++){
-      const a=i*2.4+seed,r=i?size*.42:0,scale=size*(.47+noise(seed+i)*.23);
-      add(sphere,i%3?colors.leaf:colors.leafLight,[x+Math.cos(a)*r,y+scale*.65,z+Math.sin(a)*r],[scale,scale*.76,scale],a,parent);
+    const small=size<.27;
+    for(let i=0;i<(small?2:3);i++){
+      const a=i*2.4+seed,r=i?size*.30:0,scale=size*(.58+noise(seed+i)*.12);
+      leafCluster(x+Math.cos(a)*r,y+size*(.39+(i%2)*.12),z+Math.sin(a)*r,scale,scale*.75,scale,seed+i,parent,small?'sprig':'leaf');
     }
-    if(bloom)for(let i=0;i<9;i++){
-      const a=i*2.399+seed,r=Math.sqrt((i+.5)/9)*size*.72;
-      add(flowerBud,i%3?colors.flowers:colors.flowerLight,[x+Math.cos(a)*r,y+size*.64+noise(i+seed)*.13,z+Math.sin(a)*r],[.045,.035,.045],a,parent);
+    if(bloom)for(let i=0;i<7;i++){
+      const a=i*2.399+seed,r=Math.sqrt((i+.5)/7)*size*.60,xx=x+Math.cos(a)*r,zz=z+Math.sin(a)*r,yy=y+size*.58+noise(i+seed)*size*.17;
+      rod([xx,y+size*.28,zz],[xx,yy,zz],.006,colors.leaf,parent);
+      const flower=geo('garden-flower',()=>{
+        const p=[],uv=[];
+        for(let k=0;k<5;k++){const a=k*Math.PI*2/5,ca=Math.cos(a),sa=Math.sin(a),v=[-sa*.28,0,ca*.28],c=[ca*.55,.09,sa*.55],tip=[ca,.025,sa];
+          for(const q of [[0,0,0],[c[0]+v[0],c[1],c[2]+v[2]],tip,[0,0,0],tip,[c[0]-v[0],c[1],c[2]-v[2]]]){p.push(...q);uv.push(0,0);}}
+        const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(p,3));g.setAttribute('uv',new THREE.Float32BufferAttribute(uv,2));g.computeVertexNormals();return g;
+      });
+      const head=add(flower,i%3?colors.flowers:colors.flowerLight,[xx,yy,zz],[.045,.045,.045],a,parent);head.rotation.z=.12;
+      add(flowerBud,colors.flowerLight,[xx,yy+.008,zz],[.012,.009,.012],0,parent);
     }
   }
   function fir(x,y,z,size=1,seed=0,parent=root) {
-    rod([x,y,z],[x,y+size*.77,z],size*.047,colors.timber,parent);
-    const foliage=geo(`fir${seed%5}`,()=>{
-      const positions=[],rgb=[],indices=[],uv=[],rings=[[0,.11],[.09,.44],[.17,.34],[.28,.22],[.30,.36],[.43,.24],[.51,.14],[.54,.26],[.67,.15],[.75,.08],[.79,.16],[.91,.075],[1,0]];
-      const segments=10,base=new THREE.Color(palette.leaf),light=new THREE.Color(palette.leafLight);
-      rings.forEach(([h,r],row)=>{for(let j=0;j<segments;j++){
-        const a=j/segments*Math.PI*2+(row%3)*.12,rad=r*(1+(noise(seed+j*4+row)-.5)*.26);
-        positions.push(Math.cos(a)*rad,h,Math.sin(a)*rad);uv.push(j/segments,h);
-        const c=base.clone().lerp(light,.15+noise(j+row*4)*.4);rgb.push(c.r,c.g,c.b);
-        if(row<rings.length-1){const k=row*segments+j,n=row*segments+(j+1)%segments;indices.push(k,k+segments,n,n,k+segments,n+segments);}
-      }});
-      const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(positions,3));g.setAttribute('normal',new THREE.Float32BufferAttribute(new Float32Array(positions.length),3));g.setAttribute('uv',new THREE.Float32BufferAttribute(uv,2));g.setAttribute('color',new THREE.Float32BufferAttribute(rgb,3));g.setIndex(indices);g.computeVertexNormals();return g;
-    });add(foliage,colors.foliage,[x,y+size*.16,z],[size,size*1.35,size],noise(seed)*6.28,parent);
-    for(let i=0;i<3;i++){const a=seed+i*2.1;rod([x,y+size*.4,z],[x+Math.cos(a)*size*.24,y+size*.47,z+Math.sin(a)*size*.24],size*.018,colors.timber,parent);}
+    rootFlare(x,y,z,size*.8,seed,parent);
+    taperedRod([x,y,z],[x+.025*size,y+size*1.42,z],size*.052,colors.timber,parent);
+    for(let tier=0;tier<5;tier++){
+      const h=size*(.33+tier*.225),r=size*(.43-tier*.067),count=tier===4?3:4;
+      for(let i=0;i<count;i++){
+        const a=i*Math.PI*2/count+tier*.78+noise(seed)*.7,tip=[x+Math.cos(a)*r,y+h+.065*size,z+Math.sin(a)*r];
+        taperedRod([x,y+h-.07*size,z],tip,size*(.023-tier*.003),colors.timber,parent);
+        const tuft=leafCluster(x+Math.cos(a)*r*.59,y+h,z+Math.sin(a)*r*.59,size*(.64-tier*.075),size*(.54-tier*.06),size*(.65-tier*.08),seed+tier+i,parent,'needle');
+        tuft.rotation.y=-a;tuft.rotation.z=.12;
+      }
+    }
+    const tip=leafCluster(x+.025*size,y+size*1.38,z,size*.22,size*.45,size*.22,seed,parent,'needle');tip.rotation.z=Math.PI/2;
   }
   function broadTree(x,y,z,size=1,seed=0,parent=root) {
-    rod([x,y,z],[x,y+size*.8,z],.06*size,colors.timber,parent);
-    for(let i=0;i<5;i++){
-      const a=i*2.4+seed,dx=Math.cos(a)*size*.25,dz=Math.sin(a)*size*.25;
-      rod([x,y+size*.4,z],[x+dx,y+size*.87,z+dz],.026*size,colors.timber,parent);
-      add(sphere,i%2?colors.leafLight:colors.leaf,[x+dx,y+size*(.82+(i%2)*.2),z+dz],[size*.36,size*.38,size*.33],a,parent);
+    rootFlare(x,y,z,size,seed,parent);
+    const lean=(noise(seed)-.5)*.11*size;
+    taperedRod([x,y,z],[x+lean,y+size*.53,z-.04*size],.065*size,colors.timber,parent);
+    taperedRod([x+lean,y+size*.48,z-.04*size],[x-.035*size,y+size*.98,z],.043*size,colors.timber,parent);
+    for(let i=0;i<4;i++){
+      const a=i*2.399+seed,dx=Math.cos(a)*size*.31,dz=Math.sin(a)*size*.29,h=size*(.90+(i%2)*.16);
+      const fork=[x+dx*.68,y+h*.79,z+dz*.70];
+      taperedRod([x+lean,y+size*(.40+i*.065),z-.02*size],fork,.029*size,colors.timber,parent);
+      for(const side of [-1,1])taperedRod(fork,[x+dx+Math.sin(a)*side*.09*size,y+h,z+dz+Math.cos(a)*side*.09*size],.015*size,colors.timberLight,parent);
+      leafCluster(x+dx,y+h,z+dz,size*.46,size*(.42+(i%2)*.05),size*.43,seed+i,parent);
     }
+    groundCover(x,y+.005,z,size*.23,seed,parent);
+  }
+  function topiary(x,y,z,size=1,seed=0,parent=root){
+    rootFlare(x,y,z,size*.65,seed,parent);taperedRod([x,y,z],[x,y+size*.88,z],size*.045,colors.timber,parent);
+    leafCluster(x,y+size*.91,z,size*.39,size*.57,size*.39,seed,parent);
+    leafCluster(x+size*.035,y+size*1.13,z,size*.25,size*.32,size*.26,seed+1,parent);
+  }
+  function hedgeSegment(a,b,height=.24,width=.24,parent=root){
+    const dx=b[0]-a[0],dz=b[2]-a[2],length=Math.hypot(dx,dz),angle=Math.atan2(dx,dz);
+    const body=stone((a[0]+b[0])/2,a[1],(a[2]+b[2])/2,width,height,length+.04,0,colors.leaf,parent);body.rotation.y=angle;
+    const count=Math.max(1,Math.ceil(length/.40));
+    for(let i=0;i<count;i++){
+      const t=(i+.5)/count;
+      leafCluster(a[0]+dx*t,a[1]+height*.86,a[2]+dz*t,width*.75,height*.23,width*.84,i,parent,'sprig');
+    }
+  }
+  function flowerBed(x,y,z,rx=.45,rz=.35,seed=0,parent=root){
+    island(x,z,rx,rz,y,.045,seed,colors.soil,parent);
+    const count=Math.max(8,Math.min(20,Math.ceil((rx+rz)*Math.PI/.23)));
+    for(let i=0;i<count;i++){
+      const a=i*Math.PI*2/count;
+      const edging=stone(x+Math.cos(a)*rx,y+.025,z+Math.sin(a)*rz,.19,.07,.11,seed+i,colors.stoneLight,parent);edging.rotation.y=-a;
+    }
+    for(let i=0;i<3;i++){
+      const a=i*2.399+seed;
+      bush(x+Math.cos(a)*rx*.43,y+.045,z+Math.sin(a)*rz*.43,Math.min(rx,rz)*.44,seed+i,parent,true);
+    }
+    groundCover(x,y+.055,z,Math.min(rx,rz)*.52,seed,parent);
   }
   function stoneArch(x,y,z,length=2.0,width=.8,height=.55,yaw=0,parent=root) {
     const group=new THREE.Group();group.position.set(x,y,z);group.rotation.y=yaw;parent.add(group);
@@ -213,7 +327,7 @@ export function createGardenKit({ THREE, own, root, palette }) {
     }
     return colors;
   }
-  return { colors, noise, add, material, stone, rod, ribbon, island, pavedPath, wall, bankEllipse, boulder, bush, fir, broadTree, stoneArch, woodBridge, lantern, meadowStrip, curve, finish, sphere, circle };
+  return { colors, noise, add, material, stone, rod, taperedRod, rootFlare, leafCluster, groundCover, topiary, hedgeSegment, flowerBed, ribbon, island, pavedPath, wall, bankEllipse, boulder, bush, fir, broadTree, stoneArch, woodBridge, lantern, meadowStrip, curve, finish, sphere, circle };
 }
 
 // Complete authored courtyard and terrain, kept separate from AI asset loading.
@@ -312,6 +426,7 @@ export function buildDestinationGarden({THREE,own,root,perimeter,mapId,w,d,inner
     for(const side of [-1,1]){const z=side*(d/2+1.05);pavedPath([[-w/2-.9,-.13,z],[0,-.13,z+side*.25],[w/2+.9,-.13,z]],.8,1400+side,perimeter);wall([[-w/2-1,-.43,z+side*.42],[0,-.43,z+side*.7],[w/2+1,-.43,z+side*.42]],.29,1450+side,perimeter);for(let i=0;i<3;i++){const x=(i-1)*(w*.34);planting(x,z+side*.8,.65,.43,1500+i,perimeter,-.15);broadTree(x,-.08,z+side*.9,.72+(i%2)*.15,1510+i,perimeter);}}
   }
 
+  enrichDestinationLandscape({THREE,own,garden,root,perimeter,alpine,w,d,innerW,innerD,heroZ});
   garden.finish();
   root.userData.landscape={design:'connected-garden-v2',regionalTheme:alpine?'Alpine':'Mediterranean',staticDraws:0,triangles:0};
   root.traverse(node=>{if(node.isMesh&&!node.parent?.userData.gardenDynamic){root.userData.landscape.staticDraws++;root.userData.landscape.triangles+=(node.geometry.index?.count||node.geometry.attributes.position.count)/3;}});

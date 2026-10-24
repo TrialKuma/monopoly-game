@@ -1,5 +1,5 @@
 import { loadSharedModelAsset, disposeSharedModelAssets, regionalSceneryDirectory } from './scene-model-cache.js?v=20261024-blender-release2';
-import { buildDestinationGarden, batchGardenBuilding, instanceGardenBuildings } from './scene-garden-kit.js?v=20261024-1';
+import { buildDestinationGarden, batchGardenBuilding, instanceGardenBuildings } from './scene-garden-kit.js?v=20261025-landscape3';
 
 // Destination art is cosmetic. The authored meshes keep their colors and rigid
 // part animation clips; they never enter the board's static mesh batching.
@@ -19,6 +19,7 @@ export function createDestinationScene({THREE, world, boardBounds, mapId, reques
   const w=boardBounds.w,d=boardBounds.d,innerW=w-4.7,innerD=d-4.65;
   let elapsed=0,disposed=false,visible=true,ready=false,failed=false,regionReady=false,heroReady=false;
   const {warm,plots}=buildDestinationGarden({THREE,own,root,perimeter,mapId,w,d,innerW,innerD,waves,boats,steam});
+  const waterClocks=new Set();root.traverse(node=>{const materials=Array.isArray(node.material)?node.material:[node.material];for(const mat of materials)if(mat?.userData.landscapeTime)waterClocks.add(mat.userData.landscapeTime);});
   const regionLoading=loadModel(`${regionalSceneryDirectory}/${mapId}.glb`).then(gltf=>{
     if(disposed)return;
     for(const plot of plots)if(!gltf.scene.getObjectByName(`${mapId}_${plot.asset}`))throw new Error(`Missing regional building ${mapId}_${plot.asset}`);
@@ -51,6 +52,7 @@ export function createDestinationScene({THREE, world, boardBounds, mapId, reques
   function tick(delta,{night=0,reduced=false,paused=false}={}){
     if(disposed)return false;
     const dt=Math.min(.1,Math.max(0,delta||0));if(!paused&&!reduced){elapsed+=dt;mixers.forEach(m=>m.update(dt));}
+    waterClocks.forEach(clock=>{clock.value=elapsed;});
     warm.emissiveIntensity=.2+night*1.6;glows.forEach(g=>g.material.opacity=night*.22);
     waves.forEach((r,i)=>{const phase=(elapsed*.23+i/9)%1;r.scale.setScalar(.4+phase*1.8);r.material.opacity=(1-phase)*.25;});
     steam.forEach(p=>{const phase=(elapsed*.13+p.phase)%1;p.object.position.set(p.x+Math.sin(phase*3+p.phase)*.10,.52+phase*.85,p.z);p.object.scale.setScalar(.22+phase*.34);p.object.material.opacity=Math.sin(phase*Math.PI)*.30;});

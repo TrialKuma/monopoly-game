@@ -14,7 +14,7 @@ function fixture(mapId='compact',w=12.6,d=10.8,loadSceneryBundle=pending){
 function shapeData(root){const values=[];root.updateMatrixWorld(true);root.traverse(n=>{if(n.isMesh){values.push(Array.from(n.geometry.attributes.position.array));values.push(n.matrixWorld.toArray());}});return values;}
 function fakeBundle(mapId,regional=true){
  const scene=new THREE.Group(),material=new THREE.MeshStandardMaterial({color:'#ccc9a9'}),geometry=new THREE.BoxGeometry(1,1,1);
- for(const key of ['villa_3','shop_2','hotel_2','tower_2']){const group=new THREE.Group();group.name=regional?`${mapId}_${key}`:key;const mesh=new THREE.Mesh(geometry,material);mesh.position.y=.5;group.add(mesh);scene.add(group);}
+ for(const key of ['villa_3','shop_2','hotel_2','tower_2','junction_hub']){const group=new THREE.Group();group.name=regional?`${mapId}_${key}`:key;const mesh=new THREE.Mesh(geometry,material);mesh.position.y=.5;group.add(mesh);scene.add(group);}
  return {scene,material,geometry};
 }
 
@@ -49,17 +49,29 @@ await test('night lighting, visibility and paused updates consume no gameplay RN
   f.api.setVisible(false);assert.equal(f.requests(),2);f.api.setVisible(true);assert.equal(f.api.tick(.1,{night:0}),true);assert.equal(f.requests(),3);
  }finally{Math.random=random;f.api.dispose();}assert.equal(f.api.setVisible(true),false);
 });
-await test('real regional nodes replace every neighbourhood plot and stay separately owned',async()=>{
+await test('far regional nodes replace every outer neighbourhood plot without loading the near pack and stay separately owned',async()=>{
  for(const mapId of ['classic','compact','expansion']){
   const bundle=fakeBundle(mapId),requests=[],f=fixture(mapId,12.6,10.8,async file=>{requests.push(file);return bundle;});await f.api.loading;
-  assert.deepEqual(requests,[`regions/${mapId}.glb`]);assert.equal(f.api.getState().regional,true);assert.equal(f.api.getState().ready,true);assert.equal(f.api.getState().buildings,mapId==='expansion'?11:12);
+  assert.deepEqual(requests,[`regions-far/${mapId}.glb`],'outer districts request only their selected regional far pack');assert.equal(f.api.getState().regional,true);assert.equal(f.api.getState().ready,true);assert.equal(f.api.getState().buildings,mapId==='expansion'?11:12);
   const neighbourhood=f.root.getObjectByName('outskirts_regional_neighbourhood');assert(neighbourhood);let draws=0;neighbourhood.traverse(n=>{if(n.isMesh)draws++;});assert.equal(draws,1,'regional copies merge by material');
   let releases=0;bundle.geometry.addEventListener('dispose',()=>releases++);bundle.material.addEventListener('dispose',()=>releases++);f.api.dispose();assert.equal(releases,0,'cache owns source resources');bundle.geometry.dispose();bundle.material.dispose();
  }
 });
+await test('the inner courtyard pavilion keeps near architecture while destination perimeters allocate no duplicate outer pack',async()=>{
+ const mapId='expansion',bundle=fakeBundle(mapId),world=new THREE.Group(),owned=new Set(),requests=[];
+ const park=createRegionalPark({THREE,world,boardBounds:{w:18,d:10.8},mapId,own:r=>{owned.add(r);return r;},loadSceneryBundle:async file=>{requests.push(file);return bundle;}});
+ await park.architectureLoading;
+ assert.deepEqual(requests,['regions/expansion.glb'],'the nearby courtyard pavilion uses the near pack');
+ assert(park.getObjectByName('scenic_expansion_junction_hub'),'near pavilion is actually attached');
+ owned.forEach(r=>r.dispose());bundle.geometry.dispose();bundle.material.dispose();
+ for(const destination of ['harbor','alpine']){
+  const calls=[],f=fixture(destination,12.6,10.8,async file=>{calls.push(file);throw new Error('unexpected duplicate perimeter pack');});await f.api.loading;
+  assert.deepEqual(calls,[],'destination gardens own their perimeters');assert.equal(f.root.children.length,0);assert.equal(f.api.getState().buildings,0);f.api.dispose();
+ }
+});
 await test('regional network failure never substitutes old architecture, and late loads cannot revive removed scenes',async()=>{
- const bundle=fakeBundle('compact',false),calls=[],f=fixture('compact',12.6,10.8,async file=>{calls.push(file);if(file.startsWith('regions/'))throw new Error('network');return bundle;});await f.api.loading;
- assert.deepEqual(calls,['regions/compact.glb']);assert.equal(f.api.getState().failed,true);assert.equal(f.api.getState().buildings,0);f.api.dispose();
+ const bundle=fakeBundle('compact',false),calls=[],f=fixture('compact',12.6,10.8,async file=>{calls.push(file);if(file==='regions-far/compact.glb')throw new Error('network');return bundle;});await f.api.loading;
+ assert.deepEqual(calls,['regions-far/compact.glb'],'a far-pack failure must not load the near pack or legacy architecture');assert.equal(f.api.getState().failed,true);assert.equal(f.api.getState().ready,false);assert.equal(f.api.getState().buildings,0);assert(!f.root.getObjectByName('outskirts_regional_neighbourhood'));f.api.dispose();bundle.geometry.dispose();bundle.material.dispose();
  let resolve;const late=fixture('classic',12.6,10.8,()=>new Promise(r=>resolve=r));late.api.dispose();resolve(fakeBundle('classic'));await late.api.loading;assert.equal(late.world.children.length,1);assert.equal(late.api.getState().ready,false);
 });
 await test('an incomplete regional bundle cannot silently leave empty house plots',async()=>{
