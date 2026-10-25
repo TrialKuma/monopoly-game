@@ -1,6 +1,6 @@
 // Cosmetic city life. No game state writes, global RNG, timers, or animation loop.
 // Articulated Blender parts are kept by scene.js before its static mesh batching.
-import { createCityLighting } from './scene-lighting.js?v=20261024-1';
+import { createCityLighting } from './scene-lighting.js?v=20261025-harbor1';
 import { createCityWeather } from './scene-weather.js?v=20261025-items1';
 import { createCityOutskirts } from './scene-outskirts.js?v=20261025-terrain3';
 import { createDestinationScene } from './scene-destinations.js?v=20261025-terrain3';
@@ -25,9 +25,13 @@ export function createSceneLife({ THREE, scene, world, light, snapshot, lotViews
   const parkY = .16;
   const lighting = createCityLighting({ THREE, scene, world, renderer, light, boardBounds, requestRender });
   const weather = createCityWeather({ THREE, world, renderer, boardBounds, requestRender });
-  const outskirts = createCityOutskirts({ THREE, world, boardBounds, mapId:snapshot?.mapId, requestRender });
-  const destination = createDestinationScene({THREE,world,boardBounds,mapId:snapshot?.mapId,requestRender});
+  const archipelago=snapshot?.mapId==='harbor';
+  const outskirts = archipelago?{tick(){},dispose(){},setVisible(){return false;},stats(){return {};}}:createCityOutskirts({ THREE, world, boardBounds, mapId:snapshot?.mapId, requestRender });
+  const destination = archipelago?null:createDestinationScene({THREE,world,boardBounds,mapId:snapshot?.mapId,requestRender});
   if(destination){outskirts.setVisible(false);root.position.z=2;}
+  // The harbor has its own playable island geography, without the former
+  // central park/village superimposed on the shared port streets.
+  if(archipelago)root.visible=false;
   const own = resource => { owned.add(resource); return resource; };
   const standard = (color, extra = {}) => own(new THREE.MeshStandardMaterial({ color, roughness: .65, ...extra }));
   const basic = (color, extra = {}) => own(new THREE.MeshBasicMaterial({ color, ...extra }));

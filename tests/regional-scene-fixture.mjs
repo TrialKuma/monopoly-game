@@ -10,6 +10,8 @@ import {createStreetFoundation} from '../scene-streets.js';
 import {createOwnershipRoofs} from '../scene-ownership-roofs.js';
 import {createFunctionalLandmark} from '../scene-functional-landmarks.js';
 import {createThermalSteam} from '../scene-thermal-steam.js';
+import {harborWalkOffset,harborEdgePath} from '../scene-harbor-paths.js';
+import {addHarborBridge} from '../scene-harbor-islands.js';
 import {loadGeometryGLB,regionalAssetURL} from './gltf-geometry-fixture.mjs';
 
 export {THREE};
@@ -41,7 +43,7 @@ export async function regionalFixture(mapId){
   assert(MAP_IDS.includes(mapId),`unknown map ${mapId}`);
   const assetUrl=regionalAssetURL(mapId);
   assert(fs.existsSync(assetUrl),`required regional GLB is missing: ${fileURLToPath(assetUrl)}`);
-  const context=vm.createContext({THREE,GLTFLoader,mergeGeometries,createStreetFoundation,createOwnershipRoofs,createFunctionalLandmark,createThermalSteam,performance,console,CustomEvent:class{},document:{createElement:()=>new Element(),body:{classList:{remove(){}}}},window:{matchMedia:()=>({matches:false}),addEventListener(){},dispatchEvent(){}}});
+  const context=vm.createContext({THREE,GLTFLoader,mergeGeometries,createStreetFoundation,createOwnershipRoofs,createFunctionalLandmark,createThermalSteam,harborWalkOffset,harborEdgePath,addHarborBridge,performance,console,CustomEvent:class{},document:{createElement:()=>new Element(),body:{classList:{remove(){}}}},window:{matchMedia:()=>({matches:false}),addEventListener(){},dispatchEvent(){}}});
   const run=code=>vm.runInContext(code,context);
   run(fs.readFileSync(new URL('../scene.js',import.meta.url),'utf8').replace(/^import .*;\r?\n/gm,''));
   run('world=new THREE.Group();labels=document.createElement("div");numberTexture=()=>own(new THREE.Texture());');
@@ -61,7 +63,7 @@ export async function regionalFixture(mapId){
     run(`clearMap();snapshot=data;
       var px=data.board.map(t=>t.x),py=data.board.map(t=>t.y);boardBounds={minX:Math.min(...px),maxX:Math.max(...px),minY:Math.min(...py),maxY:Math.max(...py)};
       boardBounds.cx=(boardBounds.minX+boardBounds.maxX)/2;boardBounds.cy=(boardBounds.minY+boardBounds.maxY)/2;boardBounds.w=(boardBounds.maxX-boardBounds.minX+1)*STEP;boardBounds.d=(boardBounds.maxY-boardBounds.minY+1)*STEP;
-      streetFoundation=createStreetFoundation({THREE,world,boardBounds,mapId:data.mapId});
+      streetFoundation=createStreetFoundation({THREE,world,boardBounds,mapId:data.mapId,islands:data.mapId==='harbor'});
       if(realSteps)data.board.forEach(makeStep);else data.board.forEach(t=>stepViews.set(t.index,{center:tilePosition(t)}));
       data.board.filter(t=>!t.isLargeSecondary).forEach(t=>makeLot(t,data));streetFoundation.finish();world.updateMatrixWorld(true);`);
     const views=run('[...lotViews.values()]');
@@ -69,7 +71,7 @@ export async function regionalFixture(mapId){
       context.view=view;const asset=run('resolveAsset(view.tile,data)');assert.equal(asset.key,asset.desired,`${mapId} ${view.tile.index} must use its regional root`);assert(asset.key.startsWith(mapId+'_'));assert.equal(asset.authored,true);
       let geometryCount=0;view.building.traverse(n=>{if(n.isMesh){geometryCount++;n.geometry.computeBoundingBox();n.geometry.computeBoundingSphere();}});assert(geometryCount>0,`${asset.key} has actual GLB surfaces`);
     }
-    assert(run('world.getObjectByName("regional_streets_"+data.mapId).children.length>3'),'real street foundation is populated');
+    assert(run('world.getObjectByName("regional_streets_"+data.mapId).children.some(mesh=>mesh.isInstancedMesh&&mesh.count>0)'),'real street foundation contains populated paving geometry');
     return views;
   }
   function dispose(){

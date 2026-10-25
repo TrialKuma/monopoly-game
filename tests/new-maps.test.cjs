@@ -7,27 +7,33 @@ const source = fs.readFileSync(path.join(__dirname, '../game.js'), 'utf8');
 const json = (c, code) => JSON.parse(c.run(`JSON.stringify(${code})`));
 const fresh = map => { const c = context(source, 2087); c.run(`initializeGame('${map}')`); return c; };
 const maps = {
-  harbor: { columns: 5, steps: 22, lots: 13, cash: 1700, bonus: 320, second: 400, bank: 240, ticket: 250, pairs: [[5, 6, [[5, 2], [5, 3]]], [7, 8, [[5, 4], [5, 5]]], [14, 15, [[2, 8], [1, 8]]]] },
+  harbor: { columns: 11, rows: 10, steps: 34, lots: 19, cash: 1700, bonus: 320, second: 400, bank: 240, ticket: 250, pairs: [[11, 12, [[2, 3], [2, 4]]], [14, 15, [[2, 6], [2, 7]]], [22, 23, [[10, 4], [10, 5]]]] },
   alpine: { columns: 6, steps: 24, lots: 14, cash: 1900, bonus: 350, second: 450, bank: 250, ticket: 350, pairs: [[7, 8, [[6, 3], [6, 4]]], [10, 11, [[6, 6], [6, 7]]], [14, 15, [[4, 8], [3, 8]]]] },
 };
 let checks = 0;
 async function test(name, fn) { await fn(); checks++; console.log('PASS ' + name); }
 (async () => {
   for (const [id, expected] of Object.entries(maps)) {
-    await test(id + ' is a complete tall connected loop with usable lots at every regular stop', () => {
+    await test(id + ' has connected navigation with usable lots at every regular stop', () => {
       const c = fresh(id), map = json(c, 'getMapConfig()'), board = json(c, 'state.board');
-      assert.equal(map.id, id); assert.equal(map.grid.columns, expected.columns); assert.equal(map.grid.rows, 8);
+      assert.equal(map.id, id); assert.equal(map.grid.columns, expected.columns); assert.equal(map.grid.rows, expected.rows || 8);
       assert.equal(board.length, expected.steps); assert.equal(map.tileNames.length, expected.steps);
       assert.equal(new Set(board.map(t => `${t.x},${t.y}`)).size, expected.steps);
       assert.equal(board.filter(t => t.isStart).length, 1);
       assert.equal(board.filter(t => t.lot && !t.isLargeSecondary).length, expected.lots);
       for (const tile of board) {
-        assert(tile.x >= 1 && tile.x <= expected.columns && tile.y >= 1 && tile.y <= 8);
-        assert(tile.x === 1 || tile.x === expected.columns || tile.y === 1 || tile.y === 8);
+        assert(tile.x >= 1 && tile.x <= expected.columns && tile.y >= 1 && tile.y <= (expected.rows || 8));
         const next = board[map.navigation.next[tile.index]], previous = board[map.navigation.prev[tile.index]];
-        assert.equal(Math.abs(next.x - tile.x) + Math.abs(next.y - tile.y), 1);
-        assert.equal(Math.abs(previous.x - tile.x) + Math.abs(previous.y - tile.y), 1);
-        assert.equal(map.navigation.prev[next.index], tile.index);
+        assert(next && previous);
+        if (id !== 'harbor') {
+          assert(tile.x === 1 || tile.x === expected.columns || tile.y === 1 || tile.y === 8);
+          assert.equal(Math.abs(next.x - tile.x) + Math.abs(next.y - tile.y), 1);
+          assert.equal(Math.abs(previous.x - tile.x) + Math.abs(previous.y - tile.y), 1);
+          assert.equal(map.navigation.prev[next.index], tile.index);
+        } else {
+          assert(map.navigation.edges.some(edge=>edge.from===tile.index&&edge.to===next.index));
+          assert(map.navigation.edges.some(edge=>edge.to===tile.index&&edge.from===previous.index));
+        }
         assert(tile.name && (tile.isStart || tile.isSpecial || tile.lot), 'every step has a playable role');
         if (tile.lot) {
           assert(map.districtColors[tile.lot.district], 'every district has a color');
@@ -46,12 +52,15 @@ async function test(name, fn) { await fn(); checks++; console.log('PASS ' + name
         assert.equal(c.run(`state.board[${primary}].name===state.board[${secondary}].name`), true);
       }
     });
-    await test(id + ' forward and reverse movement visits all steps from every origin', () => {
+    await test(id + ' forward and reverse movement returns from every origin', () => {
       const c = fresh(id);
       for (let start = 0; start < expected.steps; start++) for (const direction of [-1, 1]) {
-        const preview = json(c, `previewMovement(state.players[0],${expected.steps},{startingIndex:${start},direction:${direction}})`);
-        assert.equal(preview.index, start); assert.equal(new Set(preview.path).size, expected.steps);
-        assert.equal(preview.path[0], (start + direction + expected.steps) % expected.steps);
+        const lap = id === 'harbor' ? 24 : expected.steps;
+        const branch = start >= 18 && start <= 27 ? 'resort' : 'merchant';
+        c.run(`state.players[0].harborLastBranch='${branch}'`);
+        const preview = json(c, `previewMovement(state.players[0],${lap},{startingIndex:${start},direction:${direction},branchChoice:'${branch}'})`);
+        assert.equal(preview.index, start); assert.equal(new Set(preview.path).size, lap);
+        if (id !== 'harbor') assert.equal(preview.path[0], (start + direction + expected.steps) % expected.steps);
         assert.equal(c.run('state.players[0].position'), 0);
       }
     });
@@ -70,9 +79,15 @@ async function test(name, fn) { await fn(); checks++; console.log('PASS ' + name
     await test(id + ' real movement crossing start pays one correct supply in either direction', async () => {
       for (const reverse of [false, true]) {
         const c = fresh(id);
-        c.run(`state.players[0].position=${reverse ? 1 : expected.steps - 1};state.players[0].effects.reversed=${reverse};`);
-        await c.run('animateMovement(state.players[0],2,state.sessionId)');
-        assert.equal(c.run('state.players[0].position'), reverse ? expected.steps - 1 : 1);
+        if (id === 'harbor') {
+          c.run(`state.players[0].effects.reversed=${reverse}`);
+          await c.run('animateMovement(state.players[0],24,state.sessionId)');
+          assert.equal(c.run('state.players[0].position'), 0);
+        } else {
+          c.run(`state.players[0].position=${reverse ? 1 : expected.steps - 1};state.players[0].effects.reversed=${reverse};`);
+          await c.run('animateMovement(state.players[0],2,state.sessionId)');
+          assert.equal(c.run('state.players[0].position'), reverse ? expected.steps - 1 : 1);
+        }
         assert.equal(c.run('state.players[0].cash'), expected.cash + expected.bonus);
       }
     });
@@ -88,11 +103,11 @@ async function test(name, fn) { await fn(); checks++; console.log('PASS ' + name
     assert.notEqual(c.run('MAP_PRESETS.harbor.collectionId'), c.run('MAP_PRESETS.alpine.collectionId'));
   });
   await test('harbor double-property district is billed once at its secondary lighthouse stop', () => {
-    const c = fresh('harbor'); c.run('state.board[5].lot.ownerId="ai";state.board[7].lot.ownerId="ai";');
-    assert.equal(c.run('getDistrictOwnerLots(state.board[7].lot.district,"ai").length'), 2);
-    const collected = json(c, 'collectToll(state.players[0],state.players[1],state.board[8])');
-    assert.equal(collected.toll, 132); // (58 + 52) × 1.2, not four billable lots.
-    assert.deepEqual(json(c, 'state.players.map(p=>p.cash)'), [1568, 1832]);
+    const c = fresh('harbor'); c.run('state.board[14].lot.ownerId="ai";state.board[16].lot.ownerId="ai";');
+    assert.equal(c.run('getDistrictOwnerLots(state.board[14].lot.district,"ai").length'), 2);
+    const collected = json(c, 'collectToll(state.players[0],state.players[1],state.board[15])');
+    assert.equal(collected.toll, 91); // round((48 + 28) × 1.2), the large property counts once.
+    assert.deepEqual(json(c, 'state.players.map(p=>p.cash)'), [1609, 1791]);
   });
   await test('all alpine cable-car outcomes move in the current direction and settle once', async () => {
     for (const reversed of [false, true]) for (const steps of [2, 3, 4]) {

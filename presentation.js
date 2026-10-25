@@ -46,7 +46,7 @@
     classic: {title:'经典环线 · 22 格',copy:'30 回合，同街区地产连锁收租。机会格可能触发建筑升级、位置互换或免租护盾。'},
     compact: {title:'紧凑冲突 · 18 格',copy:'26 回合，包含三个街区。冲刺站随机再走 2–8 格；传送港落地后立即结算，护盾可免租。无力付租时获得 ¥200 救助和一次免租，不额外休整。'},
     expansion: {title:'都市大环线 · 28 格',copy:'40 回合，包含六个街区。开局每街区随机一处无主地产预建 Lv.1，购买后即可收租。城市快线随机再走 3–5 格，传送港落地后立即结算。无力付租时获得救助和一次免租。'},
-    harbor: {title:'潮汐港湾 · 22 格',copy:'30 回合，纵向环线，街铺价格较低。每圈领取 ¥320 补给，完成对局收集潮汐海螺。'},
+    harbor: {title:'潮汐港湾 · 三岛 34 格',copy:'30 回合。港口共用段分向商贸岛或度假岛，经过合流广场回港。两路每圈均走 24 步；掷骰前可改行程，之后沿用，不在路口打断。完成对局获得心愿建筑卡，建成地产可额外收集。'},
     alpine: {title:'云岭温泉 · 24 格山城环线',copy:'30 回合，温泉、商会与观景酒店占据双格地段。缆车再前进 2–4 格，沿路结算；完成对局收集山泉晶石。'},
   };
   const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -65,6 +65,7 @@
     return {sessionId:state.sessionId,mapId:state.currentMapId,board:state.board,players:state.players,
       currentPlayerId:currentPlayer().id,phase:state.phase,animation:state.animation,lastDice:state.lastDice,
       bankPool:state.bankPool,gameOver:state.gameOver,grid:map.grid,navigation:map.navigation,
+      nextSteps:Object.fromEntries(state.players.map(player=>[player.id,getNextTileIndex(player,player.position,player.effects?.reversed?-1:1,false)])),
       selectedTile:selected,targetSelection:state.modal?.visible && state.modal.boardTargets?.length ? {kind:'property',indices:state.modal.boardTargets} : state.modal?.visible && state.modal.boardContext ? {kind:'property',indices:state.modal.boardContext.indices,suspended:true} : state.targetSelection,districtColors:map.districtColors,
       rents:Object.fromEntries(state.board.filter(t=>t.lot).map(t=>[t.index,rentFor(t).total]))};
   }
@@ -122,6 +123,7 @@
     document.body.classList.toggle('ai-turn',!inMenu&&!state.gameOver&&document.body.dataset.turn==='ai');
     const map=getMapConfig(state.currentMapId),guide=mapGuides[map.id];
     document.body.dataset.map=inMenu?selectedMapId:map.id;
+    updateHarborControls(inMenu);
     mapGuide.hidden=inMenu||!guide;
     if(guide){
       document.getElementById('map-guide-title').textContent=guide.title;
@@ -152,6 +154,35 @@
     } else propertyPreview.innerHTML='';
     if(preview) {rollBtn.disabled=true;document.querySelectorAll('[data-showcase]').forEach(b=>b.disabled=previewBusy||state.cardUsePending);}
   }
+  function updateHarborControls(inMenu){
+    const status=window.GameHarbor?.getState(),picker=document.getElementById('harbor-wishlist'),select=document.getElementById('harbor-target'),control=document.getElementById('harbor-route-control');
+    if(!picker||!control)return;
+    picker.hidden=!inMenu||selectedMapId!=='harbor';
+    const catalog=window.GameProgression?.town?.catalog||[];
+    const cards=Array.isArray(catalog)?catalog:Object.values(catalog);
+    if(select?.options&&cards.length&&!select.options.length)select.innerHTML=cards.map(card=>`<option value="${esc(card.id||card.cardId)}">${esc(card.name)}</option>`).join('');
+    if(select?.options&&status?.wishlist){const id=status.wishlist.startsWith('harbor_')?status.wishlist:`harbor_${status.wishlist}`;if([...select.options].some(o=>o.value===id))select.value=id;}
+    control.hidden=inMenu||mapIdForHarbor()!=='harbor'||preview||state.gameOver;
+    if(!control.hidden&&status){
+      control.querySelectorAll('[data-harbor-route]').forEach(button=>{button.setAttribute('aria-pressed',String(button.dataset.harborRoute===status.route));button.disabled=!status.canChangeRoute;});
+      const rewards=status.rewards||[];document.getElementById('harbor-cards-earned').textContent=`建筑卡 ${rewards.reduce((sum,item)=>sum+(item.count||1),0)} 张 · 结算带回`;
+    }
+    if(selectedMapId==='harbor'||state.currentMapId==='harbor')ensureHarborDiagram();
+    const diagram=document.getElementById('harbor-route-diagram');if(diagram)diagram.hidden=state.currentMapId!=='harbor';
+  }
+  function mapIdForHarbor(){return state.currentMapId;}
+  function ensureHarborDiagram(){
+    if(document.getElementById('harbor-route-diagram'))return;
+    const map=getMapConfig('harbor');if(!map.navigation?.edges)return;
+    const xy=i=>map.routePositions[i],path=map.navigation.edges.map(edge=>{const a=xy(edge.from),b=xy(edge.to);return `<line x1="${a.x*22}" y1="${a.y*14}" x2="${b.x*22}" y2="${b.y*14}" stroke="${edge.branch==='merchant'?'#c49155':edge.branch==='resort'?'#6e9db5':'#688578'}" stroke-width="3"/>`;}).join('');
+    mapGuide.insertAdjacentHTML('beforeend',`<div id="harbor-route-diagram" hidden><svg class="harbor-route-diagram" viewBox="15 0 245 170" role="img" aria-label="港口出发，在北侧分岔，经商贸岛或度假岛，南侧合流回港">${path}${map.routePositions.map((p,i)=>`<circle cx="${p.x*22}" cy="${p.y*14}" r="${i===0?5:2.7}" fill="${i===0?'#e7b85b':'#fffbeb'}" stroke="#647f71"/>`).join('')}<g font-size="10" fill="#365c50" text-anchor="middle"><text x="50" y="83">商贸岛</text><text x="214" y="83">度假岛</text><text x="135" y="60">港口</text><text x="132" y="10">分岔</text><text x="132" y="160">合流回港</text></g></svg><p class="harbor-route-caption">两路等长 · 每圈 24 步 · 行程自动沿用</p></div>`);
+  }
+  document.querySelectorAll('[data-harbor-route]').forEach(button=>button.addEventListener('click',()=>{window.GameHarbor?.setRoute(button.dataset.harborRoute);updateHarborControls(false);syncCityScene();}));
+  document.getElementById('harbor-target')?.addEventListener('change',event=>{
+    const result=window.GameHarbor?.setWishlist(event.target.value.replace(/^harbor_/,''));
+    if(result&&!result.ok){updateHarborControls(true);window.GameProgression?.showEntryError(result);}
+  });
+  window.addEventListener('town:embark',()=>{setSelectedMap('harbor');void startNewGame();});
   function inferEvent(cfg) {
     const text=`${cfg.title||''} ${cfg.message||''}`,tile=state.board[currentPlayer().position];
     const named=state.board.find(t=>!t.isLargeSecondary&&text.includes(t.name));
@@ -310,7 +341,7 @@
   document.getElementById('showcase-exit-btn').addEventListener('click',()=>void startNewGame());
   showcaseControls.addEventListener('click',e=>{const b=e.target.closest('[data-showcase]');if(b)void runShowcase(b.dataset.showcase);});
   document.getElementById('restart-btn').addEventListener('click',update);
-  document.getElementById('start-map-options').addEventListener('click',()=>{menuSnapshot=null;syncCityScene();});
+  document.getElementById('start-map-options').addEventListener('click',()=>{menuSnapshot=null;updateHarborControls(true);syncCityScene();});
   window.GameDrama?.setMuted(!soundState.enabled);
   initializeGame();update();
 })();

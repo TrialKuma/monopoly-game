@@ -1,4 +1,4 @@
-/* Local vault: paid admission, final-cash settlement and cosmetic collecting. */
+/* Local vault and town: atomic admission, settlement, collection and building ledgers. */
 (function (root) {
   'use strict';
   const STORAGE_KEY = 'monopoly_city_v1';
@@ -8,11 +8,26 @@
     { id: 'waterfront', name: '滨水步道', coins: [450, 900, 1500], items: [1, 2, 3], collectionId: 'harbor_shell', icon: '≈', description: '升级可扩建步道和码头。' },
     { id: 'skyline', name: '星光地标', coins: [650, 1200, 2000], items: [1, 2, 3], collectionId: 'alpine_crystal', icon: '▥', description: '升级可增建观景台和塔冠。' },
   ]);
+  const BUILDING_CARDS = Object.freeze([
+    ['villa', '海湾公馆', 120, 1, 1], ['shop', '港湾商铺', 140, 1, 1],
+    ['hotel', '海岸酒店', 220, 1, 1], ['tower', '航海事务所', 240, 1, 1],
+    ['finance', '海港商会', 300, 2, 1], ['skyscraper', '港湾观景楼', 360, 2, 1],
+    ['onsen', '海崖温泉', 280, 2, 1],
+  ].map(([family, name, coins, width, height]) => Object.freeze({
+    id: `harbor_${family}`, family, name, region: 'harbor', mapId: 'harbor', coins,
+    footprint: Object.freeze([width, height]), mergeCosts: Object.freeze([2, 4]),
+    modelKeys: Object.freeze([1, 2, 3].map(star => `${family}_${star}`)),
+    previewPaths: Object.freeze([1, 2, 3].map(star => `assets/buildings/regions/harbor/${family}_${star}.png`)),
+  })));
+  const TOWN_EXPANSION = Object.freeze({ from: 6, to: 8, coins: 800 });
+  const cardById = id => BUILDING_CARDS.find(card => card.id === id);
+  const emptyCards = () => Object.fromEntries(BUILDING_CARDS.map(card => [card.id, { unlocked: false, star: 0, duplicates: 0 }]));
+  const emptyTown = () => ({ size: 6, targetCardId: 'harbor_villa', cards: emptyCards(), buildings: [], actions: [] });
   const integer = n => Number.isSafeInteger(n) && n >= 0;
   const text = (s, max) => typeof s === 'string' && s.length > 0 && s.length <= max;
   const emptyLevels = () => Object.fromEntries(PROJECTS.map(p => [p.id, 0]));
   const emptyCollections = () => Object.fromEntries(Object.keys(COLLECTIONS).map(id => [id, 0]));
-  const fresh = () => ({ version: 2, seedGranted: true, seedAmount: 1200, legacyBalance: 0, legacyEarned: 0, legacyLevels: emptyLevels(), wallet: 1200, earned: 0, projectLevels: emptyLevels(), collections: emptyCollections(), entries: [], receipts: [], purchases: [], stipends: [] });
+  const fresh = () => ({ version: 3, seedGranted: true, seedAmount: 1200, legacyBalance: 0, legacyEarned: 0, legacyLevels: emptyLevels(), wallet: 1200, earned: 0, projectLevels: emptyLevels(), collections: emptyCollections(), entries: [], receipts: [], purchases: [], stipends: [], town: emptyTown() });
   const clone = value => JSON.parse(JSON.stringify(value));
   const timestamp = value => text(value, 40) && Number.isFinite(Date.parse(value));
   const localDay = () => { const d = new Date(); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`; };
@@ -32,8 +47,8 @@
     const spent = p.owned.reduce((sum, id) => sum + ({ garden: 1200, waterfront: 2800, skyline: 5500 }[id]), 0);
     return integer(earned) && earned === p.earned && p.wallet === earned - spent;
   }
-  function validProfile(p) {
-    if (!p || p.version !== 2 || p.seedGranted !== true || ![0, 1200].includes(p.seedAmount)
+  function validVault(p, townSpent = 0) {
+    if (!p || ![2, 3].includes(p.version) || p.seedGranted !== true || ![0, 1200].includes(p.seedAmount)
       || ![p.wallet, p.earned, p.legacyBalance, p.legacyEarned].every(integer)
       || !p.projectLevels || !p.legacyLevels || !p.collections
       || ![p.entries, p.receipts, p.purchases, p.stipends].every(Array.isArray)) return false;
@@ -70,13 +85,109 @@
       days.add(stipend.date);
     }
     const ticketTotal = p.entries.reduce((sum, entry) => sum + entry.price, 0);
-    const expectedWallet = p.seedAmount + p.legacyBalance + earned + p.stipends.length * 300 - ticketTotal - spent;
+    const expectedWallet = p.seedAmount + p.legacyBalance + earned + p.stipends.length * 300 - ticketTotal - spent - townSpent;
     return integer(expectedWallet) && p.wallet === expectedWallet && integer(p.legacyEarned + earned) && p.earned === p.legacyEarned + earned;
   }
+  function normalizeBuildingCards(list, mapId) {
+    if (!Array.isArray(list)) return null;
+    const counts = new Map(); let total = 0;
+    for (const row of list) {
+      if (!row || !cardById(row.cardId) || !integer(row.count) || row.count < 1) return null;
+      total += row.count; if (!integer(total) || total > 5) return null;
+      counts.set(row.cardId, (counts.get(row.cardId) || 0) + row.count);
+    }
+    if ((mapId === 'harbor' && total < 1) || (mapId !== 'harbor' && total !== 0)) return null;
+    return [...counts].sort(([a], [b]) => a.localeCompare(b)).map(([cardId, count]) => ({ cardId, count }));
+  }
+  function grantBuildingCards(town, rewards) {
+    for (const reward of rewards) {
+      const card = town.cards[reward.cardId];
+      if (!card.unlocked) { card.unlocked = true; card.star = 1; card.duplicates += reward.count - 1; }
+      else card.duplicates += reward.count;
+    }
+  }
+  function footprint(cardId, rotation) {
+    const shape = cardById(cardId)?.footprint;
+    return shape ? rotation % 2 === 1 ? [shape[1], shape[0]] : [...shape] : null;
+  }
+  function placementError(town, cardId, x, y, rotation, ignoreId) {
+    if (!integer(x) || !integer(y) || ![0, 1, 2, 3].includes(rotation)) return 'invalid';
+    const shape = footprint(cardId, rotation); if (!shape) return 'invalid';
+    if (x + shape[0] > town.size || y + shape[1] > town.size) return 'out_of_bounds';
+    for (const building of town.buildings) {
+      if (building.stored || building.id === ignoreId) continue;
+      const other = footprint(building.cardId, building.rotation);
+      if (x < building.x + other[0] && x + shape[0] > building.x && y < building.y + other[1] && y + shape[1] > building.y) return 'occupied';
+    }
+    return null;
+  }
+  // The same reducer validates saved ledgers and applies new actions. Placed models
+  // read their star from the family card, so a merge upgrades every copy together.
+  function applyTownAction(town, action) {
+    if (!action || !text(action.id, 160) || !timestamp(action.createdAt)) return 'invalid';
+    const card = cardById(action.cardId), collection = card && town.cards[card.id];
+    const building = town.buildings.find(row => row.id === action.buildingId);
+    if (action.type === 'place') {
+      if (!card || !collection.unlocked) return 'card_locked';
+      if (!text(action.buildingId, 190) || building || action.coins !== card.coins) return 'invalid';
+      const error = placementError(town, card.id, action.x, action.y, action.rotation); if (error) return error;
+      town.buildings.push({ id: action.buildingId, cardId: card.id, x: action.x, y: action.y, rotation: action.rotation, stored: false });
+    } else if (action.type === 'move' || action.type === 'restore') {
+      if (!building || building.stored !== (action.type === 'restore') || action.coins !== 0) return 'building_missing';
+      const error = placementError(town, building.cardId, action.x, action.y, action.rotation, building.id); if (error) return error;
+      Object.assign(building, { x: action.x, y: action.y, rotation: action.rotation, stored: false });
+    } else if (action.type === 'store') {
+      if (!building || building.stored || action.coins !== 0) return 'building_missing';
+      building.stored = true;
+    } else if (action.type === 'merge') {
+      if (!collection?.unlocked) return 'card_locked';
+      if (collection.star >= 3) return 'max_star';
+      if (action.star !== collection.star + 1 || action.count !== card.mergeCosts[collection.star - 1] || action.coins !== 0) return 'conflict';
+      if (collection.duplicates < action.count) return 'missing_cards';
+      collection.duplicates -= action.count; collection.star = action.star;
+    } else if (action.type === 'expand') {
+      if (town.size !== TOWN_EXPANSION.from || action.size !== TOWN_EXPANSION.to || action.coins !== TOWN_EXPANSION.coins) return 'max_land';
+      town.size = action.size;
+    } else if (action.type === 'target') {
+      if (!card || action.coins !== 0) return 'invalid';
+      town.targetCardId = card.id;
+    } else return 'invalid';
+    return null;
+  }
+  function validTown(p) {
+    const saved = p.town;
+    if (!saved || !saved.cards || !Array.isArray(saved.buildings) || !Array.isArray(saved.actions) || !Array.isArray(p.receipts)) return null;
+    const town = emptyTown();
+    for (const receipt of p.receipts) {
+      if (!receipt || typeof receipt !== 'object') return null;
+      if (receipt.cardRewardVersion === 0) {
+        if (!Array.isArray(receipt.buildingCards) || receipt.buildingCards.length) return null;
+      } else if (receipt.cardRewardVersion === 1 && !receipt.legacy) {
+        const cards = normalizeBuildingCards(receipt.buildingCards, receipt.mapId);
+        if (!cards || JSON.stringify(cards) !== JSON.stringify(receipt.buildingCards)) return null;
+        grantBuildingCards(town, cards);
+      } else return null;
+    }
+    if (Object.values(town.cards).some(card => !integer(card.duplicates))) return null;
+    const ids = new Set(); let spent = 0;
+    for (const action of saved.actions) {
+      if (!action || ids.has(action.id) || applyTownAction(town, action)) return null;
+      ids.add(action.id); spent += action.coins;
+    }
+    if (!integer(spent) || saved.size !== town.size || saved.targetCardId !== town.targetCardId
+      || JSON.stringify(saved.cards) !== JSON.stringify(town.cards) || JSON.stringify(saved.buildings) !== JSON.stringify(town.buildings)) return null;
+    return spent;
+  }
+  function validProfile(p) {
+    if (!p || p.version !== 3) return false;
+    const spent = validTown(p);
+    return spent !== null && validVault(p, spent);
+  }
   function migrate(old) {
+    if (old.version === 2) return { ...clone(old), version: 3, receipts: old.receipts.map(receipt => ({ ...receipt, cardRewardVersion: 0, buildingCards: [] })), town: emptyTown() };
     const p = fresh(); p.seedAmount = 0; p.legacyBalance = old.wallet; p.legacyEarned = old.earned; p.wallet = old.wallet; p.earned = old.earned;
     for (const id of old.owned) { p.legacyLevels[id] = 1; p.projectLevels[id] = 1; }
-    p.receipts = old.receipts.map(receipt => ({ ...receipt, legacy: true }));
+    p.receipts = old.receipts.map(receipt => ({ ...receipt, legacy: true, cardRewardVersion: 0, buildingCards: [] }));
     return p;
   }
   function createStore(storage, now = () => new Date().toISOString(), today = localDay) {
@@ -91,7 +202,7 @@
       if (raw === null) return { ok: true, profile: fresh() };
       try {
         const profile = JSON.parse(raw);
-        if (profile?.version === 1 && validLegacy(profile)) {
+        if ((profile?.version === 1 && validLegacy(profile)) || (profile?.version === 2 && validVault(profile))) {
           const saved = write(migrate(profile)); return saved.ok ? { ...saved, migrated: true } : { ...saved, error: 'migration_failed' };
         }
         return validProfile(profile) ? { ok: true, profile } : { ok: false, error: 'corrupt' };
@@ -120,18 +231,24 @@
       const loaded = read(); if (!loaded.ok) return loaded;
       const profile = clone(loaded.profile), entry = profile.entries.find(row => row.runId === input.runId);
       if (!entry || entry.mapId !== input.mapId) return { ok: false, error: 'unpaid' };
+      const old = profile.receipts.find(r => r.runId === input.runId);
+      const legacyCards = old?.cardRewardVersion === 0 && input.buildingCards === undefined;
+      const buildingCards = legacyCards ? [] : normalizeBuildingCards(input.buildingCards === undefined ? (input.mapId === 'harbor' ? [{ cardId: 'harbor_villa', count: 1 }] : []) : input.buildingCards, input.mapId);
+      if (!buildingCards) return { ok: false, error: 'invalid' };
       const receipt = { runId: input.runId, mapId: input.mapId, mapName: input.mapName,
         mode: input.mode, reason: input.reason, winnerId: input.winnerId, cash: input.humanCash,
-        rounds: input.rounds, completedAt: now(), collectionId: entry.collectionId, collectionCount: input.collectionCount ?? (input.winnerId === 'human' ? 2 : 1) };
+        rounds: input.rounds, completedAt: now(), collectionId: entry.collectionId, collectionCount: input.collectionCount ?? (input.winnerId === 'human' ? 2 : 1),
+        cardRewardVersion: legacyCards ? 0 : 1, buildingCards };
       if (!validReceiptBase(receipt) || !integer(receipt.collectionCount) || receipt.collectionCount < 1 || receipt.collectionCount > 3) return { ok: false, error: 'invalid' };
-      const old = profile.receipts.find(r => r.runId === receipt.runId);
       if (old) {
-        const same = ['mapId', 'mode', 'reason', 'winnerId', 'cash', 'rounds', 'collectionId', 'collectionCount'].every(key => old[key] === receipt[key]);
+        const same = ['mapId', 'mode', 'reason', 'winnerId', 'cash', 'rounds', 'collectionId', 'collectionCount', 'cardRewardVersion'].every(key => old[key] === receipt[key])
+          && JSON.stringify(old.buildingCards) === JSON.stringify(buildingCards);
         return same ? { ok: true, duplicate: true, amount: old.cash, receipt: old, profile } : { ok: false, error: 'conflict' };
       }
       if (!integer(profile.wallet + receipt.cash) || !integer(profile.earned + receipt.cash)) return { ok: false, error: 'invalid' };
       profile.wallet += receipt.cash; profile.earned += receipt.cash; profile.receipts.push(receipt);
       profile.collections[receipt.collectionId] += receipt.collectionCount;
+      grantBuildingCards(profile.town, buildingCards);
       const saved = write(profile);
       return saved.ok ? { ...saved, amount: receipt.cash, receipt } : saved;
     }
@@ -169,14 +286,50 @@
         .sort((a, b) => b.cash - a.cash || b.completedAt.localeCompare(a.completedAt)).slice(0, 20);
       return { ok: true, rows };
     }
-    return { read, enter, getEntryInfo, settle, buy, getStipendInfo, claimStipend, leaderboard };
+    let townSequence = 0;
+    function townAction(type, input = {}) {
+      if (!input || typeof input !== 'object') return { ok: false, error: 'invalid' };
+      const loaded = read(); if (!loaded.ok) return loaded;
+      const profile = clone(loaded.profile), town = profile.town;
+      const id = input.actionId ?? (root.crypto?.randomUUID ? root.crypto.randomUUID() : `town-${Date.now().toString(36)}-${++townSequence}`);
+      if (!text(id, 160)) return { ok: false, error: 'invalid' };
+      const card = cardById(input.cardId);
+      const old = town.actions.find(action => action.id === id);
+      const action = { id, type, coins: 0, createdAt: now() };
+      if (type === 'place') Object.assign(action, { cardId: input.cardId, buildingId: `building_${id}`, x: input.x, y: input.y, rotation: input.rotation ?? 0, coins: card?.coins });
+      else if (type === 'move' || type === 'restore') Object.assign(action, { buildingId: input.buildingId, x: input.x, y: input.y, rotation: input.rotation ?? 0 });
+      else if (type === 'store') action.buildingId = input.buildingId;
+      else if (type === 'merge') {
+        const star = input.expectedStar ?? old?.star ?? ((town.cards[input.cardId]?.star || 0) + 1);
+        Object.assign(action, { cardId: input.cardId, star, count: card?.mergeCosts[star - 2] });
+      } else if (type === 'expand') Object.assign(action, { size: input.expectedSize ?? TOWN_EXPANSION.to, coins: TOWN_EXPANSION.coins });
+      else if (type === 'target') action.cardId = input.cardId;
+      else return { ok: false, error: 'invalid' };
+      if (old) {
+        const same = Object.keys(action).filter(key => key !== 'createdAt').every(key => action[key] === old[key])
+          && Object.keys(old).length === Object.keys(action).length;
+        return same ? { ok: true, duplicate: true, profile, action: old, building: town.buildings.find(row => row.id === old.buildingId) } : { ok: false, error: 'conflict' };
+      }
+      if (!integer(action.coins)) return { ok: false, error: 'invalid' };
+      if (profile.wallet < action.coins) return { ok: false, error: 'insufficient', shortfall: action.coins - profile.wallet };
+      const error = applyTownAction(town, action); if (error) return { ok: false, error };
+      profile.wallet -= action.coins; town.actions.push(action);
+      const saved = write(profile);
+      return saved.ok ? { ...saved, action, building: town.buildings.find(row => row.id === action.buildingId) } : saved;
+    }
+    const town = { catalog: BUILDING_CARDS, expansion: TOWN_EXPANSION, read, footprint,
+      place: input => townAction('place', input), move: input => townAction('move', input),
+      store: input => townAction('store', input), restore: input => townAction('restore', input),
+      merge: input => townAction('merge', input), expand: input => townAction('expand', input),
+      setTarget: input => townAction('target', input) };
+    return { read, enter, getEntryInfo, settle, buy, getStipendInfo, claimStipend, leaderboard, town };
   }
-  const core = { STORAGE_KEY, PROJECTS, COLLECTIONS, createStore, validProfile };
+  const core = { STORAGE_KEY, PROJECTS, COLLECTIONS, BUILDING_CARDS, TOWN_EXPANSION, createStore, validProfile, footprint };
   if (typeof module !== 'undefined' && module.exports) module.exports = core;
   if (!root.document) return;
   const money = n => Math.round(n).toLocaleString('zh-CN');
   const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-  const errors = { unavailable: '无法读取本机存档，请检查浏览器存储设置。', corrupt: '本机存档暂时无法读取，原存档已保留。', save_failed: '保存失败，本次操作未完成。请保留此页后重试。', migration_failed: '旧存档升级暂未保存，原存档已保留。', insufficient: '仓库金币不足。', invalid: '这次操作信息不完整，尚未保存。', conflict: '已有不同的操作记录，未重复处理。', unpaid: '未找到本局已付门票，收益尚未入库。', stipend_claimed: '今天的救急补给已经领取。', stipend_not_needed: '仓库低于 100 金币时可领取救急补给。' };
+  const errors = { unavailable: '无法读取本机存档，请检查浏览器存储设置。', corrupt: '本机存档暂时无法读取，原存档已保留。', save_failed: '保存失败，本次操作未完成。请保留此页后重试。', migration_failed: '旧存档升级暂未保存，原存档已保留。', insufficient: '仓库金币不足。', invalid: '这次操作信息不完整，尚未保存。', conflict: '已有不同的操作记录，未重复处理。', unpaid: '未找到本局已付门票，收益尚未入库。', stipend_claimed: '今天的救急补给已经领取。', stipend_not_needed: '仓库低于 100 金币时可领取救急补给。', card_locked: '先在港湾对局中收集这张建筑卡。', missing_cards: '重复建筑卡不足，还不能合成。', max_star: '这座建筑已达到三星。', max_land: '城镇土地已全部解锁。', occupied: '这里已有建筑，请换一块空地。', out_of_bounds: '建筑超出了已解锁的土地。', building_missing: '建筑状态已变化，请重新选择。' };
   const errorText = result => result?.error === 'entry_funds' ? `仓库金币不足，还差 ${money(result.shortfall)} 才能入场。` : result?.error === 'missing_collection' ? `还缺 ${result.shortfall} 枚${COLLECTIONS[result.collectionId]?.name || '收藏品'}，可前往${COLLECTIONS[result.collectionId]?.map || '对应地图'}收集。` : errors[result?.error] || '操作暂未完成，请重试。';
   const store = createStore({ getItem: key => root.localStorage.getItem(key), setItem: (key, value) => root.localStorage.setItem(key, value) });
   let dialog, menuButton, panel = 'city', filterMap = 'classic', filterMode = 'rounds', notice = '', runSequence = 0, resultContext = null;
@@ -195,7 +348,7 @@
   function refreshMenu() {
     if (!menuButton) return;
     const loaded = store.read();
-    menuButton.innerHTML = `<span>仓库 · 我的小城 <small>${loaded.ok ? `收藏 ${Object.values(loaded.profile.collections).reduce((sum, n) => sum + n, 0)} 枚 · 景观 ${Object.values(loaded.profile.projectLevels).reduce((sum, n) => sum + n, 0)} / 9 级` : '存档暂不可用'}</small></span><strong>${loaded.ok ? `${money(loaded.profile.wallet)} <small>金币</small>` : '查看'} <span aria-hidden="true">↗</span></strong>`;
+    menuButton.innerHTML = `<span>我的城镇 <small>${loaded.ok ? `建筑收藏 ${Object.values(loaded.profile.town.cards).filter(card => card.unlocked).length} / ${BUILDING_CARDS.length} · 已建 ${loaded.profile.town.buildings.filter(building => !building.stored).length} 栋` : '存档暂不可用'}</small></span><strong>${loaded.ok ? `${money(loaded.profile.wallet)} <small>金币</small>` : '查看'} <span aria-hidden="true">↗</span></strong>`;
   }
   function changed() { refreshMenu(); root.dispatchEvent(new CustomEvent('city-progress-change')); }
   function projectMarkup(profile, available) {
@@ -238,7 +391,7 @@
   }
   function settle(input) {
     const result = store.settle(input);
-    if (!result.ok && !result.skipped && input?.runId) pending.set(input.runId, { ...input });
+    if (!result.ok && !result.skipped && input?.runId) pending.set(input.runId, clone(input));
     if (result.ok) pending.delete(input.runId);
     changed();
     const output = { ...result, runId: input?.runId, details: input ? { mapName: input.mapName, mode: input.mode, winnerId: input.winnerId, humanCash: input.humanCash, rounds: input.rounds } : {} };
@@ -250,7 +403,8 @@
     if (!result || result.skipped) return '';
     const copy = result.ok ? `${money(result.amount)} 金币已入仓库` : errorText(result);
     const collection = result.ok && result.receipt?.collectionId ? `<p class="city-result-collection">+${result.receipt.collectionCount} ${COLLECTIONS[result.receipt.collectionId]?.name || '收藏品'}</p>` : '';
-    return `<div class="city-result" data-city-result="${esc(result.runId)}"><p>${esc(copy)}</p>${collection}<button type="button" data-city-open>我的仓库 ↗</button>${!result.ok && pending.has(result.runId) ? `<button type="button" data-city-retry="${esc(result.runId)}">重试保存</button>` : ''}</div>`;
+    const cards = result.ok && result.receipt?.buildingCards?.length ? `<p class="city-result-collection">建筑卡：${result.receipt.buildingCards.map(row => `${esc(cardById(row.cardId)?.name || row.cardId)} ×${row.count}`).join('、')}</p>` : '';
+    return `<div class="city-result" data-city-result="${esc(result.runId)}"><p>${esc(copy)}</p>${collection}${cards}<button type="button" data-town-open>回城建造 ↗</button><button type="button" data-city-open>我的仓库 ↗</button>${!result.ok && pending.has(result.runId) ? `<button type="button" data-city-retry="${esc(result.runId)}">重试保存</button>` : ''}</div>`;
   }
   function enter(input) { const result = store.enter(input); if (result.ok) changed(); return result; }
   function showEntryError(result) { open('city'); notice = errorText(result?.canEnter === false ? { ...result, error: 'entry_funds' } : result); render(); }
@@ -268,17 +422,23 @@
     resultContext = null;
     if (dialog?.open) dialog.close();
   }
+  function openTown() {
+    if (!root.TownBuilder?.open) { open('city'); return; }
+    if (dialog?.open) dialog.close();
+    root.TownBuilder.open();
+  }
   function mount() {
     if (dialog) { refreshMenu(); return; }
     const startPanel = document.querySelector('#start-screen .start-panel');
     if (!startPanel) return;
-    menuButton = document.createElement('button'); menuButton.type = 'button'; menuButton.className = 'city-menu-button'; menuButton.dataset.cityOpen = '';
+    menuButton = document.createElement('button'); menuButton.type = 'button'; menuButton.className = 'city-menu-button'; menuButton.dataset.townOpen = '';
     const note = startPanel.querySelector('.start-note'); startPanel.insertBefore(menuButton, note || null);
     dialog = document.createElement('dialog'); dialog.id = 'city-dialog'; dialog.className = 'city-dialog'; dialog.setAttribute('aria-labelledby', 'city-dialog-title'); document.body.appendChild(dialog);
     dialog.addEventListener('click', event => { if (event.target === dialog) dialog.close(); });
     document.addEventListener('click', event => {
       const target = event.target.closest?.('button'); if (!target) return;
-      if (target.hasAttribute('data-city-open')) open();
+      if (target.hasAttribute('data-town-open')) openTown();
+      else if (target.hasAttribute('data-city-open')) open();
       else if (target.hasAttribute('data-city-close')) dialog.close();
       else if (target.hasAttribute('data-city-home') || target.hasAttribute('data-city-replay')) {
         const callback = target.hasAttribute('data-city-home') ? resultContext?.onHome : resultContext?.onReplay;
@@ -303,9 +463,13 @@
       if (event.target.hasAttribute('data-city-mode')) filterMode = event.target.value;
       render();
     });
-    root.addEventListener('storage', event => { if (event.key === STORAGE_KEY) render(); });
+    root.addEventListener('storage', event => { if (event.key === STORAGE_KEY) { changed(); render(); } });
     refreshMenu();
   }
-  root.GameProgression = { createRunId, enter, getEntryInfo: store.getEntryInfo, showEntryError, settle, resultMarkup, mount, open, showResult, resetResult, getProfile: store.read, getStipendInfo: store.getStipendInfo, PROJECTS, COLLECTIONS };
+  const townApi = { ...store.town, errorText };
+  for (const action of ['place', 'move', 'store', 'restore', 'merge', 'expand', 'setTarget']) townApi[action] = input => {
+    const result = store.town[action](input); if (result.ok) { changed(); render(); } return result;
+  };
+  root.GameProgression = { createRunId, enter, getEntryInfo: store.getEntryInfo, showEntryError, settle, resultMarkup, mount, open, openTown, showResult, resetResult, getProfile: store.read, getStipendInfo: store.getStipendInfo, PROJECTS, COLLECTIONS, BUILDING_CARDS, town: townApi };
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', mount, { once: true }); else mount();
 })(typeof window !== 'undefined' ? window : globalThis);

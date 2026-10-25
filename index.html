@@ -12,6 +12,8 @@
   <link rel="stylesheet" href="drama.css?v=20261023-1">
   <link rel="stylesheet" href="mobile.css?v=20261025-facade3">
   <link rel="stylesheet" href="card-bag.css?v=20261025-items1">
+  <link rel="stylesheet" href="harbor-journey.css?v=20261025-harbor1">
+  <link rel="stylesheet" href="town-builder.css?v=20261025-harbor1">
 </head>
 <body class="mode-start">
   <div id="start-screen" class="start-screen">
@@ -27,10 +29,11 @@
           <button class="map-option active" type="button" data-map-id="classic" aria-pressed="true"><span class="map-option-mark">▱</span><span class="map-option-title">经典环线</span><span class="map-option-meta">22 格 · 30 回合</span></button>
           <button class="map-option" type="button" data-map-id="compact" aria-pressed="false"><span class="map-option-mark">↗</span><span class="map-option-title">紧凑冲突</span><span class="map-option-meta">18 格 · 26 回合</span></button>
           <button class="map-option" type="button" data-map-id="expansion" aria-pressed="false"><span class="map-option-mark">▱</span><span class="map-option-title">都市大环线</span><span class="map-option-meta">28 格 · 40 回合</span></button>
-          <button class="map-option" type="button" data-map-id="harbor" aria-pressed="false"><span class="map-option-mark">⚓</span><span class="map-option-title">潮汐港湾</span><span class="map-option-meta">22 格 · 30 回合</span></button>
+          <button class="map-option" type="button" data-map-id="harbor" aria-pressed="false"><span class="map-option-mark">⚓</span><span class="map-option-title">潮汐港湾</span><span class="map-option-meta">三岛 · 34 格 · 30 回合</span></button>
           <button class="map-option" type="button" data-map-id="alpine" aria-pressed="false"><span class="map-option-mark">♨</span><span class="map-option-title">云岭温泉</span><span class="map-option-meta">24 格 · 30 回合</span></button>
         </div>
         <p id="start-map-description" class="start-map-description"></p>
+        <div id="harbor-wishlist" class="harbor-wishlist" hidden><label for="harbor-target">本次想带回</label><select id="harbor-target" aria-label="港湾心愿建筑"></select><span>完成对局必得 1 张，重复卡可升星</span></div>
       </div>
       <div class="start-actions">
         <button id="start-play-btn" class="start-btn start-btn-primary" type="button">开始游戏 <span>↗</span></button>
@@ -66,6 +69,7 @@
         <div id="board-choice-dock"></div>
         <section id="center-console" class="board-center" aria-label="回合操作">
           <div class="console-dice-row"><div id="center-dice" class="center-dice"><span id="center-dice-value">—</span></div><div class="console-copy"><p id="center-player-badge" class="center-badge">当前：玩家</p><h3 id="center-title">准备开始</h3><p id="center-description">掷骰移动，落地后结算。</p></div></div>
+          <div id="harbor-route-control" class="harbor-route-control" hidden><div class="harbor-route-heading"><span>下次分岔</span><span id="harbor-cards-earned"></span></div><div class="harbor-route-options" role="group" aria-label="港湾行程"><button type="button" data-harbor-route="merchant" aria-pressed="true">商贸岛 <small>商会 · 酒店</small></button><button type="button" data-harbor-route="resort" aria-pressed="false">度假岛 <small>温泉 · 旅馆</small></button></div></div>
           <div class="center-actions"><span id="center-phase-badge" class="center-badge">等待掷骰</span><button type="button" class="card-bag-trigger" data-open-card-bag aria-haspopup="dialog" aria-expanded="false" aria-controls="card-bag-dialog">背包 <span data-card-count>0</span></button><button id="roll-btn" class="primary-btn center-roll-btn">掷骰子 <span>↗</span></button></div>
           <div class="round-progress" id="round-progress"><div class="round-progress-bar" id="round-progress-bar"></div></div>
         </section>
@@ -119,10 +123,11 @@
   </dialog>
 
   <script src="drama.js?v=20261025-landscape3"></script>
-  <script src="progression.js?v=20261025-landscape3"></script>
-  <script src="game.js?v=20261025-facade2"></script>
+  <script src="progression.js?v=20261025-harbor1"></script>
+  <script src="game.js?v=20261025-harbor1"></script>
   <script src="card-bag.js?v=20261025-items1"></script>
-  <script src="presentation.js?v=20261025-facade2"></script>
-  <script type="module" src="scene.js?v=20261025-facade2"></script>
+  <script src="presentation.js?v=20261025-harbor1"></script>
+  <script type="module" src="town-builder.js?v=20261025-harbor1"></script>
+  <script type="module" src="scene.js?v=20261025-harbor1"></script>
 </body>
 </html>

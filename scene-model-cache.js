@@ -5,6 +5,7 @@ import { GLTFLoader } from './assets/vendor/three/addons/loaders/GLTFLoader.js';
 // textures, bitmaps and geometry until all borrowers leave their generation.
 export function createModelAssetCache({load=url=>new GLTFLoader().loadAsync(url),now=Date.now}={}) {
   const entries=new Map(),sources=new Map(),epochs=new Map(),owned=new WeakSet(),released=new WeakSet(),closedImages=new WeakSet();
+  const leases=new Map(),deferredReleases=new Set();
   let disposed=false,refreshId=0;
   function resources(gltf){
     const result=new Set();gltf.scene.traverse(node=>{
@@ -51,6 +52,7 @@ export function createModelAssetCache({load=url=>new GLTFLoader().loadAsync(url)
   // Only the scene that has rebuilt every borrower may retire old generations.
   // A newer in-flight replacement remains owned until it is installed as well.
   function releaseSuperseded(file,retained){
+    if(leases.get(file))return;
     if(sources.get(retained)!==file)return;
     const current=new Set([retained]);
     for(const entry of entries.values())if(entry.file===file&&entry.value)current.add(entry.value);
@@ -59,12 +61,19 @@ export function createModelAssetCache({load=url=>new GLTFLoader().loadAsync(url)
   // The caller must first detach every borrower. Region changes do that before
   // releasing their textures, so five textured cities cannot accumulate in VRAM.
   function releaseFile(file){
+    if(leases.get(file)){deferredReleases.add(file);return;}
+    deferredReleases.delete(file);
     epochs.set(file,(epochs.get(file)||0)+1);
     for(const [key,entry] of entries)if(entry.file===file)entries.delete(key);
     for(const [gltf,sourceFile] of sources)if(sourceFile===file){release(gltf);sources.delete(gltf);}
   }
-  function dispose(){if(disposed)return;disposed=true;entries.clear();sources.forEach((file,gltf)=>release(gltf));sources.clear();epochs.clear();}
-  return {load:loadAsset,forget,releaseFile,releaseSuperseded,dispose,owns:resource=>owned.has(resource),getState:()=>({entries:entries.size,pending:[...entries.values()].filter(entry=>entry.pending).length,sources:sources.size,disposed})};
+  function retain(file){
+    if(disposed)return()=>{};
+    leases.set(file,(leases.get(file)||0)+1);let ended=false;
+    return()=>{if(ended)return;ended=true;const count=(leases.get(file)||1)-1;if(count)leases.set(file,count);else{leases.delete(file);if(deferredReleases.has(file))releaseFile(file);}};
+  }
+  function dispose(){if(disposed)return;disposed=true;entries.clear();sources.forEach((file,gltf)=>release(gltf));sources.clear();epochs.clear();leases.clear();deferredReleases.clear();}
+  return {load:loadAsset,forget,releaseFile,releaseSuperseded,retain,dispose,owns:resource=>owned.has(resource),getState:()=>({entries:entries.size,pending:[...entries.values()].filter(entry=>entry.pending).length,sources:sources.size,disposed})};
 }
 
 // The review build uses the same game and loading path with unpublished packs.
@@ -83,6 +92,7 @@ const cache=createModelAssetCache({load:url=>new GLTFLoader().loadAsync(reviewMo
 export const loadSharedModelAsset=cache.load;
 export const forgetSharedModelAsset=cache.forget;
 export const releaseSharedModelAsset=cache.releaseFile;
+export const retainSharedModelAsset=cache.retain;
 export const releaseSupersededModelAssets=cache.releaseSuperseded;
 export const ownsSharedModelResource=cache.owns;
 export const disposeSharedModelAssets=cache.dispose;

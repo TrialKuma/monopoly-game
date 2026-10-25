@@ -37,7 +37,9 @@ try{
   const next=run('stepViews.get(snapshot.navigation.next[index]).walk');assert(step.walk.distanceTo(next)>.7,'corner markers do not collapse onto adjacent steps');
  }
  }
- assert.equal(corners,4*levels.length);assert.equal(landings,board.length*levels.length);assert.equal(sharedChecks,board.length*levels.length);
+ // Branched harbor streets use explicit one-sided frontage; four diagonal
+ // corner pads are only a requirement for the rectangular ring maps.
+ assert.equal(corners,(mapId==='harbor'?0:4)*levels.length);assert.equal(landings,board.length*levels.length);assert.equal(sharedChecks,board.length*levels.length);
  console.log(`PASS ${mapId}: ${landings} landing pads with the selected regional GLB at levels ${levels.join(',')}`);
  console.log(JSON.stringify({mapId,levels,assetPath:fixture.assetPath,imageHeaders:fixture.imageHeaders,landings,corners,sharedChecks,clearanceChecks,failures:0}));
 }finally{fixture.dispose();}

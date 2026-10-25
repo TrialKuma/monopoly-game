@@ -2,11 +2,12 @@ import fs from 'node:fs';
 import vm from 'node:vm';
 import assert from 'node:assert/strict';
 import * as THREE from '../assets/vendor/three/three.module.min.js';
+import {harborEdgePath,harborWalkOffset} from '../scene-harbor-paths.js';
 
 const source=fs.readFileSync(new URL('../scene.js',import.meta.url),'utf8').replace(/^import .*;\r?\n/gm,'');
 function fixture(width=390,height=620){
   const classes=new Set(),media={matches:false};
-  const context=vm.createContext({THREE,console,performance,CustomEvent:class{},
+  const context=vm.createContext({THREE,harborEdgePath,harborWalkOffset,console,performance,CustomEvent:class{},
     window:{matchMedia:()=>media,addEventListener(){},dispatchEvent(){}},
     document:{body:{classList:{contains:key=>classes.has(key)}},getElementById:()=>null},
   });
@@ -138,15 +139,18 @@ const maps=vm.runInNewContext(game.slice(0,game.indexOf('const CARD_POOL'))+crea
 // the test: real game positions are the only source of the animated target.
 const presentation=fs.readFileSync(new URL('../presentation.js',import.meta.url),'utf8');
 const snapshotFunction=presentation.slice(presentation.indexOf('  function snapshot()'),presentation.indexOf('  function syncCityScene()'));
+const realNavigation=game.slice(game.indexOf('function getMapNavigation('),game.indexOf('const HARBOR_FAMILIES'))+
+  game.slice(game.indexOf('function resetHarborJourney('),game.indexOf('function chooseAiHarborRoute('))+
+  game.slice(game.indexOf('function getNextTileIndex('),game.indexOf('function previewMovement('));
 const gameplay=vm.createContext({});
 vm.runInContext(game.slice(0,game.indexOf('const CARD_POOL'))+createBoard+
   game.slice(game.indexOf('function defaultEffects()'),game.indexOf('function getMaxRounds('))+
   game.slice(game.indexOf('function currentPlayer()'),game.indexOf('function getPlayerById('))+
-  'let state,selected=null;function rentFor(){return {total:0};}'+snapshotFunction,gameplay);
+  'let state,selected=null;function rentFor(){return {total:0};}'+realNavigation+snapshotFunction,gameplay);
 for(const {map,board} of maps){
   gameplay.mapId=map.id;
   vm.runInContext(`state={sessionId:17,currentMapId:mapId,board:createBoard(getMapConfig(mapId)),
-    players:PLAYER_DEFS.map(p=>({...p,position:0,effects:defaultEffects()})),currentPlayerIndex:0,
+    players:PLAYER_DEFS.map(p=>({...p,position:0,selectedRoute:'merchant',harborLastBranch:'merchant',harborTrail:[],harborAnchor:0,harborDistance:0,effects:defaultEffects()})),currentPlayerIndex:0,
     phase:'await_roll',animation:{currentTile:null,landedTile:null},targetSelection:null};`,gameplay);
   const f=fixture(),data=()=>vm.runInContext('snapshot()',gameplay);let now=1000;
   f.context.performance={now:()=>now};f.context.requestAnimationFrame=()=>1;
@@ -160,14 +164,15 @@ for(const {map,board} of maps){
     const cx=(Math.min(...xs)+Math.max(...xs))/2,cz=(Math.min(...zs)+Math.max(...zs))/2;
     boardBounds={w:(Math.max(...xs)-Math.min(...xs))*STEP,d:(Math.max(...zs)-Math.min(...zs))*STEP};
     for(const tile of snapshot.board){const center=new THREE.Vector3((tile.x-cx)*STEP,.14,(tile.y-cz)*STEP);
-      stepViews.set(tile.index,{center,walk:center.clone(),normal:new THREE.Vector3(0,0,1),ring:{material:{color:new THREE.Color()}}});}
+      const offset=snapshot.mapId==='harbor'?harborWalkOffset(tile,THREE):new THREE.Vector3();
+      stepViews.set(tile.index,{center,walk:center.clone().add(offset),normal:offset.lengthSq()?offset.clone().normalize():new THREE.Vector3(0,0,1),ring:{material:{color:new THREE.Color()}}});}
     snapshot.players.forEach(makePawn);cameraFocusReady=false;resize();update(snapshotData);
   `);
   assert.equal(f.run('pawnViews.has(snapshot.players.find(p=>!p.isAi).id)'),true,'the real player definition has a scene pawn');
   const initial=f.position(),defaultView=f.run('({...cameraView})');f.run('changeCameraView(.2,0,1.15)');
   const yaw=f.run('cameraView.yaw');
   for(let step=0;step<5;step++){
-    vm.runInContext('{const p=state.players.find(p=>!p.isAi);p.position=getMapConfig().navigation.next[p.position];state.animation.currentTile=p.position;}',gameplay);
+    vm.runInContext('{const p=state.players.find(p=>!p.isAi);p.position=getNextTileIndex(p,p.position,1,true);state.animation.currentTile=p.position;}',gameplay);
     f.context.snapshotData=data();f.run('update(snapshotData)');
     assert.equal(f.run('pawnViews.get(snapshot.players.find(p=>!p.isAi).id).active'),true,'state movement starts the real pawn animation');
     for(let frame=0;frame<6;frame++){now+=32;f.run(`tick(${now})`);}
@@ -188,7 +193,7 @@ for(const {map,board} of maps){
   assert.ok(f.run('Math.hypot(cameraFocus.x-pawnViews.get("ai").group.position.x,cameraFocus.z-pawnViews.get("ai").group.position.z)')<.37);
   const aiFocus=f.position();
   for(let step=0;step<3;step++){
-    vm.runInContext('{const p=currentPlayer();p.position=getMapConfig().navigation.next[p.position];state.animation.currentTile=p.position;}',gameplay);
+    vm.runInContext('{const p=currentPlayer();p.position=getNextTileIndex(p,p.position,1,true);state.animation.currentTile=p.position;}',gameplay);
     f.context.snapshotData=data();f.run('update(snapshotData)');
     for(let frame=0;frame<6;frame++){now+=32;f.run(`tick(${now})`);}
   }
@@ -294,10 +299,34 @@ for(const {map,board} of maps){
 let checkedFrames=0;
 for(const [width,height] of [[390,620],[360,560],[740,380]])for(const {map,board} of maps)for(const zoom of [1,2.4]){
   const f=fixture(width,height);f.context.map=map;
-  f.run('snapshot.mapId=map.id');
+  f.run('snapshot.mapId=map.id;snapshot.animation.currentTile=0');
   const cx=(Math.min(...board.map(t=>t.x))+Math.max(...board.map(t=>t.x)))/2;
   const cz=(Math.min(...board.map(t=>t.y))+Math.max(...board.map(t=>t.y)))/2;
   const coords=tile=>({x:(tile.x-cx)*1.8,z:(tile.y-cz)*1.8});
+  if(map.id==='harbor'){
+    const steps=new Map(board.map(tile=>{const p=coords(tile),center=new THREE.Vector3(p.x,.265,p.z);return[tile.index,{center,walk:center.clone().add(harborWalkOffset(tile,THREE))}];}));
+    const covered=new Set();
+    for(const branch of ['merchant','resort'])for(const direction of [1,-1]){
+      let index=0;const initial=steps.get(0).walk;f.move(initial.x,initial.z);f.run(`cameraFocusReady=false;resize();changeCameraView(0,0,${zoom})`);
+      for(let n=0;n<24;n++){
+        const next=direction>0?(index===7?(branch==='resort'?18:8):map.navigation.next[index]):(index===28?(branch==='resort'?27:17):map.navigation.prev[index]);
+        covered.add(direction>0?`${index}:${next}`:`${next}:${index}`);
+        const route=harborEdgePath(index,next,steps,THREE),lengths=route.slice(1).map((p,i)=>p.distanceTo(route[i])),total=lengths.reduce((a,b)=>a+b,0),duration=Math.max(190,Math.min(650,total*112));
+        for(let segment=1;segment<route.length;segment++){
+          const from=route[segment-1],to=route[segment],frames=Math.max(3,Math.ceil(duration/1000*60*lengths[segment-1]/total));
+          for(let frame=1;frame<=frames;frame++){
+            f.move(from.x+(to.x-from.x)*frame/frames,from.z+(to.z-from.z)*frame/frames);f.step(1/60);
+            const point=f.run('pawnViews.get("human").group.position.clone().project(camera)');
+            assert(Math.abs(point.x)<.97&&Math.abs(point.y)<.97,`harbor ${branch} direction ${direction} ${width}x${height} zoom ${zoom} edge ${index}→${next}: actual curved route stays visible`);checkedFrames++;
+          }
+        }
+        index=next;
+      }
+      assert.equal(index,0,'both camera tours complete their actual branch lap');
+    }
+    assert.equal(covered.size,35,'camera framing checks every branch edge in both directions');
+    continue;
+  }
   let tile=board[0],from=coords(tile);f.move(from.x,from.z);f.run(`cameraFocusReady=false;resize();changeCameraView(0,0,${zoom})`);
   for(let i=0;i<board.length;i++){
     tile=board[map.navigation.next[tile.index]];const to=coords(tile);

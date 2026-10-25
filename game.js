@@ -185,54 +185,72 @@ const EXPANSION_LOT_CONFIGS = {
 };
 
 
-// Tall maps keep paired properties on straight, adjacent parts of the route.
+// Three islands share a working port. Either island makes one complete 24-step
+// lap; the 34 physical spaces include both branches, never a shortcut cycle.
 const HARBOR_ROUTE_POSITIONS = [
-  { x: 1, y: 1 }, { x: 2, y: 1 }, { x: 3, y: 1 }, { x: 4, y: 1 }, { x: 5, y: 1 },
-  { x: 5, y: 2 }, { x: 5, y: 3 }, { x: 5, y: 4 }, { x: 5, y: 5 },
-  { x: 5, y: 6 }, { x: 5, y: 7 }, { x: 5, y: 8 }, { x: 4, y: 8 },
-  { x: 3, y: 8 }, { x: 2, y: 8 }, { x: 1, y: 8 }, { x: 1, y: 7 },
-  { x: 1, y: 6 }, { x: 1, y: 5 }, { x: 1, y: 4 }, { x: 1, y: 3 }, { x: 1, y: 2 },
+  { x: 6, y: 6 }, { x: 5, y: 6 }, { x: 5, y: 5 }, { x: 5, y: 4 },
+  { x: 5, y: 3 }, { x: 5, y: 2 }, { x: 6, y: 2 }, { x: 6, y: 1 },
+  { x: 4, y: 1 }, { x: 3, y: 1 }, { x: 2, y: 2 }, { x: 2, y: 3 },
+  { x: 2, y: 4 }, { x: 2, y: 5 }, { x: 2, y: 6 }, { x: 2, y: 7 },
+  { x: 3, y: 8 }, { x: 4, y: 9 },
+  { x: 8, y: 1 }, { x: 9, y: 1 }, { x: 10, y: 2 }, { x: 10, y: 3 },
+  { x: 10, y: 4 }, { x: 10, y: 5 }, { x: 10, y: 6 }, { x: 10, y: 7 },
+  { x: 9, y: 8 }, { x: 8, y: 9 },
+  { x: 6, y: 10 }, { x: 6, y: 9 }, { x: 7, y: 9 }, { x: 7, y: 8 },
+  { x: 7, y: 7 }, { x: 7, y: 6 },
 ];
 const HARBOR_TILE_NAMES = [
-  "港务大厅", "贝壳巷", "帆影街", "海风里", "港湾金库",
-  "海港商会", "海港商会", "港湾观景楼", "港湾观景楼",
-  "漂流邮局", "渔火街", "珊瑚里", "白帆集", "潮汐广场",
-  "海崖温泉", "海崖温泉", "落霞湾", "船坞工坊",
-  "蓝窗巷", "水手街", "远航驿站", "归帆里",
+  "港务大厅", "贝壳巷", "码头集", "港湾金库", "归帆旅舍", "港务办公楼", "远航驿站", "双桥口",
+  "帆布商街", "货运广场", "白帆集", "海港商会", "海港商会", "船坞工坊", "港湾观景楼", "港湾观景楼", "渔火街", "商港邮局",
+  "珊瑚小筑", "漂流邮局", "落霞旅舍", "海风酒店", "海崖温泉", "海崖温泉", "蓝窗公馆", "海岸工坊", "潮汐广场", "白沙旅馆",
+  "归航广场", "航海事务所", "水手街", "灯塔里", "归港驿站", "港口旅馆",
 ];
-const HARBOR_LARGE_LOT_LINKS = { 6: 5, 8: 7, 15: 14 };
+const HARBOR_LARGE_LOT_LINKS = { 12: 11, 15: 14, 23: 22 };
 const HARBOR_DISTRICT_CONFIG = {
-  1: "海风街区", 2: "海风街区", 3: "海风街区",
-  5: "灯塔街区", 6: "灯塔街区", 7: "灯塔街区", 8: "灯塔街区",
-  10: "渔火街区", 11: "渔火街区", 12: "渔火街区",
-  14: "海崖街区", 15: "海崖街区", 16: "海崖街区",
-  18: "归帆街区", 19: "归帆街区", 21: "归帆街区",
+  1: "主港街区", 2: "主港街区", 4: "主港街区", 5: "主港街区",
+  8: "商贸街区", 10: "商贸街区", 11: "商贸街区", 12: "商贸街区",
+  14: "灯塔街区", 15: "灯塔街区", 16: "灯塔街区",
+  18: "珊瑚街区", 20: "珊瑚街区", 21: "珊瑚街区",
+  22: "海崖街区", 23: "海崖街区", 24: "海崖街区", 27: "海崖街区",
+  29: "归帆街区", 30: "归帆街区", 31: "归帆街区", 33: "归帆街区",
 };
 const HARBOR_DISTRICT_COLORS = {
-  "海风街区": "#9edac8", "灯塔街区": "#a7c8ed", "渔火街区": "#efc891",
-  "海崖街区": "#e7b5c6", "归帆街区": "#b9c4e5",
+  "主港街区": "#9edac8", "灯塔街区": "#a7c8ed", "商贸街区": "#efc891",
+  "海崖街区": "#e7b5c6", "归帆街区": "#b9c4e5", "珊瑚街区": "#f6c7a8",
 };
 const HARBOR_SPECIAL_TILES = {
-  4: { ...CLASSIC_SPECIAL_TILES[4], label: "港湾金库" },
-  9: { ...CLASSIC_SPECIAL_TILES[9], label: "漂流邮局" },
-  13: { ...CLASSIC_SPECIAL_TILES[13], label: "潮汐广场" },
-  17: { ...CLASSIC_SPECIAL_TILES[17], label: "船坞工坊" },
-  20: { ...CLASSIC_SPECIAL_TILES[20], label: "远航驿站" },
+  3: { ...CLASSIC_SPECIAL_TILES[4], label: "港湾金库" },
+  6: { ...CLASSIC_SPECIAL_TILES[9], label: "远航驿站" },
+  7: { type: "junction", label: "双桥口", color: "#91d6d7", description: "按已选航线自动分流，掷骰前可切换" },
+  9: { ...CLASSIC_SPECIAL_TILES[13], label: "货运广场" },
+  13: { ...CLASSIC_SPECIAL_TILES[17], label: "船坞工坊" },
+  17: { ...CLASSIC_SPECIAL_TILES[20], label: "商港邮局" },
+  19: { ...CLASSIC_SPECIAL_TILES[9], label: "漂流邮局" },
+  25: { ...CLASSIC_SPECIAL_TILES[17], label: "海岸工坊" },
+  26: { ...CLASSIC_SPECIAL_TILES[13], label: "潮汐广场" },
+  28: { type: "junction", label: "归航广场", color: "#91d6d7", description: "两岛航线合流，沿主港街道返回港务大厅" },
+  32: { ...CLASSIC_SPECIAL_TILES[20], label: "归港驿站" },
 };
 const HARBOR_LOT_CONFIGS = {
-  1: { price: 85, buildCosts: [0, 40, 70, 110], tolls: [20, 60, 130, 220], themeIdx: 0 },
-  2: { price: 95, buildCosts: [0, 45, 78, 118], tolls: [22, 66, 145, 240], themeIdx: 0 },
-  3: { price: 105, buildCosts: [0, 48, 80, 125], tolls: [25, 72, 152, 250], themeIdx: 0 },
-  5: { price: 260, buildCosts: [0, 80, 135, 190], tolls: [58, 145, 290, 475], themeIdx: 3, effectId: "finance_bonus", landmarkKey: "finance" },
-  7: { price: 230, buildCosts: [0, 75, 125, 180], tolls: [52, 132, 260, 430], themeIdx: 3, effectId: "tower_bonus", landmarkKey: "skyscraper" },
-  10: { price: 125, buildCosts: [0, 52, 90, 135], tolls: [30, 82, 175, 285], themeIdx: 1 },
-  11: { price: 140, buildCosts: [0, 55, 94, 142], tolls: [32, 88, 188, 305], themeIdx: 1 },
-  12: { price: 155, buildCosts: [0, 60, 100, 150], tolls: [36, 96, 200, 325], themeIdx: 1 },
-  14: { price: 300, buildCosts: [0, 95, 150, 220], tolls: [68, 170, 335, 550], themeIdx: 2, effectId: "hot_spring_rest", landmarkKey: "onsen" },
-  16: { price: 170, buildCosts: [0, 60, 105, 165], tolls: [40, 110, 225, 370], themeIdx: 2 },
-  18: { price: 75, buildCosts: [0, 40, 70, 105], tolls: [18, 54, 118, 195], themeIdx: 0 },
-  19: { price: 85, buildCosts: [0, 42, 74, 112], tolls: [20, 60, 130, 215], themeIdx: 0 },
-  21: { price: 98, buildCosts: [0, 47, 80, 120], tolls: [23, 68, 145, 240], themeIdx: 0 },
+  1: { price: 100, buildCosts: [0, 42, 72, 112], tolls: [24, 64, 135, 225], themeIdx: 0 },
+  2: { price: 135, buildCosts: [0, 52, 88, 136], tolls: [32, 86, 175, 285], themeIdx: 1 },
+  4: { price: 160, buildCosts: [0, 58, 98, 148], tolls: [38, 100, 200, 325], themeIdx: 2 },
+  5: { price: 175, buildCosts: [0, 62, 104, 156], tolls: [42, 110, 220, 355], themeIdx: 3 },
+  8: { price: 90, buildCosts: [0, 38, 66, 102], tolls: [20, 58, 124, 210], themeIdx: 1 },
+  10: { price: 110, buildCosts: [0, 45, 78, 118], tolls: [26, 72, 150, 250], themeIdx: 1 },
+  11: { price: 230, buildCosts: [0, 75, 125, 180], tolls: [52, 135, 270, 450], themeIdx: 3, effectId: "finance_bonus", landmarkKey: "finance" },
+  14: { price: 220, buildCosts: [0, 72, 118, 172], tolls: [48, 128, 255, 420], themeIdx: 3, effectId: "tower_bonus", landmarkKey: "skyscraper" },
+  16: { price: 120, buildCosts: [0, 48, 82, 124], tolls: [28, 78, 164, 270], themeIdx: 1 },
+  18: { price: 85, buildCosts: [0, 38, 66, 102], tolls: [20, 56, 120, 200], themeIdx: 0 },
+  20: { price: 125, buildCosts: [0, 50, 85, 130], tolls: [28, 80, 166, 275], themeIdx: 2 },
+  21: { price: 140, buildCosts: [0, 54, 92, 140], tolls: [32, 88, 184, 300], themeIdx: 2 },
+  22: { price: 270, buildCosts: [0, 88, 140, 205], tolls: [60, 155, 310, 510], themeIdx: 2, effectId: "hot_spring_rest", landmarkKey: "onsen" },
+  24: { price: 105, buildCosts: [0, 44, 76, 116], tolls: [24, 68, 144, 235], themeIdx: 0 },
+  27: { price: 145, buildCosts: [0, 55, 94, 142], tolls: [34, 92, 190, 310], themeIdx: 2 },
+  29: { price: 180, buildCosts: [0, 65, 108, 160], tolls: [42, 112, 225, 365], themeIdx: 3 },
+  30: { price: 130, buildCosts: [0, 50, 85, 130], tolls: [30, 84, 172, 280], themeIdx: 1 },
+  31: { price: 110, buildCosts: [0, 46, 78, 120], tolls: [26, 72, 150, 245], themeIdx: 0 },
+  33: { price: 155, buildCosts: [0, 58, 98, 148], tolls: [36, 98, 200, 325], themeIdx: 2 },
 };
 const ALPINE_ROUTE_POSITIONS = [
   { x: 1, y: 1 }, { x: 2, y: 1 }, { x: 3, y: 1 }, { x: 4, y: 1 }, { x: 5, y: 1 }, { x: 6, y: 1 },
@@ -292,6 +310,28 @@ function makeLoopNavigation(length) {
     prev[i] = (i - 1 + length) % length;
   }
   return { next, prev, junctions: {} };
+}
+
+function makeHarborNavigation() {
+  const next = {}, prev = {}, edges = [];
+  const shared = [28, 29, 30, 31, 32, 33, 0, 1, 2, 3, 4, 5, 6, 7];
+  const branches = {
+    merchant: [7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 28],
+    resort: [7, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28],
+  };
+  const connect = (path, branch) => path.slice(1).forEach((to, i) => {
+    const from = path[i];
+    next[from] ??= to; prev[to] ??= from;
+    edges.push({ from, to, branch });
+  });
+  connect(shared, "shared");
+  Object.entries(branches).forEach(([id, path]) => connect(path, id));
+  return { next, prev, edges, shared, branches, lapLength: 24,
+    junctions: { 7: { defaultNext: 8, automatic: true, options: [
+      { id: "merchant", label: "商贸岛", next: 8 },
+      { id: "resort", label: "度假岛", next: 18 },
+    ] } },
+  };
 }
 
 const MAP_PRESETS = {
@@ -359,10 +399,10 @@ const MAP_PRESETS = {
     economy: { startCash: 1700, startBonus: 320, secondPlayerBonus: 400, bankThreshold: 240 },
     ticketPrice: 250, collectionId: "harbor_shell", collectionName: "潮汐海螺",
     name: "潮汐港湾",
-    boardTitle: "潮汐港湾 · 22 格",
-    startDescription: "纵向 22 格海港，商街低价入手。起始 ¥1700，后手额外 ¥400，每圈补给 ¥320。",
-    modeLabel: "海港纵向环线",
-    grid: { columns: 5, rows: 8, cellMin: 90, cellMinTablet: 58, cellMinMobile: 40, height: "min(96vh, 1160px)", heightTablet: "min(90vh, 880px)", heightMobile: "min(82vh, 660px)", centerWidth: "min(250px, calc(100% - 160px))", centerWidthTablet: "min(220px, calc(100% - 60px))", centerWidthMobile: "min(180px, calc(100% - 40px))" },
+    boardTitle: "三岛港湾 · 34 格 · 每圈 24 步",
+    startDescription: "34 格三岛路线，商贸与度假两路各走 24 步闭环。掷骰前可切换航线，路口自动通过。完成 30 回合带回心愿建筑卡，建设 Lv.2 / Lv.3 可再收集。",
+    modeLabel: "三岛分岔航线",
+    grid: { columns: 11, rows: 10, cellMin: 68, cellMinTablet: 44, cellMinMobile: 30, height: "min(96vh, 1160px)", heightTablet: "min(90vh, 880px)", heightMobile: "min(82vh, 660px)", centerWidth: "min(250px, calc(100% - 160px))", centerWidthTablet: "min(220px, calc(100% - 60px))", centerWidthMobile: "min(180px, calc(100% - 40px))" },
     routePositions: HARBOR_ROUTE_POSITIONS,
     tileNames: HARBOR_TILE_NAMES,
     largeLotLinks: HARBOR_LARGE_LOT_LINKS,
@@ -370,7 +410,7 @@ const MAP_PRESETS = {
     districtColors: HARBOR_DISTRICT_COLORS,
     specialTiles: HARBOR_SPECIAL_TILES,
     lotConfigs: HARBOR_LOT_CONFIGS,
-    navigation: makeLoopNavigation(HARBOR_ROUTE_POSITIONS.length),
+    navigation: makeHarborNavigation(),
   },
   alpine: {
     id: "alpine",
@@ -855,7 +895,7 @@ function renderStartMapOptions() {
     btn.classList.toggle("active", active);
     btn.setAttribute("aria-pressed", active ? "true" : "false");
   });
-  if (startMapDescriptionEl) startMapDescriptionEl.textContent = `${mapCfg.startDescription} · 门票 ¥${getMapTicket(mapCfg)} · 收集${mapCfg.collectionName || "城市印章"}`;
+  if (startMapDescriptionEl) startMapDescriptionEl.textContent = `${mapCfg.startDescription} · 门票 ¥${getMapTicket(mapCfg)}${mapCfg.id === "harbor" ? "" : ` · 收集${mapCfg.collectionName || "城市印章"}`}`;
 }
 
 function getMapTicket(map = getMapConfig()) {
@@ -888,6 +928,7 @@ function initializeGame(mapId = selectedMapId) {
     currentMapId: mapCfg.id,
     board: createBoard(mapCfg),
     openingLots: [],
+    harborCollection: { wishlist: getHarborWishlist(), milestones: [], cards: [] },
     players: PLAYER_DEFS.map((p) => ({
       ...p,
       cash: economy.startCash,
@@ -896,6 +937,8 @@ function initializeGame(mapId = selectedMapId) {
       cashAnimFrame: null, cashChangeToken: 0, pendingCashDelta: 0,
       position: 0,
       nextJunctionChoice: null,
+      selectedRoute: "merchant", harborLastBranch: "merchant",
+      harborTrail: [], harborAnchor: 0, harborDistance: 0,
       effects: defaultEffects(),
       cards: [], cardUsedThisTurn: false,
     })),
@@ -1072,7 +1115,8 @@ async function startNewGame() {
     const map = getMapConfig(), price = getMapTicket(map);
     const info = window.GameProgression.getEntryInfo({mapId:map.id,price});
     if (!info.ok || !info.canEnter) { showStartScreen();render();window.GameProgression.showEntryError(info);return; }
-    const accepted = await showModal({label:"开始对局",title:map.name,message:`本局 ${getMaxRounds()} 回合，结束时现金最多者获胜。\n门票 ¥${price}，支付后仓库余额 ¥${info.wallet - price}。完成对局后，剩余现金与${map.collectionName || "城市印章"}存入仓库。`,buttons:[{id:"cancel",label:"取消",variant:"ghost"},{id:"enter",label:`支付 ¥${price} · 开始`,variant:"primary"}]});
+    const collectionMessage = map.id === "harbor" ? `完成对局后带回${HARBOR_FAMILY_NAMES[state.harborCollection.wishlist]}建筑卡 ×1，建设 Lv.2 / Lv.3 还可再得最多 4 张。剩余现金存入仓库。` : `完成对局后，剩余现金与${map.collectionName || "城市印章"}存入仓库。`;
+    const accepted = await showModal({label:"开始对局",title:map.name,message:`本局 ${getMaxRounds()} 回合，结束时现金最多者获胜。\n门票 ¥${price}，支付后仓库余额 ¥${info.wallet - price}。${collectionMessage}`,buttons:[{id:"cancel",label:"取消",variant:"ghost"},{id:"enter",label:`支付 ¥${price} · 开始`,variant:"primary"}]});
     if (!isSessionActive(sid)) return;
     if (accepted !== "enter") {showStartScreen();render();return;}
     const entry=window.GameProgression.enter({runId:state.runId,mapId:map.id,mapName:map.name,price,collectionId:map.collectionId || "city_stamp"});
@@ -1163,7 +1207,115 @@ function getJunctionConfig(index) {
   return getMapNavigation().junctions?.[index] || null;
 }
 
+const HARBOR_FAMILIES = ["villa", "shop", "hotel", "tower", "finance", "skyscraper", "onsen"];
+const HARBOR_FAMILY_NAMES = { villa: "海湾公馆", shop: "港湾商铺", hotel: "海岸酒店", tower: "航海事务所", finance: "海港商会", skyscraper: "港湾观景楼", onsen: "海崖温泉" };
+let harborWishlistFallback = "villa";
+
+function getHarborWishlist() {
+  const cardId = window.GameProgression?.getProfile?.()?.profile?.town?.targetCardId;
+  const family = typeof cardId === "string" ? cardId.replace(/^harbor_/, "") : harborWishlistFallback;
+  return HARBOR_FAMILIES.includes(family) ? family : "villa";
+}
+
+function harborBuildingMilestone(player, tile) {
+  if (state.currentMapId !== "harbor" || player.id !== "human" || tile.lot?.ownerId !== "human") return;
+  const family = tile.lot.landmarkKey || tile.lot.theme.key;
+  if (!HARBOR_FAMILIES.includes(family) || tile.lot.level < 2) return;
+  const collection = state.harborCollection;
+  const key = `${family}:${tile.lot.level}`;
+  if (collection.milestones.includes(key)) return;
+  collection.milestones.push(key);
+  if (collection.cards.length >= 4) return;
+  collection.cards.push({ cardId: `harbor_${family}`, count: 1, level: tile.lot.level, tileIndex: tile.index });
+  pushLog(`建筑卡已收集：${HARBOR_FAMILY_NAMES[family]} ×1。完成本局后带回城镇（建设奖励 ${collection.cards.length}/4）。`);
+}
+
+function getHarborBuildingRewards() {
+  if (state.currentMapId !== "harbor") return [];
+  const counts = new Map([[`harbor_${state.harborCollection.wishlist}`, 1]]);
+  state.harborCollection.cards.forEach(card => counts.set(card.cardId, (counts.get(card.cardId) || 0) + 1));
+  return [...counts].sort(([a], [b]) => a.localeCompare(b)).map(([cardId, count]) => ({ cardId, count }));
+}
+
+function resetHarborJourney(player, position = player.position) {
+  if (state.currentMapId !== "harbor") return;
+  player.harborTrail = []; player.harborAnchor = position; player.harborDistance = 0;
+  // A relocation onto an island establishes its reverse path; the preferred
+  // route remains the player's choice for the next forward departure.
+  if (position >= 8 && position <= 17) player.harborLastBranch = "merchant";
+  else if (position >= 18 && position <= 27) player.harborLastBranch = "resort";
+}
+
+function getNextHarborTile(player, currentIndex, dir, mutate) {
+  const nav = getMapNavigation();
+  if (!mutate) return getNextHarborTile({ ...player, harborTrail: [...(player.harborTrail || [])] }, currentIndex, dir, true);
+  if (player.harborAnchor !== currentIndex) resetHarborJourney(player, currentIndex);
+  player.harborTrail ||= [];
+  let next;
+  if (dir < 0) {
+    const last = player.harborTrail[player.harborTrail.length - 1];
+    if (last?.to === currentIndex) {
+      next = last.from;
+      player.harborTrail.pop();
+    } else {
+      next = currentIndex === 28 ? (player.harborLastBranch === "resort" ? 27 : 17) : nav.prev[currentIndex];
+    }
+  } else {
+    next = currentIndex === 7 ? (player.selectedRoute === "resort" ? 18 : 8) : nav.next[currentIndex];
+    if (currentIndex === 7) player.harborLastBranch = player.selectedRoute === "resort" ? "resort" : "merchant";
+    player.harborTrail.push({ from: currentIndex, to: next });
+  }
+  player.harborAnchor = next;
+  player.harborDistance = (player.harborDistance || 0) + (dir < 0 ? -1 : 1);
+  return next;
+}
+
+function chooseAiHarborRoute(player) {
+  if (state.currentMapId !== "harbor") return;
+  const score = branch => getMapNavigation().branches[branch].slice(1, -1).reduce((sum, index) => {
+    const tile = state.board[index];
+    if (tile.isLargeSecondary) return sum;
+    return sum + scoreAiTargetTile(player, tile);
+  }, 0);
+  // Stable preference when both are comparable, avoiding route churn each turn.
+  const merchant = score("merchant"), resort = score("resort");
+  if (Math.abs(merchant - resort) > 1) player.selectedRoute = merchant > resort ? "merchant" : "resort";
+}
+
+window.GameHarbor = {
+  getState() {
+    const human = state.players?.find(p => p.id === "human");
+    const active = state.currentMapId === "harbor";
+    return { active, totalTiles: 34, lapTiles: 24, route: human?.selectedRoute || "merchant",
+      canChangeRoute: active && !state.gameOver && !state.busy && !state.cardUsePending && state.phase === "await_roll" && currentPlayer()?.id === "human",
+      wishlist: active && state.isFormalRun ? state.harborCollection.wishlist : getHarborWishlist(),
+      rewards: active ? getHarborBuildingRewards() : [], earnedCount: state.harborCollection?.cards.length || 0,
+      choices: [{ id: "merchant", label: "商贸岛", detail: "商会 · 观景楼 · 商铺" }, { id: "resort", label: "度假岛", detail: "温泉 · 酒店 · 公馆" }],
+      families: HARBOR_FAMILIES.map(family => ({ family, cardId: `harbor_${family}`, label: HARBOR_FAMILY_NAMES[family] })),
+      navigation: active ? getMapNavigation() : MAP_PRESETS.harbor.navigation,
+    };
+  },
+  setRoute(route) {
+    if (!["merchant", "resort"].includes(route) || !this.getState().canChangeRoute) return { ok: false };
+    getPlayerById("human").selectedRoute = route;
+    render();
+    return { ok: true, route };
+  },
+  setWishlist(family) {
+    family = String(family).replace(/^harbor_/, "");
+    if (!HARBOR_FAMILIES.includes(family) || state.isFormalRun && !state.gameOver) return { ok: false };
+    const result = window.GameProgression?.town?.setTarget({ cardId: `harbor_${family}` });
+    if (result && !result.ok) return result;
+    harborWishlistFallback = family;
+    if (state.harborCollection) state.harborCollection.wishlist = family;
+    render();
+    return result || { ok: true };
+  },
+  getRewards: getHarborBuildingRewards,
+};
+
 function getNextTileIndex(player, currentIndex, dir = (player.effects?.reversed ? -1 : 1), consumeChoice = true) {
+  if (state.currentMapId === "harbor") return getNextHarborTile(player, currentIndex, dir, consumeChoice);
   const nav = getMapNavigation();
   if (dir < 0) return nav.prev[currentIndex] ?? ((currentIndex - 1 + getBoardLength()) % getBoardLength());
   const junction = getJunctionConfig(currentIndex);
@@ -1180,7 +1332,10 @@ function getNextTileIndex(player, currentIndex, dir = (player.effects?.reversed 
 
 function previewMovement(player, steps, options = {}) {
   const temp = {
+    ...player,
     effects: { reversed: options.direction === -1 },
+    harborTrail: [...(player.harborTrail || [])],
+    selectedRoute: options.branchChoice ?? player.selectedRoute,
     nextJunctionChoice: options.branchChoice ?? player.nextJunctionChoice ?? null,
   };
   let idx = options.startingIndex ?? player.position;
@@ -1616,6 +1771,7 @@ async function playHumanTurn() {
 async function playAiTurn() {
   if (state.gameOver || !currentPlayer().isAi || state.cardUsePending) return;
   const sid = state.sessionId;
+  chooseAiHarborRoute(currentPlayer());
   await useAiInventoryCard(currentPlayer());
   if (!isSessionActive(sid) || state.gameOver) return;
   await processTurn(currentPlayer());
@@ -1623,6 +1779,7 @@ async function playAiTurn() {
 
 async function processTurn(player, isExtraTurn = false) {
   const sid = state.sessionId;
+  if (player.isAi) chooseAiHarborRoute(player);
   // A pre-roll movement card may schedule a rest. It keeps this promised dice
   // action; the rest begins on the following action, including a bonus action.
   const deferredRest = player.cardDeferredRest || {};
@@ -1775,9 +1932,10 @@ async function animateMovement(player, steps, sid) {
     state.animation.landedTile = step === steps ? next : null;
     state.statusTitle = `${player.name} 前进中`;
     state.statusDescription = `第 ${step} / ${steps} 步，抵达 ${state.board[next].name}。`;
-    const crossedStart = next === 0 && prev !== 0;
+    const crossedStart = next === 0 && prev !== 0 && (state.currentMapId !== "harbor" || Math.abs(player.harborDistance) >= 24);
     let startUpgradeMsg = "";
     if (crossedStart) {
+      if (state.currentMapId === "harbor") player.harborDistance = 0;
       state.passedStartThisTurn = true;
       updatePlayerCash(player, getMapEconomy().startBonus, false);
       const buildable = state.board.filter((t) => t.lot?.ownerId === player.id && t.lot.level === 0 && !t.isLargeSecondary);
@@ -1791,7 +1949,7 @@ async function animateMovement(player, steps, sid) {
       }
     }
     render();
-    await sleep(step === steps ? 260 : 180);
+    await sleep(Math.max(step === steps ? 260 : 180, window.CityScene?.getMovementDuration?.(player.id) || 0));
     if (!isSessionActive(sid)) return;
     if (crossedStart) {
       render();
@@ -2118,6 +2276,9 @@ function chooseAiJunctionOption(player, tile) {
 async function resolveJunctionTile(player, tile, sid) {
   const junction = getJunctionConfig(tile.index);
   if (!junction) return;
+  // Harbor's persistent pre-roll preference is applied while moving. Landing
+  // here never interrupts a turn with a direction picker or a confirmation.
+  if (junction.automatic) return;
   if (player.isAi) {
     const selected = chooseAiJunctionOption(player, tile) || junction.options[0];
     player.nextJunctionChoice = selected.id;
@@ -2162,7 +2323,7 @@ async function resolveRushTile(player, sid, tile = state.board[player.position])
   await showContinueModal({
     label: name,
     title: `${name}，冲刺 ${steps} 格！`,
-    message: `${player.name} 沿当前${player.effects.reversed ? "逆时针" : "顺时针"}方向再前进 ${steps} 格，到达后立即结算。`,
+    message: `${player.name} 沿当前路线${player.effects.reversed ? "反向" : "正向"}前进 ${steps} 格，到达后立即结算。`,
     drama: { type: "card", to: player, tiles: [tile.index], tileName: name },
   });
   if (!isSessionActive(sid) || state.gameOver) return;
@@ -2269,6 +2430,7 @@ async function resolveChance(player, tile, sid) {
   if (selected.kind === "renovation") {
     const target = pick(freeBuildable);
     target.lot.level++;
+    harborBuildingMilestone(player, target);
     const ownerName = target.lot.ownerId ? player.name : "无主地产";
     title = "免费升级";
     message = `${target.name} 免费升至 Lv.${target.lot.level}。\n当前归属：${ownerName}，产权不变。`;
@@ -2277,7 +2439,7 @@ async function resolveChance(player, tile, sid) {
   } else if (selected.kind === "district") {
     const district = pick(districts);
     const changed = lots.filter(t => t.lot.district === district && t.lot.level < 3);
-    changed.forEach(t => t.lot.level++);
+    changed.forEach(t => { t.lot.level++; harborBuildingMilestone(player, t); });
     title = "街区升级";
     message = `${district}：${changed.map(t => `${t.name} Lv.${t.lot.level}`).join("、")}。\n以上地产各免费升一级，产权不变，新租金立即生效。`;
     Object.assign(drama, { type: "build", tiles: changed.map(t => t.index), tileName: district,
@@ -2291,6 +2453,7 @@ async function resolveChance(player, tile, sid) {
     // Choose physical destination tiles, retaining the larger lots' double footprint.
     arrival = pick(state.board.filter(t => t.lot));
     player.position = arrival.index;
+    resetHarborJourney(player);
     state.animation.currentTile = null;
     state.animation.landedTile = arrival.index;
     title = "随机传送";
@@ -2298,6 +2461,7 @@ async function resolveChance(player, tile, sid) {
     Object.assign(drama, { tiles: [arrival.index], tileName: arrival.name, outcomeLabel: `已抵达 ${arrival.name}` });
   } else if (selected.kind === "swap") {
     [player.position, opp.position] = [opp.position, player.position];
+    resetHarborJourney(player); resetHarborJourney(opp);
     state.animation.currentTile = null;
     state.animation.landedTile = player.position;
     title = "双方位置互换";
@@ -2337,6 +2501,7 @@ async function resolveTeleportTile(player, sid, tile = state.board[player.positi
   const target = lots[Math.floor(Math.random() * lots.length)];
   // A jump has no traversed route: do not call animateMovement or pay a start bonus.
   player.position = target.index;
+  resetHarborJourney(player);
   pushLog(`${player.name} 踏入传送门，被传送到了 ${target.name}！`);
   state.animation.currentTile = null;
   state.animation.landedTile = target.index;
@@ -2376,6 +2541,7 @@ async function resolveConstruction(player, sid) {
     } else if (canBuild.length > 0) {
       const target = canBuild[Math.floor(Math.random() * canBuild.length)];
       target.lot.level += 1;
+      harborBuildingMilestone(player, target);
       pushLog(`${player.name} 在城建局免费建造了 ${target.name}，升至 Lv.${target.lot.level}。`);
       render();
       await showContinueModal({ label: "城建局", title: "AI 选择建造！", message: `${player.name} 的 ${target.name} 免费升至 Lv.${target.lot.level}！` });
@@ -2402,6 +2568,7 @@ async function resolveConstruction(player, sid) {
   if (dec === "build") {
     const target = canBuild[Math.floor(Math.random() * canBuild.length)];
     target.lot.level += 1;
+    harborBuildingMilestone(player, target);
     pushLog(`${player.name} 在城建局免费建造了 ${target.name}，升至 Lv.${target.lot.level}。`);
     render();
     await showContinueModal({ label: "城建局", title: "建造完成！", message: `${target.name} 免费升级到 Lv.${target.lot.level}！` });
@@ -2692,6 +2859,7 @@ async function executeCardEffect(player, card, sid, prepared = {}) {
       if (lots.length === 0) break;
       const dest = lots[Math.floor(Math.random() * lots.length)];
       target_player.position = dest.index;
+      resetHarborJourney(target_player);
       state.animation.landedTile = dest.index;
       pushLog(`传送术！${target_player.name} 被传送到 ${dest.name}！`);
       render();
@@ -2749,7 +2917,7 @@ async function executeCardEffect(player, card, sid, prepared = {}) {
       await showContinueModal({ label: "卡牌效果", title: "时光回溯！", message: `${target_player.name} 被迫后退 3 步！` });
       if (!isSessionActive(sid)) return;
       for (let i = 0; i < 3; i++) {
-        target_player.position = getNextTileIndex(target_player, target_player.position, -1, false);
+        target_player.position = getNextTileIndex(target_player, target_player.position, -1, true);
         state.animation.currentTile = target_player.position;
         render(); await sleep(180);
         if (!isSessionActive(sid)) return;
@@ -2765,6 +2933,7 @@ async function executeCardEffect(player, card, sid, prepared = {}) {
       const tmp = player.position;
       player.position = opp.position;
       opp.position = tmp;
+      resetHarborJourney(player); resetHarborJourney(opp);
       pushLog(`换位魔法！${player.name} 和 ${opp.name} 交换了位置！`);
       state.animation.landedTile = player.position;
       render();
@@ -2875,7 +3044,7 @@ async function executeCardEffect(player, card, sid, prepared = {}) {
       if (!isSessionActive(sid) || !target_who) return;
       const target_player = target_who === "self" ? player : opp;
       target_player.effects.reversed = !target_player.effects.reversed;
-      const dirText = target_player.effects.reversed ? "逆时针" : "顺时针";
+      const dirText = state.currentMapId === "harbor" ? (target_player.effects.reversed ? "沿路线反向" : "沿路线正向") : (target_player.effects.reversed ? "逆时针" : "顺时针");
       pushLog(`逆行术！${target_player.name} 的前进方向变为${dirText}！`);
       render();
       await showContinueModal({
@@ -2912,6 +3081,7 @@ function buildLot(player, tile, animate = true) {
   const cost = lot.buildCosts[next];
   updatePlayerCash(player, -cost, animate);
   lot.level = next;
+  harborBuildingMilestone(player, tile);
   playSound("build", { rate: 0.96 + next * 0.03 });
   pushLog(`${player.name} 花 ${formatMoney(cost)} 将 ${tile.name} 升到 Lv.${next}。`);
 }
@@ -3037,6 +3207,7 @@ function finishGame(reason = "rounds") {
     humanCash: state.players.find(p => p.id === "human").cash, winnerId,
     collectionCount: 1 + Number(winnerId === "human") + Number(state.board.some(t => !t.isLargeSecondary && t.lot?.isLarge && t.lot.ownerId === "human" && t.lot.level === 3)),
     eligible: state.isFormalRun === true,
+    buildingCards: getHarborBuildingRewards(),
   });
   if (state.isFormalRun) saveGameResult(reason, winnerId);
   playSound("win");

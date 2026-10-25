@@ -1,4 +1,4 @@
-import { loadSharedModelAsset, disposeSharedModelAssets, regionalSceneryDirectory } from './scene-model-cache.js?v=20261025-facade2';
+import { loadSharedModelAsset, disposeSharedModelAssets, regionalSceneryDirectory } from './scene-model-cache.js?v=20261025-harbor1';
 import { createRegionalSurroundings, fillRegionalScenicBuildings } from './scene-regional-parks.js?v=20261025-terrain3';
 import { batchGardenBuilding, instanceGardenBuildings } from './scene-garden-kit.js?v=20261025-terrain3';
 

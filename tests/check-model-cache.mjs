@@ -92,4 +92,13 @@ await check('switching away and immediately back cannot install or erase an obso
   assert.equal(f.cache.load('regions/classic.glb'),current,'late rejection cannot delete the replacement cache slot');
   f.requests[1].resolve(active.gltf);assert.equal(await current,active.gltf);assert.equal(f.cache.getState().sources,1);f.cache.dispose();
 });
+await check('town lease protects a shared source until its final borrower closes',async()=>{
+  const f=fixture(),endA=f.cache.retain('regions/harbor.glb'),endB=f.cache.retain('regions/harbor.glb');
+  const pending=f.cache.load('regions/harbor.glb');await drain();
+  f.cache.releaseFile('regions/harbor.glb');const source=asset('harbor');f.requests[0].resolve(source.gltf);
+  assert.equal(await pending,source.gltf);assert.equal(source.released.texture,0);
+  endA();endA();assert.equal(source.released.texture,0,'one borrower remains');
+  endB();assert.equal(source.released.texture,1);assert.equal(f.cache.getState().sources,0);
+  f.cache.dispose();assert.equal(source.released.texture,1);
+});
 console.log(JSON.stringify({checks,failures:0}));

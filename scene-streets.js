@@ -8,7 +8,7 @@ export const STREET_THEMES = {
   alpine: { stone:'#a39d87', trim:'#d7c7a7', pavement:'#bdb39b', joint:'#827e70', garden:'#87a375', accent:'#9e8060' },
 };
 
-export function createStreetFoundation({THREE,world,boardBounds,mapId}) {
+export function createStreetFoundation({THREE,world,boardBounds,mapId,islands=false}) {
   const theme=STREET_THEMES[mapId]||STREET_THEMES.classic;
   const root=new THREE.Group();root.name=`regional_streets_${mapId}`;root.userData.cosmetic=true;world.add(root);
   const resources=new Set(),groups=new Map(),dummy=new THREE.Object3D(),tint=new THREE.Color();
@@ -27,6 +27,7 @@ export function createStreetFoundation({THREE,world,boardBounds,mapId}) {
   }
   function surface(w,h,d,r,material,x,y,z){const m=new THREE.Mesh(roundedGeometry(w,h,d,r),mats[material]);m.position.set(x,y,z);m.castShadow=true;m.receiveShadow=true;m.raycast=()=>{};root.add(m);return m;}
   const w=boardBounds.w,d=boardBounds.d;
+  if(!islands){
   surface(w+1.18,.37,d+1.18,.46,'joint',0,-.42,0);
   surface(w+1.27,.075,d+1.27,.48,'trim',0,-.075,0);
   surface(w+.82,.08,d+.82,.33,'garden',0,.005,0);
@@ -49,6 +50,7 @@ export function createStreetFoundation({THREE,world,boardBounds,mapId}) {
       add('paving',side*(w/2+.24),.09,axis,.28,.025,.292,0,Math.sin(axis*5)*.025);
       add('trim',side*(w/2+.44),.12,axis,.115,.055,.292);
     }
+  }
   }
   function parcel(group,width,depth,isProperty){
     // Keep this below the existing deed frame. Geometry occupies only the plot,

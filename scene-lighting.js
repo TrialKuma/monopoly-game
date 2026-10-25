@@ -61,7 +61,7 @@ export function createCityLighting({ THREE, scene, world, renderer, light, board
   // retain their real surface colours. Its edge fades into the atmospheric sky.
   world?.traverse(node => {
     const parameters = node.geometry?.parameters;
-    if (!node.isMesh || node.geometry?.type !== 'PlaneGeometry' || parameters?.width < 100 || parameters?.height < 100 || !node.material?.isMeshStandardMaterial) return;
+    if (node.userData?.preserveGroundColor || !node.isMesh || node.geometry?.type !== 'PlaneGeometry' || parameters?.width < 100 || parameters?.height < 100 || !node.material?.isMeshStandardMaterial) return;
     const previous = node.material, material = own(previous.clone());
     const previousCompile = material.onBeforeCompile;
     material.transparent = true; material.depthWrite = false; material.roughness = .96;

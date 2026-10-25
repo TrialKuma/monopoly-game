@@ -1,13 +1,15 @@
 import * as THREE from './assets/vendor/three/three.module.min.js';
 import { makeStudioEnvironment } from './scene-environment.js?v=20261025-facade2';
 import { mergeGeometries } from './assets/vendor/three/addons/utils/BufferGeometryUtils.js';
-import { createSceneLife } from './scene-life.js?v=20261025-facade2';
-import { createStreetFoundation } from './scene-streets.js?v=20261024-1';
+import { createSceneLife } from './scene-life.js?v=20261025-harbor1';
+import { createStreetFoundation } from './scene-streets.js?v=20261025-harbor1';
+import { createHarborIslands, addHarborBridge } from './scene-harbor-islands.js?v=20261025-harbor1';
+import { harborWalkOffset, harborEdgePath } from './scene-harbor-paths.js?v=20261025-harbor1';
 import { createRegionalPark } from './scene-regional-parks.js?v=20261025-terrain3';
 import { createOwnershipRoofs } from './scene-ownership-roofs.js?v=20261025-items1';
 import { createFunctionalLandmark } from './scene-functional-landmarks.js?v=20261025-items1';
 import { createThermalSteam } from './scene-thermal-steam.js?v=20261025-facade2';
-import { loadSharedModelAsset, forgetSharedModelAsset, releaseSharedModelAsset, releaseSupersededModelAssets, ownsSharedModelResource, disposeSharedModelAssets } from './scene-model-cache.js?v=20261025-facade2';
+import { loadSharedModelAsset, forgetSharedModelAsset, releaseSharedModelAsset, releaseSupersededModelAssets, ownsSharedModelResource, disposeSharedModelAssets } from './scene-model-cache.js?v=20261025-harbor1';
 
 // All route positions, ownership and prices come from the game. This view never
 // changes a rule or finishes an action; its animation is entirely cosmetic.
@@ -63,6 +65,7 @@ let cameraView = { yaw:null, elevation:null, zoom:1, modified:false, facingYaw:n
 let propertyCameraView = null;
 const cameraFocus = new THREE.Vector3(0,.2,0);
 let cameraFocusReady = false, lastLocalCamera = false;
+let followedPlayerId=null;
 let cameraGesture = { pointers:new Map(), dragged:false, pinchDistance:0 };
 let suppressSceneClickUntil = 0;
 const CAMERA_LIMITS = { minZoom:.65, maxZoom:2.4, minElevation:.35, maxElevation:1.24 };
@@ -77,6 +80,8 @@ const raycaster = new THREE.Raycaster();
 const pointer = new THREE.Vector2();
 const api = { update, effect, reset, projectTile, inspectTile, closeInspection, resetView:()=>resetCameraView(true), setViewMode:setCameraMode, zoomBy:factor=>changeCameraView(0,0,factor), getView:()=>({...cameraView,local:isLocalCamera(),target:{x:cameraFocus.x,z:cameraFocus.z}}), setTimeMode:setCityTimeMode, getTimeMode:()=>sceneLife?.getTimeMode()||timeMode, setSeason:mode=>setCityClimate('season',mode), setWeather:mode=>setCityClimate('weather',mode), getAtmosphere:()=>sceneLife?.getAtmosphere(), refreshAssets:()=>loadModelKit(true), ready: false };
 window.CityScene = api;
+api.releaseInactiveAssets=()=>queueMicrotask(()=>retireInactiveModels(snapshot?.mapId));
+api.getMovementDuration=id=>snapshot?.mapId==='harbor'&&pawnViews.get(id)?.duration?Math.ceil(pawnViews.get(id).duration)+32:0;
 
 function own(resource) { resources.add(resource); return resource; }
 function material(color, options = {}) {
@@ -452,6 +457,11 @@ function inward(position) {
   return vector.normalize();
 }
 function boundaryEdges(position){
+  if(snapshot?.mapId==='harbor'){
+    const gx=position.x/STEP+boardBounds.cx,gy=position.z/STEP+boardBounds.cy;
+    const normal=gx<4.8?new THREE.Vector3(1,0,0):gx>7.2?new THREE.Vector3(-1,0,0):gx<5.6?new THREE.Vector3(1,0,0):gx>6.4?new THREE.Vector3(-1,0,0):gy>8&&gy<9.5?new THREE.Vector3(-1,0,0):new THREE.Vector3(0,0,gy>9?-1:1);
+    return [{side:normal.x>0?'west':normal.x<0?'east':normal.z>0?'north':'south',distance:0,normal,rotation:Math.atan2(normal.x,normal.z)}];
+  }
   const left=(boardBounds.minX-boardBounds.cx)*STEP,right=(boardBounds.maxX-boardBounds.cx)*STEP;
   const back=(boardBounds.minY-boardBounds.cy)*STEP,front=(boardBounds.maxY-boardBounds.cy)*STEP;
   return [
@@ -471,10 +481,10 @@ function buildMap(data) {
   boardBounds.cy = (boardBounds.minY + boardBounds.maxY) / 2;
   boardBounds.w = (boardBounds.maxX - boardBounds.minX + 1) * STEP;
   boardBounds.d = (boardBounds.maxY - boardBounds.minY + 1) * STEP;
-  streetFoundation=createStreetFoundation({THREE,world,boardBounds,mapId:data.mapId});
-  ground = mesh(new THREE.PlaneGeometry(200, 200), '#dbe3d7', world, 0, -.44, 0);
+  streetFoundation=createStreetFoundation({THREE,world,boardBounds,mapId:data.mapId,islands:data.mapId==='harbor'});
+  ground = mesh(new THREE.PlaneGeometry(200, 200), data.mapId==='harbor'?'#609eaa':'#dbe3d7', world, 0, -.44, 0);
   ground.rotation.x = -Math.PI / 2; ground.castShadow = false;
-  makePark(data.mapId);
+  if(data.mapId==='harbor')createHarborIslands({THREE,world,boardBounds,own});else makePark(data.mapId);
   data.board.forEach((tile) => makeStep(tile));
   makeRoads(data);
   data.board.filter((tile) => !tile.isLargeSecondary).forEach((tile) => makeLot(tile, data));
@@ -508,7 +518,7 @@ function makeStep(tile) {
   const sides=edges.filter(edge=>edge.distance<nearest+.001), corner=sides.length>1;
   // A corner needs clearance on both axes; normalising a diagonal would push
   // its landing point back inside the corner building's footprint.
-  const offset=new THREE.Vector3();sides.forEach(side=>offset.addScaledVector(side.normal,WALK_SETBACK));
+  const offset=snapshot?.mapId==='harbor'?harborWalkOffset(tile,THREE):new THREE.Vector3();if(snapshot?.mapId!=='harbor')sides.forEach(side=>offset.addScaledVector(side.normal,WALK_SETBACK));
   const walk=center.clone().add(offset);walk.y=.255;
   const size=corner?.76:.66, routeColor=tile.isStart?SPECIAL_COLORS.start:SPECIAL_COLORS[tile.special?.type];
   const landing=new THREE.Group();landing.position.copy(walk);landing.position.y=.205;landing.name='landing_pad_'+tile.index;landing.userData.cosmetic=true;world.add(landing);
@@ -524,18 +534,27 @@ function makeStep(tile) {
 function makeRoads(data) {
   const edges = new Set(); const connections = [];
   const addEdge = (a,b) => { if (!stepViews.has(a)||!stepViews.has(b)) return; const key=[a,b].sort((x,y)=>x-y).join(':'); if(edges.has(key))return; edges.add(key); connections.push([a,b]); };
-  if (data.navigation?.next) Object.entries(data.navigation.next).forEach(([a,b]) => addEdge(Number(a),Number(b)));
+  if(data.navigation?.edges) data.navigation.edges.forEach(edge=>addEdge(edge.from,edge.to));
+  else if (data.navigation?.next) Object.entries(data.navigation.next).forEach(([a,b]) => addEdge(Number(a),Number(b)));
   else data.board.forEach((tile,i)=>addEdge(tile.index,data.board[(i+1)%data.board.length].index));
-  connections.forEach(([a,b]) => {
-    const start = stepViews.get(a).walk, end = stepViews.get(b).walk;
+  const paths=connections.map(([a,b])=>data.mapId==='harbor'?harborEdgePath(a,b,stepViews,THREE):[stepViews.get(a).walk,stepViews.get(b).walk]);
+  connections.forEach(([a,b],edgeIndex) => {
+    const path=paths[edgeIndex];
+    if(data.mapId==='harbor'&&((a===7&&(b===8||b===18))||((a===17||a===27)&&b===28)))addHarborBridge({THREE,world,path,paths,own});
+    for(let segment=1;segment<path.length;segment++){
+    const start=path[segment-1],end=path[segment];
     streetFoundation?.road(start,end);
     const length = start.distanceTo(end); const midpoint = start.clone().add(end).multiplyScalar(.5);
-    const road = box(world,.30,.014,length,'#e2d2b5',midpoint.x,.197,midpoint.z);
+    const routeBranch=data.navigation?.edges?.find(edge=>edge.from===a&&edge.to===b)?.branch;
+    const roadColor=data.mapId==='harbor'?(routeBranch==='merchant'?'#d1ae72':routeBranch==='resort'?'#8fbec6':'#d0c9a2'):'#e2d2b5';
+    if(data.mapId==='harbor'){const deck=box(world,.64,.10,length,'#c1bca5',midpoint.x,.13,midpoint.z);deck.rotation.y=Math.atan2(end.x-start.x,end.z-start.z);deck.castShadow=false;}
+    const road = box(world,.30,.014,length,roadColor,midpoint.x,.197,midpoint.z);
     road.rotation.y = Math.atan2(end.x-start.x,end.z-start.z); road.castShadow=false;
-    {
+    if(length>.40){
       const shape=new THREE.Shape();shape.moveTo(-.085,-.07);shape.lineTo(0,.08);shape.lineTo(.085,-.07);shape.lineTo(0,-.025);shape.closePath();
       const arrow=mesh(new THREE.ShapeGeometry(shape),own(new THREE.MeshBasicMaterial({color:'#a99161',side:THREE.DoubleSide})),world,midpoint.x,.216,midpoint.z);
       arrow.rotation.set(-Math.PI/2,0,-Math.atan2(end.x-start.x,-(end.z-start.z)));arrow.castShadow=false;
+    }
     }
   });
 }
@@ -781,8 +800,12 @@ function update(data){
     const view=pawnViews.get(player.id);if(!view)return;
     const nextPawnPosition=pawnPosition(player);
     if(view.position!==player.position||view.target.distanceToSquared(nextPawnPosition)>.0001){
+      const previousIndex=view.position;
       view.from.copy(view.group.position);view.target.copy(nextPawnPosition);view.position=player.position;view.started=performance.now();
-      view.teleport=view.from.distanceTo(view.target)>STEP*2.2;view.duration=reducedMotion.matches?0:view.teleport?470:190;view.active=true;
+      const harborWalking=data.mapId==='harbor'&&data.navigation?.edges?.some(edge=>(edge.from===previousIndex&&edge.to===player.position)||(edge.to===previousIndex&&edge.from===player.position));
+      view.path=harborWalking?harborEdgePath(previousIndex,player.position,stepViews,THREE):null;
+      if(view.path?.length){view.path[0]=view.from.clone();view.path[view.path.length-1]=view.target.clone();view.path.forEach(point=>point.y=.265);view.pathLengths=view.path.slice(1).map((point,i)=>point.distanceTo(view.path[i]));view.pathLength=view.pathLengths.reduce((a,b)=>a+b,0);}
+      view.teleport=!harborWalking&&view.from.distanceTo(view.target)>STEP*2.2;view.duration=reducedMotion.matches?0:view.teleport?470:harborWalking?Math.max(190,Math.min(650,view.pathLength*112)):190;view.active=true;
     }
     view.shield.visible=Boolean(player.effects?.shield||player.effects?.shieldCharges||player.effects?.rentShield);
     view.anchor.classList.toggle('is-current',data.currentPlayerId===player.id);
@@ -879,10 +902,11 @@ function positionLabels(){
   if(travelArrow){
     const current=snapshot.players.find((player)=>player.id===snapshot.currentPlayerId);
     const route=current?.effects?.reversed?snapshot.navigation?.prev:snapshot.navigation?.next;
-    const next=route?.[current?.position],from=stepViews.get(current?.position),to=stepViews.get(next);
+    const next=snapshot.nextSteps?.[current?.id]??route?.[current?.position],from=stepViews.get(current?.position),to=stepViews.get(next);
     travelArrow.hidden=!from||!to||Boolean(snapshot.gameOver);
     if(from&&to){
-      const a=project(from.walk),b=project(to.walk),x=a.x+(b.x-a.x)*.60,y=a.y+(b.y-a.y)*.60;
+      const heading=snapshot.mapId==='harbor'?harborEdgePath(current.position,next,stepViews,THREE)[1]:to.walk;
+      const a=project(from.walk),b=project(heading||to.walk),x=a.x+(b.x-a.x)*.60,y=a.y+(b.y-a.y)*.60;
       travelArrow.hidden=travelArrow.hidden||x<15||x>width-15||y<12||y>height-12;
       travelArrow.style.transform=`translate(${x.toFixed(1)}px,${y.toFixed(1)}px) translate(-50%,-50%) rotate(${Math.atan2(b.y-a.y,b.x-a.x)}rad)`;
       travelArrow.dataset.player=current.id;travelArrow.dataset.from=String(current.position);travelArrow.dataset.next=String(next);
@@ -910,6 +934,7 @@ function framingForLot(view){
 function followCamera(delta){
   if(!camera||!cameraFocusReady||!isLocalCamera()||!cameraView.following||inspection||cameraGesture.pointers.size)return false;
   const pawn=cameraSubject();if(!pawn)return false;
+  const switchingPlayer=followedPlayerId!==snapshot.currentPlayerId;followedPlayerId=snapshot.currentPlayerId;
   // Track the acting pawn's ground position only. Hops and dice do not make
   // the camera bob or turn; a new turn uses the same delayed translation.
   const dx=pawn.group.position.x-cameraFocus.x,dz=pawn.group.position.z-cameraFocus.z;
@@ -927,8 +952,10 @@ function followCamera(delta){
     // also gives teleports a comfortable transition without forcing rotation.
     // A tighter zoom has less visible ground: shorten the lag proportionally
     // so normal walking cannot carry the pawn outside the phone's viewport.
-    const lag=.32/followScale;
-    amount=Math.min((1-Math.exp(-delta/lag))*(distance-deadZone),18*delta)/distance;
+    const crossingHarbor=snapshot?.mapId==='harbor'&&!switchingPlayer&&(pawn.active||typeof snapshot?.animation?.currentTile==='number');
+    const lag=crossingHarbor?.32/Math.pow(followScale,1.8):.32/followScale;
+    const speedLimit=crossingHarbor?26:18;
+    amount=Math.min((1-Math.exp(-delta/lag))*(distance-deadZone),speedLimit*delta)/distance;
   }
   const x=dx*amount,z=dz*amount;
   cameraFocus.x+=x;cameraFocus.z+=z;camera.position.x+=x;camera.position.z+=z;
@@ -1115,6 +1142,7 @@ function closeInspection(){
 }
 function tick(time){
   if(disposed)return;frame=requestAnimationFrame(tick);
+  if(document.body.classList.contains('town-open')){lastTime=time;return;}
   if(!snapshot||document.hidden||time-lastTime<24)return;
   const delta=Math.min(.1,(time-lastTime)/1000);lastTime=time;
   sceneLife?.setInteractionPaused(Boolean(inspection||cameraGesture.pointers.size));
@@ -1128,7 +1156,10 @@ function tick(time){
         if(t<.5){view.group.position.copy(view.from);view.group.scale.setScalar(1-t*1.8);}
         else{view.group.position.copy(view.target);view.group.scale.setScalar(.1+(t-.5)*1.8);}
         view.group.rotation.y=t*Math.PI*2;
-      }else{const ease=t*t*(3-2*t);view.group.position.lerpVectors(view.from,view.target,ease);view.group.position.y+=Math.sin(t*Math.PI)*(reducedMotion.matches?0:.20);}
+      }else{const ease=t*t*(3-2*t);
+        if(view.path?.length>1){let distance=ease*view.pathLength;for(let i=0;i<view.pathLengths.length;i++){const length=view.pathLengths[i];if(distance<=length||i===view.pathLengths.length-1){view.group.position.lerpVectors(view.path[i],view.path[i+1],Math.min(1,distance/Math.max(.0001,length)));break;}distance-=length;}}
+        else view.group.position.lerpVectors(view.from,view.target,ease);
+        view.group.position.y+=Math.sin(t*Math.PI)*(reducedMotion.matches?0:.20);}
       if(t===1){view.active=false;view.group.position.copy(view.target);view.group.scale.setScalar(1);view.group.rotation.y=0;}
     }
     if(view.shieldUntil&&time>view.shieldUntil){view.shieldUntil=0;const p=snapshot.players.find((p)=>p.id===view.anchor.dataset.playerAnchor);view.shield.visible=Boolean(p?.effects?.shield);}

@@ -1,0 +1,13 @@
+.harbor-wishlist[hidden],.harbor-route-control[hidden]{display:none!important}
+.harbor-wishlist{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:6px 12px;padding:12px 14px;background:#eaf1e7;border:1px solid #c7d8c8;border-radius:14px;margin-top:12px;color:#294c46;font-size:13px}
+.harbor-wishlist label{font-weight:700}.harbor-wishlist select{min-width:0;width:100%;border:1px solid #b4c9b9;border-radius:8px;background:#fffdf3;color:#274b46;font:inherit;padding:8px}.harbor-wishlist span{grid-column:1/-1;color:#647b70;font-size:11px}
+.harbor-route-control{padding:5px 0 7px}.harbor-route-heading{display:flex;justify-content:space-between;color:#61796d;font-size:11px;margin-bottom:5px}.harbor-route-options{display:flex;gap:7px}.harbor-route-options button{flex:1;min-width:0;border:1px solid #d4d9c9;border-radius:10px;background:#f3f2e8;color:#566d60;font:inherit;font-size:12px;min-height:39px;padding:7px}.harbor-route-options button[aria-pressed=true]{background:#234f47;color:#fff7e1;border-color:#234f47}.harbor-route-options button:disabled{opacity:.65}.harbor-route-options small{font-size:10px;margin-left:4px;opacity:.8}
+.harbor-route-diagram{display:block;width:min(100%,320px);height:180px;margin:4px auto 8px}.harbor-route-caption{font-size:12px!important;color:#58746a}
+body[data-map=harbor] .board-center{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:9px 14px}
+body[data-map=harbor] .console-dice-row{grid-column:1;grid-row:1;flex-direction:row;min-width:0}
+body[data-map=harbor] .console-copy{min-width:0;text-align:left}
+body[data-map=harbor] .center-actions{grid-column:2;grid-row:1;flex-direction:row}
+body[data-map=harbor] .harbor-route-control{grid-column:1/-1;grid-row:2}
+body[data-map=harbor] .round-progress{grid-column:1/-1;grid-row:3}
+body[data-map=harbor] .harbor-route-options button{max-width:220px}
+@media(max-width:600px){body[data-map=harbor] .console-copy p#center-description{display:none}.harbor-route-control{padding-top:0}.harbor-route-options button{min-height:35px;padding:5px}.harbor-route-options small{font-size:9px}.harbor-wishlist{padding:9px 12px;margin-top:7px}}
