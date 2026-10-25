@@ -17,7 +17,8 @@ function context(source, seed=1) {
   const quiet=source.replace(/warmSoundCache\(\);\s*ensureBgmEngine\(\);\s*ensureFallbackBgmAudio\(\);\s*showStartScreen\(\);\s*$/,'');
   vm.runInContext(quiet,c,{filename:'game.js'});c.run=code=>vm.runInContext(code,c);
   c.realShowModal = c.showModal; // Tests can opt back into the real asynchronous choice lifecycle.
-  c.run(`render=()=>{};playSound=()=>{};applyMapLayout=()=>{};renderStartMapOptions=()=>{};updateModeEyebrow=()=>{};updateSoundToggleButton=()=>{};updateMusicToggleButton=()=>{};sleep=()=>Promise.resolve();startAiTurnWithDelay=async()=>{};showModal=async cfg=>{throw Error('Unexpected human modal: '+cfg.title)};showContinueModal=async()=>{};`);
+  c.realPlayOpeningCoinToss = c.playOpeningCoinToss;
+  c.run(`render=()=>{};playSound=()=>{};applyMapLayout=()=>{};renderStartMapOptions=()=>{};updateModeEyebrow=()=>{};updateSoundToggleButton=()=>{};updateMusicToggleButton=()=>{};sleep=()=>Promise.resolve();playOpeningCoinToss=async()=>true;startAiTurnWithDelay=async()=>{};showModal=async cfg=>{throw Error('Unexpected human modal: '+cfg.title)};showContinueModal=async()=>{};`);
   return c;
 }
 module.exports={context,mulberry32};

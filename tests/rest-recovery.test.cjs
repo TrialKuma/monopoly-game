@@ -33,8 +33,8 @@ function setup(map = 'classic', secondary = false) {
       assert.equal(c.run('state.players[0].effects.frozen'), false);
       assert.equal(c.run('state.currentPlayerIndex'), 1);
       assert.equal(events.length, oldEvents + 1);
-      assert.match(events.at(-1).message, /不重复收租/);
-      assert.doesNotMatch(events.at(-1).message, /重新结算/);
+      assert.equal(events.at(-1).label, '温泉休息');
+      assert.equal(events.at(-1).message, '');
       // Opponent completes its action. The recovered player now really rolls.
       c.run('endTurn();animateDiceRoll=async()=>3;state.players[0].isAi=true;');
       await c.run('processTurn(state.players[0])');
@@ -128,7 +128,7 @@ function setup(map = 'classic', secondary = false) {
         CARD_POOL.splice(0,CARD_POOL.length,...offered);`);
       const before = value(c, 'state.players[0].effects');
       await c.run('resolveCardDraw(state.players[1],state.sessionId)');
-      assert.match(events.find(e=>e.label==='翻牌事件').title, /加速引擎/);
+      assert.match(events.find(e=>e.label==='翻牌事件').title, /双骰卡/);
       assert.equal(c.run('state.players[1].effects.speedBoost'), false);
       assert.equal(c.run('state.players[1].cards[0].cardId'), 'boost');
       c.run('startScreenEl.classList.contains=()=>true;state.currentPlayerIndex=1;setAiTurnStatus()');

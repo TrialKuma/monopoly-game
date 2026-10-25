@@ -214,9 +214,8 @@ function setup(map) {
       const h=setup(map),{c}=h,before=financialState(c),pending=h.begin();
       h.mapClick(c.run('secondary.index'));h.click(h.chosenAction());await flush();
       assert.match(c.run('state.modal.title'),/^第 \d+、\d+ 格 · /);
-      assert.match(c.run('state.modal.message'),/接手 ¥252/);
-      assert.match(c.run('state.modal.message'),/对手获 ¥201/);
-      assert.match(c.run('state.modal.message'),/金库获 ¥51/);
+      assert.equal(c.run("state.modal.buttons.find(button=>button.id==='acquire').label"),'接手房产 · 支付 ¥252');
+      assert.match(h.actions.innerHTML,/data-action="acquire"[^>]*>接手房产 · 支付 ¥252<\/button>/,'the confirmation button visibly quotes the actual purchase cost');
       assert.deepEqual(financialState(c),before,'quote is a preview, not a purchase');
       h.click('acquire');await pending;
       const after=financialState(c),main=c.run('large.index'),secondary=c.run('secondary.index');
@@ -229,6 +228,7 @@ function setup(map) {
       }
       assert.equal(c.run('large.lot===secondary.lot'),true);assert.equal(c.run('large.lot.level'),3);
       assert.equal(h.events.length,1);assert.equal(h.events[0].drama.purchasePrice,252);
+      assert.equal(h.events[0].drama.refund,201);assert.equal(h.events[0].drama.premium,51);
       assert.deepEqual(Array.from(h.events[0].drama.tiles),[main]);
       assert.equal(h.latest().targetSelection,false);assert.equal(h.overlay.parentElement,c.document.body);
     });

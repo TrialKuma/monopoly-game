@@ -1,0 +1,32 @@
+/* Paid in-match cards remain distinct from the town's building collection. */
+.event-overlay.item-shop-overlay { padding: 16px; }
+.item-shop-overlay .event-card { width: min(560px, 100%); max-height: calc(100dvh - 32px); overflow-y: auto; box-sizing: border-box; }
+.item-shop-overlay .event-card h3 { margin: 4px 0 8px; }
+.item-shop-actions { display: grid !important; position: static; background: transparent; padding: 0; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-top: 16px; }
+#event-actions.item-shop-actions .item-shop-card {
+  display: flex; flex-direction: column; align-items: center; gap: 8px; min-width: 0; min-height: 228px;
+  padding: 16px 10px 10px; border: 1px solid #b7d8cf; border-radius: 17px; text-align: center;
+  color: #24453e; background: linear-gradient(180deg, #fbfff9, #edf5ef); box-shadow: 0 6px 15px #214c3210; order: 0;
+}
+.item-shop-card .card-icon { font-size: 30px; line-height: 1.2; }
+.item-shop-card .card-name { font-size: 14px; font-weight: 800; }
+.item-shop-card .card-desc { font-size: 12px; line-height: 1.5; color: #5c6b65; flex: 1; }
+.item-shop-card .card-price { font-size: 16px; font-weight: 800; color: #8c5e13; }
+.item-shop-card .card-buy-label { display: block; width: 100%; padding: 8px 0; border-radius: 9px; background: #267d6d; color: #fff; font-size: 12px; font-weight: 700; }
+.item-shop-actions .item-shop-card:disabled { opacity: .72; box-shadow: none; }
+.item-shop-card:disabled .card-buy-label { background: #dde5df; color: #67716b; }
+.item-shop-actions .item-shop-leave { grid-column: 2 / 4; justify-self: end; min-width: 118px; margin-top: 4px; order: 1; }
+@media (max-width: 440px) {
+  .event-overlay.item-shop-overlay { padding: 10px; }
+  .item-shop-overlay .event-card { padding: 16px 12px 12px; max-height: calc(100dvh - 20px); }
+  .item-shop-overlay .event-message { font-size: 12px; }
+  .item-shop-overlay .event-icon { width: 38px; height: 38px; font-size: 22px; margin-bottom: 0; }
+  .item-shop-overlay .event-card h3 { font-size: 19px; }
+  .item-shop-actions { gap: 6px; margin-top: 10px; }
+  #event-actions.item-shop-actions .item-shop-card { min-height: 220px; padding: 12px 6px 7px; gap: 7px; border-radius: 12px; }
+  .item-shop-card .card-icon { font-size: 26px; }
+  .item-shop-card .card-name { font-size: 12px; }
+  .item-shop-card .card-desc { font-size: 11px; }
+  .item-shop-card .card-price { font-size: 14px; }
+  .item-shop-card .card-buy-label { font-size: 10px; padding: 8px 0; }
+}

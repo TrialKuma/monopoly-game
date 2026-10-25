@@ -15,7 +15,9 @@ export const FUNCTIONAL_TYPES = Object.freeze(Object.keys(SERVICE));
 
 /** Call before rotating the cloned building; own receives only finished assets.
  *  It may be the scene's resource tracker or an inspection-specific tracker.
- *  All geometry stays inside a 1.30 x 1.30 parcel envelope, including signs.
+ *  Fittings use the shell's authored units within a 1.30 x 1.30 envelope.
+ *  The harbor renderer then scales the shell and fittings as one building;
+ *  its larger parcel, road clearance and framing share the same dimensions.
  */
 export function createFunctionalLandmark({ THREE, mapId, type, model, own = resource => resource }) {
   if (!FUNCTIONAL_TYPES.includes(type) || !model) return null;

@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>城镇建设预览</title>
+  <style>
+    *{box-sizing:border-box}body{margin:0;background:#b5d0ce;color:#315955;font-family:system-ui,"Microsoft YaHei",sans-serif}main{height:100dvh;display:flex;flex-direction:column}header{display:flex;gap:12px;align-items:center;justify-content:space-between;padding:14px 18px;background:#fbf7e9;border-bottom:1px solid #d9dfcc}h1{font-size:17px;margin:0}p{margin:4px 0 0;font-size:11px;color:#79856f}a{color:#315955;text-decoration:none;font-size:12px;border:1px solid #d1d9c7;border-radius:10px;padding:9px;white-space:nowrap}#view{position:relative;min-height:0;flex:1;touch-action:none}#view canvas{display:block;max-width:100%;touch-action:none}.badge{position:absolute;top:14px;left:16px;pointer-events:none;padding:9px 12px;background:#fff8e6e8;border-radius:12px;font-size:12px;z-index:1}.tools{position:absolute;right:12px;top:12px;display:grid;gap:6px;z-index:2}.tools button{width:36px;height:36px;min-height:0;font-size:18px;padding:0}footer{padding:13px 16px max(13px,env(safe-area-inset-bottom));background:#fbf7e9;border-top:1px solid #d1dcc8;display:flex;gap:9px;align-items:center}button{font:inherit;font-weight:700;min-height:43px;border:1px solid #c8d5c4;color:#315955;background:#f5f3e4;border-radius:12px;padding:10px 15px;cursor:pointer}button:disabled{opacity:.5;cursor:default}button:focus-visible,a:focus-visible{outline:3px solid #d8af5b;outline-offset:2px}#play{background:#327870;border-color:#327870;color:#fff7e3;flex:1}#state{min-width:50px;font-variant-numeric:tabular-nums;font-size:13px;text-align:center}@media(min-width:800px){footer{justify-content:center}#play{flex:0 0 220px}}@media(max-width:350px){header{padding:12px}h1{font-size:15px}p{font-size:10px}footer{padding:10px;gap:7px}button{font-size:12px;padding:9px 12px}}
+  </style>
+  <style>
+    .projects{display:flex;gap:7px;padding:9px 12px;background:#f7f2e1;border-bottom:1px solid #d1dcc8}.projects button{flex:1;min-width:0;padding:8px 5px;min-height:36px;font-size:12px}.projects button[data-level="3"]{background:#e9d9ab;border-color:#d3b267}#state{min-width:38px}.tools #home{font-size:12px}.badge{max-width:220px}footer{flex-wrap:wrap}#play{white-space:nowrap}#reset{font-size:12px;padding:9px 10px}
+  </style>
+</head>
+<body>
+<main>
+  <header><div><h1>城镇建设预览</h1><p>独立预览 · 不影响存档</p></div><a href="/">返回游戏</a></header>
+  <div class="projects"><button data-project="garden">花园 · 未建</button><button data-project="waterfront">码头 · 未建</button><button data-project="skyline">灯塔 · 未建</button></div>
+  <section id="view" aria-label="城镇扩建场景"><div class="badge" id="caption" role="status">正在载入建筑…</div><div class="tools"><button id="plus" aria-label="放大">＋</button><button id="minus" aria-label="缩小">−</button><button id="home" aria-label="全景">全景</button></div></section>
+  <footer><span id="state">6 × 6</span><button id="reset">重置</button><button id="play" disabled>开放码头区 · ＋12 格</button></footer>
+</main>
+<script type="module">
+  import { createTownScene } from './town-scene.js?v=20261025-district1';
+  const families = [['villa','海湾公馆'],['shop','港湾商铺'],['hotel','海岸酒店'],['tower','航海事务所'],['finance','海港商会'],['skyscraper','港湾观景楼'],['onsen','海崖温泉']];
+  const catalog = families.map(([family,name],i)=>({id:`harbor_${family}`,region:'harbor',family,name,footprint:i>=4?[2,1]:[1,1]}));
+  const placements = [[0,0,0],[2,0,0],[4,0,0],[1,2,0],[3,2,0],[0,4,0],[4,4,1]];
+  const profile = {projectLevels:{garden:0,waterfront:0,skyline:0},town:{size:6,landStage:0,cards:Object.fromEntries(catalog.map(card=>[card.id,{star:3,unlocked:true,duplicates:0}])),buildings:catalog.map((card,i)=>({id:`preview-${i}`,cardId:card.id,x:placements[i][0],y:placements[i][1],rotation:placements[i][2],stored:false}))}};
+  const play=document.getElementById('play'), reset=document.getElementById('reset'), caption=document.getElementById('caption'), label=document.getElementById('state');
+  let active=false, ready=false, lastPick=null;
+  const projectNames={garden:'花园',waterfront:'码头',skyline:'灯塔'};
+  const scene=createTownScene(document.getElementById('view'),{
+    onStatus(status){ready=status==='ready';syncControls();caption.textContent=ready?'我的海湾':status==='error'?'建筑载入失败':'正在载入建筑…';},
+    onExpansion(event){active=event.active;syncControls();caption.textContent=active?`${event.name} · 开放中`:`${event.name} · 已开放`;},
+    onPick(pick){lastPick=pick;if(pick.projectId)advanceProject(pick.projectId);else if(pick.districtId&&!active)expand();}
+  });
+  function syncControls(){
+    const land=TownPlan.getLand(profile.town);play.disabled=!ready||active||!land.next;reset.disabled=active;
+    label.textContent=`${land.width} × ${land.height}`;play.textContent=land.next?`开放${land.next.name} · ＋${land.next.w*land.next.h} 格`:'全部区域已开放';
+    for(const b of document.querySelectorAll('[data-project]')){const id=b.dataset.project,level=profile.projectLevels[id];b.dataset.level=level;b.disabled=active;b.textContent=`${projectNames[id]} · ${level?'Lv.'+level:'未建'}`;}
+  }
+  function update(stage=profile.town.landStage){profile.town.landStage=stage;profile.town.size=TownPlan.getLand(profile.town).size;scene.update({profile,catalog,selection:null,preview:null,nextDistrict:TownPlan.getLand(profile.town).next});syncControls();}
+  function advanceProject(id){if(active)return;profile.projectLevels[id]=(profile.projectLevels[id]+1)%4;update();caption.textContent=`${projectNames[id]} · ${profile.projectLevels[id]?'Lv.'+profile.projectLevels[id]:'未建'}`;}
+  function expand(){if(active||!TownPlan.getLand(profile.town).next)return;update(profile.town.landStage+1);}
+  reset.addEventListener('click',()=>{update(0);scene.home();caption.textContent='原始土地';});
+  play.addEventListener('click',expand);
+  for(const button of document.querySelectorAll('[data-project]'))button.addEventListener('click',()=>advanceProject(button.dataset.project));
+  document.getElementById('plus').addEventListener('click',()=>scene.zoomBy(1.15));
+  document.getElementById('minus').addEventListener('click',()=>scene.zoomBy(1/1.15));
+  document.getElementById('home').addEventListener('click',()=>scene.home());
+  window.addEventListener('pagehide',()=>scene.dispose(),{once:true});
+  window.TownReview = Object.freeze({ getState: () => ({...scene.getState(),lastPick}) });
+  update(0);
+</script>
+</body>
+</html>

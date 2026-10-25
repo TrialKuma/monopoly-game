@@ -1,0 +1,49 @@
+/* Persistent end-of-match building choice. Rewarded-ad claiming is not connected. */
+.building-card-draft { margin: 18px 0; padding: 18px; border: 1px solid #c1d7d2; border-radius: 18px; background: linear-gradient(145deg, #f9fcf7, #eaf4f0); color: #173f3b; text-align: left; }
+.building-card-draft-heading { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 14px; }
+.building-card-draft-heading h3 { margin: 0 0 5px; font-size: 20px; }
+.building-card-draft-heading p { margin: 0; color: #53716b; font-size: 12px; }
+.building-card-draft-heading > span { flex-shrink: 0; padding: 5px 9px; border: 1px solid #cadcce; border-radius: 30px; font-size: 11px; background: #fff9dc; color: #7b5a21; }
+.building-card-options { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.building-card-options .building-card-option { position: relative; display: flex; flex-direction: column; align-items: center; min-width: 0; margin: 0; padding: 12px 8px 9px; border: 2px solid #cddcd4; border-radius: 12px; background: #fffdf6; color: #264d45; cursor: pointer; transition: border-color .15s, background .15s, transform .15s; }
+.building-card-options .building-card-option:hover { border-color: #76a79a; transform: translateY(-2px); }
+.building-card-options .building-card-option.is-selected { border-color: #127a62; background: #e4f5e7; box-shadow: 0 0 0 2px #127a6218; }
+.building-card-option img { display: block; width: 100%; height: 125px; object-fit: contain; margin: 12px 0 8px; mix-blend-mode: multiply; pointer-events: none; }
+.building-card-option strong { font-size: 14px; text-align: center; }
+.building-card-option small { min-height: 32px; margin-top: 7px; color: #63766f; font-size: 11px; line-height: 1.5; text-align: center; }
+.building-card-tag { position: absolute; top: 7px; left: 7px; font-size: 10px; line-height: 1.5; padding: 2px 6px; border-radius: 20px; background: #f2e5b9; color: #705a27; }
+.building-card-select-mark { margin-top: 7px; font-size: 11px; color: #376f5d; }
+.building-card-choice-actions { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-top: 14px; }
+.building-card-choice-actions > p { margin: 0; font-size: 12px; color: #627a70; }
+.building-card-choice-actions > .city-confirm { flex-shrink: 0; min-height: 44px; margin-left: auto; padding: 9px 16px; border: 0; border-radius: 11px; color: #fff; background: #1d6c56; font-weight: 800; cursor: pointer; }
+.building-card-choice-actions > .city-confirm:disabled { opacity: .45; cursor: default; }
+.building-card-choice-error { margin: 10px 0 0; font-size: 12px; color: #a53329; }
+.building-card-claimed, .building-card-rewards-complete { padding: 14px; border-radius: 12px; background: #e5f4e6; color: #1e6b46; font-size: 14px; }
+.building-card-pending-count { margin: 12px 0; color: #577166; font-size: 12px; }
+.city-finish .city-result .building-card-draft-heading p, .city-finish .city-result .building-card-choice-actions p { font-size: 12px; font-weight: 400; }
+.city-finish .city-result:has(.building-card-draft) { padding: 12px 0; border: 0; background: transparent; }
+@media (max-width: 480px) {
+  .building-card-draft { margin: 12px 0; padding: 12px 9px; border-radius: 13px; }
+  .building-card-draft-heading { margin-bottom: 10px; }
+  .building-card-draft-heading h3 { font-size: 17px; }
+  .building-card-options { gap: 5px; }
+  .building-card-options .building-card-option { padding: 9px 4px 7px; border-radius: 9px; }
+  .building-card-option img { height: 91px; margin-top: 15px; }
+  .building-card-option strong { font-size: 12px; }
+  .building-card-option small { font-size: 10px; min-height: 44px; }
+  .building-card-tag { top: 5px; left: 4px; padding: 1px 4px; }
+  .building-card-choice-actions { align-items: center; gap: 7px; }
+  .building-card-choice-actions > p { max-width: 120px; font-size: 10px; line-height: 1.5; }
+  .city-finish .city-result .building-card-choice-actions p { font-size: 10px; }
+  .building-card-choice-actions > .city-confirm { padding: 9px 12px; font-size: 12px; }
+}
+@media (max-width: 360px) {
+  .building-card-draft-heading > span { display: none; }
+  .building-card-options { grid-template-columns: minmax(0, 1fr); gap: 7px; }
+  .building-card-options .building-card-option { display: grid; grid-template-columns: 72px minmax(0, 1fr) 35px; grid-template-rows: auto auto auto; column-gap: 7px; padding: 9px 7px; align-items: center; }
+  .building-card-option img { grid-column: 1; grid-row: 1 / 4; width: 72px; height: 68px; margin: 0; }
+  .building-card-option strong { grid-column: 2; grid-row: 1; text-align: left; align-self: end; }
+  .building-card-option small { grid-column: 2; grid-row: 2; margin-top: 3px; min-height: 0; text-align: left; }
+  .building-card-tag { position: static; grid-column: 2; grid-row: 3; justify-self: start; margin-top: 4px; }
+  .building-card-select-mark { grid-column: 3; grid-row: 1 / 4; margin: 0; font-size: 10px; text-align: center; }
+}

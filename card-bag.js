@@ -30,12 +30,12 @@
     if (key === renderKey) return;
     renderKey = key;
     summary.textContent = `持有 ${snapshot.count} 张 · 对手 ${snapshot.opponentCount || 0} 张`;
-    status.textContent = snapshot.canUse ? '每回合掷骰前可用 1 张' : snapshot.reason || '每回合掷骰前可用 1 张';
+    status.textContent = snapshot.canUse ? '' : snapshot.reason || '';
     list.innerHTML = snapshot.cards.length ? snapshot.cards.map(card => {
       const type = category(card.id);
       const blocked = !snapshot.canUse || !card.usable || pending;
       return `<article class="bag-card" data-kind="${type}"><div class="bag-card-art" aria-hidden="true"><span>${esc(card.icon)}</span></div><div class="bag-card-copy"><small>${labels[type]}</small><h3>${esc(card.name)}</h3><p>${esc(card.description)}</p>${snapshot.canUse && !card.usable ? `<p class="bag-card-reason">${esc(card.reason)}</p>` : ''}</div><button type="button" data-use-card="${esc(card.instanceId)}" ${blocked?'disabled':''} aria-label="使用${esc(card.name)}">使用</button></article>`;
-    }).join('') : '<div class="bag-empty"><span aria-hidden="true">▱</span><h3>还没有卡牌</h3><p>到达翻牌格，三选一收进背包。</p></div>';
+    }).join('') : '<div class="bag-empty"><span aria-hidden="true">▱</span><h3>还没有卡牌</h3></div>';
   }
   function open() {
     if (!window.GameCards?.getSnapshot().canBrowse || pending) return;

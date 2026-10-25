@@ -1,15 +1,21 @@
 'use strict';
 const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto');
 const {context,mulberry32}=require('./simulation-context.cjs');
+const {createStore}=require('../progression.js');
 function runner(source,map,options={}) {
   const legacyRoundBug = source.includes('state.currentPlayerIndex === state.players.length - 1');
   source=source.replace(/\r\n/g,'\n').replace(`  if (state.currentPlayerIndex === state.players.length - 1) {\n    state.round += 1; state.currentPlayerIndex = 0;\n  } else { state.currentPlayerIndex += 1; }`, `  state.currentPlayerIndex=(state.currentPlayerIndex+1)%state.players.length;\n  if(state.currentPlayerIndex===state.firstPlayerIndex)state.round++;`);
   const c=context(source,1);let forcedCoin=false,random=mulberry32(1),randomCalls=0,first=0;
+  // Each simulated match has its own real admission ledger; it never reads or
+  // writes browser storage, and ticket prices stay outside the match cash audit.
+  const vault=new Map();let runSequence=0;
+  const progression=createStore({getItem:key=>vault.get(key)??null,setItem:(key,value)=>vault.set(key,value)});
+  c.GameProgression={...progression,getProfile:progression.read,createRunId:()=>`economy-audit-${++runSequence}`,resetResult(){},showEntryError:result=>{throw Error(`Audit entry failed: ${result.error||'entry_funds'}`)}};
   c.forceAuditCoin=()=>{forcedCoin=true};
   c.Math.random=()=>{const value=random();randomCalls++;if(forcedCoin){forcedCoin=false;return first===0?.25:.75}return value};
   c.run(`PLAYER_DEFS.forEach(p=>p.isAi=true);selectedMapId=${JSON.stringify(map)};
     if(typeof getMapEconomy==='function') Object.assign(MAP_PRESETS[${JSON.stringify(map)}].economy,${JSON.stringify(options)});
-    showModal=async cfg=>{if(cfg.label==='对局模式'||cfg.title?.includes('选择游戏模式')||cfg.buttons?.some(b=>b.id==='rounds'))return 'rounds';if(cfg.label==='先手决定'){forceAuditCoin();return 'flip'}throw Error('Unexpected decision '+cfg.title)};
+    showModal=async cfg=>{if(cfg.label==='对局模式'||cfg.title?.includes('选择游戏模式')||cfg.buttons?.some(b=>b.id==='rounds'))return 'rounds';if(cfg.buttons?.some(b=>b.id==='enter'))return 'enter';if(cfg.label==='先手决定'){forceAuditCoin();return 'flip'}throw Error('Unexpected decision '+cfg.title)};
   `);
   const run=c.run(`
     let metric=null,moneyContext='other',landingPurchaseDepth=0;
@@ -41,7 +47,7 @@ function runner(source,map,options={}) {
       if(cash[0]+cash[1]!==2*startCash+net)throw Error('Cash ledger mismatch');
       return {...metric,first,initialCash,cash,score:cash[0]===cash[1]?.5:cash[first]>cash[1-first]?1:0,openingCompensation:state.openingCompensation,bankLeft:state.bankPool};
     })`);
-  return async(seed,seat=0)=>{random=mulberry32(seed);randomCalls=0;first=seat;forcedCoin=false;const result=JSON.parse(JSON.stringify(await run()));return{seed,randomCalls,...result}};
+  return async(seed,seat=0)=>{vault.clear();random=mulberry32(seed);randomCalls=0;first=seat;forcedCoin=false;const result=JSON.parse(JSON.stringify(await run()));return{seed,randomCalls,...result}};
 }
 function stats(games){
  const n=games.length,sum=key=>games.reduce((s,g)=>s+g[key],0),mean=key=>sum(key)/n;

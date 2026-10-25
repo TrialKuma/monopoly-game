@@ -1,6 +1,7 @@
 /* Presentation adapter: consumes real game state; map, dice, cash and card rules stay in game.js. */
 (() => {
   const inspector = document.getElementById('property-inspector');
+  const emptyInspector = inspector.innerHTML;
   const propertyPreview = document.getElementById('event-property-preview');
   const showcaseControls = document.getElementById('showcase-controls');
   let selected = null;
@@ -17,6 +18,7 @@
   const sidebar = document.querySelector('.sidebar');
   const sheetBackdrop = document.getElementById('mobile-sheet-backdrop');
   let sheetReturnFocus = null;
+  let harborProjectPanel = null, openHarborProjectId = null, harborProjectPanelKey = '', harborProjectReturnFocus = null;
   function closeMobilePanel() {
     if (!document.body.classList.contains('mobile-sheet-open')) return;
     document.body.classList.remove('mobile-sheet-open');
@@ -32,7 +34,7 @@
     if (!mobileQuery.matches) return;
     sheetReturnFocus = trigger || document.activeElement;
     sidebar.dataset.panel = panel;
-    document.getElementById('mobile-sheet-title').textContent = {property:'地块信息',log:'对局记录',rules:'游戏规则'}[panel];
+    document.getElementById('mobile-sheet-title').textContent = {assets:'资产对比',property:'地块信息',rules:'游戏规则'}[panel];
     if (panel === 'rules') sidebar.querySelector('.rules').open = true;
     document.body.classList.add('mobile-sheet-open');
     sidebar.setAttribute('role','dialog');sidebar.setAttribute('aria-modal','true');sidebar.setAttribute('aria-labelledby','mobile-sheet-title');
@@ -43,11 +45,11 @@
   }
   const mapGuide = document.getElementById('map-guide');
   const mapGuides = {
-    classic: {title:'经典环线 · 22 格',copy:'30 回合，同街区地产连锁收租。机会格可能触发建筑升级、位置互换或免租护盾。'},
-    compact: {title:'紧凑冲突 · 18 格',copy:'26 回合，包含三个街区。冲刺站随机再走 2–8 格；传送港落地后立即结算，护盾可免租。无力付租时获得 ¥200 救助和一次免租，不额外休整。'},
-    expansion: {title:'都市大环线 · 28 格',copy:'40 回合，包含六个街区。开局每街区随机一处无主地产预建 Lv.1，购买后即可收租。城市快线随机再走 3–5 格，传送港落地后立即结算。无力付租时获得救助和一次免租。'},
-    harbor: {title:'潮汐港湾 · 三岛 34 格',copy:'30 回合。港口共用段分向商贸岛或度假岛，经过合流广场回港。两路每圈均走 24 步；掷骰前可改行程，之后沿用，不在路口打断。完成对局获得心愿建筑卡，建成地产可额外收集。'},
-    alpine: {title:'云岭温泉 · 24 格山城环线',copy:'30 回合，温泉、商会与观景酒店占据双格地段。缆车再前进 2–4 格，沿路结算；完成对局收集山泉晶石。'},
+    classic: {title:'经典环线 · 22 格',copy:'同街区地产连锁收租。'},
+    compact: {title:'紧凑冲突 · 18 格',copy:'冲刺站再走 2–8 格，传送港直达地产。'},
+    expansion: {title:'都市大环线 · 28 格',copy:'六街区各有一处 Lv.1 开业地产。城市快线再走 3–5 格。'},
+    harbor: {title:'潮汐港湾 · 三岛 34 格',copy:'中央地标 · 商贸岛 · 度假岛'},
+    alpine: {title:'云岭温泉 · 24 格',copy:'缆车再走 2–4 格，温泉可让对手休息一回合。'},
   };
   const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const money = n => `¥${Math.round(n).toLocaleString('zh-CN')}`;
@@ -62,9 +64,11 @@
   }
   function snapshot() {
     const map = getMapConfig(state.currentMapId);
-    return {sessionId:state.sessionId,mapId:state.currentMapId,board:state.board,players:state.players,
+    return {sessionId:state.sessionId,mapId:state.currentMapId,board:state.board,players:state.players.map(player=>({...player,harborJourney:getHarborJourney(player)})),
       currentPlayerId:currentPlayer().id,phase:state.phase,animation:state.animation,lastDice:state.lastDice,
+      diceFaces:state.lastDiceFaces,harborJourney:getHarborJourney(currentPlayer()),harborProjects:globalThis.GameHarborProjects?.getSnapshot?.()||[],
       bankPool:state.bankPool,gameOver:state.gameOver,grid:map.grid,navigation:map.navigation,
+      routeChoice:state.modal?.visible && state.modal.routeChoice ? {playerId:currentPlayer().id,tileIndex:currentPlayer().position} : null,
       nextSteps:Object.fromEntries(state.players.map(player=>[player.id,getNextTileIndex(player,player.position,player.effects?.reversed?-1:1,false)])),
       selectedTile:selected,targetSelection:state.modal?.visible && state.modal.boardTargets?.length ? {kind:'property',indices:state.modal.boardTargets} : state.modal?.visible && state.modal.boardContext ? {kind:'property',indices:state.modal.boardContext.indices,suspended:true} : state.targetSelection,districtColors:map.districtColors,
       rents:Object.fromEntries(state.board.filter(t=>t.lot).map(t=>[t.index,rentFor(t).total]))};
@@ -78,7 +82,7 @@
         props.forEach((t,i)=>{t.lot.ownerId=i%3===0?'ai':'human';t.lot.level=i%3+1;});
         menuSnapshot={...snapshot(),sessionId:'menu-'+selectedMapId,mapId:selectedMapId,board,
           players:PLAYER_DEFS.map((p,i)=>({...p,position:i===0?1:Math.floor(board.length*.55),effects:defaultEffects()})),
-          grid:map.grid,navigation:map.navigation,rents:{},animation:{},phase:'preview',selectedTile:null,gameOver:false};
+          grid:map.grid,navigation:map.navigation,rents:{},animation:{},phase:'preview',selectedTile:null,routeChoice:null,harborProjects:[],gameOver:false};
       }
       window.CityScene.update(menuSnapshot);
     } else window.CityScene.update(snapshot());
@@ -87,7 +91,7 @@
     if (!state.players) return;
     state.players.forEach(p=>{
       document.querySelectorAll(`[data-player-anchor="${p.id}"]`).forEach(card=>{
-        const value=card.querySelector('.player-cash-value,.mini-cash');
+        const value=card.querySelector('.player-cash-value,.mini-cash,.asset-cash-value');
         if(value)value.textContent=money(p.displayedCash??p.cash);
         card.classList.toggle('cash-changing',!!p.cashPulse);
         const delta=card.querySelector('.player-cash-delta,.mini-delta');
@@ -100,6 +104,39 @@
     if(tile.isLargeSecondary)tile=state.board[tile.largePrimaryIndex];
     selected=tile.index;inspectorKey='';updateInspector();syncCityScene();
   }
+  function closeHarborProject(restoreFocus=true){
+    if(harborProjectPanel)harborProjectPanel.hidden=true;
+    document.querySelectorAll('[data-harbor-project]').forEach(button=>button.setAttribute('aria-expanded','false'));
+    openHarborProjectId=null;harborProjectPanelKey='';
+    if(restoreFocus&&harborProjectReturnFocus?.isConnected)harborProjectReturnFocus.focus({preventScroll:true});
+    harborProjectReturnFocus=null;
+  }
+  function refreshHarborProjectPanel(){
+    if(!openHarborProjectId)return;
+    const project=(globalThis.GameHarborProjects?.getSnapshot?.()||[]).find(project=>project.id===openHarborProjectId);
+    if(!project||document.body.classList.contains('mode-start')){closeHarborProject(false);return;}
+    const lots=project.indices.map(index=>state.board[index]).filter(Boolean);
+    const key=JSON.stringify([state.sessionId,project,lots.map(tile=>[tile.name,tile.lot?.ownerId,tile.lot?.level])]);
+    if(key===harborProjectPanelKey)return;harborProjectPanelKey=key;
+    harborProjectPanel.innerHTML=`<header><div><small>我的建设度 · ${project.points}/${project.maxPoints}</small><h2 id="harbor-project-title">${esc(project.name)}</h2></div><button type="button" data-harbor-project-close aria-label="关闭建设详情">×</button></header><div class="harbor-project-lots">${lots.map(tile=>{const owned=tile.lot?.ownerId==='human',level=owned?tile.lot.level:0;return `<button type="button" data-harbor-locate="${tile.index}" data-owned="${owned}" aria-label="定位${esc(tile.name)}，${owned?`我的建筑 ${level} 级`:'未拥有，贡献 0 级'}"><span>${esc(tile.name)}</span><b>Lv.${level}</b><i aria-hidden="true">↗</i></button>`;}).join('')}</div><ol class="harbor-project-rewards">${project.rewards.map(reward=>`<li data-earned="${Boolean(reward.earned)}"><small>${reward.threshold} 级</small><b>${esc(reward.label)}</b><span>${reward.earned?(reward.stage===3?'结算带回':'已获得'):'未达成'}</span></li>`).join('')}</ol>`;
+  }
+  function openHarborProject(id){
+    if(!(globalThis.GameHarborProjects?.getSnapshot?.()||[]).some(project=>project.id===id))return;
+    if(!harborProjectPanel){
+      harborProjectPanel=document.createElement('section');harborProjectPanel.id='harbor-project-panel';harborProjectPanel.className='harbor-project-panel';harborProjectPanel.hidden=true;
+      harborProjectPanel.setAttribute('role','dialog');harborProjectPanel.setAttribute('aria-modal','false');harborProjectPanel.setAttribute('aria-labelledby','harbor-project-title');
+      document.getElementById('board-stage').appendChild(harborProjectPanel);
+      harborProjectPanel.addEventListener('click',event=>{
+        if(event.target.closest('[data-harbor-project-close]')){closeHarborProject();return;}
+        const button=event.target.closest('[data-harbor-locate]');if(!button)return;
+        window.CityScene?.locateTile(Number(button.dataset.harborLocate));closeHarborProject(false);
+      });
+      harborProjectPanel.addEventListener('keydown',event=>{if(event.key==='Escape'){event.preventDefault();event.stopPropagation();closeHarborProject();}});
+    }
+    harborProjectReturnFocus=document.activeElement;openHarborProjectId=id;harborProjectPanelKey='';refreshHarborProjectPanel();harborProjectPanel.hidden=false;
+    document.querySelectorAll('[data-harbor-project]').forEach(button=>button.setAttribute('aria-expanded',String(button.dataset.harborProject===id)));
+    harborProjectPanel.querySelector('[data-harbor-project-close]').focus({preventScroll:true});
+  }
   function updateInspector() {
     const tile=state.board?.[selected];if(!tile)return;
     const lot=tile.lot,owner=lot?.ownerId?getPlayerById(lot.ownerId):null,rent=rentFor(tile),economy=getMapEconomy();
@@ -108,7 +145,7 @@
     if(lot){
       inspector.innerHTML=`<p class="panel-label">${esc(lot.district||'地产手册')}</p><h2>${esc(tile.name)}</h2><div class="property-meta"><span>${esc(owner?.name||'无主地产')}</span><span>${lot.level===0?'空地':`Lv.${lot.level}`}</span>${lot.isLarge?'<span>占据 2 格</span>':''}</div><div class="property-price">${money(owner?rent.total:lot.price)} <small>${owner?'街区租金':'购买价格'}</small></div>${owner?`<div class="property-breakdown">${rent.lots.map(t=>`${esc(t.name)} ${money(t.lot.tolls[t.lot.level])}`).join(' ＋ ')}<br>街区合计 ${money(rent.base)} × ${rent.multiplier}</div>`:''}<p class="property-note">${!owner&&lot.level>0?`开业地产：买下即得 Lv.${lot.level} 建筑。`:lot.level<3?`升级到 Lv.${lot.level+1}：${money(lot.buildCosts[lot.level+1])}`:'已达最高等级。'}${lot.effectId?'<br>'+({finance_bonus:'自己停留时获得金融收益。',tower_bonus:'自己停留时获得商务收益。',hot_spring_rest:'让来访的对手下回合休息。'}[lot.effectId]||''):''}</p>`;
     } else {
-      inspector.innerHTML=`<p class="panel-label">城市特别地标</p><h2>${esc(tile.name)}</h2><div class="inspector-special">${tile.isStart?'⚑':({bank:'◈',card_draw:'▣',chance:'✦',construction:'⚒',teleport:'◎',rush:'↗',junction:'∞'}[tile.special?.type]||'✦')}</div><p class="property-note">${tile.isStart?`经过领取 ${money(economy.startBonus)}，并自动建造一处空地。停留时可按原地价的 125% 带楼接手对手的一处地产，也可只征用，让它变为无主。原主获原地价补偿，接手溢价进入公共金库。`:esc(tile.special?.description)}</p>${tile.special?.type==='bank'?`<div class="property-price">${money(state.bankPool)}<small>${state.bankPool>=economy.bankThreshold?'金库已满 · 停留可全部提取':`金库积累中 · ${money(economy.bankThreshold)} 起可提`}</small></div>`:''}`;
+      inspector.innerHTML=`<p class="panel-label">城市特别地标</p><h2>${esc(tile.name)}</h2><div class="inspector-special">${tile.isStart?'⚑':({bank:'◈',card_draw:'▣',chance:'✦',construction:'⚒',teleport:'◎',rush:'↗',junction:'∞'}[tile.special?.type]||'✦')}</div><p class="property-note">${tile.isStart?`经过 +${money(economy.startBonus)} · 自动建造一处空地；停留可征用地产。`:esc(tile.special?.description)}</p>${tile.special?.type==='bank'?`<div class="property-price">${money(state.bankPool)}<small>${state.bankPool>=economy.bankThreshold?'金库已满 · 停留可全部提取':`金库积累中 · ${money(economy.bankThreshold)} 起可提`}</small></div>`:''}`;
     }
     inspector.insertAdjacentHTML('beforeend',`<button class="inspect-building-btn" type="button" data-inspect-building="${tile.index}">近看建筑 <span aria-hidden="true">↗</span></button>`);
     inspector.querySelector('[data-inspect-building]').disabled=!window.CityScene?.inspectTile||(state.busy&&!preview);
@@ -128,7 +165,7 @@
     if(guide){
       document.getElementById('map-guide-title').textContent=guide.title;
       const economy=getMapEconomy(map.id);
-      document.getElementById('map-guide-copy').textContent=`${guide.copy} 开局每人 ${money(economy.startCash)}，后手另获 ${money(economy.secondPlayerBonus)}；经过起点领取 ${money(economy.startBonus)}。`;
+      document.getElementById('map-guide-copy').textContent=guide.copy;
       const opening=document.getElementById('map-opening-copy');
       opening.hidden=preview||!state.openingLots?.length;
       opening.textContent=opening.hidden?'':`本局开业：${state.openingLots.map(i=>state.board[i]?.name).filter(Boolean).join('、')}。`;
@@ -142,9 +179,10 @@
     });
     showcaseControls.classList.toggle('hidden',!preview||inMenu);
     document.getElementById('showcase-open-btn').classList.toggle('hidden',!preview);
-    if(lastCameraSession!==state.sessionId){lastCameraSession=state.sessionId;inspectorKey='';mapGuide.open=false;}
-    document.getElementById('victory-rule').textContent=preview?`${map.name} · 示例局面`:state.gameMode==='bankruptcy'?'破产淘汰 · 坚持到最后':`${getMaxRounds()} 回合后，现金最多者获胜`;
-    updateCash();updateInspector();syncCityScene();
+    if(lastCameraSession!==state.sessionId){lastCameraSession=state.sessionId;inspectorKey='';mapGuide.open=false;closeHarborProject(false);}
+    document.getElementById('victory-rule').textContent='';
+    document.getElementById('rules-victory').textContent=state.gameMode==='bankruptcy'?'对手破产时，你获胜。':`打完 ${getMaxRounds()} 回合，现金更多的一方获胜。`;
+    updateCash();updateInspector();syncCityScene();refreshHarborProjectPanel();
     inspector.querySelectorAll('[data-inspect-building]').forEach(button=>{button.disabled=!window.CityScene?.inspectTile||(state.busy&&!preview);});
     const m=state.modal,tile=state.board[currentPlayer().position];
     if(m.visible&&tile?.lot&&['购买提示','升级提示'].includes(m.label)) {
@@ -155,34 +193,37 @@
     if(preview) {rollBtn.disabled=true;document.querySelectorAll('[data-showcase]').forEach(b=>b.disabled=previewBusy||state.cardUsePending);}
   }
   function updateHarborControls(inMenu){
-    const status=window.GameHarbor?.getState(),picker=document.getElementById('harbor-wishlist'),select=document.getElementById('harbor-target'),control=document.getElementById('harbor-route-control');
-    if(!picker||!control)return;
-    picker.hidden=!inMenu||selectedMapId!=='harbor';
-    const catalog=window.GameProgression?.town?.catalog||[];
-    const cards=Array.isArray(catalog)?catalog:Object.values(catalog);
-    if(select?.options&&cards.length&&!select.options.length)select.innerHTML=cards.map(card=>`<option value="${esc(card.id||card.cardId)}">${esc(card.name)}</option>`).join('');
-    if(select?.options&&status?.wishlist){const id=status.wishlist.startsWith('harbor_')?status.wishlist:`harbor_${status.wishlist}`;if([...select.options].some(o=>o.value===id))select.value=id;}
-    control.hidden=inMenu||mapIdForHarbor()!=='harbor'||preview||state.gameOver;
-    if(!control.hidden&&status){
-      control.querySelectorAll('[data-harbor-route]').forEach(button=>{button.setAttribute('aria-pressed',String(button.dataset.harborRoute===status.route));button.disabled=!status.canChangeRoute;});
-      const rewards=status.rewards||[];document.getElementById('harbor-cards-earned').textContent=`建筑卡 ${rewards.reduce((sum,item)=>sum+(item.count||1),0)} 张 · 结算带回`;
-    }
     if(selectedMapId==='harbor'||state.currentMapId==='harbor')ensureHarborDiagram();
     const diagram=document.getElementById('harbor-route-diagram');if(diagram)diagram.hidden=state.currentMapId!=='harbor';
+    const journey=getHarborJourney(currentPlayer());
+    if(diagram&&journey){
+      diagram.dataset.phase=journey.phase;
+      diagram.querySelectorAll('[data-route-edge]').forEach(line=>{
+        const direction=line.dataset.branch==='shared'?journey.centralDirection:journey.travelDirection;
+        const a=direction<0?'b':'a',b=direction<0?'a':'b';
+        for(const [target,point] of [['1',a],['2',b]])for(const axis of ['x','y'])line.setAttribute(axis+target,line.dataset[point+axis]);
+        if(line.dataset.branch==='shared')line.setAttribute('stroke',journey.phase==='red'?'#d75f63':'#d6a632');
+      });
+    }
   }
-  function mapIdForHarbor(){return state.currentMapId;}
-  function ensureHarborDiagram(){
-    if(document.getElementById('harbor-route-diagram'))return;
+  let harborDiagramLoading=false;
+  async function ensureHarborDiagram(){
+    if(harborDiagramLoading||document.getElementById('harbor-route-diagram'))return;
     const map=getMapConfig('harbor');if(!map.navigation?.edges)return;
-    const xy=i=>map.routePositions[i],path=map.navigation.edges.map(edge=>{const a=xy(edge.from),b=xy(edge.to);return `<line x1="${a.x*22}" y1="${a.y*14}" x2="${b.x*22}" y2="${b.y*14}" stroke="${edge.branch==='merchant'?'#c49155':edge.branch==='resort'?'#6e9db5':'#688578'}" stroke-width="3"/>`;}).join('');
-    mapGuide.insertAdjacentHTML('beforeend',`<div id="harbor-route-diagram" hidden><svg class="harbor-route-diagram" viewBox="15 0 245 170" role="img" aria-label="港口出发，在北侧分岔，经商贸岛或度假岛，南侧合流回港">${path}${map.routePositions.map((p,i)=>`<circle cx="${p.x*22}" cy="${p.y*14}" r="${i===0?5:2.7}" fill="${i===0?'#e7b85b':'#fffbeb'}" stroke="#647f71"/>`).join('')}<g font-size="10" fill="#365c50" text-anchor="middle"><text x="50" y="83">商贸岛</text><text x="214" y="83">度假岛</text><text x="135" y="60">港口</text><text x="132" y="10">分岔</text><text x="132" y="160">合流回港</text></g></svg><p class="harbor-route-caption">两路等长 · 每圈 24 步 · 行程自动沿用</p></div>`);
+    harborDiagramLoading=true;
+    try{
+      const {harborStreetPosition}=await import('./scene-harbor-paths.js?v=20261025-harbor-main-island1');
+      const positions=map.routePositions.map((p,index)=>harborStreetPosition({...p,index}));
+      const minX=Math.min(...positions.map(p=>p.x)),maxX=Math.max(...positions.map(p=>p.x));
+      const minY=Math.min(...positions.map(p=>p.y)),maxY=Math.max(...positions.map(p=>p.y));
+      const scale=Math.min(258/Math.max(1,maxX-minX),213/Math.max(1,maxY-minY));
+      const xy=i=>({x:145+(positions[i].x-(minX+maxX)/2)*scale,y:122.5+(positions[i].y-(minY+maxY)/2)*scale});
+      const path=map.navigation.edges.map(edge=>{const a=xy(edge.from),b=xy(edge.to);return `<line data-route-edge data-branch="${edge.branch}" data-ax="${a.x}" data-ay="${a.y}" data-bx="${b.x}" data-by="${b.y}" x1="${a.x}" y1="${a.y}" x2="${b.x}" y2="${b.y}" stroke="${edge.branch==='merchant'?'#c49155':edge.branch==='resort'?'#6e9db5':'#d75f63'}" stroke-width="3" marker-end="url(#harbor-route-arrow)"/>`;}).join('');
+      mapGuide.insertAdjacentHTML('beforeend',`<div id="harbor-route-diagram"${state.currentMapId==='harbor'?'':' hidden'}><svg class="harbor-route-diagram" viewBox="0 0 290 245" role="img" aria-label="红黄航线自动轮换，每圈经过左右两岛，中央道路交替方向"><defs><marker id="harbor-route-arrow" markerWidth="4" markerHeight="4" refX="3" refY="2" orient="auto"><path d="M0,0 L4,2 L0,4" fill="#688578"/></marker></defs>${path}${positions.map((p,i)=>`<circle cx="${xy(i).x}" cy="${xy(i).y}" r="${i===0?5:[5,10,33].includes(i)?3.8:2.7}" fill="${i===0?'#e7b85b':[5,10,33].includes(i)?'#bda0d1':'#fffbeb'}" stroke="#647f71"/>`).join('')}</svg></div>`);
+      updateHarborControls(document.body.classList.contains('mode-start'));
+    }finally{harborDiagramLoading=false;}
   }
-  document.querySelectorAll('[data-harbor-route]').forEach(button=>button.addEventListener('click',()=>{window.GameHarbor?.setRoute(button.dataset.harborRoute);updateHarborControls(false);syncCityScene();}));
-  document.getElementById('harbor-target')?.addEventListener('change',event=>{
-    const result=window.GameHarbor?.setWishlist(event.target.value.replace(/^harbor_/,''));
-    if(result&&!result.ok){updateHarborControls(true);window.GameProgression?.showEntryError(result);}
-  });
-  window.addEventListener('town:embark',()=>{setSelectedMap('harbor');void startNewGame();});
+  window.addEventListener('town:embark',event=>{openDepartureMenu(MAP_PRESETS[event.detail?.mapId] ? event.detail.mapId : 'harbor');});
   function inferEvent(cfg) {
     const text=`${cfg.title||''} ${cfg.message||''}`,tile=state.board[currentPlayer().position];
     const named=state.board.find(t=>!t.isLargeSecondary&&text.includes(t.name));
@@ -246,13 +287,13 @@
     if(!isSessionActive(sid)||serial!==eventSerial)return;
     state.phase='locked';state.busy=true;render();
   }
-  function onReset() {eventSerial++;selected=null;inspectorKey='';previewBusy=false;if(!preparingPreview)preview=false;document.body.classList.remove('selecting-target');closeMobilePanel();window.GameCardBag?.close();}
+  function onReset() {eventSerial++;selected=null;inspectorKey='';inspector.innerHTML=emptyInspector;previewBusy=false;if(!preparingPreview)preview=false;document.body.classList.remove('selecting-target');closeMobilePanel();closeHarborProject(false);window.GameCardBag?.close();}
   async function celebrate(winner,tied) {
     if(preview)return;
     const sid=state.sessionId;
     await window.GameDrama?.play({type:'win',title:tied?'本局平局':`${winner.name} 获胜`,message:getWinnerText(),amount:winner.cash,to:person(winner),tiles:[],sessionId:sid});
     if(!isSessionActive(sid))return;
-    window.GameProgression?.showResult(state.citySettlement,{onReplay:()=>void startNewGame(),onHome:()=>{showStartScreen();render();}});
+    window.GameProgression?.showResult(state.citySettlement,{onReplay:()=>openDepartureMenu(state.currentMapId),onHome:()=>openDepartureMenu()});
   }
   function setupShowcase() {
     showcaseMapId=selectedMapId;
@@ -270,7 +311,7 @@
     state.players[0].cash=2600;state.players[0].displayedCash=2600;state.players[0].position=hero.index;
     state.players[1].cash=980;state.players[1].displayedCash=980;state.players[1].position=lots[lots.length-2].index;
     selected=hero.index;
-    state.statusTitle='玩法演示';state.statusDescription='选择事件查看效果，或开始正式对局。';
+    state.statusTitle='玩法演示';state.statusDescription='';
     state.logs=[];pushLog('演示不消耗门票，不计入战绩或收益。');render();
   }
   async function runShowcase(type) {
@@ -280,7 +321,7 @@
     if(type==='cards'){
       state.currentPlayerIndex=0;state.busy=false;state.phase='await_roll';previewBusy=false;
       ['shield','launch','reverse','doubleRent'].forEach(id=>window.GameCards?.grant('human',id,{type:'showcase'}));
-      state.statusTitle='卡牌演示';state.statusDescription='从背包选择一张卡牌使用。';
+      state.statusTitle='卡牌演示';state.statusDescription='';
       render();window.GameCardBag?.open();return;
     }
     if(type==='shield')human.effects.shield=true;
@@ -291,7 +332,7 @@
         if(station){human.position=station.index;selected=station.index;state.currentPlayerIndex=0;render();await resolveCardDraw(human,sid);}
       } else if(type==='seize'){
         human.position=0;state.currentPlayerIndex=0;selected=0;
-        state.statusTitle='选择征用地产';state.statusDescription='选择对手地产后，可接手房产或免费征用。';render();
+        state.statusTitle='选择征用地产';state.statusDescription='';render();
         await resolveStartTakeover(human,sid);
       } else if(type==='buy'){
         const tile=state.board[showcaseTargets.build];
@@ -300,7 +341,7 @@
         await sleep(250);if(!isSessionActive(sid))return;
         if(buyLot(human,tile)) {
           render();
-          await present({label:'购买完成',title:`已购买 ${tile.name}`,message:`支付 ${money(tile.lot.price)}，剩余现金 ${money(human.cash)}。${purchaseBuildingNote(tile.lot)}`,drama:{type:'buy',amount:tile.lot.price,to:human,tiles:[tile.index],tileName:tile.name}});
+          await present({label:'购买完成',title:`已购买 ${tile.name}`,message:`−${money(tile.lot.price)}`,drama:{type:'buy',amount:tile.lot.price,to:human,tiles:[tile.index],tileName:tile.name}});
         }
       } else if(type==='build'){
         const tile=state.board[showcaseTargets.build];tile.lot.ownerId='human';tile.lot.level=1;human.position=tile.index;render();
@@ -315,7 +356,7 @@
         if(station){human.position=station.index;selected=station.index;render();await resolveLanding(human,station,sid);}
       } else {render();await resolveLanding(human,state.board[showcaseTargets.rent],sid);}
     } finally {
-      if(isSessionActive(sid)){previewBusy=false;state.busy=type!=='draw';state.phase=type==='draw'?'await_roll':'locked';state.statusTitle=type==='draw'?'卡牌已入包':'演示结束';state.statusDescription=type==='draw'?'可从背包选择使用，也可继续保留。':'选择其他事件，或开始正式对局。';render();if(type==='draw')window.GameCardBag?.open();}
+      if(isSessionActive(sid)){previewBusy=false;state.busy=type!=='draw';state.phase=type==='draw'?'await_roll':'locked';state.statusTitle=type==='draw'?'卡牌已入包':'演示结束';state.statusDescription='';render();if(type==='draw')window.GameCardBag?.open();}
     }
   }
   window.GamePresentation={update,updateCash,present,onReset,celebrate,rentFor,syncCityScene,selectTile,selectCurrentTile:()=>{if(state.players)selectTile(currentPlayer().position);}};
@@ -327,9 +368,9 @@
   propertyPreview.addEventListener('click',inspectBuilding);
   window.addEventListener('city:ready',()=>{syncCityScene();render();});
   window.addEventListener('city:select',e=>{if(state.modal.visible&&state.modal.boardTargets?.length){previewMunicipalTarget(e.detail.index);return;}selectTile(e.detail.index);if(!state.modal.visible&&!state.busy)openMobilePanel('property');});
+  window.addEventListener('city:harbor-project',event=>openHarborProject(event.detail?.id));
   document.querySelector('.mobile-tools').addEventListener('click',e=>{
     const button=e.target.closest('[data-mobile-panel]');if(!button)return;
-    if(button.dataset.mobilePanel==='property'&&selected==null)selectTile(currentPlayer().position);
     openMobilePanel(button.dataset.mobilePanel,button);
   });
   document.getElementById('mobile-sheet-close').addEventListener('click',closeMobilePanel);
@@ -338,7 +379,7 @@
   mobileQuery.addEventListener('change',()=>{if(!mobileQuery.matches)closeMobilePanel();});
   document.getElementById('start-showcase-btn').addEventListener('click',setupShowcase);
   document.getElementById('showcase-open-btn').addEventListener('click',setupShowcase);
-  document.getElementById('showcase-exit-btn').addEventListener('click',()=>void startNewGame());
+  document.getElementById('showcase-exit-btn').addEventListener('click',()=>openDepartureMenu());
   showcaseControls.addEventListener('click',e=>{const b=e.target.closest('[data-showcase]');if(b)void runShowcase(b.dataset.showcase);});
   document.getElementById('restart-btn').addEventListener('click',update);
   document.getElementById('start-map-options').addEventListener('click',()=>{menuSnapshot=null;updateHarborControls(true);syncCityScene();});

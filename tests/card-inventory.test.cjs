@@ -29,7 +29,7 @@ const use = (c, id) => c.run(`GameCards.use(${JSON.stringify(id)})`);
     const bag = json(c, 'GameCards.getSnapshot()');
     assert.equal(bag.count, 1); assert.equal(bag.cards[0].id, 'shield');
     assert.equal(bag.cards[0].source.type, 'tile');
-    assert.match(choices[0].title, /存入背包/);
+    assert.equal(choices[0].cardDraw, true);
   });
   await test('AI draw also stores its chosen reward for a later turn', async () => {
     const { c } = setup();
@@ -176,7 +176,7 @@ const use = (c, id) => c.run(`GameCards.use(${JSON.stringify(id)})`);
   });
   await test('real AI turn uses a stored card once, then continues normal dice movement', async () => {
     const { c } = setup(); grant(c, 'boost', 'ai');
-    c.run('state.currentPlayerIndex=1;setAiTurnStatus();animateDiceRoll=async()=>2;resolveLanding=async()=>{};');
+    c.run('state.currentPlayerIndex=1;setAiTurnStatus();rollDice=()=>2;resolveLanding=async()=>{};');
     await c.run('playAiTurn()'); assert.equal(c.run('state.players[1].cards.length'), 0);
     assert.equal(c.run('state.players[1].position'), 4); assert.equal(c.run('state.currentPlayerIndex'), 0);
   });

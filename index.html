@@ -5,15 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="theme-color" content="#173d3a">
   <title>环城大富翁</title>
-  <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="presentation.css?v=20261023-1">
+  <link rel="stylesheet" href="styles.css?v=20261025-entry2">
+  <link rel="stylesheet" href="presentation.css?v=20261026-match-info1">
   <link rel="stylesheet" href="progression.css?v=20261023-1">
   <link rel="stylesheet" href="scene.css?v=20261025-items1">
   <link rel="stylesheet" href="drama.css?v=20261023-1">
-  <link rel="stylesheet" href="mobile.css?v=20261025-facade3">
+  <link rel="stylesheet" href="mobile.css?v=20261026-match-info1">
+  <link rel="stylesheet" href="opening-coin.css?v=20261025-harbor2">
+  <link rel="stylesheet" href="dice-pair.css?v=20261025-harbor-projects1">
+  <link rel="stylesheet" href="harbor-projects.css?v=20261025-harbor-projects1">
   <link rel="stylesheet" href="card-bag.css?v=20261025-items1">
-  <link rel="stylesheet" href="harbor-journey.css?v=20261025-harbor1">
-  <link rel="stylesheet" href="town-builder.css?v=20261025-harbor1">
+  <link rel="stylesheet" href="item-shop.css?v=20261025-shop1">
+  <link rel="stylesheet" href="settlement-card.css?v=20261025-choice1">
+  <link rel="stylesheet" href="harbor-journey.css?v=20261025-harbor2">
+  <link rel="stylesheet" href="town-builder.css?v=20261025-random1">
 </head>
 <body class="mode-start">
   <div id="start-screen" class="start-screen">
@@ -21,7 +26,6 @@
       <div class="start-title-block">
         <p class="start-kicker"><span></span> 买地 · 建造 · 收租</p>
         <h1 class="start-game-title">环城<br><em>大富翁</em></h1>
-        <p class="start-subtitle">经营地产，赚取金币。</p>
       </div>
       <div class="map-picker">
         <p class="map-picker-label">选择地图</p>
@@ -29,14 +33,14 @@
           <button class="map-option active" type="button" data-map-id="classic" aria-pressed="true"><span class="map-option-mark">▱</span><span class="map-option-title">经典环线</span><span class="map-option-meta">22 格 · 30 回合</span></button>
           <button class="map-option" type="button" data-map-id="compact" aria-pressed="false"><span class="map-option-mark">↗</span><span class="map-option-title">紧凑冲突</span><span class="map-option-meta">18 格 · 26 回合</span></button>
           <button class="map-option" type="button" data-map-id="expansion" aria-pressed="false"><span class="map-option-mark">▱</span><span class="map-option-title">都市大环线</span><span class="map-option-meta">28 格 · 40 回合</span></button>
-          <button class="map-option" type="button" data-map-id="harbor" aria-pressed="false"><span class="map-option-mark">⚓</span><span class="map-option-title">潮汐港湾</span><span class="map-option-meta">三岛 · 34 格 · 30 回合</span></button>
+          <button class="map-option" type="button" data-map-id="harbor" aria-pressed="false"><span class="map-option-mark">⚓</span><span class="map-option-title">潮汐港湾</span><span class="map-option-meta">三岛 · 34 格 · 40 回合</span></button>
           <button class="map-option" type="button" data-map-id="alpine" aria-pressed="false"><span class="map-option-mark">♨</span><span class="map-option-title">云岭温泉</span><span class="map-option-meta">24 格 · 30 回合</span></button>
         </div>
-        <p id="start-map-description" class="start-map-description"></p>
-        <div id="harbor-wishlist" class="harbor-wishlist" hidden><label for="harbor-target">本次想带回</label><select id="harbor-target" aria-label="港湾心愿建筑"></select><span>完成对局必得 1 张，重复卡可升星</span></div>
+        <p id="start-map-description" class="start-map-description" hidden></p>
       </div>
       <div class="start-actions">
-        <button id="start-play-btn" class="start-btn start-btn-primary" type="button">开始游戏 <span>↗</span></button>
+        <p id="start-entry-error" class="start-entry-error" role="alert" hidden></p>
+        <button id="start-play-btn" class="start-btn start-btn-primary" type="button">出发 · ¥100</button>
         <button id="start-showcase-btn" class="start-btn start-btn-secondary" type="button">玩法演示</button>
         <button id="start-history-btn" class="start-history-link" type="button">历史对局 ↗</button>
       </div>
@@ -68,47 +72,28 @@
         </div>
         <div id="board-choice-dock"></div>
         <section id="center-console" class="board-center" aria-label="回合操作">
-          <div class="console-dice-row"><div id="center-dice" class="center-dice"><span id="center-dice-value">—</span></div><div class="console-copy"><p id="center-player-badge" class="center-badge">当前：玩家</p><h3 id="center-title">准备开始</h3><p id="center-description">掷骰移动，落地后结算。</p></div></div>
-          <div id="harbor-route-control" class="harbor-route-control" hidden><div class="harbor-route-heading"><span>下次分岔</span><span id="harbor-cards-earned"></span></div><div class="harbor-route-options" role="group" aria-label="港湾行程"><button type="button" data-harbor-route="merchant" aria-pressed="true">商贸岛 <small>商会 · 酒店</small></button><button type="button" data-harbor-route="resort" aria-pressed="false">度假岛 <small>温泉 · 旅馆</small></button></div></div>
+          <div class="console-dice-row"><div id="center-dice" class="center-dice"><span id="center-dice-value">—</span></div><div class="console-copy"><p id="center-player-badge" class="center-badge">当前：玩家</p><h3 id="center-title">准备开始</h3><p id="center-description"></p></div></div>
           <div class="center-actions"><span id="center-phase-badge" class="center-badge">等待掷骰</span><button type="button" class="card-bag-trigger" data-open-card-bag aria-haspopup="dialog" aria-expanded="false" aria-controls="card-bag-dialog">背包 <span data-card-count>0</span></button><button id="roll-btn" class="primary-btn center-roll-btn">掷骰子 <span>↗</span></button></div>
           <div class="round-progress" id="round-progress"><div class="round-progress-bar" id="round-progress-bar"></div></div>
         </section>
         <nav class="mobile-tools" aria-label="对局信息">
           <button type="button" class="card-bag-trigger" data-open-card-bag aria-haspopup="dialog" aria-expanded="false" aria-controls="card-bag-dialog">背包 <span data-card-count>0</span></button>
-          <button type="button" data-mobile-panel="property" aria-expanded="false">地块</button>
-          <button type="button" data-mobile-panel="log" aria-expanded="false">快报</button>
+          <button type="button" data-mobile-panel="assets" aria-expanded="false">资产</button>
           <button type="button" data-mobile-panel="rules" aria-expanded="false">规则</button>
         </nav>
-        <div id="showcase-controls" class="showcase-controls hidden"><div><b>玩法演示</b><span>不消耗门票 · 不计入战绩</span></div><div class="showcase-buttons"><button data-showcase="rent">连锁收租</button><button data-showcase="seize">地标征用</button><button data-showcase="shield">护盾免租</button><button data-showcase="relief">破产救助</button><button data-showcase="buy">购买地产</button><button data-showcase="build">建筑升级</button><button data-showcase="draw">翻牌存包</button><button data-showcase="cards">卡牌背包</button><button data-showcase="chance">机会事件</button><button data-showcase="route" id="showcase-route-btn" hidden>快线移动</button><button id="showcase-exit-btn">开始正式对局 ↗</button></div></div>
+        <div id="showcase-controls" class="showcase-controls hidden"><div><b>玩法演示</b><span>不消耗门票 · 不计入战绩</span></div><div class="showcase-buttons"><button data-showcase="rent">连锁收租</button><button data-showcase="seize">地标征用</button><button data-showcase="shield">护盾免租</button><button data-showcase="relief">破产救助</button><button data-showcase="buy">购买地产</button><button data-showcase="build">建筑升级</button><button data-showcase="draw">翻牌存包</button><button data-showcase="cards">卡牌背包</button><button data-showcase="chance">道具商店</button><button data-showcase="route" id="showcase-route-btn" hidden>快线移动</button><button id="showcase-exit-btn">开始正式对局 ↗</button></div></div>
       </section>
       <aside class="sidebar">
-        <div class="mobile-sheet-header"><strong id="mobile-sheet-title">地块信息</strong><button id="mobile-sheet-close" type="button" aria-label="关闭信息面板">关闭</button></div>
-        <section class="card status-card"><div class="panel-title-row"><p class="panel-label">双方资产</p><div class="dice-box" id="dice-box">—</div></div><h2 id="turn-title">准备开始</h2><p id="turn-description" class="muted"></p><div class="scoreboard" id="scoreboard"></div><p class="victory-rule" id="victory-rule">30 回合后，现金最多者获胜</p></section>
+        <div class="mobile-sheet-header"><strong id="mobile-sheet-title">资产对比</strong><button id="mobile-sheet-close" type="button" aria-label="关闭信息面板">关闭</button></div>
+        <section class="card status-card"><div class="panel-title-row"><p class="panel-label">资产对比</p><div class="dice-box" id="dice-box">—</div></div><h2 id="turn-title">准备开始</h2><p id="turn-description" class="muted"></p><div class="scoreboard" id="scoreboard"></div><p class="victory-rule" id="victory-rule"></p></section>
         <section id="property-inspector" class="card property-inspector"><p class="panel-label">街区手册</p><h2>地块信息</h2><p>点选建筑，查看归属、等级和街区租金。</p><div class="inspector-legend"><span><i class="human-dot"></i>你的地产</span><span><i class="ai-dot"></i>对手地产</span></div></section>
-        <section class="card log-card"><div class="panel-title-row"><div><p class="panel-label">刚刚发生</p><h2>对局记录</h2></div><span class="live-dot"></span></div><div id="log-list"></div></section>
         <details class="rules card"><summary>游戏规则 <span>＋</span></summary>
-            <p>规则速览</p>
             <ul>
-              <li>落到空地可购买，再次落到可升级（最高 3 级）；持有即收过路费。经过市政府自动建造一处自己的空地。</li>
-              <li>同街区连锁收费：该街区内所有你的地产一起算，2 块×1.2，3 块×1.5。</li>
-              <li>掷出 6 点可获得额外一个完整回合（每次最多触发一次）。</li>
-              <li>部分大型地产拥有专属效果，例如额外收益或让对手下回合休息。</li>
-              <li>每局抛硬币决定先手；后手获得额外开局金。双方的基础轮次数相同。</li>
-              <li>翻牌格：随机抽 3 张卡牌，选 1 张放入背包。每回合掷骰前可用 1 张，也可留到以后；选择目标时取消不会消耗卡牌。</li>
-              <li>己方建筑为青绿屋顶，对手为砖红屋顶；无主建筑保留原色。卡牌仅在本局内持有，结束后清空。</li>
-              <li>城建局：选择免费升级自己或拆除对手一层建筑！</li>
-              <li>银行金库：强制掷骰存钱，存满后下个人全部提走！</li>
-              <li>机会格：随机触发建筑升级、位置互换、传送、免租等事件。</li>
-              <li>紧凑冲突的冲刺站随机前进 2–8 格；都市大环线的快线随机前进 3–5 格。抵达地产后照常买地、升级或交租。</li>
-              <li>传送港随机送到地产并立即结算。都市大环线开局每个街区随机一处无主地产预建一级，买下即可经营。</li>
-              <li>停留市政府可按原地价的 125% 直接接手对手一处房产，建筑保留；原主拿回原地价，溢价进入金库。也可只征用，让房产变无主。</li>
-              <li>绊脚术：目标下回合停步并结算当前地块；温泉休息期间，两种效果同时结束，不重复收租或延长本次住宿。</li>
-              <li>逆行术：可改变自己或对手的前进方向！</li>
-              <li>大地块占据两格，两个落点共用产权和建筑等级。</li>
-              <li><b>固定回合</b>：经典环线、潮汐港湾、云岭温泉各 30 回合，紧凑冲突 26 回合，都市大环线 40 回合；结束时剩余现金最多者获胜。</li>
-              <li>都市大环线：破产救助除 ¥200 和休整一回合外，附带一次过路护盾，免交下一笔租金。</li>
-              <li>紧凑冲突：救助发放 ¥200 和一次过路护盾，下次行动正常掷骰，不额外休整。</li>
-              <li>现金不足以支付租金时，支付现有现金并获得救助，本局继续。</li>
+              <li>停在空地上可以买地，回到自己的地产可以升级，最高 3 级。</li>
+              <li>停在对手的地产上，要付他在这个街区所有地产的租金。同街区拥有 2 块加收 20%，至少 3 块加收 50%。</li>
+              <li>掷骰前，可以从背包使用一张道具卡。</li>
+              <li>单骰掷出 6 点，可以再掷一次，每回合最多一次。</li>
+              <li id="rules-victory">打完 30 回合，现金更多的一方获胜。</li>
             </ul>
           </details>
       </aside>
@@ -123,11 +108,12 @@
   </dialog>
 
   <script src="drama.js?v=20261025-landscape3"></script>
-  <script src="progression.js?v=20261025-harbor1"></script>
-  <script src="game.js?v=20261025-harbor1"></script>
-  <script src="card-bag.js?v=20261025-items1"></script>
-  <script src="presentation.js?v=20261025-harbor1"></script>
-  <script type="module" src="town-builder.js?v=20261025-harbor1"></script>
-  <script type="module" src="scene.js?v=20261025-harbor1"></script>
+  <script src="town-plan.js?v=20261025-district1"></script>
+  <script src="progression.js?v=20261025-harbor-projects1"></script>
+  <script src="game.js?v=20261026-match-info1"></script>
+  <script src="card-bag.js?v=20261025-entry2"></script>
+  <script src="presentation.js?v=20261026-match-info1"></script>
+  <script type="module" src="town-builder.js?v=20261025-random1"></script>
+  <script type="module" src="scene.js?v=20261025-ground-travel1"></script>
 </body>
 </html>

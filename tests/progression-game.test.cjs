@@ -4,42 +4,43 @@ const { context } = require('../tools/simulation-context.cjs');
 const { createStore } = require('../progression.js');
 const source = fs.readFileSync(path.join(__dirname, '../game.js'), 'utf8');
 function setup(map = 'classic') {
-  const data = new Map(), prompts = [], errors = []; let sequence = 0, failWrite = false, cancelEntry = false;
+  const data = new Map(), prompts = [], errors = []; let sequence = 0, failWrite = false;
   const store = createStore({ getItem: key => data.get(key) ?? null, setItem(key, value) { if (failWrite) throw Error('Storage full'); data.set(key, value); } });
   const c = context(source, 7001);
   c.GameProgression = { ...store, getProfile: store.read, createRunId: () => 'actual-' + ++sequence, resetResult() {}, showEntryError: error => errors.push(error) };
-  c.answer = cfg => { prompts.push({ label: cfg.label, wallet: store.read().profile?.wallet, buttons: Array.from(cfg.buttons, b => b.id) }); if (cfg.buttons.some(b => b.id === 'enter')) return cancelEntry ? 'cancel' : 'enter'; if (cfg.buttons.some(b => b.id === 'flip')) return 'flip'; throw Error('Unexpected modal: ' + cfg.title); };
+  c.answer = cfg => { prompts.push({ label: cfg.label, wallet: store.read().profile?.wallet, buttons: Array.from(cfg.buttons, b => b.id) }); if (cfg.buttons.some(b => b.id === 'flip')) return 'flip'; throw Error('Unexpected modal: ' + cfg.title); };
+  c.entryError = error => { if (error) errors.push(error); };
   c.Math.random = () => .1;
-  c.run(`selectedMapId='${map}';showModal=async cfg=>answer(cfg);`);
-  return { c, store, prompts, errors, fail: value => { failWrite = value; }, cancel: value => { cancelEntry = value; } };
+  c.run(`selectedMapId='${map}';showModal=async cfg=>answer(cfg);setEntryError=result=>entryError(result);`);
+  return { c, store, prompts, errors, fail: value => { failWrite = value; } };
 }
 let checks = 0;
 async function test(name, fn) { await fn(); checks++; console.log('PASS ' + name); }
 (async () => {
   await test('all five maps start directly with fixed rounds, even after a legacy bankruptcy game', async () => {
-    for (const [map, limit] of [['classic', 30], ['compact', 26], ['expansion', 40], ['harbor', 30], ['alpine', 30]]) {
+    for (const [map, limit] of [['classic', 30], ['compact', 26], ['expansion', 40], ['harbor', 40], ['alpine', 30]]) {
       const f = setup(map); f.c.run('initializeGame();state.gameMode="bankruptcy";');
       await f.c.run('startNewGame()');
       assert.equal(f.c.run('state.gameMode'), 'rounds'); assert.equal(f.c.run('getMaxRounds()'), limit);
-      assert.deepEqual(f.prompts.map(p => p.label), ['开始对局', '先手决定']);
-      assert.deepEqual(f.prompts[0].buttons, ['cancel', 'enter']);
+      assert.deepEqual(f.prompts.map(p => p.label), ['先手决定']);
+      assert.deepEqual(f.prompts[0].buttons, ['flip']);
       assert.equal(f.store.read().profile.entries.length, 1);
     }
   });
   await test('overlapping start requests admit only the active session and charge one ticket', async () => {
-    const f = setup(); const answer = f.c.answer; let release, admissionCount = 0;
+    const f = setup(); const answer = f.c.answer; let release, coinCount = 0;
     f.c.answer = cfg => {
-      if (cfg.buttons.some(b => b.id === 'enter') && ++admissionCount === 1) return new Promise(resolve => { release = resolve; });
+      if (cfg.buttons.some(b => b.id === 'flip') && ++coinCount === 1) return new Promise(resolve => { release = resolve; });
       return answer(cfg);
     };
     const staleStart = f.c.run('startNewGame()'); await f.c.run('startNewGame()');
-    release('enter'); await staleStart;
+    release('flip'); await staleStart;
     assert.equal(f.store.read().profile.wallet, 1100); assert.equal(f.store.read().profile.entries.length, 1);
     assert.equal(f.store.read().profile.entries[0].runId, f.c.run('state.runId'));
     assert.equal(f.c.run('state.isFormalRun'), true);
   });
   await test('each map ends after both seats finish its fixed normal-round limit', async () => {
-    for (const [map, limit] of [['classic', 30], ['compact', 26], ['expansion', 40], ['harbor', 30], ['alpine', 30]]) {
+    for (const [map, limit] of [['classic', 30], ['compact', 26], ['expansion', 40], ['harbor', 40], ['alpine', 30]]) {
       for (const first of [0, 1]) {
         const f = setup(map); f.c.Math.random = () => first === 0 ? .1 : .9; await f.c.run('startNewGame()');
         const turns = [0, 0];
@@ -63,14 +64,27 @@ async function test(name, fn) { await fn(); checks++; console.log('PASS ' + name
     const entry = f.store.read().profile.entries[0]; assert.equal(entry.mapId, 'harbor'); assert.equal(entry.collectionId, 'harbor_shell');
     assert.equal(f.c.run('state.players[0].cash'), 1700, 'vault ticket does not reduce the match starting cash');
   });
-  await test('cancel before payment and failed ticket persistence cannot reach the coin flip', async () => {
-    for (const failure of ['cancel', 'storage']) {
-      const f = setup(); if (failure === 'cancel') f.cancel(true); else f.fail(true);
+  await test('failed ticket persistence leaves the existing board intact and cannot reach the coin flip', async () => {
+      const f = setup(); f.c.run('initializeGame("harbor")'); const before = f.c.run('state'); f.fail(true);
       await f.c.run('startNewGame()');
       assert.equal(f.store.read().profile.wallet, 1200); assert.equal(f.c.run('state.isFormalRun'), false);
       assert.equal(f.prompts.some(p => p.label === '先手决定'), false); assert.equal(f.store.read().profile.entries.length, 0);
-      if (failure === 'storage') assert.equal(f.errors[0].error, 'save_failed');
-    }
+      assert.equal(f.errors[0].error, 'save_failed'); assert.equal(f.c.run('state'), before);
+  });
+  await test('ticket debit occurs while the old board still exists, before initializing the paid session', async () => {
+    const f = setup('harbor'); f.c.run('initializeGame("classic");selectedMapId="harbor";');
+    const before = f.c.run('state'), realEnter = f.c.GameProgression.enter;
+    f.c.GameProgression.enter = input => { assert.equal(f.c.run('state'), before); return realEnter(input); };
+    await f.c.run('startNewGame()'); assert.notEqual(f.c.run('state'), before);
+    assert.equal(f.c.run('state.currentMapId'), 'harbor');
+  });
+  await test('insufficient funds and cancelled map browsing leave the existing session untouched', async () => {
+    const f = setup('harbor'); f.c.run('initializeGame("harbor")'); const before = f.c.run('state');
+    const wallet = f.store.read().profile.wallet; f.c.run('showStartScreen();setSelectedMap("alpine");setSelectedMap("harbor");');
+    assert.equal(f.store.read().profile.wallet, wallet); assert.equal(f.c.run('state'), before);
+    f.store.enter({runId:'spent',mapId:'classic',price:1200});
+    await f.c.run('startNewGame()'); assert.equal(f.c.run('state'), before);
+    assert.equal(f.errors[0].canEnter, false); assert.equal(f.prompts.length, 0); assert.equal(f.store.read().profile.entries.length, 1);
   });
   await test('reset does not refund a paid unfinished run and another start pays a fresh ticket', async () => {
     const f = setup(); await f.c.run('startNewGame()'); const first = f.c.run('state.runId');

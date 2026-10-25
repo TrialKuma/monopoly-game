@@ -1,7 +1,7 @@
 'use strict';
 const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'C:/Users/A/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
 const fs = require('node:fs'), path = require('node:path'), http = require('node:http'), assert = require('node:assert/strict');
-const { createStore, STORAGE_KEY } = require('../progression.js');
+const { createStore, STORAGE_KEY, buildingCardOffers } = require('../progression.js');
 const root = path.resolve(__dirname, '..'), out = path.join(root, 'work/harbor-town-qa');
 const mime = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.png': 'image/png', '.jpg': 'image/jpeg', '.glb': 'model/gltf-binary', '.wav': 'audio/wav', '.mp3': 'audio/mpeg' };
 const server = http.createServer((req, res) => {
@@ -31,6 +31,7 @@ async function coordinate(page, axis, value) {
   await field.fill(String(value)); await field.press('Tab');
 }
 async function pickBuilding(page, buildingId) {
+  await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))));
   await page.waitForFunction(id => TownBuilder.getState().scene?.buildingCenters?.some(item => item.id === id), buildingId, { timeout: 90000 });
   const point = await page.evaluate(id => TownBuilder.getState().scene.buildingCenters.find(item => item.id === id), buildingId);
   await page.mouse.click(point.x, point.y);
@@ -49,7 +50,7 @@ function legacyFixture() {
   for (const receipt of profile.receipts) { delete receipt.buildingCards; delete receipt.cardRewardVersion; }
   return profile;
 }
-async function wishlistQuotaCase(browser, base) {
+async function admissionQuotaCase(browser, base) {
   const initial = createStore({ getItem: () => null, setItem() {} }).read().profile, raw = JSON.stringify(initial);
   const context = await browser.newContext({ viewport: { width: 320, height: 568 }, isMobile: true, hasTouch: true });
   try {
@@ -60,20 +61,13 @@ async function wishlistQuotaCase(browser, base) {
     }, { key: STORAGE_KEY, raw });
     const page = await context.newPage(); await page.goto(base); await page.waitForFunction(() => window.GameProgression?.town && window.GameHarbor);
     await page.locator('[data-map-id="harbor"]').click();
-    await page.locator('#harbor-target').waitFor({ state: 'visible' });
-    await page.locator('[data-map-id="classic"]').click();
-    await page.locator('#harbor-target').waitFor({ state: 'hidden' });
-    await page.locator('[data-map-id="harbor"]').click();
-    await page.locator('#harbor-target').waitFor({ state: 'visible' });
-    assert.equal(await page.locator('#harbor-target').inputValue(), 'harbor_villa');
-    await page.locator('#harbor-target').selectOption('harbor_finance');
-    await page.getByRole('heading', { name: '我的小城', exact: true }).waitFor();
-    assert.match(await page.locator('.city-message').innerText(), /保存失败/);
-    assert.equal(await page.locator('#harbor-target').inputValue(), 'harbor_villa', 'unsaved choice rolls back to the persisted target');
+    assert.equal(await page.locator('#harbor-target, #harbor-wishlist').count(), 0);
+    await page.locator('#start-play-btn').click();
+    assert.match(await page.locator('#start-entry-error').innerText(), /保存失败/);
     const profile = await page.evaluate(() => GameProgression.getProfile().profile);
-    assert.equal(profile.town.targetCardId, 'harbor_villa'); assert.equal(profile.wallet, 1200); assert.equal(profile.entries.length, 0);
+    assert.equal(profile.wallet, 1200); assert.equal(profile.entries.length, 0);
     assert.equal(await page.evaluate(() => window.qaReadOriginalTownSave()), raw);
-    pass('wishlist quota failure restores the saved selection, shows a visible error and preserves original bytes');
+    pass('admission save failure leaves the ticket unpaid, shows a visible error and preserves original bytes');
   } finally { await context.close(); }
 }
 (async () => {
@@ -82,7 +76,7 @@ async function wishlistQuotaCase(browser, base) {
   const browser = await chromium.launch({ executablePath: 'C:/Program Files/Google/Chrome/Application/chrome.exe', headless: true, args: ['--enable-webgl', '--ignore-gpu-blocklist'] });
   let page;
   try {
-    if (process.env.HARBOR_TOWN_CASE === 'quota') { await wishlistQuotaCase(browser, base); return; }
+    if (process.env.HARBOR_TOWN_CASE === 'quota') { await admissionQuotaCase(browser, base); return; }
     const context = await browser.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
     page = await context.newPage(); const errors = []; page.on('pageerror', error => errors.push(error.message));
     await page.goto(base); await page.waitForFunction(() => window.GameProgression?.town && window.TownBuilder && window.GameHarbor);
@@ -92,20 +86,27 @@ async function wishlistQuotaCase(browser, base) {
     await page.locator('.city-menu-button').click(); await page.getByRole('heading', { name: '我的城镇', exact: true }).waitFor();
     await fit(page, 390, 844, '01-empty'); await fit(page, 320, 568, '01-empty'); await page.setViewportSize({ width: 390, height: 844 });
     await page.locator('[data-town-card="harbor_finance"]').click();
-    await page.locator('.town-card-detail [data-town-action="target"]').click();
-    assert.equal(await page.evaluate(() => GameProgression.getProfile().profile.town.targetCardId), 'harbor_finance');
+    assert.equal(await page.locator('[data-town-action="target"], .town-card-target').count(), 0);
     await page.locator('.town-card-detail [data-town-action="embark"]').click();
-    await page.locator('[data-action="enter"]').waitFor();
-    assert.equal(await page.evaluate(() => state.currentMapId), 'harbor');
+    await page.locator('#start-play-btn').waitFor();
+    assert.equal(await page.evaluate(() => selectedMapId), 'harbor');
     assert.equal(await page.evaluate(() => GameProgression.getProfile().profile.wallet), 1200, 'no ticket until actual confirmation');
-    await page.locator('[data-action="enter"]').click();
+    // Fixed random seed exercises this family's full merge flow; distribution is checked separately.
+    let qaRunId;
+    for (let seed = 0; seed < 100; seed++) {
+      const candidate = 'town-browser-random-' + seed;
+      if (buildingCardOffers(candidate).includes('harbor_finance')) { qaRunId = candidate; break; }
+    }
+    assert(qaRunId);
+    await page.evaluate(runId => { GameProgression.createRunId = () => runId; }, qaRunId);
+    await page.locator('#start-play-btn').click();
     assert.equal(await page.evaluate(() => GameProgression.getProfile().profile.wallet), 950);
     await page.evaluate(() => { window.qaRandom = Math.random; Math.random = () => .1; });
-    await page.locator('[data-action="flip"]').click(); await skipDrama(page);
+    await page.locator('[data-action="flip"]').click(); await page.locator('#event-actions [data-action="continue"]').click();
     await page.waitForFunction(() => state.isFormalRun === true && state.phase === 'await_roll');
     await page.evaluate(() => { Math.random = window.qaRandom; });
-    const started = await page.evaluate(() => ({ runId: state.runId, wishlist: state.harborCollection.wishlist, profile: GameProgression.getProfile().profile }));
-    assert.equal(started.wishlist, 'finance'); assert.equal(started.profile.entries.length, 1);
+    const started = await page.evaluate(() => ({ runId: state.runId, hasWishlist: 'wishlist' in state.harborCollection, profile: GameProgression.getProfile().profile }));
+    assert.equal(started.hasWishlist, false); assert.equal(started.runId, qaRunId); assert.equal(started.profile.entries.length, 1);
     // A controlled late-game fixture pays the actual purchase/build functions,
     // then reaches the normal fixed-round ending. The vault is never overwritten.
     const ended = await page.evaluate(() => {
@@ -121,10 +122,18 @@ async function wishlistQuotaCase(browser, base) {
       return { receipt, profile: GameProgression.getProfile().profile, humanCash: human.cash };
     });
     assert.equal(ended.receipt.ok, true); assert.equal(ended.profile.wallet, 950 + ended.humanCash);
-    assert.deepEqual(ended.receipt.receipt.buildingCards, [{ cardId: 'harbor_finance', count: 3 }, { cardId: 'harbor_villa', count: 2 }]);
-    assert.equal(ended.profile.receipts.length, 1); assert.equal(ended.profile.town.cards.harbor_finance.duplicates, 2);
+    assert.deepEqual(ended.receipt.receipt.buildingCards, [{ cardId: 'harbor_finance', count: 2 }, { cardId: 'harbor_villa', count: 2 }]);
+    assert.equal(ended.profile.receipts.length, 1); assert.equal(ended.profile.town.cards.harbor_finance.duplicates, 1);
+    assert.equal(ended.receipt.receipt.cardRewardVersion, 3);
+    assert.equal(new Set(ended.receipt.receipt.buildingCardDraft.offers).size, 3);
+    assert(ended.receipt.receipt.buildingCardDraft.offers.includes('harbor_finance'));
     await skipDrama(page); await page.getByRole('heading', { name: '本局结算', exact: true }).waitFor();
-    assert.match(await page.locator('#city-dialog').innerText(), /海港商会 ×3/);
+    assert.match(await page.locator('#city-dialog').innerText(), /建设奖励：海港商会 ×2/);
+    await page.locator('#city-dialog [data-building-card-option="harbor_finance"]').click();
+    await page.locator('#city-dialog [data-building-card-claim]').click();
+    assert.equal(await page.evaluate(() => GameProgression.getProfile().profile.town.cards.harbor_finance.duplicates), 2);
+    assert.equal(await page.evaluate(() => GameProgression.getPendingBuildingCards().rows.length), 0);
+    assert.equal(await page.evaluate(() => GameProgression.getProfile().profile.wallet), ended.profile.wallet);
     await page.screenshot({ path: path.join(out, '02-earned-cards-390.png') });
     await page.locator('#city-dialog [data-town-open]').click();
     await page.getByRole('heading', { name: '我的城镇', exact: true }).waitFor();
@@ -157,13 +166,19 @@ async function wishlistQuotaCase(browser, base) {
     const merged = await page.evaluate(() => GameProgression.getProfile().profile);
     assert.equal(merged.town.cards.harbor_finance.star, 2); assert.equal(merged.town.cards.harbor_finance.duplicates, 0);
     assert.equal(merged.town.buildings[0].id, id); assert.equal(merged.wallet, ended.profile.wallet - 300);
+    await page.locator('[data-town-section="land"]').click();
     await page.locator('[data-town-action="expand"]').click(); await page.locator('[data-town-action="confirm-expand"]').click();
     const finalProfile = await page.evaluate(() => GameProgression.getProfile().profile);
-    assert.equal(finalProfile.town.size, 8); assert.equal(finalProfile.wallet, merged.wallet - 800);
+    assert.equal(finalProfile.town.size, 8); assert.equal(finalProfile.town.landStage, 1);
+    assert.equal(finalProfile.wallet, merged.wallet - 500);
+    assert.equal(finalProfile.collections.harbor_shell, merged.collections.harbor_shell - 2);
     await fit(page, 390, 844, '04-merged-expanded'); await fit(page, 320, 568, '04-merged-expanded');
     await page.reload(); await page.waitForFunction(() => window.GameProgression?.town && window.TownBuilder);
     assert.deepEqual(await page.evaluate(() => GameProgression.getProfile().profile), finalProfile);
-    const duplicate = await page.evaluate(receipt => GameProgression.settle({ ...receipt, humanCash: receipt.cash, eligible: true }), ended.receipt.receipt);
+    const duplicate = await page.evaluate(receipt => GameProgression.settle({ ...receipt, humanCash: receipt.cash, eligible: true,
+      buildingCardDraft: true,
+      buildingCards: [{ cardId: 'harbor_finance', count: 2 }, { cardId: 'harbor_villa', count: 2 }],
+    }), ended.receipt.receipt);
     assert.equal(duplicate.duplicate, true); assert.equal(duplicate.profile.wallet, finalProfile.wallet);
     await page.locator('.city-menu-button').click(); await page.waitForFunction(() => TownBuilder.getState().scene?.ready, null, { timeout: 90000 });
     assert.equal(await page.evaluate(() => TownBuilder.getState().scene.buildings), 1);
@@ -175,7 +190,7 @@ async function wishlistQuotaCase(browser, base) {
     await legacyContext.addInitScript(({ key, profile }) => { if (!localStorage.getItem(key)) localStorage.setItem(key, JSON.stringify(profile)); }, { key: STORAGE_KEY, profile: legacy });
     page = await legacyContext.newPage(); await page.goto(base); await page.waitForFunction(() => window.GameProgression?.town);
     const migrated = await page.evaluate(() => GameProgression.getProfile().profile);
-    assert.equal(migrated.version, 3); assert.equal(migrated.wallet, legacy.wallet); assert.equal(migrated.earned, legacy.earned);
+    assert.equal(migrated.version, 4); assert.equal(migrated.wallet, legacy.wallet); assert.equal(migrated.earned, legacy.earned);
     assert.deepEqual(migrated.entries, legacy.entries); assert.deepEqual(migrated.projectLevels, legacy.projectLevels); assert.deepEqual(migrated.collections, legacy.collections);
     assert.equal(migrated.town.cards.harbor_villa.unlocked, false);
     const boundary = await page.evaluate(() => {
@@ -204,7 +219,7 @@ async function wishlistQuotaCase(browser, base) {
       }, { key: STORAGE_KEY, raw, blocked: failure === 'blocked' });
       page = await failureContext.newPage(); await page.goto(base); await page.waitForFunction(() => window.GameProgression?.town && window.TownBuilder);
       await page.locator('.city-menu-button').click();
-      await page.getByRole('heading', { name: '我的小城', exact: true }).waitFor();
+      await page.getByRole('heading', { name: '仓库', exact: true }).waitFor();
       assert.match(await page.locator('.city-message-error').innerText(), /存档|存储/);
       assert.equal(await page.evaluate(() => document.querySelector('.town-builder').hidden), true);
       assert.equal(await page.evaluate(() => document.body.classList.contains('town-open')), false);
@@ -212,7 +227,7 @@ async function wishlistQuotaCase(browser, base) {
       assert.equal(await page.locator('#city-dialog').evaluate(dialog => dialog.open), true);
       await failureContext.close(); pass(`${failure} town save opens a visible recovery message and preserves the original bytes`);
     }
-    await wishlistQuotaCase(browser, base);
+    await admissionQuotaCase(browser, base);
     fs.writeFileSync(path.join(out, 'result.json'), JSON.stringify({ ok: true, viewportWidths: [390, 320], actualRunId: started.runId, earnedCards: ended.receipt.receipt.buildingCards, finalTown: finalProfile.town, finalWallet: finalProfile.wallet, browserErrors: errors }, null, 2));
   } catch (error) {
     if (page && !page.isClosed()) { await page.screenshot({ path: path.join(out, 'failure.png') }).catch(() => {}); fs.writeFileSync(path.join(out, 'failure.txt'), String(error.stack)); }

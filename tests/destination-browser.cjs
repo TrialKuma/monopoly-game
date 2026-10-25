@@ -1,5 +1,6 @@
 'use strict';
-// Actual browser acceptance of the two themed destinations and generated GLBs.
+// Alpine destination controller. Harbor uses the archipelago path covered by
+// harbor-scene-browser.cjs and check-harbor-paths.mjs instead of this controller.
 // Start the local preview at 8876, or provide CITY_PREVIEW_URL.
 const {chromium}=require(process.env.PLAYWRIGHT_MODULE || 'C:/Users/A/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
 const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path');
@@ -10,12 +11,12 @@ const out=path.resolve(__dirname,'../work/destination-qa');fs.mkdirSync(out,{rec
   const context=await browser.newContext({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
   const page=await context.newPage(),errors=[],results=[];
   page.on('pageerror',e=>errors.push(e.message));
-  for(const map of ['harbor','alpine']){
+  for(const map of ['alpine']){
    await page.goto(process.env.CITY_PREVIEW_URL||'http://127.0.0.1:8876');await page.waitForFunction(()=>window.CityScene?.ready);
    await page.locator(`[data-map-id="${map}"]`).click();
-   await page.locator('#start-play-btn').click();await page.locator('[data-action="enter"]').click();
+   await page.locator('#start-play-btn').click();
    await page.evaluate(()=>{window.qaRandom=Math.random;Math.random=()=>.1;});
-   await page.locator('[data-action="flip"]').click();await page.locator('.drama-skip').click();
+   await page.locator('[data-action="flip"]').click();await page.locator('#event-actions [data-action="continue"]').click();
    await page.waitForFunction(()=>state.isFormalRun===true);await page.evaluate(()=>{Math.random=window.qaRandom;CityScene.setTimeMode('day');CityScene.setSeason('spring');CityScene.setWeather('clear');});
    await page.waitForFunction(()=>CityScene.getAtmosphere()?.destination?.ready,null,{timeout:30000});await page.waitForTimeout(1400);
    await page.screenshot({path:path.join(out,`${map}-portrait-start.png`)});
@@ -53,6 +54,6 @@ const out=path.resolve(__dirname,'../work/destination-qa');fs.mkdirSync(out,{rec
    results.push({map,...contract});await page.setViewportSize({width:390,height:844});
   }
   assert.deepEqual(errors,[]);fs.writeFileSync(path.join(out,'results.json'),JSON.stringify({results,errors},null,2));
-  console.log('PASS both destination maps: actual paid entry, generated textures/clips, moving parts, pause/reduced motion, scenery toggle, late load teardown and mobile/desktop capture');
+  console.log('PASS alpine destination: actual paid entry, generated textures/clips, moving parts, pause/reduced motion, scenery toggle, late load teardown and mobile/desktop capture');
  }finally{await browser.close();}
 })().catch(error=>{console.error(error);process.exit(1);});

@@ -57,10 +57,13 @@ export function createStreetFoundation({THREE,world,boardBounds,mapId,islands=fa
     // never the inset walk where the token actually lands.
     const nx=Math.max(3,Math.round((width-.16)/.28)),nz=Math.max(3,Math.round((depth-.16)/.28));
     const sx=(width-.16)/nx,sz=(depth-.16)/nz;
+    group.updateMatrix();
+    const point=new THREE.Vector3();
     for(let ix=0;ix<nx;ix++)for(let iz=0;iz<nz;iz++){
       const edge=ix===0||iz===0||ix===nx-1||iz===nz-1;
       if(!edge&&isProperty)continue;
-      add(edge?'paving':'accent',group.position.x-width/2+.08+(ix+.5)*sx,group.position.y+.025,group.position.z-depth/2+.08+(iz+.5)*sz,sx-.012,.018,sz-.012,0,((ix*7+iz*3)%5-2)*.022);
+      point.set(-width/2+.08+(ix+.5)*sx,.025,-depth/2+.08+(iz+.5)*sz).applyMatrix4(group.matrix);
+      add(edge?'paving':'accent',point.x,point.y,point.z,sx-.012,.018,sz-.012,group.rotation.y,((ix*7+iz*3)%5-2)*.022);
     }
   }
   function road(a,b){

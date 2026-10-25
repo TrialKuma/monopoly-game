@@ -5,9 +5,9 @@ const { context } = require('../tools/simulation-context.cjs');
 const { runner } = require('../tools/economy-simulation.cjs');
 const source = fs.readFileSync(path.join(__dirname, '../game.js'), 'utf8');
 const json = (c, code) => JSON.parse(c.run(`JSON.stringify(${code})`));
-const fresh = map => { const c = context(source, 2087); c.run(`initializeGame('${map}')`); return c; };
+const fresh = map => { const c = context(source, 2087); c.run(`initializeGame('${map}');showModal=async cfg=>{if(cfg.routeChoice)return 'merchant';throw Error('Unexpected modal: '+cfg.title)}`); return c; };
 const maps = {
-  harbor: { columns: 11, rows: 10, steps: 34, lots: 19, cash: 1700, bonus: 320, second: 400, bank: 240, ticket: 250, pairs: [[11, 12, [[2, 3], [2, 4]]], [14, 15, [[2, 6], [2, 7]]], [22, 23, [[10, 4], [10, 5]]]] },
+  harbor: { columns: 12, rows: 14, steps: 34, lots: 13, cash: 1700, bonus: 320, second: 400, bank: 240, ticket: 250, pairs: [[2, 3, [[7, 8], [7, 7]]], [7, 8, [[4, 5], [4, 4]]], [30, 31, [[5, 12], [5, 11]]]] },
   alpine: { columns: 6, steps: 24, lots: 14, cash: 1900, bonus: 350, second: 450, bank: 250, ticket: 350, pairs: [[7, 8, [[6, 3], [6, 4]]], [10, 11, [[6, 6], [6, 7]]], [14, 15, [[4, 8], [3, 8]]]] },
 };
 let checks = 0;
@@ -55,19 +55,19 @@ async function test(name, fn) { await fn(); checks++; console.log('PASS ' + name
     await test(id + ' forward and reverse movement returns from every origin', () => {
       const c = fresh(id);
       for (let start = 0; start < expected.steps; start++) for (const direction of [-1, 1]) {
-        const lap = id === 'harbor' ? 24 : expected.steps;
-        const branch = start >= 18 && start <= 27 ? 'resort' : 'merchant';
+        const lap = id === 'harbor' ? 70 : expected.steps;
+        const branch = start >= 20 && start <= 27 ? 'resort' : 'merchant';
         c.run(`state.players[0].harborLastBranch='${branch}'`);
         const preview = json(c, `previewMovement(state.players[0],${lap},{startingIndex:${start},direction:${direction},branchChoice:'${branch}'})`);
-        assert.equal(preview.index, start); assert.equal(new Set(preview.path).size, lap);
+        assert.equal(preview.index, start); assert.equal(new Set(preview.path).size, expected.steps);
         if (id !== 'harbor') assert.equal(preview.path[0], (start + direction + expected.steps) % expected.steps);
         assert.equal(c.run('state.players[0].position'), 0);
       }
     });
-    await test(id + ' has its own 30-round economy and explicit collection/ticket metadata', () => {
+    await test(id + ' has its own configured economy and explicit collection/ticket metadata', () => {
       const c = fresh(id), map = json(c, 'getMapConfig()');
       assert.deepEqual(json(c, 'getMapEconomy()'), { startCash: expected.cash, startBonus: expected.bonus, secondPlayerBonus: expected.second, bankThreshold: expected.bank });
-      assert.equal(c.run('getMaxRounds()'), 30);
+      assert.equal(c.run('getMaxRounds()'), id === 'harbor' ? 40 : 30);
       assert.deepEqual(json(c, 'state.players.map(p=>p.cash)'), [expected.cash, expected.cash]);
       assert.equal(map.ticketPrice, expected.ticket); assert(map.collectionId && map.collectionName);
       assert.deepEqual(json(c, 'state.openingLots'), []);
@@ -81,7 +81,7 @@ async function test(name, fn) { await fn(); checks++; console.log('PASS ' + name
         const c = fresh(id);
         if (id === 'harbor') {
           c.run(`state.players[0].effects.reversed=${reverse}`);
-          await c.run('animateMovement(state.players[0],24,state.sessionId)');
+          await c.run('animateMovement(state.players[0],'+(reverse ? 30 : 40)+',state.sessionId)');
           assert.equal(c.run('state.players[0].position'), 0);
         } else {
           c.run(`state.players[0].position=${reverse ? 1 : expected.steps - 1};state.players[0].effects.reversed=${reverse};`);
@@ -99,15 +99,15 @@ async function test(name, fn) { await fn(); checks++; console.log('PASS ' + name
     assert.deepEqual(json(c, 'getMapEconomy("expansion")'), { startCash: 2000, startBonus: 450, secondPlayerBonus: 300, bankThreshold: 200 });
     assert.equal(c.run('MAP_PRESETS.classic.lotConfigs[14].price'), 280);
     assert.notDeepEqual(json(c, 'Object.keys(MAP_PRESETS.harbor.specialTiles)'), json(c, 'Object.keys(MAP_PRESETS.alpine.specialTiles)'));
-    assert.notEqual(c.run('MAP_PRESETS.harbor.lotConfigs[14].price'), c.run('MAP_PRESETS.alpine.lotConfigs[14].price'));
+    assert.notEqual(c.run('MAP_PRESETS.harbor.lotConfigs[7].price'), c.run('MAP_PRESETS.alpine.lotConfigs[14].price'));
     assert.notEqual(c.run('MAP_PRESETS.harbor.collectionId'), c.run('MAP_PRESETS.alpine.collectionId'));
   });
-  await test('harbor double-property district is billed once at its secondary lighthouse stop', () => {
-    const c = fresh('harbor'); c.run('state.board[14].lot.ownerId="ai";state.board[16].lot.ownerId="ai";');
-    assert.equal(c.run('getDistrictOwnerLots(state.board[14].lot.district,"ai").length'), 2);
-    const collected = json(c, 'collectToll(state.players[0],state.players[1],state.board[15])');
-    assert.equal(collected.toll, 91); // round((48 + 28) × 1.2), the large property counts once.
-    assert.deepEqual(json(c, 'state.players.map(p=>p.cash)'), [1609, 1791]);
+  await test('harbor double-property district is billed once at its secondary main-port stop', () => {
+    const c = fresh('harbor'); c.run('state.board[2].lot.ownerId="ai";state.board[1].lot.ownerId="ai";');
+    assert.equal(c.run('getDistrictOwnerLots(state.board[2].lot.district,"ai").length'), 2);
+    const collected = json(c, 'collectToll(state.players[0],state.players[1],state.board[3])');
+    assert.equal(collected.toll, 86); // round((48 + 24) × 1.2), the large property counts once.
+    assert.deepEqual(json(c, 'state.players.map(p=>p.cash)'), [1614, 1786]);
   });
   await test('all alpine cable-car outcomes move in the current direction and settle once', async () => {
     for (const reversed of [false, true]) for (const steps of [2, 3, 4]) {
@@ -121,18 +121,26 @@ async function test(name, fn) { await fn(); checks++; console.log('PASS ' + name
       assert.equal(c.run('state.players[0].cash'), reversed ? 1900 : 2250);
     }
   });
-  await test('32 real-start games finish with a reconciled ledger and equal 30-turn allocations', async () => {
+  await test('32 real-start games finish with a reconciled ledger and equal configured turn allocations', async () => {
     for (const id of Object.keys(maps)) {
       const run = runner(source, id);
       for (let seed = 31041; seed < 31049; seed++) {
         const first = await run(seed, 0), second = await run(seed, 1);
-        assert.deepEqual(first.base, [30, 30]); assert.deepEqual(second.base, [30, 30]);
-        assert.deepEqual(first.cash, [...second.cash].reverse());
-        assert.equal(first.randomCalls, second.randomCalls);
-        assert(first.cash.every(n => Number.isFinite(n) && n >= 0));
-        if (seed === 31041) assert.deepEqual(await run(seed, 0), first);
+        assert.deepEqual(first.base, id === 'harbor' ? [40,40] : [30,30]); assert.deepEqual(second.base, id === 'harbor' ? [40,40] : [30,30]);
+        // Harbor's construction goals reward only the human seat, so swapping
+        // initiative need not mirror cash or later decisions. Both seats must
+        // still reconcile their ledgers, finish equal rounds and replay exactly.
+        if (id !== 'harbor') {
+          assert.deepEqual(first.cash, [...second.cash].reverse());
+          assert.equal(first.randomCalls, second.randomCalls);
+        }
+        for (const game of [first, second]) assert(game.cash.every(n => Number.isFinite(n) && n >= 0));
+        if (seed === 31041) {
+          assert.deepEqual(await run(seed, 0), first);
+          assert.deepEqual(await run(seed, 1), second);
+        }
       }
     }
   });
-  console.log(`${checks} new-map checks passed; 32 games plus two repeatability reruns.`);
+  console.log(`${checks} new-map checks passed; 32 games plus four repeatability reruns.`);
 })().catch(error => { console.error(error); process.exitCode = 1; });

@@ -48,6 +48,23 @@ body.ai-turn {
 .ai-turn .player-cash-label { color:#d3aaa0; }
 .ai-turn .player-title .meta-chip,.ai-turn .player-meta .meta-chip { color:#dcbdb2; }
 .ai-turn .mini-scoreboard { background:#f0d9d0; }
+
+/* Comparable totals; large lots count as one property. */
+.status-card{--asset-ink:#f5f1dc;--asset-muted:#abc1b2;--asset-line:#ffffff15;--asset-header:#ffffff08;--asset-cash:#ffffff0a}
+.asset-comparison{width:100%;table-layout:fixed;border-collapse:separate;border-spacing:0;color:var(--asset-ink);font-size:13px;font-variant-numeric:tabular-nums}
+.asset-comparison th,.asset-comparison td{padding:13px 5px;border-bottom:1px solid var(--asset-line);text-align:center;vertical-align:middle;overflow-wrap:anywhere}
+.asset-comparison thead th{font-size:14px;background:var(--asset-header)}
+.asset-comparison thead th:nth-child(2){border-radius:12px 0 0 0}
+.asset-comparison thead th:last-child{border-radius:0 12px 0 0}
+.asset-comparison th[scope="row"]{width:35%;text-align:left;font-size:12px;font-weight:500;color:var(--asset-muted)}
+.asset-comparison td{font-weight:700}
+.asset-comparison small{margin-left:3px;font-size:10px;font-weight:400;color:var(--asset-muted)}
+.asset-comparison .asset-cash-row td{background:var(--asset-cash)}
+.asset-cash-value{font-size:clamp(16px,2vw,22px);letter-spacing:-.4px;white-space:nowrap}
+.asset-owner-dot{display:inline-block;width:8px;height:8px;margin-right:6px;border-radius:50%;background:#309b8a}
+[data-asset-owner="ai"] .asset-owner-dot{background:#d57663}
+.asset-comparison .asset-effects-row td{font-size:11px;font-weight:400;line-height:1.7}
+.asset-comparison tbody tr:last-child>*{border-bottom:0}
 .ai-turn .mini-player.active .mini-name,.ai-turn .mini-player.active .mini-cash { color:#a33c34; }
 .ai-turn .event-card .modal-btn.primary { background:#b64b40;box-shadow:0 3px 0 #84352f; }
 

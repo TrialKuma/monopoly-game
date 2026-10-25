@@ -70,12 +70,16 @@
   .mobile-tools button{flex:1;min-height:44px;padding:8px;border-radius:0;background:transparent;color:#557465;font-size:12px}
   .mobile-tools button+button{border-left:1px solid #e3e8dc}
   .mobile-tools button[aria-expanded="true"]{background:#e4eddd;color:#215d50}
-  .city-camera-controls{top:8px;right:8px;padding:3px;gap:2px;max-width:calc(100% - 16px);border-radius:13px}
-  .city-camera-controls button,.city-camera-controls button.city-camera-reset,.city-camera-controls button[data-camera="mode"]{width:46px;height:44px;font-size:13px}
+  .city-camera-controls{top:8px;left:8px;right:8px;padding:0;gap:2px;justify-content:flex-end;max-width:calc(100% - 16px);border:0;background:transparent;box-shadow:none;pointer-events:none}
+  .city-camera-controls button,.city-camera-controls button.city-camera-reset,.city-camera-controls button[data-camera="mode"]{width:46px;height:44px;font-size:13px;border:1px solid #c8d4c4;border-radius:10px;background:#faf8eff0;pointer-events:auto}
+  .city-camera-controls button.city-camera-reset,.city-camera-controls button[data-camera="mode"]{background:#e5ecdf}
   .city-camera-controls button[data-camera="left"],.city-camera-controls button[data-camera="right"],.city-camera-divider,.city-camera-controls output{display:none}
   .city-camera-controls button[data-camera="in"],.city-camera-controls button[data-camera="out"]{font-size:22px;width:44px}
-  .city-atmosphere{width:192px;top:calc(100% + 5px);max-height:min(320px,60dvh);overflow:auto}
-  .city-atmosphere summary{min-height:44px}
+  .city-atmosphere{left:0;right:auto;top:0;width:44px;border:0;background:transparent;box-shadow:none;overflow:visible;pointer-events:auto}
+  .city-atmosphere summary{width:44px;height:44px;min-height:44px;padding:0;justify-content:center;border:1px solid #c8d4c4;border-radius:10px;background:#faf8eff0;touch-action:manipulation}
+  .city-atmosphere-current{position:absolute;flex:none;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+  .city-atmosphere-expand{display:none}
+  .city-atmosphere-panel{position:absolute;top:calc(100% + 6px);left:0;width:214px;max-height:clamp(120px,calc(100dvh - 360px),260px);overflow-y:auto;overscroll-behavior:contain;border:1px solid #c8d4c4;border-radius:11px;background:#faf8eff5;box-shadow:0 3px 12px #28493d12}
   .city-time-control select{width:119px;min-height:44px}
   .city-atmosphere-panel p{display:none}
   .city-outskirts-control{min-height:44px}
@@ -108,15 +112,16 @@
   .sidebar{display:none;position:fixed;bottom:env(safe-area-inset-bottom);left:env(safe-area-inset-left);right:env(safe-area-inset-right);width:auto;max-height:72dvh;padding:0 16px 18px;background:#fbfaf3;border-radius:22px 22px 0 0;z-index:65;overflow:auto;overscroll-behavior:contain;box-shadow:0 -10px 50px #173d3a22}
   .mobile-sheet-open .sidebar{display:block}
   .sidebar>section,.sidebar>details{display:none;box-shadow:none;border:0;background:transparent;margin:0;padding:14px 0;min-height:0}
-  .sidebar[data-panel="property"]>.property-inspector,.sidebar[data-panel="log"]>.log-card,.sidebar[data-panel="rules"]>.rules{display:block}
+  .sidebar[data-panel="assets"]>.status-card,.sidebar[data-panel="property"]>.property-inspector,.sidebar[data-panel="rules"]>.rules{display:block}
+  .sidebar[data-panel="assets"]>.status-card{--asset-ink:#294e43;--asset-muted:#708575;--asset-line:#dfe6d9;--asset-header:#e9eee1;--asset-cash:#edf3e6;color:var(--asset-ink)}
+  .sidebar[data-panel="assets"]>.status-card>.panel-title-row{display:none}
   .mobile-sheet-header{position:sticky;top:0;display:flex;justify-content:space-between;align-items:center;background:#fbfaf3;z-index:2;min-height:56px;border-bottom:1px solid #dce3d5}
   .mobile-sheet-header strong{font-size:15px}
   .mobile-sheet-header button{min-height:44px;min-width:60px;background:#e7eee0;color:#426e58;font-size:12px}
   .mobile-sheet-backdrop:not([hidden]){display:block;position:fixed;inset:0;z-index:60;border-radius:0;background:#16382c55;backdrop-filter:blur(2px)}
   .property-inspector h2{font-size:22px}.property-inspector>p:not(.panel-label),.property-note,.property-breakdown{font-size:13px}
   .property-price{font-size:34px}.property-meta{font-size:12px}.property-price small{font-size:12px}
-  .log-card{max-height:none}#log-list{max-height:none}.log-item{font-size:13px;line-height:1.7}
-  .rules{font-size:13px}.rules summary{display:none}.rules p,.rules ul{font-size:13px}
+  .rules{font-size:14px;color:#42634f}.rules summary{display:none}.rules p,.rules ul{font-size:14px}.rules li{margin-bottom:14px;line-height:1.75}
   .history-overlay{padding:12px}.history-panel{width:100%;max-height:90dvh;padding:18px}
   .history-panel-header button{min-height:44px}
   .mode-start .topbar{visibility:hidden}

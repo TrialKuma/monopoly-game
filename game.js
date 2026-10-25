@@ -18,7 +18,7 @@ const CLASSIC_ROUTE_POSITIONS = [
 const CLASSIC_TILE_NAMES = [
   "市政府", "晨曦街", "花园里", "曦园", "银行金库",
   "环城商会", "环城商会", "皇家大酒店", "皇家大酒店",
-  "命运转盘", "百味町", "湖畔街", "瀚海阁", "机会广场",
+  "命运转盘", "百味町", "湖畔街", "瀚海阁", "道具商店",
   "温泉庄园", "温泉庄园", "枫叶路", "城建局",
   "中央区", "艺文里", "翻牌驿站", "日落湾",
 ];
@@ -56,7 +56,7 @@ const CLASSIC_DISTRICT_COLORS = {
 const CLASSIC_SPECIAL_TILES = {
   4:  { type: "bank", label: "金库", color: "#bfdbfe", description: "存钱或提款！" },
   9:  { type: "card_draw", label: "翻牌格", color: "#e9d5ff", description: "三选一存入背包，掷骰前可选用" },
-  13: { type: "chance", label: "机会格", color: "#fbcfe8", description: "街区翻新、换位、专车等城市奇遇。" },
+  13: { type: "chance", label: "道具商店", color: "#fbcfe8", description: "花金币选购一张道具卡，存入背包择机使用" },
   17: { type: "construction", label: "城建局", color: "#fef08a", description: "建造或拆除！" },
   20: { type: "card_draw", label: "翻牌格", color: "#e9d5ff", description: "三选一存入背包，掷骰前可选用" },
 };
@@ -85,7 +85,7 @@ const COMPACT_ROUTE_POSITIONS = [
 
 const COMPACT_TILE_NAMES = [
   "市政府", "河畔小筑", "林间公馆", "林间公馆", "晨曦街", "城建局",
-  "翻牌驿站", "机会广场", "冲刺站", "中央金库", "港风小筑", "潮畔温泉",
+  "翻牌驿站", "道具商店", "冲刺站", "中央金库", "港风小筑", "潮畔温泉",
   "潮畔温泉", "传送港", "艺文里", "命运转盘", "艺文里南", "艺文里北",
 ];
 
@@ -103,7 +103,7 @@ const COMPACT_DISTRICT_COLORS = {
 const COMPACT_SPECIAL_TILES = {
   5:  { type: "construction", label: "城建局", color: "#fef08a", description: "建造或拆除！" },
   6:  { type: "card_draw", label: "翻牌格", color: "#e9d5ff", description: "三选一存入背包，掷骰前可选用" },
-  7:  { type: "chance", label: "机会格", color: "#fbcfe8", description: "街区翻新、换位、专车等城市奇遇。" },
+  7:  { type: "chance", label: "道具商店", color: "#fbcfe8", description: "花金币选购一张道具卡，存入背包择机使用" },
   8:  { type: "rush", label: "冲刺站", color: "#fdba74", rushMin: 2, rushMax: 8, description: "随机冲刺 2–8 格，到达后立即结算。" },
   9:  { type: "bank", label: "金库", color: "#bfdbfe", description: "存钱或提款！" },
   13: { type: "teleport", label: "传送港", color: "#a7f3d0", settleArrival: true, description: "随机传送到一块地产，到达后立即结算。" },
@@ -133,8 +133,8 @@ const EXPANSION_TILE_NAMES = [
   "市政府", "晶藤街", "花园里", "清贝里", "银行金库", "开发局",
   "新月里", "都会大酒店", "都会大酒店", "望月庭", "翻牌驿站", "百味町",
   "城市快线",
-  "烟火巷", "机运广场", "食光里", "传送港", "暮岚街", "港湾路", "命运转盘",
-  "潮畔街", "云栖区", "星湾广场", "星港里", "星河庭", "天际里", "新月温泉", "新月温泉",
+  "烟火巷", "街角道具商店", "食光里", "传送港", "暮岚街", "港湾路", "命运转盘",
+  "潮畔街", "云栖区", "星湾道具商店", "星港里", "星河庭", "天际里", "新月温泉", "新月温泉",
 ];
 
 const EXPANSION_LARGE_LOT_LINKS = { 8: 7, 27: 26 };
@@ -159,10 +159,10 @@ const EXPANSION_SPECIAL_TILES = {
   5:  { type: "construction", label: "开发局", color: "#fef08a", description: "强化建设节奏。" },
   10: { type: "card_draw", label: "翻牌格", color: "#e9d5ff", description: "三选一存入背包，掷骰前可选用" },
   12: { type: "rush", label: "城市快线", color: "#fdba74", rushMin: 3, rushMax: 5, description: "随机冲刺 3–5 格，到达后立即结算。" },
-  14: { type: "chance", label: "机会格", color: "#fbcfe8", description: "街区翻新、换位、专车等城市奇遇。" },
+  14: { type: "chance", label: "道具商店", color: "#fbcfe8", description: "花金币选购一张道具卡，存入背包择机使用" },
   16: { type: "teleport", label: "传送港", color: "#a7f3d0", settleArrival: true, description: "随机传送到一块地产，到达后立即结算。" },
   19: { type: "card_draw", label: "命运转盘", color: "#e9d5ff", description: "三选一存入背包，掷骰前可选用" },
-  22: { type: "chance", label: "机会格", color: "#fbcfe8", description: "街区翻新、换位、专车等城市奇遇。" },
+  22: { type: "chance", label: "道具商店", color: "#fbcfe8", description: "花金币选购一张道具卡，存入背包择机使用" },
 };
 const EXPANSION_LOT_CONFIGS = {
   1:  { price: 80,  buildCosts: [0, 38, 66, 100], tolls: [18, 52, 112, 188], themeIdx: 0 },
@@ -185,72 +185,65 @@ const EXPANSION_LOT_CONFIGS = {
 };
 
 
-// Three islands share a working port. Either island makes one complete 24-step
-// lap; the 34 physical spaces include both branches, never a shortcut cycle.
+// The central port is shared; each side excursion adds eight distinct spaces.
 const HARBOR_ROUTE_POSITIONS = [
-  { x: 6, y: 6 }, { x: 5, y: 6 }, { x: 5, y: 5 }, { x: 5, y: 4 },
-  { x: 5, y: 3 }, { x: 5, y: 2 }, { x: 6, y: 2 }, { x: 6, y: 1 },
-  { x: 4, y: 1 }, { x: 3, y: 1 }, { x: 2, y: 2 }, { x: 2, y: 3 },
-  { x: 2, y: 4 }, { x: 2, y: 5 }, { x: 2, y: 6 }, { x: 2, y: 7 },
-  { x: 3, y: 8 }, { x: 4, y: 9 },
-  { x: 8, y: 1 }, { x: 9, y: 1 }, { x: 10, y: 2 }, { x: 10, y: 3 },
-  { x: 10, y: 4 }, { x: 10, y: 5 }, { x: 10, y: 6 }, { x: 10, y: 7 },
-  { x: 9, y: 8 }, { x: 8, y: 9 },
-  { x: 6, y: 10 }, { x: 6, y: 9 }, { x: 7, y: 9 }, { x: 7, y: 8 },
-  { x: 7, y: 7 }, { x: 7, y: 6 },
+  {x:6,y:9},{x:7,y:9},{x:7,y:8},{x:7,y:7},{x:6,y:6},{x:5,y:6},
+  {x:4,y:6},{x:4,y:5},{x:4,y:4},{x:5,y:3},{x:6,y:3},{x:7,y:3},
+  {x:3,y:1},{x:1,y:3},{x:1,y:5},{x:1,y:7},{x:1,y:9},{x:1,y:11},{x:3,y:13},{x:4,y:14},
+  {x:9,y:3},{x:11,y:4},{x:12,y:6},{x:12,y:8},{x:12,y:10},{x:11,y:12},{x:9,y:14},{x:8,y:14},
+  {x:6,y:14},{x:6,y:13},{x:5,y:12},{x:5,y:11},{x:5,y:10},{x:5,y:9},
 ];
 const HARBOR_TILE_NAMES = [
-  "港务大厅", "贝壳巷", "码头集", "港湾金库", "归帆旅舍", "港务办公楼", "远航驿站", "双桥口",
-  "帆布商街", "货运广场", "白帆集", "海港商会", "海港商会", "船坞工坊", "港湾观景楼", "港湾观景楼", "渔火街", "商港邮局",
-  "珊瑚小筑", "漂流邮局", "落霞旅舍", "海风酒店", "海崖温泉", "海崖温泉", "蓝窗公馆", "海岸工坊", "潮汐广场", "白沙旅馆",
-  "归航广场", "航海事务所", "水手街", "灯塔里", "归港驿站", "港口旅馆",
+  "港务大厅","贝壳巷","港湾观景楼","港湾观景楼","归帆旅舍","主港建设局","港务办公楼","海崖温泉","海崖温泉","蓝窗公馆","主港补给站","双桥口",
+  "商港道具商店","船坞工坊","商港金库","帆布商街","航海集市","造船局","商港邮局","渔火旅馆",
+  "漂流邮局","海岸快线","珊瑚小筑","潮汐道具商店","海岸工坊","旅人驿站","归航快线","白沙旅馆",
+  "归航广场","航海事务所","海港商会","海港商会","水手街","主港道具商店",
 ];
-const HARBOR_LARGE_LOT_LINKS = { 12: 11, 15: 14, 23: 22 };
+const HARBOR_LARGE_LOT_LINKS = { 3:2, 8:7, 31:30 };
 const HARBOR_DISTRICT_CONFIG = {
-  1: "主港街区", 2: "主港街区", 4: "主港街区", 5: "主港街区",
-  8: "商贸街区", 10: "商贸街区", 11: "商贸街区", 12: "商贸街区",
-  14: "灯塔街区", 15: "灯塔街区", 16: "灯塔街区",
-  18: "珊瑚街区", 20: "珊瑚街区", 21: "珊瑚街区",
-  22: "海崖街区", 23: "海崖街区", 24: "海崖街区", 27: "海崖街区",
-  29: "归帆街区", 30: "归帆街区", 31: "归帆街区", 33: "归帆街区",
+  1:"主港街区",2:"主港街区",3:"主港街区",4:"主港街区",
+  6:"海崖街区",7:"海崖街区",8:"海崖街区",
+  9:"归帆街区",29:"归帆街区",
+  30:"灯塔街区",31:"灯塔街区",32:"灯塔街区",
+  15:"商贸街区",19:"商贸街区",22:"珊瑚街区",27:"珊瑚街区",
 };
 const HARBOR_DISTRICT_COLORS = {
-  "主港街区": "#9edac8", "灯塔街区": "#a7c8ed", "商贸街区": "#efc891",
-  "海崖街区": "#e7b5c6", "归帆街区": "#b9c4e5", "珊瑚街区": "#f6c7a8",
+  "主港街区":"#9edac8","灯塔街区":"#a7c8ed","商贸街区":"#efc891",
+  "海崖街区":"#e7b5c6","归帆街区":"#b9c4e5","珊瑚街区":"#f6c7a8",
 };
 const HARBOR_SPECIAL_TILES = {
-  3: { ...CLASSIC_SPECIAL_TILES[4], label: "港湾金库" },
-  6: { ...CLASSIC_SPECIAL_TILES[9], label: "远航驿站" },
-  7: { type: "junction", label: "双桥口", color: "#91d6d7", description: "按已选航线自动分流，掷骰前可切换" },
-  9: { ...CLASSIC_SPECIAL_TILES[13], label: "货运广场" },
-  13: { ...CLASSIC_SPECIAL_TILES[17], label: "船坞工坊" },
-  17: { ...CLASSIC_SPECIAL_TILES[20], label: "商港邮局" },
-  19: { ...CLASSIC_SPECIAL_TILES[9], label: "漂流邮局" },
-  25: { ...CLASSIC_SPECIAL_TILES[17], label: "海岸工坊" },
-  26: { ...CLASSIC_SPECIAL_TILES[13], label: "潮汐广场" },
-  28: { type: "junction", label: "归航广场", color: "#91d6d7", description: "两岛航线合流，沿主港街道返回港务大厅" },
-  32: { ...CLASSIC_SPECIAL_TILES[20], label: "归港驿站" },
+  5:{...CLASSIC_SPECIAL_TILES[17],label:"主港建设局"},
+  10:{...CLASSIC_SPECIAL_TILES[9],label:"主港补给站",guaranteedCardId:"boost"},
+  11:{type:"junction",label:"双桥口",color:"#91d6d7",description:"红黄航线轮换"},
+  12:{...CLASSIC_SPECIAL_TILES[13],label:"商港道具商店"},
+  13:{...CLASSIC_SPECIAL_TILES[17],label:"船坞工坊"},
+  14:{...CLASSIC_SPECIAL_TILES[4],label:"商港金库"},
+  16:{...CLASSIC_SPECIAL_TILES[13],label:"航海集市"},
+  17:{...CLASSIC_SPECIAL_TILES[17],label:"造船局"},
+  18:{...CLASSIC_SPECIAL_TILES[9],label:"商港邮局"},
+  20:{...CLASSIC_SPECIAL_TILES[9],label:"漂流邮局"},
+  21:{type:"rush",label:"海岸快线",color:"#fdba74",rushMin:2,rushMax:3,description:"前进 2–3 格"},
+  23:{...CLASSIC_SPECIAL_TILES[13],label:"潮汐道具商店"},
+  24:{...CLASSIC_SPECIAL_TILES[17],label:"海岸工坊"},
+  25:{...CLASSIC_SPECIAL_TILES[9],label:"旅人驿站"},
+  26:{type:"rush",label:"归航快线",color:"#fdba74",rushMin:2,rushMax:3,description:"前进 2–3 格"},
+  28:{type:"junction",label:"归航广场",color:"#91d6d7",description:"两岛航线合流"},
+  33:{...CLASSIC_SPECIAL_TILES[13],label:"主港道具商店"},
 };
 const HARBOR_LOT_CONFIGS = {
-  1: { price: 100, buildCosts: [0, 42, 72, 112], tolls: [24, 64, 135, 225], themeIdx: 0 },
-  2: { price: 135, buildCosts: [0, 52, 88, 136], tolls: [32, 86, 175, 285], themeIdx: 1 },
-  4: { price: 160, buildCosts: [0, 58, 98, 148], tolls: [38, 100, 200, 325], themeIdx: 2 },
-  5: { price: 175, buildCosts: [0, 62, 104, 156], tolls: [42, 110, 220, 355], themeIdx: 3 },
-  8: { price: 90, buildCosts: [0, 38, 66, 102], tolls: [20, 58, 124, 210], themeIdx: 1 },
-  10: { price: 110, buildCosts: [0, 45, 78, 118], tolls: [26, 72, 150, 250], themeIdx: 1 },
-  11: { price: 230, buildCosts: [0, 75, 125, 180], tolls: [52, 135, 270, 450], themeIdx: 3, effectId: "finance_bonus", landmarkKey: "finance" },
-  14: { price: 220, buildCosts: [0, 72, 118, 172], tolls: [48, 128, 255, 420], themeIdx: 3, effectId: "tower_bonus", landmarkKey: "skyscraper" },
-  16: { price: 120, buildCosts: [0, 48, 82, 124], tolls: [28, 78, 164, 270], themeIdx: 1 },
-  18: { price: 85, buildCosts: [0, 38, 66, 102], tolls: [20, 56, 120, 200], themeIdx: 0 },
-  20: { price: 125, buildCosts: [0, 50, 85, 130], tolls: [28, 80, 166, 275], themeIdx: 2 },
-  21: { price: 140, buildCosts: [0, 54, 92, 140], tolls: [32, 88, 184, 300], themeIdx: 2 },
-  22: { price: 270, buildCosts: [0, 88, 140, 205], tolls: [60, 155, 310, 510], themeIdx: 2, effectId: "hot_spring_rest", landmarkKey: "onsen" },
-  24: { price: 105, buildCosts: [0, 44, 76, 116], tolls: [24, 68, 144, 235], themeIdx: 0 },
-  27: { price: 145, buildCosts: [0, 55, 94, 142], tolls: [34, 92, 190, 310], themeIdx: 2 },
-  29: { price: 180, buildCosts: [0, 65, 108, 160], tolls: [42, 112, 225, 365], themeIdx: 3 },
-  30: { price: 130, buildCosts: [0, 50, 85, 130], tolls: [30, 84, 172, 280], themeIdx: 1 },
-  31: { price: 110, buildCosts: [0, 46, 78, 120], tolls: [26, 72, 150, 245], themeIdx: 0 },
-  33: { price: 155, buildCosts: [0, 58, 98, 148], tolls: [36, 98, 200, 325], themeIdx: 2 },
+  1:{price:100,buildCosts:[0,42,72,112],tolls:[24,64,135,225],themeIdx:0},
+  2:{price:220,buildCosts:[0,72,118,172],tolls:[48,128,255,420],themeIdx:3,effectId:"tower_bonus",landmarkKey:"skyscraper"},
+  4:{price:160,buildCosts:[0,58,98,148],tolls:[38,100,200,325],themeIdx:2},
+  6:{price:175,buildCosts:[0,62,104,156],tolls:[42,110,220,355],themeIdx:3},
+  7:{price:270,buildCosts:[0,88,140,205],tolls:[60,155,310,510],themeIdx:2,effectId:"hot_spring_rest",landmarkKey:"onsen"},
+  9:{price:105,buildCosts:[0,44,76,116],tolls:[24,68,144,235],themeIdx:0},
+  15:{price:90,buildCosts:[0,38,66,102],tolls:[20,58,124,210],themeIdx:1},
+  19:{price:125,buildCosts:[0,50,85,130],tolls:[28,80,166,275],themeIdx:2},
+  22:{price:85,buildCosts:[0,38,66,102],tolls:[20,56,120,200],themeIdx:0},
+  27:{price:145,buildCosts:[0,55,94,142],tolls:[34,92,190,310],themeIdx:2},
+  29:{price:180,buildCosts:[0,65,108,160],tolls:[42,112,225,365],themeIdx:3},
+  30:{price:230,buildCosts:[0,75,125,180],tolls:[52,135,270,450],themeIdx:3,effectId:"finance_bonus",landmarkKey:"finance"},
+  32:{price:130,buildCosts:[0,50,85,130],tolls:[30,84,172,280],themeIdx:1},
 };
 const ALPINE_ROUTE_POSITIONS = [
   { x: 1, y: 1 }, { x: 2, y: 1 }, { x: 3, y: 1 }, { x: 4, y: 1 }, { x: 5, y: 1 }, { x: 6, y: 1 },
@@ -261,7 +254,7 @@ const ALPINE_ROUTE_POSITIONS = [
 const ALPINE_TILE_NAMES = [
   "山城会馆", "松风径", "山间邮局", "杉影台", "雪松集", "匠人山房",
   "映湖里", "山岚商会", "山岚商会", "山城金库", "云顶酒店", "云顶酒店",
-  "雾岚街", "山泉广场", "云岭温泉", "云岭温泉", "枫叶馆", "木屋巷",
+  "雾岚街", "山泉道具商店", "云岭温泉", "云岭温泉", "枫叶馆", "木屋巷",
   "钟声里", "山麓集", "旅人驿站", "暖泉街", "归林里", "山间缆车",
 ];
 const ALPINE_LARGE_LOT_LINKS = { 8: 7, 11: 10, 15: 14 };
@@ -281,7 +274,7 @@ const ALPINE_SPECIAL_TILES = {
   2: { type: "card_draw", label: "山间邮局", color: "#e9d5ff", description: "三选一存入背包，掷骰前可选用" },
   5: { type: "construction", label: "匠人山房", color: "#fef08a", description: "免费升级自己或拆除对手一层建筑。" },
   9: { type: "bank", label: "山城金库", color: "#bfdbfe", description: "存钱或提款！" },
-  13: { type: "chance", label: "山泉广场", color: "#fbcfe8", description: "街区翻新、换位、专车等城市奇遇。" },
+  13: { type: "chance", label: "道具商店", color: "#fbcfe8", description: "花金币选购一张道具卡，存入背包择机使用" },
   20: { type: "card_draw", label: "旅人驿站", color: "#e9d5ff", description: "三选一存入背包，掷骰前可选用" },
   23: { type: "rush", label: "山间缆车", color: "#c5dbc9", rushMin: 2, rushMax: 4, description: "乘缆车随机前进 2–4 格，抵达后立即结算。" },
 };
@@ -314,10 +307,10 @@ function makeLoopNavigation(length) {
 
 function makeHarborNavigation() {
   const next = {}, prev = {}, edges = [];
-  const shared = [28, 29, 30, 31, 32, 33, 0, 1, 2, 3, 4, 5, 6, 7];
+  const shared = [28,29,30,31,32,33,0,1,2,3,4,5,6,7,8,9,10,11];
   const branches = {
-    merchant: [7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 28],
-    resort: [7, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28],
+    merchant: [28,19,18,17,16,15,14,13,12,11],
+    resort: [11,20,21,22,23,24,25,26,27,28],
   };
   const connect = (path, branch) => path.slice(1).forEach((to, i) => {
     const from = path[i];
@@ -326,12 +319,17 @@ function makeHarborNavigation() {
   });
   connect(shared, "shared");
   Object.entries(branches).forEach(([id, path]) => connect(path, id));
-  return { next, prev, edges, shared, branches, lapLength: 24,
-    junctions: { 7: { defaultNext: 8, automatic: true, options: [
-      { id: "merchant", label: "商贸岛", next: 8 },
-      { id: "resort", label: "度假岛", next: 18 },
-    ] } },
-  };
+  // A physical junction appears several times in the itinerary. A cursor, not
+  // the tile number, determines which exit is next and makes reversal exact.
+  const red = [...shared, ...branches.resort.slice(1), ...branches.merchant.slice(1)];
+  const yellow = [...shared].reverse().concat(branches.merchant.slice(1), branches.resort.slice(1));
+  const cycle = [...red.slice(0,-1), ...yellow.slice(0,-1)];
+  const salaryStops = cycle.flatMap((tile,index) => tile === 0 ? [index] : []);
+  const salaryGapMin = Math.min(...salaryStops.map((index,i) =>
+    (salaryStops[(i+1)%salaryStops.length]-index+cycle.length)%cycle.length || cycle.length));
+  return { next, prev, edges, shared, branches, fork: 11, merge: 28,
+    cycle, phases: {red,yellow}, phaseLength:35, lapLength:35, cycleLength:70,salaryGapMin,
+    junctions: {}, automatic:true };
 }
 
 const MAP_PRESETS = {
@@ -395,14 +393,14 @@ const MAP_PRESETS = {
   },
   harbor: {
     id: "harbor",
-    maxRounds: 30,
+    maxRounds: 40,
     economy: { startCash: 1700, startBonus: 320, secondPlayerBonus: 400, bankThreshold: 240 },
     ticketPrice: 250, collectionId: "harbor_shell", collectionName: "潮汐海螺",
     name: "潮汐港湾",
-    boardTitle: "三岛港湾 · 34 格 · 每圈 24 步",
-    startDescription: "34 格三岛路线，商贸与度假两路各走 24 步闭环。掷骰前可切换航线，路口自动通过。完成 30 回合带回心愿建筑卡，建设 Lv.2 / Lv.3 可再收集。",
-    modeLabel: "三岛分岔航线",
-    grid: { columns: 11, rows: 10, cellMin: 68, cellMinTablet: 44, cellMinMobile: 30, height: "min(96vh, 1160px)", heightTablet: "min(90vh, 880px)", heightMobile: "min(82vh, 660px)", centerWidth: "min(250px, calc(100% - 160px))", centerWidthTablet: "min(220px, calc(100% - 60px))", centerWidthMobile: "min(180px, calc(100% - 40px))" },
+    boardTitle: "三岛港湾 · 34 格",
+    startDescription: "红黄航线自动轮换，每圈经过两岛。",
+    modeLabel: "三岛双向航线",
+    grid: { columns: 12, rows: 14, cellMin: 68, cellMinTablet: 44, cellMinMobile: 30, height: "min(96vh, 1160px)", heightTablet: "min(90vh, 880px)", heightMobile: "min(82vh, 660px)", centerWidth: "min(250px, calc(100% - 160px))", centerWidthTablet: "min(220px, calc(100% - 60px))", centerWidthMobile: "min(180px, calc(100% - 40px))" },
     routePositions: HARBOR_ROUTE_POSITIONS,
     tileNames: HARBOR_TILE_NAMES,
     largeLotLinks: HARBOR_LARGE_LOT_LINKS,
@@ -437,7 +435,7 @@ let selectedMapId = DEFAULT_MAP_ID;
 
 const CARD_POOL = [
   { id: "teleport", name: "传送术", icon: "🌀", description: "传送自己或对手到随机地产格，不结算落点" },
-  { id: "boost", name: "加速引擎", icon: "⚡", description: "选择一方，下次掷骰结果翻倍" },
+  { id: "boost", name: "双骰卡", icon: "🎲", description: "选择一方，下次同时掷两颗骰子" },
   { id: "slow", name: "减速陷阱", icon: "🐌", description: "选择一方，下次掷骰结果减半" },
   { id: "launch", name: "命定骰", icon: "🎯", description: "额外前进1~6步并结算地块，之后仍可掷骰" },
   { id: "rewind", name: "时光回溯", icon: "⏪", description: "选择一方后退3步，不结算落点" },
@@ -449,6 +447,12 @@ const CARD_POOL = [
   { id: "propertySwap", name: "地产互换", icon: "🔀", description: "交出你的一块地产，随机获得对手一块" },
   { id: "reverse", name: "逆行术", icon: "🔃", description: "选择一方，反转其前进方向" },
 ];
+
+const ITEM_SHOP_PRICES = Object.freeze({
+  teleport: 100, boost: 120, slow: 100, launch: 200,
+  rewind: 80, swap: 100, freeze: 160, combo: 240,
+  shield: 140, doubleRent: 180, propertySwap: 220, reverse: 80,
+});
 
 const boardEl = document.getElementById("board");
 const scoreboardEl = document.getElementById("scoreboard");
@@ -488,6 +492,7 @@ const EVENT_ICON_MAP = {
   "AI 行动": { emoji: "🤖", cls: "event-info" },
   "翻牌事件": { emoji: "🎴", cls: "event-card" },
   "翻牌奖励": { emoji: "🎴", cls: "event-card" },
+  "道具商店": { emoji: "🛍️", cls: "event-card" },
   "使用卡牌": { emoji: "🃏", cls: "event-card" },
   "传送门": { emoji: "🌀", cls: "event-special" },
   "城建局": { emoji: "🏗️", cls: "event-build" },
@@ -579,6 +584,8 @@ const BGM_SPARKLE = [
 let state = {};
 let sessionCounter = 0;
 let modalResolver = null;
+let openingCoinJob = null;
+let departureJob = null;
 let homeConfirmationPending = false;
 const soundState = { enabled: loadSoundPreference(), pools: {} };
 const bgmState = {
@@ -895,7 +902,11 @@ function renderStartMapOptions() {
     btn.classList.toggle("active", active);
     btn.setAttribute("aria-pressed", active ? "true" : "false");
   });
-  if (startMapDescriptionEl) startMapDescriptionEl.textContent = `${mapCfg.startDescription} · 门票 ¥${getMapTicket(mapCfg)}${mapCfg.id === "harbor" ? "" : ` · 收集${mapCfg.collectionName || "城市印章"}`}`;
+  if (startMapDescriptionEl) startMapDescriptionEl.textContent = "";
+  if (startPlayBtn) {
+    startPlayBtn.textContent = `出发 · ¥${getMapTicket(mapCfg)}`;
+    startPlayBtn.disabled = Boolean(departureJob);
+  }
 }
 
 function getMapTicket(map = getMapConfig()) {
@@ -903,11 +914,14 @@ function getMapTicket(map = getMapConfig()) {
 }
 
 function setSelectedMap(mapId) {
+  if (departureJob) return;
   selectedMapId = MAP_PRESETS[mapId] ? mapId : DEFAULT_MAP_ID;
+  setEntryError();
   renderStartMapOptions();
 }
 
-function initializeGame(mapId = selectedMapId) {
+function initializeGame(mapId = selectedMapId, paidRunId = null) {
+  cancelOpeningCoinToss();
   window.GameDrama?.reset();
   window.GameProgression?.resetResult();
   window.GamePresentation?.onReset();
@@ -917,7 +931,7 @@ function initializeGame(mapId = selectedMapId) {
   selectedMapId = mapCfg.id;
   state = {
     sessionId: ++sessionCounter,
-    runId: window.GameProgression?.createRunId(),
+    runId: paidRunId || window.GameProgression?.createRunId(),
     isFormalRun: false,
     round: 1,
     currentPlayerIndex: 0,
@@ -928,7 +942,9 @@ function initializeGame(mapId = selectedMapId) {
     currentMapId: mapCfg.id,
     board: createBoard(mapCfg),
     openingLots: [],
-    harborCollection: { wishlist: getHarborWishlist(), milestones: [], cards: [] },
+    harborCollection: { milestones: [], cards: [] },
+    harborProjects: Object.fromEntries(HARBOR_PROJECT_DEFS.map(project => [project.id, { stage: 0 }])),
+    harborRouteChoice: null, harborMovement: null, harborRouteSequence: 0,
     players: PLAYER_DEFS.map((p) => ({
       ...p,
       cash: economy.startCash,
@@ -937,12 +953,12 @@ function initializeGame(mapId = selectedMapId) {
       cashAnimFrame: null, cashChangeToken: 0, pendingCashDelta: 0,
       position: 0,
       nextJunctionChoice: null,
-      selectedRoute: "merchant", harborLastBranch: "merchant",
-      harborTrail: [], harborAnchor: 0, harborDistance: 0,
+      harborCursor: 6, harborAnchor: 0, harborSalaryMin: 6, harborSalaryMax: 6,
+      harborSalaryDistance: 0,
       effects: defaultEffects(),
       cards: [], cardUsedThisTurn: false,
     })),
-    lastDice: null, logs: [], gameOver: false, busy: false,
+    lastDice: null, lastDiceFaces: [], diceActionId: 0, diceDisplay: null, logs: [], gameOver: false, busy: false,
     cardSequence: 0, cardUsePending: false,
     passedStartThisTurn: false, bankPool: 0,
     gameMode: "rounds",
@@ -988,6 +1004,23 @@ function showStartScreen() {
 }
 function hideStartScreen() {
   startScreenEl?.classList.add("hidden");
+}
+function setEntryError(result) {
+  const node = document.getElementById("start-entry-error");
+  if (!node) return;
+  const errors = { unavailable: "存档暂不可用", corrupt: "存档读取失败", save_failed: "保存失败，请重试", migration_failed: "存档升级失败，请重试" };
+  node.textContent = !result ? "" : result.canEnter === false || result.error === "entry_funds"
+    ? `金币不足，还差 ¥${result.shortfall || 0}` : errors[result.error] || "出发失败，请重试";
+  node.hidden = !node.textContent;
+}
+function openDepartureMenu(mapId = selectedMapId) {
+  if (departureJob) return;
+  hideModal();
+  window.GameDrama?.reset();
+  window.GamePresentation?.onReset();
+  setSelectedMap(mapId);
+  showStartScreen();
+  render();
 }
 function showHistoryOverlay() {
   renderHistoryList();
@@ -1072,71 +1105,112 @@ function settleFirstPlayer(humanFirst, sid = state.sessionId) {
   state.initiativeResolved = true;
   const second = state.players[1 - state.firstPlayerIndex];
   const amount = getMapEconomy().secondPlayerBonus;
-  state.openingCompensation = { playerId: second.id, amount };
+  const cardId = state.currentMapId === "harbor" ? "boost" : null;
+  state.openingCompensation = { playerId: second.id, amount, ...(cardId ? { cardId } : {}) };
   if (amount > 0) {
     updatePlayerCash(second, amount, false);
     pushLog(`${second.name} 后手行动，领取 ${formatMoney(amount)} 开局补给。`);
+  }
+  if (cardId) {
+    grantInventoryCard(second.id, cardId, { type: "opening_compensation" });
+    pushLog(`${second.name} 后手补给：双骰卡 ×1。`);
   }
   return true;
 }
 
 async function coinFlipForFirstPlayer(sid) {
-  await showModal({
+  const action = await showModal({
     label: "先手决定",
-    title: "掷硬币！",
-    message: "正面你先手，反面对手先手。",
-    buttons: [{ id: "flip", label: "🪙 抛出硬币", variant: "primary" }],
+    title: "掷硬币决定先手",
+    message: "",
+    openingCoin: { phase: "ready", humanFirst: true },
+    buttons: [{ id: "flip", label: "抛出硬币", variant: "primary" }],
   });
-  if (!isSessionActive(sid)) return undefined;
+  if (!isSessionActive(sid) || action !== "flip") return undefined;
   const humanFirst = Math.random() < 0.5;
+  if (!await playOpeningCoinToss(humanFirst, sid) || !isSessionActive(sid)) return undefined;
   pushLog(`先手决定：硬币 ${humanFirst ? "正面" : "反面"}，${humanFirst ? "玩家" : "AI 对手"}先手！`);
   settleFirstPlayer(humanFirst, sid);
   const compensation = state.openingCompensation;
   const second = getPlayerById(compensation.playerId);
-  const supplyMessage = compensation.amount > 0
-    ? `\n${second.name} 后手行动，${formatMoney(compensation.amount)} 开局补给已到账。${state.gameMode === "rounds" ? `双方各有 ${getMaxRounds()} 个正常轮次，额外行动另计。` : "本局采用破产淘汰制。"}`
-    : "";
-  await showContinueModal({
+  const supplies = [compensation.amount > 0 ? formatMoney(compensation.amount) : "", compensation.cardId ? "双骰卡 ×1" : ""].filter(Boolean);
+  const supplyMessage = supplies.length ? `${second.isAi ? "对手" : "你"}获后手补偿 ${supplies.join(" · ")}` : "";
+  const confirmed = await showContinueModal({
     label: "先手决定",
-    title: humanFirst ? "🪙 正面！玩家先手！" : "🪙 反面！AI 先手！",
-    message: (humanFirst ? "由你先掷骰。" : "对手先掷骰。") + supplyMessage,
-    drama: { type: "notice", amount: 0 },
+    title: humanFirst ? "你先手" : "对手先手",
+    message: supplyMessage,
+    openingCoin: { phase: "settled", humanFirst },
   });
-  if (!isSessionActive(sid)) return undefined;
+  if (!isSessionActive(sid) || confirmed === "cancel") return undefined;
   return humanFirst;
 }
 
+function cancelOpeningCoinToss() {
+  const job = openingCoinJob;
+  if (!job) return;
+  openingCoinJob = null;
+  clearTimeout(job.timer);
+  job.resolve(false);
+}
+
+function playOpeningCoinToss(humanFirst, sid) {
+  cancelOpeningCoinToss();
+  if (!isSessionActive(sid)) return Promise.resolve(false);
+  const reduced = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+  state.modal = { ...defaultModal(), visible: true, label: "先手决定", title: "硬币翻转中", message: "",
+    openingCoin: { phase: "tossing", humanFirst, reduced: Boolean(reduced) }, buttons: [] };
+  state.phase = "presenting";
+  state.busy = true;
+  return new Promise(resolve => {
+    const job = { sid, resolve, timer: null };
+    openingCoinJob = job;
+    render();
+    job.timer = setTimeout(() => {
+      if (openingCoinJob !== job) return;
+      openingCoinJob = null;
+      resolve(isSessionActive(sid));
+    }, reduced ? 120 : 1760);
+  });
+}
+
+function openingCoinMarkup(coin) {
+  const playerMark = '<path d="m20 47 30-22 30 22v28H58V56H42v19H20Z"/><path d="M34 29v-9h11v1"/>';
+  const rivalMark = '<path d="M20 75V40h21V25h19v15h20v35ZM31 51v5m0 8v3m19-30v6m0 10v6m19-8v5m0 8v3"/>';
+  const face = (side, label, mark) => `<div class="opening-coin-face opening-coin-${side}"><span class="opening-coin-rim"></span><svg viewBox="0 0 100 100" aria-hidden="true">${mark}</svg><span class="opening-coin-face-label">${label}</span></div>`;
+  const edge = Array.from({ length: 24 }, (_, i) => `<i style="--edge-turn:${i * 15}deg"></i>`).join("");
+  return `<div class="opening-coin-stage ${coin.phase}${coin.reduced ? " reduced" : ""}" data-coin-side="${coin.humanFirst ? "human" : "ai"}" aria-hidden="true"><div class="opening-coin-halo"></div><div class="opening-coin-shadow"></div><div class="opening-coin-lift"><div class="opening-coin-spin">${face("front", "玩家", playerMark)}${face("back", "对手", rivalMark)}<div class="opening-coin-edge">${edge}</div></div></div><span class="opening-coin-spark spark-a">✦</span><span class="opening-coin-spark spark-b">✦</span></div>`;
+}
+
 async function startNewGame() {
-  hideStartScreen();
-  initializeGame(selectedMapId);
-  const sid = state.sessionId;
-
-  if (window.GameProgression?.enter) {
-    const map = getMapConfig(), price = getMapTicket(map);
-    const info = window.GameProgression.getEntryInfo({mapId:map.id,price});
-    if (!info.ok || !info.canEnter) { showStartScreen();render();window.GameProgression.showEntryError(info);return; }
-    const collectionMessage = map.id === "harbor" ? `完成对局后带回${HARBOR_FAMILY_NAMES[state.harborCollection.wishlist]}建筑卡 ×1，建设 Lv.2 / Lv.3 还可再得最多 4 张。剩余现金存入仓库。` : `完成对局后，剩余现金与${map.collectionName || "城市印章"}存入仓库。`;
-    const accepted = await showModal({label:"开始对局",title:map.name,message:`本局 ${getMaxRounds()} 回合，结束时现金最多者获胜。\n门票 ¥${price}，支付后仓库余额 ¥${info.wallet - price}。${collectionMessage}`,buttons:[{id:"cancel",label:"取消",variant:"ghost"},{id:"enter",label:`支付 ¥${price} · 开始`,variant:"primary"}]});
-    if (!isSessionActive(sid)) return;
-    if (accepted !== "enter") {showStartScreen();render();return;}
-    const entry=window.GameProgression.enter({runId:state.runId,mapId:map.id,mapName:map.name,price,collectionId:map.collectionId || "city_stamp"});
-    if (!entry.ok) {showStartScreen();render();window.GameProgression.showEntryError(entry);return;}
+  if (departureJob) return;
+  // Every paid path must first show the chosen map and ticket price.
+  if (startScreenEl?.classList.contains("hidden")) { openDepartureMenu(); return; }
+  const job = departureJob = {}, map = getMapConfig(selectedMapId), price = getMapTicket(map);
+  setEntryError(); renderStartMapOptions();
+  try {
+    const progression = window.GameProgression;
+    if (!progression?.enter || !progression?.createRunId) { setEntryError({ error: "unavailable" }); return; }
+    const info = progression.getEntryInfo({ mapId: map.id, price });
+    if (!info.ok || !info.canEnter) { setEntryError(info); return; }
+    const runId = progression.createRunId();
+    // The debit is synchronous and durable before any board/session is replaced.
+    const entry = progression.enter({ runId, mapId: map.id, mapName: map.name, price, collectionId: map.collectionId || "city_stamp" });
+    if (!entry.ok) { setEntryError(entry); return; }
+    initializeGame(map.id, runId);
     state.ticketPaid = true;
-  }
-
-  // 硬币决定先手
-  const humanFirst = await coinFlipForFirstPlayer(sid);
-  if (!isSessionActive(sid)) return;
-  if (humanFirst === undefined) { showStartScreen(); return; }
-  state.isFormalRun = true;
-  if (!humanFirst) {
-    state.currentPlayerIndex = 1;
-    setAiTurnStatus();
-    render();
-    void startAiTurnWithDelay(sid);
-  } else {
-    setHumanTurnStatus();
-    render();
+    hideStartScreen();
+    const sid = state.sessionId;
+    const humanFirst = await coinFlipForFirstPlayer(sid);
+    if (!isSessionActive(sid)) return;
+    if (humanFirst === undefined) { showStartScreen(); render(); return; }
+    state.isFormalRun = true;
+    if (!humanFirst) {
+      state.currentPlayerIndex = 1; setAiTurnStatus(); render();
+      void startAiTurnWithDelay(sid);
+    } else { setHumanTurnStatus(); render(); }
+  } finally {
+    if (departureJob === job) departureJob = null;
+    renderStartMapOptions();
   }
 }
 
@@ -1209,15 +1283,54 @@ function getJunctionConfig(index) {
 
 const HARBOR_FAMILIES = ["villa", "shop", "hotel", "tower", "finance", "skyscraper", "onsen"];
 const HARBOR_FAMILY_NAMES = { villa: "海湾公馆", shop: "港湾商铺", hotel: "海岸酒店", tower: "航海事务所", finance: "海港商会", skyscraper: "港湾观景楼", onsen: "海崖温泉" };
-let harborWishlistFallback = "villa";
+const HARBOR_PROJECT_DEFS = [
+  { id: "water", name: "海崖水庭", indices: [6, 7, 9] },
+  { id: "promenade", name: "归航花园", indices: [29, 30, 32] },
+];
+const HARBOR_PROJECT_REWARDS = [
+  { stage: 1, threshold: 3, label: "金币 +100" },
+  { stage: 2, threshold: 6, label: "双骰卡 ×1" },
+  { stage: 3, threshold: 9, label: "潮汐海螺 ×1" },
+];
 
-function getHarborWishlist() {
-  const cardId = window.GameProgression?.getProfile?.()?.profile?.town?.targetCardId;
-  const family = typeof cardId === "string" ? cardId.replace(/^harbor_/, "") : harborWishlistFallback;
-  return HARBOR_FAMILIES.includes(family) ? family : "villa";
+// Reading scene/UI state never grants a reward. Only a completed property
+// mutation can advance a project, and earned stages survive ownership loss.
+function getHarborProjectSnapshot() {
+  if (state.currentMapId !== "harbor" || !state.board || !state.harborProjects) return [];
+  return HARBOR_PROJECT_DEFS.map(project => {
+    const lots = project.indices.map(index => {
+      const tile = state.board[index], owned = tile?.lot?.ownerId === "human";
+      const level = Math.max(0, Math.min(3, tile?.lot?.level || 0));
+      return { index, name: tile?.name || "", owned, level, contribution: owned ? level : 0 };
+    });
+    const points = lots.reduce((sum, lot) => sum + lot.contribution, 0);
+    const stage = state.harborProjects[project.id]?.stage || 0;
+    return { id: project.id, name: project.name, indices: [...project.indices], lots,
+      points, maxPoints: 9, stage, nextTarget: stage < 3 ? (stage + 1) * 3 : null,
+      rewards: HARBOR_PROJECT_REWARDS.map(reward => ({ ...reward, earned: reward.stage <= stage })),
+      collectionBonus: Number(stage === 3) };
+  });
 }
 
+function syncHarborProjects() {
+  if (state.gameOver || state.phase === "preview" || document.body.classList.contains("mode-showcase")) return;
+  const human = state.players?.find(player => player.id === "human");
+  if (!human) return;
+  for (const project of getHarborProjectSnapshot()) {
+    const progress = state.harborProjects[project.id], targetStage = Math.floor(project.points / 3);
+    while (progress.stage < targetStage) {
+      const stage = ++progress.stage;
+      if (stage === 1) updatePlayerCash(human, 100, false);
+      if (stage === 2) grantInventoryCard("human", "boost", { type: "harbor_project", reference: project.id });
+      pushLog(`${project.name} Lv.${stage} · ${HARBOR_PROJECT_REWARDS[stage - 1].label}${stage === 3 ? "（结算带回）" : ""}`);
+    }
+  }
+}
+
+window.GameHarborProjects = Object.freeze({ getSnapshot: getHarborProjectSnapshot });
+
 function harborBuildingMilestone(player, tile) {
+  syncHarborProjects();
   if (state.currentMapId !== "harbor" || player.id !== "human" || tile.lot?.ownerId !== "human") return;
   const family = tile.lot.landmarkKey || tile.lot.theme.key;
   if (!HARBOR_FAMILIES.includes(family) || tile.lot.level < 2) return;
@@ -1232,86 +1345,85 @@ function harborBuildingMilestone(player, tile) {
 
 function getHarborBuildingRewards() {
   if (state.currentMapId !== "harbor") return [];
-  const counts = new Map([[`harbor_${state.harborCollection.wishlist}`, 1]]);
+  const counts = new Map();
   state.harborCollection.cards.forEach(card => counts.set(card.cardId, (counts.get(card.cardId) || 0) + 1));
   return [...counts].sort(([a], [b]) => a.localeCompare(b)).map(([cardId, count]) => ({ cardId, count }));
 }
 
+function harborCycleOffset(cursor) {
+  const length = getMapNavigation().cycle.length;
+  return ((cursor % length) + length) % length;
+}
+
 function resetHarborJourney(player, position = player.position) {
   if (state.currentMapId !== "harbor") return;
-  player.harborTrail = []; player.harborAnchor = position; player.harborDistance = 0;
-  // A relocation onto an island establishes its reverse path; the preferred
-  // route remains the player's choice for the next forward departure.
-  if (position >= 8 && position <= 17) player.harborLastBranch = "merchant";
-  else if (position >= 18 && position <= 27) player.harborLastBranch = "resort";
+  const nav = getMapNavigation(), old = Number.isInteger(player.harborCursor) ? player.harborCursor : 6;
+  const direction = player.effects?.reversed ? -1 : 1;
+  // Relocation keeps the current phase when possible. It never fabricates
+  // traversed steps, a salary, or a route-choice state.
+  const phase = Math.floor(harborCycleOffset(old) / nav.phaseLength);
+  const base = old - harborCycleOffset(old);
+  const candidates = nav.cycle.flatMap((tile,index) => tile === position ? [-1,0,1].map(lap => base + index + lap * nav.cycle.length) : []);
+  candidates.sort((a,b) => {
+    const rank = cursor => (Math.floor(harborCycleOffset(cursor)/nav.phaseLength) === phase ? 0 : 1000) + Math.abs(cursor-old) + (Math.sign(cursor-old) === direction ? 0 : .1);
+    return rank(a)-rank(b);
+  });
+  player.harborCursor = candidates[0] ?? 6;
+  player.harborAnchor = position;
+  player.harborSalaryMin = Math.min(player.harborSalaryMin ?? old, player.harborCursor);
+  player.harborSalaryMax = Math.max(player.harborSalaryMax ?? old, player.harborCursor);
+  player.harborSalaryDistance = 0;
+  player.harborFreshSalary = false;
 }
 
 function getNextHarborTile(player, currentIndex, dir, mutate) {
+  if (!mutate) return getNextHarborTile({...player}, currentIndex, dir, true);
   const nav = getMapNavigation();
-  if (!mutate) return getNextHarborTile({ ...player, harborTrail: [...(player.harborTrail || [])] }, currentIndex, dir, true);
-  if (player.harborAnchor !== currentIndex) resetHarborJourney(player, currentIndex);
-  player.harborTrail ||= [];
-  let next;
-  if (dir < 0) {
-    const last = player.harborTrail[player.harborTrail.length - 1];
-    if (last?.to === currentIndex) {
-      next = last.from;
-      player.harborTrail.pop();
-    } else {
-      next = currentIndex === 28 ? (player.harborLastBranch === "resort" ? 27 : 17) : nav.prev[currentIndex];
-    }
-  } else {
-    next = currentIndex === 7 ? (player.selectedRoute === "resort" ? 18 : 8) : nav.next[currentIndex];
-    if (currentIndex === 7) player.harborLastBranch = player.selectedRoute === "resort" ? "resort" : "merchant";
-    player.harborTrail.push({ from: currentIndex, to: next });
-  }
+  if (player.harborAnchor !== currentIndex || nav.cycle[harborCycleOffset(player.harborCursor)] !== currentIndex) resetHarborJourney(player,currentIndex);
+  const cursor = player.harborCursor + (dir < 0 ? -1 : 1);
+  const next = nav.cycle[harborCycleOffset(cursor)];
+  player.harborSalaryDistance = (player.harborSalaryDistance || 0) + (dir < 0 ? -1 : 1);
+  player.harborFreshSalary = next === 0 && Math.abs(player.harborSalaryDistance) >= nav.salaryGapMin &&
+    (cursor < player.harborSalaryMin || cursor > player.harborSalaryMax);
+  player.harborSalaryMin = Math.min(player.harborSalaryMin,cursor);
+  player.harborSalaryMax = Math.max(player.harborSalaryMax,cursor);
+  player.harborCursor = cursor;
   player.harborAnchor = next;
-  player.harborDistance = (player.harborDistance || 0) + (dir < 0 ? -1 : 1);
   return next;
 }
 
-function chooseAiHarborRoute(player) {
-  if (state.currentMapId !== "harbor") return;
-  const score = branch => getMapNavigation().branches[branch].slice(1, -1).reduce((sum, index) => {
-    const tile = state.board[index];
-    if (tile.isLargeSecondary) return sum;
-    return sum + scoreAiTargetTile(player, tile);
-  }, 0);
-  // Stable preference when both are comparable, avoiding route churn each turn.
-  const merchant = score("merchant"), resort = score("resort");
-  if (Math.abs(merchant - resort) > 1) player.selectedRoute = merchant > resort ? "merchant" : "resort";
+async function ensureHarborDeparture(player, sid) {
+  return isSessionActive(sid) && !state.gameOver && getPlayerById(player.id) === player;
+}
+
+function getHarborJourney(player) {
+  if (state.currentMapId !== "harbor" || !player) return null;
+  const copy = {...player}, nav = getMapNavigation();
+  if (copy.harborAnchor !== copy.position || nav.cycle[harborCycleOffset(copy.harborCursor)] !== copy.position) resetHarborJourney(copy);
+  const travelDirection = copy.effects?.reversed ? -1 : 1;
+  // At an exact phase boundary, reverse movement uses the preceding phase.
+  const outgoingCursor = copy.harborCursor + (travelDirection < 0 ? -1 : 0);
+  const cycleOffset = harborCycleOffset(copy.harborCursor);
+  const phase = harborCycleOffset(outgoingCursor) < nav.phaseLength ? "red" : "yellow";
+  return {phase,phaseNumber:Math.floor(outgoingCursor/nav.phaseLength)+1,
+    cycleOffset,cycleLength:nav.cycle.length,phaseProgress:harborCycleOffset(outgoingCursor)%nav.phaseLength,
+    travelDirection,centralDirection:(phase === "red" ? 1 : -1)*travelDirection,
+    nextTileIndex:getNextHarborTile(copy,copy.position,travelDirection,false)};
 }
 
 window.GameHarbor = {
   getState() {
-    const human = state.players?.find(p => p.id === "human");
-    const active = state.currentMapId === "harbor";
-    return { active, totalTiles: 34, lapTiles: 24, route: human?.selectedRoute || "merchant",
-      canChangeRoute: active && !state.gameOver && !state.busy && !state.cardUsePending && state.phase === "await_roll" && currentPlayer()?.id === "human",
-      wishlist: active && state.isFormalRun ? state.harborCollection.wishlist : getHarborWishlist(),
-      rewards: active ? getHarborBuildingRewards() : [], earnedCount: state.harborCollection?.cards.length || 0,
-      choices: [{ id: "merchant", label: "商贸岛", detail: "商会 · 观景楼 · 商铺" }, { id: "resort", label: "度假岛", detail: "温泉 · 酒店 · 公馆" }],
-      families: HARBOR_FAMILIES.map(family => ({ family, cardId: `harbor_${family}`, label: HARBOR_FAMILY_NAMES[family] })),
-      navigation: active ? getMapNavigation() : MAP_PRESETS.harbor.navigation,
-    };
+    const human = state.players?.find(p=>p.id === "human"), active = state.currentMapId === "harbor";
+    const nav = active ? getMapNavigation() : MAP_PRESETS.harbor.navigation;
+    const journey = active ? getHarborJourney(human) : null;
+    return {active,totalTiles:34,lapTiles:35,cycleTiles:70,route:journey?.phase || "red",journey,canChangeRoute:false,
+      pendingChoice:null,choices:[],
+      rewards:active ? getHarborBuildingRewards() : [],earnedCount:state.harborCollection?.cards.length || 0,
+      families:HARBOR_FAMILIES.map(family=>({family,cardId:"harbor_"+family,label:HARBOR_FAMILY_NAMES[family]})),
+      navigation:nav};
   },
-  setRoute(route) {
-    if (!["merchant", "resort"].includes(route) || !this.getState().canChangeRoute) return { ok: false };
-    getPlayerById("human").selectedRoute = route;
-    render();
-    return { ok: true, route };
-  },
-  setWishlist(family) {
-    family = String(family).replace(/^harbor_/, "");
-    if (!HARBOR_FAMILIES.includes(family) || state.isFormalRun && !state.gameOver) return { ok: false };
-    const result = window.GameProgression?.town?.setTarget({ cardId: `harbor_${family}` });
-    if (result && !result.ok) return result;
-    harborWishlistFallback = family;
-    if (state.harborCollection) state.harborCollection.wishlist = family;
-    render();
-    return result || { ok: true };
-  },
-  getRewards: getHarborBuildingRewards,
+  setRoute() { return {ok:false}; },
+  getRewards:getHarborBuildingRewards,
 };
 
 function getNextTileIndex(player, currentIndex, dir = (player.effects?.reversed ? -1 : 1), consumeChoice = true) {
@@ -1331,21 +1443,20 @@ function getNextTileIndex(player, currentIndex, dir = (player.effects?.reversed 
 }
 
 function previewMovement(player, steps, options = {}) {
+  const dir = options.direction ?? (player.effects.reversed ? -1 : 1);
   const temp = {
     ...player,
-    effects: { reversed: options.direction === -1 },
-    harborTrail: [...(player.harborTrail || [])],
-    selectedRoute: options.branchChoice ?? player.selectedRoute,
+    effects: { ...player.effects, reversed: dir < 0 },
     nextJunctionChoice: options.branchChoice ?? player.nextJunctionChoice ?? null,
   };
   let idx = options.startingIndex ?? player.position;
-  const dir = options.direction ?? (player.effects.reversed ? -1 : 1);
   const path = [];
+  let uncertain = false;
   for (let i = 0; i < steps; i++) {
     idx = getNextTileIndex(temp, idx, dir, true);
     path.push(idx);
   }
-  return { path, index: idx, branchChoice: temp.nextJunctionChoice };
+  return { path, index: idx, branchChoice: temp.nextJunctionChoice, uncertain };
 }
 
 function currentPlayer() { return state.players[state.currentPlayerIndex]; }
@@ -1415,22 +1526,43 @@ function getRoundLabel() {
 }
 
 function setHumanTurnStatus() {
+  resetDiceDisplay();
   state.phase = "await_roll"; state.busy = false;
   state.statusTitle = `${getRoundLabel()}：${currentPlayer().name} 行动`;
-  state.statusDescription = "点击掷骰子开始行动！掷出6点可获得额外一个完整回合。";
+  state.statusDescription = "";
   clearHighlights(); hideModal(false);
 }
 
 function setAiTurnStatus() {
+  resetDiceDisplay();
   state.phase = "locked"; state.busy = true;
   state.statusTitle = `${getRoundLabel()}：${currentPlayer().name} 行动`;
-  state.statusDescription = "AI 正在掷骰并自动完成买地、升级和收费。";
+  state.statusDescription = "";
   clearHighlights(); hideModal(false);
 }
 
 function clearHighlights() {
   state.animation.currentTile = null; state.animation.landedTile = null;
   state.animation.diceResult = false; state.animation.boardBurst = false;
+}
+
+function resetDiceDisplay() {
+  state.diceActionId = (state.diceActionId || 0) + 1;
+  state.diceDisplay = null;
+  state.lastDice = null;
+  state.lastDiceFaces = [];
+  state.animation.diceRolling = false;
+  state.animation.diceResult = false;
+  state.animation.boardBurst = false;
+}
+
+function getDiceDisplay() {
+  const player = currentPlayer(), rolled = state.diceDisplay;
+  const belongsToAction = rolled && rolled.sessionId === state.sessionId &&
+    rolled.actionId === state.diceActionId && rolled.actorId === player.id;
+  if (belongsToAction) return {...rolled,faces:[...rolled.faces]};
+  return {actorId:player.id,purpose:"turn",stage:"ready",count:player.effects.speedBoost ? 2 : 1,
+    faces:[],total:null,sessionId:state.sessionId,actionId:state.diceActionId};
 }
 
 function render() {
@@ -1615,45 +1747,31 @@ function renderScoreboard() {
       </div>`;
     scoreboardEl.appendChild(wb);
   }
-  state.players.forEach((p) => {
+  const assets = state.players.map((p) => {
     const lots = state.board.filter((t) => t.lot?.ownerId === p.id && !t.isLargeSecondary);
     const totalLv = lots.reduce((s, t) => s + t.lot.level, 0);
-    const card = document.createElement("div");
-    card.className = `player-card${p.id === currentPlayer().id && !state.gameOver ? " active" : ""}${p.cashPulse ? " cash-changing" : ""}`;
-    card.dataset.playerAnchor = p.id;
-    const dc = Math.round(p.displayedCash ?? p.cash);
-    const dt = p.cashDelta > 0 ? `+${formatMoney(p.cashDelta)}` : `-${formatMoney(Math.abs(p.cashDelta))}`;
     const efx = [];
-    if (p.effects.speedBoost) efx.push("⚡加速");
-    if (p.effects.speedSlow) efx.push("🐌减速");
-    if (p.effects.shield) efx.push("🛡️护盾");
-    if (p.effects.doubleRent) efx.push("💎翻倍");
-    if (p.effects.frozen) efx.push("🪤绊脚");
-    if (p.effects.hotSpringRest) efx.push("♨️休息中");
-    if (p.effects.bankruptcyRelief) efx.push(getMapConfig().reliefRest === false ? "🆘已获救助" : "🆘休整中");
-    if (p.effects.extraTurn) efx.push("🥁连击");
-    if (p.effects.reversed) efx.push("🔃逆行");
-    const efxHtml = efx.length > 0 ? `<div class="player-effects">${efx.map((e) => `<span class="effect-chip">${e}</span>`).join("")}</div>` : "";
-    card.innerHTML = `
-      <div class="player-title">
-        <div class="player-name"><span class="player-dot" style="background:${p.color};"></span><span>${p.name}</span></div>
-        <span class="meta-chip">${p.isAi ? "AI" : "玩家"}</span>
-      </div>
-      <div class="player-cash-row">
-        <span class="player-cash-label">剩余金钱</span>
-        <div class="player-cash-main">
-          <span class="player-cash-value${p.cashPulse ? " animate" : ""}">${formatMoney(dc)}</span>
-          ${p.cashDeltaVisible ? `<span class="player-cash-delta ${p.cashDelta > 0 ? "positive" : "negative"}">${dt}</span>` : ""}
-        </div>
-      </div>
-      ${efxHtml}
-      <div class="player-meta">
-        <span class="meta-chip">地产 ${lots.length} 块</span>
-        <span class="meta-chip">建筑等级 ${totalLv}</span>
-        <span class="meta-chip">位置 ${state.board[p.position].name}</span>
-      </div>`;
-    scoreboardEl.appendChild(card);
+    if (p.effects.speedBoost) efx.push("双骰");
+    if (p.effects.speedSlow) efx.push("减速");
+    if (p.effects.shield) efx.push("护盾");
+    if (p.effects.doubleRent) efx.push("收租翻倍");
+    if (p.effects.frozen) efx.push("绊脚");
+    if (p.effects.hotSpringRest) efx.push("温泉休息");
+    if (p.effects.bankruptcyRelief && getMapConfig().reliefRest !== false) efx.push("休整中");
+    if (p.effects.extraTurn) efx.push("再行动");
+    if (p.effects.reversed) efx.push("逆行");
+    return { player:p, lots:lots.length, totalLv, maxLevel:lots.filter(t=>t.lot.level===3).length, cards:p.cards?.length||0, effects:efx };
   });
+  const table = document.createElement("table");
+  table.className = "asset-comparison";
+  table.setAttribute("aria-label", "双方当前资产对比");
+  const row = (label, key, suffix) => `<tr data-asset-row="${key}"><th scope="row">${label}</th>${assets.map(a=>`<td data-asset-player="${a.player.id}">${a[key]}<small>${suffix}</small></td>`).join("")}</tr>`;
+  table.innerHTML = `<thead><tr><td></td>${assets.map(a=>`<th scope="col" data-asset-owner="${a.player.id}"><span class="asset-owner-dot" aria-hidden="true"></span>${a.player.id==='human'?'你':'对手'}</th>`).join("")}</tr></thead><tbody>
+    <tr class="asset-cash-row" data-asset-row="cash"><th scope="row">现金</th>${assets.map(a=>`<td data-player-anchor="${a.player.id}" data-asset-player="${a.player.id}"><strong class="asset-cash-value">${formatMoney(Math.round(a.player.displayedCash??a.player.cash))}</strong></td>`).join("")}</tr>
+    ${row('地产','lots','块')}${row('建筑总等级','totalLv','级')}${row('满级建筑','maxLevel','座')}${row('道具卡','cards','张')}
+    ${assets.some(a=>a.effects.length)?`<tr class="asset-effects-row"><th scope="row">状态</th>${assets.map(a=>`<td>${a.effects.length?a.effects.join(' · '):'—'}</td>`).join("")}</tr>`:''}
+  </tbody>`;
+  scoreboardEl.appendChild(table);
 }
 
 function renderMiniScoreboard() {
@@ -1681,6 +1799,7 @@ function getLogPlayerColor(text) {
 }
 
 function renderLogs() {
+  if (!logListEl) return;
   const nextKey = state.logs.join("\n");
   if (logListEl.dataset.logKey === nextKey) return;
   logListEl.dataset.logKey = nextKey;
@@ -1701,13 +1820,23 @@ function renderStatus() {
     roundChipEl.textContent = `第 ${Math.min(state.round, getMaxRounds())} / ${getMaxRounds()} 回合`;
     roundProgressBarEl.style.width = `${Math.min((state.round - 1) / getMaxRounds() * 100, 100)}%`;
   }
-  diceBoxEl.textContent = state.lastDice ?? "-";
-  if (state.lastDice) centerDiceValueEl.innerHTML = renderDiceFaceSvg(state.lastDice);
-  else centerDiceValueEl.textContent = "-";
-  const isIdle = !state.animation.diceRolling && !state.animation.diceResult && !state.gameOver && !state.modal.visible;
+  const dice = getDiceDisplay(), diceFaces = Array.from({length:dice.count},(_,i) => dice.faces[i] ?? null);
+  const diceFace = face => face === null ? '<span class="dice-ready-mark" aria-hidden="true">—</span>' : renderDiceFaceSvg(face);
+  diceBoxEl.textContent = dice.faces.length ? dice.faces.join("+") : "—";
+  centerDiceEl.dataset.diceActor = dice.actorId;
+  centerDiceEl.dataset.dicePurpose = dice.purpose;
+  centerDiceEl.dataset.diceStage = dice.stage;
+  diceBoxEl.dataset.diceActor = dice.actorId;
+  centerDiceEl.setAttribute("aria-label",`${getPlayerById(dice.actorId).name} · ${dice.purpose === "bank" ? "存款骰" : dice.count === 2 ? "双骰" : "骰子"}${dice.total === null ? " · 待掷" : ` · ${dice.faces.join(" + ")} 点`}`);
+  centerDiceEl.classList.toggle("double-dice", dice.count === 2);
+  centerDiceValueEl.innerHTML = dice.count === 2
+    ? `<span class="dice-pair">${diceFaces.map(face => `<span class="dice-pair-face">${diceFace(face)}</span>`).join("")}</span>`
+    : diceFace(diceFaces[0]);
+  const rolling = dice.stage === "rolling", result = dice.stage === "result" && state.animation.diceResult;
+  const isIdle = dice.stage === "ready" && !state.gameOver && !state.modal.visible;
   centerDiceEl.classList.toggle("idle", isIdle);
-  centerDiceEl.classList.toggle("rolling", state.animation.diceRolling);
-  centerDiceEl.classList.toggle("result", state.animation.diceResult === true);
+  centerDiceEl.classList.toggle("rolling", rolling);
+  centerDiceEl.classList.toggle("result", result === true);
   centerTitleEl.textContent = state.statusTitle;
   centerDescriptionEl.textContent = state.statusDescription;
   centerPlayerBadgeEl.textContent = `当前：${currentPlayer().name}`;
@@ -1720,7 +1849,10 @@ function renderModal() {
   if (eventOverlayEl.dataset.modalKey === nextKey) return;
   eventOverlayEl.dataset.modalKey = nextKey;
   eventOverlayEl.classList.toggle("visible", m.visible);
-  const boardChoice = Boolean(m.visible && m.boardTargets?.length);
+  eventOverlayEl.classList.toggle("opening-coin-overlay", Boolean(m.visible && m.openingCoin));
+  eventOverlayEl.classList.toggle("item-shop-overlay", Boolean(m.visible && m.itemShop));
+  eventOverlayEl.setAttribute("aria-busy", m.openingCoin?.phase === "tossing" ? "true" : "false");
+  const boardChoice = Boolean(m.visible && (m.boardTargets?.length || m.routeChoice));
   document.body.classList.toggle("browsing-property", boardChoice);
   eventOverlayEl.classList.toggle("board-choice", boardChoice);
   const dock = boardChoice ? document.getElementById("board-choice-dock") : document.body;
@@ -1729,7 +1861,7 @@ function renderModal() {
   eventTitleEl.textContent = m.title || "";
   eventMessageEl.textContent = m.message || "";
   const ico = EVENT_ICON_MAP[m.label] || { emoji: "📋", cls: "event-info" };
-  eventIconWrapEl.innerHTML = m.visible ? `<div class="event-icon ${ico.cls}">${ico.emoji}</div>` : "";
+  eventIconWrapEl.innerHTML = m.visible ? m.openingCoin ? openingCoinMarkup(m.openingCoin) : `<div class="event-icon ${ico.cls}">${ico.emoji}</div>` : "";
   if (boardChoice && m.buttons.some(b => b.id.startsWith("seize_"))) {
     eventActionsEl.className = "event-actions property-target-actions";
     const options = m.buttons.filter(b => b.id.startsWith("seize_")).map(b => {
@@ -1737,6 +1869,9 @@ function renderModal() {
       return `<option value="${index}"${index === m.selectedTarget ? " selected" : ""}>${municipalTargetLabel(tile)} · Lv.${tile.lot.level} · ${formatMoney(getCityTakeoverQuote(tile.lot).purchasePrice)}</option>`;
     }).join("");
     eventActionsEl.innerHTML = `<label class="property-target-picker">征用目标<select data-city-target aria-label="征用目标">${options}</select></label><button class="modal-btn secondary" data-action="skip">跳过</button><button class="modal-btn primary" data-action="seize_${m.selectedTarget}">选择这处地产</button>`;
+  } else if (m.itemShop) {
+    eventActionsEl.className = "event-actions item-shop-actions";
+    eventActionsEl.innerHTML = m.buttons.map(b => `<button class="modal-btn ${b.variant || "ghost"} ${b.id === "skip" ? "item-shop-leave" : "item-shop-card"}" data-action="${b.id}"${b.disabled ? " disabled aria-disabled=\"true\"" : ""}>${b.label}</button>`).join("");
   } else if (m.cardDraw) {
     eventActionsEl.className = "event-actions card-draw-actions";
     eventActionsEl.innerHTML = m.buttons
@@ -1750,7 +1885,7 @@ function renderModal() {
 
 function updateControls() {
   rollBtn.disabled = state.gameOver || state.busy || currentPlayer().isAi || state.phase !== "await_roll";
-  restartBtn.disabled = homeConfirmationPending || Boolean(state.ticketPaid && !state.gameOver && state.busy && !state.modal.visible);
+  restartBtn.disabled = Boolean(openingCoinJob) || homeConfirmationPending || Boolean(state.ticketPaid && !state.gameOver && state.busy && !state.modal.visible);
 }
 
 function getPhaseLabel() {
@@ -1771,7 +1906,6 @@ async function playHumanTurn() {
 async function playAiTurn() {
   if (state.gameOver || !currentPlayer().isAi || state.cardUsePending) return;
   const sid = state.sessionId;
-  chooseAiHarborRoute(currentPlayer());
   await useAiInventoryCard(currentPlayer());
   if (!isSessionActive(sid) || state.gameOver) return;
   await processTurn(currentPlayer());
@@ -1779,7 +1913,7 @@ async function playAiTurn() {
 
 async function processTurn(player, isExtraTurn = false) {
   const sid = state.sessionId;
-  if (player.isAi) chooseAiHarborRoute(player);
+  resetDiceDisplay();
   // A pre-roll movement card may schedule a rest. It keeps this promised dice
   // action; the rest begins on the following action, including a bonus action.
   const deferredRest = player.cardDeferredRest || {};
@@ -1798,9 +1932,9 @@ async function processTurn(player, isExtraTurn = false) {
     } else {
       pushLog(`${player.name} 本回合休整，救助金已在上回合到账，下回合恢复行动。`);
       state.statusTitle = `${player.name} 本回合休整`;
-      state.statusDescription = "救助金已在上回合到账，本回合休整，下回合恢复行动。";
+      state.statusDescription = "";
       render();
-      await showContinueModal({ label: "等待救援", title: `${player.name} 本回合休整`, message: "本回合休整，救助金已在上回合到账，下回合恢复行动。", drama: { type: "notice", amount: 0 } });
+      await showContinueModal({ label: "等待救援", title: `${player.name} 本回合休整`, message: "", drama: { type: "notice", amount: 0 } });
       if (!isSessionActive(sid)) return;
       endTurn(); return;
     }
@@ -1815,9 +1949,9 @@ async function processTurn(player, isExtraTurn = false) {
     player.effects.frozen = false;
     pushLog(`${player.name} 在温泉庄园休息一回合，下回合恢复行动。${trappedWhileResting ? "绊脚效果同时结束，不重复收租或追加休息。" : ""}`);
     state.statusTitle = `${player.name} 休息结束`;
-    state.statusDescription = "本回合休息结束，下回合恢复行动；停留期间不重复结算温泉。";
+    state.statusDescription = "";
     render();
-    await showContinueModal({ label: "温泉休息", title: `♨️ ${player.name} 休息结束`, message: `本回合休息结束，下回合可以正常行动。${trappedWhileResting ? "绊脚效果一同消退，不重复收租，也不延长住宿。" : "停留期间不重复收租。"}` });
+    await showContinueModal({ label: "温泉休息", title: `♨️ ${player.name} 休息结束`, message: "" });
     if (!isSessionActive(sid)) return;
     endTurn(); return;
   }
@@ -1826,9 +1960,9 @@ async function processTurn(player, isExtraTurn = false) {
     player.effects.frozen = false;
     pushLog(`${player.name} 被绊脚术绊住，无法移动，但需结算当前地块！`);
     state.statusTitle = `${player.name} 被绊住`;
-    state.statusDescription = "绊脚术生效，无法移动，结算当前所在地块。";
+    state.statusDescription = "本回合停步";
     render();
-    await showContinueModal({ label: "绊脚效果", title: `${player.name} 被绊住！`, message: "绊脚术生效，本回合无法移动，但仍需结算当前所在地块。" });
+    await showContinueModal({ label: "绊脚效果", title: `${player.name} 被绊住！`, message: "本回合停步" });
     if (!isSessionActive(sid)) return;
     const frozenTile = state.board[player.position];
     state.animation.landedTile = frozenTile.index;
@@ -1838,23 +1972,24 @@ async function processTurn(player, isExtraTurn = false) {
     endTurn(); return;
   }
 
-  const dice = await animateDiceRoll(sid);
+  const doubleDice = player.effects.speedBoost;
+  const dice = await animateDiceRoll(sid,"turn",doubleDice ? 2 : 1,player);
   if (!isSessionActive(sid) || dice === null) return;
 
   let actualSteps = dice;
   let speedMsg = "";
-  if (player.effects.speedBoost) {
+  if (doubleDice) {
     player.effects.speedBoost = false;
-    actualSteps = dice * 2;
-    speedMsg = `加速引擎生效！${dice}→${actualSteps} 步！`;
-  } else if (player.effects.speedSlow) {
+    speedMsg = `双骰 ${state.lastDiceFaces.join(" + ")} = ${dice} 步`;
+  }
+  if (player.effects.speedSlow) {
     player.effects.speedSlow = false;
     actualSteps = Math.max(1, Math.ceil(dice / 2));
     speedMsg = `减速陷阱生效！${dice}→${actualSteps} 步。`;
   }
   pushLog(`${player.name} 掷出 ${dice} 点${speedMsg ? "。" + speedMsg : "。"}`);
 
-  await animateMovement(player, actualSteps, sid);
+  if (await animateMovement(player, actualSteps, sid) === false) return;
   if (!isSessionActive(sid)) return;
 
   const tile = state.board[player.position];
@@ -1870,7 +2005,7 @@ async function processTurn(player, isExtraTurn = false) {
   if (!isSessionActive(sid) || state.gameOver) return;
 
   let extra = false;
-  if (!isExtraTurn && dice === 6) extra = true;
+  if (!isExtraTurn && !doubleDice && dice === 6) extra = true;
   if (player.effects.extraTurn) { player.effects.extraTurn = false; extra = true; }
 
   if (extra) {
@@ -1878,7 +2013,7 @@ async function processTurn(player, isExtraTurn = false) {
     await showContinueModal({
       label: "骰6再动",
       title: "再来一回合！",
-      message: `${player.name} 获得额外一个完整回合！`,
+      message: "",
     });
     if (!isSessionActive(sid) || state.gameOver) return;
     await processTurn(player, true);
@@ -1887,39 +2022,59 @@ async function processTurn(player, isExtraTurn = false) {
   endTurn();
 }
 
-async function animateDiceRoll(sid, purpose = "turn") {
-  const final = rollDice();
+async function animateDiceRoll(sid, purpose = "turn", count = 1, player = currentPlayer()) {
+  if (!isSessionActive(sid) || state.gameOver || currentPlayer() !== player) return null;
+  const diceCount = purpose === "turn" && count === 2 ? 2 : 1;
+  const display = {sessionId:sid,actionId:state.diceActionId,actorId:player.id,
+    purpose,count:diceCount,stage:"rolling",faces:[],total:null};
+  state.diceDisplay = display;
+  state.lastDice = null; state.lastDiceFaces = [];
+  const isActive = () => isSessionActive(sid) && !state.gameOver && currentPlayer() === player &&
+    state.diceActionId === display.actionId && state.diceDisplay === display;
+  const faces = Array.from({length:diceCount},() => rollDice());
+  const final = faces.reduce((sum,face) => sum + face,0);
   playSound("dice", { rate: 0.92 + Math.random() * 0.06 });
   state.animation.diceRolling = true;
-  state.statusTitle = `${currentPlayer().name} 正在掷${purpose === "bank" ? "存款骰" : "骰"}`;
-  state.statusDescription = purpose === "bank" ? "按点数 × 30 计算存款，不影响本回合步数。" : "骰子正在滚动...";
+  state.animation.diceResult = false;
+  state.statusTitle = `${player.name} 正在掷${purpose === "bank" ? "存款骰" : "骰"}`;
+  state.statusDescription = "";
   render();
   for (let i = 0; i < 10; i++) {
-    state.lastDice = rollDice(); render();
+    state.lastDiceFaces = Array.from({length:diceCount},() => rollDice());
+    state.lastDice = state.lastDiceFaces.reduce((sum,face) => sum + face,0);
+    display.faces = [...state.lastDiceFaces]; display.total = state.lastDice; render();
     if (i === 4) playSound("dice", { rate: 0.98 + Math.random() * 0.06 });
     await sleep(70 + i * 10);
-    if (!isSessionActive(sid)) return null;
+    if (!isActive()) return null;
   }
   state.lastDice = final;
+  state.lastDiceFaces = faces;
+  display.faces = [...faces]; display.total = final; display.stage = "result";
   state.animation.diceRolling = false;
   state.animation.diceResult = true;
   state.animation.boardBurst = true;
   playSound("land", { volumeMultiplier: 0.55, rate: 1.18 + (final / 6) * 0.08 });
-  state.statusTitle = purpose === "bank" ? `存款骰：${final} 点` : `${currentPlayer().name} 掷出了 ${final} 点`;
+  state.statusTitle = purpose === "bank" ? `存款骰：${final} 点` : diceCount === 2 ? `${faces.join(" + ")} = ${final} 点` : `${player.name} 掷出了 ${final} 点`;
   state.statusDescription = purpose === "bank"
-    ? `本次应存入 ${formatMoney(final * 30)}，最多扣除现有现金。`
-    : final === 6 ? "骰出6点！本次行动后将获得额外一个完整回合！" : "开始前进。";
+    ? `存款 ${formatMoney(Math.min(final * 30, player.cash))}`
+    : diceCount === 1 && final === 6 ? "再行动一次" : "";
   render();
   await sleep(500);
-  if (!isSessionActive(sid)) return null;
+  if (!isActive()) return null;
   state.animation.diceResult = false;
   state.animation.boardBurst = false;
   render();
   return final;
 }
 
-async function animateMovement(player, steps, sid) {
-  const dir = player.effects.reversed ? -1 : 1;
+async function animateMovement(player, steps, sid, options = {}) {
+  if (!isSessionActive(sid) || state.gameOver || getPlayerById(player.id) !== player) return false;
+  if (state.harborMovement && state.currentMapId === "harbor") return false;
+  const movement = {sessionId:sid,player,remainingSteps:steps};
+  if (state.currentMapId === "harbor") state.harborMovement = movement;
+  const dir = options.direction ?? (player.effects.reversed ? -1 : 1);
+  try {
+  if (!await ensureHarborDeparture(player,sid,dir,steps)) return false;
   for (let step = 1; step <= steps; step++) {
     const prev = player.position;
     const next = getNextTileIndex(player, player.position, dir, true);
@@ -1932,16 +2087,17 @@ async function animateMovement(player, steps, sid) {
     state.animation.landedTile = step === steps ? next : null;
     state.statusTitle = `${player.name} 前进中`;
     state.statusDescription = `第 ${step} / ${steps} 步，抵达 ${state.board[next].name}。`;
-    const crossedStart = next === 0 && prev !== 0 && (state.currentMapId !== "harbor" || Math.abs(player.harborDistance) >= 24);
+    const crossedStart = options.payStart !== false && next === 0 && prev !== 0 && (state.currentMapId !== "harbor" || player.harborFreshSalary);
     let startUpgradeMsg = "";
     if (crossedStart) {
-      if (state.currentMapId === "harbor") player.harborDistance = 0;
+      if (state.currentMapId === "harbor") player.harborSalaryDistance = 0;
       state.passedStartThisTurn = true;
       updatePlayerCash(player, getMapEconomy().startBonus, false);
       const buildable = state.board.filter((t) => t.lot?.ownerId === player.id && t.lot.level === 0 && !t.isLargeSecondary);
       if (buildable.length > 0) {
         const target = buildable[Math.floor(Math.random() * buildable.length)];
         target.lot.level = 1;
+        syncHarborProjects();
         startUpgradeMsg = `\n${target.name} 自动建造至 Lv.1！`;
         pushLog(`${player.name} 经过市政府，获得 ${formatMoney(getMapEconomy().startBonus)}。${target.name} 自动建造至 Lv.1。`);
       } else {
@@ -1950,7 +2106,7 @@ async function animateMovement(player, steps, sid) {
     }
     render();
     await sleep(Math.max(step === steps ? 260 : 180, window.CityScene?.getMovementDuration?.(player.id) || 0));
-    if (!isSessionActive(sid)) return;
+    if (!isSessionActive(sid) || state.gameOver) return false;
     if (crossedStart) {
       render();
       await showContinueModal({
@@ -1958,9 +2114,13 @@ async function animateMovement(player, steps, sid) {
         message: `${player.name} 经过市政府，领取了 ${formatMoney(getMapEconomy().startBonus)} 补给资金。${startUpgradeMsg}`,
         drama: { type: "income", amount: getMapEconomy().startBonus, to: player },
       });
-      if (!isSessionActive(sid)) return;
+      if (!isSessionActive(sid) || state.gameOver) return false;
     }
+    movement.remainingSteps = steps - step;
+    if (!await ensureHarborDeparture(player,sid,dir,movement.remainingSteps)) return false;
   }
+  return true;
+  } finally { if (state.harborMovement === movement) state.harborMovement = null; }
 }
 
 function getCityTakeoverQuote(lot) {
@@ -2001,7 +2161,7 @@ async function resolveStartTakeover(player, sid) {
     buttons.push({ id: "skip", label: "跳过（不征用）", variant: "secondary" });
     const selection = await showModal({
       label: "市政府征用", title: "选择征用地产",
-      message: "点选地图上的对手地产，或从列表选择。可拖动旋转、缩放查看位置。",
+      message: "",
       buttons, boardTargets: oppTiles.map(tile => tile.index),
     });
     if (!isSessionActive(sid)) return;
@@ -2021,7 +2181,7 @@ async function resolveStartTakeover(player, sid) {
     choices.push({ id: "skip", label: "放弃这次征用", variant: "secondary" });
     action = await showModal({
       label: "市政府征用", title: `${municipalTargetLabel(target)} · Lv.${target.lot.level}`,
-      message: `接手 ${formatMoney(quote.purchasePrice)}：对手获 ${formatMoney(quote.refund)}，金库获 ${formatMoney(quote.premium)}。建筑等级保留。\n只征用：不花钱，地产变无主。\n${canAcquire ? `现有 ${formatMoney(player.cash)}，接手后剩余 ${formatMoney(player.cash - quote.purchasePrice)}。` : `现有 ${formatMoney(player.cash)}，还差 ${formatMoney(quote.purchasePrice - player.cash)}；仍可免费征用。`}`,
+      message: `接手后归你；免费征用后变无主。${canAcquire ? "" : `\n接手还差 ${formatMoney(quote.purchasePrice - player.cash)}`}`,
       buttons: choices, boardTargets: [target.index], selectedTarget: target.index,
     });
   }
@@ -2034,25 +2194,27 @@ async function resolveStartTakeover(player, sid) {
   const { refund, purchasePrice, premium } = getCityTakeoverQuote(target.lot);
   if (action === "acquire") {
     if (player.cash < purchasePrice) {
-      await showContinueModal({ label: "市政府征用", title: "现金不足，未接手", message: `接手 ${target.name} 需要 ${formatMoney(purchasePrice)}，你目前只有 ${formatMoney(player.cash)}。产权与金库均未改变。` });
+      await showContinueModal({ label: "市政府征用", title: "现金不足，未接手", message: `还差 ${formatMoney(purchasePrice - player.cash)}` });
       return;
     }
     updatePlayerCash(player, -purchasePrice, false);
     updatePlayerCash(opp, refund, false);
     state.bankPool += premium;
     target.lot.ownerId = player.id;
+    syncHarborProjects();
     playSound("special", { rate: 1.05 });
     pushLog(`市政府接管令！${player.name} 花 ${formatMoney(purchasePrice)} 接手 ${target.name}（Lv.${target.lot.level}），${opp.name} 获补偿 ${formatMoney(refund)}，溢价 ${formatMoney(premium)} 进入公共金库。`);
     render();
     await showContinueModal({
       label: "市政府征用", title: "房产接手成功",
       drama: { type: "seize", from: opp, to: player, amount: purchasePrice, acquisition: true, purchasePrice, refund, premium, tiles: [target.index], tileName: target.name },
-      message: `${player.name} 接手了 ${target.name}，Lv.${target.lot.level} 建筑原样保留，之后租金归新业主。\n支付 ${formatMoney(purchasePrice)}：${opp.name} 收到 ${formatMoney(refund)} 补偿，${formatMoney(premium)} 进入公共金库（现有 ${formatMoney(state.bankPool)}）。`,
+      message: `${player.name} 支付 ${formatMoney(purchasePrice)} · ${opp.name} 获 ${formatMoney(refund)}`,
     });
     return;
   }
 
   target.lot.ownerId = null;
+  syncHarborProjects();
   updatePlayerCash(opp, refund, false);
   playSound("special", { rate: 0.88 });
   pushLog(`市政府征用令！${opp.name} 的 ${target.name}（Lv.${target.lot.level}）被强制拍卖，退还买地成本 ${formatMoney(refund)}！`);
@@ -2060,7 +2222,7 @@ async function resolveStartTakeover(player, sid) {
   await showContinueModal({
     label: "市政府征用", title: "征用成功！",
     drama: { type: "seize", from: opp, to: { id: "city", name: "无主地产" }, amount: 0, refund, tiles: [target.index], tileName: target.name },
-    message: `${target.name}（Lv.${target.lot.level}）被强制拍卖！地产变为无主状态，建筑保留。\n买地成本 ${formatMoney(refund)} 已退还给 ${opp.name}。`,
+    message: `${target.name} 变为无主 · ${opp.name} 获补偿 ${formatMoney(refund)}`,
   });
 }
 
@@ -2081,7 +2243,7 @@ async function resolveLargeLotEffect(player, tile, sid) {
     await showContinueModal({
       label: "商会收益",
       title: `📈 ${lotName} 运转！`,
-      message: `Lv.${lot.level} 建筑额外收益 ${formatMoney(bonus)} 入账！${lot.level === 3 ? "\n建筑已满级，无需再升级。" : ""}`,
+      message: `经营收益 +${formatMoney(bonus)}`,
     });
   } else if (lot.effectId === "tower_bonus" && lot.ownerId === player.id) {
     const bonusTable = [0, 50, 100, 170];
@@ -2092,7 +2254,7 @@ async function resolveLargeLotEffect(player, tile, sid) {
     await showContinueModal({
       label: "酒店收益",
       title: `🏨 ${lotName} 经营收益！`,
-      message: `Lv.${lot.level} 酒店经营收益 ${formatMoney(bonus)} 入账！${lot.level === 3 ? "\n建筑已满级，无需再升级。" : ""}`,
+      message: `经营收益 +${formatMoney(bonus)}`,
     });
   } else if (lot.effectId === "hot_spring_rest" && lot.ownerId && lot.ownerId !== player.id) {
     // Relief has already scheduled one recovery action and takes precedence.
@@ -2106,7 +2268,7 @@ async function resolveLargeLotEffect(player, tile, sid) {
       await showContinueModal({
         label: "温泉庄园",
         title: `♨️ ${lotName} 生效！`,
-        message: `${player.name} 下回合在 ${lotName} 休息一回合；休息期间不重复收租，绊脚也不会延长本次住宿。`,
+        message: `${player.name} 下回合休息`,
       });
     }
   }
@@ -2133,7 +2295,7 @@ async function resolveLanding(player, tile, sid) {
     if (player.isAi) {
       if (shouldAiBuy(player, lot) && buyLot(player, tile, false)) {
         render();
-        await showContinueModal({ label: "AI 行动", title: `AI 买下了 ${tile.name}`, message: `花费 ${formatMoney(lot.price)}。${purchaseBuildingNote(lot)}` });
+        await showContinueModal({ label: "AI 行动", title: `AI 买下了 ${tile.name}`, message: `−${formatMoney(lot.price)}` });
       } else {
         pushLog(`AI 对手放弃购买 ${tile.name}。`);
         await showContinueModal({ label: "AI 行动", title: `AI 放弃购买 ${tile.name}`, message: "AI 选择保留现金。" });
@@ -2142,14 +2304,14 @@ async function resolveLanding(player, tile, sid) {
     }
     const dec = await showModal({
       label: "购买提示", title: `购买 ${tile.name}？`,
-      message: `${lot.theme.label}${lot.isLarge ? "（大型地产·命中率翻倍）" : ""} 售价 ${formatMoney(lot.price)}，当前现金 ${formatMoney(player.cash)}。${purchaseBuildingNote(lot)}`,
+      message: `${lot.theme.label}${lot.isLarge ? " · 大型地产" : ""} · ${formatMoney(lot.price)}`,
       buttons: [
         { id: "buy", label: `购买 ${formatMoney(lot.price)}`, variant: "primary" },
         { id: "skip", label: "暂不购买", variant: "ghost" },
       ],
     });
     if (!isSessionActive(sid)) return;
-    if (dec === "buy" && buyLot(player, tile)) { render(); await showContinueModal({ label: "购买完成", title: `已购买 ${tile.name}`, message: `支付 ${formatMoney(lot.price)}，剩余现金 ${formatMoney(player.cash)}。${purchaseBuildingNote(lot)}`, drama: { type: "buy", amount: lot.price, to: player, tiles: [tile.index], tileName: tile.name } }); }
+    if (dec === "buy" && buyLot(player, tile)) { render(); await showContinueModal({ label: "购买完成", title: `已购买 ${tile.name}`, message: `−${formatMoney(lot.price)}`, drama: { type: "buy", amount: lot.price, to: player, tiles: [tile.index], tileName: tile.name } }); }
     return;
   }
 
@@ -2180,7 +2342,7 @@ async function resolveLanding(player, tile, sid) {
     }
     const dec = await showModal({
       label: "升级提示", title: `升级 ${tile.name}？`,
-      message: `当前 Lv.${lot.level}，收费 ${formatMoney(lot.tolls[lot.level])}。花 ${formatMoney(cost)} 升到 Lv.${lot.level + 1}（收费 ${formatMoney(lot.tolls[lot.level + 1])}）。`,
+      message: `Lv.${lot.level} → Lv.${lot.level + 1} · 租金 ${formatMoney(lot.tolls[lot.level])} → ${formatMoney(lot.tolls[lot.level + 1])}`,
       buttons: [
         { id: "build", label: `升级 ${formatMoney(cost)}`, variant: "primary" },
         { id: "skip", label: "跳过", variant: "ghost" },
@@ -2226,13 +2388,13 @@ async function resolveLanding(player, tile, sid) {
     const reliefShield = getMapConfig().reliefShield === true;
     if (reliefShield) player.effects.shield = true;
     updatePlayerCash(player, relief, false);
-    const reliefMessage = `${formatMoney(relief)} 救助金立即到账，${getMapConfig().reliefRest === false ? "下次行动正常掷骰，不额外休整" : "下回合休整"}。${reliefShield ? "另获一次过路护盾，免交下一笔租金。" : ""}`;
+    const reliefMessage = `+${formatMoney(relief)}${reliefShield ? " · 护盾" : ""}${getMapConfig().reliefRest === false ? "" : " · 休整 1 回合"}`;
     pushLog(`${player.name} 现金耗尽，进入破产救助：${reliefMessage}`);
     await showContinueModal({
       label: "破产救助",
       title: "救助金已到账",
       drama: { type: "relief", amount: relief, to: player, tiles: [tile.index], tileName: tile.name },
-      message: `${player.name} 仅支付了 ${formatMoney(toll.actualPayment)}，差 ${formatMoney(toll.toll - toll.actualPayment)} 无力偿还。\n${reliefMessage}`,
+      message: reliefMessage,
     });
   } else if (!window.GamePresentation) {
     await showContinueModal({ label: "过路费提示", title: `支付 ${formatMoney(toll.actualPayment)} 过路费`, message: toll.message });
@@ -2274,11 +2436,12 @@ function chooseAiJunctionOption(player, tile) {
 }
 
 async function resolveJunctionTile(player, tile, sid) {
+  if (state.currentMapId === "harbor") {
+    await ensureHarborDeparture(player,sid,player.effects.reversed ? -1 : 1,0);
+    return;
+  }
   const junction = getJunctionConfig(tile.index);
   if (!junction) return;
-  // Harbor's persistent pre-roll preference is applied while moving. Landing
-  // here never interrupts a turn with a direction picker or a confirmation.
-  if (junction.automatic) return;
   if (player.isAi) {
     const selected = chooseAiJunctionOption(player, tile) || junction.options[0];
     player.nextJunctionChoice = selected.id;
@@ -2286,7 +2449,7 @@ async function resolveJunctionTile(player, tile, sid) {
     await showContinueModal({
       label: "路线选择",
       title: `${player.name} 锁定路线`,
-      message: `AI 选择了 ${selected.label}，下次从 ${tile.name} 出发时将进入该路线。`,
+      message: selected.label,
     });
     return;
   }
@@ -2298,7 +2461,7 @@ async function resolveJunctionTile(player, tile, sid) {
   const selected = await showModal({
     label: "路线选择",
     title: `选择 ${tile.name} 的前进方向`,
-    message: "你停在交叉枢纽，可以为下一次从这里出发时锁定路线。",
+    message: "",
     buttons,
   });
   if (!isSessionActive(sid)) return;
@@ -2308,7 +2471,7 @@ async function resolveJunctionTile(player, tile, sid) {
   await showContinueModal({
     label: "路线选择",
     title: "路线已锁定",
-    message: `下次从 ${tile.name} 出发时，你将进入 ${option.label}。`,
+    message: `行程：${option.label}`,
   });
 }
 
@@ -2323,11 +2486,11 @@ async function resolveRushTile(player, sid, tile = state.board[player.position])
   await showContinueModal({
     label: name,
     title: `${name}，冲刺 ${steps} 格！`,
-    message: `${player.name} 沿当前路线${player.effects.reversed ? "反向" : "正向"}前进 ${steps} 格，到达后立即结算。`,
+    message: "",
     drama: { type: "card", to: player, tiles: [tile.index], tileName: name },
   });
   if (!isSessionActive(sid) || state.gameOver) return;
-  await animateMovement(player, steps, sid);
+  if (await animateMovement(player, steps, sid) === false) return;
   if (!isSessionActive(sid) || state.gameOver) return;
   state.animation.currentTile = null;
   state.animation.landedTile = player.position;
@@ -2350,10 +2513,10 @@ async function resolveSpecialTile(player, tile, sid) {
       await showContinueModal({
         label: "功能地块", title: "提取金库",
         drama: { type: "bank", amount: payout, from: { id: "bank", name: "银行金库" }, to: player, tiles: [tile.index], tileName: tile.name },
-        message: `金库已满，${player.name} 提走了全部 ${formatMoney(payout)}！金库清零重新开始。`,
+        message: `${player.name} +${formatMoney(payout)}`,
       });
     } else {
-      const bankDice = await animateDiceRoll(sid, "bank");
+      const bankDice = await animateDiceRoll(sid, "bank", 1, player);
       if (!isSessionActive(sid) || bankDice === null) return;
       const deposit = bankDice * 30;
       const actual = Math.min(deposit, player.cash);
@@ -2388,7 +2551,7 @@ async function resolveSpecialTile(player, tile, sid) {
   }
 
   if (tile.special.type === "card_draw") {
-    await resolveCardDraw(player, sid);
+    await resolveCardDraw(player, sid, tile);
     return;
   }
 
@@ -2402,94 +2565,92 @@ async function resolveSpecialTile(player, tile, sid) {
   }
 }
 
-async function resolveChance(player, tile, sid) {
-  if (!isSessionActive(sid) || state.gameOver) return;
-  playSound("special", { rate: 1.04 });
-  const opp = getOpponent(player);
-  const lots = state.board.filter(t => t.lot && !t.isLargeSecondary);
-  const ownedBuildable = lots.filter(t => t.lot.ownerId === player.id && t.lot.level < 3);
-  const freeBuildable = ownedBuildable.length ? ownedBuildable : lots.filter(t => !t.lot.ownerId && t.lot.level < 3);
-  const districts = [...new Set(lots.filter(t => t.lot.level < 3).map(t => t.lot.district))];
-  // Only draw events that can actually happen. No empty result or follow-up choice.
-  const events = [
-    { kind: "renovation", weight: 22, available: freeBuildable.length > 0 },
-    { kind: "district", weight: 16, available: districts.length > 0 },
-    { kind: "shield", weight: 12, available: !player.effects.shield },
-    { kind: "express", weight: 16, available: lots.length > 0 },
-    { kind: "swap", weight: 10, available: player.position !== opp.position },
-    { kind: "bank", weight: 12, available: true },
-    { kind: "bonus", weight: 12, available: true },
-  ].filter(event => event.available);
-  let draw = Math.random() * events.reduce((sum, event) => sum + event.weight, 0);
-  const selected = events.find(event => (draw -= event.weight) < 0) || events[events.length - 1];
-  const pick = choices => choices[Math.floor(Math.random() * choices.length)];
-  const drama = { type: "card", amount: 0, chanceKind: selected.kind, actor: player, rival: opp,
-    to: player, tiles: [tile.index], triggerTiles: [tile.index], tileName: tile.name, outcomeLabel: "" };
-  let title, message, arrival = null;
+function itemShopVisitIsActive(visit) {
+  return Boolean(visit && state.itemShopVisit === visit && !visit.closed &&
+    isSessionActive(visit.sessionId) && !state.gameOver &&
+    currentPlayer() === visit.player && state.players.includes(visit.player) &&
+    visit.player.position === visit.tileIndex && state.board[visit.tileIndex]?.special?.type === "chance");
+}
 
-  if (selected.kind === "renovation") {
-    const target = pick(freeBuildable);
-    target.lot.level++;
-    harborBuildingMilestone(player, target);
-    const ownerName = target.lot.ownerId ? player.name : "无主地产";
-    title = "免费升级";
-    message = `${target.name} 免费升至 Lv.${target.lot.level}。\n当前归属：${ownerName}，产权不变。`;
-    Object.assign(drama, { type: "build", tiles: [target.index], tileName: target.name,
-      outcomeLabel: `${target.name} → Lv.${target.lot.level}` });
-  } else if (selected.kind === "district") {
-    const district = pick(districts);
-    const changed = lots.filter(t => t.lot.district === district && t.lot.level < 3);
-    changed.forEach(t => { t.lot.level++; harborBuildingMilestone(player, t); });
-    title = "街区升级";
-    message = `${district}：${changed.map(t => `${t.name} Lv.${t.lot.level}`).join("、")}。\n以上地产各免费升一级，产权不变，新租金立即生效。`;
-    Object.assign(drama, { type: "build", tiles: changed.map(t => t.index), tileName: district,
-      outcomeLabel: `${district} · ${changed.length} 处升级` });
-  } else if (selected.kind === "shield") {
-    player.effects.shield = true;
-    title = "获得免租护盾";
-    message = `${player.name} 获得护盾，下次支付租金时自动免租一次。`;
-    drama.outcomeLabel = "已获得一次过路护盾";
-  } else if (selected.kind === "express") {
-    // Choose physical destination tiles, retaining the larger lots' double footprint.
-    arrival = pick(state.board.filter(t => t.lot));
-    player.position = arrival.index;
-    resetHarborJourney(player);
-    state.animation.currentTile = null;
-    state.animation.landedTile = arrival.index;
-    title = "随机传送";
-    message = `${player.name} 到达 ${arrival.name}，立即结算该地块。\n传送不领取市政府补给。`;
-    Object.assign(drama, { tiles: [arrival.index], tileName: arrival.name, outcomeLabel: `已抵达 ${arrival.name}` });
-  } else if (selected.kind === "swap") {
-    [player.position, opp.position] = [opp.position, player.position];
-    resetHarborJourney(player); resetHarborJourney(opp);
-    state.animation.currentTile = null;
-    state.animation.landedTile = player.position;
-    title = "双方位置互换";
-    message = `${player.name} → ${state.board[player.position].name}\n${opp.name} → ${state.board[opp.position].name}\n本次不结算落点，下次从新位置行动。`;
-    Object.assign(drama, { tiles: [player.position, opp.position], outcomeLabel: "双方位置已交换" });
-  } else if (selected.kind === "bank") {
-    const amount = getMapEconomy().bankThreshold;
-    state.bankPool += amount;
-    title = "金库获得补贴";
-    message = `公共金库增加 ${formatMoney(amount)}，当前共 ${formatMoney(state.bankPool)}。\n下一位停留金库的玩家可提取全部存款。`;
-    Object.assign(drama, { type: "bank", amount, from: { id: "city", name: "市政补贴" },
-      to: { id: "bank", name: "银行金库" }, tiles: state.board.filter(t => t.special?.type === "bank").map(t => t.index),
-      tileName: "银行金库", outcomeLabel: `金库已增加 ${formatMoney(amount)}` });
-  } else {
-    const opened = lots.filter(t => t.lot.level > 0).length;
-    const amount = 120 + Math.min(180, opened * 10);
-    state.players.forEach(p => updatePlayerCash(p, amount, false));
-    title = "经营分红";
-    message = `全城已有 ${opened} 处建筑，${player.name} 与 ${opp.name} 各获得 ${formatMoney(amount)}。`;
-    Object.assign(drama, { type: "income", amount, from: { id: "city", name: "经营分红" },
-      to: player, beneficiaries: [...state.players], outcomeLabel: `双方各到账 ${formatMoney(amount)}` });
+function commitItemShopPurchase(visit, cardId) {
+  if (!itemShopVisitIsActive(visit)) return { ok: false, reason: "商店已关闭" };
+  const card = visit.offers.find(offer => offer.id === cardId);
+  if (!card) return { ok: false, reason: "本次没有这张商品" };
+  const price = ITEM_SHOP_PRICES[card.id];
+  if (!Number.isFinite(visit.player.cash) || visit.player.cash < price) return { ok: false, reason: "金币不足" };
+  // Commit once, synchronously: double taps and stale dialogs cannot pay or grant twice.
+  visit.closed = true;
+  const item = grantInventoryCard(visit.player.id, card.id, {
+    type: "shop", tileIndex: visit.tileIndex, reference: visit.reference,
+  });
+  if (!item) return { ok: false, reason: "本局已结束" };
+  updatePlayerCash(visit.player, -price, false);
+  pushLog(`${visit.player.name} 花费 ${formatMoney(price)} 购买 ${card.icon} ${card.name}，已存入背包。`);
+  return { ok: true, card, price, item };
+}
+
+function drawItemShopOffers() {
+  const pool = CARD_POOL.filter(card => Number.isFinite(ITEM_SHOP_PRICES[card.id]));
+  for (let i = pool.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [pool[i], pool[j]] = [pool[j], pool[i]];
   }
-  pushLog(`${player.name} 在 ${tile.name} 遇到「${title}」${message.replace(/\n/g, " ")}`);
-  render();
-  await showContinueModal({ label: "机会事件", title, message, drama });
-  if (!isSessionActive(sid) || state.gameOver) return;
-  // One landing only; neither relocation traverses a route nor grants a dice action.
-  if (arrival) await resolveLanding(player, arrival, sid);
+  if (state.currentMapId === "harbor") {
+    const boost = pool.find(card => card.id === "boost");
+    if (boost) return [boost,...pool.filter(card => card.id !== "boost").slice(0,2)];
+  }
+  return pool.slice(0, 3);
+}
+
+async function resolveChance(player, tile, sid) {
+  if (!isSessionActive(sid) || state.gameOver || currentPlayer() !== player ||
+      state.board[tile?.index] !== tile || tile.special?.type !== "chance" || player.position !== tile.index) return;
+  // One offer set per visit; a concurrent resolver cannot refresh the stock.
+  if (state.itemShopVisit && isSessionActive(state.itemShopVisit.sessionId)) return;
+  const visit = {
+    sessionId: sid, player, tileIndex: tile.index, offers: drawItemShopOffers(), closed: false,
+    reference: `${sid}:shop:${state.itemShopSequence = (state.itemShopSequence || 0) + 1}`,
+  };
+  state.itemShopVisit = visit;
+  playSound("card", { rate: 1.04 });
+  try {
+    if (player.isAi) {
+      const offers = visit.offers.filter(card => player.cash - ITEM_SHOP_PRICES[card.id] >= 150 &&
+        !cardEffectBlock(player, card) && !(player.cards || []).some(item => item.cardId === card.id));
+      const selected = (player.cards || []).length < 3 && offers.length ? aiChooseCard(offers, player) : null;
+      const purchase = selected ? commitItemShopPurchase(visit, selected.id) : null;
+      if (!purchase?.ok) {
+        pushLog(`${player.name} 经过 ${tile.name}，本次未购买道具。`);
+        return;
+      }
+      render();
+      await showContinueModal({ label: "道具商店", title: `${player.name} 购买了 ${selected.name}`,
+        message: `−${formatMoney(purchase.price)}` });
+      return;
+    }
+    const decision = await showModal({
+      label: "道具商店", title: tile.name,
+      message: `持有 ${formatMoney(player.cash)}`, itemShop: true,
+      buttons: [...visit.offers.map(card => {
+        const price = ITEM_SHOP_PRICES[card.id], affordable = player.cash >= price;
+        return { id: card.id, variant: "primary", disabled: !affordable,
+          label: `<span class="card-icon">${card.icon}</span><span class="card-name">${card.name}</span><span class="card-desc">${card.description}</span><span class="card-price">${formatMoney(price)}</span><span class="card-buy-label">${affordable ? "购买" : "金币不足"}</span>` };
+      }), { id: "skip", label: "离开商店", variant: "ghost" }],
+    });
+    if (!itemShopVisitIsActive(visit)) return;
+    if (decision === "skip" || decision === "cancel") {
+      pushLog(`${player.name} 离开 ${tile.name}，未购买道具。`);
+      return;
+    }
+    const purchase = commitItemShopPurchase(visit, decision);
+    if (!purchase.ok) return;
+    playSound("card", { rate: 1.12 });
+    flushQueuedCashAnimations();
+    render();
+  } finally {
+    visit.closed = true;
+    if (state.itemShopVisit === visit) state.itemShopVisit = null;
+  }
 }
 
 async function resolveTeleportTile(player, sid, tile = state.board[player.position]) {
@@ -2508,7 +2669,7 @@ async function resolveTeleportTile(player, sid, tile = state.board[player.positi
   render();
   await showContinueModal({
     label: "传送门", title: "传送门启动！",
-    message: `${player.name} 被传送到了 ${target.name}！${settleArrival ? "现在立即结算这块地产。" : "下回合将从此处出发。"}`,
+    message: `${player.name} 抵达 ${target.name}`,
     drama: { type: "card", to: player, tiles: [target.index], tileName: target.name },
   });
   if (!isSessionActive(sid) || state.gameOver) return;
@@ -2535,6 +2696,7 @@ async function resolveConstruction(player, sid) {
       const sorted = [...canDemolish].sort((a, b) => b.lot.level - a.lot.level);
       const target = sorted[Math.floor(Math.random() * Math.min(2, sorted.length))];
       target.lot.level -= 1;
+      syncHarborProjects();
       pushLog(`${player.name} 在城建局拆除了 ${target.name} 一级建筑！降至 Lv.${target.lot.level}。`);
       render();
       await showContinueModal({ label: "城建局", title: "AI 选择拆除！", message: `${opp.name} 的 ${target.name} 被拆除一级，降至 Lv.${target.lot.level}！` });
@@ -2548,6 +2710,7 @@ async function resolveConstruction(player, sid) {
     } else {
       const target = canDemolish[Math.floor(Math.random() * canDemolish.length)];
       target.lot.level -= 1;
+      syncHarborProjects();
       pushLog(`${player.name} 在城建局拆除了 ${target.name} 一级建筑！`);
       render();
       await showContinueModal({ label: "城建局", title: "AI 选择拆除！", message: `${opp.name} 的 ${target.name} 被拆除一级，降至 Lv.${target.lot.level}！` });
@@ -2560,7 +2723,7 @@ async function resolveConstruction(player, sid) {
   if (canDemolish.length > 0) btns.push({ id: "demolish", label: `随机拆除对手（${canDemolish.length} 处可拆）`, variant: "danger" });
   const dec = await showModal({
     label: "城建局", title: "城建局 — 选择行动",
-    message: "你可以免费升级一处自己的地产，或拆除对手一层建筑！",
+    message: "",
     buttons: btns,
   });
   if (!isSessionActive(sid)) return;
@@ -2575,6 +2738,7 @@ async function resolveConstruction(player, sid) {
   } else if (dec === "demolish") {
     const target = canDemolish[Math.floor(Math.random() * canDemolish.length)];
     target.lot.level -= 1;
+    syncHarborProjects();
     pushLog(`${player.name} 在城建局拆除了 ${opp.name} 的 ${target.name} 一级建筑！`);
     render();
     await showContinueModal({ label: "城建局", title: "拆除完成！", message: `${opp.name} 的 ${target.name} 降至 Lv.${target.lot.level}！` });
@@ -2625,7 +2789,7 @@ function cardEffectBlock(player, card) {
     case "swap": return player.position === opp.position ? "双方已在同一地块" : "";
     case "propertySwap": return !owned(player.id) ? "你还没有可交换的地产" : !owned(opp.id) ? "对手还没有可交换的地产" : "";
     case "teleport": return state.board.some(t => t.lot) ? "" : "没有可传送的地产";
-    case "boost": return player.effects.speedBoost && opp.effects.speedBoost ? "双方已有加速效果" : "";
+    case "boost": return player.effects.speedBoost && opp.effects.speedBoost ? "双方已有双骰效果" : "";
     case "slow": return player.effects.speedSlow && opp.effects.speedSlow ? "双方已有减速效果" : "";
     default: return "";
   }
@@ -2663,8 +2827,8 @@ async function prepareInventoryCard(player, card, sid) {
   }
   if (card.id === "launch" && !player.isAi) {
     const buttons = Array.from({ length: 6 }, (_, i) => {
-      const steps = i + 1, tile = state.board[previewMovement(player, steps).index];
-      return { id: String(steps), label: `${steps} 步 → ${tile.name}`, variant: "primary" };
+      const steps = i + 1, preview = previewMovement(player, steps), tile = state.board[preview.index];
+      return { id: String(steps), label: `${steps} 步 → ${preview.uncertain ? "岔路待选" : tile.name}`, variant: "primary" };
     });
     buttons.unshift({ id: "cancel", label: "暂不使用", variant: "ghost" });
     const choice = await showModal({ label: "使用卡牌", title: "🎯 命定骰 · 选择步数", message: card.description, buttons });
@@ -2741,6 +2905,12 @@ async function useAiInventoryCard(player) {
 window.GameCards = {
   getSnapshot: getCardInventory,
   getInventory: getCardInventory,
+  getShopSnapshot: () => {
+    const visit = state.itemShopVisit;
+    if (!itemShopVisitIsActive(visit)) return null;
+    return { playerId: visit.player.id, tileIndex: visit.tileIndex, cash: visit.player.cash,
+      offers: visit.offers.map(card => ({ ...card, price: ITEM_SHOP_PRICES[card.id], affordable: visit.player.cash >= ITEM_SHOP_PRICES[card.id] })) };
+  },
   use: instanceId => useInventoryCard(state.players?.find(p => p.id === "human"), instanceId),
   grant: grantInventoryCard,
   // A future entry flow can apply an already-authorized loadout once, before initiative.
@@ -2754,10 +2924,25 @@ window.GameCards = {
   },
 };
 
-async function resolveCardDraw(player, sid) {
+function drawInventoryCardOffers(tile = null) {
+  const remaining = [...CARD_POOL], drawn = [];
+  const guaranteedId = state.currentMapId === "harbor" && state.board[tile?.index] === tile &&
+    tile?.special?.type === "card_draw" ? tile.special.guaranteedCardId : null;
+  const guaranteedIndex = remaining.findIndex(card => card.id === guaranteedId);
+  if (guaranteedIndex >= 0) drawn.push(remaining.splice(guaranteedIndex,1)[0]);
+  while (remaining.length && drawn.length < 3) {
+    const weight = card => state.currentMapId === "harbor" && card.id === "boost" ? 3 : 1;
+    let ticket = Math.random() * remaining.reduce((sum,card) => sum + weight(card),0);
+    let index = remaining.findIndex(card => (ticket -= weight(card)) < 0);
+    if (index < 0) index = remaining.length - 1;
+    drawn.push(remaining.splice(index,1)[0]);
+  }
+  return drawn;
+}
+
+async function resolveCardDraw(player, sid, tile = state.board[player.position]) {
   playSound("card", { rate: 1.02 });
-  const shuffled = [...CARD_POOL].sort(() => Math.random() - 0.5);
-  const drawn = shuffled.slice(0, 3);
+  const drawn = drawInventoryCardOffers(tile);
   let selected;
 
   if (player.isAi) {
@@ -2765,12 +2950,12 @@ async function resolveCardDraw(player, sid) {
     pushLog(`${player.name} 翻牌选择了 ${selected.icon} ${selected.name}。`);
     await showContinueModal({
       label: "翻牌事件", title: `AI 选择了 ${selected.icon} ${selected.name}`,
-      message: `存入背包，之后可在掷骰前使用。\n${selected.description}`,
+      message: "",
     });
     if (!isSessionActive(sid)) return;
   } else {
     const dec = await showModal({
-      label: "翻牌奖励", title: "选择一张卡牌存入背包", message: "每回合掷骰前可用 1 张。",
+      label: "翻牌奖励", title: "选一张道具卡", message: "",
       cardDraw: true,
       buttons: drawn.map((c) => ({
         id: c.id,
@@ -2805,11 +2990,13 @@ async function chooseCardTarget(player, card, sid) {
     switch (card.id) {
       case "teleport": return "opponent";
       case "boost": {
-        for (let s = 1; s <= 3; s++) {
-          const idx = previewMovement(opp, s * 2).index;
+        let dangerousOutcomes = 0;
+        for (let s = 2; s <= 12; s++) {
+          const idx = previewMovement(opp, s).index;
           const t = state.board[idx];
-          if (t.lot?.ownerId === player.id && t.lot.level >= 2) return "opponent";
+          if (t.lot?.ownerId === player.id && t.lot.level >= 2) dangerousOutcomes += 6-Math.abs(7-s);
         }
+        if (dangerousOutcomes >= 12) return "opponent";
         return "self";
       }
       case "slow": {
@@ -2863,7 +3050,7 @@ async function executeCardEffect(player, card, sid, prepared = {}) {
       state.animation.landedTile = dest.index;
       pushLog(`传送术！${target_player.name} 被传送到 ${dest.name}！`);
       render();
-      await showContinueModal({ label: "卡牌效果", title: `${target_player.name} 传送到 ${dest.name}！`, message: "本次传送不结算落点，正常掷骰次数保留。" });
+      await showContinueModal({ label: "卡牌效果", title: `${target_player.name} 传送到 ${dest.name}！`, message: "" });
       break;
     }
     case "launch": {
@@ -2886,21 +3073,21 @@ async function executeCardEffect(player, card, sid, prepared = {}) {
       } else {
         const btns = [];
         for (let s = 1; s <= 6; s++) {
-          const idx = previewMovement(player, s).index;
-          btns.push({ id: String(s), label: `${s} 步 → ${state.board[idx].name}`, variant: "primary" });
+          const preview = previewMovement(player, s);
+          btns.push({ id: String(s), label: `${s} 步 → ${preview.uncertain ? "岔路待选" : state.board[preview.index].name}`, variant: "primary" });
         }
         const choice = await showModal({
           label: "卡牌效果", title: "🎯 命定骰 — 选择步数",
-          message: "选择你想要前进的步数：",
+          message: "",
           buttons: btns,
         });
         if (!isSessionActive(sid)) return;
         steps = parseInt(choice, 10) || 1;
       }
       pushLog(`命定骰！${player.name} 选择前进 ${steps} 步！`);
-      await showContinueModal({ label: "卡牌效果", title: "命定骰启动！", message: `${player.name} 即将前进 ${steps} 步！` });
+      await showContinueModal({ label: "卡牌效果", title: "命定骰", message: `${player.name} · 前进 ${steps} 步` });
       if (!isSessionActive(sid)) return;
-      await animateMovement(player, steps, sid);
+      if (await animateMovement(player, steps, sid) === false) return;
       if (!isSessionActive(sid) || state.gameOver) return;
       state.animation.currentTile = null;
       state.animation.landedTile = player.position;
@@ -2914,18 +3101,13 @@ async function executeCardEffect(player, card, sid, prepared = {}) {
       const target_player = target_who === "self" ? player : opp;
       playSound("special", { rate: 0.94 });
       pushLog(`时光回溯！${target_player.name} 被迫后退 3 步！`);
-      await showContinueModal({ label: "卡牌效果", title: "时光回溯！", message: `${target_player.name} 被迫后退 3 步！` });
+      await showContinueModal({ label: "卡牌效果", title: "时光回溯", message: `${target_player.name} · 后退 3 步` });
       if (!isSessionActive(sid)) return;
-      for (let i = 0; i < 3; i++) {
-        target_player.position = getNextTileIndex(target_player, target_player.position, -1, true);
-        state.animation.currentTile = target_player.position;
-        render(); await sleep(180);
-        if (!isSessionActive(sid)) return;
-      }
+      if (await animateMovement(target_player,3,sid,{direction:target_player.effects.reversed ? 1 : -1,payStart:false}) === false) return;
       state.animation.currentTile = null;
       state.animation.landedTile = target_player.position;
       render();
-      await showContinueModal({ label: "卡牌效果", title: `${target_player.name} 到达 ${state.board[target_player.position].name}`, message: "本次后退不结算落点，正常掷骰次数保留。" });
+      await showContinueModal({ label: "卡牌效果", title: `${target_player.name} 到达 ${state.board[target_player.position].name}`, message: "" });
       break;
     }
     case "swap": {
@@ -2948,8 +3130,8 @@ async function executeCardEffect(player, card, sid, prepared = {}) {
       if (!isSessionActive(sid) || !target_who) return;
       const target_player = target_who === "self" ? player : opp;
       target_player.effects.speedBoost = true;
-      pushLog(`加速引擎！${target_player.name} 下次掷骰翻倍！`);
-      await showContinueModal({ label: "卡牌效果", title: "加速引擎启动！", message: `${target_player.name} 的下次掷骰结果将翻倍！` });
+      pushLog(`双骰卡！${target_player.name} 下次同时掷两颗骰子！`);
+      await showContinueModal({ label: "卡牌效果", title: "双骰卡", message: `${target_player.name} · 下次掷两颗骰子` });
       break;
     }
     case "slow": {
@@ -2958,7 +3140,7 @@ async function executeCardEffect(player, card, sid, prepared = {}) {
       const target_player = target_who === "self" ? player : opp;
       target_player.effects.speedSlow = true;
       pushLog(`减速陷阱！${target_player.name} 下次掷骰减半！`);
-      await showContinueModal({ label: "卡牌效果", title: "减速陷阱！", message: `${target_player.name} 的下次掷骰结果将减半！` });
+      await showContinueModal({ label: "卡牌效果", title: "减速陷阱", message: `${target_player.name} · 下次骰点减半` });
       break;
     }
     case "freeze":
@@ -2975,17 +3157,17 @@ async function executeCardEffect(player, card, sid, prepared = {}) {
     case "combo":
       player.effects.extraTurn = true;
       pushLog(`连击鼓！${player.name} 将获得额外回合！`);
-      await showContinueModal({ label: "卡牌效果", title: "连击鼓！", message: `${player.name} 本回合结束后将获得额外回合！` });
+      await showContinueModal({ label: "卡牌效果", title: "连击鼓", message: `${player.name} · 再行动一次` });
       break;
     case "shield":
       player.effects.shield = true;
       pushLog(`护盾术！${player.name} 将免疫下一次过路费！`);
-      await showContinueModal({ label: "卡牌效果", title: "护盾术！", message: `${player.name} 下次路过对手地产免交过路费！` });
+      await showContinueModal({ label: "卡牌效果", title: "护盾术", message: `${player.name} · 获得护盾` });
       break;
     case "doubleRent":
       player.effects.doubleRent = true;
       pushLog(`收租翻倍！${player.name} 的地产下次被踩收费×2！`);
-      await showContinueModal({ label: "卡牌效果", title: "收租翻倍！", message: `${player.name} 的地产下次被踩时过路费翻倍！` });
+      await showContinueModal({ label: "卡牌效果", title: "收租翻倍", message: `${player.name} · 下次租金 ×2` });
       break;
     case "propertySwap": {
       playSound("special", { rate: 1.02 });
@@ -3012,7 +3194,7 @@ async function executeCardEffect(player, card, sid, prepared = {}) {
         }));
         const dec = await showModal({
           label: "卡牌效果", title: "🔀 地产互换 — 选择交出的地产",
-          message: "选择你要交出的一块地产，你将随机获得对手的一块地产。建筑等级保留不变。",
+          message: "随机换取对手一处地产",
           buttons: btns,
         });
         if (!isSessionActive(sid)) return;
@@ -3023,6 +3205,7 @@ async function executeCardEffect(player, card, sid, prepared = {}) {
       const getTile = oppLots[Math.floor(Math.random() * oppLots.length)];
       giveTile.lot.ownerId = opp.id;
       getTile.lot.ownerId = player.id;
+      syncHarborProjects();
       if (giveTile.lot.isLarge) {
         const sec = state.board.find((t) => t.isLargeSecondary && t.largePrimaryIndex === giveTile.index);
         if (sec) sec.lot = giveTile.lot;
@@ -3058,7 +3241,7 @@ async function executeCardEffect(player, card, sid, prepared = {}) {
 
 function purchaseBuildingNote(lot) {
   return lot.level > 0
-    ? `\n已建 Lv.${lot.level}，当前基础租金 ${formatMoney(lot.tolls[lot.level])}。按原地价买入，现有建筑一并保留。`
+    ? `Lv.${lot.level} · 租金 ${formatMoney(lot.tolls[lot.level])}`
     : "";
 }
 
@@ -3070,6 +3253,7 @@ function buyLot(player, tile, animate = true) {
   }
   updatePlayerCash(player, -lot.price, animate);
   lot.ownerId = player.id;
+  syncHarborProjects();
   playSound("buy", { rate: lot.isLarge ? 0.92 : 1 });
   pushLog(`${player.name} 花 ${formatMoney(lot.price)} 买下了 ${tile.name}。`);
   return true;
@@ -3170,6 +3354,7 @@ function endTurn() {
   if (state.gameOver) return;
   hideModal(false); clearHighlights(); state.busy = false;
   state.currentPlayerIndex = (state.currentPlayerIndex + 1) % state.players.length;
+  resetDiceDisplay();
   currentPlayer().cardUsedThisTurn = false;
   if (state.currentPlayerIndex === state.firstPlayerIndex) state.round += 1;
   if (state.gameMode === "rounds" && state.round > getMaxRounds()) { finishGame("rounds"); return; }
@@ -3206,8 +3391,10 @@ function finishGame(reason = "rounds") {
     reason, rounds: reason === "rounds" ? state.round - 1 : state.round,
     humanCash: state.players.find(p => p.id === "human").cash, winnerId,
     collectionCount: 1 + Number(winnerId === "human") + Number(state.board.some(t => !t.isLargeSecondary && t.lot?.isLarge && t.lot.ownerId === "human" && t.lot.level === 3)),
+    harborProjectRewards: getHarborProjectSnapshot().filter(project => project.stage === 3).map(project => project.id),
     eligible: state.isFormalRun === true,
     buildingCards: getHarborBuildingRewards(),
+    buildingCardDraft: mapCfg.id === 'harbor',
   });
   if (state.isFormalRun) saveGameResult(reason, winnerId);
   playSound("win");
@@ -3239,9 +3426,10 @@ function previewMunicipalTarget(index) {
   return true;
 }
 
-function showModal({ label = "行动提示", title, message, buttons, cardDraw = false, boardTargets = null, selectedTarget = null, boardContext = null }) {
+function showModal({ label = "行动提示", title, message, buttons, cardDraw = false, itemShop = false, boardTargets = null, selectedTarget = null, boardContext = null, openingCoin = null, routeChoice = null }) {
+  cancelOpeningCoinToss();
   if (modalResolver) { modalResolver("cancel"); modalResolver = null; }
-  state.modal = { visible: true, label, title, message, buttons, cardDraw, boardTargets, boardContext, selectedTarget: selectedTarget ?? boardTargets?.[0] ?? null };
+  state.modal = { visible: true, label, title, message, buttons, cardDraw, itemShop, boardTargets, boardContext, openingCoin, routeChoice, selectedTarget: selectedTarget ?? boardTargets?.[0] ?? null };
   if (boardTargets?.length) window.GamePresentation?.selectTile(state.modal.selectedTarget);
   else if (boardContext) window.GamePresentation?.selectTile(boardContext.selectedTarget);
   else window.GamePresentation?.selectCurrentTile();
@@ -3250,7 +3438,7 @@ function showModal({ label = "行动提示", title, message, buttons, cardDraw =
 }
 
 async function returnToStartScreen() {
-  if (homeConfirmationPending) return;
+  if (homeConfirmationPending || openingCoinJob) return;
   if (state.ticketPaid && !state.gameOver) {
     // Movement and presentations must finish before an asynchronous choice can pause the turn.
     if (state.busy && !state.modal.visible) return;
@@ -3260,7 +3448,7 @@ async function returnToStartScreen() {
     modalResolver = null;
     const action = await showModal({
       label: "返回首页", title: "结束本局并返回首页？",
-      message: "返回首页会结束本局，门票不退，未结算的金币和收藏品不会带回。",
+      message: "本局收益放弃，门票不退。",
       boardContext: previous.modal.boardTargets?.length ? {indices:previous.modal.boardTargets,selectedTarget:previous.modal.selectedTarget} : null,
       buttons: [
         { id: "cancel", label: "继续本局", variant: "ghost" },
@@ -3285,12 +3473,18 @@ async function returnToStartScreen() {
 }
 
 async function showContinueModal(cfg) {
+  if (cfg.openingCoin) {
+    const action = await showModal({ ...cfg, buttons: [{ id: "continue", label: "开始行动", variant: "primary" }] });
+    flushQueuedCashAnimations();
+    return action;
+  }
   if (window.GamePresentation) return window.GamePresentation.present(cfg);
   await showModal({ ...cfg, buttons: [{ id: "continue", label: "确定", variant: "primary" }] });
   flushQueuedCashAnimations();
 }
 
 function hideModal(shouldResolve = true, actionId = "cancel") {
+  cancelOpeningCoinToss();
   const choosingProperty = state.modal.boardTargets?.length && /^seize_\d+$/.test(actionId) || state.modal.boardContext;
   state.modal = defaultModal();
   if (shouldResolve && modalResolver) { const r = modalResolver; modalResolver = null; r(actionId); }
@@ -3322,8 +3516,8 @@ function createStartSvg() {
 }
 
 function createSpecialSvg(type) {
-  const asset = { bank:'vault_bank', construction:'builders_guild', card_draw:'card_pavilion', chance:'chance_wheel', teleport:'teleport_gate', rush:'rush_station', junction:'junction_hub' }[type];
-  const label = { bank:'金库', construction:'城建局', card_draw:'翻牌驿站', chance:'机会广场', teleport:'传送港', rush:'冲刺站', junction:'交汇广场' }[type];
+  const asset = { bank:'vault_bank', construction:'builders_guild', card_draw:'card_pavilion', chance:'card_pavilion', teleport:'teleport_gate', rush:'rush_station', junction:'junction_hub' }[type];
+  const label = { bank:'金库', construction:'城建局', card_draw:'翻牌驿站', chance:'道具商店', teleport:'传送港', rush:'冲刺站', junction:'交汇广场' }[type];
   return asset ? createRegionalBuildingSprite(asset, label) : '';
 }
 
@@ -3495,6 +3689,7 @@ musicToggleBtn?.addEventListener("click", () => {
 document.addEventListener("pointerdown", unlockBgmPlayback, { once: true });
 document.addEventListener("keydown", unlockBgmPlayback, { once: true });
 document.addEventListener("visibilitychange", syncBgmPlayback);
+window.addEventListener("pagehide", () => { if (openingCoinJob) hideModal(); });
 rollBtn.addEventListener("click", () => void playHumanTurn());
 restartBtn.addEventListener("click", () => void returnToStartScreen());
 scoreboardEl.addEventListener("click", (e) => {

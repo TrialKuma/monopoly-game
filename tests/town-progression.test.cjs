@@ -1,6 +1,6 @@
 'use strict';
 const assert = require('node:assert/strict');
-const { STORAGE_KEY, BUILDING_CARDS, TOWN_EXPANSION, createStore, validProfile, footprint } = require('../progression.js');
+const { STORAGE_KEY, BUILDING_CARDS, TOWN_DISTRICTS, createStore, validProfile, footprint } = require('../progression.js');
 let checks = 0;
 function test(name, fn) { fn(); checks++; console.log('PASS ' + name); }
 function fixture(raw) {
@@ -22,7 +22,7 @@ function v2From(profile) {
 
 test('fresh town uses seven existing regional series and no passive currency or free cards', () => {
   const f = fixture(), p = f.store.read().profile;
-  assert.equal(p.version, 3); assert.equal(p.wallet, 1200); assert.equal(p.town.size, 6);
+  assert.equal(p.version, 4); assert.equal(p.wallet, 1200); assert.equal(p.town.size, 6);
   assert.equal(p.town.targetCardId, 'harbor_villa'); assert.equal(BUILDING_CARDS.length, 7);
   assert.equal(BUILDING_CARDS.every(card => card.modelKeys.length === 3 && card.previewPaths.length === 3), true);
   assert.equal(Object.values(p.town.cards).every(card => !card.unlocked && card.star === 0 && card.duplicates === 0), true);
@@ -42,7 +42,7 @@ test('v2 migration preserves exact vault, earned, tickets, projects and collecti
   assert.equal(migrated.profile.receipts.every(receipt => receipt.cardRewardVersion === 0 && receipt.buildingCards.length === 0), true);
   const settled = f.store.settle(result('unfinished', [{ cardId: 'harbor_onsen', count: 1 }]));
   assert.equal(settled.ok, true); assert.equal(settled.profile.town.cards.harbor_onsen.unlocked, true);
-  assert.equal(f.create().read().profile.version, 3);
+  assert.equal(f.create().read().profile.version, 4);
 });
 
 test('a migrated receipt remains idempotent and cannot be reissued with new cards', () => {
@@ -134,33 +134,37 @@ test('merge consumes two then four duplicates and upgrades the family for every 
   assert.equal(f.store.town.merge({ cardId: 'harbor_villa' }).error, 'max_star'); assert.equal(validProfile(final.profile), true);
 });
 
-test('land expansion is paid once, opens the outer cells, and retains existing layout', () => {
+test('the first district is paid once, opens only the eastern cells, and retains existing layout', () => {
   const f = fixture(); complete(f); const first = f.store.town.place({ cardId: 'harbor_villa', x: 5, y: 5 });
   assert.equal(f.store.town.place({ cardId: 'harbor_villa', x: 6, y: 6 }).error, 'out_of_bounds');
-  const expanded = f.store.town.expand({ expectedSize: 8, actionId: 'expand' }); assert.equal(expanded.ok, true);
-  assert.equal(expanded.profile.wallet, first.profile.wallet - TOWN_EXPANSION.coins); assert.equal(expanded.profile.town.size, 8);
+  const expanded = f.store.town.expand({ expectedStage: 1, actionId: 'expand' }); assert.equal(expanded.ok, true);
+  assert.equal(expanded.profile.wallet, first.profile.wallet - TOWN_DISTRICTS[0].coins); assert.equal(expanded.profile.town.size, 8);
   assert.deepEqual(expanded.profile.town.buildings[0], first.building);
-  assert.equal(f.create().town.expand({ expectedSize: 8, actionId: 'expand' }).duplicate, true);
-  assert.equal(f.store.town.place({ cardId: 'harbor_villa', x: 7, y: 7 }).ok, true);
-  assert.equal(f.store.town.expand({ expectedSize: 8 }).error, 'max_land');
+  assert.equal(f.create().town.expand({ expectedStage: 1, actionId: 'expand' }).duplicate, true);
+  assert.equal(f.store.town.place({ cardId: 'harbor_villa', x: 7, y: 5 }).ok, true);
+  assert.equal(f.store.town.place({ cardId: 'harbor_villa', x: 7, y: 7 }).error, 'out_of_bounds');
+  assert.equal(f.store.town.expand({ expectedStage: 1 }).duplicate, true);
 });
 
-test('saving failures roll back build, merge, target and expansion together with their costs', () => {
+test('saving failures roll back build, merge and expansion together with their costs', () => {
   const f = fixture(); complete(f, 'rollback', [{ cardId: 'harbor_villa', count: 3 }]);
-  const operations = [() => f.store.town.place({ cardId: 'harbor_villa', x: 0, y: 0, actionId: 'rollback-build' }), () => f.store.town.merge({ cardId: 'harbor_villa', expectedStar: 2, actionId: 'rollback-merge' }), () => f.store.town.expand({ expectedSize: 8, actionId: 'rollback-expand' }), () => f.store.town.setTarget({ cardId: 'harbor_onsen', actionId: 'rollback-target' })];
+  const operations = [() => f.store.town.place({ cardId: 'harbor_villa', x: 0, y: 0, actionId: 'rollback-build' }), () => f.store.town.merge({ cardId: 'harbor_villa', expectedStar: 2, actionId: 'rollback-merge' }), () => f.store.town.expand({ expectedStage: 1, actionId: 'rollback-expand' })];
   for (const operation of operations) {
     const before = f.raw(); f.fail(true); assert.equal(operation().error, 'save_failed'); assert.equal(f.raw(), before);
     f.fail(false); assert.equal(operation().ok, true); assert.equal(operation().duplicate, true);
   }
-  assert.equal(f.create().read().profile.town.targetCardId, 'harbor_onsen');
+  assert.equal(f.store.town.setTarget, undefined);
 });
 
 test('insufficient construction money never takes cards and blocked storage is not reset', () => {
   const f = fixture(); complete(f, 'low', [{ cardId: 'harbor_skyscraper', count: 1 }], { humanCash: 0 });
-  f.store.town.expand({ expectedSize: 8 }); const before = f.raw();
+  f.store.town.expand({ expectedStage: 1 });
+  f.store.enter({ runId: 'spend-low-a', mapId: 'classic', price: 100 });
+  f.store.enter({ runId: 'spend-low-b', mapId: 'classic', price: 100 });
+  const before = f.raw();
   assert.equal(f.store.town.place({ cardId: 'harbor_skyscraper', x: 0, y: 0 }).error, 'insufficient'); assert.equal(f.raw(), before);
   const inaccessible = createStore({ getItem() { throw Error('SecurityError'); }, setItem() { throw Error('unexpected'); } });
-  assert.equal(inaccessible.town.setTarget({ cardId: 'harbor_villa' }).error, 'unavailable');
+  assert.equal(inaccessible.town.place({ cardId: 'harbor_villa', x: 0, y: 0 }).error, 'unavailable');
 });
 
 test('tampered snapshots and ledgers are rejected without overwriting the original bytes', () => {
@@ -171,7 +175,7 @@ test('tampered snapshots and ledgers are rejected without overwriting the origin
   for (const mutation of mutations) {
     const broken = JSON.parse(JSON.stringify(original)); mutation(broken); const raw = JSON.stringify(broken), corrupt = fixture(raw);
     assert.equal(validProfile(broken), false); assert.equal(corrupt.store.read().error, 'corrupt');
-    assert.equal(corrupt.store.town.expand({ expectedSize: 8 }).error, 'corrupt'); assert.equal(corrupt.raw(), raw);
+    assert.equal(corrupt.store.town.expand({ expectedStage: 1 }).error, 'corrupt'); assert.equal(corrupt.raw(), raw);
   }
 });
 

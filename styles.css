@@ -1001,6 +1001,9 @@ img.building-sprite {
   color: #94a3b8;
 }
 .start-actions { display: flex; flex-direction: column; gap: 14px; width: 240px; }
+.start-entry-error { margin: 0; color: #b54837; font-size: 13px; }
+.start-entry-error[hidden], .start-map-description[hidden], #event-message:empty, #center-description:empty, #turn-description:empty, #victory-rule:empty, #card-bag-status:empty { display: none; }
+.start-btn:disabled { opacity: .65; cursor: wait; transform: none; }
 .start-btn {
   padding: 14px 28px; border-radius: 16px; font-size: 16px; font-weight: 700;
   cursor: pointer; border: none; transition: transform 0.15s, box-shadow 0.15s;

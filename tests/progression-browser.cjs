@@ -67,10 +67,9 @@ const server = http.createServer((req, res) => {
     // Enter through the actual game flow, then finish a controlled late-game state.
     await page.setViewportSize({ width: 320, height: 568 });
     await page.locator('#start-play-btn').click();
-    await page.locator('[data-action="enter"]').click();
     assert.equal(await page.evaluate(() => GameProgression.getProfile().profile.wallet), 11000);
     await page.locator('[data-action="flip"]').click();
-    await page.locator('.drama-skip').click();
+    await page.locator('#event-actions [data-action="continue"]').click();
     await page.waitForFunction(() => state.isFormalRun === true, null, { timeout: 10000 }).catch(async error => { await page.screenshot({ path: path.join(out, 'integration-start-failure.png') }); throw error; });
     const actual = await page.evaluate(() => {
       state.round = getMaxRounds() + 1;

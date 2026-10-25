@@ -24,7 +24,7 @@ async function test(name,work){await work();checks++;console.log('PASS '+name);}
     assert.equal(c.run('visitor.cash'),200);
     assert.equal(c.run('visitor.effects.shield'),true);
     assert.equal(c.run('visitor.effects.hotSpringRest'),false);
-    assert.match(events.find(e=>e.label==='破产救助').message,/正常掷骰，不额外休整/);
+    assert.equal(events.find(e=>e.label==='破产救助').message, '+¥200 · 护盾');
     // A trap cast before the protected departure must not restore the lost turn.
     await c.run('executeCardEffect(owner,{id:"freeze"},state.sessionId)');
     assert.equal(c.run('visitor.effects.frozen'),false);

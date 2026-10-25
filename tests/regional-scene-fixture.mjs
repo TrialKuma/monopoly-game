@@ -10,7 +10,9 @@ import {createStreetFoundation} from '../scene-streets.js';
 import {createOwnershipRoofs} from '../scene-ownership-roofs.js';
 import {createFunctionalLandmark} from '../scene-functional-landmarks.js';
 import {createThermalSteam} from '../scene-thermal-steam.js';
-import {harborWalkOffset,harborEdgePath} from '../scene-harbor-paths.js';
+import {createLevelThreeTracker} from '../scene-fireworks.js';
+import {harborWalkOffset,harborEdgePath,harborParcelRotation,harborVisualPosition} from '../scene-harbor-paths.js';
+import {harborLandmarkSpec} from '../scene-harbor-landmarks.js';
 import {addHarborBridge} from '../scene-harbor-islands.js';
 import {loadGeometryGLB,regionalAssetURL} from './gltf-geometry-fixture.mjs';
 
@@ -43,7 +45,7 @@ export async function regionalFixture(mapId){
   assert(MAP_IDS.includes(mapId),`unknown map ${mapId}`);
   const assetUrl=regionalAssetURL(mapId);
   assert(fs.existsSync(assetUrl),`required regional GLB is missing: ${fileURLToPath(assetUrl)}`);
-  const context=vm.createContext({THREE,GLTFLoader,mergeGeometries,createStreetFoundation,createOwnershipRoofs,createFunctionalLandmark,createThermalSteam,harborWalkOffset,harborEdgePath,addHarborBridge,performance,console,CustomEvent:class{},document:{createElement:()=>new Element(),body:{classList:{remove(){}}}},window:{matchMedia:()=>({matches:false}),addEventListener(){},dispatchEvent(){}}});
+  const context=vm.createContext({THREE,GLTFLoader,mergeGeometries,createStreetFoundation,createOwnershipRoofs,createFunctionalLandmark,createThermalSteam,createLevelThreeTracker,harborWalkOffset,harborEdgePath,harborParcelRotation,harborVisualPosition,harborLandmarkSpec,addHarborBridge,performance,console,CustomEvent:class{},document:{createElement:()=>new Element(),body:{classList:{remove(){}}}},window:{matchMedia:()=>({matches:false}),addEventListener(){},dispatchEvent(){}}});
   const run=code=>vm.runInContext(code,context);
   run(fs.readFileSync(new URL('../scene.js',import.meta.url),'utf8').replace(/^import .*;\r?\n/gm,''));
   run('world=new THREE.Group();labels=document.createElement("div");numberTexture=()=>own(new THREE.Texture());');
@@ -61,7 +63,8 @@ export async function regionalFixture(mapId){
     context.data={mapId,sessionId:'regional-fixture',board,players:[{id:'human',position:0},{id:'ai',position:0}],navigation:map.navigation};
     context.realSteps=steps;
     run(`clearMap();snapshot=data;
-      var px=data.board.map(t=>t.x),py=data.board.map(t=>t.y);boardBounds={minX:Math.min(...px),maxX:Math.max(...px),minY:Math.min(...py),maxY:Math.max(...py)};
+      var positions=data.board.map(t=>data.mapId==='harbor'?harborVisualPosition(t):t);
+      var px=positions.map(t=>t.x),py=positions.map(t=>t.y);boardBounds={minX:Math.min(...px),maxX:Math.max(...px),minY:Math.min(...py),maxY:Math.max(...py)};
       boardBounds.cx=(boardBounds.minX+boardBounds.maxX)/2;boardBounds.cy=(boardBounds.minY+boardBounds.maxY)/2;boardBounds.w=(boardBounds.maxX-boardBounds.minX+1)*STEP;boardBounds.d=(boardBounds.maxY-boardBounds.minY+1)*STEP;
       streetFoundation=createStreetFoundation({THREE,world,boardBounds,mapId:data.mapId,islands:data.mapId==='harbor'});
       if(realSteps)data.board.forEach(makeStep);else data.board.forEach(t=>stepViews.set(t.index,{center:tilePosition(t)}));

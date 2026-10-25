@@ -2,12 +2,14 @@ import fs from 'node:fs';
 import vm from 'node:vm';
 import assert from 'node:assert/strict';
 import * as THREE from '../assets/vendor/three/three.module.min.js';
-import {harborEdgePath,harborWalkOffset} from '../scene-harbor-paths.js';
+import {harborEdgePath,harborWalkOffset,harborParcelRotation,harborVisualPosition} from '../scene-harbor-paths.js';
+import {harborLandmarkSpec} from '../scene-harbor-landmarks.js';
+import {createLevelThreeTracker} from '../scene-fireworks.js';
 
 const source=fs.readFileSync(new URL('../scene.js',import.meta.url),'utf8').replace(/^import .*;\r?\n/gm,'');
 function fixture(width=390,height=620){
   const classes=new Set(),media={matches:false};
-  const context=vm.createContext({THREE,harborEdgePath,harborWalkOffset,console,performance,CustomEvent:class{},
+  const context=vm.createContext({THREE,harborEdgePath,harborWalkOffset,harborParcelRotation,harborVisualPosition,harborLandmarkSpec,createLevelThreeTracker,console,performance,CustomEvent:class{},
     window:{matchMedia:()=>media,addEventListener(){},dispatchEvent(){}},
     document:{body:{classList:{contains:key=>classes.has(key)}},getElementById:()=>null},
   });
@@ -48,6 +50,26 @@ function fixture(width=390,height=620){
   f.run('snapshot.targetSelection={};resize()');assert.equal(f.run('api.getView().local'),false);
   assert.ok(f.run('camera.right-camera.left')>14,'board-wide target choices remain accessible');
   f.run('snapshot.targetSelection=null;resize()');assert.equal(f.run('api.getView().local'),true);
+}
+
+// Portrait startup, reset and aspect changes retain a readable slanted view.
+// Test both default and long-map branches because each has its own yaw rule.
+for(const mapId of ['classic','compact','expansion','harbor','alpine']){
+  const f=fixture(390,620);f.context.mapId=mapId;f.run('snapshot.mapId=mapId;resize()');
+  assert.equal(f.run('cameraView.elevation'),.78,`${mapId}: portrait starts at 45 degrees`);
+  for(const [width,height] of [[320,540],[390,620],[1280,720],[740,380],[390,620]]){
+    f.context.size={width,height};f.run('resize()');
+    assert.ok(f.run('cameraView.elevation>=.62&&cameraView.elevation<=.78'),`${mapId}: aspect never restores a top-down angle`);
+    f.run('changeCameraView(.2,.17,1.15);resetCameraView(true)');
+    assert.ok(f.run('cameraView.elevation>=.62&&cameraView.elevation<=.78'),`${mapId}: follow reset restores the slanted default`);
+    const angle=f.run('cameraView.elevation');
+    f.run('snapshot.currentPlayerId="ai";pawnViews.get("ai").group.position.set(7,.265,-4)');f.step();
+    assert.equal(f.run('cameraView.elevation'),angle,`${mapId}: AI turn preserves the viewing angle`);
+    f.run('setCameraMode("overview")');
+    const projected=f.run('[-1,1].flatMap(x=>[-1,1].map(z=>new THREE.Vector3(x*(boardBounds.w/2+.66),0,z*(boardBounds.d/2+.66)).project(camera)))');
+    assert.ok(projected.every(point=>Math.abs(point.x)<1&&Math.abs(point.y)<1),`${mapId}: overview still contains every board corner`);
+    f.run('setCameraMode("local")');assert.equal(f.run('cameraView.elevation'),angle);
+  }
 }
 
 // Small spacing changes and animated jumps do not move the camera.
@@ -129,6 +151,50 @@ function fixture(width=390,height=620){
   assert.deepEqual(f.run('camera.position.clone()'),overview);
 }
 
+// Wide harbor estates receive a separate, eased projection offset. The actual
+// pawn-following position, building scale and the user's camera stay untouched.
+for(const [width,height] of [[390,620],[320,360]]){
+  const f=fixture(width,height);
+  f.run(`snapshot.mapId='harbor';snapshot.board=[{index:1},{index:2,lot:{isLarge:true}},{index:3,isLargeSecondary:true,largePrimaryIndex:2}];
+    snapshot.players[0].position=2;
+    const estateGroup=new THREE.Group();estateGroup.position.set(2,0,0);
+    lotViews.set(2,{tile:snapshot.board[1],group:estateGroup,parcelRotation:0,w:4.2,d:2.45,boundary:{normal:new THREE.Vector3(0,0,1)},anchor:new THREE.Vector3()});
+    arrangeLabels=()=>{};positionLabels=()=>{};framingForLot=()=>[];`);
+  const focus=f.position(),cameraPosition=f.run('camera.position.clone()'),angle=f.run('camera.quaternion.clone()'),span=f.run('camera.right-camera.left');
+  const target=f.run('localFramingTarget()');assert(target>0);
+  assert.equal(f.run('localFramingBias'),0,'entering the estate never changes projection synchronously');
+  f.run('frameLocalEstate(1/60)');const first=f.run('localFramingBias');
+  assert(first>0&&first<target/10,'the first estate frame eases in, rather than jumping');
+  for(let frame=0;frame<150;frame++)f.run('frameLocalEstate(1/60)');
+  assert(Math.abs(f.run('localFramingBias')-target)<.001);
+  assert.deepEqual(f.position(),focus,'projection composition never displaces the tracked pawn focus');
+  assert.deepEqual(f.run('camera.position.clone()'),cameraPosition);
+  assert.deepEqual(f.run('camera.quaternion.clone()'),angle);
+  assert(Math.abs(f.run('camera.right-camera.left')-span)<1e-10,'estate composition never changes scale');
+  f.run('snapshot.players[0].position=3');assert.equal(f.run('localFramingTarget()'),target,'both steps share their estate composition');
+  f.run('inspection={};snapshot.players[0].position=1');const held=f.run('localFramingBias');
+  assert.equal(f.run('frameLocalEstate(.1)'),false);assert.equal(f.run('localFramingBias'),held,'inspection freezes background composition');
+  f.run('inspection=null;frameLocalEstate(1/60)');const leaving=f.run('localFramingBias');
+  assert(leaving<held&&leaving>held*.9,'leaving the estate eases back without a jump');
+  for(let frame=0;frame<150;frame++)f.run('frameLocalEstate(1/60)');
+  assert.equal(f.run('localFramingBias'),0);
+  f.run('snapshot.currentPlayerId="ai";snapshot.players[1].position=2');
+  for(let frame=0;frame<150;frame++)f.run('frameLocalEstate(1/60)');
+  assert(Math.abs(f.run('localFramingBias')-target)<.001,'estate composition follows the acting opponent too');
+  f.run('cameraGesture.pointers.set(1,{x:0,y:0});changeCameraView(.1,0,1)');const manual=f.run('localFramingBias');
+  assert.equal(f.run('frameLocalEstate(.1)'),false);assert.equal(f.run('localFramingBias'),manual,'automatic composition never moves during a held gesture');
+  f.run('cameraGesture.pointers.clear()');
+  for(let frame=0;frame<150;frame++)f.run('frameLocalEstate(1/60)');
+  assert.equal(f.run('localFramingBias'),0,'manual orbit disables automatic estate composition');
+  f.run('resetCameraView(true)');for(let frame=0;frame<150;frame++)f.run('frameLocalEstate(1/60)');
+  assert(f.run('localFramingBias')>0,'restoring follow eases the estate framing back in');
+  f.run('setCameraMode("overview")');assert.equal(f.run('localFramingBias'),0,'overview always clears the local bias');
+  const overview=f.run('camera.projectionMatrix.clone()');f.run('frameLocalEstate(.1)');
+  assert.deepEqual(f.run('camera.projectionMatrix.clone()'),overview,'estate framing cannot move overview');
+  f.run('setCameraMode("local");snapshot.mapId="compact"');
+  for(let frame=0;frame<150;frame++)f.run('frameLocalEstate(1/60)');assert.equal(f.run('localFramingBias'),0,'other maps retain their existing composition');
+}
+
 // The fastest ordinary route stays inside the local viewport on each aspect and map.
 const game=fs.readFileSync(new URL('../game.js',import.meta.url),'utf8');
 const createBoard=game.slice(game.indexOf('function createBoard('),game.indexOf('function prepareOpeningLots('));
@@ -140,7 +206,7 @@ const maps=vm.runInNewContext(game.slice(0,game.indexOf('const CARD_POOL'))+crea
 const presentation=fs.readFileSync(new URL('../presentation.js',import.meta.url),'utf8');
 const snapshotFunction=presentation.slice(presentation.indexOf('  function snapshot()'),presentation.indexOf('  function syncCityScene()'));
 const realNavigation=game.slice(game.indexOf('function getMapNavigation('),game.indexOf('const HARBOR_FAMILIES'))+
-  game.slice(game.indexOf('function resetHarborJourney('),game.indexOf('function chooseAiHarborRoute('))+
+  game.slice(game.indexOf('function harborCycleOffset('),game.indexOf('window.GameHarbor ='))+
   game.slice(game.indexOf('function getNextTileIndex('),game.indexOf('function previewMovement('));
 const gameplay=vm.createContext({});
 vm.runInContext(game.slice(0,game.indexOf('const CARD_POOL'))+createBoard+
@@ -160,10 +226,11 @@ for(const {map,board} of maps){
   f.run(`snapshot=snapshotData;mapKey=snapshot.sessionId+':'+snapshot.mapId+':'+snapshot.board.length;
     world=new THREE.Group();renderer.render=()=>{};labels.querySelectorAll=()=>[];labels.appendChild=()=>{};
     mount=()=>true;loadModelKit=()=>{};pawnViews.clear();
-    const xs=snapshot.board.map(tile=>tile.x),zs=snapshot.board.map(tile=>tile.y);
+    const positions=snapshot.board.map(tile=>snapshot.mapId==='harbor'?harborVisualPosition(tile):tile);
+    const xs=positions.map(tile=>tile.x),zs=positions.map(tile=>tile.y);
     const cx=(Math.min(...xs)+Math.max(...xs))/2,cz=(Math.min(...zs)+Math.max(...zs))/2;
-    boardBounds={w:(Math.max(...xs)-Math.min(...xs))*STEP,d:(Math.max(...zs)-Math.min(...zs))*STEP};
-    for(const tile of snapshot.board){const center=new THREE.Vector3((tile.x-cx)*STEP,.14,(tile.y-cz)*STEP);
+    boardBounds={w:(Math.max(...xs)-Math.min(...xs)+1)*STEP,d:(Math.max(...zs)-Math.min(...zs)+1)*STEP};
+    for(const tile of snapshot.board){const visual=snapshot.mapId==='harbor'?harborVisualPosition(tile):tile;const center=new THREE.Vector3((visual.x-cx)*STEP,.14,(visual.y-cz)*STEP);
       const offset=snapshot.mapId==='harbor'?harborWalkOffset(tile,THREE):new THREE.Vector3();
       stepViews.set(tile.index,{center,walk:center.clone().add(offset),normal:offset.lengthSq()?offset.clone().normalize():new THREE.Vector3(0,0,1),ring:{material:{color:new THREE.Color()}}});}
     snapshot.players.forEach(makePawn);cameraFocusReady=false;resize();update(snapshotData);
@@ -175,7 +242,8 @@ for(const {map,board} of maps){
     vm.runInContext('{const p=state.players.find(p=>!p.isAi);p.position=getNextTileIndex(p,p.position,1,true);state.animation.currentTile=p.position;}',gameplay);
     f.context.snapshotData=data();f.run('update(snapshotData)');
     assert.equal(f.run('pawnViews.get(snapshot.players.find(p=>!p.isAi).id).active'),true,'state movement starts the real pawn animation');
-    for(let frame=0;frame<6;frame++){now+=32;f.run(`tick(${now})`);}
+    const moveFrames=Math.max(6,Math.ceil(f.run('api.getMovementDuration(snapshot.currentPlayerId)')/32));
+    for(let frame=0;frame<moveFrames;frame++){now+=32;f.run(`tick(${now})`);}
   }
   vm.runInContext('state.animation.currentTile=null;',gameplay);f.context.snapshotData=data();f.run('update(snapshotData)');
   for(let frame=0;frame<60;frame++){now+=32;f.run(`tick(${now})`);}
@@ -190,17 +258,18 @@ for(const {map,board} of maps){
   assert.ok(f.position().distanceTo(humanFocus)<=18*.032+.001,'the first opponent frame has bounded translation');
   for(let frame=0;frame<90;frame++){now+=32;f.run(`tick(${now})`);}
   assert.ok(f.position().distanceTo(humanFocus)>1,`${map.id}: the opponent turn is followed`);
-  assert.ok(f.run('Math.hypot(cameraFocus.x-pawnViews.get("ai").group.position.x,cameraFocus.z-pawnViews.get("ai").group.position.z)')<.37);
+  assert.ok(f.run('Math.hypot(cameraFocus.x-pawnViews.get("ai").group.position.x,cameraFocus.z-pawnViews.get("ai").group.position.z)')<.37,`${map.id}: AI camera settles after turn handover`);
   const aiFocus=f.position();
   for(let step=0;step<3;step++){
     vm.runInContext('{const p=currentPlayer();p.position=getNextTileIndex(p,p.position,1,true);state.animation.currentTile=p.position;}',gameplay);
     f.context.snapshotData=data();f.run('update(snapshotData)');
-    for(let frame=0;frame<6;frame++){now+=32;f.run(`tick(${now})`);}
+    const moveFrames=Math.max(6,Math.ceil(f.run('api.getMovementDuration(snapshot.currentPlayerId)')/32));
+    for(let frame=0;frame<moveFrames;frame++){now+=32;f.run(`tick(${now})`);}
   }
   vm.runInContext('state.animation.currentTile=null;',gameplay);f.context.snapshotData=data();f.run('update(snapshotData)');
   for(let frame=0;frame<45;frame++){now+=32;f.run(`tick(${now})`);}
   assert.ok(f.position().distanceTo(aiFocus)>1,`${map.id}: walking during the opponent turn moves the camera`);
-  assert.ok(f.run('Math.hypot(cameraFocus.x-pawnViews.get("ai").group.position.x,cameraFocus.z-pawnViews.get("ai").group.position.z)')<.37);
+  assert.ok(f.run('Math.hypot(cameraFocus.x-pawnViews.get("ai").group.position.x,cameraFocus.z-pawnViews.get("ai").group.position.z)')<.37,`${map.id}: AI camera settles after walking (distance ${f.run('Math.hypot(cameraFocus.x-pawnViews.get("ai").group.position.x,cameraFocus.z-pawnViews.get("ai").group.position.z)')})`);
   const beforeReturn=f.position();
   vm.runInContext('state.currentPlayerIndex=0;',gameplay);f.context.snapshotData=data();f.run('update(snapshotData)');
   assert.deepEqual(f.position(),beforeReturn,'returning to the player does not snap the focus');
@@ -300,29 +369,39 @@ let checkedFrames=0;
 for(const [width,height] of [[390,620],[360,560],[740,380]])for(const {map,board} of maps)for(const zoom of [1,2.4]){
   const f=fixture(width,height);f.context.map=map;
   f.run('snapshot.mapId=map.id;snapshot.animation.currentTile=0');
-  const cx=(Math.min(...board.map(t=>t.x))+Math.max(...board.map(t=>t.x)))/2;
-  const cz=(Math.min(...board.map(t=>t.y))+Math.max(...board.map(t=>t.y)))/2;
-  const coords=tile=>({x:(tile.x-cx)*1.8,z:(tile.y-cz)*1.8});
+  const positions=board.map(tile=>map.id==='harbor'?harborVisualPosition(tile):tile);
+  const cx=(Math.min(...positions.map(t=>t.x))+Math.max(...positions.map(t=>t.x)))/2;
+  const cz=(Math.min(...positions.map(t=>t.y))+Math.max(...positions.map(t=>t.y)))/2;
+  f.context.actualBounds={w:(Math.max(...positions.map(t=>t.x))-Math.min(...positions.map(t=>t.x))+1)*1.8,d:(Math.max(...positions.map(t=>t.y))-Math.min(...positions.map(t=>t.y))+1)*1.8};
+  f.run('boardBounds=actualBounds');
+  const coords=tile=>{const visual=map.id==='harbor'?harborVisualPosition(tile):tile;return{x:(visual.x-cx)*1.8,z:(visual.y-cz)*1.8};};
   if(map.id==='harbor'){
     const steps=new Map(board.map(tile=>{const p=coords(tile),center=new THREE.Vector3(p.x,.265,p.z);return[tile.index,{center,walk:center.clone().add(harborWalkOffset(tile,THREE))}];}));
+    f.context.streetPoints=[...steps.values()].flatMap(step=>[step.center,step.walk]);
+    f.run('setCameraMode("overview")');
+    assert(f.run('streetPoints.every(point=>{const projected=point.clone().project(camera);return Math.abs(projected.x)<.97&&Math.abs(projected.y)<.97;})'),`harbor ${width}x${height}: overview includes the full authored street and both junctions`);
+    f.run('setCameraMode("local")');
     const covered=new Set();
-    for(const branch of ['merchant','resort'])for(const direction of [1,-1]){
+    const cycle=map.navigation.cycle,startCursor=cycle.indexOf(0);
+    for(const direction of [1,-1]){
       let index=0;const initial=steps.get(0).walk;f.move(initial.x,initial.z);f.run(`cameraFocusReady=false;resize();changeCameraView(0,0,${zoom})`);
-      for(let n=0;n<24;n++){
-        const next=direction>0?(index===7?(branch==='resort'?18:8):map.navigation.next[index]):(index===28?(branch==='resort'?27:17):map.navigation.prev[index]);
-        covered.add(direction>0?`${index}:${next}`:`${next}:${index}`);
-        const route=harborEdgePath(index,next,steps,THREE),lengths=route.slice(1).map((p,i)=>p.distanceTo(route[i])),total=lengths.reduce((a,b)=>a+b,0),duration=Math.max(190,Math.min(650,total*112));
+      for(let n=0;n<cycle.length;n++){
+        const next=cycle[((startCursor+(n+1)*direction)%cycle.length+cycle.length)%cycle.length];
+        covered.add([index,next].sort((a,b)=>a-b).join(':'));
+        const route=harborEdgePath(index,next,steps,THREE),lengths=route.slice(1).map((p,i)=>p.distanceTo(route[i])),total=lengths.reduce((a,b)=>a+b,0);
+        f.context.pathLength=total;const duration=f.run('harborMovementDuration(pathLength)');
+        assert(duration>=total*112,'long bridges never accelerate beyond the ordinary walking speed');
         for(let segment=1;segment<route.length;segment++){
           const from=route[segment-1],to=route[segment],frames=Math.max(3,Math.ceil(duration/1000*60*lengths[segment-1]/total));
           for(let frame=1;frame<=frames;frame++){
             f.move(from.x+(to.x-from.x)*frame/frames,from.z+(to.z-from.z)*frame/frames);f.step(1/60);
             const point=f.run('pawnViews.get("human").group.position.clone().project(camera)');
-            assert(Math.abs(point.x)<.97&&Math.abs(point.y)<.97,`harbor ${branch} direction ${direction} ${width}x${height} zoom ${zoom} edge ${index}→${next}: actual curved route stays visible`);checkedFrames++;
+            assert(Math.abs(point.x)<.97&&Math.abs(point.y)<.97,`harbor cycle direction ${direction} ${width}x${height} zoom ${zoom} edge ${index}→${next}: the actual route stays visible`);checkedFrames++;
           }
         }
         index=next;
       }
-      assert.equal(index,0,'both camera tours complete their actual branch lap');
+      assert.equal(index,0,'both camera tours complete a full red/yellow cycle');
     }
     assert.equal(covered.size,35,'camera framing checks every branch edge in both directions');
     continue;

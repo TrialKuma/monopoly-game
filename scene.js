@@ -2,13 +2,15 @@ import * as THREE from './assets/vendor/three/three.module.min.js';
 import { makeStudioEnvironment } from './scene-environment.js?v=20261025-facade2';
 import { mergeGeometries } from './assets/vendor/three/addons/utils/BufferGeometryUtils.js';
 import { createSceneLife } from './scene-life.js?v=20261025-harbor1';
-import { createStreetFoundation } from './scene-streets.js?v=20261025-harbor1';
-import { createHarborIslands, addHarborBridge } from './scene-harbor-islands.js?v=20261025-harbor1';
-import { harborWalkOffset, harborEdgePath } from './scene-harbor-paths.js?v=20261025-harbor1';
+import { createStreetFoundation } from './scene-streets.js?v=20261025-harbor-main-island1';
+import { createHarborIslands, addHarborBridge, updateHarborProjectVisuals, tickHarborProjectVisuals } from './scene-harbor-islands.js?v=20261025-harbor-projects1';
+import { harborWalkOffset, harborEdgePath, harborParcelRotation, harborVisualPosition } from './scene-harbor-paths.js?v=20261025-harbor-main-island1';
+import { harborLandmarkSpec } from './scene-harbor-landmarks.js?v=20261025-harbor-main-island1';
 import { createRegionalPark } from './scene-regional-parks.js?v=20261025-terrain3';
 import { createOwnershipRoofs } from './scene-ownership-roofs.js?v=20261025-items1';
 import { createFunctionalLandmark } from './scene-functional-landmarks.js?v=20261025-items1';
 import { createThermalSteam } from './scene-thermal-steam.js?v=20261025-facade2';
+import { createLevelThreeTracker, createBuildingFireworks, buildingRoofAnchor } from './scene-fireworks.js?v=20261025-celebrate1';
 import { loadSharedModelAsset, forgetSharedModelAsset, releaseSharedModelAsset, releaseSupersededModelAssets, ownsSharedModelResource, disposeSharedModelAssets } from './scene-model-cache.js?v=20261025-harbor1';
 
 // All route positions, ownership and prices come from the game. This view never
@@ -32,6 +34,9 @@ const installedModelSources = new Map();
 const lotViews = new Map();
 const pawnViews = new Map();
 const stepViews = new Map();
+const streetArrows = [];
+const harborProjectBadges = new Map();
+let harborSceneRoot = null;
 const resources = new Set();
 const materials = new Map();
 const pulses = [];
@@ -48,6 +53,8 @@ let studioEnvironment = null;
 let travelArrow = null;
 let sceneLife = null, cameraControls = null, timeMode = 'auto';
 let streetFoundation=null;
+let buildingFireworks=null, levelThreeTracker=null;
+const pendingCelebrations=new Map();
 let seasonMode = 'auto', weatherMode = 'auto', outskirtsVisible=true, lastAtmosphereReadout = 0;
 const ATMOSPHERE_MODES = {
   time: { auto:'自然流转', dawn:'清晨', day:'白天', dusk:'夕照', night:'月夜' },
@@ -63,14 +70,17 @@ try {
 } catch (_) { /* Private browsing can disable local preferences. */ }
 let cameraView = { yaw:null, elevation:null, zoom:1, modified:false, facingYaw:null, mode:'local', following:true };
 let propertyCameraView = null;
+let routeCameraView = null;
 const cameraFocus = new THREE.Vector3(0,.2,0);
 let cameraFocusReady = false, lastLocalCamera = false;
+let localFramingBias = 0;
+let cameraBrowseTarget = null;
 let followedPlayerId=null;
 let cameraGesture = { pointers:new Map(), dragged:false, pinchDistance:0 };
 let suppressSceneClickUntil = 0;
 const CAMERA_LIMITS = { minZoom:.65, maxZoom:2.4, minElevation:.35, maxElevation:1.24 };
 const LANDMARKS = { classic: { 5:'finance', 7:'skyscraper', 14:'onsen' }, compact: { 2:'finance', 11:'onsen' }, expansion: { 7:'skyscraper', 26:'onsen' } };
-const SPECIAL_MODELS = { bank:'vault_bank',construction:'builders_guild',card_draw:'card_pavilion',chance:'chance_wheel',teleport:'teleport_gate',rush:'rush_station',junction:'junction_hub' };
+const SPECIAL_MODELS = { bank:'vault_bank',construction:'builders_guild',card_draw:'card_pavilion',chance:'card_pavilion',teleport:'teleport_gate',rush:'rush_station',junction:'junction_hub' };
 const ASSET_BUNDLES = [
   {file:'city-kit.glb',version:'20260911-12',authored:false,pattern:/^(plot_0|tree|streetlamp|fountain)$/},
   ...['classic','compact','expansion','harbor','alpine'].map(mapId=>({file:`regions/${mapId}.glb`,mapId,version:'20261025-facade2',authored:true,pattern:new RegExp(`^${mapId}_(?:(?:villa|shop|hotel|tower|skyscraper|finance|onsen)_[123]|civic_hall|vault_bank|builders_guild|card_pavilion|chance_wheel|teleport_gate|rush_station|junction_hub)$`)})),
@@ -78,10 +88,12 @@ const ASSET_BUNDLES = [
 const projection = new THREE.Vector3();
 const raycaster = new THREE.Raycaster();
 const pointer = new THREE.Vector2();
-const api = { update, effect, reset, projectTile, inspectTile, closeInspection, resetView:()=>resetCameraView(true), setViewMode:setCameraMode, zoomBy:factor=>changeCameraView(0,0,factor), getView:()=>({...cameraView,local:isLocalCamera(),target:{x:cameraFocus.x,z:cameraFocus.z}}), setTimeMode:setCityTimeMode, getTimeMode:()=>sceneLife?.getTimeMode()||timeMode, setSeason:mode=>setCityClimate('season',mode), setWeather:mode=>setCityClimate('weather',mode), getAtmosphere:()=>sceneLife?.getAtmosphere(), refreshAssets:()=>loadModelKit(true), ready: false };
+const api = { update, effect, reset, projectTile, locateTile, inspectTile, closeInspection, resetView:()=>resetCameraView(true), setViewMode:setCameraMode, zoomBy:factor=>changeCameraView(0,0,factor), getView:()=>({...cameraView,local:isLocalCamera(),target:{x:cameraFocus.x,z:cameraFocus.z}}), setTimeMode:setCityTimeMode, getTimeMode:()=>sceneLife?.getTimeMode()||timeMode, setSeason:mode=>setCityClimate('season',mode), setWeather:mode=>setCityClimate('weather',mode), getAtmosphere:()=>sceneLife?.getAtmosphere(), refreshAssets:()=>loadModelKit(true), ready: false };
 window.CityScene = api;
 api.releaseInactiveAssets=()=>queueMicrotask(()=>retireInactiveModels(snapshot?.mapId));
 api.getMovementDuration=id=>snapshot?.mapId==='harbor'&&pawnViews.get(id)?.duration?Math.ceil(pawnViews.get(id).duration)+32:0;
+api.getCelebrationState=()=>({...buildingFireworks?.getState(),pending:pendingCelebrations.size});
+api.getHarborProjectsState=()=>[...harborProjectBadges].map(([id,view])=>({id,stage:view.stage,points:view.points,visible:!view.button.hidden,screen:view.screenPoint||project(view.anchor)}));
 
 function own(resource) { resources.add(resource); return resource; }
 function material(color, options = {}) {
@@ -180,6 +192,10 @@ function mount() {
     renderer.domElement.addEventListener('webglcontextrestored', () => { if (snapshot) update(snapshot); });
     observer = new ResizeObserver(resize); observer.observe(wrap);
     labels.addEventListener('click', (event) => {
+      const project=event.target.closest('[data-harbor-project]');
+      if(project&&!isSuppressedSceneClick(event)){
+        window.dispatchEvent(new CustomEvent('city:harbor-project',{detail:{id:project.dataset.harborProject}}));return;
+      }
       if(!canSelectScene()||isSuppressedSceneClick(event))return;
       const button = event.target.closest('[data-scene-tile-index]');
       if (!button) return;
@@ -222,9 +238,9 @@ function selectSceneTile(index){
 function canSelectScene(){
   const drama=document.getElementById('drama-layer');
   const modal=document.getElementById('event-overlay');
-  return Boolean(snapshot&&!inspection&&snapshot.phase!=='presenting'&&(!drama||drama.hidden)&&(!modal?.classList.contains('visible')||snapshot.targetSelection&&!snapshot.targetSelection.suspended));
+  return Boolean(snapshot&&!inspection&&snapshot.phase!=='presenting'&&(!drama||drama.hidden)&&(!modal?.classList.contains('visible')||snapshot.routeChoice||snapshot.targetSelection&&!snapshot.targetSelection.suspended));
 }
-function canMoveCamera(){return canSelectScene()&&(!document.getElementById('event-overlay')?.classList.contains('visible')||snapshot?.targetSelection?.kind==='property')&&!document.body.classList.contains('mode-start');}
+function canMoveCamera(){return canSelectScene()&&(!document.getElementById('event-overlay')?.classList.contains('visible')||snapshot?.routeChoice||snapshot?.targetSelection?.kind==='property')&&!document.body.classList.contains('mode-start');}
 function isSuppressedSceneClick(event){return event.detail!==0&&performance.now()<suppressSceneClickUntil;}
 function isLocalCamera(){
   // Board-wide card and city-hall choices must keep every legal target visible.
@@ -236,15 +252,16 @@ function cameraSubject(){
   return pawnViews.get(snapshot?.currentPlayerId)||pawnViews.get(snapshot?.players?.[0]?.id)||pawnViews.values().next().value;
 }
 function resetCameraView(apply=false){
+  cameraBrowseTarget=null;
   cancelCameraGesture();cameraView={yaw:null,elevation:null,zoom:1,modified:false,facingYaw:cameraView.facingYaw,mode:apply?cameraView.mode:'local',following:true};
   // A new board starts at its pawn. Returning from an inspection eases back
   // from the current focus instead of jumping to a new point.
-  if(!apply)cameraFocusReady=false;
+  if(!apply){cameraFocusReady=false;localFramingBias=0;}
   if(apply)resize();
 }
 function setCameraMode(mode){
   if(!['local','overview'].includes(mode)||!canMoveCamera())return false;
-  cameraView.mode=mode;cameraView.zoom=1;cameraView.following=true;
+  cameraBrowseTarget=null;cameraView.mode=mode;cameraView.zoom=1;cameraView.following=true;
   cameraFocusReady=false;cancelCameraGesture();resize();return true;
 }
 function changeCameraView(yawDelta=0,elevationDelta=0,zoomFactor=1){
@@ -401,11 +418,13 @@ function mountCameraControls(){
   window.addEventListener('blur',cancelCameraGesture);
 }
 function clearMap() {
+  buildingFireworks?.dispose();buildingFireworks=null;pendingCelebrations.clear();
   sceneLife?.dispose();sceneLife=null;
   streetFoundation?.dispose();streetFoundation=null;
+  harborSceneRoot=null;harborProjectBadges.clear();cameraBrowseTarget=null;
   ownershipRoofs?.clear();
   world?.clear(); labels?.replaceChildren(); lotViews.clear(); pawnViews.clear(); stepViews.clear();
-  travelArrow = null;
+  travelArrow = null;streetArrows.length=0;
   resources.forEach((resource) => resource.dispose?.()); resources.clear(); materials.clear(); pulses.length = 0;
 }
 function retireInactiveModels(activeMap){
@@ -436,11 +455,12 @@ function reset() {
   closeInspection();
   cancelAnimationFrame(assetRefreshFrame);assetRefreshFrame=0;sceneryRefreshNeeded=false;
   resetCameraView();cameraView.facingYaw=null;
-  clearMap();retireInactiveModels(null); snapshot = null; mapKey = ''; selectedIndex = null; propertyCameraView = null;
+  clearMap();levelThreeTracker?.reset();retireInactiveModels(null); snapshot = null; mapKey = ''; selectedIndex = null; propertyCameraView = null; routeCameraView = null;
   document.body.classList.remove('scene-ready'); api.ready = false;
 }
 function tilePosition(tile) {
-  return new THREE.Vector3((tile.x - boardBounds.cx) * STEP, .14, (tile.y - boardBounds.cy) * STEP);
+  const center=snapshot?.mapId==='harbor'?harborVisualPosition(tile):tile;
+  return new THREE.Vector3((center.x - boardBounds.cx) * STEP, .14, (center.y - boardBounds.cy) * STEP);
 }
 function inward(position) {
   const x = position.x, z = position.z;
@@ -459,8 +479,9 @@ function inward(position) {
 function boundaryEdges(position){
   if(snapshot?.mapId==='harbor'){
     const gx=position.x/STEP+boardBounds.cx,gy=position.z/STEP+boardBounds.cy;
-    const normal=gx<4.8?new THREE.Vector3(1,0,0):gx>7.2?new THREE.Vector3(-1,0,0):gx<5.6?new THREE.Vector3(1,0,0):gx>6.4?new THREE.Vector3(-1,0,0):gy>8&&gy<9.5?new THREE.Vector3(-1,0,0):new THREE.Vector3(0,0,gy>9?-1:1);
-    return [{side:normal.x>0?'west':normal.x<0?'east':normal.z>0?'north':'south',distance:0,normal,rotation:Math.atan2(normal.x,normal.z)}];
+    const distance=item=>{const center=harborVisualPosition(item);return Math.hypot(center.x-gx,center.y-gy);};
+    const tile=snapshot.board.reduce((best,item)=>distance(item)<distance(best)?item:best);
+    return [harborBoundaryForTile(tile)];
   }
   const left=(boardBounds.minX-boardBounds.cx)*STEP,right=(boardBounds.maxX-boardBounds.cx)*STEP;
   const back=(boardBounds.minY-boardBounds.cy)*STEP,front=(boardBounds.maxY-boardBounds.cy)*STEP;
@@ -471,11 +492,24 @@ function boundaryEdges(position){
     {side:'east',distance:Math.abs(position.x-right),normal:new THREE.Vector3(-1,0,0),rotation:-Math.PI/2},
   ];
 }
+function harborBoundaryForTile(tile){
+  const normal=harborWalkOffset(tile,THREE).normalize();
+  return {side:Math.abs(normal.x)>Math.abs(normal.z)?(normal.x>0?'west':'east'):(normal.z>0?'north':'south'),distance:0,normal,rotation:Math.atan2(normal.x,normal.z)};
+}
 function boundaryFor(position){return boundaryEdges(position).sort((a,b)=>a.distance-b.distance)[0];}
+function parcelLocalDirection(group,direction){return direction.clone().applyAxisAngle(new THREE.Vector3(0,1,0),-group.rotation.y);}
+function parcelFrontDepth(view,worldNormal){
+  if(view.parcelRotation==null)return Math.abs(worldNormal.x)>.5?view.w:view.d;
+  const normal=parcelLocalDirection(view.group,worldNormal);
+  return Math.abs(normal.x)*view.w+Math.abs(normal.z)*view.d;
+}
+function lotWorldSetback(view){return (view.mapId==='harbor'?view.boundary.normal.clone():inward(view.group.position)).multiplyScalar(-(view.landmarkSpec?.modelSetback??.10));}
 function buildMap(data) {
   clearMap();
+  buildingFireworks=createBuildingFireworks({THREE,parent:world,reducedMotion:()=>reducedMotion.matches,requestRender:()=>{renderDirty=true;}});
   retireInactiveModels(data.mapId);
-  const xs = data.board.map((tile) => tile.x), ys = data.board.map((tile) => tile.y);
+  const positions = data.board.map((tile) => data.mapId==='harbor'?harborVisualPosition(tile):tile);
+  const xs = positions.map((tile) => tile.x), ys = positions.map((tile) => tile.y);
   boardBounds = { minX: Math.min(...xs), maxX: Math.max(...xs), minY: Math.min(...ys), maxY: Math.max(...ys) };
   boardBounds.cx = (boardBounds.minX + boardBounds.maxX) / 2;
   boardBounds.cy = (boardBounds.minY + boardBounds.maxY) / 2;
@@ -484,12 +518,13 @@ function buildMap(data) {
   streetFoundation=createStreetFoundation({THREE,world,boardBounds,mapId:data.mapId,islands:data.mapId==='harbor'});
   ground = mesh(new THREE.PlaneGeometry(200, 200), data.mapId==='harbor'?'#609eaa':'#dbe3d7', world, 0, -.44, 0);
   ground.rotation.x = -Math.PI / 2; ground.castShadow = false;
-  if(data.mapId==='harbor')createHarborIslands({THREE,world,boardBounds,own});else makePark(data.mapId);
+  if(data.mapId==='harbor')harborSceneRoot=createHarborIslands({THREE,world,boardBounds,data,own});else makePark(data.mapId);
   data.board.forEach((tile) => makeStep(tile));
   makeRoads(data);
   data.board.filter((tile) => !tile.isLargeSecondary).forEach((tile) => makeLot(tile, data));
   streetFoundation.finish();
   data.players.forEach((player) => makePawn(player));
+  syncHarborProjects(data);
   if(data.mapId!=='classic'){
     travelArrow=document.createElement('span');travelArrow.className='scene-travel-arrow';travelArrow.setAttribute('role','img');
     travelArrow.innerHTML='<svg viewBox="0 0 28 20" aria-hidden="true"><path d="M3 10H23M17 4L23 10L17 16"/></svg>';
@@ -514,7 +549,7 @@ function numberTexture(number) {
   const texture = own(new THREE.CanvasTexture(canvas)); texture.colorSpace = THREE.SRGBColorSpace; return texture;
 }
 function makeStep(tile) {
-  const center = tilePosition(tile), edges=boundaryEdges(center), nearest=Math.min(...edges.map(edge=>edge.distance));
+  const center = tilePosition(tile), edges=snapshot?.mapId==='harbor'?[harborBoundaryForTile(tile)]:boundaryEdges(center), nearest=Math.min(...edges.map(edge=>edge.distance));
   const sides=edges.filter(edge=>edge.distance<nearest+.001), corner=sides.length>1;
   // A corner needs clearance on both axes; normalising a diagonal would push
   // its landing point back inside the corner building's footprint.
@@ -522,6 +557,7 @@ function makeStep(tile) {
   const walk=center.clone().add(offset);walk.y=.255;
   const size=corner?.76:.66, routeColor=tile.isStart?SPECIAL_COLORS.start:SPECIAL_COLORS[tile.special?.type];
   const landing=new THREE.Group();landing.position.copy(walk);landing.position.y=.205;landing.name='landing_pad_'+tile.index;landing.userData.cosmetic=true;world.add(landing);
+  if(snapshot?.mapId==='harbor'){const angle=harborParcelRotation(tile);if(angle!=null)landing.rotation.y=angle;}
   rounded(landing,size,.026,size,corner?.19:.16,routeColor||'#c2b191');
   rounded(landing,size-.075,.018,size-.075,corner?.16:.13,'#faf2db',0,.027);
   const disc = mesh(new THREE.PlaneGeometry(corner?.49:.43,corner?.49:.43), own(new THREE.MeshBasicMaterial({ map:numberTexture(tile.index), transparent:true, depthWrite:false })), world, walk.x, walk.y, walk.z);
@@ -540,7 +576,7 @@ function makeRoads(data) {
   const paths=connections.map(([a,b])=>data.mapId==='harbor'?harborEdgePath(a,b,stepViews,THREE):[stepViews.get(a).walk,stepViews.get(b).walk]);
   connections.forEach(([a,b],edgeIndex) => {
     const path=paths[edgeIndex];
-    if(data.mapId==='harbor'&&((a===7&&(b===8||b===18))||((a===17||a===27)&&b===28)))addHarborBridge({THREE,world,path,paths,own});
+    if(data.mapId==='harbor'&&['11:12','11:20','19:28','27:28'].includes([a,b].sort((x,y)=>x-y).join(':')))addHarborBridge({THREE,world,path,paths,own});
     for(let segment=1;segment<path.length;segment++){
     const start=path[segment-1],end=path[segment];
     streetFoundation?.road(start,end);
@@ -553,19 +589,45 @@ function makeRoads(data) {
     if(length>.40){
       const shape=new THREE.Shape();shape.moveTo(-.085,-.07);shape.lineTo(0,.08);shape.lineTo(.085,-.07);shape.lineTo(0,-.025);shape.closePath();
       const arrow=mesh(new THREE.ShapeGeometry(shape),own(new THREE.MeshBasicMaterial({color:'#a99161',side:THREE.DoubleSide})),world,midpoint.x,.216,midpoint.z);
+      arrow.name=`street_direction_${a}_${b}_${segment}`;arrow.userData.streetFrom=a;arrow.userData.streetTo=b;
       arrow.rotation.set(-Math.PI/2,0,-Math.atan2(end.x-start.x,-(end.z-start.z)));arrow.castShadow=false;
+      if(data.mapId==='harbor'){arrow.userData.streetBranch=routeBranch;arrow.userData.forwardRotation=arrow.rotation.z;streetArrows.push(arrow);}
     }
     }
   });
+  syncHarborStreetArrows(data);
+}
+function syncHarborStreetArrows(data){
+  if(data.mapId!=='harbor')return;
+  const current=data.players.find(player=>player.id===data.currentPlayerId);
+  const journey=current?.harborJourney||data.harborJourney;
+  const travel=journey?.travelDirection??(current?.effects?.reversed?-1:1);
+  const central=journey?.centralDirection??travel;
+  for(const arrow of streetArrows){
+    const reverse=(arrow.userData.streetBranch==='shared'?central:travel)<0;
+    arrow.rotation.z=arrow.userData.forwardRotation+(reverse?Math.PI:0);
+    arrow.material.color.set(arrow.userData.streetBranch==='shared'?(journey?.phase==='yellow'?'#c2942f':'#c96368'):'#a99161');
+    arrow.userData.actualFrom=reverse?arrow.userData.streetTo:arrow.userData.streetFrom;
+    arrow.userData.actualTo=reverse?arrow.userData.streetFrom:arrow.userData.streetTo;
+  }
 }
 function makeLot(tile, data) {
   const center = tilePosition(tile);
   const secondary = data.board.find((item) => item.isLargeSecondary && item.largePrimaryIndex === tile.index);
   const position = secondary ? center.clone().add(tilePosition(secondary)).multiplyScalar(.5) : center.clone();
-  const w = 1.43 + (secondary && secondary.x !== tile.x ? STEP : 0);
-  const d = 1.43 + (secondary && secondary.y !== tile.y ? STEP : 0);
+  const parcelRotation=data.mapId==='harbor'?harborParcelRotation(tile):null;
+  const landmarkSpec=data.mapId==='harbor'?harborLandmarkSpec(tile):null;
+  const streetAlignedLarge=Boolean(secondary&&parcelRotation!=null);
+  // Reviewed large models are wide across their frontage. Their two landing
+  // positions stay separate; one full-width deed follows the shared street.
+  const w = landmarkSpec?.width??(1.43 + (streetAlignedLarge || secondary && secondary.x !== tile.x ? STEP : 0));
+  const d = landmarkSpec?.depth??(1.43 + (!streetAlignedLarge && secondary && secondary.y !== tile.y ? STEP : 0));
   const group = new THREE.Group(); group.position.copy(position); group.userData.tileIndex=tile.index; world.add(group);
-  const boundary=boundaryFor(position),modern=data.mapId!=='classic';
+  // Rotate the complete parcel, including large estates and their deed frames.
+  if(parcelRotation!=null)group.rotation.y=parcelRotation;
+  // A merged parcel's midpoint can be closer to another street. Its primary
+  // tile owns the frontage, so never infer that direction from a neighbour.
+  const boundary=data.mapId==='harbor'?harborBoundaryForTile(tile):boundaryFor(position),modern=data.mapId!=='classic';
   rounded(group,w,.08,d,.13,PALETTE.cream,0,-.07);
   rounded(group,w-.12,.03,d-.12,.09,tile.lot ? streetFoundation.theme.garden : streetFoundation.theme.pavement,0,.011);
   streetFoundation.parcel(group,w,d,!!tile.lot);
@@ -579,10 +641,15 @@ function makeLot(tile, data) {
   const outline=roundedFrame(group,w+.12,.014,d+.12,.18,.035,pulseMaterial,.014);outline.name='event_frame';
   const building = new THREE.Group(); building.position.y=.048; building.userData.snowTarget=true; group.add(building);
   const flag = new THREE.Group(); flag.position.set(-w/2+.19,.045,d/2-.26); group.add(flag);
-  if(modern){const front=Math.abs(boundary.normal.x)>.5?w:d,span=Math.abs(boundary.normal.x)>.5?d:w;flag.position.copy(boundary.normal.clone().multiplyScalar(front/2-.23)).add(new THREE.Vector3(boundary.normal.z,0,-boundary.normal.x).multiplyScalar(-span/2+.19));flag.position.y=.045;flag.rotation.y=boundary.rotation;}
+  if(modern){
+    const normal=parcelLocalDirection(group,boundary.normal),tangent=new THREE.Vector3(normal.z,0,-normal.x);
+    const front=parcelRotation!=null?Math.abs(normal.x)*w+Math.abs(normal.z)*d:Math.abs(normal.x)>.5?w:d;
+    const span=parcelRotation!=null?Math.abs(tangent.x)*w+Math.abs(tangent.z)*d:Math.abs(normal.x)>.5?d:w;
+    flag.position.copy(normal.multiplyScalar(front/2-.23)).add(tangent.multiplyScalar(-span/2+.19));flag.position.y=.045;flag.rotation.y=boundary.rotation-group.rotation.y;
+  }
   cylinder(flag,.017,.38,PALETTE.dark,0,.19,0,8);
   const flagCloth = box(flag,.21,.12,.012,ownerMaterial,.09,.32,0);
-  const outward = inward(position).multiplyScalar(-1);
+  const outward = (data.mapId==='harbor'?boundary.normal.clone():inward(position)).multiplyScalar(-1);
   // Back-row names sit along the walk in front of their buildings; placing them
   // beyond the far edge would project the text directly over the roofs.
   if(outward.z<-.2)outward.z*=-1;
@@ -591,9 +658,10 @@ function makeLot(tile, data) {
   button.dataset.side=boundary.side;
   button.innerHTML='<span class="scene-tile-name"></span><span class="scene-tile-meta"></span>';
   button.querySelector('.scene-tile-name').textContent=tile.name;
-  if(!tile.lot)button.querySelector('.scene-tile-name').dataset.service=({start:'市政',bank:'金库',construction:'城建',card_draw:'抽卡',chance:'事件',teleport:'传送',rush:'快线',junction:'分岔'})[tile.isStart?'start':tile.special?.type]||'';
+  if(!tile.lot)button.querySelector('.scene-tile-name').dataset.service=({start:'市政',bank:'金库',construction:'城建',card_draw:'抽卡',chance:'商店',teleport:'传送',rush:'快线',junction:data.mapId==='harbor'?'航线':'分岔'})[tile.isStart?'start':tile.special?.type]||'';
   labels.appendChild(button);
-  const view={tile, mapId:data.mapId, boundary, group, building, ownerMaterial, ownerFrame, flag, flagCloth, outline, label:button, anchor, w, d, signature:'', modelName:'', born:0};
+  const view={tile, mapId:data.mapId, boundary, parcelRotation, landmarkSpec, group, building, ownerMaterial, ownerFrame, flag, flagCloth, outline, label:button, anchor, w, d, signature:'', modelName:'', born:0};
+  if(parcelRotation!=null){anchor.copy(position).addScaledVector(boundary.normal,parcelFrontDepth(view,boundary.normal)/2+.26);anchor.y=.07;}
   lotViews.set(tile.index,view); updateLot(view,tile,data,true);
   if (secondary) {
     // Both physical step positions remain separately selectable even when they share a deed.
@@ -629,7 +697,10 @@ function resolveAsset(tile,data,level=tile.lot?.level||0){
   const key=desired;
   return {family,desired,key,source:modelLibrary.get(key),authored:authoredModels.has(key),level};
 }
-function lotModelRotation(view){return view.mapId==='classic'?(view.d>view.w?Math.PI/2:0):(view.readableRotation??view.boundary.rotation);}
+function lotModelRotation(view){
+  const frontage=view.mapId==='classic'?(view.d>view.w?Math.PI/2:0):(view.parcelRotation!=null?view.boundary.rotation:view.readableRotation??view.boundary.rotation);
+  return frontage-view.group.rotation.y;
+}
 function createLotModel(tile,data,level,view=null,ownResource=own){
   const asset=resolveAsset(tile,data,level);let model;
   if(asset.source){
@@ -648,10 +719,15 @@ function createLotModel(tile,data,level,view=null,ownResource=own){
       if(service){model.userData.functionalBounds=new THREE.Box3().setFromObject(service);model.add(service);}
     }
   }
+  // Scale the reviewed shell and any fittings together, after measuring the
+  // authored model. Housing, estates and public buildings share this contract;
+  // gameplay and label semantics still come exclusively from tile.lot/special.
+  const landmarkSpec=data.mapId==='harbor'?harborLandmarkSpec(tile):null;
+  if(landmarkSpec){model.scale.multiply(new THREE.Vector3(...landmarkSpec.scale));model.userData.harborParcelScale=[...landmarkSpec.scale];model.userData.harborLandmarkScale=[...landmarkSpec.scale];}
   if(view){
     model.userData.cityBaseRotationY=model.rotation.y;
     model.rotation.y+=lotModelRotation(view);
-    const setback=inward(view.group.position).multiplyScalar(-.10);
+    const setback=parcelLocalDirection(view.group,lotWorldSetback(view));
     model.position.x+=setback.x;model.position.z+=setback.z;
   }
   return {model,asset};
@@ -767,7 +843,7 @@ function makePawn(player) {
   const anchor=document.createElement('span');anchor.className=`scene-pawn-anchor pawn-${player.id}`;anchor.dataset.playerAnchor=player.id;
   anchor.textContent=player.id==='human'?'你':'对手';labels.appendChild(anchor);
   const pos=pawnPosition(player);g.position.copy(pos);
-  pawnViews.set(player.id,{group:g,anchor,shield,position:player.position,from:pos.clone(),target:pos.clone(),started:0,duration:220,active:false,teleport:false});
+  pawnViews.set(player.id,{group:g,anchor,shield,position:player.position,from:pos.clone(),target:pos.clone(),started:0,duration:220,active:false,teleport:false,facing:0});
 }
 function pawnPosition(player){
   const step=stepViews.get(player.position)||stepViews.values().next().value;
@@ -777,11 +853,56 @@ function pawnPosition(player){
   if(sharing)pos.addScaledVector(tangent,player.id==='human'?-.17:.17);
   return pos;
 }
+// Brief acceleration/braking at each tile, with steady travel across a long
+// bridge. A whole road segment must not read as a single airborne leap.
+function pawnTravelProgress(t,duration){
+  const ramp=Math.min(.16,70/Math.max(1,duration));
+  if(t<ramp)return t*t/(2*ramp*(1-ramp));
+  if(t>1-ramp)return 1-(1-t)*(1-t)/(2*ramp*(1-ramp));
+  return (t-ramp/2)/(1-ramp);
+}
+function updatePawnMotion(view,time,delta){
+  if(!view.active)return;
+  const t=view.duration===0?1:THREE.MathUtils.clamp((time-view.started)/view.duration,0,1);
+  if(view.teleport){
+    if(t<.5){view.group.position.copy(view.from);view.group.scale.setScalar(1-t*1.8);}
+    else{view.group.position.copy(view.target);view.group.scale.setScalar(.1+(t-.5)*1.8);}
+    view.group.rotation.y=(view.facing||0)+t*Math.PI*2;
+  }else{
+    const progress=pawnTravelProgress(t,view.duration);
+    let from=view.from,to=view.target;
+    if(view.path?.length>1){
+      let distance=progress*view.pathLength;
+      for(let i=0;i<view.pathLengths.length;i++){
+        const length=view.pathLengths[i];
+        if(distance<=length||i===view.pathLengths.length-1){
+          from=view.path[i];to=view.path[i+1];
+          view.group.position.lerpVectors(from,to,Math.min(1,distance/Math.max(.0001,length)));break;
+        }
+        distance-=length;
+      }
+    }else view.group.position.lerpVectors(from,to,progress);
+    const dx=to.x-from.x,dz=to.z-from.z;
+    if(Math.hypot(dx,dz)>.001){
+      view.facing=Math.atan2(dx,dz);
+      const angle=Math.atan2(Math.sin(view.facing-view.group.rotation.y),Math.cos(view.facing-view.group.rotation.y));
+      view.group.rotation.y+=angle*(1-Math.exp(-delta/.055));
+    }
+  }
+  if(t===1){
+    view.active=false;view.group.position.copy(view.target);view.group.scale.setScalar(1);
+    view.group.rotation.y=view.facing||0;
+  }
+}
 function update(data){
   if(inspection&&inspection.sessionId!==data?.sessionId)closeInspection();
   snapshot=data;if(!data?.board?.length||!mount())return;
   const key=`${data.sessionId}:${data.mapId}:${data.board.length}`;
-  if(key!==mapKey){propertyCameraView=null;resetCameraView();cameraView.facingYaw=null;mapKey=key;buildMap(data);}
+  if(key!==mapKey){propertyCameraView=null;routeCameraView=null;resetCameraView();cameraView.facingYaw=null;mapKey=key;buildMap(data);}
+  syncHarborStreetArrows(data);
+  levelThreeTracker ||= createLevelThreeTracker();
+  const reached=levelThreeTracker.observe(key,data.board.filter(tile=>tile.lot&&!tile.isLargeSecondary).map(tile=>({id:tile.index,level:tile.lot.level,owner:tile.lot.ownerId})),data.phase!=='preview'&&!document.body.classList.contains('mode-start')&&!document.body.classList.contains('mode-showcase'));
+  for(const entry of reached.slice(0,2))pendingCelebrations.set(entry.id,{owner:entry.owner,expires:performance.now()+5000});
   // A purchase gets its own full-board view. Gestures here must not change
   // the player's saved local view when the purchase closes.
   if(data.targetSelection?.kind==='property'&&!propertyCameraView){
@@ -790,12 +911,16 @@ function update(data){
   }else if(data.targetSelection?.kind!=='property'&&propertyCameraView){
     cancelCameraGesture();cameraView=propertyCameraView;propertyCameraView=null;resize();
   }
+  // Looking around at a fork is temporary; movement resumes the prior view.
+  if(data.routeChoice&&!routeCameraView){routeCameraView={...cameraView};}
+  else if(!data.routeChoice&&routeCameraView){cancelCameraGesture();cameraView=routeCameraView;routeCameraView=null;resize();}
   if(lastLocalCamera!==isLocalCamera())resize();
   if(data.selectedTile!==undefined){
     selectedIndex=data.selectedTile;
     labels.querySelectorAll('.scene-tile').forEach((node)=>node.classList.toggle('is-selected',Number(node.dataset.sceneTileIndex)===selectedIndex));
   }
   data.board.filter((tile)=>!tile.isLargeSecondary).forEach((tile)=>{const view=lotViews.get(tile.index);if(view)updateLot(view,tile,data);});
+  flushBuildingCelebrations(performance.now());
   data.players.forEach((player)=>{
     const view=pawnViews.get(player.id);if(!view)return;
     const nextPawnPosition=pawnPosition(player);
@@ -805,7 +930,7 @@ function update(data){
       const harborWalking=data.mapId==='harbor'&&data.navigation?.edges?.some(edge=>(edge.from===previousIndex&&edge.to===player.position)||(edge.to===previousIndex&&edge.from===player.position));
       view.path=harborWalking?harborEdgePath(previousIndex,player.position,stepViews,THREE):null;
       if(view.path?.length){view.path[0]=view.from.clone();view.path[view.path.length-1]=view.target.clone();view.path.forEach(point=>point.y=.265);view.pathLengths=view.path.slice(1).map((point,i)=>point.distanceTo(view.path[i]));view.pathLength=view.pathLengths.reduce((a,b)=>a+b,0);}
-      view.teleport=!harborWalking&&view.from.distanceTo(view.target)>STEP*2.2;view.duration=reducedMotion.matches?0:view.teleport?470:harborWalking?Math.max(190,Math.min(650,view.pathLength*112)):190;view.active=true;
+      view.teleport=!harborWalking&&view.from.distanceTo(view.target)>STEP*2.2;view.duration=reducedMotion.matches?0:view.teleport?470:harborWalking?harborMovementDuration(view.pathLength):190;view.active=true;
     }
     view.shield.visible=Boolean(player.effects?.shield||player.effects?.shieldCharges||player.effects?.rentShield);
     view.anchor.classList.toggle('is-current',data.currentPlayerId===player.id);
@@ -819,9 +944,21 @@ function update(data){
     step.ring.material.opacity=(landed||moving) ? .85 : standing ? .70 : 0;
     step.ring.material.color.set(landed||moving?'#e6b253':current?.id==='ai'?'#d77b59':'#348d87');
   });
-  sceneLife?.update(data);syncCameraControls();
+  syncHarborProjects(data);sceneLife?.update(data);syncCameraControls();
   renderer.render(scene,camera);document.body.classList.add('scene-ready');api.ready=true;
   arrangeLabels();positionLabels();loadModelKit();
+}
+function flushBuildingCelebrations(now){
+  for(const [index,pending] of pendingCelebrations){
+    const view=lotViews.get(index),tile=view?.tile;
+    if(now>pending.expires||tile?.lot?.level!==3||tile.lot.ownerId!==pending.owner){pendingCelebrations.delete(index);continue;}
+    // Wait for the reviewed regional mesh, so the launch clears the actual
+    // roof rather than the temporary loading plinth or construction scale.
+    if(!resolveAsset(tile,snapshot).source)continue;
+    const anchor=buildingRoofAnchor(THREE,view.building,1);
+    buildingFireworks?.launch({key:index,anchor,color:pending.owner==='human'?'#62d2b4':'#f59370',now});
+    pendingCelebrations.delete(index);
+  }
 }
 function effect(event={}){
   sceneLife?.effect(event);
@@ -848,11 +985,47 @@ function effect(event={}){
 }
 function project(point){projection.copy(point).project(camera);return{x:(projection.x*.5+.5)*width,y:(-.5*projection.y+.5)*height};}
 function projectTile(index){const step=stepViews.get(Number(index));return step&&camera?project(step.center):null;}
+function locateTile(index){
+  const tile=snapshot?.board?.find(tile=>tile.index===Number(index));
+  const view=tile&&lotViews.get(tile.isLargeSecondary?tile.largePrimaryIndex:tile.index);
+  if(!view||inspection)return false;
+  // Looking at a project contributor never selects a game target or resolves
+  // a modal. A board-wide purchase keeps its existing full-map framing.
+  effect({type:'select',tiles:[view.tile.index]});
+  if(snapshot.targetSelection)return true;
+  cancelCameraGesture();cameraView.mode='local';cameraView.following=false;
+  cameraBrowseTarget=view.group.position.clone();cameraBrowseTarget.y=.2;
+  resize();wrap?.focus?.({preventScroll:true});return true;
+}
+function syncHarborProjects(data){
+  if(!harborSceneRoot)return;
+  const projects=data.harborProjects||[];
+  updateHarborProjectVisuals(harborSceneRoot,projects);
+  const active=new Set();
+  for(const project of projects){
+    const landscape=harborSceneRoot.userData.harborProjects?.[project.id];if(!landscape?.anchor)continue;
+    active.add(project.id);let view=harborProjectBadges.get(project.id);
+    if(!view){
+      const button=document.createElement('button');button.type='button';button.className='harbor-project-badge';button.dataset.harborProject=project.id;
+      button.setAttribute('aria-haspopup','dialog');button.setAttribute('aria-expanded','false');button.setAttribute('aria-controls','harbor-project-panel');button.innerHTML='<b></b><span></span><div class="harbor-project-progress" aria-hidden="true"><span><i></i></span><span><i></i></span><span><i></i></span></div>';
+      button.querySelector('b').dataset.short=project.id==='water'?'水庭':'花园';
+      const leader=document.createElement('span');leader.className='harbor-project-leader';leader.setAttribute('aria-hidden','true');
+      labels.appendChild(leader);labels.appendChild(button);view={button,leader,anchor:landscape.labelAnchor||landscape.anchor};harborProjectBadges.set(project.id,view);
+    }
+    view.anchor=landscape.labelAnchor||landscape.anchor;view.center=landscape.anchor;view.stage=project.stage;view.points=project.points;
+    view.button.dataset.stage=String(project.stage);view.button.querySelector('b').textContent=project.name;view.button.querySelector(':scope > span').textContent=`${project.points}/${project.maxPoints}`;
+    view.button.setAttribute('aria-label',`${project.name}，我的建设度 ${project.points}/${project.maxPoints}，查看阶段奖励`);
+    view.button.querySelectorAll('.harbor-project-progress span').forEach((bar,index)=>bar.style.setProperty('--part',`${THREE.MathUtils.clamp((project.points-index*3)/3,0,1)*100}%`));
+  }
+  for(const [id,view] of harborProjectBadges)if(!active.has(id)){view.button.remove();view.leader.remove();harborProjectBadges.delete(id);}
+}
 function arrangeLabels(){
   if(!camera)return;
   const placed=[];
   const candidates=[...lotViews.values()].map((view)=>{
-    const point=project(view.anchor),visible=point.x>=10&&point.x<=width-10&&point.y>=8&&point.y<=height-8;
+    const overview=snapshot?.mapId==='harbor'&&width<720&&!isLocalCamera();
+    const important=view.tile.lot?.isLarge||view.tile.isStart||view.tile.special?.type==='junction'||view.tile.index===selectedIndex||view.tile.index===snapshot?.players?.find(player=>player.id===snapshot.currentPlayerId)?.position;
+    const point=project(view.anchor),visible=(!overview||important)&&point.x>=10&&point.x<=width-10&&point.y>=8&&point.y<=height-8;
     view.label.hidden=!visible;
     const hovered=!cameraGesture.dragged&&view.label.matches(':hover');
     return {view,visible,hovered,point:hovered&&view.screenPoint?{...view.screenPoint}:point,w:view.label.offsetWidth,h:view.label.offsetHeight};
@@ -880,6 +1053,19 @@ function arrangeLabels(){
 }
 function positionLabels(){
   if(!camera)return;
+  harborProjectBadges.forEach((view,id)=>{
+    const overview=!isLocalCamera(),anchor=project(view.anchor),center=project(view.center);view.button.classList.toggle('is-overview',overview);
+    const half=(view.button.offsetWidth||(overview?58:116))/2;
+    // In full-map view the two small progress buttons sit on the surrounding
+    // sea, connected to their courts, rather than covering the central town.
+    const point=overview?{x:id==='water'?width-half-12:half+12,y:THREE.MathUtils.clamp(anchor.y,74,height-24)}:anchor;
+    view.screenPoint=point;
+    view.button.hidden=snapshot?.phase==='preview'||document.body.classList.contains('mode-start')||point.x<half+5||point.x>width-half-5||point.y<62||point.y>height-22;
+    view.button.style.transform=`translate(${point.x.toFixed(1)}px,${point.y.toFixed(1)}px) translate(-50%,-50%)`;
+    view.leader.hidden=!overview||view.button.hidden;
+    const endX=point.x+(id==='water'?-half:half),dx=endX-center.x,dy=point.y-center.y;
+    view.leader.style.width=`${Math.hypot(dx,dy).toFixed(1)}px`;view.leader.style.transform=`translate(${center.x.toFixed(1)}px,${center.y.toFixed(1)}px) rotate(${Math.atan2(dy,dx)}rad)`;
+  });
   lotViews.forEach((view)=>{const p=view.screenPoint||project(view.anchor);view.label.style.transform=`translate(${p.x.toFixed(1)}px,${p.y.toFixed(1)}px) translate(-50%,-50%)`;});
   stepViews.forEach((step)=>{if(step.label){const p=project(step.walk);step.label.hidden=p.x<8||p.x>width-8||p.y<8||p.y>height-8;step.label.style.transform=`translate(${p.x.toFixed(1)}px,${p.y.toFixed(1)}px) translate(-50%,-50%)`;}});
   const pawnLabels=[];
@@ -903,7 +1089,7 @@ function positionLabels(){
     const current=snapshot.players.find((player)=>player.id===snapshot.currentPlayerId);
     const route=current?.effects?.reversed?snapshot.navigation?.prev:snapshot.navigation?.next;
     const next=snapshot.nextSteps?.[current?.id]??route?.[current?.position],from=stepViews.get(current?.position),to=stepViews.get(next);
-    travelArrow.hidden=!from||!to||Boolean(snapshot.gameOver);
+    travelArrow.hidden=!from||!to||Boolean(snapshot.gameOver)||Boolean(snapshot.routeChoice);
     if(from&&to){
       const heading=snapshot.mapId==='harbor'?harborEdgePath(current.position,next,stepViews,THREE)[1]:to.walk;
       const a=project(from.walk),b=project(heading||to.walk),x=a.x+(b.x-a.x)*.60,y=a.y+(b.y-a.y)*.60;
@@ -917,9 +1103,13 @@ function positionLabels(){
 function framingForLot(view){
   const asset=resolveAsset(view.tile,snapshot,view.tile.lot?3:0);
   const envelope=assetEnvelopes.get(asset.desired);
-  const rotation=new THREE.Matrix4().makeRotationY(lotModelRotation(view));
-  const offset=inward(view.group.position).multiplyScalar(-.10).add(view.group.position);offset.y+=.05;
-  const boxes=envelope?.boxes||(
+  const rotation=new THREE.Matrix4().makeRotationY(view.group.rotation.y+lotModelRotation(view));
+  if(view.landmarkSpec)rotation.scale(new THREE.Vector3(...view.landmarkSpec.scale));
+  const offset=lotWorldSetback(view).add(view.group.position);offset.y+=.05;
+  // Some early roofs are deeper than their taller upgrades. Reserve every
+  // authored harbor level so enlarged eaves fit and upgrading never zooms out.
+  const harborLevels=view.mapId==='harbor'&&view.tile.lot?[1,2,3].flatMap(level=>assetEnvelopes.get(resolveAsset(view.tile,snapshot,level).desired)?.boxes||[]):null;
+  const boxes=(harborLevels?.length?harborLevels:envelope?.boxes)||(
     asset.family==='skyscraper'?[
       new THREE.Box3(new THREE.Vector3(-1.12,0,-.47),new THREE.Vector3(1.12,.8,.47)),
       new THREE.Box3(new THREE.Vector3(-.47,.8,-.40),new THREE.Vector3(.47,3.2,.40)),
@@ -931,20 +1121,50 @@ function framingForLot(view){
   const serviceBounds=!view.tile.lot&&view.building?.children[0]?.userData.functionalBounds;
   return [...boxes,...(serviceBounds?[serviceBounds]:[])].map((box)=>box.clone().applyMatrix4(rotation).translate(offset));
 }
+function harborMovementDuration(distance){
+  // Long bridges take longer to cross instead of accelerating the pawn beyond
+  // the delayed camera. Presentation waits for this actual animation duration.
+  return Math.max(190,distance*112);
+}
+function localFramingTarget(){
+  if(snapshot?.mapId!=='harbor'||cameraView.modified||!cameraView.following)return 0;
+  const player=snapshot.players?.find(player=>player.id===snapshot.currentPlayerId);
+  const tile=snapshot.board?.find(tile=>tile.index===player?.position);
+  const view=tile&&lotViews.get(tile.isLargeSecondary?tile.largePrimaryIndex:tile.index);
+  if(!view?.tile.lot?.isLarge)return 0;
+  const pawn=cameraSubject();if(!pawn)return 0;
+  const dx=view.group.position.x-pawn.group.position.x,dz=view.group.position.z-pawn.group.position.z;
+  // Give a wide estate room beside the pawn without changing building scale,
+  // the viewing angle, or the ground point tracked by the delayed camera.
+  return THREE.MathUtils.clamp((dx*Math.cos(cameraView.yaw)-dz*Math.sin(cameraView.yaw))*.6,-1.4,1.4);
+}
+function frameLocalEstate(delta){
+  if(!camera||!isLocalCamera()){localFramingBias=0;return false;}
+  // Holding the view or inspecting a model must not add automatic movement.
+  if(inspection||cameraGesture.pointers.size)return false;
+  const target=localFramingTarget(),difference=target-localFramingBias;
+  if(Math.abs(difference)<.0001)return false;
+  if(reducedMotion.matches&&(cameraSubject()?.active||typeof snapshot?.animation?.currentTile==='number'))return false;
+  const change=reducedMotion.matches||Math.abs(difference)<.001?difference:difference*(1-Math.exp(-delta/.30));
+  localFramingBias+=change;camera.left+=change;camera.right+=change;camera.updateProjectionMatrix();
+  lotViews.forEach(view=>{view.screenPoint=null;});arrangeLabels();
+  return true;
+}
 function followCamera(delta){
-  if(!camera||!cameraFocusReady||!isLocalCamera()||!cameraView.following||inspection||cameraGesture.pointers.size)return false;
+  if(!camera||!cameraFocusReady||!isLocalCamera()||(!cameraView.following&&!cameraBrowseTarget)||inspection||cameraGesture.pointers.size)return false;
   const pawn=cameraSubject();if(!pawn)return false;
   const switchingPlayer=followedPlayerId!==snapshot.currentPlayerId;followedPlayerId=snapshot.currentPlayerId;
-  // Track the acting pawn's ground position only. Hops and dice do not make
-  // the camera bob or turn; a new turn uses the same delayed translation.
-  const dx=pawn.group.position.x-cameraFocus.x,dz=pawn.group.position.z-cameraFocus.z;
+  // Track the acting pawn's ground position only. Dice and effects do not
+  // make the camera bob or turn; a new turn uses the same delayed translation.
+  const subject=cameraBrowseTarget||pawn.group.position;
+  const dx=subject.x-cameraFocus.x,dz=subject.z-cameraFocus.z;
   const followScale=Math.max(1,cameraView.zoom);
-  const distance=Math.hypot(dx,dz),deadZone=.36/followScale;
+  const distance=Math.hypot(dx,dz),deadZone=cameraBrowseTarget?.02:.36/followScale;
   if(distance<=deadZone+.001)return false;
   let amount;
   if(reducedMotion.matches){
     // In reduced motion the whole trip completes before one static reframe.
-    if(pawn.active||typeof snapshot?.animation?.currentTile==='number')return false;
+    if(!cameraBrowseTarget&&(pawn.active||typeof snapshot?.animation?.currentTile==='number'))return false;
     amount=1;
   }else{
     // A dead zone absorbs small changes (including co-located pawn spacing).
@@ -952,7 +1172,7 @@ function followCamera(delta){
     // also gives teleports a comfortable transition without forcing rotation.
     // A tighter zoom has less visible ground: shorten the lag proportionally
     // so normal walking cannot carry the pawn outside the phone's viewport.
-    const crossingHarbor=snapshot?.mapId==='harbor'&&!switchingPlayer&&(pawn.active||typeof snapshot?.animation?.currentTile==='number');
+    const crossingHarbor=!cameraBrowseTarget&&snapshot?.mapId==='harbor'&&!switchingPlayer&&(pawn.active||typeof snapshot?.animation?.currentTile==='number');
     const lag=crossingHarbor?.32/Math.pow(followScale,1.8):.32/followScale;
     const speedLimit=crossingHarbor?26:18;
     amount=Math.min((1-Math.exp(-delta/lag))*(distance-deadZone),speedLimit*delta)/distance;
@@ -971,19 +1191,18 @@ function resize(){
   labels.classList.toggle('scene-labels-tiny',width<460);
   if(boardBounds){
     const local=isLocalCamera();lastLocalCamera=local;
-    // A wide game canvas needs a more frontal view; a portrait canvas keeps the
-    // familiar high three-quarter miniature view. The route itself never moves.
+    // Keep facades and pawn faces visible on a phone. Changing canvas shape
+    // only blends between shallow three-quarter angles, never a top-down view.
     const aspect=width/height;
     const wide=THREE.MathUtils.clamp((aspect-1.05)/.85,0,1);
     let yaw=THREE.MathUtils.lerp(.65,.10,wide);
-    // Keep the pawn's head and chest visible beside the taller level-three
-    // landmarks. This is a fixed default, not another moving camera effect.
-    let elevation=THREE.MathUtils.lerp(1.08,.62,wide);
+    const portraitElevation=.78,wideElevation=.62;
+    let elevation=THREE.MathUtils.lerp(portraitElevation,wideElevation,wide);
     if(snapshot?.mapId==='expansion'){
       // Turn toward the long side on a phone: the 28-step rectangle then uses
       // the available height instead of squeezing ten buildings across 390px.
       const portrait=THREE.MathUtils.clamp((1.40-aspect)/.65,0,1);
-      yaw=THREE.MathUtils.lerp(.10,-1.47,portrait);elevation=THREE.MathUtils.lerp(.62,1.08,portrait);
+      yaw=THREE.MathUtils.lerp(.10,-1.47,portrait);elevation=THREE.MathUtils.lerp(wideElevation,portraitElevation,portrait);
     }
     if(cameraView.facingYaw===null)cameraView.facingYaw=yaw;
     if(cameraView.modified){yaw=cameraView.yaw;elevation=cameraView.elevation;}
@@ -992,13 +1211,13 @@ function resize(){
     if(snapshot?.mapId!=='classic')lotViews.forEach((view)=>{
       // Choose a readable initial frontage once. Buildings remain physical
       // objects when the player rotates the camera, never facing billboards.
-      if(view.readableRotation===undefined&&['chance','card_draw','bank','rush','teleport'].includes(view.tile.special?.type)){
+      if(view.parcelRotation==null&&view.readableRotation===undefined&&['chance','card_draw','bank','rush','teleport'].includes(view.tile.special?.type)){
         view.readableRotation=Math.round(cameraView.facingYaw/(Math.PI/2))*(Math.PI/2);
-        view.building?.children.forEach((model)=>{model.rotation.y=(model.userData.cityBaseRotationY||0)+view.readableRotation;});
+        view.building?.children.forEach((model)=>{model.rotation.y=(model.userData.cityBaseRotationY||0)+lotModelRotation(view);});
       }
       const normal=view.boundary.normal.clone();
       if(normal.x*Math.sin(yaw)+normal.z*Math.cos(yaw)<0)normal.negate();
-      const depth=Math.abs(normal.x)>.5?view.w:view.d;
+      const depth=parcelFrontDepth(view,normal);
       view.anchor.copy(view.group.position).add(normal.multiplyScalar(depth/2+.26));view.anchor.y=.07;
     });
     if(local){
@@ -1011,8 +1230,9 @@ function resize(){
       // island into its narrow width. A small upward framing bias leaves room
       // above the pawn for tall buildings and below it for the action bar.
       const vertical=Math.max(3.9,3.5/aspect)/cameraView.zoom,centerY=.55;
-      camera.left=-vertical*aspect;camera.right=vertical*aspect;camera.top=vertical+centerY;camera.bottom=-vertical+centerY;camera.updateProjectionMatrix();
+      camera.left=-vertical*aspect+localFramingBias;camera.right=vertical*aspect+localFramingBias;camera.top=vertical+centerY;camera.bottom=-vertical+centerY;camera.updateProjectionMatrix();
     }else{
+    localFramingBias=0;
     camera.left=-1;camera.right=1;camera.top=1;camera.bottom=-1;camera.updateProjectionMatrix();
     const xs=[],ys=[];
     const include=(point)=>{const p=point.clone().project(camera);xs.push(p.x);ys.push(p.y);};
@@ -1147,25 +1367,17 @@ function tick(time){
   const delta=Math.min(.1,(time-lastTime)/1000);lastTime=time;
   sceneLife?.setInteractionPaused(Boolean(inspection||cameraGesture.pointers.size));
   const living=sceneLife?.tick(time,delta);
+  flushBuildingCelebrations(time);
+  const celebrating=buildingFireworks?.tick(time);
+  const projectsGrowing=harborSceneRoot&&tickHarborProjectVisuals(harborSceneRoot,time,{reducedMotion:reducedMotion.matches});
   if(time-lastAtmosphereReadout>250){lastAtmosphereReadout=time;syncAtmosphereReadout();}
   const moving=[...pawnViews.values()].some((view)=>view.active||view.shieldUntil)||[...lotViews.values()].some((view)=>view.born)||pulses.length;
   pawnViews.forEach((view)=>{
-    if(view.active){
-      const t=view.duration===0?1:Math.min(1,(time-view.started)/view.duration);
-      if(view.teleport){
-        if(t<.5){view.group.position.copy(view.from);view.group.scale.setScalar(1-t*1.8);}
-        else{view.group.position.copy(view.target);view.group.scale.setScalar(.1+(t-.5)*1.8);}
-        view.group.rotation.y=t*Math.PI*2;
-      }else{const ease=t*t*(3-2*t);
-        if(view.path?.length>1){let distance=ease*view.pathLength;for(let i=0;i<view.pathLengths.length;i++){const length=view.pathLengths[i];if(distance<=length||i===view.pathLengths.length-1){view.group.position.lerpVectors(view.path[i],view.path[i+1],Math.min(1,distance/Math.max(.0001,length)));break;}distance-=length;}}
-        else view.group.position.lerpVectors(view.from,view.target,ease);
-        view.group.position.y+=Math.sin(t*Math.PI)*(reducedMotion.matches?0:.20);}
-      if(t===1){view.active=false;view.group.position.copy(view.target);view.group.scale.setScalar(1);view.group.rotation.y=0;}
-    }
+    updatePawnMotion(view,time,delta);
     if(view.shieldUntil&&time>view.shieldUntil){view.shieldUntil=0;const p=snapshot.players.find((p)=>p.id===view.anchor.dataset.playerAnchor);view.shield.visible=Boolean(p?.effects?.shield);}
   });
-  const cameraMoving=followCamera(delta);
-  if(!moving&&!renderDirty&&!living&&!cameraMoving)return;renderDirty=false;
+  const cameraMoving=followCamera(delta),framingMoving=frameLocalEstate(delta);
+  if(!moving&&!renderDirty&&!living&&!cameraMoving&&!framingMoving&&!celebrating&&!projectsGrowing)return;renderDirty=false;
   lotViews.forEach((view)=>{
     if(view.born){const t=Math.min(1,(time-view.born)/650);view.building.scale.y=reducedMotion.matches?1:1-Math.pow(1-t,3)*.22;if(t===1){view.born=0;view.building.scale.y=1;}}
   });
