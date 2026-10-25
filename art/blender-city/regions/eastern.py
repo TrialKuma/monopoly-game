@@ -168,7 +168,14 @@ def flowerbox(b,x,y,z,w=.53):
         b.sphere((xx,y,z+.12),(.10,.105,.082),'leaf' if k%2 else 'leaf2',6,3)
         for q in range(2):b.sphere((xx+.025*(q*2-1),y-.045,z+.173+q*.025),(.027,.025,.022),'cream',6,3)
 
-def shutter_window(b,x,y,z,w=.48,h=.62,flowers=False,arched=False):
+def shutter_window(b,x,y,z,w=.48,h=.62,flowers=False,arched=False,max_span=None):
+    # Include both open shutters and their straps in the available wall bay.
+    # Glass width alone used to fit while the two neighbouring shutters overlapped.
+    shutter_w=.22
+    if max_span is not None and w+.525>max_span:
+        w=min(w,max_span*.53)
+        shutter_w=(max_span-w-.085)/2
+        assert shutter_w>=.04, 'Opening is too narrow for a framed shutter window'
     if arched:
         b.arch(x,y-.025,z,w+.16,h+.12,'stone',.08)
         b.arch(x,y-.080,z+.025,w,h,'glass',.025)
@@ -181,9 +188,10 @@ def shutter_window(b,x,y,z,w=.48,h=.62,flowers=False,arched=False):
         b.box((x,y-.11,z),(w+.14,.14,.055),'stone2')
     else:grid_window(b,x,y,z,w,h,2,2)
     for sign in (-1,1):
-        sx=x+sign*(w/2+.14);b.box((sx,y-.07,z+h/2),(.22,.065,h+.035),'indigo')
-        for k in range(3):b.box((sx-.067+k*.067,y-.108,z+h/2),(.008,.012,h-.025),'dark')
-        for zz in (z+.10,z+h-.10):b.box((sx,y-.122,zz),(.245,.026,.043),'indigo')
+        sx=x+sign*(w/2+.03+shutter_w/2);b.box((sx,y-.07,z+h/2),(shutter_w,.065,h+.035),'indigo')
+        slat_step=.067 if shutter_w==.22 else shutter_w*.3045
+        for k in range(3):b.box((sx+(k-1)*slat_step,y-.108,z+h/2),(.008,.012,h-.025),'dark')
+        for zz in (z+.10,z+h-.10):b.box((sx,y-.122,zz),(shutter_w+.025,.026,.043),'indigo')
     if flowers:flowerbox(b,x,y-.16,z-.07,w+.11)
 
 def railing(b,w,y,z,region,flowers=False):
@@ -254,7 +262,7 @@ def door(b,region,x,y,z=.17,w=.66,h=.98):
             b.cylinder((x-w*.29,y-.145,zz),.02,.01,'bronze',8)
         b.rod((x+w*.20,y-.12,z+.48),(x+w*.20,y-.16,z+.48),.035,'bronze',10)
 
-def timber_shell(b,region,w,d,floors,storey=1.12,balconies=False,window_count=2,facades=None,front_limit=None,flowerboxes=True):
+def timber_shell(b,region,w,d,floors,storey=1.12,balconies=False,window_count=2,facades=None,front_limit=None,flowerboxes=True,front_windows=True):
     bottom=.18;top=bottom+floors*storey
     b.box((0,0,(bottom+top)/2),(w,d,top-bottom),'wall')
     if region=='alpine':masonry(b,w,d,.17,min(.94,storey-.12),4,facades,front_limit)
@@ -274,14 +282,17 @@ def timber_shell(b,region,w,d,floors,storey=1.12,balconies=False,window_count=2,
                         if angle==0 and front_limit is not None and abs(xx)>front_limit:continue
                         b.box((xx,-depth/2-.047,z+.15),(span/n-.009,.045,.22),'wood' if k%3 else 'dark')
                 # Front ground floor is reserved for the per-family entrance.
-                if angle==0 and level==0:continue
+                if angle==0 and (level==0 or not front_windows):continue
                 count=window_count if angle in (0,math.pi) else max(1,round(span/1.1))
                 ww=min(.62,(span-.28)/count-.22)
                 for k in range(count):
                     x=(k-(count-1)/2)*(span-.28)/count
                     if angle==0 and front_limit is not None and abs(x)>front_limit:continue
                     if region=='compact':grid_window(b,x,-depth/2-.045,z+.31,ww,.56,6,2)
-                    else:shutter_window(b,x,-depth/2-.045,z+.31,min(.47,ww-.08),.56,flowers=flowerboxes and level>0 and not balconies)
+                    else:
+                        spacing=(span-.28)/count
+                        clearance=min(spacing-.045,span-(count-1)*spacing-.16) if count>1 else span-.16
+                        shutter_window(b,x,-depth/2-.045,z+.31,min(.47,ww-.08),.56,flowers=flowerboxes and level>0 and not balconies,max_span=clearance)
                 if balconies and level>0 and angle in (0,math.pi):railing(b,min(span-.18,front_limit*2) if angle==0 and front_limit is not None else span-.18,-depth/2-.25,z+.20,region,region=='alpine')
         if region=='compact' and level>0:eave(b,w,d,z+.07)
     return top
@@ -327,7 +338,7 @@ def core(region,family,level,mats):
     if level==1 and family=='villa':w=2.85 if region=='compact' else 2.60
     if family=='tower':w=2.02;d=1.84
     if family=='hotel':w=2.62;d=1.94
-    base(b,w,d);top=timber_shell(b,region,w,d,level,balconies=family=='hotel' or (family=='tower' and region=='compact'),window_count=3 if family=='hotel' else 2)
+    base(b,w,d);top=timber_shell(b,region,w,d,level,balconies=family=='hotel' or (family=='tower' and region=='compact'),window_count=3 if family=='hotel' else 2,front_windows=not(region=='alpine' and family=='tower' and level>=2))
     rise=.56 if region=='compact' else .71
     gable_infill(b,w,d,top,rise,region=='alpine')
     roof(b,region,w+.36,d+.40,top+.015,rise,'x' if region=='compact' else 'y')
@@ -335,9 +346,10 @@ def core(region,family,level,mats):
     if family=='shop':shopfront(b,region,w,d,level)
     else:
         door(b,region,0,y,w=.72,h=1.00)
-        for x in (-w*.33,w*.33):
+        flank_x=(w/2-.08+.445+.05)/2 if region=='alpine' else w*.33
+        for x in (-flank_x,flank_x):
             if region=='compact':grid_window(b,x,y,.45,.50,.62,6,2)
-            else:shutter_window(b,x,y,.44,.41,.59,flowers=level==1)
+            else:shutter_window(b,x,y,.44,.41,.59,flowers=level==1,max_span=2*min(w/2-.08-abs(x),abs(x)-.445-.05))
         for x in (-w*.43,w*.43):pot(b,x,y-.21,flowers=region=='alpine')
         if region=='compact':noren(b,y-.18,1.22,.85)
         for x in (-.58,.58) if family=='hotel' else (-.59,):lantern(b,x,y-.16,1.03,region)
@@ -347,9 +359,8 @@ def core(region,family,level,mats):
         if family=='tower':
             # Compact central arched bay and individual balconies are unlike chalet suites.
             for j in range(1,level):
-                b.box((0,y-.035,.18+j*1.12+.62),(w-.23,.10,.96),'wall')
-                shutter_window(b,0,y-.11,.18+j*1.12+.31,.64,.65,False,True)
-                railing(b,1.00,y-.34,.18+j*1.12+.20,region,True)
+                shutter_window(b,0,y+.05,.18+j*1.12+.31,.64,.65,False,True)
+                railing(b,1.00,y-.18,.18+j*1.12+.20,region,True)
             for sign in (-1,1):
                 for j in range(level*4):b.box((sign*(w/2-.015),y-.02,.28+j*.26),(.20,.13,.18),'stone' if j%2 else 'stone2')
     if family=='hotel':
@@ -418,7 +429,7 @@ def summit_room(b,region,w,d,z,height=.94,balconies=False,axis=None):
         # sit above a roof, so they need windows rather than another entrance.
         for x in (-w*.24,w*.24):
             if region=='compact':grid_window(b,x,-d/2-.05,.34,min(.55,w*.36),height*.55,4,2)
-            else:shutter_window(b,x,-d/2-.05,.32,min(.40,w*.32),height*.56,False)
+            else:shutter_window(b,x,-d/2-.05,.32,min(.40,w*.32),height*.56,False,max_span=min(w*.48-.045,w*.52-.16))
         if balconies:railing(b,w+.04,-d/2-.23,.22,region,region=='alpine')
         summit_roof(b,region,w,d,top,.46,axis)
     return z+top+.46
@@ -442,11 +453,13 @@ def level3_core(region,family,mats):
     if family=='shop':shopfront(b,region,w,d,3)
     else:
         door(b,region,0,y,w=.78,h=1.06)
-        for x in (-w*.33,w*.33):
+        flank_x=(w/2-.08+.475+.05)/2 if region=='alpine' else w*.33
+        for x in (-flank_x,flank_x):
             if region=='compact':grid_window(b,x,y,.45,.49,.63,5,2)
-            else:shutter_window(b,x,y,.44,.40,.60)
+            else:shutter_window(b,x,y,.44,.40,.60,max_span=2*min(w/2-.08-abs(x),abs(x)-.475-.05))
         for x in (-w*.43,w*.43):pot(b,x,y-.20,flowers=region=='alpine')
-    for x in (-.63,.63):lantern(b,x,y-.15,1.06,region)
+    # Shop lamps mount on the corner posts, outside the cloth / striped canopy.
+    for x in (-1.24,1.24) if family=='shop' else (-.63,.63):lantern(b,x,y-.15,1.06,region)
     if region=='compact':
         summit_roof(b,region,w,d,top,.43)
         if family=='tower':
@@ -791,7 +804,7 @@ def public(region,name,mats):
             with b.at((sign*.94,0,0)):
                 timber_shell(b,region,.66,1.66,1,1.62,window_count=1)
                 if region=='compact':grid_window(b,0,-.88,.50,.35,.65,4,3)
-                else:shutter_window(b,0,-.88,.53,.27,.50)
+                else:shutter_window(b,0,-.88,.53,.27,.50,max_span=.50)
         if region=='compact':
             b.box((0,0,1.81),(2.70,1.85,.17),'wood')
             roof(b,region,3.02,2.14,1.90,.53,'x',14,4)
@@ -835,10 +848,11 @@ def public(region,name,mats):
         if region=='alpine':chimney(b,.80,.28,top+.20)
         if name!='builders_guild':door(b,region,0,y,.18,.71,1.02)
         for xx in (-.83,.83):
-            if name!='builders_guild':
+            if name!='builders_guild' and not(name=='junction_hub' and xx<0):
                 if region=='compact':grid_window(b,xx,y,.45,.45,.59,5,2)
-                else:shutter_window(b,xx,y,.46,.36,.56,True)
-            lantern(b,xx,y-.16,1.17,region)
+                else:shutter_window(b,xx,y,.46,.36,.56,True,max_span=.68)
+            lamp_x=math.copysign(1.25,xx) if region=='alpine' and name=='card_pavilion' else xx
+            lantern(b,lamp_x,y-.16,1.17,region)
         if name=='civic_hall':
             clock_tower(b,region,0,.06,top+.25,.74)
             for xx in (-1.08,1.08):
@@ -878,8 +892,6 @@ def public(region,name,mats):
                     for u,v in ((0,.075),(-.070,-.005),(.070,-.005)):
                         xx,zz=plane([(u,v)])[0];b.rod((x+xx,y-.229,z+zz),(x+xx,y-.244,z+zz),.070,'dark',12)
                     b.xz_shape(plane([(-.035,-.13),(.035,-.13),(.015,.015),(-.015,.015)]),(x,y-.231,z),.012,'dark')
-            for xx in (-.88,.88):
-                for z in (.25,.42,.59):b.box((xx,y-.18,z),(.35,.13,.034),'lightwood')
         elif name=='rush_station':emblem(b,0,y-.14,top+.22,'clock',.24)
         elif name=='junction_hub':
             emblem(b,0,y-.14,top+.25,'info',.22)

@@ -1,13 +1,13 @@
 import * as THREE from './assets/vendor/three/three.module.min.js';
-import { makeStudioEnvironment } from './scene-environment.js?v=20261025-landmarks3';
+import { makeStudioEnvironment } from './scene-environment.js?v=20261025-facade2';
 import { mergeGeometries } from './assets/vendor/three/addons/utils/BufferGeometryUtils.js';
-import { createSceneLife } from './scene-life.js?v=20261025-landmarks3';
+import { createSceneLife } from './scene-life.js?v=20261025-facade2';
 import { createStreetFoundation } from './scene-streets.js?v=20261024-1';
 import { createRegionalPark } from './scene-regional-parks.js?v=20261025-terrain3';
 import { createOwnershipRoofs } from './scene-ownership-roofs.js?v=20261025-items1';
 import { createFunctionalLandmark } from './scene-functional-landmarks.js?v=20261025-items1';
-import { createThermalSteam } from './scene-thermal-steam.js?v=20261025-landmarks3';
-import { loadSharedModelAsset, forgetSharedModelAsset, releaseSharedModelAsset, releaseSupersededModelAssets, ownsSharedModelResource, disposeSharedModelAssets } from './scene-model-cache.js?v=20261025-landmarks3';
+import { createThermalSteam } from './scene-thermal-steam.js?v=20261025-facade2';
+import { loadSharedModelAsset, forgetSharedModelAsset, releaseSharedModelAsset, releaseSupersededModelAssets, ownsSharedModelResource, disposeSharedModelAssets } from './scene-model-cache.js?v=20261025-facade2';
 
 // All route positions, ownership and prices come from the game. This view never
 // changes a rule or finishes an action; its animation is entirely cosmetic.
@@ -60,6 +60,7 @@ try {
   if(typeof saved.outskirts==='boolean')outskirtsVisible=saved.outskirts;
 } catch (_) { /* Private browsing can disable local preferences. */ }
 let cameraView = { yaw:null, elevation:null, zoom:1, modified:false, facingYaw:null, mode:'local', following:true };
+let propertyCameraView = null;
 const cameraFocus = new THREE.Vector3(0,.2,0);
 let cameraFocusReady = false, lastLocalCamera = false;
 let cameraGesture = { pointers:new Map(), dragged:false, pinchDistance:0 };
@@ -69,7 +70,7 @@ const LANDMARKS = { classic: { 5:'finance', 7:'skyscraper', 14:'onsen' }, compac
 const SPECIAL_MODELS = { bank:'vault_bank',construction:'builders_guild',card_draw:'card_pavilion',chance:'chance_wheel',teleport:'teleport_gate',rush:'rush_station',junction:'junction_hub' };
 const ASSET_BUNDLES = [
   {file:'city-kit.glb',version:'20260911-12',authored:false,pattern:/^(plot_0|tree|streetlamp|fountain)$/},
-  ...['classic','compact','expansion','harbor','alpine'].map(mapId=>({file:`regions/${mapId}.glb`,mapId,version:'20261025-landmarks3',authored:true,pattern:new RegExp(`^${mapId}_(?:(?:villa|shop|hotel|tower|skyscraper|finance|onsen)_[123]|civic_hall|vault_bank|builders_guild|card_pavilion|chance_wheel|teleport_gate|rush_station|junction_hub)$`)})),
+  ...['classic','compact','expansion','harbor','alpine'].map(mapId=>({file:`regions/${mapId}.glb`,mapId,version:'20261025-facade2',authored:true,pattern:new RegExp(`^${mapId}_(?:(?:villa|shop|hotel|tower|skyscraper|finance|onsen)_[123]|civic_hall|vault_bank|builders_guild|card_pavilion|chance_wheel|teleport_gate|rush_station|junction_hub)$`)})),
 ];
 const projection = new THREE.Vector3();
 const raycaster = new THREE.Raycaster();
@@ -203,6 +204,11 @@ function mount() {
   }
 }
 function selectSceneTile(index){
+  if(snapshot?.targetSelection?.kind==='property'){
+    const tile=snapshot.board.find(tile=>tile.index===index);
+    index=tile?.isLargeSecondary?tile.largePrimaryIndex:index;
+    if(!snapshot.targetSelection.indices.includes(index))return;
+  }
   selectedIndex=index;
   labels.querySelectorAll('.scene-tile').forEach((node)=>node.classList.toggle('is-selected',Number(node.dataset.sceneTileIndex)===index));
   effect({type:'select',tiles:[index]});
@@ -211,9 +217,9 @@ function selectSceneTile(index){
 function canSelectScene(){
   const drama=document.getElementById('drama-layer');
   const modal=document.getElementById('event-overlay');
-  return Boolean(snapshot&&!inspection&&snapshot.phase!=='presenting'&&(!drama||drama.hidden)&&(!modal?.classList.contains('visible')||snapshot.targetSelection));
+  return Boolean(snapshot&&!inspection&&snapshot.phase!=='presenting'&&(!drama||drama.hidden)&&(!modal?.classList.contains('visible')||snapshot.targetSelection&&!snapshot.targetSelection.suspended));
 }
-function canMoveCamera(){return canSelectScene()&&!document.getElementById('event-overlay')?.classList.contains('visible')&&!document.body.classList.contains('mode-start');}
+function canMoveCamera(){return canSelectScene()&&(!document.getElementById('event-overlay')?.classList.contains('visible')||snapshot?.targetSelection?.kind==='property')&&!document.body.classList.contains('mode-start');}
 function isSuppressedSceneClick(event){return event.detail!==0&&performance.now()<suppressSceneClickUntil;}
 function isLocalCamera(){
   // Board-wide card and city-hall choices must keep every legal target visible.
@@ -296,7 +302,7 @@ function syncCameraControls(){
   cameraControls.querySelectorAll('button').forEach(button=>{button.disabled=!allowed||(button.dataset.camera==='out'&&cameraView.zoom<=CAMERA_LIMITS.minZoom)||(button.dataset.camera==='in'&&cameraView.zoom>=CAMERA_LIMITS.maxZoom);});
   cameraControls.querySelector('output').textContent=`${Math.round(cameraView.zoom*100)}%`;
   const local=isLocalCamera(),modeButton=cameraControls.querySelector('[data-camera="mode"]'),resetButton=cameraControls.querySelector('[data-camera="reset"]');
-  if(modeButton){modeButton.hidden=document.body.classList.contains('mode-showcase')||document.body.classList.contains('mode-start')||snapshot?.phase==='preview';modeButton.style.display=modeButton.hidden?'none':'';modeButton.textContent=local?'全图':'局部';modeButton.setAttribute('aria-label',local?'查看整张地图':'切换局部跟随镜头');modeButton.setAttribute('aria-pressed',String(!local));}
+  if(modeButton){modeButton.hidden=Boolean(snapshot?.targetSelection)||document.body.classList.contains('mode-showcase')||document.body.classList.contains('mode-start')||snapshot?.phase==='preview';modeButton.style.display=modeButton.hidden?'none':'';modeButton.textContent=local?'全图':'局部';modeButton.setAttribute('aria-label',local?'查看整张地图':'切换局部跟随镜头');modeButton.setAttribute('aria-pressed',String(!local));}
   if(resetButton){resetButton.textContent=local?'跟随':'回正';resetButton.setAttribute('aria-label',local?'恢复跟随当前行动的棋子':'恢复默认棋盘视角');resetButton.setAttribute('aria-pressed',String(local&&cameraView.following));}
   wrap.dataset.cameraMode=local?'local':'overview';wrap.dataset.cameraFollowing=String(local&&cameraView.following);
   cameraControls.querySelectorAll('select').forEach(select=>{
@@ -425,7 +431,7 @@ function reset() {
   closeInspection();
   cancelAnimationFrame(assetRefreshFrame);assetRefreshFrame=0;sceneryRefreshNeeded=false;
   resetCameraView();cameraView.facingYaw=null;
-  clearMap();retireInactiveModels(null); snapshot = null; mapKey = ''; selectedIndex = null;
+  clearMap();retireInactiveModels(null); snapshot = null; mapKey = ''; selectedIndex = null; propertyCameraView = null;
   document.body.classList.remove('scene-ready'); api.ready = false;
 }
 function tilePosition(tile) {
@@ -487,7 +493,7 @@ function buildMap(data) {
   resize();
 }
 function makePark(mapId) {
-  createRegionalPark({THREE,world,boardBounds,mapId,own,loadSceneryBundle:file=>loadSharedModelAsset(file,{version:'20261025-landmarks3'}),requestRender:()=>{renderDirty=true;}});
+  createRegionalPark({THREE,world,boardBounds,mapId,own,loadSceneryBundle:file=>loadSharedModelAsset(file,{version:'20261025-facade2'}),requestRender:()=>{renderDirty=true;}});
 }
 function numberTexture(number) {
   const canvas = document.createElement('canvas'); canvas.width = 96; canvas.height = 96;
@@ -687,6 +693,11 @@ function saleSign(parent) {
 }
 function updateLot(view,tile,data,initial=false) {
   view.tile=tile;
+  const purchaseSelected=data.targetSelection?.kind==='property'&&data.selectedTile===tile.index;
+  if(purchaseSelected){view.outline.material.color.set('#efbb46');view.outline.material.opacity=.85;}
+  else if(view.purchaseSelected)view.outline.material.opacity=0;
+  view.purchaseSelected=purchaseSelected;
+  view.label.classList.toggle('is-purchase-target',purchaseSelected);
   const owner=data.players.find((p)=>p.id===tile.lot?.ownerId);
   const specialColor=!tile.lot?(tile.isStart?SPECIAL_COLORS.start:SPECIAL_COLORS[tile.special?.type]):null;
   const color=owner?.id==='human'?'#348d87':owner?.id==='ai'?'#d77b59':specialColor||'#c5b696';
@@ -751,7 +762,15 @@ function update(data){
   if(inspection&&inspection.sessionId!==data?.sessionId)closeInspection();
   snapshot=data;if(!data?.board?.length||!mount())return;
   const key=`${data.sessionId}:${data.mapId}:${data.board.length}`;
-  if(key!==mapKey){resetCameraView();cameraView.facingYaw=null;mapKey=key;buildMap(data);}
+  if(key!==mapKey){propertyCameraView=null;resetCameraView();cameraView.facingYaw=null;mapKey=key;buildMap(data);}
+  // A purchase gets its own full-board view. Gestures here must not change
+  // the player's saved local view when the purchase closes.
+  if(data.targetSelection?.kind==='property'&&!propertyCameraView){
+    propertyCameraView={...cameraView};cancelCameraGesture();
+    cameraView={...cameraView,yaw:null,elevation:null,zoom:1,modified:false};resize();
+  }else if(data.targetSelection?.kind!=='property'&&propertyCameraView){
+    cancelCameraGesture();cameraView=propertyCameraView;propertyCameraView=null;resize();
+  }
   if(lastLocalCamera!==isLocalCamera())resize();
   if(data.selectedTile!==undefined){
     selectedIndex=data.selectedTile;
@@ -1120,8 +1139,8 @@ function tick(time){
     if(view.born){const t=Math.min(1,(time-view.born)/650);view.building.scale.y=reducedMotion.matches?1:1-Math.pow(1-t,3)*.22;if(t===1){view.born=0;view.building.scale.y=1;}}
   });
   for(let i=pulses.length-1;i>=0;i--){const pulse=pulses[i];const elapsed=time-pulse.started;if(elapsed<0)continue;const t=elapsed/pulse.duration;
-    if(t>=1){pulse.view.outline.material.opacity=0;pulse.view.label.classList.remove('is-event');pulses.splice(i,1);continue;}
-    pulse.view.outline.material.opacity=reducedMotion.matches?.45:Math.sin(t*Math.PI)*.83;
+    if(t>=1){pulse.view.outline.material.opacity=pulse.view.purchaseSelected?.85:0;pulse.view.label.classList.remove('is-event');pulses.splice(i,1);continue;}
+    pulse.view.outline.material.opacity=pulse.view.purchaseSelected?.85:reducedMotion.matches?.45:Math.sin(t*Math.PI)*.83;
   }
   positionLabels();renderer.render(scene,camera);
 }

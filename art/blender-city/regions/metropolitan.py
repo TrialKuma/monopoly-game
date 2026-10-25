@@ -267,6 +267,9 @@ def landmark_core(family,mats):
     floors=3 if family=='tower' else 2;storey=1.22 if family=='tower' else 1.88
     top=shell(b,w,d,floors,storey,front=False)
     for f in range(floors):
+        # The ground-floor shopfront below owns these bays. A full-height
+        # domestic window here would leave its head poking above the awning.
+        if family=='shop' and f==0:continue
         for x in (-w*.31,0,w*.31):
             if f or x:window(b,x,y,.55+f*storey,.52,storey-.43,fan=f==floors-1)
     door(b,0,y,w=.63,h=1.08,double=family!='villa')
@@ -390,8 +393,12 @@ def large(family,level,mats):
         floors=4 if level==3 else level;body=.30+floors*1.15
         top=shell(b,4.25,d,floors,1.15,front=False,faces=(0,math.pi));barrel(b,4.25,d+.10,body+.07,.57)
         for x in (-2.65,2.65):
-            tower_mass(b,x,0,1.26,d,1 if level==1 else (5 if level==3 else level+1),step=level!=3,faces=(0,math.pi,math.pi/2 if x>0 else -math.pi/2))
-            with b.at((x,0,0)):crest(b,0,y-.13,body+.30,.69,.72)
+            side_top=tower_mass(b,x,0,1.26,d,1 if level==1 else (5 if level==3 else level+1),step=level!=3,faces=(0,math.pi,math.pi/2 if x>0 else -math.pi/2))
+            # The wings outgrow the central hall at L2/3. Their emblem must
+            # follow the wing parapet, never the hall height through a window.
+            # L3 already has its own crown crest below.
+            if level<3:
+                with b.at((x,0,0)):crest(b,0,y-.13,side_top+(.30 if level==1 else .12),.69,.72 if level==1 else .60)
         for x in (-1.45,1.45):
             for f in range(floors):window(b,x,y,.55+f*1.15,.55,.72)
         window(b,0,y,.74,1.24,max(.70,body-.90),True)
@@ -632,7 +639,10 @@ def public(name,mats):
             window(b,0,y-.025,2.20,.45,1.01,True)
             for x in (-.41,.41):b.box((x,y-.09,2.66),(.13,.15,1.57),'stone')
         else:copper_roof(b,w+.16,d+.16,top+.05,.62)
-        for x in (-1.00,1.00):window(b,x,y,.60,.40,1.05,True)
+        # The map office uses the left bay for its board and the right bay
+        # for an offset entrance, so neither bay receives a generic window.
+        if name!='junction_hub':
+            for x in (-1.00,1.00):window(b,x,y,.60,.40,1.05,True)
         if name=='civic_hall':
             for x in (-.53,.53):b.box((x,y-.10,1.38),(.19,.18,2.10),'stone')
             door(b,0,y,w=.73,h=1.22,double=True);window(b,0,y-.03,1.40,.65,.52,True)

@@ -1,0 +1,467 @@
+{
+  "schemaVersion": 1,
+  "region": "expansion",
+  "scope": "All 29 New York assets: seven families at levels1/2/3 plus eight public buildings.",
+  "method": "Read current production PNG renders and active metropolitan.py code. Inspect complete contact sheets, then targeted individual and before/after renders. Validate all PNG/GLB hashes. No AI generation; only four confirmed defects rebuilt.",
+  "inspectionViews": [
+    "current isometric production render",
+    "active source geometry and numeric placement"
+  ],
+  "limits": "This is a facade-construction audit of the available production view plus source, not a claim that every possible camera angle has a new render.",
+  "source": "art/blender-city/regions/metropolitan.py",
+  "sourceSha256": "e513d53e5d440031927b8384084f25670a36f0b7904c7df8e777df0355d983cf",
+  "coverageCount": 29,
+  "changedAssets": [
+    "shop_3",
+    "junction_hub",
+    "finance_2",
+    "finance_3"
+  ],
+  "unchangedAssets": [
+    "villa_1",
+    "villa_2",
+    "villa_3",
+    "shop_1",
+    "shop_2",
+    "hotel_1",
+    "hotel_2",
+    "hotel_3",
+    "tower_1",
+    "tower_2",
+    "tower_3",
+    "skyscraper_1",
+    "skyscraper_2",
+    "skyscraper_3",
+    "finance_1",
+    "onsen_1",
+    "onsen_2",
+    "onsen_3",
+    "civic_hall",
+    "vault_bank",
+    "builders_guild",
+    "card_pavilion",
+    "chance_wheel",
+    "teleport_gate",
+    "rush_station"
+  ],
+  "summary": {
+    "confirmedDuplicateOuterArcades": 0,
+    "confirmedMisplacedOrExposedWindowDecorations": 4,
+    "repaired": 4,
+    "unchanged": 25,
+    "allDimensionsPreserved": true
+  },
+  "contactSheets": [
+    "work/facade-audit-metropolitan-sheet-1.png",
+    "work/facade-audit-metropolitan-sheet-2.png",
+    "work/facade-audit-metropolitan-sheet-3.png",
+    "work/facade-audit-metropolitan-sheet-4.png"
+  ],
+  "comparison": "work/facade-audit-metropolitan-before-after.png",
+  "coverage": [
+    {
+      "asset": "villa_1",
+      "status": "inspected_no_confirmed_same_defect",
+      "render": "art/blender-city/renders/expansion/villa_1.png",
+      "renderSha256": "74e39f1427d318f2d4306d7f943b9394044b57fc88bfb57c7addb1cad6db6a87",
+      "modelSha256": "48d745a34a130a5112949295be34bc0a3e2b8c8762dc3c6d6e5ce0176386c657",
+      "sourceFunction": "core",
+      "note": "One window assembly per exposed bay; limestone corner piers remain continuous from foundation to cornice, without free-floating bases or a second arcade."
+    },
+    {
+      "asset": "villa_2",
+      "status": "inspected_no_confirmed_same_defect",
+      "render": "art/blender-city/renders/expansion/villa_2.png",
+      "renderSha256": "35ef8355f7f2d3d9f8c58ad6cccb717e2b020611d145e047dc5b8b9dee3570db",
+      "modelSha256": "323ba7e8948c996d6cebd6f6384778d679bd1b3ed15f56dd8dc83b8abd03c715",
+      "sourceFunction": "core",
+      "note": "One window assembly per exposed bay; limestone corner piers remain continuous from foundation to cornice, without free-floating bases or a second arcade."
+    },
+    {
+      "asset": "villa_3",
+      "status": "inspected_no_confirmed_same_defect",
+      "render": "art/blender-city/renders/expansion/villa_3.png",
+      "renderSha256": "56cc914eff2cb664b7b0320e347f2df62124293bd2af0f9760f23344851116d9",
+      "modelSha256": "42c1136c2195737563c5eea64531a5bd1618f8ccd0b53324d676c14536c1366f",
+      "sourceFunction": "landmark_core",
+      "note": "One window assembly per exposed bay; limestone corner piers remain continuous from foundation to cornice, without free-floating bases or a second arcade."
+    },
+    {
+      "asset": "shop_1",
+      "status": "inspected_no_confirmed_same_defect",
+      "render": "art/blender-city/renders/expansion/shop_1.png",
+      "renderSha256": "4df6412a565d6228a870e615e82a3cd151c7ba3ed43c0b4f653429095925fc67",
+      "modelSha256": "1d71212f290140f2e11523c4042a75ad3eccf4249f13b2d62f5346f2078e367e",
+      "sourceFunction": "core",
+      "note": "Front storefront and awning checked separately from upper/side residential windows. L1/2 domestic windows behind storefront are fully hidden in the current render and do not leave exposed upper fragments; no edits made to these two assets."
+    },
+    {
+      "asset": "shop_2",
+      "status": "inspected_no_confirmed_same_defect",
+      "render": "art/blender-city/renders/expansion/shop_2.png",
+      "renderSha256": "71ada7f8f4aaa556a41c16900e89692309505e3e7a480d952f723e3278bf10d9",
+      "modelSha256": "44af38c5783339b5cd656b1d3fb980e2c314139adbc90ee449b539295bb0bb5d",
+      "sourceFunction": "core",
+      "note": "Front storefront and awning checked separately from upper/side residential windows. L1/2 domestic windows behind storefront are fully hidden in the current render and do not leave exposed upper fragments; no edits made to these two assets."
+    },
+    {
+      "asset": "shop_3",
+      "status": "fixed_and_visually_rechecked",
+      "render": "art/blender-city/renders/expansion/shop_3.png",
+      "renderSha256": "389df54f6b42fcb8f7f463d6edc17627bc1b440cd8160505c6c9b9106b2e7040",
+      "modelSha256": "707c8ae2a5d8b77dd6f9ae332ed4ae603746ace47cf8e285946d83347f6f2a01",
+      "sourceFunction": "landmark_core",
+      "note": "Front storefront and awning checked separately from upper/side residential windows. L1/2 domestic windows behind storefront are fully hidden in the current render and do not leave exposed upper fragments; no edits made to these two assets.",
+      "finding": "SHOP3-EXPOSED-WINDOW-HEAD"
+    },
+    {
+      "asset": "hotel_1",
+      "status": "inspected_no_confirmed_same_defect",
+      "render": "art/blender-city/renders/expansion/hotel_1.png",
+      "renderSha256": "04de86b476fd3e82e0470967da2e8cf008da2451fa2161c7cb8607ea698e959f",
+      "modelSha256": "809b4b22dcecc9c698f67f4b50a0331094cac32a8184e55b2d0171f624f94556",
+      "sourceFunction": "core",
+      "note": "Entry canopy and lanterns are separate supported fittings; window headers and sills align with their own bays, with no second exterior arch frame."
+    },
+    {
+      "asset": "hotel_2",
+      "status": "inspected_no_confirmed_same_defect",
+      "render": "art/blender-city/renders/expansion/hotel_2.png",
+      "renderSha256": "72d9ae487cd5630e770fc7b37368696d38bb43ef6a844754f207f13b91cfa4fa",
+      "modelSha256": "18dde19d112be7ec72db28f2a7e2e3da0b94ec57562698e2db661053e80121e1",
+      "sourceFunction": "core",
+      "note": "Entry canopy and lanterns are separate supported fittings; window headers and sills align with their own bays, with no second exterior arch frame."
+    },
+    {
+      "asset": "hotel_3",
+      "status": "inspected_no_confirmed_same_defect",
+      "render": "art/blender-city/renders/expansion/hotel_3.png",
+      "renderSha256": "4a37a67b7ece833b2df17e94e4fa9c552f1701b1173c60aa7cd9e6638e17eb35",
+      "modelSha256": "d02c3ab12380b9f5507ae5e79614c3966cfe345e9519006ec947cc3ac4cc9b4f",
+      "sourceFunction": "landmark_core",
+      "note": "Entry canopy and lanterns are separate supported fittings; window headers and sills align with their own bays, with no second exterior arch frame."
+    },
+    {
+      "asset": "tower_1",
+      "status": "inspected_no_confirmed_same_defect",
+      "render": "art/blender-city/renders/expansion/tower_1.png",
+      "renderSha256": "9bd6d3f4a71413de01d4606199055ca9efc1be2b473bd4aa4c79ee6e61f8f705",
+      "modelSha256": "b650a63e71e8a02d9aa387fe4ab2353409e2c89678060e36d8eb0474f63d0d49",
+      "sourceFunction": "core",
+      "note": "Central stone/gold ribs sit between the front window bays; top-level facade and roof-window openings are independently framed and remain aligned."
+    },
+    {
+      "asset": "tower_2",
+      "status": "inspected_no_confirmed_same_defect",
+      "render": "art/blender-city/renders/expansion/tower_2.png",
+      "renderSha256": "c66627d4b7abbdb94ab3cdaddcd5159f4d150caa9e74f9aceed578196f5321ea",
+      "modelSha256": "a849fc61e071e95a65050bcfa30a9b1675c9a46efcf3a101dcb30a7b5644f6f7",
+      "sourceFunction": "core",
+      "note": "Central stone/gold ribs sit between the front window bays; top-level facade and roof-window openings are independently framed and remain aligned."
+    },
+    {
+      "asset": "tower_3",
+      "status": "inspected_no_confirmed_same_defect",
+      "render": "art/blender-city/renders/expansion/tower_3.png",
+      "renderSha256": "7f8f5741aa4c09fe636430f3d30b94d73586e676afb69ccfb6c8eb946425f6a9",
+      "modelSha256": "6cd7e70a6966f83092c3b0a1baae575f2622a59444dcaea9e3ac915aa7046202",
+      "sourceFunction": "landmark_core",
+      "note": "Central stone/gold ribs sit between the front window bays; top-level facade and roof-window openings are independently framed and remain aligned."
+    },
+    {
+      "asset": "skyscraper_1",
+      "status": "inspected_no_confirmed_same_defect",
+      "render": "art/blender-city/renders/expansion/skyscraper_1.png",
+      "renderSha256": "c293081fcfda22dd520431c516deffc38531cb73cc6d479d555ae79431773bf0",
+      "modelSha256": "42c75a2ed2b89385635d4f7af6635597adbc6ac49b51266823c2cd2e4f295d09",
+      "sourceFunction": "large",
+      "note": "Five stepped tower fronts inspected. Narrow gold vertical facade fins are deliberate attached trim, not an additional white outer arcade or detached stone fragments. Corner piers and window sills remain contiguous."
+    },
+    {
+      "asset": "skyscraper_2",
+      "status": "inspected_no_confirmed_same_defect",
+      "render": "art/blender-city/renders/expansion/skyscraper_2.png",
+      "renderSha256": "cc7a9e5b73074f6389ccf241e5e9f020be64a16d6953cf5496d634b4bed0ab11",
+      "modelSha256": "2b7065b88e976991c058e233686194160353ed30725c0666b3b9c80df7b4bf24",
+      "sourceFunction": "large",
+      "note": "Five stepped tower fronts inspected. Narrow gold vertical facade fins are deliberate attached trim, not an additional white outer arcade or detached stone fragments. Corner piers and window sills remain contiguous."
+    },
+    {
+      "asset": "skyscraper_3",
+      "status": "inspected_no_confirmed_same_defect",
+      "render": "art/blender-city/renders/expansion/skyscraper_3.png",
+      "renderSha256": "8872e8decb9b4f28242b6193f11d59d4f60a63d618999fdbab923cb3df9b7a5a",
+      "modelSha256": "02b53fc51d30f91edd0ba9e084902ac97afee48c4dd2cc9c5206790dc4353476",
+      "sourceFunction": "large",
+      "note": "Five stepped tower fronts inspected. Narrow gold vertical facade fins are deliberate attached trim, not an additional white outer arcade or detached stone fragments. Corner piers and window sills remain contiguous."
+    },
+    {
+      "asset": "finance_1",
+      "status": "inspected_no_confirmed_same_defect",
+      "render": "art/blender-city/renders/expansion/finance_1.png",
+      "renderSha256": "dc79ef0307c4877d8735d669fe92a4acc5272bcd65f82fa34b7a39e51b02c4b4",
+      "modelSha256": "0c93ae4bb42a9721fef5f13a168521f1e3f0b90f3fd86b1b361617b0dd5d5e6f",
+      "sourceFunction": "large",
+      "note": "Central full-height arch is a single layered stone/wood/glass window assembly. L1 wing crest sits above its one-storey tower. L2/3 wing-crest placement is recorded as the targeted defect."
+    },
+    {
+      "asset": "finance_2",
+      "status": "fixed_and_visually_rechecked",
+      "render": "art/blender-city/renders/expansion/finance_2.png",
+      "renderSha256": "532f7cddfcabc7cff112aea0f14d72f862292ca8d3b994fe5eda64ebbc44d7c3",
+      "modelSha256": "95e65a1ecf5fc1fe892db4b5b4abbe09a20fe0d410167f74c62e4a87dc6b07a9",
+      "sourceFunction": "large",
+      "note": "Central full-height arch is a single layered stone/wood/glass window assembly. L1 wing crest sits above its one-storey tower. L2/3 wing-crest placement is recorded as the targeted defect.",
+      "finding": "FINANCE-WING-CREST-IN-WINDOW"
+    },
+    {
+      "asset": "finance_3",
+      "status": "fixed_and_visually_rechecked",
+      "render": "art/blender-city/renders/expansion/finance_3.png",
+      "renderSha256": "f7ce2a8c0a65f96c4eeeecf93cf07e948b768705112936494aecd2099dfa6034",
+      "modelSha256": "794fd6b8905968589f539836c03ba64126f49874ca976260f4aeb324db531882",
+      "sourceFunction": "large",
+      "note": "Central full-height arch is a single layered stone/wood/glass window assembly. L1 wing crest sits above its one-storey tower. L2/3 wing-crest placement is recorded as the targeted defect.",
+      "finding": "FINANCE-WING-CREST-IN-WINDOW"
+    },
+    {
+      "asset": "onsen_1",
+      "status": "inspected_no_confirmed_same_defect",
+      "render": "art/blender-city/renders/expansion/onsen_1.png",
+      "renderSha256": "5dfc944b1554bb103920ea623c5482af43e753a16a4c6d336887b2c5f0e95afa",
+      "modelSha256": "12df67d2e7a87960c571f8c1488385af04726c4d1ff5a4448860d52238f3e985",
+      "sourceFunction": "thermal_resort",
+      "note": "Arched rear-hall glazing and side-pavilion windows are single assemblies. Pool rails are anchored to pool surrounds; water-cascade bowls at L3 attach to their stone support rather than float."
+    },
+    {
+      "asset": "onsen_2",
+      "status": "inspected_no_confirmed_same_defect",
+      "render": "art/blender-city/renders/expansion/onsen_2.png",
+      "renderSha256": "81bef31e6835df54392b80d44307bffefcf9caf801414bf5351c932d1fa66a10",
+      "modelSha256": "10ccbbc569e84a6c2a6f6d1bbbde96efd2d61e4da1f04c51b7cf1d993be23960",
+      "sourceFunction": "thermal_resort",
+      "note": "Arched rear-hall glazing and side-pavilion windows are single assemblies. Pool rails are anchored to pool surrounds; water-cascade bowls at L3 attach to their stone support rather than float."
+    },
+    {
+      "asset": "onsen_3",
+      "status": "inspected_no_confirmed_same_defect",
+      "render": "art/blender-city/renders/expansion/onsen_3.png",
+      "renderSha256": "2bae39356544e4ed72f893aea094988ed51791c7b4360232aecea8df21a9b3d5",
+      "modelSha256": "0fc6a038b0e4968fef49a0d7ebd6b855e4f1358397ff6c41326d469e33dbec0a",
+      "sourceFunction": "thermal_palace",
+      "note": "Arched rear-hall glazing and side-pavilion windows are single assemblies. Pool rails are anchored to pool surrounds; water-cascade bowls at L3 attach to their stone support rather than float."
+    },
+    {
+      "asset": "civic_hall",
+      "status": "inspected_no_confirmed_same_defect",
+      "render": "art/blender-city/renders/expansion/civic_hall.png",
+      "renderSha256": "072aad0c5998ead6479875017dada82d99bcdd1aa4e60b702df476dd606eb53e",
+      "modelSha256": "e437f33062ba3b21069b3cb1b354a48f94da31edf82d15373ee58db482686575",
+      "sourceFunction": "public",
+      "note": "The central transom shares the entrance axis, and the bell canopy has four continuous corner posts. No replicated outer arcade found."
+    },
+    {
+      "asset": "vault_bank",
+      "status": "inspected_no_confirmed_same_defect",
+      "render": "art/blender-city/renders/expansion/vault_bank.png",
+      "renderSha256": "8865f267e78df102b2c94adb5368a96db049c12e9b8d8ed917c0abb1ada4b30a",
+      "modelSha256": "332540f0fd444d00be74e09e5c6ebf8ce5aaac3b9de8ae38c07b35a8065c61f6",
+      "sourceFunction": "public",
+      "note": "Metal security bars intentionally cross the glass and attach to each window; facade piers reach the foundation. No orphaned white fragments or second arch frame found."
+    },
+    {
+      "asset": "builders_guild",
+      "status": "inspected_no_confirmed_same_defect",
+      "render": "art/blender-city/renders/expansion/builders_guild.png",
+      "renderSha256": "c16d19d1247a86a0aef1a8e66a54d93c2fbb58240be7ed2f0281ac44a67d1152",
+      "modelSha256": "790fec4dd10a5cd4d283114afb2a6f5d9e2164dc0d2e0f609b0a9419a9c1786a",
+      "sourceFunction": "public",
+      "note": "Workshop shelves and lintel own the central bay; side and roof-tower windows remain separate. Crane load is suspended by its explicit rope, not a detached support."
+    },
+    {
+      "asset": "card_pavilion",
+      "status": "inspected_no_confirmed_same_defect",
+      "render": "art/blender-city/renders/expansion/card_pavilion.png",
+      "renderSha256": "662b2c52f95e344164ae2d87e816663f0ec7026ba291bcc689ee32fe7b85894a",
+      "modelSha256": "3bde7e4c4d01fd2a7a71cf0d87f7e21e2a8e54aabddb64c9a48d091db9e61cba",
+      "sourceFunction": "public",
+      "note": "Shop counter, awning and card display occupy the centre; side arched windows remain complete, with no duplicate facade arcade."
+    },
+    {
+      "asset": "chance_wheel",
+      "status": "inspected_no_confirmed_same_defect",
+      "render": "art/blender-city/renders/expansion/chance_wheel.png",
+      "renderSha256": "529e4a1c507b1374ff24dce199358118ae8c14d78ecaefd7b429237fb97a3c59",
+      "modelSha256": "7ecd486cbf30cc36e2bc8b66213c52e2c40329879a0e183c6b8bf40a40068b72",
+      "sourceFunction": "public",
+      "note": "Service bay and attached wheel/support are distinct from side windows. No misplaced window-head/corner fragments identified in the current render."
+    },
+    {
+      "asset": "teleport_gate",
+      "status": "inspected_no_confirmed_same_defect",
+      "render": "art/blender-city/renders/expansion/teleport_gate.png",
+      "renderSha256": "8c48ded5115a2fdb7dc9a8094a15147162b6e5733276b55d55306ffb85ba01ad",
+      "modelSha256": "3a5fe5677cbd838640259d8c7d24e7f5912a59971f7eb70def967329e6dea2b9",
+      "sourceFunction": "public",
+      "note": "Central open arch is the passage itself, flanked by windowed towers. It is not applied over a complete window; the tower piers are supported."
+    },
+    {
+      "asset": "rush_station",
+      "status": "inspected_no_confirmed_same_defect",
+      "render": "art/blender-city/renders/expansion/rush_station.png",
+      "renderSha256": "7bbb27a0c3dcc8eeffb3fd033074555a913c806c4e95a96ab015c20329c8bd1f",
+      "modelSha256": "a12a41a4512c337ad9b63f248b59eb0cdfc609f49023aff6b9998c6cad792dfc",
+      "sourceFunction": "public",
+      "note": "Portico lamps have ground-supported slender piers, while the canopy and facade windows are independently aligned."
+    },
+    {
+      "asset": "junction_hub",
+      "status": "fixed_and_visually_rechecked",
+      "render": "art/blender-city/renders/expansion/junction_hub.png",
+      "renderSha256": "a25dc66edc23868deaa6ed49efd5d5ff401b929b4e1cf365333f6b3ffe569d89",
+      "modelSha256": "3227c87e8d4be35c5bf41fc6d29facfebcc51935a698774baa6e4e81f20c4f1a",
+      "sourceFunction": "public",
+      "note": "The two generic front windows were incompatible with the map board and offset entrance; corrected in this audit.",
+      "finding": "MAPOFFICE-OVERLAID-WINDOWS"
+    }
+  ],
+  "repairs": [
+    {
+      "asset": "shop_3",
+      "finding": "SHOP3-EXPOSED-WINDOW-HEAD",
+      "rootCause": "landmark_core placed a 1.45-high domestic window at z=.55 before the shopfront. Its head reached z=2.00, above the storefront glass top 1.55 and canopy, leaving two green frame fragments and stone heads visible above the awning.",
+      "fix": "Reserve both ground-floor front bays for the bespoke shopfront; omit only the two domestic windows. Upper storey windows, all side/rear facades, clerestory, roof and awning remain.",
+      "source": "landmark_core: ground-floor family==shop exclusion",
+      "beforeRender": "work/facade-before/expansion/shop_3.png",
+      "afterRender": "art/blender-city/renders/expansion/shop_3.png",
+      "before": {
+        "triangles": 29472,
+        "size": [
+          0.9900000095367432,
+          1.7065171003341675,
+          0.9617785215377808
+        ],
+        "bytes": 2210840,
+        "sha256": "ac659a31efbf52aefc0fc6cc0705687d9ef509e0a2d9603b38182e1857951a1a"
+      },
+      "after": {
+        "triangles": 28952,
+        "size": [
+          0.9900000095367432,
+          1.7065171003341675,
+          0.9617785215377808
+        ],
+        "bytes": 2180620,
+        "sha256": "707c8ae2a5d8b77dd6f9ae332ed4ae603746ace47cf8e285946d83347f6f2a01"
+      },
+      "dimensionsUnchanged": true,
+      "triangleDelta": -520,
+      "storage": "normal16_uv16_color8"
+    },
+    {
+      "asset": "junction_hub",
+      "finding": "MAPOFFICE-OVERLAID-WINDOWS",
+      "rootCause": "public created arched windows at x=-1 and +1 before placing the map board at x=-.37 (width1.39) and the door at x=.87. The left window extends outside the board edge; the right arch remains above a door whose centre is offset by .13, producing a visibly misaligned remnant.",
+      "fix": "Reserve both front bays for the map board and offset entrance; omit generic windows only for junction_hub. Keep side/rear glazing, upper arched bay, map, signpost and canopy.",
+      "source": "public: name!=junction_hub front-window exclusion",
+      "beforeRender": "work/facade-before/expansion/junction_hub.png",
+      "afterRender": "art/blender-city/renders/expansion/junction_hub.png",
+      "before": {
+        "triangles": 16828,
+        "size": [
+          1.0399999618530273,
+          1.0659294128417969,
+          0.8327573537826538
+        ],
+        "bytes": 1657920,
+        "sha256": "ed832261266434d2868ce2060fe6b60b38a1d7bacb5ece8298781b85699bd106"
+      },
+      "after": {
+        "triangles": 16052,
+        "size": [
+          1.0399999618530273,
+          1.0659294128417969,
+          0.8327573537826538
+        ],
+        "bytes": 1661192,
+        "sha256": "3227c87e8d4be35c5bf41fc6d29facfebcc51935a698774baa6e4e81f20c4f1a"
+      },
+      "dimensionsUnchanged": true,
+      "triangleDelta": -776,
+      "storage": "normal16_uv16_color8"
+    },
+    {
+      "asset": "finance_2",
+      "finding": "FINANCE-WING-CREST-IN-WINDOW",
+      "rootCause": "Side-tower crests incorrectly used the shorter central-hall height body+.30: z=2.90 with height .72. The three-storey wing top-floor glazing starts at z=2.85 and ends at3.53, so the crest crossed the real window.",
+      "fix": "Use tower_mass returned side_top=3.75; crest base is3.87 with height .60, entirely above the top window and within the existing stepped roof envelope. Main building and roof geometry are unchanged.",
+      "source": "large finance: side_top returned by tower_mass",
+      "beforeRender": "work/facade-before/expansion/finance_2.png",
+      "afterRender": "art/blender-city/renders/expansion/finance_2.png",
+      "before": {
+        "triangles": 36928,
+        "size": [
+          2.2602827548980713,
+          1.4481910467147827,
+          1.0199999809265137
+        ],
+        "bytes": 2579544,
+        "sha256": "01f62c1eb182c0f751f9041fe5c683c766a8359f761d6637539b55916909eda7"
+      },
+      "after": {
+        "triangles": 36928,
+        "size": [
+          2.2602827548980713,
+          1.4481910467147827,
+          1.0199999809265137
+        ],
+        "bytes": 2593796,
+        "sha256": "95e65a1ecf5fc1fe892db4b5b4abbe09a20fe0d410167f74c62e4a87dc6b07a9"
+      },
+      "dimensionsUnchanged": true,
+      "triangleDelta": 0,
+      "storage": "normal16_uv16_color8"
+    },
+    {
+      "asset": "finance_3",
+      "finding": "FINANCE-WING-CREST-IN-WINDOW",
+      "rootCause": "The inherited crest used central-hall body+.30=5.20 although the side tower has five floors. Top-floor glazing is z=5.15..5.83, so the old crest was directly over it. This duplicates the separate new L3 rooftop crest at6.12.",
+      "fix": "Remove only the obsolete low crest on each wing. Preserve the separate rooftop crests, pinnacles, rotunda, full-height central window and all building masses.",
+      "source": "large finance: legacy crest only for level<3",
+      "beforeRender": "work/facade-before/expansion/finance_3.png",
+      "afterRender": "art/blender-city/renders/expansion/finance_3.png",
+      "before": {
+        "triangles": 60196,
+        "size": [
+          2.2602827548980713,
+          2.4149670600891113,
+          1.0199999809265137
+        ],
+        "bytes": 4098832,
+        "sha256": "2a1b17ecb1545486631ed2e7bbf3c638f0d198ff62e4cee01a3565b4e68ea633"
+      },
+      "after": {
+        "triangles": 59476,
+        "size": [
+          2.2602827548980713,
+          2.4149670600891113,
+          1.0199999809265137
+        ],
+        "bytes": 4031808,
+        "sha256": "794fd6b8905968589f539836c03ba64126f49874ca976260f4aeb324db531882"
+      },
+      "dimensionsUnchanged": true,
+      "triangleDelta": -720,
+      "storage": "normal16_uv16_color8"
+    }
+  ],
+  "execution": {
+    "buildLog": "work/facade-expansion-build.log",
+    "renderLog": "work/facade-expansion-render.log",
+    "blenderCpuThreads": 3,
+    "sourceCompression": "--apply --map=expansion --color8; only four fresh assets changed, 25 skipped as current",
+    "published": false,
+    "runtimeCacheEdited": false,
+    "committed": false
+  }
+}

@@ -1,0 +1,1491 @@
+{
+  "scope": [
+    "compact",
+    "alpine"
+  ],
+  "assetsReviewed": 59,
+  "includingHero": "alpine/alpine_windmill",
+  "method": "Actual final exported GLB renders plus source construction / coordinate audit; no AI generation. Source-only diagnostic traced all Alpine constrained openings.",
+  "source": {
+    "path": "art/blender-city/regions/eastern.py",
+    "sha256": "84712ec6f04fadd6c90480e26a21417298ab4df7af19e36763b306cabc913632",
+    "functions": {
+      "module": 13,
+      "materials": 32,
+      "beam": 39,
+      "directions": 46,
+      "masonry": 49,
+      "base": 60,
+      "tiles": 66,
+      "roof": 117,
+      "gable_infill": 141,
+      "eave": 153,
+      "grid_window": 160,
+      "flowerbox": 163,
+      "shutter_window": 171,
+      "railing": 197,
+      "pot": 210,
+      "lantern": 223,
+      "noren": 241,
+      "door": 249,
+      "timber_shell": 265,
+      "chimney": 300,
+      "awning": 307,
+      "shopfront": 315,
+      "front_gable": 331,
+      "core": 335,
+      "emblem": 383,
+      "clock_tower": 397,
+      "crates": 407,
+      "pool": 413,
+      "summit_roof": 419,
+      "summit_room": 425,
+      "ridge_crest": 437,
+      "level3_core": 443,
+      "thermal_badge": 527,
+      "thermal_pool": 539,
+      "thermal_resort": 557,
+      "level3_large": 600,
+      "exchange_hall": 651,
+      "observation_suite": 668,
+      "thermal_palace": 679,
+      "large": 724,
+      "public": 799,
+      "windmill": 926,
+      "accepted_villa": 980,
+      "build": 991
+    }
+  },
+  "findings": [
+    {
+      "id": "E1",
+      "severity": "confirmed_geometry_overlap",
+      "assets": [
+        "alpine/villa_1",
+        "alpine/villa_2",
+        "alpine/villa_3",
+        "alpine/shop_1",
+        "alpine/shop_2",
+        "alpine/shop_3",
+        "alpine/hotel_1",
+        "alpine/hotel_2",
+        "alpine/hotel_3",
+        "alpine/tower_1",
+        "alpine/tower_2",
+        "alpine/tower_3",
+        "alpine/skyscraper_1",
+        "alpine/skyscraper_2",
+        "alpine/skyscraper_3",
+        "alpine/finance_1",
+        "alpine/finance_2",
+        "alpine/finance_3",
+        "alpine/onsen_1",
+        "alpine/onsen_2",
+        "alpine/onsen_3",
+        "alpine/civic_hall",
+        "alpine/vault_bank",
+        "alpine/builders_guild",
+        "alpine/card_pavilion",
+        "alpine/teleport_gate",
+        "alpine/rush_station",
+        "alpine/junction_hub",
+        "alpine/alpine_windmill"
+      ],
+      "location": "Front, side and rear window rows; ground windows beside doors; narrow gate piers and summit rooms",
+      "rootCause": "The original slot calculation included glass but omitted 0.525 author units of open shutters and straps. Door flanks and wall ends were not reserved.",
+      "proof": "Example: alpine/hotel_2 has 0.78 between front window centres, but each old complete shutter window is 0.995 wide. Adjacent shutters overlap by 0.215. Ground tower windows also crossed the central door surround.",
+      "fix": "Fit glass plus shutters and straps to complete wall bay, with 0.045 separation between adjacent complete windows. Reserve 0.08 at wall ends and 0.05 beside door surrounds; centre the side windows within the remaining space. Preserve teal shutters, slats and straps.",
+      "sourceFunctions": [
+        "shutter_window",
+        "timber_shell",
+        "core",
+        "summit_room",
+        "level3_core",
+        "public"
+      ],
+      "constrainedOpenings": 342
+    },
+    {
+      "id": "E2",
+      "severity": "confirmed_duplicate_facade",
+      "assets": [
+        "alpine/tower_2"
+      ],
+      "location": "Second-floor front central arched window",
+      "rootCause": "Generic two-window facade was still authored, then covered by a shallow white plate and overlaid with a third arched window.",
+      "proof": "The cover plate front was y=-1.070 while the old straps/frame projected to about y=-1.10. Their outer edges also exceeded the plate width. Both old teal shutter sets visibly survived beside the new arch.",
+      "fix": "Skip original front windows at authoring time, remove the masking plate, place the single arched assembly against the real wall and reconnect its balcony deck.",
+      "sourceFunctions": [
+        "timber_shell",
+        "core"
+      ]
+    },
+    {
+      "id": "E3",
+      "severity": "confirmed_canopy_intersection",
+      "assets": [
+        "alpine/card_pavilion",
+        "alpine/shop_3",
+        "compact/shop_3"
+      ],
+      "location": "Lamps at the shop canopy / noren curtain",
+      "rootCause": "Lamps were added using residential positions after the complete store canopy or curtain was already built.",
+      "proof": "Alpine card pavilion glass lamps span z=1.065..1.275, while the awning at the same x/y is z approximately 1.211. The shop lamp similarly cuts the left canopy. Kyoto shop_3 paper lamps occupy the noren curtain plane.",
+      "fix": "Mount shop lamps on the corner posts outside the cloth; card pavilion lamps sit outside both awning edges.",
+      "sourceFunctions": [
+        "lantern",
+        "awning",
+        "shopfront",
+        "level3_core",
+        "public"
+      ]
+    },
+    {
+      "id": "E4",
+      "severity": "confirmed_duplicate_facade",
+      "assets": [
+        "compact/junction_hub",
+        "alpine/junction_hub"
+      ],
+      "location": "Front left information board",
+      "rootCause": "Information board was placed in front of an already complete left window.",
+      "proof": "Board x=-0.86..-0.34 overlaps the Kyoto window/frame x=-1.1225..-0.5375 and Alpine complete shutter assembly x=-1.2725..-0.3875. The board depth is in front, leaving partial window pieces visible.",
+      "fix": "Reserve the left facade for the board, omit the hidden window and its shutters / flowerbox.",
+      "sourceFunctions": [
+        "public"
+      ]
+    },
+    {
+      "id": "E5",
+      "severity": "confirmed_extraneous_overlay",
+      "assets": [
+        "compact/card_pavilion",
+        "alpine/card_pavilion"
+      ],
+      "location": "Three short floating boards in front of each ground window",
+      "rootCause": "Additional boards at z=0.25,0.42,0.59 were stacked in front of existing complete windows without supports.",
+      "proof": "Upper board z=0.573..0.607 lies across glass that starts at z=0.45 (Kyoto) or z=0.46 (Alpine), separated from the glass plane and conflicting with Alpine window flowerboxes.",
+      "fix": "Remove the duplicate six boards; retain the actual framed window, Alpine flowerbox, plants and playing-card sign.",
+      "sourceFunctions": [
+        "public"
+      ]
+    }
+  ],
+  "coverage": [
+    {
+      "region": "compact",
+      "asset": "villa_1",
+      "render": "art/blender-city/renders/compact/villa_1.png",
+      "actualRenderReviewed": true,
+      "sourceGeometryReviewed": true,
+      "status": "no_confirmed_issue",
+      "findings": [],
+      "sha256": "1ffad66984a77eb65f2db1a3689dd89fd9852c0422a10c349d4dd2916839ee30",
+      "triangles": 15588,
+      "size": [
+        0.9899999499320984,
+        0.5905932188034058,
+        0.7009991407394409
+      ]
+    },
+    {
+      "region": "compact",
+      "asset": "villa_2",
+      "render": "art/blender-city/renders/compact/villa_2.png",
+      "actualRenderReviewed": true,
+      "sourceGeometryReviewed": true,
+      "status": "no_confirmed_issue",
+      "findings": [],
+      "sha256": "92ac4b70058f4011e676c8728e6cc1958728523399ee7b84af0416e168594c89",
+      "triangles": 41116,
+      "size": [
+        0.9900000095367432,
+        1.0812287330627441,
+        0.8098868131637573
+      ]
+    },
+    {
+      "region": "compact",
+      "asset": "villa_3",
+      "render": "art/blender-city/renders/compact/villa_3.png",
+      "actualRenderReviewed": true,
+      "sourceGeometryReviewed": true,
+      "status": "no_confirmed_issue",
+      "findings": [],
+      "sha256": "15d43f64f8272c27f8379a9e85d5dcae358cfbfb0284eef26bbce2b1fa63859e",
+      "triangles": 34356,
+      "size": [
+        0.9900000095367432,
+        1.7510133981704712,
+        0.9288928508758545
+      ]
+    },
+    {
+      "region": "compact",
+      "asset": "shop_1",
+      "render": "art/blender-city/renders/compact/shop_1.png",
+      "actualRenderReviewed": true,
+      "sourceGeometryReviewed": true,
+      "status": "no_confirmed_issue",
+      "findings": [],
+      "sha256": "36d00d423336d523163095c7f6a49b0d2ffd9ae366f46bf3c19657b04a75b2ab",
+      "triangles": 13244,
+      "size": [
+        0.9900000095367432,
+        0.7007708549499512,
+        0.8335158824920654
+      ]
+    },
+    {
+      "region": "compact",
+      "asset": "shop_2",
+      "render": "art/blender-city/renders/compact/shop_2.png",
+      "actualRenderReviewed": true,
+      "sourceGeometryReviewed": true,
+      "status": "no_confirmed_issue",
+      "findings": [],
+      "sha256": "63c4e015aa0fcd675f2594aa8f924daa43ddba4f12c6ab2b4a771f7314edd6b3",
+      "triangles": 17924,
+      "size": [
+        0.9900000095367432,
+        1.091055989265442,
+        0.8596509695053101
+      ]
+    },
+    {
+      "region": "compact",
+      "asset": "shop_3",
+      "render": "art/blender-city/renders/compact/shop_3.png",
+      "actualRenderReviewed": true,
+      "sourceGeometryReviewed": true,
+      "status": "repaired_and_final_render_reviewed",
+      "findings": [
+        "E3"
+      ],
+      "sha256": "49cf84fc84054cc61bffbbca062a9466444f5677562c153a98f3ee5e3e7eb3a4",
+      "triangles": 31644,
+      "size": [
+        0.9541693925857544,
+        1.7599999904632568,
+        0.90020751953125
+      ],
+      "beforeSize": [
+        0.9541693925857544,
+        1.7599999904632568,
+        0.90020751953125
+      ],
+      "heightDelta": 0.0
+    },
+    {
+      "region": "compact",
+      "asset": "hotel_1",
+      "render": "art/blender-city/renders/compact/hotel_1.png",
+      "actualRenderReviewed": true,
+      "sourceGeometryReviewed": true,
+      "status": "no_confirmed_issue",
+      "findings": [],
+      "sha256": "82d9ec32c353fccf02ba140c04572bc173f1dd72fc4f607f18502f43704419d6",
+      "triangles": 20268,
+      "size": [
+        0.9899999499320984,
+        0.63383948802948,
+        0.8937104940414429
+      ]
+    },
+    {
+      "region": "compact",
+      "asset": "hotel_2",
+      "render": "art/blender-city/renders/compact/hotel_2.png",
+      "actualRenderReviewed": true,
+      "sourceGeometryReviewed": true,
+      "status": "no_confirmed_issue",
+      "findings": [],
+      "sha256": "51f0a4ac753e04478fa545d96c3cbf2978f730caf973c84a53d5fef7bff4005b",
+      "triangles": 30984,
+      "size": [
+        0.9899999499320984,
+        0.9868481159210205,
+        0.9261747598648071
+      ]
+    },
+    {
+      "region": "compact",
+      "asset": "hotel_3",
+      "render": "art/blender-city/renders/compact/hotel_3.png",
+      "actualRenderReviewed": true,
+      "sourceGeometryReviewed": true,
+      "status": "no_confirmed_issue",
+      "findings": [],
+      "sha256": "57faeb9405073182d37cb518b079f0f0823083417ab958e82c1c1cc459323af0",
+      "triangles": 43160,
+      "size": [
+        0.9900000095367432,
+        1.7386856079101562,
+        0.9352141618728638
+      ]
+    },
+    {
+      "region": "compact",
+      "asset": "tower_1",
+      "render": "art/blender-city/renders/compact/tower_1.png",
+      "actualRenderReviewed": true,
+      "sourceGeometryReviewed": true,
+      "status": "no_confirmed_issue",
+      "findings": [],
+      "sha256": "6d185bfe047fea7120f88b26df2068b8e091ca73dc26fac769104d2fa4a2e27f",
+      "triangles": 23360,
+      "size": [
+        0.8171297311782837,
+        0.7799999713897705,
+        0.7087488174438477
+      ]
+    },
+    {
+      "region": "compact",
+      "asset": "tower_2",
+      "render": "art/blender-city/renders/compact/tower_2.png",
+      "actualRenderReviewed": true,
+      "sourceGeometryReviewed": true,
+      "status": "no_confirmed_issue",
+      "findings": [],
+      "sha256": "219b8e14f3e43b72eeb877b408e1cd11c75cb9df0c6f2e4647006e0a782ac1ae",
+      "triangles": 29576,
+      "size": [
+        0.8711728453636169,
+        1.159999966621399,
+        0.7858259677886963
+      ]
+    },
+    {
+      "region": "compact",
+      "asset": "tower_3",
+      "render": "art/blender-city/renders/compact/tower_3.png",
+      "actualRenderReviewed": true,
+      "sourceGeometryReviewed": true,
+      "status": "no_confirmed_issue",
+      "findings": [],
+      "sha256": "229e07535855a02163babfbfb97aa835bc5cdf00181a077ff9a9b952df44e917",
+      "triangles": 36144,
+      "size": [
+        0.9301708340644836,
+        1.7599999904632568,
+        0.9187881946563721
+      ]
+    },
+    {
+      "region": "compact",
+      "asset": "skyscraper_1",
+      "render": "art/blender-city/renders/compact/skyscraper_1.png",
+      "actualRenderReviewed": true,
+      "sourceGeometryReviewed": true,
+      "status": "no_confirmed_issue",
+      "findings": [],
+      "sha256": "c6269a172aa570d654c70cc03199799a01016b2a156a3b28ba965f28139751d8",
+      "triangles": 38084,
+      "size": [
+        2.2717831134796143,
+        0.8980821967124939,
+        1.0199999809265137
+      ]
+    },
+    {
+      "region": "compact",
+      "asset": "skyscraper_2",
+      "render": "art/blender-city/renders/compact/skyscraper_2.png",
+      "actualRenderReviewed": true,
+      "sourceGeometryReviewed": true,
+      "status": "no_confirmed_issue",
+      "findings": [],
+      "sha256": "0422c79688fb2c2be277e81a9609f25ba9f9fde08007c17bfcfbef64d750f5de",
+      "triangles": 54320,
+      "size": [
+        2.2030322551727295,
+        1.1945703029632568,
+        1.0199999809265137
+      ]
+    },
+    {
+      "region": "compact",
+      "asset": "skyscraper_3",
+      "render": "art/blender-city/renders/compact/skyscraper_3.png",
+      "actualRenderReviewed": true,
+      "sourceGeometryReviewed": true,
+      "status": "no_confirmed_issue",
+      "findings": [],
+      "sha256": "095ec7e44c193a6283be5a0c1d781be946602951b7ee4b56de30112eb7642d30",
+      "triangles": 66352,
+      "size": [
+        2.2481541633605957,
+        2.5999999046325684,
+        1.001571774482727
+      ]
+    },
+    {
+      "region": "compact",
+      "asset": "finance_1",
+      "render": "art/blender-city/renders/compact/finance_1.png",
+      "actualRenderReviewed": true,
+      "sourceGeometryReviewed": true,
+      "status": "no_confirmed_issue",
+      "findings": [],
+      "sha256": "eba918f1fadb70f0c38752d4e414194f22670f67c70c48553d59ddbdb257bbb0",
+      "triangles": 40212,
+      "size": [
+        2.2717831134796143,
+        0.8331829309463501,
+        1.0199999809265137
+      ]
+    },
+    {
+      "region": "compact",
+      "asset": "finance_2",
+      "render": "art/blender-city/renders/compact/finance_2.png",
+      "actualRenderReviewed": true,
+      "sourceGeometryReviewed": true,
+      "status": "no_confirmed_issue",
+      "findings": [],
+      "sha256": "a5cc8f2bf6cb028c57e14da6f934c8d0d5b1728dac43de9d97eb2b6e3b894233",
+      "triangles": 53188,
+      "size": [
+        2.221306562423706,
+        1.1410220861434937,
+        1.0199999809265137
+      ]
+    },
+    {
+      "region": "compact",
+      "asset": "finance_3",
+      "render": "art/blender-city/renders/compact/finance_3.png",
+      "actualRenderReviewed": true,
+      "sourceGeometryReviewed": true,
+      "status": "no_confirmed_issue",
+      "findings": [],
+      "sha256": "5c46eb34c38126d40f7c4f74aa151f2db268dacaabecebe05eea3967298841d5",
+      "triangles": 66500,
+      "size": [
+        2.2895185947418213,
+        2.4778664112091064,
+        1.0199999809265137
+      ]
+    },
+    {
+      "region": "compact",
+      "asset": "onsen_1",
+      "render": "art/blender-city/renders/compact/onsen_1.png",
+      "actualRenderReviewed": true,
+      "sourceGeometryReviewed": true,
+      "status": "no_confirmed_issue",
+      "findings": [],
+      "sha256": "abe2ce83ac0f27f1fc140a4e781e673b8e50730a4f63d9fc672be6ebd6d46fe8",
+      "triangles": 30170,
+      "size": [
+        2.059586524963379,
+        0.5125613212585449,
+        1.0199999809265137
+      ]
+    },
+    {
+      "region": "compact",
+      "asset": "onsen_2",
+      "render": "art/blender-city/renders/compact/onsen_2.png",
+      "actualRenderReviewed": true,
+      "sourceGeometryReviewed": true,
+      "status": "no_confirmed_issue",
+      "findings": [],
+      "sha256": "039ce5146d46be8a157b8bf7c3ffd2075b7d4c1a9276bc1d0d1a63c806df435e",
+      "triangles": 46666,
+      "size": [
+        1.9862394332885742,
+        0.7645641565322876,
+        1.0200001001358032
+      ]
+    },
+    {
+      "region": "compact",
+      "asset": "onsen_3",
+      "render": "art/blender-city/renders/compact/onsen_3.png",
+      "actualRenderReviewed": true,
+      "sourceGeometryReviewed": true,
+      "status": "no_confirmed_issue",
+      "findings": [],
+      "sha256": "696e2dd16d961e305c481c1e7c3772f6ebb4c6b0beb01aac1dfc7ade92ad3e8d",
+      "triangles": 66780,
+      "size": [
+        1.9610971212387085,
+        1.8876616954803467,
+        1.0199999809265137
+      ]
+    },
+    {
+      "region": "compact",
+      "asset": "civic_hall",
+      "render": "art/blender-city/renders/compact/civic_hall.png",
+      "actualRenderReviewed": true,
+      "sourceGeometryReviewed": true,
+      "status": "no_confirmed_issue",
+      "findings": [],
+      "sha256": "adfc2d67c627687a9c2040f609faa000ac778d3334f85ad0ae038685ab3b4caf",
+      "triangles": 27348,
+      "size": [
+        1.040000081062317,
+        1.3780595064163208,
+        0.9769749641418457
+      ]
+    },
+    {
+      "region": "compact",
+      "asset": "vault_bank",
+      "render": "art/blender-city/renders/compact/vault_bank.png",
+      "actualRenderReviewed": true,
+      "sourceGeometryReviewed": true,
+      "status": "no_confirmed_issue",
+      "findings": [],
+      "sha256": "87c8207445640ab99b90a6fb06931f44fc0259c0028ec170774776f497aa56c5",
+      "triangles": 14668,
+      "size": [
+        1.040000081062317,
+        0.8140608072280884,
+        0.882331132888794
+      ]
+    },
+    {
+      "region": "compact",
+      "asset": "builders_guild",
+      "render": "art/blender-city/renders/compact/builders_guild.png",
+      "actualRenderReviewed": true,
+      "sourceGeometryReviewed": true,
+      "status": "no_confirmed_issue",
+      "findings": [],
+      "sha256": "e3d1a41876bbf4820ad26f3c80e5115a1eecf6c4e1e61b6d8a11db3022318450",
+      "triangles": 20300,
+      "size": [
+        1.0399999618530273,
+        0.838895320892334,
+        0.8172985315322876
+      ]
+    },
+    {
+      "region": "compact",
+      "asset": "card_pavilion",
+      "render": "art/blender-city/renders/compact/card_pavilion.png",
+      "actualRenderReviewed": true,
+      "sourceGeometryReviewed": true,
+      "status": "repaired_and_final_render_reviewed",
+      "findings": [
+        "E5"
+      ],
+      "sha256": "fdba70bffb1e0d6819e160c329d800c38fcbec4985004867e0a25dfae14784e1",
+      "triangles": 14924,
+      "size": [
+        1.0399999618530273,
+        0.816996693611145,
+        0.8873885869979858
+      ],
+      "beforeSize": [
+        1.0399999618530273,
+        0.816996693611145,
+        0.8873885869979858
+      ],
+      "heightDelta": 0.0
+    },
+    {
+      "region": "compact",
+      "asset": "chance_wheel",
+      "render": "art/blender-city/renders/compact/chance_wheel.png",
+      "actualRenderReviewed": true,
+      "sourceGeometryReviewed": true,
+      "status": "no_confirmed_issue",
+      "findings": [],
+      "sha256": "6a2a2212c91f79ca1a4081510656ed0b5815b0957dcbe287771128a734e3f082",
+      "triangles": 15600,
+      "size": [
+        1.0399999618530273,
+        0.949153482913971,
+        0.8716357350349426
+      ]
+    },
+    {
+      "region": "compact",
+      "asset": "teleport_gate",
+      "render": "art/blender-city/renders/compact/teleport_gate.png",
+      "actualRenderReviewed": true,
+      "sourceGeometryReviewed": true,
+      "status": "no_confirmed_issue",
+      "findings": [],
+      "sha256": "9999728e73b594256ed1b002028deed95a1515e5e644b1d38b2ed1041ff27f22",
+      "triangles": 15416,
+      "size": [
+        1.040000081062317,
+        0.838931143283844,
+        0.8059101104736328
+      ]
+    },
+    {
+      "region": "compact",
+      "asset": "rush_station",
+      "render": "art/blender-city/renders/compact/rush_station.png",
+      "actualRenderReviewed": true,
+      "sourceGeometryReviewed": true,
+      "status": "no_confirmed_issue",
+      "findings": [],
+      "sha256": "f088326fa134a9c0d82ad816c30a67b35ae880243cb4082a0c818cff85c070ae",
+      "triangles": 14588,
+      "size": [
+        1.0399999618530273,
+        0.816996693611145,
+        0.8873885869979858
+      ]
+    },
+    {
+      "region": "compact",
+      "asset": "junction_hub",
+      "render": "art/blender-city/renders/compact/junction_hub.png",
+      "actualRenderReviewed": true,
+      "sourceGeometryReviewed": true,
+      "status": "repaired_and_final_render_reviewed",
+      "findings": [
+        "E4"
+      ],
+      "sha256": "97d80a1c862c40bd3ba5df117cd29c35dad7a80218517c54d6b0303f44b387c0",
+      "triangles": 14532,
+      "size": [
+        1.040000081062317,
+        0.7201710939407349,
+        0.7822205424308777
+      ],
+      "beforeSize": [
+        1.040000081062317,
+        0.7201710939407349,
+        0.7822205424308777
+      ],
+      "heightDelta": 0.0
+    },
+    {
+      "region": "alpine",
+      "asset": "villa_1",
+      "render": "art/blender-city/renders/alpine/villa_1.png",
+      "actualRenderReviewed": true,
+      "sourceGeometryReviewed": true,
+      "status": "repaired_and_final_render_reviewed",
+      "findings": [
+        "E1"
+      ],
+      "sha256": "9fcc931a0738fc5fcb5006ebd5d21c9bd99cb91d60034327c07c6a60abdfe124",
+      "triangles": 22528,
+      "size": [
+        0.9900000095367432,
+        0.7679662704467773,
+        0.8156956434249878
+      ],
+      "beforeSize": [
+        0.9900000095367432,
+        0.7679662704467773,
+        0.8156956434249878
+      ],
+      "heightDelta": 0.0
+    },
+    {
+      "region": "alpine",
+      "asset": "villa_2",
+      "render": "art/blender-city/renders/alpine/villa_2.png",
+      "actualRenderReviewed": true,
+      "sourceGeometryReviewed": true,
+      "status": "repaired_and_final_render_reviewed",
+      "findings": [
+        "E1"
+      ],
+      "sha256": "5b76c6c7ba0b93cd5cc87fe2d561c0bf1bf56d095615fb27b4ebe5524039a3b6",
+      "triangles": 32052,
+      "size": [
+        0.9900000095367432,
+        1.1481205224990845,
+        0.8859947323799133
+      ],
+      "beforeSize": [
+        0.9900000095367432,
+        1.1481205224990845,
+        0.8859947323799133
+      ],
+      "heightDelta": 0.0
+    },
+    {
+      "region": "alpine",
+      "asset": "villa_3",
+      "render": "art/blender-city/renders/alpine/villa_3.png",
+      "actualRenderReviewed": true,
+      "sourceGeometryReviewed": true,
+      "status": "repaired_and_final_render_reviewed",
+      "findings": [
+        "E1"
+      ],
+      "sha256": "ac8acc8054538b2a47dee9ee0cdb45ab1a4843ba643f6b27aeaa7e0d7126aaff",
+      "triangles": 43952,
+      "size": [
+        0.9348281621932983,
+        1.7599998712539673,
+        0.8712663054466248
+      ],
+      "beforeSize": [
+        0.9348281621932983,
+        1.7599998712539673,
+        0.8712663054466248
+      ],
+      "heightDelta": 0.0
+    },
+    {
+      "region": "alpine",
+      "asset": "shop_1",
+      "render": "art/blender-city/renders/alpine/shop_1.png",
+      "actualRenderReviewed": true,
+      "sourceGeometryReviewed": true,
+      "status": "repaired_and_final_render_reviewed",
+      "findings": [
+        "E1"
+      ],
+      "sha256": "dbda201b2b5f9016366f2c718457314bf399ddb5f864a7245c1292e060d8d341",
+      "triangles": 21082,
+      "size": [
+        0.9343834519386292,
+        0.7799999713897705,
+        0.8300938606262207
+      ],
+      "beforeSize": [
+        0.9343834519386292,
+        0.7799999713897705,
+        0.8300938606262207
+      ],
+      "heightDelta": 0.0
+    },
+    {
+      "region": "alpine",
+      "asset": "shop_2",
+      "render": "art/blender-city/renders/alpine/shop_2.png",
+      "actualRenderReviewed": true,
+      "sourceGeometryReviewed": true,
+      "status": "repaired_and_final_render_reviewed",
+      "findings": [
+        "E1"
+      ],
+      "sha256": "c2db03a68798be635793881878d227fd48a4a611a9ba40a0c647733ff6e9be50",
+      "triangles": 30682,
+      "size": [
+        0.9900000095367432,
+        1.1481205224990845,
+        0.8515227437019348
+      ],
+      "beforeSize": [
+        0.9900000095367432,
+        1.1481205224990845,
+        0.8515227437019348
+      ],
+      "heightDelta": 0.0
+    },
+    {
+      "region": "alpine",
+      "asset": "shop_3",
+      "render": "art/blender-city/renders/alpine/shop_3.png",
+      "actualRenderReviewed": true,
+      "sourceGeometryReviewed": true,
+      "status": "repaired_and_final_render_reviewed",
+      "findings": [
+        "E1",
+        "E3"
+      ],
+      "sha256": "5babf304e8e2c96ff2bfbd58f0f9bd7102645d2cb53398fee6da7e0c1e177f04",
+      "triangles": 35230,
+      "size": [
+        0.9171294569969177,
+        1.7599999904632568,
+        0.8306329250335693
+      ],
+      "beforeSize": [
+        0.9171294569969177,
+        1.7599999904632568,
+        0.8306329250335693
+      ],
+      "heightDelta": 0.0
+    },
+    {
+      "region": "alpine",
+      "asset": "hotel_1",
+      "render": "art/blender-city/renders/alpine/hotel_1.png",
+      "actualRenderReviewed": true,
+      "sourceGeometryReviewed": true,
+      "status": "repaired_and_final_render_reviewed",
+      "findings": [
+        "E1"
+      ],
+      "sha256": "590574deed65ea8d07298e1d94db1e5cf618a82aae25f1fd0b5205b90681456c",
+      "triangles": 26888,
+      "size": [
+        0.9900000095367432,
+        0.7630590796470642,
+        0.8985910415649414
+      ],
+      "beforeSize": [
+        0.9900000095367432,
+        0.7630590796470642,
+        0.8985910415649414
+      ],
+      "heightDelta": 0.0
+    },
+    {
+      "region": "alpine",
+      "asset": "hotel_2",
+      "render": "art/blender-city/renders/alpine/hotel_2.png",
+      "actualRenderReviewed": true,
+      "sourceGeometryReviewed": true,
+      "status": "repaired_and_final_render_reviewed",
+      "findings": [
+        "E1"
+      ],
+      "sha256": "d2e337a97a22bb7b6fc25c41d22e5f01451826846d90606345ccb279f6eee4ee",
+      "triangles": 33032,
+      "size": [
+        0.9900000095367432,
+        1.117308259010315,
+        0.980036735534668
+      ],
+      "beforeSize": [
+        0.9900000095367432,
+        1.117308259010315,
+        0.980036735534668
+      ],
+      "heightDelta": 0.0
+    },
+    {
+      "region": "alpine",
+      "asset": "hotel_3",
+      "render": "art/blender-city/renders/alpine/hotel_3.png",
+      "actualRenderReviewed": true,
+      "sourceGeometryReviewed": true,
+      "status": "repaired_and_final_render_reviewed",
+      "findings": [
+        "E1"
+      ],
+      "sha256": "60a8988ddc4d84ef7ba7159662a7f408098fc4fabe64afecc28b07a4e54aae08",
+      "triangles": 49796,
+      "size": [
+        0.9900000095367432,
+        1.7255667448043823,
+        0.9032540917396545
+      ],
+      "beforeSize": [
+        0.9900000095367432,
+        1.7255667448043823,
+        0.9032540917396545
+      ],
+      "heightDelta": 0.0
+    },
+    {
+      "region": "alpine",
+      "asset": "tower_1",
+      "render": "art/blender-city/renders/alpine/tower_1.png",
+      "actualRenderReviewed": true,
+      "sourceGeometryReviewed": true,
+      "status": "repaired_and_final_render_reviewed",
+      "findings": [
+        "E1"
+      ],
+      "sha256": "4a94b2450a1bfe043e66562635f3ce20e2ec40cfe6f466d019bc3c8bd9f5c4e1",
+      "triangles": 22352,
+      "size": [
+        0.8179896473884583,
+        0.7799999713897705,
+        0.8349436521530151
+      ],
+      "beforeSize": [
+        0.8179896473884583,
+        0.7799999713897705,
+        0.8349436521530151
+      ],
+      "heightDelta": 0.0
+    },
+    {
+      "region": "alpine",
+      "asset": "tower_2",
+      "render": "art/blender-city/renders/alpine/tower_2.png",
+      "actualRenderReviewed": true,
+      "sourceGeometryReviewed": true,
+      "status": "repaired_and_final_render_reviewed",
+      "findings": [
+        "E1",
+        "E2"
+      ],
+      "sha256": "e388b5c6a25d91c1fc797fd2ecd7cd82b4325d7536d0bf7a19eef4159089791b",
+      "triangles": 30828,
+      "size": [
+        0.8820269107818604,
+        1.159999966621399,
+        0.8885944485664368
+      ],
+      "beforeSize": [
+        0.8820269107818604,
+        1.159999966621399,
+        0.9411351680755615
+      ],
+      "heightDelta": 0.0
+    },
+    {
+      "region": "alpine",
+      "asset": "tower_3",
+      "render": "art/blender-city/renders/alpine/tower_3.png",
+      "actualRenderReviewed": true,
+      "sourceGeometryReviewed": true,
+      "status": "repaired_and_final_render_reviewed",
+      "findings": [
+        "E1"
+      ],
+      "sha256": "fdb3599dbcfd989723ada4a23919adfbd8ed98ed6f3c21ef5ca43ca67427b4f4",
+      "triangles": 32816,
+      "size": [
+        0.9382770657539368,
+        1.7599999904632568,
+        0.8449161052703857
+      ],
+      "beforeSize": [
+        0.9382770657539368,
+        1.7599999904632568,
+        0.8449161052703857
+      ],
+      "heightDelta": 0.0
+    },
+    {
+      "region": "alpine",
+      "asset": "skyscraper_1",
+      "render": "art/blender-city/renders/alpine/skyscraper_1.png",
+      "actualRenderReviewed": true,
+      "sourceGeometryReviewed": true,
+      "status": "repaired_and_final_render_reviewed",
+      "findings": [
+        "E1"
+      ],
+      "sha256": "5753a3a0e1510a886a06009d4dd9df831f3e27ff93b07c0301760f33895607b1",
+      "triangles": 48396,
+      "size": [
+        2.2717831134796143,
+        0.7208453416824341,
+        1.0199999809265137
+      ],
+      "beforeSize": [
+        2.2717831134796143,
+        0.7208453416824341,
+        1.0199999809265137
+      ],
+      "heightDelta": 0.0
+    },
+    {
+      "region": "alpine",
+      "asset": "skyscraper_2",
+      "render": "art/blender-city/renders/alpine/skyscraper_2.png",
+      "actualRenderReviewed": true,
+      "sourceGeometryReviewed": true,
+      "status": "repaired_and_final_render_reviewed",
+      "findings": [
+        "E1"
+      ],
+      "sha256": "0583a696f0c67c5b0ac052157841bfa7501e34bdfec299789d9a45c9881ab4c8",
+      "triangles": 61864,
+      "size": [
+        2.090914726257324,
+        0.970649778842926,
+        1.0199999809265137
+      ],
+      "beforeSize": [
+        2.090914726257324,
+        0.970649778842926,
+        1.0199999809265137
+      ],
+      "heightDelta": 0.0
+    },
+    {
+      "region": "alpine",
+      "asset": "skyscraper_3",
+      "render": "art/blender-city/renders/alpine/skyscraper_3.png",
+      "actualRenderReviewed": true,
+      "sourceGeometryReviewed": true,
+      "status": "repaired_and_final_render_reviewed",
+      "findings": [
+        "E1"
+      ],
+      "sha256": "c6690171edc88214b7955d3a6b7fa2859e70d11f834f6d4ca755b1b58d3f79bf",
+      "triangles": 79408,
+      "size": [
+        2.2389719486236572,
+        2.5999999046325684,
+        0.9577546119689941
+      ],
+      "beforeSize": [
+        2.2389719486236572,
+        2.5999999046325684,
+        0.9577546119689941
+      ],
+      "heightDelta": 0.0
+    },
+    {
+      "region": "alpine",
+      "asset": "finance_1",
+      "render": "art/blender-city/renders/alpine/finance_1.png",
+      "actualRenderReviewed": true,
+      "sourceGeometryReviewed": true,
+      "status": "repaired_and_final_render_reviewed",
+      "findings": [
+        "E1"
+      ],
+      "sha256": "80a943b00f1192122fa347dc861d7764f5ac518212adc12c667c2c2f02093c50",
+      "triangles": 52380,
+      "size": [
+        2.2717831134796143,
+        0.9815240502357483,
+        1.0199999809265137
+      ],
+      "beforeSize": [
+        2.2717831134796143,
+        0.9815240502357483,
+        1.0199999809265137
+      ],
+      "heightDelta": 0.0
+    },
+    {
+      "region": "alpine",
+      "asset": "finance_2",
+      "render": "art/blender-city/renders/alpine/finance_2.png",
+      "actualRenderReviewed": true,
+      "sourceGeometryReviewed": true,
+      "status": "repaired_and_final_render_reviewed",
+      "findings": [
+        "E1"
+      ],
+      "sha256": "1b492ec83d0f7278243e5ee49f0998614d954bd60788b752786f7a8f3be8db0c",
+      "triangles": 71180,
+      "size": [
+        2.2826616764068604,
+        1.2925770282745361,
+        1.0199999809265137
+      ],
+      "beforeSize": [
+        2.2826616764068604,
+        1.2925770282745361,
+        1.0199999809265137
+      ],
+      "heightDelta": 0.0
+    },
+    {
+      "region": "alpine",
+      "asset": "finance_3",
+      "render": "art/blender-city/renders/alpine/finance_3.png",
+      "actualRenderReviewed": true,
+      "sourceGeometryReviewed": true,
+      "status": "repaired_and_final_render_reviewed",
+      "findings": [
+        "E1"
+      ],
+      "sha256": "7bb554540b5573dce3e8a6b067ebf439bc3e4291833d643a39d19293600de476",
+      "triangles": 61332,
+      "size": [
+        2.3844847679138184,
+        2.572481870651245,
+        1.0199999809265137
+      ],
+      "beforeSize": [
+        2.3844847679138184,
+        2.572481870651245,
+        1.0199999809265137
+      ],
+      "heightDelta": 0.0
+    },
+    {
+      "region": "alpine",
+      "asset": "onsen_1",
+      "render": "art/blender-city/renders/alpine/onsen_1.png",
+      "actualRenderReviewed": true,
+      "sourceGeometryReviewed": true,
+      "status": "repaired_and_final_render_reviewed",
+      "findings": [
+        "E1"
+      ],
+      "sha256": "8bae9ac73b844f18e5a5c9d2feab614a53e47782d47c302faee8a404ad440718",
+      "triangles": 45526,
+      "size": [
+        2.059586524963379,
+        0.5125613212585449,
+        1.0199999809265137
+      ],
+      "beforeSize": [
+        2.059586524963379,
+        0.5125613212585449,
+        1.0199999809265137
+      ],
+      "heightDelta": 0.0
+    },
+    {
+      "region": "alpine",
+      "asset": "onsen_2",
+      "render": "art/blender-city/renders/alpine/onsen_2.png",
+      "actualRenderReviewed": true,
+      "sourceGeometryReviewed": true,
+      "status": "repaired_and_final_render_reviewed",
+      "findings": [
+        "E1"
+      ],
+      "sha256": "8afba0bdd4cfb8894330d94b27383a3cf4847c4d7f95222c61db30749fcaeed9",
+      "triangles": 57142,
+      "size": [
+        2.059586524963379,
+        0.7927976846694946,
+        1.0199999809265137
+      ],
+      "beforeSize": [
+        2.059586524963379,
+        0.7927976846694946,
+        1.0199999809265137
+      ],
+      "heightDelta": 0.0
+    },
+    {
+      "region": "alpine",
+      "asset": "onsen_3",
+      "render": "art/blender-city/renders/alpine/onsen_3.png",
+      "actualRenderReviewed": true,
+      "sourceGeometryReviewed": true,
+      "status": "repaired_and_final_render_reviewed",
+      "findings": [
+        "E1"
+      ],
+      "sha256": "aab0d495fd39036b35a2ff17169ea6ad77db60227858534af9b2ca10d5d2f006",
+      "triangles": 78064,
+      "size": [
+        2.0325655937194824,
+        1.888635516166687,
+        1.0199999809265137
+      ],
+      "beforeSize": [
+        2.0325655937194824,
+        1.888635516166687,
+        1.0199999809265137
+      ],
+      "heightDelta": 0.0
+    },
+    {
+      "region": "alpine",
+      "asset": "civic_hall",
+      "render": "art/blender-city/renders/alpine/civic_hall.png",
+      "actualRenderReviewed": true,
+      "sourceGeometryReviewed": true,
+      "status": "repaired_and_final_render_reviewed",
+      "findings": [
+        "E1"
+      ],
+      "sha256": "edc4e1d087260e502638aa8daf94272c10d61e178d883d50d138880e4cbfca4c",
+      "triangles": 30112,
+      "size": [
+        1.0399999618530273,
+        1.2807344198226929,
+        0.9567999839782715
+      ],
+      "beforeSize": [
+        1.0399999618530273,
+        1.2807344198226929,
+        0.9567999839782715
+      ],
+      "heightDelta": 0.0
+    },
+    {
+      "region": "alpine",
+      "asset": "vault_bank",
+      "render": "art/blender-city/renders/alpine/vault_bank.png",
+      "actualRenderReviewed": true,
+      "sourceGeometryReviewed": true,
+      "status": "repaired_and_final_render_reviewed",
+      "findings": [
+        "E1"
+      ],
+      "sha256": "7d63d4de04b0085a46ce8f26082f4c81831fca4f7fbf79faeedafc58f1fd8b72",
+      "triangles": 22816,
+      "size": [
+        1.0399999618530273,
+        0.9180983901023865,
+        0.8873885869979858
+      ],
+      "beforeSize": [
+        1.0399999618530273,
+        0.9180983901023865,
+        0.8873885869979858
+      ],
+      "heightDelta": 0.0
+    },
+    {
+      "region": "alpine",
+      "asset": "builders_guild",
+      "render": "art/blender-city/renders/alpine/builders_guild.png",
+      "actualRenderReviewed": true,
+      "sourceGeometryReviewed": true,
+      "status": "repaired_and_final_render_reviewed",
+      "findings": [
+        "E1"
+      ],
+      "sha256": "b96eaa7e565973950c695d9ba860c8e2126025ffb123e7108356bf9be89553b6",
+      "triangles": 30716,
+      "size": [
+        1.0399999618530273,
+        0.8922591805458069,
+        0.7916098833084106
+      ],
+      "beforeSize": [
+        1.0399999618530273,
+        0.8922591805458069,
+        0.7916098833084106
+      ],
+      "heightDelta": 0.0
+    },
+    {
+      "region": "alpine",
+      "asset": "card_pavilion",
+      "render": "art/blender-city/renders/alpine/card_pavilion.png",
+      "actualRenderReviewed": true,
+      "sourceGeometryReviewed": true,
+      "status": "repaired_and_final_render_reviewed",
+      "findings": [
+        "E1",
+        "E3",
+        "E5"
+      ],
+      "sha256": "f53234f60d7cb906e16425cf2c8d5e1e5fac4cf5c58cc7ac8c3c6a015dea56ff",
+      "triangles": 22908,
+      "size": [
+        1.0399999618530273,
+        0.9180983901023865,
+        0.8897967338562012
+      ],
+      "beforeSize": [
+        1.0399999618530273,
+        0.9180983901023865,
+        0.8897967338562012
+      ],
+      "heightDelta": 0.0
+    },
+    {
+      "region": "alpine",
+      "asset": "chance_wheel",
+      "render": "art/blender-city/renders/alpine/chance_wheel.png",
+      "actualRenderReviewed": true,
+      "sourceGeometryReviewed": true,
+      "status": "no_confirmed_issue",
+      "findings": [],
+      "sha256": "7ec84ea63459ddd68eac2b914636fd076c6bbd8f1bd4c4dfae177dbcd15bc2af",
+      "triangles": 18672,
+      "size": [
+        1.0399999618530273,
+        0.9233071208000183,
+        0.8420997858047485
+      ]
+    },
+    {
+      "region": "alpine",
+      "asset": "teleport_gate",
+      "render": "art/blender-city/renders/alpine/teleport_gate.png",
+      "actualRenderReviewed": true,
+      "sourceGeometryReviewed": true,
+      "status": "repaired_and_final_render_reviewed",
+      "findings": [
+        "E1"
+      ],
+      "sha256": "4f653f5d984ab7fddfb9acebe5787d8f8dab2629331d7c605837718f127fc0c5",
+      "triangles": 26132,
+      "size": [
+        1.040000081062317,
+        0.838931143283844,
+        0.8059101104736328
+      ],
+      "beforeSize": [
+        1.040000081062317,
+        0.838931143283844,
+        0.8059101104736328
+      ],
+      "heightDelta": 0.0
+    },
+    {
+      "region": "alpine",
+      "asset": "rush_station",
+      "render": "art/blender-city/renders/alpine/rush_station.png",
+      "actualRenderReviewed": true,
+      "sourceGeometryReviewed": true,
+      "status": "repaired_and_final_render_reviewed",
+      "findings": [
+        "E1"
+      ],
+      "sha256": "7488e6e0e794eb7e0dc8aa696cbeddf667f5bbf21bea07c168188586fcb5f2d1",
+      "triangles": 22736,
+      "size": [
+        1.0399999618530273,
+        0.9180983901023865,
+        0.8873885869979858
+      ],
+      "beforeSize": [
+        1.0399999618530273,
+        0.9180983901023865,
+        0.8873885869979858
+      ],
+      "heightDelta": 0.0
+    },
+    {
+      "region": "alpine",
+      "asset": "junction_hub",
+      "render": "art/blender-city/renders/alpine/junction_hub.png",
+      "actualRenderReviewed": true,
+      "sourceGeometryReviewed": true,
+      "status": "repaired_and_final_render_reviewed",
+      "findings": [
+        "E1",
+        "E4"
+      ],
+      "sha256": "de387ee7d24fa661e2f274ed500e05fabe4e05ccc56bea3242bf01158acc98f9",
+      "triangles": 21792,
+      "size": [
+        1.040000081062317,
+        0.8092908263206482,
+        0.7822205424308777
+      ],
+      "beforeSize": [
+        1.040000081062317,
+        0.8092908263206482,
+        0.7822205424308777
+      ],
+      "heightDelta": 0.0
+    },
+    {
+      "region": "alpine",
+      "asset": "alpine_windmill",
+      "render": "art/blender-city/renders/alpine/alpine_windmill.png",
+      "actualRenderReviewed": true,
+      "sourceGeometryReviewed": true,
+      "status": "repaired_and_final_render_reviewed",
+      "findings": [
+        "E1"
+      ],
+      "sha256": "e4143a708acd57675d0c1bdfe25b001854789d2ce6a4d79c203c09c7e4ca5265",
+      "triangles": 42294,
+      "size": [
+        2.8000001907348633,
+        2.9360506534576416,
+        1.9817054271697998
+      ],
+      "beforeSize": [
+        2.8000001907348633,
+        2.9360506534576416,
+        1.9817054271697998
+      ],
+      "heightDelta": 0.0
+    }
+  ],
+  "repairAssets": {
+    "compact": [
+      "shop_3",
+      "card_pavilion",
+      "junction_hub"
+    ],
+    "alpine": [
+      "villa_1",
+      "villa_2",
+      "villa_3",
+      "shop_1",
+      "shop_2",
+      "shop_3",
+      "hotel_1",
+      "hotel_2",
+      "hotel_3",
+      "tower_1",
+      "tower_2",
+      "tower_3",
+      "skyscraper_1",
+      "skyscraper_2",
+      "skyscraper_3",
+      "finance_1",
+      "finance_2",
+      "finance_3",
+      "onsen_1",
+      "onsen_2",
+      "onsen_3",
+      "civic_hall",
+      "vault_bank",
+      "builders_guild",
+      "card_pavilion",
+      "teleport_gate",
+      "rush_station",
+      "junction_hub",
+      "alpine_windmill"
+    ]
+  },
+  "repairCount": 32,
+  "untouchedCount": 27,
+  "validation": {
+    "renderBindingChecks": 59,
+    "constrainedOpenings": 342,
+    "maxAbsoluteHeightChange": 0.0,
+    "triangleBudgetsPassed": true,
+    "approvedCompactVilla2Rebuilt": false
+  },
+  "sourceEvidence": "work/facade-audit-eastern-source.json",
+  "beforeAfter": "work/facade-audit-eastern/before-after.jpg",
+  "nonIssues": [
+    "Alpine quoins are attached corner masonry, not detached fragments; retained.",
+    "Kyoto eave returns and the approved villa_2 foundation detailing are intentional structure; retained.",
+    "The dark line below the high onsen pool is the shadow of the real overlapping ledge/support slab; no floating gap, retained."
+  ],
+  "limitations": "Main source audit uses actual isometric final renders and construction coordinates. Game integration and browser acceptance are performed by the parent after publication.",
+  "publishPerformed": false,
+  "runtimeEdited": false,
+  "aiCalls": 0,
+  "farValidation": [
+    {
+      "asset": "compact/villa_3",
+      "triangles": 13440,
+      "bindingPassed": true
+    },
+    {
+      "asset": "compact/shop_2",
+      "triangles": 13440,
+      "bindingPassed": true
+    },
+    {
+      "asset": "compact/hotel_2",
+      "triangles": 13440,
+      "bindingPassed": true
+    },
+    {
+      "asset": "compact/tower_2",
+      "triangles": 13440,
+      "bindingPassed": true
+    },
+    {
+      "asset": "compact/junction_hub",
+      "triangles": 13440,
+      "bindingPassed": true
+    },
+    {
+      "asset": "alpine/villa_3",
+      "triangles": 17280,
+      "bindingPassed": true
+    },
+    {
+      "asset": "alpine/shop_2",
+      "triangles": 13440,
+      "bindingPassed": true
+    },
+    {
+      "asset": "alpine/hotel_2",
+      "triangles": 13440,
+      "bindingPassed": true
+    },
+    {
+      "asset": "alpine/tower_2",
+      "triangles": 13440,
+      "bindingPassed": true
+    },
+    {
+      "asset": "alpine/junction_hub",
+      "triangles": 13440,
+      "bindingPassed": true
+    }
+  ]
+}

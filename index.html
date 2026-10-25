@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="progression.css?v=20261023-1">
   <link rel="stylesheet" href="scene.css?v=20261025-items1">
   <link rel="stylesheet" href="drama.css?v=20261023-1">
-  <link rel="stylesheet" href="mobile.css?v=20261023-1">
+  <link rel="stylesheet" href="mobile.css?v=20261025-facade3">
   <link rel="stylesheet" href="card-bag.css?v=20261025-items1">
 </head>
 <body class="mode-start">
@@ -63,6 +63,7 @@
           <div id="city-labels" aria-label="城市地块"></div>
           <div id="board" class="board" aria-label="游戏地图"></div>
         </div>
+        <div id="board-choice-dock"></div>
         <section id="center-console" class="board-center" aria-label="回合操作">
           <div class="console-dice-row"><div id="center-dice" class="center-dice"><span id="center-dice-value">—</span></div><div class="console-copy"><p id="center-player-badge" class="center-badge">当前：玩家</p><h3 id="center-title">准备开始</h3><p id="center-description">掷骰移动，落地后结算。</p></div></div>
           <div class="center-actions"><span id="center-phase-badge" class="center-badge">等待掷骰</span><button type="button" class="card-bag-trigger" data-open-card-bag aria-haspopup="dialog" aria-expanded="false" aria-controls="card-bag-dialog">背包 <span data-card-count>0</span></button><button id="roll-btn" class="primary-btn center-roll-btn">掷骰子 <span>↗</span></button></div>
@@ -119,9 +120,9 @@
 
   <script src="drama.js?v=20261025-landscape3"></script>
   <script src="progression.js?v=20261025-landscape3"></script>
-  <script src="game.js?v=20261025-landmarks3"></script>
+  <script src="game.js?v=20261025-facade2"></script>
   <script src="card-bag.js?v=20261025-items1"></script>
-  <script src="presentation.js?v=20261025-items1"></script>
-  <script type="module" src="scene.js?v=20261025-landmarks3"></script>
+  <script src="presentation.js?v=20261025-facade2"></script>
+  <script type="module" src="scene.js?v=20261025-facade2"></script>
 </body>
 </html>

@@ -14,6 +14,25 @@
 .map-options{grid-template-columns:repeat(3,minmax(0,1fr))}
 .map-option:nth-child(n+4){background:#e6eee2;border-color:#b7cdbb}.map-option:nth-child(n+4).active{background:#2b6d64;color:#fff6df}
 
+/* Keep the board available while choosing a municipal purchase. */
+#board-choice-dock:empty{display:none}
+#board-choice-dock{flex:0 0 auto;min-height:0}
+.browsing-property .board-center,.browsing-property .mobile-tools,.browsing-property #showcase-controls{display:none}
+.event-overlay.board-choice{position:static;inset:auto;padding:0;background:transparent;backdrop-filter:none;pointer-events:auto}
+.event-overlay.board-choice .event-card{width:100%;max-height:40dvh;padding:14px 18px;border-radius:0;border:0;border-top:1px solid #d4dfcd;box-shadow:none;text-align:left}
+.event-overlay.board-choice .event-icon,.event-overlay.board-choice .panel-label{display:none}
+.event-overlay.board-choice h3{font-size:17px;margin:0 0 6px}
+.event-overlay.board-choice .event-message{font-size:12px;line-height:1.5}
+.event-overlay.board-choice .event-actions{margin-top:10px;padding-top:0;gap:8px}
+.property-target-picker{display:grid;gap:4px;flex:1 0 100%;min-width:0;font-size:11px;color:#557465}
+.property-target-picker select{width:100%;min-width:0;min-height:44px;padding:8px 10px;border:1px solid #b9cdbd;border-radius:10px;background:#f1f5eb;color:#284f40;font:inherit;font-size:13px}
+.event-overlay.board-choice .modal-btn{min-height:44px}
+.event-overlay.board-choice .event-actions:not(.property-target-actions){display:grid;grid-template-columns:1fr 1fr}
+.event-overlay.board-choice .event-actions:not(.property-target-actions) .modal-btn.danger{grid-column:1/-1}
+.browsing-property .scene-tile.is-purchase-target{background:#fff3cb;box-shadow:0 0 0 2px #c99329,0 4px 16px #744d2340}
+.browsing-property .scene-tile.is-purchase-target::before{content:'征用目标';font-size:9px;font-weight:700;color:#94630e;margin-bottom:5px}
+.browsing-property .city-atmosphere{display:none}
+
 @media(max-width:820px) and (orientation:portrait),(max-width:600px){
   html,body{height:100%;min-height:0;overscroll-behavior:none}
   body:not(.mode-start){overflow:hidden}

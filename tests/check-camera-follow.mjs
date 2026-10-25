@@ -164,7 +164,7 @@ for(const {map,board} of maps){
     snapshot.players.forEach(makePawn);cameraFocusReady=false;resize();update(snapshotData);
   `);
   assert.equal(f.run('pawnViews.has(snapshot.players.find(p=>!p.isAi).id)'),true,'the real player definition has a scene pawn');
-  const initial=f.position();f.run('changeCameraView(.2,0,1.15)');
+  const initial=f.position(),defaultView=f.run('({...cameraView})');f.run('changeCameraView(.2,0,1.15)');
   const yaw=f.run('cameraView.yaw');
   for(let step=0;step<5;step++){
     vm.runInContext('{const p=state.players.find(p=>!p.isAi);p.position=getMapConfig().navigation.next[p.position];state.animation.currentTile=p.position;}',gameplay);
@@ -205,6 +205,90 @@ for(const {map,board} of maps){
   assert.ok(f.run('Math.hypot(cameraFocus.x-pawnViews.get("human").group.position.x,cameraFocus.z-pawnViews.get("human").group.position.z)')<.37);
   assert.equal(f.run('cameraView.yaw'),yaw,'all turn transitions preserve manual orientation');
   assert.equal(f.run('cameraView.zoom'),1.15,'all turn transitions preserve manual zoom');
+
+  // Real presentation snapshots and production update() enter a temporary,
+  // movable full-board municipal view, then restore the player's local view.
+  let modalVisible=true;
+  f.context.document.getElementById=id=>id==='event-overlay'?{classList:{contains:key=>key==='visible'&&modalVisible}}:id==='drama-layer'?{hidden:true}:null;
+  const modeButton={dataset:{camera:'mode'},style:{},setAttribute(){}},resetButton={dataset:{camera:'reset'},style:{},setAttribute(){}},output={};
+  f.context.controls={querySelectorAll:selector=>selector==='button'?[modeButton,resetButton]:[],querySelector:selector=>selector==='output'?output:selector==='[data-camera="mode"]'?modeButton:selector==='[data-camera="reset"]'?resetButton:null};
+  f.run('cameraControls=controls;wrap.parentElement={classList:{add(){},remove(){}},setPointerCapture(){},hasPointerCapture(){return false;}}');
+  const saved=JSON.parse(f.run('JSON.stringify(cameraView)'));
+  vm.runInContext(`{const props=state.board.filter(t=>t.lot&&!t.isLargeSecondary);state.modal={visible:true,boardTargets:[props.find(t=>!t.lot.isLarge).index,props.find(t=>t.lot.isLarge).index]};}`,gameplay);
+  f.context.snapshotData=data();f.run('update(snapshotData)');
+  assert.equal(f.run('isLocalCamera()'),false,`${map.id}: municipal choice fits the full board`);
+  assert.equal(f.run('canMoveCamera()'),true,'property choice permits orbit and zoom while its panel is visible');
+  assert.equal(f.run('cameraView.zoom'),1);assert.equal(f.run('cameraView.yaw'),defaultView.yaw);assert.equal(f.run('cameraView.elevation'),defaultView.elevation);
+  assert.equal(modeButton.hidden,true,'local/overview switch is hidden during board-wide selection');
+  assert.equal(resetButton.disabled,false);
+  const selections=[];
+  f.context.CustomEvent=class{constructor(type,options){this.type=type;this.detail=options.detail;}};
+  f.context.window.dispatchEvent=event=>selections.push(event);
+  f.run('selectSceneTile(snapshot.targetSelection.indices[0])');
+  assert.equal(selections.length,1);assert.equal(selections[0].type,'city:select');
+  const selectedBefore=f.run('selectedIndex');
+  for(const invalid of [-1,9999,0,board.find(tile=>tile.lot&&!tile.isLargeSecondary&&!data().targetSelection.indices.includes(tile.index)).index]){
+    f.context.invalidIndex=invalid;f.run('selectSceneTile(invalidIndex)');
+    assert.equal(f.run('selectedIndex'),selectedBefore,'scene rejects an ineligible step before changing highlight');
+    assert.equal(selections.length,1,'scene never dispatches an ineligible property target');
+  }
+  f.run('selectSceneTile(snapshot.board.find(tile=>tile.isLargeSecondary&&snapshot.targetSelection.indices.includes(tile.largePrimaryIndex)).index)');
+  assert.equal(selections.length,2);
+  assert.equal(selections[1].detail.index,data().targetSelection.indices[1],'scene normalizes the secondary half before dispatch');
+  assert.equal(f.run('selectedIndex'),data().targetSelection.indices[1],'selection highlight uses the primary land parcel');
+  f.context.pointerTarget={closest:()=>true};
+  f.run(`cameraPointerDown({target:pointerTarget,pointerType:'touch',pointerId:101,clientX:100,clientY:100,preventDefault(){}});
+    cameraPointerMove({pointerId:101,clientX:130,clientY:114,preventDefault(){}});`);
+  assert.notEqual(f.run('cameraView.yaw'),defaultView.yaw,'touch dragging rotates the visible choice board');
+  f.run(`cameraPointerDown({target:pointerTarget,pointerType:'touch',pointerId:102,clientX:210,clientY:114,preventDefault(){}});
+    cameraPointerMove({pointerId:102,clientX:250,clientY:114,preventDefault(){}});
+    cameraPointerUp({pointerId:102});cameraPointerUp({pointerId:101});`);
+  assert.ok(f.run('cameraView.zoom')>1,'two-finger pinch zoom works through a property modal');
+  const browsing=JSON.parse(f.run('JSON.stringify(cameraView)'));
+  vm.runInContext('selected=state.modal.boardTargets[1];',gameplay);
+  f.context.snapshotData=data();f.run('update(snapshotData)');
+  assert.deepEqual(JSON.parse(f.run('JSON.stringify(cameraView)')),browsing,'changing the preview preserves manual browsing orientation and zoom');
+  function checkSuspendedHome(stage){
+    const remembered=f.run('propertyCameraView'),selected=f.run('selectedIndex');
+    f.run(`cameraPointerDown({target:pointerTarget,pointerType:'touch',pointerId:202,clientX:80,clientY:90,preventDefault(){}})`);
+    assert.equal(f.run('cameraGesture.pointers.size'),1);
+    vm.runInContext('var resumedMunicipalModal=state.modal;state.modal={visible:true,boardContext:{indices:resumedMunicipalModal.boardTargets,selectedTarget:selected}};',gameplay);
+    f.context.snapshotData=data();f.run('update(snapshotData)');
+    assert.equal(f.run('snapshot.targetSelection.suspended'),true,`${map.id} ${stage}: real snapshot marks the temporary home confirmation suspended`);
+    assert.equal(f.run('propertyCameraView'),remembered,'home confirmation never replaces or releases the saved camera');
+    assert.deepEqual(JSON.parse(f.run('JSON.stringify(cameraView)')),browsing,'opening home does not reset the browsing angle/zoom');
+    assert.equal(f.run('selectedIndex'),selected);
+    assert.equal(f.run('canSelectScene()'),false,'home confirmation blocks the actual scene-click entry gate');
+    assert.equal(f.run('canMoveCamera()'),false);
+    assert.equal(f.run('cameraGesture.pointers.size'),0,'home confirmation cancels a held touch without changing the view');
+    assert.equal(resetButton.disabled,true);
+    assert.equal(f.run('changeCameraView(.4,.1,1.4)'),false,'buttons/wheel cannot alter the suspended view');
+    f.run(`cameraPointerDown({target:pointerTarget,pointerType:'touch',pointerId:203,clientX:80,clientY:90,preventDefault(){}});
+      cameraPointerMove({pointerId:203,clientX:140,clientY:130,preventDefault(){}});`);
+    assert.equal(f.run('cameraGesture.pointers.size'),0,'new touch input is rejected while suspended');
+    assert.deepEqual(JSON.parse(f.run('JSON.stringify(cameraView)')),browsing);
+    vm.runInContext('state.modal=resumedMunicipalModal;',gameplay);
+    f.context.snapshotData=data();f.run('update(snapshotData)');
+    assert.equal(f.run('propertyCameraView'),remembered);
+    assert.deepEqual(JSON.parse(f.run('JSON.stringify(cameraView)')),browsing,'continue game resumes the same browsing view');
+    assert.equal(f.run('selectedIndex'),selected);assert.equal(f.run('canSelectScene()'),true);assert.equal(f.run('canMoveCamera()'),true);
+    assert.equal(resetButton.disabled,false);
+  }
+  checkSuspendedHome('target picker');
+  vm.runInContext('state.modal.boardTargets=[selected];',gameplay);
+  f.context.snapshotData=data();f.run('update(snapshotData)');
+  assert.deepEqual(JSON.parse(f.run('JSON.stringify(cameraView)')),browsing,'the confirmation quote preserves the same browsing view');
+  checkSuspendedHome('quote');
+  modalVisible=false;vm.runInContext('state.modal={visible:false};',gameplay);
+  f.context.snapshotData=data();f.run('update(snapshotData)');
+  assert.deepEqual(JSON.parse(f.run('JSON.stringify(cameraView)')),saved,'leaving the municipal flow restores the exact saved view');
+  assert.equal(f.run('isLocalCamera()'),true);assert.equal(modeButton.hidden,false);
+  assert.equal(f.run('propertyCameraView'),null);
+  modalVisible=true;
+  assert.equal(f.run('canMoveCamera()'),false,'ordinary blocking modal cannot move the camera');
+  f.run('snapshot.targetSelection={kind:"dice",indices:[1]}');
+  assert.equal(f.run('canSelectScene()'),true,'ordinary target picking still receives board clicks');
+  assert.equal(f.run('canMoveCamera()'),false,'non-property target modal does not accidentally gain orbit gestures');
 }
 
 let checkedFrames=0;
@@ -225,4 +309,4 @@ for(const [width,height] of [[390,620],[360,560],[740,380]])for(const {map,board
     from=to;
   }
 }
-console.log(`PASS acting-player camera, smooth round-trip turn changes, gesture release, overview, reduced motion, ${maps.length} real snapshot/update/tick paths and ${checkedFrames} route frames at normal/maximum zoom`);
+console.log(`PASS acting-player camera, smooth round-trip turn changes, gesture release, overview, reduced motion, ${maps.length} municipal modal orbit/pinch/save/restore flows with suspended home input locks at both stages, ${maps.length} real snapshot/update/tick paths and ${checkedFrames} route frames at normal/maximum zoom`);

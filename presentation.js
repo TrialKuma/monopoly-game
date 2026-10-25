@@ -65,7 +65,7 @@
     return {sessionId:state.sessionId,mapId:state.currentMapId,board:state.board,players:state.players,
       currentPlayerId:currentPlayer().id,phase:state.phase,animation:state.animation,lastDice:state.lastDice,
       bankPool:state.bankPool,gameOver:state.gameOver,grid:map.grid,navigation:map.navigation,
-      selectedTile:selected,targetSelection:state.targetSelection,districtColors:map.districtColors,
+      selectedTile:selected,targetSelection:state.modal?.visible && state.modal.boardTargets?.length ? {kind:'property',indices:state.modal.boardTargets} : state.modal?.visible && state.modal.boardContext ? {kind:'property',indices:state.modal.boardContext.indices,suspended:true} : state.targetSelection,districtColors:map.districtColors,
       rents:Object.fromEntries(state.board.filter(t=>t.lot).map(t=>[t.index,rentFor(t).total]))};
   }
   function syncCityScene() {
@@ -287,7 +287,7 @@
       if(isSessionActive(sid)){previewBusy=false;state.busy=type!=='draw';state.phase=type==='draw'?'await_roll':'locked';state.statusTitle=type==='draw'?'卡牌已入包':'演示结束';state.statusDescription=type==='draw'?'可从背包选择使用，也可继续保留。':'选择其他事件，或开始正式对局。';render();if(type==='draw')window.GameCardBag?.open();}
     }
   }
-  window.GamePresentation={update,updateCash,present,onReset,celebrate,rentFor,syncCityScene,selectCurrentTile:()=>{if(state.players)selectTile(currentPlayer().position);}};
+  window.GamePresentation={update,updateCash,present,onReset,celebrate,rentFor,syncCityScene,selectTile,selectCurrentTile:()=>{if(state.players)selectTile(currentPlayer().position);}};
   function inspectBuilding(event) {
     const button=event.target.closest('[data-inspect-building]');
     if(button&&!button.disabled&&(!state.busy||preview))window.CityScene?.inspectTile(Number(button.dataset.inspectBuilding),button.dataset.inspectLevel?Number(button.dataset.inspectLevel):undefined);
@@ -295,7 +295,7 @@
   inspector.addEventListener('click',inspectBuilding);
   propertyPreview.addEventListener('click',inspectBuilding);
   window.addEventListener('city:ready',()=>{syncCityScene();render();});
-  window.addEventListener('city:select',e=>{selectTile(e.detail.index);if(!state.modal.visible&&!state.busy)openMobilePanel('property');});
+  window.addEventListener('city:select',e=>{if(state.modal.visible&&state.modal.boardTargets?.length){previewMunicipalTarget(e.detail.index);return;}selectTile(e.detail.index);if(!state.modal.visible&&!state.busy)openMobilePanel('property');});
   document.querySelector('.mobile-tools').addEventListener('click',e=>{
     const button=e.target.closest('[data-mobile-panel]');if(!button)return;
     if(button.dataset.mobilePanel==='property'&&selected==null)selectTile(currentPlayer().position);

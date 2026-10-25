@@ -17,7 +17,7 @@ const CLASSIC_ROUTE_POSITIONS = [
 
 const CLASSIC_TILE_NAMES = [
   "市政府", "晨曦街", "花园里", "曦园", "银行金库",
-  "金融中心", "金融中心", "摩天楼", "摩天楼",
+  "环城商会", "环城商会", "皇家大酒店", "皇家大酒店",
   "命运转盘", "百味町", "湖畔街", "瀚海阁", "机会广场",
   "温泉庄园", "温泉庄园", "枫叶路", "城建局",
   "中央区", "艺文里", "翻牌驿站", "日落湾",
@@ -131,7 +131,7 @@ const EXPANSION_ROUTE_POSITIONS = [
 
 const EXPANSION_TILE_NAMES = [
   "市政府", "晶藤街", "花园里", "清贝里", "银行金库", "开发局",
-  "新月里", "摩天大楼", "摩天大楼", "望月庭", "翻牌驿站", "百味町",
+  "新月里", "都会大酒店", "都会大酒店", "望月庭", "翻牌驿站", "百味町",
   "城市快线",
   "烟火巷", "机运广场", "食光里", "传送港", "暮岚街", "港湾路", "命运转盘",
   "潮畔街", "云栖区", "星湾广场", "星港里", "星河庭", "天际里", "新月温泉", "新月温泉",
@@ -456,8 +456,8 @@ const EVENT_ICON_MAP = {
   "卡牌效果": { emoji: "🃏", cls: "event-card" },
   "路线选择": { emoji: "🧭", cls: "event-special" },
   "冲刺站": { emoji: "🚀", cls: "event-special" },
-  "金融中心": { emoji: "📈", cls: "event-special" },
-  "摩天楼": { emoji: "🏙️", cls: "event-special" },
+  "商会收益": { emoji: "📈", cls: "event-special" },
+  "酒店收益": { emoji: "🏨", cls: "event-special" },
   "温泉休息": { emoji: "♨️", cls: "event-info" },
   "温泉庄园": { emoji: "♨️", cls: "event-info" },
   "破产救助": { emoji: "🆘", cls: "event-toll" },
@@ -1565,12 +1565,24 @@ function renderModal() {
   if (eventOverlayEl.dataset.modalKey === nextKey) return;
   eventOverlayEl.dataset.modalKey = nextKey;
   eventOverlayEl.classList.toggle("visible", m.visible);
+  const boardChoice = Boolean(m.visible && m.boardTargets?.length);
+  document.body.classList.toggle("browsing-property", boardChoice);
+  eventOverlayEl.classList.toggle("board-choice", boardChoice);
+  const dock = boardChoice ? document.getElementById("board-choice-dock") : document.body;
+  if (dock && eventOverlayEl.parentElement !== dock) dock.appendChild(eventOverlayEl);
   eventLabelEl.textContent = m.label || "行动提示";
   eventTitleEl.textContent = m.title || "";
   eventMessageEl.textContent = m.message || "";
   const ico = EVENT_ICON_MAP[m.label] || { emoji: "📋", cls: "event-info" };
   eventIconWrapEl.innerHTML = m.visible ? `<div class="event-icon ${ico.cls}">${ico.emoji}</div>` : "";
-  if (m.cardDraw) {
+  if (boardChoice && m.buttons.some(b => b.id.startsWith("seize_"))) {
+    eventActionsEl.className = "event-actions property-target-actions";
+    const options = m.buttons.filter(b => b.id.startsWith("seize_")).map(b => {
+      const index = Number(b.id.slice(6)), tile = state.board[index];
+      return `<option value="${index}"${index === m.selectedTarget ? " selected" : ""}>${municipalTargetLabel(tile)} · Lv.${tile.lot.level} · ${formatMoney(getCityTakeoverQuote(tile.lot).purchasePrice)}</option>`;
+    }).join("");
+    eventActionsEl.innerHTML = `<label class="property-target-picker">征用目标<select data-city-target aria-label="征用目标">${options}</select></label><button class="modal-btn secondary" data-action="skip">跳过</button><button class="modal-btn primary" data-action="seize_${m.selectedTarget}">选择这处地产</button>`;
+  } else if (m.cardDraw) {
     eventActionsEl.className = "event-actions card-draw-actions";
     eventActionsEl.innerHTML = m.buttons
       .map((b) => `<button class="modal-btn ${b.variant || "ghost"}" data-action="${b.id}">${b.label}</button>`).join("");
@@ -1825,14 +1837,14 @@ async function resolveStartTakeover(player, sid) {
   } else {
     const buttons = oppTiles.map((tile) => ({
       id: `seize_${tile.index}`,
-      label: `${tile.name}（Lv.${tile.lot.level}）接手 ${formatMoney(getCityTakeoverQuote(tile.lot).purchasePrice)}`,
+      label: `${municipalTargetLabel(tile)}（Lv.${tile.lot.level}）接手 ${formatMoney(getCityTakeoverQuote(tile.lot).purchasePrice)}`,
       variant: "secondary",
     }));
     buttons.push({ id: "skip", label: "跳过（不征用）", variant: "secondary" });
     const selection = await showModal({
-      label: "市政府征用", title: "📜 市政府征用令 — 选择目标",
-      message: "选对手一处地产：可按原地价加价 25% 连楼接手，或免费征用使其变为无主。建筑等级都会保留。",
-      buttons,
+      label: "市政府征用", title: "选择征用地产",
+      message: "点选地图上的对手地产，或从列表选择。可拖动旋转、缩放查看位置。",
+      buttons, boardTargets: oppTiles.map(tile => tile.index),
     });
     if (!isSessionActive(sid)) return;
     if (selection === "skip" || selection === "cancel") {
@@ -1850,9 +1862,9 @@ async function resolveStartTakeover(player, sid) {
     choices.push({ id: "release", label: "只征用 · 不花钱，地产变无主", variant: "danger" });
     choices.push({ id: "skip", label: "放弃这次征用", variant: "secondary" });
     action = await showModal({
-      label: "市政府征用", title: `${target.name}（Lv.${target.lot.level}）— 怎么处理？`,
-      message: `接手总价 ${formatMoney(quote.purchasePrice)}（原地价 × 125%）：${opp.name} 获得 ${formatMoney(quote.refund)} 补偿，另有 ${formatMoney(quote.premium)} 进入公共金库。产权立即归你，建筑保留。\n只征用则由市政府退还原地价，房产变为无主。\n${canAcquire ? `你现有 ${formatMoney(player.cash)}，接手后剩余 ${formatMoney(player.cash - quote.purchasePrice)}。` : `你现有 ${formatMoney(player.cash)}，还差 ${formatMoney(quote.purchasePrice - player.cash)} 才能接手；仍可免费征用。`}`,
-      buttons: choices,
+      label: "市政府征用", title: `${municipalTargetLabel(target)} · Lv.${target.lot.level}`,
+      message: `接手 ${formatMoney(quote.purchasePrice)}：对手获 ${formatMoney(quote.refund)}，金库获 ${formatMoney(quote.premium)}。建筑等级保留。\n只征用：不花钱，地产变无主。\n${canAcquire ? `现有 ${formatMoney(player.cash)}，接手后剩余 ${formatMoney(player.cash - quote.purchasePrice)}。` : `现有 ${formatMoney(player.cash)}，还差 ${formatMoney(quote.purchasePrice - player.cash)}；仍可免费征用。`}`,
+      buttons: choices, boardTargets: [target.index], selectedTarget: target.index,
     });
   }
 
@@ -1909,7 +1921,7 @@ async function resolveLargeLotEffect(player, tile, sid) {
     pushLog(`${player.name} 的 ${lotName}（Lv.${lot.level}）带来额外收益 ${formatMoney(bonus)}！`);
     render();
     await showContinueModal({
-      label: "金融中心",
+      label: "商会收益",
       title: `📈 ${lotName} 运转！`,
       message: `Lv.${lot.level} 建筑额外收益 ${formatMoney(bonus)} 入账！${lot.level === 3 ? "\n建筑已满级，无需再升级。" : ""}`,
     });
@@ -1917,12 +1929,12 @@ async function resolveLargeLotEffect(player, tile, sid) {
     const bonusTable = [0, 50, 100, 170];
     const bonus = bonusTable[lot.level];
     updatePlayerCash(player, bonus, false);
-    pushLog(`${player.name} 的 ${lotName}（Lv.${lot.level}）带来商务收益 ${formatMoney(bonus)}！`);
+    pushLog(`${player.name} 的 ${lotName}（Lv.${lot.level}）带来酒店收益 ${formatMoney(bonus)}！`);
     render();
     await showContinueModal({
-      label: "摩天楼",
-      title: `🏙️ ${lotName} 商务收益！`,
-      message: `Lv.${lot.level} 商务运营收益 ${formatMoney(bonus)} 入账！${lot.level === 3 ? "\n建筑已满级，无需再升级。" : ""}`,
+      label: "酒店收益",
+      title: `🏨 ${lotName} 经营收益！`,
+      message: `Lv.${lot.level} 酒店经营收益 ${formatMoney(bonus)} 入账！${lot.level === 3 ? "\n建筑已满级，无需再升级。" : ""}`,
     });
   } else if (lot.effectId === "hot_spring_rest" && lot.ownerId && lot.ownerId !== player.id) {
     // Relief has already scheduled one recovery action and takes precedence.
@@ -3039,10 +3051,29 @@ function getWinnerText() {
   return `胜者：${r[0].name}，最终现金 ${formatMoney(r[0].cash)}。`;
 }
 
-function showModal({ label = "行动提示", title, message, buttons, cardDraw = false }) {
+function municipalTargetLabel(tile) {
+  const steps = state.board.filter(t => t.index === tile.index || t.isLargeSecondary && t.largePrimaryIndex === tile.index).map(t => t.index + 1);
+  return `第 ${steps.join("、")} 格 · ${tile.name}`;
+}
+
+function previewMunicipalTarget(index) {
+  const m = state.modal;
+  if (!m.visible || !m.boardTargets?.length) return false;
+  let tile = state.board[index];
+  if (tile?.isLargeSecondary) tile = state.board[tile.largePrimaryIndex];
+  if (!tile || !m.boardTargets.includes(tile.index)) return false;
+  m.selectedTarget = tile.index;
+  window.GamePresentation?.selectTile(tile.index);
+  render();
+  return true;
+}
+
+function showModal({ label = "行动提示", title, message, buttons, cardDraw = false, boardTargets = null, selectedTarget = null, boardContext = null }) {
   if (modalResolver) { modalResolver("cancel"); modalResolver = null; }
-  state.modal = { visible: true, label, title, message, buttons, cardDraw };
-  window.GamePresentation?.selectCurrentTile();
+  state.modal = { visible: true, label, title, message, buttons, cardDraw, boardTargets, boardContext, selectedTarget: selectedTarget ?? boardTargets?.[0] ?? null };
+  if (boardTargets?.length) window.GamePresentation?.selectTile(state.modal.selectedTarget);
+  else if (boardContext) window.GamePresentation?.selectTile(boardContext.selectedTarget);
+  else window.GamePresentation?.selectCurrentTile();
   state.phase = "await_modal"; state.busy = false; render();
   return new Promise((r) => { modalResolver = r; });
 }
@@ -3059,6 +3090,7 @@ async function returnToStartScreen() {
     const action = await showModal({
       label: "返回首页", title: "结束本局并返回首页？",
       message: "返回首页会结束本局，门票不退，未结算的金币和收藏品不会带回。",
+      boardContext: previous.modal.boardTargets?.length ? {indices:previous.modal.boardTargets,selectedTarget:previous.modal.selectedTarget} : null,
       buttons: [
         { id: "cancel", label: "继续本局", variant: "ghost" },
         { id: "home", label: "返回首页", variant: "primary" },
@@ -3073,6 +3105,7 @@ async function returnToStartScreen() {
     modalResolver = previous.resolver;
     if (action !== "home") {
       state.modal = previous.modal; state.phase = previous.phase; state.busy = previous.busy;
+      if (previous.modal.boardTargets?.length) window.GamePresentation?.selectTile(previous.modal.selectedTarget);
       render();
       return;
     }
@@ -3087,9 +3120,13 @@ async function showContinueModal(cfg) {
 }
 
 function hideModal(shouldResolve = true, actionId = "cancel") {
+  const choosingProperty = state.modal.boardTargets?.length && /^seize_\d+$/.test(actionId) || state.modal.boardContext;
   state.modal = defaultModal();
   if (shouldResolve && modalResolver) { const r = modalResolver; modalResolver = null; r(actionId); }
-  render();
+  // Keep the browsing angle across the target picker and its quote panel.
+  // The next choice is opened by the resolved promise before this redraw.
+  if (choosingProperty) Promise.resolve().then(render);
+  else render();
 }
 
 function renderDiceFaceSvg(v) {
@@ -3106,7 +3143,7 @@ function createRegionalBuildingSprite(asset, label) {
   const candidate = new URLSearchParams(location.search).get('artStage') === 'candidate';
   const directory = candidate ? 'art/full-ai-city/packed/previews' : 'assets/buildings/regions';
   const mapId = state?.currentMapId ?? selectedMapId;
-  return `<img class="building-sprite" src="${directory}/${mapId}/${asset}.png?v=20261025-landmarks3" alt="${label}" loading="lazy" decoding="async" draggable="false">`;
+  return `<img class="building-sprite" src="${directory}/${mapId}/${asset}.png?v=20261025-facade2" alt="${label}" loading="lazy" decoding="async" draggable="false">`;
 }
 
 function createStartSvg() {
@@ -3267,6 +3304,13 @@ boardEl.addEventListener("click", (e) => {
 eventActionsEl.addEventListener("click", (e) => {
   const btn = e.target.closest("button[data-action]");
   if (btn) hideModal(true, btn.dataset.action);
+});
+eventActionsEl.addEventListener("change", (e) => {
+  if (e.target.matches("[data-city-target]")) {
+    const hadFocus = document.activeElement === e.target;
+    previewMunicipalTarget(Number(e.target.value));
+    if (hadFocus) eventActionsEl.querySelector("[data-city-target]")?.focus({preventScroll:true});
+  }
 });
 soundToggleBtn?.addEventListener("click", () => {
   const nextEnabled = !soundState.enabled;

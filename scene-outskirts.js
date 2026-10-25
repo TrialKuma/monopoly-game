@@ -1,11 +1,11 @@
-import { loadSharedModelAsset, disposeSharedModelAssets, regionalSceneryDirectory } from './scene-model-cache.js?v=20261025-landmarks3';
+import { loadSharedModelAsset, disposeSharedModelAssets, regionalSceneryDirectory } from './scene-model-cache.js?v=20261025-facade2';
 import { createRegionalSurroundings, fillRegionalScenicBuildings } from './scene-regional-parks.js?v=20261025-terrain3';
 import { batchGardenBuilding, instanceGardenBuildings } from './scene-garden-kit.js?v=20261025-terrain3';
 
 // Regional architecture is shared by all scenic copies. The selected map owns
 // only its merged placement geometry, never the GLTF cache's materials/textures.
 function loadBundle(file){
-  return loadSharedModelAsset(file,{version:file==='city-kit.glb'?'20260911-12':'20261025-landmarks3'});
+  return loadSharedModelAsset(file,{version:file==='city-kit.glb'?'20260911-12':'20261025-facade2'});
 }
 export function createCityOutskirts({THREE,world,boardBounds,mapId='classic',requestRender=()=>{},loadSceneryBundle=loadBundle}){
   const root=new THREE.Group();root.name='city_outskirts';root.userData.cosmetic=true;world.add(root);

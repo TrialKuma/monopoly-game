@@ -356,39 +356,49 @@ def dome(b,x,y,z,r,h,region='classic',glass=False):
     b.sphere((x,y,z+h+.12),(.045,.045,.055),'gold',12,6)
 
 
-def rounded_tower(b,x,y,z,r,h,floors,region='classic',roof=True,facings=(0,PI/2,PI,PI*1.5),window_height=None):
+def rounded_tower(b,x,y,z,r,h,floors,region='classic',roof=True,facings=(0,PI/2,PI,PI*1.5),window_height=None,window_width=.32,window_offset=.19,skip_windows=()):
     b.cylinder((x,y,z+h/2),r,h,'wall',32)
     for j in range(floors):
         bottom=z+j*h/floors
         b.cylinder((x,y,bottom+.03),r+.045,.065,'trim',32)
         for a in facings:
-            with b.at((x,y,0),a):pane(b,0,-r-.008,bottom+.19,.32,min(.60,h/floors-.28) if window_height is None else window_height,True,False)
+            if (j,a) in skip_windows:continue
+            with b.at((x,y,0),a):pane(b,0,-r-.008,bottom+window_offset,window_width,min(.60,h/floors-.28) if window_height is None else window_height,True,False)
     b.cylinder((x,y,z+h-.025),r+.055,.09,'trim',32)
     if roof:dome(b,x,y,z+h+.04,r+.10,.47 if region=='classic' else .32,region)
 
 
-def shell(b,w,d,floors,region,front='normal',balconies=False,columns=2,offset=0,sparse=False,hidden=(),omit_front=(),storey=1.0):
+def shell(b,w,d,floors,region,front='normal',balconies=False,columns=2,offset=0,sparse=False,hidden=(),omit_front=(),storey=1.0,compact_windows=False,omit_by_facing=None):
     h=floors*storey;top=.17+h
     foundation(b,w,d);b.box((0,0,.17+h/2),(w,d,h),'wall');masonry(b,w,d,.16,.23)
     for a,span,dep in ((0,w,d),(PI,w,d),(PI/2,d,w),(-PI/2,d,w)):
         if a in hidden:continue
         with b.facing(a):
             for side in (-1,1):
-                for j in range(max(4,round(h/getattr(b,'quoin_pitch',.22)))):
-                    hh=h/max(4,round(h/getattr(b,'quoin_pitch',.22)));b.box((side*(span/2-.035),-dep/2-.022,.17+(j+.5)*hh),(.14,.085,hh-.014),'stone' if j%2 else 'trim')
+                if getattr(b,'clean_facade',False):
+                    # A shallow continuous corner return keeps the silhouette
+                    # clean; stacked projecting blocks competed with the windows.
+                    b.box((side*(span/2-.04),-dep/2-.006,.17+h/2),(.105,.045,h),'trim')
+                else:
+                    for j in range(max(4,round(h/getattr(b,'quoin_pitch',.22)))):
+                        hh=h/max(4,round(h/getattr(b,'quoin_pitch',.22)));b.box((side*(span/2-.035),-dep/2-.022,.17+(j+.5)*hh),(.14,.085,hh-.014),'stone' if j%2 else 'trim')
             for floor in range(floors):
                 z=.17+floor*storey
                 if floor>0:b.box((0,-dep/2-.035,z-.025),(span+.13,.12,.07),'trim')
                 if a==0 and floor==0 and front in ('shop','arcade','blank','offdoor','door'):continue
+                if compact_windows and span<.9 and a==PI and floor==0:continue
                 count=columns if a in (0,PI) else max(1,round(span/1.05))
                 step=span/(count+.40)
                 for k in range(count):
                     if a==0 and k in omit_front:continue
+                    if omit_by_facing and k in omit_by_facing.get(a,()):continue
                     xx=(k-(count-1)/2)*step
-                    pane(b,xx,-dep/2,z+.18,.33 if count>2 else .41,.60*storey,region=='harbor',floor>0 and (not sparse or a==0),flowers=(floor>0 and (a==0 or a==PI and floor==floors-1) and not balconies and not sparse))
+                    window_w=.33 if count>2 else .41
+                    if compact_windows:window_w=min(window_w,span*.42)
+                    pane(b,xx,-dep/2,z+.18,window_w,.60*storey,region=='harbor',floor>0 and (not sparse or a==0) and not compact_windows,flowers=(floor>0 and (a==0 or a==PI and floor==floors-1) and not balconies and not sparse))
                     if balconies and floor>0 and (a==0 or not sparse and a==PI):iron(b,xx,-dep/2,z+.105,.53,a==0 and (floor==1 or not sparse))
             # A real rear entry distinguishes back from front with no plain wall.
-            if a==PI:door(b,span*.27,-dep/2,.16,.32,.66,region)
+            if a==PI:door(b,0 if compact_windows and span<.9 else span*.27,-dep/2,.16,.30 if compact_windows and span<.9 else .32,.66,region)
     cornice(b,w,d,top+.035,region=='classic')
     return top
 
@@ -452,10 +462,11 @@ def arcade(b,w,y,z,count=3,h=.92,depth=.38):
         b.box((x,y,z+spring),(.23,depth+.05,.065),'trim')
 
 
-def pergola(b,x,y,z,w,d):
+def pergola(b,x,y,z,w,d,leg_bottom=None):
+    bottom=z if leg_bottom is None else leg_bottom;leg_top=z+.66
     for xx in (-w*.44,w*.44):
         for yy in (-d*.43,d*.43):
-            b.box((x+xx,y+yy,z+.33),(.075,.075,.66),'wood');b.box((x+xx,y+yy,z+.66),(.13,.13,.065),'wood_light')
+            b.box((x+xx,y+yy,(bottom+leg_top)/2),(.075,.075,leg_top-bottom),'wood');b.box((x+xx,y+yy,z+.66),(.13,.13,.065),'wood_light')
     for yy in (-d*.43,d*.43):b.box((x,y+yy,z+.65),(w+.15,.08,.10),'wood')
     for i in range(7):b.box((x-w*.53+i*w*1.06/6,y,z+.73),(.054,d+.18,.07),'wood_light')
     for k in range(8):leaf(b,(x-w*.4+k*w*.8/7,y+d*.42,z+.78),-PI*.3,.15)
@@ -485,21 +496,23 @@ def chateau_spire(b,x,y,z,r,h):
 
 def prestige_core(region,family,mats):
     """L3 changes the skyline, not just the count of identical storeys."""
-    b=Mesh(f'{region}_{family}_3',mats);b.compact_dome=True
+    b=Mesh(f'{region}_{family}_3',mats);b.compact_dome=True;b.clean_facade=region=='harbor'
     w=2.50;d=1.70;y=-d/2
     storey=1.16;lift=3*(storey-1)
-    top=shell(b,w,d,3,region,'shop' if family=='shop' else 'door',False,3,sparse=True,storey=storey)
+    turret_front=region=='classic' and family in ('villa','tower')
+    top=shell(b,w,d,3,region,'shop' if family=='shop' else 'door',False,3,sparse=True,storey=storey,omit_front=(0,2) if turret_front else ())
     if family=='shop':shopfront(b,w,d,region,3)
     else:
         door(b,0,y,.16,.52,.88,region,True)
-        for xx in (-.74,.74):pane(b,xx,y,.37,.37,.63,region=='harbor',False)
+        if not turret_front:
+            for xx in (-.74,.74):pane(b,xx,y,.37,.37,.63,region=='harbor',False)
         for xx in (-.40,.40):lantern(b,xx,y,.94)
     if region=='classic':
         if family=='villa':
             # Chateau residence: steep central roof framed by two proud turrets.
             hip(b,2.62,1.84,top+.08,.72,region,1)
             for xx in (-.91,.91):
-                rounded_tower(b,xx,-.55,.17,.33,3.79+lift,3,region,False,(0,PI/2 if xx>0 else -PI/2))
+                rounded_tower(b,xx,-.55,.17,.33,3.79+lift,3,region,False,(0,))
                 chateau_spire(b,xx,-.55,3.925+lift,.43,.57)
             iron(b,0,y,.21+storey,1.18,True,.32)
             b.xz_shape([(-.59,0),(.59,0),(0,.27)],(0,y-.09,1.17),.26,'trim')
@@ -534,7 +547,7 @@ def prestige_core(region,family,mats):
         b.box((0,0,top+.075),(2.65,1.84,.13),'trim')
         if family=='villa':
             roof_lantern(b,-.61,.20,top+.13,1.03,1.12,.63,region)
-            rounded_tower(b,.77,.25,top+.14,.31,.43,1,region,False,(0,PI/2))
+            rounded_tower(b,.77,.25,top+.14,.31,.43,1,region,False,(0,PI/2),window_height=.23,window_width=.18,window_offset=.10)
             dome(b,.77,.25,top+.60,.40,.40,region)
             pergola(b,.48,-.46,top+.14,1.08,.47)
             for j in (1,2):iron(b,0,y,.22+j*storey,2.16,False,.30)
@@ -542,23 +555,20 @@ def prestige_core(region,family,mats):
             for xx in (-.87,.87):
                 with b.at((xx,.08,0)):gable(b,.88,1.37,top+.10,.44,region)
             roof_lantern(b,0,.16,top+.13,.87,.96,.82,region,True)
-            arcade(b,2.42,y-.13,.20+2*storey,3,.85*storey,.24)
             iron(b,0,y-.05,.20+2*storey,2.38,False,.28)
         elif family=='hotel':
             # An asymmetric double lookout replaces the former single tiny turret.
             with b.at((0,.10,0)):hip(b,2.55,1.25,top+.10,.42,region)
             for xx,extra in ((-.93,.35),(.93,.65)):
-                rounded_tower(b,xx,-.39,2.18+lift,.32,1.55+extra,2,region,False,(0,PI/2 if xx>0 else -PI/2))
+                outer=PI/2 if xx>0 else -PI/2
+                rounded_tower(b,xx,-.39,2.18+lift,.32,1.55+extra,2,region,False,(0,outer),skip_windows=((0,0),(0,outer)))
                 dome(b,xx,-.39,3.77+extra+lift,.42,.38,region)
-            arcade(b,2.57,y-.20,.17,3,1.01,.29)
-            for j in (1,2):arcade(b,2.47,y-.05,.21+j*storey,3,.83*storey,.19)
         else:
             # A palatial round belvedere gives the mansion its own broad crown.
             rounded_tower(b,0,.14,top+.14,.61,.69,1,region,False)
             dome(b,0,.14,top+.88,.72,.59,region)
             for xx in (-.93,.93):
                 with b.at((xx,.15,0)):hip(b,.57,1.16,top+.12,.36,region)
-            arcade(b,2.38,y-.07,.20+2*storey,3,.85*storey,.24)
             iron(b,0,y-.08,.20+2*storey,2.34,False,.29)
             pergola(b,0,-.57,top+.15,1.30,.43)
     for xx in (-1.08,1.08):plant(b,xx,y-.17,.14,.14,True)
@@ -663,7 +673,7 @@ def grand_bath(region,mats):
             door(b,0,-.525,.17,.43,.83,region)
             hip(b,1.34,1.18,side+.07,.44,region,0)
         if region=='classic':roof_lantern(b,xx,.54,1.65,.58,.62,.56,region)
-        else:pergola(b,xx,.06,1.66,.97,.75)
+        else:pergola(b,xx,.54,1.66,.97,.75,leg_bottom=1.34)
     # Terraced thermal circuit: raised warm pool spills into the long lower pool.
     bath_pool(b,0,-.33,2.50,.43,.65)
     bath_pool(b,0,-.91,2.50,.43,.23)
@@ -683,7 +693,7 @@ def grand_bath(region,mats):
 
 
 def prestige_large(region,family,mats):
-    b=Mesh(f'{region}_{family}_3',mats);b.compact_dome=True;b.roof_pitch=.28;b.quoin_pitch=.31
+    b=Mesh(f'{region}_{family}_3',mats);b.compact_dome=True;b.roof_pitch=.28;b.quoin_pitch=.31;b.clean_facade=region=='harbor'
     foundation(b,5.60,2.24)
     if family=='skyscraper':
         # The central palace has five complete floors; the attached wings stop at two.
@@ -693,7 +703,7 @@ def prestige_large(region,family,mats):
                 with b.facing(a):
                     for j in (2,3,4):
                         for xx in (-.43,.43):pane(b,xx,-1.41,.35+j,.39,.65,region=='harbor',False)
-        for xx in (-2.08,2.08):wide_block(b,xx,.11,1.32,1.76,2,region,False,True)
+        for xx in (-2.08,2.08):wide_block(b,xx,.11,1.32,1.76,2,region,False,True,omit_front_columns=(0,1) if region=='classic' else ())
         door(b,0,-.77,.17,.68,1.18,region,True)
         if region=='classic':
             hip(b,3.00,1.94,top+.08,.98,region,2)
@@ -708,10 +718,9 @@ def prestige_large(region,family,mats):
             roof_lantern(b,0,.30,top+.15,1.75,1.30,.88,region)
             pergola(b,0,-.52,top+.14,2.11,.55)
             for xx,extra in ((-2.20,.0),(2.20,.38)):
-                rounded_tower(b,xx,-.28,.17,.37,2.87+extra,3,region,False,(0,PI/2 if xx>0 else -PI/2))
+                outer=PI/2 if xx>0 else -PI/2
+                rounded_tower(b,xx,-.28,.17,.37,2.87+extra,3,region,False,(0,outer),skip_windows=tuple((j,a) for j in (0,1) for a in (0,outer)))
                 dome(b,xx,-.28,3.08+extra,.48,.45,region)
-            for j in (2,4):arcade(b,2.73,-.79,.17+j,3,.88,.22)
-            arcade(b,5.32,-.85,.17,5,1.10,.29)
     elif region=='classic':
         # A broad rotunda and a giant column portico dominate the stock exchange.
         top=wide_block(b,0,.10,2.78,1.78,3,region,False,False)
@@ -730,7 +739,8 @@ def prestige_large(region,family,mats):
         door(b,0,-.81,.17,.72,1.44,region,True)
         for k in range(3):b.box((0,-1.00-k*.06,.12-k*.025),(2.42+k*.08,.22,.08),'trim')
     else:
-        # Maritime trading hall: a broad stepped roof and a full-height arcaded facade.
+        # Maritime trading hall: a tall main hall with integrated arched windows.
+        # No second colonnade is pasted across the existing shutters and frames.
         top=wide_block(b,0,.10,2.80,1.78,5,region,False,False)
         for a in (PI/2,-PI/2):
             with b.at((0,.10,0),a):
@@ -738,7 +748,6 @@ def prestige_large(region,family,mats):
                     for xx in (-.43,.43):pane(b,xx,-1.40,.35+j,.39,.65,True,False)
         for xx in (-2.08,2.08):wide_block(b,xx,.10,1.30,1.78,1,region,False,True)
         hip(b,3.00,1.97,top+.08,.99,region,0)
-        for j in (0,2,4):arcade(b,2.76,-.83,.17+j,3,.98,.24)
         b.xz_shape([(-1.25,0),(-.87,.28),(-.60,.61),(0,1.02),(.60,.61),(.87,.28),(1.25,0)],(0,-.78,top-.01),.26,'wall')
         base.clock_face(b,0,-.94,top+.45,.31,coin=True)
         for xx in (-2.08,2.08):
@@ -761,7 +770,7 @@ def core(region,family,level,mats):
     cols=3 if region=='classic' and family in ('villa','shop') and level==3 else 2 if family in ('villa','shop') else 3
     # The reference's highest coastal residence retains only the central balcony;
     # its smaller villa grows two separate flower balconies.
-    top=shell(b,w,d,level,region,front,False,cols,omit_front=(1,) if family=='tower' and region=='classic' else ())
+    top=shell(b,w,d,level,region,front,False,cols,omit_front=(1,) if family=='tower' and region=='classic' else (),omit_by_facing={PI/2:(1,)} if family=='tower' and region=='harbor' and level==2 else None)
     y=-d/2
     if family=='shop':shopfront(b,w,d,region,level)
     elif family=='villa' and region=='classic' and level<3:
@@ -807,13 +816,13 @@ def core(region,family,level,mats):
             else:
                 b.box((0,0,top+.06),(w+.06,d+.06,.11),'trim')
                 with b.at((-.77,.15,0)):hip(b,.92,d*.82,top+.08,.43,region)
-            pergola(b,-.25,.30 if level==2 else -.28,top+.12,1.25,.90)
+            pergola(b,-.25,.30 if level==2 else -.28,top+.12,1.25,.90,leg_bottom=top+.07 if level==2 else None)
             rounded_tower(b,w*.43,.22,.17,.29,level+.54,level,region)
             for j in range(1,level):iron(b,0,y,.19+j,w*.78 if level==2 else .74,True,.30)
         else:
             hip(b,w+.20,d+.18,top+.08,.43,region)
             if family=='hotel' and level==2:
-                rounded_tower(b,0,.20,top+.32,.26,.43,1,region)
+                rounded_tower(b,0,.20,top+.32,.26,.43,1,region,window_height=.23,window_width=.18,window_offset=.10)
             elif family=='hotel' and level==3:
                 rounded_tower(b,w*.49,-.50,.17,.29,level+.72,level,region,True,(0,PI/2))
                 for xx in (-w*.29,0,w*.29):iron(b,xx,y,2.23,.52,True)
@@ -834,12 +843,13 @@ def core(region,family,level,mats):
     root=b.finish(bevel=.007);return root
 
 
-def wide_block(b,x,y,w,d,floors,region,balconies=False,roof=True,omit_outer=False):
+def wide_block(b,x,y,w,d,floors,region,balconies=False,roof=True,omit_outer=False,omit_front_columns=()):
     with b.at((x,y,0)):
         # The side walls between joined wings are internal: no hidden windows,
         # flower boxes, bevelled quoins or ironwork are built into those seams.
         hidden=(PI/2,-PI/2) if abs(x)<.01 else (PI/2,) if x<0 else (-PI/2,)
         omit=(0,) if omit_outer and x<0 else (1,) if omit_outer and x>0 else ()
+        omit=tuple(sorted(set(omit+tuple(omit_front_columns))))
         top=shell(b,w,d,floors,region,'door',balconies,2,sparse=True,hidden=hidden,omit_front=omit)
         for k,xx in enumerate((-w*.27,w*.27)):
             if k not in omit:pane(b,xx,-d/2,.38,.34,.62,True,False)
@@ -918,7 +928,8 @@ def large(region,family,level,mats):
             dormer_count=(2,1) if family=='skyscraper' and level==3 and region=='classic' else 2 if family=='skyscraper' and level==1 else 3
             hip(b,2.49,1.99,top+.07,.62 if region=='classic' else .42,region,dormer_count if region=='classic' else 0)
         door(b,0,-.805,.16,.65,.92,region,True)
-        for xx in (-.59,.59):b.cylinder((xx,-.87,.67),.075,1.04,'trim',16)
+        if region=='classic':
+            for xx in (-.59,.59):b.cylinder((xx,-.87,.67),.075,1.04,'trim',16)
         if family=='skyscraper':
             if region=='classic':
                 if level>=2:
@@ -928,11 +939,8 @@ def large(region,family,level,mats):
                     with b.at((0,-.52,0)):hip(b,1.12,.83,top+.22,.71,region,1)
                     if level==3:iron(b,0,-.48,top+.98,.64,False,.42)
             else:
-                arcade(b,5.30,-.92,.17,5,1.0,.34)
                 for j in range(1,floors):iron(b,0,-.79,.19+j,4.96,j==1,.35)
                 if level>=2:rounded_tower(b,-2.27,-.10,.17,.35,floors+.62 if level==2 else 3.30,3,region,True,(0,-PI/2))
-                if level>=2:
-                    arcade(b,4.34,-.92,.17+floors-1,4,1.00,.31)
                 if level==1:awning(b,0,-.91,1.22,1.06,'accent',True)
                 if level==3:dome(b,0,-1.0,1.20,.70,.24,region,True)
         else:
@@ -945,7 +953,6 @@ def large(region,family,level,mats):
                     b.box((xx,-.825,colh*.5+.18),(.095,.12,colh),'trim')
                     b.box((xx,-.85,colh+.12),(.17,.15,.09),'stone')
             else:
-                arcade(b,5.25,-.90,.17,3 if level==1 else 5,1.12 if level==1 else 1.0,.35)
                 for j in range(1,floors):iron(b,0,-.79,.19+j,4.96,True,.35)
                 b.xz_shape([(-.54,0),(-.40,.20),(-.25,.40),(0,.55),(.25,.40),(.40,.20),(.54,0)],(0,-.78,top-.02),.20,'wall')
                 ring(b,0,-.90,top+.28,.18,.035,'gold',24)
@@ -993,9 +1000,8 @@ def public(region,name,mats):
     if name=='teleport_gate':
         for xx in (-.94,.94):
             with b.at((xx,0,0)):
-                top=shell(b,.67,1.28,2 if region=='classic' else 1,region,'blank',False,1)
+                top=shell(b,.67,1.28,2 if region=='classic' else 1,region,'blank',False,1,compact_windows=True)
                 door(b,0,-.64,.16,.30,.78,region)
-                pane(b,0,-.64,1.17,.28,.54,True,False)
                 hip(b,.87,1.45,top+.06,.60 if region=='classic' else .38,region,1 if region=='classic' else 0)
         opening_h=2.06 if region=='classic' else 1.70
         with b.at((0,0,.17)):base.arch_opening(b,1.18,opening_h,1.02,'trim',.15)
@@ -1032,7 +1038,7 @@ def public(region,name,mats):
                 if region=='harbor':
                     with b.at((0,y+.12,0)):gable(b,1.08,.60,1.82,.54,region)
                 for xx in (-.19,.19):
-                    for yy in (-.16,.16):b.box((xx,yy,2.56),(.074,.074,.52),'trim')
+                    for yy in (-.16,.16):b.box((xx,yy,2.46 if region=='harbor' else 2.56),(.074,.074,.72 if region=='harbor' else .52),'trim')
                 b.cylinder((0,0,2.55),.11,.17,'gold',16,top=.06);b.sphere((0,0,2.43),(.030,.030,.035),'metal')
                 if region=='classic':dome(b,0,0,2.86,.32,.30,region)
                 else:hip(b,.62,.58,2.86,.30,region)
@@ -1068,7 +1074,7 @@ def public(region,name,mats):
             else:
                 wheel=(w*.53,-d*.43,.79)
                 for xx in (wheel[0]-.21,wheel[0]+.21):b.rod((xx,wheel[1],.17),wheel,.045,'wood')
-                if region=='harbor':rounded_tower(b,0,.10,2.04,.24,.34,1,region)
+                if region=='harbor':rounded_tower(b,0,.10,2.04,.24,.34,1,region,window_height=.16,window_width=.14,window_offset=.09)
         elif name=='builders_guild':
             # Dark setback aperture with shelving; no noisy or missing solid wall.
             b.box((0,y-.025,.79),(1.13,.07,1.20),'recess')
@@ -1126,7 +1132,7 @@ def lighthouse(mats):
     # The established hero has a left domed annex, right wheel and tall light tower.
     rounded_tower(b,-1.03,.08,.18,.66,1.24,1,'harbor',False)
     dome(b,-1.03,.08,1.47,.76,.66,'harbor',True)
-    rounded_tower(b,.36,.08,.18,.73,2.65,2,'harbor',False)
+    rounded_tower(b,.36,.08,.18,.73,2.65,2,'harbor',False,skip_windows=((1,PI/2),(1,PI),(1,PI*1.5)))
     door(b,.36,-.69,.18,.62,1.0,'harbor',True)
     for a in (PI/2,PI,-PI/2):
         with b.at((.36,.08,0),a):pane(b,0,-.74,2.02,.40,.65,True,False,True)

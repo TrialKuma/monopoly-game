@@ -1,0 +1,1699 @@
+{
+  "scope": {
+    "regions": [
+      "classic",
+      "harbor"
+    ],
+    "playableAssets": 58,
+    "heroes": 1,
+    "totalReviewed": 59,
+    "targetedRepairsThisAudit": 18,
+    "priorRootL3Cleanup": [
+      "harbor/villa_3",
+      "harbor/shop_3",
+      "harbor/hotel_3",
+      "harbor/tower_3",
+      "harbor/skyscraper_3",
+      "harbor/finance_3"
+    ],
+    "combinedDistinctChangedAssets": [
+      "classic/skyscraper_3",
+      "classic/teleport_gate",
+      "classic/tower_3",
+      "classic/villa_3",
+      "harbor/chance_wheel",
+      "harbor/civic_hall",
+      "harbor/finance_1",
+      "harbor/finance_2",
+      "harbor/finance_3",
+      "harbor/harbor_lighthouse",
+      "harbor/hotel_2",
+      "harbor/hotel_3",
+      "harbor/onsen_3",
+      "harbor/shop_3",
+      "harbor/skyscraper_1",
+      "harbor/skyscraper_2",
+      "harbor/skyscraper_3",
+      "harbor/teleport_gate",
+      "harbor/tower_2",
+      "harbor/tower_3",
+      "harbor/villa_3"
+    ]
+  },
+  "coordinateSystem": "Unfitted Blender author coordinates; Z up.",
+  "sourceFunctions": {
+    "rounded_tower": 359,
+    "shell": 371,
+    "pergola": 465,
+    "prestige_core": 497,
+    "grand_bath": 653,
+    "prestige_large": 695,
+    "wide_block": 846,
+    "large": 860,
+    "public": 998,
+    "lighthouse": 1129
+  },
+  "method": "Inspected all 59 existing isometric renders, then source geometry at suspicious locations. Verified all 18 before/after drafts and final compressed-GLB renders. No AI calls.",
+  "limitations": [
+    "This is an asset facade audit, not a physical phone performance test.",
+    "Every asset has an isometric image review; rear/hidden-side issues additionally checked from source geometry, not claimed to have individual rear renders."
+  ],
+  "issues": [
+    {
+      "id": "W01",
+      "assets": [
+        "harbor/skyscraper_1",
+        "harbor/skyscraper_2",
+        "harbor/finance_1",
+        "harbor/finance_2"
+      ],
+      "location": "large(), lower front facade and skyscraper_2 upper facade",
+      "rootCause": "A second arcade is overlaid on the windows already built by wide_block; two generic entry columns also lie over the central ground-floor windows.",
+      "coordinatesBefore": {
+        "wallFrontY": -0.79,
+        "skyscraperArcadeYRange": [
+          -1.09,
+          -0.75
+        ],
+        "financeArcadeYRange": [
+          -1.075,
+          -0.725
+        ],
+        "centralGroundWindowX": [
+          -0.6318,
+          0.6318
+        ],
+        "entryColumnX": [
+          -0.59,
+          0.59
+        ]
+      },
+      "fix": "Removed only the redundant arcade and these two harbor entrance columns; kept all walls, roofs, balconies, windows and canvas awnings."
+    },
+    {
+      "id": "W02",
+      "assets": [
+        "classic/teleport_gate",
+        "harbor/teleport_gate"
+      ],
+      "location": "public() teleport_gate narrow towers, shell()",
+      "rootCause": "Classic automatic upstairs window and manual window occupy the same plane. Harbor manual window starts at the wall top and intersects the roof without a dormer body. Default shutters are wider than the narrow tower and the rear ground-floor window intersects its rear door.",
+      "coordinatesBefore": {
+        "towerWidth": 0.67,
+        "classicAutomaticWindowZ": [
+          1.35,
+          1.95
+        ],
+        "manualWindowZ": [
+          1.17,
+          1.71
+        ],
+        "harborWallTop": 1.17,
+        "defaultWindowAndShuttersWidth": 0.8642
+      },
+      "fix": "Removed the extra manual window; added compact_windows only at teleport_gate call sites: narrow windows, no shutters, and a centered rear door with no competing ground-floor window."
+    },
+    {
+      "id": "W03",
+      "assets": [
+        "classic/villa_3",
+        "classic/tower_3",
+        "classic/skyscraper_3"
+      ],
+      "location": "prestige_core() and prestige_large() facade behind attached round towers",
+      "rootCause": "Complete rectangular facade windows are built before the new round towers; their flat frames remain in front of portions of the curved wall and intersect the new tower windows.",
+      "coordinatesBefore": {
+        "villaFlatWindowX": [
+          -0.735294,
+          0.735294
+        ],
+        "villaFlatFrameFrontY": -0.9515,
+        "villaTowerCenterXY": [
+          [
+            -0.91,
+            -0.55
+          ],
+          [
+            0.91,
+            -0.55
+          ]
+        ],
+        "villaTowerRadius": 0.33,
+        "towerWallFrontYAtFlatWindowCenter": -0.82998
+      },
+      "fix": "Omitted the replaced original front windows only, retained round tower windows and mass, and omitted villa tower side windows buried against the existing side facade."
+    },
+    {
+      "id": "W04",
+      "assets": [
+        "harbor/villa_3",
+        "harbor/hotel_2",
+        "harbor/chance_wheel"
+      ],
+      "location": "rounded_tower() short roof drums",
+      "rootCause": "Default width .32 with height h/floors-.28 yields window heights .15/.15/.06, less than the arch radius .16, so arch_ring creates negative-height jambs.",
+      "coordinatesBefore": {
+        "windowWidth": 0.32,
+        "windowHeights": [
+          0.15,
+          0.15,
+          0.06
+        ],
+        "archSprings": [
+          -0.01,
+          -0.01,
+          -0.1
+        ]
+      },
+      "fix": "Scoped window dimensions and offset to each small drum: villa/hotel width .18 height .23 offset .10; chance width .14 height .16 offset .09. Drum and roof sizes unchanged.",
+      "validatedArchSpringsAfter": [
+        0.14,
+        0.14,
+        0.09
+      ]
+    },
+    {
+      "id": "W05",
+      "assets": [
+        "harbor/harbor_lighthouse"
+      ],
+      "location": "lighthouse() upper windows on left/right/back sides",
+      "rootCause": "rounded_tower auto upper windows overlap three separately authored taller upper windows at the same horizontal centers.",
+      "coordinatesBefore": {
+        "automaticWindowZ": [
+          1.695,
+          2.295
+        ],
+        "manualWindowZ": [
+          2.02,
+          2.67
+        ],
+        "overlapHeight": 0.275
+      },
+      "fix": "Skipped only the three replaced automatic upper windows; retained manual upper windows, the front window, lighthouse bodies and animated waterwheel."
+    },
+    {
+      "id": "W06",
+      "assets": [
+        "harbor/civic_hall",
+        "harbor/onsen_3",
+        "harbor/tower_2"
+      ],
+      "location": "civic_hall bell-tower posts and pergola legs",
+      "rootCause": "Some supports were positioned from a nominal roof height rather than the actual roof beneath the feet.",
+      "coordinatesBefore": {
+        "civicPostBottomZ": 2.3,
+        "civicRoofAtPostsZApprox": 2.145,
+        "onsenFrontLegY": -0.2625,
+        "onsenRoofFrontY": -0.05,
+        "tower2RearLegBottomZ": 2.29,
+        "tower2TerraceTopZ": 2.253
+      },
+      "fix": "Extended civic posts down to 2.10; centered onsen pergolas over the wing roofs (y=.54) and extended feet to 1.34; extended tower2 legs to terrace level. All canopy tops and major building mass retained."
+    },
+    {
+      "id": "W07",
+      "assets": [
+        "harbor/hotel_3",
+        "harbor/skyscraper_3",
+        "harbor/tower_2"
+      ],
+      "location": "Attached round-tower windows behind rectangular body",
+      "rootCause": "Buried lower tower windows still project sills through the main flat facade. On tower2 the existing side-wall window also occupies the new round tower facade.",
+      "coordinatesBefore": {
+        "hotelMainWallY": -0.85,
+        "hotelBuriedSillFrontY": -0.873,
+        "skyscraperWingWallY": -0.77,
+        "skyscraperBuriedSillFrontY": -0.813
+      },
+      "fix": "Skipped buried hotel lower tower windows and skyscraper lower two tower window rows; kept roof-level visible tower windows. Skipped tower2 right rear flat-wall window column, which is replaced by the round tower."
+    }
+  ],
+  "retainedIntentionalFeatures": [
+    {
+      "assets": [
+        "harbor/hotel_1",
+        "harbor/hotel_2"
+      ],
+      "reason": "Their ground arcade is a genuine forward porch with columns standing on the plinth, not a second frame pasted across upper-floor windows."
+    },
+    {
+      "assets": [
+        "classic/*",
+        "harbor/L1-L2 and public corners"
+      ],
+      "reason": "Regular bonded corner quoins and cornice dentils contact the wall and remain coherent architectural details; not removed indiscriminately."
+    },
+    {
+      "assets": [
+        "classic/finance_3"
+      ],
+      "reason": "The full-height column portico has a base and a supported pediment, unlike the removed duplicate flat arcade."
+    },
+    {
+      "assets": [
+        "harbor/harbor_lighthouse",
+        "classic/builders_guild",
+        "harbor/builders_guild",
+        "classic/chance_wheel",
+        "harbor/chance_wheel"
+      ],
+      "reason": "Animated wheel/crane structures and their animation pivots are functional features and retained."
+    }
+  ],
+  "verification": {
+    "modelAndRenderHashesVerified": 59,
+    "targetedAuthoredMajorHeightUnchanged": 18,
+    "targetedFittedHeightUnchanged": 16,
+    "teleportAutomaticFitIncreasePercent": 1.08042,
+    "targetedTriangleBudgetsPassed": 18,
+    "farUpdatedAndBound": [
+      {
+        "asset": "classic/villa_3",
+        "sha256": "f3e096e22b576f50d77b26a1e94a477af88769b79d9d5cc9244961040309447b",
+        "triangles": 13440
+      },
+      {
+        "asset": "harbor/villa_3",
+        "sha256": "0b5d0115a7ddc7f75749d0c1c22f6bf86869cf1dc0cdb16f25bde07bb83b65f4",
+        "triangles": 13440
+      },
+      {
+        "asset": "harbor/hotel_2",
+        "sha256": "95a3f192900b05ddf0299b1dd9e793d717360bbb47b599eac348ab6fe2c035f5",
+        "triangles": 13440
+      },
+      {
+        "asset": "harbor/tower_2",
+        "sha256": "e522f50bc3bb08170bd98e5af4fa6ec69d8d602d2a48349a691c8f49df01d25a",
+        "triangles": 13440
+      }
+    ],
+    "thermalPoolAnchorsUnchanged": [
+      "harbor/onsen_3"
+    ],
+    "newAICalls": 0,
+    "animationStructureAndPivotsPreserved": [
+      "harbor/harbor_lighthouse",
+      "harbor/chance_wheel"
+    ],
+    "publishedByThisAgent": false,
+    "committedByThisAgent": false
+  },
+  "coverage": [
+    {
+      "asset": "classic/villa_1",
+      "reviewedViews": [
+        "iso"
+      ],
+      "sourceReviewed": "art/blender-city/regions/western.py",
+      "contactsheet": "work/facade-audit-western/classic-core.jpg",
+      "render": "art/blender-city/renders/classic/villa_1.png",
+      "finalModelSHA256": "e15dc071522d88c1a2f5ea9b8c5f4b5b36c9afb9d0c1e2152f86ced48064020a",
+      "finalRenderSHA256": "3bea948621a65dd9a28fae047aa40270008c92e6725ffa1e42cfeb6ba28990a0",
+      "issues": [],
+      "status": "no_fault_observed_in_iso_and_source",
+      "triangles": 15656,
+      "size": [
+        0.887254536151886,
+        0.7800000309944153,
+        0.8765647411346436
+      ]
+    },
+    {
+      "asset": "classic/villa_2",
+      "reviewedViews": [
+        "iso"
+      ],
+      "sourceReviewed": "art/blender-city/regions/western.py",
+      "contactsheet": "work/facade-audit-western/classic-core.jpg",
+      "render": "art/blender-city/renders/classic/villa_2.png",
+      "finalModelSHA256": "7e4b445bd384337bc19eda67ab3742c1259a19e806395452fa90375f3720b000",
+      "finalRenderSHA256": "24fec8b721f2c72ba48b4b8ae53e59185141bb41dd196077d08059cae18b97b8",
+      "issues": [],
+      "status": "no_fault_observed_in_iso_and_source",
+      "triangles": 25560,
+      "size": [
+        0.9057384729385376,
+        1.159999966621399,
+        0.8948259949684143
+      ]
+    },
+    {
+      "asset": "classic/villa_3",
+      "reviewedViews": [
+        "iso"
+      ],
+      "sourceReviewed": "art/blender-city/regions/western.py",
+      "contactsheet": "work/facade-audit-western/classic-core.jpg",
+      "render": "art/blender-city/renders/classic/villa_3.png",
+      "finalModelSHA256": "85d195fd17b68d75081965942901c9191b572a85b713e8820c6c2b03c96879a8",
+      "finalRenderSHA256": "f874f8425f5a9ebbc4c04c5a784b6c3deee8dc6d110d4ba1f299b4d85c44f232",
+      "issues": [
+        "W03"
+      ],
+      "status": "targeted_repair_verified",
+      "triangles": 34512,
+      "size": [
+        0.9706771969795227,
+        1.7599999904632568,
+        0.8722277283668518
+      ],
+      "before": {
+        "triangles": 41136,
+        "size": [
+          0.9706771969795227,
+          1.7599999904632568,
+          0.8722277283668518
+        ],
+        "sha256": "99efde034d4e774ef7d0381deb870089bfed846f0dec5bab73fa92d114f7d739"
+      },
+      "deltaTriangles": -6624,
+      "heightChange": 0.0,
+      "authoredHeightBefore": 5.094999762583864,
+      "authoredHeightAfter": 5.094999762583864
+    },
+    {
+      "asset": "classic/shop_1",
+      "reviewedViews": [
+        "iso"
+      ],
+      "sourceReviewed": "art/blender-city/regions/western.py",
+      "contactsheet": "work/facade-audit-western/classic-core.jpg",
+      "render": "art/blender-city/renders/classic/shop_1.png",
+      "finalModelSHA256": "377f529a67f74ae7aa5b39cc68b9d4ae629ad860b9075fed362e03586fda2b4d",
+      "finalRenderSHA256": "9317e1fb050c8b59bf084c3ae9088c33b180aec1e3e7a74c0723358c1188f3a0",
+      "issues": [],
+      "status": "no_fault_observed_in_iso_and_source",
+      "triangles": 19596,
+      "size": [
+        0.887254536151886,
+        0.7800000309944153,
+        0.9374966621398926
+      ]
+    },
+    {
+      "asset": "classic/shop_2",
+      "reviewedViews": [
+        "iso"
+      ],
+      "sourceReviewed": "art/blender-city/regions/western.py",
+      "contactsheet": "work/facade-audit-western/classic-core.jpg",
+      "render": "art/blender-city/renders/classic/shop_2.png",
+      "finalModelSHA256": "b46e0cb8182128ae286e4635cd7c3d4d54213d68faa5f399e67c9c411a90b252",
+      "finalRenderSHA256": "b5c0a4b7f0ae5b2a9ec8ce5761948a6bdd221d64c9a205fd54edc916d3e966a5",
+      "issues": [],
+      "status": "no_fault_observed_in_iso_and_source",
+      "triangles": 29500,
+      "size": [
+        0.9057384729385376,
+        1.159999966621399,
+        0.9570273160934448
+      ]
+    },
+    {
+      "asset": "classic/shop_3",
+      "reviewedViews": [
+        "iso"
+      ],
+      "sourceReviewed": "art/blender-city/regions/western.py",
+      "contactsheet": "work/facade-audit-western/classic-core.jpg",
+      "render": "art/blender-city/renders/classic/shop_3.png",
+      "finalModelSHA256": "a523adae56925a8eb8dd54753b5227ff1e512502152aa7127f66e1865f21ad5f",
+      "finalRenderSHA256": "0d849e210406c201318d6430fe647bbdb85539c01187559cfe3c26e77968fb07",
+      "issues": [],
+      "status": "no_fault_observed_in_iso_and_source",
+      "triangles": 42696,
+      "size": [
+        0.9899999499320984,
+        1.7305623292922974,
+        0.9269359111785889
+      ]
+    },
+    {
+      "asset": "classic/hotel_1",
+      "reviewedViews": [
+        "iso"
+      ],
+      "sourceReviewed": "art/blender-city/regions/western.py",
+      "contactsheet": "work/facade-audit-western/classic-core.jpg",
+      "render": "art/blender-city/renders/classic/hotel_1.png",
+      "finalModelSHA256": "3b618b2b5021f10c973e1d26c48281d8b9a629219a723df14ff1499def804805",
+      "finalRenderSHA256": "fb1442493febd8a45fec3a49d13e498d6f070a0e70556fd400df14c736ca44c8",
+      "issues": [],
+      "status": "no_fault_observed_in_iso_and_source",
+      "triangles": 17696,
+      "size": [
+        0.9899999499320984,
+        0.7712134718894958,
+        0.8666903972625732
+      ]
+    },
+    {
+      "asset": "classic/hotel_2",
+      "reviewedViews": [
+        "iso"
+      ],
+      "sourceReviewed": "art/blender-city/regions/western.py",
+      "contactsheet": "work/facade-audit-western/classic-core.jpg",
+      "render": "art/blender-city/renders/classic/hotel_2.png",
+      "finalModelSHA256": "c09293ca1107a21ccfb22a8d8c3831130187f4f0a4cf46ffaf80012ec5090316",
+      "finalRenderSHA256": "f9e6b1b36c3d8afa315ff8cd5f646d919e97cb59363ac5b17d29a71fc714b131",
+      "issues": [],
+      "status": "no_fault_observed_in_iso_and_source",
+      "triangles": 32492,
+      "size": [
+        0.9899999499320984,
+        1.1235265731811523,
+        0.9663773775100708
+      ]
+    },
+    {
+      "asset": "classic/hotel_3",
+      "reviewedViews": [
+        "iso"
+      ],
+      "sourceReviewed": "art/blender-city/regions/western.py",
+      "contactsheet": "work/facade-audit-western/classic-core.jpg",
+      "render": "art/blender-city/renders/classic/hotel_3.png",
+      "finalModelSHA256": "2b655d161aead7aa1496dd947902c2f48a20e52772156ccba45b3db6e36453e6",
+      "finalRenderSHA256": "469ca8b7edd178ad6e1ae511d1374ed07e5e930b9e4c9493aff97827c5d55965",
+      "issues": [],
+      "status": "no_fault_observed_in_iso_and_source",
+      "triangles": 42240,
+      "size": [
+        0.8990691304206848,
+        1.6611982583999634,
+        0.9899998903274536
+      ]
+    },
+    {
+      "asset": "classic/tower_1",
+      "reviewedViews": [
+        "iso"
+      ],
+      "sourceReviewed": "art/blender-city/regions/western.py",
+      "contactsheet": "work/facade-audit-western/classic-core.jpg",
+      "render": "art/blender-city/renders/classic/tower_1.png",
+      "finalModelSHA256": "62d7271583c264888959c3985775c3dbe4c1ea6feced5c1a6f2381bea1017a02",
+      "finalRenderSHA256": "f13ab58612c5f6b3ce71a4c4683500b081991705269d34cb684d810c4912abe1",
+      "issues": [],
+      "status": "no_fault_observed_in_iso_and_source",
+      "triangles": 22536,
+      "size": [
+        0.9335234761238098,
+        0.7272180914878845,
+        0.9900000095367432
+      ]
+    },
+    {
+      "asset": "classic/tower_2",
+      "reviewedViews": [
+        "iso"
+      ],
+      "sourceReviewed": "art/blender-city/regions/western.py",
+      "contactsheet": "work/facade-audit-western/classic-core.jpg",
+      "render": "art/blender-city/renders/classic/tower_2.png",
+      "finalModelSHA256": "7b3ef7fff5e67a73d148b06691c782cf513a18ee862075d5e1fd15793556f532",
+      "finalRenderSHA256": "2c2bf78325700c1004f75e76ec974eab17aa000826791b614f88e368821713ab",
+      "issues": [],
+      "status": "no_fault_observed_in_iso_and_source",
+      "triangles": 33460,
+      "size": [
+        0.928848147392273,
+        1.0541268587112427,
+        0.9900000691413879
+      ]
+    },
+    {
+      "asset": "classic/tower_3",
+      "reviewedViews": [
+        "iso"
+      ],
+      "sourceReviewed": "art/blender-city/regions/western.py",
+      "contactsheet": "work/facade-audit-western/classic-core.jpg",
+      "render": "art/blender-city/renders/classic/tower_3.png",
+      "finalModelSHA256": "e5634fecb0c74e77f6cc84ad427246bcd5ee6fb604f4a36686c7327b512491cd",
+      "finalRenderSHA256": "68887c511bbf2c71b4c45772fc772af6bc55e8438f0d7106747a146085588f6b",
+      "issues": [
+        "W03"
+      ],
+      "status": "targeted_repair_verified",
+      "triangles": 40780,
+      "size": [
+        0.9054558277130127,
+        1.7599999904632568,
+        0.8136214017868042
+      ],
+      "before": {
+        "triangles": 44476,
+        "size": [
+          0.9054558277130127,
+          1.7599999904632568,
+          0.8136214017868042
+        ],
+        "sha256": "3eb3b9900b3124180915f3b9baeabe702bc53529fa44a623a177a6a3894cb93f"
+      },
+      "deltaTriangles": -3696,
+      "heightChange": 0.0,
+      "authoredHeightBefore": 5.4619998635920615,
+      "authoredHeightAfter": 5.4619998635920615
+    },
+    {
+      "asset": "classic/skyscraper_1",
+      "reviewedViews": [
+        "iso"
+      ],
+      "sourceReviewed": "art/blender-city/regions/western.py",
+      "contactsheet": "work/facade-audit-western/classic-large.jpg",
+      "render": "art/blender-city/renders/classic/skyscraper_1.png",
+      "finalModelSHA256": "09ad4ead61beedc0e117388e273c29239065ad9e4491a034de0195ef3b128389",
+      "finalRenderSHA256": "6946f0b04cdb2d8fd1ae178df745ba51b0ecb3bb9e533a958d4741e24c36bc21",
+      "issues": [],
+      "status": "no_fault_observed_in_iso_and_source",
+      "triangles": 59892,
+      "size": [
+        1.7241847515106201,
+        0.9542675614356995,
+        0.9007821083068848
+      ]
+    },
+    {
+      "asset": "classic/skyscraper_2",
+      "reviewedViews": [
+        "iso"
+      ],
+      "sourceReviewed": "art/blender-city/regions/western.py",
+      "contactsheet": "work/facade-audit-western/classic-large.jpg",
+      "render": "art/blender-city/renders/classic/skyscraper_2.png",
+      "finalModelSHA256": "660543975c4a0b921614a79473de46511ced0553623edea9188a022fa526dcf8",
+      "finalRenderSHA256": "8825841a0aeae4e0dbb5dd7da9122c540bebe05c0e424a512f7f5801b217c6e2",
+      "issues": [],
+      "status": "no_fault_observed_in_iso_and_source",
+      "triangles": 62968,
+      "size": [
+        1.9523794651031494,
+        1.0602973699569702,
+        1.0199999809265137
+      ]
+    },
+    {
+      "asset": "classic/skyscraper_3",
+      "reviewedViews": [
+        "iso"
+      ],
+      "sourceReviewed": "art/blender-city/regions/western.py",
+      "contactsheet": "work/facade-audit-western/classic-large.jpg",
+      "render": "art/blender-city/renders/classic/skyscraper_3.png",
+      "finalModelSHA256": "d611e29091ca6fcb17159cb998ffced86378df6dd498d030ab3802f4813ce47c",
+      "finalRenderSHA256": "93b220be5d7693854334d3bb56a360c2b74b55d751d3f7550b82dbf5af5e2afd",
+      "issues": [
+        "W03"
+      ],
+      "status": "targeted_repair_verified",
+      "triangles": 71912,
+      "size": [
+        2.113732099533081,
+        2.6000001430511475,
+        0.9930707812309265
+      ],
+      "before": {
+        "triangles": 76712,
+        "size": [
+          2.113732099533081,
+          2.6000001430511475,
+          0.9930707812309265
+        ],
+        "sha256": "54a3a540061fe3b3ee8b7042e04a113ddae28f958d0329a040823c3b98547abc"
+      },
+      "deltaTriangles": -4800,
+      "heightChange": 0.0,
+      "authoredHeightBefore": 7.122000609287861,
+      "authoredHeightAfter": 7.122000609287861
+    },
+    {
+      "asset": "classic/finance_1",
+      "reviewedViews": [
+        "iso"
+      ],
+      "sourceReviewed": "art/blender-city/regions/western.py",
+      "contactsheet": "work/facade-audit-western/classic-large.jpg",
+      "render": "art/blender-city/renders/classic/finance_1.png",
+      "finalModelSHA256": "8bb80948ca0ce5eadfbed1d2d747dcc41470cf7daaf93087e0e97027e81eaf2c",
+      "finalRenderSHA256": "5f026af9db667b54aa645d38e336313c4809b3c6749991270a2009a54a12331f",
+      "issues": [],
+      "status": "no_fault_observed_in_iso_and_source",
+      "triangles": 41312,
+      "size": [
+        2.2502291202545166,
+        0.8327404260635376,
+        1.0199999809265137
+      ]
+    },
+    {
+      "asset": "classic/finance_2",
+      "reviewedViews": [
+        "iso"
+      ],
+      "sourceReviewed": "art/blender-city/regions/western.py",
+      "contactsheet": "work/facade-audit-western/classic-large.jpg",
+      "render": "art/blender-city/renders/classic/finance_2.png",
+      "finalModelSHA256": "6d134996f554fa7eed628423e8ac384fb5aa30e8e4e4c3d145e7bde7b9f40b88",
+      "finalRenderSHA256": "6c6e8687d3ae9f6fe04f5ba46be2dfaa497e4cb70d63b4224422dbb83b9b3c51",
+      "issues": [],
+      "status": "no_fault_observed_in_iso_and_source",
+      "triangles": 53108,
+      "size": [
+        2.0419809818267822,
+        1.108958125114441,
+        0.9256037473678589
+      ]
+    },
+    {
+      "asset": "classic/finance_3",
+      "reviewedViews": [
+        "iso"
+      ],
+      "sourceReviewed": "art/blender-city/regions/western.py",
+      "contactsheet": "work/facade-audit-western/classic-large.jpg",
+      "render": "art/blender-city/renders/classic/finance_3.png",
+      "finalModelSHA256": "46410da5b15292e22beb12308647adbe17c99c96b8366d534c5b052841e36d72",
+      "finalRenderSHA256": "c15e21aa5d5c32a5c27c0dba1a8048270967c3e6a17d2ed4574cd9915074948a",
+      "issues": [],
+      "status": "no_fault_observed_in_iso_and_source",
+      "triangles": 50636,
+      "size": [
+        2.2562572956085205,
+        2.3753156661987305,
+        1.0199999809265137
+      ]
+    },
+    {
+      "asset": "classic/onsen_1",
+      "reviewedViews": [
+        "iso"
+      ],
+      "sourceReviewed": "art/blender-city/regions/western.py",
+      "contactsheet": "work/facade-audit-western/classic-large.jpg",
+      "render": "art/blender-city/renders/classic/onsen_1.png",
+      "finalModelSHA256": "03ef5e13bd4d056c050717292e3de54e1872ce3fb44c9d0b26a29391f3504676",
+      "finalRenderSHA256": "6c90644ae498db743f98fc52eacc8c93d346b78f5c867bf4f2e73d59c99bc210",
+      "issues": [],
+      "status": "no_fault_observed_in_iso_and_source",
+      "triangles": 22884,
+      "size": [
+        1.8711236715316772,
+        0.5459892749786377,
+        0.8849468231201172
+      ]
+    },
+    {
+      "asset": "classic/onsen_2",
+      "reviewedViews": [
+        "iso"
+      ],
+      "sourceReviewed": "art/blender-city/regions/western.py",
+      "contactsheet": "work/facade-audit-western/classic-large.jpg",
+      "render": "art/blender-city/renders/classic/onsen_2.png",
+      "finalModelSHA256": "86b9c03cb4317a0d32d218ae7705974ace6f05a7685c48683175a498c3b05285",
+      "finalRenderSHA256": "d734a09f799f32bd4df0f05e160d226219b8b1c688d5969e2a2c5f5ecfe63fbe",
+      "issues": [],
+      "status": "no_fault_observed_in_iso_and_source",
+      "triangles": 23088,
+      "size": [
+        1.9766640663146973,
+        0.8192979097366333,
+        1.0199999809265137
+      ]
+    },
+    {
+      "asset": "classic/onsen_3",
+      "reviewedViews": [
+        "iso"
+      ],
+      "sourceReviewed": "art/blender-city/regions/western.py",
+      "contactsheet": "work/facade-audit-western/classic-large.jpg",
+      "render": "art/blender-city/renders/classic/onsen_3.png",
+      "finalModelSHA256": "edd2a3d9c208d08748fd841b4b89e5c04c7969964a27a95a81a9c56ec5295e78",
+      "finalRenderSHA256": "7383c80e6a787de9c0e5dd48575526a960b4d47acfc59b6eca9fe6dc20cfe588",
+      "issues": [],
+      "status": "no_fault_observed_in_iso_and_source",
+      "triangles": 33556,
+      "size": [
+        2.160665512084961,
+        1.9212199449539185,
+        1.0199999809265137
+      ]
+    },
+    {
+      "asset": "classic/builders_guild",
+      "reviewedViews": [
+        "iso"
+      ],
+      "sourceReviewed": "art/blender-city/regions/western.py",
+      "contactsheet": "work/facade-audit-western/classic-public.jpg",
+      "render": "art/blender-city/renders/classic/builders_guild.png",
+      "finalModelSHA256": "7b8f1f57179db6e1d81552aa473b1b6b7b47b8e2a8ddd3177f789e9735b3ed9b",
+      "finalRenderSHA256": "69884a5a790b29cb41219acad93120c6c3481c48feb4b5d46416dbf68f2c4318",
+      "issues": [],
+      "status": "no_fault_observed_in_iso_and_source",
+      "triangles": 15792,
+      "size": [
+        1.0399999618530273,
+        0.9098735451698303,
+        0.8444252014160156
+      ]
+    },
+    {
+      "asset": "classic/card_pavilion",
+      "reviewedViews": [
+        "iso"
+      ],
+      "sourceReviewed": "art/blender-city/regions/western.py",
+      "contactsheet": "work/facade-audit-western/classic-public.jpg",
+      "render": "art/blender-city/renders/classic/card_pavilion.png",
+      "finalModelSHA256": "b8930b26540e7cbd05e14bbc40c23166bcec411d3ec244a929e8f46d021afa48",
+      "finalRenderSHA256": "a6d3a994e042d94ab1abb7e9c3e16e5805b67441d82cf41483a4232f5856dc16",
+      "issues": [],
+      "status": "no_fault_observed_in_iso_and_source",
+      "triangles": 16680,
+      "size": [
+        1.0399999618530273,
+        1.0096977949142456,
+        0.9767770171165466
+      ]
+    },
+    {
+      "asset": "classic/chance_wheel",
+      "reviewedViews": [
+        "iso"
+      ],
+      "sourceReviewed": "art/blender-city/regions/western.py",
+      "contactsheet": "work/facade-audit-western/classic-public.jpg",
+      "render": "art/blender-city/renders/classic/chance_wheel.png",
+      "finalModelSHA256": "7d1929dd01d7cccf775a09ffeb844dbee0d3e401d680c74f99c74de406029d59",
+      "finalRenderSHA256": "c54fa413f217fcfeb364938714e6f7322ba1a6d9f283f7e1a49eec9ae9190fbe",
+      "issues": [],
+      "status": "no_fault_observed_in_iso_and_source",
+      "triangles": 16474,
+      "size": [
+        1.040000081062317,
+        1.0213812589645386,
+        0.9350993633270264
+      ]
+    },
+    {
+      "asset": "classic/civic_hall",
+      "reviewedViews": [
+        "iso"
+      ],
+      "sourceReviewed": "art/blender-city/regions/western.py",
+      "contactsheet": "work/facade-audit-western/classic-public.jpg",
+      "render": "art/blender-city/renders/classic/civic_hall.png",
+      "finalModelSHA256": "922f19b9b6eab54f5195a5b9c170cc92c7dce438d25acafded75f5da220b85ff",
+      "finalRenderSHA256": "042d83c6c5db7d1694451ad1159826c3d2ca3ccb0ef3534fb7db745fb5eb1405",
+      "issues": [],
+      "status": "no_fault_observed_in_iso_and_source",
+      "triangles": 20928,
+      "size": [
+        1.0399999618530273,
+        1.2476259469985962,
+        0.9277697801589966
+      ]
+    },
+    {
+      "asset": "classic/junction_hub",
+      "reviewedViews": [
+        "iso"
+      ],
+      "sourceReviewed": "art/blender-city/regions/western.py",
+      "contactsheet": "work/facade-audit-western/classic-public.jpg",
+      "render": "art/blender-city/renders/classic/junction_hub.png",
+      "finalModelSHA256": "da6bd05086f90fe209a8d8afe9b72bef332d1325112e410fbea974057b58316c",
+      "finalRenderSHA256": "a1f614c45ef28582f9cebeb991a4a4f78237a09c71600dccddb1ee5fba1bdb10",
+      "issues": [],
+      "status": "no_fault_observed_in_iso_and_source",
+      "triangles": 15624,
+      "size": [
+        1.0399999618530273,
+        1.0152499675750732,
+        0.9257243871688843
+      ]
+    },
+    {
+      "asset": "classic/rush_station",
+      "reviewedViews": [
+        "iso"
+      ],
+      "sourceReviewed": "art/blender-city/regions/western.py",
+      "contactsheet": "work/facade-audit-western/classic-public.jpg",
+      "render": "art/blender-city/renders/classic/rush_station.png",
+      "finalModelSHA256": "2b5ddb28c798d626ab0b9775fcdc2051cf8fc9204414fcba9794030f445198ee",
+      "finalRenderSHA256": "6e04daed48d3a50f80d190151cccfd43538287b41dbbbee713af6f9b11b4e4e7",
+      "issues": [],
+      "status": "no_fault_observed_in_iso_and_source",
+      "triangles": 20840,
+      "size": [
+        0.7837460041046143,
+        0.7609102129936218,
+        1.0399999618530273
+      ]
+    },
+    {
+      "asset": "classic/teleport_gate",
+      "reviewedViews": [
+        "iso"
+      ],
+      "sourceReviewed": "art/blender-city/regions/western.py",
+      "contactsheet": "work/facade-audit-western/classic-public.jpg",
+      "render": "art/blender-city/renders/classic/teleport_gate.png",
+      "finalModelSHA256": "b3377436e2534696c0d8df30cddbfb294b77f278af238234542e763bc05d003a",
+      "finalRenderSHA256": "86bd6bfaea279100ecf21dec9ace869d18b453fe5863fe50eac1ccf3fa230d1e",
+      "issues": [
+        "W02"
+      ],
+      "status": "targeted_repair_verified",
+      "triangles": 29324,
+      "size": [
+        1.0399999618530273,
+        1.1050909757614136,
+        0.7418181896209717
+      ],
+      "before": {
+        "triangles": 33452,
+        "size": [
+          1.040000081062317,
+          1.0932790040969849,
+          0.7338891625404358
+        ],
+        "sha256": "79a7362638d1dce4a43ecc3733271769a6e44cce0787a72f8187fee09de16f74"
+      },
+      "deltaTriangles": -4128,
+      "heightChange": 0.011811971664428711,
+      "authoredHeightBefore": 3.039000153771782,
+      "authoredHeightAfter": 3.0390000718740247,
+      "fitNote": "The over-wide window ornaments were removed; the unchanged authored building is automatically fitted about 1.08% larger inside the same 1.04-wide envelope."
+    },
+    {
+      "asset": "classic/vault_bank",
+      "reviewedViews": [
+        "iso"
+      ],
+      "sourceReviewed": "art/blender-city/regions/western.py",
+      "contactsheet": "work/facade-audit-western/classic-public.jpg",
+      "render": "art/blender-city/renders/classic/vault_bank.png",
+      "finalModelSHA256": "9e751d61327bd7c50f2681980417e8140da05e8dc3712c0e7adfb5a3ad7a72d4",
+      "finalRenderSHA256": "95ea57d2c34709e29918693c024f9c564c004bada263964dc2c3846a830ca68f",
+      "issues": [],
+      "status": "no_fault_observed_in_iso_and_source",
+      "triangles": 18960,
+      "size": [
+        1.0399999618530273,
+        1.0096977949142456,
+        0.9277697801589966
+      ]
+    },
+    {
+      "asset": "harbor/villa_1",
+      "reviewedViews": [
+        "iso"
+      ],
+      "sourceReviewed": "art/blender-city/regions/western.py",
+      "contactsheet": "work/facade-audit-western/harbor-core.jpg",
+      "render": "art/blender-city/renders/harbor/villa_1.png",
+      "finalModelSHA256": "8b5ffb4f7c273cfec583ae1b4df6c31fa239c2666c7853a83ed6a31a5cf258be",
+      "finalRenderSHA256": "89248e1eeb766fc2c53e965d950d642f35b3c659546d6f2e8c9e6cf3d43d20ae",
+      "issues": [],
+      "status": "no_fault_observed_in_iso_and_source",
+      "triangles": 17188,
+      "size": [
+        0.9432734847068787,
+        0.7800000309944153,
+        0.9319087266921997
+      ]
+    },
+    {
+      "asset": "harbor/villa_2",
+      "reviewedViews": [
+        "iso"
+      ],
+      "sourceReviewed": "art/blender-city/regions/western.py",
+      "contactsheet": "work/facade-audit-western/harbor-core.jpg",
+      "render": "art/blender-city/renders/harbor/villa_2.png",
+      "finalModelSHA256": "6d67f20d724e46cd90e3efb714aa671fb752496afe002168e38c211c96ff0315",
+      "finalRenderSHA256": "0ae4702e0ec692548a6e5f963f0276725ecfeef1bf6c24d394f59fc107797dcb",
+      "issues": [],
+      "status": "no_fault_observed_in_iso_and_source",
+      "triangles": 26832,
+      "size": [
+        0.9442301392555237,
+        1.159999966621399,
+        0.934749960899353
+      ]
+    },
+    {
+      "asset": "harbor/villa_3",
+      "reviewedViews": [
+        "iso"
+      ],
+      "sourceReviewed": "art/blender-city/regions/western.py",
+      "contactsheet": "work/facade-audit-western/harbor-core.jpg",
+      "render": "art/blender-city/renders/harbor/villa_3.png",
+      "finalModelSHA256": "ae9af8e6db0a6d2f8489c6ae0271517b4aa6f5a186f8a121f56ca9852da807fd",
+      "finalRenderSHA256": "933dcbc9cda658486f12d941d98c6d135be60ad7ef21a935c179ab73842e93bb",
+      "issues": [
+        "W04"
+      ],
+      "status": "targeted_repair_verified",
+      "triangles": 34072,
+      "size": [
+        0.9899999499320984,
+        1.7016725540161133,
+        0.8666903972625732
+      ],
+      "before": {
+        "triangles": 34072,
+        "size": [
+          0.9899999499320984,
+          1.7016725540161133,
+          0.8666903972625732
+        ],
+        "sha256": "19540697fdff27793fc79516d4f4e41570f5e9259817bc3242f9e6d44ab1e037"
+      },
+      "deltaTriangles": 0,
+      "heightChange": 0.0,
+      "authoredHeightBefore": 4.829999777186661,
+      "authoredHeightAfter": 4.829999777186661
+    },
+    {
+      "asset": "harbor/shop_1",
+      "reviewedViews": [
+        "iso"
+      ],
+      "sourceReviewed": "art/blender-city/regions/western.py",
+      "contactsheet": "work/facade-audit-western/harbor-core.jpg",
+      "render": "art/blender-city/renders/harbor/shop_1.png",
+      "finalModelSHA256": "5a55a7088eb3b10d42e6bdaad8b472eac0a0ea16d1f34f4904251da34c742b5d",
+      "finalRenderSHA256": "1221a7c79356d001b5fda9680f31afbed401abd20154e294c68cf51e44c2ffdf",
+      "issues": [],
+      "status": "no_fault_observed_in_iso_and_source",
+      "triangles": 19872,
+      "size": [
+        0.9195238351821899,
+        0.7603613138198853,
+        0.9900000095367432
+      ]
+    },
+    {
+      "asset": "harbor/shop_2",
+      "reviewedViews": [
+        "iso"
+      ],
+      "sourceReviewed": "art/blender-city/regions/western.py",
+      "contactsheet": "work/facade-audit-western/harbor-core.jpg",
+      "render": "art/blender-city/renders/harbor/shop_2.png",
+      "finalModelSHA256": "e1273dd2418ffff7a5c76a105e30349247bd61942d5d93d09a580df49598c811",
+      "finalRenderSHA256": "dd2d14a0629129d02da6208710c8b4967f7bc946be013753a39e4abe5a1d7c2a",
+      "issues": [],
+      "status": "no_fault_observed_in_iso_and_source",
+      "triangles": 29028,
+      "size": [
+        0.9369441270828247,
+        1.151049017906189,
+        0.9900000095367432
+      ]
+    },
+    {
+      "asset": "harbor/shop_3",
+      "reviewedViews": [
+        "iso"
+      ],
+      "sourceReviewed": "art/blender-city/regions/western.py",
+      "contactsheet": "work/facade-audit-western/harbor-core.jpg",
+      "render": "art/blender-city/renders/harbor/shop_3.png",
+      "finalModelSHA256": "942b4d52e4610ee7863a8fa8a2d57d70c77ae6c41b0f42dda5672c27611c28a4",
+      "finalRenderSHA256": "752bbd1c9da2586a9eff8ae2a1696d72687553e7799bdd09a68e81279464d247",
+      "issues": [],
+      "status": "previous_root_cleanup_verified",
+      "triangles": 39284,
+      "size": [
+        0.9851793050765991,
+        1.7599999904632568,
+        0.9562550187110901
+      ]
+    },
+    {
+      "asset": "harbor/hotel_1",
+      "reviewedViews": [
+        "iso"
+      ],
+      "sourceReviewed": "art/blender-city/regions/western.py",
+      "contactsheet": "work/facade-audit-western/harbor-core.jpg",
+      "render": "art/blender-city/renders/harbor/hotel_1.png",
+      "finalModelSHA256": "9cdf71e2e9c4c4d032e31cd250649d7d2b994b0a36cd90b8a2dfd21f0bcc1f75",
+      "finalRenderSHA256": "0073b263c96a5135f2bd22d386463a54d502ac8c3f2d59783d8dc795c1ee9bb5",
+      "issues": [],
+      "status": "no_fault_observed_in_iso_and_source",
+      "triangles": 18916,
+      "size": [
+        0.9900000095367432,
+        0.7202862501144409,
+        0.9025442004203796
+      ]
+    },
+    {
+      "asset": "harbor/hotel_2",
+      "reviewedViews": [
+        "iso"
+      ],
+      "sourceReviewed": "art/blender-city/regions/western.py",
+      "contactsheet": "work/facade-audit-western/harbor-core.jpg",
+      "render": "art/blender-city/renders/harbor/hotel_2.png",
+      "finalModelSHA256": "dc28ab9291e2b7314833f7b52148bf32a71c3438f970fcbf65e11ab5883d45bc",
+      "finalRenderSHA256": "897f7bad2c5b458386062fdaee3a6c19811c8ee9c44e6644533e207e36b7a975",
+      "issues": [
+        "W04"
+      ],
+      "status": "targeted_repair_verified",
+      "triangles": 35976,
+      "size": [
+        0.9501591920852661,
+        1.159999966621399,
+        0.8914037942886353
+      ],
+      "before": {
+        "triangles": 35976,
+        "size": [
+          0.9501591920852661,
+          1.159999966621399,
+          0.8914037942886353
+        ],
+        "sha256": "2f247cba5b0cccae2cd0978b7f8defc0e5f289df0205242a77d8521f08620a25"
+      },
+      "deltaTriangles": 0,
+      "heightChange": 0.0,
+      "authoredHeightBefore": 3.4549998242896205,
+      "authoredHeightAfter": 3.4549998242896205
+    },
+    {
+      "asset": "harbor/hotel_3",
+      "reviewedViews": [
+        "iso"
+      ],
+      "sourceReviewed": "art/blender-city/regions/western.py",
+      "contactsheet": "work/facade-audit-western/harbor-core.jpg",
+      "render": "art/blender-city/renders/harbor/hotel_3.png",
+      "finalModelSHA256": "5c37fc3573ac032c7a30b6a1be2d0bbb28120f48b6312f69e856adc7536ff598",
+      "finalRenderSHA256": "3bfd5b0330fd2a8ece01152d1e31b8013975504316494149a5f5af08347e1f0f",
+      "issues": [
+        "W07"
+      ],
+      "status": "targeted_repair_verified",
+      "triangles": 33664,
+      "size": [
+        0.911780059337616,
+        1.7599999904632568,
+        0.7936939001083374
+      ],
+      "before": {
+        "triangles": 35616,
+        "size": [
+          0.911780059337616,
+          1.7599999904632568,
+          0.7936939001083374
+        ],
+        "sha256": "14cbf7708cb04c2cc21275e9e3ac6bebb42d3a5f6db8f00fbf0d302ef4d8a49c"
+      },
+      "deltaTriangles": -1952,
+      "heightChange": 0.0,
+      "authoredHeightBefore": 5.454999894147569,
+      "authoredHeightAfter": 5.454999894147569
+    },
+    {
+      "asset": "harbor/tower_1",
+      "reviewedViews": [
+        "iso"
+      ],
+      "sourceReviewed": "art/blender-city/regions/western.py",
+      "contactsheet": "work/facade-audit-western/harbor-core.jpg",
+      "render": "art/blender-city/renders/harbor/tower_1.png",
+      "finalModelSHA256": "f133cbe9034d6367ca3a7f5f22dda5935ce3f9f796ae467379c3efbf9bf68654",
+      "finalRenderSHA256": "0ae97db79a63e1f3c73e14ff3a256279a47ff1771fa2d6c611c9513dd99a5233",
+      "issues": [],
+      "status": "no_fault_observed_in_iso_and_source",
+      "triangles": 14804,
+      "size": [
+        0.9899999499320984,
+        0.7613487243652344,
+        0.9371530413627625
+      ]
+    },
+    {
+      "asset": "harbor/tower_2",
+      "reviewedViews": [
+        "iso"
+      ],
+      "sourceReviewed": "art/blender-city/regions/western.py",
+      "contactsheet": "work/facade-audit-western/harbor-core.jpg",
+      "render": "art/blender-city/renders/harbor/tower_2.png",
+      "finalModelSHA256": "8e1a53395bf2bf020893bd2d3622a15ffc1efbec2a238919786564a3a79e7668",
+      "finalRenderSHA256": "9785cfe762b348138d066ed44c35f58abd6eca7ef682db84de0c5259dc9016ad",
+      "issues": [
+        "W06",
+        "W07"
+      ],
+      "status": "targeted_repair_verified",
+      "triangles": 35176,
+      "size": [
+        0.9899998903274536,
+        1.0953118801116943,
+        0.9130412340164185
+      ],
+      "before": {
+        "triangles": 36440,
+        "size": [
+          0.9899998903274536,
+          1.0953118801116943,
+          0.9130412340164185
+        ],
+        "sha256": "5fbd625046be53afe965d759063ff9f136767e8399e94e18aa5af68731a35213"
+      },
+      "deltaTriangles": -1264,
+      "heightChange": 0.0,
+      "authoredHeightBefore": 3.244999838856681,
+      "authoredHeightAfter": 3.244999838856681
+    },
+    {
+      "asset": "harbor/tower_3",
+      "reviewedViews": [
+        "iso"
+      ],
+      "sourceReviewed": "art/blender-city/regions/western.py",
+      "contactsheet": "work/facade-audit-western/harbor-core.jpg",
+      "render": "art/blender-city/renders/harbor/tower_3.png",
+      "finalModelSHA256": "1ed15309270e8b0a0e6e892a7915c45900c83889228719f87f2bbfe6cb5c9b98",
+      "finalRenderSHA256": "08d5b7488367019265da4603126651fee51e274613d5d6fad7a6ac072c8c2994",
+      "issues": [],
+      "status": "previous_root_cleanup_verified",
+      "triangles": 34032,
+      "size": [
+        0.9340131282806396,
+        1.7599998712539673,
+        0.820336103439331
+      ]
+    },
+    {
+      "asset": "harbor/skyscraper_1",
+      "reviewedViews": [
+        "iso"
+      ],
+      "sourceReviewed": "art/blender-city/regions/western.py",
+      "contactsheet": "work/facade-audit-western/harbor-large.jpg",
+      "render": "art/blender-city/renders/harbor/skyscraper_1.png",
+      "finalModelSHA256": "d3e4593301732f15fa35a0606473fd49a156f4ce123735119aaf5b75acf62251",
+      "finalRenderSHA256": "6f9eecda264bc8250026a46beb257cc404bbf3c9036881374054883c90341f24",
+      "issues": [
+        "W01"
+      ],
+      "status": "targeted_repair_verified",
+      "triangles": 54060,
+      "size": [
+        2.143075466156006,
+        1.0159214735031128,
+        1.0199999809265137
+      ],
+      "before": {
+        "triangles": 55572,
+        "size": [
+          2.143075466156006,
+          1.0159214735031128,
+          1.0199999809265137
+        ],
+        "sha256": "763970a2eaba03b761d5d1de3d2a1953ce77238de1e6729b0e8db666bc3ed8c7"
+      },
+      "deltaTriangles": -1512,
+      "heightChange": 0.0,
+      "authoredHeightBefore": 2.739999901935136,
+      "authoredHeightAfter": 2.739999901935136
+    },
+    {
+      "asset": "harbor/skyscraper_2",
+      "reviewedViews": [
+        "iso"
+      ],
+      "sourceReviewed": "art/blender-city/regions/western.py",
+      "contactsheet": "work/facade-audit-western/harbor-large.jpg",
+      "render": "art/blender-city/renders/harbor/skyscraper_2.png",
+      "finalModelSHA256": "d60aba9f7310a74bedba24f95f8611d52c8e75a26e3077d528eb95afeb96fd85",
+      "finalRenderSHA256": "1a0fb2a31ff692b6aa763229e0f31c539395c28a244d570391f07008c465d473",
+      "issues": [
+        "W01"
+      ],
+      "status": "targeted_repair_verified",
+      "triangles": 74768,
+      "size": [
+        1.5640474557876587,
+        1.1703295707702637,
+        0.7238454818725586
+      ],
+      "before": {
+        "triangles": 77420,
+        "size": [
+          1.5640474557876587,
+          1.1703295707702637,
+          0.7238454818725586
+        ],
+        "sha256": "11410547b98190469f500153d5febd8cb466157eb10ca2f348a1dd18ee93cdbe"
+      },
+      "deltaTriangles": -2652,
+      "heightChange": 0.0,
+      "authoredHeightBefore": 4.324999897997362,
+      "authoredHeightAfter": 4.324999897997362
+    },
+    {
+      "asset": "harbor/skyscraper_3",
+      "reviewedViews": [
+        "iso"
+      ],
+      "sourceReviewed": "art/blender-city/regions/western.py",
+      "contactsheet": "work/facade-audit-western/harbor-large.jpg",
+      "render": "art/blender-city/renders/harbor/skyscraper_3.png",
+      "finalModelSHA256": "2dd1464f2b89f28c6f91e791a2ceee810844fb768b3f1448b1e6a82a3e429c6c",
+      "finalRenderSHA256": "7a52c1c67d1bf5175324f8d5b8d7ed52fb70872d9cb2dc04738284fa42502757",
+      "issues": [
+        "W07"
+      ],
+      "status": "targeted_repair_verified",
+      "triangles": 66148,
+      "size": [
+        2.2740180492401123,
+        2.5999999046325684,
+        1.0132930278778076
+      ],
+      "before": {
+        "triangles": 70052,
+        "size": [
+          2.2740180492401123,
+          2.5999999046325684,
+          1.0132930278778076
+        ],
+        "sha256": "34e43c1220730942ee4f208ee28b402980c7ca60d4abca80e448603a52263689"
+      },
+      "deltaTriangles": -3904,
+      "heightChange": 0.0,
+      "authoredHeightBefore": 6.619999642738933,
+      "authoredHeightAfter": 6.619999642738933
+    },
+    {
+      "asset": "harbor/finance_1",
+      "reviewedViews": [
+        "iso"
+      ],
+      "sourceReviewed": "art/blender-city/regions/western.py",
+      "contactsheet": "work/facade-audit-western/harbor-large.jpg",
+      "render": "art/blender-city/renders/harbor/finance_1.png",
+      "finalModelSHA256": "cb66cfac48230b6b694ff58987c50956e6af459441a045c313ff0c2014e98fdf",
+      "finalRenderSHA256": "6ebdf863e348042f6f41112b1536abef9de9919a2713a8ae9a8aa845e54a7dba",
+      "issues": [
+        "W01"
+      ],
+      "status": "targeted_repair_verified",
+      "triangles": 41188,
+      "size": [
+        2.2502291202545166,
+        0.6774045825004578,
+        1.0199999809265137
+      ],
+      "before": {
+        "triangles": 42196,
+        "size": [
+          2.2502291202545166,
+          0.6774045825004578,
+          1.0199999809265137
+        ],
+        "sha256": "2edb43ed56912eed8762f1a28b8098e3340f9e0ded907d76d43a4866f117e92d"
+      },
+      "deltaTriangles": -1008,
+      "heightChange": 0.0,
+      "authoredHeightBefore": 1.7399999300278401,
+      "authoredHeightAfter": 1.7399999300278401
+    },
+    {
+      "asset": "harbor/finance_2",
+      "reviewedViews": [
+        "iso"
+      ],
+      "sourceReviewed": "art/blender-city/regions/western.py",
+      "contactsheet": "work/facade-audit-western/harbor-large.jpg",
+      "render": "art/blender-city/renders/harbor/finance_2.png",
+      "finalModelSHA256": "561ee084cb519f259903a7fd74b4e3d20a5ca62ab34142f5c3557faefc78284b",
+      "finalRenderSHA256": "26a93662cc868b738b08ef334a8ab2b022b76c7eb5c2a225830fbd337df31e83",
+      "issues": [
+        "W01"
+      ],
+      "status": "targeted_repair_verified",
+      "triangles": 54072,
+      "size": [
+        2.203962564468384,
+        1.0447850227355957,
+        1.0199999809265137
+      ],
+      "before": {
+        "triangles": 55584,
+        "size": [
+          2.203962564468384,
+          1.0447850227355957,
+          1.0199999809265137
+        ],
+        "sha256": "0561eb4b14225dcd730c6da511b249be347367345996a86ee20939d98079f635"
+      },
+      "deltaTriangles": -1512,
+      "heightChange": 0.0,
+      "authoredHeightBefore": 2.73999988823381,
+      "authoredHeightAfter": 2.73999988823381
+    },
+    {
+      "asset": "harbor/finance_3",
+      "reviewedViews": [
+        "iso"
+      ],
+      "sourceReviewed": "art/blender-city/regions/western.py",
+      "contactsheet": "work/facade-audit-western/harbor-large.jpg",
+      "render": "art/blender-city/renders/harbor/finance_3.png",
+      "finalModelSHA256": "5535d6f36f648460968776b3368357d2be034581753dbfe8027ac4e810b21bc7",
+      "finalRenderSHA256": "cc9cf63e6393c7fccde3066fb008b564119821754b2c680741a50cba81125479",
+      "issues": [],
+      "status": "previous_root_cleanup_verified",
+      "triangles": 58104,
+      "size": [
+        2.28511643409729,
+        2.4986045360565186,
+        1.0200001001358032
+      ]
+    },
+    {
+      "asset": "harbor/onsen_1",
+      "reviewedViews": [
+        "iso"
+      ],
+      "sourceReviewed": "art/blender-city/regions/western.py",
+      "contactsheet": "work/facade-audit-western/harbor-large.jpg",
+      "render": "art/blender-city/renders/harbor/onsen_1.png",
+      "finalModelSHA256": "51c2636b43b10285875b776a2adf18275a96963248568bbe5b1c19ee3992eed5",
+      "finalRenderSHA256": "a9c1fe63442676153a61ff69413cae00bcc44b8cbfc576a1e9611dd14ba1daa4",
+      "issues": [],
+      "status": "no_fault_observed_in_iso_and_source",
+      "triangles": 30564,
+      "size": [
+        1.9410110712051392,
+        0.5758671760559082,
+        0.9179999828338623
+      ]
+    },
+    {
+      "asset": "harbor/onsen_2",
+      "reviewedViews": [
+        "iso"
+      ],
+      "sourceReviewed": "art/blender-city/regions/western.py",
+      "contactsheet": "work/facade-audit-western/harbor-large.jpg",
+      "render": "art/blender-city/renders/harbor/onsen_2.png",
+      "finalModelSHA256": "e59156bf12a90dadf8df38bdae8ff68ea778f8b26663022fe88d48bb3ffb07a3",
+      "finalRenderSHA256": "8eeb73897c0efd79ddc75363ab42453e791679d00ad072386094b401e249dc4e",
+      "issues": [],
+      "status": "no_fault_observed_in_iso_and_source",
+      "triangles": 32564,
+      "size": [
+        2.1566789150238037,
+        0.9353135824203491,
+        1.0199999809265137
+      ]
+    },
+    {
+      "asset": "harbor/onsen_3",
+      "reviewedViews": [
+        "iso"
+      ],
+      "sourceReviewed": "art/blender-city/regions/western.py",
+      "contactsheet": "work/facade-audit-western/harbor-large.jpg",
+      "render": "art/blender-city/renders/harbor/onsen_3.png",
+      "finalModelSHA256": "cd2324634717d2fd999d6d9511aecefc10d9e296f5ef9b6c438688bedb7dd7ef",
+      "finalRenderSHA256": "bb59e9170292e82c5750ef9c0f99ef5de06f5f0550f0fae6deab74c6c8d425cd",
+      "issues": [
+        "W06"
+      ],
+      "status": "targeted_repair_verified",
+      "triangles": 31412,
+      "size": [
+        2.160665512084961,
+        1.9212199449539185,
+        1.0199999809265137
+      ],
+      "before": {
+        "triangles": 31412,
+        "size": [
+          2.160665512084961,
+          1.9212199449539185,
+          1.0199999809265137
+        ],
+        "sha256": "e2b5cbf9615f500b006d73aa3547053ed29e915c83c48cd023fc4de03e0db167"
+      },
+      "deltaTriangles": 0,
+      "heightChange": 0.0,
+      "authoredHeightBefore": 5.094999808355785,
+      "authoredHeightAfter": 5.094999808355785
+    },
+    {
+      "asset": "harbor/builders_guild",
+      "reviewedViews": [
+        "iso"
+      ],
+      "sourceReviewed": "art/blender-city/regions/western.py",
+      "contactsheet": "work/facade-audit-western/harbor-public.jpg",
+      "render": "art/blender-city/renders/harbor/builders_guild.png",
+      "finalModelSHA256": "bcde13a90f1649d3cdfcfb7222d4cbb6d770fe6ddb08580120ebb96741a757b9",
+      "finalRenderSHA256": "7c51057d72fdbf05182fb11d6a3db7da2b72a7babaebcc7ab6e3e1c7e952e85e",
+      "issues": [],
+      "status": "no_fault_observed_in_iso_and_source",
+      "triangles": 17116,
+      "size": [
+        1.0399999618530273,
+        0.9098735451698303,
+        0.8444252014160156
+      ]
+    },
+    {
+      "asset": "harbor/card_pavilion",
+      "reviewedViews": [
+        "iso"
+      ],
+      "sourceReviewed": "art/blender-city/regions/western.py",
+      "contactsheet": "work/facade-audit-western/harbor-public.jpg",
+      "render": "art/blender-city/renders/harbor/card_pavilion.png",
+      "finalModelSHA256": "c1205477633076467a3d9df52def6132583501163567b25f2dec3ea3497eba1f",
+      "finalRenderSHA256": "059520556f1d71db1e79583eed83bcde698cbb352249ec887ddddc604659653f",
+      "issues": [],
+      "status": "no_fault_observed_in_iso_and_source",
+      "triangles": 17868,
+      "size": [
+        1.0399999618530273,
+        1.0096977949142456,
+        0.9767770171165466
+      ]
+    },
+    {
+      "asset": "harbor/chance_wheel",
+      "reviewedViews": [
+        "iso"
+      ],
+      "sourceReviewed": "art/blender-city/regions/western.py",
+      "contactsheet": "work/facade-audit-western/harbor-public.jpg",
+      "render": "art/blender-city/renders/harbor/chance_wheel.png",
+      "finalModelSHA256": "2f691a61e9c7440018e362bd7d881ea33c7dac39d0735764c6aebfdb73683003",
+      "finalRenderSHA256": "3446dc44fb28c8712b9d133131aec37d9f606fa7331535ee653944da36ec2b03",
+      "issues": [
+        "W04"
+      ],
+      "status": "targeted_repair_verified",
+      "triangles": 21414,
+      "size": [
+        1.040000081062317,
+        1.1031221151351929,
+        0.9350993633270264
+      ],
+      "before": {
+        "triangles": 21414,
+        "size": [
+          1.040000081062317,
+          1.1031221151351929,
+          0.9350993633270264
+        ],
+        "sha256": "9a2ca79e78f28aa0c5920bf6c0f4ec7fe93d1cb8322cac8af9c7782781e793d3"
+      },
+      "deltaTriangles": 0,
+      "heightChange": 0.0,
+      "authoredHeightBefore": 2.915000125314348,
+      "authoredHeightAfter": 2.915000125314348
+    },
+    {
+      "asset": "harbor/civic_hall",
+      "reviewedViews": [
+        "iso"
+      ],
+      "sourceReviewed": "art/blender-city/regions/western.py",
+      "contactsheet": "work/facade-audit-western/harbor-public.jpg",
+      "render": "art/blender-city/renders/harbor/civic_hall.png",
+      "finalModelSHA256": "aee1a369bc7ff35eb9eb4b760ba210fb5ae6ef600ff2db425e517d61444e383b",
+      "finalRenderSHA256": "5aff987cc56605d78e7a69750b1eae61938c1d8548265a96a3afb4aa528532c1",
+      "issues": [
+        "W06"
+      ],
+      "status": "targeted_repair_verified",
+      "triangles": 23588,
+      "size": [
+        1.0399999618530273,
+        1.2120863199234009,
+        0.9277697801589966
+      ],
+      "before": {
+        "triangles": 23588,
+        "size": [
+          1.0399999618530273,
+          1.2120863199234009,
+          0.9277697801589966
+        ],
+        "sha256": "c23c49ac6a1b50b530fe76eacf642744d8e3b1cd80a920ab8fc8269662ffb25b"
+      },
+      "deltaTriangles": 0,
+      "heightChange": 0.0,
+      "authoredHeightBefore": 3.2399999372201793,
+      "authoredHeightAfter": 3.2399999372201793
+    },
+    {
+      "asset": "harbor/junction_hub",
+      "reviewedViews": [
+        "iso"
+      ],
+      "sourceReviewed": "art/blender-city/regions/western.py",
+      "contactsheet": "work/facade-audit-western/harbor-public.jpg",
+      "render": "art/blender-city/renders/harbor/junction_hub.png",
+      "finalModelSHA256": "d0a4b60b96949d2d63addfaa44022bab6594acbd482d0a472e28a0fa44d50766",
+      "finalRenderSHA256": "7870abdfedebd1c71927e32a90b42668dc25d68c111df83081d675bfcb476505",
+      "issues": [],
+      "status": "no_fault_observed_in_iso_and_source",
+      "triangles": 16760,
+      "size": [
+        1.0399999618530273,
+        1.0152499675750732,
+        0.9257243871688843
+      ]
+    },
+    {
+      "asset": "harbor/rush_station",
+      "reviewedViews": [
+        "iso"
+      ],
+      "sourceReviewed": "art/blender-city/regions/western.py",
+      "contactsheet": "work/facade-audit-western/harbor-public.jpg",
+      "render": "art/blender-city/renders/harbor/rush_station.png",
+      "finalModelSHA256": "4c929088d19c4e0df21334125b63c9e17de362038aa33ab936a67d0040334bcb",
+      "finalRenderSHA256": "c3670ffcbe8d52dbd6da5f055f1a2832b270dfdf3a124c16a425eda8d9383414",
+      "issues": [],
+      "status": "no_fault_observed_in_iso_and_source",
+      "triangles": 23576,
+      "size": [
+        1.0399999618530273,
+        1.0096977949142456,
+        0.996938943862915
+      ]
+    },
+    {
+      "asset": "harbor/teleport_gate",
+      "reviewedViews": [
+        "iso"
+      ],
+      "sourceReviewed": "art/blender-city/regions/western.py",
+      "contactsheet": "work/facade-audit-western/harbor-public.jpg",
+      "render": "art/blender-city/renders/harbor/teleport_gate.png",
+      "finalModelSHA256": "e8f97a1dd7fe6b772a9c0e6129bc185ed4c6db95662917e4fe62fb828f5233fb",
+      "finalRenderSHA256": "9a6eda148a562e24b34fb06fb4e5deb7891fab615a6458fd879ec03db293ac2d",
+      "issues": [
+        "W02"
+      ],
+      "status": "targeted_repair_verified",
+      "triangles": 23368,
+      "size": [
+        1.0399999618530273,
+        0.8872727751731873,
+        0.7418181896209717
+      ],
+      "before": {
+        "triangles": 25320,
+        "size": [
+          1.040000081062317,
+          0.8777890205383301,
+          0.7338891625404358
+        ],
+        "sha256": "bc79a0400453d7d9792521ddefff8580a4fc0afe2a8a4b385e460c5580ef0645"
+      },
+      "deltaTriangles": -1952,
+      "heightChange": 0.009483754634857178,
+      "authoredHeightBefore": 2.440000181471082,
+      "authoredHeightAfter": 2.4400000422275934,
+      "fitNote": "The over-wide window ornaments were removed; the unchanged authored building is automatically fitted about 1.08% larger inside the same 1.04-wide envelope."
+    },
+    {
+      "asset": "harbor/vault_bank",
+      "reviewedViews": [
+        "iso"
+      ],
+      "sourceReviewed": "art/blender-city/regions/western.py",
+      "contactsheet": "work/facade-audit-western/harbor-public.jpg",
+      "render": "art/blender-city/renders/harbor/vault_bank.png",
+      "finalModelSHA256": "ffa57e1efeeb5bdd97a41e44635da7b49618a797da2605a1f7b4cf2ba8ab9c12",
+      "finalRenderSHA256": "c53770606d854f9f087ebd4187bfb2c9e803cbe048014f1ee5f8b91ae86438ed",
+      "issues": [],
+      "status": "no_fault_observed_in_iso_and_source",
+      "triangles": 18836,
+      "size": [
+        1.0399999618530273,
+        1.0096977949142456,
+        0.9277697801589966
+      ]
+    },
+    {
+      "asset": "harbor/harbor_lighthouse",
+      "reviewedViews": [
+        "iso"
+      ],
+      "sourceReviewed": "art/blender-city/regions/western.py",
+      "contactsheet": "work/facade-audit-western/harbor-public.jpg",
+      "render": "art/blender-city/renders/harbor/harbor_lighthouse.png",
+      "finalModelSHA256": "14c24e02e77f676a96e6d7d37be94c85b0305bb307803179bb7f29c4d8ffcae0",
+      "finalRenderSHA256": "113a1f7c7469878dce8eefc8f760d0632a773c67520ad50aaf0dd0b1d1192578",
+      "issues": [
+        "W05"
+      ],
+      "status": "targeted_repair_verified",
+      "triangles": 20902,
+      "size": [
+        2.799999713897705,
+        3.0121209621429443,
+        1.6708624362945557
+      ],
+      "before": {
+        "triangles": 22366,
+        "size": [
+          2.799999713897705,
+          3.0121209621429443,
+          1.6708624362945557
+        ],
+        "sha256": "b1cde16ddd3cab39a7130ed63a879ede9660244717bdf00d6f6f69bf9993982f"
+      },
+      "deltaTriangles": -1464,
+      "heightChange": 0.0,
+      "authoredHeightBefore": 4.614999575960692,
+      "authoredHeightAfter": 4.614999575960692
+    }
+  ]
+}
