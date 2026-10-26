@@ -71,7 +71,8 @@
       routeChoice:state.modal?.visible && state.modal.routeChoice ? {playerId:currentPlayer().id,tileIndex:currentPlayer().position} : null,
       nextSteps:Object.fromEntries(state.players.map(player=>[player.id,getNextTileIndex(player,player.position,player.effects?.reversed?-1:1,false)])),
       selectedTile:selected,targetSelection:state.modal?.visible && state.modal.boardTargets?.length ? {kind:'property',indices:state.modal.boardTargets} : state.modal?.visible && state.modal.boardContext ? {kind:'property',indices:state.modal.boardContext.indices,suspended:true} : state.targetSelection,districtColors:map.districtColors,
-      rents:Object.fromEntries(state.board.filter(t=>t.lot).map(t=>[t.index,rentFor(t).total]))};
+      rents:Object.fromEntries(state.board.filter(t=>t.lot).map(t=>[t.index,rentFor(t).total])),
+      purchasePrices:Object.fromEntries(state.board.filter(t=>t.lot).map(t=>[t.index,getLotPurchasePrice(t.lot)]))};
   }
   function syncCityScene() {
     if (!state.board || !window.CityScene?.update) return;
@@ -137,18 +138,55 @@
     document.querySelectorAll('[data-harbor-project]').forEach(button=>button.setAttribute('aria-expanded',String(button.dataset.harborProject===id)));
     harborProjectPanel.querySelector('[data-harbor-project-close]').focus({preventScroll:true});
   }
+  function effectText(lot) {
+    const bonus=EFFECT_BONUS_TABLES[lot?.effectId];
+    if(bonus)return `地主自己停在这里时领 ${[1,2,3].map(level=>`${level} 级 ${money(bonus[level])}`).join('、')}`;
+    return lot?.effectId==='hot_spring_rest'?'别人停在这里，下回合要休息':'';
+  }
+  function tileGuideText(tile,economy=getMapEconomy()) {
+    if(tile.isStart)return `路过领 ${money(economy.startBonus)}，并随机把你一块空地免费盖到 1 级；停在这里抽一张买地卡或卖地卡。`;
+    const special=tile.special||{};
+    return ({
+      bank:`攒到 ${money(economy.bankThreshold)} 以后，停在这里的人全部取走；没攒够时要掷骰往里存钱。`,
+      construction:'随机给自己加盖一处，或者随机拆对手一处。',
+      card_draw:'三张道具卡选一张放进背包，掷骰前可以用。',
+      chance:'花钱买一张道具卡，每次最多一张。',
+      rush:special.rushMin?`再往前冲 ${special.rushMin} 到 ${special.rushMax} 格，停下的地方照常处理。`:'',
+      teleport:special.settleArrival?'随机送到一块地产，到了照常买地或交租。':'随机送到一块地产，到了不交租也不能买。',
+    })[special.type]||special.description||'';
+  }
+  let rulesGuideKey='';
+  function renderRulesGuide(map) {
+    const box=document.getElementById('rules-tile-guide');if(!box||!state.board)return;
+    const economy=getMapEconomy(),key=JSON.stringify([map.id,state.board.length,economy.startBonus,economy.bankThreshold]);
+    if(key===rulesGuideKey)return;rulesGuideKey=key;
+    const groups=new Map();
+    for(const tile of state.board) {
+      if(tile.isLargeSecondary)continue;
+      const kind=tile.isStart?'start':tile.special?.type?`special:${tile.special.type}`:tile.lot?.effectId?`effect:${tile.lot.effectId}`:'';
+      if(!kind)continue;
+      if(!groups.has(kind))groups.set(kind,{names:[],text:tile.lot?effectText(tile.lot):tileGuideText(tile,economy)});
+      const group=groups.get(kind);if(!group.names.includes(tile.name))group.names.push(tile.name);
+    }
+    const rows=[...groups.values()].filter(group=>group.text).map(group=>`<li><b>${esc(group.names.join('、'))}</b>${esc(group.text.replace(/。$/,''))}。</li>`);
+    box.innerHTML=rows.length?`<p class="panel-label">格子说明</p><ul>${rows.join('')}</ul>`:'';
+  }
   function updateInspector() {
     const tile=state.board?.[selected];if(!tile)return;
     const lot=tile.lot,owner=lot?.ownerId?getPlayerById(lot.ownerId):null,rent=rentFor(tile),economy=getMapEconomy();
     const key=JSON.stringify([tile.index,lot?.ownerId,lot?.level,rent.total,state.bankPool]);
     if(key===inspectorKey)return;inspectorKey=key;
     if(lot){
-      inspector.innerHTML=`<p class="panel-label">${esc(lot.district||'地产手册')}</p><h2>${esc(tile.name)}</h2><div class="property-meta"><span>${esc(owner?.name||'无主地产')}</span><span>${lot.level===0?'空地':`Lv.${lot.level}`}</span>${lot.isLarge?'<span>占据 2 格</span>':''}</div><div class="property-price">${money(owner?rent.total:lot.price)} <small>${owner?'街区租金':'购买价格'}</small></div>${owner?`<div class="property-breakdown">${rent.lots.map(t=>`${esc(t.name)} ${money(t.lot.tolls[t.lot.level])}`).join(' ＋ ')}<br>街区合计 ${money(rent.base)} × ${rent.multiplier}</div>`:''}<p class="property-note">${!owner&&lot.level>0?`开业地产：买下即得 Lv.${lot.level} 建筑。`:lot.level<3?`升级到 Lv.${lot.level+1}：${money(lot.buildCosts[lot.level+1])}`:'已达最高等级。'}${lot.effectId?'<br>'+({finance_bonus:'自己停留时获得金融收益。',tower_bonus:'自己停留时获得商务收益。',hot_spring_rest:'让来访的对手下回合休息。'}[lot.effectId]||''):''}</p>`;
+      const mates=lot.district?state.board.filter(t=>t.lot&&!t.isLargeSecondary&&t.lot.district===lot.district):[];
+      const effect=effectText(lot);
+      inspector.innerHTML=`<p class="panel-label">${esc(lot.district||'地产手册')}</p><h2>${esc(tile.name)}</h2><div class="property-meta"><span>${owner?(owner.id==='human'?'你的地产':'对手地产'):'待售'}</span><span>${lot.level===0?'空地':`Lv.${lot.level}`}</span>${lot.isLarge?'<span>占据 2 格</span>':''}</div><div class="property-price">${money(owner?rent.total:getLotPurchasePrice(lot))} <small>${owner?'街区租金':'购买价格'}</small></div>${owner?`<div class="property-breakdown">${rent.lots.map(t=>`${esc(t.name)} ${money(t.lot.tolls[t.lot.level])}`).join(' ＋ ')}<br>街区合计 ${money(rent.base)} × ${rent.multiplier}</div>`:''}<p class="property-rents">租金${lot.tolls.map((value,level)=>`<span${level===lot.level?' class="is-current"':''}>${level===0?'空地':`${level} 级`} ${money(value)}</span>`).join('')}</p>${mates.length>1?`<p class="property-district">同街区${mates.map(t=>`<span class="${[t.lot.ownerId==='human'?'is-human':t.lot.ownerId?'is-ai':'',t.lot===lot?'is-self':''].join(' ').trim()}">${esc(t.name)}</span>`).join('')}</p>`:''}<p class="property-note">${!owner&&lot.level>0?`买下保留 Lv.${lot.level} 建筑。`:lot.level<3?`升级到 Lv.${lot.level+1}：${money(lot.buildCosts[lot.level+1])}`:'已达最高等级。'}${effect?`<br>${effect}。`:''}</p>`;
     } else {
-      inspector.innerHTML=`<p class="panel-label">城市特别地标</p><h2>${esc(tile.name)}</h2><div class="inspector-special">${tile.isStart?'⚑':({bank:'◈',card_draw:'▣',chance:'✦',construction:'⚒',teleport:'◎',rush:'↗',junction:'∞'}[tile.special?.type]||'✦')}</div><p class="property-note">${tile.isStart?`经过 +${money(economy.startBonus)} · 自动建造一处空地；停留可征用地产。`:esc(tile.special?.description)}</p>${tile.special?.type==='bank'?`<div class="property-price">${money(state.bankPool)}<small>${state.bankPool>=economy.bankThreshold?'金库已满 · 停留可全部提取':`金库积累中 · ${money(economy.bankThreshold)} 起可提`}</small></div>`:''}`;
+      inspector.innerHTML=`<p class="panel-label">城市特别地标</p><h2>${esc(tile.name)}</h2><div class="inspector-special">${tile.isStart?'⚑':({bank:'◈',card_draw:'▣',chance:'✦',construction:'⚒',teleport:'◎',rush:'↗',junction:'∞'}[tile.special?.type]||'✦')}</div><p class="property-note">${esc(tileGuideText(tile,economy))}</p>${tile.special?.type==='bank'?`<div class="property-price">${money(state.bankPool)}<small>${state.bankPool>=economy.bankThreshold?'金库已满 · 停留可全部提取':`金库积累中 · ${money(economy.bankThreshold)} 起可提`}</small></div>`:''}`;
     }
-    inspector.insertAdjacentHTML('beforeend',`<button class="inspect-building-btn" type="button" data-inspect-building="${tile.index}">近看建筑 <span aria-hidden="true">↗</span></button>`);
-    inspector.querySelector('[data-inspect-building]').disabled=!window.CityScene?.inspectTile||(state.busy&&!preview);
+    if(!lot||lot.level>0){
+      inspector.insertAdjacentHTML('beforeend',`<button class="inspect-building-btn" type="button" data-inspect-building="${tile.index}">近看建筑 <span aria-hidden="true">↗</span></button>`);
+      inspector.querySelector('[data-inspect-building]').disabled=!window.CityScene?.inspectTile||(state.busy&&!preview);
+    }
   }
   function update() {
     if(!state.players)return;
@@ -175,20 +213,24 @@
     routeButton.textContent=map.id==='expansion'?'城市快线':map.id==='alpine'?'缆车穿城':'冲刺移动';
     document.querySelectorAll('#start-map-options [data-map-id]').forEach(button=>{
       const option=getMapConfig(button.dataset.mapId);
-      button.querySelector('.map-option-meta').textContent=`${option.routePositions.length} 格 · ${getMaxRounds(option.id)} 回合`;
+      button.querySelector('.map-option-meta').textContent=`${getMaxRounds(option.id)} 回合`;
     });
     showcaseControls.classList.toggle('hidden',!preview||inMenu);
     document.getElementById('showcase-open-btn').classList.toggle('hidden',!preview);
     if(lastCameraSession!==state.sessionId){lastCameraSession=state.sessionId;inspectorKey='';mapGuide.open=false;closeHarborProject(false);}
     document.getElementById('victory-rule').textContent='';
     document.getElementById('rules-victory').textContent=state.gameMode==='bankruptcy'?'对手破产时，你获胜。':`打完 ${getMaxRounds()} 回合，现金更多的一方获胜。`;
+    renderRulesGuide(map);
     updateCash();updateInspector();syncCityScene();refreshHarborProjectPanel();
     inspector.querySelectorAll('[data-inspect-building]').forEach(button=>{button.disabled=!window.CityScene?.inspectTile||(state.busy&&!preview);});
-    const m=state.modal,tile=state.board[currentPlayer().position];
-    if(m.visible&&tile?.lot&&['购买提示','升级提示'].includes(m.label)) {
-      const owner=tile.lot.ownerId, rent=rentFor(tile), next=tile.lot.buildCosts[tile.lot.level+1];
-      const remaining=currentPlayer().cash-(owner?(next||0):tile.lot.price);
-      propertyPreview.innerHTML=`<div class="event-property-grid"><div><small>${owner?'当前街区租金':'基础过路费'}</small><b>${money(owner?rent.total:tile.lot.tolls[tile.lot.level])}</b></div><div><small>操作后现金</small><b>${money(Math.max(0,remaining))}</b></div></div>${window.CityScene?.inspectTile?`<button class="inspect-building-btn" type="button" data-inspect-building="${tile.index}" data-inspect-level="3">查看满级建筑 <span aria-hidden="true">↗</span></button>`:''}`;
+    const m=state.modal,tile=state.board[m.propertyOffer?.tileIndex];
+    if(m.visible&&tile?.lot&&m.propertyOffer) {
+      const lot=tile.lot,action=m.propertyOffer.action,upgrading=action==='build';
+      const municipal=action==='municipalBuy'||action==='municipalSell';
+      const price=municipal?getCityTakeoverQuote(lot).purchasePrice:upgrading?lot.buildCosts[lot.level+1]:getLotPurchasePrice(lot);
+      const priceLabel=action==='municipalSell'?'原主获补偿':action==='municipalBuy'?'买入价':upgrading?'升级费用':'售价';
+      const rent=upgrading?`${money(lot.tolls[lot.level])} → ${money(lot.tolls[lot.level+1])}`:money(lot.tolls[lot.level]);
+      propertyPreview.innerHTML=`<div class="property-offer-price"><span>${priceLabel}</span><strong>${money(price)}</strong></div><p class="property-offer-rent">基础租金 <span>${rent}</span></p>`;
     } else propertyPreview.innerHTML='';
     if(preview) {rollBtn.disabled=true;document.querySelectorAll('[data-showcase]').forEach(b=>b.disabled=previewBusy||state.cardUsePending);}
   }
@@ -332,7 +374,7 @@
         if(station){human.position=station.index;selected=station.index;state.currentPlayerIndex=0;render();await resolveCardDraw(human,sid);}
       } else if(type==='seize'){
         human.position=0;state.currentPlayerIndex=0;selected=0;
-        state.statusTitle='选择征用地产';state.statusDescription='';render();
+        state.statusTitle='领取市政卡';state.statusDescription='';render();
         await resolveStartTakeover(human,sid);
       } else if(type==='buy'){
         const tile=state.board[showcaseTargets.build];
@@ -341,7 +383,7 @@
         await sleep(250);if(!isSessionActive(sid))return;
         if(buyLot(human,tile)) {
           render();
-          await present({label:'购买完成',title:`已购买 ${tile.name}`,message:`−${money(tile.lot.price)}`,drama:{type:'buy',amount:tile.lot.price,to:human,tiles:[tile.index],tileName:tile.name}});
+          await present({label:'购买完成',title:`已购买 ${tile.name}`,message:'',drama:{type:'buy',amount:getLotPurchasePrice(tile.lot),to:human,tiles:[tile.index],tileName:tile.name}});
         }
       } else if(type==='build'){
         const tile=state.board[showcaseTargets.build];tile.lot.ownerId='human';tile.lot.level=1;human.position=tile.index;render();
@@ -356,16 +398,20 @@
         if(station){human.position=station.index;selected=station.index;render();await resolveLanding(human,station,sid);}
       } else {render();await resolveLanding(human,state.board[showcaseTargets.rent],sid);}
     } finally {
-      if(isSessionActive(sid)){previewBusy=false;state.busy=type!=='draw';state.phase=type==='draw'?'await_roll':'locked';state.statusTitle=type==='draw'?'卡牌已入包':'演示结束';state.statusDescription='';render();if(type==='draw')window.GameCardBag?.open();}
+      if(isSessionActive(sid)){const receivedCard=type==='draw'||type==='seize';previewBusy=false;state.busy=!receivedCard;state.phase=receivedCard?'await_roll':'locked';state.statusTitle=receivedCard?'卡牌已入包':'演示结束';state.statusDescription='';render();if(receivedCard)window.GameCardBag?.open();}
     }
   }
   window.GamePresentation={update,updateCash,present,onReset,celebrate,rentFor,syncCityScene,selectTile,selectCurrentTile:()=>{if(state.players)selectTile(currentPlayer().position);}};
   function inspectBuilding(event) {
     const button=event.target.closest('[data-inspect-building]');
-    if(button&&!button.disabled&&(!state.busy||preview))window.CityScene?.inspectTile(Number(button.dataset.inspectBuilding),button.dataset.inspectLevel?Number(button.dataset.inspectLevel):undefined);
+    if(button&&!button.disabled&&(!state.busy||preview))window.CityScene?.inspectTile(Number(button.dataset.inspectBuilding));
   }
   inspector.addEventListener('click',inspectBuilding);
-  propertyPreview.addEventListener('click',inspectBuilding);
+  const topbarMenu=document.getElementById('topbar-menu');
+  if(topbarMenu) {
+    topbarMenu.addEventListener('click',event=>{if(event.target.closest('.topbar-menu-panel button'))topbarMenu.open=false;});
+    document.addEventListener('pointerdown',event=>{if(topbarMenu.open&&!topbarMenu.contains(event.target))topbarMenu.open=false;});
+  }
   window.addEventListener('city:ready',()=>{syncCityScene();render();});
   window.addEventListener('city:select',e=>{if(state.modal.visible&&state.modal.boardTargets?.length){previewMunicipalTarget(e.detail.index);return;}selectTile(e.detail.index);if(!state.modal.visible&&!state.busy)openMobilePanel('property');});
   window.addEventListener('city:harbor-project',event=>openHarborProject(event.detail?.id));

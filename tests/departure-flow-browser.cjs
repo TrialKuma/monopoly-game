@@ -48,7 +48,7 @@ const assert = require('node:assert/strict'), fs = require('node:fs'), path = re
     await page.locator('[data-action="flip"]').click();
     await page.locator('[data-action="continue"]').waitFor();
     assert.equal(await page.locator('#event-title').textContent(), '你先手');
-    assert.equal(await page.locator('#event-message').textContent(), '对手获后手补偿 ¥400 · 双骰卡 ×1');
+    assert.equal(await page.locator('#event-message').textContent(), '对手获后手补偿 双骰卡 ×1');
     await page.screenshot({ path: path.join(out, 'initiative-320.png') });
     await page.locator('[data-action="continue"]').click();
     await page.waitForFunction(() => state.isFormalRun && !departureJob);

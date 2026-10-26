@@ -82,9 +82,37 @@ export function createCityLighting({ THREE, scene, world, renderer, light, board
   const parkX = Math.max(.8, Math.min(2.6, (boardWidth - 4.7) * .35));
   const parkZ = Math.max(.5, Math.min(1.2, (boardDepth - 4.65) * .3));
   const parkLights = [[-parkX, -.32], [parkX, .32], [.32, parkZ]].map(([x, z], index) => {
-    const lamp = new THREE.PointLight('#ffc477', 0, 4.8, 2); lamp.name = `city_park_light_${index}`;
+    const lamp = new THREE.PointLight('#ffd18c', 0, 5.4, 2); lamp.name = `city_park_light_${index}`;
     lamp.position.set(x, .82, z); lamp.castShadow = false; root.add(lamp); return lamp;
   });
+  // Harbor squares own their lamp positions. Never leave the old park pools
+  // floating on a road or in the water after changing to the island map.
+  const lampAnchors = [];
+  world?.traverse(node => { if (node.userData.nightLightAnchor) lampAnchors.push(node); });
+  const selectedAnchors = [];
+  while (lampAnchors.length && selectedAnchors.length < parkLights.length) {
+    world.updateWorldMatrix(true, true);
+    const distance = node => {
+      const position = node.getWorldPosition(new THREE.Vector3());
+      return selectedAnchors.length ? Math.min(...selectedAnchors.map(anchor => position.distanceToSquared(anchor.getWorldPosition(new THREE.Vector3())))) : 0;
+    };
+    lampAnchors.sort((a, b) => distance(b) - distance(a));
+    selectedAnchors.push(lampAnchors.shift());
+  }
+  function updateParkLights(night) {
+    let changed = false;
+    for (const [index, lamp] of parkLights.entries()) {
+      const anchor = selectedAnchors[index]; let visible = true;
+      if (anchor) {
+        for (let node = anchor; node; node = node.parent) if (!node.visible) visible = false;
+        anchor.getWorldPosition(point); root.worldToLocal(point);
+        if (!lamp.position.equals(point)) { lamp.position.copy(point); changed = true; }
+      }
+      const power = visible ? (2.8 + wetness * .5) * smooth(.12, .9, night) : 0;
+      if (lamp.intensity !== power) { lamp.intensity = power; changed = true; }
+    }
+    return changed;
+  }
 
   let disposed = false, mode = 'auto', hour = 10, autoHour = 10, targetHour = 10;
   let manualTransition = false, forced = true, reduced = false, lastSignature = '', lastSkySignature = '';
@@ -148,7 +176,7 @@ export function createCityLighting({ THREE, scene, world, renderer, light, board
     // `warmth` remains the existing low-sun indicator used by the clock label.
     const evening = smooth(11, 13, hour), dawn = warmth * (1 - evening), dusk = warmth * evening;
     const sunPower = (.3 + 1.6 * Math.pow(Math.max(0, altitude), .38)) * daylight * (1 - cloud * .76);
-    const moonPower = .64 * night * (1 - cloud * .55);
+    const moonPower = 1.0 * night * (1 - cloud * .40);
     const moonMix = moonPower / Math.max(.001, sunPower + moonPower);
     sunDirection.set(-Math.cos(phase), Math.max(.40, altitude), .36 + Math.sin(phase * .8) * .18).normalize();
     moonDirection.set(-Math.cos(phase + Math.PI), .68 + Math.max(0, -altitude) * .25, -.28).normalize();
@@ -168,16 +196,16 @@ export function createCityLighting({ THREE, scene, world, renderer, light, board
         node.color.copy(colors.hemiDay).lerp(colors.hemiDawn, dawn * .85).lerp(colors.hemiDusk, dusk * .74).lerp(colors.hemiNight, night);
         node.color.lerp(colors.cloud, cloud * .27);
         node.groundColor.copy(colors.bounceDay).lerp(colors.bounceDawn, dawn * .86).lerp(colors.bounceDusk, dusk * .76).lerp(colors.bounceNight, night).lerp(colors.snow, snow * daylight * .42);
-        node.intensity = mix(1.05, .46, night) + cloud * .16 * daylight + snow * .09;
+        node.intensity = mix(1.05, .70, night) + cloud * .16 * daylight + snow * .09;
       } else if (node.isDirectionalLight) {
         node.position.set(-keyDirection.x * lightDistance * .65, lightDistance * .45, -keyDirection.z * lightDistance * .6);
         node.color.copy(colors.fillDay).lerp(colors.fillDawn, dawn).lerp(colors.fillDusk, dusk * .72).lerp(colors.fillNight, night);
-        node.intensity = mix(.50, .24, night) + cloud * .06;
+        node.intensity = mix(.50, .40, night) + cloud * .06;
       }
     }
-    scene.environmentIntensity = mix(.48, .115, night) + cloud * daylight * .035;
-    if (renderer && Number.isFinite(original.exposure)) renderer.toneMappingExposure = mix(.96, .98, night) - warmth * .025;
-    for (const lamp of parkLights) lamp.intensity = (1.7 + wetness * .5) * smooth(.12, .9, night);
+    scene.environmentIntensity = mix(.48, .24, night) + cloud * daylight * .035;
+    if (renderer && Number.isFinite(original.exposure)) renderer.toneMappingExposure = mix(.96, 1.04, night) - warmth * .025;
+    updateParkLights(night);
     for (const { material } of groundCopies) {
       material.color.copy(colors.groundDay).lerp(colors.groundDawn, dawn * .85).lerp(colors.groundDusk, dusk * .72).lerp(colors.groundNight, night * .55);
       material.color.lerp(colors.wet, wetness * .14).lerp(colors.snow, snow * .27);
@@ -216,7 +244,7 @@ export function createCityLighting({ THREE, scene, world, renderer, light, board
       cloud = Math.max(cloud, rain * .83);
     }
     const signature = [hour, cloud, rain, snow, wetness, Number(reduced)].map(value => value.toFixed(5)).join(':') + mode;
-    if (!forced && signature === lastSignature) return false;
+    if (!forced && signature === lastSignature) return updateParkLights(state.night);
     lastSignature = signature; forced = false; apply(); return true;
   }
 

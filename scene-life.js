@@ -1,9 +1,9 @@
 // Cosmetic city life. No game state writes, global RNG, timers, or animation loop.
 // Articulated Blender parts are kept by scene.js before its static mesh batching.
-import { createCityLighting } from './scene-lighting.js?v=20261025-harbor1';
+import { createCityLighting } from './scene-lighting.js?v=20261027-night1';
 import { createCityWeather } from './scene-weather.js?v=20261025-items1';
-import { createCityOutskirts } from './scene-outskirts.js?v=20261025-terrain3';
-import { createDestinationScene } from './scene-destinations.js?v=20261025-terrain3';
+import { createCityOutskirts } from './scene-outskirts.js?v=20261027-night1';
+import { createDestinationScene } from './scene-destinations.js?v=20261027-night1';
 export function shouldPreserveLifeNode(node) {
   return !!node?.userData?.lifePart || /^life_(wheel_rotor|crane_pendulum)$/.test(node?.name || '');
 }
@@ -19,6 +19,8 @@ export function createSceneLife({ THREE, scene, world, light, snapshot, lotViews
   let disposed = false, paused = false, mode = 'auto', elapsed = 0, accumulator = 0, forced = true;
   let night = 0, lastTime = null, currentSnapshot = snapshot;
   let observedBuildings = '';
+  const regionalPark = world.getObjectByName(`regional_park_${snapshot?.mapId}`);
+  let observedParkRevision = -1;
   const sparkEvents = [], sparkLimit = 20;
   const w = Math.max(1, (boardBounds?.w || 11.55) - 4.7);
   const d = Math.max(1, (boardBounds?.d || 9.9) - 4.65);
@@ -141,11 +143,12 @@ export function createSceneLife({ THREE, scene, world, light, snapshot, lotViews
     const name = original.name || '';
     const warm = /warm (lit|light|welcome|amber|lantern glass)|window glass|window recess|enamel window/i.test(name);
     const cool = /turquoise glass|deep sea glass|deep blue glazing|soft teal architectural glass|portal cyan/i.test(name);
+    const service = /^public-service-.+-glow$/.test(name);
     const anonymousLamp = !name && original.emissiveIntensity > .05 && original.emissive?.r > original.emissive?.b * 1.3;
-    if (!warm && !cool && !anonymousLamp) return original;
+    if (!warm && !cool && !anonymousLamp && !service) return original;
     if (!materialCopies.has(original)) {
       const clone = own(original.clone()); clone.name = original.name;
-      materialCopies.set(original, { material: clone, base: original.emissive.clone(), intensity: original.emissiveIntensity || 0, tint: new THREE.Color(cool ? '#26879f' : '#ffbb67'), strength: cool ? .34 : .70 });
+      materialCopies.set(original, { material: clone, base: original.emissive.clone(), intensity: original.emissiveIntensity || 0, tint: service ? original.emissive.clone() : new THREE.Color(cool ? '#58bfce' : '#ffd18a'), strength: service ? 1.6 : cool ? 1.1 : 2.0 });
     }
     return materialCopies.get(original).material;
   }
@@ -158,8 +161,13 @@ export function createSceneLife({ THREE, scene, world, light, snapshot, lotViews
       if (node.userData.thermalSteam) thermalSteam.push(node);
       // Each atmosphere module owns its materials. Only bind actual buildings,
       // never another module's translucent particles or emissive decorations.
-      if (node.userData.cosmetic) return;
-      for (let p = node.parent; p; p = p.parent) if (p.userData.cosmetic) return;
+      const serviceLight = node.isMesh && (Array.isArray(node.material) ? node.material : [node.material]).some(material => /^public-service-.+-glow$/.test(material?.name || ''));
+      let parkLight = false;
+      for (let p = node; p; p = p.parent) if (p === regionalPark) { parkLight = true; break; }
+      if (!serviceLight && !parkLight) {
+        if (node.userData.cosmetic) return;
+        for (let p = node.parent; p; p = p.parent) if (p.userData.cosmetic) return;
+      }
       if (node.isMesh && !bindings.has(node)) {
         const original = node.material;
         const replacement = Array.isArray(original) ? original.map(copyWindowMaterial) : copyWindowMaterial(original);
@@ -172,10 +180,11 @@ export function createSceneLife({ THREE, scene, world, light, snapshot, lotViews
       }
     });
     weather.refresh();
+    observedParkRevision = regionalPark?.userData.nightLightingRevision || 0;
     forced = true;
   }
   function applyLight() {
-    palette.lamp.emissiveIntensity = .28 + night * 1.8; poolMat.opacity = night * .38;
+    palette.lamp.emissiveIntensity = .28 + night * 3.2; poolMat.opacity = night * .58;
     palette.water.emissiveIntensity = .12 + night * .18;
     for (const entry of materialCopies.values()) {
       entry.material.emissive.copy(entry.base).lerp(entry.tint, night * .86);
@@ -229,6 +238,9 @@ export function createSceneLife({ THREE, scene, world, light, snapshot, lotViews
   }
   function tick(time, delta) {
     if (disposed || hidden) { lastTime = time; return false; }
+    // Regional scenery arrives separately from the playable building package.
+    // Bind its windows once when that asynchronous generation becomes ready.
+    if ((regionalPark?.userData.nightLightingRevision || 0) !== observedParkRevision) bindBuildings();
     const dt = Math.min(.08, Math.max(0, Number.isFinite(delta) ? delta : lastTime == null ? 0 : (time - lastTime) / 1000));
     lastTime = time;
     if ((paused || reduced) && !forced && !weather.needsWork?.()) return false;

@@ -1,6 +1,7 @@
 import { loadSharedModelAsset, disposeSharedModelAssets, regionalSceneryDirectory } from './scene-model-cache.js?v=20261025-harbor1';
-import { createRegionalSurroundings, fillRegionalScenicBuildings } from './scene-regional-parks.js?v=20261025-terrain3';
+import { createRegionalSurroundings, fillRegionalScenicBuildings } from './scene-regional-parks.js?v=20261027-night1';
 import { batchGardenBuilding, instanceGardenBuildings } from './scene-garden-kit.js?v=20261025-terrain3';
+import { createScenicWindowLights, createGroundLightPools, proceduralLampPositions } from './scene-scenic-lighting.js?v=20261027-night1';
 
 // Regional architecture is shared by all scenic copies. The selected map owns
 // only its merged placement geometry, never the GLTF cache's materials/textures.
@@ -10,11 +11,13 @@ function loadBundle(file){
 export function createCityOutskirts({THREE,world,boardBounds,mapId='classic',requestRender=()=>{},loadSceneryBundle=loadBundle}){
   const root=new THREE.Group();root.name='city_outskirts';root.userData.cosmetic=true;world.add(root);
   const owned=new Set(),own=value=>{owned.add(value);return value;};
+  const windowLights=createScenicWindowLights({THREE,own});
   let disposed=false,lastNight=-1,ready=false,failed=false,regional=false;
   // The two destination scenes own their own perimeter and should not allocate
   // an invisible second district when scene-life creates this common controller.
   const supported=['classic','compact','expansion'].includes(mapId);
   const scenery=supported?createRegionalSurroundings({THREE,root,own,boardBounds,mapId}):null;
+  const lampPools=scenery?createGroundLightPools({THREE,parent:root,own,positions:proceduralLampPositions({THREE,root,material:scenery.warm}),radius:.55}):null;
   const loading=supported?loadSceneryBundle(`${regionalSceneryDirectory}/${mapId}.glb`).then(gltf=>({gltf,regional:true})).then(bundle=>{
     if(disposed||!bundle)return;
     for(const plot of scenery.plots){
@@ -36,16 +39,17 @@ export function createCityOutskirts({THREE,world,boardBounds,mapId='classic',req
       district.add(building);count++;
     }
     if(count){const batch=(allInstanceable?instanceGardenBuildings:batchGardenBuilding)({THREE,source:district,own});batch.name='outskirts_regional_neighbourhood';batch.traverse(node=>{if(node.isMesh){node.castShadow=!node.material?.transparent;node.raycast=()=>{};}});root.add(batch);}
+    windowLights.bind(root);
     root.userData.buildingCount=count;root.userData.regionalArchitecture=regional;ready=true;requestRender();
   }).catch(error=>{if(!disposed){failed=true;if(typeof window!=='undefined')console.warn(`Scenic district ${mapId} unavailable`,error.message);}}):Promise.resolve();
   function tick(delta,{night=0,reduced=false,paused=false}={}){
     if(disposed||!root.visible||!scenery)return false;
     const darkness=Math.min(1,Math.max(0,Number.isFinite(night)?night:0));
     if(Math.abs(darkness-lastNight)<=.002)return false;
-    lastNight=darkness;scenery.warm.emissiveIntensity=.2+darkness*1.6;return true;
+    lastNight=darkness;scenery.warm.emissiveIntensity=.2+darkness*2.8;windowLights.update(darkness);lampPools?.update(darkness);return true;
   }
   function setVisible(value){if(disposed)return false;const visible=!!value;if(root.visible===visible)return true;root.visible=visible;requestRender();return true;}
-  function dispose(){if(disposed)return;disposed=true;root.removeFromParent();owned.forEach(resource=>resource.dispose());owned.clear();}
+  function dispose(){if(disposed)return;disposed=true;windowLights.dispose();root.removeFromParent();owned.forEach(resource=>resource.dispose());owned.clear();}
   tick(0);requestRender();
   return {tick,setVisible,dispose,loading,getState:()=>({ready,failed,regional,buildings:root.userData.buildingCount||0,landscape:root.userData.landscape})};
 }

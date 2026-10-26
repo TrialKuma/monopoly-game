@@ -1,9 +1,10 @@
 // Permanent court upgrades are built once. Snapshot stages only reveal the
 // authored additions; local UI animation never changes points or rewards.
+import { createGroundLightPools } from './scene-scenic-lighting.js?v=20261027-night1';
 export function createHarborProjectVisuals({THREE,root,id,center,radius,own}){
   const group=new THREE.Group();group.name='harbor_project_'+id;group.position.copy(center);root.add(group);
   const stages=[null,...[1,2,3].map(stage=>{const g=new THREE.Group();g.name=`harbor_project_${id}_stage_${stage}`;g.visible=false;group.add(g);return g;})];
-  const materials=new Map(),glowMaterials=[];
+  const materials=new Map(),glowMaterials=[],lampPositions=[];
   function mat(color,{glow=false,metal=false}={}){const key=color+':'+glow+':'+metal;if(!materials.has(key)){const m=own(new THREE.MeshStandardMaterial({color,roughness:metal?.38:.76,metalness:metal?.38:0,emissive:glow?color:'#000000',emissiveIntensity:glow?.55:0}));materials.set(key,m);if(glow){m.userData.projectBaseEmissive=.55;glowMaterials.push(m);}}return materials.get(key);}
   const boxGeo=own(new THREE.BoxGeometry(1,1,1)),budGeo=own(new THREE.IcosahedronGeometry(1,1));
   function mesh(parent,geometry,material,x=0,y=0,z=0){const m=new THREE.Mesh(geometry,material);m.position.set(x,y,z);m.castShadow=true;m.receiveShadow=true;parent.add(m);return m;}
@@ -12,7 +13,8 @@ export function createHarborProjectVisuals({THREE,root,id,center,radius,own}){
   function tube(parent,points,width,color,options){return mesh(parent,own(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(points.map(p=>new THREE.Vector3(...p))),16,width,6,false)),mat(color,options));}
   function lamp(parent,x,z){
     cylinder(parent,x,.22,z,.13,.11,'#b9ad8d');box(parent,x,.47,z,.045,.48,.045,'#597f75');
-    box(parent,x,.75,z,.17,.20,.17,'#f2d890',{glow:true});box(parent,x,.87,z,.22,.045,.22,'#608779');
+    const head=box(parent,x,.75,z,.17,.20,.17,'#f2d890',{glow:true});head.name='harbor_project_lantern';head.userData.nightLightAnchor=true;
+    box(parent,x,.87,z,.22,.045,.22,'#608779');lampPositions.push([x,.165,z]);
   }
   // Stage 1: an intentionally visible ring of low flower urns and lanterns.
   for(const sx of [-1,1])for(const sz of [-1,1]){
@@ -22,6 +24,7 @@ export function createHarborProjectVisuals({THREE,root,id,center,radius,own}){
     const bush=mesh(stages[1],budGeo,mat('#7c9e78'),px,.45,pz);bush.scale.set(.20,.17,.20);
     for(let j=0;j<3;j++){const bud=mesh(stages[1],budGeo,mat(j%2?'#e4c58b':'#d79693'),px+(j-1)*.09,.58,pz+(j%2?.04:-.04));bud.scale.set(.055,.045,.055);}
   }
+  const lampPools=createGroundLightPools({THREE,parent:stages[1],own,positions:lampPositions,radius:.70});
   if(id==='water'){
     // Stage 2: a compact tiered fountain sits in the existing water basin.
     cylinder(stages[2],0,.31,0,.34,.15,'#b8c7b2');cylinder(stages[2],0,.51,0,.095,.35,'#789d91');
@@ -56,7 +59,7 @@ export function createHarborProjectVisuals({THREE,root,id,center,radius,own}){
   const inlay=mesh(stages[3],own(new THREE.TorusGeometry(inlayRadius,.018,6,64)),gold,0,.153,0);inlay.rotation.x=Math.PI/2;
   for(let i=0;i<8;i++){const a=(i+.5)*Math.PI/4;const stud=mesh(stages[3],budGeo,gold,Math.cos(a)*inlayRadius,.18,Math.sin(a)*inlayRadius);stud.scale.set(.06,.035,.06);}
   root.updateWorldMatrix(true,true);
-  const entry={id,anchor:group.localToWorld(new THREE.Vector3(0,.48,0)),labelAnchor:group.localToWorld(new THREE.Vector3(1.19,.30,-1.91)),group,stage:0,stages,initialized:false,revision:0,animation:null,glowMaterials};
+  const entry={id,anchor:group.localToWorld(new THREE.Vector3(0,.48,0)),labelAnchor:group.localToWorld(new THREE.Vector3(1.19,.30,-1.91)),group,stage:0,stages,initialized:false,revision:0,animation:null,glowMaterials,lampPools,night:0};
   (root.userData.harborProjects||={})[id]=entry;return entry;
 }
 
@@ -70,7 +73,7 @@ export function updateHarborProjectVisuals(root,projects=[]){
     entry.stage=stage;entry.stages.forEach((g,i)=>{if(g)g.visible=i<=stage;});
     if(stage!==from){entry.revision++;changes.push({id:entry.id,from,to:stage,celebrate:!first&&stage>from,anchor:entry.anchor});}
     entry.animation=!first&&stage>from?{started:null}:null;
-    entry.group.scale.set(1,1,1);for(const material of entry.glowMaterials)material.emissiveIntensity=material.userData.projectBaseEmissive;
+    entry.group.scale.set(1,1,1);for(const material of entry.glowMaterials)material.emissiveIntensity=material.userData.projectBaseEmissive+entry.night*2.4;
   }
   return changes;
 }
@@ -80,11 +83,13 @@ export function tickHarborProjectVisuals(root,time,options={}){
   const reduced=options.reducedMotion??globalThis.matchMedia?.('(prefers-reduced-motion: reduce)').matches??false;
   let dirty=false;
   for(const entry of Object.values(entries)){
+    const night=Number.isFinite(options.night)?Math.max(0,Math.min(1,options.night)):entry.night;
+    if(night!==entry.night){entry.night=night;dirty=true;entry.lampPools.update(night);for(const material of entry.glowMaterials)material.emissiveIntensity=material.userData.projectBaseEmissive+night*2.4;}
     if(!entry.animation)continue;dirty=true;
     if(entry.animation.started===null)entry.animation.started=time;
     const t=reduced?1:Math.min(1,Math.max(0,(time-entry.animation.started)/1100)),pulse=Math.sin(t*Math.PI);
     entry.group.scale.setScalar(1+pulse*.035);
-    for(const material of entry.glowMaterials)material.emissiveIntensity=material.userData.projectBaseEmissive+pulse*.55;
+    for(const material of entry.glowMaterials)material.emissiveIntensity=material.userData.projectBaseEmissive+entry.night*2.4+pulse*.55;
     if(t===1){entry.animation=null;entry.group.scale.setScalar(1);}
   }
   return dirty;

@@ -217,6 +217,7 @@ export function fillRegionalScenicBuildings({THREE,root,bundle,mapId}){
     model.traverse(node=>{if(node.isMesh){node.castShadow=true;node.receiveShadow=true;node.raycast=()=>{};}});
     anchor.add(model);anchor.userData.scenicModelReady=true;
   }
+  root.userData.nightLightingRevision=(root.userData.nightLightingRevision||0)+1;
 }
 
 // The surrounding district has a low inner promenade and real regional

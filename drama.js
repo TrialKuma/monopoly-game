@@ -61,10 +61,6 @@
     thin:[['只剩一点现金了。','接下来得谨慎些。'],['暂时不能再买地了。','先攒现金吧。']],
     zero:[['这次不用付钱。','继续走吧。']],
     shield:[['护盾挡住了。','这次免租。'],['省下一笔租金。','下次可就不一定了。']],
-    buy:[['这块地我买了。','那我得注意了。'],['买好了。','看谁先踩到。']],
-    buyDistrict:[['街区连起来了。','租金可要涨了。'],['又添一处地产。','这条街不好走了。']],
-    buyLarge:[['大地块到手。','两个落点都得注意。'],['这块地值得买。','后面还要升级呢。']],
-    buyOpening:[['连建筑一起买下。','马上就能收租了。'],['这栋楼也归我了。','省下了建造费。']],
   };
   const LINES = {
     relief:['拿到救助了。','先把现金攒回来。','还有机会。'],
@@ -111,10 +107,6 @@
       if (!event.leadChanged && !lastCash && amount < 300) return [];
       key = lastCash ? 'rent_last_cash' : event.leadChanged ? 'rent_reversal' : 'rent_large';
       if (lastCash || event.leadChanged) gap = 2;
-    } else if (type === 'buy') {
-      const facts = purchaseFacts(event);
-      if (!facts.chain && !facts.large && !facts.built) return [];
-      key = 'buy';
     } else if (['shield', 'seize', 'relief'].includes(type)) {
       if (type === 'relief' && amount <= 0) return [];
       key = type;
@@ -144,14 +136,6 @@
       const key = exhausted ? (amount > 0 ? 'empty' : 'emptyZero') : amount <= 0 ? 'zero' : event.leadChanged ? (amount >= 300 ? 'hugeLead' : 'lead') : cash !== null && cash <= 100 ? 'thin' : amount >= 300 ? 'huge' : 'rent';
       const [complaint, reply] = line(key);
       return [say(event.from,'付款方',exhausted?'panic':'complaint',exhausted?'😱':amount>=300?'😤':'😮',complaint), say(event.to,'收租方','proud',event.leadChanged?'😎':'😏',reply)];
-    }
-    if (type === 'buy') {
-      const facts = purchaseFacts(event);
-      const key = facts.chain ? 'buyDistrict' : facts.opening || facts.built ? 'buyOpening' : facts.large ? 'buyLarge' : 'buy';
-      const [boast, reply] = line(key);
-      const lines = [say(event.to,'买家','joyful','🤩',boast)];
-      if (event.rival?.name && event.rival.id !== event.to?.id) lines.push(say(event.rival,'对手','complaint','🙄',reply));
-      return lines;
     }
     if (type === 'shield') {
       const [taunt, reply] = line('shield');
@@ -427,10 +411,13 @@
     card.setAttribute('aria-atomic', 'true');
     const content = element('div', 'drama-content');
     const meta = element('div', 'drama-meta');
-    const kicker = element('span', 'drama-kicker', chance ? '机会事件 · 已结算' : LABELS[type]);
-    kicker.prepend(element('i', 'drama-live-dot'));
-    meta.append(kicker, element('span', 'drama-sequence', String(++eventNumber).padStart(2, '0')));
-    content.appendChild(meta);
+    eventNumber++;
+    if (type === 'buy') {
+      const kicker = element('span', 'drama-kicker', `${event.to?.name || '玩家'}已购入`);
+      kicker.prepend(element('i', 'drama-live-dot'));
+      meta.appendChild(kicker);
+      content.appendChild(meta);
+    }
     const speech = speechBubbles(reaction);
     if (speech) content.appendChild(speech);
     const body = element('div', 'drama-body');
@@ -441,12 +428,12 @@
     let title = event.title || TITLES[type];
     if (type === 'rent' && amount >= 300) title = event.tiles?.length > 1 ? '连锁收租' : '租金结算';
     if (leadChanged) title = '现金排名反超';
-    if (type === 'buy') title = facts.chain ? '购买成功 · 街区连锁' : facts.built ? '房产购买成功' : facts.large ? '大型地产购买成功' : '地产购买成功';
+    if (type === 'buy') title = event.tileName || '地产';
     const heading = element('h3', 'drama-title', title);
     copy.appendChild(heading);
     if (chance && event.outcomeLabel) copy.appendChild(element('span', 'drama-chance-outcome', event.outcomeLabel));
     if (type === 'seize') copy.appendChild(element('span', 'drama-stamp', acquisition ? '接手成功' : '征用令'));
-    const showAmount = amount > 0 || type === 'shield';
+    const showAmount = type !== 'buy' && (amount > 0 || type === 'shield');
     if (showAmount) {
       const numberLine = element('div', 'drama-amount-line');
       if (type === 'shield') {
@@ -468,7 +455,6 @@
             counter.textContent = fmt(amount);
           };
         }
-        if (type === 'buy') numberLine.appendChild(element('span', 'drama-amount-unit', '买入花费'));
         if (acquisition) numberLine.appendChild(element('span', 'drama-amount-unit', '接手总支出'));
         if (beneficiaries.length) numberLine.appendChild(element('span', 'drama-amount-unit', '每人到账'));
         if (event.chanceKind === 'bank') numberLine.appendChild(element('span', 'drama-amount-unit', '金库增加'));
@@ -482,15 +468,7 @@
       if (acquisition) ledger.appendChild(element('span', 'drama-person', `公共金库 +¥${fmt(premium)}`));
       copy.appendChild(ledger);
     }
-    if (type === 'buy') {
-      const ribbon = element('div', 'drama-purchase-ribbon');
-      ribbon.appendChild(element('span', 'drama-purchase-tag', '购买成功'));
-      if (facts.chain) ribbon.appendChild(element('span', 'drama-purchase-tag', `街区已拥有 ${Math.floor(facts.districtCount)} 处`));
-      if (facts.large) ribbon.appendChild(element('span', 'drama-purchase-tag', '大型地产'));
-      if (facts.built) ribbon.appendChild(element('span', 'drama-purchase-tag', `${facts.opening ? '开业楼 · ' : ''}Lv.${Math.floor(facts.buildingLevel)} 建筑保留`));
-      copy.appendChild(ribbon);
-    }
-    if (event.message) copy.appendChild(element('p', 'drama-message', event.message));
+    if (type !== 'buy' && event.message) copy.appendChild(element('p', 'drama-message', event.message));
     const detail = element('div', 'drama-detail');
     if (beneficiaries.length) {
       beneficiaries.forEach(p => detail.appendChild(element('span', 'drama-person drama-to', p.name)));
@@ -506,7 +484,7 @@
       badge.prepend(element('i', 'drama-lead-arrow', '↗'));
       detail.appendChild(badge);
     }
-    if (detail.childNodes.length) copy.appendChild(detail);
+    if (type !== 'buy' && detail.childNodes.length) copy.appendChild(detail);
     body.append(symbol, copy);
     content.appendChild(body);
     card.appendChild(content);
@@ -552,7 +530,6 @@
     if (type === 'win') confetti(job);
     if (type === 'buy') {
       purchaseBurst(job, card, importantPurchase);
-      delay(job, () => signedCounter(job, event.to, amount, '-'), 280);
     }
     // The result waits for an explicit confirmation; animation timers never advance play.
   }

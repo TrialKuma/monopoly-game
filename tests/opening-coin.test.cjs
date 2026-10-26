@@ -29,7 +29,9 @@ function setup(random = .1, reduced = false) {
     assert.equal(f.c.run('state.openingCompensation.playerId'), first ? 'ai' : 'human');
     assert.equal(f.c.run('state.openingCompensation.cardId'), 'boost');
     assert.deepEqual(JSON.parse(f.c.run('JSON.stringify(state.players.map(player=>player.cards.map(card=>card.cardId)))')), first ? [[], ['boost']] : [['boost'], []]);
-    assert.equal(f.results[0].message, `${first ? '对手' : '你'}获后手补偿 ¥400 · 双骰卡 ×1`);
+    assert.equal(f.c.run('state.openingCompensation.amount'), 0);
+    assert.deepEqual(JSON.parse(f.c.run('JSON.stringify(state.players.map(player=>player.cash))')), [1700, 1700]);
+    assert.equal(f.results[0].message, `${first ? '对手' : '你'}获后手补偿 双骰卡 ×1`);
     assert.equal(f.randomCalls(), 1);
   }
   console.log('PASS both faces match the single sampled initiative and only settle after the toss');

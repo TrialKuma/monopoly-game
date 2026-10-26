@@ -20,7 +20,7 @@ function freeze(value) {
   if (value && typeof value === 'object' && !Object.isFrozen(value)) { Object.freeze(value); Object.values(value).forEach(freeze); }
   return value;
 }
-function fixture(bounds = { w: 11.55, d: 9.9 }, reduced = false) {
+function fixture(bounds = { w: 11.55, d: 9.9 }, reduced = false, withScenery = false) {
   const media = events({ matches: reduced }), doc = events({ hidden: false });
   globalThis.window = { matchMedia: () => media };
   globalThis.document = doc;
@@ -42,6 +42,12 @@ function fixture(bounds = { w: 11.55, d: 9.9 }, reduced = false) {
     group.add(glass, leaf, mixed, wheel); return { group, glass, leaf, mixed, wheel };
   }
   const model = building(); world.add(model.group);
+  const park = new THREE.Group(); park.name = 'regional_park_classic'; park.userData.cosmetic = true;
+  const scenicGlass = new THREE.Mesh(geometry, windowMat); park.add(scenicGlass);
+  const publicBuilding = new THREE.Group(); publicBuilding.userData.cosmetic = true;
+  const serviceMat = new THREE.MeshStandardMaterial({ emissive: '#65bfca', emissiveIntensity: .35 }); serviceMat.name = 'public-service-teleport-glow';
+  const serviceLight = new THREE.Mesh(geometry, serviceMat); publicBuilding.add(serviceLight);
+  if (withScenery) world.add(park, publicBuilding);
   const lotViews = new Map([[7, { building: model.group }]]);
   const snapshot = freeze({ mapId: 'classic', board: Array.from({ length: 22 }, (_, index) => ({ index, owner: null })), players: [{ id: 'human', money: 1600 }, { id: 'ai', money: 2100 }] });
   const original = { background: scene.background, sceneChildren: scene.children.length, worldChildren: world.children.length,
@@ -53,7 +59,7 @@ function fixture(bounds = { w: 11.55, d: 9.9 }, reduced = false) {
   let renders = 0, time = 0;
   const controller = createSceneLife({ THREE, scene, world, light, renderer, boardBounds: bounds, snapshot, lotViews, requestRender: () => renders++ });
   const step = (count = 1) => { let changed; for (let i = 0; i < count; i++) changed = controller.tick(time += 40, .04); return changed; };
-  return { media, doc, scene, world, light, hemi, fill, floor, floorMat, windowMat, leafMat, model, building, lotViews, snapshot, original, renderer, controller, step, renders: () => renders };
+  return { media, doc, scene, world, light, hemi, fill, floor, floorMat, windowMat, leafMat, model, building, lotViews, snapshot, original, renderer, controller, step, park, scenicGlass, serviceMat, serviceLight, renders: () => renders };
 }
 function disposeAndCheck(f) {
   const { controller, scene, world, model, original } = f;
@@ -127,6 +133,25 @@ test('weather owns particle materials; seasonal opacity is not mistaken for wind
   assert.ok(petals.material.opacity < .4, 'spring petals fade during the summer transition');
   assert.equal(petals.material.emissiveIntensity, .055, 'petals never receive the window-light shader material');
   disposeAndCheck(f);
+});
+
+test('regional park windows and service lights brighten, bind late models, and restore at dawn', () => {
+  const f = fixture(undefined, true, true); f.step(); f.controller.setTimeMode('night'); f.step();
+  assert.ok(f.scenicGlass.material.emissiveIntensity > 1.8, 'scenic windows match the brighter playable buildings');
+  assert.ok(f.serviceLight.material.emissiveIntensity > 1.5, 'the cyan service fitting is lit despite its cosmetic parent');
+  assert.equal(f.serviceLight.material.emissive.getHexString(), '65bfca', 'functional color is retained');
+  assert.equal(f.windowMat.emissiveIntensity, .1); assert.equal(f.serviceMat.emissiveIntensity, .35);
+  const late = new THREE.Mesh(f.model.glass.geometry, f.windowMat); f.park.add(late); f.park.userData.nightLightingRevision = 1; f.step();
+  assert.notEqual(late.material, f.windowMat, 'scenic GLTF loaded after the playable map receives its own night material');
+  assert.ok(late.material.emissiveIntensity > 1.8);
+  f.controller.setTimeMode('day'); f.step();
+  for (const glass of [f.model.glass, f.scenicGlass, late]) {
+    assert.equal(glass.material.emissiveIntensity, .1);
+    assert.deepEqual(glass.material.emissive.toArray(), f.windowMat.emissive.toArray());
+  }
+  assert.equal(f.serviceLight.material.emissiveIntensity, .35);
+  disposeAndCheck(f);
+  assert.equal(f.scenicGlass.material, f.windowMat); assert.equal(late.material, f.windowMat); assert.equal(f.serviceLight.material, f.serviceMat);
 });
 
 test('live media preference change freezes particle movement and resumes cleanly', () => {

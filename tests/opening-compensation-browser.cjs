@@ -10,11 +10,11 @@ const assert = require('node:assert/strict'), fs = require('node:fs'), path = re
     page.on('pageerror', error => errors.push(error.message));
     await page.goto(process.env.CITY_PREVIEW_URL || 'http://127.0.0.1:8876/');
     await page.waitForFunction(() => typeof coinFlipForFirstPlayer === 'function' && window.GameCardBag);
-    for (const humanFirst of [true, false]) {
-      await page.evaluate(() => {
-        initializeGame('harbor'); hideStartScreen();
+    for (const [map, startCash] of Object.entries({classic:1600,compact:1600,expansion:2000,harbor:1700,alpine:1900})) for (const humanFirst of [true, false]) {
+      await page.evaluate(map => {
+        initializeGame(map); hideStartScreen();
         window.openingQaPromise = coinFlipForFirstPlayer(state.sessionId);
-      });
+      }, map);
       assert.deepEqual(await page.evaluate(() => state.players.map(player => player.cards)), [[], []]);
       await page.evaluate(humanFirst => {
         const original = Math.random; Math.random = () => humanFirst ? .1 : .9;
@@ -25,6 +25,7 @@ const assert = require('node:assert/strict'), fs = require('node:fs'), path = re
       const result = await page.evaluate(() => ({
         cards: state.players.map(player => player.cards.map(card => card.cardId)),
         cash: state.players.map(player => player.cash),
+        activeDouble: state.players.map(player => player.effects.speedBoost),
         first: state.firstPlayerIndex,
         message: document.querySelector('#event-message').textContent,
         width: document.documentElement.scrollWidth,
@@ -32,18 +33,20 @@ const assert = require('node:assert/strict'), fs = require('node:fs'), path = re
         compensation: { ...state.openingCompensation },
       }));
       assert.deepEqual(result.cards, humanFirst ? [[], ['boost']] : [['boost'], []]);
-      assert.deepEqual(result.cash, humanFirst ? [1700, 2100] : [2100, 1700]);
+      assert.deepEqual(result.cash, [startCash, startCash]);
+      assert.deepEqual(result.activeDouble, [false, false]);
+      assert.deepEqual(result.compensation, {playerId:humanFirst?'ai':'human',amount:0,cardId:'boost'});
       assert.equal(result.first, humanFirst ? 0 : 1);
-      assert.equal(result.message, `${humanFirst ? '对手' : '你'}获后手补偿 ¥400 · 双骰卡 ×1`);
+      assert.equal(result.message, `${humanFirst ? '对手' : '你'}获后手补偿 双骰卡 ×1`);
       assert(result.width <= 390 && result.card.left >= 0 && result.card.right <= 390 && result.card.bottom <= 844);
-      await page.screenshot({ path: path.join(output, `${humanFirst ? 'human' : 'ai'}-first.png`) });
+      await page.screenshot({ path: path.join(output, `${map}-${humanFirst ? 'human' : 'ai'}-first.png`) });
       await page.locator('[data-action="continue"]').click();
       assert.equal(await page.evaluate(() => openingQaPromise), humanFirst);
-      results.push(result);
+      results.push({map,...result});
     }
     assert.deepEqual(errors, []);
     fs.writeFileSync(path.join(output, 'result.json'), JSON.stringify({ results, errors }, null, 2));
-    console.log('PASS 390 portrait real coin flip: either first player receives no card, second player receives one optional double-dice card, short compensation text fits, zero browser exceptions');
+    console.log('PASS all five maps / both initiative outcomes at 390 portrait: equal starting cash, no first-player card, exactly one optional second-player double-dice card, no cash compensation, text fits, zero browser exceptions');
     await context.close();
   } finally { await browser.close(); }
 })().catch(error => { console.error(error); process.exitCode = 1; });

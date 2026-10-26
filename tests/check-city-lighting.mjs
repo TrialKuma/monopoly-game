@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import * as THREE from '../assets/vendor/three/three.module.min.js';
 import { createCityLighting } from '../scene-lighting.js';
 
-function fixture({ rendererless = false, width = 14.85, depth = 11.55 } = {}) {
+function fixture({ rendererless = false, width = 14.85, depth = 11.55, harborLamps = false } = {}) {
   const scene = new THREE.Scene(), world = new THREE.Group(); scene.add(world);
   const background = new THREE.Color('#abcded'); scene.background = background; scene.environmentIntensity = .35;
   const hemi = new THREE.HemisphereLight('#fff6e7', '#94aaa0', 1); scene.add(hemi);
@@ -14,9 +14,17 @@ function fixture({ rendererless = false, width = 14.85, depth = 11.55 } = {}) {
   const boardMaterial = new THREE.MeshStandardMaterial({ color: '#eece93' });
   const board = new THREE.Mesh(new THREE.BoxGeometry(width, .1, depth), boardMaterial); world.add(board);
   const renderer = rendererless ? undefined : { toneMappingExposure: .96 };
+  const lanternStage = new THREE.Group(); lanternStage.visible = false;
+  if (harborLamps) {
+    lanternStage.position.set(2, .2, -1); world.add(lanternStage);
+    for (const [x,z] of [[-1,-1],[1,-1],[1,1]]) {
+      const lantern = new THREE.Object3D(); lantern.userData.nightLightAnchor = true;
+      lantern.position.set(x,.8,z); lanternStage.add(lantern);
+    }
+  }
   let requests = 0;
   const api = createCityLighting({ THREE, scene, world, renderer, light: sun, boardBounds: { w: width, d: depth }, requestRender: () => requests++ });
-  return { api, scene, world, sun, hemi, fill, floor, material, board, boardMaterial, renderer, background, requests: () => requests };
+  return { api, scene, world, sun, hemi, fill, floor, material, board, boardMaterial, renderer, background, lanternStage, requests: () => requests };
 }
 const settle = (api, mode, climate = {}) => {
   api.setTimeMode(mode);
@@ -43,11 +51,31 @@ test('actual sun travels east to west and produces long golden-hour shadows', ()
 test('night keeps a real elevated moon key and bounded warm shadowless park lights', () => {
   const f = fixture(); const state = settle(f.api, 'night');
   assert.equal(state.shadowSource, 'moon'); assert.equal(state.night, 1);
-  assert.ok(f.sun.position.y > 5 && f.sun.intensity >= .55 && f.sun.intensity < 1);
-  assert.ok(f.sun.color.b > f.sun.color.r && f.hemi.intensity > .4);
+  assert.ok(f.sun.position.y > 5 && f.sun.intensity >= .95 && f.sun.intensity < 1.2);
+  assert.ok(f.sun.color.b > f.sun.color.r && f.hemi.intensity >= .65);
   const pointLights = []; f.scene.traverse(node => { if (node.isPointLight) pointLights.push(node); });
   assert.equal(pointLights.length, 3); assert.ok(pointLights.every(node => !node.castShadow && node.intensity > 0));
-  assert.ok(f.scene.environmentIntensity > .1 && f.scene.environmentIntensity < .2);
+  assert.ok(f.scene.environmentIntensity >= .22 && f.scene.environmentIntensity < .35);
+  const clearMoon = f.sun.intensity;
+  f.api.tick(.03, { cloud: 1, rain: 1, wetness: 1 });
+  assert.ok(f.sun.intensity >= clearMoon * .55, 'rainy nights retain enough moonlight to read the board');
+  assert.ok(f.hemi.intensity >= .65 && f.fill.intensity >= .38, 'shadowed walls and roads remain readable');
+  f.api.dispose();
+});
+
+test('harbor pools follow actual lanterns and stay off until their square is unlocked', () => {
+  const f = fixture({harborLamps:true}); settle(f.api, 'night');
+  const lamps = []; f.scene.traverse(node => { if(node.isPointLight) lamps.push(node); });
+  assert.equal(lamps.length,3); assert.ok(lamps.every(lamp=>lamp.intensity===0));
+  f.lanternStage.visible=true; assert.equal(f.api.tick(.03),true);
+  const positions=f.lanternStage.children.map(anchor=>anchor.getWorldPosition(new THREE.Vector3()).toArray());
+  for(const lamp of lamps){
+    assert.ok(lamp.intensity>2 && !lamp.castShadow);
+    assert.ok(positions.some(position=>lamp.position.equals(new THREE.Vector3(...position))));
+  }
+  assert.equal(f.api.tick(.03),false,'a settled rig does not request another frame');
+  f.lanternStage.scale.setScalar(1.03);assert.equal(f.api.tick(.03),true,'light follows the square upgrade animation');
+  f.lanternStage.visible=false;assert.equal(f.api.tick(.03),true);assert.ok(lamps.every(lamp=>lamp.intensity===0));
   f.api.dispose();
 });
 

@@ -4,13 +4,13 @@ import vm from 'node:vm';
 import {spawnSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
 import * as THREE from '../assets/vendor/three/three.module.min.js';
-import {buildDestinationGarden,batchGardenBuilding,instanceGardenBuildings} from '../scene-garden-kit.js';
 import {loadGeometryGLB,regionalAssetURL} from './gltf-geometry-fixture.mjs';
 // Import the actual controllers under the same preview flag as the browser.
 const originalLocation=globalThis.location;
 if(process.argv.includes('--candidate'))globalThis.location={search:'?artStage=candidate'};
 const {createModelAssetCache,regionalSceneryDirectory}=await import('../scene-model-cache.js');
 const {createCityOutskirts}=await import('../scene-outskirts.js');
+const {createDestinationScene}=await import('../scene-destinations.js');
 if(originalLocation===undefined)delete globalThis.location;else globalThis.location=originalLocation;
 
 const maps=['classic','compact','expansion','harbor','alpine'];
@@ -50,13 +50,11 @@ class FixtureGLTFLoader{
 const assetCache=createModelAssetCache({load:url=>new FixtureGLTFLoader().loadAsync(url)});
 // The board and perimeter load their separately reviewed near/far packages.
 const boardSource=assetCache.load(`regions/${mapId}.glb`);
-let api,disposeAssets=()=>{};
+let api;
 if(['harbor','alpine'].includes(mapId)){
   // Run the production destination controller, substituting only file transport
   // so both its asynchronous hero and regional-village branches execute in Node.
-  const code=fs.readFileSync(new URL('../scene-destinations.js',import.meta.url),'utf8').replace(/^import .*;\r?\n/gm,'').replace(/^export /gm,'');
-  const module=new Function('loadSharedModelAsset','disposeSharedModelAssets','buildDestinationGarden','batchGardenBuilding','instanceGardenBuildings','regionalSceneryDirectory',code+';return {createDestinationScene,disposeDestinationAssets};')(assetCache.load,assetCache.dispose,buildDestinationGarden,batchGardenBuilding,instanceGardenBuildings,regionalSceneryDirectory);
-  api=module.createDestinationScene({THREE,world,boardBounds,mapId});disposeAssets=module.disposeDestinationAssets;
+  api=createDestinationScene({THREE,world,boardBounds,mapId,loadSceneryBundle:assetCache.load});
 }else api=createCityOutskirts({THREE,world,boardBounds,mapId,loadSceneryBundle:assetCache.load});
 try{
   await api.loading;const sharedSource=await boardSource;
@@ -85,5 +83,5 @@ try{
   console.log(`PASS ${mapId}: actual loaded scenery uses lightweight regional houses, with no near-detail villa duplication`);
   console.log(JSON.stringify({mapId,buildings:expectedBuildings,neighbourhood:buildings,complete,pixelsRendered:false,failures:0}));
 }finally{
-  api.dispose();disposeAssets();assetCache.dispose();
+  api.dispose();assetCache.dispose();
 }

@@ -30,9 +30,47 @@ function offers(c, ids = ['shield', 'boost', 'combo']) {
       assert(c.run(`state.board.some(t=>t.special?.type==='card_draw')`),'free draw stations remain');
     }
   });
-  await test('stock has three unique cards with fixed prices between 80 and 240', () => {
+  await test('every map stocks one 400-coin motorcycle and two unique regular cards', () => {
+    for (const map of ['classic','compact','expansion','harbor','alpine']) {
+      const { c } = setup({ map });
+      for (let i=0;i<20;i++) {
+        const stock=json(c,'drawItemShopOffers().map(c=>({id:c.id,price:ITEM_SHOP_PRICES[c.id]}))');
+        assert.equal(stock.length,3);assert.equal(new Set(stock.map(c=>c.id)).size,3);
+        assert.equal(stock.filter(c=>c.id==='motorcycle').length,1,map);
+        stock.forEach(card=>card.id==='motorcycle' ? assert.equal(card.price,400) : assert(card.price>=80&&card.price<=240));
+      }
+    }
+  });
+  await test('a motorcycle already in the bag or installed is replaced with regular stock', () => {
+    for (const state of ['bag','installed']) {
+      const { c } = setup();
+      c.run(state==='bag' ? `GameCards.grant('human','motorcycle',{type:'test'})` : `shopper.vehicle='motorcycle'`);
+      for (let i=0;i<20;i++) {
+        const ids=json(c,'drawItemShopOffers().map(c=>c.id)');
+        assert.equal(ids.length,3);assert.equal(new Set(ids).size,3);assert(!ids.includes('motorcycle'),state);
+      }
+    }
+  });
+  await test('free card destinations do not offer the shop-only motorcycle', () => {
     const { c } = setup();
-    for (let i=0;i<100;i++) { const ids=json(c,'drawItemShopOffers().map(c=>c.id)');assert.equal(new Set(ids).size,3);ids.forEach(id=>assert(c.run(`ITEM_SHOP_PRICES['${id}']>=80&&ITEM_SHOP_PRICES['${id}']<=240`))); }
+    for(let i=0;i<100;i++) assert(!json(c,'drawInventoryCardOffers().map(c=>c.id)').includes('motorcycle'));
+  });
+  await test('a bought motorcycle stays in the bag until installed and then persists between turns', async () => {
+    const { c, open } = setup(); c.choose=()=>'motorcycle';
+    await open();
+    assert.equal(c.run('shopper.cash'),100);
+    assert.equal(c.run('shopper.cards.length'),1);
+    assert.equal(c.run('shopper.cards[0].cardId'),'motorcycle');
+    assert.equal(c.run('shopper.cards[0].source.type'),'shop');
+    assert.notEqual(c.run('shopper.vehicle'),'motorcycle');
+    const installed=await c.run(`GameCards.use(shopper.cards[0].instanceId)`);
+    assert.equal(installed.ok,true);
+    assert.equal(c.run('shopper.vehicle'),'motorcycle');assert.equal(c.run('shopper.vehicleDiceCount'),1);
+    assert.equal(c.run('shopper.cash'),100);assert.equal(c.run('shopper.cards.length'),0);
+    assert.equal(c.run('state.currentPlayerIndex'),0);assert.equal(c.run('state.phase'),'await_roll');
+    c.run('endTurn();endTurn()');
+    assert.equal(c.run('shopper.vehicle'),'motorcycle');assert.equal(c.run('shopper.vehicleDiceCount'),1);
+    c.run(`initializeGame('compact')`);assert.notEqual(c.run('state.players[0].vehicle'),'motorcycle');
   });
   await test('buy one card debits exact price, retains provenance, and never auto uses it', async () => {
     const { c, open } = setup(); offers(c); c.choose=()=>'shield';

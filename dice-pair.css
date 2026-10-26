@@ -18,3 +18,9 @@
  .dice-pair{gap:6px}.dice-pair-face{width:40px;height:40px;border-radius:10px}
 }
 @media(prefers-reduced-motion:reduce){.center-dice.double-dice,.center-dice.double-dice .dice-pair-face{animation:none!important}}
+/* A vehicle remembers the choice; changing dice does not interrupt the turn. */
+.vehicle-dice-selector{display:inline-flex;gap:3px;margin-top:5px;padding:3px;border:1px solid #cad8ca;border-radius:10px;background:#eaf0e5}
+.vehicle-dice-selector[hidden]{display:none}
+.vehicle-dice-selector button{min-width:50px;min-height:36px;padding:4px 9px;border:0;border-radius:7px;background:transparent;color:#647b6b;font-size:12px;font-weight:700;box-shadow:none}
+.vehicle-dice-selector button[aria-pressed="true"]{background:#247d72;color:#fff}
+.vehicle-dice-selector button:disabled{opacity:.5;cursor:default}

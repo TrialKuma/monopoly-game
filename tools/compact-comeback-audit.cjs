@@ -8,10 +8,14 @@ const crypto = require('node:crypto');
 const assert = require('node:assert/strict');
 const {execFileSync} = require('node:child_process');
 const {context, mulberry32} = require('./simulation-context.cjs');
+const {createStore} = require('../progression.js');
 const repo = path.resolve(__dirname, '..');
 
 function auditRunner(source, map) {
   const c = context(source, 1);
+  const vault = new Map(); let runSequence = 0;
+  const progression = createStore({getItem:key=>vault.get(key)??null,setItem:(key,value)=>vault.set(key,value)});
+  c.GameProgression = {...progression,getProfile:progression.read,createRunId:()=>`comeback-audit-${++runSequence}`,resetResult(){}};
   let random = mulberry32(1), randomCalls = 0, forceCoin = false, firstSeat = 0;
   c.auditCoin = () => { forceCoin = true; };
   c.Math.random = () => {
@@ -85,7 +89,12 @@ function auditRunner(source, map) {
     await startNewGame();
     if(!state.initiativeResolved||state.firstPlayerIndex!==state.currentPlayerIndex)throw Error('Initiative not settled');
     const first=state.firstPlayerIndex,initialCash=state.players.map(p=>p.cash),economy=getMapEconomy();
-    if(initialCash[first]!==economy.startCash||initialCash[1-first]!==economy.startCash+economy.secondPlayerBonus)throw Error('Startup cash mismatch');
+    const compensation=state.openingCompensation,cashBonus=compensation?.amount??economy.secondPlayerBonus;
+    if(initialCash[first]!==economy.startCash||initialCash[1-first]!==economy.startCash+cashBonus)throw Error('Startup cash mismatch');
+    if(compensation?.cardId){
+      const cards=state.players.map(p=>p.cards.filter(card=>card.source?.type==='opening_compensation'));
+      if(cards[first].length!==0||cards[1-first].length!==1||cards[1-first][0].cardId!==compensation.cardId||state.players[1-first].effects.speedBoost)throw Error('Startup card mismatch');
+    }
     auditLedger();
     while(!state.gameOver){
       const actor=state.currentPlayerIndex;audit.normalTurns[actor]++;
@@ -111,6 +120,7 @@ function auditRunner(source, map) {
       zeroPropertyLoser:winner!==null&&final.properties[1-winner]===0,bankLeft:state.bankPool};
   })`);
   return async (seed, seat = 0) => {
+    vault.clear();
     random = mulberry32(seed); randomCalls = 0; forceCoin = false; firstSeat = seat;
     const result = JSON.parse(JSON.stringify(await run()));
     return {seed, randomCalls, ...result};

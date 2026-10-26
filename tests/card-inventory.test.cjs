@@ -111,34 +111,72 @@ const use = (c, id) => c.run(`GameCards.use(${JSON.stringify(id)})`);
     assert.equal(c.run('state.players[0].effects.shield'), false); assert.equal(c.run('state.cardUsePending'), false);
     assert.equal(c.run('state.phase'), 'locked');
   });
-  await test('launch resolves a real card tile once and stores its reward without recursion', async () => {
+  await test('launch queues the roll, then resolves a real card tile once during the normal action', async () => {
     const { c } = setup(); const id = grant(c, 'launch');
     c.run(`var draw=state.board.find(t=>t.special?.type==='card_draw');state.players[0].position=draw.index-1;`);
     c.choose = cfg => cfg.cardDraw ? cfg.buttons[0].id : '1';
+    const start = c.run('state.players[0].position');
     const result = await use(c, id); assert.equal(result.ok, true);
-    assert.equal(c.run('state.players[0].position'), c.run('draw.index'));
-    assert.equal(c.run('GameCards.getSnapshot().count'), 1); assert.equal(c.run('state.phase'), 'await_roll');
+    assert.equal(c.run('state.players[0].position'), start);
+    assert.equal(c.run('GameCards.getSnapshot().count'), 0);
+    assert.equal(c.run('state.phase'), 'await_roll');
     assert.equal(c.run('state.currentPlayerIndex'), 0);
+    await c.run('playHumanTurn()');
+    assert.equal(c.run('state.players[0].position'), c.run('draw.index'));
+    assert.equal(c.run('GameCards.getSnapshot().count'), 1);
+    assert.equal(c.run('state.currentPlayerIndex'), 1);
   });
-  await test('launch can collect start salary but does not take the normal dice action', async () => {
+  await test('launch pays start salary only when the queued normal roll actually crosses start', async () => {
     const { c } = setup(); const id = grant(c, 'launch'); c.choose = () => '1';
     c.run('state.players[0].position=state.board.length-1;resolveStartTakeover=async()=>{}');
     const cash = c.run('state.players[0].cash'); await use(c, id);
+    assert.equal(c.run('state.players[0].cash'), cash);
+    assert.equal(c.run('state.players[0].position'), c.run('state.board.length-1'));
+    assert.equal(c.run('state.phase'), 'await_roll');
+    await c.run('playHumanTurn()');
     assert.equal(c.run('state.players[0].cash'), cash + c.run('getMapEconomy().startBonus'));
-    assert.equal(c.run('state.players[0].position'), 0); assert.equal(c.run('state.phase'), 'await_roll');
+    assert.equal(c.run('state.players[0].position'), 0);
+    assert.equal(c.run('state.currentPlayerIndex'), 1);
+  });
+  await test('a chosen six resolves one action without a six bonus and does not fix later rolls', async () => {
+    const { c } = setup(); const id = grant(c, 'launch'); c.choose = () => '6';
+    c.run('var landings=[];resolveLanding=async(p,t)=>landings.push(t.index);rollDice=()=>2');
+    await use(c, id);
+    assert.equal(c.run('state.players[0].position'), 0);
+    assert.deepEqual(json(c, 'landings'), []);
+    await c.run('playHumanTurn()');
+    assert.equal(c.run('state.players[0].position'), 6);
+    assert.deepEqual(json(c, 'landings'), [6]);
+    assert.equal(c.run('state.currentPlayerIndex'), 1);
+    c.run('endTurn()');
+    await c.run('playHumanTurn()');
+    assert.equal(c.run('state.players[0].position'), 8);
+    assert.deepEqual(json(c, 'landings'), [6, 8]);
+    assert.equal(c.run('state.currentPlayerIndex'), 1);
   });
   for (const [name, cash, effect] of [['onsen', 5000, 'hotSpringRest'], ['relief', 1, 'bankruptcyRelief']]) {
-    await test(`launch landing on ${name} preserves the dice action and queues exactly one rest`, async () => {
+    await test(`launch landing on ${name} ends the action and rests exactly the following turn`, async () => {
       const { c } = setup(); const id = grant(c, 'launch'); c.choose = () => '1';
       c.run(`var spa=state.board.find(t=>t.lot?.effectId==='hot_spring_rest'&&!t.isLargeSecondary);
         spa.lot.ownerId='ai';spa.lot.level=1;state.players[0].position=spa.index-1;state.players[0].cash=${cash};`);
-      await use(c, id); assert.equal(c.run(`state.players[0].effects.${effect}`), true);
       const start = c.run('state.players[0].position');
-      c.run('animateDiceRoll=async()=>2;resolveLanding=async()=>{}'); await c.run('playHumanTurn()');
-      assert.equal(c.run('state.players[0].position'), start + 2);
+      await use(c, id);
+      assert.equal(c.run('state.players[0].position'), start);
+      assert.equal(c.run(`state.players[0].effects.${effect}`), false);
+      assert.equal(c.run('state.players[0].cash'), cash);
+      await c.run('playHumanTurn()');
+      assert.equal(c.run('state.players[0].position'), c.run('spa.index'));
       assert.equal(c.run(`state.players[0].effects.${effect}`), true);
+      assert.equal(c.run('state.currentPlayerIndex'), 1);
+      const afterLandingCash = c.run('state.players[0].cash');
       c.run('endTurn();animateDiceRoll=async()=>{throw Error("Queued rest must not roll")};');
       await c.run('playHumanTurn()'); assert.equal(c.run(`state.players[0].effects.${effect}`), false);
+      assert.equal(c.run('state.players[0].position'), c.run('spa.index'));
+      assert.equal(c.run('state.players[0].cash'), afterLandingCash);
+      assert.equal(c.run('state.currentPlayerIndex'), 1);
+      c.run('endTurn();animateDiceRoll=async()=>2;resolveLanding=async()=>{}');
+      await c.run('playHumanTurn()');
+      assert.equal(c.run('state.players[0].position'), c.run('spa.index+2'));
       assert.equal(c.run('state.currentPlayerIndex'), 1);
     });
   }

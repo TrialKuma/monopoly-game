@@ -6,13 +6,13 @@
   <meta name="theme-color" content="#173d3a">
   <title>环城大富翁</title>
   <link rel="stylesheet" href="styles.css?v=20261025-entry2">
-  <link rel="stylesheet" href="presentation.css?v=20261026-match-info1">
+  <link rel="stylesheet" href="presentation.css?v=20261027-ui1">
   <link rel="stylesheet" href="progression.css?v=20261023-1">
   <link rel="stylesheet" href="scene.css?v=20261025-items1">
-  <link rel="stylesheet" href="drama.css?v=20261023-1">
+  <link rel="stylesheet" href="drama.css?v=20261026-property-cards1">
   <link rel="stylesheet" href="mobile.css?v=20261026-match-info1">
   <link rel="stylesheet" href="opening-coin.css?v=20261025-harbor2">
-  <link rel="stylesheet" href="dice-pair.css?v=20261025-harbor-projects1">
+  <link rel="stylesheet" href="dice-pair.css?v=20261026-property-cards1">
   <link rel="stylesheet" href="harbor-projects.css?v=20261025-harbor-projects1">
   <link rel="stylesheet" href="card-bag.css?v=20261025-items1">
   <link rel="stylesheet" href="item-shop.css?v=20261025-shop1">
@@ -30,11 +30,11 @@
       <div class="map-picker">
         <p class="map-picker-label">选择地图</p>
         <div id="start-map-options" class="map-options" role="group" aria-label="地图选择">
-          <button class="map-option active" type="button" data-map-id="classic" aria-pressed="true"><span class="map-option-mark">▱</span><span class="map-option-title">经典环线</span><span class="map-option-meta">22 格 · 30 回合</span></button>
-          <button class="map-option" type="button" data-map-id="compact" aria-pressed="false"><span class="map-option-mark">↗</span><span class="map-option-title">紧凑冲突</span><span class="map-option-meta">18 格 · 26 回合</span></button>
-          <button class="map-option" type="button" data-map-id="expansion" aria-pressed="false"><span class="map-option-mark">▱</span><span class="map-option-title">都市大环线</span><span class="map-option-meta">28 格 · 40 回合</span></button>
-          <button class="map-option" type="button" data-map-id="harbor" aria-pressed="false"><span class="map-option-mark">⚓</span><span class="map-option-title">潮汐港湾</span><span class="map-option-meta">三岛 · 34 格 · 40 回合</span></button>
-          <button class="map-option" type="button" data-map-id="alpine" aria-pressed="false"><span class="map-option-mark">♨</span><span class="map-option-title">云岭温泉</span><span class="map-option-meta">24 格 · 30 回合</span></button>
+          <button class="map-option active" type="button" data-map-id="classic" aria-pressed="true"><span class="map-option-mark">▱</span><span class="map-option-title">经典环线</span><span class="map-option-meta">30 回合</span></button>
+          <button class="map-option" type="button" data-map-id="compact" aria-pressed="false"><span class="map-option-mark">↗</span><span class="map-option-title">紧凑冲突</span><span class="map-option-meta">26 回合</span></button>
+          <button class="map-option" type="button" data-map-id="expansion" aria-pressed="false"><span class="map-option-mark">▱</span><span class="map-option-title">都市大环线</span><span class="map-option-meta">40 回合</span></button>
+          <button class="map-option" type="button" data-map-id="harbor" aria-pressed="false"><span class="map-option-mark">⚓</span><span class="map-option-title">潮汐港湾</span><span class="map-option-meta">40 回合</span></button>
+          <button class="map-option" type="button" data-map-id="alpine" aria-pressed="false"><span class="map-option-mark">♨</span><span class="map-option-title">云岭温泉</span><span class="map-option-meta">30 回合</span></button>
         </div>
         <p id="start-map-description" class="start-map-description" hidden></p>
       </div>
@@ -54,10 +54,15 @@
     <header class="topbar">
       <div class="brand-lockup"><span class="brand-mark" aria-hidden="true">城</span><div><h1>环城大富翁</h1><p class="eyebrow" id="mode-eyebrow">固定回合对局</p></div></div>
       <div class="topbar-actions">
-        <button id="sound-toggle-btn" class="ghost-btn" type="button" aria-pressed="true">音效：开</button>
-        <button id="music-toggle-btn" class="ghost-btn" type="button" aria-pressed="true">音乐：开</button>
-        <button id="showcase-open-btn" class="ghost-btn" type="button">玩法演示</button>
-        <button id="restart-btn" class="ghost-btn" type="button">返回首页</button>
+        <details id="topbar-menu" class="topbar-menu">
+          <summary class="ghost-btn">设置</summary>
+          <div class="topbar-menu-panel">
+            <button id="sound-toggle-btn" class="ghost-btn" type="button" aria-pressed="true">音效：开</button>
+            <button id="music-toggle-btn" class="ghost-btn" type="button" aria-pressed="true">音乐：开</button>
+            <button id="showcase-open-btn" class="ghost-btn" type="button">玩法演示</button>
+            <button id="restart-btn" class="ghost-btn" type="button">返回首页</button>
+          </div>
+        </details>
       </div>
     </header>
     <main class="layout">
@@ -72,7 +77,7 @@
         </div>
         <div id="board-choice-dock"></div>
         <section id="center-console" class="board-center" aria-label="回合操作">
-          <div class="console-dice-row"><div id="center-dice" class="center-dice"><span id="center-dice-value">—</span></div><div class="console-copy"><p id="center-player-badge" class="center-badge">当前：玩家</p><h3 id="center-title">准备开始</h3><p id="center-description"></p></div></div>
+          <div class="console-dice-row"><div id="center-dice" class="center-dice"><span id="center-dice-value">—</span></div><div class="console-copy"><p id="center-player-badge" class="center-badge">当前：玩家</p><h3 id="center-title">准备开始</h3><div id="vehicle-dice-selector" class="vehicle-dice-selector" role="group" aria-label="机车骰子数量" hidden><button type="button" data-vehicle-dice="1" aria-pressed="true">单骰</button><button type="button" data-vehicle-dice="2" aria-pressed="false">双骰</button></div><p id="center-description"></p></div></div>
           <div class="center-actions"><span id="center-phase-badge" class="center-badge">等待掷骰</span><button type="button" class="card-bag-trigger" data-open-card-bag aria-haspopup="dialog" aria-expanded="false" aria-controls="card-bag-dialog">背包 <span data-card-count>0</span></button><button id="roll-btn" class="primary-btn center-roll-btn">掷骰子 <span>↗</span></button></div>
           <div class="round-progress" id="round-progress"><div class="round-progress-bar" id="round-progress-bar"></div></div>
         </section>
@@ -81,7 +86,7 @@
           <button type="button" data-mobile-panel="assets" aria-expanded="false">资产</button>
           <button type="button" data-mobile-panel="rules" aria-expanded="false">规则</button>
         </nav>
-        <div id="showcase-controls" class="showcase-controls hidden"><div><b>玩法演示</b><span>不消耗门票 · 不计入战绩</span></div><div class="showcase-buttons"><button data-showcase="rent">连锁收租</button><button data-showcase="seize">地标征用</button><button data-showcase="shield">护盾免租</button><button data-showcase="relief">破产救助</button><button data-showcase="buy">购买地产</button><button data-showcase="build">建筑升级</button><button data-showcase="draw">翻牌存包</button><button data-showcase="cards">卡牌背包</button><button data-showcase="chance">道具商店</button><button data-showcase="route" id="showcase-route-btn" hidden>快线移动</button><button id="showcase-exit-btn">开始正式对局 ↗</button></div></div>
+        <div id="showcase-controls" class="showcase-controls hidden"><div><b>玩法演示</b><span>不消耗门票 · 不计入战绩</span></div><div class="showcase-buttons"><button data-showcase="rent">连锁收租</button><button data-showcase="seize">市政卡</button><button data-showcase="shield">护盾免租</button><button data-showcase="relief">破产救助</button><button data-showcase="buy">购买地产</button><button data-showcase="build">建筑升级</button><button data-showcase="draw">翻牌存包</button><button data-showcase="cards">卡牌背包</button><button data-showcase="chance">道具商店</button><button data-showcase="route" id="showcase-route-btn" hidden>快线移动</button><button id="showcase-exit-btn">开始正式对局 ↗</button></div></div>
       </section>
       <aside class="sidebar">
         <div class="mobile-sheet-header"><strong id="mobile-sheet-title">资产对比</strong><button id="mobile-sheet-close" type="button" aria-label="关闭信息面板">关闭</button></div>
@@ -94,7 +99,9 @@
               <li>掷骰前，可以从背包使用一张道具卡。</li>
               <li>单骰掷出 6 点，可以再掷一次，每回合最多一次。</li>
               <li id="rules-victory">打完 30 回合，现金更多的一方获胜。</li>
+              <li>付不起租时，会拿到 ¥200 救助金。</li>
             </ul>
+            <div id="rules-tile-guide" class="rules-tile-guide"></div>
           </details>
       </aside>
     </main>
@@ -107,13 +114,13 @@
     <footer class="card-bag-footer"><p id="card-bag-status"></p></footer>
   </dialog>
 
-  <script src="drama.js?v=20261025-landscape3"></script>
+  <script src="drama.js?v=20261027-ui1"></script>
   <script src="town-plan.js?v=20261025-district1"></script>
   <script src="progression.js?v=20261025-harbor-projects1"></script>
-  <script src="game.js?v=20261026-match-info1"></script>
-  <script src="card-bag.js?v=20261025-entry2"></script>
-  <script src="presentation.js?v=20261026-match-info1"></script>
+  <script src="game.js?v=20261027-ui3"></script>
+  <script src="card-bag.js?v=20261026-property-cards1"></script>
+  <script src="presentation.js?v=20261027-ui2"></script>
   <script type="module" src="town-builder.js?v=20261025-random1"></script>
-  <script type="module" src="scene.js?v=20261025-ground-travel1"></script>
+  <script type="module" src="scene.js?v=20261027-night1"></script>
 </body>
 </html>

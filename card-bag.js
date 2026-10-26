@@ -7,7 +7,7 @@
   const summary = document.getElementById('card-bag-summary');
   const triggers = [...document.querySelectorAll('[data-open-card-bag]')];
   const esc = text => String(text ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  const category = id => ['shield','doubleRent','propertySwap'].includes(id) ? 'estate' : ['slow','freeze','reverse'].includes(id) ? 'control' : 'movement';
+  const category = id => ['shield','doubleRent','propertySwap','buyProperty','sellProperty'].includes(id) ? 'estate' : ['slow','freeze','reverse'].includes(id) ? 'control' : 'movement';
   const labels = {estate:'经营',control:'干扰',movement:'行动'};
   let lastSession = null;
   let renderKey = '';

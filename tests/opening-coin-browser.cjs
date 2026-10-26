@@ -63,7 +63,7 @@ const assert = require('node:assert/strict'), fs = require('node:fs'), path = re
       });
       assert.equal(result.side, humanFirst ? 'human' : 'ai'); assert.equal(result.first, humanFirst ? 0 : 1);
       assert.deepEqual(await page.evaluate(() => state.players.map(player => player.cards.map(card => card.cardId))), humanFirst ? [[], ['boost']] : [['boost'], []]);
-      assert.equal(await page.locator('#event-message').textContent(), `${humanFirst ? '对手' : '你'}获后手补偿 ¥400 · 双骰卡 ×1`);
+      assert.equal(await page.locator('#event-message').textContent(), `${humanFirst ? '对手' : '你'}获后手补偿 双骰卡 ×1`);
       assert(humanFirst ? result.facing > .99 : result.facing < -.99, 'settled visible face agrees with the actual winner');
       assert(result.card.left >= 0 && result.card.right <= width && result.card.top >= 0 && result.card.bottom <= height);
       assert(result.button.left > width / 2 - 35 && result.button.right <= width && result.button.bottom <= height, 'confirmation stays right and visible');

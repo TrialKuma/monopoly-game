@@ -336,10 +336,10 @@ const MAP_PRESETS = {
   classic: {
     id: "classic",
     maxRounds: 30,
-    economy: { secondPlayerBonus: 500 },
+    economy: { secondPlayerBonus: 0 },
     name: "经典环线",
-    boardTitle: "环形线路 · 22 格",
-    startDescription: "经典 22 格环形线路，节奏均衡。起始 ¥1600，后手额外补给 ¥500。",
+    boardTitle: "环形线路",
+    startDescription: "经典 22 格环形线路，节奏均衡。",
     modeLabel: "环形地图休闲对战",
     grid: { columns: 7, rows: 6, cellMin: 90, cellMinTablet: 56, cellMinMobile: 44, height: "min(90vh, 1080px)", heightTablet: "min(85vh, 660px)", heightMobile: "min(80vh, 520px)", centerWidth: "min(340px, calc(100% - 160px))", centerWidthTablet: "min(280px, calc(100% - 60px))", centerWidthMobile: "min(240px, calc(100% - 40px))" },
     routePositions: CLASSIC_ROUTE_POSITIONS,
@@ -354,12 +354,12 @@ const MAP_PRESETS = {
   compact: {
     id: "compact",
     maxRounds: 26,
-    economy: { secondPlayerBonus: 500 },
+    economy: { secondPlayerBonus: 0 },
     reliefShield: true,
     reliefRest: false,
     name: "紧凑冲突",
-    boardTitle: "紧凑冲突 · 18 格",
-    startDescription: "18 格短环线，冲刺与传送加快连锁收租。起始 ¥1600，后手额外补给 ¥500。",
+    boardTitle: "紧凑冲突",
+    startDescription: "18 格短环线，冲刺与传送加快连锁收租。",
     modeLabel: "高冲突短局",
     grid: { columns: 6, rows: 5, cellMin: 104, cellMinTablet: 64, cellMinMobile: 48, height: "min(82vh, 900px)", heightTablet: "min(76vh, 620px)", heightMobile: "min(72vh, 480px)", centerWidth: "min(300px, calc(100% - 120px))", centerWidthTablet: "min(260px, calc(100% - 56px))", centerWidthMobile: "min(220px, calc(100% - 32px))" },
     routePositions: COMPACT_ROUTE_POSITIONS,
@@ -374,12 +374,12 @@ const MAP_PRESETS = {
   expansion: {
     id: "expansion",
     maxRounds: 40,
-    economy: { startCash: 2000, startBonus: 450, secondPlayerBonus: 300 },
+    economy: { startCash: 2000, startBonus: 450, secondPlayerBonus: 0 },
     openingBuildings: true,
     reliefShield: true,
     name: "都市大环线",
-    boardTitle: "都市大环线 · 28 格",
-    startDescription: "28 格大环线，六街区各有一处 Lv.1 地产开业。起始 ¥2000，后手额外 ¥300，每圈补给 ¥450。",
+    boardTitle: "都市大环线",
+    startDescription: "28 格大环线，六街区各有一处 Lv.1 地产开业。",
     modeLabel: "六街区都市大环线",
     grid: { columns: 10, rows: 6, cellMin: 78, cellMinTablet: 50, cellMinMobile: 38, height: "min(84vh, 820px)", heightTablet: "min(76vh, 650px)", heightMobile: "min(68vh, 500px)", centerWidth: "min(420px, calc(100% - 160px))", centerWidthTablet: "min(330px, calc(100% - 80px))", centerWidthMobile: "min(250px, calc(100% - 45px))" },
     routePositions: EXPANSION_ROUTE_POSITIONS,
@@ -394,10 +394,10 @@ const MAP_PRESETS = {
   harbor: {
     id: "harbor",
     maxRounds: 40,
-    economy: { startCash: 1700, startBonus: 320, secondPlayerBonus: 400, bankThreshold: 240 },
+    economy: { startCash: 1700, startBonus: 320, secondPlayerBonus: 0, bankThreshold: 240 },
     ticketPrice: 250, collectionId: "harbor_shell", collectionName: "潮汐海螺",
     name: "潮汐港湾",
-    boardTitle: "三岛港湾 · 34 格",
+    boardTitle: "三岛港湾",
     startDescription: "红黄航线自动轮换，每圈经过两岛。",
     modeLabel: "三岛双向航线",
     grid: { columns: 12, rows: 14, cellMin: 68, cellMinTablet: 44, cellMinMobile: 30, height: "min(96vh, 1160px)", heightTablet: "min(90vh, 880px)", heightMobile: "min(82vh, 660px)", centerWidth: "min(250px, calc(100% - 160px))", centerWidthTablet: "min(220px, calc(100% - 60px))", centerWidthMobile: "min(180px, calc(100% - 40px))" },
@@ -413,10 +413,10 @@ const MAP_PRESETS = {
   alpine: {
     id: "alpine",
     maxRounds: 30,
-    economy: { startCash: 1900, startBonus: 350, secondPlayerBonus: 450, bankThreshold: 250 },
+    economy: { startCash: 1900, startBonus: 350, secondPlayerBonus: 0, bankThreshold: 250 },
     ticketPrice: 350, collectionId: "alpine_crystal", collectionName: "山泉晶石",
     name: "云岭温泉",
-    boardTitle: "云岭温泉 · 24 格",
+    boardTitle: "云岭温泉",
     startDescription: "24 格山城环线，缆车前进 2–4 格，温泉与观景地标更丰厚。起始 ¥1900，每圈补给 ¥350。",
     modeLabel: "山城温泉环线",
     grid: { columns: 6, rows: 8, cellMin: 88, cellMinTablet: 56, cellMinMobile: 40, height: "min(96vh, 1140px)", heightTablet: "min(90vh, 860px)", heightMobile: "min(82vh, 650px)", centerWidth: "min(280px, calc(100% - 160px))", centerWidthTablet: "min(240px, calc(100% - 60px))", centerWidthMobile: "min(200px, calc(100% - 40px))" },
@@ -434,13 +434,16 @@ const MAP_PRESETS = {
 let selectedMapId = DEFAULT_MAP_ID;
 
 const CARD_POOL = [
-  { id: "teleport", name: "传送术", icon: "🌀", description: "传送自己或对手到随机地产格，不结算落点" },
+  { id: "buyProperty", name: "买地卡", icon: "🏘️", description: "站在对手地上，下回合开始时按全部成本买下这块地", municipalOnly: true },
+  { id: "sellProperty", name: "卖地卡", icon: "📜", description: "站在对手地上，下回合开始时让他把这块地卖给市政府，他拿回全部成本", municipalOnly: true },
+  { id: "teleport", name: "传送术", icon: "🌀", description: "把自己或对手送到随机一块地产，到了不交租也不能买" },
   { id: "boost", name: "双骰卡", icon: "🎲", description: "选择一方，下次同时掷两颗骰子" },
   { id: "slow", name: "减速陷阱", icon: "🐌", description: "选择一方，下次掷骰结果减半" },
-  { id: "launch", name: "命定骰", icon: "🎯", description: "额外前进1~6步并结算地块，之后仍可掷骰" },
-  { id: "rewind", name: "时光回溯", icon: "⏪", description: "选择一方后退3步，不结算落点" },
-  { id: "swap", name: "换位魔法", icon: "🔄", description: "和对手交换位置，不结算落点" },
-  { id: "freeze", name: "绊脚术", icon: "🪤", description: "对手下回合停步并结算地块；温泉休息期间不追加结算" },
+  { id: "launch", name: "命定骰", icon: "🎯", description: "这次掷骰自己选点数（1 到 6）" },
+  { id: "motorcycle", name: "机车卡", icon: "🛵", description: "装备机车，本局可自由选择掷1颗或2颗骰子", shopOnly: true },
+  { id: "rewind", name: "时光回溯", icon: "⏪", description: "让一方后退 3 步，到了不交租也不能买" },
+  { id: "swap", name: "换位魔法", icon: "🔄", description: "和对手交换位置，到了不交租也不能买" },
+  { id: "freeze", name: "绊脚术", icon: "🪤", description: "对手下回合原地不动，脚下的格子再算一次" },
   { id: "combo", name: "连击鼓", icon: "🥁", description: "获得额外一回合" },
   { id: "shield", name: "护盾术", icon: "🛡️", description: "免疫下一次过路费" },
   { id: "doubleRent", name: "收租翻倍", icon: "💎", description: "地产下次被踩收费×2" },
@@ -448,9 +451,11 @@ const CARD_POOL = [
   { id: "reverse", name: "逆行术", icon: "🔃", description: "选择一方，反转其前进方向" },
 ];
 
+const EFFECT_BONUS_TABLES = Object.freeze({ finance_bonus: [0, 60, 120, 200], tower_bonus: [0, 50, 100, 170] });
+
 const ITEM_SHOP_PRICES = Object.freeze({
   teleport: 100, boost: 120, slow: 100, launch: 200,
-  rewind: 80, swap: 100, freeze: 160, combo: 240,
+  rewind: 160, swap: 100, freeze: 160, combo: 240, motorcycle: 400,
   shield: 140, doubleRent: 180, propertySwap: 220, reverse: 80,
 });
 
@@ -852,7 +857,7 @@ function playSound(key, options = {}) {
 }
 
 function defaultEffects() {
-  return { speedBoost: false, speedSlow: false, shield: false, doubleRent: false, frozen: false, extraTurn: false, reversed: false, hotSpringRest: false, bankruptcyRelief: false };
+  return { speedBoost: false, speedSlow: false, fixedDiceFace: null, shield: false, doubleRent: false, frozen: false, extraTurn: false, reversed: false, hotSpringRest: false, bankruptcyRelief: false };
 }
 
 function getMapConfig(mapId = state?.currentMapId ?? selectedMapId) {
@@ -956,7 +961,9 @@ function initializeGame(mapId = selectedMapId, paidRunId = null) {
       harborCursor: 6, harborAnchor: 0, harborSalaryMin: 6, harborSalaryMax: 6,
       harborSalaryDistance: 0,
       effects: defaultEffects(),
+      vehicle: null, vehicleDiceCount: 1,
       cards: [], cardUsedThisTurn: false,
+      completedTurns: 0, propertyVisitVersion: 0, propertySettlement: null,
     })),
     lastDice: null, lastDiceFaces: [], diceActionId: 0, diceDisplay: null, logs: [], gameOver: false, busy: false,
     cardSequence: 0, cardUsePending: false,
@@ -983,7 +990,7 @@ function initializeGame(mapId = selectedMapId, paidRunId = null) {
 }
 
 function defaultModal() {
-  return { visible: false, label: "行动提示", title: "", message: "", buttons: [], cardDraw: false };
+  return { visible: false, label: "行动提示", title: "", message: "", buttons: [], cardDraw: false, propertyOffer: null };
 }
 
 // ─── 开始界面控制 ─────────────────────────────────────────
@@ -1104,17 +1111,9 @@ function settleFirstPlayer(humanFirst, sid = state.sessionId) {
   state.currentPlayerIndex = state.firstPlayerIndex;
   state.initiativeResolved = true;
   const second = state.players[1 - state.firstPlayerIndex];
-  const amount = getMapEconomy().secondPlayerBonus;
-  const cardId = state.currentMapId === "harbor" ? "boost" : null;
-  state.openingCompensation = { playerId: second.id, amount, ...(cardId ? { cardId } : {}) };
-  if (amount > 0) {
-    updatePlayerCash(second, amount, false);
-    pushLog(`${second.name} 后手行动，领取 ${formatMoney(amount)} 开局补给。`);
-  }
-  if (cardId) {
-    grantInventoryCard(second.id, cardId, { type: "opening_compensation" });
-    pushLog(`${second.name} 后手补给：双骰卡 ×1。`);
-  }
+  state.openingCompensation = { playerId: second.id, amount: 0, cardId: "boost" };
+  grantInventoryCard(second.id, "boost", { type: "opening_compensation" });
+  pushLog(`${second.name} 后手补给：双骰卡 ×1。`);
   return true;
 }
 
@@ -1133,8 +1132,7 @@ async function coinFlipForFirstPlayer(sid) {
   settleFirstPlayer(humanFirst, sid);
   const compensation = state.openingCompensation;
   const second = getPlayerById(compensation.playerId);
-  const supplies = [compensation.amount > 0 ? formatMoney(compensation.amount) : "", compensation.cardId ? "双骰卡 ×1" : ""].filter(Boolean);
-  const supplyMessage = supplies.length ? `${second.isAi ? "对手" : "你"}获后手补偿 ${supplies.join(" · ")}` : "";
+  const supplyMessage = `${second.id === "human" ? "你" : "对手"}获后手补偿 双骰卡 ×1`;
   const confirmed = await showContinueModal({
     label: "先手决定",
     title: humanFirst ? "你先手" : "对手先手",
@@ -1528,7 +1526,7 @@ function getRoundLabel() {
 function setHumanTurnStatus() {
   resetDiceDisplay();
   state.phase = "await_roll"; state.busy = false;
-  state.statusTitle = `${getRoundLabel()}：${currentPlayer().name} 行动`;
+  state.statusTitle = "轮到你了";
   state.statusDescription = "";
   clearHighlights(); hideModal(false);
 }
@@ -1536,7 +1534,7 @@ function setHumanTurnStatus() {
 function setAiTurnStatus() {
   resetDiceDisplay();
   state.phase = "locked"; state.busy = true;
-  state.statusTitle = `${getRoundLabel()}：${currentPlayer().name} 行动`;
+  state.statusTitle = "对手行动中";
   state.statusDescription = "";
   clearHighlights(); hideModal(false);
 }
@@ -1561,9 +1559,53 @@ function getDiceDisplay() {
   const belongsToAction = rolled && rolled.sessionId === state.sessionId &&
     rolled.actionId === state.diceActionId && rolled.actorId === player.id;
   if (belongsToAction) return {...rolled,faces:[...rolled.faces]};
-  return {actorId:player.id,purpose:"turn",stage:"ready",count:player.effects.speedBoost ? 2 : 1,
-    faces:[],total:null,sessionId:state.sessionId,actionId:state.diceActionId};
+  const fixedFace = getFixedDiceFace(player);
+  return {actorId:player.id,purpose:"turn",stage:"ready",count:getTurnDiceCount(player),fixed:fixedFace !== null,
+    faces:fixedFace === null ? [] : [fixedFace],total:fixedFace,sessionId:state.sessionId,actionId:state.diceActionId};
 }
+
+function getFixedDiceFace(player) {
+  const face = player.effects.fixedDiceFace;
+  return Number.isInteger(face) && face >= 1 && face <= 6 ? face : null;
+}
+
+function getTurnDiceCount(player) {
+  if (getFixedDiceFace(player) !== null) return 1;
+  return player.effects.speedBoost || (player.vehicle === "motorcycle" && player.vehicleDiceCount === 2) ? 2 : 1;
+}
+
+function getVehicleDiceSnapshot() {
+  const player = state.players?.find(p => !p.isAi), active = player && currentPlayer() === player;
+  const visible = Boolean(active && player.vehicle === "motorcycle" && !state.gameOver && startScreenEl.classList.contains("hidden"));
+  const canChoose = Boolean(visible && !state.busy && !state.modal.visible && !state.cardUsePending && !homeConfirmationPending && state.phase === "await_roll");
+  return { visible, canChoose, count:player?.vehicleDiceCount === 2 ? 2 : 1,
+    effectiveCount:player ? getTurnDiceCount(player) : 1,
+    fixedFace:player ? getFixedDiceFace(player) : null, forcedDouble:Boolean(player?.effects.speedBoost) };
+}
+
+function setVehicleDiceCount(count) {
+  const snapshot = getVehicleDiceSnapshot();
+  if (!snapshot.canChoose || ![1,2].includes(count) || (count === 2 && snapshot.fixedFace !== null) || snapshot.forcedDouble) return false;
+  const player = currentPlayer();
+  player.vehicleDiceCount = count;
+  resetDiceDisplay();
+  render();
+  return true;
+}
+
+function renderVehicleDiceSelector() {
+  const selector = document.getElementById("vehicle-dice-selector");
+  if (!selector) return;
+  const snapshot = getVehicleDiceSnapshot();
+  selector.hidden = !snapshot.visible;
+  selector.querySelectorAll("[data-vehicle-dice]").forEach(button => {
+    const count = Number(button.dataset.vehicleDice);
+    button.disabled = !snapshot.canChoose || snapshot.forcedDouble || (count === 2 && snapshot.fixedFace !== null);
+    button.setAttribute("aria-pressed", String(count === snapshot.effectiveCount));
+  });
+}
+
+window.GameVehicle = { getSnapshot:getVehicleDiceSnapshot, setDiceCount:setVehicleDiceCount };
 
 function render() {
   renderBoard(); renderScoreboard(); renderMiniScoreboard(); renderLogs(); renderStatus(); updateControls(); renderModal();
@@ -1665,7 +1707,7 @@ function renderLotTile(tile) {
     ? createBuildingSvg(lot.landmarkKey || lot.theme.key, lot.level, owner?.color ?? lot.theme.color)
     : createLotBaseSprite(!!lot.ownerId);
   const distColor = getDistrictColors()[lot.district] || "#e2e8f0";
-  const forSaleBadge = !owner ? `<span class="for-sale-badge">待售 <b>¥${lot.price}</b></span>` : "";
+  const forSaleBadge = !owner ? `<span class="for-sale-badge">待售 <b>¥${getLotPurchasePrice(lot)}</b></span>` : "";
   const tollRow = owner ? `<div class="lot-price-toll">收费 ${formatMoney(lot.tolls[lot.level])}</div>` : "";
   return `<div class="tile-header"><span class="tile-name">${tile.name}</span>${forSaleBadge}</div>
     <span class="lot-badge" style="background:${lot.theme.color};">${lot.theme.label}</span>
@@ -1694,7 +1736,7 @@ function renderLargeLotMerged(tile, secTile) {
     cellA = tile.x < (secTile?.x ?? 99) ? tile.index : secTile.index;
     cellB = tile.x < (secTile?.x ?? 99) ? secTile.index : tile.index;
   }
-  const forSaleBadge = !owner ? `<span class="for-sale-badge">待售 <b>¥${lot.price}</b></span>` : "";
+  const forSaleBadge = !owner ? `<span class="for-sale-badge">待售 <b>¥${getLotPurchasePrice(lot)}</b></span>` : "";
   const tollRow = owner ? `<div class="lot-price-toll">收费 ${formatMoney(lot.tolls[lot.level])}</div>` : "";
   return `<div class="tile-header"><span class="tile-name">${tile.name}</span>${forSaleBadge}</div>
     <span class="lot-badge" style="background:${lot.theme.color};">${lot.theme.label}·大型地产</span>
@@ -1752,6 +1794,8 @@ function renderScoreboard() {
     const totalLv = lots.reduce((s, t) => s + t.lot.level, 0);
     const efx = [];
     if (p.effects.speedBoost) efx.push("双骰");
+    if (getFixedDiceFace(p) !== null) efx.push(`命定骰 ${getFixedDiceFace(p)} 点`);
+    if (p.vehicle === "motorcycle") efx.push("机车");
     if (p.effects.speedSlow) efx.push("减速");
     if (p.effects.shield) efx.push("护盾");
     if (p.effects.doubleRent) efx.push("收租翻倍");
@@ -1766,9 +1810,9 @@ function renderScoreboard() {
   table.className = "asset-comparison";
   table.setAttribute("aria-label", "双方当前资产对比");
   const row = (label, key, suffix) => `<tr data-asset-row="${key}"><th scope="row">${label}</th>${assets.map(a=>`<td data-asset-player="${a.player.id}">${a[key]}<small>${suffix}</small></td>`).join("")}</tr>`;
-  table.innerHTML = `<thead><tr><td></td>${assets.map(a=>`<th scope="col" data-asset-owner="${a.player.id}"><span class="asset-owner-dot" aria-hidden="true"></span>${a.player.id==='human'?'你':'对手'}</th>`).join("")}</tr></thead><tbody>
+  table.innerHTML = `${state.gameMode === "rounds" ? `<caption class="asset-rounds-left">还剩 ${Math.max(0, getMaxRounds() - state.round + 1)} 回合</caption>` : ""}<thead><tr><td></td>${assets.map(a=>`<th scope="col" data-asset-owner="${a.player.id}"><span class="asset-owner-dot" aria-hidden="true"></span>${a.player.id==='human'?'你':'对手'}</th>`).join("")}</tr></thead><tbody>
     <tr class="asset-cash-row" data-asset-row="cash"><th scope="row">现金</th>${assets.map(a=>`<td data-player-anchor="${a.player.id}" data-asset-player="${a.player.id}"><strong class="asset-cash-value">${formatMoney(Math.round(a.player.displayedCash??a.player.cash))}</strong></td>`).join("")}</tr>
-    ${row('地产','lots','块')}${row('建筑总等级','totalLv','级')}${row('满级建筑','maxLevel','座')}${row('道具卡','cards','张')}
+    ${row('地产','lots','块')}${row('道具卡','cards','张')}
     ${assets.some(a=>a.effects.length)?`<tr class="asset-effects-row"><th scope="row">状态</th>${assets.map(a=>`<td>${a.effects.length?a.effects.join(' · '):'—'}</td>`).join("")}</tr>`:''}
   </tbody>`;
   scoreboardEl.appendChild(table);
@@ -1851,6 +1895,7 @@ function renderModal() {
   eventOverlayEl.classList.toggle("visible", m.visible);
   eventOverlayEl.classList.toggle("opening-coin-overlay", Boolean(m.visible && m.openingCoin));
   eventOverlayEl.classList.toggle("item-shop-overlay", Boolean(m.visible && m.itemShop));
+  eventOverlayEl.classList.toggle("property-offer-overlay", Boolean(m.visible && m.propertyOffer));
   eventOverlayEl.setAttribute("aria-busy", m.openingCoin?.phase === "tossing" ? "true" : "false");
   const boardChoice = Boolean(m.visible && (m.boardTargets?.length || m.routeChoice));
   document.body.classList.toggle("browsing-property", boardChoice);
@@ -1886,6 +1931,7 @@ function renderModal() {
 function updateControls() {
   rollBtn.disabled = state.gameOver || state.busy || currentPlayer().isAi || state.phase !== "await_roll";
   restartBtn.disabled = Boolean(openingCoinJob) || homeConfirmationPending || Boolean(state.ticketPaid && !state.gameOver && state.busy && !state.modal.visible);
+  renderVehicleDiceSelector();
 }
 
 function getPhaseLabel() {
@@ -1914,14 +1960,10 @@ async function playAiTurn() {
 async function processTurn(player, isExtraTurn = false) {
   const sid = state.sessionId;
   resetDiceDisplay();
-  // A pre-roll movement card may schedule a rest. It keeps this promised dice
-  // action; the rest begins on the following action, including a bonus action.
-  const deferredRest = player.cardDeferredRest || {};
-  player.cardDeferredRest = null;
   state.busy = true; state.phase = "locked"; state.passedStartThisTurn = false;
   hideModal(false); render();
 
-  if (player.effects.bankruptcyRelief && !deferredRest.bankruptcyRelief) {
+  if (player.effects.bankruptcyRelief) {
     player.effects.bankruptcyRelief = false;
     player.effects.frozen = false;
     player.effects.hotSpringRest = false;
@@ -1940,7 +1982,7 @@ async function processTurn(player, isExtraTurn = false) {
     }
   }
 
-  if (player.effects.hotSpringRest && !deferredRest.hotSpringRest) {
+  if (player.effects.hotSpringRest) {
     player.effects.hotSpringRest = false;
     // A rest already consumes this action. A trap laid during the same rest
     // expires with it: settling the stationary lot again would collect rent
@@ -1972,9 +2014,12 @@ async function processTurn(player, isExtraTurn = false) {
     endTurn(); return;
   }
 
-  const doubleDice = player.effects.speedBoost;
-  const dice = await animateDiceRoll(sid,"turn",doubleDice ? 2 : 1,player);
+  const fixedFace = getFixedDiceFace(player);
+  if (player.isAi && player.vehicle === "motorcycle" && fixedFace === null && !player.effects.speedBoost) player.vehicleDiceCount = chooseAiVehicleDiceCount(player);
+  const doubleDice = getTurnDiceCount(player) === 2;
+  const dice = await animateDiceRoll(sid,"turn",doubleDice ? 2 : 1,player,fixedFace);
   if (!isSessionActive(sid) || dice === null) return;
+  if (fixedFace !== null) player.effects.fixedDiceFace = null;
 
   let actualSteps = dice;
   let speedMsg = "";
@@ -2005,7 +2050,7 @@ async function processTurn(player, isExtraTurn = false) {
   if (!isSessionActive(sid) || state.gameOver) return;
 
   let extra = false;
-  if (!isExtraTurn && !doubleDice && dice === 6) extra = true;
+  if (!isExtraTurn && fixedFace === null && !doubleDice && dice === 6) extra = true;
   if (player.effects.extraTurn) { player.effects.extraTurn = false; extra = true; }
 
   if (extra) {
@@ -2022,25 +2067,26 @@ async function processTurn(player, isExtraTurn = false) {
   endTurn();
 }
 
-async function animateDiceRoll(sid, purpose = "turn", count = 1, player = currentPlayer()) {
+async function animateDiceRoll(sid, purpose = "turn", count = 1, player = currentPlayer(), fixedFace = null) {
   if (!isSessionActive(sid) || state.gameOver || currentPlayer() !== player) return null;
-  const diceCount = purpose === "turn" && count === 2 ? 2 : 1;
+  const chosenFace = purpose === "turn" && Number.isInteger(fixedFace) && fixedFace >= 1 && fixedFace <= 6 ? fixedFace : null;
+  const diceCount = chosenFace === null && purpose === "turn" && count === 2 ? 2 : 1;
   const display = {sessionId:sid,actionId:state.diceActionId,actorId:player.id,
-    purpose,count:diceCount,stage:"rolling",faces:[],total:null};
+    purpose,count:diceCount,fixed:chosenFace !== null,stage:"rolling",faces:[],total:null};
   state.diceDisplay = display;
   state.lastDice = null; state.lastDiceFaces = [];
   const isActive = () => isSessionActive(sid) && !state.gameOver && currentPlayer() === player &&
     state.diceActionId === display.actionId && state.diceDisplay === display;
-  const faces = Array.from({length:diceCount},() => rollDice());
+  const faces = chosenFace === null ? Array.from({length:diceCount},() => rollDice()) : [chosenFace];
   const final = faces.reduce((sum,face) => sum + face,0);
-  playSound("dice", { rate: 0.92 + Math.random() * 0.06 });
+  playSound("dice", { rate: chosenFace === null ? 0.92 + Math.random() * 0.06 : 1 });
   state.animation.diceRolling = true;
   state.animation.diceResult = false;
   state.statusTitle = `${player.name} 正在掷${purpose === "bank" ? "存款骰" : "骰"}`;
   state.statusDescription = "";
   render();
-  for (let i = 0; i < 10; i++) {
-    state.lastDiceFaces = Array.from({length:diceCount},() => rollDice());
+  for (let i = 0; i < (chosenFace === null ? 10 : 1); i++) {
+    state.lastDiceFaces = chosenFace === null ? Array.from({length:diceCount},() => rollDice()) : [chosenFace];
     state.lastDice = state.lastDiceFaces.reduce((sum,face) => sum + face,0);
     display.faces = [...state.lastDiceFaces]; display.total = state.lastDice; render();
     if (i === 4) playSound("dice", { rate: 0.98 + Math.random() * 0.06 });
@@ -2054,10 +2100,10 @@ async function animateDiceRoll(sid, purpose = "turn", count = 1, player = curren
   state.animation.diceResult = true;
   state.animation.boardBurst = true;
   playSound("land", { volumeMultiplier: 0.55, rate: 1.18 + (final / 6) * 0.08 });
-  state.statusTitle = purpose === "bank" ? `存款骰：${final} 点` : diceCount === 2 ? `${faces.join(" + ")} = ${final} 点` : `${player.name} 掷出了 ${final} 点`;
+  state.statusTitle = purpose === "bank" ? `存款骰：${final} 点` : chosenFace !== null ? `命定骰：${final} 点` : diceCount === 2 ? `${faces.join(" + ")} = ${final} 点` : `${player.name} 掷出了 ${final} 点`;
   state.statusDescription = purpose === "bank"
     ? `存款 ${formatMoney(Math.min(final * 30, player.cash))}`
-    : diceCount === 1 && final === 6 ? "再行动一次" : "";
+    : chosenFace === null && diceCount === 1 && final === 6 ? "再行动一次" : "";
   render();
   await sleep(500);
   if (!isActive()) return null;
@@ -2075,6 +2121,7 @@ async function animateMovement(player, steps, sid, options = {}) {
   const dir = options.direction ?? (player.effects.reversed ? -1 : 1);
   try {
   if (!await ensureHarborDeparture(player,sid,dir,steps)) return false;
+  if (steps > 0) clearPropertySettlement(player);
   for (let step = 1; step <= steps; step++) {
     const prev = player.position;
     const next = getNextTileIndex(player, player.position, dir, true);
@@ -2098,7 +2145,7 @@ async function animateMovement(player, steps, sid, options = {}) {
         const target = buildable[Math.floor(Math.random() * buildable.length)];
         target.lot.level = 1;
         syncHarborProjects();
-        startUpgradeMsg = `\n${target.name} 自动建造至 Lv.1！`;
+        startUpgradeMsg = `${target.name} 免费盖到 1 级`;
         pushLog(`${player.name} 经过市政府，获得 ${formatMoney(getMapEconomy().startBonus)}。${target.name} 自动建造至 Lv.1。`);
       } else {
         pushLog(`${player.name} 经过市政府，获得 ${formatMoney(getMapEconomy().startBonus)} 奖励。`);
@@ -2111,7 +2158,7 @@ async function animateMovement(player, steps, sid, options = {}) {
       render();
       await showContinueModal({
         label: "市政府补给", title: "市政府补给",
-        message: `${player.name} 经过市政府，领取了 ${formatMoney(getMapEconomy().startBonus)} 补给资金。${startUpgradeMsg}`,
+        message: startUpgradeMsg,
         drama: { type: "income", amount: getMapEconomy().startBonus, to: player },
       });
       if (!isSessionActive(sid) || state.gameOver) return false;
@@ -2123,106 +2170,79 @@ async function animateMovement(player, steps, sid, options = {}) {
   } finally { if (state.harborMovement === movement) state.harborMovement = null; }
 }
 
+function getPropertyCost(lot) {
+  return lot.price + lot.buildCosts.slice(1, Math.min(3, lot.level) + 1).reduce((sum, cost) => sum + cost, 0);
+}
+
+function getLotPurchasePrice(lot) {
+  return lot.municipalResale ? getPropertyCost(lot) : lot.price;
+}
+
 function getCityTakeoverQuote(lot) {
-  const refund = lot.price;
-  const purchasePrice = Math.ceil(refund * 1.25);
-  return { refund, purchasePrice, premium: purchasePrice - refund };
+  const cost = getPropertyCost(lot);
+  return { refund: cost, purchasePrice: cost, premium: 0 };
+}
+
+function clearPropertySettlement(player) {
+  player.propertySettlement = null;
+  player.propertyVisitVersion = (player.propertyVisitVersion || 0) + 1;
+}
+
+function invalidatePropertySettlements(lot) {
+  state.players.forEach(player => {
+    if (player.propertySettlement?.lot === lot || state.board[player.position]?.lot === lot) clearPropertySettlement(player);
+  });
+}
+
+function municipalCardTarget(player) {
+  const visit = player.propertySettlement;
+  const tile = state.board[player.position];
+  if (!visit || visit.sessionId !== state.sessionId || visit.tileIndex !== player.position ||
+      visit.version !== player.propertyVisitVersion || visit.lot !== tile?.lot ||
+      tile.lot.ownerId !== visit.ownerId || tile.lot.ownerId !== getOpponent(player).id) return null;
+  return tile.isLargeSecondary ? state.board[tile.largePrimaryIndex] : tile;
+}
+
+function municipalCardBlock(player, card) {
+  const target = municipalCardTarget(player);
+  if (!target) return "先停到对手地上，下回合开始才能用";
+  if ((player.completedTurns || 0) <= player.propertySettlement.completedTurns) return "下回合可使用";
+  if (card.id === "buyProperty" && player.cash < getPropertyCost(target.lot)) return "金币不足";
+  return "";
 }
 
 async function resolveStartTakeover(player, sid) {
-  if (!isSessionActive(sid) || getPlayerById(player.id) !== player) return;
-  const opp = getOpponent(player);
-  const oppTiles = state.board.filter((t) => t.lot?.ownerId === opp.id && !t.isLargeSecondary);
-
-  if (oppTiles.length === 0) {
-    const fallback = 100;
-    updatePlayerCash(player, fallback, false);
-    pushLog(`${player.name} 停留市政府，对手暂无地产可征用，获得 ${formatMoney(fallback)} 补贴。`);
-    await showContinueModal({ label: "市政府征用", title: "市政府征用 — 无可用目标", message: `对手暂无地产可征用，改为获得 ${formatMoney(fallback)} 补贴。` });
-    return;
-  }
-
-  let target, action;
-  if (player.isAi) {
-    const value = (tile) => tile.lot.tolls[tile.lot.level] + tile.lot.level * 80
-      + getDistrictOwnerLots(tile.lot.district, player.id).length * 90
-      + getDistrictOwnerLots(tile.lot.district, opp.id).length * 50;
-    const sorted = [...oppTiles].sort((a, b) => value(b) - value(a));
-    // Consider every affordable property before falling back to a free seizure.
-    target = sorted.find((tile) => player.cash - getCityTakeoverQuote(tile.lot).purchasePrice >= 80);
-    action = target ? "acquire" : "release";
-    target ||= sorted[0];
-  } else {
-    const buttons = oppTiles.map((tile) => ({
-      id: `seize_${tile.index}`,
-      label: `${municipalTargetLabel(tile)}（Lv.${tile.lot.level}）接手 ${formatMoney(getCityTakeoverQuote(tile.lot).purchasePrice)}`,
-      variant: "secondary",
-    }));
-    buttons.push({ id: "skip", label: "跳过（不征用）", variant: "secondary" });
-    const selection = await showModal({
-      label: "市政府征用", title: "选择征用地产",
-      message: "",
-      buttons, boardTargets: oppTiles.map(tile => tile.index),
-    });
-    if (!isSessionActive(sid)) return;
-    if (selection === "skip" || selection === "cancel") {
-      pushLog(`${player.name} 停留市政府，放弃了征用机会。`);
-      return;
-    }
-    if (typeof selection !== "string" || !/^seize_\d+$/.test(selection)) return;
-    target = state.board[Number(selection.slice(6))];
-    if (!oppTiles.includes(target) || target.lot.ownerId !== opp.id) return;
-
-    const quote = getCityTakeoverQuote(target.lot);
-    const canAcquire = player.cash >= quote.purchasePrice;
-    const choices = [];
-    if (canAcquire) choices.push({ id: "acquire", label: `接手房产 · 支付 ${formatMoney(quote.purchasePrice)}`, variant: "primary" });
-    choices.push({ id: "release", label: "只征用 · 不花钱，地产变无主", variant: "danger" });
-    choices.push({ id: "skip", label: "放弃这次征用", variant: "secondary" });
-    action = await showModal({
-      label: "市政府征用", title: `${municipalTargetLabel(target)} · Lv.${target.lot.level}`,
-      message: `接手后归你；免费征用后变无主。${canAcquire ? "" : `\n接手还差 ${formatMoney(quote.purchasePrice - player.cash)}`}`,
-      buttons: choices, boardTargets: [target.index], selectedTarget: target.index,
-    });
-  }
-
-  // Both menus can remain open while a game is restarted; validate immediately
-  // before the synchronous transfer, including ownership and available cash.
-  if (!isSessionActive(sid) || getPlayerById(player.id) !== player || getPlayerById(opp.id) !== opp) return;
-  if (action !== "acquire" && action !== "release") return;
-  if (state.board[target?.index] !== target || !target?.lot || target.isLargeSecondary || target.lot.ownerId !== opp.id) return;
-  const { refund, purchasePrice, premium } = getCityTakeoverQuote(target.lot);
-  if (action === "acquire") {
-    if (player.cash < purchasePrice) {
-      await showContinueModal({ label: "市政府征用", title: "现金不足，未接手", message: `还差 ${formatMoney(purchasePrice - player.cash)}` });
-      return;
-    }
-    updatePlayerCash(player, -purchasePrice, false);
-    updatePlayerCash(opp, refund, false);
-    state.bankPool += premium;
-    target.lot.ownerId = player.id;
-    syncHarborProjects();
-    playSound("special", { rate: 1.05 });
-    pushLog(`市政府接管令！${player.name} 花 ${formatMoney(purchasePrice)} 接手 ${target.name}（Lv.${target.lot.level}），${opp.name} 获补偿 ${formatMoney(refund)}，溢价 ${formatMoney(premium)} 进入公共金库。`);
-    render();
-    await showContinueModal({
-      label: "市政府征用", title: "房产接手成功",
-      drama: { type: "seize", from: opp, to: player, amount: purchasePrice, acquisition: true, purchasePrice, refund, premium, tiles: [target.index], tileName: target.name },
-      message: `${player.name} 支付 ${formatMoney(purchasePrice)} · ${opp.name} 获 ${formatMoney(refund)}`,
-    });
-    return;
-  }
-
-  target.lot.ownerId = null;
-  syncHarborProjects();
-  updatePlayerCash(opp, refund, false);
-  playSound("special", { rate: 0.88 });
-  pushLog(`市政府征用令！${opp.name} 的 ${target.name}（Lv.${target.lot.level}）被强制拍卖，退还买地成本 ${formatMoney(refund)}！`);
+  if (!isSessionActive(sid) || state.gameOver || getPlayerById(player.id) !== player) return;
+  const cardId = Math.random() < .5 ? "buyProperty" : "sellProperty";
+  const card = CARD_POOL.find(item => item.id === cardId);
+  if (!card || !grantInventoryCard(player.id, card.id, { type: "municipal", tileIndex: player.position })) return;
+  playSound("card", { rate: 1.08 });
+  pushLog(player.name + " 在市政府获得了" + card.name + "。");
   render();
-  await showContinueModal({
-    label: "市政府征用", title: "征用成功！",
-    drama: { type: "seize", from: opp, to: { id: "city", name: "无主地产" }, amount: 0, refund, tiles: [target.index], tileName: target.name },
-    message: `${target.name} 变为无主 · ${opp.name} 获补偿 ${formatMoney(refund)}`,
+  await showContinueModal({ label: "市政府", title: "获得" + card.name, message: "已放入背包",
+    drama: { type: "card", to: player, amount: 0 } });
+}
+
+async function executeMunicipalCard(player, card, sid, prepared) {
+  if (!isSessionActive(sid) || state.gameOver || getPlayerById(player.id) !== player || currentPlayer() !== player || municipalCardBlock(player, card)) return;
+  const target = municipalCardTarget(player), seller = getOpponent(player);
+  if (prepared?.tileIndex !== target.index || prepared.lot !== target.lot || prepared.visit !== player.propertySettlement || prepared.cost !== getPropertyCost(target.lot)) return;
+  const cost = prepared.cost, buy = card.id === "buyProperty";
+  invalidatePropertySettlements(target.lot);
+  if (buy) updatePlayerCash(player, -cost, false);
+  updatePlayerCash(seller, cost, false);
+  target.lot.ownerId = buy ? player.id : null;
+  target.lot.municipalResale = !buy;
+  syncHarborProjects();
+  playSound(buy ? "buy" : "special");
+  pushLog(buy ? player.name + " 用买地卡支付 " + formatMoney(cost) + " 买下了 " + target.name + "。" : seller.name + " 的 " + target.name + " 被卖出，收回 " + formatMoney(cost) + "。");
+  render();
+  await showContinueModal(buy ? {
+    label: "购买完成", title: "已购买 " + target.name, message: "",
+    drama: { type: "buy", amount: cost, to: player, tiles: [target.index], tileName: target.name },
+  } : {
+    label: "卖地卡", title: target.name + " 已售出", message: seller.name + " 收回 " + formatMoney(cost),
+    drama: { type: "notice", amount: 0, tiles: [target.index], tileName: target.name },
   });
 }
 
@@ -2235,7 +2255,7 @@ async function resolveLargeLotEffect(player, tile, sid) {
   if (!lot || lot.level === 0 || !lot.effectId) return;
 
   if (lot.effectId === "finance_bonus" && lot.ownerId === player.id) {
-    const bonusTable = [0, 60, 120, 200];
+    const bonusTable = EFFECT_BONUS_TABLES.finance_bonus;
     const bonus = bonusTable[lot.level];
     updatePlayerCash(player, bonus, false);
     pushLog(`${player.name} 的 ${lotName}（Lv.${lot.level}）带来额外收益 ${formatMoney(bonus)}！`);
@@ -2246,7 +2266,7 @@ async function resolveLargeLotEffect(player, tile, sid) {
       message: `经营收益 +${formatMoney(bonus)}`,
     });
   } else if (lot.effectId === "tower_bonus" && lot.ownerId === player.id) {
-    const bonusTable = [0, 50, 100, 170];
+    const bonusTable = EFFECT_BONUS_TABLES.tower_bonus;
     const bonus = bonusTable[lot.level];
     updatePlayerCash(player, bonus, false);
     pushLog(`${player.name} 的 ${lotName}（Lv.${lot.level}）带来酒店收益 ${formatMoney(bonus)}！`);
@@ -2276,6 +2296,21 @@ async function resolveLargeLotEffect(player, tile, sid) {
 
 async function resolveLanding(player, tile, sid) {
   if (!isSessionActive(sid) || state.gameOver) return;
+  const lot = tile?.lot, ownerId = lot?.ownerId, version = player.propertyVisitVersion || 0;
+  await resolveLandingEffect(player, tile, sid);
+  // A settled visit only matures after this normal turn ends. Movement or a
+  // change of ownership while an event is open invalidates the visit as well.
+  if (isSessionActive(sid) && !state.gameOver && getPlayerById(player.id) === player &&
+      player.position === tile.index && state.board[tile.index] === tile && lot &&
+      ownerId === getOpponent(player).id && lot.ownerId === ownerId &&
+      (player.propertyVisitVersion || 0) === version) {
+    player.propertySettlement = { sessionId: sid, tileIndex: tile.index, lot, ownerId,
+      version, completedTurns: player.completedTurns || 0 };
+  }
+}
+
+async function resolveLandingEffect(player, tile, sid) {
+  if (!isSessionActive(sid) || state.gameOver) return;
   if (tile.isStart) {
     await resolveStartTakeover(player, sid);
     return;
@@ -2287,15 +2322,16 @@ async function resolveLanding(player, tile, sid) {
   if (!lot) return;
 
   if (!lot.ownerId) {
-    if (player.cash < lot.price) {
+    const price = getLotPurchasePrice(lot);
+    if (player.cash < price) {
       pushLog(`${player.name} 资金不足，无法购买 ${tile.name}。`);
-      await showContinueModal({ label: "购买提示", title: `${tile.name} 暂不可购买`, message: `售价 ${formatMoney(lot.price)}，你只有 ${formatMoney(player.cash)}。` });
+      await showContinueModal({ label: "购买提示", title: `${tile.name} 暂不可购买`, message: `售价 ${formatMoney(price)}，你只有 ${formatMoney(player.cash)}。` });
       return;
     }
     if (player.isAi) {
       if (shouldAiBuy(player, lot) && buyLot(player, tile, false)) {
         render();
-        await showContinueModal({ label: "AI 行动", title: `AI 买下了 ${tile.name}`, message: `−${formatMoney(lot.price)}` });
+        await showContinueModal({ label: "AI 行动", title: `AI 买下了 ${tile.name}`, message: "", drama: { type: "buy", amount: price, to: player, tiles: [tile.index], tileName: tile.name } });
       } else {
         pushLog(`AI 对手放弃购买 ${tile.name}。`);
         await showContinueModal({ label: "AI 行动", title: `AI 放弃购买 ${tile.name}`, message: "AI 选择保留现金。" });
@@ -2304,14 +2340,15 @@ async function resolveLanding(player, tile, sid) {
     }
     const dec = await showModal({
       label: "购买提示", title: `购买 ${tile.name}？`,
-      message: `${lot.theme.label}${lot.isLarge ? " · 大型地产" : ""} · ${formatMoney(lot.price)}`,
+      message: `${lot.theme.label}${lot.isLarge ? " · 大型地产" : ""}${lot.level > 0 ? ` · Lv.${lot.level}` : ""}`,
+      propertyOffer: { tileIndex: tile.index, action: "buy" },
       buttons: [
-        { id: "buy", label: `购买 ${formatMoney(lot.price)}`, variant: "primary" },
+        { id: "buy", label: "购买", variant: "primary" },
         { id: "skip", label: "暂不购买", variant: "ghost" },
       ],
     });
     if (!isSessionActive(sid)) return;
-    if (dec === "buy" && buyLot(player, tile)) { render(); await showContinueModal({ label: "购买完成", title: `已购买 ${tile.name}`, message: `−${formatMoney(lot.price)}`, drama: { type: "buy", amount: lot.price, to: player, tiles: [tile.index], tileName: tile.name } }); }
+    if (dec === "buy" && buyLot(player, tile)) { render(); await showContinueModal({ label: "购买完成", title: `已购买 ${tile.name}`, message: "", drama: { type: "buy", amount: price, to: player, tiles: [tile.index], tileName: tile.name } }); }
     return;
   }
 
@@ -2342,9 +2379,10 @@ async function resolveLanding(player, tile, sid) {
     }
     const dec = await showModal({
       label: "升级提示", title: `升级 ${tile.name}？`,
-      message: `Lv.${lot.level} → Lv.${lot.level + 1} · 租金 ${formatMoney(lot.tolls[lot.level])} → ${formatMoney(lot.tolls[lot.level + 1])}`,
+      message: `Lv.${lot.level} → Lv.${lot.level + 1}`,
+      propertyOffer: { tileIndex: tile.index, action: "build" },
       buttons: [
-        { id: "build", label: `升级 ${formatMoney(cost)}`, variant: "primary" },
+        { id: "build", label: "升级", variant: "primary" },
         { id: "skip", label: "跳过", variant: "ghost" },
       ],
     });
@@ -2366,7 +2404,7 @@ async function resolveLanding(player, tile, sid) {
   render();
   if (window.GamePresentation) {
     const leadChanged = owner.cash > player.cash && owner.cash - toll.actualPayment <= player.cash + toll.actualPayment;
-    await showContinueModal({ label: "过路费提示", title: "街区租金结算", message: toll.message, drama: { type: "rent", amount: toll.actualPayment, expectedAmount: toll.toll, leadChanged, from: player, to: owner, tiles: getDistrictOwnerLots(lot.district, owner.id).map(t => t.index), tileName: tile.name } });
+    await showContinueModal({ label: "过路费提示", title: player.isAi ? "收租" : "交租", message: toll.message, drama: { type: "rent", amount: toll.actualPayment, expectedAmount: toll.toll, leadChanged, from: player, to: owner, tiles: getDistrictOwnerLots(lot.district, owner.id).map(t => t.index), tileName: tile.name } });
     if (!isSessionActive(sid)) return;
   }
   if (toll.actualPayment < toll.toll) {
@@ -2576,6 +2614,7 @@ function commitItemShopPurchase(visit, cardId) {
   if (!itemShopVisitIsActive(visit)) return { ok: false, reason: "商店已关闭" };
   const card = visit.offers.find(offer => offer.id === cardId);
   if (!card) return { ok: false, reason: "本次没有这张商品" };
+  if (card.id === "motorcycle" && hasMotorcycleAccess(visit.player)) return { ok:false, reason:"已有机车" };
   const price = ITEM_SHOP_PRICES[card.id];
   if (!Number.isFinite(visit.player.cash) || visit.player.cash < price) return { ok: false, reason: "金币不足" };
   // Commit once, synchronously: double taps and stale dialogs cannot pay or grant twice.
@@ -2589,17 +2628,23 @@ function commitItemShopPurchase(visit, cardId) {
   return { ok: true, card, price, item };
 }
 
-function drawItemShopOffers() {
-  const pool = CARD_POOL.filter(card => Number.isFinite(ITEM_SHOP_PRICES[card.id]));
+function hasMotorcycleAccess(player) {
+  return player.vehicle === "motorcycle" || (player.cards || []).some(item => item.cardId === "motorcycle");
+}
+
+function drawItemShopOffers(player = currentPlayer()) {
+  const pool = CARD_POOL.filter(card => !card.municipalOnly && Number.isFinite(ITEM_SHOP_PRICES[card.id]) &&
+    (card.id !== "motorcycle" || !hasMotorcycleAccess(player)));
   for (let i = pool.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [pool[i], pool[j]] = [pool[j], pool[i]];
   }
-  if (state.currentMapId === "harbor") {
-    const boost = pool.find(card => card.id === "boost");
-    if (boost) return [boost,...pool.filter(card => card.id !== "boost").slice(0,2)];
-  }
-  return pool.slice(0, 3);
+  const reserved = [];
+  const vehicle = pool.find(card => card.id === "motorcycle");
+  if (vehicle) reserved.push(vehicle);
+  const boost = state.currentMapId === "harbor" && pool.find(card => card.id === "boost");
+  if (boost) reserved.push(boost);
+  return [...reserved,...pool.filter(card => !reserved.includes(card))].slice(0,3);
 }
 
 async function resolveChance(player, tile, sid) {
@@ -2608,7 +2653,7 @@ async function resolveChance(player, tile, sid) {
   // One offer set per visit; a concurrent resolver cannot refresh the stock.
   if (state.itemShopVisit && isSessionActive(state.itemShopVisit.sessionId)) return;
   const visit = {
-    sessionId: sid, player, tileIndex: tile.index, offers: drawItemShopOffers(), closed: false,
+    sessionId: sid, player, tileIndex: tile.index, offers: drawItemShopOffers(player), closed: false,
     reference: `${sid}:shop:${state.itemShopSequence = (state.itemShopSequence || 0) + 1}`,
   };
   state.itemShopVisit = visit;
@@ -2661,6 +2706,7 @@ async function resolveTeleportTile(player, sid, tile = state.board[player.positi
   if (lots.length === 0) return;
   const target = lots[Math.floor(Math.random() * lots.length)];
   // A jump has no traversed route: do not call animateMovement or pay a start bonus.
+  clearPropertySettlement(player);
   player.position = target.index;
   resetHarborJourney(player);
   pushLog(`${player.name} 踏入传送门，被传送到了 ${target.name}！`);
@@ -2686,7 +2732,7 @@ async function resolveConstruction(player, sid) {
   if (!canBuild.length && !canDemolish.length) {
     const b = 120; updatePlayerCash(player, b, false);
     pushLog(`${player.name} 在城建局无事可做，领取 ${formatMoney(b)} 补贴。`);
-    await showContinueModal({ label: "城建局", title: "城建局", message: `暂无可建造或拆除的目标，获得 ${formatMoney(b)} 补贴。` });
+    await showContinueModal({ label: "城建局", title: "城建局", message: "没有能建或能拆的地，改领补贴", drama: { type: "income", amount: b } });
     return;
   }
 
@@ -2782,6 +2828,7 @@ function cardEffectBlock(player, card) {
   const opp = getOpponent(player);
   const owned = pid => state.board.some(t => t.lot?.ownerId === pid && !t.isLargeSecondary);
   switch (card.id) {
+    case "buyProperty": case "sellProperty": return municipalCardBlock(player, card);
     case "shield": return player.effects.shield ? "护盾已生效" : "";
     case "combo": return player.effects.extraTurn ? "已获得额外回合" : "";
     case "doubleRent": return !owned(player.id) ? "需要先拥有地产" : player.effects.doubleRent ? "翻倍效果已生效" : "";
@@ -2789,10 +2836,17 @@ function cardEffectBlock(player, card) {
     case "swap": return player.position === opp.position ? "双方已在同一地块" : "";
     case "propertySwap": return !owned(player.id) ? "你还没有可交换的地产" : !owned(opp.id) ? "对手还没有可交换的地产" : "";
     case "teleport": return state.board.some(t => t.lot) ? "" : "没有可传送的地产";
-    case "boost": return player.effects.speedBoost && opp.effects.speedBoost ? "双方已有双骰效果" : "";
+    case "boost": return boostTargetBlock(player,player) && boostTargetBlock(player,opp) ? "没有可使用双骰卡的目标" : "";
+    case "launch": return getFixedDiceFace(player) !== null ? "已指定骰点" : player.effects.speedBoost ? "双骰效果尚未使用" :
+      player.vehicle === "motorcycle" && player.vehicleDiceCount === 2 && !player.isAi ? "先切换为单骰" : "";
+    case "motorcycle": return player.vehicle === "motorcycle" ? "已装备机车" : "";
     case "slow": return player.effects.speedSlow && opp.effects.speedSlow ? "双方已有减速效果" : "";
     default: return "";
   }
+}
+
+function boostTargetBlock(actor, target) {
+  return target.effects.speedBoost || getFixedDiceFace(target) !== null || (actor === target && target.vehicle === "motorcycle");
 }
 
 function getCardInventory() {
@@ -2813,10 +2867,25 @@ function getCardInventory() {
 }
 
 async function prepareInventoryCard(player, card, sid) {
+  if (card.municipalOnly) {
+    const target = municipalCardTarget(player);
+    if (!target || municipalCardBlock(player, card)) return null;
+    const prepared = { tileIndex: target.index, lot: target.lot, visit: player.propertySettlement, cost: getPropertyCost(target.lot) };
+    if (player.isAi) return prepared;
+    const buying = card.id === "buyProperty";
+    const choice = await showModal({ label: card.name, title: `${buying ? "买下" : "卖出"} ${target.name}？`, message: "",
+      propertyOffer: { tileIndex: target.index, action: buying ? "municipalBuy" : "municipalSell" },
+      buttons: [{ id: "cancel", label: "暂不使用", variant: "ghost" }, { id: "confirm", label: buying ? "买下" : "卖出", variant: "primary" }] });
+    return isSessionActive(sid) && choice === "confirm" ? prepared : null;
+  }
   if (["teleport", "boost", "slow", "rewind", "reverse"].includes(card.id)) {
     let target = await chooseCardTarget(player, card, sid);
     if (!isSessionActive(sid) || !target) return null;
-    if (card.id === "boost" || card.id === "slow") {
+    if (card.id === "boost") {
+      const blocked = who => boostTargetBlock(player,who === "self" ? player : getOpponent(player));
+      if (player.isAi && blocked(target)) target = target === "self" ? "opponent" : "self";
+      if (blocked(target)) return null;
+    } else if (card.id === "slow") {
       const effect = card.id === "boost" ? "speedBoost" : "speedSlow";
       if (player.isAi && (target === "self" ? player : getOpponent(player)).effects[effect]) {
         target = target === "self" ? "opponent" : "self";
@@ -2827,11 +2896,12 @@ async function prepareInventoryCard(player, card, sid) {
   }
   if (card.id === "launch" && !player.isAi) {
     const buttons = Array.from({ length: 6 }, (_, i) => {
-      const steps = i + 1, preview = previewMovement(player, steps), tile = state.board[preview.index];
-      return { id: String(steps), label: `${steps} 步 → ${preview.uncertain ? "岔路待选" : tile.name}`, variant: "primary" };
+      const steps = i + 1, movement = player.effects.speedSlow ? Math.ceil(steps / 2) : steps;
+      const preview = previewMovement(player, movement), tile = state.board[preview.index];
+      return { id: String(steps), label: `${steps} 点 → ${preview.uncertain ? "岔路待选" : tile.name}`, variant: "primary" };
     });
     buttons.unshift({ id: "cancel", label: "暂不使用", variant: "ghost" });
-    const choice = await showModal({ label: "使用卡牌", title: "🎯 命定骰 · 选择步数", message: card.description, buttons });
+    const choice = await showModal({ label: "使用卡牌", title: "命定骰 · 选择点数", message: "", buttons });
     if (!isSessionActive(sid) || !/^[1-6]$/.test(choice)) return null;
     return { steps: Number(choice) };
   }
@@ -2865,6 +2935,10 @@ async function useInventoryCard(player, instanceId, ai = false) {
     if (!prepared) return { ok: false, cancelled: true, reason: "已保留卡牌" };
     const changed = cardEffectBlock(player, card);
     if (changed) return { ok: false, reason: changed };
+    if (card.municipalOnly && (state.gameOver || getPlayerById(player.id) !== player || currentPlayer() !== player || prepared.visit !== player.propertySettlement ||
+        prepared.lot !== municipalCardTarget(player)?.lot || prepared.cost !== getPropertyCost(prepared.lot))) {
+      return { ok: false, reason: "地产状态已变化" };
+    }
     // Consume only after a valid choice, but before any awaited effect can be clicked twice.
     player.cards.splice(player.cards.indexOf(item), 1);
     player.cardUsedThisTurn = true;
@@ -2872,12 +2946,6 @@ async function useInventoryCard(player, instanceId, ai = false) {
     hideModal(false);
     pushLog(`${player.name} 使用了 ${card.icon} ${card.name}。`);
     await executeCardEffect(player, card, sid, prepared);
-    if (isSessionActive(sid) && card.id === "launch") {
-      player.cardDeferredRest = {
-        hotSpringRest: player.effects.hotSpringRest,
-        bankruptcyRelief: player.effects.bankruptcyRelief,
-      };
-    }
     return { ok: true, cardId: card.id };
   } finally {
     if (isSessionActive(sid)) {
@@ -2918,14 +2986,14 @@ window.GameCards = {
   applyLoadout(playerId, cardIds, reference = "") {
     const player = state.players?.find(p => p.id === playerId);
     if (!player || state.initiativeResolved || state.gameOver || player.cardLoadoutApplied || !Array.isArray(cardIds) ||
-        cardIds.some(id => !CARD_POOL.some(card => card.id === id))) return [];
+        cardIds.some(id => !CARD_POOL.some(card => card.id === id && !card.municipalOnly))) return [];
     player.cardLoadoutApplied = true;
     return cardIds.map(id => grantInventoryCard(playerId, id, { type: "loadout", reference }));
   },
 };
 
 function drawInventoryCardOffers(tile = null) {
-  const remaining = [...CARD_POOL], drawn = [];
+  const remaining = CARD_POOL.filter(card => !card.shopOnly && !card.municipalOnly), drawn = [];
   const guaranteedId = state.currentMapId === "harbor" && state.board[tile?.index] === tile &&
     tile?.special?.type === "card_draw" ? tile.special.guaranteedCardId : null;
   const guaranteedIndex = remaining.findIndex(card => card.id === guaranteedId);
@@ -3018,7 +3086,8 @@ async function chooseCardTarget(player, card, sid) {
   const targets = [
     { id: "self", label: "对自己使用", variant: "primary" },
     { id: "opponent", label: "对对手使用", variant: "danger" },
-  ].filter(target => !blockedEffect || !(target.id === "self" ? player : getOpponent(player)).effects[blockedEffect]);
+  ].filter(target => card.id === "boost" ? !boostTargetBlock(player,target.id === "self" ? player : getOpponent(player)) :
+    !blockedEffect || !(target.id === "self" ? player : getOpponent(player)).effects[blockedEffect]);
   const choice = await showModal({
     label: "卡牌效果",
     title: `${card.icon} ${card.name} — 选择目标`,
@@ -3037,6 +3106,9 @@ async function executeCardEffect(player, card, sid, prepared = {}) {
   const opp = getOpponent(player);
 
   switch (card.id) {
+    case "buyProperty": case "sellProperty":
+      await executeMunicipalCard(player, card, sid, prepared);
+      break;
     case "teleport": {
       const target_who = prepared.target || await chooseCardTarget(player, card, sid);
       if (!isSessionActive(sid) || !target_who) return;
@@ -3045,6 +3117,7 @@ async function executeCardEffect(player, card, sid, prepared = {}) {
       const lots = state.board.filter((t) => t.lot !== null);
       if (lots.length === 0) break;
       const dest = lots[Math.floor(Math.random() * lots.length)];
+      clearPropertySettlement(target_player);
       target_player.position = dest.index;
       resetHarborJourney(target_player);
       state.animation.landedTile = dest.index;
@@ -3060,39 +3133,40 @@ async function executeCardEffect(player, card, sid, prepared = {}) {
       else if (player.isAi) {
         let bestStep = 1, bestScore = -9999;
         for (let s = 1; s <= 6; s++) {
-          const idx = previewMovement(player, s).index;
-          const t = state.board[idx];
-          let score = 0;
-          if (t.lot && !t.lot.ownerId) score += 5;
-          else if (t.lot?.ownerId === player.id && t.lot.level < 3) score += 4;
-          else if (t.lot?.ownerId === opp.id) score -= t.lot.tolls[t.lot.level] / 40;
-          if (t.isSpecial && (t.special.type === "card_draw" || t.special.type === "construction")) score += 3;
+          const score = movementOutcomeValue(player,s);
           if (score > bestScore) { bestScore = score; bestStep = s; }
         }
         steps = bestStep;
       } else {
         const btns = [];
         for (let s = 1; s <= 6; s++) {
-          const preview = previewMovement(player, s);
-          btns.push({ id: String(s), label: `${s} 步 → ${preview.uncertain ? "岔路待选" : state.board[preview.index].name}`, variant: "primary" });
+          const preview = previewMovement(player, player.effects.speedSlow ? Math.ceil(s/2) : s);
+          btns.push({ id: String(s), label: `${s} 点 → ${preview.uncertain ? "岔路待选" : state.board[preview.index].name}`, variant: "primary" });
         }
         const choice = await showModal({
-          label: "卡牌效果", title: "🎯 命定骰 — 选择步数",
+          label: "卡牌效果", title: "命定骰 · 选择点数",
           message: "",
           buttons: btns,
         });
         if (!isSessionActive(sid)) return;
-        steps = parseInt(choice, 10) || 1;
+        if (!/^[1-6]$/.test(choice)) return;
+        steps = Number(choice);
       }
-      pushLog(`命定骰！${player.name} 选择前进 ${steps} 步！`);
-      await showContinueModal({ label: "卡牌效果", title: "命定骰", message: `${player.name} · 前进 ${steps} 步` });
-      if (!isSessionActive(sid)) return;
-      if (await animateMovement(player, steps, sid) === false) return;
-      if (!isSessionActive(sid) || state.gameOver) return;
-      state.animation.currentTile = null;
-      state.animation.landedTile = player.position;
+      if (!Number.isInteger(steps) || steps < 1 || steps > 6 || player.effects.speedBoost || getFixedDiceFace(player) !== null) return;
+      player.effects.fixedDiceFace = steps;
+      if (player.vehicle === "motorcycle") player.vehicleDiceCount = 1;
+      resetDiceDisplay();
+      pushLog(`${player.name} 将下次单骰指定为 ${steps} 点。`);
       render();
-      await resolveLanding(player, state.board[player.position], sid);
+      break;
+    }
+    case "motorcycle": {
+      if (player.vehicle === "motorcycle") break;
+      player.vehicle = "motorcycle";
+      player.vehicleDiceCount = 1;
+      resetDiceDisplay();
+      pushLog(`${player.name} 已装备机车。`);
+      await showContinueModal({ label:"卡牌效果", title:"机车已装备", message:"" });
       break;
     }
     case "rewind": {
@@ -3112,6 +3186,7 @@ async function executeCardEffect(player, card, sid, prepared = {}) {
     }
     case "swap": {
       playSound("special", { rate: 1 });
+      clearPropertySettlement(player); clearPropertySettlement(opp);
       const tmp = player.position;
       player.position = opp.position;
       opp.position = tmp;
@@ -3129,6 +3204,7 @@ async function executeCardEffect(player, card, sid, prepared = {}) {
       const target_who = prepared.target || await chooseCardTarget(player, card, sid);
       if (!isSessionActive(sid) || !target_who) return;
       const target_player = target_who === "self" ? player : opp;
+      if (boostTargetBlock(player,target_player)) return;
       target_player.effects.speedBoost = true;
       pushLog(`双骰卡！${target_player.name} 下次同时掷两颗骰子！`);
       await showContinueModal({ label: "卡牌效果", title: "双骰卡", message: `${target_player.name} · 下次掷两颗骰子` });
@@ -3203,6 +3279,7 @@ async function executeCardEffect(player, card, sid, prepared = {}) {
       }
       const giveTile = state.board[giveIdx];
       const getTile = oppLots[Math.floor(Math.random() * oppLots.length)];
+      invalidatePropertySettlements(giveTile.lot); invalidatePropertySettlements(getTile.lot);
       giveTile.lot.ownerId = opp.id;
       getTile.lot.ownerId = player.id;
       syncHarborProjects();
@@ -3247,15 +3324,18 @@ function purchaseBuildingNote(lot) {
 
 function buyLot(player, tile, animate = true) {
   const lot = tile.lot;
-  if (player.cash < lot.price) {
+  const price = getLotPurchasePrice(lot);
+  if (lot.ownerId || player.cash < price) {
     pushLog(`${player.name} 资金不足，无法购买 ${tile.name}。`);
     return false;
   }
-  updatePlayerCash(player, -lot.price, animate);
+  updatePlayerCash(player, -price, animate);
+  invalidatePropertySettlements(lot);
   lot.ownerId = player.id;
+  lot.municipalResale = false;
   syncHarborProjects();
   playSound("buy", { rate: lot.isLarge ? 0.92 : 1 });
-  pushLog(`${player.name} 花 ${formatMoney(lot.price)} 买下了 ${tile.name}。`);
+  pushLog(`${player.name} 花 ${formatMoney(price)} 买下了 ${tile.name}。`);
   return true;
 }
 
@@ -3282,14 +3362,13 @@ function collectToll(visitor, owner, tile) {
   updatePlayerCash(visitor, -actual, false);
   updatePlayerCash(owner, actual, false);
   playSound("toll", { rate: doubleActive ? 0.9 : 1 });
-  const mText = mult > 1 ? `，系数 x${mult}` : "";
-  const dText = doubleActive ? "（收租翻倍生效！）" : "";
   if (actual < toll) pushLog(`${visitor.name} 现金不足，仅支付 ${formatMoney(actual)} 给 ${owner.name}。`);
   else pushLog(`${visitor.name} 支付 ${formatMoney(actual)} 过路费给 ${owner.name}。`);
-  return {
-    actualPayment: actual, toll,
-    message: `${tile.lot.district}连锁收费：${owner.name} 拥有 ${cnt} 块地${mText}${dText}，合计 ${formatMoney(actual)}。`,
-  };
+  const notes = [];
+  if (cnt > 1) notes.push(`${owner.isAi ? "对手" : "你"}在${tile.lot.district}有 ${cnt} 块地，一起收`);
+  if (doubleActive) notes.push("这次租金翻倍");
+  if (actual < toll) notes.push(`现金不够，应付 ${formatMoney(toll)}`);
+  return { actualPayment: actual, toll, message: notes.join("；") };
 }
 
 function getDistrictOwnerLots(district, ownerId) {
@@ -3314,14 +3393,15 @@ function findUpgradeableOwnedLot(pid) {
 }
 
 function shouldAiBuy(player, lot) {
-  if (player.cash < lot.price) return false;
+  const price = getLotPurchasePrice(lot);
+  if (player.cash < price) return false;
   const reserve = 180;
   const distOwned = getDistrictOwnerLots(lot.district, player.id);
   const distTotal = new Set(state.board.filter((t) => t.lot && t.lot.district === lot.district).map((t) => t.lot)).size;
-  if (distOwned.length + 1 >= distTotal && player.cash - lot.price >= 60) return true;
+  if (distOwned.length + 1 >= distTotal && player.cash - price >= 60) return true;
   const oppOwns = state.board.filter((t) => t.lot && t.lot.district === lot.district && t.lot.ownerId && t.lot.ownerId !== player.id).length;
-  if (oppOwns >= 2 && player.cash - lot.price >= reserve) return true;
-  return player.cash - lot.price >= reserve || lot.price <= 120;
+  if (oppOwns >= 2 && player.cash - price >= reserve) return true;
+  return player.cash - price >= reserve || price <= 120;
 }
 
 function shouldAiBuild(player, lot, cost) {
@@ -3340,18 +3420,44 @@ function aiChooseCard(cards, player) {
   // while one is already pending, but still accept it if it is the only reward.
   const redundantFreeze = opp.effects.hotSpringRest || opp.effects.frozen || opp.effects.bankruptcyRelief;
   const prio = {
+    buyProperty: 12, sellProperty: 11,
     rewind: oppLots > 0 ? 9 : 2, freeze: redundantFreeze ? -1 : oppLots > 0 ? 7 : 3,
     slow: oppLots > 0 ? 7 : 3, doubleRent: myLots >= 2 ? 8 : 2,
     combo: 6, boost: 5, shield: oppLots >= 3 ? 7 : 3,
-    launch: 6, teleport: 5, swap: 4,
+    launch: 6, teleport: 5, swap: 4, motorcycle:player.vehicle === "motorcycle" ? -1 : 10,
     propertySwap: (myLots > 0 && oppLots > 0) ? 6 : 1,
     reverse: 5,
   };
   return [...cards].sort((a, b) => (prio[b.id] ?? 3) - (prio[a.id] ?? 3))[0];
 }
 
+function movementOutcomeValue(player, diceTotal) {
+  const steps = player.effects.speedSlow ? Math.ceil(diceTotal / 2) : diceTotal;
+  const preview = previewMovement(player,steps), tile = state.board[preview.index];
+  let score = steps * 0.08;
+  if (tile.lot && !tile.lot.ownerId && player.cash >= getLotPurchasePrice(tile.lot)) score += 5;
+  else if (tile.lot?.ownerId === player.id) score += tile.lot.level < 3 ? 4 : 1;
+  else if (tile.lot?.ownerId && !player.effects.shield) {
+    const district = getDistrictOwnerLots(tile.lot.district,tile.lot.ownerId);
+    const toll = district.reduce((sum,t) => sum+t.lot.tolls[t.lot.level],0) * getDistrictTollMultiplier(district.length);
+    score -= toll * (getPlayerById(tile.lot.ownerId)?.effects.doubleRent ? 2 : 1) / 40;
+  }
+  if (tile.isSpecial) score += ({card_draw:3,construction:4,bank:2,start:2,chance:player.cash >= 250 ? 2 : 0})[tile.special.type] || 0;
+  return score;
+}
+
+function chooseAiVehicleDiceCount(player) {
+  let single = 0, double = 0;
+  for (let a = 1; a <= 6; a++) {
+    single += movementOutcomeValue(player,a) / 6;
+    for (let b = 1; b <= 6; b++) double += movementOutcomeValue(player,a+b) / 36;
+  }
+  return double > single ? 2 : 1;
+}
+
 function endTurn() {
   if (state.gameOver) return;
+  currentPlayer().completedTurns = (currentPlayer().completedTurns || 0) + 1;
   hideModal(false); clearHighlights(); state.busy = false;
   state.currentPlayerIndex = (state.currentPlayerIndex + 1) % state.players.length;
   resetDiceDisplay();
@@ -3426,10 +3532,10 @@ function previewMunicipalTarget(index) {
   return true;
 }
 
-function showModal({ label = "行动提示", title, message, buttons, cardDraw = false, itemShop = false, boardTargets = null, selectedTarget = null, boardContext = null, openingCoin = null, routeChoice = null }) {
+function showModal({ label = "行动提示", title, message, buttons, cardDraw = false, itemShop = false, propertyOffer = null, boardTargets = null, selectedTarget = null, boardContext = null, openingCoin = null, routeChoice = null }) {
   cancelOpeningCoinToss();
   if (modalResolver) { modalResolver("cancel"); modalResolver = null; }
-  state.modal = { visible: true, label, title, message, buttons, cardDraw, itemShop, boardTargets, boardContext, openingCoin, routeChoice, selectedTarget: selectedTarget ?? boardTargets?.[0] ?? null };
+  state.modal = { visible: true, label, title, message, buttons, cardDraw, itemShop, propertyOffer, boardTargets, boardContext, openingCoin, routeChoice, selectedTarget: selectedTarget ?? boardTargets?.[0] ?? null };
   if (boardTargets?.length) window.GamePresentation?.selectTile(state.modal.selectedTarget);
   else if (boardContext) window.GamePresentation?.selectTile(boardContext.selectedTarget);
   else window.GamePresentation?.selectCurrentTile();
@@ -3590,7 +3696,7 @@ function buildTooltipContent(idx) {
     tollBlock = `<div class="tt-toll">收费 ¥${lot.tolls[lot.level]}</div>
       <div class="tt-toll-label">Lv.0 ¥${lot.tolls[0]}　Lv.1 ¥${lot.tolls[1]}　Lv.2 ¥${lot.tolls[2]}　Lv.3 ¥${lot.tolls[3]}</div>`;
   } else {
-    tollBlock = `<div class="tt-price-row"><span>售价 ¥${lot.price}</span><span>基础收费 ¥${lot.tolls[0]}</span></div>`;
+    tollBlock = `<div class="tt-price-row"><span>售价 ¥${getLotPurchasePrice(lot)}</span><span>基础收费 ¥${lot.tolls[lot.level]}</span></div>`;
   }
 
   const upgradeHint = (owner && lot.level < 3)
@@ -3691,6 +3797,10 @@ document.addEventListener("keydown", unlockBgmPlayback, { once: true });
 document.addEventListener("visibilitychange", syncBgmPlayback);
 window.addEventListener("pagehide", () => { if (openingCoinJob) hideModal(); });
 rollBtn.addEventListener("click", () => void playHumanTurn());
+document.getElementById("vehicle-dice-selector")?.addEventListener("click", event => {
+  const button = event.target.closest("[data-vehicle-dice]");
+  if (button && !button.disabled) setVehicleDiceCount(Number(button.dataset.vehicleDice));
+});
 restartBtn.addEventListener("click", () => void returnToStartScreen());
 scoreboardEl.addEventListener("click", (e) => {
   if (e.target.closest(".play-again-btn")) void startNewGame();

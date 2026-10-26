@@ -61,16 +61,38 @@ let checks=0;const test=async(name,fn)=>{await fn();checks++;console.log('PASS '
     c.run('initializeGame("harbor")');release();assert.equal(await move,false);
     assert.equal(c.run('state.players[0].harborCursor'),6);assert.equal(c.run('state.players[0].position'),0);
   });
-  await test('rush and chosen movement follow current phase and settle exactly once',async()=>{
+  await test('rush follows current phase and settles exactly once in either direction',async()=>{
     for(const reversed of [false,true]){
       const c=fresh(),landings=[];c.record=index=>landings.push(index);
       c.run(`state.players[0].position=21;resetHarborJourney(state.players[0]);state.players[0].effects.reversed=${reversed};resolveLanding=async(p,t)=>record(t.index)`);
       const destination=c.run('previewMovement(state.players[0],3).index');
       await c.run('resolveRushTile(state.players[0],state.sessionId,{index:21,name:"快线",special:{rushMin:3,rushMax:3}})');
       assert.deepEqual(landings,[destination]);
-      const second=c.run('previewMovement(state.players[0],6).index');
-      await c.run('executeCardEffect(state.players[0],{id:"launch"},state.sessionId,{steps:6})');
-      assert.deepEqual(landings,[destination,second]);
+    }
+  });
+  await test('chosen six queues one normal roll and crosses either harbor phase boundary exactly once',async()=>{
+    for(const reversed of [false,true]) for(const cursor of [0,34,35,69]) {
+      const c=fresh(),cycle=json(c,'getMapNavigation().cycle'),landings=[];
+      c.record=index=>landings.push(index);
+      c.run(`Object.assign(state.players[0],{position:${cycle[cursor]},harborAnchor:${cycle[cursor]},harborCursor:${cursor}});
+        state.players[0].effects.reversed=${reversed};
+        resolveLanding=async(p,t)=>record(t.index);showModal=async()=>"6";
+        rollDice=()=>{throw Error("Chosen dice must not sample or trigger a six bonus")};
+        grantInventoryCard('human','launch');`);
+      const before=json(c,'({position:state.players[0].position,cursor:state.players[0].harborCursor,cash:state.players[0].cash})');
+      assert.equal((await c.run('GameCards.use("launch")')).ok,true);
+      assert.deepEqual(json(c,'({position:state.players[0].position,cursor:state.players[0].harborCursor,cash:state.players[0].cash})'),before,
+        'using the card cannot move, cross a boundary, or collect salary');
+      assert.deepEqual(landings,[]);
+      assert.equal(c.run('state.phase'),'await_roll');
+      assert.equal(c.run('state.players[0].cards.length'),0);
+      const expectedCursor=cursor+(reversed?-6:6),expectedIndex=cycle[(expectedCursor%70+70)%70];
+      await c.run('playHumanTurn()');
+      assert.equal(c.run('state.players[0].harborCursor'),expectedCursor);
+      assert.equal(c.run('state.players[0].position'),expectedIndex);
+      assert.deepEqual(landings,[expectedIndex],'the queued normal roll settles only its final destination');
+      assert.equal(c.run('state.players[0].effects.fixedDiceFace'),null);
+      assert.equal(c.run('state.currentPlayerIndex'),1,'chosen six passes the turn instead of granting another action');
     }
   });
   console.log(`${checks} automatic harbor cycle lifecycle checks passed.`);

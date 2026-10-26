@@ -2,8 +2,8 @@
 // this layer never changes the movement graph or generates gameplay rewards.
 import { harborWalkOffset, harborEdgePath, harborVisualPosition, harborParcelRotation, harborStreetPosition, harborCoastLayout } from './scene-harbor-paths.js?v=20261025-harbor-main-island1';
 import { harborLandmarkSpec } from './scene-harbor-landmarks.js?v=20261025-harbor-main-island1';
-import { createHarborProjectVisuals, updateHarborProjectVisuals } from './scene-harbor-projects.js?v=20261025-harbor-projects1';
-export { updateHarborProjectVisuals, tickHarborProjectVisuals } from './scene-harbor-projects.js?v=20261025-harbor-projects1';
+import { createHarborProjectVisuals, updateHarborProjectVisuals } from './scene-harbor-projects.js?v=20261027-night1';
+export { updateHarborProjectVisuals, tickHarborProjectVisuals } from './scene-harbor-projects.js?v=20261027-night1';
 
 export function createHarborIslands({THREE,world,boardBounds,data,own}) {
   const root=new THREE.Group();root.name='harbor_three_islands';root.userData.cosmetic=true;world.add(root);

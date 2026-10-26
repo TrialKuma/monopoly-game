@@ -1,12 +1,12 @@
 import * as THREE from './assets/vendor/three/three.module.min.js';
 import { makeStudioEnvironment } from './scene-environment.js?v=20261025-facade2';
 import { mergeGeometries } from './assets/vendor/three/addons/utils/BufferGeometryUtils.js';
-import { createSceneLife } from './scene-life.js?v=20261025-harbor1';
+import { createSceneLife } from './scene-life.js?v=20261027-night1';
 import { createStreetFoundation } from './scene-streets.js?v=20261025-harbor-main-island1';
-import { createHarborIslands, addHarborBridge, updateHarborProjectVisuals, tickHarborProjectVisuals } from './scene-harbor-islands.js?v=20261025-harbor-projects1';
+import { createHarborIslands, addHarborBridge, updateHarborProjectVisuals, tickHarborProjectVisuals } from './scene-harbor-islands.js?v=20261027-night1';
 import { harborWalkOffset, harborEdgePath, harborParcelRotation, harborVisualPosition } from './scene-harbor-paths.js?v=20261025-harbor-main-island1';
 import { harborLandmarkSpec } from './scene-harbor-landmarks.js?v=20261025-harbor-main-island1';
-import { createRegionalPark } from './scene-regional-parks.js?v=20261025-terrain3';
+import { createRegionalPark } from './scene-regional-parks.js?v=20261027-night1';
 import { createOwnershipRoofs } from './scene-ownership-roofs.js?v=20261025-items1';
 import { createFunctionalLandmark } from './scene-functional-landmarks.js?v=20261025-items1';
 import { createThermalSteam } from './scene-thermal-steam.js?v=20261025-facade2';
@@ -817,13 +817,14 @@ function updateLot(view,tile,data,initial=false) {
   const meta=view.label.querySelector('.scene-tile-meta');
   if(tile.lot){
     const rent=data.rents?.[tile.index]??tile.lot.tolls?.[level]??0;
-    meta.textContent=owner?`${owner.id==='human'?'你':'对手'} · Lv.${level} · ¥${rent}`:level>0?`Lv.${level}待售 · 买下即用 · ¥${tile.lot.price}`:`空地待售 ¥${tile.lot.price}`;
+    const price=data.purchasePrices?.[tile.index]??tile.lot.price;
+    meta.textContent=owner?`${owner.id==='human'?'你':'对手'} · Lv.${level} · ¥${rent}`:level>0?`Lv.${level}待售 · ¥${price}`:`空地待售 ¥${price}`;
     view.label.style.setProperty('--owner-color',owner?color:'#b8ab90');
     view.label.dataset.owner=owner?.id||'none';
     view.label.dataset.rent=String(rent);
     view.label.dataset.level=String(level);view.label.classList.toggle('is-built-for-sale',!owner&&level>0);
     view.label.querySelector('.scene-tile-name').dataset.level=String(level);
-  }else {meta.textContent=tile.isStart?'起点 · 征用':tile.special?.label||'城市事件';view.label.style.setProperty('--owner-color',specialColor||'#ab9569');view.label.dataset.special=tile.isStart?'start':tile.special?.type||'';}
+  }else {meta.textContent=tile.isStart?'起点 · 市政卡':tile.special?.label||'城市事件';view.label.style.setProperty('--owner-color',specialColor||'#ab9569');view.label.dataset.special=tile.isStart?'start':tile.special?.type||'';}
   view.label.title=`第 ${tile.index+1} 格 · ${tile.name}${tile.lot?.isLarge?' · 双格地产':''} · ${meta.textContent}`;
   view.label.setAttribute('aria-label',view.label.title);
   view.label.classList.toggle('is-landmark',Boolean(tile.lot?.isLarge));
@@ -1255,28 +1256,25 @@ function resize(){
   syncCameraControls();
   renderDirty=true;
 }
-function inspectTile(index,level){
+function inspectTile(index){
   let tile=snapshot?.board?.find((item)=>item.index===Number(index));
   if(!tile)return false;
   if(tile.isLargeSecondary)tile=snapshot.board[tile.largePrimaryIndex];
+  if(!tile||tile.lot&&!(tile.lot.level>0))return false;
   cancelCameraGesture();
   closeInspection();
   const dialog=document.createElement('dialog');dialog.id='city-building-inspection';dialog.className='city-model-dialog';dialog.setAttribute('aria-labelledby','city-model-title');
-  dialog.innerHTML=`<header class="city-model-header"><div><p class="city-model-eyebrow">${tile.lot?'建造预览':'地标近看'}</p><h2 id="city-model-title"></h2></div><button type="button" class="city-model-close" data-model-close aria-label="关闭近看">✕</button></header><div class="city-model-stage"><div class="city-model-canvas"></div><span class="city-model-level-badge"></span><p class="city-model-hint">拖动转一转 · 看看每一面</p></div><footer class="city-model-footer"><div class="city-model-levels" role="group" aria-label="预览建筑等级"><button type="button" data-model-level="1">Lv.1</button><button type="button" data-model-level="2">Lv.2</button><button type="button" data-model-level="3">Lv.3</button></div><div class="city-model-view-tools" role="group" aria-label="调整建筑视角"><button type="button" data-model-turn="-1" aria-label="向左转动建筑">↶</button><button type="button" data-model-turn="1" aria-label="向右转动建筑">↷</button><span></span><button type="button" data-model-zoom="-1" aria-label="缩小建筑">−</button><button type="button" data-model-zoom="1" aria-label="放大建筑">＋</button><button type="button" data-model-reset>恢复视角</button></div><p class="city-model-disclaimer">${tile.lot?'这里可以看看升级后的样子，不改变当前对局。':'拖动或缩放，看看这座城市地标的细节。'}</p></footer>`;
+  dialog.innerHTML=`<header class="city-model-header"><div><p class="city-model-eyebrow">${tile.lot?'建筑近看':'地标近看'}</p><h2 id="city-model-title"></h2></div><button type="button" class="city-model-close" data-model-close aria-label="关闭近看">✕</button></header><div class="city-model-stage"><div class="city-model-canvas"></div><span class="city-model-level-badge"></span><p class="city-model-hint" aria-live="polite"></p></div><footer class="city-model-footer"><div class="city-model-view-tools" role="group" aria-label="调整建筑视角"><button type="button" data-model-turn="-1" aria-label="向左转动建筑">↶</button><button type="button" data-model-turn="1" aria-label="向右转动建筑">↷</button><span></span><button type="button" data-model-zoom="-1" aria-label="缩小建筑">−</button><button type="button" data-model-zoom="1" aria-label="放大建筑">＋</button><button type="button" data-model-reset>恢复视角</button></div></footer>`;
   const returnFocus=document.activeElement;
   document.body.appendChild(dialog);document.body.classList.add('city-inspection-open');
-  const requestedLevel=Number(level??(tile.lot?.level||3));
-  const state={dialog,tile,mapId:snapshot.mapId,sessionId:snapshot.sessionId,level:tile.lot?THREE.MathUtils.clamp(Number.isFinite(requestedLevel)?Math.round(requestedLevel):3,1,3):0,returnFocus,renderer:null,scene:null,camera:null,pivot:null,environment:null,observer:null,resources:[],angle:0,zoom:1,elevation:.78,bounds:null,drag:null};
+  const state={dialog,tile,mapId:snapshot.mapId,sessionId:snapshot.sessionId,level:tile.lot?THREE.MathUtils.clamp(Math.floor(tile.lot.level),1,3):0,returnFocus,renderer:null,scene:null,camera:null,pivot:null,environment:null,observer:null,resources:[],angle:0,zoom:1,elevation:.78,bounds:null,drag:null};
   inspection=state;
   syncCameraControls();
   dialog.querySelector('#city-model-title').textContent=tile.name;
-  dialog.querySelector('.city-model-levels').hidden=!tile.lot;
   dialog.addEventListener('cancel',(event)=>{event.preventDefault();event.stopPropagation();closeInspection();});
   dialog.addEventListener('click',(event)=>{
     event.stopPropagation();
     if(event.target===dialog||event.target.closest('[data-model-close]')){closeInspection();return;}
-    const selectedLevel=event.target.closest('[data-model-level]');
-    if(selectedLevel){state.level=Number(selectedLevel.dataset.modelLevel);renderInspectionModel();return;}
     const turn=event.target.closest('[data-model-turn]');
     if(turn){state.angle+=Number(turn.dataset.modelTurn)*Math.PI/6;renderInspection();return;}
     const zoom=event.target.closest('[data-model-zoom]');
@@ -1310,7 +1308,7 @@ function inspectTile(index,level){
     return true;
   }catch(error){
     console.warn('The building preview could not start.',error);
-    dialog.querySelector('.city-model-canvas').innerHTML='<p class="city-model-unavailable">暂时无法打开建筑预览，可以关闭后继续对局。</p>';
+    dialog.querySelector('.city-model-canvas').innerHTML='<p class="city-model-unavailable">暂时无法查看建筑</p>';
     return false;
   }
 }
@@ -1322,15 +1320,13 @@ function renderInspectionModel(){
   state.pivot.clear();
   const data={mapId:state.mapId};const current=createLotModel(state.tile,data,state.level,null,ownPreview);
   state.pivot.add(current.model);
-  const highest=createLotModel(state.tile,data,state.tile.lot?3:0,null,ownPreview).model;highest.updateMatrixWorld(true);
-  state.bounds=new THREE.Box3().setFromObject(highest);
-  ownershipRoofs?.release(highest);
+  state.pivot.rotation.y=0;state.pivot.updateMatrixWorld(true);
+  state.bounds=new THREE.Box3().setFromObject(current.model);
   if(state.bounds.isEmpty())state.bounds.set(new THREE.Vector3(-.5,0,-.5),new THREE.Vector3(.5,1,.5));
-  state.dialog.querySelector('.city-model-hint').textContent=current.asset.source?'拖动转一转 · 看看每一面':failedBundles.has(`regions/${state.mapId}.glb`)?'建筑未载入，关闭后重开可重试':'建筑加载中…';
+  state.dialog.querySelector('.city-model-hint').textContent=current.asset.source?'':failedBundles.has(`regions/${state.mapId}.glb`)?'建筑未载入，重新打开可重试':'建筑加载中…';
   state.elevation=state.bounds.max.y>2.5?.57:.78;
   state.dialog.dataset.tileIndex=String(state.tile.index);state.dialog.dataset.modelKey=current.asset.desired;state.dialog.dataset.loadedModel=current.asset.source?current.asset.key:'';state.dialog.dataset.level=String(state.level);
   state.dialog.querySelector('.city-model-level-badge').textContent=state.tile.lot?`Lv.${state.level}${state.level===3?' · 满级':''}`:'城市地标';
-  state.dialog.querySelectorAll('[data-model-level]').forEach((button)=>{const selected=Number(button.dataset.modelLevel)===state.level;button.classList.toggle('is-active',selected);button.setAttribute('aria-pressed',String(selected));});
   renderInspection();
 }
 function renderInspection(){
@@ -1341,8 +1337,7 @@ function renderInspection(){
   state.camera.position.set(5.8,centerY+Math.tan(state.elevation)*10,8.15);state.camera.lookAt(0,centerY,0);state.camera.updateMatrixWorld(true);
   state.camera.left=-1;state.camera.right=1;state.camera.top=1;state.camera.bottom=-1;state.camera.updateProjectionMatrix();
   const rot=new THREE.Matrix4().makeRotationY(state.angle),points=[];
-  // Every level uses the same full-level viewing frame, so changing Lv.1→Lv.3
-  // reveals genuine growth instead of resizing each building to fill the picture.
+  // Frame the building that is actually on the board, including after its model loads.
   for(const x of [state.bounds.min.x-.14,state.bounds.max.x+.14])for(const y of [-.06,state.bounds.max.y+.08])for(const z of [state.bounds.min.z-.14,state.bounds.max.z+.14])points.push(new THREE.Vector3(x,y,z).applyMatrix4(rot).project(state.camera));
   const minX=Math.min(...points.map((p)=>p.x)),maxX=Math.max(...points.map((p)=>p.x));
   const minY=Math.min(...points.map((p)=>p.y)),maxY=Math.max(...points.map((p)=>p.y));
@@ -1369,7 +1364,7 @@ function tick(time){
   const living=sceneLife?.tick(time,delta);
   flushBuildingCelebrations(time);
   const celebrating=buildingFireworks?.tick(time);
-  const projectsGrowing=harborSceneRoot&&tickHarborProjectVisuals(harborSceneRoot,time,{reducedMotion:reducedMotion.matches});
+  const projectsGrowing=harborSceneRoot&&tickHarborProjectVisuals(harborSceneRoot,time,{reducedMotion:reducedMotion.matches,night:sceneLife?.getNightFactor()||0});
   if(time-lastAtmosphereReadout>250){lastAtmosphereReadout=time;syncAtmosphereReadout();}
   const moving=[...pawnViews.values()].some((view)=>view.active||view.shieldUntil)||[...lotViews.values()].some((view)=>view.born)||pulses.length;
   pawnViews.forEach((view)=>{

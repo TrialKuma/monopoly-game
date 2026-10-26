@@ -76,8 +76,10 @@ const kinds={renovation:'build',district:'build',shield:'card',express:'card',sw
   ]){
    let done=false;const p=h.api.play({...event,title:'结算',message:'真实到账记录。',sessionId:1}).then(()=>done=true);
    assert.equal(h.all('.drama-speech').length,0,'routine event stays quiet');
-   assert.equal(h.q('.drama-pause'),null);assert(h.q('.drama-skip'));assert.equal(h.q('.drama-message').textContent,'真实到账记录。');
-   if(event.amount>0){assert(h.q('.drama-amount'));await h.clock.advance(20000);assert(!done);assert.equal(h.q('.drama-amount').textContent,String(event.amount));}
+   assert.equal(h.q('.drama-pause'),null);assert(h.q('.drama-skip'));
+   if(event.type==='buy'){assert.equal(h.q('.drama-message'),null);assert.equal(h.q('.drama-amount'),null);}
+   else assert.equal(h.q('.drama-message').textContent,'真实到账记录。');
+   if(event.amount>0 && event.type!=='buy'){assert(h.q('.drama-amount'));await h.clock.advance(20000);assert(!done);assert.equal(h.q('.drama-amount').textContent,String(event.amount));}
    await h.skip();await p;
   }
   assert.equal(h.clock.timers.size,0);assert.equal(h.randomCalls(),0);count++;
@@ -109,12 +111,28 @@ const kinds={renovation:'build',district:'build',shield:'card',express:'card',sw
    {type:'rent',amount:80,payerCashAfter:60,from:actor,to:rival},
    {type:'rent',amount:100,payerCashAfter:0,from:actor,to:rival},
    {type:'rent',amount:160,payerCashAfter:600,leadChanged:true,from:actor,to:rival},
-   {type:'shield',expectedAmount:600,to:actor,rival},
-   {type:'buy',amount:250,to:actor,rival,isLarge:true,buildingLevel:0,districtCount:1},
-   {type:'buy',amount:250,to:actor,rival,buildingLevel:1,districtCount:1},
-   {type:'buy',amount:250,to:actor,rival,buildingLevel:0,districtCount:2}
+   {type:'shield',expectedAmount:600,to:actor,rival}
   ]){const h=harness();h.api.play(event);assert.equal(h.all('.drama-speech').length,2,'important event retains a reaction');await h.reset();}
   count++;
+ }
+ {
+  for(const reduced of [false,true]) for(const buyer of [actor,rival]) for(const property of [
+   {tileName:'曦园',buildingLevel:0,isLarge:false,districtCount:1},
+   {tileName:'湖畔温泉',buildingLevel:3,isLarge:true,districtCount:2}
+  ]) {
+   const h=harness({reduced});let done=false;
+   const event=Object.freeze({type:'buy',title:'地产购买成功',message:'−¥95',amount:95,to:buyer,rival:buyer===actor?rival:actor,...property});
+   const p=h.api.play(event).then(()=>done=true);
+   assert.equal(h.q('.drama-title').textContent,property.tileName,'purchased property is the focal result');
+   assert.equal(h.q('.drama-kicker').textContent,`${buyer.name}已购入`,'ownership remains clear for both sides');
+   for(const selector of ['.drama-amount','.drama-message','.drama-detail','.drama-purchase-ribbon','.drama-dialogue','.drama-sequence']) assert.equal(h.q(selector),null,`purchase omits ${selector}`);
+   await h.clock.advance(30000);
+   assert.equal(h.all('.drama-cash-float').length,0,'purchase success does not repeat the spent amount');
+   assert.equal(event.amount,95,'presentation preserves the transaction amount');
+   assert(!done,'purchase result still waits for confirmation');
+   await h.skip();await p;
+   assert.equal(h.clock.timers.size,0);assert.equal(h.randomCalls(),0);count++;
+  }
  }
  {
   const h=harness();let done=false;const p=h.api.play({type:'rent',amount:60,payerCashAfter:900,from:actor,to:rival,message:'支付 ¥60。'}).then(()=>done=true);

@@ -7,8 +7,8 @@ const source = fs.readFileSync(path.join(__dirname, '../game.js'), 'utf8');
 const json = (c, code) => JSON.parse(c.run(`JSON.stringify(${code})`));
 const fresh = map => { const c = context(source, 2087); c.run(`initializeGame('${map}');showModal=async cfg=>{if(cfg.routeChoice)return 'merchant';throw Error('Unexpected modal: '+cfg.title)}`); return c; };
 const maps = {
-  harbor: { columns: 12, rows: 14, steps: 34, lots: 13, cash: 1700, bonus: 320, second: 400, bank: 240, ticket: 250, pairs: [[2, 3, [[7, 8], [7, 7]]], [7, 8, [[4, 5], [4, 4]]], [30, 31, [[5, 12], [5, 11]]]] },
-  alpine: { columns: 6, steps: 24, lots: 14, cash: 1900, bonus: 350, second: 450, bank: 250, ticket: 350, pairs: [[7, 8, [[6, 3], [6, 4]]], [10, 11, [[6, 6], [6, 7]]], [14, 15, [[4, 8], [3, 8]]]] },
+  harbor: { columns: 12, rows: 14, steps: 34, lots: 13, cash: 1700, bonus: 320, second: 0, bank: 240, ticket: 250, pairs: [[2, 3, [[7, 8], [7, 7]]], [7, 8, [[4, 5], [4, 4]]], [30, 31, [[5, 12], [5, 11]]]] },
+  alpine: { columns: 6, steps: 24, lots: 14, cash: 1900, bonus: 350, second: 0, bank: 250, ticket: 350, pairs: [[7, 8, [[6, 3], [6, 4]]], [10, 11, [[6, 6], [6, 7]]], [14, 15, [[4, 8], [3, 8]]]] },
 };
 let checks = 0;
 async function test(name, fn) { await fn(); checks++; console.log('PASS ' + name); }
@@ -73,7 +73,8 @@ async function test(name, fn) { await fn(); checks++; console.log('PASS ' + name
       assert.deepEqual(json(c, 'state.openingLots'), []);
       for (const first of [true, false]) {
         c.run(`initializeGame('${id}');settleFirstPlayer(${first});`);
-        assert.deepEqual(json(c, 'state.players.map(p=>p.cash)'), first ? [expected.cash, expected.cash + expected.second] : [expected.cash + expected.second, expected.cash]);
+        assert.deepEqual(json(c, 'state.players.map(p=>p.cash)'), [expected.cash, expected.cash]);
+        assert.deepEqual(json(c, 'state.players.map(p=>p.cards.map(card=>card.cardId))'), first ? [[], ['boost']] : [['boost'], []]);
       }
     });
     await test(id + ' real movement crossing start pays one correct supply in either direction', async () => {
@@ -92,11 +93,11 @@ async function test(name, fn) { await fn(); checks++; console.log('PASS ' + name
       }
     });
   }
-  await test('old maps retain their original economies while new maps have different costs and public stops', () => {
+  await test('maps retain distinct costs and income with no second-player cash bonus', () => {
     const c = fresh('harbor');
-    assert.deepEqual(json(c, 'getMapEconomy("classic")'), { startCash: 1600, startBonus: 300, secondPlayerBonus: 500, bankThreshold: 200 });
+    assert.deepEqual(json(c, 'getMapEconomy("classic")'), { startCash: 1600, startBonus: 300, secondPlayerBonus: 0, bankThreshold: 200 });
     assert.deepEqual(json(c, 'getMapEconomy("compact")'), json(c, 'getMapEconomy("classic")'));
-    assert.deepEqual(json(c, 'getMapEconomy("expansion")'), { startCash: 2000, startBonus: 450, secondPlayerBonus: 300, bankThreshold: 200 });
+    assert.deepEqual(json(c, 'getMapEconomy("expansion")'), { startCash: 2000, startBonus: 450, secondPlayerBonus: 0, bankThreshold: 200 });
     assert.equal(c.run('MAP_PRESETS.classic.lotConfigs[14].price'), 280);
     assert.notDeepEqual(json(c, 'Object.keys(MAP_PRESETS.harbor.specialTiles)'), json(c, 'Object.keys(MAP_PRESETS.alpine.specialTiles)'));
     assert.notEqual(c.run('MAP_PRESETS.harbor.lotConfigs[7].price'), c.run('MAP_PRESETS.alpine.lotConfigs[14].price'));

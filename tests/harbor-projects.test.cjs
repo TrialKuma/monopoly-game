@@ -70,12 +70,18 @@ async function test(name, fn) { await fn(); checks++; console.log('PASS '+name);
     assert.equal(d.run('state.board[32].lot.level'),1);assert.equal(snapshot(d)[1].stage,1);
     assert.equal(d.run('human.cash'),before+d.run('getMapEconomy().startBonus')+100);
   });
-  await test('municipal acquisition grants a reached stage, and later seizure preserves earned milestones', async () => {
-    const c=fresh();seed(c,[6,7],[1,1]);seed(c,[9],[1],'ai');c.run('showModal=async cfg=>cfg.buttons.some(b=>b.id==="seize_9")?"seize_9":"acquire"');
-    const before=c.run('human.cash'),price=c.run('getCityTakeoverQuote(state.board[9].lot).purchasePrice');
-    await c.run('resolveStartTakeover(human,state.sessionId)');
+  await test('municipal cards advance construction milestones without replaying them after a sale', async () => {
+    const c=fresh();seed(c,[6,7],[1,1]);seed(c,[9],[1],'ai');
+    c.run('startScreenEl.classList.contains=()=>true;showModal=async()=>"confirm";human.position=9;grantInventoryCard("human","buyProperty",{type:"municipal"})');
+    await c.run('resolveLanding(human,state.board[9],state.sessionId)');
+    c.run('endTurn();endTurn()');
+    const before=c.run('human.cash'),price=c.run('getPropertyCost(state.board[9].lot)');
+    assert.equal((await c.run('GameCards.use(human.cards.find(card=>card.cardId==="buyProperty").instanceId)')).ok,true);
     assert.equal(c.run('human.cash'),before-price+100);assert.equal(snapshot(c)[0].stage,1);
-    c.run('ai.cash=0');await c.run('resolveStartTakeover(ai,state.sessionId)');
+    c.run('endTurn();ai.position=9;grantInventoryCard("ai","sellProperty",{type:"municipal"})');
+    await c.run('resolveLanding(ai,state.board[9],state.sessionId)');
+    c.run('endTurn();endTurn()');
+    assert.equal((await c.run('useInventoryCard(ai,ai.cards.find(card=>card.cardId==="sellProperty").instanceId,true)')).ok,true);
     assert(snapshot(c)[0].points<3);assert.equal(snapshot(c)[0].stage,1);
   });
   await test('property swap updates progress for the human even when initiated by AI', async () => {
