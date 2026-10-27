@@ -20,10 +20,12 @@ function v2From(profile) {
   return old;
 }
 
-test('fresh town uses seven existing regional series and no passive currency or free cards', () => {
+test('fresh town uses all five regional series and no passive currency or free cards', () => {
   const f = fixture(), p = f.store.read().profile;
-  assert.equal(p.version, 4); assert.equal(p.wallet, 1200); assert.equal(p.town.size, 6);
-  assert.equal(p.town.targetCardId, 'harbor_villa'); assert.equal(BUILDING_CARDS.length, 7);
+  assert.equal(p.version, 5); assert.equal(p.wallet, 1200); assert.equal(p.town.size, 6);
+  assert.equal(p.town.targetCardId, 'harbor_villa'); assert.equal(BUILDING_CARDS.length, 35);
+  assert.deepEqual([...new Set(BUILDING_CARDS.map(card => card.region))], ['classic', 'compact', 'expansion', 'harbor', 'alpine']);
+  assert.equal(new Set(BUILDING_CARDS.map(card => card.name)).size, 35);
   assert.equal(BUILDING_CARDS.every(card => card.modelKeys.length === 3 && card.previewPaths.length === 3), true);
   assert.equal(Object.values(p.town.cards).every(card => !card.unlocked && card.star === 0 && card.duplicates === 0), true);
   assert.equal(validProfile(p), true); assert.equal(f.store.town.place({ cardId: 'harbor_villa', x: 0, y: 0 }).error, 'card_locked');
@@ -42,7 +44,37 @@ test('v2 migration preserves exact vault, earned, tickets, projects and collecti
   assert.equal(migrated.profile.receipts.every(receipt => receipt.cardRewardVersion === 0 && receipt.buildingCards.length === 0), true);
   const settled = f.store.settle(result('unfinished', [{ cardId: 'harbor_onsen', count: 1 }]));
   assert.equal(settled.ok, true); assert.equal(settled.profile.town.cards.harbor_onsen.unlocked, true);
-  assert.equal(f.create().read().profile.version, 4);
+  assert.equal(f.create().read().profile.version, 5);
+});
+
+test('v4 town saves gain the other regions locked while harbor progress, buildings and pending drafts stay', () => {
+  const seed = fixture(); complete(seed, 'v4-built', [{ cardId: 'harbor_villa', count: 3 }]);
+  assert.equal(seed.store.town.place({ cardId: 'harbor_villa', x: 0, y: 0, actionId: 'v4-place' }).ok, true);
+  assert.equal(seed.store.town.merge({ cardId: 'harbor_villa', expectedStar: 2, actionId: 'v4-merge' }).ok, true);
+  seed.store.enter({ runId: 'v4-draft', mapId: 'harbor', price: 250 });
+  assert.equal(seed.store.settle(result('v4-draft', [], { buildingCardDraft: true })).ok, true);
+  const current = seed.store.read().profile, old = JSON.parse(JSON.stringify(current));
+  old.version = 4; old.town.cards = Object.fromEntries(BUILDING_CARDS.filter(card => card.mapId === 'harbor').map(card => [card.id, current.town.cards[card.id]]));
+  const f = fixture(JSON.stringify(old)), migrated = f.store.read();
+  assert.equal(migrated.ok, true); assert.equal(migrated.migrated, true); assert.equal(migrated.profile.version, 5);
+  assert.deepEqual(migrated.profile.town.cards, current.town.cards); assert.deepEqual(migrated.profile.town.buildings, current.town.buildings);
+  assert.equal(migrated.profile.wallet, current.wallet); assert.equal(validProfile(migrated.profile), true);
+  const offers = migrated.profile.receipts.find(receipt => receipt.runId === 'v4-draft').buildingCardDraft.offers;
+  assert.equal(offers.every(id => id.startsWith('harbor_')), true); assert.equal(f.store.claimBuildingCard({ runId: 'v4-draft', cardId: offers[0] }).ok, true);
+});
+
+test('every map settles into a three-card draft from its own region', () => {
+  const f = fixture();
+  for (const [mapId, mapName] of [['classic', '经典环线'], ['compact', '紧凑冲突'], ['expansion', '都市大环线'], ['alpine', '云岭温泉']]) {
+    assert.equal(f.store.enter({ runId: `draft-${mapId}`, mapId, price: 100 }).ok, true);
+    const settled = f.store.settle(result(`draft-${mapId}`, [], { mapId, mapName, buildingCardDraft: true }));
+    const offers = settled.receipt.buildingCardDraft.offers;
+    assert.equal(settled.receipt.cardRewardVersion, 3); assert.equal(new Set(offers).size, 3); assert.equal(offers.every(id => id.startsWith(`${mapId}_`)), true);
+    assert.equal(f.store.claimBuildingCard({ runId: `draft-${mapId}`, cardId: offers[0] }).ok, true);
+    assert.equal(f.store.town.place({ cardId: offers[0], x: ['classic', 'compact', 'expansion', 'alpine'].indexOf(mapId), y: 0 }).ok, true);
+  }
+  assert.equal(validProfile(f.create().read().profile), true);
+  assert.equal(f.store.settle(result('wrong-region', [{ cardId: 'harbor_villa', count: 1 }], { mapId: 'alpine', mapName: '云岭温泉', buildingCardDraft: true })).ok, false);
 });
 
 test('a migrated receipt remains idempotent and cannot be reissued with new cards', () => {

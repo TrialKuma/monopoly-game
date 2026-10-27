@@ -66,18 +66,37 @@ async function test(name,work){await work();checks++;console.log('PASS '+name);}
     assert.equal(c.run('visitor.effects.shield'),false);
     assert(!events.some(e=>e.label==='破产救助'));
   });
-  for(const reversed of [false,true]) await test('all seven compact rush outcomes use real '+(reversed?'reverse':'forward')+' movement and one arrival',async()=>{
-    const landings=[];
-    for(let roll=0;roll<7;roll++) {
-      const {c}=setup();c.captureLanding=tile=>landings.push({index:tile.index,spa:tile.lot?.effectId==='hot_spring_rest',special:tile.isSpecial});
-      c.run(`visitor.position=8;visitor.effects.reversed=${reversed};resolveLanding=async(p,t)=>captureLanding(t);`);
-      c.Math.random=()=> (roll+.1)/7;
-      await c.run('resolveRushTile(visitor,state.sessionId,state.board[8])');
-      assert.equal(landings.length,roll+1);
-      assert.equal(landings.at(-1).index,(8+(reversed?-1:1)*(roll+2)+18)%18);
-    }
-    assert(landings.filter(t=>t.spa).length<=2,'No more than two direct onsen endpoints out of seven');
-    assert(landings.some(t=>t.special),'Rush must offer outcomes beyond one landlord district');
+  await test('compact earthquake drops the tallest building, clears its owner and repairs at half cost once per game',async()=>{
+    const {c,events}=setup();
+    c.run(`visitor.cash=1000;owner.cash=1000;
+      state.board[4].lot.ownerId=owner.id;state.board[4].lot.level=3;
+      state.board[14].lot.ownerId=visitor.id;state.board[14].lot.level=1;
+      var eventTile=state.board.find(t=>t.special?.type==='event');visitor.position=eventTile.index;`);
+    c.Math.random=()=>.1;
+    await c.run('resolveEventTile(visitor,eventTile,state.sessionId)');
+    assert.equal(c.run('state.quakeHappened'),true);
+    assert.equal(c.run('state.board[4].lot.ownerId'),null);
+    assert.equal(c.run('state.board[4].lot.ruined'),true);
+    assert.equal(c.run('state.board[14].lot.ownerId'),c.run('visitor.id'));
+    assert(events.some(e=>e.title==='地震！'));
+    const cost=c.run('getPropertyCost(state.board[4].lot)');
+    assert.equal(c.run('getLotPurchasePrice(state.board[4].lot)'),Math.round(cost*.5));
+    assert.equal(c.run('buyLot(visitor,state.board[4],false)'),true);
+    assert.equal(c.run('state.board[4].lot.level'),3);
+    assert.equal(c.run('state.board[4].lot.ruined'),false);
+    assert.equal(c.run('visitor.cash'),1000-Math.round(cost*.5));
+    await c.run('resolveEventTile(visitor,eventTile,state.sessionId)');
+    assert.equal(c.run('state.board.filter(t=>t.lot?.ruined).length'),0,'only one earthquake per game');
   });
-  console.log(checks+' compact recovery / rush checks passed.');
+  await test('compact passing start pays the larger supply and builds nothing',async()=>{
+    const {c,events}=setup();
+    c.run(`visitor.cash=500;visitor.position=17;
+      state.board[1].lot.ownerId=visitor.id;state.board[4].lot.ownerId=visitor.id;`);
+    await c.run('animateMovement(visitor,2,state.sessionId)');
+    assert.equal(c.run('visitor.position'),1);
+    assert.equal(c.run('visitor.cash'),950);
+    assert.equal(c.run('state.board[1].lot.level+state.board[4].lot.level'),0);
+    assert.equal(events.find(e=>e.label==='市政府补给').message,'');
+  });
+  console.log(checks+' compact recovery / earthquake checks passed.');
 })().catch(error=>{console.error(error);process.exitCode=1;});

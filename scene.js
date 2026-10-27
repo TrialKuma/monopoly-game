@@ -80,7 +80,7 @@ let cameraGesture = { pointers:new Map(), dragged:false, pinchDistance:0 };
 let suppressSceneClickUntil = 0;
 const CAMERA_LIMITS = { minZoom:.65, maxZoom:2.4, minElevation:.35, maxElevation:1.24 };
 const LANDMARKS = { classic: { 5:'finance', 7:'skyscraper', 14:'onsen' }, compact: { 2:'finance', 11:'onsen' }, expansion: { 7:'skyscraper', 26:'onsen' } };
-const SPECIAL_MODELS = { bank:'vault_bank',construction:'builders_guild',card_draw:'card_pavilion',chance:'card_pavilion',teleport:'teleport_gate',rush:'rush_station',junction:'junction_hub' };
+const SPECIAL_MODELS = { bank:'vault_bank',construction:'builders_guild',card_draw:'card_pavilion',chance:'card_pavilion',teleport:'teleport_gate',rush:'rush_station',junction:'junction_hub',event:'chance_wheel' };
 const ASSET_BUNDLES = [
   {file:'city-kit.glb',version:'20260911-12',authored:false,pattern:/^(plot_0|tree|streetlamp|fountain)$/},
   ...['classic','compact','expansion','harbor','alpine'].map(mapId=>({file:`regions/${mapId}.glb`,mapId,version:'20261025-facade2',authored:true,pattern:new RegExp(`^${mapId}_(?:(?:villa|shop|hotel|tower|skyscraper|finance|onsen)_[123]|civic_hall|vault_bank|builders_guild|card_pavilion|chance_wheel|teleport_gate|rush_station|junction_hub)$`)})),
@@ -658,7 +658,7 @@ function makeLot(tile, data) {
   button.dataset.side=boundary.side;
   button.innerHTML='<span class="scene-tile-name"></span><span class="scene-tile-meta"></span>';
   button.querySelector('.scene-tile-name').textContent=tile.name;
-  if(!tile.lot)button.querySelector('.scene-tile-name').dataset.service=({start:'市政',bank:'金库',construction:'城建',card_draw:'抽卡',chance:'商店',teleport:'传送',rush:'快线',junction:data.mapId==='harbor'?'航线':'分岔'})[tile.isStart?'start':tile.special?.type]||'';
+  if(!tile.lot)button.querySelector('.scene-tile-name').dataset.service=({start:'市政',bank:'金库',construction:'城建',card_draw:'抽卡',chance:'商店',teleport:'传送',rush:'快线',event:'事件',junction:data.mapId==='harbor'?'航线':'分岔'})[tile.isStart?'start':tile.special?.type]||'';
   labels.appendChild(button);
   const view={tile, mapId:data.mapId, boundary, parcelRotation, landmarkSpec, group, building, ownerMaterial, ownerFrame, flag, flagCloth, outline, label:button, anchor, w, d, signature:'', modelName:'', born:0};
   if(parcelRotation!=null){anchor.copy(position).addScaledVector(boundary.normal,parcelFrontDepth(view,boundary.normal)/2+.26);anchor.y=.07;}
@@ -799,7 +799,7 @@ function updateLot(view,tile,data,initial=false) {
   view.ownerMaterial.color.set(color);view.ownerFrame.visible=Boolean(owner||specialColor);view.flag.visible=Boolean(owner);
   view.ownerFrame.name=specialColor?'special_tile_frame':'ownership_frame';
   view.ownerMaterial.emissive.set(specialColor||'#000000');view.ownerMaterial.emissiveIntensity=specialColor?.09:0;
-  const level=tile.lot?.level||0;
+  const level=tile.lot?.ruined?0:(tile.lot?.level||0);
   const asset=resolveAsset(tile,data,level);
   const modelName=asset.desired;
   const signature=`${modelName}:${asset.key}:${asset.source?.uuid||'fallback'}`;
@@ -818,7 +818,7 @@ function updateLot(view,tile,data,initial=false) {
   if(tile.lot){
     const rent=data.rents?.[tile.index]??tile.lot.tolls?.[level]??0;
     const price=data.purchasePrices?.[tile.index]??tile.lot.price;
-    meta.textContent=owner?`${owner.id==='human'?'你':'对手'} · Lv.${level} · ¥${rent}`:level>0?`Lv.${level}待售 · ¥${price}`:`空地待售 ¥${price}`;
+    meta.textContent=owner?`${owner.id==='human'?'你':'对手'} · Lv.${level} · ¥${rent}`:tile.lot.ruined?`废墟待修 · ¥${price}`:level>0?`Lv.${level}待售 · ¥${price}`:`空地待售 ¥${price}`;
     view.label.style.setProperty('--owner-color',owner?color:'#b8ab90');
     view.label.dataset.owner=owner?.id||'none';
     view.label.dataset.rent=String(rent);

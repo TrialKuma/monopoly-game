@@ -30,13 +30,14 @@ function offers(c, ids = ['shield', 'boost', 'combo']) {
       assert(c.run(`state.board.some(t=>t.special?.type==='card_draw')`),'free draw stations remain');
     }
   });
-  await test('every map stocks one 400-coin motorcycle and two unique regular cards', () => {
+  await test('maps that allow it stock one 400-coin motorcycle; compact never sells one', () => {
     for (const map of ['classic','compact','expansion','harbor','alpine']) {
       const { c } = setup({ map });
+      const motorcycles = map === 'compact' ? 0 : 1;
       for (let i=0;i<20;i++) {
         const stock=json(c,'drawItemShopOffers().map(c=>({id:c.id,price:ITEM_SHOP_PRICES[c.id]}))');
         assert.equal(stock.length,3);assert.equal(new Set(stock.map(c=>c.id)).size,3);
-        assert.equal(stock.filter(c=>c.id==='motorcycle').length,1,map);
+        assert.equal(stock.filter(c=>c.id==='motorcycle').length,motorcycles,map);
         stock.forEach(card=>card.id==='motorcycle' ? assert.equal(card.price,400) : assert(card.price>=80&&card.price<=240));
       }
     }

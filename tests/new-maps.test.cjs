@@ -96,7 +96,7 @@ async function test(name, fn) { await fn(); checks++; console.log('PASS ' + name
   await test('maps retain distinct costs and income with no second-player cash bonus', () => {
     const c = fresh('harbor');
     assert.deepEqual(json(c, 'getMapEconomy("classic")'), { startCash: 1600, startBonus: 300, secondPlayerBonus: 0, bankThreshold: 200 });
-    assert.deepEqual(json(c, 'getMapEconomy("compact")'), json(c, 'getMapEconomy("classic")'));
+    assert.deepEqual(json(c, 'getMapEconomy("compact")'), { startCash: 1000, startBonus: 450, secondPlayerBonus: 0, bankThreshold: 200 });
     assert.deepEqual(json(c, 'getMapEconomy("expansion")'), { startCash: 2000, startBonus: 450, secondPlayerBonus: 0, bankThreshold: 200 });
     assert.equal(c.run('MAP_PRESETS.classic.lotConfigs[14].price'), 280);
     assert.notDeepEqual(json(c, 'Object.keys(MAP_PRESETS.harbor.specialTiles)'), json(c, 'Object.keys(MAP_PRESETS.alpine.specialTiles)'));

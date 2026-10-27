@@ -10,12 +10,12 @@ import { createLevelThreeTracker, createBuildingFireworks, buildingRoofAnchor } 
 // This scene only displays the town ledger. Placement, costs and overlap checks
 // are committed by progression.js; a green preview is never an inventory grant.
 export function createTownScene(host, { onPick = () => {}, onStatus = () => {}, onExpansion = () => {} } = {}) {
-  const CELL = 1.45, BASE_SIZE = 6, OVERVIEW_SIZE = 10, owned = new Set(), sources = new Map(), familyScale = new Map();
+  const CELL = 1.45, BASE_SIZE = 6, OVERVIEW_SIZE = 10, owned = new Set(), sources = new Map(), cardScale = new Map();
+  const regionLeases = new Map(), loadingRegions = new Set(), failedRegions = new Set();
   const TownPlan = globalThis.TownPlan;
   const scene = new THREE.Scene(); scene.background = new THREE.Color('#afcfd0');
   const camera = new THREE.OrthographicCamera(-10, 10, 10, -10, .1, 100);
   const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false, powerPreference: 'high-performance' });
-  const releaseLease = retainSharedModelAsset('regions/harbor.glb');
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
   renderer.outputColorSpace = THREE.SRGBColorSpace; renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.04;
   renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
@@ -28,7 +28,7 @@ export function createTownScene(host, { onPick = () => {}, onStatus = () => {}, 
   sun.shadow.bias = -.0005; sun.shadow.normalBias = .025; scene.add(sun);
   const terrain = new THREE.Group(), buildings = new THREE.Group(), highlights = new THREE.Group(), expansionEffects = new THREE.Group(), publicScenery = new THREE.Group(), districtPreview = new THREE.Group(); scene.add(terrain, buildings, highlights, expansionEffects, publicScenery, districtPreview);
   const raycaster = new THREE.Raycaster(), pickPlane = new THREE.Plane(new THREE.Vector3(0, 1, 0), -.12), pointer = new THREE.Vector2();
-  let state = null, size = 6, yaw = Math.PI / 4, zoom = 1.2, frame = 0, disposed = false, width = 1, height = 1, loading = false;
+  let state = null, size = 6, yaw = Math.PI / 4, zoom = 1.2, frame = 0, disposed = false, width = 1, height = 1;
   let objects = [], terrainLand = null, modelError = false, lastStamp = '', pointerDown = null, distance = 0;
   let land = TownPlan.getLand({size:6,landStage:0}), visualWidth = BASE_SIZE, visualHeight = BASE_SIZE, expansion = null, landforms = [], surroundings = null, coastMorphs = [], grid = null, newCells = [], revealMaterial = null;
   let projects = [], projectStamp = '';
@@ -166,7 +166,7 @@ export function createTownScene(host, { onPick = () => {}, onStatus = () => {}, 
     const source = sources.get(`${card.region}_${card.family}_${star}`); if (!source) return null;
     const object = source.clone(true); object.position.set(0, 0, 0);
     const bounds = new THREE.Box3().setFromObject(object), center = bounds.getCenter(new THREE.Vector3());
-    const scale = familyScale.get(card.family) || 1.15; object.scale.multiplyScalar(scale);
+    const scale = cardScale.get(card.id) || 1.15; object.scale.multiplyScalar(scale);
     object.position.set(-center.x * scale, -bounds.min.y * scale, -center.z * scale);
     object.traverse(node => { if (!node.isMesh) return; node.castShadow = !ghost; node.receiveShadow = true; if (ghost) { const convert = m => { const mat = own(m.clone()); mat.transparent = true; mat.opacity = .61; mat.depthWrite = false; return mat; }; node.material = Array.isArray(node.material) ? node.material.map(convert) : convert(node.material); } });
     return object;
@@ -266,18 +266,40 @@ export function createTownScene(host, { onPick = () => {}, onStatus = () => {}, 
   }
   function resize() { if (disposed) return; const r = host.getBoundingClientRect(); width = Math.max(1, r.width); height = Math.max(1, r.height); renderer.setSize(width, height, false); setCamera(); requestRender(); }
   const observer = new ResizeObserver(resize); observer.observe(host);
-  async function loadModels() {
-    if (loading || sources.size || disposed) return; loading = true; modelError = false; onStatus('loading');
+  // Each region pack is large, so only the regions with a standing building or
+  // the current placement preview are fetched.
+  function neededRegions() {
+    const ids = new Set((state?.profile.town.buildings || []).filter(item => !item.stored).map(item => item.cardId));
+    if (state?.preview) ids.add(state.preview.cardId);
+    return [...new Set([...ids].map(id => state.catalog.find(card => card.id === id)?.region).filter(Boolean))];
+  }
+  async function loadRegion(region) {
+    const file = `regions/${region}.glb`, release = retainSharedModelAsset(file);
+    loadingRegions.add(region);
     try {
-      const gltf = await loadSharedModelAsset('regions/harbor.glb', { version: '20261025-facade2' }); if (disposed) return;
-      gltf.scene.traverse(node => { if (/^harbor_(villa|shop|hotel|tower|finance|skyscraper|onsen)_[123]$/.test(node.name)) sources.set(node.name, node); });
-      for (const card of state?.catalog || []) {
-        let maxX = 0, maxZ = 0; for (let star = 1; star <= 3; star++) { const source = sources.get(`harbor_${card.family}_${star}`); if (!source) continue; const bounds = new THREE.Box3().setFromObject(source), dims = bounds.getSize(new THREE.Vector3()); maxX = Math.max(maxX, dims.x); maxZ = Math.max(maxZ, dims.z); }
-        familyScale.set(card.family, Math.min((card.footprint[0] * CELL - .3) / Math.max(maxX, .1), (card.footprint[1] * CELL - .3) / Math.max(maxZ, .1)));
+      const gltf = await loadSharedModelAsset(file, { version: '20261025-facade2' });
+      if (disposed) { release(); return; }
+      regionLeases.set(region, release);
+      const pattern = new RegExp(`^${region}_(villa|shop|hotel|tower|finance|skyscraper|onsen)_[123]$`);
+      gltf.scene.traverse(node => { if (pattern.test(node.name)) sources.set(node.name, node); });
+      for (const card of state.catalog.filter(card => card.region === region)) {
+        let maxX = 0, maxZ = 0; for (let star = 1; star <= 3; star++) { const source = sources.get(`${region}_${card.family}_${star}`); if (!source) continue; const bounds = new THREE.Box3().setFromObject(source), dims = bounds.getSize(new THREE.Vector3()); maxX = Math.max(maxX, dims.x); maxZ = Math.max(maxZ, dims.z); }
+        cardScale.set(card.id, Math.min((card.footprint[0] * CELL - .3) / Math.max(maxX, .1), (card.footprint[1] * CELL - .3) / Math.max(maxZ, .1)));
       }
-      renderBuildings(); onStatus('ready');
-    } catch (error) { if (!disposed) { modelError = true; onStatus('error'); } }
-    finally { loading = false; }
+      renderBuildings();
+    } catch (error) { release(); if (!disposed) failedRegions.add(region); }
+    finally { loadingRegions.delete(region); }
+  }
+  async function loadModels(retry = false) {
+    if (disposed || !state) return;
+    if (retry) failedRegions.clear();
+    const missing = neededRegions().filter(region => !regionLeases.has(region) && !loadingRegions.has(region) && !failedRegions.has(region));
+    if (!missing.length) return;
+    modelError = false; onStatus('loading');
+    await Promise.all(missing.map(loadRegion));
+    if (disposed) return;
+    modelError = failedRegions.size > 0;
+    onStatus(loadingRegions.size ? 'loading' : modelError ? 'error' : 'ready');
   }
   function update(next) {
     const reached = levelThreeTracker.observe('town', Object.entries(next.profile.town.cards).map(([id, card]) => ({ id, level: card.star, owner: card.unlocked })));
@@ -326,7 +348,7 @@ export function createTownScene(host, { onPick = () => {}, onStatus = () => {}, 
   function wheel(event) { event.preventDefault(); if (expansion) return; zoom = Math.max(.7, Math.min(2.2, zoom * (event.deltaY < 0 ? 1.08 : 1 / 1.08))); setCamera(); requestRender(); }
   const canvas = renderer.domElement; canvas.addEventListener('pointerdown', pointerStart); canvas.addEventListener('pointermove', pointerMove); canvas.addEventListener('pointerup', pointerEnd); canvas.addEventListener('pointercancel', pointerCancel); canvas.addEventListener('wheel', wheel, { passive: false });
   resize();
-  return { update, retry: loadModels, zoomBy(factor) { if (expansion) return; zoom = Math.max(.7, Math.min(2.2, zoom * factor)); setCamera(); requestRender(); }, home() { if (expansion) return; zoom = 1; yaw = Math.PI / 4; setCamera(); requestRender(); }, getState: () => {
+  return { update, retry: () => loadModels(true), zoomBy(factor) { if (expansion) return; zoom = Math.max(.7, Math.min(2.2, zoom * factor)); setCamera(); requestRender(); }, home() { if (expansion) return; zoom = 1; yaw = Math.PI / 4; setCamera(); requestRender(); }, getState: () => {
       const rect = canvas.getBoundingClientRect(); camera.updateMatrixWorld();
       const lo = -BASE_SIZE * CELL / 2, hiX = lo + visualWidth * CELL, hiZ = lo + visualHeight * CELL;
       const corners = [[lo, lo], [lo, hiZ], [hiX, hiZ], [hiX, lo]].map(([x, z]) => {
@@ -345,6 +367,6 @@ export function createTownScene(host, { onPick = () => {}, onStatus = () => {}, 
         return { id: object.userData.buildingId, worldX, worldZ, x: rect.left + (point.x + 1) * rect.width / 2, y: rect.top + (1 - point.y) * rect.height / 2 };
       }) };
     },
-    dispose() { if (disposed) return; disposed = true; observer.disconnect(); if (frame) cancelAnimationFrame(frame); buildingFireworks.dispose(); levelThreeTracker.reset(); pendingCelebrations.clear(); canvas.removeEventListener('pointerdown', pointerStart); canvas.removeEventListener('pointermove', pointerMove); canvas.removeEventListener('pointerup', pointerEnd); canvas.removeEventListener('pointercancel', pointerCancel); canvas.removeEventListener('wheel', wheel); scene.clear(); owned.forEach(resource => resource.dispose?.()); environment.dispose(); sun.shadow.map?.dispose(); renderer.dispose(); canvas.remove(); releaseLease(); }
+    dispose() { if (disposed) return; disposed = true; observer.disconnect(); if (frame) cancelAnimationFrame(frame); buildingFireworks.dispose(); levelThreeTracker.reset(); pendingCelebrations.clear(); canvas.removeEventListener('pointerdown', pointerStart); canvas.removeEventListener('pointermove', pointerMove); canvas.removeEventListener('pointerup', pointerEnd); canvas.removeEventListener('pointercancel', pointerCancel); canvas.removeEventListener('wheel', wheel); scene.clear(); owned.forEach(resource => resource.dispose?.()); environment.dispose(); sun.shadow.map?.dispose(); renderer.dispose(); canvas.remove(); regionLeases.forEach(release => release()); regionLeases.clear(); }
   };
 }

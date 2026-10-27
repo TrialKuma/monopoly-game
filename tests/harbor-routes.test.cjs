@@ -107,7 +107,7 @@ async function test(name, fn) { await fn(); checks++; console.log('PASS ' + name
     assert.equal(receipts.length,1);assert.deepEqual(receipts[0].buildingCards,[]);
     assert.equal(receipts[0].buildingCardDraft,true); assert.equal('buildingCardTarget' in receipts[0],false);
     c.run('initializeGame("classic");state.isFormalRun=true;state.round=31;finishGame("rounds")');
-    assert.deepEqual(receipts[1].buildingCards,[]); assert.equal(receipts[1].buildingCardDraft,false);
+    assert.deepEqual(receipts[1].buildingCards,[]); assert.equal(receipts[1].buildingCardDraft,true);
   });
   await test('paid match → random choice and earned cards → build and merge → saved town survives reload', async () => {
     const data=new Map(); let runId=0;

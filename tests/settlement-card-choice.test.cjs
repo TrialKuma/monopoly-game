@@ -38,7 +38,7 @@ test('old targets and explicit target input do not affect new candidates', () =>
   assert.deepEqual(runs[0], runs[1]); assert.deepEqual(runs[1], runs[2]);
 });
 test('seeded shuffle samples all seven cards without replacement or game RNG consumption', () => {
-  const counts = Object.fromEntries(BUILDING_CARDS.map(card => [card.id, 0])), positionCounts = [0, 1, 2].map(() => ({ ...counts }));
+  const counts = Object.fromEntries(BUILDING_CARDS.filter(card => card.mapId === 'harbor').map(card => [card.id, 0])), positionCounts = [0, 1, 2].map(() => ({ ...counts }));
   const original = Math.random; Math.random = () => { throw Error('must not consume dice RNG'); };
   try {
     for (let i = 0; i < 4096; i++) {

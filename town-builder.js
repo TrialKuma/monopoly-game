@@ -4,7 +4,7 @@
   const money = value => Math.round(value || 0).toLocaleString('zh-CN');
   let shell, scene, profile, selectedCard = 'harbor_villa', selectedBuilding = null, mode = null, preview = null, shelf = 'collection', timer, previousFocus, openGeneration = 0;
   let config = {}, scenePromise, message = '', previousOverflow = '', expanding = false;
-  let section = 'buildings', selectedProject = 'garden', expansionTarget = null;
+  let section = 'buildings', selectedProject = 'garden', expansionTarget = null, regionFilter = 'all';
   const backend = () => root.GameProgression?.town;
   const catalog = () => backend()?.catalog || [];
   const land = () => root.TownPlan.getLand(profile.town);
@@ -41,7 +41,7 @@
   function mount() {
     if (shell) return;
     shell = document.createElement('section'); shell.className = 'town-builder'; shell.hidden = true; shell.setAttribute('role', 'dialog'); shell.setAttribute('aria-modal', 'true'); shell.setAttribute('aria-labelledby', 'town-builder-title');
-    shell.innerHTML = `<header class="town-header"><div class="town-title"><p>HARBOR · MY TOWN</p><h2 id="town-builder-title">我的城镇</h2></div><div class="town-header-right"><div class="town-wallet"><span>仓库金币</span><strong data-town-wallet></strong></div><button type="button" class="town-close" data-town-action="close">返回</button></div></header><div class="town-content"><div class="town-view"><div class="town-canvas"></div><div class="town-overview"></div><div class="town-view-tools"><button type="button" data-town-action="zoom-in" aria-label="放大城镇">＋</button><button type="button" data-town-action="zoom-out" aria-label="缩小城镇">−</button><button type="button" data-town-action="camera-home">全景</button></div><div class="town-load-status" role="status" hidden></div><div class="town-empty" hidden></div><div class="town-map-hint">点击建筑查看 · 拖动转动 · 双指缩放</div></div><aside class="town-side" aria-label="建筑卡与城镇建设"></aside></div><div class="town-message" role="status" hidden></div>`;
+    shell.innerHTML = `<header class="town-header"><div class="town-title"><p>MY TOWN</p><h2 id="town-builder-title">我的城镇</h2></div><div class="town-header-right"><div class="town-wallet"><span>仓库金币</span><strong data-town-wallet></strong></div><button type="button" class="town-close" data-town-action="close">返回</button></div></header><div class="town-content"><div class="town-view"><div class="town-canvas"></div><div class="town-overview"></div><div class="town-view-tools"><button type="button" data-town-action="zoom-in" aria-label="放大城镇">＋</button><button type="button" data-town-action="zoom-out" aria-label="缩小城镇">−</button><button type="button" data-town-action="camera-home">全景</button></div><div class="town-load-status" role="status" hidden></div><div class="town-empty" hidden></div><div class="town-map-hint">点击建筑查看 · 拖动转动 · 双指缩放</div></div><aside class="town-side" aria-label="建筑卡与城镇建设"></aside></div><div class="town-message" role="status" hidden></div>`;
     document.body.appendChild(shell); shell.addEventListener('click', clicked); shell.addEventListener('change', changedInput); shell.addEventListener('keydown', keydown);
     shell.querySelector('.town-header').insertAdjacentHTML('afterend', '<div class="town-materials" aria-label="建设素材"></div>');
     shell.querySelector('.town-view').insertAdjacentHTML('beforeend', '<div class="town-expansion-notice" role="status" hidden><strong></strong><span></span></div>');
@@ -51,6 +51,15 @@
   function cardMarkup(card, building) {
     const record = ownedCard(card.id), selected = building ? selectedBuilding === building.id : selectedCard === card.id;
     return `<button type="button" class="town-card${selected ? ' is-selected' : ''}${record.unlocked ? '' : ' is-locked'}" ${building ? `data-town-stored="${esc(building.id)}"` : `data-town-card="${esc(card.id)}"`} aria-pressed="${selected}" aria-label="${esc(card.name)}，${record.star ? `${record.star} 星，重复卡 ${record.duplicates} 张` : '未收集'}"><span class="town-card-image"><img src="${previewImage(card, record.star)}" alt="" draggable="false" loading="lazy"></span><b>${esc(card.name)}</b><span class="town-card-meta"><i>${record.unlocked ? stars(record.star) : '待收集'}</i><span>${building ? '已收纳' : record.unlocked ? `余卡 ${record.duplicates}` : `${card.footprint.join('×')} 格`}</span></span></button>`;
+  }
+  function regionTabsMarkup() {
+    const regions = [...new Map(catalog().map(card => [card.region, card.regionName])).entries()];
+    const tab = (id, name, cards) => `<button type="button" data-town-region="${id}" aria-pressed="${regionFilter === id}">${esc(name)}<small>${cards.filter(card => ownedCard(card.id).unlocked).length}/${cards.length}</small></button>`;
+    return `<div class="town-region-tabs" role="group" aria-label="按地区筛选建筑">${tab('all', '全部', catalog())}${regions.map(([id, name]) => tab(id, name, catalog().filter(card => card.region === id))).join('')}</div>`;
+  }
+  function shelfCards() {
+    if (regionFilter !== 'all') return catalog().filter(card => card.region === regionFilter);
+    return [...catalog().filter(card => ownedCard(card.id).unlocked), ...catalog().filter(card => !ownedCard(card.id).unlocked)];
   }
   function costMarkup(coins, collectionId, count) {
     const have = profile.collections[collectionId] || 0;
@@ -84,7 +93,7 @@
     const record = ownedCard(card.id), count = profile.town.buildings.filter(item => item.cardId === card.id && !item.stored).length, stored = findBuilding(selectedBuilding);
     const cost = card.mergeCosts?.[record.star - 1] || (record.star === 1 ? 2 : 4);
     if (shelf === 'storage') return stored ? `<div class="town-card-detail"><div class="town-detail-heading"><strong>${esc(card.name)}</strong><span>${stars(record.star)}</span></div><div class="town-detail-actions"><button type="button" class="town-primary" data-town-action="restore">放回城镇</button></div></div>` : '';
-    return `<div class="town-card-detail"><div class="town-detail-heading"><strong>${esc(card.name)}</strong><span>${record.unlocked ? stars(record.star) : '未收集'}</span></div><p>${record.unlocked ? `${card.footprint.join('×')} 格 · 已建 ${count} 栋${record.star >= 3 ? '' : ` · 升星 ${record.duplicates}/${cost}`}` : ''}</p><div class="town-detail-actions">${record.unlocked ? `<button type="button" data-town-action="merge"${record.star >= 3 || record.duplicates < cost ? ' disabled' : ''}>${record.star >= 3 ? '已满星' : `合成 ${record.star + 1} 星`}</button><button type="button" class="town-primary" data-town-action="build"${profile.wallet < card.coins ? ' disabled' : ''}>建造 · ¥${money(card.coins)}</button>` : `<button type="button" class="town-primary" data-town-action="embark">前往港湾</button>`}</div></div>`;
+    return `<div class="town-card-detail"><div class="town-detail-heading"><strong>${esc(card.name)}</strong><span>${record.unlocked ? stars(record.star) : '未收集'}</span></div><p>${record.unlocked ? `${card.footprint.join('×')} 格 · 已建 ${count} 栋${record.star >= 3 ? '' : ` · 升星 ${record.duplicates}/${cost}`}` : ''}</p><div class="town-detail-actions">${record.unlocked ? `<button type="button" data-town-action="merge"${record.star >= 3 || record.duplicates < cost ? ' disabled' : ''}>${record.star >= 3 ? '已满星' : `合成 ${record.star + 1} 星`}</button><button type="button" class="town-primary" data-town-action="build"${profile.wallet < card.coins ? ' disabled' : ''}>建造 · ¥${money(card.coins)}</button>` : `<button type="button" class="town-primary" data-town-trip="${esc(card.mapId)}">前往${esc(card.mapName)}</button>`}</div></div>`;
   }
   function editMarkup() {
     const district = expansionTarget || land().next;
@@ -103,14 +112,14 @@
     const unlocked = catalog().filter(card => ownedCard(card.id).unlocked).length, built = profile.town.buildings.filter(item => !item.stored).length;
     shell.querySelector('[data-town-wallet]').textContent = money(profile.wallet);
     const area = land();
-    shell.querySelector('.town-overview').innerHTML = `<strong>港湾新城</strong><small>${built} 栋 · ${area.width} × ${area.height}</small>`;
+    shell.querySelector('.town-overview').innerHTML = `<strong>我的新城</strong><small>${built} 栋 · ${area.width} × ${area.height}</small>`;
     shell.querySelector('.town-materials').innerHTML = Object.entries(materialNames).map(([id,name])=>`<button type="button" data-town-material="${id}"><span aria-hidden="true">${materialIcons[id]}</span> ${name} <b>${profile.collections[id]||0}</b></button>`).join('');
     shell.classList.toggle('is-editing', !!mode);
     shell.classList.toggle('is-expansion-mode', mode === 'expand' || mode === 'expanding' || section === 'land' && !!shell.style.getPropertyValue('--town-expansion-height'));
     const stored = profile.town.buildings.filter(item => item.stored);
-    const list = shelf === 'storage' ? stored.map(item => cardMarkup(catalog().find(c => c.id === item.cardId), item)).join('') || '<div class="town-storage-empty">暂无收纳</div>' : catalog().map(card => cardMarkup(card)).join('');
-    const houses = `<div class="town-shelf-tabs" role="tablist" aria-label="建筑列表"><button type="button" role="tab" data-town-shelf="collection" aria-selected="${shelf === 'collection'}">建筑 ${unlocked}/${catalog().length}</button><button type="button" role="tab" data-town-shelf="storage" aria-selected="${shelf === 'storage'}">收纳 ${stored.length}</button></div><div class="town-collection">${list}</div>${detailMarkup()}`;
-    shell.querySelector('.town-side').innerHTML = mode ? editMarkup() : `${sectionMarkup()}${section==='landscape'?landscapeMarkup():section==='land'?landMarkup():houses}<footer class="town-bottom-bar"><button type="button" data-town-action="warehouse">战绩</button><button type="button" data-town-action="embark">前往港湾 ↗</button></footer>`;
+    const list = shelf === 'storage' ? stored.map(item => cardMarkup(catalog().find(c => c.id === item.cardId), item)).join('') || '<div class="town-storage-empty">暂无收纳</div>' : shelfCards().map(card => cardMarkup(card)).join('');
+    const houses = `<div class="town-shelf-tabs" role="tablist" aria-label="建筑列表"><button type="button" role="tab" data-town-shelf="collection" aria-selected="${shelf === 'collection'}">建筑 ${unlocked}/${catalog().length}</button><button type="button" role="tab" data-town-shelf="storage" aria-selected="${shelf === 'storage'}">收纳 ${stored.length}</button></div>${shelf === 'collection' ? regionTabsMarkup() : ''}<div class="town-collection">${list}</div>${detailMarkup()}`;
+    shell.querySelector('.town-side').innerHTML = mode ? editMarkup() : `${sectionMarkup()}${section==='landscape'?landscapeMarkup():section==='land'?landMarkup():houses}<footer class="town-bottom-bar"><button type="button" data-town-action="warehouse">战绩</button><button type="button" data-town-trip="${esc(currentCard()?.mapId || 'harbor')}">出发 ↗</button></footer>`;
     shell.querySelector('.town-side').dataset.section = section;
     const empty = shell.querySelector('.town-empty'); empty.hidden = true;
     shell.querySelector('.town-map-hint').textContent = preview ? '点选空地' : '';
@@ -155,6 +164,12 @@
     if (button.dataset.townProject) { selectedProject=button.dataset.townProject;render();return; }
     if (button.dataset.townTrip) { embark(button.dataset.townTrip);return; }
     if (button.dataset.townMaterial) { shell.style.removeProperty('--town-expansion-height');section='landscape';selectedProject=projects().find(item=>item.collectionId===button.dataset.townMaterial)?.id||'garden';mode=null;preview=null;render();return; }
+    if (button.dataset.townRegion) {
+      regionFilter = button.dataset.townRegion; selectedBuilding = null;
+      const cards = shelfCards();
+      if (!cards.some(card => card.id === selectedCard)) selectedCard = (cards.find(card => ownedCard(card.id).unlocked) || cards[0])?.id || selectedCard;
+      render(); return;
+    }
     if (button.dataset.townCard) { selectedCard = button.dataset.townCard; selectedBuilding = null; render(); return; }
     if (button.dataset.townStored) { selectedBuilding = button.dataset.townStored; selectedCard = findBuilding(selectedBuilding)?.cardId; render(); return; }
     if (button.dataset.townShelf) { shelf = button.dataset.townShelf; selectedBuilding = null; render(); return; }
@@ -197,9 +212,11 @@
     if (!load()) { close(); root.GameProgression.open('city'); return; }
     if (!shell.hidden) { if (options.cardId) selectedCard = options.cardId; render(); return; }
     previousFocus = document.activeElement; previousOverflow = document.body.style.overflow; document.body.style.overflow = 'hidden'; document.body.classList.add('town-open'); shell.hidden = false; mode = null; preview = null; shelf = 'collection'; selectedBuilding = null;section=options.section||'buildings';expansionTarget=null;shell.style.removeProperty('--town-expansion-height');
-    selectedCard = options.cardId || selectedCard; const generation = ++openGeneration; render(); shell.querySelector('.town-close').focus();
+    selectedCard = options.cardId || selectedCard;
+    if (!options.cardId && !ownedCard(selectedCard).unlocked) selectedCard = shelfCards()[0]?.id || selectedCard;
+    const generation = ++openGeneration; render(); shell.querySelector('.town-close').focus();
     try {
-      scenePromise ||= import('./town-scene.js?v=20261025-district1'); const { createTownScene } = await scenePromise;
+      scenePromise ||= import('./town-scene.js?v=20261027-regions1'); const { createTownScene } = await scenePromise;
       if (generation !== openGeneration || shell.hidden) return;
       scene?.dispose(); scene = createTownScene(shell.querySelector('.town-canvas'), { onPick, onExpansion: expansionChanged, onStatus(status) { if (shell.hidden) return; const node = shell.querySelector('.town-load-status'); node.hidden = status === 'ready'; node.innerHTML = status === 'error' ? '载入失败 <button type="button" data-town-action="retry">重试</button>' : '载入中…'; } }); syncScene();
     } catch (_) { announce('城镇暂时无法打开'); }

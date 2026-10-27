@@ -87,7 +87,7 @@ async function admissionQuotaCase(browser, base) {
     await fit(page, 390, 844, '01-empty'); await fit(page, 320, 568, '01-empty'); await page.setViewportSize({ width: 390, height: 844 });
     await page.locator('[data-town-card="harbor_finance"]').click();
     assert.equal(await page.locator('[data-town-action="target"], .town-card-target').count(), 0);
-    await page.locator('.town-card-detail [data-town-action="embark"]').click();
+    await page.locator('.town-card-detail [data-town-trip="harbor"]').click();
     await page.locator('#start-play-btn').waitFor();
     assert.equal(await page.evaluate(() => selectedMapId), 'harbor');
     assert.equal(await page.evaluate(() => GameProgression.getProfile().profile.wallet), 1200, 'no ticket until actual confirmation');
@@ -190,7 +190,7 @@ async function admissionQuotaCase(browser, base) {
     await legacyContext.addInitScript(({ key, profile }) => { if (!localStorage.getItem(key)) localStorage.setItem(key, JSON.stringify(profile)); }, { key: STORAGE_KEY, profile: legacy });
     page = await legacyContext.newPage(); await page.goto(base); await page.waitForFunction(() => window.GameProgression?.town);
     const migrated = await page.evaluate(() => GameProgression.getProfile().profile);
-    assert.equal(migrated.version, 4); assert.equal(migrated.wallet, legacy.wallet); assert.equal(migrated.earned, legacy.earned);
+    assert.equal(migrated.version, 5); assert.equal(migrated.wallet, legacy.wallet); assert.equal(migrated.earned, legacy.earned);
     assert.deepEqual(migrated.entries, legacy.entries); assert.deepEqual(migrated.projectLevels, legacy.projectLevels); assert.deepEqual(migrated.collections, legacy.collections);
     assert.equal(migrated.town.cards.harbor_villa.unlocked, false);
     const boundary = await page.evaluate(() => {

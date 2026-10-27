@@ -118,7 +118,7 @@ test('v3 expanded saves preserve the paid 8×8 land, all balances, layouts and l
   old.town.buildings.push({ id: 'building_historic-build', cardId: 'harbor_villa', x: 7, y: 7, rotation: 0, stored: false });
   assert.equal(validProfile(old), true);
   const raw = JSON.stringify(old), f = fixture(raw); f.fail(true); assert.equal(f.store.read().error, 'migration_failed'); assert.equal(f.raw(), raw);
-  f.fail(false); const migrated = f.store.read(); assert.equal(migrated.migrated, true); assert.equal(migrated.profile.version, 4); assert.equal(migrated.profile.town.landStage, 2);
+  f.fail(false); const migrated = f.store.read(); assert.equal(migrated.migrated, true); assert.equal(migrated.profile.version, 5); assert.equal(migrated.profile.town.landStage, 2);
   for (const key of ['wallet', 'collections', 'projectLevels', 'purchases', 'receipts', 'entries']) assert.deepEqual(migrated.profile[key], old[key], key);
   for (const key of ['buildings', 'actions', 'cards', 'targetCardId']) assert.deepEqual(migrated.profile.town[key], old.town[key], key);
   assert.equal(f.store.town.expand({ expectedStage: 1 }).duplicate, true); assert.equal(f.store.town.expand({ expectedStage: 2 }).duplicate, true);

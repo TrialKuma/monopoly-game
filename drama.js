@@ -2,7 +2,7 @@
  * GameDrama — presentation only. No access to game state.
  * play({ type, title, message, amount, expectedAmount, from, to,
  *        tiles, tileName, leadChanged?, duration?, sessionId?, payerCashAfter?,
- *        cashAfter?, districtCount?, isLarge?, buildingLevel?, isOpeningBuilding?, rival?,
+ *        cashAfter?, districtCount?, isLarge?, buildingLevel?, isOpeningBuilding?, repaired?, rival?,
  *        chanceKind?, outcomeLabel?, actor?, beneficiaries?, acquisition?, purchasePrice?, refund?, premium? }): Promise<void>
  * from/to: { id: 'human'|'ai', name, color }. Amounts are positive magnitudes.
  * reset() cancels every animation, pending event and sound; all promises resolve.
@@ -413,7 +413,7 @@
     const meta = element('div', 'drama-meta');
     eventNumber++;
     if (type === 'buy') {
-      const kicker = element('span', 'drama-kicker', `${event.to?.name || '玩家'}已购入`);
+      const kicker = element('span', 'drama-kicker', `${event.to?.name || '玩家'}${event.repaired ? '已修复' : '已购入'}`);
       kicker.prepend(element('i', 'drama-live-dot'));
       meta.appendChild(kicker);
       content.appendChild(meta);

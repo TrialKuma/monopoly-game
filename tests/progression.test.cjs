@@ -82,7 +82,7 @@ test('v1 migration preserves exact old balance, purchases and receipts without r
   const receipt = { runId: 'legacy', mapId: 'classic', mapName: '经典环线', mode: 'rounds', reason: 'rounds', rounds: 30, cash: 4000, winnerId: 'human', completedAt: '2026-10-22T08:00:00.000Z' };
   const old = { version: 1, wallet: 2800, earned: 4000, owned: ['garden'], receipts: [receipt] }; const f = fixture(JSON.stringify(old)); f.fail(true);
   assert.equal(f.store.read().error, 'migration_failed'); assert.deepEqual(JSON.parse(f.data.get(STORAGE_KEY)), old); f.fail(false);
-  const migrated = f.store.read(); assert.equal(migrated.migrated, true); assert.equal(migrated.profile.version, 4);
+  const migrated = f.store.read(); assert.equal(migrated.migrated, true); assert.equal(migrated.profile.version, 5);
   assert.equal(migrated.profile.wallet, 2800); assert.equal(migrated.profile.seedAmount, 0); assert.equal(migrated.profile.projectLevels.garden, 1); assert.equal(migrated.profile.receipts[0].legacy, true);
   assert.equal(f.create().read().profile.wallet, 2800); assert.equal(f.store.enter(admission({ runId: 'legacy' })).error, 'conflict');
   complete(f, 'after-migration', 'harbor', 500, 1); assert.equal(f.store.read().profile.wallet, 3050);

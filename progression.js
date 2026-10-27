@@ -10,27 +10,33 @@
     { id: 'waterfront', name: '滨水码头', coins: [450, 900, 1500], items: [1, 2, 3], collectionId: 'harbor_shell', icon: '≈', description: '栈桥 · 码头 · 帆船港' },
     { id: 'skyline', name: '海角灯塔', coins: [650, 1200, 2000], items: [1, 2, 3], collectionId: 'alpine_crystal', icon: '▥', description: '观景台 · 灯塔 · 塔冠' },
   ]);
-  const BUILDING_CARDS = Object.freeze([
-    ['villa', '海湾公馆', 120, 1, 1], ['shop', '港湾商铺', 140, 1, 1],
-    ['hotel', '海岸酒店', 220, 1, 1], ['tower', '航海事务所', 240, 1, 1],
-    ['finance', '海港商会', 300, 2, 1], ['skyscraper', '港湾观景楼', 360, 2, 1],
-    ['onsen', '海崖温泉', 280, 2, 1],
-  ].map(([family, name, coins, width, height]) => Object.freeze({
-    id: `harbor_${family}`, family, name, region: 'harbor', mapId: 'harbor', coins,
-    footprint: Object.freeze([width, height]), mergeCosts: Object.freeze([2, 4]),
+  const BUILDING_FAMILIES = [['villa', 120, 1], ['shop', 140, 1], ['hotel', 220, 1], ['tower', 240, 1], ['finance', 300, 2], ['skyscraper', 360, 2], ['onsen', 280, 2]];
+  // Each map's settlement draft offers its own region. The harbor family order
+  // is part of saved v2/v3 draft offers and must not change.
+  const BUILDING_REGIONS = [
+    ['classic', '经典', '经典环线', ['曦园公馆', '湖畔商行', '花园旅馆', '瀚海阁', '环城商会', '皇家大酒店', '温泉庄园']],
+    ['compact', '紧凑', '紧凑冲突', ['河畔小筑', '柳桥茶屋', '艺文旅馆', '港口仓屋', '林间公馆', '天守楼', '潮畔温泉']],
+    ['expansion', '都市', '都市大环线', ['清贝公寓', '晶藤百货', '星港旅馆', '天际大楼', '星河商会', '都会大酒店', '新月温泉']],
+    ['harbor', '港湾', '潮汐港湾', ['海湾公馆', '港湾商铺', '海岸酒店', '航海事务所', '海港商会', '港湾观景楼', '海崖温泉']],
+    ['alpine', '温泉', '云岭温泉', ['杉影山居', '雪松商铺', '松风旅舍', '山间邮局', '山岚商会', '云顶酒店', '云岭温泉']],
+  ];
+  const BUILDING_CARDS = Object.freeze(BUILDING_REGIONS.flatMap(([region, regionName, mapName, names]) => BUILDING_FAMILIES.map(([family, coins, width], index) => Object.freeze({
+    id: `${region}_${family}`, family, name: names[index], region, regionName, mapId: region, mapName, coins,
+    footprint: Object.freeze([width, 1]), mergeCosts: Object.freeze([2, 4]),
     modelKeys: Object.freeze([1, 2, 3].map(star => `${family}_${star}`)),
-    previewPaths: Object.freeze([1, 2, 3].map(star => `assets/buildings/regions/harbor/${family}_${star}.png`)),
-  })));
+    previewPaths: Object.freeze([1, 2, 3].map(star => `assets/buildings/regions/${region}/${family}_${star}.png`)),
+  }))));
   // Retained solely to validate expansion already purchased in v3 saves.
   const TOWN_EXPANSION = Object.freeze({ from: 6, to: 8, coins: 800 });
   const cardById = id => BUILDING_CARDS.find(card => card.id === id);
+  const cardsForMap = mapId => BUILDING_CARDS.filter(card => card.mapId === mapId);
   const emptyCards = () => Object.fromEntries(BUILDING_CARDS.map(card => [card.id, { unlocked: false, star: 0, duplicates: 0 }]));
   const emptyTown = () => ({ size: 6, landStage: 0, targetCardId: 'harbor_villa', cards: emptyCards(), buildings: [], actions: [] });
   const integer = n => Number.isSafeInteger(n) && n >= 0;
   const text = (s, max) => typeof s === 'string' && s.length > 0 && s.length <= max;
   const emptyLevels = () => Object.fromEntries(PROJECTS.map(p => [p.id, 0]));
   const emptyCollections = () => Object.fromEntries(Object.keys(COLLECTIONS).map(id => [id, 0]));
-  const fresh = () => ({ version: 4, seedGranted: true, seedAmount: 1200, legacyBalance: 0, legacyEarned: 0, legacyLevels: emptyLevels(), wallet: 1200, earned: 0, projectLevels: emptyLevels(), collections: emptyCollections(), entries: [], receipts: [], purchases: [], stipends: [], town: emptyTown() });
+  const fresh = () => ({ version: 5, seedGranted: true, seedAmount: 1200, legacyBalance: 0, legacyEarned: 0, legacyLevels: emptyLevels(), wallet: 1200, earned: 0, projectLevels: emptyLevels(), collections: emptyCollections(), entries: [], receipts: [], purchases: [], stipends: [], town: emptyTown() });
   const clone = value => JSON.parse(JSON.stringify(value));
   const timestamp = value => text(value, 40) && Number.isFinite(Date.parse(value));
   const localDay = () => { const d = new Date(); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`; };
@@ -60,7 +66,7 @@
     return integer(earned) && earned === p.earned && p.wallet === earned - spent;
   }
   function validVault(p, townSpent = 0, townMaterials = emptyCollections()) {
-    if (!p || ![2, 3, 4].includes(p.version) || p.seedGranted !== true || ![0, 1200].includes(p.seedAmount)
+    if (!p || ![2, 3, 4, 5].includes(p.version) || p.seedGranted !== true || ![0, 1200].includes(p.seedAmount)
       || ![p.wallet, p.earned, p.legacyBalance, p.legacyEarned].every(integer)
       || !p.projectLevels || !p.legacyLevels || !p.collections
       || ![p.entries, p.receipts, p.purchases, p.stipends].every(Array.isArray)) return false;
@@ -105,11 +111,11 @@
     if (!Array.isArray(list)) return null;
     const counts = new Map(); let total = 0;
     for (const row of list) {
-      if (!row || !cardById(row.cardId) || !integer(row.count) || row.count < 1) return null;
+      if (!row || cardById(row.cardId)?.mapId !== mapId || !integer(row.count) || row.count < 1) return null;
       total += row.count; if (!integer(total) || total > 5) return null;
       counts.set(row.cardId, (counts.get(row.cardId) || 0) + row.count);
     }
-    if ((mapId === 'harbor' && total < 1 && !allowEmpty) || (mapId !== 'harbor' && total !== 0)) return null;
+    if (!allowEmpty && (mapId === 'harbor' ? total < 1 : total !== 0)) return null;
     return [...counts].sort(([a], [b]) => a.localeCompare(b)).map(([cardId, count]) => ({ cardId, count }));
   }
   function draftHash(value) {
@@ -119,12 +125,13 @@
   }
   function legacyBuildingCardOffers(runId, targetCardId) {
     if (!text(runId, 160) || !cardById(targetCardId)) return null;
-    const ranked = BUILDING_CARDS.map(card => card.id).filter(id => id !== targetCardId)
+    const ranked = cardsForMap('harbor').map(card => card.id).filter(id => id !== targetCardId)
       .sort((a, b) => draftHash(`${runId}|${targetCardId}|${a}`) - draftHash(`${runId}|${targetCardId}|${b}`) || a.localeCompare(b));
     return [targetCardId, ...ranked.slice(0, 2)].sort((a, b) => draftHash(`${runId}|offer|${a}`) - draftHash(`${runId}|offer|${b}`) || a.localeCompare(b));
   }
-  function buildingCardOffers(runId) {
-    if (!text(runId, 160)) return null;
+  function buildingCardOffers(runId, mapId = 'harbor') {
+    const cards = cardsForMap(mapId).map(card => card.id);
+    if (!text(runId, 160) || cards.length < 3) return null;
     // A private PRNG keeps a run's reward fixed without consuming dice randomness.
     let seed = draftHash(`building-draft-v3|${runId}`);
     const random = () => {
@@ -133,7 +140,6 @@
       value ^= value + Math.imul(value ^ value >>> 7, value | 61);
       return ((value ^ value >>> 14) >>> 0) / 4294967296;
     };
-    const cards = BUILDING_CARDS.map(card => card.id);
     for (let i = cards.length - 1; i > 0; i--) {
       const j = Math.floor(random() * (i + 1));
       [cards[i], cards[j]] = [cards[j], cards[i]];
@@ -221,9 +227,9 @@
         const cards = normalizeBuildingCards(receipt.buildingCards, receipt.mapId);
         if (!cards || JSON.stringify(cards) !== JSON.stringify(receipt.buildingCards)) return null;
         grantBuildingCards(town, cards);
-      } else if ([2, 3].includes(receipt.cardRewardVersion) && !receipt.legacy && receipt.mapId === 'harbor') {
+      } else if (!receipt.legacy && (receipt.cardRewardVersion === 2 && receipt.mapId === 'harbor' || receipt.cardRewardVersion === 3 && cardsForMap(receipt.mapId).length)) {
         const cards = normalizeBuildingCards(receipt.buildingCards, receipt.mapId, true);
-        const draft = receipt.buildingCardDraft, offers = receipt.cardRewardVersion === 2 ? legacyBuildingCardOffers(receipt.runId, draft?.targetCardId) : buildingCardOffers(receipt.runId);
+        const draft = receipt.buildingCardDraft, offers = receipt.cardRewardVersion === 2 ? legacyBuildingCardOffers(receipt.runId, draft?.targetCardId) : buildingCardOffers(receipt.runId, receipt.mapId);
         if (!cards || cards.reduce((sum, row) => sum + row.count, 0) > 4 || JSON.stringify(cards) !== JSON.stringify(receipt.buildingCards)
           || !offers || JSON.stringify(draft?.offers) !== JSON.stringify(offers)
           || receipt.cardRewardVersion === 3 && JSON.stringify(draft) !== JSON.stringify({ offers })) return null;
@@ -244,22 +250,25 @@
       if (action.type === 'expand' && action.stage !== undefined) materials[action.collectionId] += action.count;
       ids.add(action.id); spent += action.coins;
     }
+    // Saves before v5 list only the harbor cards; every other card is still locked.
+    const savedCards = p.version >= 5 ? saved.cards : { ...emptyCards(), ...saved.cards };
     if (!integer(spent) || saved.size !== town.size || (p.version >= 4 && saved.landStage !== town.landStage) || saved.targetCardId !== town.targetCardId
-      || JSON.stringify(saved.cards) !== JSON.stringify(town.cards) || JSON.stringify(saved.buildings) !== JSON.stringify(town.buildings)) return null;
+      || JSON.stringify(savedCards) !== JSON.stringify(town.cards) || JSON.stringify(saved.buildings) !== JSON.stringify(town.buildings)) return null;
     return { coins: spent, materials };
   }
   function validProfile(p) {
-    if (!p || ![3, 4].includes(p.version)) return false;
+    if (!p || ![3, 4, 5].includes(p.version)) return false;
     const spent = validTown(p);
     return spent !== null && validVault(p, spent.coins, spent.materials);
   }
   function migrate(old) {
-    if (old.version === 3) {
-      const migrated = clone(old); migrated.version = 4;
-      migrated.town.landStage = old.town.size === 8 ? 2 : 0;
+    if (old.version === 3 || old.version === 4) {
+      const migrated = clone(old); migrated.version = 5;
+      if (old.version === 3) migrated.town.landStage = old.town.size === 8 ? 2 : 0;
+      migrated.town.cards = { ...emptyCards(), ...old.town.cards };
       return migrated;
     }
-    if (old.version === 2) return { ...clone(old), version: 4, receipts: old.receipts.map(receipt => ({ ...receipt, cardRewardVersion: 0, buildingCards: [] })), town: emptyTown() };
+    if (old.version === 2) return { ...clone(old), version: 5, receipts: old.receipts.map(receipt => ({ ...receipt, cardRewardVersion: 0, buildingCards: [] })), town: emptyTown() };
     const p = fresh(); p.seedAmount = 0; p.legacyBalance = old.wallet; p.legacyEarned = old.earned; p.wallet = old.wallet; p.earned = old.earned;
     for (const id of old.owned) { p.legacyLevels[id] = 1; p.projectLevels[id] = 1; }
     p.receipts = old.receipts.map(receipt => ({ ...receipt, legacy: true, cardRewardVersion: 0, buildingCards: [] }));
@@ -277,7 +286,7 @@
       if (raw === null) return { ok: true, profile: fresh() };
       try {
         const profile = JSON.parse(raw);
-        if ((profile?.version === 1 && validLegacy(profile)) || (profile?.version === 2 && validVault(profile)) || (profile?.version === 3 && validProfile(profile))) {
+        if ((profile?.version === 1 && validLegacy(profile)) || (profile?.version === 2 && validVault(profile)) || ([3, 4].includes(profile?.version) && validProfile(profile))) {
           const saved = write(migrate(profile)); return saved.ok ? { ...saved, migrated: true } : { ...saved, error: 'migration_failed' };
         }
         return validProfile(profile) ? { ok: true, profile } : { ok: false, error: 'corrupt' };
@@ -315,7 +324,7 @@
       if (!buildingCards) return { ok: false, error: 'invalid' };
       let buildingCardDraft, rewardVersion = legacyCards ? 0 : 1;
       if (wantsDraft) {
-        if (input.mapId !== 'harbor' || legacyCards) return { ok: false, error: 'invalid' };
+        if (!cardsForMap(input.mapId).length || legacyCards) return { ok: false, error: 'invalid' };
         if (old?.cardRewardVersion === 2) {
           // Old pending offers remain exactly as saved. Support retries from the
           // former payload, where its one base card preceded construction bonuses.
@@ -326,7 +335,7 @@
           }
           buildingCardDraft = clone(old.buildingCardDraft); rewardVersion = 2;
         } else {
-          const offers = buildingCardOffers(input.runId);
+          const offers = buildingCardOffers(input.runId, input.mapId);
           if (!offers) return { ok: false, error: 'invalid' };
           buildingCardDraft = { offers }; rewardVersion = 3;
         }
@@ -511,7 +520,7 @@
     const details = result?.receipt || result?.details || {};
     const isResult = panel === 'result' && !!result;
     const isRewards = panel === 'rewards';
-    dialog.innerHTML = `<div class="city-sheet"><header class="city-sheet-header"><div><p>${isRewards ? '港湾收藏' : '我的城镇'}</p><h2 id="city-dialog-title">${isResult ? '本局结算' : isRewards ? '建筑卡奖励' : '仓库'}</h2></div><button class="city-close" type="button" data-city-close aria-label="关闭面板">关闭</button></header>
+    dialog.innerHTML = `<div class="city-sheet"><header class="city-sheet-header"><div><p>${isRewards ? '建筑收藏' : '我的城镇'}</p><h2 id="city-dialog-title">${isResult ? '本局结算' : isRewards ? '建筑卡奖励' : '仓库'}</h2></div><button class="city-close" type="button" data-city-close aria-label="关闭面板">关闭</button></header>
       ${isResult || isRewards ? '' : `<div class="city-tabs" role="tablist" aria-label="仓库页面"><button type="button" role="tab" aria-selected="${panel === 'city'}" data-city-tab="city">仓库</button><button type="button" role="tab" aria-selected="${panel === 'board'}" data-city-tab="board">本机榜</button></div>`}
       <p class="city-message${!loaded.ok ? ' city-message-error' : ''}" role="status"${notice || !loaded.ok ? '' : ' hidden'}>${esc(notice || errors[loaded.error] || '')}</p>
       ${isRewards ? pendingDraftMarkup(profile) || '<p class="building-card-rewards-complete">已全部领取</p>' : isResult ? `<div class="city-finish"><div class="city-finish-mark" aria-hidden="true">${details.winnerId === 'human' ? '✦' : details.winnerId === 'draw' ? '≈' : '▱'}</div><h3>${details.winnerId === 'human' ? '本局胜利' : details.winnerId === 'draw' ? '平局' : '本局失利'}</h3><p>${esc(details.mapName || '')} · ${details.mode === 'bankruptcy' ? '破产淘汰' : '回合制'}</p><div class="city-finish-cash"><span>最终现金</span><strong>${money(details.cash ?? details.humanCash ?? 0)}</strong></div>${resultMarkup(result)}<div class="city-finish-links"><button type="button" data-city-tab="city">仓库 ↗</button><button type="button" data-city-tab="board">查看本机榜 ↗</button></div></div>` : panel === 'city' ? `${loaded.ok ? pendingDraftMarkup(profile) : ''}<div class="city-wallet"><span>仓库金币</span><strong>${loaded.ok ? money(profile.wallet) : '—'}</strong><small>累计带回 ${money(profile.earned)}</small></div>${inventoryMarkup(profile, loaded.ok)}

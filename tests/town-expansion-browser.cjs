@@ -14,7 +14,7 @@ const server = http.createServer((req, res) => {
 const pass = message => console.log('PASS ' + message);
 function fixture() {
   const data = new Map(), store = createStore({ getItem: key => data.get(key) ?? null, setItem: (key, value) => data.set(key, value) }, () => '2026-10-25T12:00:00.000Z');
-  for (const card of BUILDING_CARDS) {
+  for (const card of BUILDING_CARDS.filter(card => card.mapId === 'harbor')) {
     for (const count of [5, 2]) {
       const runId = `expansion-fixture-${card.id}-${count}`;
       assert.equal(store.enter({ runId, mapId: 'harbor', price: 250 }).ok, true);
