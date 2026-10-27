@@ -1,9 +1,9 @@
 // Cosmetic city life. No game state writes, global RNG, timers, or animation loop.
 // Articulated Blender parts are kept by scene.js before its static mesh batching.
 import { createCityLighting } from './scene-lighting.js?v=20261027-night1';
-import { createCityWeather } from './scene-weather.js?v=20261025-items1';
-import { createCityOutskirts } from './scene-outskirts.js?v=20261027-night1';
-import { createDestinationScene } from './scene-destinations.js?v=20261027-night1';
+import { createCityWeather } from './scene-weather.js?v=20261028-global-roofs2';
+import { createCityOutskirts } from './scene-outskirts.js?v=20261028-global-roofs2';
+import { createDestinationScene } from './scene-destinations.js?v=20261028-global-roofs2';
 export function shouldPreserveLifeNode(node) {
   return !!node?.userData?.lifePart || /^life_(wheel_rotor|crane_pendulum)$/.test(node?.name || '');
 }

@@ -16,6 +16,19 @@ const compile = material => {
   const shader = { uniforms: {}, vertexShader: '#include <common>\n#include <begin_vertex>', fragmentShader: '#include <common>\n#include <color_fragment>\n#include <aomap_fragment>' };
   material.onBeforeCompile(shader, null); return shader;
 };
+// A feathered cover changes visible snow via vertex alpha, not by deleting
+// roof triangles. Integrate projected roof area with interpolated coverage.
+const visibleSnowArea = geometry => {
+  const position = geometry.attributes.position, coverage = geometry.attributes.color, index = geometry.index;
+  let area = 0;
+  for (let i = 0; i < index.count; i += 3) {
+    const a = index.getX(i), b = index.getX(i + 1), c = index.getX(i + 2);
+    const triangle = Math.abs((position.getX(b) - position.getX(a)) * (position.getZ(c) - position.getZ(a)) -
+      (position.getZ(b) - position.getZ(a)) * (position.getX(c) - position.getX(a))) * .5;
+    area += triangle * (coverage.getW(a) + coverage.getW(b) + coverage.getW(c)) / 3;
+  }
+  return area;
+};
 let tested = 0, masked = 0, wallVertices = 0;
 for (const region of Object.keys(WALL)) {
   const gltf = await loadGeometryGLB(regionalAssetURL(region)), roofs = createOwnershipRoofs({ THREE });
@@ -41,13 +54,20 @@ for (const region of Object.keys(WALL)) {
       assert.equal(hash(node.geometry.attributes.color), colorsBefore.get(node.geometry), 'original colors stay byte-identical');
       assert.equal(hash(node.geometry.attributes.position), shapesBefore.get(node.geometry), 'topology positions stay byte-identical');
       assert.equal(neutralNode.material, original, 'unowned material unchanged');
+      const mask = node.geometry.attributes.cityRoofMask, color = node.geometry.attributes.color, wall = new THREE.Color(WALL[region]);
+      // Facades are now independent primitives in the tiled regions. Check
+      // every wall, including primitives which need no private roof material.
+      for (let i = 0; i < color.count; i++) {
+        if (Math.max(Math.abs(color.getX(i) - wall.r), Math.abs(color.getY(i) - wall.g), Math.abs(color.getZ(i) - wall.b)) < .0021) {
+          assert.equal(mask?.getX(i) || 0, 0, `${source.name}: no wall painting`); wallVertices++;
+        }
+      }
       if (node.material === original) { unchanged.push(node); return; }
       selected.push(node);
       assert.notEqual(node.material, enemyNode.material, 'independent material instance per lot');
       assert.equal(node.material.aoMap, original.aoMap); assert.equal(node.material.roughnessMap, original.roughnessMap); assert.equal(node.material.metalnessMap, original.metalnessMap);
       assert.equal(node.material.vertexColors, true);
       assert(node.material.color.equals(original.color), 'material base color is not whole-building tint');
-      const mask = node.geometry.attributes.cityRoofMask, color = node.geometry.attributes.color, wall = new THREE.Color(WALL[region]);
       if (region === 'expansion') {
         const family = source.name.split('_')[1], expectedDecks = family === 'skyscraper' ? 5 : ['finance', 'onsen'].includes(family) ? 2 : 1;
         const info = node.geometry.userData.ownershipRoofMask;
@@ -57,11 +77,17 @@ for (const region of Object.keys(WALL)) {
       let count = 0;
       for (let i = 0; i < mask.count; i++) {
         if (mask.getX(i)) count++;
-        if (Math.max(Math.abs(color.getX(i) - wall.r), Math.abs(color.getY(i) - wall.g), Math.abs(color.getZ(i) - wall.b)) < .0021) {
-          assert.equal(mask.getX(i), 0, `${source.name}: no wall painting`); wallVertices++;
-        }
       }
-      assert(count > 10 && count < mask.count * .70, `${source.name}: selective roof mask`);
+      if (original.name.endsWith(' / roof ceramic')) {
+        assert(['classic','compact','harbor','alpine'].includes(region), 'only tiled/slate regions use the dedicated ceramic surface');
+        if(region==='compact')assert.equal(count, mask.count, `${source.name}: every Kyoto ceramic vertex is recolored`);
+        else assert(count > 10, `${source.name}: ceramic roof has a usable ownership mask; detached shutter straps keep their color`);
+        assert(original.aoMap, 'ceramic retains its soft contact shading through ownership changes');
+        assert.equal(original.aoMap.image.width, 256, 'ceramic samples a continuous scalar ramp, not facade UV islands');
+        assert.equal(original.aoMap.image.height, 1);
+        assert.equal(original.aoMap.channel, 0);
+        assert.equal(original.roughnessMap, null, 'ceramic has stable roughness at every view distance');
+      } else assert(count > 10 && count < mask.count * .70, `${source.name}: selective roof mask`);
       const shader = compile(node.material), enemyShader = compile(enemyNode.material); humanShaders.push(shader);
       assert.equal(shader.uniforms.cityOwnerRoofColor.value.getHexString(), OWNERSHIP_ROOF_COLORS.human.slice(1));
       assert.equal(enemyShader.uniforms.cityOwnerRoofColor.value.getHexString(), OWNERSHIP_ROOF_COLORS.ai.slice(1));
@@ -100,7 +126,10 @@ for (const region of Object.keys(WALL)) {
     for (let i = 0; i < 150; i++) weather.tick(0, { reduced: true });
     const neutralCap = model.getObjectByName('roof_snow_cap').geometry;
     assert.equal(neutralCap.userData.roofSnow.ownedRoof, false);
-    assert(neutralCap.index.count > ownedCap.index.count, 'neutral roof restores full snow without stale owner band');
+    const ownedSnowArea = visibleSnowArea(ownedCap), neutralSnowArea = visibleSnowArea(neutralCap);
+    assert(ownedSnowArea > 0, 'painted eaves still leave visible snow on the owned roof');
+    assert(neutralSnowArea > ownedSnowArea + 1e-5, 'neutral roof restores greater visible snow coverage without a stale owner band');
+    console.log(`INFO alpine snow coverage: owned=${ownedSnowArea.toFixed(4)}, neutral=${neutralSnowArea.toFixed(4)}`);
     assert.equal(roofMaterials[0][0].material, roofBefore, 'snow regeneration does not replace private owner material');
     roofs.set(model, 'ai'); weather.refresh();
     for (let i = 0; i < 150; i++) weather.tick(0, { reduced: true });

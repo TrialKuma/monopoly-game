@@ -1,7 +1,7 @@
 import * as THREE from './assets/vendor/three/three.module.min.js';
 import { makeStudioEnvironment } from './scene-environment.js?v=20261025-facade2';
 import { GLTFLoader } from './assets/vendor/three/addons/loaders/GLTFLoader.js';
-import { createOwnershipRoofs } from './scene-ownership-roofs.js?v=20261025-items1';
+import { createOwnershipRoofs } from './scene-ownership-roofs.js?v=20261028-global-roofs2';
 import { createFunctionalLandmark } from './scene-functional-landmarks.js?v=20261025-items1';
 import { createThermalSteam } from './scene-thermal-steam.js?v=20261025-facade2';
 
@@ -82,7 +82,7 @@ const pivot=new THREE.Group();scene.add(pivot);let bundle=null,candidateReceipt=
 async function sha256(bytes){const digest=await crypto.subtle.digest('SHA-256',bytes);return Array.from(new Uint8Array(digest),v=>v.toString(16).padStart(2,'0')).join('');}
 async function loadReviewModel(file){
   const loader=new GLTFLoader();
-  if(!candidateMode)return {gltf:await loader.loadAsync(`${file}?v=20261025-facade2`),report:null};
+  if(!candidateMode)return {gltf:await loader.loadAsync(`${file}?v=20261028-global-roofs2`),report:null};
   const stamp=Date.now(),response=await fetch(`${file.replace(/\.glb$/,'.json')}?review=${stamp}`);
   if(!response.ok)throw Error('这栋建筑尚未完成候选导出。');const report=await response.json();
   const modelResponse=await fetch(`${file}?review=${stamp}`);if(!modelResponse.ok)throw Error('候选模型尚未载入。');

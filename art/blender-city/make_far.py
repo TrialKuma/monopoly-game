@@ -78,6 +78,25 @@ def build(region, asset, target):
             break
     if triangles(root) > 20000:
         raise ValueError(f'{region}/{asset}: far still exceeds 20k triangles')
+    # Collapse can extrapolate UVs slightly outside their original scalar range.
+    # Ceramic AO uses a one-row ramp, so keep only that layer in its texel-center
+    # bounds. Facade atlases and geometric positions must stay untouched.
+    roof_ao_clamp = {'corners': 0, 'maximumDelta': 0}
+    for obj in meshes(root):
+        if not obj.data.uv_layers:
+            continue
+        uv = obj.data.uv_layers[0].data
+        for face in obj.data.polygons:
+            if not obj.data.materials[face.material_index].name.endswith(' / roof ceramic'):
+                continue
+            for index in face.loop_indices:
+                before = uv[index].uv.copy()
+                after = (max(.5/256, min(255.5/256, before.x)), .5)
+                delta = max(abs(before.x-after[0]), abs(before.y-after[1]))
+                if delta > 1e-8:
+                    roof_ao_clamp['corners'] += 1
+                    roof_ao_clamp['maximumDelta'] = max(roof_ao_clamp['maximumDelta'], delta)
+                uv[index].uv = after
     lo, hi = bounds(root)
     old_size, new_size = before_hi-before_lo, hi-lo
     if any(abs(new_size[i]-old_size[i]) > max(.012, old_size[i]*.025) for i in range(3)):
@@ -128,7 +147,8 @@ def build(region, asset, target):
               'bounds': {'min': [lo.x, lo.z, -hi.y], 'max': [hi.x, hi.z, -lo.y]},
               'surface': surface, 'simplification': {'method': 'Blender collapse with existing UV and vertex color layers',
               'target': target, 'passes': passes, 'rescaling': False,
-              'centeringOffsetBlender': list(offset), 'textures': textures},
+              'centeringOffsetBlender': list(offset), 'textures': textures,
+              'roofAmbientClamp': roof_ao_clamp},
               'sha256': digest(output), 'bytes': output.stat().st_size,
               'status': 'built_pending_scene_review', 'seconds': round(time.monotonic()-started, 2)}
     # This export is a new simplified mesh, not the compressed near payload.

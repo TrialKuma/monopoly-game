@@ -16,7 +16,7 @@
   const currentCard = () => catalog().find(card => card.id === selectedCard) || catalog()[0];
   const stars = star => '★'.repeat(star || 0) + '☆'.repeat(3 - (star || 0));
   const ownedCard = id => profile?.town.cards[id] || { unlocked: false, star: 0, duplicates: 0 };
-  const previewImage = (card, star) => `assets/buildings/regions/${card.region}/${card.family}_${Math.max(1, star)}.png?v=20261025-facade2`;
+  const previewImage = (card, star) => `assets/buildings/regions/${card.region}/${card.family}_${Math.max(1, star)}.png?v=20261028-global-roofs2`;
   const findBuilding = id => profile?.town.buildings.find(item => item.id === id);
   function footprint(card, rotation) { return rotation % 2 ? [card.footprint[1], card.footprint[0]] : card.footprint; }
   function isValidPlacement(item) {
@@ -216,7 +216,7 @@
     if (!options.cardId && !ownedCard(selectedCard).unlocked) selectedCard = shelfCards()[0]?.id || selectedCard;
     const generation = ++openGeneration; render(); shell.querySelector('.town-close').focus();
     try {
-      scenePromise ||= import('./town-scene.js?v=20261027-regions1'); const { createTownScene } = await scenePromise;
+      scenePromise ||= import('./town-scene.js?v=20261028-global-roofs2'); const { createTownScene } = await scenePromise;
       if (generation !== openGeneration || shell.hidden) return;
       scene?.dispose(); scene = createTownScene(shell.querySelector('.town-canvas'), { onPick, onExpansion: expansionChanged, onStatus(status) { if (shell.hidden) return; const node = shell.querySelector('.town-load-status'); node.hidden = status === 'ready'; node.innerHTML = status === 'error' ? '载入失败 <button type="button" data-town-action="retry">重试</button>' : '载入中…'; } }); syncScene();
     } catch (_) { announce('城镇暂时无法打开'); }

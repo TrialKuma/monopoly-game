@@ -28,6 +28,8 @@ export function createModelAssetCache({load=url=>new GLTFLoader().loadAsync(url)
   function closedError(){const error=new Error('Model asset cache is disposed');error.name='AbortError';return error;}
   function loadAsset(file,{version='20261025-facade2',force=false}={}){
     if(disposed)return Promise.reject(closedError());
+    // Board, town and scenery share the same repaired regional packs.
+    if (/^(?:regions(?:-far)?\/(?:classic|compact|expansion|harbor|alpine)|harbor\/(?:harbor_lighthouse|alpine_windmill))\.glb$/.test(file)) version='20261028-global-roofs2';
     const key=`${file}?v=${version}`,previous=entries.get(key);
     if(previous&&(!force||previous.pending))return previous.promise;
     const epoch=epochs.get(file)||0,entry={file,pending:true,value:null,promise:null};entries.set(key,entry);

@@ -112,10 +112,11 @@ async function ready(c, card='buyProperty') {const id=grant(c,card);await settle
     nextTurn(c);assert.equal((await use(c,id)).ok,true);
   });
   for(const bonus of ['six','combo'])await test(bonus+' bonus action cannot mature the visit and moving again clears it',async()=>{
-    const {c,events}=setup(),id=grant(c);const observed=[];
-    c.capture=cfg=>{events.push(cfg);if(cfg.label==='骰6再动')observed.push(json(c,'({turns:buyer.completedTurns,blocked:municipalCardBlock(buyer,CARD_POOL.find(c=>c.id==="buyProperty"))})'));};
+    const {c}=setup(),id=grant(c);
     c.run('buyer.position=(target.index-'+(bonus==='six'?6:1)+'+getBoardLength())%getBoardLength();var diceQueue=['+(bonus==='six'?6:1)+',1];animateDiceRoll=async()=>diceQueue.shift();buyer.effects.extraTurn='+(bonus==='combo')+';');
-    await c.run('processTurn(buyer)');assert.deepEqual(observed,[{turns:0,blocked:'下回合可使用'}]);
+    await c.run('processTurn(buyer)');assert.equal(c.run('state.extraTurnPending'),true);
+    assert.deepEqual(json(c,'({turns:buyer.completedTurns,blocked:municipalCardBlock(buyer,CARD_POOL.find(c=>c.id==="buyProperty"))})'),{turns:0,blocked:'下回合可使用'});
+    assert.equal((await use(c,id)).ok,false);await c.run('playHumanTurn()');
     assert.equal(c.run('buyer.completedTurns'),1);assert.equal(c.run('buyer.propertySettlement'),null);
     c.run('endTurn()');assert.equal((await use(c,id)).ok,false);assert.equal(c.run('buyer.cards.length'),1);
   });

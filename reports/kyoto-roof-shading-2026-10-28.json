@@ -1,0 +1,60 @@
+{
+  "date": "2026-10-28",
+  "scope": "Kyoto roof shading refinement on existing repaired geometry; local only",
+  "nearBuildings": 29,
+  "farBuildings": 5,
+  "changes": [
+    "Restore broad soft ceramic highlights with roughness 0.43 and metallic 0",
+    "Add short-radius bounded local contact shading without fragmented facade UV islands",
+    "Keep existing repaired tile mesh, normals, authored ownership colors, timber clearance and all facade images"
+  ],
+  "parameters": {
+    "roughness": 0.43,
+    "metallic": 0,
+    "aoRange": [
+      0.68,
+      1
+    ],
+    "radiusAuthorUnits": 0.1,
+    "rayOffsetAuthorUnits": 0.003,
+    "samples": 64,
+    "continuousRampPixels": [
+      256,
+      1
+    ]
+  },
+  "installed": {
+    "nearSha256": "4389e70799284304a9684c0a2504cba5546c78e1844cbf1e3f900c345892a2f3",
+    "farSha256": "070567f233ffe1466b7fe8dd297b5fea9a29551fb690a605b1ab06655b60216a",
+    "nearBytes": 70216932,
+    "farBytes": 6822876,
+    "cacheVersion": "20261028-kyoto-glaze1"
+  },
+  "preservation": {
+    "all29GeometryBoundsAndFacadeChecked": true,
+    "all29RefreshGeometryNormalsColorsAssertionsPassed": true,
+    "otherFourMapPacksUnchanged": true
+  },
+  "checks": {
+    "publisher": "5-map preflight passed",
+    "modelsAndPreviews": "29 near, 5 far, 29 previews and 29 UI routes passed",
+    "ownership": "105 variants passed; AO survives recolor and neutral restoration",
+    "cache": "12 checks passed",
+    "negativeTests": "Missing AO, facade atlas reuse, roughness texture and invalid UV rejected",
+    "visual": "All 29 in top-view gallery; villa2 and tower3 before/after; game scene at 390x844 with human/AI roofs, high top view and night"
+  },
+  "evidence": [
+    "work/kyoto-roof-shading/comparison.html",
+    "work/kyoto-roof-shading/villa2-top-final.png",
+    "work/kyoto-roof-shading/tower3-top-final.png",
+    "work/kyoto-roof-shading/phone-finance-human-day.png",
+    "work/kyoto-roof-shading/phone-finance-ai-top.png",
+    "work/kyoto-roof-shading/phone-villa2-night.png",
+    "work/kyoto-roof-shading/preservation-check.json"
+  ],
+  "limitations": [
+    "Phone-sized browser viewport checked; no physical-device FPS measurement",
+    "Awaiting user visual acceptance"
+  ],
+  "git": "Not committed or pushed"
+}

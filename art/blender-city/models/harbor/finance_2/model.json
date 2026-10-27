@@ -22,10 +22,10 @@
       "sha256": "ca4599d799e759e4202311e82ec0b1ed4295d8707d61ff39f49bdee2b2958612"
     }
   ],
-  "triangles": 54072,
+  "triangles": 57964,
   "size": [
     2.203962564468384,
-    1.0447850227355957,
+    1.034489631652832,
     1.0199999809265137
   ],
   "bounds": {
@@ -36,33 +36,65 @@
     ],
     "max": [
       1.101981282234192,
-      1.0447850227355957,
+      1.034489631652832,
       0.5099999904632568
     ]
   },
   "scale": 0.38130841801203824,
-  "bytes": 3921464,
-  "sha256": "561ee084cb519f259903a7fd74b4e3d20a5ca62ab34142f5c3557faefc78284b",
+  "bytes": 4130132,
+  "sha256": "e5ac76dc0495539e09cb779e485290bbef44eedcba8f6bc6a55cc865f502f9b4",
   "builder": "art/blender-city/regions/western.py",
-  "builderSha256": "0366ee7a64ba81313009f1879978c854b99ca91e0f9b40e19d61b7bb7c5c26b4",
-  "pipelineSha256": "191c40856013a55f057d4e166f232ed075741b4104a569af08cc0a4366466d05",
+  "builderSha256": "40bd8d4d52a5f7ad867bfbdeca839f2cf9b72921b9306a2bf552fd20da45c8f4",
+  "pipelineSha256": "5a98297eb44e26a1f83908f4e1b690814796873349557ea5d845ca97a56dc192",
   "surface": {
-    "materials": 3,
+    "materials": 4,
     "textureSize": 1024,
     "vertexColours": true,
     "aoSamples": 32,
-    "directionalLightingBaked": false
+    "directionalLightingBaked": false,
+    "roofSurface": {
+      "method": "bounded_local_vertex_ao_ramp",
+      "roughness": 0.43,
+      "aoTexture": true,
+      "aoRange": [
+        0.68,
+        1
+      ],
+      "radiusAuthorUnits": 0.1,
+      "offsetAuthorUnits": 0.003,
+      "samples": 64,
+      "rampSize": [
+        256,
+        1
+      ],
+      "directionalLightingBaked": false,
+      "roofExcludedFromFacadeAtlas": true,
+      "neutralAtlasBackground": true,
+      "sampledAoRange": [
+        0.68,
+        1
+      ],
+      "sampledAoQuantiles": [
+        0.68,
+        0.68,
+        0.9491083459994032
+      ],
+      "sampledCorners": 30278,
+      "uniqueSamples": 25888,
+      "builder": "art/blender-city/roof_shading.py",
+      "builderSha256": "001f3758598ba3124918dfa5643438cb15b2542fb4157414111f494d28950a9b"
+    }
   },
   "status": "built_pending_scene_review",
-  "seconds": 1.18,
+  "seconds": 11.39,
   "storageCompression": {
     "configuration": "normal16_uv16_color8",
-    "afterSha256": "561ee084cb519f259903a7fd74b4e3d20a5ca62ab34142f5c3557faefc78284b",
-    "originalSha256": "1e6795202abfc2bae4e61cb333da4b421cf64633d428bbcd23cf45dedbb7dfb4",
-    "originalBytes": 5120000,
+    "afterSha256": "e5ac76dc0495539e09cb779e485290bbef44eedcba8f6bc6a55cc865f502f9b4",
+    "originalSha256": "2244866bc6615395ca65d0bc863c8e94c332acbc97cc3fde3b1b9d99911c06ee",
+    "originalBytes": 5412056,
     "report": {
-      "path": "art/blender-city/reports/storage-compression/harbor/finance_2-561ee084cb519f25.json",
-      "sha256": "730f7e16f5579a36fd0abc08a43d3a0105d495fdb4370fae5262555ba65b72de"
+      "path": "art/blender-city/reports/storage-compression/harbor/finance_2-e5ac76dc0495539e.json",
+      "sha256": "ceadf07a4cb5d52b401c78d17aace387588262982296a51c53e9eb99ccf36f70"
     },
     "maxNormalError": 0.000015245682389114501,
     "maxUVError": 0.000007629510948348184,

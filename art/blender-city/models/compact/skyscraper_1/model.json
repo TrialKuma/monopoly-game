@@ -22,7 +22,7 @@
       "sha256": "7e8ee302c16b276d2c87adc824785ded730a5c34fcddf6f59019a05550bc28a3"
     }
   ],
-  "triangles": 38084,
+  "triangles": 35716,
   "size": [
     2.2717831134796143,
     0.8980821967124939,
@@ -41,31 +41,105 @@
     ]
   },
   "scale": 0.3090440920878692,
-  "bytes": 3004128,
-  "sha256": "c6269a172aa570d654c70cc03199799a01016b2a156a3b28ba965f28139751d8",
+  "bytes": 2675884,
+  "sha256": "bbd1d41c7e54c3a49e3848f276a1718a722cc5084733dd307c7c6a9916a53366",
   "builder": "art/blender-city/regions/eastern.py",
-  "builderSha256": "12b8c65dc3316d4d9a68ef1d46743e5b0271de3c7514fbf26b1830625585a028",
-  "pipelineSha256": "299a3de32ea2fe7238f6bd22334a9f5446946e50b5c38efd0e3c9678171ee259",
+  "builderSha256": "8d3c4ec48624304a2d3a239aa795fe65c998435d61d1435bec8c692ba95218d0",
+  "pipelineSha256": "adc4fba1847024765b4435dca139b87fe963c632828284e9bbaeebd45f9b68f9",
   "surface": {
-    "materials": 3,
+    "materials": 4,
     "textureSize": 1024,
     "vertexColours": true,
     "aoSamples": 32,
-    "directionalLightingBaked": false
+    "directionalLightingBaked": false,
+    "roofSurface": {
+      "method": "bounded_local_vertex_ao_ramp",
+      "roughness": 0.43,
+      "aoTexture": true,
+      "aoRange": [
+        0.68,
+        1
+      ],
+      "radiusAuthorUnits": 0.1,
+      "offsetAuthorUnits": 0.003,
+      "samples": 64,
+      "rampSize": [
+        256,
+        1
+      ],
+      "directionalLightingBaked": false,
+      "roofExcludedFromFacadeAtlas": true,
+      "neutralAtlasBackground": true,
+      "sampledAoRange": [
+        0.68,
+        1
+      ],
+      "sampledAoQuantiles": [
+        0.68,
+        0.7246404136733824,
+        0.9994882630169661
+      ],
+      "sampledCorners": 33572,
+      "uniqueSamples": 23336,
+      "builder": "art/blender-city/roof_shading.py",
+      "builderSha256": "001f3758598ba3124918dfa5643438cb15b2542fb4157414111f494d28950a9b"
+    }
   },
   "status": "built_pending_scene_review",
-  "seconds": 1.25,
+  "seconds": 1.12,
+  "roofSourceReceipt": {
+    "input": {
+      "model.glb": {
+        "path": "art/blender-city/models/compact/skyscraper_1/model.glb",
+        "sha256": "d9ac14a33afce2bbc05a29441c9ec350811e04113766eca32228126e7814066c"
+      },
+      "source.blend": {
+        "path": "art/blender-city/models/compact/skyscraper_1/source.blend",
+        "sha256": "a00082707cea90bd24404e917110c3a508320f00bfcc3b5a759563f7a409138b"
+      },
+      "surface-orm.png": {
+        "path": "art/blender-city/models/compact/skyscraper_1/surface-orm.png",
+        "sha256": "9b4b6104da16b7eb28480505ad8512d997dbbfb0907d3220fe175a3c770b8531"
+      }
+    },
+    "method": "refresh_existing_clean_source_no_facade_bake",
+    "refresher": {
+      "path": "art/blender-city/refresh_roof_shading.py",
+      "sha256": "ab636043652b6f9022daa2cc93a8bac1b64b6f797fefcc02cfc87bcbbbe52142"
+    },
+    "shader": {
+      "path": "art/blender-city/roof_shading.py",
+      "sha256": "001f3758598ba3124918dfa5643438cb15b2542fb4157414111f494d28950a9b"
+    },
+    "pipeline": {
+      "path": "art/blender-city/build.py",
+      "sha256": "adc4fba1847024765b4435dca139b87fe963c632828284e9bbaeebd45f9b68f9"
+    },
+    "geometryBuilder": {
+      "path": "art/blender-city/regions/eastern.py",
+      "sha256": "8d3c4ec48624304a2d3a239aa795fe65c998435d61d1435bec8c692ba95218d0"
+    },
+    "geometryNormalsColorsPreserved": true,
+    "nonRoofImagesPreserved": [
+      {
+        "image": "surface-orm",
+        "sha256": "9b4b6104da16b7eb28480505ad8512d997dbbfb0907d3220fe175a3c770b8531",
+        "bytes": 730681
+      }
+    ],
+    "refreshedAtUtc": "2026-10-27T17:17:02.620170+00:00"
+  },
   "storageCompression": {
     "configuration": "normal16_uv16_color8",
-    "afterSha256": "c6269a172aa570d654c70cc03199799a01016b2a156a3b28ba965f28139751d8",
-    "originalSha256": "7a51c9fc2d53ba51c50e2d9d43b948655089aafb35e38e2ef3eac4843f939e7f",
-    "originalBytes": 3834264,
+    "afterSha256": "bbd1d41c7e54c3a49e3848f276a1718a722cc5084733dd307c7c6a9916a53366",
+    "originalSha256": "7691dc86b34339afe86a48d749e2d20cf9c28e9f2b6745af5296ea93e6f51dca",
+    "originalBytes": 3414928,
     "report": {
-      "path": "art/blender-city/reports/storage-compression/compact/skyscraper_1-c6269a172aa570d6.json",
-      "sha256": "29ca515736abb077bac43ac9c79b7cb9028e14a79d4d8e4ebe6191b5e9316d94"
+      "path": "art/blender-city/reports/storage-compression/compact/skyscraper_1-bbd1d41c7e54c3a4.json",
+      "sha256": "a387edcc2eb1f850b9557214152db7d62482d20734b224d24063266e8ef4a604"
     },
     "maxNormalError": 0.00001525559027198975,
-    "maxUVError": 0.000007629392712232841,
+    "maxUVError": 0.000007629510948348184,
     "maxColorError": 0.0018768596932936601
   }
 }

@@ -1,17 +1,17 @@
 import * as THREE from './assets/vendor/three/three.module.min.js';
 import { makeStudioEnvironment } from './scene-environment.js?v=20261025-facade2';
 import { mergeGeometries } from './assets/vendor/three/addons/utils/BufferGeometryUtils.js';
-import { createSceneLife } from './scene-life.js?v=20261027-night1';
+import { createSceneLife } from './scene-life.js?v=20261028-global-roofs2';
 import { createStreetFoundation } from './scene-streets.js?v=20261028-visual1';
 import { createHarborIslands, addHarborBridge, updateHarborProjectVisuals, tickHarborProjectVisuals } from './scene-harbor-islands.js?v=20261027-night1';
 import { harborWalkOffset, harborEdgePath, harborParcelRotation, harborVisualPosition } from './scene-harbor-paths.js?v=20261025-harbor-main-island1';
 import { harborLandmarkSpec } from './scene-harbor-landmarks.js?v=20261025-harbor-main-island1';
 import { createRegionalPark } from './scene-regional-parks.js?v=20261027-night1';
-import { createOwnershipRoofs } from './scene-ownership-roofs.js?v=20261025-items1';
+import { createOwnershipRoofs } from './scene-ownership-roofs.js?v=20261028-global-roofs2';
 import { createFunctionalLandmark } from './scene-functional-landmarks.js?v=20261025-items1';
 import { createThermalSteam } from './scene-thermal-steam.js?v=20261025-facade2';
 import { createLevelThreeTracker, createBuildingFireworks, buildingRoofAnchor } from './scene-fireworks.js?v=20261025-celebrate1';
-import { loadSharedModelAsset, forgetSharedModelAsset, releaseSharedModelAsset, releaseSupersededModelAssets, ownsSharedModelResource, disposeSharedModelAssets } from './scene-model-cache.js?v=20261025-harbor1';
+import { loadSharedModelAsset, forgetSharedModelAsset, releaseSharedModelAsset, releaseSupersededModelAssets, ownsSharedModelResource, disposeSharedModelAssets } from './scene-model-cache.js?v=20261028-global-roofs2';
 
 // All route positions, ownership and prices come from the game. This view never
 // changes a rule or finishes an action; its animation is entirely cosmetic.

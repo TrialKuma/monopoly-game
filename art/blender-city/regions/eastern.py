@@ -63,7 +63,7 @@ def base(b,w,d):
     b.box((0,-d/2-.19,.055),(.90,.40,.11),'stone2')
     b.box((0,-d/2-.10,.12),(.86,.24,.12),'stone')
 
-def tiles(b,x0,x1,y0,y1,z0,z1,cols,rows,roll=True):
+def tiles(b,x0,x1,y0,y1,z0,z1,cols,rows,roll=True,collars=True):
     """Solid roof deck and visible tile shells; no hidden tile undersides.
 
     Along a straight pitch the original middle tile row is exactly coplanar,
@@ -104,7 +104,7 @@ def tiles(b,x0,x1,y0,y1,z0,z1,cols,rows,roll=True):
                 caps=[tuple(range(n-1,-1,-1)),tuple(range(n,2*n))]
                 if y1>y0:ff=[tuple(reversed(f)) for f in ff];caps=[tuple(reversed(f)) for f in caps]
                 b.poly(vv,ff,'roof',True);b.poly(vv,caps,'roof')
-                if row<rows-1:
+                if row<rows-1 and collars:
                     yy=yy1-(yy1-yy0)*.04;zz=z0+(yy-y0)*slope+.044
                     cuff=[]
                     for y in (yy,yy+(y1-y0)*.009):
@@ -121,7 +121,10 @@ def roof(b,region,w,d,z,rise=.58,axis='x',cols=None,rows=5):
         return
     cols=cols or max(6,min(16,round(w/.22)))
     for sign in (-1,1):
-        tiles(b,-w/2,w/2,0,sign*d/2,z+rise,z,cols,rows,True)
+        # Physical course ends already describe the tile overlaps.
+        # An almost-coplanar extra cuff on each cap only creates dark flecks
+        # at the elevated phone camera; keep the complete ceramic cap itself.
+        tiles(b,-w/2,w/2,0,sign*d/2,z+rise,z,cols,rows,True,collars=False)
         b.box((0,sign*d/2,z-.042),(w+.06,.11,.085),'wood')
         b.box((0,sign*(d/2+.050),z-.018),(w+.07,.024,.024),'lightwood')
         for k in range(cols):
@@ -138,7 +141,7 @@ def roof(b,region,w,d,z,rise=.58,axis='x',cols=None,rows=5):
     for i in range(cols):
         x=-w/2+i*w/cols;b.rod((x,0,z+rise+.052),(x+w/cols-.006,0,z+rise+.052),.060,'roof',10)
 
-def gable_infill(b,w,d,z,rise,front=True,framing=True):
+def gable_infill(b,w,d,z,rise,front=True,framing=True,region=None):
     # Front gable for chalets / side gable for machiya.
     with b.facing(0 if front else math.pi/2):
         span,dep=(w,d) if front else (d,w)
@@ -146,13 +149,21 @@ def gable_infill(b,w,d,z,rise,front=True,framing=True):
             y=s*dep/2;b.xz_shape([(-span/2,z),(span/2,z),(0,z+rise)],(0,y,0),.045,'wall')
             if framing:
                 yy=y+math.copysign(.04,y)
-                for a,c in (((-span/2,yy,z),(0,yy,z+rise)),((0,yy,z+rise),(span/2,yy,z))):beam(b,a,c,.08,.09)
-                beam(b,(0,yy,z),(0,yy,z+rise),.09,.10)
-                for sign in (-1,1):beam(b,(0,yy,z+.04),(sign*span*.29,yy,z+rise*.40),.065,.065)
+                # The ceramic pan reference is its exterior, not a beam
+                # centreline. Include the beam section's projection against
+                # the pitch, plus the .015 roof-deck inset and .005 clearance.
+                # A fixed vertical offset fails on the steeper front gables.
+                # This leaves the full visible timber A-frame on the gable face,
+                # while its upper corners cannot pierce the ridge-side pans.
+                recess=.020+.045*math.sqrt(1+(2*rise/span)**2) if region in ('compact','alpine') else 0
+                frame_z=z-recess
+                for a,c in (((-span/2,yy,frame_z),(0,yy,frame_z+rise)),((0,yy,frame_z+rise),(span/2,yy,frame_z))):beam(b,a,c,.08,.09)
+                beam(b,(0,yy,frame_z),(0,yy,frame_z+rise),.09,.10)
+                for sign in (-1,1):beam(b,(0,yy,frame_z+.04),(sign*span*.29,yy,frame_z+rise*.40),.065,.065)
 
-def eave(b,w,d,z):
+def eave(b,w,d,z,region=None):
     for sign in (-1,1):
-        tiles(b,-w/2-.15,w/2+.15,sign*(d/2-.02),sign*(d/2+.31),z+.16,z,max(7,min(24,round(w/.22))),2,True)
+        tiles(b,-w/2-.15,w/2+.15,sign*(d/2-.02),sign*(d/2+.31),z+.16,z,max(7,min(24,round(w/.22))),2,True,collars=False)
         b.box((0,sign*(d/2+.30),z-.04),(w+.36,.10,.075),'wood')
         for i in range(max(6,round(w/.22))):
             n=max(6,round(w/.22));b.box((-w/2+(i+.5)*w/n,sign*(d/2+.25),z-.105),(.04,.19,.09),'wood')
@@ -294,7 +305,7 @@ def timber_shell(b,region,w,d,floors,storey=1.12,balconies=False,window_count=2,
                         clearance=min(spacing-.045,span-(count-1)*spacing-.16) if count>1 else span-.16
                         shutter_window(b,x,-depth/2-.045,z+.31,min(.47,ww-.08),.56,flowers=flowerboxes and level>0 and not balconies,max_span=clearance)
                 if balconies and level>0 and angle in (0,math.pi):railing(b,min(span-.18,front_limit*2) if angle==0 and front_limit is not None else span-.18,-depth/2-.25,z+.20,region,region=='alpine')
-        if region=='compact' and level>0:eave(b,w,d,z+.07)
+        if region=='compact' and level>0:eave(b,w,d,z+.07,region)
     return top
 
 def chimney(b,x,y,z):
@@ -329,7 +340,7 @@ def shopfront(b,region,w,d,level):
     for x in (-w*.44,w*.44):pot(b,x,y-.22,flowers=region=='alpine')
 
 def front_gable(b,region,w,d,z,rise=.42):
-    gable_infill(b,w,d,z,rise,True)
+    gable_infill(b,w,d,z,rise,True,region=region)
     roof(b,region,w+.22,d+.20,z,rise,'y',rows=3)
 
 def core(region,family,level,mats):
@@ -340,7 +351,7 @@ def core(region,family,level,mats):
     if family=='hotel':w=2.62;d=1.94
     base(b,w,d);top=timber_shell(b,region,w,d,level,balconies=family=='hotel' or (family=='tower' and region=='compact'),window_count=3 if family=='hotel' else 2,front_windows=not(region=='alpine' and family=='tower' and level>=2))
     rise=.56 if region=='compact' else .71
-    gable_infill(b,w,d,top,rise,region=='alpine')
+    gable_infill(b,w,d,top,rise,region=='alpine',region=region)
     roof(b,region,w+.36,d+.40,top+.015,rise,'x' if region=='compact' else 'y')
     y=-d/2-.065
     if family=='shop':shopfront(b,region,w,d,level)
@@ -419,8 +430,11 @@ def pool(b,x,y,z,w=1.4,d=.60):
 def summit_roof(b,region,w,d,z,rise=.48,axis=None):
     """Hero roofs keep the full ceramic profile with fewer invisible courses."""
     axis=axis or ('x' if region=='compact' else 'y')
-    gable_infill(b,w,d,z,rise,axis=='y')
+    gable_infill(b,w,d,z,rise,axis=='y',region=region)
     roof(b,region,w+.30,d+.30,z+.015,rise,axis,cols=10,rows=3)
+    # Include the ceramic ridge end-cap, not just the theoretical roof plane.
+    # Ornaments use this support height rather than an unrelated magic offset.
+    return z+.015+rise+.136
 
 def summit_room(b,region,w,d,z,height=.94,balconies=False,axis=None):
     with b.at((0,0,z)):
@@ -431,14 +445,18 @@ def summit_room(b,region,w,d,z,height=.94,balconies=False,axis=None):
             if region=='compact':grid_window(b,x,-d/2-.05,.34,min(.55,w*.36),height*.55,4,2)
             else:shutter_window(b,x,-d/2-.05,.32,min(.40,w*.32),height*.56,False,max_span=min(w*.48-.045,w*.52-.16))
         if balconies:railing(b,w+.04,-d/2-.23,.22,region,region=='alpine')
-        summit_roof(b,region,w,d,top,.46,axis)
-    return z+top+.46
+        roof_top=summit_roof(b,region,w,d,top,.46,axis)
+    return z+roof_top
 
-def ridge_crest(b,x,y,z):
-    # Paired swept bronze ridge ornaments read as a castle crown at phone size.
-    for s in (-1,1):
-        beam(b,(x+s*.28,y,z),(x+s*.41,y,z+.18),.070,.075,'bronze')
-        beam(b,(x+s*.41,y,z+.18),(x+s*.37,y,z+.29),.058,.065,'bronze')
+def ridge_crest(b,x,y,z,axis='x'):
+    # One complete ridge fitting: a seated bronze spine with two swept tips.
+    # Orient it along the actual roof ridge so overhead views do not expose
+    # two disconnected golden fragments across the ceramic courses.
+    with b.at((x,y,z),math.pi/2 if axis=='y' else 0):
+        beam(b,(-.31,0,-.01),(.31,0,-.01),.075,.09,'bronze')
+        for s in (-1,1):
+            beam(b,(s*.28,0,.025),(s*.41,0,.18),.070,.075,'bronze')
+            beam(b,(s*.41,0,.18),(s*.37,0,.29),.058,.065,'bronze')
 
 def level3_core(region,family,mats):
     """A distinct premium silhouette; never simply a third identical floor."""
@@ -467,7 +485,7 @@ def level3_core(region,family,mats):
             # Broad lower eaves, a recessed middle tier and a high lookout
             # create three readable silhouettes, not one stretched tenement.
             summit=summit_room(b,region,2.03,1.49,top+.20,.92,True,'y')
-            ridge_crest(b,0,0,summit+.07)
+            ridge_crest(b,0,0,summit,'y')
             with b.at((0,-d/2-.03,0)):front_gable(b,region,1.26,.77,1.32,.46)
             noren(b,y-.22,1.31,1.04)
         elif family=='villa':
@@ -621,12 +639,12 @@ def level3_large(region,family,mats):
         if family=='skyscraper':
             summit_room(b,region,2.81,1.72,top+.20,1.31,True)
             crest=summit_room(b,region,2.12,1.42,top+1.81,1.06,True,'y')
-            ridge_crest(b,0,0,crest+.08)
+            ridge_crest(b,0,0,crest,'y')
         else:
             # A glazed ceremonial exchange hall, with full-height timber
             # bays on every facade and twin projecting roof gables.
             crest=exchange_hall(b,2.69,1.73,top+.28,1.82)
-            ridge_crest(b,0,0,crest+.08)
+            ridge_crest(b,0,0,crest)
             for x in (-1.30,1.30):
                 b.box((x,y-.12,2.12),(.42,.055,1.74),'indigo');emblem(b,x,y-.18,2.34,'coin',.18)
                 crates(b,x-.10,y-.15,.06)
@@ -660,10 +678,10 @@ def exchange_hall(b,w,d,z,height):
                     xx=(k-(count-1)/2)*(span-.16)/count
                     grid_window(b,xx,-depth/2-.08,.34,(span-.16)/count-.13,height-.29,6,5)
         railing(b,w+.02,-d/2-.21,.22,'compact')
-        summit_roof(b,'compact',w,d,.18+height,.50,'x')
+        roof_top=summit_roof(b,'compact',w,d,.18+height,.50,'x')
         for xx in (-.71,.71):
             with b.at((xx,-d/2+.03,0)):front_gable(b,'compact',1.05,.74,.18+height+.03,.65)
-    return z+.18+height+.73
+    return z+roof_top
 
 def observation_suite(b,w,d,z):
     with b.at((0,0,z)):
@@ -692,7 +710,7 @@ def thermal_palace(region,mats):
         summit_roof(b,region,3.33,1.16,top,.54,'x')
         door(b,region,0,-.65,.18,.88,1.12)
         crest=summit_room(b,region,2.54,1.08,top+.24,1.42,False,'x' if region=='compact' else 'y')
-        if region=='compact':ridge_crest(b,0,0,crest+.08)
+        if region=='compact':ridge_crest(b,0,0,crest)
     for s in (-1,1):
         # Short connecting roof galleries explain the U-shaped circulation.
         with b.at((s*1.96,.86,0)):
@@ -725,7 +743,7 @@ def large(region,family,level,mats):
     b=Mesh(f'{region}_{family}_{level}',mats);w=6.85;d=2.25;floor=1.08
     floors=level if family=='skyscraper' else min(2,level)
     base(b,w,d);top=timber_shell(b,region,w,d,floors,floor,balconies=family!='finance',window_count=6,front_limit=1.70)
-    gable_infill(b,w,d,top,.52,False)
+    gable_infill(b,w,d,top,.52,False,region=region)
     roof(b,region,w+.34,d+.40,top+.02,.55,'x',16,5)
     # Individually shaped projecting end bays read clearly on large parcels.
     for sign in (-1,1):
@@ -830,7 +848,7 @@ def public(region,name,mats):
     elif name=='chance_wheel':
         with b.at((-.35,0,0)):
             timber_shell(b,region,1.55,1.63,2,.91,window_count=1)
-            gable_infill(b,1.55,1.63,2.00,.55,True)
+            gable_infill(b,1.55,1.63,2.00,.55,True,region=region)
             roof(b,region,1.90,1.95,2.02,.55,'y',9,4)
             grid_window(b,0,-.86,.64,.91,.52,6,3);b.box((0,-1.02,.48),(1.23,.37,.12),'wood')
             if region=='compact':noren(b,-.93,1.40,1.16,'wood')
@@ -843,7 +861,7 @@ def public(region,name,mats):
         storey=.91 if floors==2 else 1.52
         top=timber_shell(b,region,w,d,floors,storey,balconies=name=='card_pavilion',window_count=2)
         front_roof=region=='alpine' or name in ('builders_guild','card_pavilion','rush_station','junction_hub')
-        gable_infill(b,w,d,top,.54,front_roof)
+        gable_infill(b,w,d,top,.54,front_roof,region=region)
         roof(b,region,w+.34,d+.40,top+.02,.54,'y' if front_roof else 'x',12,4)
         if region=='alpine':chimney(b,.80,.28,top+.20)
         if name!='builders_guild':door(b,region,0,y,.18,.71,1.02)
@@ -947,12 +965,12 @@ def windmill(mats):
     b.cylinder((-1.05,0,4.85),.11,.24,'bronze',12,top=.025)
     with b.at((.99,.12,0)):
         top=timber_shell(b,'alpine',2.03,1.93,2,1.15,balconies=True,window_count=1)
-        gable_infill(b,2.03,1.93,top,.66,True)
+        gable_infill(b,2.03,1.93,top,.66,True,region='alpine')
         roof(b,'alpine',2.42,2.28,top+.02,.66,'y',11,5)
         shutter_window(b,0,-1.04,.54,.59,.70)
         chimney(b,.61,.20,top+.34)
     for xx in (.09,1.98):b.box((xx,-1.15,.83),(.13,.13,1.43),'wood')
-    tiles(b,-.07,2.15,-.68,-1.47,1.82,1.46,10,3,True)
+    tiles(b,-.07,2.15,-.68,-1.47,1.82,1.46,10,3,True,collars=False)
     b.box((1.04,-1.44,1.43),(2.24,.10,.09),'wood')
     pool(b,1.03,-1.27,.22,1.53,.79)
     for xx in (-1.73,-.41,2.08):pot(b,xx,-1.01,flowers=True)
@@ -977,6 +995,48 @@ def windmill(mats):
     rotor.rotation_euler[1]=0;bpy.context.scene.frame_set(1)
     return root
 
+def _kyoto_micro_overlay_faces(mesh):
+    """Recognize only the approved sample's thin ceramic lip/cuff strips.
+
+    Their original builder emits isolated smooth strips of four/six quads
+    (10/14 vertices) in the edge material. Physical tile pans, tile ends,
+    ridge caps, and beveled architectural members have different topology.
+    """
+    slots={i for i,m in enumerate(mesh.materials) if m and m.name.split('/')[-1].strip().split('.')[0]=='edge'}
+    candidates={p.index:p for p in mesh.polygons if p.material_index in slots and p.use_smooth and len(p.vertices)==4}
+    by_vertex={}
+    for index,p in candidates.items():
+        for v in p.vertices:by_vertex.setdefault(v,set()).add(index)
+    pending=set(candidates);remove=set()
+    while pending:
+        start=pending.pop();component={start};todo=[start]
+        while todo:
+            for v in candidates[todo.pop()].vertices:
+                adjacent=by_vertex[v]&pending
+                pending.difference_update(adjacent);component.update(adjacent);todo.extend(adjacent)
+        vertices={v for index in component for v in candidates[index].vertices}
+        if (len(component),len(vertices)) in ((4,10),(6,14)):
+            remove.update(component)
+    return remove
+
+def _clean_accepted_roof_overlays(root):
+    """Clean the loaded copy only; the approved archived .blend stays intact."""
+    import bmesh
+    removed=0
+    for obj in (root,*root.children_recursive):
+        if obj.type!='MESH':continue
+        mesh=obj.data;faces=_kyoto_micro_overlay_faces(mesh)
+        if not faces:continue
+        # BMesh carries the original custom-normal corner layer with retained
+        # faces. Do not regenerate or re-encode it: that would unnecessarily
+        # quantize the architectural normals in the approved sample again.
+        bm=bmesh.new();bm.from_mesh(mesh);bm.faces.ensure_lookup_table()
+        bmesh.ops.delete(bm,geom=[bm.faces[index] for index in faces],context='FACES')
+        bm.to_mesh(mesh);bm.free();mesh.update()
+        removed+=len(faces)
+    root['roofMicroOverlayFacesRemoved']=removed
+    return removed
+
 def accepted_villa():
     path=ROOT/'art/blender-quality-study/kyoto-villa2/kyoto-villa2.blend'
     with bpy.data.libraries.load(str(path),link=False) as (source,dest):
@@ -984,7 +1044,10 @@ def accepted_villa():
     for obj in dest.objects:
         if obj:bpy.context.collection.objects.link(obj)
     root=next(obj for obj in dest.objects if obj and obj.parent is None)
-    root['sampleGeometryPreserved']=True
+    _clean_accepted_roof_overlays(root)
+    root['sampleGeometryPreserved']=False
+    root['sampleStructurePreserved']=True
+    root['sampleCleanup']='Roof micro-overlay strips only; preserved ceramic shells and architectural corner normals'
     root['sampleSource']='art/blender-quality-study/kyoto-villa2/kyoto-villa2.blend'
     return root
 

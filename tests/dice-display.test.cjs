@@ -38,6 +38,8 @@ let checks=0;async function test(name,fn){await fn();checks++;console.log('PASS 
     const c=fresh(),frames=[];c.record=()=>frames.push(json(c,'getDiceDisplay()'));
     c.run('state.players[0].effects.speedBoost=true;state.players[0].effects.extraTurn=true;render=()=>record()');
     await c.run('processTurn(state.players[0])');
+    assert.equal(c.run('state.players[0].position'),4);assert.equal(c.run('state.extraTurnPending'),true);
+    await c.run('playHumanTurn()');
     assert.equal(c.run('state.players[0].position'),6);
     const results=frames.filter(frame=>frame.actorId==='human'&&frame.stage==='result');
     assert(results.some(frame=>frame.count===2&&frame.total===4));assert(results.some(frame=>frame.count===1&&frame.total===2));

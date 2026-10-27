@@ -1,4 +1,4 @@
-import { loadSharedModelAsset, disposeSharedModelAssets, regionalSceneryDirectory } from './scene-model-cache.js?v=20261025-harbor1';
+import { loadSharedModelAsset, disposeSharedModelAssets, regionalSceneryDirectory } from './scene-model-cache.js?v=20261028-global-roofs2';
 import { createRegionalSurroundings, fillRegionalScenicBuildings } from './scene-regional-parks.js?v=20261027-night1';
 import { batchGardenBuilding, instanceGardenBuildings } from './scene-garden-kit.js?v=20261025-terrain3';
 import { createScenicWindowLights, createGroundLightPools, proceduralLampPositions } from './scene-scenic-lighting.js?v=20261027-night1';

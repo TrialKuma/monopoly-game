@@ -218,9 +218,13 @@ const use = (c, id) => c.run(`GameCards.use(${JSON.stringify(id)})`);
     await c.run('playAiTurn()'); assert.equal(c.run('state.players[1].cards.length'), 0);
     assert.equal(c.run('state.players[1].position'), 4); assert.equal(c.run('state.currentPlayerIndex'), 0);
   });
-  await test('combo keeps the existing automatic extra action without another card allowance', async () => {
+  await test('combo waits for manual extra action and restores one card allowance', async () => {
     const { c } = setup(); const id = grant(c, 'combo'); await use(c, id);
     c.run('animateDiceRoll=async()=>2;resolveLanding=async()=>{}'); await c.run('playHumanTurn()');
+    assert.equal(c.run('state.players[0].position'), 2); assert.equal(c.run('state.extraTurnPending'), true);
+    assert.equal(c.run('state.players[0].cardUsedThisTurn'), false);
+    const shield = grant(c, 'shield'); assert.equal((await use(c, shield)).ok, true);
+    await c.run('playHumanTurn()');
     assert.equal(c.run('state.players[0].position'), 4); assert.equal(c.run('state.currentPlayerIndex'), 1);
     assert.equal(c.run('state.players[0].cardUsedThisTurn'), true);
   });

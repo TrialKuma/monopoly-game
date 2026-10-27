@@ -21,8 +21,9 @@ let checks=0;const test=async(name,fn)=>{await fn();checks++;console.log('PASS '
       assert.equal(c.run('state.players[0].effects.speedBoost'),false);assert.equal(c.run('state.players[0].effects.speedSlow'),false);
     }
   });
-  await test('ordinary six still grants its existing extra action',async()=>{
+  await test('ordinary six grants a manual extra action',async()=>{
     const c=fresh();let i=0;c.nextFace=()=>i++<11?6:2;c.run('rollDice=()=>nextFace();resolveLanding=async()=>{}');
+    await c.run('playHumanTurn()');assert.equal(c.run('state.players[0].position'),6);assert.equal(c.run('state.extraTurnPending'),true);
     await c.run('playHumanTurn()');assert.equal(c.run('state.players[0].position'),8);assert.equal(c.run('state.currentPlayerIndex'),1);
   });
   await test('bank dice stays a single die and cannot consume the next movement double',async()=>{

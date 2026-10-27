@@ -22,7 +22,7 @@
       "sha256": "cb500c165a92ecd922c487a26e78d914611d9b2db4c6db6a58d0a8bc4bacfba7"
     }
   ],
-  "triangles": 18960,
+  "triangles": 19280,
   "size": [
     1.0399999618530273,
     1.0096977949142456,
@@ -41,31 +41,63 @@
     ]
   },
   "scale": 0.3741007232744991,
-  "bytes": 1885448,
-  "sha256": "9e751d61327bd7c50f2681980417e8140da05e8dc3712c0e7adfb5a3ad7a72d4",
+  "bytes": 1925752,
+  "sha256": "f9f7c7c9fac76b73167ed140676166ae201b6d1660325549b2d433067974857c",
   "builder": "art/blender-city/regions/western.py",
-  "builderSha256": "ce0b17b382989c25a5cfd0c3013c402f5e979c7f61bca1adfa17bd9bc9899853",
-  "pipelineSha256": "8bfd4f54084734f345ca7531d288c1c733355eaec2aea576afa225121a97aedf",
+  "builderSha256": "40bd8d4d52a5f7ad867bfbdeca839f2cf9b72921b9306a2bf552fd20da45c8f4",
+  "pipelineSha256": "ae178492d50c4810794299f2ae947a1390804dfb5c76f83a9fec0221ce3b7d5f",
   "surface": {
-    "materials": 3,
+    "materials": 4,
     "textureSize": 1024,
     "vertexColours": true,
     "aoSamples": 32,
-    "directionalLightingBaked": false
+    "directionalLightingBaked": false,
+    "roofSurface": {
+      "method": "bounded_local_vertex_ao_ramp",
+      "roughness": 0.43,
+      "aoTexture": true,
+      "aoRange": [
+        0.68,
+        1
+      ],
+      "radiusAuthorUnits": 0.1,
+      "offsetAuthorUnits": 0.003,
+      "samples": 64,
+      "rampSize": [
+        256,
+        1
+      ],
+      "directionalLightingBaked": false,
+      "roofExcludedFromFacadeAtlas": true,
+      "neutralAtlasBackground": true,
+      "sampledAoRange": [
+        0.68,
+        1
+      ],
+      "sampledAoQuantiles": [
+        0.68,
+        0.68,
+        0.9927203891007507
+      ],
+      "sampledCorners": 6504,
+      "uniqueSamples": 5984,
+      "builder": "art/blender-city/roof_shading.py",
+      "builderSha256": "001f3758598ba3124918dfa5643438cb15b2542fb4157414111f494d28950a9b"
+    }
   },
   "status": "built_pending_scene_review",
-  "seconds": 1.34,
+  "seconds": 2.99,
   "storageCompression": {
     "configuration": "normal16_uv16_color8",
-    "afterSha256": "9e751d61327bd7c50f2681980417e8140da05e8dc3712c0e7adfb5a3ad7a72d4",
-    "originalSha256": "d2840cb0d7bd9ee1e10f9e65b8bd6abfcfe44bd2caa2fffa4a4d3608bf5b0934",
-    "originalBytes": 2316440,
+    "afterSha256": "f9f7c7c9fac76b73167ed140676166ae201b6d1660325549b2d433067974857c",
+    "originalSha256": "403af8e57b0b939c50382db6dd4f8a9aa61b22044449889900784ca32a180b30",
+    "originalBytes": 2360736,
     "report": {
-      "path": "art/blender-city/reports/storage-compression/classic/vault_bank-9e751d61327bd7c5.json",
-      "sha256": "87591403523b345ff0fe579a2e9554fb8ae092028b3c9789a1b91c4c478476a1"
+      "path": "art/blender-city/reports/storage-compression/classic/vault_bank-f9f7c7c9fac76b73.json",
+      "sha256": "a87d66e653aaf386734068dcefbb30dfea30979e5bf08eb7f5493f2259d7bf44"
     },
     "maxNormalError": 0.000015237649941490794,
-    "maxUVError": 0.000007629468201431067,
+    "maxUVError": 0.000007629510948348184,
     "maxColorError": 0.0019226367589837423
   }
 }

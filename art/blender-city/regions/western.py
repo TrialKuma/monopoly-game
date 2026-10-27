@@ -233,37 +233,66 @@ def cornice(b,w,d,z,classic=True):
 
 
 def roof_tile(b,a,c,aa,cc,row,rows,col,cols,curved):
-    t0=row/rows;t1=min(1,(row+1.06)/rows)
-    left0=a.lerp(aa,t0);right0=c.lerp(cc,t0);left1=a.lerp(aa,t1);right1=c.lerp(cc,t1)
-    seg=4 if curved else 1
-    direction=(c-a).normalized();slope=((aa+cc)-(a+c)).normalized();normal=direction.cross(slope).normalized()
+    # Clip a fixed-width tile against the *entire* trapezoidal roof face. The
+    # old two-endpoint test discarded a tile whenever its upper end narrowed
+    # to a point, leaving stair-step holes beside every hip. Its curved profile
+    # also shrank with the clipped end and twisted whole tile columns.
+    t0=row/rows;t1=min(1,(row+1.08)/rows)
+    direction=(c-a).normalized();width=(c-a).length;cell=width/cols
+    left_delta=(aa-a).dot(direction);right_delta=(cc-c).dot(direction)
+    fall=(aa-a)-direction*left_delta;normal=direction.cross(fall).normalized()
     if normal.z<0:normal=-normal
-    # Fixed-width world-space tiles follow the roof fall line. The hip boundary
-    # clips only the outer tiles; inner tiles never fan or pinch at the ridge.
-    width=(c-a).length;cell=width/cols
-    bounds0=((left0-a).dot(direction),(right0-a).dot(direction))
-    bounds1=((left1-a).dot(direction),(right1-a).dot(direction))
-    x0=col*cell+.004;x1=(col+1)*cell-.004
-    ends=[(max(x0,bounds0[0]+.002),min(x1,bounds0[1]-.002)),(max(x0,bounds1[0]+.002),min(x1,bounds1[1]-.002))]
-    if any(hi-lo<.006 for lo,hi in ends):return
-    vv=[]
-    for bottom in (False,True):
-        for t,left,right in ((0,left0,right0),(1,left1,right1)):
-            lo,hi=ends[t];project=(left-a).dot(direction)
-            for k in range(seg+1):
-                frac=k/seg;p=left+direction*(lo+(hi-lo)*frac-project)
-                bulge=(math.sin(frac*PI)*min(.038,(hi-lo)*.29) if curved else 0)
-                p+=normal*(.016+bulge+.010*(1-t)-(0.009 if bottom else 0));vv.append(tuple(p))
-    n=seg+1;offset=n*2
-    top=[(k,k+1,n+k+1,n+k) for k in range(seg)]
-    # Compute polygon winding once from the actual sloped face.
-    if (Vector(vv[1])-Vector(vv[0])).cross(Vector(vv[n])-Vector(vv[0])).dot(normal)<0:top=[tuple(reversed(f)) for f in top]
-    b.poly(vv,top,'roof',curved)
-    perimeter=list(range(n))+list(range(2*n-1,n-1,-1))
-    side=[(u,v,v+offset,u+offset) for u,v in zip(perimeter,perimeter[1:]+perimeter[:1])]
-    # Back/bottom and exposed ceramic ends stay flat-shaded.
-    side += [tuple(reversed(tuple(v+offset for v in f))) for f in top]
-    b.poly(vv,side,'roof_edge' if curved else 'roof',False)
+    x0=col*cell+.0015;x1=(col+1)*cell-.0015
+    def clip(points,distance):
+        result=[]
+        for p,q in zip(points,points[1:]+points[:1]):
+            dp,dq=distance(p),distance(q)
+            if dp>=-1e-9:result.append(p)
+            if (dp<0)!=(dq<0):
+                f=dp/(dp-dq);result.append((p[0]+(q[0]-p[0])*f,p[1]+(q[1]-p[1])*f))
+        return result
+    vv=[];top=[];lookup={};edges={};segments=4 if curved else 1
+    def vertex(point):
+        # Merge the coincident intersections produced at a strip/hip corner
+        # before Blender's float32 storage turns a near-zero edge into a point.
+        key=tuple(round(v,7) for v in point)
+        if key not in lookup:
+            x,t=point;frac=(x-col*cell)/cell
+            bulge=math.sin(frac*PI)*min(.032,cell*.22) if curved else 0
+            p=a+direction*x+fall*t+normal*(.012+bulge+.008*(1-(t-t0)/(t1-t0)))
+            lookup[key]=len(vv);vv.append(tuple(p))
+        return lookup[key]
+    for k in range(segments):
+        lo=x0+(x1-x0)*k/segments;hi=x0+(x1-x0)*(k+1)/segments
+        polygon=[(lo,t0),(hi,t0),(hi,t1),(lo,t1)]
+        polygon=clip(polygon,lambda p:p[0]-left_delta*p[1])
+        polygon=clip(polygon,lambda p:width+right_delta*p[1]-p[0])
+        if len(polygon)<3:continue
+        face=list(dict.fromkeys(vertex(p) for p in polygon))
+        if len(face)<3:continue
+        cross=(Vector(vv[face[1]])-Vector(vv[face[0]])).cross(Vector(vv[face[2]])-Vector(vv[face[0]]))
+        if cross.length<1e-10:continue
+        if cross.dot(normal)<0:face.reverse()
+        top.append(tuple(face))
+        for u,v in zip(face,face[1:]+face[:1]):
+            key=tuple(sorted((u,v)));edges[key]=None if key in edges else (u,v)
+    if not top:return
+    count=len(vv);vv += [tuple(Vector(p)-normal*.009) for p in vv]
+    sides=[(u,v,v+count,u+count) for edge in edges.values() if edge for u,v in [edge] if (Vector(vv[u])-Vector(vv[v])).length>1e-6]
+    sides += [tuple(v+count for v in reversed(face)) for face in top]
+    b.poly(vv,top,'roof',curved);b.poly(vv,sides,'roof',False)
+
+
+def seated_ridge(b,start,end,width=.050,height=.016):
+    """A low ceramic saddle, rather than a thin round pole over the roof."""
+    start,end=Vector(start),Vector(end);axis=(end-start).normalized()
+    across=axis.cross(Vector((0,0,1))).normalized();up=across.cross(axis).normalized()
+    if up.z<0:up=-up
+    steps=8;profile=[(-width+2*width*i/steps,height*math.sin(PI*i/steps)) for i in range(steps+1)]
+    profile += [(width,-.009),(-width,-.009)]
+    n=len(profile);vv=[tuple(p+across*x+up*z) for p in (start,end) for x,z in profile]
+    b.poly(vv,[(i,(i+1)%n,(i+1)%n+n,i+n) for i in range(n)],'roof',True)
+    b.poly(vv,[tuple(range(n-1,-1,-1)),tuple(range(n,2*n))],'roof',False)
 
 
 def hip(b,w,d,z,h,region='classic',dormers=0):
@@ -276,13 +305,13 @@ def hip(b,w,d,z,h,region='classic',dormers=0):
         cols=max(4,round((c-a).length/getattr(b,'roof_pitch',.19)));rows=max(4,round(h/.115)) if classic else 5
         for row in range(rows):
             for col in range(cols):roof_tile(b,a,c,aa,cc,row,rows,col,cols,not classic)
-        b.rod(tuple(a+Vector((0,0,.027))),tuple(aa+Vector((0,0,.028))),.024 if classic else .034,'roof_edge',8)
+        seated_ridge(b,a+Vector((0,0,.030)),aa+Vector((0,0,.030)),.037 if classic else .055,.012 if classic else .018)
     if classic:
         b.box((0,0,z+h+.015),(topw+.025,topd+.025,.035),'roof_edge')
         for k in range(max(3,round(topw/.15))):
             xx=-topw/2+(k+.5)*topw/max(3,round(topw/.15));b.rod((xx,-topd/2,z+h+.04),(xx,topd/2,z+h+.04),.012,'roof')
     else:
-        b.rod((-topw/2,0,z+h+.038),(topw/2,0,z+h+.038),.042,'roof_edge',12)
+        seated_ridge(b,(-topw/2,0,z+h+.032),(topw/2,0,z+h+.032),.061,.021)
     b.box((0,0,z-.027),(w+.04,d+.04,.06),'trim' if classic else 'wood_light')
     if dormers:
         for side_index,angle in enumerate((0,PI)):
@@ -313,9 +342,12 @@ def gable(b,w,d,z,h,region='harbor'):
         cols=max(6,round(d/.18));rows=5
         for row in range(rows):
             for col in range(cols):roof_tile(b,a,c,aa,cc,row,rows,col,cols,True)
-        for yy in (-d/2-.02,d/2+.02):b.rod((side*w/2,yy,z-.025),(0,yy,z+h-.025),.047,'wood_light',8)
-        b.rod((side*w/2,-d/2,z-.03),(side*w/2,d/2,z-.03),.044,'wood',8)
-    b.rod((0,-d/2-.035,z+h+.04),(0,d/2+.035,z+h+.04),.047,'roof_edge',12)
+        # The rake belongs below the ceramic deck; its radius used to cross the
+        # roof plane and expose intermittent timber dots through the tile edge.
+        rake_drop=.050/math.cos(math.atan2(h,w/2))+.018
+        for yy in (-d/2-.02,d/2+.02):b.rod((side*w/2,yy,z-rake_drop),(0,yy,z+h-rake_drop),.047,'wood_light',8)
+        b.rod((side*w/2,-d/2,z-.068),(side*w/2,d/2,z-.068),.044,'wood',8)
+    seated_ridge(b,(0,-d/2,z+h+.032),(0,d/2,z+h+.032),.061,.021)
 
 
 def chimney(b,x,y,z,region='classic',h=.50):
@@ -329,29 +361,41 @@ def chimney(b,x,y,z,region='classic',h=.50):
 
 
 def dome(b,x,y,z,r,h,region='classic',glass=False):
-    sides=20;rings=7;vv=[]
-    for j in range(rings+1):
+    sides=32;rings=12;vv=[]
+    def point(latitude,longitude,lift=0):
+        normal=Vector((math.cos(latitude)*math.cos(longitude)/r,math.cos(latitude)*math.sin(longitude)/r,math.sin(latitude)/h)).normalized()
+        return Vector((x+r*math.cos(latitude)*math.cos(longitude),y+r*math.cos(latitude)*math.sin(longitude),z+h*math.sin(latitude)))+normal*lift
+    for j in range(rings):
         a=j*PI/(2*rings)
         for i in range(sides):
-            t=i*math.tau/sides;rr=r*math.cos(a)
-            vv.append((x+rr*math.cos(t),y+rr*math.sin(t),z+h*math.sin(a)))
-    b.poly(vv,[(j*sides+i,j*sides+(i+1)%sides,(j+1)*sides+(i+1)%sides,(j+1)*sides+i) for j in range(rings) for i in range(sides)],'water' if glass else 'roof',True)
+            vv.append(tuple(point(a,i*math.tau/sides)))
+    vv.append((x,y,z+h));apex=len(vv)-1
+    faces=[(j*sides+i,j*sides+(i+1)%sides,(j+1)*sides+(i+1)%sides,(j+1)*sides+i) for j in range(rings-1) for i in range(sides)]
+    faces += [((rings-1)*sides+i,(rings-1)*sides+(i+1)%sides,apex) for i in range(sides)]
+    b.poly(vv,faces,'water' if glass else 'roof',True)
     b.cylinder((x,y,z-.02),r*1.045,.075,'trim',32)
+    # The old ribs were five separately capped chords cutting through the
+    # curved shell. These continuous strips share the shell's latitude rings,
+    # so they remain seated instead of appearing as broken black stitch marks.
     for i in range(8):
-        a=i*math.tau/8
-        for j in range(5):
-            u=j*PI/10;v=(j+1)*PI/10
-            b.rod((x+r*math.cos(u)*math.cos(a),y+r*math.cos(u)*math.sin(a),z+h*math.sin(u)+.008),
-                  (x+r*math.cos(v)*math.cos(a),y+r*math.cos(v)*math.sin(a),z+h*math.sin(v)+.008),.013 if glass else .009,'gold' if glass else 'roof_edge',6)
-    for j in ((4,) if getattr(b,'compact_dome',False) else (2,4,6)):
-        a=j*PI/16;rr=r*math.cos(a);zz=z+h*math.sin(a);v=[]
+        a=i*math.tau/8;v=[];half=.015 if glass else .012
+        for j in range(rings):
+            latitude=j*PI/(2*rings)
+            da=half/max(r*math.cos(latitude),.08)
+            for k in range(5):
+                f=k/4;v.append(tuple(point(latitude,a+(2*f-1)*da,.003+(.012 if glass else .007)*math.sin(PI*f))))
+        f=[(j*5+k,j*5+k+1,(j+1)*5+k+1,(j+1)*5+k) for j in range(rings-1) for k in range(4)]
+        b.poly(v,f,'gold' if glass else 'roof',True)
+    # Horizontal hoops are structural glazing bars. Opaque ceramic domes need
+    # only the broad meridians; tiny floating hoops created flickering scars.
+    for j in ((6,) if getattr(b,'compact_dome',False) else (3,6,9)) if glass else ():
+        a=j*PI/(2*rings);v=[]
         for i in range(sides):
             u=i*math.tau/sides
-            for k in range(4):
-                t=k*PI/2;rad=rr+.006*math.cos(t)
-                v.append((x+rad*math.cos(u),y+rad*math.sin(u),zz+.009+.006*math.sin(t)))
-        f=[(i*4+k,((i+1)%sides)*4+k,((i+1)%sides)*4+(k+1)%4,i*4+(k+1)%4) for i in range(sides) for k in range(4)]
-        b.poly(v,f,'gold' if glass else 'roof_edge',True)
+            for k in range(5):
+                f=k/4;v.append(tuple(point(a+(2*f-1)*.012/max(h,.15),u,.004+.012*math.sin(PI*f))))
+        f=[(i*5+k,((i+1)%sides)*5+k,((i+1)%sides)*5+k+1,i*5+k+1) for i in range(sides) for k in range(4)]
+        b.poly(v,f,'gold',True)
     b.cylinder((x,y,z+h+.05),.026,.12,'gold',12,top=.012)
     b.sphere((x,y,z+h+.12),(.045,.045,.055),'gold',12,6)
 

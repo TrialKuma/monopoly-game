@@ -608,7 +608,9 @@ def copper_roof(b,w,d,z,h=.58):
     b.poly(lower+upper,[(i,(i+1)%4,(i+1)%4+4,i+4) for i in range(4)]+[(4,5,6,7)],'roof')
     for i in range(4):
         a=lower[i];c=lower[(i+1)%4];aa=upper[i];cc=upper[(i+1)%4]
-        for j in range(7):
+        # Each hip belongs to its next face's j=0. Repeating it at j=6
+        # puts two identical rods in one place and causes dark zipper seams.
+        for j in range(6):
             t=j/6;start=tuple(a[k]*(1-t)+c[k]*t+( .02 if k==2 else 0) for k in range(3));end=tuple(aa[k]*(1-t)+cc[k]*t+(.02 if k==2 else 0) for k in range(3))
             b.rod(start,end,.018,'roof_edge',6)
     b.box((0,0,z-.035),(w+.04,d+.04,.10),'trim');b.box((0,0,z+h+.03),(w*.50,d*.44,.07),'roof_edge')

@@ -22,7 +22,7 @@
       "sha256": "9167430bd92f7a80e0506fd91954fad6e0200b866c92cec7d74ed25c18943db2"
     }
   ],
-  "triangles": 13440,
+  "triangles": 13431,
   "size": [
     1.0399999618530273,
     1.0152499675750732,
@@ -41,34 +41,66 @@
     ]
   },
   "scale": 0.3761578193368476,
-  "bytes": 1480096,
-  "sha256": "311fbca731bbaea2c9c6c0c40250b3db560a8b29e53324c4d4bb667c3f72e2fc",
+  "bytes": 1483716,
+  "sha256": "e0361652c8c2eeb56a19ab08a3fa6540fa782018ea32f32b3152e59ff8867272",
   "builder": "art/blender-city/regions/western.py",
-  "builderSha256": "ce0b17b382989c25a5cfd0c3013c402f5e979c7f61bca1adfa17bd9bc9899853",
-  "pipelineSha256": "8bfd4f54084734f345ca7531d288c1c733355eaec2aea576afa225121a97aedf",
+  "builderSha256": "40bd8d4d52a5f7ad867bfbdeca839f2cf9b72921b9306a2bf552fd20da45c8f4",
+  "pipelineSha256": "ae178492d50c4810794299f2ae947a1390804dfb5c76f83a9fec0221ce3b7d5f",
   "surface": {
-    "materials": 3,
+    "materials": 4,
     "textureSize": 512,
     "vertexColours": true,
     "aoSamples": 32,
-    "directionalLightingBaked": false
+    "directionalLightingBaked": false,
+    "roofSurface": {
+      "method": "bounded_local_vertex_ao_ramp",
+      "roughness": 0.43,
+      "aoTexture": true,
+      "aoRange": [
+        0.68,
+        1
+      ],
+      "radiusAuthorUnits": 0.1,
+      "offsetAuthorUnits": 0.003,
+      "samples": 64,
+      "rampSize": [
+        256,
+        1
+      ],
+      "directionalLightingBaked": false,
+      "roofExcludedFromFacadeAtlas": true,
+      "neutralAtlasBackground": true,
+      "sampledAoRange": [
+        0.68,
+        1
+      ],
+      "sampledAoQuantiles": [
+        0.68,
+        0.68,
+        0.9892459282379793
+      ],
+      "sampledCorners": 5448,
+      "uniqueSamples": 5032,
+      "builder": "art/blender-city/roof_shading.py",
+      "builderSha256": "001f3758598ba3124918dfa5643438cb15b2542fb4157414111f494d28950a9b"
+    }
   },
   "status": "built_pending_scene_review",
-  "seconds": 0.26,
+  "seconds": 0.33,
   "detailLevel": "far",
   "nearSource": "art/blender-city/models/classic/junction_hub/model.glb",
-  "nearSourceSha256": "da6bd05086f90fe209a8d8afe9b72bef332d1325112e410fbea974057b58316c",
+  "nearSourceSha256": "b964e24ad0826ed5b5bc8e542472a5e4809d5c359a3ec4b8d0195e1dd7286137",
   "farBuilder": "art/blender-city/make_far.py",
   "farBuilderSha256": "a54a8ed6742117b72a3e524a548f79cc0ff93f6096ac1b0ff3341c37ba6789c3",
-  "sourceTriangles": 15624,
+  "sourceTriangles": 15992,
   "simplification": {
     "method": "Blender collapse with existing UV and vertex color layers",
     "target": 14000,
     "passes": [
       {
-        "before": 15624,
-        "after": 13440,
-        "ratio": 0.8602150537634409
+        "before": 15992,
+        "after": 13439,
+        "ratio": 0.8404202101050524
       }
     ],
     "rescaling": false,
@@ -87,20 +119,30 @@
           1024,
           1024
         ]
+      },
+      {
+        "size": [
+          256,
+          1
+        ],
+        "before": [
+          256,
+          1
+        ]
       }
     ]
   },
   "nearStorageCompression": {
     "configuration": "normal16_uv16_color8",
-    "afterSha256": "da6bd05086f90fe209a8d8afe9b72bef332d1325112e410fbea974057b58316c",
-    "originalSha256": "db7ac7bddc6410d9a54689514d7449d381b5ffa72e5c6bfb93f380e01c0d1714",
-    "originalBytes": 2049236,
+    "afterSha256": "b964e24ad0826ed5b5bc8e542472a5e4809d5c359a3ec4b8d0195e1dd7286137",
+    "originalSha256": "c47b39cd43772d0f0785d94aa816b65706e98dc55eb684722575828a2d25c5fd",
+    "originalBytes": 2103192,
     "report": {
-      "path": "art/blender-city/reports/storage-compression/classic/junction_hub-da6bd05086f90fe2.json",
-      "sha256": "54bff4abbd2efd46d5eb49f16a5beb2a58ace1b2e6ee087a2d901b26bd946811"
+      "path": "art/blender-city/reports/storage-compression/classic/junction_hub-b964e24ad0826ed5.json",
+      "sha256": "d8548048aa3c31fa1827a5d8ae0a2baecaf2dcd59fde1d82de28fb3660d764f5"
     },
     "maxNormalError": 1.5250421455892393e-05,
-    "maxUVError": 7.629177158699485e-06,
+    "maxUVError": 7.629510948348184e-06,
     "maxColorError": 0.0019226367589837423
   }
 }

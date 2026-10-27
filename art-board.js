@@ -5,12 +5,14 @@ const $=id=>document.getElementById(id),region=$('region'),board=$('board'),card
 const candidate=params.get('artStage')==='candidate';
 if([...region.options].some(o=>o.value===params.get('map')))region.value=params.get('map');
 const families=[['villa','住宅'],['shop','商铺'],['hotel','旅馆'],['tower','公馆'],['skyscraper','大酒店'],['finance','商会'],['onsen','温泉庄园']];
-const familyReview=candidate&&families.some(([name])=>name===params.get('family'))?params.get('family'):null;
+const familyReview=families.some(([name])=>name===params.get('family'))?params.get('family'):null;
 const publics=[['civic_hall','市政厅'],['vault_bank','银行'],['builders_guild','工坊'],['card_pavilion','卡牌店'],['chance_wheel','幸运亭'],['teleport_gate','交通门'],['rush_station','快线站'],['junction_hub','路口驿站']];
 const assets=[...families.flatMap(([family,label])=>[1,2,3].map(level=>({name:`${family}_${level}`,family,level,label:`${label} · Lv.${level}`}))),...publics.map(([name,label])=>({name,family:name,level:1,label}))].filter(asset=>!familyReview||asset.family===familyReview);
 if(familyReview){document.body.classList.add('family-review');document.querySelector('h1').textContent=`${families.find(([name])=>name===familyReview)[1]} · 三级对照`;}
 const renderer=new THREE.WebGLRenderer({antialias:true,powerPreference:'low-power'});renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1;renderer.setClearColor('#e9e8df');board.prepend(renderer.domElement);
-let bundle=null,views=[],view='iso',token=0,disposed=false,frame=0;
+let bundle=null,views=[],view=params.get('view')==='top'?'top':'iso',token=0,disposed=false,frame=0;
+const topButton=document.createElement('button');topButton.dataset.view='top';topButton.textContent='俯视';document.querySelector('nav').insertBefore(topButton,$('status'));
+document.querySelectorAll('[data-view]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.view===view)));
 const environment=makeStudioEnvironment(renderer);
 function dispose(gltf){if(!gltf)return;const resources=new Set(),images=new Set();gltf.scene.traverse(n=>{if(n.geometry)resources.add(n.geometry);for(const m of Array.isArray(n.material)?n.material:[n.material])if(m){resources.add(m);for(const value of Object.values(m))if(value?.isTexture){resources.add(value);const data=value.source?.data;for(const image of Array.isArray(data)?data:[data])if(image?.close)images.add(image);}}});resources.forEach(r=>r.dispose());images.forEach(i=>i.close());}
 function draw(){
@@ -19,7 +21,7 @@ function draw(){
     const card=item.card,x=card.offsetLeft,y=h-card.offsetTop-card.offsetHeight+38,width=card.clientWidth,height=card.clientHeight-40;
     if(height<=0)continue;const {camera,center}=item,size=item.framing||item.size,aspect=width/height,v=Math.max(size.y*.64,Math.hypot(size.x,size.z)*.65/aspect,.3);
     camera.left=-v*aspect;camera.right=v*aspect;camera.top=v;camera.bottom=-v;
-    const yaw=view==='iso'?.55:view==='back'?Math.PI:0,elevation=view==='iso'?.38:0;camera.position.set(center.x+Math.sin(yaw)*12,center.y+Math.sin(elevation)*12,center.z+Math.cos(yaw)*12);camera.lookAt(center);camera.updateProjectionMatrix();
+    const yaw=view==='iso'||view==='top'?.55:view==='back'?Math.PI:0,elevation=view==='top'?1.35:view==='iso'?.38:0,horizontal=view==='top'?Math.cos(elevation)*12:12;camera.position.set(center.x+Math.sin(yaw)*horizontal,center.y+Math.sin(elevation)*12,center.z+Math.cos(yaw)*horizontal);camera.lookAt(center);camera.updateProjectionMatrix();
     renderer.setViewport(x,y,width,height);renderer.setScissor(x,y,width,height);renderer.render(item.scene,camera);
   }
   renderer.setScissorTest(false);
@@ -27,9 +29,9 @@ function draw(){
 function requestDraw(){if(!frame&&!disposed)frame=requestAnimationFrame(draw);}
 async function load(){
   const current=++token,map=region.value;views=[];cards.replaceChildren();dispose(bundle);bundle=null;$('error').hidden=true;$('status').textContent='模型载入中';requestDraw();
-  const url=familyReview?`./art/full-ai-city/packed/families/${map}-${familyReview}.glb`:candidate?`./art/full-ai-city/packed/${map}.glb`:`./assets/models/regions/${map}.glb`;
+  const url=candidate&&familyReview?`./art/full-ai-city/packed/families/${map}-${familyReview}.glb`:candidate?`./art/full-ai-city/packed/${map}.glb`:`./assets/models/regions/${map}.glb`;
   try{
-    const gltf=await new GLTFLoader().loadAsync(`${url}?v=20261025-facade2`);if(current!==token||disposed){dispose(gltf);return;}bundle=gltf;let authored=0,loaded=0;
+    const gltf=await new GLTFLoader().loadAsync(`${url}?v=20261028-global-roofs2`);if(current!==token||disposed){dispose(gltf);return;}bundle=gltf;let authored=0,loaded=0;
     for(const asset of assets){
       const source=gltf.scene.getObjectByName(`${map}_${asset.name}`);if(!source)throw new Error(`缺少${asset.label}，整套资源尚未完成。`);
       const card=document.createElement('a');card.className='card';const query=new URLSearchParams({map,family:asset.family,level:String(asset.level)});if(candidate)query.set('stage','candidate');card.href=`./art-review.html?${query}`;

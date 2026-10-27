@@ -22,59 +22,91 @@
       "sha256": "713a2c041608c3a399eb465a9cebdd2775971a6f78ca02a905b11efc841fbfa0"
     }
   ],
-  "triangles": 13440,
+  "triangles": 13429,
   "size": [
     0.9899999499320984,
     1.1235265731811523,
-    0.9732821583747864
+    0.9663773775100708
   ],
   "bounds": {
     "min": [
       -0.4949999749660492,
       0.0,
-      -0.4866410791873932
+      -0.4831886887550354
     ],
     "max": [
       0.4949999749660492,
       1.1235265731811523,
-      0.4866410791873932
+      0.4831886887550354
     ]
   },
   "scale": 0.3523131744339934,
-  "bytes": 1417536,
-  "sha256": "497391c502a6cbda82c1672d4c64383aaaeee3b2ba35456b63bfaeddce0c1182",
+  "bytes": 1439308,
+  "sha256": "f712c9d502b12ab52eedd2b73fad4422ed4bd349d055062f7f79d67630c17e42",
   "builder": "art/blender-city/regions/western.py",
-  "builderSha256": "ce0b17b382989c25a5cfd0c3013c402f5e979c7f61bca1adfa17bd9bc9899853",
-  "pipelineSha256": "8bfd4f54084734f345ca7531d288c1c733355eaec2aea576afa225121a97aedf",
+  "builderSha256": "40bd8d4d52a5f7ad867bfbdeca839f2cf9b72921b9306a2bf552fd20da45c8f4",
+  "pipelineSha256": "ae178492d50c4810794299f2ae947a1390804dfb5c76f83a9fec0221ce3b7d5f",
   "surface": {
-    "materials": 3,
+    "materials": 4,
     "textureSize": 512,
     "vertexColours": true,
     "aoSamples": 32,
-    "directionalLightingBaked": false
+    "directionalLightingBaked": false,
+    "roofSurface": {
+      "method": "bounded_local_vertex_ao_ramp",
+      "roughness": 0.43,
+      "aoTexture": true,
+      "aoRange": [
+        0.68,
+        1
+      ],
+      "radiusAuthorUnits": 0.1,
+      "offsetAuthorUnits": 0.003,
+      "samples": 64,
+      "rampSize": [
+        256,
+        1
+      ],
+      "directionalLightingBaked": false,
+      "roofExcludedFromFacadeAtlas": true,
+      "neutralAtlasBackground": true,
+      "sampledAoRange": [
+        0.68,
+        1
+      ],
+      "sampledAoQuantiles": [
+        0.68,
+        0.68,
+        0.9890539845559578
+      ],
+      "sampledCorners": 7752,
+      "uniqueSamples": 7200,
+      "builder": "art/blender-city/roof_shading.py",
+      "builderSha256": "001f3758598ba3124918dfa5643438cb15b2542fb4157414111f494d28950a9b"
+    }
   },
   "status": "built_pending_scene_review",
-  "seconds": 0.39,
+  "seconds": 0.44,
   "detailLevel": "far",
   "nearSource": "art/blender-city/models/classic/hotel_2/model.glb",
-  "nearSourceSha256": "c09293ca1107a21ccfb22a8d8c3831130187f4f0a4cf46ffaf80012ec5090316",
+  "nearSourceSha256": "116488f53b6287a9bbfa93775ecdda8dcff0c65e9def19d313c21ab1b83df457",
   "farBuilder": "art/blender-city/make_far.py",
   "farBuilderSha256": "a54a8ed6742117b72a3e524a548f79cc0ff93f6096ac1b0ff3341c37ba6789c3",
-  "sourceTriangles": 32492,
+  "sourceTriangles": 33460,
   "simplification": {
     "method": "Blender collapse with existing UV and vertex color layers",
     "target": 14000,
     "passes": [
       {
-        "before": 32492,
-        "after": 13440,
-        "ratio": 0.41364028068447617
+        "before": 33460,
+        "after": 13439,
+        "ratio": 0.401673640167364
       }
     ],
     "rescaling": false,
     "centeringOffsetBlender": [
       -0.0,
-      0.003452390432357788,
+      -0.0,
       -0.0
     ],
     "textures": [
@@ -87,20 +119,30 @@
           1024,
           1024
         ]
+      },
+      {
+        "size": [
+          256,
+          1
+        ],
+        "before": [
+          256,
+          1
+        ]
       }
     ]
   },
   "nearStorageCompression": {
     "configuration": "normal16_uv16_color8",
-    "afterSha256": "c09293ca1107a21ccfb22a8d8c3831130187f4f0a4cf46ffaf80012ec5090316",
-    "originalSha256": "01e088748b619caee3f40496719ebed2f8668c582b3cfe008146668bcb0e4dcd",
-    "originalBytes": 3370536,
+    "afterSha256": "116488f53b6287a9bbfa93775ecdda8dcff0c65e9def19d313c21ab1b83df457",
+    "originalSha256": "9512f59a909253fd608f533c0b2a6cd6fa88866e00506ba8fd5278913979ee4d",
+    "originalBytes": 3469660,
     "report": {
-      "path": "art/blender-city/reports/storage-compression/classic/hotel_2-c09293ca1107a21c.json",
-      "sha256": "d5ede95ca9d7f485d285d4fdf422f1fc2a4a5f4bed6d9a613ec526d31220dbfb"
+      "path": "art/blender-city/reports/storage-compression/classic/hotel_2-116488f53b6287a9.json",
+      "sha256": "6e78e5893e6eacebff8db44e4f12c182c8267915b050ad99504ee3eaea0aa66e"
     },
-    "maxNormalError": 1.525654708961488e-05,
-    "maxUVError": 7.629323589553039e-06,
+    "maxNormalError": 1.5250421455892393e-05,
+    "maxUVError": 7.629510948348184e-06,
     "maxColorError": 0.0019226367589837423
   }
 }

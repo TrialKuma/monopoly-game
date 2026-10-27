@@ -22,7 +22,7 @@
       "sha256": "0df51224acd5b5ed3efef3c35435d74badf2e8ac911f2ee26af918a4926e6c07"
     }
   ],
-  "triangles": 13440,
+  "triangles": 13431,
   "size": [
     0.9057384729385376,
     1.1600000858306885,
@@ -41,34 +41,66 @@
     ]
   },
   "scale": 0.36375040437332506,
-  "bytes": 1433764,
-  "sha256": "3aaf843567babf664d288d3c68adb6522356237da904cd792fe785431952fcaf",
+  "bytes": 1445936,
+  "sha256": "b2ea49ba4539f86060920411bf2eac5330d12709218fcb99148b08df5d1ee4a5",
   "builder": "art/blender-city/regions/western.py",
-  "builderSha256": "ce0b17b382989c25a5cfd0c3013c402f5e979c7f61bca1adfa17bd9bc9899853",
-  "pipelineSha256": "8bfd4f54084734f345ca7531d288c1c733355eaec2aea576afa225121a97aedf",
+  "builderSha256": "40bd8d4d52a5f7ad867bfbdeca839f2cf9b72921b9306a2bf552fd20da45c8f4",
+  "pipelineSha256": "ae178492d50c4810794299f2ae947a1390804dfb5c76f83a9fec0221ce3b7d5f",
   "surface": {
-    "materials": 3,
+    "materials": 4,
     "textureSize": 512,
     "vertexColours": true,
     "aoSamples": 32,
-    "directionalLightingBaked": false
+    "directionalLightingBaked": false,
+    "roofSurface": {
+      "method": "bounded_local_vertex_ao_ramp",
+      "roughness": 0.43,
+      "aoTexture": true,
+      "aoRange": [
+        0.68,
+        1
+      ],
+      "radiusAuthorUnits": 0.1,
+      "offsetAuthorUnits": 0.003,
+      "samples": 64,
+      "rampSize": [
+        256,
+        1
+      ],
+      "directionalLightingBaked": false,
+      "roofExcludedFromFacadeAtlas": true,
+      "neutralAtlasBackground": true,
+      "sampledAoRange": [
+        0.68,
+        1
+      ],
+      "sampledAoQuantiles": [
+        0.68,
+        0.68,
+        0.9908960573363541
+      ],
+      "sampledCorners": 7272,
+      "uniqueSamples": 6784,
+      "builder": "art/blender-city/roof_shading.py",
+      "builderSha256": "001f3758598ba3124918dfa5643438cb15b2542fb4157414111f494d28950a9b"
+    }
   },
   "status": "built_pending_scene_review",
   "seconds": 0.36,
   "detailLevel": "far",
   "nearSource": "art/blender-city/models/classic/shop_2/model.glb",
-  "nearSourceSha256": "b46e0cb8182128ae286e4635cd7c3d4d54213d68faa5f399e67c9c411a90b252",
+  "nearSourceSha256": "10cb1557b34e4738f3b6144542cf44adc95223ccbbacf487dcc8b9d6d3b436e2",
   "farBuilder": "art/blender-city/make_far.py",
   "farBuilderSha256": "a54a8ed6742117b72a3e524a548f79cc0ff93f6096ac1b0ff3341c37ba6789c3",
-  "sourceTriangles": 29500,
+  "sourceTriangles": 29820,
   "simplification": {
     "method": "Blender collapse with existing UV and vertex color layers",
     "target": 14000,
     "passes": [
       {
-        "before": 29500,
-        "after": 13440,
-        "ratio": 0.45559322033898303
+        "before": 29820,
+        "after": 13439,
+        "ratio": 0.4507042253521127
       }
     ],
     "rescaling": false,
@@ -87,20 +119,30 @@
           1024,
           1024
         ]
+      },
+      {
+        "size": [
+          256,
+          1
+        ],
+        "before": [
+          256,
+          1
+        ]
       }
     ]
   },
   "nearStorageCompression": {
     "configuration": "normal16_uv16_color8",
-    "afterSha256": "b46e0cb8182128ae286e4635cd7c3d4d54213d68faa5f399e67c9c411a90b252",
-    "originalSha256": "03f77ad2db9102968796561411e977bbf7102bc42868e5d07101d76f42d6d98a",
-    "originalBytes": 3211556,
+    "afterSha256": "10cb1557b34e4738f3b6144542cf44adc95223ccbbacf487dcc8b9d6d3b436e2",
+    "originalSha256": "99db4e4c25b33903cb833578d06903208f5522c6a0975c061052d71dfe241e58",
+    "originalBytes": 3234440,
     "report": {
-      "path": "art/blender-city/reports/storage-compression/classic/shop_2-b46e0cb8182128ae.json",
-      "sha256": "65ffc1c1f60a007ae65cbd6385267eec7d861574aaa813934c356d7f0e267094"
+      "path": "art/blender-city/reports/storage-compression/classic/shop_2-10cb1557b34e4738.json",
+      "sha256": "d4e575861b324c2deebf4e8ef26457b6df3b183aef5db008249a6a6d175082e3"
     },
     "maxNormalError": 1.5250421455892393e-05,
-    "maxUVError": 7.629048463242416e-06,
+    "maxUVError": 7.629510948348184e-06,
     "maxColorError": 0.0019226367589837423
   }
 }

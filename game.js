@@ -971,7 +971,7 @@ function initializeGame(mapId = selectedMapId, paidRunId = null) {
       completedTurns: 0, propertyVisitVersion: 0, propertySettlement: null,
     })),
     lastDice: null, lastDiceFaces: [], diceActionId: 0, diceDisplay: null, logs: [], gameOver: false, busy: false,
-    cardSequence: 0, cardUsePending: false,
+    cardSequence: 0, cardUsePending: false, extraTurnPending: false,
     passedStartThisTurn: false, bankPool: 0, quakeHappened: false,
     gameMode: "rounds",
     statusTitle: "", statusDescription: "",
@@ -1531,7 +1531,7 @@ function getRoundLabel() {
 function setHumanTurnStatus() {
   resetDiceDisplay();
   state.phase = "await_roll"; state.busy = false;
-  state.statusTitle = "轮到你了";
+  state.statusTitle = state.extraTurnPending ? "奖励行动" : "轮到你了";
   state.statusDescription = "";
   clearHighlights(); hideModal(false);
 }
@@ -1935,6 +1935,7 @@ function renderModal() {
 
 function updateControls() {
   rollBtn.disabled = state.gameOver || state.busy || currentPlayer().isAi || state.phase !== "await_roll";
+  rollBtn.textContent = state.extraTurnPending ? "掷奖励骰" : "掷骰子";
   restartBtn.disabled = Boolean(openingCoinJob) || homeConfirmationPending || Boolean(state.ticketPaid && !state.gameOver && state.busy && !state.modal.visible);
   renderVehicleDiceSelector();
 }
@@ -1951,7 +1952,7 @@ function getPhaseLabel() {
 
 async function playHumanTurn() {
   if (state.gameOver || state.busy || currentPlayer().isAi || state.phase !== "await_roll") return;
-  await processTurn(currentPlayer());
+  await processTurn(currentPlayer(), Boolean(state.extraTurnPending));
 }
 
 async function playAiTurn() {
@@ -1964,6 +1965,7 @@ async function playAiTurn() {
 
 async function processTurn(player, isExtraTurn = false) {
   const sid = state.sessionId;
+  state.extraTurnPending = false;
   resetDiceDisplay();
   state.busy = true; state.phase = "locked"; state.passedStartThisTurn = false;
   hideModal(false); render();
@@ -2059,6 +2061,14 @@ async function processTurn(player, isExtraTurn = false) {
   if (player.effects.extraTurn) { player.effects.extraTurn = false; extra = true; }
 
   if (extra) {
+    if (!player.isAi) {
+      // A bonus is a separate action with its own card choice, but still part
+      // of this normal turn for round limits and municipal-card cooldowns.
+      state.extraTurnPending = true;
+      player.cardUsedThisTurn = false;
+      setHumanTurnStatus(); render();
+      return;
+    }
     clearHighlights(); render();
     await showContinueModal({
       label: "骰6再动",
@@ -3521,6 +3531,7 @@ function chooseAiVehicleDiceCount(player) {
 
 function endTurn() {
   if (state.gameOver) return;
+  state.extraTurnPending = false;
   currentPlayer().completedTurns = (currentPlayer().completedTurns || 0) + 1;
   hideModal(false); clearHighlights(); state.busy = false;
   state.currentPlayerIndex = (state.currentPlayerIndex + 1) % state.players.length;
@@ -3539,6 +3550,7 @@ async function startAiTurnWithDelay(sid) {
 
 function finishGame(reason = "rounds") {
   if (state.gameOver) return;
+  state.extraTurnPending = false;
   state.gameOver = true; state.phase = "locked"; state.busy = false; hideModal(false);
   const rank = [...state.players].sort((a, b) => b.cash - a.cash);
   const top = rank[0];
@@ -3679,7 +3691,7 @@ function createRegionalBuildingSprite(asset, label) {
   const candidate = new URLSearchParams(location.search).get('artStage') === 'candidate';
   const directory = candidate ? 'art/full-ai-city/packed/previews' : 'assets/buildings/regions';
   const mapId = state?.currentMapId ?? selectedMapId;
-  return `<img class="building-sprite" src="${directory}/${mapId}/${asset}.png?v=20261025-facade2" alt="${label}" loading="lazy" decoding="async" draggable="false">`;
+  return `<img class="building-sprite" src="${directory}/${mapId}/${asset}.png?v=20261028-global-roofs2" alt="${label}" loading="lazy" decoding="async" draggable="false">`;
 }
 
 function createStartSvg() {

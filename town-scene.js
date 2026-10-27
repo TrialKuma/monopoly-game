@@ -1,7 +1,7 @@
 import * as THREE from './assets/vendor/three/three.module.min.js';
 import { mergeGeometries } from './assets/vendor/three/addons/utils/BufferGeometryUtils.js';
 import { makeStudioEnvironment } from './scene-environment.js?v=20261025-facade2';
-import { loadSharedModelAsset, retainSharedModelAsset } from './scene-model-cache.js?v=20261025-harbor1';
+import { loadSharedModelAsset, retainSharedModelAsset } from './scene-model-cache.js?v=20261028-global-roofs2';
 import './town-plan.js?v=20261025-district1';
 import { buildTownSurroundings } from './town-scenery.js?v=20261025-district1';
 import { buildTownProjects } from './town-projects.js?v=20261025-district1';

@@ -143,7 +143,7 @@ export function createOwnershipRoofs({ THREE }) {
         if (!node.isMesh || !node.geometry || Array.isArray(node.material)) return;
         const original = node.material;
         // The separate glass and plant primitives cannot acquire a roof mask.
-        if (!original?.vertexColors || !original.name.endsWith(' / solid')) return;
+        if (!original?.vertexColors || !/ \/ (solid|roof ceramic)$/.test(original.name)) return;
         const mask = roofMask(node.geometry, model.name, region);
         if (!mask?.vertices) return;
         record.vertices += mask.vertices;

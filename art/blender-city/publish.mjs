@@ -6,6 +6,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
 import assert from 'node:assert/strict';
+import {inflateSync} from 'node:zlib';
 import {fileURLToPath} from 'node:url';
 import {Matrix4,Vector3,Quaternion,Box3} from '../../assets/vendor/three/three.module.min.js';
 
@@ -26,6 +27,59 @@ const receipt=file=>{const bytes=read(file);return {path:file,sha256:hash(bytes)
 function write(file,bytes){const target=local(file);fs.mkdirSync(path.dirname(target),{recursive:true});fs.writeFileSync(target+'.pending',bytes);fs.renameSync(target+'.pending',target);}
 const writeJSON=(file,value)=>write(file,JSON.stringify(value,null,2)+'\n');
 const matrix=node=>node.matrix?new Matrix4().fromArray(node.matrix):new Matrix4().compose(new Vector3().fromArray(node.translation||[0,0,0]),new Quaternion().fromArray(node.rotation||[0,0,0,1]),new Vector3().fromArray(node.scale||[1,1,1]));
+
+// A one-dimensional, fully occupied ambient ramp has no UV islands or black
+// gutters. Validate the actual embedded pixels and all roof UVs, not its name.
+export function validateCeramicRoof({doc,bin},material,name,{allowUnmapped=false}={}){
+  const pbr=material.pbrMetallicRoughness;
+  assert(/^(classic|compact|harbor|alpine)_/.test(name),`${name}: ceramic shading belongs to tiled/slate architecture`);
+  assert.equal(material.name,`${name} / roof ceramic`,`${name}: explicit authored roof material`);
+  assert(pbr&&Number.isFinite(pbr.roughnessFactor)&&Math.abs(pbr.roughnessFactor-.43)<1e-6,`${name}: reviewed ceramic roughness`);
+  assert.equal(pbr.metallicFactor,0,`${name}: ceramic is not metallic`);
+  assert(!pbr.metallicRoughnessTexture&&!pbr.baseColorTexture&&!material.normalTexture,`${name}: ceramic uses no fragmented color, roughness or normal atlas`);
+  const primitives=doc.meshes.flatMap(mesh=>mesh.primitives).filter(primitive=>doc.materials[primitive.material]===material);
+  assert(primitives.length,`${name}: roof material is used`);
+  for(const primitive of primitives)assert(primitive.attributes.COLOR_0!==undefined,`${name}: roof retains authored vertex colors`);
+  if(allowUnmapped&&!material.occlusionTexture)return;
+  const binding=material.occlusionTexture;
+  assert(binding&&Number.isInteger(binding.index)&&!binding.extensions,`${name}: explicit untransformed ceramic AO ramp`);
+  assert.equal(binding.strength??1,1,`${name}: AO ramp already contains its bounded strength`);
+  const texture=doc.textures?.[binding.index],image=doc.images?.[texture?.source],sampler=doc.samplers?.[texture?.sampler];
+  assert(texture&&Number.isInteger(texture.source)&&image&&Number.isInteger(image.bufferView)&&!image.uri,`${name}: self-contained ceramic ramp`);
+  assert.equal(sampler?.wrapS,33071,`${name}: ceramic ramp clamps horizontally`);
+  assert.equal(sampler?.wrapT,33071,`${name}: ceramic ramp clamps vertically`);
+  assert.equal(sampler?.magFilter,9729,`${name}: linear ceramic ramp sampling`);
+  assert([9729,9987].includes(sampler?.minFilter),`${name}: linear ceramic ramp minification`);
+  for(const other of doc.materials)if(other!==material){
+    for(const ref of [other.occlusionTexture,other.normalTexture,other.pbrMetallicRoughness?.metallicRoughnessTexture,other.pbrMetallicRoughness?.baseColorTexture])if(ref)assert.notEqual(doc.textures[ref.index]?.source,texture.source,`${name}: ramp is separate from facade atlases`);
+  }
+  const view=doc.bufferViews[image.bufferView],start=view.byteOffset||0,png=bin.subarray(start,start+view.byteLength);
+  assert.equal(png.subarray(0,8).toString('hex'),'89504e470d0a1a0a',`${name}: lossless ceramic AO PNG`);
+  assert.equal(png.readUInt32BE(16),256,`${name}: continuous 256-sample ramp`);assert.equal(png.readUInt32BE(20),1,`${name}: one-row ramp without gutters`);
+  assert.equal(png[24],8,`${name}: bounded 8-bit ramp`);assert.equal(png[26],0);assert.equal(png[27],0);assert.equal(png[28],0,`${name}: non-interlaced ramp`);
+  const channels={0:1,2:3,4:2,6:4}[png[25]];assert(channels,`${name}: grayscale or RGB ramp pixels`);
+  const idat=[];for(let cursor=8;cursor+12<=png.length;){const length=png.readUInt32BE(cursor),kind=png.toString('ascii',cursor+4,cursor+8);assert(cursor+12+length<=png.length,`${name}: complete ramp PNG chunk`);if(kind==='IDAT')idat.push(png.subarray(cursor+8,cursor+8+length));cursor+=length+12;}
+  const encoded=inflateSync(Buffer.concat(idat),{maxOutputLength:256*channels+1});assert.equal(encoded.length,256*channels+1);
+  const row=Buffer.alloc(256*channels),filter=encoded[0];assert(filter<=4,`${name}: known PNG row filter`);
+  for(let i=0;i<row.length;i++){const left=i>=channels?row[i-channels]:0;const prediction=filter===1||filter===4?left:filter===3?Math.floor(left/2):0;row[i]=(encoded[i+1]+prediction)&255;}
+  for(let x=0;x<256;x++){
+    const offset=x*channels,gray=row[offset],expected=Math.round((.68+.32*x/255)*255);
+    assert(Math.abs(gray-expected)<=1,`${name}: AO ramp pixel ${x} stays in the smooth .68–1 range`);
+    if(channels>=3)assert(row[offset+1]===gray&&row[offset+2]===gray,`${name}: neutral grayscale AO`);
+    if(channels===2||channels===4)assert.equal(row[offset+channels-1],255,`${name}: opaque ramp pixels`);
+  }
+  const uvName=`TEXCOORD_${binding.texCoord??0}`,tolerance=1/65535+1e-7;
+  for(const primitive of primitives){
+    const a=doc.accessors[primitive.attributes[uvName]],position=doc.accessors[primitive.attributes.POSITION];
+    assert(a&&a.type==='VEC2'&&a.count===position.count,`${name}: roof AO coordinates cover each vertex`);
+    assert(a.componentType===5126||a.componentType===5123&&a.normalized,`${name}: bounded UV storage`);
+    const uvView=doc.bufferViews[a.bufferView],width=a.componentType===5126?4:2,stride=uvView.byteStride||2*width,base=(uvView.byteOffset||0)+(a.byteOffset||0);
+    for(let i=0;i<a.count;i++){
+      const offset=base+i*stride,u=width===4?bin.readFloatLE(offset):bin.readUInt16LE(offset)/65535,v=width===4?bin.readFloatLE(offset+width):bin.readUInt16LE(offset+width)/65535;
+      assert(Number.isFinite(u)&&u>=.5/256-tolerance&&u<=255.5/256+tolerance&&Number.isFinite(v)&&Math.abs(v-.5)<=tolerance,`${name}: AO samples stay at ramp texel centers`);
+    }
+  }
+}
 
 export function parseGLB(bytes){
   assert.equal(bytes.toString('ascii',0,4),'glTF');assert.equal(bytes.readUInt32LE(4),2);assert.equal(bytes.readUInt32LE(8),bytes.length);
@@ -88,11 +142,17 @@ function inspectSource(catalog,region,asset,{far=false,smoke=false,sourceRoot=HE
   measured.size.forEach((size,i)=>assert(size<=limits[i]+.002,`${name}: parcel clearance; no packing deformation`));
   assert(Math.abs(measured.bounds.min[1])<.002,'grounded');assert(Math.abs(measured.bounds.min[0]+measured.bounds.max[0])<.002&&Math.abs(measured.bounds.min[2]+measured.bounds.max[2])<.002,'centered');
   assert(measured.triangles>500&&measured.triangles<=(far?20000:hero?60000:large?80000:50000),`${name}: ${measured.triangles} triangles exceeds mobile budget`);
-  assert(measured.materials<=3,`${name}: compact material set`);
+  // Dense ceramic/slate tiles use a separate constant-roughness surface and
+  // continuous local-AO ramp; their former sub-texel ORM islands made black seams.
+  // Only one extra roof surface is allowed; the metal city keeps its own PBR.
+  const ceramic=(parsed.doc.materials||[]).filter(material=>material.name?.endsWith(' / roof ceramic'));
+  assert(ceramic.length<=1&&(!ceramic.length||['classic','compact','harbor','alpine'].includes(region)),`${name}: one dedicated tiled/slate roof surface`);
+  for(const material of ceramic)validateCeramicRoof(parsed,material,name,{allowUnmapped:smoke});
+  assert(measured.materials<=3+ceramic.length,`${name}: compact material set`);
   // Smoke accepts draft vertex colors. Actual delivery also needs its ORM atlas.
   if(!smoke){
     assert(record.surface?.textureSize>0&&parsed.doc.images?.length,`${name}: final surface atlas required`);
-    for(const material of parsed.doc.materials||[])assert(material.pbrMetallicRoughness?.metallicRoughnessTexture&&material.occlusionTexture,`${name}: ORM material mapping`);
+    for(const material of parsed.doc.materials||[])if(!ceramic.includes(material))assert(material.pbrMetallicRoughness?.metallicRoughnessTexture&&material.occlusionTexture,`${name}: ORM material mapping`);
     for(const image of parsed.doc.images||[]){
       const view=parsed.doc.bufferViews[image.bufferView],png=parsed.bin.subarray(view.byteOffset||0,(view.byteOffset||0)+view.byteLength);
       assert.equal(png.subarray(0,8).toString('hex'),'89504e470d0a1a0a',`${name}: lossless authored ORM`);

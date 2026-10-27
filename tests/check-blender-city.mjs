@@ -7,6 +7,7 @@ import crypto from 'node:crypto';
 import {fileURLToPath} from 'node:url';
 import {Matrix4,Vector3,Quaternion,Box3} from '../assets/vendor/three/three.module.min.js';
 import {glb,verifyAnimation} from './ai-city-fixture.mjs';
+import {validateCeramicRoof} from '../art/blender-city/publish.mjs';
 
 const root=fileURLToPath(new URL('..',import.meta.url));
 const sourceType='authored_blender_reference_rebuild';
@@ -93,6 +94,16 @@ function packageFile(file,region,expected,{far=false,hero=false,nearManifest=nul
       if(key==='compact/villa_2')assert.equal(report.maxColorError,0,'accepted benchmark colors remain exact');
     }
     const original=glb(originalBytes),originalRoots=original.doc.scenes[original.doc.scene||0].nodes;
+    const usedMaterials=new Set(original.doc.meshes.flatMap(mesh=>mesh.primitives.map(primitive=>primitive.material)));
+    const ceramic=[...usedMaterials].filter(i=>original.doc.materials[i].name?.endsWith(' / roof ceramic'));
+    assert(ceramic.length<=1&&(!ceramic.length||['classic','compact','harbor','alpine'].includes(region)),`${key}: one dedicated tiled/slate surface`);
+    assert(usedMaterials.size<=3+ceramic.length,`${key}: bounded material draw calls`);
+    for(const i of usedMaterials){
+      const material=original.doc.materials[i],pbr=material.pbrMetallicRoughness;
+      if(ceramic.includes(i)){
+        validateCeramicRoof(original,material,node.name);
+      }else assert(material.occlusionTexture&&pbr.metallicRoughnessTexture,`${key}: non-roof material retains its baked surface`);
+    }
     if(extra.family==='onsen')assert.deepEqual(extra.thermalPools,original.doc.nodes[originalRoots[0]].extras.thermalPools,`${key}: authored pool anchors survive publishing`);
     assert.equal(originalRoots.length,1);assert.equal(measure(original,originalRoots[0]).fingerprint,m.fingerprint,'original geometry and transforms survive packaging exactly');
     assert(Math.abs(m.box.min.y)<.002,`${key}: ground contact`);

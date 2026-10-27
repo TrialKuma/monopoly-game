@@ -5,7 +5,7 @@ export function createRoofSnow({ THREE, world, requestRender = () => {} }) {
   const records = new Map(), cache = new Map(), queue = [];
   const material = new THREE.MeshStandardMaterial({ color: '#f2f7fc', roughness: .96,
     metalness: 0, emissive: '#bacfe4', emissiveIntensity: .035, transparent: true,
-    opacity: 0, depthWrite: true });
+    opacity: 0, depthWrite: false, vertexColors: true });
   material.name = 'Cosmetic roof snow';
   let amount = 0, disposed = false, stamp = 0, trianglesProcessed = 0;
   const clamp = value => Math.max(0, Math.min(1, value));
@@ -36,9 +36,10 @@ export function createRoofSnow({ THREE, world, requestRender = () => {} }) {
     // instance transforms, including the short building-upgrade animation.
     const unit = Math.max(.1, Math.abs(model.scale.x)), heightUnit = Math.max(.1, Math.abs(model.scale.y));
     const ownedRoof = Boolean(model.userData.roofOwner);
-    const key = `${model.name}|${unit.toFixed(5)}|${heightUnit.toFixed(5)}|${ownedRoof ? 'owned' : 'neutral'}|` + parts.map(part =>
+    const hasRoofMask = parts.some(part => part.geometry.attributes.cityRoofMask);
+    const key = `${model.name}|${unit.toFixed(5)}|${heightUnit.toFixed(5)}|${ownedRoof ? 'owned' : 'neutral'}|${hasRoofMask ? 'roof-mask' : 'heightfield'}|` + parts.map(part =>
       `${part.geometry.uuid}:${part.forbidden ? 1 : 0}:${part.materials.map(mat => mat?.name || mat?.color?.getHexString() || '').join(',')}:${part.matrix.elements.map(v => v.toFixed(5)).join(',')}`).join(';');
-    return { parts, bounds, unit, heightUnit, key, ownedRoof };
+    return { parts, bounds, unit, heightUnit, key, ownedRoof, hasRoofMask };
   }
   function eligible(material, forbidden) {
     if (!material || forbidden || material.visible === false || material.opacity < .85) return false;
@@ -54,7 +55,7 @@ export function createRoofSnow({ THREE, world, requestRender = () => {} }) {
     const nx = Math.ceil((bounds.max.x - bounds.min.x) / step) + 1;
     const nz = Math.ceil((bounds.max.z - bounds.min.z) / step) + 1;
     const count = nx * nz, heights = new Float32Array(count); heights.fill(-Infinity);
-    const suitable = new Uint8Array(count), sourceNormals = new Float32Array(count);
+    const suitable = new Uint8Array(count), candidates = new Uint8Array(count), sourceNormals = new Float32Array(count);
     const minHeight = bounds.min.y + .175 / heightUnit;
     const a = new THREE.Vector3(), b = new THREE.Vector3(), c = new THREE.Vector3();
     const ab = new THREE.Vector3(), ac = new THREE.Vector3(), normal = new THREE.Vector3();
@@ -71,6 +72,8 @@ export function createRoofSnow({ THREE, world, requestRender = () => {} }) {
           b.fromBufferAttribute(positions, indices ? indices.getX(i + 1) : i + 1).applyMatrix4(matrix);
           c.fromBufferAttribute(positions, indices ? indices.getX(i + 2) : i + 2).applyMatrix4(matrix);
           normal.crossVectors(ab.subVectors(b, a), ac.subVectors(c, a)).normalize();
+          const mask = geometry.attributes.cityRoofMask;
+          const roofFace = !entry.hasRoofMask || (mask && [0, 1, 2].every(offset => mask.getX(indices ? indices.getX(i + offset) : i + offset) > 0));
           if (normal.y < .08 || Math.max(a.y, b.y, c.y) < minHeight) continue;
           const denominator = (b.z - c.z) * (a.x - c.x) + (c.x - b.x) * (a.z - c.z);
           if (Math.abs(denominator) < 1e-10) continue;
@@ -88,7 +91,8 @@ export function createRoofSnow({ THREE, world, requestRender = () => {} }) {
             // water and decorative panels must not receive a floating cap).
             if (y > heights[index] + 1e-6) {
               heights[index] = y;
-              suitable[index] = canHold && normal.y >= .48 && y >= minHeight ? 1 : 0;
+              candidates[index] = canHold && roofFace && y >= minHeight ? 1 : 0;
+              suitable[index] = candidates[index] && normal.y >= .48 ? 1 : 0;
               sourceNormals[index] = normal.y;
             }
           }
@@ -98,22 +102,57 @@ export function createRoofSnow({ THREE, world, requestRender = () => {} }) {
     trianglesProcessed += work;
     yield;
     const topTriangles = [], maxRise = step * 1.72 + .009 / heightUnit;
-    // Leave a narrow painted eave visible on owned buildings. Snow stays white,
-    // but a winter roof can still identify its owner on a phone. Erosion only
-    // removes cap cells inside the existing silhouette; no new surface appears.
-    let exposedEdgeSamples = 0;
-    if (entry.ownedRoof) {
-      const surface = suitable.slice(), band = Math.max(1, Math.ceil(.045 / (step * unit)));
-      for (let iz = 0; iz < nz; iz++) for (let ix = 0; ix < nx; ix++) {
-        const index = iz * nx + ix; if (!surface[index]) continue;
-        let edge = false;
-        for (let dz = -band; dz <= band && !edge; dz++) for (let dx = -band; dx <= band && !edge; dx++) {
-          if (dx * dx + dz * dz > band * band) continue;
-          const x = ix + dx, z = iz + dz, neighbor = z * nx + x;
-          edge = x < 0 || z < 0 || x >= nx || z >= nz || !surface[neighbor]
-            || Math.abs(heights[index] - heights[neighbor]) > maxRise * Math.max(1, Math.hypot(dx, dz));
+    // A curved tile cap has steep little side faces even on an ordinary roof.
+    // Do not turn every such sample into a snow-free stripe. Join only tiny
+    // gaps which are still supported by the same exposed ceramic surface.
+    let bridgedSamples = 0;
+    for (let pass = 0; pass < 2; pass++) {
+      const surface = suitable.slice();
+      for (let iz = 1; iz < nz - 1; iz++) for (let ix = 1; ix < nx - 1; ix++) {
+        const index = iz * nx + ix; if (surface[index] || !candidates[index]) continue;
+        const neighbors = [];
+        for (let dz = -1; dz <= 1; dz++) for (let dx = -1; dx <= 1; dx++) {
+          const other = index + dz * nx + dx;
+          if ((dx || dz) && surface[other] && Math.abs(heights[index] - heights[other]) <= maxRise) neighbors.push(other);
         }
-        if (edge) { suitable[index] = 0; exposedEdgeSamples++; }
+        const supportedAcross = [1, nx].some(stride => {
+          const reaches = [-1, 1].map(direction => {
+            let previous = index;
+            for (let reach = 1; reach <= 2; reach++) {
+              const other = index + direction * stride * reach;
+              if (other < 0 || other >= count || (stride === 1 && Math.floor(other / nx) !== iz) ||
+                !candidates[other] || Math.abs(heights[other] - heights[previous]) > maxRise) return 0;
+              if (surface[other]) return reach;
+              previous = other;
+            }
+            return 0;
+          });
+          return reaches[0] && reaches[1] && reaches[0] + reaches[1] <= 3;
+        });
+        if (neighbors.length >= 5 || supportedAcross) { suitable[index] = 1; bridgedSamples++; }
+      }
+    }
+    // Find real roof/eave boundaries, including steps between roof storeys.
+    // Fade a thin layer into them instead of extruding a rectangular white rim.
+    // Owned roofs retain a slightly wider colored eave for phone readability.
+    let exposedEdgeSamples = 0;
+    const distance = new Float32Array(count); distance.fill(Infinity);
+    const frontier = [];
+    for (let iz = 0; iz < nz; iz++) for (let ix = 0; ix < nx; ix++) {
+      const index = iz * nx + ix; if (!suitable[index]) continue;
+      for (const [dx, dz] of [[-1, 0], [1, 0], [0, -1], [0, 1]]) {
+        const x = ix + dx, z = iz + dz, other = z * nx + x;
+        if (x < 0 || z < 0 || x >= nx || z >= nz || !suitable[other] || Math.abs(heights[index] - heights[other]) > maxRise) {
+          distance[index] = 0; frontier.push(index); exposedEdgeSamples++; break;
+        }
+      }
+    }
+    for (let head = 0; head < frontier.length; head++) {
+      const index = frontier[head], x = index % nx, z = Math.floor(index / nx);
+      for (const [dx, dz] of [[-1, 0], [1, 0], [0, -1], [0, 1]]) {
+        const xx = x + dx, zz = z + dz, other = zz * nx + xx;
+        if (xx < 0 || zz < 0 || xx >= nx || zz >= nz || !suitable[other] || Math.abs(heights[index] - heights[other]) > maxRise) continue;
+        if (distance[other] > distance[index] + 1) { distance[other] = distance[index] + 1; frontier.push(other); }
       }
     }
     const addTop = (x, y, z) => {
@@ -132,7 +171,8 @@ export function createRoofSnow({ THREE, world, requestRender = () => {} }) {
       if (!adjacency.has(vertex)) adjacency.set(vertex, []); adjacency.get(vertex).push(index);
     }));
     const visited = new Uint8Array(topTriangles.length), retained = [];
-    const minTriangles = Math.max(4, Math.ceil(.0025 / (step * step * unit * unit * .5)));
+    let components = 0;
+    const minTriangles = Math.max(6, Math.ceil(.0045 / (step * step * unit * unit * .5)));
     topTriangles.forEach((_, start) => {
       if (visited[start]) return;
       const component = [], pending = [start]; visited[start] = 1;
@@ -140,19 +180,27 @@ export function createRoofSnow({ THREE, world, requestRender = () => {} }) {
         const index = pending.pop(); component.push(index);
         for (const vertex of topTriangles[index]) for (const neighbor of adjacency.get(vertex)) if (!visited[neighbor]) { visited[neighbor] = 1; pending.push(neighbor); }
       }
-      if (component.length >= minTriangles) retained.push(...component.map(index => topTriangles[index]));
+      if (component.length >= minTriangles) { retained.push(...component.map(index => topTriangles[index])); components++; }
     });
     if (!retained.length) return null;
     yield;
-    const base = [], full = [], indices = [], vertexMap = new Map(), edges = new Map();
+    const base = [], full = [], colors = [], indices = [], vertexMap = new Map(), edges = new Map();
+    const coverageAt = index => {
+      const x = (index % nx) * step * unit, z = Math.floor(index / nx) * step * unit;
+      const irregular = .78 + Math.sin(x * 23.7 + z * 11.3) * .12 + Math.cos(z * 17.9 - x * 15.1) * .10;
+      const feather = Math.max(.035, step * unit * (entry.ownedRoof ? 2.3 : 1.55));
+      const t = clamp(distance[index] * step * unit / feather * irregular);
+      return t * t * (3 - 2 * t);
+    };
     const thicknessAt = index => {
       const x = (index % nx) * step * unit, z = Math.floor(index / nx) * step * unit;
-      return (.036 + Math.sin(x * 14.1 + z * 7.3) * .004 + Math.cos(z * 19.3 - x * 6.7) * .003) / heightUnit;
+      return (.009 + Math.sin(x * 14.1 + z * 7.3) * .002 + Math.cos(z * 19.3 - x * 6.7) * .0015) * coverageAt(index) / heightUnit;
     };
-    const vertex = (index, low = false) => {
+    const vertex = index => {
       const x = bounds.min.x + (index % nx) * step, z = bounds.min.z + Math.floor(index / nx) * step;
-      const y = heights[index] + (low ? .002 : .007) / heightUnit;
-      const result = base.length / 3; base.push(x, y, z); full.push(x, low ? y : y + thicknessAt(index), z); return result;
+      const y = heights[index] + .004 / heightUnit;
+      const result = base.length / 3; base.push(x, y, z); full.push(x, y + thicknessAt(index), z);
+      colors.push(1, 1, 1, coverageAt(index)); return result;
     };
     for (const triangle of retained) {
       for (const index of triangle) { if (!vertexMap.has(index)) vertexMap.set(index, vertex(index)); indices.push(vertexMap.get(index)); }
@@ -162,18 +210,15 @@ export function createRoofSnow({ THREE, world, requestRender = () => {} }) {
       }
     }
     const topIndexCount = indices.length;
-    for (const [a, b] of edges.values()) {
-      const at = vertex(a), bt = vertex(b), ab = vertex(a, true), bb = vertex(b, true);
-      indices.push(at, ab, bt, bt, ab, bb);
-    }
     const geometry = entry.geometry;
-    geometry.setAttribute('position', new THREE.Float32BufferAttribute(base, 3)); geometry.setIndex(indices); geometry.computeVertexNormals();
+    geometry.setAttribute('position', new THREE.Float32BufferAttribute(base, 3)); geometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 4)); geometry.setIndex(indices); geometry.computeVertexNormals();
     geometry.morphAttributes.position = [new THREE.Float32BufferAttribute(full, 3)];
     geometry.computeBoundingBox(); geometry.computeBoundingSphere();
     geometry.userData.roofSnow = { topIndexCount, capTriangles: retained.length, borderEdges: edges.size,
       minSourceNormal: Math.min(...Array.from(vertexMap.keys(), index => sourceNormals[index])),
-      stepWorld: step * unit, maxDepthWorld: .048, model: entry.name,
-      ownedRoof: entry.ownedRoof, exposedEdgeSamples };
+      stepWorld: step * unit, maxDepthWorld: .017, model: entry.name,
+      ownedRoof: entry.ownedRoof, exposedEdgeSamples, bridgedSamples, components,
+      edgeProfile: 'thin_feathered_coverage', usesAuthoredRoofMask: entry.hasRoofMask };
     return geometry;
   }
   function install(record) {
@@ -191,7 +236,15 @@ export function createRoofSnow({ THREE, world, requestRender = () => {} }) {
   }
   function refresh() {
     if (disposed) return;
-    for (const [model, record] of records) if (!belongs(model) || record.entry.ownedRoof !== Boolean(model.userData.roofOwner)) { release(record); records.delete(model); }
+    for (const [model, record] of records) {
+      // Ownership derives its roof mask lazily on geometry shared by all
+      // placements. Existing neutral copies must pick up that surface mask
+      // too, even though their own ownership has not changed.
+      const hasRoofMask = record.sourceGeometry.some(geometry => geometry.attributes.cityRoofMask);
+      if (!belongs(model) || record.entry.ownedRoof !== Boolean(model.userData.roofOwner) || record.entry.hasRoofMask !== hasRoofMask) {
+        release(record); records.delete(model);
+      }
+    }
     const targets = [];
     world.traverse(node => {
       if (!node.userData.snowTarget || cosmetic(node)) return;
@@ -207,7 +260,7 @@ export function createRoofSnow({ THREE, world, requestRender = () => {} }) {
         entry.iterator = build(entry); cache.set(entry.key, entry); queue.push(entry);
       }
       entry.refs++; entry.used = ++stamp;
-      const record = { model, entry, root: null, mesh: null, installed: false };
+      const record = { model, entry, sourceGeometry: data.parts.map(part => part.geometry), root: null, mesh: null, installed: false };
       if (entry.geometry) {
         record.root = new THREE.Group(); record.root.name = 'building_roof_snow'; record.root.userData.cosmetic = true;
         record.mesh = new THREE.Mesh(entry.geometry, material); record.mesh.name = 'roof_snow_cap';

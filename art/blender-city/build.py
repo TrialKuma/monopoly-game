@@ -2,8 +2,10 @@
 
 blender -b -t 3 --python art/blender-city/build.py -- --region expansion
 Use --assets villa_1,villa_2 for a bounded rebuild; --draft omits the AO bake.
+Use --skip-render when storage compression will run before --render-only.
 """
-import argparse, hashlib, importlib.util, json, math, sys, time
+import argparse, hashlib, importlib.util, json, math, re, sys, time
+from array import array
 from pathlib import Path
 import bpy
 from mathutils import Vector, Matrix
@@ -28,24 +30,55 @@ def bounds(root):
     bpy.context.view_layer.update();points=[o.matrix_world@Vector(c) for o in meshes(root) for c in o.bound_box]
     lo=Vector(tuple(min(p[k] for p in points) for k in range(3)));hi=Vector(tuple(max(p[k] for p in points) for k in range(3)));return lo,hi
 def triangles(root):return sum(sum(len(p.vertices)-2 for p in o.data.polygons) for o in meshes(root))
-def mat_category(mat):
-    name=mat.name.lower().split('/')[-1].strip()
+def mat_category(mat,region=None):
+    name=re.sub(r'\.\d+$','',mat.name.lower().split('/')[-1].strip())
+    if region in ('classic','compact','harbor','alpine') and name in ('roof','roof_edge','edge'):return 'roof ceramic'
     if any(k in name for k in ('glass','glazing','warm light','lantern glass','window pane')):return 'warm window glass'
     if any(k in name for k in ('water','leaf','leaves','foliage','flower','soil','pool')):return 'water foliage'
     return 'solid'
 
+def split_roof_surfaces(root,cats):
+    """Keep ceramic faces out of the facade bake without moving a vertex.
+
+    These solid tile shells already provide real shape and lighting. Packing
+    each thin lip into an AO atlas made sub-texel islands and black/glossy gaps.
+    Separate by the authored palette so the facade can use the entire atlas;
+    the unselected roof stays in the scene and still occludes light onto walls.
+    """
+    for obj in list(meshes(root)):
+        roof=[cats[obj.data.materials[p.material_index]]=='roof ceramic' for p in obj.data.polygons]
+        if not any(roof) or all(roof):continue
+        bpy.ops.object.select_all(action='DESELECT');obj.select_set(True)
+        bpy.context.view_layer.objects.active=obj
+        bpy.ops.object.mode_set(mode='EDIT');bpy.ops.mesh.select_mode(type='FACE');bpy.ops.mesh.select_all(action='DESELECT');bpy.ops.object.mode_set(mode='OBJECT')
+        for polygon,selected in zip(obj.data.polygons,roof):polygon.select=selected
+        bpy.ops.object.mode_set(mode='EDIT');bpy.ops.mesh.separate(type='SELECTED');bpy.ops.object.mode_set(mode='OBJECT')
+        for split in bpy.context.selected_objects:
+            if split!=obj:split.name=obj.name+' ceramic'
+    objs=meshes(root)
+    bake=[obj for obj in objs if any(cats[obj.data.materials[p.material_index]]!='roof ceramic' for p in obj.data.polygons)]
+    assert all(all(cats[obj.data.materials[p.material_index]]!='roof ceramic' for p in obj.data.polygons) for obj in bake)
+    return objs,bake
+
 def atlas(root,folder,size=1024,draft=False):
-    """Exact face colours plus a local occlusion/roughness atlas, 2-3 materials.
+    """Exact face colours plus a local occlusion/roughness atlas.
 
     Colour is stored in COLOR_0, so narrow window bars never depend on the atlas
-    resolution. No directional lighting or generated texture is baked into it.
+    resolution. Tiled/slate ceramic roofs use one material and a continuous scalar
+    AO ramp, with real tile lighting rather than sub-pixel baked seams. The modern
+    metal roof keeps its authored metalness. No directional lighting is baked in.
     """
     objs=meshes(root);mats=sorted({m for o in objs for m in o.data.materials if m},key=lambda m:m.name)
     # Make separate instances per asset so later operations cannot change neighbours.
     copies={m:m.copy() for m in mats}
     for o in objs:
         for i,m in enumerate(o.data.materials):o.data.materials[i]=copies[m]
-    mats=list(copies.values());cats={m:mat_category(m) for m in mats}
+    region=root.get('region');mats=list(copies.values());cats={m:mat_category(m,region) for m in mats}
+    # Palette slots also include unused roof paints on flat-roof buildings.
+    # Only actual ceramic faces require a separate roof bake and AO samples.
+    ceramic=any(cats[o.data.materials[p.material_index]]=='roof ceramic'
+                for o in objs for p in o.data.polygons)
+    objs,bake_objs=split_roof_surfaces(root,cats) if ceramic else (objs,objs)
     for o in objs:
         if not o.data.color_attributes.get('Color'):
             color=o.data.color_attributes.new(name='Color',type='FLOAT_COLOR',domain='CORNER')
@@ -59,15 +92,21 @@ def atlas(root,folder,size=1024,draft=False):
     image=None
     if not draft:
         bpy.ops.object.select_all(action='DESELECT')
-        for o in objs:o.select_set(True)
-        bpy.context.view_layer.objects.active=objs[0]
+        for o in bake_objs:o.select_set(True)
+        bpy.context.view_layer.objects.active=bake_objs[0]
         bpy.ops.object.mode_set(mode='EDIT');bpy.ops.mesh.select_all(action='SELECT')
         bpy.ops.uv.smart_project(angle_limit=math.radians(66),island_margin=.003,area_weight=.5,correct_aspect=True,scale_to_bounds=True)
         bpy.ops.object.mode_set(mode='OBJECT')
         image=bpy.data.images.new(root.name+' ORM',width=size,height=size,alpha=False)
         image.colorspace_settings.name='Non-Color';image.generated_color=(1,.65,0,1)
+        if ceramic:
+            # Preserve neutral texels around tiny facade details. Clearing an
+            # EMIT bake fills unused pixels with black (AO=0, roughness=0), which
+            # then bleeds into valid islands under bilinear/mipmap filtering.
+            image.pixels.foreach_set(array('f',(1,.65,0,1))*(size*size));image.update()
         lo,hi=bounds(root);distance=(hi-lo).z*.055
         for m in mats:
+            if cats[m]=='roof ceramic':continue
             nodes=m.node_tree.nodes;links=m.node_tree.links;bsdf=next((n for n in nodes if n.type=='BSDF_PRINCIPLED'),None)
             rough=float(bsdf.inputs['Roughness'].default_value) if bsdf else .65
             metallic=float(bsdf.inputs['Metallic'].default_value) if bsdf else 0
@@ -78,8 +117,8 @@ def atlas(root,folder,size=1024,draft=False):
             tex=nodes.new('ShaderNodeTexImage');tex.image=image;nodes.active=tex
         scene=bpy.context.scene;scene.render.engine='CYCLES';scene.cycles.device='CPU';scene.cycles.samples=1
         scene.render.threads_mode='FIXED';scene.render.threads=3
-        scene.render.bake.use_clear=True
-        bpy.ops.object.bake(type='EMIT',use_clear=True,margin=4)
+        scene.render.bake.use_clear=not ceramic
+        bpy.ops.object.bake(type='EMIT',use_clear=not ceramic,margin=4)
         image.filepath_raw=str(folder/'surface-orm.png');image.file_format='PNG';image.save();image.pack()
     shared={}
     for category in sorted(set(cats.values())):
@@ -87,9 +126,12 @@ def atlas(root,folder,size=1024,draft=False):
         nodes=m.node_tree.nodes;links=m.node_tree.links;p=nodes.get('Principled BSDF');p.inputs['Base Color'].default_value=(1,1,1,1);p.inputs['Roughness'].default_value=.65
         # Explicit vertex colour node supports both .blend review and glTF COLOR_0.
         v=nodes.new('ShaderNodeVertexColor');v.layer_name='Color';links.new(v.outputs['Color'],p.inputs['Base Color'])
+        if category=='roof ceramic':
+            p.inputs['Roughness'].default_value=.43;p.inputs['Metallic'].default_value=0
+            m['surfacePolicy']='solid ceramic geometry; stable roughness; no micro-island AO'
         if category=='warm window glass':
             p.inputs['Emission Color'].default_value=(1,.55,.18,1);p.inputs['Emission Strength'].default_value=.035
-        if image:
+        if image and category!='roof ceramic':
             tex=nodes.new('ShaderNodeTexImage');tex.image=image
             sep=nodes.new('ShaderNodeSeparateColor');sep.mode='RGB';links.new(tex.outputs['Color'],sep.inputs[0]);links.new(sep.outputs['Green'],p.inputs['Roughness']);links.new(sep.outputs['Blue'],p.inputs['Metallic'])
             group=bpy.data.node_groups.new('glTF Material Output','ShaderNodeTree');group.interface.new_socket(name='Occlusion',in_out='INPUT',socket_type='NodeSocketFloat').default_value=1
@@ -100,7 +142,15 @@ def atlas(root,folder,size=1024,draft=False):
         slots=list(shared);o.data.materials.clear()
         for key in slots:o.data.materials.append(shared[key])
         for p,category in zip(o.data.polygons,categories):p.material_index=slots.index(category)
-    return {'materials':len(shared),'textureSize':0 if draft else size,'vertexColours':True,'aoSamples':32,'directionalLightingBaked':False}
+    details={'materials':len(shared),'textureSize':0 if draft else size,'vertexColours':True,'aoSamples':32,'directionalLightingBaked':False}
+    if ceramic:
+        details['roofSurface']={'method':'authored_geometry_unmapped_ceramic','roughness':.43,'aoTexture':False,'roofExcludedFromFacadeAtlas':True,'neutralAtlasBackground':True}
+        if not draft:
+            shader_path=HERE/'roof_shading.py';shader=load_module('roof_shading',shader_path)
+            roof_image,roof_details=shader.ambient_uv(root,shader.roof_objects(root),folder)
+            shader.attach(shared['roof ceramic'],roof_image)
+            details['roofSurface']={**roof_details,'builder':str(shader_path.relative_to(ROOT)).replace('\\','/'),'builderSha256':digest(shader_path)}
+    return details
 
 def fit(root,asset):
     lo,hi=bounds(root);size=hi-lo
@@ -163,7 +213,8 @@ def render_model(path,output,resolution=384):
     save_json(output.with_suffix('.json'),{'sourceModelSha256':digest(path),'pngSha256':digest(output),'view':'iso','sourceType':SOURCE})
 
 def main():
-    p=argparse.ArgumentParser();p.add_argument('--region',required=True);p.add_argument('--assets');p.add_argument('--draft',action='store_true');p.add_argument('--render-only',action='store_true');p.add_argument('--skip-existing',action='store_true');args=p.parse_args(sys.argv[sys.argv.index('--')+1:])
+    p=argparse.ArgumentParser();p.add_argument('--region',required=True);p.add_argument('--assets');p.add_argument('--draft',action='store_true');p.add_argument('--render-only',action='store_true');p.add_argument('--skip-render',action='store_true');p.add_argument('--skip-existing',action='store_true');args=p.parse_args(sys.argv[sys.argv.index('--')+1:])
+    if args.render_only and args.skip_render:p.error('--skip-render cannot be combined with --render-only')
     region=args.region;module_name='western' if region in ('classic','harbor') else 'eastern' if region in ('compact','alpine') else 'metropolitan'
     path=HERE/'regions'/f'{module_name}.py';builder_sha=digest(path);pipeline_sha=digest(__file__);module=load_module('authored_'+module_name,path)
     names=args.assets.split(',') if args.assets else list(CAT['regions'][region])+(['harbor_lighthouse'] if region=='harbor' else ['alpine_windmill'] if region=='alpine' else [])
@@ -176,7 +227,7 @@ def main():
             if old.get('sha256')==digest(glb):
                 receipt=preview.with_suffix('.json')
                 binding=json.loads(receipt.read_text('utf-8')) if receipt.exists() else {}
-                if not preview.exists() or binding.get('sourceModelSha256')!=digest(glb) or binding.get('pngSha256')!=digest(preview):render_model(glb,preview)
+                if not args.skip_render and (not preview.exists() or binding.get('sourceModelSha256')!=digest(glb) or binding.get('pngSha256')!=digest(preview)):render_model(glb,preview)
                 continue
         reset();root=module.build(region,asset);root.name=asset if asset.startswith(region+'_') else f'{region}_{asset}'
         reference=CAT['regions'][region].get(asset,{})
@@ -193,6 +244,6 @@ def main():
         record={'region':region,'asset':asset,'name':root.name,'sourceType':SOURCE,'family':root.get('family'),'level':root.get('level'),'referenceViews':reference.get('referenceViews',[]),'triangles':triangles(root),'size':[dimensions.x,dimensions.z,dimensions.y],'bounds':{'min':[lo.x,lo.z,-hi.y],'max':[hi.x,hi.z,-lo.y]},'scale':scale,'bytes':glb.stat().st_size,'sha256':digest(glb),'builder':str(path.relative_to(ROOT)).replace('\\','/'),'builderSha256':builder_sha,'pipelineSha256':pipeline_sha,'surface':details,'status':'built_pending_scene_review','seconds':round(time.monotonic()-started,2)}
         save_json(folder/'model.json',record)
         print('AUTHORED_ASSET_READY '+json.dumps({'region':region,'asset':asset,'triangles':record['triangles'],'bytes':record['bytes']}),flush=True)
-        render_model(glb,preview)
+        if not args.skip_render:render_model(glb,preview)
 
 if __name__=='__main__':main()

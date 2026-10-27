@@ -1,0 +1,81 @@
+{
+  "date": "2026-10-28",
+  "scope": "Kyoto (compact) ceramic roof cleanup; local integration only",
+  "nearBuildings": 29,
+  "farBuildings": 5,
+  "changes": [
+    "Dedicated matte ceramic surface without fragmented AO/roughness atlas sampling; real tile geometry and vertex colours retained",
+    "Facade baking excludes ceramic surfaces and keeps a neutral background",
+    "Gable beam clearance derived from actual slope and beam section",
+    "Thin ceramic collar/overlay removal; approved villa archive remains unchanged",
+    "Continuous ridge ornaments sit above actual ridge and follow its direction",
+    "Ownership shaders accept the dedicated ceramic material; model and preview caches refreshed"
+  ],
+  "installed": {
+    "nearSha256": "844b8a690b44ecd76a64db0ef9f60b1c469ba474119147daa745db9e13b9e168",
+    "farSha256": "040da651a15b4380e008558c0c2679fbe0735c2b60870e819c4eced22cff38e9",
+    "nearBytes": 68475352,
+    "farBytes": 6512652
+  },
+  "otherMapsUnchanged": {
+    "alpine": true,
+    "classic": true,
+    "expansion": true,
+    "harbor": true
+  },
+  "checks": {
+    "geometryClearance": "7 source structures passed; minimum deck clearance 0.012508 author units",
+    "approvedVilla": "1652 micro-overlay faces removed; retained geometry/materials/bounds and corner normals unchanged; archived source unchanged",
+    "publisher": "Complete five-map preflight passed; only Kyoto geometry packs changed",
+    "packAndPreviews": "29 near, 5 far, 29 previews and 29 UI routes passed",
+    "ownership": "105 building variants across five regions passed; walls, glass and seasonal bindings preserved",
+    "cache": "12 resource cache checks passed"
+  },
+  "visualReview": {
+    "renderer": "Actual scene.js and installed formal GLB packs on an isolated board snapshot",
+    "viewports": [
+      [
+        1280,
+        720
+      ],
+      [
+        390,
+        844
+      ],
+      [
+        320,
+        740
+      ]
+    ],
+    "angles": [
+      "77-degree roof gallery",
+      "71-degree board view",
+      "45-degree portrait board view"
+    ],
+    "lighting": [
+      "day",
+      "night"
+    ],
+    "ownership": [
+      "neutral",
+      "human",
+      "ai"
+    ],
+    "all29RoofOverviewInspected": true,
+    "physicalPhoneTested": false,
+    "screenshots": [
+      "all-roofs-top-a.png",
+      "all-roofs-top-b.png",
+      "tower3-top-fixed.png",
+      "game-after-wide.png",
+      "game-finance-phone.png",
+      "game-finance-top-phone.png",
+      "game-onsen-night-phone.png",
+      "game-tower-320.png"
+    ],
+    "evidenceDirectory": "work/kyoto-roof-audit"
+  },
+  "tradeoff": "Kyoto can use one additional lightweight material per building; no additional roof texture. Mesh and package budgets pass; no claim of physical-phone FPS.",
+  "gitAction": "No commit or push by this repair task",
+  "newAIInferenceCalls": 0
+}

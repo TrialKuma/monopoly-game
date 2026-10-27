@@ -19,7 +19,7 @@
   <footer><span id="state">6 × 6</span><button id="reset">重置</button><button id="play" disabled>开放码头区 · ＋12 格</button></footer>
 </main>
 <script type="module">
-  import { createTownScene } from './town-scene.js?v=20261025-district1';
+  import { createTownScene } from './town-scene.js?v=20261028-global-roofs2';
   const families = [['villa','海湾公馆'],['shop','港湾商铺'],['hotel','海岸酒店'],['tower','航海事务所'],['finance','海港商会'],['skyscraper','港湾观景楼'],['onsen','海崖温泉']];
   const catalog = families.map(([family,name],i)=>({id:`harbor_${family}`,region:'harbor',family,name,footprint:i>=4?[2,1]:[1,1]}));
   const placements = [[0,0,0],[2,0,0],[4,0,0],[1,2,0],[3,2,0],[0,4,0],[4,4,1]];
