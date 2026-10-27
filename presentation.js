@@ -46,7 +46,7 @@
   const mapGuide = document.getElementById('map-guide');
   const mapGuides = {
     classic: {title:'经典环线',copy:'同街区地产连锁收租。'},
-    compact: {title:'紧凑冲突',copy:'地产密集，没有冲刺和传送。命运转盘可能引发地震，震塌的楼谁先到谁修。'},
+    compact: {title:'紧凑冲突',copy:'地产密集，命运转盘可能地震。'},
     expansion: {title:'都市大环线',copy:'六街区各有一处 Lv.1 开业地产。城市快线再走 3–5 格。'},
     harbor: {title:'潮汐港湾 · 三岛',copy:'中央地标 · 商贸岛 · 度假岛'},
     alpine: {title:'云岭温泉',copy:'缆车再走 2–4 格，温泉可让对手休息一回合。'},
@@ -151,7 +151,7 @@
       construction:'随机给自己加盖一处，或者随机拆对手一处。',
       card_draw:'三张道具卡选一张放进背包，掷骰前可以用。',
       chance:'花钱买一张道具卡，每次最多一张。',
-      event:'随机事件。可能地震：最高的楼先塌，塌了谁先停上去花一半成本修好就归谁。',
+      event:'随机事件，可能地震。',
       rush:special.rushMin?`再往前冲 ${special.rushMin} 到 ${special.rushMax} 格，停下的地方照常处理。`:'',
       teleport:special.settleArrival?'随机送到一块地产，到了照常买地或交租。':'随机送到一块地产，到了不交租也不能买。',
     })[special.type]||special.description||'';
@@ -180,7 +180,7 @@
     if(lot){
       const mates=lot.district?state.board.filter(t=>t.lot&&!t.isLargeSecondary&&t.lot.district===lot.district):[];
       const effect=effectText(lot);
-      inspector.innerHTML=`<p class="panel-label">${esc(lot.district||'地产手册')}</p><h2>${esc(tile.name)}</h2><div class="property-meta"><span>${owner?(owner.id==='human'?'你的地产':'对手地产'):lot.ruined?'废墟':'待售'}</span><span>${lot.level===0?'空地':`Lv.${lot.level}`}</span>${lot.isLarge?'<span>占据 2 格</span>':''}</div><div class="property-price">${money(owner?rent.total:getLotPurchasePrice(lot))} <small>${owner?'街区租金':lot.ruined?'修复费用':'购买价格'}</small></div>${owner?`<div class="property-breakdown">${rent.lots.map(t=>`${esc(t.name)} ${money(t.lot.tolls[t.lot.level])}`).join(' ＋ ')}<br>街区合计 ${money(rent.base)} × ${rent.multiplier}</div>`:''}<p class="property-rents">租金${lot.tolls.map((value,level)=>`<span${level===lot.level?' class="is-current"':''}>${level===0?'空地':`${level} 级`} ${money(value)}</span>`).join('')}</p>${mates.length>1?`<p class="property-district">同街区${mates.map(t=>`<span class="${[t.lot.ownerId==='human'?'is-human':t.lot.ownerId?'is-ai':'',t.lot===lot?'is-self':''].join(' ').trim()}">${esc(t.name)}</span>`).join('')}</p>`:''}<p class="property-note">${!owner&&lot.ruined?`修好恢复 Lv.${lot.level}。`:!owner&&lot.level>0?`买下保留 Lv.${lot.level} 建筑。`:lot.level<3?`升级到 Lv.${lot.level+1}：${money(lot.buildCosts[lot.level+1])}`:'已达最高等级。'}${effect?`<br>${effect}。`:''}</p>`;
+      inspector.innerHTML=`<p class="panel-label">${esc(lot.district||'地产手册')}</p><h2>${esc(tile.name)}</h2><div class="property-meta"><span>${owner?(owner.id==='human'?'你的地产':'对手地产'):lot.ruined?'废墟':'待售'}</span><span>${lot.level===0?'空地':`Lv.${lot.level}`}</span>${lot.isLarge?'<span>占据 2 格</span>':''}</div><div class="property-price">${money(owner?rent.total:getLotPurchasePrice(lot))} <small>${owner?'街区租金':lot.ruined?'修复费用':'购买价格'}</small></div>${owner?`<div class="property-breakdown">${rent.lots.map(t=>`${esc(t.name)} ${money(t.lot.tolls[t.lot.level])}`).join(' ＋ ')}<br>街区合计 ${money(rent.base)} × ${rent.multiplier}</div>`:''}<p class="property-rents">租金${lot.tolls.map((value,level)=>`<span${level===lot.level?' class="is-current"':''}>${level===0?'空地':`${level} 级`} ${money(value)}</span>`).join('')}</p>${mates.length>1?`<p class="property-district">同街区${mates.map(t=>`<span class="${[t.lot.ownerId==='human'?'is-human':t.lot.ownerId?'is-ai':'',t.lot===lot?'is-self':''].join(' ').trim()}">${esc(t.name)}</span>`).join('')}</p>`:''}<p class="property-note">${!owner&&lot.ruined?'':!owner&&lot.level>0?`买下保留 Lv.${lot.level} 建筑。`:lot.level<3?`升级到 Lv.${lot.level+1}：${money(lot.buildCosts[lot.level+1])}`:'已达最高等级。'}${effect?`<br>${effect}。`:''}</p>`;
     } else {
       const serviceIcon=tile.isStart?window.GameIcons?.svg('start'):window.GameIcons?.service(tile.special?.type);
       inspector.innerHTML=`<p class="panel-label">城市特别地标</p><h2>${esc(tile.name)}</h2><div class="inspector-special">${serviceIcon||(tile.isStart?'⚑':({bank:'◈',card_draw:'▣',chance:'✦',construction:'⚒',teleport:'◎',rush:'↗',junction:'∞'}[tile.special?.type]||'✦'))}</div><p class="property-note">${esc(tileGuideText(tile,economy))}</p>${tile.special?.type==='bank'?`<div class="property-price">${money(state.bankPool)}<small>${state.bankPool>=economy.bankThreshold?'金库已满 · 停留可全部提取':`金库积累中 · ${money(economy.bankThreshold)} 起可提`}</small></div>`:''}`;

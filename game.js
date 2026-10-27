@@ -361,7 +361,7 @@ const MAP_PRESETS = {
     reliefRest: false,
     name: "紧凑冲突",
     boardTitle: "紧凑冲突",
-    startDescription: "短环线，地产密集，命运转盘可能引发地震。",
+    startDescription: "地产密集，命运转盘可能地震。",
     modeLabel: "高冲突短局",
     grid: { columns: 6, rows: 5, cellMin: 104, cellMinTablet: 64, cellMinMobile: 48, height: "min(82vh, 900px)", heightTablet: "min(76vh, 620px)", heightMobile: "min(72vh, 480px)", centerWidth: "min(300px, calc(100% - 120px))", centerWidthTablet: "min(260px, calc(100% - 56px))", centerWidthMobile: "min(220px, calc(100% - 32px))" },
     routePositions: COMPACT_ROUTE_POSITIONS,
@@ -2347,7 +2347,7 @@ async function resolveLandingEffect(player, tile, sid) {
     }
     const dec = await showModal({
       label: "购买提示", title: repairing ? `修复 ${tile.name}？` : `购买 ${tile.name}？`,
-      message: repairing ? `震塌的废墟 · 修好恢复 ${lot.level} 级` : `${lot.theme.label}${lot.isLarge ? " · 大型地产" : ""}${lot.level > 0 ? ` · Lv.${lot.level}` : ""}`,
+      message: repairing ? "地震废墟" : `${lot.theme.label}${lot.isLarge ? " · 大型地产" : ""}${lot.level > 0 ? ` · Lv.${lot.level}` : ""}`,
       propertyOffer: { tileIndex: tile.index, action: "buy" },
       buttons: [
         { id: "buy", label: repairing ? "修复" : "购买", variant: "primary" },
@@ -2640,7 +2640,7 @@ async function resolveEventTile(player, tile, sid) {
     render();
     await showContinueModal({
       label: "地震", title: "地震！",
-      message: `${names}震塌了，现在谁的都不是。谁先停上去，花一半成本修好，就归谁。`,
+      message: `${fallen.map((t) => t.name).join("和")}塌了。`,
       drama: { type: "quake", tiles: fallen.map((t) => t.index), tileName: tile.name },
     });
     return;
@@ -2651,7 +2651,7 @@ async function resolveEventTile(player, tile, sid) {
     pushLog(`夏日祭：双方各领 ${formatMoney(each)}。`);
     render();
     await showContinueModal({
-      label: "随机事件", title: "夏日祭", message: "双方各领一份",
+      label: "随机事件", title: "夏日祭", message: "",
       drama: { type: "income", amount: each, chanceKind: "bonus", beneficiaries: state.players.map((p) => ({ id: p.id, name: p.name })) },
     });
     return;
@@ -2661,7 +2661,7 @@ async function resolveEventTile(player, tile, sid) {
   pushLog(`赞助商往金库放了 ${formatMoney(sponsor)}。`);
   render();
   await showContinueModal({
-    label: "随机事件", title: "金库赞助", message: "谁先停到金库谁拿走",
+    label: "随机事件", title: "金库赞助", message: "",
     drama: { type: "bank", amount: sponsor, chanceKind: "bank" },
   });
 }
