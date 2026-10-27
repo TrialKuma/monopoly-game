@@ -95,13 +95,14 @@ async function test(name, fn) { await fn(); checks++; console.log('PASS ' + name
   await test('real finish banks exact final cash and rewards completion, victory and a max-level large lot', async () => {
     const f = setup('alpine'); await f.c.run('startNewGame()');
     f.c.run('state.round=31;state.players[0].cash=700;state.players[1].cash=300;state.board[14].lot.ownerId="human";state.board[14].lot.level=3;finishGame("rounds");finishGame("rounds");');
-    const p = f.store.read().profile; assert.equal(p.wallet, 1550); assert.equal(p.earned, 700); assert.equal(p.receipts.length, 1);
+    const p = f.store.read().profile; assert.equal(p.wallet, 1940); assert.equal(p.earned, 1090); assert.equal(p.receipts.length, 1);
+  assert.equal(p.receipts[0].cash, 700); assert.equal(p.receipts[0].opponentCash, 300); assert.equal(p.receipts[0].coins, 1090);
     assert.equal(p.collections.alpine_crystal, 3); assert.equal(p.receipts[0].collectionCount, 3); assert.equal(f.c.run('loadHistory().length'), 1);
   });
-  await test('a loss still banks its cash and exactly one completion collectible', async () => {
-    const f = setup('harbor'); await f.c.run('startNewGame()');
-    f.c.run('state.round=31;state.players[0].cash=200;state.players[1].cash=900;finishGame("rounds");');
-    assert.equal(f.store.read().profile.wallet, 1150); assert.equal(f.store.read().profile.collections.harbor_shell, 1);
+await test('a loss banks the scaled consolation payout and exactly one completion collectible', async () => {
+  const f = setup('harbor'); await f.c.run('startNewGame()');
+  f.c.run('state.round=31;state.players[0].cash=200;state.players[1].cash=900;finishGame("rounds");');
+  assert.equal(f.store.read().profile.wallet, 1075); assert.equal(f.store.read().profile.collections.harbor_shell, 1);
   });
   await test('an initialized preview or unpaid scenario cannot mint cash or collectibles', () => {
     const f = setup(); f.c.run('initializeGame("harbor");state.players[0].cash=10000;finishGame("rounds");');

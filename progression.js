@@ -48,13 +48,24 @@
     return ['water', 'promenade'].filter(id => list.includes(id));
   }
   const receiptCollectionTotal = receipt => receipt.collectionCount + (receipt.harborProjectRewards?.length || 0);
+  // Final cash only ranks a run. Payout receipts bank coins from the result,
+  // scaled from a ¥100 ticket so dearer maps keep the same stakes.
+  const PAYOUT = Object.freeze({ ticket: 100, win: 300, draw: 150, loss: 50, leadShare: 10, leadCap: 300 });
+  function payoutFor(receipt, ticket) {
+    const scale = value => Math.round(value * ticket / PAYOUT.ticket);
+    const base = scale(PAYOUT[receipt.winnerId === 'human' ? 'win' : receipt.winnerId === 'draw' ? 'draw' : 'loss']);
+    const lead = receipt.winnerId === 'human' ? Math.min(scale(PAYOUT.leadCap), Math.floor(Math.max(0, receipt.cash - receipt.opponentCash) / PAYOUT.leadShare)) : 0;
+    return { base, lead, coins: base + lead };
+  }
+  const receiptCoins = receipt => receipt.payoutVersion === 1 ? receipt.coins : receipt.cash;
   function validReceiptBase(r) {
     const projectRewards = r && normalizeHarborProjectRewards(r.harborProjectRewards, r.mapId);
     return r && text(r.runId, 160) && text(r.mapId, 60) && text(r.mapName, 80)
       && ['rounds', 'bankruptcy'].includes(r.mode) && ['rounds', 'bankruptcy'].includes(r.reason)
       && ['human', 'ai', 'draw'].includes(r.winnerId) && integer(r.cash) && integer(r.rounds)
       && timestamp(r.completedAt) && projectRewards !== null
-      && (r.harborProjectRewards === undefined || JSON.stringify(r.harborProjectRewards) === JSON.stringify(projectRewards));
+      && (r.harborProjectRewards === undefined || JSON.stringify(r.harborProjectRewards) === JSON.stringify(projectRewards))
+      && (r.payoutVersion === undefined || r.payoutVersion === 1 && integer(r.opponentCash) && integer(r.coins));
   }
   function validLegacy(p) {
     if (!p || p.version !== 1 || !integer(p.wallet) || !integer(p.earned)
@@ -81,10 +92,11 @@
     for (const receipt of p.receipts) {
       if (!validReceiptBase(receipt) || ids.has(receipt.runId)) return false;
       ids.add(receipt.runId);
-      if (receipt.legacy === true) { if (entries.has(receipt.runId) || receipt.harborProjectRewards?.length) return false; legacyEarned += receipt.cash; continue; }
+      if (receipt.legacy === true) { if (entries.has(receipt.runId) || receipt.harborProjectRewards?.length || receipt.payoutVersion !== undefined) return false; legacyEarned += receipt.cash; continue; }
       const entry = entries.get(receipt.runId);
       if (!entry || entry.mapId !== receipt.mapId || entry.collectionId !== receipt.collectionId || !integer(receipt.collectionCount) || receipt.collectionCount < 1 || receipt.collectionCount > 3) return false;
-      earned += receipt.cash; items[receipt.collectionId] += receiptCollectionTotal(receipt);
+      if (receipt.payoutVersion === 1 && receipt.coins !== payoutFor(receipt, entry.price).coins) return false;
+      earned += receiptCoins(receipt); items[receipt.collectionId] += receiptCollectionTotal(receipt);
     }
     if (legacyEarned !== p.legacyEarned) return false;
     const legacySpent = PROJECTS.reduce((sum, item) => sum + p.legacyLevels[item.id] * ({ garden: 1200, waterfront: 2800, skyline: 5500 }[item.id]), 0);
@@ -341,25 +353,30 @@
         }
         if (buildingCards.reduce((sum, row) => sum + row.count, 0) > 4) return { ok: false, error: 'invalid' };
       }
+      const converted = input.payoutVersion === 1;
+      if (converted && !integer(input.opponentCash)) return { ok: false, error: 'invalid' };
       const receipt = { runId: input.runId, mapId: input.mapId, mapName: input.mapName,
         mode: input.mode, reason: input.reason, winnerId: input.winnerId, cash: input.humanCash,
         rounds: input.rounds, completedAt: now(), collectionId: entry.collectionId, collectionCount: input.collectionCount ?? (input.winnerId === 'human' ? 2 : 1),
         cardRewardVersion: rewardVersion, buildingCards, harborProjectRewards,
-        ...(buildingCardDraft ? { buildingCardDraft } : {}) };
+        ...(buildingCardDraft ? { buildingCardDraft } : {}),
+        ...(converted ? { payoutVersion: 1, opponentCash: input.opponentCash } : {}) };
+      if (converted && integer(receipt.cash)) receipt.coins = payoutFor(receipt, entry.price).coins;
       if (!validReceiptBase(receipt) || !integer(receipt.collectionCount) || receipt.collectionCount < 1 || receipt.collectionCount > 3) return { ok: false, error: 'invalid' };
       if (old) {
-        const same = ['mapId', 'mode', 'reason', 'winnerId', 'cash', 'rounds', 'collectionId', 'collectionCount', 'cardRewardVersion'].every(key => old[key] === receipt[key])
+        const same = ['mapId', 'mode', 'reason', 'winnerId', 'cash', 'rounds', 'collectionId', 'collectionCount', 'cardRewardVersion', 'payoutVersion', 'opponentCash', 'coins'].every(key => old[key] === receipt[key])
           && JSON.stringify(old.buildingCards) === JSON.stringify(buildingCards)
           && JSON.stringify(old.buildingCardDraft) === JSON.stringify(buildingCardDraft)
           && JSON.stringify(old.harborProjectRewards || []) === JSON.stringify(harborProjectRewards);
-        return same ? { ok: true, duplicate: true, amount: old.cash, receipt: old, profile } : { ok: false, error: 'conflict' };
+        return same ? { ok: true, duplicate: true, amount: receiptCoins(old), receipt: old, profile } : { ok: false, error: 'conflict' };
       }
-      if (!integer(profile.wallet + receipt.cash) || !integer(profile.earned + receipt.cash)) return { ok: false, error: 'invalid' };
-      profile.wallet += receipt.cash; profile.earned += receipt.cash; profile.receipts.push(receipt);
+      const coins = receiptCoins(receipt);
+      if (!integer(profile.wallet + coins) || !integer(profile.earned + coins)) return { ok: false, error: 'invalid' };
+      profile.wallet += coins; profile.earned += coins; profile.receipts.push(receipt);
       profile.collections[receipt.collectionId] += receiptCollectionTotal(receipt);
       grantBuildingCards(profile.town, buildingCards);
       const saved = write(profile);
-      return saved.ok ? { ...saved, amount: receipt.cash, receipt } : saved;
+      return saved.ok ? { ...saved, amount: coins, receipt } : saved;
     }
     function getPendingBuildingCards() {
       const loaded = read(); if (!loaded.ok) return loaded;
@@ -459,7 +476,7 @@
       buyLandscape: input => input && Number.isSafeInteger(input.expectedLevel) && input.expectedLevel >= 1 && input.expectedLevel <= 3 ? buy(input.projectId, input.expectedLevel) : { ok: false, error: 'invalid' } };
     return { read, enter, getEntryInfo, settle, getPendingBuildingCards, claimBuildingCard, buy, getStipendInfo, claimStipend, leaderboard, town };
   }
-  const core = { STORAGE_KEY, PROJECTS, COLLECTIONS, BUILDING_CARDS, TOWN_EXPANSION, TOWN_DISTRICTS: TownPlan.districts, TownPlan, createStore, validProfile, footprint, buildingCardOffers };
+  const core = { STORAGE_KEY, PROJECTS, COLLECTIONS, BUILDING_CARDS, TOWN_EXPANSION, TOWN_DISTRICTS: TownPlan.districts, TownPlan, PAYOUT, createStore, validProfile, footprint, buildingCardOffers, payoutFor };
   if (typeof module !== 'undefined' && module.exports) module.exports = core;
   if (!root.document) return;
   const money = n => Math.round(n).toLocaleString('zh-CN');
@@ -552,7 +569,10 @@
     const collection = result.ok && result.receipt?.collectionId ? `<p class="city-result-collection">+${receiptCollectionTotal(result.receipt)} ${COLLECTIONS[result.receipt.collectionId]?.name || '收藏品'}${projectBonus ? ` · 建设 +${projectBonus}` : ''}</p>` : '';
     const cards = result.ok && result.receipt?.buildingCards?.length ? `<p class="city-result-collection">${[2, 3].includes(result.receipt.cardRewardVersion) ? '建设奖励' : '建筑卡'}：${result.receipt.buildingCards.map(row => `${esc(cardById(row.cardId)?.name || row.cardId)} ×${row.count}`).join('、')}</p>` : '';
     const loaded = store.read(), draft = result.ok && loaded.ok ? draftMarkup(result.receipt, loaded.profile) : '';
-    return `<div class="city-result" data-city-result="${esc(result.runId)}"><p>${esc(copy)}</p>${collection}${cards}${draft}<button type="button" data-town-open>回城建造 ↗</button><button type="button" data-city-open>我的仓库 ↗</button>${!result.ok && pending.has(result.runId) ? `<button type="button" data-city-retry="${esc(result.runId)}">重试保存</button>` : ''}</div>`;
+    const entry = result.ok && loaded.ok && result.receipt?.payoutVersion === 1 ? loaded.profile.entries.find(row => row.runId === result.receipt.runId) : null;
+    const split = entry ? payoutFor(result.receipt, entry.price) : null;
+    const payout = split ? `<p class="city-result-collection">${result.receipt.winnerId === 'human' ? `胜利 ${money(split.base)}${split.lead ? ` · 领先奖励 ${money(split.lead)}` : ''}` : result.receipt.winnerId === 'draw' ? `平局 ${money(split.base)}` : `参与奖 ${money(split.base)}`}</p>` : '';
+    return `<div class="city-result" data-city-result="${esc(result.runId)}"><p>${esc(copy)}</p>${payout}${collection}${cards}${draft}<button type="button" data-town-open>回城建造 ↗</button><button type="button" data-city-open>我的仓库 ↗</button>${!result.ok && pending.has(result.runId) ? `<button type="button" data-city-retry="${esc(result.runId)}">重试保存</button>` : ''}</div>`;
   }
   function enter(input) { const result = store.enter(input); if (result.ok) changed(); return result; }
   function showEntryError(result) { open('city'); notice = errorText(result?.canEnter === false ? { ...result, error: 'entry_funds' } : result); render(); }

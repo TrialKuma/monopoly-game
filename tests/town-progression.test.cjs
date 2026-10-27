@@ -1,6 +1,6 @@
 'use strict';
 const assert = require('node:assert/strict');
-const { STORAGE_KEY, BUILDING_CARDS, TOWN_DISTRICTS, createStore, validProfile, footprint } = require('../progression.js');
+const { STORAGE_KEY, BUILDING_CARDS, TOWN_DISTRICTS, createStore, validProfile, footprint, payoutFor } = require('../progression.js');
 let checks = 0;
 function test(name, fn) { fn(); checks++; console.log('PASS ' + name); }
 function fixture(raw) {
@@ -208,6 +208,36 @@ test('tampered snapshots and ledgers are rejected without overwriting the origin
     const broken = JSON.parse(JSON.stringify(original)); mutation(broken); const raw = JSON.stringify(broken), corrupt = fixture(raw);
     assert.equal(validProfile(broken), false); assert.equal(corrupt.store.read().error, 'corrupt');
     assert.equal(corrupt.store.town.expand({ expectedStage: 1 }).error, 'corrupt'); assert.equal(corrupt.raw(), raw);
+  }
+});
+
+test('payout receipts bank result coins scaled by ticket while final cash still ranks the run', () => {
+  const outcome = (winnerId, cash, opponentCash) => ({ winnerId, cash, opponentCash });
+  assert.deepEqual(payoutFor(outcome('human', 3200, 1300), 100), { base: 300, lead: 190, coins: 490 });
+  assert.deepEqual(payoutFor(outcome('human', 9000, 0), 100), { base: 300, lead: 300, coins: 600 });
+  assert.deepEqual(payoutFor(outcome('ai', 800, 3000), 100), { base: 50, lead: 0, coins: 50 });
+  assert.deepEqual(payoutFor(outcome('draw', 2000, 2000), 100), { base: 150, lead: 0, coins: 150 });
+  assert.deepEqual(payoutFor(outcome('human', 9000, 0), 350), { base: 1050, lead: 900, coins: 1950 });
+  assert.deepEqual(payoutFor(outcome('ai', 800, 3000), 250), { base: 125, lead: 0, coins: 125 });
+
+  const f = fixture(), paid = (runId, mapId, price, winnerId, humanCash, opponentCash) => {
+    assert.equal(f.store.enter({ runId, mapId, price }).ok, true);
+    return f.store.settle(result(runId, [], { mapId, mapName: mapId, winnerId, humanCash, opponentCash, payoutVersion: 1, buildingCardDraft: true }));
+  };
+  const won = paid('payout-win', 'compact', 100, 'human', 3200, 1300);
+  assert.equal(won.ok, true); assert.equal(won.amount, 490); assert.equal(won.receipt.coins, 490); assert.equal(won.receipt.cash, 3200);
+  assert.equal(won.profile.wallet, 1200 - 100 + 490); assert.equal(won.profile.earned, 490);
+  const lost = paid('payout-loss', 'alpine', 350, 'ai', 4800, 5200);
+  assert.equal(lost.amount, 175); assert.equal(lost.profile.wallet, 1590 - 350 + 175);
+  const again = f.store.settle(result('payout-win', [], { mapId: 'compact', mapName: 'compact', humanCash: 3200, opponentCash: 1300, payoutVersion: 1, buildingCardDraft: true }));
+  assert.equal(again.duplicate, true); assert.equal(again.amount, 490); assert.equal(f.store.read().profile.wallet, 1415);
+  assert.equal(f.store.settle(result('payout-win', [], { mapId: 'compact', mapName: 'compact', humanCash: 3200, opponentCash: 100, payoutVersion: 1, buildingCardDraft: true })).error, 'conflict');
+  assert.deepEqual(f.store.leaderboard('alpine', 'rounds').rows.map(row => row.cash), [4800]);
+  f.store.enter({ runId: 'payout-bad', mapId: 'classic', price: 100 });
+  assert.equal(f.store.settle(result('payout-bad', [], { mapId: 'classic', mapName: 'classic', payoutVersion: 1, buildingCardDraft: true })).error, 'invalid', 'opponent cash is required');
+  const saved = f.store.read().profile; assert.equal(validProfile(saved), true);
+  for (const mutate of [p => { p.receipts[0].coins++; p.wallet++; p.earned++; }, p => { p.receipts[0].opponentCash = 0; }, p => { p.receipts[1].payoutVersion = 2; }]) {
+    const broken = JSON.parse(JSON.stringify(saved)); mutate(broken); assert.equal(validProfile(broken), false);
   }
 });
 

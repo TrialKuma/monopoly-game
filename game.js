@@ -3557,6 +3557,7 @@ function finishGame(reason = "rounds") {
     runId: state.runId, mapId: mapCfg.id, mapName: mapCfg.name, mode: state.gameMode,
     reason, rounds: reason === "rounds" ? state.round - 1 : state.round,
     humanCash: state.players.find(p => p.id === "human").cash, winnerId,
+    opponentCash: state.players.find(p => p.id === "ai").cash, payoutVersion: 1,
     collectionCount: 1 + Number(winnerId === "human") + Number(state.board.some(t => !t.isLargeSecondary && t.lot?.isLarge && t.lot.ownerId === "human" && t.lot.level === 3)),
     harborProjectRewards: getHarborProjectSnapshot().filter(project => project.stage === 3).map(project => project.id),
     eligible: state.isFormalRun === true,

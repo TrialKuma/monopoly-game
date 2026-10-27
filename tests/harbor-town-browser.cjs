@@ -121,7 +121,8 @@ async function admissionQuotaCase(browser, base) {
       const receipt = state.citySettlement; finishGame('rounds');
       return { receipt, profile: GameProgression.getProfile().profile, humanCash: human.cash };
     });
-    assert.equal(ended.receipt.ok, true); assert.equal(ended.profile.wallet, 950 + ended.humanCash);
+    assert.equal(ended.receipt.ok, true); assert.equal(ended.receipt.receipt.cash, ended.humanCash);
+    assert.equal(ended.receipt.amount, 750 + Math.min(750, Math.floor((ended.humanCash - 200) / 10))); assert.equal(ended.profile.wallet, 950 + ended.receipt.amount);
     assert.deepEqual(ended.receipt.receipt.buildingCards, [{ cardId: 'harbor_finance', count: 2 }, { cardId: 'harbor_villa', count: 2 }]);
     assert.equal(ended.profile.receipts.length, 1); assert.equal(ended.profile.town.cards.harbor_finance.duplicates, 1);
     assert.equal(ended.receipt.receipt.cardRewardVersion, 3);
