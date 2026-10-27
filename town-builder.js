@@ -10,7 +10,7 @@
   const land = () => root.TownPlan.getLand(profile.town);
   const projects = () => root.GameProgression.PROJECTS;
   const materialNames = { city_stamp: '印章', harbor_shell: '海螺', alpine_crystal: '晶石' };
-  const materialIcons = { city_stamp: '◈', harbor_shell: '≈', alpine_crystal: '✧' };
+  const materialIcons = Object.fromEntries([['city_stamp', 'stamp', '◈'], ['harbor_shell', 'shell', '≈'], ['alpine_crystal', 'crystal', '✧']].map(([id, icon, glyph]) => [id, root.GameIcons?.svg(icon) || glyph]));
   const materialMaps = { city_stamp: ['classic', '经典'], harbor_shell: ['harbor', '港湾'], alpine_crystal: ['alpine', '温泉'] };
   const projectStages = { garden: ['花圃', '喷泉庭院', '玻璃花亭'], waterfront: ['木栈桥', '码头', '帆船港'], skyline: ['观景台', '灯塔', '灯光塔冠'] };
   const currentCard = () => catalog().find(card => card.id === selectedCard) || catalog()[0];
@@ -77,7 +77,7 @@
   function landscapeMarkup() {
     const project = projects().find(item => item.id === selectedProject) || projects()[0], level = profile.projectLevels[project.id] || 0, complete = level >= 3;
     const coins = project.coins[level], count = project.items[level];
-    return `<div class="town-landscape-list">${projects().map(item => `<button type="button" data-town-project="${item.id}" aria-pressed="${item.id===project.id}"><span class="town-project-icon town-project-${item.id}" aria-hidden="true">${item.icon}</span><strong>${esc(item.name)}</strong><small>${profile.projectLevels[item.id] ? `${profile.projectLevels[item.id]} 级` : '未建'}</small></button>`).join('')}</div><div class="town-project-detail"><div class="town-detail-heading"><strong>${esc(project.name)}</strong><span>${level}/3</span></div><p class="town-project-next">${complete ? projectStages[project.id][2] : `${level ? projectStages[project.id][level-1]+' → ' : ''}${projectStages[project.id][level]}`}</p>${complete ? '<div class="town-project-complete">已满级</div>' : `${costMarkup(coins,project.collectionId,count)}<div class="town-detail-actions">${materialTrip(project.collectionId,count)}<button type="button" class="town-primary" data-town-action="landscape" data-project-id="${project.id}" data-project-level="${level+1}"${canAfford(coins,project.collectionId,count)?'':' disabled'}>${level?'升级':'建造'}</button></div>`}</div>`;
+    return `<div class="town-landscape-list">${projects().map(item => `<button type="button" data-town-project="${item.id}" aria-pressed="${item.id===project.id}"><span class="town-project-icon town-project-${item.id}" aria-hidden="true">${root.GameIcons?.svg(item.id) || item.icon}</span><strong>${esc(item.name)}</strong><small>${profile.projectLevels[item.id] ? `${profile.projectLevels[item.id]} 级` : '未建'}</small></button>`).join('')}</div><div class="town-project-detail"><div class="town-detail-heading"><strong>${esc(project.name)}</strong><span>${level}/3</span></div><p class="town-project-next">${complete ? projectStages[project.id][2] : `${level ? projectStages[project.id][level-1]+' → ' : ''}${projectStages[project.id][level]}`}</p>${complete ? '<div class="town-project-complete">已满级</div>' : `${costMarkup(coins,project.collectionId,count)}<div class="town-detail-actions">${materialTrip(project.collectionId,count)}<button type="button" class="town-primary" data-town-action="landscape" data-project-id="${project.id}" data-project-level="${level+1}"${canAfford(coins,project.collectionId,count)?'':' disabled'}>${level?'升级':'建造'}</button></div>`}</div>`;
   }
   function districtMapMarkup() {
     const area = land();

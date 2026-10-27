@@ -26,8 +26,9 @@
     win: '<svg viewBox="0 0 100 100" fill="none" aria-hidden="true"><path d="M30 16h40v27c0 14-9 23-20 23s-20-9-20-23V16ZM30 25H15v14c0 13 10 17 19 17m36-31h15v14c0 13-10 17-19 17M50 66v17m-18 3h36" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="m50 29 4 8 9 1-7 7 2 9-8-4-8 4 2-9-7-7 9-1 4-8Z" fill="currentColor"/></svg>',
     notice: '<svg viewBox="0 0 100 100" fill="none" aria-hidden="true"><path d="m50 11 10 27 29 12-29 11-10 28-11-28L11 50l28-12 11-27Z" stroke="currentColor" stroke-width="4" stroke-linejoin="round"/><path d="m81 13 3 8 8 3-8 3-3 8-3-8-8-3 8-3 3-8Z" fill="currentColor"/></svg>'
   };
-  const LABELS = {rent:'租金结算', seize:'产权变更', shield:'护盾免租', relief:'破产救助', build:'建筑升级', buy:'购买地产', bank:'金库结算', card:'卡牌效果', income:'现金入账', win:'对局结束', notice:'行动提示'};
-  const TITLES = {rent:'租金到账', seize:'产权已变更', shield:'本次免租', relief:'救助金到账', build:'升级完成', buy:'购买成功', bank:'金库结算', card:'卡牌已生效', income:'获得金币', win:'本局结算', notice:'行动结果'};
+  SVG.quake = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.15" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 20.5h17"/><path d="m6.5 20.5-1.6-10 5.2-1.4 1.5 11.4" fill="currentColor" fill-opacity=".09"/><path d="M13.5 20.5v-6l5 .8v5.2" fill="currentColor" fill-opacity=".09"/><path d="m7 12.5 2.1 1.6-1.2 2 1.4 1.8"/><path d="m14.6 6.4 1.6 2 2.1-1 1 2.6M3 9.5l1.2-1.3M20.5 13l1.3-.6"/></svg>';
+  const LABELS = {rent:'租金结算', seize:'产权变更', shield:'护盾免租', relief:'破产救助', build:'建筑升级', buy:'购买地产', bank:'金库结算', card:'卡牌效果', income:'现金入账', win:'对局结束', notice:'行动提示', quake:'地震'};
+  const TITLES = {rent:'租金到账', seize:'产权已变更', shield:'本次免租', relief:'救助金到账', build:'升级完成', buy:'购买成功', bank:'金库结算', card:'卡牌已生效', income:'获得金币', win:'本局结算', notice:'行动结果', quake:'地震！'};
   let layer, boardStage, transferLayer, audioContext, active, eventNumber = 0, muted = false;
   const queue = [];
   const motionPreference = window.matchMedia?.('(prefers-reduced-motion: reduce)');
@@ -158,7 +159,9 @@
       bubble.style.setProperty('--speech-order', index);
       if (spoken.player?.color) bubble.style.setProperty('--speaker-color', spoken.player.color);
       const who = element('div', 'drama-speaker');
-      const face = element('span', 'drama-speaker-face', spoken.face);
+      const face = element('span', 'drama-speaker-face');
+      const drawn = window.GameIcons?.face(spoken.face);
+      if (drawn) face.innerHTML = drawn; else face.textContent = spoken.face;
       face.setAttribute('aria-hidden', 'true');
       who.append(face, element('b', 'drama-speaker-name', spoken.player?.name || spoken.role), element('span', 'drama-speaker-role', spoken.role));
       bubble.append(who, element('p', 'drama-speech-words', spoken.words));
@@ -246,6 +249,8 @@
       if (major) tone(job, 1046.5, .38, .36, .012);
     } else if (type === 'build') {
       tone(job, 392, .07, .2, .02); tone(job, 523.25, .17, .28, .02);
+    } else if (type === 'quake') {
+      tone(job, 55, 0, .9, .05, 'sawtooth'); tone(job, 41.2, .08, 1.1, .045, 'triangle'); tone(job, 73.4, .32, .55, .025, 'sawtooth');
     }
   }
 
@@ -397,7 +402,7 @@
     const leadChanged = type === 'rent' && !!event.leadChanged;
     const facts = purchaseFacts(event);
     const importantPurchase = type === 'buy' && (facts.chain || facts.large || facts.built);
-    const major = type === 'rent' && (amount >= 300 || leadChanged) || ['seize', 'shield', 'relief', 'win'].includes(type) || type === 'bank' && amount >= 300 || importantPurchase;
+    const major = type === 'rent' && (amount >= 300 || leadChanged) || ['seize', 'shield', 'relief', 'win', 'quake'].includes(type) || type === 'bank' && amount >= 300 || importantPurchase;
     const reaction = reactionFor(event, type, amount);
     layer.replaceChildren();
     layer.className = `drama-layer drama-kind-${type}${major ? ' is-major' : ' is-minor'}${chance ? ' is-chance' : ''}${leadChanged ? ' is-lead-change' : ''}${reduced() ? ' is-reduced-motion' : ''}`;
@@ -422,7 +427,12 @@
     if (speech) content.appendChild(speech);
     const body = element('div', 'drama-body');
     const symbol = element('div', 'drama-symbol');
-    symbol.innerHTML = SVG[type];
+    if (event.art) {
+      const art = element('img', 'drama-art' + (event.artPlan ? ' is-plan' : ''));
+      art.src = event.art; art.alt = ''; art.draggable = false;
+      symbol.classList.add('has-art');
+      symbol.appendChild(art);
+    } else symbol.innerHTML = SVG[type];
     symbol.appendChild(element('i', 'drama-symbol-orbit'));
     const copy = element('div', 'drama-copy');
     let title = event.title || TITLES[type];
@@ -528,6 +538,12 @@
       delay(job, () => signedCounter(job, event.to, amount, '+'), 460);
     }
     if (type === 'win') confetti(job);
+    if (type === 'quake' && !reduced()) {
+      const shake = [0, -7, 6, -5, 4, -2, 0].map((x, i) => ({transform:`translate(${x}px, ${i % 2 ? 3 : -2}px)`}));
+      const stage = document.querySelector('.board-stage');
+      if (stage) animate(job, stage, shake, {duration:640, easing:'ease-out'});
+      animate(job, card, shake.map(frame => ({transform:frame.transform.replace(/(-?\d+)px/g, (_, n) => `${n / 2}px`)})), {duration:520, delay:120, easing:'ease-out'});
+    }
     if (type === 'buy') {
       purchaseBurst(job, card, importantPurchase);
     }

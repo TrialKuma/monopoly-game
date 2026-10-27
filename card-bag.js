@@ -34,7 +34,7 @@
     list.innerHTML = snapshot.cards.length ? snapshot.cards.map(card => {
       const type = category(card.id);
       const blocked = !snapshot.canUse || !card.usable || pending;
-      return `<article class="bag-card" data-kind="${type}"><div class="bag-card-art" aria-hidden="true"><span>${esc(card.icon)}</span></div><div class="bag-card-copy"><small>${labels[type]}</small><h3>${esc(card.name)}</h3><p>${esc(card.description)}</p>${snapshot.canUse && !card.usable ? `<p class="bag-card-reason">${esc(card.reason)}</p>` : ''}</div><button type="button" data-use-card="${esc(card.instanceId)}" ${blocked?'disabled':''} aria-label="使用${esc(card.name)}">使用</button></article>`;
+      return `<article class="bag-card" data-kind="${type}"><div class="bag-card-art" aria-hidden="true"><span>${window.GameIcons?.card(card.id) || esc(card.icon)}</span></div><div class="bag-card-copy"><small>${labels[type]}</small><h3>${esc(card.name)}</h3><p>${esc(card.description)}</p>${snapshot.canUse && !card.usable ? `<p class="bag-card-reason">${esc(card.reason)}</p>` : ''}</div><button type="button" data-use-card="${esc(card.instanceId)}" ${blocked?'disabled':''} aria-label="使用${esc(card.name)}">使用</button></article>`;
     }).join('') : '<div class="bag-empty"><span aria-hidden="true">▱</span><h3>还没有卡牌</h3></div>';
   }
   function open() {

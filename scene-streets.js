@@ -21,9 +21,9 @@ export function createStreetFoundation({THREE,world,boardBounds,mapId,islands=fa
     const g=new THREE.ExtrudeGeometry(s,{depth:h,bevelEnabled:bevel>0,bevelSize:bevel,bevelThickness:bevel,bevelSegments:1,curveSegments:3});g.rotateX(-Math.PI/2);return own(g);
   }
   const block=roundedGeometry(1,.16,1,.045,.012);
-  function add(kind,x,y,z,w,h,d,angle=0,shade=0){
+  function add(kind,x,y,z,w,h,d,angle=0,shade=0,color='#ffffff'){
     const key=kind;if(!groups.has(key))groups.set(key,[]);
-    groups.get(key).push({x,y,z,w,h,d,angle,shade});
+    groups.get(key).push({x,y,z,w,h,d,angle,shade,color});
   }
   function surface(w,h,d,r,material,x,y,z){const m=new THREE.Mesh(roundedGeometry(w,h,d,r),mats[material]);m.position.set(x,y,z);m.castShadow=true;m.receiveShadow=true;m.raycast=()=>{};root.add(m);return m;}
   const w=boardBounds.w,d=boardBounds.d;
@@ -52,7 +52,7 @@ export function createStreetFoundation({THREE,world,boardBounds,mapId,islands=fa
     }
   }
   }
-  function parcel(group,width,depth,isProperty){
+  function parcel(group,width,depth,isProperty,edgeTint='#ffffff'){
     // Keep this below the existing deed frame. Geometry occupies only the plot,
     // never the inset walk where the token actually lands.
     const nx=Math.max(3,Math.round((width-.16)/.28)),nz=Math.max(3,Math.round((depth-.16)/.28));
@@ -63,7 +63,7 @@ export function createStreetFoundation({THREE,world,boardBounds,mapId,islands=fa
       const edge=ix===0||iz===0||ix===nx-1||iz===nz-1;
       if(!edge&&isProperty)continue;
       point.set(-width/2+.08+(ix+.5)*sx,.025,-depth/2+.08+(iz+.5)*sz).applyMatrix4(group.matrix);
-      add(edge?'paving':'accent',point.x,point.y,point.z,sx-.012,.018,sz-.012,group.rotation.y,((ix*7+iz*3)%5-2)*.022);
+      add(edge?'paving':'accent',point.x,point.y,point.z,sx-.012,.018,sz-.012,group.rotation.y,((ix*7+iz*3)%5-2)*.022,edge?edgeTint:'#ffffff');
     }
   }
   function road(a,b){
@@ -76,7 +76,7 @@ export function createStreetFoundation({THREE,world,boardBounds,mapId,islands=fa
   function finish(){
     for(const [key,items] of groups){
       const m=own(new THREE.InstancedMesh(block,mats[key],items.length));m.name=`regional_${key}_masonry`;m.castShadow=true;m.receiveShadow=true;m.raycast=()=>{};
-      items.forEach((it,i)=>{dummy.position.set(it.x,it.y,it.z);dummy.rotation.set(0,it.angle,0);dummy.scale.set(it.w,it.h/.16,it.d);dummy.updateMatrix();m.setMatrixAt(i,dummy.matrix);tint.set('#ffffff').multiplyScalar(1+it.shade);m.setColorAt(i,tint);});
+      items.forEach((it,i)=>{dummy.position.set(it.x,it.y,it.z);dummy.rotation.set(0,it.angle,0);dummy.scale.set(it.w,it.h/.16,it.d);dummy.updateMatrix();m.setMatrixAt(i,dummy.matrix);tint.set(it.color).multiplyScalar(1+it.shade);m.setColorAt(i,tint);});
       m.instanceMatrix.needsUpdate=true;if(m.instanceColor)m.instanceColor.needsUpdate=true;root.add(m);
     }
     groups.clear();root.userData.drawCount=root.children.length;

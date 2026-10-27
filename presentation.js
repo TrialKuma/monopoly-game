@@ -67,7 +67,7 @@
     return {sessionId:state.sessionId,mapId:state.currentMapId,board:state.board,players:state.players.map(player=>({...player,harborJourney:getHarborJourney(player)})),
       currentPlayerId:currentPlayer().id,phase:state.phase,animation:state.animation,lastDice:state.lastDice,
       diceFaces:state.lastDiceFaces,harborJourney:getHarborJourney(currentPlayer()),harborProjects:globalThis.GameHarborProjects?.getSnapshot?.()||[],
-      bankPool:state.bankPool,gameOver:state.gameOver,grid:map.grid,navigation:map.navigation,
+      bankPool:state.bankPool,gameOver:state.gameOver,grid:map.grid,navigation:map.navigation,districtColors:map.districtColors||{},
       routeChoice:state.modal?.visible && state.modal.routeChoice ? {playerId:currentPlayer().id,tileIndex:currentPlayer().position} : null,
       nextSteps:Object.fromEntries(state.players.map(player=>[player.id,getNextTileIndex(player,player.position,player.effects?.reversed?-1:1,false)])),
       selectedTile:selected,targetSelection:state.modal?.visible && state.modal.boardTargets?.length ? {kind:'property',indices:state.modal.boardTargets} : state.modal?.visible && state.modal.boardContext ? {kind:'property',indices:state.modal.boardContext.indices,suspended:true} : state.targetSelection,districtColors:map.districtColors,
@@ -182,7 +182,8 @@
       const effect=effectText(lot);
       inspector.innerHTML=`<p class="panel-label">${esc(lot.district||'地产手册')}</p><h2>${esc(tile.name)}</h2><div class="property-meta"><span>${owner?(owner.id==='human'?'你的地产':'对手地产'):lot.ruined?'废墟':'待售'}</span><span>${lot.level===0?'空地':`Lv.${lot.level}`}</span>${lot.isLarge?'<span>占据 2 格</span>':''}</div><div class="property-price">${money(owner?rent.total:getLotPurchasePrice(lot))} <small>${owner?'街区租金':lot.ruined?'修复费用':'购买价格'}</small></div>${owner?`<div class="property-breakdown">${rent.lots.map(t=>`${esc(t.name)} ${money(t.lot.tolls[t.lot.level])}`).join(' ＋ ')}<br>街区合计 ${money(rent.base)} × ${rent.multiplier}</div>`:''}<p class="property-rents">租金${lot.tolls.map((value,level)=>`<span${level===lot.level?' class="is-current"':''}>${level===0?'空地':`${level} 级`} ${money(value)}</span>`).join('')}</p>${mates.length>1?`<p class="property-district">同街区${mates.map(t=>`<span class="${[t.lot.ownerId==='human'?'is-human':t.lot.ownerId?'is-ai':'',t.lot===lot?'is-self':''].join(' ').trim()}">${esc(t.name)}</span>`).join('')}</p>`:''}<p class="property-note">${!owner&&lot.ruined?`修好恢复 Lv.${lot.level}。`:!owner&&lot.level>0?`买下保留 Lv.${lot.level} 建筑。`:lot.level<3?`升级到 Lv.${lot.level+1}：${money(lot.buildCosts[lot.level+1])}`:'已达最高等级。'}${effect?`<br>${effect}。`:''}</p>`;
     } else {
-      inspector.innerHTML=`<p class="panel-label">城市特别地标</p><h2>${esc(tile.name)}</h2><div class="inspector-special">${tile.isStart?'⚑':({bank:'◈',card_draw:'▣',chance:'✦',construction:'⚒',teleport:'◎',rush:'↗',junction:'∞'}[tile.special?.type]||'✦')}</div><p class="property-note">${esc(tileGuideText(tile,economy))}</p>${tile.special?.type==='bank'?`<div class="property-price">${money(state.bankPool)}<small>${state.bankPool>=economy.bankThreshold?'金库已满 · 停留可全部提取':`金库积累中 · ${money(economy.bankThreshold)} 起可提`}</small></div>`:''}`;
+      const serviceIcon=tile.isStart?window.GameIcons?.svg('start'):window.GameIcons?.service(tile.special?.type);
+      inspector.innerHTML=`<p class="panel-label">城市特别地标</p><h2>${esc(tile.name)}</h2><div class="inspector-special">${serviceIcon||(tile.isStart?'⚑':({bank:'◈',card_draw:'▣',chance:'✦',construction:'⚒',teleport:'◎',rush:'↗',junction:'∞'}[tile.special?.type]||'✦'))}</div><p class="property-note">${esc(tileGuideText(tile,economy))}</p>${tile.special?.type==='bank'?`<div class="property-price">${money(state.bankPool)}<small>${state.bankPool>=economy.bankThreshold?'金库已满 · 停留可全部提取':`金库积累中 · ${money(economy.bankThreshold)} 起可提`}</small></div>`:''}`;
     }
     if(!lot||lot.level>0){
       inspector.insertAdjacentHTML('beforeend',`<button class="inspect-building-btn" type="button" data-inspect-building="${tile.index}">近看建筑 <span aria-hidden="true">↗</span></button>`);
@@ -231,7 +232,8 @@
       const price=municipal?getCityTakeoverQuote(lot).purchasePrice:upgrading?lot.buildCosts[lot.level+1]:getLotPurchasePrice(lot);
       const priceLabel=action==='municipalSell'?'原主获补偿':action==='municipalBuy'?'买入价':upgrading?'升级费用':lot.ruined?'修复费用':'售价';
       const rent=upgrading?`${money(lot.tolls[lot.level])} → ${money(lot.tolls[lot.level+1])}`:money(lot.tolls[lot.level]);
-      propertyPreview.innerHTML=`<div class="property-offer-price"><span>${priceLabel}</span><strong>${money(price)}</strong></div><p class="property-offer-rent">租金 <span>${rent}</span></p>`;
+      const art=lotArt(lot,upgrading?lot.level+1:lot.level);
+      propertyPreview.innerHTML=`${art?`<img class="property-offer-art${art.plan?' is-plan':''}" src="${art.src}" alt="" draggable="false">`:''}<div class="property-offer-price"><span>${priceLabel}</span><strong>${money(price)}</strong></div><p class="property-offer-rent">租金 <span>${rent}</span></p>`;
     } else propertyPreview.innerHTML='';
     if(preview) {rollBtn.disabled=true;document.querySelectorAll('[data-showcase]').forEach(b=>b.disabled=previewBusy||state.cardUsePending);}
   }
@@ -267,6 +269,12 @@
     }finally{harborDiagramLoading=false;}
   }
   window.addEventListener('town:embark',event=>{openDepartureMenu(MAP_PRESETS[event.detail?.mapId] ? event.detail.mapId : 'harbor');});
+  // A bare lot shows its first building faintly, as a plan of what it can become.
+  function lotArt(lot,level=lot.level) {
+    const family=lot.landmarkKey||lot.theme?.key;
+    if(!family||!state.currentMapId)return null;
+    return {src:`assets/buildings/regions/${state.currentMapId}/${family}_${Math.min(3,Math.max(1,level))}.png?v=20261025-facade2`,plan:level<1};
+  }
   function inferEvent(cfg) {
     const text=`${cfg.title||''} ${cfg.message||''}`,tile=state.board[currentPlayer().position];
     const named=state.board.find(t=>!t.isLargeSecondary&&text.includes(t.name));
@@ -311,6 +319,13 @@
         event.isOpeningBuilding=primary.lot.level>0&&!!state.openingLots?.includes(primary.index);
         event.districtCount=getDistrictOwnerLots(primary.lot.district,recipient?.id||primary.lot.ownerId).length;
       }
+    }
+    if(['rent','buy','build'].includes(event.type)&&!event.art) {
+      const landed=state.board[currentPlayer().position],listed=(event.tiles||[]).map(index=>state.board[index]);
+      const lotTile=(event.type==='rent'?[landed,...listed]:[...listed,landed]).map(t=>t?.isLargeSecondary?state.board[t.largePrimaryIndex]:t)
+        .find(t=>t?.lot&&(event.type!=='rent'||t.lot.ownerId===event.to?.id));
+      const art=lotTile&&lotArt(lotTile.lot);
+      if(art){event.art=art.src;event.artPlan=art.plan;}
     }
     return event;
   }

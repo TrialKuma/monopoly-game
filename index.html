@@ -19,6 +19,7 @@
   <link rel="stylesheet" href="settlement-card.css?v=20261025-choice1">
   <link rel="stylesheet" href="harbor-journey.css?v=20261025-harbor2">
   <link rel="stylesheet" href="town-builder.css?v=20261027-regions1">
+  <link rel="stylesheet" href="visual.css?v=20261028-visual3">
 </head>
 <body class="mode-start">
   <div id="start-screen" class="start-screen">
@@ -30,11 +31,11 @@
       <div class="map-picker">
         <p class="map-picker-label">选择地图</p>
         <div id="start-map-options" class="map-options" role="group" aria-label="地图选择">
-          <button class="map-option active" type="button" data-map-id="classic" aria-pressed="true"><span class="map-option-mark">▱</span><span class="map-option-title">经典环线</span><span class="map-option-meta">30 回合</span></button>
-          <button class="map-option" type="button" data-map-id="compact" aria-pressed="false"><span class="map-option-mark">↗</span><span class="map-option-title">紧凑冲突</span><span class="map-option-meta">26 回合</span></button>
-          <button class="map-option" type="button" data-map-id="expansion" aria-pressed="false"><span class="map-option-mark">▱</span><span class="map-option-title">都市大环线</span><span class="map-option-meta">40 回合</span></button>
-          <button class="map-option" type="button" data-map-id="harbor" aria-pressed="false"><span class="map-option-mark">⚓</span><span class="map-option-title">潮汐港湾</span><span class="map-option-meta">40 回合</span></button>
-          <button class="map-option" type="button" data-map-id="alpine" aria-pressed="false"><span class="map-option-mark">♨</span><span class="map-option-title">云岭温泉</span><span class="map-option-meta">30 回合</span></button>
+          <button class="map-option active" type="button" data-map-id="classic" aria-pressed="true"><img class="map-option-art" src="assets/buildings/regions/classic/finance_3.png?v=20261025-facade2" alt="" draggable="false"><span class="map-option-title">经典环线</span><span class="map-option-meta">30 回合</span></button>
+          <button class="map-option" type="button" data-map-id="compact" aria-pressed="false"><img class="map-option-art" src="assets/buildings/regions/compact/skyscraper_3.png?v=20261025-facade2" alt="" draggable="false"><span class="map-option-title">紧凑冲突</span><span class="map-option-meta">26 回合</span></button>
+          <button class="map-option" type="button" data-map-id="expansion" aria-pressed="false"><img class="map-option-art" src="assets/buildings/regions/expansion/finance_3.png?v=20261025-facade2" alt="" draggable="false"><span class="map-option-title">都市大环线</span><span class="map-option-meta">40 回合</span></button>
+          <button class="map-option" type="button" data-map-id="harbor" aria-pressed="false"><img class="map-option-art" src="assets/buildings/regions/harbor/onsen_3.png?v=20261025-facade2" alt="" draggable="false"><span class="map-option-title">潮汐港湾</span><span class="map-option-meta">40 回合</span></button>
+          <button class="map-option" type="button" data-map-id="alpine" aria-pressed="false"><img class="map-option-art" src="assets/buildings/regions/alpine/civic_hall.png?v=20261025-facade2" alt="" draggable="false"><span class="map-option-title">云岭温泉</span><span class="map-option-meta">30 回合</span></button>
         </div>
         <p id="start-map-description" class="start-map-description" hidden></p>
       </div>
@@ -78,7 +79,7 @@
         <div id="board-choice-dock"></div>
         <section id="center-console" class="board-center" aria-label="回合操作">
           <div class="console-dice-row"><div id="center-dice" class="center-dice"><span id="center-dice-value">—</span></div><div class="console-copy"><p id="center-player-badge" class="center-badge">当前：玩家</p><h3 id="center-title">准备开始</h3><div id="vehicle-dice-selector" class="vehicle-dice-selector" role="group" aria-label="机车骰子数量" hidden><button type="button" data-vehicle-dice="1" aria-pressed="true">单骰</button><button type="button" data-vehicle-dice="2" aria-pressed="false">双骰</button></div><p id="center-description"></p></div></div>
-          <div class="center-actions"><span id="center-phase-badge" class="center-badge">等待掷骰</span><button type="button" class="card-bag-trigger" data-open-card-bag aria-haspopup="dialog" aria-expanded="false" aria-controls="card-bag-dialog">背包 <span data-card-count>0</span></button><button id="roll-btn" class="primary-btn center-roll-btn">掷骰子 <span>↗</span></button></div>
+          <div class="center-actions"><span id="center-phase-badge" class="center-badge">等待掷骰</span><button type="button" class="card-bag-trigger" data-open-card-bag aria-haspopup="dialog" aria-expanded="false" aria-controls="card-bag-dialog">背包 <span data-card-count>0</span></button><button id="roll-btn" class="primary-btn center-roll-btn">掷骰子</button></div>
           <div class="round-progress" id="round-progress"><div class="round-progress-bar" id="round-progress-bar"></div></div>
         </section>
         <nav class="mobile-tools" aria-label="对局信息">
@@ -114,13 +115,14 @@
     <footer class="card-bag-footer"><p id="card-bag-status"></p></footer>
   </dialog>
 
-  <script src="drama.js?v=20261027-compact2"></script>
+  <script src="icons.js?v=20261028-visual1"></script>
+  <script src="drama.js?v=20261028-visual1"></script>
   <script src="town-plan.js?v=20261025-district1"></script>
-  <script src="progression.js?v=20261028-payout2"></script>
-  <script src="game.js?v=20261028-payout1"></script>
-  <script src="card-bag.js?v=20261026-property-cards1"></script>
-  <script src="presentation.js?v=20261027-compact1"></script>
-  <script type="module" src="town-builder.js?v=20261027-regions2"></script>
-  <script type="module" src="scene.js?v=20261027-compact1"></script>
+  <script src="progression.js?v=20261028-visual1"></script>
+  <script src="game.js?v=20261028-visual1"></script>
+  <script src="card-bag.js?v=20261028-visual1"></script>
+  <script src="presentation.js?v=20261028-visual1"></script>
+  <script type="module" src="town-builder.js?v=20261028-visual1"></script>
+  <script type="module" src="scene.js?v=20261028-visual2"></script>
 </body>
 </html>

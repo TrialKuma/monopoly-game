@@ -490,33 +490,36 @@ const roundProgressBarEl = document.getElementById("round-progress-bar");
 const tileTooltipEl = document.getElementById("tile-tooltip");
 
 const EVENT_ICON_MAP = {
-  "购买提示": { emoji: "🏠", cls: "event-buy" },
-  "升级提示": { emoji: "🔧", cls: "event-build" },
-  "过路费提示": { emoji: "💰", cls: "event-toll" },
-  "功能地块": { emoji: "✨", cls: "event-special" },
-  "市政府补给": { emoji: "🏛️", cls: "event-start" },
-  "市政府征用": { emoji: "📜", cls: "event-start" },
-  "AI 行动": { emoji: "🤖", cls: "event-info" },
-  "翻牌事件": { emoji: "🎴", cls: "event-card" },
-  "翻牌奖励": { emoji: "🎴", cls: "event-card" },
-  "道具商店": { emoji: "🛍️", cls: "event-card" },
-  "使用卡牌": { emoji: "🃏", cls: "event-card" },
-  "传送门": { emoji: "🌀", cls: "event-special" },
-  "城建局": { emoji: "🏗️", cls: "event-build" },
-  "骰6再动": { emoji: "🎲", cls: "event-special" },
-  "绊脚效果": { emoji: "🪤", cls: "event-info" },
-  "卡牌效果": { emoji: "🃏", cls: "event-card" },
-  "路线选择": { emoji: "🧭", cls: "event-special" },
-  "冲刺站": { emoji: "🚀", cls: "event-special" },
-  "商会收益": { emoji: "📈", cls: "event-special" },
-  "酒店收益": { emoji: "🏨", cls: "event-special" },
-  "温泉休息": { emoji: "♨️", cls: "event-info" },
-  "温泉庄园": { emoji: "♨️", cls: "event-info" },
-  "破产救助": { emoji: "🆘", cls: "event-toll" },
-  "等待救援": { emoji: "🆘", cls: "event-info" },
-  "破产淘汰": { emoji: "💸", cls: "event-toll" },
-  "先手决定": { emoji: "🪙", cls: "event-special" },
+  "购买提示": { emoji: "🏠", icon: "buyProperty", cls: "event-buy" },
+  "升级提示": { emoji: "🔧", icon: "construction", cls: "event-build" },
+  "过路费提示": { emoji: "💰", icon: "bank", cls: "event-toll" },
+  "功能地块": { emoji: "✨", icon: "notice", cls: "event-special" },
+  "市政府补给": { emoji: "🏛️", icon: "start", cls: "event-start" },
+  "市政府征用": { emoji: "📜", icon: "sellProperty", cls: "event-start" },
+  "AI 行动": { emoji: "🤖", icon: "ai", cls: "event-info" },
+  "翻牌事件": { emoji: "🎴", icon: "cardDraw", cls: "event-card" },
+  "翻牌奖励": { emoji: "🎴", icon: "cardDraw", cls: "event-card" },
+  "道具商店": { emoji: "🛍️", icon: "shop", cls: "event-card" },
+  "使用卡牌": { emoji: "🃏", icon: "cardDraw", cls: "event-card" },
+  "传送门": { emoji: "🌀", icon: "teleport", cls: "event-special" },
+  "城建局": { emoji: "🏗️", icon: "construction", cls: "event-build" },
+  "骰6再动": { emoji: "🎲", icon: "boost", cls: "event-special" },
+  "绊脚效果": { emoji: "🪤", icon: "freeze", cls: "event-info" },
+  "卡牌效果": { emoji: "🃏", icon: "cardDraw", cls: "event-card" },
+  "路线选择": { emoji: "🧭", icon: "junction", cls: "event-special" },
+  "冲刺站": { emoji: "🚀", icon: "rush", cls: "event-special" },
+  "商会收益": { emoji: "📈", icon: "chart", cls: "event-special" },
+  "酒店收益": { emoji: "🏨", icon: "chart", cls: "event-special" },
+  "温泉休息": { emoji: "♨️", icon: "onsen", cls: "event-info" },
+  "温泉庄园": { emoji: "♨️", icon: "onsen", cls: "event-info" },
+  "破产救助": { emoji: "🆘", icon: "relief", cls: "event-toll" },
+  "等待救援": { emoji: "🆘", icon: "relief", cls: "event-info" },
+  "破产淘汰": { emoji: "💸", icon: "lose", cls: "event-toll" },
+  "先手决定": { emoji: "🪙", icon: "notice", cls: "event-special" },
+  "地震": { emoji: "⚠️", icon: "quake", cls: "event-toll" },
 };
+const iconMarkup = (name, fallback = "") => globalThis.GameIcons?.svg(name) || fallback;
+const cardIconMarkup = (card) => globalThis.GameIcons?.card(card.id) || card.icon;
 
 const SOUND_PREF_KEY = "monopoly-sfx-enabled";
 const MUSIC_PREF_KEY = "monopoly-bgm-enabled";
@@ -1094,7 +1097,7 @@ function renderHistoryList() {
     const isHumanWin = rec.winner === "human";
     const isDraw = rec.winner === "draw";
     const resultCls = isDraw ? "draw" : (isHumanWin ? "win" : "lose");
-    const resultText = isDraw ? "⚖️ 平局" : (isHumanWin ? `🏆 ${winnerName} 胜` : `💔 ${winnerName} 胜`);
+    const resultText = `${iconMarkup(isDraw ? "draw" : isHumanWin ? "win" : "lose")}${isDraw ? "平局" : `${winnerName} 胜`}`;
     const cashRow = rec.players
       ? rec.players.map((p) => `${p.name} ¥${p.cash}`).join("　vs　")
       : "";
@@ -1786,8 +1789,8 @@ function renderScoreboard() {
     wb.className = "winner-banner";
     wb.innerHTML = `<div class="winner-text">${winner}</div>${window.GameProgression?.resultMarkup(state.citySettlement) || ""}
       <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
-        <button class="play-again-btn" type="button">🎮 再来一局</button>
-        <button class="view-history-btn" type="button">📋 历史记录</button>
+        <button class="play-again-btn" type="button">再来一局</button>
+        <button class="view-history-btn" type="button">历史记录</button>
       </div>`;
     scoreboardEl.appendChild(wb);
   }
@@ -1908,7 +1911,7 @@ function renderModal() {
   eventTitleEl.textContent = m.title || "";
   eventMessageEl.textContent = m.message || "";
   const ico = EVENT_ICON_MAP[m.label] || { emoji: "📋", cls: "event-info" };
-  eventIconWrapEl.innerHTML = m.visible ? m.openingCoin ? openingCoinMarkup(m.openingCoin) : `<div class="event-icon ${ico.cls}">${ico.emoji}</div>` : "";
+  eventIconWrapEl.innerHTML = m.visible ? m.openingCoin ? openingCoinMarkup(m.openingCoin) : `<div class="event-icon ${ico.cls}">${iconMarkup(ico.icon, ico.emoji)}</div>` : "";
   if (boardChoice && m.buttons.some(b => b.id.startsWith("seize_"))) {
     eventActionsEl.className = "event-actions property-target-actions";
     const options = m.buttons.filter(b => b.id.startsWith("seize_")).map(b => {
@@ -1995,7 +1998,7 @@ async function processTurn(player, isExtraTurn = false) {
     state.statusTitle = `${player.name} 休息结束`;
     state.statusDescription = "";
     render();
-    await showContinueModal({ label: "温泉休息", title: `♨️ ${player.name} 休息结束`, message: "" });
+    await showContinueModal({ label: "温泉休息", title: `${player.name} 休息结束`, message: "" });
     if (!isSessionActive(sid)) return;
     endTurn(); return;
   }
@@ -2265,7 +2268,7 @@ async function resolveLargeLotEffect(player, tile, sid) {
     render();
     await showContinueModal({
       label: "商会收益",
-      title: `📈 ${lotName} 运转！`,
+      title: `${lotName} 运转！`,
       message: `经营收益 +${formatMoney(bonus)}`,
     });
   } else if (lot.effectId === "tower_bonus" && lot.ownerId === player.id) {
@@ -2276,7 +2279,7 @@ async function resolveLargeLotEffect(player, tile, sid) {
     render();
     await showContinueModal({
       label: "酒店收益",
-      title: `🏨 ${lotName} 经营收益！`,
+      title: `${lotName} 经营收益！`,
       message: `经营收益 +${formatMoney(bonus)}`,
     });
   } else if (lot.effectId === "hot_spring_rest" && lot.ownerId && lot.ownerId !== player.id) {
@@ -2290,7 +2293,7 @@ async function resolveLargeLotEffect(player, tile, sid) {
       render();
       await showContinueModal({
         label: "温泉庄园",
-        title: `♨️ ${lotName} 生效！`,
+        title: `${lotName} 生效！`,
         message: `${player.name} 下回合休息`,
       });
     }
@@ -2416,7 +2419,7 @@ async function resolveLandingEffect(player, tile, sid) {
       pushLog(`${player.name} 无力偿还 ${formatMoney(toll.toll)} 过路费，宣告破产！游戏结束。`);
       await showContinueModal({
         label: "破产淘汰",
-        title: "💸 破产！游戏结束",
+        title: "破产！游戏结束",
         message: `${player.name} 仅剩 ${formatMoney(toll.actualPayment)}，差 ${formatMoney(toll.toll - toll.actualPayment)} 无力偿还。\n${owner.name} 获胜！`,
       });
       if (!isSessionActive(sid)) return;
@@ -2638,7 +2641,7 @@ async function resolveEventTile(player, tile, sid) {
     await showContinueModal({
       label: "地震", title: "地震！",
       message: `${names}震塌了，现在谁的都不是。谁先停上去，花一半成本修好，就归谁。`,
-      drama: { type: "notice", tiles: fallen.map((t) => t.index), tileName: tile.name },
+      drama: { type: "quake", tiles: fallen.map((t) => t.index), tileName: tile.name },
     });
     return;
   }
@@ -2739,7 +2742,7 @@ async function resolveChance(player, tile, sid) {
       buttons: [...visit.offers.map(card => {
         const price = ITEM_SHOP_PRICES[card.id], affordable = player.cash >= price;
         return { id: card.id, variant: "primary", disabled: !affordable,
-          label: `<span class="card-icon">${card.icon}</span><span class="card-name">${card.name}</span><span class="card-desc">${card.description}</span><span class="card-price">${formatMoney(price)}</span><span class="card-buy-label">${affordable ? "购买" : "金币不足"}</span>` };
+          label: `<span class="card-icon">${cardIconMarkup(card)}</span><span class="card-name">${card.name}</span><span class="card-desc">${card.description}</span><span class="card-price">${formatMoney(price)}</span><span class="card-buy-label">${affordable ? "购买" : "金币不足"}</span>` };
       }), { id: "skip", label: "离开商店", variant: "ghost" }],
     });
     if (!itemShopVisitIsActive(visit)) return;
@@ -2968,7 +2971,7 @@ async function prepareInventoryCard(player, card, sid) {
   if (card.id === "propertySwap" && !player.isAi) {
     const lots = state.board.filter(t => t.lot?.ownerId === player.id && !t.isLargeSecondary);
     const choice = await showModal({
-      label: "使用卡牌", title: "🔀 地产互换 · 选择交出的地产",
+      label: "使用卡牌", title: "地产互换 · 选择交出的地产",
       message: "随机获得对手的一块地产，双方建筑等级保留。",
       buttons: [{ id: "cancel", label: "暂不使用", variant: "ghost" }, ...lots.map(t => ({ id: String(t.index), label: `${t.name}（Lv.${t.lot.level}）`, variant: "primary" }))],
     });
@@ -3077,7 +3080,7 @@ async function resolveCardDraw(player, sid, tile = state.board[player.position])
     selected = aiChooseCard(drawn, player);
     pushLog(`${player.name} 翻牌选择了 ${selected.icon} ${selected.name}。`);
     await showContinueModal({
-      label: "翻牌事件", title: `AI 选择了 ${selected.icon} ${selected.name}`,
+      label: "翻牌事件", title: `AI 选择了 ${selected.name}`,
       message: "",
     });
     if (!isSessionActive(sid)) return;
@@ -3087,7 +3090,7 @@ async function resolveCardDraw(player, sid, tile = state.board[player.position])
       cardDraw: true,
       buttons: drawn.map((c) => ({
         id: c.id,
-        label: `<span class="card-icon">${c.icon}</span><span class="card-name">${c.name}</span><span class="card-desc">${c.description}</span>`,
+        label: `<span class="card-icon">${cardIconMarkup(c)}</span><span class="card-name">${c.name}</span><span class="card-desc">${c.description}</span>`,
         variant: "primary",
       })),
     });
@@ -3150,7 +3153,7 @@ async function chooseCardTarget(player, card, sid) {
     !blockedEffect || !(target.id === "self" ? player : getOpponent(player)).effects[blockedEffect]);
   const choice = await showModal({
     label: "卡牌效果",
-    title: `${card.icon} ${card.name} — 选择目标`,
+    title: `${card.name} — 选择目标`,
     message: card.description,
     buttons: [
       { id: "cancel", label: "暂不使用", variant: "ghost" },
@@ -3282,12 +3285,12 @@ async function executeCardEffect(player, card, sid, prepared = {}) {
     case "freeze":
       if (opp.effects.bankruptcyRelief) {
         pushLog(`绊脚术对 ${opp.name} 无效！对方正在救助休整中，免疫控制效果。`);
-        await showContinueModal({ label: "卡牌效果", title: "🪤 绊脚术 — 无效！", message: `${opp.name} 正处于破产救助状态，免疫绊脚术！` });
+        await showContinueModal({ label: "卡牌效果", title: "绊脚术 — 无效！", message: `${opp.name} 正处于破产救助状态，免疫绊脚术！` });
       } else {
         opp.effects.frozen = true;
         const restNote = opp.effects.hotSpringRest ? "对方正在温泉休息，绊脚与休息同时结束，不重复收租或追加休息。" : "下回合无法移动，但仍需结算当前所在地块！";
         pushLog(`绊脚术！${opp.name} 被绊住。${restNote}`);
-        await showContinueModal({ label: "卡牌效果", title: "🪤 绊脚术！", message: `${opp.name} 被绊住。${restNote}` });
+        await showContinueModal({ label: "卡牌效果", title: "绊脚术！", message: `${opp.name} 被绊住。${restNote}` });
       }
       break;
     case "combo":
@@ -3329,7 +3332,7 @@ async function executeCardEffect(player, card, sid, prepared = {}) {
           variant: "primary",
         }));
         const dec = await showModal({
-          label: "卡牌效果", title: "🔀 地产互换 — 选择交出的地产",
+          label: "卡牌效果", title: "地产互换 — 选择交出的地产",
           message: "随机换取对手一处地产",
           buttons: btns,
         });
@@ -3368,7 +3371,7 @@ async function executeCardEffect(player, card, sid, prepared = {}) {
       pushLog(`逆行术！${target_player.name} 的前进方向变为${dirText}！`);
       render();
       await showContinueModal({
-        label: "卡牌效果", title: "🔃 逆行术！",
+        label: "卡牌效果", title: "逆行术！",
         message: `${target_player.name} 的前进方向已变为${dirText}！`,
       });
       break;

@@ -2,7 +2,7 @@ import * as THREE from './assets/vendor/three/three.module.min.js';
 import { makeStudioEnvironment } from './scene-environment.js?v=20261025-facade2';
 import { mergeGeometries } from './assets/vendor/three/addons/utils/BufferGeometryUtils.js';
 import { createSceneLife } from './scene-life.js?v=20261027-night1';
-import { createStreetFoundation } from './scene-streets.js?v=20261025-harbor-main-island1';
+import { createStreetFoundation } from './scene-streets.js?v=20261028-visual1';
 import { createHarborIslands, addHarborBridge, updateHarborProjectVisuals, tickHarborProjectVisuals } from './scene-harbor-islands.js?v=20261027-night1';
 import { harborWalkOffset, harborEdgePath, harborParcelRotation, harborVisualPosition } from './scene-harbor-paths.js?v=20261025-harbor-main-island1';
 import { harborLandmarkSpec } from './scene-harbor-landmarks.js?v=20261025-harbor-main-island1';
@@ -357,7 +357,8 @@ function syncAtmosphereReadout(){
   const badge=cameraControls?.querySelector('.city-atmosphere-current');
   if(badge&&badge.textContent!==label)badge.textContent=label;
   const symbol=cameraControls?.querySelector('.city-atmosphere-symbol');
-  if(symbol)symbol.textContent=atmosphere.weather==='snow'?'❄':atmosphere.weather==='rain'?'☂':atmosphere.night>.72?'☾':'☼';
+  const weatherIcon=atmosphere.weather==='snow'?'snow':atmosphere.weather==='rain'?'rain':atmosphere.night>.72?'moon':'sun';
+  if(symbol&&symbol.dataset.icon!==weatherIcon){symbol.dataset.icon=weatherIcon;symbol.innerHTML=window.GameIcons?.svg(weatherIcon)||({snow:'❄',rain:'☂',moon:'☾',sun:'☼'})[weatherIcon];}
   wrap.dataset.season=atmosphere.season;wrap.dataset.weather=atmosphere.weather;
   wrap.dataset.timeMode=timeMode;wrap.dataset.night=atmosphere.night.toFixed(2);
   wrap.dataset.outskirts=String(outskirtsVisible);
@@ -611,6 +612,12 @@ function syncHarborStreetArrows(data){
     arrow.userData.actualTo=reverse?arrow.userData.streetFrom:arrow.userData.streetTo;
   }
 }
+// Lots of one district share a tinted paving ring, so a chain reads from the
+// ground without a sign; ownership keeps its separate frame colour on top.
+function districtPaving(tile,data){
+  const color=data.districtColors?.[tile.lot?.district];
+  return color?`#${new THREE.Color(color).lerp(new THREE.Color('#ffffff'),.3).getHexString()}`:undefined;
+}
 function makeLot(tile, data) {
   const center = tilePosition(tile);
   const secondary = data.board.find((item) => item.isLargeSecondary && item.largePrimaryIndex === tile.index);
@@ -630,7 +637,7 @@ function makeLot(tile, data) {
   const boundary=data.mapId==='harbor'?harborBoundaryForTile(tile):boundaryFor(position),modern=data.mapId!=='classic';
   rounded(group,w,.08,d,.13,PALETTE.cream,0,-.07);
   rounded(group,w-.12,.03,d-.12,.09,tile.lot ? streetFoundation.theme.garden : streetFoundation.theme.pavement,0,.011);
-  streetFoundation.parcel(group,w,d,!!tile.lot);
+  streetFoundation.parcel(group,w,d,!!tile.lot,tile.lot?districtPaving(tile,data):undefined);
   const ownerMaterial = own(new THREE.MeshStandardMaterial({ color:'#c5b696', roughness:.84, emissive:'#000000' }));
   // A single closed deed boundary, in parcel coordinates. The two physical
   // steps of a large lot share this one frame, independent of its frontage.
@@ -658,7 +665,12 @@ function makeLot(tile, data) {
   button.dataset.side=boundary.side;
   button.innerHTML='<span class="scene-tile-name"></span><span class="scene-tile-meta"></span>';
   button.querySelector('.scene-tile-name').textContent=tile.name;
-  if(!tile.lot)button.querySelector('.scene-tile-name').dataset.service=({start:'市政',bank:'金库',construction:'城建',card_draw:'抽卡',chance:'商店',teleport:'传送',rush:'快线',event:'事件',junction:data.mapId==='harbor'?'航线':'分岔'})[tile.isStart?'start':tile.special?.type]||'';
+  if(!tile.lot){
+    const name=button.querySelector('.scene-tile-name');
+    name.dataset.service=({start:'市政',bank:'金库',construction:'城建',card_draw:'抽卡',chance:'商店',teleport:'传送',rush:'快线',event:'事件',junction:data.mapId==='harbor'?'航线':'分岔'})[tile.isStart?'start':tile.special?.type]||'';
+    const icon=tile.isStart?window.GameIcons?.svg('start'):window.GameIcons?.service(tile.special?.type);
+    if(icon){name.insertAdjacentHTML('afterbegin',`<i class="scene-tile-icon">${icon}</i>`);name.dataset.hasIcon='true';}
+  }
   labels.appendChild(button);
   const view={tile, mapId:data.mapId, boundary, parcelRotation, landmarkSpec, group, building, ownerMaterial, ownerFrame, flag, flagCloth, outline, label:button, anchor, w, d, signature:'', modelName:'', born:0};
   if(parcelRotation!=null){anchor.copy(position).addScaledVector(boundary.normal,parcelFrontDepth(view,boundary.normal)/2+.26);anchor.y=.07;}
@@ -1024,8 +1036,11 @@ function arrangeLabels(){
   if(!camera)return;
   const placed=[];
   const candidates=[...lotViews.values()].map((view)=>{
-    const overview=snapshot?.mapId==='harbor'&&width<720&&!isLocalCamera();
-    const important=view.tile.lot?.isLarge||view.tile.isStart||view.tile.special?.type==='junction'||view.tile.index===selectedIndex||view.tile.index===snapshot?.players?.find(player=>player.id===snapshot.currentPlayerId)?.position;
+    // On a phone the whole-board view keeps only services, landmarks, deeds and
+    // the tiles in play; every other name returns when the camera follows again.
+    const overview=width<720&&!isLocalCamera();
+    const service=!view.tile.lot&&(snapshot?.mapId!=='harbor'||view.tile.isStart||view.tile.special?.type==='junction');
+    const important=service||view.tile.lot?.isLarge||Boolean(view.tile.lot?.ownerId)||view.tile.index===selectedIndex||view.tile.index===snapshot?.players?.find(player=>player.id===snapshot.currentPlayerId)?.position;
     const point=project(view.anchor),visible=(!overview||important)&&point.x>=10&&point.x<=width-10&&point.y>=8&&point.y<=height-8;
     view.label.hidden=!visible;
     const hovered=!cameraGesture.dragged&&view.label.matches(':hover');
