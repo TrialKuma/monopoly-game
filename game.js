@@ -56,7 +56,7 @@ const CLASSIC_DISTRICT_COLORS = {
 const CLASSIC_SPECIAL_TILES = {
   4:  { type: "bank", label: "金库", color: "#bfdbfe", description: "存钱或提款！" },
   9:  { type: "card_draw", label: "翻牌格", color: "#e9d5ff", description: "三选一存入背包，掷骰前可选用" },
-  13: { type: "chance", label: "道具商店", color: "#fbcfe8", description: "花金币选购一张道具卡，存入背包择机使用" },
+  13: { type: "chance", label: "道具商店", color: "#fbcfe8", description: "花钱选购一张道具卡，存入背包择机使用" },
   17: { type: "construction", label: "城建局", color: "#fef08a", description: "建造或拆除！" },
   20: { type: "card_draw", label: "翻牌格", color: "#e9d5ff", description: "三选一存入背包，掷骰前可选用" },
 };
@@ -102,7 +102,7 @@ const COMPACT_DISTRICT_COLORS = {
 };
 const COMPACT_SPECIAL_TILES = {
   6:  { type: "card_draw", label: "翻牌格", color: "#e9d5ff", description: "三选一存入背包，掷骰前可选用" },
-  7:  { type: "chance", label: "道具商店", color: "#fbcfe8", description: "花金币选购一张道具卡，存入背包择机使用" },
+  7:  { type: "chance", label: "道具商店", color: "#fbcfe8", description: "花钱选购一张道具卡，存入背包择机使用" },
   9:  { type: "bank", label: "金库", color: "#bfdbfe", description: "存钱或提款！" },
   15: { type: "event", label: "命运转盘", color: "#fde68a", description: "随机事件，可能地震。" },
 };
@@ -159,10 +159,10 @@ const EXPANSION_SPECIAL_TILES = {
   5:  { type: "construction", label: "开发局", color: "#fef08a", description: "强化建设节奏。" },
   10: { type: "card_draw", label: "翻牌格", color: "#e9d5ff", description: "三选一存入背包，掷骰前可选用" },
   12: { type: "rush", label: "城市快线", color: "#fdba74", rushMin: 3, rushMax: 5, description: "随机冲刺 3–5 格，到达后立即结算。" },
-  14: { type: "chance", label: "道具商店", color: "#fbcfe8", description: "花金币选购一张道具卡，存入背包择机使用" },
+  14: { type: "chance", label: "道具商店", color: "#fbcfe8", description: "花钱选购一张道具卡，存入背包择机使用" },
   16: { type: "teleport", label: "传送港", color: "#a7f3d0", settleArrival: true, description: "随机传送到一块地产，到达后立即结算。" },
   19: { type: "card_draw", label: "命运转盘", color: "#e9d5ff", description: "三选一存入背包，掷骰前可选用" },
-  22: { type: "chance", label: "道具商店", color: "#fbcfe8", description: "花金币选购一张道具卡，存入背包择机使用" },
+  22: { type: "chance", label: "道具商店", color: "#fbcfe8", description: "花钱选购一张道具卡，存入背包择机使用" },
 };
 const EXPANSION_LOT_CONFIGS = {
   1:  { price: 80,  buildCosts: [0, 38, 66, 100], tolls: [18, 52, 112, 188], themeIdx: 0 },
@@ -274,7 +274,7 @@ const ALPINE_SPECIAL_TILES = {
   2: { type: "card_draw", label: "山间邮局", color: "#e9d5ff", description: "三选一存入背包，掷骰前可选用" },
   5: { type: "construction", label: "匠人山房", color: "#fef08a", description: "免费升级自己或拆除对手一层建筑。" },
   9: { type: "bank", label: "山城金库", color: "#bfdbfe", description: "存钱或提款！" },
-  13: { type: "chance", label: "道具商店", color: "#fbcfe8", description: "花金币选购一张道具卡，存入背包择机使用" },
+  13: { type: "chance", label: "道具商店", color: "#fbcfe8", description: "花钱选购一张道具卡，存入背包择机使用" },
   20: { type: "card_draw", label: "旅人驿站", color: "#e9d5ff", description: "三选一存入背包，掷骰前可选用" },
   23: { type: "rush", label: "山间缆车", color: "#c5dbc9", rushMin: 2, rushMax: 4, description: "乘缆车随机前进 2–4 格，抵达后立即结算。" },
 };
@@ -436,21 +436,21 @@ const MAP_PRESETS = {
 let selectedMapId = DEFAULT_MAP_ID;
 
 const CARD_POOL = [
-  { id: "buyProperty", name: "买地卡", icon: "🏘️", description: "站在对手地上，下回合开始时按全部成本买下这块地", municipalOnly: true },
-  { id: "sellProperty", name: "卖地卡", icon: "📜", description: "站在对手地上，下回合开始时让他把这块地卖给市政府，他拿回全部成本", municipalOnly: true },
+  { id: "buyProperty", name: "买地卡", icon: "🏘️", description: "站在对手地上，下回合开始时连地带楼按原价买下", municipalOnly: true },
+  { id: "sellProperty", name: "卖地卡", icon: "📜", description: "站在对手地上，下回合开始时让这块地收归市政府，对手拿回原价", municipalOnly: true },
   { id: "teleport", name: "传送术", icon: "🌀", description: "把自己或对手送到随机一块地产，到了不交租也不能买" },
-  { id: "boost", name: "双骰卡", icon: "🎲", description: "选择一方，下次同时掷两颗骰子" },
-  { id: "slow", name: "减速陷阱", icon: "🐌", description: "选择一方，下次掷骰结果减半" },
+  { id: "boost", name: "双骰卡", icon: "🎲", description: "让一方下次掷两颗骰子" },
+  { id: "slow", name: "减速陷阱", icon: "🐌", description: "让一方下次掷出的点数减半" },
   { id: "launch", name: "命定骰", icon: "🎯", description: "这次掷骰自己选点数（1 到 6）" },
-  { id: "motorcycle", name: "机车卡", icon: "🛵", description: "装备机车，本局可自由选择掷1颗或2颗骰子", shopOnly: true },
+  { id: "motorcycle", name: "机车卡", icon: "🛵", description: "骑上机车，本局每次都能选掷 1 颗还是 2 颗骰子", shopOnly: true },
   { id: "rewind", name: "时光回溯", icon: "⏪", description: "让一方后退 3 步，到了不交租也不能买" },
   { id: "swap", name: "换位魔法", icon: "🔄", description: "和对手交换位置，到了不交租也不能买" },
-  { id: "freeze", name: "绊脚术", icon: "🪤", description: "对手下回合原地不动，脚下的格子再算一次" },
+  { id: "freeze", name: "绊脚术", icon: "🪤", description: "对手下回合停在原地，脚下那块地再结算一次" },
   { id: "combo", name: "连击鼓", icon: "🥁", description: "获得额外一回合" },
-  { id: "shield", name: "护盾术", icon: "🛡️", description: "免疫下一次过路费" },
-  { id: "doubleRent", name: "收租翻倍", icon: "💎", description: "地产下次被踩收费×2" },
+  { id: "shield", name: "护盾术", icon: "🛡️", description: "下一次租金免交" },
+  { id: "doubleRent", name: "收租翻倍", icon: "💎", description: "你的地下次收租翻倍" },
   { id: "propertySwap", name: "地产互换", icon: "🔀", description: "交出你的一块地产，随机获得对手一块" },
-  { id: "reverse", name: "逆行术", icon: "🔃", description: "选择一方，反转其前进方向" },
+  { id: "reverse", name: "逆行术", icon: "🔃", description: "让一方掉头往回走" },
 ];
 
 const EFFECT_BONUS_TABLES = Object.freeze({ finance_bonus: [0, 60, 120, 200], tower_bonus: [0, 50, 100, 170] });
@@ -492,7 +492,7 @@ const tileTooltipEl = document.getElementById("tile-tooltip");
 const EVENT_ICON_MAP = {
   "购买提示": { emoji: "🏠", icon: "buyProperty", cls: "event-buy" },
   "升级提示": { emoji: "🔧", icon: "construction", cls: "event-build" },
-  "过路费提示": { emoji: "💰", icon: "bank", cls: "event-toll" },
+  "租金": { emoji: "💰", icon: "bank", cls: "event-toll" },
   "功能地块": { emoji: "✨", icon: "notice", cls: "event-special" },
   "市政府补给": { emoji: "🏛️", icon: "start", cls: "event-start" },
   "市政府征用": { emoji: "📜", icon: "sellProperty", cls: "event-start" },
@@ -1291,7 +1291,7 @@ const HARBOR_PROJECT_DEFS = [
   { id: "promenade", name: "归航花园", indices: [29, 30, 32] },
 ];
 const HARBOR_PROJECT_REWARDS = [
-  { stage: 1, threshold: 3, label: "金币 +100" },
+  { stage: 1, threshold: 3, label: "现金 +100" },
   { stage: 2, threshold: 6, label: "双骰卡 ×1" },
   { stage: 3, threshold: 9, label: "潮汐海螺 ×1" },
 ];
@@ -2213,7 +2213,7 @@ function municipalCardBlock(player, card) {
   const target = municipalCardTarget(player);
   if (!target) return "先停到对手地上，下回合开始才能用";
   if ((player.completedTurns || 0) <= player.propertySettlement.completedTurns) return "下回合可使用";
-  if (card.id === "buyProperty" && player.cash < getPropertyCost(target.lot)) return "金币不足";
+  if (card.id === "buyProperty" && player.cash < getPropertyCost(target.lot)) return "现金不够";
   return "";
 }
 
@@ -2347,7 +2347,7 @@ async function resolveLandingEffect(player, tile, sid) {
     }
     const dec = await showModal({
       label: "购买提示", title: repairing ? `修复 ${tile.name}？` : `购买 ${tile.name}？`,
-      message: repairing ? "地震废墟" : `${lot.theme.label}${lot.isLarge ? " · 大型地产" : ""}${lot.level > 0 ? ` · Lv.${lot.level}` : ""}`,
+      message: repairing ? `地震废墟 · 修好就是 ${lot.level} 级` : `${lot.theme.label}${lot.isLarge ? " · 大型地产" : ""}${lot.level > 0 ? ` · Lv.${lot.level}` : ""}`,
       propertyOffer: { tileIndex: tile.index, action: "buy" },
       buttons: [
         { id: "buy", label: repairing ? "修复" : "购买", variant: "primary" },
@@ -2365,7 +2365,7 @@ async function resolveLandingEffect(player, tile, sid) {
 
     if (lot.level >= 3) {
       if (lot.effectId !== "finance_bonus" && lot.effectId !== "tower_bonus") {
-        await showContinueModal({ label: "升级提示", title: `${tile.name} 已满级`, message: `Lv.3 最高等级，收费 ${formatMoney(lot.tolls[3])}。` });
+        await showContinueModal({ label: "升级提示", title: `${tile.name} 已满级`, message: `已经是最高一级，租金 ${formatMoney(lot.tolls[3])}。` });
       }
       return;
     }
@@ -2394,7 +2394,7 @@ async function resolveLandingEffect(player, tile, sid) {
       ],
     });
     if (!isSessionActive(sid)) return;
-    if (dec === "build") { buildLot(player, tile); render(); await showContinueModal({ label: "建筑升级", title: `${tile.name} 升至 Lv.${lot.level}`, message: `支付 ${formatMoney(cost)}，基础租金提高至 ${formatMoney(lot.tolls[lot.level])}。`, drama: { type: "build", amount: cost, to: player, tiles: [tile.index], tileName: tile.name } }); }
+    if (dec === "build") { buildLot(player, tile); render(); await showContinueModal({ label: "建筑升级", title: `${tile.name} 升至 Lv.${lot.level}`, message: `支付 ${formatMoney(cost)}，租金涨到 ${formatMoney(lot.tolls[lot.level])}。`, drama: { type: "build", amount: cost, to: player, tiles: [tile.index], tileName: tile.name } }); }
     return;
   }
 
@@ -2402,7 +2402,7 @@ async function resolveLandingEffect(player, tile, sid) {
   if (player.effects.shield) {
     player.effects.shield = false;
     pushLog(`${player.name} 的护盾术生效，免交 ${tile.name} 的过路费！`);
-    await showContinueModal({ label: "过路费提示", title: "护盾生效 · 本次免租", message: `${player.name} 免交 ${tile.name} 的过路费。`, drama: { type: "shield", expectedAmount: window.GamePresentation?.rentFor(tile).total ?? lot.tolls[lot.level], to: player, tiles: [tile.index], tileName: tile.name } });
+    await showContinueModal({ label: "租金", title: "护盾生效 · 本次免租", message: `${player.name} 免交 ${tile.name} 的租金。`, drama: { type: "shield", expectedAmount: window.GamePresentation?.rentFor(tile).total ?? lot.tolls[lot.level], to: player, tiles: [tile.index], tileName: tile.name } });
     if (!isSessionActive(sid)) return;
     await resolveLargeLotEffect(player, tile, sid);
     return;
@@ -2411,7 +2411,7 @@ async function resolveLandingEffect(player, tile, sid) {
   render();
   if (window.GamePresentation) {
     const leadChanged = owner.cash > player.cash && owner.cash - toll.actualPayment <= player.cash + toll.actualPayment;
-    await showContinueModal({ label: "过路费提示", title: player.isAi ? "收租" : "交租", message: toll.message, drama: { type: "rent", amount: toll.actualPayment, expectedAmount: toll.toll, leadChanged, from: player, to: owner, tiles: getDistrictOwnerLots(lot.district, owner.id).map(t => t.index), tileName: tile.name } });
+    await showContinueModal({ label: "租金", title: player.isAi ? "收租" : "交租", message: toll.message, drama: { type: "rent", amount: toll.actualPayment, expectedAmount: toll.toll, leadChanged, from: player, to: owner, tiles: getDistrictOwnerLots(lot.district, owner.id).map(t => t.index), tileName: tile.name } });
     if (!isSessionActive(sid)) return;
   }
   if (toll.actualPayment < toll.toll) {
@@ -2442,7 +2442,7 @@ async function resolveLandingEffect(player, tile, sid) {
       message: reliefMessage,
     });
   } else if (!window.GamePresentation) {
-    await showContinueModal({ label: "过路费提示", title: `支付 ${formatMoney(toll.actualPayment)} 过路费`, message: toll.message });
+    await showContinueModal({ label: "租金", title: `支付 ${formatMoney(toll.actualPayment)} 租金`, message: toll.message });
   }
   if (!isSessionActive(sid)) return;
   await resolveLargeLotEffect(player, tile, sid);
@@ -2640,7 +2640,7 @@ async function resolveEventTile(player, tile, sid) {
     render();
     await showContinueModal({
       label: "地震", title: "地震！",
-      message: `${fallen.map((t) => t.name).join("和")}塌了。`,
+      message: `${fallen.map((t) => t.name).join("和")}塌了，地契作废。废墟谁先修就归谁。`,
       drama: { type: "quake", tiles: fallen.map((t) => t.index), tileName: tile.name },
     });
     return;
@@ -2661,7 +2661,7 @@ async function resolveEventTile(player, tile, sid) {
   pushLog(`赞助商往金库放了 ${formatMoney(sponsor)}。`);
   render();
   await showContinueModal({
-    label: "随机事件", title: "金库赞助", message: "",
+    label: "随机事件", title: "金库赞助", message: "谁先停到金库，钱就归谁。",
     drama: { type: "bank", amount: sponsor, chanceKind: "bank" },
   });
 }
@@ -2679,7 +2679,7 @@ function commitItemShopPurchase(visit, cardId) {
   if (!card) return { ok: false, reason: "本次没有这张商品" };
   if (card.id === "motorcycle" && hasMotorcycleAccess(visit.player)) return { ok:false, reason:"已有机车" };
   const price = ITEM_SHOP_PRICES[card.id];
-  if (!Number.isFinite(visit.player.cash) || visit.player.cash < price) return { ok: false, reason: "金币不足" };
+  if (!Number.isFinite(visit.player.cash) || visit.player.cash < price) return { ok: false, reason: "现金不够" };
   // Commit once, synchronously: double taps and stale dialogs cannot pay or grant twice.
   visit.closed = true;
   const item = grantInventoryCard(visit.player.id, card.id, {
@@ -2742,7 +2742,7 @@ async function resolveChance(player, tile, sid) {
       buttons: [...visit.offers.map(card => {
         const price = ITEM_SHOP_PRICES[card.id], affordable = player.cash >= price;
         return { id: card.id, variant: "primary", disabled: !affordable,
-          label: `<span class="card-icon">${cardIconMarkup(card)}</span><span class="card-name">${card.name}</span><span class="card-desc">${card.description}</span><span class="card-price">${formatMoney(price)}</span><span class="card-buy-label">${affordable ? "购买" : "金币不足"}</span>` };
+          label: `<span class="card-icon">${cardIconMarkup(card)}</span><span class="card-name">${card.name}</span><span class="card-desc">${card.description}</span><span class="card-price">${formatMoney(price)}</span><span class="card-buy-label">${affordable ? "购买" : "现金不够"}</span>` };
       }), { id: "skip", label: "离开商店", variant: "ghost" }],
     });
     if (!itemShopVisitIsActive(visit)) return;

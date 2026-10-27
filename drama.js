@@ -28,7 +28,7 @@
   };
   SVG.quake = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.15" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 20.5h17"/><path d="m6.5 20.5-1.6-10 5.2-1.4 1.5 11.4" fill="currentColor" fill-opacity=".09"/><path d="M13.5 20.5v-6l5 .8v5.2" fill="currentColor" fill-opacity=".09"/><path d="m7 12.5 2.1 1.6-1.2 2 1.4 1.8"/><path d="m14.6 6.4 1.6 2 2.1-1 1 2.6M3 9.5l1.2-1.3M20.5 13l1.3-.6"/></svg>';
   const LABELS = {rent:'租金结算', seize:'产权变更', shield:'护盾免租', relief:'破产救助', build:'建筑升级', buy:'购买地产', bank:'金库结算', card:'卡牌效果', income:'现金入账', win:'对局结束', notice:'行动提示', quake:'地震'};
-  const TITLES = {rent:'租金到账', seize:'产权已变更', shield:'本次免租', relief:'救助金到账', build:'升级完成', buy:'购买成功', bank:'金库结算', card:'卡牌已生效', income:'获得金币', win:'本局结算', notice:'行动结果', quake:'地震！'};
+  const TITLES = {rent:'租金到账', seize:'产权已变更', shield:'本次免租', relief:'救助金到账', build:'升级完成', buy:'购买成功', bank:'金库结算', card:'卡牌已生效', income:'进账', win:'本局结算', notice:'行动结果', quake:'地震！'};
   let layer, boardStage, transferLayer, audioContext, active, eventNumber = 0, muted = false;
   const queue = [];
   const motionPreference = window.matchMedia?.('(prefers-reduced-motion: reduce)');
@@ -46,26 +46,26 @@
   const lastReactionByKind = new Map();
   const CHANCE_KINDS = new Set(['renovation','district','shield','express','swap','bank','bonus']);
   const EXCHANGES = {
-    chance_renovation:[['免费升级！','看看哪栋楼升了。'],['这次不用花钱。','记得看新的租金。']],
-    chance_district:[['整条街都升级了！','这条路得小心了。'],['这次升级不少。','租金也提高了。']],
-    chance_shield:[['免租券到手。','这次算你走运。'],['下次租金省了。','我的租金要等一等了。']],
-    chance_express:[['直接到站了？','先看看落在哪块地。'],['这次走得真远。','落地还要结算。']],
-    chance_swap:[['位置换了！','这条路现在归我走。'],['得重新规划了。','我也一样。']],
-    chance_bank:[['金库又加钱了。','看谁先到。'],['得去一趟金库。','我也盯着呢。']],
-    chance_bonus:[['补贴到账。','我也收到了。'],['又多了一笔。','这次都有份。']],
-    rent:[['又踩到你的地。','租金收到了。'],['这笔租金先付了。','下次见。']],
-    huge:[['这笔租金真不少。','升级的投入回来了。'],['得留点现金了。','这条街可不便宜。']],
-    hugeLead:[['这下被反超了。','我暂时领先。'],['这笔租金影响真大。','接下来轮到我了。']],
-    lead:[['领先没保住。','还有机会追。'],['又得追赶了。','看接下来的骰子。']],
-    empty:[['现金用完了。','这笔开销不小。'],['这笔只能付这些。','知道了。']],
-    emptyZero:[['已经没有现金了。','这回收不到租金了。']],
-    thin:[['只剩一点现金了。','接下来得谨慎些。'],['暂时不能再买地了。','先攒现金吧。']],
-    zero:[['这次不用付钱。','继续走吧。']],
-    shield:[['护盾挡住了。','这次免租。'],['省下一笔租金。','下次可就不一定了。']],
+    chance_renovation:[['白捡一层楼。','以后路过你家得多掏钱了。'],['不花钱就升级了？','这栋楼我得绕着走了。']],
+    chance_district:[['整条街都升了！','这条街以后可不好走。'],['这次升得真多。','你家租金又涨了。']],
+    chance_shield:[['拿到一张免租券。','这次算你运气好。'],['下一笔租金不用交了。','这笔我先记着。']],
+    chance_express:[['一下子就到了？','最好停在我家。'],['这趟走得真远。','看看你落在谁家。']],
+    chance_swap:[['位置换过来了！','那这条路归我走了。'],['路线全乱了。','我也得重新盘算。']],
+    chance_bank:[['金库又进账了。','看谁先去拿。'],['得找机会去趟金库。','我也盯着呢。']],
+    chance_bonus:[['发补贴了。','我这份也到了。'],['白来一笔钱。','见者有份。']],
+    rent:[['又踩到你家了。','谢谢惠顾。'],['这笔先交了。','常来啊。']],
+    huge:[['这一笔也太狠了。','盖楼的钱这下回来了。'],['得省着点花了。','这条街可不便宜。']],
+    hugeLead:[['一下被你翻过去了。','这下换我领先。'],['这一笔太伤了。','接下来看我的。']],
+    lead:[['领先没保住。','换我在前面了。'],['又得往回追了。','追得上再说。']],
+    empty:[['钱全交出去了。','这下你见底了。'],['就剩这些，全给你。','先收着吧。']],
+    emptyZero:[['一分钱都没了。','这回一分没收到。']],
+    thin:[['只剩一点钱了。','省着点花吧。'],['这下买不起地了。','先攒攒吧。']],
+    zero:[['这次不用交钱。','算你走运。']],
+    shield:[['护盾挡下了。','就差一点。'],['这笔租金省了。','下次可没这么好运。']],
   };
   const LINES = {
-    relief:['拿到救助了。','先把现金攒回来。','还有机会。'],
-    seize:['这块地不归我了。','得重新买地了。','地没了，补偿收到了。'],
+    relief:['拿到救助了。','先把钱攒回来。','还没输呢。'],
+    seize:['这块地没了。','只能再买块地了。','地没了，好歹补了钱。'],
   };
 
   function line(key) {
