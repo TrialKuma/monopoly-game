@@ -26,7 +26,7 @@ function offers(c, ids = ['shield', 'boost', 'combo']) {
     for (const map of ['classic','compact','expansion','harbor','alpine']) {
       c.run(`initializeGame('${map}')`);
       const shops = json(c, `state.board.filter(t=>t.special?.type==='chance').map(t=>({name:t.name,label:t.special.label,description:t.special.description}))`);
-      assert(shops.length); shops.forEach(shop => { assert.match(shop.name,/道具商店|集市/); assert.match(shop.label,/道具商店|集市/); assert.match(shop.description,/花钱/); });
+      assert(shops.length); shops.forEach(shop => { assert.match(shop.name,/道具商店|集市/); assert.match(shop.label,/道具商店|集市/); assert.match(shop.description,/现金/); });
       assert(c.run(`state.board.some(t=>t.special?.type==='card_draw')`),'free draw stations remain');
     }
   });

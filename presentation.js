@@ -47,9 +47,9 @@
   const mapGuides = {
     classic: {title:'经典环线',copy:'同街区地产连锁收租。'},
     compact: {title:'紧凑冲突',copy:'地产密集，命运转盘可能地震。'},
-    expansion: {title:'都市大环线',copy:'六街区各有一处 Lv.1 开业地产。城市快线再走 3–5 格。'},
+    expansion: {title:'都市大环线',copy:'六街区各有一处 Lv.1 开业地产。城市快线可再前进 3–5 格。'},
     harbor: {title:'潮汐港湾 · 三岛',copy:'中央地标 · 商贸岛 · 度假岛'},
-    alpine: {title:'云岭温泉',copy:'缆车再走 2–4 格，温泉可让对手休息一回合。'},
+    alpine: {title:'云岭温泉',copy:'缆车可再前进 2–4 格，温泉可令对手休息一回合。'},
   };
   const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const money = n => `¥${Math.round(n).toLocaleString('zh-CN')}`;
@@ -140,20 +140,20 @@
   }
   function effectText(lot) {
     const bonus=EFFECT_BONUS_TABLES[lot?.effectId];
-    if(bonus)return `地主自己停在这里时领 ${[1,2,3].map(level=>`${level} 级 ${money(bonus[level])}`).join('、')}`;
-    return lot?.effectId==='hot_spring_rest'?'别人停在这里，下回合要休息':'';
+    if(bonus)return `所有者停留时获得 ${[1,2,3].map(level=>`Lv.${level} ${money(bonus[level])}`).join('、')}`;
+    return lot?.effectId==='hot_spring_rest'?'其他玩家停留时，下回合需休息一次':'';
   }
   function tileGuideText(tile,economy=getMapEconomy()) {
-    if(tile.isStart)return `路过领 ${money(economy.startBonus)}${getMapConfig().autoBuildOnPass===false?'':'，并随机把你一块空地免费盖到 1 级'}；停在这里抽一张买地卡或卖地卡。`;
+    if(tile.isStart)return `经过时获得 ${money(economy.startBonus)}${getMapConfig().autoBuildOnPass===false?'':'，并随机将你的一块空地免费建造至 Lv.1'}；停留时随机获得一张买地卡或卖地卡。`;
     const special=tile.special||{};
     return ({
-      bank:`攒到 ${money(economy.bankThreshold)} 以后，停在这里的人全部取走；没攒够时要掷骰往里存钱。`,
-      construction:'随机给自己加盖一处，或者随机拆对手一处。',
-      card_draw:'三张道具卡选一张放进背包，掷骰前可以用。',
-      chance:'花钱买一张道具卡，每次最多一张。',
+      bank:`金库累计达到 ${money(economy.bankThreshold)} 后，停留的玩家可提取全部现金；未达到时需掷骰存入现金。`,
+      construction:'随机升级自己的一处地产，或随机拆除对手一处地产的一层建筑。',
+      card_draw:'从三张道具卡中选择一张存入背包，掷骰前可使用。',
+      chance:'花费现金购买道具卡，每次限购一张。',
       event:'随机事件，可能触发地震：最高的建筑倒塌，原产权失效；首位停留在废墟上的玩家可半价修复并获得产权。',
-      rush:special.rushMin?`再往前冲 ${special.rushMin} 到 ${special.rushMax} 格，停下的地方照常处理。`:'',
-      teleport:special.settleArrival?'随机送到一块地产，到了照常买地或交租。':'随机送到一块地产，到了不交租也不能买。',
+      rush:special.rushMin?`随机前进 ${special.rushMin}–${special.rushMax} 格，并结算到达的地块。`:'',
+      teleport:special.settleArrival?'随机传送至一块地产，到达后正常结算。':'随机传送至一块地产，到达后不支付租金，也无法购买。',
     })[special.type]||special.description||'';
   }
   let rulesGuideKey='';
@@ -221,7 +221,7 @@
     document.getElementById('showcase-open-btn').classList.toggle('hidden',!preview);
     if(lastCameraSession!==state.sessionId){lastCameraSession=state.sessionId;inspectorKey='';mapGuide.open=false;closeHarborProject(false);}
     document.getElementById('victory-rule').textContent='';
-    document.getElementById('rules-victory').textContent=state.gameMode==='bankruptcy'?'对手破产时，你获胜。':`打完 ${getMaxRounds()} 回合，现金更多的一方获胜。`;
+    document.getElementById('rules-victory').textContent=state.gameMode==='bankruptcy'?'对手破产时，你获胜。':`${getMaxRounds()} 回合结束时，现金较多的一方获胜。`;
     renderRulesGuide(map);
     updateCash();updateInspector();syncCityScene();refreshHarborProjectPanel();
     inspector.querySelectorAll('[data-inspect-building]').forEach(button=>{button.disabled=!window.CityScene?.inspectTile||(state.busy&&!preview);});

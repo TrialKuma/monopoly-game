@@ -56,7 +56,7 @@ const CLASSIC_DISTRICT_COLORS = {
 const CLASSIC_SPECIAL_TILES = {
   4:  { type: "bank", label: "金库", color: "#bfdbfe", description: "存钱或提款！" },
   9:  { type: "card_draw", label: "翻牌格", color: "#e9d5ff", description: "三选一存入背包，掷骰前可选用" },
-  13: { type: "chance", label: "道具商店", color: "#fbcfe8", description: "花钱选购一张道具卡，存入背包择机使用" },
+  13: { type: "chance", label: "道具商店", color: "#fbcfe8", description: "花费现金选购一张道具卡，存入背包择机使用" },
   17: { type: "construction", label: "城建局", color: "#fef08a", description: "建造或拆除！" },
   20: { type: "card_draw", label: "翻牌格", color: "#e9d5ff", description: "三选一存入背包，掷骰前可选用" },
 };
@@ -102,7 +102,7 @@ const COMPACT_DISTRICT_COLORS = {
 };
 const COMPACT_SPECIAL_TILES = {
   6:  { type: "card_draw", label: "翻牌格", color: "#e9d5ff", description: "三选一存入背包，掷骰前可选用" },
-  7:  { type: "chance", label: "道具商店", color: "#fbcfe8", description: "花钱选购一张道具卡，存入背包择机使用" },
+  7:  { type: "chance", label: "道具商店", color: "#fbcfe8", description: "花费现金选购一张道具卡，存入背包择机使用" },
   9:  { type: "bank", label: "金库", color: "#bfdbfe", description: "存钱或提款！" },
   15: { type: "event", label: "命运转盘", color: "#fde68a", description: "随机事件，可能地震。" },
 };
@@ -159,10 +159,10 @@ const EXPANSION_SPECIAL_TILES = {
   5:  { type: "construction", label: "开发局", color: "#fef08a", description: "强化建设节奏。" },
   10: { type: "card_draw", label: "翻牌格", color: "#e9d5ff", description: "三选一存入背包，掷骰前可选用" },
   12: { type: "rush", label: "城市快线", color: "#fdba74", rushMin: 3, rushMax: 5, description: "随机冲刺 3–5 格，到达后立即结算。" },
-  14: { type: "chance", label: "道具商店", color: "#fbcfe8", description: "花钱选购一张道具卡，存入背包择机使用" },
+  14: { type: "chance", label: "道具商店", color: "#fbcfe8", description: "花费现金选购一张道具卡，存入背包择机使用" },
   16: { type: "teleport", label: "传送港", color: "#a7f3d0", settleArrival: true, description: "随机传送到一块地产，到达后立即结算。" },
   19: { type: "card_draw", label: "命运转盘", color: "#e9d5ff", description: "三选一存入背包，掷骰前可选用" },
-  22: { type: "chance", label: "道具商店", color: "#fbcfe8", description: "花钱选购一张道具卡，存入背包择机使用" },
+  22: { type: "chance", label: "道具商店", color: "#fbcfe8", description: "花费现金选购一张道具卡，存入背包择机使用" },
 };
 const EXPANSION_LOT_CONFIGS = {
   1:  { price: 80,  buildCosts: [0, 38, 66, 100], tolls: [18, 52, 112, 188], themeIdx: 0 },
@@ -274,7 +274,7 @@ const ALPINE_SPECIAL_TILES = {
   2: { type: "card_draw", label: "山间邮局", color: "#e9d5ff", description: "三选一存入背包，掷骰前可选用" },
   5: { type: "construction", label: "匠人山房", color: "#fef08a", description: "免费升级自己或拆除对手一层建筑。" },
   9: { type: "bank", label: "山城金库", color: "#bfdbfe", description: "存钱或提款！" },
-  13: { type: "chance", label: "道具商店", color: "#fbcfe8", description: "花钱选购一张道具卡，存入背包择机使用" },
+  13: { type: "chance", label: "道具商店", color: "#fbcfe8", description: "花费现金选购一张道具卡，存入背包择机使用" },
   20: { type: "card_draw", label: "旅人驿站", color: "#e9d5ff", description: "三选一存入背包，掷骰前可选用" },
   23: { type: "rush", label: "山间缆车", color: "#c5dbc9", rushMin: 2, rushMax: 4, description: "乘缆车随机前进 2–4 格，抵达后立即结算。" },
 };
@@ -436,20 +436,20 @@ const MAP_PRESETS = {
 let selectedMapId = DEFAULT_MAP_ID;
 
 const CARD_POOL = [
-  { id: "buyProperty", name: "买地卡", icon: "🏘️", description: "站在对手地上，下回合开始时按全部成本买下这块地", municipalOnly: true },
-  { id: "sellProperty", name: "卖地卡", icon: "📜", description: "站在对手地上，下回合开始时该地产由市政府收回，原主获得全部成本", municipalOnly: true },
-  { id: "teleport", name: "传送术", icon: "🌀", description: "把自己或对手送到随机一块地产，到了不交租也不能买" },
+  { id: "buyProperty", name: "买地卡", icon: "🏘️", description: "停留在对手地产上时，下回合开始可按全部成本购买该地产", municipalOnly: true },
+  { id: "sellProperty", name: "卖地卡", icon: "📜", description: "停留在对手地产上时，下回合开始可令该地产由市政府收回，原主获得全部成本", municipalOnly: true },
+  { id: "teleport", name: "传送术", icon: "🌀", description: "将自己或对手传送至随机一块地产，到达后不支付租金，也无法购买" },
   { id: "boost", name: "双骰卡", icon: "🎲", description: "选择一方，下次同时掷两颗骰子" },
   { id: "slow", name: "减速陷阱", icon: "🐌", description: "选择一方，下次掷骰结果减半" },
-  { id: "launch", name: "命定骰", icon: "🎯", description: "这次掷骰自己选点数（1 到 6）" },
+  { id: "launch", name: "命定骰", icon: "🎯", description: "本次掷骰可自选点数（1–6）" },
   { id: "motorcycle", name: "机车卡", icon: "🛵", description: "装备机车，本局可自由选择掷1颗或2颗骰子", shopOnly: true },
-  { id: "rewind", name: "时光回溯", icon: "⏪", description: "让一方后退 3 步，到了不交租也不能买" },
-  { id: "swap", name: "换位魔法", icon: "🔄", description: "和对手交换位置，到了不交租也不能买" },
+  { id: "rewind", name: "时光回溯", icon: "⏪", description: "选择一方后退 3 步，到达后不支付租金，也无法购买" },
+  { id: "swap", name: "换位魔法", icon: "🔄", description: "与对手交换位置，到达后不支付租金，也无法购买" },
   { id: "freeze", name: "绊脚术", icon: "🪤", description: "对手下回合无法移动，并再次结算所在地块" },
   { id: "combo", name: "连击鼓", icon: "🥁", description: "获得额外一回合" },
   { id: "shield", name: "护盾术", icon: "🛡️", description: "免交下一次租金" },
   { id: "doubleRent", name: "收租翻倍", icon: "💎", description: "你的地产下一次收取的租金翻倍" },
-  { id: "propertySwap", name: "地产互换", icon: "🔀", description: "交出你的一块地产，随机获得对手一块" },
+  { id: "propertySwap", name: "地产互换", icon: "🔀", description: "交出你的一块地产，随机获得对手的一块地产" },
   { id: "reverse", name: "逆行术", icon: "🔃", description: "选择一方，反转其前进方向" },
 ];
 
@@ -2150,7 +2150,7 @@ async function animateMovement(player, steps, sid, options = {}) {
         const target = buildable[Math.floor(Math.random() * buildable.length)];
         target.lot.level = 1;
         syncHarborProjects();
-        startUpgradeMsg = `${target.name} 免费盖到 1 级`;
+        startUpgradeMsg = `${target.name} 免费建造至 Lv.1`;
         pushLog(`${player.name} 经过市政府，获得 ${formatMoney(getMapEconomy().startBonus)}。${target.name} 自动建造至 Lv.1。`);
       } else {
         pushLog(`${player.name} 经过市政府，获得 ${formatMoney(getMapEconomy().startBonus)} 奖励。`);
@@ -2211,7 +2211,7 @@ function municipalCardTarget(player) {
 
 function municipalCardBlock(player, card) {
   const target = municipalCardTarget(player);
-  if (!target) return "先停到对手地上，下回合开始才能用";
+  if (!target) return "需先停留在对手地产上，下回合开始时可使用";
   if ((player.completedTurns || 0) <= player.propertySettlement.completedTurns) return "下回合可使用";
   if (card.id === "buyProperty" && player.cash < getPropertyCost(target.lot)) return "现金不足";
   return "";
@@ -2795,7 +2795,7 @@ async function resolveConstruction(player, sid) {
   if (!canBuild.length && !canDemolish.length) {
     const b = 120; updatePlayerCash(player, b, false);
     pushLog(`${player.name} 在城建局无事可做，领取 ${formatMoney(b)} 补贴。`);
-    await showContinueModal({ label: "城建局", title: "城建局", message: "没有能建或能拆的地，改领补贴", drama: { type: "income", amount: b } });
+    await showContinueModal({ label: "城建局", title: "城建局", message: "没有可建造或拆除的地产，改为领取补贴", drama: { type: "income", amount: b } });
     return;
   }
 
@@ -3429,7 +3429,7 @@ function collectToll(visitor, owner, tile) {
   if (actual < toll) pushLog(`${visitor.name} 现金不足，仅支付 ${formatMoney(actual)} 给 ${owner.name}。`);
   else pushLog(`${visitor.name} 支付 ${formatMoney(actual)} 过路费给 ${owner.name}。`);
   const notes = [];
-  if (cnt > 1) notes.push(`${owner.isAi ? "对手" : "你"}在${tile.lot.district}有 ${cnt} 块地，一起收`);
+  if (cnt > 1) notes.push(`${owner.isAi ? "对手" : "你"}在${tile.lot.district}拥有 ${cnt} 块地产，租金合并收取`);
   if (doubleActive) notes.push("这次租金翻倍");
   if (actual < toll) notes.push(`现金不足，应付 ${formatMoney(toll)}`);
   return { actualPayment: actual, toll, message: notes.join("；") };
