@@ -11,7 +11,7 @@
   const projects = () => root.GameProgression.PROJECTS;
   const materialNames = { city_stamp: '印章', harbor_shell: '海螺', alpine_crystal: '晶石' };
   const materialIcons = Object.fromEntries([['city_stamp', 'stamp', '◈'], ['harbor_shell', 'shell', '≈'], ['alpine_crystal', 'crystal', '✧']].map(([id, icon, glyph]) => [id, root.GameIcons?.svg(icon) || glyph]));
-  const materialMaps = { city_stamp: ['classic', '经典'], harbor_shell: ['harbor', '港湾'], alpine_crystal: ['alpine', '温泉'] };
+  const materialMaps = { city_stamp: ['classic', '香榭花都'], harbor_shell: ['harbor', '蔚蓝港湾'], alpine_crystal: ['alpine', '阿尔卑斯山镇'] };
   const projectStages = { garden: ['花圃', '喷泉庭院', '玻璃花亭'], waterfront: ['木栈桥', '码头', '帆船港'], skyline: ['观景台', '灯塔', '灯光塔冠'] };
   const currentCard = () => catalog().find(card => card.id === selectedCard) || catalog()[0];
   const stars = star => '★'.repeat(star || 0) + '☆'.repeat(3 - (star || 0));

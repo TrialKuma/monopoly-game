@@ -45,11 +45,11 @@
   }
   const mapGuide = document.getElementById('map-guide');
   const mapGuides = {
-    classic: {title:'经典环线',copy:'同街区地产连锁收租。'},
-    compact: {title:'紧凑冲突',copy:'地产密集，命运转盘可能地震。'},
-    expansion: {title:'都市大环线',copy:'六街区各有一处 Lv.1 开业地产。城市快线可再前进 3–5 格。'},
-    harbor: {title:'潮汐港湾 · 三岛',copy:'中央地标 · 商贸岛 · 度假岛'},
-    alpine: {title:'云岭温泉',copy:'缆车可再前进 2–4 格，温泉可令对手休息一回合。'},
+    classic: {title:'香榭花都',copy:'同街区地产连锁收租。'},
+    compact: {title:'京都花见',copy:'地产密集，命运转盘可能地震。'},
+    expansion: {title:'曼哈顿大道',copy:'六街区各有一处 Lv.1 开业地产。城市快线可再前进 3–5 格。'},
+    harbor: {title:'蔚蓝港湾 · 三岛',copy:'中央地标 · 商贸岛 · 度假岛'},
+    alpine: {title:'阿尔卑斯山镇',copy:'缆车可再前进 2–4 格，温泉可令对手休息一回合。'},
   };
   const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const money = n => `¥${Math.round(n).toLocaleString('zh-CN')}`;

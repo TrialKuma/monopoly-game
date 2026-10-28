@@ -1,0 +1,68 @@
+{
+  "date": "2026-10-28",
+  "scope": "Map theme names and cosmetic regional atmosphere",
+  "localOnly": true,
+  "maps": {
+    "classic": {
+      "name": "香榭花都",
+      "theme": "French garden",
+      "atmosphere": "warm spring/summer garden, cream petals and pollen"
+    },
+    "compact": {
+      "name": "京都花见",
+      "theme": "Kyoto machiya",
+      "atmosphere": "long spring, pink cherry crowns and fluttering petals"
+    },
+    "expansion": {
+      "name": "曼哈顿大道",
+      "theme": "New York city",
+      "atmosphere": "autumn showers, wet paths and peripheral city mist"
+    },
+    "harbor": {
+      "name": "蔚蓝港湾",
+      "theme": "Mediterranean islands",
+      "atmosphere": "summer sea breeze and three-layer moving nearshore foam"
+    },
+    "alpine": {
+      "name": "阿尔卑斯山镇",
+      "theme": "Alpine mountain town",
+      "atmosphere": "light snow, winter vegetation and low mountain mist"
+    }
+  },
+  "integration": [
+    "Menu, map titles, building cards, collection links and historical labels use the new names",
+    "Stable map IDs, saved economic state and gameplay numbers retained",
+    "Automatic climate varies by map; manual season/weather controls still override",
+    "Marked perimeter plants follow seasons; structural materials and shaders remain unchanged",
+    "Accents use existing scene clock and never consume gameplay randomness"
+  ],
+  "validation": {
+    "progressionAndTown": 48,
+    "weather": 25,
+    "regionalAccents": 8,
+    "atmosphereLifecycle": 8,
+    "coastVerticesOutsideShoals": 699840,
+    "coastDrawCalls": 1,
+    "visual": [
+      "Five map overview scenes",
+      "Kyoto and harbor at 390x844",
+      "Manhattan night rain",
+      "Alpine perimeter winter palette",
+      "Home map names at 390x844"
+    ],
+    "browserErrors": 0
+  },
+  "limitations": [
+    "Phone-sized browser checks, not physical-device performance measurement"
+  ],
+  "preview": "http://127.0.0.1:8876/work/regional-atmosphere/review.html?map=compact",
+  "evidence": [
+    "work/regional-atmosphere/kyoto-wide.png",
+    "work/regional-atmosphere/kyoto-phone.png",
+    "work/regional-atmosphere/harbor-wide.png",
+    "work/regional-atmosphere/harbor-phone.png",
+    "work/regional-atmosphere/alpine-wide.png",
+    "work/regional-atmosphere/classic-wide.png",
+    "work/regional-atmosphere/manhattan-night.png"
+  ]
+}

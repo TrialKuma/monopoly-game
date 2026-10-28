@@ -4,7 +4,7 @@
   const TownPlan = root.TownPlan || (typeof require === 'function' ? require('./town-plan.js') : null);
   if (!TownPlan) throw new Error('TownPlan must load before progression.js');
   const STORAGE_KEY = 'monopoly_city_v1';
-  const COLLECTIONS = Object.freeze({ city_stamp: { name: '城市印章', map: '经典 / 紧凑 / 都市' }, harbor_shell: { name: '潮汐海螺', map: '潮汐港湾' }, alpine_crystal: { name: '山泉晶石', map: '云岭温泉' } });
+  const COLLECTIONS = Object.freeze({ city_stamp: { name: '城市印章', map: '香榭花都 / 京都花见 / 曼哈顿大道' }, harbor_shell: { name: '潮汐海螺', map: '蔚蓝港湾' }, alpine_crystal: { name: '山泉晶石', map: '阿尔卑斯山镇' } });
   const PROJECTS = Object.freeze([
     { id: 'garden', name: '海岸花园', coins: [300, 650, 1100], items: [1, 2, 3], collectionId: 'city_stamp', icon: '✿', description: '花圃 · 喷泉 · 玻璃花亭' },
     { id: 'waterfront', name: '滨水码头', coins: [450, 900, 1500], items: [1, 2, 3], collectionId: 'harbor_shell', icon: '≈', description: '栈桥 · 码头 · 帆船港' },
@@ -14,11 +14,11 @@
   // Each map's settlement draft offers its own region. The harbor family order
   // is part of saved v2/v3 draft offers and must not change.
   const BUILDING_REGIONS = [
-    ['classic', '经典', '经典环线', ['曦园公馆', '湖畔商行', '花园旅馆', '瀚海阁', '环城商会', '皇家大酒店', '温泉庄园']],
-    ['compact', '紧凑', '紧凑冲突', ['河畔小筑', '柳桥茶屋', '艺文旅馆', '港口仓屋', '林间公馆', '天守楼', '潮畔温泉']],
-    ['expansion', '都市', '都市大环线', ['清贝公寓', '晶藤百货', '星港旅馆', '天际大楼', '星河商会', '都会大酒店', '新月温泉']],
-    ['harbor', '港湾', '潮汐港湾', ['海湾公馆', '港湾商铺', '海岸酒店', '航海事务所', '海港商会', '港湾观景楼', '海崖温泉']],
-    ['alpine', '温泉', '云岭温泉', ['杉影山居', '雪松商铺', '松风旅舍', '山间邮局', '山岚商会', '云顶酒店', '云岭温泉']],
+    ['classic', '香榭', '香榭花都', ['曦园公馆', '湖畔商行', '花园旅馆', '瀚海阁', '环城商会', '皇家大酒店', '温泉庄园']],
+    ['compact', '京都', '京都花见', ['河畔小筑', '柳桥茶屋', '艺文旅馆', '港口仓屋', '林间公馆', '天守楼', '潮畔温泉']],
+    ['expansion', '曼哈顿', '曼哈顿大道', ['清贝公寓', '晶藤百货', '星港旅馆', '天际大楼', '星河商会', '都会大酒店', '新月温泉']],
+    ['harbor', '港湾', '蔚蓝港湾', ['海湾公馆', '港湾商铺', '海岸酒店', '航海事务所', '海港商会', '港湾观景楼', '海崖温泉']],
+    ['alpine', '阿尔卑斯', '阿尔卑斯山镇', ['杉影山居', '雪松商铺', '松风旅舍', '山间邮局', '山岚商会', '云顶酒店', '云岭温泉']],
   ];
   const BUILDING_CARDS = Object.freeze(BUILDING_REGIONS.flatMap(([region, regionName, mapName, names]) => BUILDING_FAMILIES.map(([family, coins, width], index) => Object.freeze({
     id: `${region}_${family}`, family, name: names[index], region, regionName, mapId: region, mapName, coins,
@@ -28,6 +28,7 @@
   }))));
   // Retained solely to validate expansion already purchased in v3 saves.
   const TOWN_EXPANSION = Object.freeze({ from: 6, to: 8, coins: 800 });
+  const mapNameFor = (mapId, fallback = '') => BUILDING_REGIONS.find(region => region[0] === mapId)?.[2] || fallback;
   const cardById = id => BUILDING_CARDS.find(card => card.id === id);
   const cardsForMap = mapId => BUILDING_CARDS.filter(card => card.mapId === mapId);
   const emptyCards = () => Object.fromEntries(BUILDING_CARDS.map(card => [card.id, { unlocked: false, star: 0, duplicates: 0 }]));
@@ -540,7 +541,7 @@
     dialog.innerHTML = `<div class="city-sheet"><header class="city-sheet-header"><div><p>${isRewards ? '建筑收藏' : '我的城镇'}</p><h2 id="city-dialog-title">${isResult ? '本局结算' : isRewards ? '建筑卡奖励' : '仓库'}</h2></div><button class="city-close" type="button" data-city-close aria-label="关闭面板">关闭</button></header>
       ${isResult || isRewards ? '' : `<div class="city-tabs" role="tablist" aria-label="仓库页面"><button type="button" role="tab" aria-selected="${panel === 'city'}" data-city-tab="city">仓库</button><button type="button" role="tab" aria-selected="${panel === 'board'}" data-city-tab="board">本机榜</button></div>`}
       <p class="city-message${!loaded.ok ? ' city-message-error' : ''}" role="status"${notice || !loaded.ok ? '' : ' hidden'}>${esc(notice || errors[loaded.error] || '')}</p>
-      ${isRewards ? pendingDraftMarkup(profile) || '<p class="building-card-rewards-complete">已全部领取</p>' : isResult ? `<div class="city-finish is-${details.winnerId === 'human' ? 'win' : details.winnerId === 'draw' ? 'draw' : 'lose'}"><div class="city-finish-mark" aria-hidden="true">${root.GameIcons?.svg(details.winnerId === 'human' ? 'win' : details.winnerId === 'draw' ? 'draw' : 'lose') || (details.winnerId === 'human' ? '✦' : details.winnerId === 'draw' ? '≈' : '▱')}</div><h3>${details.winnerId === 'human' ? '本局胜利' : details.winnerId === 'draw' ? '平局' : '本局失利'}</h3><p>${esc(details.mapName || '')} · ${details.mode === 'bankruptcy' ? '破产淘汰' : '回合制'}</p>${result.ok ? `<div class="city-finish-cash"><span>入库金币</span><strong>${money(result.amount)}</strong><small>最终现金 ${money(details.cash ?? details.humanCash ?? 0)}</small></div>` : `<div class="city-finish-cash"><span>最终现金</span><strong>${money(details.cash ?? details.humanCash ?? 0)}</strong></div>`}${resultMarkup(result, { hideAmount: result.ok })}<div class="city-finish-links"><button type="button" data-city-tab="city">仓库 ↗</button><button type="button" data-city-tab="board">查看本机榜 ↗</button></div></div>` : panel === 'city' ? `${loaded.ok ? pendingDraftMarkup(profile) : ''}<div class="city-wallet"><span>仓库金币</span><strong>${loaded.ok ? money(profile.wallet) : '—'}</strong><small>累计带回 ${money(profile.earned)}</small></div>${inventoryMarkup(profile, loaded.ok)}
+      ${isRewards ? pendingDraftMarkup(profile) || '<p class="building-card-rewards-complete">已全部领取</p>' : isResult ? `<div class="city-finish is-${details.winnerId === 'human' ? 'win' : details.winnerId === 'draw' ? 'draw' : 'lose'}"><div class="city-finish-mark" aria-hidden="true">${root.GameIcons?.svg(details.winnerId === 'human' ? 'win' : details.winnerId === 'draw' ? 'draw' : 'lose') || (details.winnerId === 'human' ? '✦' : details.winnerId === 'draw' ? '≈' : '▱')}</div><h3>${details.winnerId === 'human' ? '本局胜利' : details.winnerId === 'draw' ? '平局' : '本局失利'}</h3><p>${esc(mapNameFor(details.mapId, details.mapName))} · ${details.mode === 'bankruptcy' ? '破产淘汰' : '回合制'}</p>${result.ok ? `<div class="city-finish-cash"><span>入库金币</span><strong>${money(result.amount)}</strong><small>最终现金 ${money(details.cash ?? details.humanCash ?? 0)}</small></div>` : `<div class="city-finish-cash"><span>最终现金</span><strong>${money(details.cash ?? details.humanCash ?? 0)}</strong></div>`}${resultMarkup(result, { hideAmount: result.ok })}<div class="city-finish-links"><button type="button" data-city-tab="city">仓库 ↗</button><button type="button" data-city-tab="board">查看本机榜 ↗</button></div></div>` : panel === 'city' ? `${loaded.ok ? pendingDraftMarkup(profile) : ''}<div class="city-wallet"><span>仓库金币</span><strong>${loaded.ok ? money(profile.wallet) : '—'}</strong><small>累计带回 ${money(profile.earned)}</small></div>${inventoryMarkup(profile, loaded.ok)}
       <div class="city-finish-links"><button type="button" data-town-open>回城建造 ↗</button></div>`
       : `<div class="city-filters"><label>地图<select data-city-map>${mapList.map(map => `<option value="${esc(map.id)}"${filterMap === map.id ? ' selected' : ''}>${esc(map.name)}</option>`).join('')}</select></label>${hasArchivedMode ? `<label>记录类型<select data-city-mode><option value="rounds"${filterMode === 'rounds' ? ' selected' : ''}>固定回合</option><option value="bankruptcy"${filterMode === 'bankruptcy' ? ' selected' : ''}>历史淘汰局</option></select></label>` : ''}</div><ol class="city-ranking">${rows.ok && rows.rows.length ? rows.rows.map((r, i) => `<li><span class="city-rank-number">${i + 1}</span><div><strong>${r.winnerId === 'human' ? '胜利' : r.winnerId === 'draw' ? '平局' : '完成对局'}</strong><small>${esc(new Date(r.completedAt).toLocaleDateString('zh-CN'))} · ${r.rounds} 回合</small></div><b>${money(r.cash)}</b></li>`).join('') : '<li class="city-ranking-empty">暂无记录</li>'}</ol>`}
       <footer class="city-sheet-footer${isResult ? ' city-result-footer' : ''}">${isRewards ? pendingBuildingCards(profile).length ? '<button type="button" class="city-close" data-city-close>稍后领取</button>' : '<button type="button" class="city-confirm" data-town-open>回城建造</button>' : isResult ? '<button type="button" class="city-close" data-city-home>返回首页</button><button type="button" class="city-confirm" data-city-replay>再来一局</button>' : resultContext ? '<button type="button" class="city-confirm" data-city-tab="result">返回结算</button>' : '<button type="button" class="city-confirm" data-city-close>完成</button>'}</footer></div>`;
@@ -557,7 +558,7 @@
     if (!result.ok && !result.skipped && input?.runId) pending.set(input.runId, clone(input));
     if (result.ok) pending.delete(input.runId);
     changed();
-    const output = { ...result, runId: input?.runId, details: input ? { mapName: input.mapName, mode: input.mode, winnerId: input.winnerId, humanCash: input.humanCash, rounds: input.rounds } : {} };
+    const output = { ...result, runId: input?.runId, details: input ? { mapId: input.mapId, mapName: input.mapName, mode: input.mode, winnerId: input.winnerId, humanCash: input.humanCash, rounds: input.rounds } : {} };
     if (input?.runId) latestResults.set(input.runId, output);
     return output;
   }

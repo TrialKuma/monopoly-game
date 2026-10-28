@@ -13,7 +13,7 @@ function loadModel(file) {
 }
 export function createDestinationScene({THREE, world, boardBounds, mapId, requestRender=()=>{}, loadSceneryBundle=loadModel}) {
   const theme=THEMES[mapId];if(!theme)return null;
-  const root=new THREE.Group();root.name=`destination_${mapId}`;root.userData.cosmetic=true;world.add(root);
+  const root=new THREE.Group();root.name=`destination_${mapId}`;root.userData.cosmetic=true;root.userData.seasonalScenery=true;world.add(root);
   const perimeter=new THREE.Group();perimeter.name=`destination_${mapId}_outskirts`;root.add(perimeter);
   const owned=new Set(),mixers=[],waves=[],glows=[],boats=[],steam=[];
   const own=r=>{owned.add(r);return r;};

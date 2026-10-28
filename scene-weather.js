@@ -1,25 +1,44 @@
 import { createRoofSnow } from './scene-snow.js?v=20261028-global-roofs2';
 
+// A destination keeps its own climate long enough to be recognisable during a
+// match. Explicit season/weather controls still override these automatic cycles.
+const REGIONAL_CLIMATES = {
+  classic: { theme: 'garden', seasons: ['spring', 'summer', 'autumn'], seasonSeconds: 210, weatherSeconds: 150, rainWindows: [[.64, .80]], rainStrength: .60, petals: 26, petalSize: .073, leaves: 38, butterflies: true,
+    colors: { leaf: ['#83aa77', '#719b64', '#c09253', '#95a595'], crown: ['#b6cc8b', '#a7c47e', '#e1b66b', '#dbe3d7'], blossom: ['#ffe9d2', '#ebd9af', '#e6c39a', '#e9ede4'] },
+    petalColors: ['#fff1df', '#f3d6c3', '#efd2c8', '#ffe7c7'] },
+  compact: { theme: 'sakura', seasons: ['spring', 'spring', 'spring', 'summer', 'autumn'], seasonSeconds: 240, weatherSeconds: 180, rainWindows: [[.69, .79]], rainStrength: .48, petals: 94, petalSize: .088, leaves: 48, butterflies: true,
+    colors: { leaf: ['#a2b98b', '#729965', '#c88148', '#91a195'], crown: ['#f4c3d6', '#acc985', '#eab25c', '#e1e9e0'], blossom: ['#ffdae8', '#c3d6ad', '#e4b799', '#f0f2eb'] },
+    petalColors: ['#ffd9e5', '#efa6c4', '#fff0f4', '#f2bed7'] },
+  expansion: { theme: 'city-rain', seasons: ['autumn', 'autumn', 'summer'], seasonSeconds: 190, weatherSeconds: 140, rainWindows: [[0, .24], [.63, .82]], rainStrength: .68, petals: 0, leaves: 44, butterflies: false,
+    colors: { leaf: ['#7e9b75', '#658969', '#b88448', '#81958e'], crown: ['#a0b789', '#8bac79', '#d4a85b', '#c6d6cf'], blossom: ['#dbe6cc', '#afc49f', '#dcb58a', '#dce5df'], grass: ['#a5b796', '#8ca786', '#b1a579', '#cbd8d0'] } },
+  harbor: { theme: 'sea-breeze', seasons: ['summer', 'summer', 'spring'], seasonSeconds: 260, weatherSeconds: 210, rainWindows: [[.82, .88]], rainStrength: .36, petals: 0, leaves: 18, butterflies: true,
+    colors: { leaf: ['#91af76', '#789765', '#9f9e6a', '#93a48b'], crown: ['#b7ca91', '#a3bd7e', '#c4b779', '#c1d1b6'], blossom: ['#f5e6c9', '#d8deae', '#ddcea3', '#e4e9d8'], evergreen: ['#7ca17d', '#638f75', '#84936f', '#a2b5a1'], grass: ['#bac89b', '#b1c18f', '#c4bb91', '#d5dece'] } },
+  alpine: { theme: 'alpine-snow', seasons: ['winter', 'winter', 'spring', 'autumn'], seasonSeconds: 240, weatherSeconds: 170, rainWindows: [[.60, .75]], snowWindow: .72, rainStrength: .48, snowStrength: .64, petals: 0, leaves: 24, butterflies: false,
+    colors: { leaf: ['#88ad85', '#789e7c', '#bda47b', '#a3bab1'], crown: ['#becfb1', '#afc59d', '#d1c199', '#e4eee9'], blossom: ['#dfebdb', '#b8ceaf', '#d1c5ae', '#f0f6f2'], evergreen: ['#729b8b', '#5b8d7d', '#819883', '#b1c9c2'], grass: ['#b5c9ad', '#9eb994', '#beb796', '#e2eae4'] } },
+};
+
 // The weather is cosmetic: its own deterministic clock and generator never
 // consume dice/card randomness, advance a turn, or schedule another frame.
-export function createCityWeather({ THREE, world, boardBounds, renderer, requestRender = () => {} }) {
+export function createCityWeather({ THREE, world, boardBounds, renderer, mapId, requestRender = () => {} }) {
   const SEASONS = ['spring', 'summer', 'autumn', 'winter'];
   const WEATHER = ['clear', 'rain', 'snow'];
   const TAU = Math.PI * 2, SEASON_SECONDS = 100;
+  const climate = REGIONAL_CLIMATES[mapId] || null;
   const owned = new Set(), bindings = new Map(), materialCopies = new Map();
   const root = new THREE.Group(); root.name = 'city_weather'; root.userData.cosmetic = true; world.add(root);
   const roofSnow = createRoofSnow({ THREE, world, requestRender });
   const own = resource => { owned.add(resource); return resource; };
   const w = Math.max(3, boardBounds?.w || 11.55), d = Math.max(3, boardBounds?.d || 9.9);
   const parkW = Math.max(1, w - 4.7), parkD = Math.max(1, d - 4.65);
-  let seed = (81317 + Math.round(w * 100) * 31 + Math.round(d * 100) * 17) >>> 0;
+  const regionSeed = climate ? [...mapId].reduce((value, letter) => Math.imul(value, 31) + letter.charCodeAt(0), 0) : 0;
+  let seed = (81317 + Math.round(w * 100) * 31 + Math.round(d * 100) * 17 + regionSeed) >>> 0;
   const random = () => { seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0; return seed / 4294967296; };
   const clamp = value => Math.max(0, Math.min(1, value));
   const wrap = value => ((value % 1) + 1) % 1;
-  let seasonMode = 'auto', weatherMode = 'auto', season = 'spring', weather = 'clear';
+  let seasonMode = 'auto', weatherMode = 'auto', season = climate?.seasons[0] || 'spring', weather = 'clear';
   let elapsed = 0, motionTime = 0, accumulator = 0, disposed = false, forced = true, motionReduced = false;
   let cloud = .08, rain = 0, snow = 0, wetness = 0, nightValue = 0;
-  const weights = { spring: 1, summer: 0, autumn: 0, winter: 0 };
+  const weights = Object.fromEntries(SEASONS.map(name => [name, name === season ? 1 : 0]));
   const dummy = new THREE.Object3D(), color = new THREE.Color(), targetColor = new THREE.Color();
   const seasonalColors = Object.fromEntries(Object.entries({
     leaf: ['#c895a7', '#679561', '#c67e3d', '#839a91'],
@@ -27,6 +46,7 @@ export function createCityWeather({ THREE, world, boardBounds, renderer, request
     blossom: ['#fff1f6', '#b8cfad', '#e5b99b', '#edf2ed'],
     evergreen: ['#629a76', '#4c8b67', '#718663', '#9ab7ab'],
     grass: ['#b3c99f', '#a3bc88', '#bdaf82', '#d8e0d7'],
+    ...climate?.colors,
   }).map(([key, values]) => [key, values.map(value => new THREE.Color(value))]));
 
   function standard(tint, extra = {}) {
@@ -40,7 +60,7 @@ export function createCityWeather({ THREE, world, boardBounds, renderer, request
   }
   function paintInstances(mesh, palette) {
     for (let i = 0; i < mesh.count; i++) mesh.setColorAt(i, color.set(palette[i % palette.length]));
-    mesh.instanceColor.needsUpdate = true;
+    if (mesh.instanceColor) mesh.instanceColor.needsUpdate = true;
   }
   function petalGeometry() {
     const shape = new THREE.Shape();
@@ -61,10 +81,10 @@ export function createCityWeather({ THREE, world, boardBounds, renderer, request
   const petalMat = standard('#ffffff', { side: THREE.DoubleSide, emissive: '#4a2437', emissiveIntensity: .055 });
   const leafMat = standard('#ffffff', { side: THREE.DoubleSide });
   const snowMat = standard('#f5fbff', { roughness: .9, emissive: '#bfd4e8', emissiveIntensity: .09 });
-  const petals = instanced('weather_spring_petals', petalGeometry(), petalMat, 62);
-  const leaves = instanced('weather_autumn_leaves', leafGeometry(), leafMat, 48);
+  const petals = instanced('weather_spring_petals', petalGeometry(), petalMat, climate?.petals ?? 62);
+  const leaves = instanced('weather_autumn_leaves', leafGeometry(), leafMat, climate?.leaves ?? 48);
   const flakes = instanced('weather_snowflakes', own(new THREE.IcosahedronGeometry(1, 0)), snowMat, 132);
-  paintInstances(petals, ['#ffd2df', '#ed9fc2', '#ffebef', '#eab6d3']);
+  paintInstances(petals, climate?.petalColors || ['#ffd2df', '#ed9fc2', '#ffebef', '#eab6d3']);
   paintInstances(leaves, ['#dc8439', '#f2b65a', '#c76842', '#eac66c']);
   const particles = count => Array.from({ length: count }, () => ({ x: random(), z: random(), y: random(), speed: .7 + random() * .6, phase: random() * TAU, size: .7 + random() * .6 }));
   const petalData = particles(petals.count), leafData = particles(leaves.count), flakeData = particles(flakes.count);
@@ -182,10 +202,14 @@ export function createCityWeather({ THREE, world, boardBounds, renderer, request
     roofSnow.refresh(); forced = true; applyPalette(); requestRender();
   }
   function resolve() {
-    season = seasonMode === 'auto' ? SEASONS[Math.floor(elapsed / SEASON_SECONDS) % 4] : seasonMode;
+    const sequence = climate?.seasons || SEASONS, duration = climate?.seasonSeconds || SEASON_SECONDS;
+    season = seasonMode === 'auto' ? sequence[Math.floor(elapsed / duration) % sequence.length] : seasonMode;
     const phase = elapsed % SEASON_SECONDS;
     const rainWindow = { spring: [28, 54], summer: [56, 74], autumn: [65, 84] }[season];
-    const automatic = season === 'winter' ? (phase < 68 ? 'snow' : 'clear') : rainWindow && phase >= rainWindow[0] && phase < rainWindow[1] ? 'rain' : 'clear';
+    const regionalPhase = climate ? (elapsed % climate.weatherSeconds) / climate.weatherSeconds : 0;
+    const automatic = climate
+      ? season === 'winter' ? (regionalPhase < (climate.snowWindow ?? .58) ? 'snow' : 'clear') : climate.rainWindows.some(([start, end]) => regionalPhase >= start && regionalPhase < end) ? 'rain' : 'clear'
+      : season === 'winter' ? (phase < 68 ? 'snow' : 'clear') : rainWindow && phase >= rainWindow[0] && phase < rainWindow[1] ? 'rain' : 'clear';
     weather = weatherMode === 'auto' ? automatic : weatherMode;
   }
   function applyPalette() {
@@ -219,15 +243,15 @@ export function createCityWeather({ THREE, world, boardBounds, renderer, request
     mesh.instanceMatrix.needsUpdate = true;
   }
   function updateMotion(reduced) {
-    petals.visible = !reduced && weights.spring > .025; petalMat.opacity = weights.spring * (1 - rain * .4) * .94;
+    petals.visible = !reduced && petals.count > 0 && weights.spring > .025; petalMat.opacity = weights.spring * (1 - rain * .4) * .94;
     leaves.visible = !reduced && weights.autumn > .025; leafMat.opacity = weights.autumn * .94;
     flakes.visible = !reduced && snow > .025; snowMat.opacity = snow * .94;
     rainLines.visible = !reduced && rain > .025; rainMat.opacity = rain * (.44 + nightValue * .16);
     ripples.visible = !reduced && rain > .025; rippleMat.opacity = rain * .36;
-    butterflies.visible = !reduced && weights.summer > .025 && rain < .8;
+    butterflies.visible = !reduced && climate?.butterflies !== false && weights.summer > .025 && rain < .8;
     wingMaterials.forEach(mat => { mat.opacity = weights.summer * (1 - rain); });
     if (reduced) return;
-    if (petals.visible) updateFalling(petals, petalData, .079, .058, .40);
+    if (petals.visible) updateFalling(petals, petalData, climate?.petalSize || .079, .058, .40);
     if (leaves.visible) updateFalling(leaves, leafData, .088, .068, .47);
     if (flakes.visible) updateFalling(flakes, flakeData, .027, .055, .19);
     if (rainLines.visible) {
@@ -274,7 +298,8 @@ export function createCityWeather({ THREE, world, boardBounds, renderer, request
     resolve();
     const blend = reduced || paused ? 1 : 1 - Math.exp(-Math.max(step, 1 / 60) * .72);
     const paletteBlend = reduced || paused ? 1 : 1 - Math.exp(-Math.max(step, 1 / 60) * .32);
-    const rainTarget = weather === 'rain' ? 1 : 0, snowTarget = weather === 'snow' ? 1 : 0;
+    const rainTarget = weather === 'rain' ? (weatherMode === 'auto' ? climate?.rainStrength ?? 1 : 1) : 0;
+    const snowTarget = weather === 'snow' ? (weatherMode === 'auto' ? climate?.snowStrength ?? 1 : 1) : 0;
     const cloudTarget = weather === 'clear' ? .08 : weather === 'rain' ? .85 : .64;
     const previous = [cloud, rain, snow, wetness, nightValue, ...Object.values(weights)];
     cloud += (cloudTarget - cloud) * blend; rain += (rainTarget - rain) * blend; snow += (snowTarget - snow) * blend;
@@ -291,7 +316,7 @@ export function createCityWeather({ THREE, world, boardBounds, renderer, request
     for (const [node, entry] of bindings) restoreBinding(node, entry);
     roofSnow.dispose(); root.removeFromParent(); owned.forEach(resource => resource.dispose?.()); owned.clear(); bindings.clear(); materialCopies.clear();
   }
-  function getState() { return { season, weather, cloud, rain, snow, wetness, seasonMode, weatherMode, roofSnow: roofSnow.getState().amount }; }
-  refresh(); updateMotion(false);
+  function getState() { return { season, weather, cloud, rain, snow, wetness, seasonMode, weatherMode, mapId: climate ? mapId : null, theme: climate?.theme || 'temperate', roofSnow: roofSnow.getState().amount }; }
+  resolve(); refresh(); updateMotion(false);
   return { setSeason, setWeather, tick, getState, refresh, dispose, needsWork: () => roofSnow.getState().pending > 0 };
 }

@@ -108,6 +108,64 @@ check('plant names match whole words across exported separators, not Alpine or p
   effect.dispose(); rows.forEach(({ mesh, material }) => { assert.equal(mesh.material, material); material.dispose(); });
 });
 
+check('each destination opens with its own climate and keeps it beyond the old 100 second season boundary', () => {
+  const expected = {
+    classic: ['spring', 'clear', 'garden'], compact: ['spring', 'clear', 'sakura'],
+    expansion: ['autumn', 'rain', 'city-rain'], harbor: ['summer', 'clear', 'sea-breeze'],
+    alpine: ['winter', 'snow', 'alpine-snow'],
+  };
+  for (const [mapId, [season, sky, theme]] of Object.entries(expected)) {
+    const local = new THREE.Group(), effect = createCityWeather({THREE, world:local, boardBounds:bounds, mapId});
+    assert.equal(effect.getState().season, season, mapId + ': first season');
+    assert.equal(effect.getState().weather, sky, mapId + ': first weather');
+    assert.equal(effect.getState().theme, theme); assert.equal(effect.getState().mapId, mapId);
+    advance(effect, 110);
+    assert.equal(effect.getState().season, season, mapId + ': destination identity persists');
+    effect.dispose(); assert.equal(local.getObjectByName('city_weather'), undefined);
+  }
+});
+check('Kyoto has distinct blossoms while Mediterranean and city vegetation stay green outside autumn', () => {
+  const colors = new Map(), counts = new Map();
+  for (const mapId of ['classic', 'compact', 'expansion', 'harbor', 'alpine']) {
+    const local = new THREE.Group(), source = new THREE.MeshStandardMaterial({color:'#a1bc84'});
+    source.userData.seasonalKind = 'crown';
+    const plant = new THREE.Mesh(geo, source); local.add(plant);
+    const effect = createCityWeather({THREE, world:local, boardBounds:bounds, mapId});
+    effect.setSeason('spring'); effect.tick(0, {reduced:true});
+    colors.set(mapId, plant.material.color.clone());
+    const petals = local.getObjectByName('weather_spring_petals'); counts.set(mapId, petals.count);
+    effect.tick(1 / 30); assert.equal(petals.visible, petals.count > 0);
+    effect.dispose(); assert.equal(plant.material, source); source.dispose();
+  }
+  assert(colors.get('compact').r > colors.get('compact').g, 'Kyoto crowns are cherry pink');
+  for (const mapId of ['classic', 'expansion', 'harbor', 'alpine']) assert(colors.get(mapId).g > colors.get(mapId).r, mapId + ': no pink-tree reskin');
+  assert(counts.get('compact') > counts.get('classic') && counts.get('classic') > 0);
+  for (const mapId of ['expansion', 'harbor', 'alpine']) assert.equal(counts.get(mapId), 0, mapId + ': no drifting cherry petals');
+});
+check('regional automatic climate still accepts deliberate season and weather overrides', () => {
+  for (const mapId of ['compact', 'harbor', 'alpine']) {
+    const local = new THREE.Group(), effect = createCityWeather({THREE, world:local, boardBounds:bounds, mapId});
+    effect.setSeason('winter'); effect.setWeather('rain'); effect.tick(0, {reduced:true});
+    assert.equal(effect.getState().season, 'winter'); assert.equal(effect.getState().weather, 'rain'); assert.equal(effect.getState().rain, 1);
+    effect.setSeason('summer'); effect.setWeather('snow'); effect.tick(0, {reduced:true});
+    assert.equal(effect.getState().season, 'summer'); assert.equal(effect.getState().weather, 'snow'); assert.equal(effect.getState().snow, 1);
+    effect.setSeason('auto'); effect.setWeather('auto'); effect.tick(0, {reduced:true});
+    assert.equal(effect.getState().season, {compact:'spring', harbor:'summer', alpine:'winter'}[mapId]);
+    effect.dispose();
+  }
+});
+check('regional weather pauses cleanly and disables motion for reduced-motion users', () => {
+  const local = new THREE.Group(), effect = createCityWeather({THREE, world:local, boardBounds:bounds, mapId:'compact'});
+  advance(effect, 3); const petals = local.getObjectByName('weather_spring_petals');
+  const before = [...petals.instanceMatrix.array], state = effect.getState();
+  advance(effect, 9, {paused:true}); assert.deepEqual([...petals.instanceMatrix.array], before); assert.deepEqual(effect.getState(), state);
+  effect.tick(0, {reduced:true}); assert.equal(petals.visible, false);
+  effect.setSeason('autumn'); effect.setWeather('rain'); effect.tick(0, {reduced:true});
+  for (const name of ['weather_autumn_leaves', 'weather_rain_streaks', 'weather_rain_ripples', 'weather_summer_butterflies']) assert.equal(local.getObjectByName(name).visible, false, name);
+  effect.tick(1 / 30); assert.equal(local.getObjectByName('weather_rain_streaks').visible, true);
+  effect.dispose();
+});
+
 // Use the actual exported material semantics. Blender's baked color surfaces
 // have solid/glass/foliage roles; legacy assets retain their stricter old-name
 // requirements, including the /pine/ regression in the alpine region prefix.
@@ -135,13 +193,13 @@ check('plant names match whole words across exported separators, not Alpine or p
     const names = new Set([...sourceColors.keys()].map(material => material.name));
     if(authored){
       const expected=gltf.scene.children.flatMap(node=>[
-        `${node.name} / solid`,`${node.name} / warm window glass`,
-        ...(node.name==='alpine_teleport_gate'?[]:[`${node.name} / water foliage`]),
+        `${node.name} / solid`,`${node.name} / warm window glass`,`${node.name} / roof ceramic`,
+        ...(['alpine_teleport_gate','alpine_finance_3'].includes(node.name)?[]:[`${node.name} / water foliage`]),
       ]);
-      assert.deepEqual([...names].sort(),expected.sort(),'the real Blender package has the complete reviewed solid/glass/foliage material set');
+      assert.deepEqual([...names].sort(),expected.sort(),'the real Blender package has the complete reviewed solid/glass/roof/foliage material set');
       for(const material of sourceColors.keys()){
         assert.equal(material.vertexColors,true,'Blender authored vertex colors are enabled: '+material.name);
-        assert(material.roughnessMap?.isTexture&&material.metalnessMap?.isTexture,'Blender authored surface maps remain bound: '+material.name);
+        if(!material.name.endsWith(' / roof ceramic'))assert(material.roughnessMap?.isTexture&&material.metalnessMap?.isTexture,'Blender authored surface maps remain bound: '+material.name);
       }
     }else{
       for (const name of ['alpine/roof', 'alpine/roof_edge', 'alpine/wall', 'alpine/wood', 'alpine/wood_light', 'alpine/leaf']) assert(names.has(name), name + ' exists in actual asset');
@@ -236,6 +294,47 @@ const kits = ['city-kit', 'specials', 'landmarks', 'compact-specials', 'expansio
       assert(structureCount>=5,`${mapId}: ${plantCount} plant batches and ${structureCount} structural batches tested`);
       effect.dispose();for(const [node,material] of originals)assert.equal(node.material,material);
       resources.forEach(r=>r.dispose());
+    }
+  });
+}
+{
+  const {createDestinationScene}=await import(pathToFileURL(root+'scene-destinations.js'));
+  const {createCityOutskirts}=await import(pathToFileURL(root+'scene-outskirts.js'));
+  check('real destination hills and outer gardens inherit regional seasons without recoloring masonry',()=>{
+    for(const mapId of ['alpine','classic','compact','expansion']){
+      const local=new THREE.Group();let requests=0;
+      // Exercise each real synchronous terrain/garden builder. Model loads stay
+      // pending without network access; no fake plant marker is added by tests.
+      const loadSceneryBundle=()=>{requests++;return new Promise(()=>{});};
+      const scenery=(mapId==='alpine'?createDestinationScene:createCityOutskirts)({THREE,world:local,boardBounds:bounds,mapId,loadSceneryBundle});
+      const scenicRoot=local.getObjectByName(mapId==='alpine'?'destination_alpine':'city_outskirts');
+      assert(scenicRoot.userData.cosmetic&&scenicRoot.userData.seasonalScenery,mapId+': actual scenic root opts into weather');
+      assert(requests>0,'loading fixture was used instead of a real network request');
+      const originals=new Map(),colors=new Map();
+      scenicRoot.traverse(node=>{if(node.isMesh){originals.set(node,node.material);for(const mat of Array.isArray(node.material)?node.material:[node.material])if(mat.color)colors.set(mat,mat.color.clone());}});
+      const effect=createCityWeather({THREE,world:local,boardBounds:bounds,mapId});
+      try{
+        effect.setSeason('spring');effect.setWeather('clear');effect.tick(0,{reduced:true});
+        const spring=new Map();scenicRoot.traverse(node=>{if(node.isMesh)spring.set(node,(Array.isArray(node.material)?node.material:[node.material]).map(mat=>mat.color?.clone()));});
+        effect.setSeason('winter');effect.tick(0,{reduced:true});
+        let plants=0,structures=0;const kinds=new Set();
+        for(const [node,original] of originals){
+          const before=Array.isArray(original)?original:[original],after=Array.isArray(node.material)?node.material:[node.material];
+          before.forEach((mat,i)=>{
+            if(mat.userData.seasonalKind){
+              plants++;kinds.add(mat.userData.seasonalKind);assert.notEqual(after[i],mat,mapId+': exterior plant receives local palette');
+              assert(!after[i].color.equals(spring.get(node)[i]),mapId+': exterior plant changes across seasons');
+              assert.equal(after[i].onBeforeCompile,mat.onBeforeCompile,'authored grass shader preserved');
+              assert.equal(after[i].customProgramCacheKey(),mat.customProgramCacheKey(),'authored surface program key preserved');
+            }else{structures++;assert.equal(after[i],mat,mapId+': nonplant surface keeps original material');}
+            if(mat.color)assert(mat.color.equals(colors.get(mat)),mapId+': shared source color unchanged');
+          });
+        }
+        assert(plants>0&&structures>0);assert(kinds.has('grass'),mapId+': actual outer terrain tested');
+        if(mapId==='alpine')assert(kinds.has('evergreen'),'actual alpine conifers are part of the weather pass');
+      }finally{effect.dispose();}
+      for(const [node,mat] of originals)assert.equal(node.material,mat,mapId+': weather teardown restores scenic materials');
+      scenery.dispose();assert.equal(local.children.length,0,mapId+': both controllers release their roots');
     }
   });
 }

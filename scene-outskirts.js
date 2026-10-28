@@ -9,7 +9,7 @@ function loadBundle(file){
   return loadSharedModelAsset(file,{version:file==='city-kit.glb'?'20260911-12':'20261025-facade2'});
 }
 export function createCityOutskirts({THREE,world,boardBounds,mapId='classic',requestRender=()=>{},loadSceneryBundle=loadBundle}){
-  const root=new THREE.Group();root.name='city_outskirts';root.userData.cosmetic=true;world.add(root);
+  const root=new THREE.Group();root.name='city_outskirts';root.userData.cosmetic=true;root.userData.seasonalScenery=true;world.add(root);
   const owned=new Set(),own=value=>{owned.add(value);return value;};
   const windowLights=createScenicWindowLights({THREE,own});
   let disposed=false,lastNight=-1,ready=false,failed=false,regional=false;

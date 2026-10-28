@@ -337,10 +337,10 @@ const MAP_PRESETS = {
     id: "classic",
     maxRounds: 30,
     economy: { secondPlayerBonus: 0 },
-    name: "经典环线",
-    boardTitle: "环形线路",
-    startDescription: "经典 22 格环形线路，节奏均衡。",
-    modeLabel: "环形地图休闲对战",
+    name: "香榭花都",
+    boardTitle: "香榭花都",
+    startDescription: "22 格花园街区，节奏均衡。",
+    modeLabel: "法式花园街区",
     grid: { columns: 7, rows: 6, cellMin: 90, cellMinTablet: 56, cellMinMobile: 44, height: "min(90vh, 1080px)", heightTablet: "min(85vh, 660px)", heightMobile: "min(80vh, 520px)", centerWidth: "min(340px, calc(100% - 160px))", centerWidthTablet: "min(280px, calc(100% - 60px))", centerWidthMobile: "min(240px, calc(100% - 40px))" },
     routePositions: CLASSIC_ROUTE_POSITIONS,
     tileNames: CLASSIC_TILE_NAMES,
@@ -359,10 +359,10 @@ const MAP_PRESETS = {
     allowMotorcycle: false,
     reliefShield: true,
     reliefRest: false,
-    name: "紧凑冲突",
-    boardTitle: "紧凑冲突",
+    name: "京都花见",
+    boardTitle: "京都花见",
     startDescription: "地产密集，命运转盘可能地震。",
-    modeLabel: "高冲突短局",
+    modeLabel: "日式町屋街区",
     grid: { columns: 6, rows: 5, cellMin: 104, cellMinTablet: 64, cellMinMobile: 48, height: "min(82vh, 900px)", heightTablet: "min(76vh, 620px)", heightMobile: "min(72vh, 480px)", centerWidth: "min(300px, calc(100% - 120px))", centerWidthTablet: "min(260px, calc(100% - 56px))", centerWidthMobile: "min(220px, calc(100% - 32px))" },
     routePositions: COMPACT_ROUTE_POSITIONS,
     tileNames: COMPACT_TILE_NAMES,
@@ -379,10 +379,10 @@ const MAP_PRESETS = {
     economy: { startCash: 2000, startBonus: 450, secondPlayerBonus: 0 },
     openingBuildings: true,
     reliefShield: true,
-    name: "都市大环线",
-    boardTitle: "都市大环线",
-    startDescription: "28 格大环线，六街区各有一处 Lv.1 地产开业。",
-    modeLabel: "六街区都市大环线",
+    name: "曼哈顿大道",
+    boardTitle: "曼哈顿大道",
+    startDescription: "28 格街道，六街区各有一处 Lv.1 地产开业。",
+    modeLabel: "都会六街区",
     grid: { columns: 10, rows: 6, cellMin: 78, cellMinTablet: 50, cellMinMobile: 38, height: "min(84vh, 820px)", heightTablet: "min(76vh, 650px)", heightMobile: "min(68vh, 500px)", centerWidth: "min(420px, calc(100% - 160px))", centerWidthTablet: "min(330px, calc(100% - 80px))", centerWidthMobile: "min(250px, calc(100% - 45px))" },
     routePositions: EXPANSION_ROUTE_POSITIONS,
     tileNames: EXPANSION_TILE_NAMES,
@@ -398,10 +398,10 @@ const MAP_PRESETS = {
     maxRounds: 40,
     economy: { startCash: 1700, startBonus: 320, secondPlayerBonus: 0, bankThreshold: 240 },
     ticketPrice: 250, collectionId: "harbor_shell", collectionName: "潮汐海螺",
-    name: "潮汐港湾",
-    boardTitle: "三岛港湾",
+    name: "蔚蓝港湾",
+    boardTitle: "蔚蓝港湾",
     startDescription: "红黄航线自动轮换，每圈经过两岛。",
-    modeLabel: "三岛双向航线",
+    modeLabel: "地中海三岛",
     grid: { columns: 12, rows: 14, cellMin: 68, cellMinTablet: 44, cellMinMobile: 30, height: "min(96vh, 1160px)", heightTablet: "min(90vh, 880px)", heightMobile: "min(82vh, 660px)", centerWidth: "min(250px, calc(100% - 160px))", centerWidthTablet: "min(220px, calc(100% - 60px))", centerWidthMobile: "min(180px, calc(100% - 40px))" },
     routePositions: HARBOR_ROUTE_POSITIONS,
     tileNames: HARBOR_TILE_NAMES,
@@ -417,10 +417,10 @@ const MAP_PRESETS = {
     maxRounds: 30,
     economy: { startCash: 1900, startBonus: 350, secondPlayerBonus: 0, bankThreshold: 250 },
     ticketPrice: 350, collectionId: "alpine_crystal", collectionName: "山泉晶石",
-    name: "云岭温泉",
-    boardTitle: "云岭温泉",
+    name: "阿尔卑斯山镇",
+    boardTitle: "阿尔卑斯山镇",
     startDescription: "24 格山城环线，缆车前进 2–4 格，温泉与观景地标更丰厚。起始 ¥1900，每圈补给 ¥350。",
-    modeLabel: "山城温泉环线",
+    modeLabel: "高山温泉小镇",
     grid: { columns: 6, rows: 8, cellMin: 88, cellMinTablet: 56, cellMinMobile: 40, height: "min(96vh, 1140px)", heightTablet: "min(90vh, 860px)", heightMobile: "min(82vh, 650px)", centerWidth: "min(280px, calc(100% - 160px))", centerWidthTablet: "min(240px, calc(100% - 60px))", centerWidthMobile: "min(200px, calc(100% - 40px))" },
     routePositions: ALPINE_ROUTE_POSITIONS,
     tileNames: ALPINE_TILE_NAMES,
@@ -1090,7 +1090,7 @@ function renderHistoryList() {
     // Records created before map-specific limits all used the original 30 rounds.
     const roundLimit = Number.isInteger(rec.roundLimit) && rec.roundLimit > 0 ? rec.roundLimit : CONFIG.maxRounds;
     const modeLabel = rec.mode === "bankruptcy" ? "破产淘汰制" : `${roundLimit} 回合制（${rec.rounds} 回合）`;
-    const mapLabel = rec.mapName || MAP_PRESETS[rec.mapId]?.name || MAP_PRESETS[DEFAULT_MAP_ID].name;
+    const mapLabel = MAP_PRESETS[rec.mapId]?.name || rec.mapName || MAP_PRESETS[DEFAULT_MAP_ID].name;
     const winnerName = rec.winner === "draw"
       ? "平局"
       : (rec.players?.find((p) => p.id === rec.winner)?.name ?? rec.winner);
@@ -2540,7 +2540,7 @@ async function resolveRushTile(player, sid, tile = state.board[player.position])
   pushLog(`${player.name} 启动${name}，随机冲刺 ${steps} 格！`);
   await showContinueModal({
     label: name,
-    title: `${name}，冲刺 ${steps} 格！`,
+      title: `${name}，冲刺 ${steps} 格！`,
     message: "",
     drama: { type: "card", to: player, tiles: [tile.index], tileName: name },
   });
@@ -2819,7 +2819,7 @@ async function resolveTeleportTile(player, sid, tile = state.board[player.positi
   state.animation.landedTile = target.index;
   render();
   await showContinueModal({
-    label: "传送门", title: "传送门启动！",
+      label: "传送门", title: "传送门启动！",
     message: `${player.name} 抵达 ${target.name}`,
     drama: { type: "card", to: player, tiles: [target.index], tileName: target.name },
   });

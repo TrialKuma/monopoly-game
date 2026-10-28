@@ -2,6 +2,7 @@
 // Articulated Blender parts are kept by scene.js before its static mesh batching.
 import { createCityLighting } from './scene-lighting.js?v=20261027-night1';
 import { createCityWeather } from './scene-weather.js?v=20261028-global-roofs2';
+import { createRegionalAtmosphere } from './scene-regional-atmosphere.js?v=20261028-global-roofs2';
 import { createCityOutskirts } from './scene-outskirts.js?v=20261028-global-roofs2';
 import { createDestinationScene } from './scene-destinations.js?v=20261028-global-roofs2';
 export function shouldPreserveLifeNode(node) {
@@ -26,7 +27,8 @@ export function createSceneLife({ THREE, scene, world, light, snapshot, lotViews
   const d = Math.max(1, (boardBounds?.d || 9.9) - 4.65);
   const parkY = .16;
   const lighting = createCityLighting({ THREE, scene, world, renderer, light, boardBounds, requestRender });
-  const weather = createCityWeather({ THREE, world, renderer, boardBounds, requestRender });
+  const weather = createCityWeather({ THREE, world, renderer, boardBounds, mapId:snapshot?.mapId, requestRender });
+  const regionalAtmosphere = createRegionalAtmosphere({ THREE, world, boardBounds, mapId:snapshot?.mapId });
   const archipelago=snapshot?.mapId==='harbor';
   const outskirts = archipelago?{tick(){},dispose(){},setVisible(){return false;},stats(){return {};}}:createCityOutskirts({ THREE, world, boardBounds, mapId:snapshot?.mapId, requestRender });
   const destination = archipelago?null:createDestinationScene({THREE,world,boardBounds,mapId:snapshot?.mapId,requestRender});
@@ -252,6 +254,7 @@ export function createSceneLife({ THREE, scene, world, light, snapshot, lotViews
     weather.tick(step, { night, reduced, paused });
     lighting.tick(step, { ...weather.getState(), reduced, paused });
     night = lighting.getState().night;
+    regionalAtmosphere.tick(step, { ...weather.getState(), night, reduced, paused });
     outskirts.tick(step, { night, reduced, paused });
     destination?.tick(step, {night,reduced,paused});
     applyLight();
@@ -295,13 +298,13 @@ export function createSceneLife({ THREE, scene, world, light, snapshot, lotViews
     if (typeof document !== 'undefined') document.removeEventListener('visibilitychange', visibilityChanged);
     for (const [node, material] of bindings) node.material = material;
     for (const part of movingParts) part.node.rotation.copy(part.base);
-    weather.dispose(); outskirts.dispose(); destination?.dispose(); lighting.dispose();
+    weather.dispose(); regionalAtmosphere.dispose(); outskirts.dispose(); destination?.dispose(); lighting.dispose();
     root.removeFromParent(); owned.forEach(resource => resource.dispose?.()); owned.clear(); bindings.clear(); materialCopies.clear(); movingParts.length = 0; sparkEvents.length = 0; thermalSteam.length = 0;
   }
   bindBuildings(); tick(0, 0);
   return { update, tick, effect, setTimeMode, setSeason, setWeather, getTimeMode: () => mode, getNightFactor: () => night,
-    setOutskirtsVisible: value => { if(disposed)return false;forced=true;if(destination){destination.setVisible(value);return true;}return outskirts.setVisible(value); },
-    getAtmosphere: () => ({ ...lighting.getState(), ...weather.getState(), timeMode: mode, destination:destination?.getState() }),
+    setOutskirtsVisible: value => { if(disposed)return false;forced=true;regionalAtmosphere.setVisible(value);if(destination){destination.setVisible(value);return true;}return outskirts.setVisible(value); },
+    getAtmosphere: () => ({ ...lighting.getState(), ...weather.getState(), timeMode: mode, destination:destination?.getState(), regional:regionalAtmosphere.getState() }),
     setInteractionPaused: value => { const next=!!value;if(next===paused)return;paused=next;if(!paused){forced=true;requestRender();} }, dispose,
     // Bounded diagnostic counts support resource/reset checks without exposing rules.
     stats: () => ({ owned: owned.size, materialBindings: bindings.size, movingParts: movingParts.length, pedestrians: pedestrians.length, thermalBaths: thermalSteam.length, particles: 36 + 16 + sparkLimit + thermalSteam.reduce((total,node)=>total+node.geometry.attributes.position.count,0), disposed }) };
