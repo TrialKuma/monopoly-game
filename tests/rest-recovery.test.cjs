@@ -102,7 +102,14 @@ function setup(map = 'classic', secondary = false) {
     await c.run('processTurn(state.players[0])');
     assert.equal(c.run('state.players[0].position'), c.run('spa.index'));
     assert.equal(c.run('state.players[0].cash'), 5000 - c.run('spa.lot.tolls[1]'));
+    assert.equal(c.run('state.players[0].effects.hotSpringRest'), true);
+    assert.equal(c.run('state.extraTurnPending'), true);
+    assert.equal(c.run('state.currentPlayerIndex'), 0);
+    await c.run('playHumanTurn()');
+    assert.equal(c.run('state.players[0].position'), c.run('spa.index'));
+    assert.equal(c.run('state.players[0].cash'), 5000 - c.run('spa.lot.tolls[1]'));
     assert.equal(c.run('state.players[0].effects.hotSpringRest'), false);
+    assert.equal(c.run('state.extraTurnPending'), false);
     assert.equal(c.run('state.currentPlayerIndex'), 1);
   });
   await test('restart during rest presentation never advances the new game', async () => {
