@@ -33,7 +33,7 @@ function runner(source,map,options={}) {
     showContinueModal=async cfg=>{if(!metric)return;if(cfg.label==='破产救助')metric.reliefs++;if(cfg.drama?.chanceKind){const key=cfg.drama.chanceKind;metric.chance[key]=(metric.chance[key]||0)+1}};
     (async function(){
       metric={actions:0,extraActions:0,base:[0,0],rents:0,hugeRents:0,incompleteRents:0,rentFlips:0,bigRentFlips:0,reliefs:0,reliefRests:0,buyOffers:0,buyTooPoor:0,buyReserveSkips:0,buildOffers:0,buildTooPoor:0,buildReserveSkips:0,samples:0,poor:0,atReliefFloor:0,thinCash:0,lateSamples:0,latePoor:0,cashSum:0,money:{},chance:{}};
-      moneyContext='opening';await startNewGame();moneyContext='other';
+      moneyContext='opening';showStartScreen();await startNewGame();moneyContext='other';
       // Old source needs only the equal-round marker. Current source must set it
       // and award its recorded compensation through the real opening flow.
       if(${legacyRoundBug})state.firstPlayerIndex=state.currentPlayerIndex;
@@ -48,7 +48,7 @@ function runner(source,map,options={}) {
           if(cards[first].length!==0||cards[1-first].length!==1||cards[1-first][0].cardId!==compensation.cardId||state.players[1-first].effects.speedBoost)throw Error('Actual startup card mismatch');
         }
       }
-      while(!state.gameOver){const actor=state.currentPlayerIndex;metric.base[actor]++;await processTurn(currentPlayer());if(metric.base[0]+metric.base[1]>200)throw Error('Turn safety limit');if(metric.base[0]===metric.base[1]){for(const player of state.players){metric.samples++;metric.cashSum+=player.cash;if(player.cash<200)metric.poor++;if(player.cash<=200)metric.atReliefFloor++;if(player.cash<400)metric.thinCash++;if(metric.base[0]>=20){metric.lateSamples++;if(player.cash<200)metric.latePoor++}}}}
+      while(!state.gameOver){const actor=state.currentPlayerIndex;metric.base[actor]++;await playAiTurn();if(metric.base[0]+metric.base[1]>200)throw Error('Turn safety limit');if(metric.base[0]===metric.base[1]){for(const player of state.players){metric.samples++;metric.cashSum+=player.cash;if(player.cash<200)metric.poor++;if(player.cash<=200)metric.atReliefFloor++;if(player.cash<400)metric.thinCash++;if(metric.base[0]>=20){metric.lateSamples++;if(player.cash<200)metric.latePoor++}}}}
       const cash=state.players.map(p=>p.cash),n=getMaxRounds();if(metric.base.some(v=>v!==n))throw Error('Unequal scheduled turns '+metric.base);if(cash.some(v=>!Number.isFinite(v)||v<0))throw Error('Bad cash');
       const startCash=typeof getMapEconomy==='function'?getMapEconomy().startCash:CONFIG.startCash;
       const net=Object.values(metric.money).reduce((sum,flow)=>sum+flow.in-flow.out,0);

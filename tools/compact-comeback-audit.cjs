@@ -86,7 +86,7 @@ function auditRunner(source, map) {
     audit={cashNet:{},actions:0,extraActions:0,reliefs:0,reliefRests:0,reliefRecoveryActions:0,rents:0,hugeRents:0,
       incompleteRents:0,actualRentTotal:0,maxActualRent:0,acquisitions:0,acquisitionsWhileBehind:0,acquisitionsWhileBehindByTwo:0,
       zeroVsFourRounds:0,lateRoundSamples:0,normalTurns:[0,0],round10:null};
-    await startNewGame();
+    showStartScreen();await startNewGame();
     if(!state.initiativeResolved||state.firstPlayerIndex!==state.currentPlayerIndex)throw Error('Initiative not settled');
     const first=state.firstPlayerIndex,initialCash=state.players.map(p=>p.cash),economy=getMapEconomy();
     const compensation=state.openingCompensation,cashBonus=compensation?.amount??economy.secondPlayerBonus;
@@ -98,7 +98,7 @@ function auditRunner(source, map) {
     auditLedger();
     while(!state.gameOver){
       const actor=state.currentPlayerIndex;audit.normalTurns[actor]++;
-      await processTurn(currentPlayer());
+      await playAiTurn();
       if(audit.normalTurns[0]+audit.normalTurns[1]>200)throw Error('Normal-turn safety limit');
       auditLedger();
       if(audit.normalTurns[0]===audit.normalTurns[1]){

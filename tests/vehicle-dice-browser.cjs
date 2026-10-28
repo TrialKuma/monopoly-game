@@ -29,7 +29,7 @@ const output=path.join(__dirname,'../work/vehicle-dice-qa');
     initializeGame('classic');hideStartScreen();state.initiativeResolved=true;
     const p=state.players[0],tile=state.board.find(t=>t.special?.type==='chance');
     p.cash=p.displayedCash=1200;p.position=tile.index;state.currentPlayerIndex=0;state.busy=true;state.phase='locked';
-    startAiTurnWithDelay=async()=>{};
+    startAiTurnWithDelay=async()=>{};drawItemShopOffers=()=>['motorcycle','shield','boost'].map(id=>CARD_POOL.find(c=>c.id===id));
     CityScene.setTimeMode('day');CityScene.setWeather('clear');CityScene.setSeason('summer');
     render();window.vehicleShopPending=resolveLanding(p,tile,state.sessionId).then(()=>{setHumanTurnStatus();render();});
    });

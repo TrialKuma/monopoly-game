@@ -116,7 +116,7 @@ async function test(name, fn) { await fn(); checks++; console.log('PASS ' + name
     c.GameProgression={...store,getProfile:store.read,createRunId:()=>`harbor-journey-${++runId}`,resetResult(){},showEntryError:error=>{throw Error(error.error)}};
     c.run('showModal=async()=>"flip";selectedMapId="harbor"');
     const complete=async build=>{
-      await c.run('startNewGame()');
+      await c.run('showStartScreen();startNewGame()');
       if(build)c.run('buyLot(state.players[0],state.board[7],false);buildLot(state.players[0],state.board[7],false);buildLot(state.players[0],state.board[7],false);buildLot(state.players[0],state.board[7],false);state.players[0].cash+=5000');
       for(let n=0;n<80;n++)c.run('endTurn()');
       assert.equal(c.run('state.gameOver'),true);assert.equal(c.run('state.citySettlement.ok'),true);

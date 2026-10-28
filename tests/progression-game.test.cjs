@@ -88,7 +88,7 @@ async function test(name, fn) { await fn(); checks++; console.log('PASS ' + name
   });
   await test('reset does not refund a paid unfinished run and another start pays a fresh ticket', async () => {
     const f = setup(); await f.c.run('startNewGame()'); const first = f.c.run('state.runId');
-    f.c.run('initializeGame("classic")'); assert.equal(f.store.read().profile.wallet, 1100); assert.equal(f.c.run('state.isFormalRun'), false);
+    f.c.run('initializeGame("classic");showStartScreen()'); assert.equal(f.store.read().profile.wallet, 1100); assert.equal(f.c.run('state.isFormalRun'), false);
     await f.c.run('startNewGame()'); assert.notEqual(f.c.run('state.runId'), first); assert.equal(f.store.read().profile.wallet, 1000);
     assert.equal(f.store.read().profile.entries.length, 2);
   });

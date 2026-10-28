@@ -1921,13 +1921,13 @@ function renderModal() {
     eventActionsEl.innerHTML = `<label class="property-target-picker">征用目标<select data-city-target aria-label="征用目标">${options}</select></label><button class="modal-btn secondary" data-action="skip">跳过</button><button class="modal-btn primary" data-action="seize_${m.selectedTarget}">选择这处地产</button>`;
   } else if (m.itemShop) {
     eventActionsEl.className = "event-actions item-shop-actions";
-    eventActionsEl.innerHTML = m.buttons.map(b => `<button class="modal-btn ${b.variant || "ghost"} ${b.id === "skip" ? "item-shop-leave" : "item-shop-card"}" data-action="${b.id}"${b.disabled ? " disabled aria-disabled=\"true\"" : ""}>${b.label}</button>`).join("");
+    eventActionsEl.innerHTML = m.buttons.map(b => `<button class="modal-btn ${b.variant || "ghost"} ${b.id === "skip" ? "item-shop-leave" : b.id === "refresh" ? "item-shop-refresh" : "item-shop-card"}" data-action="${b.id}"${b.disabled ? " disabled aria-disabled=\"true\"" : ""}>${b.label}</button>`).join("");
   } else if (m.cardDraw) {
     eventActionsEl.className = "event-actions card-draw-actions";
     eventActionsEl.innerHTML = m.buttons
       .map((b) => `<button class="modal-btn ${b.variant || "ghost"}" data-action="${b.id}">${b.label}</button>`).join("");
   } else {
-    eventActionsEl.className = "event-actions";
+    eventActionsEl.className = m.cardTarget ? "event-actions card-target-actions" : "event-actions";
     eventActionsEl.innerHTML = m.buttons
       .map((b) => `<button class="modal-btn ${b.variant || "ghost"}" data-action="${b.id}">${b.label}</button>`).join("");
   }
@@ -2683,8 +2683,36 @@ function itemShopVisitIsActive(visit) {
     visit.player.position === visit.tileIndex && state.board[visit.tileIndex]?.special?.type === "chance");
 }
 
+const SHOP_REFRESH_PLACEMENT = "shop_refresh";
+
+function itemShopRefreshAvailable(visit) {
+  return Boolean(itemShopVisitIsActive(visit) && !visit.player.isAi && !visit.refreshed && !visit.refreshPending &&
+    window.GameAds?.isAvailable?.(SHOP_REFRESH_PLACEMENT) === true);
+}
+
+// The ad adapter resolves true only for a fully watched ad; cancel, no fill or errors keep the current stock.
+async function refreshItemShopWithAd(visit) {
+  if (!itemShopRefreshAvailable(visit)) return { ok: false, reason: "当前无法刷新" };
+  visit.refreshPending = true;
+  let watched = false;
+  try {
+    watched = await window.GameAds.showRewarded({ placement: SHOP_REFRESH_PLACEMENT, reference: visit.reference }) === true;
+  } catch {
+    watched = false;
+  } finally {
+    visit.refreshPending = false;
+  }
+  if (!watched) return { ok: false, reason: "广告未看完" };
+  if (!itemShopVisitIsActive(visit) || visit.refreshed) return { ok: false, reason: "商店已关闭" };
+  visit.refreshed = true;
+  visit.offers = drawItemShopOffers(visit.player);
+  pushLog(`${visit.player.name} 刷新了道具商店的商品。`);
+  return { ok: true, offers: visit.offers };
+}
+
 function commitItemShopPurchase(visit, cardId) {
   if (!itemShopVisitIsActive(visit)) return { ok: false, reason: "商店已关闭" };
+  if (visit.refreshPending) return { ok: false, reason: "正在刷新商品" };
   const card = visit.offers.find(offer => offer.id === cardId);
   if (!card) return { ok: false, reason: "本次没有这张商品" };
   if (card.id === "motorcycle" && hasMotorcycleAccess(visit.player)) return { ok:false, reason:"已有机车" };
@@ -2713,8 +2741,6 @@ function drawItemShopOffers(player = currentPlayer()) {
     [pool[i], pool[j]] = [pool[j], pool[i]];
   }
   const reserved = [];
-  const vehicle = pool.find(card => card.id === "motorcycle");
-  if (vehicle) reserved.push(vehicle);
   const boost = state.currentMapId === "harbor" && pool.find(card => card.id === "boost");
   if (boost) reserved.push(boost);
   return [...reserved,...pool.filter(card => !reserved.includes(card))].slice(0,3);
@@ -2746,16 +2772,22 @@ async function resolveChance(player, tile, sid) {
         message: `−${formatMoney(purchase.price)}` });
       return;
     }
-    const decision = await showModal({
-      label: "道具商店", title: tile.name,
-      message: `持有 ${formatMoney(player.cash)}`, itemShop: true,
-      buttons: [...visit.offers.map(card => {
-        const price = ITEM_SHOP_PRICES[card.id], affordable = player.cash >= price;
-        return { id: card.id, variant: "primary", disabled: !affordable,
-          label: `<span class="card-icon">${cardIconMarkup(card)}</span><span class="card-name">${card.name}</span><span class="card-desc">${card.description}</span><span class="card-price">${formatMoney(price)}</span><span class="card-buy-label">${affordable ? "购买" : "现金不足"}</span>` };
-      }), { id: "skip", label: "离开商店", variant: "ghost" }],
-    });
-    if (!itemShopVisitIsActive(visit)) return;
+    let decision;
+    do {
+      decision = await showModal({
+        label: "道具商店", title: tile.name,
+        message: `持有 ${formatMoney(player.cash)}`, itemShop: true,
+        buttons: [...visit.offers.map(card => {
+          const price = ITEM_SHOP_PRICES[card.id], affordable = player.cash >= price;
+          return { id: card.id, variant: "primary", disabled: !affordable,
+            label: `<span class="card-icon">${cardIconMarkup(card)}</span><span class="card-name">${card.name}</span><span class="card-desc">${card.description}</span><span class="card-price">${formatMoney(price)}</span><span class="card-buy-label">${affordable ? "购买" : "现金不足"}</span>` };
+        }), ...(itemShopRefreshAvailable(visit) ? [{ id: "refresh", label: "看广告刷新", variant: "ghost" }] : []),
+        { id: "skip", label: "离开商店", variant: "ghost" }],
+      });
+      if (!itemShopVisitIsActive(visit)) return;
+      if (decision === "refresh" && (await refreshItemShopWithAd(visit)).ok) playSound("card", { rate: 1.04 });
+      if (!itemShopVisitIsActive(visit)) return;
+    } while (decision === "refresh");
     if (decision === "skip" || decision === "cancel") {
       pushLog(`${player.name} 离开 ${tile.name}，未购买道具。`);
       return;
@@ -3050,6 +3082,7 @@ window.GameCards = {
     const visit = state.itemShopVisit;
     if (!itemShopVisitIsActive(visit)) return null;
     return { playerId: visit.player.id, tileIndex: visit.tileIndex, cash: visit.player.cash,
+      canRefresh: itemShopRefreshAvailable(visit), refreshed: Boolean(visit.refreshed),
       offers: visit.offers.map(card => ({ ...card, price: ITEM_SHOP_PRICES[card.id], affordable: visit.player.cash >= ITEM_SHOP_PRICES[card.id] })) };
   },
   use: instanceId => useInventoryCard(state.players?.find(p => p.id === "human"), instanceId),
@@ -3165,6 +3198,7 @@ async function chooseCardTarget(player, card, sid) {
     label: "卡牌效果",
     title: `${card.name} — 选择目标`,
     message: card.description,
+    cardTarget: true,
     buttons: [
       { id: "cancel", label: "暂不使用", variant: "ghost" },
       ...targets,
@@ -3495,7 +3529,7 @@ function aiChooseCard(cards, player) {
   const redundantFreeze = opp.effects.hotSpringRest || opp.effects.frozen || opp.effects.bankruptcyRelief;
   const prio = {
     buyProperty: 12, sellProperty: 11,
-    rewind: oppLots > 0 ? 9 : 2, freeze: redundantFreeze ? -1 : oppLots > 0 ? 7 : 3,
+    rewind: oppLots > 0 ? 4 : 2, freeze: redundantFreeze ? -1 : oppLots > 0 ? 7 : 3,
     slow: oppLots > 0 ? 7 : 3, doubleRent: myLots >= 2 ? 8 : 2,
     combo: 6, boost: 5, shield: oppLots >= 3 ? 7 : 3,
     launch: 6, teleport: 5, swap: 4, motorcycle:player.vehicle === "motorcycle" ? -1 : 10,
@@ -3609,10 +3643,10 @@ function previewMunicipalTarget(index) {
   return true;
 }
 
-function showModal({ label = "行动提示", title, message, buttons, cardDraw = false, itemShop = false, propertyOffer = null, boardTargets = null, selectedTarget = null, boardContext = null, openingCoin = null, routeChoice = null }) {
+function showModal({ label = "行动提示", title, message, buttons, cardDraw = false, itemShop = false, cardTarget = false, propertyOffer = null, boardTargets = null, selectedTarget = null, boardContext = null, openingCoin = null, routeChoice = null }) {
   cancelOpeningCoinToss();
   if (modalResolver) { modalResolver("cancel"); modalResolver = null; }
-  state.modal = { visible: true, label, title, message, buttons, cardDraw, itemShop, propertyOffer, boardTargets, boardContext, openingCoin, routeChoice, selectedTarget: selectedTarget ?? boardTargets?.[0] ?? null };
+  state.modal = { visible: true, label, title, message, buttons, cardDraw, itemShop, cardTarget, propertyOffer, boardTargets, boardContext, openingCoin, routeChoice, selectedTarget: selectedTarget ?? boardTargets?.[0] ?? null };
   if (boardTargets?.length) window.GamePresentation?.selectTile(state.modal.selectedTarget);
   else if (boardContext) window.GamePresentation?.selectTile(boardContext.selectedTarget);
   else window.GamePresentation?.selectCurrentTile();

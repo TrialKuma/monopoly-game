@@ -30,16 +30,18 @@ function offers(c, ids = ['shield', 'boost', 'combo']) {
       assert(c.run(`state.board.some(t=>t.special?.type==='card_draw')`),'free draw stations remain');
     }
   });
-  await test('maps that allow it stock one 400-coin motorcycle; compact never sells one', () => {
+  await test('maps that allow it stock a 400-coin motorcycle as regular random stock; compact never sells one', () => {
     for (const map of ['classic','compact','expansion','harbor','alpine']) {
       const { c } = setup({ map });
-      const motorcycles = map === 'compact' ? 0 : 1;
-      for (let i=0;i<20;i++) {
+      let motorcycles = 0;
+      for (let i=0;i<300;i++) {
         const stock=json(c,'drawItemShopOffers().map(c=>({id:c.id,price:ITEM_SHOP_PRICES[c.id]}))');
         assert.equal(stock.length,3);assert.equal(new Set(stock.map(c=>c.id)).size,3);
-        assert.equal(stock.filter(c=>c.id==='motorcycle').length,motorcycles,map);
+        motorcycles+=stock.filter(c=>c.id==='motorcycle').length;
         stock.forEach(card=>card.id==='motorcycle' ? assert.equal(card.price,400) : assert(card.price>=80&&card.price<=240));
       }
+      if (map === 'compact') assert.equal(motorcycles,0,map);
+      else assert(motorcycles>30&&motorcycles<105,`${map} motorcycle appears like other stock: ${motorcycles}/300`);
     }
   });
   await test('a motorcycle already in the bag or installed is replaced with regular stock', () => {
@@ -57,7 +59,7 @@ function offers(c, ids = ['shield', 'boost', 'combo']) {
     for(let i=0;i<100;i++) assert(!json(c,'drawInventoryCardOffers().map(c=>c.id)').includes('motorcycle'));
   });
   await test('a bought motorcycle stays in the bag until installed and then persists between turns', async () => {
-    const { c, open } = setup(); c.choose=()=>'motorcycle';
+    const { c, open } = setup(); offers(c, ['motorcycle', 'shield', 'boost']); c.choose=()=>'motorcycle';
     await open();
     assert.equal(c.run('shopper.cash'),100);
     assert.equal(c.run('shopper.cards.length'),1);
@@ -130,6 +132,49 @@ function offers(c, ids = ['shield', 'boost', 'combo']) {
   await test('AI purchase remains exactly once even while its notice awaits',async()=>{
     const {c,open}=setup({ai:true});offers(c);let release;c.run('showContinueModal=cfg=>notice(cfg)');c.notice=()=>new Promise(r=>release=r);
     const pending=open();await Promise.resolve();await open();assert.equal(c.run('shopper.cards.length'),1);release();await pending;
+  });
+  const offerSequence = (c, sets) => c.run(`var drawCount=0;drawItemShopOffers=()=>${JSON.stringify(sets)}[Math.min(drawCount++,${sets.length - 1})].map(id=>CARD_POOL.find(c=>c.id===id))`);
+  const ads = (c, outcomes) => c.run(`var adCalls=[];GameAds={isAvailable:placement=>placement==='shop_refresh',showRewarded:async request=>{adCalls.push(request);const outcome=${JSON.stringify(outcomes)}[adCalls.length-1];if(outcome==='throw')throw Error('no fill');return outcome}}`);
+  await test('without an ad adapter the shop shows no refresh and a forged refresh does nothing', async () => {
+    const { c, open, dialogs } = setup(); offerSequence(c, [['shield', 'boost', 'combo'], ['motorcycle', 'freeze', 'launch']]);
+    let snapshot; c.choose = cfg => { dialogs.push(cfg); snapshot ??= json(c, 'GameCards.getShopSnapshot()'); return dialogs.length === 1 ? 'refresh' : 'skip'; };
+    await open();
+    assert.equal(dialogs.length, 2); dialogs.forEach(d => assert(!d.buttons.some(b => b.id === 'refresh')));
+    assert.equal(snapshot.canRefresh, false); assert.equal(c.run('drawCount'), 1); assert.equal(c.run('shopper.cash'), 500);
+  });
+  await test('a watched ad redraws the stock once per visit and the new stock can be bought', async () => {
+    const { c, open, dialogs } = setup(); offerSequence(c, [['shield', 'boost', 'combo'], ['motorcycle', 'freeze', 'launch']]); ads(c, [true]);
+    c.choose = cfg => { dialogs.push(cfg); return dialogs.length === 1 ? 'refresh' : 'motorcycle'; };
+    await open();
+    assert.deepEqual(Array.from(dialogs[0].buttons, b => b.id), ['shield', 'boost', 'combo', 'refresh', 'skip']);
+    assert.deepEqual(Array.from(dialogs[1].buttons, b => b.id), ['motorcycle', 'freeze', 'launch', 'skip']);
+    assert.deepEqual(json(c, 'adCalls.map(r=>r.placement)'), ['shop_refresh']); assert.match(c.run('adCalls[0].reference'), /:shop:1$/);
+    assert.equal(c.run('drawCount'), 2); assert.equal(c.run('shopper.cards[0].cardId'), 'motorcycle'); assert.equal(c.run('shopper.cash'), 100);
+  });
+  await test('stock replaced by a refresh can no longer be bought', async () => {
+    const { c, open, dialogs } = setup(); offerSequence(c, [['shield', 'boost', 'combo'], ['motorcycle', 'freeze', 'launch']]); ads(c, [true]);
+    c.choose = cfg => { dialogs.push(cfg); return dialogs.length === 1 ? 'refresh' : 'shield'; };
+    await open();
+    assert.equal(c.run('shopper.cards.length'), 0); assert.equal(c.run('shopper.cash'), 500);
+  });
+  await test('a cancelled or failed ad keeps the same stock and the refresh can be retried', async () => {
+    const { c, open, dialogs } = setup(); offerSequence(c, [['shield', 'boost', 'combo'], ['motorcycle', 'freeze', 'launch']]); ads(c, [false, 'throw']);
+    c.choose = cfg => { dialogs.push(cfg); return dialogs.length < 3 ? 'refresh' : 'skip'; };
+    await open();
+    assert.equal(dialogs.length, 3); assert.equal(c.run('adCalls.length'), 2); assert.equal(c.run('drawCount'), 1);
+    dialogs.forEach(d => assert.deepEqual(Array.from(d.buttons, b => b.id), ['shield', 'boost', 'combo', 'refresh', 'skip']));
+    assert.equal(c.run('shopper.cash'), 500); assert.equal(c.run('shopper.cards.length'), 0);
+  });
+  await test('a shop visit that ends while the ad plays is neither refreshed nor reopened', async () => {
+    const { c, open, dialogs } = setup(); offerSequence(c, [['shield', 'boost', 'combo'], ['motorcycle', 'freeze', 'launch']]);
+    c.run(`var adCalls=[];GameAds={isAvailable:()=>true,showRewarded:async request=>{adCalls.push(request);initializeGame('harbor');return true}}`);
+    c.choose = cfg => { dialogs.push(cfg); return 'refresh'; };
+    await open();
+    assert.equal(dialogs.length, 1); assert.equal(c.run('adCalls.length'), 1); assert.equal(c.run('drawCount'), 1);
+  });
+  await test('AI shoppers never request an ad refresh', async () => {
+    const { c, open } = setup({ ai: true }); offers(c); ads(c, [true]); await open();
+    assert.equal(c.run('adCalls.length'), 0); assert.equal(c.run('shopper.cards.length'), 1);
   });
   console.log(`PASS ${checks} item shop groups`);
 })().catch(error=>{console.error(error);process.exitCode=1;});
