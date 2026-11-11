@@ -1265,6 +1265,13 @@ function resize(){
     const centerX=(Math.max(...xs)+Math.min(...xs))/2;
     camera.left=centerX-vertical*aspect;camera.right=centerX+vertical*aspect;camera.top=vertical+centerY;camera.bottom=-vertical+centerY;camera.updateProjectionMatrix();
     }
+    // In a tall frame the ground near the bottom edge ends up behind the camera and is clipped,
+    // which showed the page colour under the harbour sea. Sliding an orthographic camera back
+    // along its own axis leaves the picture unchanged, so retreat just far enough to keep it.
+    const retreat=Math.max(0,-camera.bottom/Math.tan(elevation)-22/Math.cos(elevation)+4);
+    if(retreat>0)camera.position.addScaledVector(camera.getWorldDirection(new THREE.Vector3()),-retreat);
+    if(camera.far!==100+retreat){camera.far=100+retreat;camera.updateProjectionMatrix();}
+    camera.updateMatrixWorld(true);
   }
   lotViews.forEach(view=>{view.screenPoint=null;});
   arrangeLabels();positionLabels();
