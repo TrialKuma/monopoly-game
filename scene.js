@@ -11,6 +11,7 @@ import { createOwnershipRoofs } from './scene-ownership-roofs.js?v=20261028-glob
 import { createFunctionalLandmark } from './scene-functional-landmarks.js?v=20261025-items1';
 import { createThermalSteam } from './scene-thermal-steam.js?v=20261025-facade2';
 import { createLevelThreeTracker, createBuildingFireworks, buildingRoofAnchor } from './scene-fireworks.js?v=20261025-celebrate1';
+import { loadPawnModels } from './scene-pawns.js?v=20261111-pawns1';
 import { loadSharedModelAsset, forgetSharedModelAsset, releaseSharedModelAsset, releaseSupersededModelAssets, ownsSharedModelResource, disposeSharedModelAssets } from './scene-model-cache.js?v=20261028-global-roofs2';
 
 // All route positions, ownership and prices come from the game. This view never
@@ -525,6 +526,7 @@ function buildMap(data) {
   data.board.filter((tile) => !tile.isLargeSecondary).forEach((tile) => makeLot(tile, data));
   streetFoundation.finish();
   data.players.forEach((player) => makePawn(player));
+  dressPawns();
   syncHarborProjects(data);
   if(data.mapId!=='classic'){
     travelArrow=document.createElement('span');travelArrow.className='scene-travel-arrow';travelArrow.setAttribute('role','img');
@@ -858,6 +860,19 @@ function makePawn(player) {
   const pos=pawnPosition(player);g.position.copy(pos);
   pawnViews.set(player.id,{group:g,anchor,shield,position:player.position,from:pos.clone(),target:pos.clone(),started:0,duration:220,active:false,teleport:false,facing:0});
 }
+// makePawn's simple shapes stand in until the modelled pieces arrive, and stay if they never do.
+function dressPawns(){
+  const views=[...pawnViews.values()];
+  loadPawnModels().then(make=>{
+    for(const view of views){
+      const id=view.anchor.dataset.playerAnchor;
+      if(pawnViews.get(id)!==view)continue;
+      for(const part of [...view.group.children])if(part!==view.shield)view.group.remove(part);
+      view.group.add(make(id));view.shield.position.y=.31;
+    }
+    renderDirty=true;
+  }).catch(error=>console.warn('Pawn models unavailable; keeping the simple pawns.',error));
+}
 function pawnPosition(player){
   const step=stepViews.get(player.position)||stepViews.values().next().value;
   const pos=step.walk.clone();pos.y=.265;
@@ -1032,9 +1047,47 @@ function syncHarborProjects(data){
   }
   for(const [id,view] of harborProjectBadges)if(!active.has(id)){view.button.remove();view.leader.remove();harborProjectBadges.delete(id);}
 }
+// Screen boxes of the pawn name badges, moved apart where two pawns share a landing.
+// With resting=true each pawn is measured where it will stop, and a pawn still walking
+// tile by tile is left out, so tile names do not hop about as its badge passes them.
+function pawnBadges(resting=false){
+  const badges=[],walking=resting&&typeof snapshot?.animation?.currentTile==='number'?snapshot.currentPlayerId:null;
+  pawnViews.forEach((view,id)=>{
+    if(id===walking)return;
+    const ground=resting&&view.active?view.target:view.group.position;
+    const point=project(ground.clone().add(new THREE.Vector3(0,.84,0)));
+    const hidden=point.x<12||point.x>width-12||point.y<8||point.y>height-8;
+    if(!resting)view.anchor.hidden=hidden;
+    if(!hidden)badges.push({view,point,foot:resting?project(ground):null,w:view.anchor.offsetWidth||48,h:view.anchor.offsetHeight||22});
+  });
+  badges.sort((a,b)=>a.point.x-b.point.x);
+  for(let i=1;i<badges.length;i++){
+    const left=badges[i-1],right=badges[i],gap=6;
+    if(right.point.x-left.point.x<(left.w+right.w)/2+gap&&Math.abs(right.point.y-left.point.y)<(left.h+right.h)/2+3){
+      // Pawns sharing a landing stand a little apart; their wider name badges
+      // need separate room too, especially when the full map is on a phone.
+      const total=left.w+right.w+gap,center=THREE.MathUtils.clamp((left.point.x+right.point.x)/2,total/2+5,width-total/2-5);
+      left.point.x=center-(right.w+gap)/2;right.point.x=center+(left.w+gap)/2;
+    }
+  }
+  badges.forEach(badge=>{badge.point.x=THREE.MathUtils.clamp(badge.point.x,badge.w/2+5,width-badge.w/2-5);});
+  return badges;
+}
 function arrangeLabels(){
   if(!camera)return;
+  // Pawns, their badges and the round second-step markers stay where they are; tile names
+  // are arranged around them instead of on top.
   const placed=[];
+  for(const {point,foot,w,h} of pawnBadges(true)){
+    // The pawn's box runs from its badge down to the front rim of its base, a little below the foot point.
+    const tall=Math.max(0,foot.y-point.y)*1.2;
+    placed.push({point,w,h},{point:{x:foot.x,y:point.y+tall/2},w:tall*.5,h:tall});
+  }
+  stepViews.forEach((step)=>{
+    if(!step.label)return;
+    const point=project(step.walk);
+    if(point.x>=8&&point.x<=width-8&&point.y>=8&&point.y<=height-8)placed.push({point,w:step.label.offsetWidth||16,h:step.label.offsetHeight||16});
+  });
   const candidates=[...lotViews.values()].map((view)=>{
     // On a phone the whole-board view keeps only services, landmarks, deeds and
     // the tiles in play; every other name returns when the camera follows again.
@@ -1084,23 +1137,7 @@ function positionLabels(){
   });
   lotViews.forEach((view)=>{const p=view.screenPoint||project(view.anchor);view.label.style.transform=`translate(${p.x.toFixed(1)}px,${p.y.toFixed(1)}px) translate(-50%,-50%)`;});
   stepViews.forEach((step)=>{if(step.label){const p=project(step.walk);step.label.hidden=p.x<8||p.x>width-8||p.y<8||p.y>height-8;step.label.style.transform=`translate(${p.x.toFixed(1)}px,${p.y.toFixed(1)}px) translate(-50%,-50%)`;}});
-  const pawnLabels=[];
-  pawnViews.forEach((view)=>{
-    const point=project(view.group.position.clone().add(new THREE.Vector3(0,.76,0)));
-    view.anchor.hidden=point.x<12||point.x>width-12||point.y<8||point.y>height-8;
-    if(!view.anchor.hidden)pawnLabels.push({view,point,w:view.anchor.offsetWidth||48,h:view.anchor.offsetHeight||22});
-  });
-  pawnLabels.sort((a,b)=>a.point.x-b.point.x);
-  for(let i=1;i<pawnLabels.length;i++){
-    const left=pawnLabels[i-1],right=pawnLabels[i],gap=6;
-    if(right.point.x-left.point.x<(left.w+right.w)/2+gap&&Math.abs(right.point.y-left.point.y)<(left.h+right.h)/2+3){
-      // Pawns sharing a landing stand a little apart; their wider name badges
-      // need separate room too, especially when the full map is on a phone.
-      const total=left.w+right.w+gap,center=THREE.MathUtils.clamp((left.point.x+right.point.x)/2,total/2+5,width-total/2-5);
-      left.point.x=center-(right.w+gap)/2;right.point.x=center+(left.w+gap)/2;
-    }
-  }
-  pawnLabels.forEach(({view,point,w})=>{point.x=THREE.MathUtils.clamp(point.x,w/2+5,width-w/2-5);view.anchor.style.transform=`translate(${point.x.toFixed(1)}px,${point.y.toFixed(1)}px) translate(-50%,-50%)`;});
+  pawnBadges().forEach(({view,point})=>{view.anchor.style.transform=`translate(${point.x.toFixed(1)}px,${point.y.toFixed(1)}px) translate(-50%,-50%)`;});
   if(travelArrow){
     const current=snapshot.players.find((player)=>player.id===snapshot.currentPlayerId);
     const route=current?.effects?.reversed?snapshot.navigation?.prev:snapshot.navigation?.next;
